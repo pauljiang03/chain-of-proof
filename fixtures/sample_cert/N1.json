@@ -1,0 +1,150 @@
+{
+  "finding_id": "N1",
+  "question": "Was a confidential file opened from an unauthorized USB device?",
+  "claim": {
+    "both": [
+      {
+        "usbMountedAs": [
+          4512,
+          4513
+        ]
+      },
+      {
+        "openedFromMount": [
+          4600,
+          4513
+        ]
+      },
+      {
+        "tagged": [
+          4600,
+          "obj",
+          9001,
+          50
+        ]
+      },
+      {
+        "tagged": [
+          4512,
+          "obj",
+          9002,
+          51
+        ]
+      },
+      {
+        "before": [
+          3100,
+          4512
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 4512,
+      "kind": "usbInsert",
+      "t": 1427119200000000,
+      "res": 1,
+      "obj": 101,
+      "obj_text": "SAMPLE-SERIAL-RM2",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "0e0b39b0cb0744811a8b7c57bb6e1750c8a5dd00d8fe4d882962304a1efe5c41",
+      "prov": {
+        "image": "sample",
+        "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+        "tool": "hand-written"
+      }
+    },
+    {
+      "id": 4513,
+      "kind": "volumeMount",
+      "t": 1427119201000000,
+      "res": 1,
+      "obj": 101,
+      "obj_text": "SAMPLE-SERIAL-RM2",
+      "aux": 88,
+      "aux_text": "SAMPLE-VOL-RM2",
+      "row_sha256": "853bd962119751b6b43a64103dc7d0097e1084f596a10d5fc46ad3301e3fcdab",
+      "prov": {
+        "image": "sample",
+        "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt",
+        "tool": "hand-written"
+      }
+    },
+    {
+      "id": 4600,
+      "kind": "lnkTarget",
+      "t": 1427120900000000,
+      "res": 1,
+      "obj": 913,
+      "obj_text": "E:\\sample\\design_concept.ppt",
+      "aux": 88,
+      "aux_text": "SAMPLE-VOL-RM2",
+      "row_sha256": "159da3c8845a87064ee0c5a9039a7679528da909cd12a0a4a59bbb0f194d0fff",
+      "prov": {
+        "image": "sample",
+        "artifact": "Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk",
+        "tool": "hand-written"
+      }
+    },
+    {
+      "id": 9001,
+      "kind": "tag",
+      "t": 1794636000000000,
+      "res": 1,
+      "obj": 913,
+      "obj_text": "E:\\sample\\design_concept.ppt",
+      "aux": 50,
+      "aux_text": "confidential",
+      "row_sha256": "01f826fa5178109b046ebdf532a6f7f04ae774a8da342a622cb7c8ad7c453781",
+      "prov": {
+        "source": "deterministic",
+        "rule": "path is under a folder the case brief lists as confidential"
+      }
+    },
+    {
+      "id": 9002,
+      "kind": "tag",
+      "t": 1794636000000000,
+      "res": 1,
+      "obj": 101,
+      "obj_text": "SAMPLE-SERIAL-RM2",
+      "aux": 51,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "06f1b2b3940f32505433d845d4f4d67a29ffe348fed83a99f1809c58125fe856",
+      "prov": {
+        "source": "deterministic",
+        "rule": "device serial is not on the case brief's authorized list"
+      }
+    },
+    {
+      "id": 3100,
+      "kind": "webSearch",
+      "t": 1427119000000000,
+      "res": 1,
+      "obj": 700,
+      "obj_text": "sample data leakage methods",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "79710e3d726fbfef447be89bfc0eaef55df97927151fe1a515a135b0fe239879",
+      "prov": {
+        "image": "sample",
+        "artifact": "Chrome History",
+        "tool": "hand-written"
+      }
+    }
+  ],
+  "rules": [
+    "R1",
+    "R2",
+    "R3",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "N1.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

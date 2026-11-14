@@ -1,5 +1,7 @@
 # Chain of Proof
 
+> **Superseded by [chain-of-proof-revised.md](chain-of-proof-revised.md).** Kept for history. The Lean sketch and several statements below are corrected there (§19) and in `lean/ChainOfProof/`: do not copy code from this version.
+
 **Machine-checked digital forensics: the LLM proposes, Lean 4 decides.**
 
 > "Every sentence in our report is a theorem."

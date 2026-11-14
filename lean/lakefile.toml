@@ -1,6 +1,11 @@
 name = "ChainOfProof"
 version = "0.1.0"
-defaultTargets = ["ChainOfProof"]
+defaultTargets = ["ChainOfProof", "Miner"]
 
+# The trusted core: facts, claims, the checker, and theorems about it.
 [[lean_lib]]
 name = "ChainOfProof"
+
+# Untrusted candidate generators. Kept apart so certificates never import them.
+[[lean_lib]]
+name = "Miner"

@@ -5,12 +5,12 @@ import ChainOfProof.Claim
   The checker. `holds cited claim` is the whole trusted definition of "this claim is
   supported by these facts".
 
-  It is written with `Nat.beq` / `Nat.blt` and structural recursion only. That keeps two
-  properties:
+  It is written with `Nat.beq` / `Nat.blt`, structural recursion and single-discriminant
+  matches only. That keeps two properties:
     * the kernel can evaluate it by `decide`;
-    * a certificate depends on no axioms at all. (`==` or `<` on `Nat` go through
-      `Decidable` instances whose proofs use `propext`, which would then show up in
-      `#print axioms` for every certificate.)
+    * a certificate depends on no axioms at all. (`decide (a < b)`, `max`, and a
+      two-discriminant `match … | _, _ => …` each pull `propext` into the definition,
+      and it then shows up in `#print axioms` for every certificate.)
 -/
 namespace ChainOfProof
 
@@ -23,30 +23,24 @@ def lookup (fs : List Fact) (i : Nat) : Option Fact :=
 def precedes (x y : Fact) : Bool :=
   Nat.blt (x.t + x.res + y.res) y.t
 
+/-- Look up one cited fact and test it; `false` if the id is not cited. -/
+def with1 (fs : List Fact) (a : Nat) (k : Fact → Bool) : Bool :=
+  match lookup fs a with
+  | none => false
+  | some x => k x
+
+/-- Look up two cited facts and test them; `false` if either id is not cited. -/
+def with2 (fs : List Fact) (a b : Nat) (k : Fact → Fact → Bool) : Bool :=
+  with1 fs a fun x => with1 fs b fun y => k x y
+
 def holds (fs : List Fact) : Claim → Bool
-  | .before a b =>
-    match lookup fs a, lookup fs b with
-    | some x, some y => precedes x y
-    | _, _ => false
-  | .sameDevice u m =>
-    match lookup fs u, lookup fs m with
-    | some x, some y =>
-      x.kind == .usbInsert && y.kind == .volumeMount && Nat.beq x.obj y.obj
-    | _, _ => false
-  | .onVolume l m =>
-    match lookup fs l, lookup fs m with
-    | some x, some y =>
-      x.kind == .lnkTarget && y.kind == .volumeMount && Nat.beq x.aux y.aux
-    | _, _ => false
-  | .copied c m =>
-    match lookup fs c, lookup fs m with
-    | some x, some y =>
-      x.kind == .fileCreated && y.kind == .fileModified
-        && Nat.beq x.obj y.obj && Nat.beq x.aux y.aux && precedes y x
-    | _, _ => false
+  | .is f k => with1 fs f fun x => x.kind == k
+  | .val f s v => with1 fs f fun x => Nat.beq (x.get s) v
+  | .link a sa b sb => with2 fs a b fun x y => Nat.beq (x.get sa) (y.get sb)
+  | .before a b => with2 fs a b precedes
   | .both c d => holds fs c && holds fs d
 
-/-- Per-atom verdicts, for feedback to the agent when a claim is rejected.
+/-- Per-brick verdicts, for feedback to the agent when a claim is rejected.
     Diagnostic only: the certificate is the `holds … = true` theorem, not this. -/
 def explain (fs : List Fact) (c : Claim) : List String :=
   c.atoms.map fun a => s!"{if holds fs a then "ok  " else "FAIL"} {repr a}"
