@@ -22,33 +22,112 @@ fixtures/sample_cert/N1.json. Nothing here is recomputed or reworded.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
+import tempfile
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
 
-def bundle(certs_dir: Path, case_name: str) -> dict:
+def _sidecar(directory, name):
+    path = directory / name
+    if path.is_symlink():
+        raise ValueError(f"run sidecar cannot be a symlink: {name}")
+    return json.loads(path.read_text()) if path.is_file() else None
+
+
+def _audit_snapshot(directory, expected_head):
+    """Verify exactly the bytes summarized, even if a live log later grows."""
+    from agent.audit import LIMITATION, verify_audit
+
+    path = directory / "audit.jsonl"
+    summary = {"status": "unavailable", "path": None, "passed": None,
+               "count": None, "head": None, "sha256": None,
+               "expected_head": expected_head, "problems": [], "scope": LIMITATION}
+    if not path.exists() and not path.is_symlink() and expected_head is None:
+        return summary, None
+    summary.update(status="invalid", path="audit.jsonl", passed=False)
+    if path.is_symlink():
+        summary["problems"] = ["audit log cannot be a symlink"]
+        return summary, []
+    try:
+        raw = path.read_bytes()
+    except OSError as error:
+        summary["problems"] = ["cannot read audit: " + type(error).__name__]
+        return summary, []
+    summary["sha256"] = hashlib.sha256(raw).hexdigest()
+    # verify_audit accepts a path. An immutable snapshot prevents checking one
+    # version of an actively appended log and summarizing another version.
+    with tempfile.TemporaryDirectory(prefix="cop-export-audit-") as temporary:
+        snapshot = Path(temporary) / "audit.jsonl"
+        snapshot.write_bytes(raw)
+        result = verify_audit(snapshot, expected_head=expected_head)
+    summary.update({key: result[key] for key in ("passed", "count", "head", "problems")})
+    summary["status"] = "valid" if result["passed"] else "invalid"
+    try:
+        events = [json.loads(line) for line in raw.splitlines()]
+    except (ValueError, UnicodeError):
+        events = []
+    return summary, events
+
+
+def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
+           public_questions=None, answers=None, health=None, audit_expected_head=None,
+           case_metadata=None) -> dict:
+    """Keep certificate fields intact and add separately qualified run metadata.
+
+    Inputs are public extraction metadata/questions/answers, never a reference.
+    Optional fixed sidecars are used only when the corresponding value is absent.
+    Missing logs are unmeasured, not evidence that no tool calls occurred.
+    Case metadata is merged before coverage evaluates execution and question scope.
+    """
+    from agent.coverage import summarize_coverage
+    from agent.history import summarize_history
+    from checker.check import valid_finding_id
+
     certs_dir = Path(certs_dir)
+    log = certs_dir / "proposals.jsonl"
+    if log.is_symlink():
+        raise ValueError("proposal log cannot be a symlink")
+    proposals = ([json.loads(line) for line in log.read_text().splitlines() if line.strip()]
+                 if log.is_file() else [])
+    # Generated certificates have a same-ID Lean file or an entry in the fixed
+    # proposal log. Do not scan unrelated JSON (answers, references, or secrets).
+    identifiers = {p.get("finding_id") for p in proposals if isinstance(p, dict)
+                   and p.get("status") == "verified" and valid_finding_id(p.get("finding_id"))}
+    identifiers.update(p.stem for p in certs_dir.glob("*.lean") if valid_finding_id(p.stem))
     findings = []
-    for path in sorted(certs_dir.glob("*.json")):
-        cert = json.loads(path.read_text())
-        if cert.get("status") != "verified":
+    for identifier in sorted(identifiers):
+        path = certs_dir / (identifier + ".json")
+        if path.is_symlink():
+            raise ValueError(f"run artifact cannot be a symlink: {path.name}")
+        if not path.is_file():
             continue
-        lean = certs_dir / cert.get("lean_file", "")
+        cert = json.loads(path.read_text())
+        if not isinstance(cert, dict) or cert.get("status") != "verified":
+            continue
+        if cert.get("finding_id") != identifier:
+            raise ValueError("certificate finding ID differs from its artifact name")
+        lean_name = cert.get("lean_file", "")
+        if not isinstance(lean_name, str) or (lean_name and (
+                Path(lean_name).name != lean_name or "\\" in lean_name
+                or Path(lean_name).suffix != ".lean")):
+            raise ValueError("certificate Lean source must name a local .lean file")
+        lean = certs_dir / lean_name
+        if lean.is_symlink():
+            raise ValueError("certificate Lean source cannot be a symlink")
         cert["lean"] = lean.read_text() if lean.is_file() else ""
         findings.append(cert)
-    proposals = []
-    log = certs_dir / "proposals.jsonl"
-    if log.is_file():
-        proposals = [json.loads(line) for line in log.read_text().splitlines() if line.strip()]
     rejections = [p for p in proposals if p.get("status") == "rejected"]
     conclusions = []
     notes = certs_dir / "conclusions.jsonl"
+    if notes.is_symlink():
+        raise ValueError("conclusion log cannot be a symlink")
     if notes.is_file():
         conclusions = [json.loads(line) for line in notes.read_text().splitlines() if line.strip()]
-    return {
+    data = {
         "version": 1,
         "case": {"name": case_name,
                  "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")},
@@ -64,6 +143,28 @@ def bundle(certs_dir: Path, case_name: str) -> dict:
         # the investigator's judgment: NOT checked by the kernel, each cites certified findings
         "conclusions": conclusions,
     }
+    if case_metadata is not None:
+        if not isinstance(case_metadata, dict):
+            raise ValueError("case metadata must be an object")
+        data["case"].update(case_metadata)
+    audit, events = _audit_snapshot(certs_dir, audit_expected_head)
+    if facts_metadata is None:
+        facts_metadata = _sidecar(certs_dir, "extraction-metadata.json")
+    if public_questions is None:
+        public_questions = _sidecar(certs_dir, "questions.json")
+    data["audit"] = audit
+    verification = audit if audit["status"] != "unavailable" else None
+    data["coverage"] = summarize_coverage(data, facts_metadata=facts_metadata,
+        audit_events=events, public_questions=public_questions, answers=answers,
+        health=health, audit_verification=verification)
+    data["history"] = summarize_history(proposals if log.is_file() else None,
+        audit_events=events, audit_verification=verification)
+    manifest = _sidecar(certs_dir, "run-manifest.json")
+    if manifest is not None:
+        if not isinstance(manifest, dict):
+            raise ValueError("recorded run manifest must be an object")
+        data["run_manifest"] = manifest
+    return data
 
 
 def main(argv=None) -> int:
