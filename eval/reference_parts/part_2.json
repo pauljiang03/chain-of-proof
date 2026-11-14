@@ -1,0 +1,2064 @@
+{
+ "questions": [
+  15,
+  17,
+  18,
+  19,
+  20,
+  23,
+  24,
+  25,
+  27,
+  29,
+  30,
+  31,
+  32,
+  34
+ ],
+ "notes": "Part 2 of the NIST CFReDS Data Leakage Case answer key (dated 2018-07-23), section 6, questions listed in 'questions'. Only 'Possible Answer' rows are transcribed; values quoted under 'Considerations' are not items (they are mentioned in an item's note where they matter). 'page' is the PDF page (the '===== PAGE n =====' marker in answers.txt), not the number printed in the page footer, as in eval/reference.json. TIME ZONES. Q15, Q17, Q23, Q25, Q27, Q31: the table is marked '(Timezone is applied)', read as US Eastern local time; all dates are 2015-03-22 to 2015-03-25, inside daylight time, so utc = printed + 4 h. Q30: the 'Timestamp' column is marked '(Timezone is applied)' (utc = printed + 4 h); the 'Modified Time (UTC-05)' column is printed in UTC-05 (utc = printed + 5 h; January dates). Q18, Q19, Q20, Q24, Q29, Q32, Q34: the answer prints no time, so no utc and no local_day. CONVENTIONS. Q15: URLs split over several printed lines are joined with nothing in between; 72 URLs are matched exactly, 2 that the key prints cut off are matched with obj_contains. The Browser column is matched with aux_contains: 'Chrome' for Chrome, 'Internet Explorer' for the key's 'IE 8' and 'IE 11' (the key itself spells it out in question 13). Q23: the 48 printed rows are 24 renames; the timestamp cell spans a 'Renamed Old' and a 'Renamed New' row, and fileRenamed holds old name in obj and new name in aux, so there is one item per rename. Only file names are matched (obj_endswith old name, aux_contains new name) because the table header says 'just file names are OK'; the printed folders are in 'nist'. Q25, Q27: printed directory paths end in a backslash; the matcher drops it. ShellBag rows are folderOpened with aux_contains 'shell' (covers 'shell bag' and 'ShellBag'); '(created)' and '(last accessed)' differ only in the time. The drive letter (E:, V:) or \\\\server\\share is kept in obj_endswith. The four JumpList / .LNK rows of Q27 are lnkTarget, as in questions 26, 28, 35. Two of those (Q27-13, Q27-14) have identical matchers because lnkTarget cannot tell a jump list from a .LNK file. Q29: files and folders named as traces are fileCreated (the file exists) or fileDeleted (marked '(deleted)'); the key's '\\User\\...' spelling is not corrected, only trailing path parts are matched. Q34: one item per listed file, fileCreated in the burn folder, no time printed. No 'exhibit' matcher is set anywhere: every row here is found on the PC image, including the Q25 rows about folders on RM#2. Inconsistencies copied as printed and flagged with 'note': Q19 (Office vs Outlook folder), Q29 (\\User vs \\Users, missing \\Local), Q30 (the two modified times are swapped relative to the log excerpt).",
+ "items": [
+  {
+   "id": "Q15-001",
+   "question": 15,
+   "page": 21,
+   "nist": "visited http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome (IE 8)",
+   "nist_local_time": "2015-03-22 11:09:01",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:01"
+   }
+  },
+  {
+   "id": "Q15-002",
+   "question": 15,
+   "page": 21,
+   "nist": "visited https://www.google.com/ (IE 8)",
+   "nist_local_time": "2015-03-22 11:09:47",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:47"
+   }
+  },
+  {
+   "id": "Q15-003",
+   "question": 15,
+   "page": 21,
+   "nist": "visited http://windows.microsoft.com/en-us/internet-explorer/download-ie (IE 8)",
+   "nist_local_time": "2015-03-22 11:10:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:10:50"
+   }
+  },
+  {
+   "id": "Q15-004",
+   "question": 15,
+   "page": 21,
+   "nist": "visited http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe (IE 8)",
+   "nist_local_time": "2015-03-22 11:11:04",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:11:04"
+   }
+  },
+  {
+   "id": "Q15-005",
+   "question": 15,
+   "page": 21,
+   "nist": "visited https://dl.google.com/update2/1.3.26.9/GoogleInstaller_en.application?appguid%3D%7B8A69D345-D564-463C-AFF1- (IE 8)",
+   "nist_local_time": "2015-03-22 11:11:06",
+   "expect": {
+    "kind": "webVisit",
+    "obj_contains": "https://dl.google.com/update2/1.3.26.9/GoogleInstaller_en.application?appguid%3D%7B8A69D345-D564-463C-AFF1-",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:11:06"
+   },
+   "note": "The key prints this URL cut off (it ends in '-'), so the printed part is matched as a substring."
+  },
+  {
+   "id": "Q15-006",
+   "question": 15,
+   "page": 21,
+   "nist": "visited https://www.google.com/intl/en/chrome/browser/welcome.html (Chrome)",
+   "nist_local_time": "2015-03-22 11:11:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/intl/en/chrome/browser/welcome.html",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-22T15:11:58"
+   }
+  },
+  {
+   "id": "Q15-007",
+   "question": 15,
+   "page": 21,
+   "nist": "visited https://www.google.com/#q=outlook+2013+settings (Chrome)",
+   "nist_local_time": "2015-03-22 11:27:59",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/#q=outlook+2013+settings",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-22T15:27:59"
+   }
+  },
+  {
+   "id": "Q15-008",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/ (Chrome)",
+   "nist_local_time": "2015-03-23 13:26:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T17:26:58"
+   }
+  },
+  {
+   "id": "Q15-009",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/webhp?hl=en (Chrome)",
+   "nist_local_time": "2015-03-23 13:26:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T17:26:58"
+   }
+  },
+  {
+   "id": "Q15-010",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://go.microsoft.com/fwlink/?LinkId=69157 (IE 11)",
+   "nist_local_time": "2015-03-23 13:27:36",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://go.microsoft.com/fwlink/?LinkId=69157",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:27:36"
+   }
+  },
+  {
+   "id": "Q15-011",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie (IE 11)",
+   "nist_local_time": "2015-03-23 13:27:49",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:27:49"
+   }
+  },
+  {
+   "id": "Q15-012",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods (Chrome)",
+   "nist_local_time": "2015-03-23 14:02:09",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:02:09"
+   }
+  },
+  {
+   "id": "Q15-013",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.sans.org/reading-room/whitepapers/awareness/data-leakage-threats-mitigation_1931 (Chrome)",
+   "nist_local_time": "2015-03-23 14:02:18",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.sans.org/reading-room/whitepapers/awareness/data-leakage-threats-mitigation_1931",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:02:18"
+   }
+  },
+  {
+   "id": "Q15-014",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/webhp?hl=en#hl=en&q=leaking+confidential+information (Chrome)",
+   "nist_local_time": "2015-03-23 14:02:44",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en#hl=en&q=leaking+confidential+information",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:02:44"
+   }
+  },
+  {
+   "id": "Q15-015",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases (Chrome)",
+   "nist_local_time": "2015-03-23 14:03:40",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:03:40"
+   }
+  },
+  {
+   "id": "Q15-016",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.emirates247.com/business/technology/top-5-sources-leaking-personal-data-2015-03- (Chrome)",
+   "nist_local_time": "2015-03-23 14:04:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj_contains": "http://www.emirates247.com/business/technology/top-5-sources-leaking-personal-data-2015-03-",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:04:54"
+   },
+   "note": "The key prints this URL cut off (it ends in '-'), so the printed part is matched as a substring."
+  },
+  {
+   "id": "Q15-017",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft (Chrome)",
+   "nist_local_time": "2015-03-23 14:05:48",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:05:48"
+   }
+  },
+  {
+   "id": "Q15-018",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.fbi.gov/about-us/investigate/white_collar/ipr/ipr (Chrome)",
+   "nist_local_time": "2015-03-23 14:05:55",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.fbi.gov/about-us/investigate/white_collar/ipr/ipr",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:05:55"
+   }
+  },
+  {
+   "id": "Q15-019",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://en.wikipedia.org/wiki/Intellectual_property (Chrome)",
+   "nist_local_time": "2015-03-23 14:06:01",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/Intellectual_property",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:06:01"
+   }
+  },
+  {
+   "id": "Q15-020",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret (Chrome)",
+   "nist_local_time": "2015-03-23 14:06:27",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:06:27"
+   }
+  },
+  {
+   "id": "Q15-021",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://research.microsoft.com/en-us/um/people/yael/publications/2001-leak_secret.pdf (Chrome)",
+   "nist_local_time": "2015-03-23 14:06:53",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://research.microsoft.com/en-us/um/people/yael/publications/2001-leak_secret.pdf",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:06:53"
+   }
+  },
+  {
+   "id": "Q15-022",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6 (IE 11)",
+   "nist_local_time": "2015-03-23 14:07:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:07:58"
+   }
+  },
+  {
+   "id": "Q15-023",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://sysinfotools.com/blog/tethering-internet-files-sharing/ (IE 11)",
+   "nist_local_time": "2015-03-23 14:08:18",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://sysinfotools.com/blog/tethering-internet-files-sharing/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:08:18"
+   }
+  },
+  {
+   "id": "Q15-024",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0 (IE 11)",
+   "nist_local_time": "2015-03-23 14:08:31",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:08:31"
+   }
+  },
+  {
+   "id": "Q15-025",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1 (IE 11)",
+   "nist_local_time": "2015-03-23 14:08:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:08:54"
+   }
+  },
+  {
+   "id": "Q15-026",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3 (IE 11)",
+   "nist_local_time": "2015-03-23 14:10:03",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:10:03"
+   }
+  },
+  {
+   "id": "Q15-027",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4 (IE 11)",
+   "nist_local_time": "2015-03-23 14:10:27",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:10:27"
+   }
+  },
+  {
+   "id": "Q15-028",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/ (IE 11)",
+   "nist_local_time": "2015-03-23 14:11:12",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:11:12"
+   }
+  },
+  {
+   "id": "Q15-029",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5 (IE 11)",
+   "nist_local_time": "2015-03-23 14:11:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:11:50"
+   }
+  },
+  {
+   "id": "Q15-030",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://technet.microsoft.com/en-us/library/cc162846.aspx (IE 11)",
+   "nist_local_time": "2015-03-23 14:12:07",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://technet.microsoft.com/en-us/library/cc162846.aspx",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:07"
+   }
+  },
+  {
+   "id": "Q15-031",
+   "question": 15,
+   "page": 22,
+   "nist": "visited http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6 (IE 11)",
+   "nist_local_time": "2015-03-23 14:12:35",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:35"
+   }
+  },
+  {
+   "id": "Q15-032",
+   "question": 15,
+   "page": 22,
+   "nist": "visited https://support.microsoft.com/en-us/kb/308427 (IE 11)",
+   "nist_local_time": "2015-03-23 14:12:45",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://support.microsoft.com/en-us/kb/308427",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:45"
+   }
+  },
+  {
+   "id": "Q15-033",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://en.wikipedia.org/wiki/Event_Viewer (IE 11)",
+   "nist_local_time": "2015-03-23 14:12:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/Event_Viewer",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:52"
+   }
+  },
+  {
+   "id": "Q15-034",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7 (IE 11)",
+   "nist_local_time": "2015-03-23 14:13:20",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:13:20"
+   }
+  },
+  {
+   "id": "Q15-035",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8 (IE 11)",
+   "nist_local_time": "2015-03-23 14:13:37",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:13:37"
+   }
+  },
+  {
+   "id": "Q15-036",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx (IE 11)",
+   "nist_local_time": "2015-03-23 14:13:57",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:13:57"
+   }
+  },
+  {
+   "id": "Q15-037",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9 (IE 11)",
+   "nist_local_time": "2015-03-23 14:14:11",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:14:11"
+   }
+  },
+  {
+   "id": "Q15-038",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.forensicswiki.org/wiki/USB_History_Viewing (IE 11)",
+   "nist_local_time": "2015-03-23 14:14:24",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.forensicswiki.org/wiki/USB_History_Viewing",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:14:24"
+   }
+  },
+  {
+   "id": "Q15-039",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage (Chrome)",
+   "nist_local_time": "2015-03-23 14:14:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:14:50"
+   }
+  },
+  {
+   "id": "Q15-040",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://en.wikipedia.org/wiki/Cloud_storage (Chrome)",
+   "nist_local_time": "2015-03-23 14:15:09",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/Cloud_storage",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:15:09"
+   }
+  },
+  {
+   "id": "Q15-041",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.pcadvisor.co.uk/test-centre/internet/3506734/best-cloud-storage-dropbox-google-drive-onedrive-icloud/ (Chrome)",
+   "nist_local_time": "2015-03-23 14:15:32",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.pcadvisor.co.uk/test-centre/internet/3506734/best-cloud-storage-dropbox-google-drive-onedrive-icloud/",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:15:32"
+   }
+  },
+  {
+   "id": "Q15-042",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics (Chrome)",
+   "nist_local_time": "2015-03-23 14:15:44",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:15:44"
+   }
+  },
+  {
+   "id": "Q15-043",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://en.wikipedia.org/wiki/Digital_forensics (Chrome)",
+   "nist_local_time": "2015-03-23 14:15:49",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/Digital_forensics",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:15:49"
+   }
+  },
+  {
+   "id": "Q15-044",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://nij.gov/topics/forensics/evidence/digital/pages/welcome.aspx (Chrome)",
+   "nist_local_time": "2015-03-23 14:16:06",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://nij.gov/topics/forensics/evidence/digital/pages/welcome.aspx",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:16:06"
+   }
+  },
+  {
+   "id": "Q15-045",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data (Chrome)",
+   "nist_local_time": "2015-03-23 14:16:55",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:16:55"
+   }
+  },
+  {
+   "id": "Q15-046",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=anti-forensics (Chrome)",
+   "nist_local_time": "2015-03-23 14:17:14",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=anti-forensics",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:17:14"
+   }
+  },
+  {
+   "id": "Q15-047",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://forensicswiki.org/wiki/Anti-forensic_techniques (Chrome)",
+   "nist_local_time": "2015-03-23 14:17:19",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://forensicswiki.org/wiki/Anti-forensic_techniques",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:17:19"
+   }
+  },
+  {
+   "id": "Q15-048",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://defcon.org/images/defcon-20/dc-20-presentations/Perklin/DEFCON-20-Perklin-AntiForensics.pdf (Chrome)",
+   "nist_local_time": "2015-03-23 14:18:00",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://defcon.org/images/defcon-20/dc-20-presentations/Perklin/DEFCON-20-Perklin-AntiForensics.pdf",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:18:00"
+   }
+  },
+  {
+   "id": "Q15-049",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=system+cleaner (Chrome)",
+   "nist_local_time": "2015-03-23 14:18:10",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=system+cleaner",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:18:10"
+   }
+  },
+  {
+   "id": "Q15-050",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data (Chrome)",
+   "nist_local_time": "2015-03-23 14:18:30",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:18:30"
+   }
+  },
+  {
+   "id": "Q15-051",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools (Chrome)",
+   "nist_local_time": "2015-03-23 14:19:03",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:19:03"
+   }
+  },
+  {
+   "id": "Q15-052",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://en.wikipedia.org/wiki/List_of_data_recovery_software (Chrome)",
+   "nist_local_time": "2015-03-23 14:19:17",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/List_of_data_recovery_software",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:19:17"
+   }
+  },
+  {
+   "id": "Q15-053",
+   "question": 15,
+   "page": 23,
+   "nist": "visited http://www.forensicswiki.org/wiki/Tools:Data_Recovery (Chrome)",
+   "nist_local_time": "2015-03-23 14:19:21",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.forensicswiki.org/wiki/Tools:Data_Recovery",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T18:19:21"
+   }
+  },
+  {
+   "id": "Q15-054",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.google.com/webhp?hl=en#hl=en&q=apple+icloud (Chrome)",
+   "nist_local_time": "2015-03-23 15:55:09",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en#hl=en&q=apple+icloud",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T19:55:09"
+   }
+  },
+  {
+   "id": "Q15-055",
+   "question": 15,
+   "page": 23,
+   "nist": "visited https://www.apple.com/icloud/setup/pc.html (Chrome)",
+   "nist_local_time": "2015-03-23 15:55:28",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.apple.com/icloud/setup/pc.html",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T19:55:28"
+   }
+  },
+  {
+   "id": "Q15-056",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://www.google.com/webhp?hl=en#hl=en&q=google+drive (Chrome)",
+   "nist_local_time": "2015-03-23 15:56:04",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en#hl=en&q=google+drive",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T19:56:04"
+   }
+  },
+  {
+   "id": "Q15-057",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://www.google.com/drive/download/ (Chrome)",
+   "nist_local_time": "2015-03-23 15:56:15",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/drive/download/",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-23T19:56:15"
+   }
+  },
+  {
+   "id": "Q15-058",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?FORM=Z9LH3 (IE 11)",
+   "nist_local_time": "2015-03-23 16:43:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?FORM=Z9LH3",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:43:52"
+   }
+  },
+  {
+   "id": "Q15-059",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?q=Soccer+News&FORM=NSBABR (IE 11)",
+   "nist_local_time": "2015-03-23 16:45:30",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:45:30"
+   }
+  },
+  {
+   "id": "Q15-060",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?q=top+stories&FORM=NWRFSH (IE 11)",
+   "nist_local_time": "2015-03-23 16:53:46",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:53:46"
+   }
+  },
+  {
+   "id": "Q15-061",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?q=world+news&FORM=NSBABR (IE 11)",
+   "nist_local_time": "2015-03-23 16:55:10",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:10"
+   }
+  },
+  {
+   "id": "Q15-062",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?q=entertainment+news&FORM=NSBABR (IE 11)",
+   "nist_local_time": "2015-03-23 16:55:18",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:18"
+   }
+  },
+  {
+   "id": "Q15-063",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/news?q=business+news&FORM=NSBABR (IE 11)",
+   "nist_local_time": "2015-03-23 16:55:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:54"
+   }
+  },
+  {
+   "id": "Q15-064",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=0b2226a6a5dab3b27ee85fc5e8d21f28f01e (Chrome)",
+   "nist_local_time": "2015-03-24 11:22:46",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=0b2226a6a5dab3b27ee85fc5e8d21f28f01e",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-24T15:22:46"
+   }
+  },
+  {
+   "id": "Q15-065",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=tc&siidp=e6116f8175cb189b8dd7fd58ef6bc922ec04&ar=1427212899 (Chrome)",
+   "nist_local_time": "2015-03-24 11:23:16",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=tc&siidp=e6116f8175cb189b8dd7fd58ef6bc922ec04&ar=1427212899",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-24T15:23:16"
+   }
+  },
+  {
+   "id": "Q15-066",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://news.google.com/news?pz=1&cf=all&ned=us&siidp=0c33ef04190b3734a22c5bae18801ff1041e (Chrome)",
+   "nist_local_time": "2015-03-24 14:59:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://news.google.com/news?pz=1&cf=all&ned=us&siidp=0c33ef04190b3734a22c5bae18801ff1041e",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-24T18:59:52"
+   }
+  },
+  {
+   "id": "Q15-067",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=538c61c825aba06be7485be747a619778015 (Chrome)",
+   "nist_local_time": "2015-03-24 15:00:27",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://news.google.com/news/section?pz=1&cf=all&ned=us&topic=w&siidp=538c61c825aba06be7485be747a619778015",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-24T19:00:27"
+   }
+  },
+  {
+   "id": "Q15-068",
+   "question": 15,
+   "page": 24,
+   "nist": "visited https://www.google.com/#q=security+checkpoint+cd-r (Chrome)",
+   "nist_local_time": "2015-03-24 17:06:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/#q=security+checkpoint+cd-r",
+    "aux_contains": "Chrome",
+    "utc": "2015-03-24T21:06:50"
+   }
+  },
+  {
+   "id": "Q15-069",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3 (IE 11)",
+   "nist_local_time": "2015-03-25 10:46:44",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:46:44"
+   }
+  },
+  {
+   "id": "Q15-070",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0 (IE 11)",
+   "nist_local_time": "2015-03-25 10:46:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:46:54"
+   }
+  },
+  {
+   "id": "Q15-071",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://eraser.heidi.ie/ (IE 11)",
+   "nist_local_time": "2015-03-25 10:46:59",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://eraser.heidi.ie/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:46:59"
+   }
+  },
+  {
+   "id": "Q15-072",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (IE 11)",
+   "nist_local_time": "2015-03-25 10:47:34",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:47:34"
+   }
+  },
+  {
+   "id": "Q15-073",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1 (IE 11)",
+   "nist_local_time": "2015-03-25 10:47:51",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:47:51"
+   }
+  },
+  {
+   "id": "Q15-074",
+   "question": 15,
+   "page": 24,
+   "nist": "visited http://www.piriform.com/ccleaner/download (IE 11)",
+   "nist_local_time": "2015-03-25 10:48:12",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.piriform.com/ccleaner/download",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-25T14:48:12"
+   }
+  },
+  {
+   "id": "Q17-01",
+   "question": 17,
+   "page": 26,
+   "nist": "Windows Explorer search bar keyword 'secret' (time of the WordWheelQuery key)",
+   "nist_local_time": "2015-03-23 14:40:17",
+   "expect": {
+    "kind": "localSearch",
+    "obj": "secret",
+    "aux_contains": "Windows Explorer",
+    "utc": "2015-03-23T18:40:17"
+   }
+  },
+  {
+   "id": "Q18-01",
+   "question": 18,
+   "page": 27,
+   "nist": "application used for e-mail: 'Microsoft Outlook 2013'",
+   "expect": {
+    "kind": "programRun",
+    "obj_contains": "outlook"
+   },
+   "note": "Uncertain mapping. The key names the application, not an event. Stated here as 'a program whose executable name contains Outlook was run' (question: 'what application was used'). Alternatives: programInstalled with 'Outlook' in the name, or accountSeen with aux 'outlook e-mail'. No time is printed."
+  },
+  {
+   "id": "Q19-01",
+   "question": 19,
+   "page": 27,
+   "nist": "e-mail file located at 'C:\\Users\\informant\\AppData\\Local\\Microsoft\\Office\\iaman.informant@nist.gov.ost'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\iaman.informant@nist.gov.ost"
+   },
+   "note": "Printed inconsistently: the answer says ...\\Microsoft\\Office\\..., the registry value quoted under Considerations says ...\\Microsoft\\Outlook\\.... Only the file name, on which both agree, is matched. A file's location is stated as a fileCreated row for that path; no time is printed."
+  },
+  {
+   "id": "Q20-01",
+   "question": 20,
+   "page": 27,
+   "nist": "e-mail account used by the suspect: 'iaman.informant@nist.gov'",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "iaman.informant@nist.gov",
+    "aux_contains": "mail"
+   }
+  },
+  {
+   "id": "Q23-01",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_detailed_proposal.docx' to 'landscape.png' in \\Users\\informant\\Desktop\\S data\\ (USN 56306184 Renamed Old, USN 56306328 Renamed New)",
+   "nist_local_time": "2015-03-23 14:41:40",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_detailed_proposal.docx",
+    "aux_contains": "landscape.png",
+    "utc": "2015-03-23T18:41:40"
+   }
+  },
+  {
+   "id": "Q23-02",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_design_concept.ppt' to 'space_and_earth.mp4' in \\Users\\informant\\Desktop\\S data\\ (USN 56307712 Renamed Old, USN 56307848 Renamed New)",
+   "nist_local_time": "2015-03-23 14:41:55",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_design_concept.ppt",
+    "aux_contains": "space_and_earth.mp4",
+    "utc": "2015-03-23T18:41:55"
+   }
+  },
+  {
+   "id": "Q23-03",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '(secret_project)_pricing_decision.xlsx' to 'happy_holiday.jpg' in \\Users\\informant\\Desktop\\S data\\ (USN 58506640 Renamed Old, USN 58506776 Renamed New)",
+   "nist_local_time": "2015-03-23 16:30:44",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_pricing_decision.xlsx",
+    "aux_contains": "happy_holiday.jpg",
+    "utc": "2015-03-23T20:30:44"
+   }
+  },
+  {
+   "id": "Q23-04",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_final_meeting.pptx' to 'do_u_wanna_build_a_snow_man.mp3' in \\Users\\informant\\Desktop\\S data\\ (USN 58510288 Renamed Old, USN 58510424 Renamed New)",
+   "nist_local_time": "2015-03-23 16:31:02",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_final_meeting.pptx",
+    "aux_contains": "do_u_wanna_build_a_snow_man.mp3",
+    "utc": "2015-03-23T20:31:02"
+   }
+  },
+  {
+   "id": "Q23-05",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_detailed_design.pptx' to 'winter_whether_advisory.zip' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\ (USN 59801680 Renamed Old, USN 59801816 Renamed New)",
+   "nist_local_time": "2015-03-24 09:49:51",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_detailed_design.pptx",
+    "aux_contains": "winter_whether_advisory.zip",
+    "utc": "2015-03-24T13:49:51"
+   }
+  },
+  {
+   "id": "Q23-06",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_revised_points.ppt' to 'winter_storm.amr' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\ (USN 59802408 Renamed Old, USN 59802544 Renamed New)",
+   "nist_local_time": "2015-03-24 09:50:08",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_revised_points.ppt",
+    "aux_contains": "winter_storm.amr",
+    "utc": "2015-03-24T13:50:08"
+   }
+  },
+  {
+   "id": "Q23-07",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_design_concept.ppt' to 'space_and_earth.mp4' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\ (USN 59803456 Renamed Old, USN 59803592 Renamed New)",
+   "nist_local_time": "2015-03-24 09:50:49",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_design_concept.ppt",
+    "aux_contains": "space_and_earth.mp4",
+    "utc": "2015-03-24T13:50:49"
+   }
+  },
+  {
+   "id": "Q23-08",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '[secret_project]_final_meeting.pptx' to 'do_u_wanna_build_a_snow_man.mp3' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\ (USN 59814352 Renamed Old, USN 59814488 Renamed New)",
+   "nist_local_time": "2015-03-24 09:52:35",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_final_meeting.pptx",
+    "aux_contains": "do_u_wanna_build_a_snow_man.mp3",
+    "utc": "2015-03-24T13:52:35"
+   }
+  },
+  {
+   "id": "Q23-09",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '(secret_project)_market_analysis.xlsx' to 'new_years_day.jpg' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\ (USN 59814904 Renamed Old, USN 59815040 Renamed New)",
+   "nist_local_time": "2015-03-24 09:52:56",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_market_analysis.xlsx",
+    "aux_contains": "new_years_day.jpg",
+    "utc": "2015-03-24T13:52:56"
+   }
+  },
+  {
+   "id": "Q23-10",
+   "question": 23,
+   "page": 30,
+   "nist": "renamed '(secret_project)_market_shares.xls' to 'super_bowl.avi' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\ (USN 59815232 Renamed Old, USN 59815360 Renamed New)",
+   "nist_local_time": "2015-03-24 09:53:08",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_market_shares.xls",
+    "aux_contains": "super_bowl.avi",
+    "utc": "2015-03-24T13:53:08"
+   },
+   "note": "The Old row is printed on page 30, the New row on page 31."
+  },
+  {
+   "id": "Q23-11",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '(secret_project)_price_analysis_#1.xlsx' to 'my_favorite_movies.7z' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\ (USN 59815536 Renamed Old, USN 59815680 Renamed New)",
+   "nist_local_time": "2015-03-24 09:53:38",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_price_analysis_#1.xlsx",
+    "aux_contains": "my_favorite_movies.7z",
+    "utc": "2015-03-24T13:53:38"
+   }
+  },
+  {
+   "id": "Q23-12",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '(secret_project)_price_analysis_#2.xls' to 'my_favorite_cars.db' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\ (USN 59815968 Renamed Old, USN 59816104 Renamed New)",
+   "nist_local_time": "2015-03-24 09:53:52",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_price_analysis_#2.xls",
+    "aux_contains": "my_favorite_cars.db",
+    "utc": "2015-03-24T13:53:52"
+   }
+  },
+  {
+   "id": "Q23-13",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '(secret_project)_pricing_decision.xlsx' to 'happy_holiday.jpg' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\ (USN 59816312 Renamed Old, USN 59816448 Renamed New)",
+   "nist_local_time": "2015-03-24 09:54:05",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "(secret_project)_pricing_decision.xlsx",
+    "aux_contains": "happy_holiday.jpg",
+    "utc": "2015-03-24T13:54:05"
+   }
+  },
+  {
+   "id": "Q23-14",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_progress_#1.docx' to 'my_smartphone.png' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\ (USN 59816880 Renamed Old, USN 59817008 Renamed New)",
+   "nist_local_time": "2015-03-24 09:54:23",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_progress_#1.docx",
+    "aux_contains": "my_smartphone.png",
+    "utc": "2015-03-24T13:54:23"
+   }
+  },
+  {
+   "id": "Q23-15",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_progress_#2.docx' to 'new_year_calendar.one' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\ (USN 59817984 Renamed Old, USN 59818112 Renamed New)",
+   "nist_local_time": "2015-03-24 09:54:43",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_progress_#2.docx",
+    "aux_contains": "new_year_calendar.one",
+    "utc": "2015-03-24T13:54:43"
+   }
+  },
+  {
+   "id": "Q23-16",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_progress_#3.doc' to 'my_friends.svg' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\progress\\ (USN 59818320 Renamed Old, USN 59818448 Renamed New)",
+   "nist_local_time": "2015-03-24 09:54:52",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_progress_#3.doc",
+    "aux_contains": "my_friends.svg",
+    "utc": "2015-03-24T13:54:52"
+   }
+  },
+  {
+   "id": "Q23-17",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_detailed_proposal.docx' to 'a_gift_from_you.gif' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\ (USN 59818624 Renamed Old, USN 59818768 Renamed New)",
+   "nist_local_time": "2015-03-24 09:55:08",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_detailed_proposal.docx",
+    "aux_contains": "a_gift_from_you.gif",
+    "utc": "2015-03-24T13:55:08"
+   }
+  },
+  {
+   "id": "Q23-18",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_proposal.docx' to 'landscape.png' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\ (USN 59818976 Renamed Old, USN 59819096 Renamed New)",
+   "nist_local_time": "2015-03-24 09:55:17",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_proposal.docx",
+    "aux_contains": "landscape.png",
+    "utc": "2015-03-24T13:55:17"
+   }
+  },
+  {
+   "id": "Q23-19",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#1.docx' to 'diary_#1d.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59819272 Renamed Old, USN 59819416 Renamed New)",
+   "nist_local_time": "2015-03-24 09:55:32",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#1.docx",
+    "aux_contains": "diary_#1d.txt",
+    "utc": "2015-03-24T13:55:32"
+   }
+  },
+  {
+   "id": "Q23-20",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#1.pptx' to 'diary_#1p.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59819592 Renamed Old, USN 59819736 Renamed New)",
+   "nist_local_time": "2015-03-24 09:55:42",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#1.pptx",
+    "aux_contains": "diary_#1p.txt",
+    "utc": "2015-03-24T13:55:42"
+   }
+  },
+  {
+   "id": "Q23-21",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#2.docx' to 'diary_#2d.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59819912 Renamed Old, USN 59820056 Renamed New)",
+   "nist_local_time": "2015-03-24 09:55:53",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#2.docx",
+    "aux_contains": "diary_#2d.txt",
+    "utc": "2015-03-24T13:55:53"
+   }
+  },
+  {
+   "id": "Q23-22",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#2.ppt' to 'diary_#2p.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59823280 Renamed Old, USN 59823424 Renamed New)",
+   "nist_local_time": "2015-03-24 09:56:09",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#2.ppt",
+    "aux_contains": "diary_#2p.txt",
+    "utc": "2015-03-24T13:56:09"
+   }
+  },
+  {
+   "id": "Q23-23",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#3.doc' to 'diary_#3d.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59823600 Renamed Old, USN 59823744 Renamed New)",
+   "nist_local_time": "2015-03-24 09:56:14",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#3.doc",
+    "aux_contains": "diary_#3d.txt",
+    "utc": "2015-03-24T13:56:14"
+   }
+  },
+  {
+   "id": "Q23-24",
+   "question": 23,
+   "page": 31,
+   "nist": "renamed '[secret_project]_technical_review_#3.ppt' to 'diary_#3p.txt' in \\Users\\informant\\Desktop\\S data\\Secret Project Data\\technical review\\ (USN 59823920 Renamed Old, USN 59824064 Renamed New)",
+   "nist_local_time": "2015-03-24 09:56:20",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "[secret_project]_technical_review_#3.ppt",
+    "aux_contains": "diary_#3p.txt",
+    "utc": "2015-03-24T13:56:20"
+   }
+  },
+  {
+   "id": "Q24-01",
+   "question": 24,
+   "page": 32,
+   "nist": "IP address of the company's shared network drive: '10.11.11.128'",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_contains": "\\\\10.11.11.128\\"
+   },
+   "note": "Uncertain mapping. The answer is a bare IP address; it is stated here as 'a folder on \\\\10.11.11.128\\ was opened'. The Considerations (not transcribed as items) quote RunMRU data '\\\\10.11.11.128\\secured_drive' with key time 2015-03-23 16:23:28 and Map Network Drive MRU with key time 2015-03-23 16:26:04. lnkTarget rows with aux '\\\\10.11.11.128\\secured_drive' would show the same thing but are a different kind."
+  },
+  {
+   "id": "Q25-01",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-24 10:00:19",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:00:19"
+   }
+  },
+  {
+   "id": "Q25-02",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\technical review\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-24 10:01:11",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\technical review",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:01:11"
+   }
+  },
+  {
+   "id": "Q25-03",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\proposal\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-24 10:01:14",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\proposal",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:01:14"
+   }
+  },
+  {
+   "id": "Q25-04",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\progress\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-24 10:01:15",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\progress",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:01:15"
+   }
+  },
+  {
+   "id": "Q25-05",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\pricing decision\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-24 10:01:17",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\pricing decision",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:01:17"
+   }
+  },
+  {
+   "id": "Q25-06",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\design\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-24 10:01:29",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\design",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T14:01:29"
+   }
+  },
+  {
+   "id": "Q25-07",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-24 16:54:07",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T20:54:07"
+   }
+  },
+  {
+   "id": "Q25-08",
+   "question": 25,
+   "page": 32,
+   "nist": "E:\\Secret Project Data\\progress\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-24 16:54:07",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "E:\\Secret Project Data\\progress",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T20:54:07"
+   }
+  },
+  {
+   "id": "Q27-01",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Common Data\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:01",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Common Data",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:01"
+   }
+  },
+  {
+   "id": "Q27-02",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Past Projects\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:08",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Past Projects",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:08"
+   }
+  },
+  {
+   "id": "Q27-03",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\design\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:12",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\design",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:12"
+   }
+  },
+  {
+   "id": "Q27-04",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:15",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:15"
+   }
+  },
+  {
+   "id": "Q27-05",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\final\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:16",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\final",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:16"
+   }
+  },
+  {
+   "id": "Q27-06",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\technical review\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:18",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\technical review",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:18"
+   }
+  },
+  {
+   "id": "Q27-07",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\proposal\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:20",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\proposal",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:20"
+   }
+  },
+  {
+   "id": "Q27-08",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\progress\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:24:27",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\progress",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:24:27"
+   }
+  },
+  {
+   "id": "Q27-09",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ traversed, source JumpList",
+   "nist_local_time": "2015-03-23 16:26:53",
+   "expect": {
+    "kind": "lnkTarget",
+    "obj_endswith": "\\Secret Project Data\\pricing decision",
+    "aux": "\\\\10.11.11.128\\secured_drive",
+    "utc": "2015-03-23T20:26:53"
+   },
+   "note": "Jump list / .LNK source, so stated as lnkTarget like the JumpList and .LNK rows of questions 26, 28 and 35 (obj = path below the share, aux = the share). It could also be read as folderOpened."
+  },
+  {
+   "id": "Q27-10",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ traversed, source .LNK (Windows)",
+   "nist_local_time": "2015-03-23 16:26:54",
+   "expect": {
+    "kind": "lnkTarget",
+    "obj_endswith": "\\Secret Project Data\\pricing decision",
+    "aux": "\\\\10.11.11.128\\secured_drive",
+    "utc": "2015-03-23T20:26:54"
+   },
+   "note": "Jump list / .LNK source, so stated as lnkTarget like the JumpList and .LNK rows of questions 26, 28 and 35 (obj = path below the share, aux = the share). It could also be read as folderOpened."
+  },
+  {
+   "id": "Q27-11",
+   "question": 27,
+   "page": 33,
+   "nist": "V:\\Secret Project Data\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:27:24",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "V:\\Secret Project Data",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:27:24"
+   }
+  },
+  {
+   "id": "Q27-12",
+   "question": 27,
+   "page": 33,
+   "nist": "V:\\Secret Project Data\\final\\ traversed, source ShellBag (created)",
+   "nist_local_time": "2015-03-23 16:27:29",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "V:\\Secret Project Data\\final",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:27:29"
+   }
+  },
+  {
+   "id": "Q27-13",
+   "question": 27,
+   "page": 33,
+   "nist": "V:\\Secret Project Data\\final\\ traversed, source JumpList",
+   "nist_local_time": "2015-03-23 16:27:33",
+   "expect": {
+    "kind": "lnkTarget",
+    "obj_endswith": "\\Secret Project Data\\final",
+    "utc": "2015-03-23T20:27:33"
+   },
+   "note": "Jump list / .LNK source, so stated as lnkTarget (obj = path without the drive letter V:). No aux: the row prints a drive letter, not a share (Considerations: 'V:\\ is mapped on \\\\10.11.11.128'). It could also be read as folderOpened."
+  },
+  {
+   "id": "Q27-14",
+   "question": 27,
+   "page": 33,
+   "nist": "V:\\Secret Project Data\\final\\ traversed, source .LNK (Windows)",
+   "nist_local_time": "2015-03-23 16:27:33",
+   "expect": {
+    "kind": "lnkTarget",
+    "obj_endswith": "\\Secret Project Data\\final",
+    "utc": "2015-03-23T20:27:33"
+   },
+   "note": "Jump list / .LNK source, so stated as lnkTarget (obj = path without the drive letter V:). No aux: the row prints a drive letter, not a share (Considerations: 'V:\\ is mapped on \\\\10.11.11.128'). It could also be read as folderOpened."
+  },
+  {
+   "id": "Q27-15",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-23 16:28:17",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:28:17"
+   }
+  },
+  {
+   "id": "Q27-16",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-23 16:28:17",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+    "aux_contains": "shell",
+    "utc": "2015-03-23T20:28:17"
+   }
+  },
+  {
+   "id": "Q27-17",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-24 09:47:54",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T13:47:54"
+   }
+  },
+  {
+   "id": "Q27-18",
+   "question": 27,
+   "page": 33,
+   "nist": "\\\\10.11.11.128\\secured_drive\\Past Projects\\ traversed, source ShellBag (last accessed)",
+   "nist_local_time": "2015-03-24 09:47:54",
+   "expect": {
+    "kind": "folderOpened",
+    "obj_endswith": "\\\\10.11.11.128\\secured_drive\\Past Projects",
+    "aux_contains": "shell",
+    "utc": "2015-03-24T13:47:54"
+   }
+  },
+  {
+   "id": "Q29-01",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '\\Program Files (x86)\\Google\\Drive\\'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_contains": "\\Program Files (x86)\\Google\\Drive\\"
+   },
+   "note": "A directory. Stated as: some file or folder was created under this directory."
+  },
+  {
+   "id": "Q29-02",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '\\User\\informant\\AppData\\Google\\Drive\\user_default\\'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_contains": "\\Google\\Drive\\user_default\\"
+   },
+   "note": "A directory. Stated as: some file was created under this directory. The key prints '\\User\\informant\\AppData\\Google\\Drive\\user_default\\' (not '\\Users\\...', and without '\\Local'); only the trailing part is matched."
+  },
+  {
+   "id": "Q29-03",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '...\\Google\\Drive\\user_default\\' > 'sync_config.db (deleted)'",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_config.db"
+   },
+   "note": "Uncertain mapping: the key marks the file '(deleted)' and gives no time; stated as fileDeleted. A pipeline that only lists it as a file-system entry (fileCreated) would not match. The key prints '\\User\\informant\\AppData\\Google\\Drive\\user_default\\' (not '\\Users\\...', and without '\\Local'); only the trailing part is matched."
+  },
+  {
+   "id": "Q29-04",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '...\\Google\\Drive\\user_default\\' > 'snapshot.db (deleted)'",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Google\\Drive\\user_default\\snapshot.db"
+   },
+   "note": "Uncertain mapping: the key marks the file '(deleted)' and gives no time; stated as fileDeleted. A pipeline that only lists it as a file-system entry (fileCreated) would not match. The key prints '\\User\\informant\\AppData\\Google\\Drive\\user_default\\' (not '\\Users\\...', and without '\\Local'); only the trailing part is matched."
+  },
+  {
+   "id": "Q29-05",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '...\\Google\\Drive\\user_default\\' > 'sync_log.log'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_log.log"
+   },
+   "note": "The key prints '\\User\\informant\\AppData\\Google\\Drive\\user_default\\' (not '\\Users\\...', and without '\\Local'); only the trailing part is matched."
+  },
+  {
+   "id": "Q29-06",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, File/Dir: '\\User\\informant\\Downloads\\googledrivesync.exe'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\informant\\Downloads\\googledrivesync.exe"
+   },
+   "note": "The key prints '\\User\\informant\\...' (not '\\Users\\...'); matched from '\\informant\\' on."
+  },
+  {
+   "id": "Q29-07",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, Registry: 'HKU\\informant\\Software\\Google\\Drive'",
+   "expect": null,
+   "not_expressible": "existence of a registry key (no kind holds a registry key as such)"
+  },
+  {
+   "id": "Q29-08",
+   "question": 29,
+   "page": 34,
+   "nist": "Google Drive, Registry: 'HKU\\informant\\Software\\Classes\\GoogleDrive.*'",
+   "expect": null,
+   "not_expressible": "existence of registry keys matching a pattern (no kind holds a registry key as such)"
+  },
+  {
+   "id": "Q29-09",
+   "question": 29,
+   "page": 34,
+   "nist": "Apple iCloud, File/Dir: '\\User\\informant\\Downloads\\icloudsetup.exe'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\informant\\Downloads\\icloudsetup.exe"
+   },
+   "note": "The key prints '\\User\\informant\\...' (not '\\Users\\...'); matched from '\\informant\\' on."
+  },
+  {
+   "id": "Q30-01",
+   "question": 30,
+   "page": 34,
+   "nist": "deleted from Google Drive: 'happy_holiday.jpg'",
+   "nist_local_time": "2015-03-23 16:42:17",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "happy_holiday.jpg",
+    "aux": "google drive: deleted",
+    "utc": "2015-03-23T20:42:17"
+   }
+  },
+  {
+   "id": "Q30-02",
+   "question": 30,
+   "page": 34,
+   "nist": "'happy_holiday.jpg' Modified Time (UTC-05): 2015-01-30 11:49:20",
+   "nist_local_time": "2015-01-30 11:49:20",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "happy_holiday.jpg",
+    "aux": "google drive: modified",
+    "utc": "2015-01-30T16:49:20"
+   },
+   "note": "Printed inconsistently: the answer table gives this file the modified time 2015-01-30 11:49:20, but the sync_log.log excerpt quoted under Considerations gives it mtime=1422563714.5256062, which is 2015-01-29 15:35:14 in UTC-05, the time the table gives the other file. Copied from the table as printed. Uncertain mapping: a modified time taken from the Google Drive log is stated as cloudFile 'google drive: modified'; a pipeline could instead hold it as fileModified."
+  },
+  {
+   "id": "Q30-03",
+   "question": 30,
+   "page": 34,
+   "nist": "deleted from Google Drive: 'do_u_wanna_build_a_snow_man.mp3'",
+   "nist_local_time": "2015-03-23 16:42:17",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "do_u_wanna_build_a_snow_man.mp3",
+    "aux": "google drive: deleted",
+    "utc": "2015-03-23T20:42:17"
+   }
+  },
+  {
+   "id": "Q30-04",
+   "question": 30,
+   "page": 34,
+   "nist": "'do_u_wanna_build_a_snow_man.mp3' Modified Time (UTC-05): 2015-01-29 15:35:14",
+   "nist_local_time": "2015-01-29 15:35:14",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "do_u_wanna_build_a_snow_man.mp3",
+    "aux": "google drive: modified",
+    "utc": "2015-01-29T20:35:14"
+   },
+   "note": "Printed inconsistently: the answer table gives this file the modified time 2015-01-29 15:35:14, but the sync_log.log excerpt quoted under Considerations gives it mtime=1422636560.5520115, which is 2015-01-30 11:49:20 in UTC-05, the time the table gives the other file. Copied from the table as printed. Uncertain mapping: a modified time taken from the Google Drive log is stated as cloudFile 'google drive: modified'; a pipeline could instead hold it as fileModified."
+  },
+  {
+   "id": "Q31-01",
+   "question": 31,
+   "page": 35,
+   "nist": "Google Drive sync account 'iaman.informant.personal@gmail.com', logon time from sync_log.log",
+   "nist_local_time": "2015-03-23 16:05:32",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "iaman.informant.personal@gmail.com",
+    "aux_contains": "google drive",
+    "utc": "2015-03-23T20:05:32"
+   },
+   "note": "The printed time is the logon line in sync_log.log, not an account creation time."
+  },
+  {
+   "id": "Q32-01",
+   "question": 32,
+   "page": 36,
+   "nist": "CD-R burning method: 'Windows default CD/DVD burning feature (No 3rd party application was used for burning CD-R)'",
+   "expect": null,
+   "not_expressible": "a conclusion about which software did the burning, including a negative (no third-party tool); not a recorded event"
+  },
+  {
+   "id": "Q34-01",
+   "question": 34,
+   "page": 37,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\de\\winter_storm.amr'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\de\\winter_storm.amr"
+   }
+  },
+  {
+   "id": "Q34-02",
+   "question": 34,
+   "page": 37,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\de\\winter_whether_advisory.zip'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\de\\winter_whether_advisory.zip"
+   }
+  },
+  {
+   "id": "Q34-03",
+   "question": 34,
+   "page": 37,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\my_favorite_cars.db'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\pd\\my_favorite_cars.db"
+   }
+  },
+  {
+   "id": "Q34-04",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\my_favorite_movies.7z'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\pd\\my_favorite_movies.7z"
+   }
+  },
+  {
+   "id": "Q34-05",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\new_years_day.jpg'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\pd\\new_years_day.jpg"
+   }
+  },
+  {
+   "id": "Q34-06",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd\\super_bowl.avi'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\pd\\super_bowl.avi"
+   }
+  },
+  {
+   "id": "Q34-07",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\\my_friends.svg'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\prog\\my_friends.svg"
+   }
+  },
+  {
+   "id": "Q34-08",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\\my_smartphone.png'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\prog\\my_smartphone.png"
+   }
+  },
+  {
+   "id": "Q34-09",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog\\new_year_calendar.one'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\prog\\new_year_calendar.one"
+   }
+  },
+  {
+   "id": "Q34-10",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop\\a_gift_from_you.gif'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\prop\\a_gift_from_you.gif"
+   }
+  },
+  {
+   "id": "Q34-11",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop\\landscape.png'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\prop\\landscape.png"
+   }
+  },
+  {
+   "id": "Q34-12",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#1d.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#1d.txt"
+   }
+  },
+  {
+   "id": "Q34-13",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#1p.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#1p.txt"
+   }
+  },
+  {
+   "id": "Q34-14",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#2d.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#2d.txt"
+   }
+  },
+  {
+   "id": "Q34-15",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#2p.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#2p.txt"
+   }
+  },
+  {
+   "id": "Q34-16",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#3d.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#3d.txt"
+   }
+  },
+  {
+   "id": "Q34-17",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr\\diary_#3p.txt'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\tr\\diary_#3p.txt"
+   }
+  },
+  {
+   "id": "Q34-18",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\Penguins.jpg"
+   }
+  },
+  {
+   "id": "Q34-19",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\Koala.jpg"
+   }
+  },
+  {
+   "id": "Q34-20",
+   "question": 34,
+   "page": 38,
+   "nist": "copied to CD-R (burn folder): '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg'",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Burn\\Burn\\Tulips.jpg"
+   }
+  }
+ ]
+}

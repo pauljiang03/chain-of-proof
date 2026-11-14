@@ -1,0 +1,1758 @@
+{
+ "questions": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14
+ ],
+ "notes": "Section 6, questions 1-14 of the answer key (answers.txt lines 1013-1528, PDF pages 16-21; 'page' is the PDF page, as in eval/reference.json). One item per table row or stated fact. Q6 rows are split per timestamp. 'Considerations' cells are not transcribed, except that the NT hashes they list are quoted in the Q6 account rows (the table's NT Hash column points to them). Q1 prints no row for RM#1 and no answer to 'does the hash match'. TIME ZONES. Q1, Q2, Q4, Q5, Q7, Q9, Q13, Q14: no times printed. Q3: install date printed as GMT, copied. Q8: printed as 'Eastern Time + DST', UTC-4. Q11, Q12: caption '(Timezone is applied)', read as Eastern Daylight Time, UTC-4 (default rule; Q12's last shutdown 11:31:00 agrees with Q8's 11:31:05, and Q11's last run 11:28:47 falls before it). Q6, Q10: same caption, but the printed times run one hour behind the rest of the key, i.e. Eastern Standard Time, UTC-5, daylight saving not applied (Q4 prints the zone as UTC-05:00). utc for Q6 and Q10 is therefore printed time + 5 h, NOT the default + 4 h; every such item has a note giving the + 4 h value, so the choice can be reversed mechanically. Evidence, all from the key itself: (a) Q6 informant created 09:33:54 is 14:33:54 UTC at UTC-5, 32 s before the install date Q3 prints in GMT (14:34:26); at UTC-4 the account would be an hour older than the installation. (b) Q6 informant last login 2015-03-25 09:45:59; Q12 lists an event at 10:45:59 that day. (c) At UTC-4 the Q6 accounts would be created 10:51:54-10:53:01, before the day's first logon in Q12 (11:00:08). (d) Q10 Chrome installed 2015-03-22 10:11:51; Q15 has the Chrome installer download at 11:11:06 and Chrome's welcome page at 11:11:58. (e) Q10 Apple Software Update 2015-03-23 15:01:01; Q11 AppleSoftwareUpdateIco.exe 16:00:59. (f) Q10 .NET Framework 4 installed 2015-03-25 09:51:39; Q11 has its setup program first run at 10:50:15. (g) At UTC-4 Q10's Office install (10:04:14) would precede the OS install date. MATCHERS. systemSetting: fixed names only; rows with no fitting name are null. Q1 hash rows carry 'exhibit' from the table's Class column, PC included. Q2: aux_contains on the contract's 'start sector S, sectors C' wording. programInstalled: obj_contains the printed name, aux the printed version; manufacturer and path are in 'nist' only. programRun: obj is the file name (last part of the printed path), exact. aux: a path tail ('\\folder\\file', aux_contains) on Shimcache and MuiCache rows and on rows with no time; none on Prefetch and UserAssist rows that have a time, because those artifacts may record no path or spell the leading folders differently. Execution counts are in 'nist' only. Where the key lists one run from two sources (Prefetch and UserAssist at the same second) the two items have the same matchers. sessionEvent: Q12 prints no account, so no aux; Q6 last-login rows have aux = account name. accountSeen: no aux matcher, the key does not print the contract's wording.",
+ "items": [
+  {
+   "id": "Q1-01",
+   "question": 1,
+   "page": 16,
+   "nist": "PC image MD5 A49D1254C873808C58E6F1BCD60B5BDE",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image md5",
+    "aux": "A49D1254C873808C58E6F1BCD60B5BDE",
+    "exhibit": "PC"
+   }
+  },
+  {
+   "id": "Q1-02",
+   "question": 1,
+   "page": 16,
+   "nist": "PC image SHA-1 AFE5C9AB487BD47A8A9856B1371C2384D44FD785",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image sha1",
+    "aux": "AFE5C9AB487BD47A8A9856B1371C2384D44FD785",
+    "exhibit": "PC"
+   }
+  },
+  {
+   "id": "Q1-03",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#2 image MD5 B4644902ACAB4583A1D0F9F1A08FAA77",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image md5",
+    "aux": "B4644902ACAB4583A1D0F9F1A08FAA77",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q1-04",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#2 image SHA-1 048961A85CA3ECED8CC73F1517442D31D4DCA0A3",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image sha1",
+    "aux": "048961A85CA3ECED8CC73F1517442D31D4DCA0A3",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q1-05",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type1) image MD5 858C7250183A44DD83EB706F3F178990",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image md5",
+    "aux": "858C7250183A44DD83EB706F3F178990",
+    "exhibit": "RM#3"
+   },
+   "note": "Type1 is the RAW/CUE image (section 4.6). Type1 and Type2 print the same digests, so their rows have identical matchers."
+  },
+  {
+   "id": "Q1-06",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type1) image SHA-1 471D3EEDCA9ADD872FC0708297284E1960FF44F8",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image sha1",
+    "aux": "471D3EEDCA9ADD872FC0708297284E1960FF44F8",
+    "exhibit": "RM#3"
+   },
+   "note": "Type1 is the RAW/CUE image (section 4.6). Type1 and Type2 print the same digests, so their rows have identical matchers."
+  },
+  {
+   "id": "Q1-07",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type2) image MD5 858C7250183A44DD83EB706F3F178990",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image md5",
+    "aux": "858C7250183A44DD83EB706F3F178990",
+    "exhibit": "RM#3"
+   },
+   "note": "Type2 is the DD image converted from RAW/CUE (section 4.7). Type1 and Type2 print the same digests, so their rows have identical matchers."
+  },
+  {
+   "id": "Q1-08",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type2) image SHA-1 471D3EEDCA9ADD872FC0708297284E1960FF44F8",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image sha1",
+    "aux": "471D3EEDCA9ADD872FC0708297284E1960FF44F8",
+    "exhibit": "RM#3"
+   },
+   "note": "Type2 is the DD image converted from RAW/CUE (section 4.7). Type1 and Type2 print the same digests, so their rows have identical matchers."
+  },
+  {
+   "id": "Q1-09",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type3) image MD5 DF914108FB3D86744EB688EBA482FBDF",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image md5",
+    "aux": "DF914108FB3D86744EB688EBA482FBDF",
+    "exhibit": "RM#3"
+   },
+   "note": "Type3 is the EnCase E01 image (section 4.8)."
+  },
+  {
+   "id": "Q1-10",
+   "question": 1,
+   "page": 16,
+   "nist": "RM#3 (Type3) image SHA-1 7F3C2EB1F1E2DB97BE6E963625402A0E362A532C",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "image sha1",
+    "aux": "7F3C2EB1F1E2DB97BE6E963625402A0E362A532C",
+    "exhibit": "RM#3"
+   },
+   "note": "Type3 is the EnCase E01 image (section 4.8)."
+  },
+  {
+   "id": "Q2-01",
+   "question": 2,
+   "page": 16,
+   "nist": "partition 1: not bootable, NTFS, start sector 2,048, total sectors 204,800, size 100 MB",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "disk partition",
+    "aux_contains": "start sector 2048, sectors 204800"
+   },
+   "note": "Matcher follows the contract's wording 'partition N: type, start sector S, sectors C' with plain digits; the partition number, file system and bootable flag are not matched because the contract does not fix how 'type' is spelled."
+  },
+  {
+   "id": "Q2-02",
+   "question": 2,
+   "page": 16,
+   "nist": "partition 2: bootable (*), NTFS, start sector 206,848, total sectors 41,734,144, size 19.9 GB",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "disk partition",
+    "aux_contains": "start sector 206848, sectors 41734144"
+   },
+   "note": "Matcher follows the contract's wording 'partition N: type, start sector S, sectors C' with plain digits; the partition number, file system and bootable flag are not matched because the contract does not fix how 'type' is spelled."
+  },
+  {
+   "id": "Q3-01",
+   "question": 3,
+   "page": 16,
+   "nist": "OS Name 'Windows 7 Ultimate'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "operating system",
+    "aux_contains": "Windows 7 Ultimate"
+   }
+  },
+  {
+   "id": "Q3-02",
+   "question": 3,
+   "page": 16,
+   "nist": "Version '6.1'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "operating system version",
+    "aux_contains": "6.1"
+   }
+  },
+  {
+   "id": "Q3-03",
+   "question": 3,
+   "page": 16,
+   "nist": "Build Number '7601'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "operating system version",
+    "aux_contains": "7601"
+   },
+   "note": "The fixed setting names have none for the build number; mapped to 'operating system version' on the reading that the build is part of the version. An extractor that reports only '6.1' there, or the build under a name of its own, will show as a miss."
+  },
+  {
+   "id": "Q3-04",
+   "question": 3,
+   "page": 16,
+   "nist": "Registered Owner 'informant'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "registered owner",
+    "aux": "informant"
+   }
+  },
+  {
+   "id": "Q3-05",
+   "question": 3,
+   "page": 16,
+   "nist": "System Root 'C:\\\\Windows'",
+   "expect": null,
+   "not_expressible": "system root folder: none of the fixed systemSetting names holds it",
+   "note": "Printed with a doubled backslash."
+  },
+  {
+   "id": "Q3-06",
+   "question": 3,
+   "page": 16,
+   "nist": "Install Date '2015-03-22 14:34:26 (GMT)'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "operating system installed",
+    "utc": "2015-03-22T14:34:26"
+   },
+   "note": "Printed in GMT, so copied to utc unchanged; there is no local time to quote."
+  },
+  {
+   "id": "Q4-01",
+   "question": 4,
+   "page": 16,
+   "nist": "Timezone 'Eastern Time (US & Canada) (UTC-05:00)'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "time zone",
+    "aux_contains": "Eastern"
+   },
+   "note": "The key prints a display name. Only the word 'Eastern' is matched, so that either the display name or the name the registry itself stores satisfies it."
+  },
+  {
+   "id": "Q4-02",
+   "question": 4,
+   "page": 16,
+   "nist": "Daylight Time Bias '+1'",
+   "expect": null,
+   "not_expressible": "daylight-saving offset of the time zone: none of the fixed systemSetting names holds it"
+  },
+  {
+   "id": "Q5-01",
+   "question": 5,
+   "page": 16,
+   "nist": "computer name 'INFORMANT-PC'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "computer name",
+    "aux": "INFORMANT-PC"
+   }
+  },
+  {
+   "id": "Q6-01",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'informant': SID 1000, NT hash (a) 9E3D31B073E60BFD7B07978D6F914D0A, Enabled, login count 10; account created time",
+   "nist_local_time": "2015-03-22 09:33:54",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "informant",
+    "utc": "2015-03-22T14:33:54"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T13:33:54."
+  },
+  {
+   "id": "Q6-02",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'informant': last login time",
+   "nist_local_time": "2015-03-25 09:45:59",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "aux": "informant",
+    "utc": "2015-03-25T14:45:59"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-25T13:45:59."
+  },
+  {
+   "id": "Q6-03",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'informant': login failure time",
+   "nist_local_time": "2015-03-25 09:45:43",
+   "expect": null,
+   "not_expressible": "time of a failed logon: sessionEvent has no value for a failed logon",
+   "note": "Time base as for the other Q6 rows: UTC-5 gives 2015-03-25T14:45:43, the default rule (UTC-4) gives 2015-03-25T13:45:43."
+  },
+  {
+   "id": "Q6-04",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'admin11': SID 1001, NT hash (b) 21759544B2D7EFCCC978449463CF7E63, Enabled, login count 2; account created time",
+   "nist_local_time": "2015-03-22 10:51:54",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "admin11",
+    "utc": "2015-03-22T15:51:54"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:51:54."
+  },
+  {
+   "id": "Q6-05",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'admin11': last login time",
+   "nist_local_time": "2015-03-22 10:57:02",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "aux": "admin11",
+    "utc": "2015-03-22T15:57:02"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:57:02."
+  },
+  {
+   "id": "Q6-06",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'admin11': login failure time",
+   "nist_local_time": "2015-03-22 10:53:02",
+   "expect": null,
+   "not_expressible": "time of a failed logon: sessionEvent has no value for a failed logon",
+   "note": "Time base as for the other Q6 rows: UTC-5 gives 2015-03-22T15:53:02, the default rule (UTC-4) gives 2015-03-22T14:53:02."
+  },
+  {
+   "id": "Q6-07",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'ITechTeam': SID 1002, NT hash (c) 75ED0CB7676889AB43764A3B7D3E6943, Enabled, login count 0; account created time",
+   "nist_local_time": "2015-03-22 10:52:30",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "ITechTeam",
+    "utc": "2015-03-22T15:52:30"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:52:30."
+  },
+  {
+   "id": "Q6-08",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'Temporary': SID 1003, NT hash (d) 1B3801B608A6BE89D21FD3C5729D30BF, Enabled, login count 1; account created time",
+   "nist_local_time": "2015-03-22 10:53:01",
+   "expect": {
+    "kind": "accountSeen",
+    "obj": "Temporary",
+    "utc": "2015-03-22T15:53:01"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:53:01."
+  },
+  {
+   "id": "Q6-09",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'Temporary': last login time",
+   "nist_local_time": "2015-03-22 10:55:57",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "aux": "Temporary",
+    "utc": "2015-03-22T15:55:57"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:55:57."
+  },
+  {
+   "id": "Q6-10",
+   "question": 6,
+   "page": 17,
+   "nist": "account 'Temporary': login failure time",
+   "nist_local_time": "2015-03-22 10:56:37",
+   "expect": null,
+   "not_expressible": "time of a failed logon: sessionEvent has no value for a failed logon",
+   "note": "Time base as for the other Q6 rows: UTC-5 gives 2015-03-22T15:56:37, the default rule (UTC-4) gives 2015-03-22T14:56:37."
+  },
+  {
+   "id": "Q7-01",
+   "question": 7,
+   "page": 17,
+   "nist": "last user to log on: 'informant'",
+   "expect": null,
+   "not_expressible": "a conclusion drawn by comparing last-logon times, not one recorded row; the row it rests on is Q6-02"
+  },
+  {
+   "id": "Q8-01",
+   "question": 8,
+   "page": 17,
+   "nist": "last recorded shutdown '2015-03-25 11:31:05 (Eastern Time + DST)'",
+   "nist_local_time": "2015-03-25 11:31:05",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "last shutdown",
+    "utc": "2015-03-25T15:31:05"
+   }
+  },
+  {
+   "id": "Q9-01",
+   "question": 9,
+   "page": 17,
+   "nist": "Device Name 'Intel(R) PRO/1000 MT Network Connection'",
+   "expect": null,
+   "not_expressible": "network adapter name: the contract keeps it in the provenance of the 'network address' row, which matchers do not reach"
+  },
+  {
+   "id": "Q9-02",
+   "question": 9,
+   "page": 17,
+   "nist": "IP Address '10.11.11.129'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "network address",
+    "aux": "10.11.11.129"
+   }
+  },
+  {
+   "id": "Q9-03",
+   "question": 9,
+   "page": 17,
+   "nist": "Subnet Mask '255.255.255.0'",
+   "expect": null,
+   "not_expressible": "subnet mask of the network interface: none of the fixed systemSetting names holds it"
+  },
+  {
+   "id": "Q9-04",
+   "question": 9,
+   "page": 17,
+   "nist": "Name Server '10.11.11.2'",
+   "expect": null,
+   "not_expressible": "name server of the network interface: none of the fixed systemSetting names holds it"
+  },
+  {
+   "id": "Q9-05",
+   "question": 9,
+   "page": 17,
+   "nist": "Domain 'localdomain'",
+   "expect": null,
+   "not_expressible": "DNS domain of the network interface: none of the fixed systemSetting names holds it"
+  },
+  {
+   "id": "Q9-06",
+   "question": 9,
+   "page": 17,
+   "nist": "Default Gateway '10.11.11.2'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "default gateway",
+    "aux": "10.11.11.2"
+   }
+  },
+  {
+   "id": "Q9-07",
+   "question": 9,
+   "page": 17,
+   "nist": "DHCP Usage 'Yes'",
+   "expect": null,
+   "not_expressible": "DHCP on/off flag of the network interface: none of the fixed systemSetting names holds it"
+  },
+  {
+   "id": "Q9-08",
+   "question": 9,
+   "page": 17,
+   "nist": "DHCP Server '10.11.11.254'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj": "dhcp server",
+    "aux": "10.11.11.254"
+   }
+  },
+  {
+   "id": "Q10-01",
+   "question": 10,
+   "page": 17,
+   "nist": "installed 'Microsoft Office Professional Plus 2013' version 15.0.4420.1017, Microsoft Corporation, path C:\\Program Files\\Microsoft Office",
+   "nist_local_time": "2015-03-22 10:04:14",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Microsoft Office Professional Plus 2013",
+    "aux": "15.0.4420.1017",
+    "utc": "2015-03-22T15:04:14"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:04:14."
+  },
+  {
+   "id": "Q10-02",
+   "question": 10,
+   "page": 17,
+   "nist": "installed 'Google Chrome' version 41.0.2272.101, Google Inc., path C:\\Program Files (x86)\\Google\\Chrome\\Application",
+   "nist_local_time": "2015-03-22 10:11:51",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Google Chrome",
+    "aux": "41.0.2272.101",
+    "utc": "2015-03-22T15:11:51"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:11:51."
+  },
+  {
+   "id": "Q10-03",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Google Update Helper' version 1.3.26.9, Google Inc., no installation path printed",
+   "nist_local_time": "2015-03-22 10:16:03",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Google Update Helper",
+    "aux": "1.3.26.9",
+    "utc": "2015-03-22T15:16:03"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-22T14:16:03."
+  },
+  {
+   "id": "Q10-04",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Apple Application Support' version 3.0.6, Apple Inc., path C:\\Program Files (x86)\\Common Files\\Apple\\Apple Application Support\\",
+   "nist_local_time": "2015-03-23 15:00:45",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Apple Application Support",
+    "aux": "3.0.6",
+    "utc": "2015-03-23T20:00:45"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-23T19:00:45."
+  },
+  {
+   "id": "Q10-05",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Bonjour' version 3.0.0.10, Apple Inc., path C:\\Program Files (x86)\\Bonjour\\",
+   "nist_local_time": "2015-03-23 15:00:58",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Bonjour",
+    "aux": "3.0.0.10",
+    "utc": "2015-03-23T20:00:58"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-23T19:00:58."
+  },
+  {
+   "id": "Q10-06",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Apple Software Update' version 2.1.3.127, Apple Inc., path C:\\Program Files (x86)\\Apple Software Update\\",
+   "nist_local_time": "2015-03-23 15:01:01",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Apple Software Update",
+    "aux": "2.1.3.127",
+    "utc": "2015-03-23T20:01:01"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-23T19:01:01."
+  },
+  {
+   "id": "Q10-07",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Google Drive' version 1.20.8672.3137, Google Inc., no installation path printed",
+   "nist_local_time": "2015-03-23 15:02:46",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Google Drive",
+    "aux": "1.20.8672.3137",
+    "utc": "2015-03-23T20:02:46"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-23T19:02:46."
+  },
+  {
+   "id": "Q10-08",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Microsoft .NET Framework 4' version 4.0.30319, Microsoft Corporation, path C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319",
+   "nist_local_time": "2015-03-25 09:51:39",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Microsoft .NET Framework 4",
+    "aux": "4.0.30319",
+    "utc": "2015-03-25T14:51:39"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-25T13:51:39."
+  },
+  {
+   "id": "Q10-09",
+   "question": 10,
+   "page": 18,
+   "nist": "installed 'Eraser' version 6.2.2962, The Eraser Project, no installation path printed",
+   "nist_local_time": "2015-03-25 09:57:31",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Eraser",
+    "aux": "6.2.2962",
+    "utc": "2015-03-25T14:57:31"
+   },
+   "note": "Time base: this table prints Eastern Standard Time (UTC-5, no daylight saving), see top-level notes; utc is the printed time + 5 h. Under the default rule (UTC-4) it would be 2015-03-25T13:57:31."
+  },
+  {
+   "id": "Q11-01",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe, count N/A",
+   "nist_local_time": "2015-03-22 11:11:04",
+   "expect": {
+    "kind": "programRun",
+    "obj": "IE11-Windows6.1-x64-en-us.exe",
+    "aux_contains": "\\temp\\IE11-Windows6.1-x64-en-us.exe",
+    "utc": "2015-03-22T15:11:04"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-02",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe, count N/A",
+   "nist_local_time": "2015-03-22 11:11:04",
+   "expect": {
+    "kind": "programRun",
+    "obj": "IE11-Windows6.1-x64-en-us.exe",
+    "aux_contains": "\\Download\\IE11-Windows6.1-x64-en-us.exe",
+    "utc": "2015-03-22T15:11:04"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-03",
+   "question": 11,
+   "page": 18,
+   "nist": "UserAssist: C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe, count 1",
+   "nist_local_time": "2015-03-22 11:12:32",
+   "expect": {
+    "kind": "programRun",
+    "obj": "IE11-Windows6.1-x64-en-us.exe",
+    "utc": "2015-03-22T15:12:32"
+   }
+  },
+  {
+   "id": "Q11-04",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\informant\\Downloads\\googledrivesync.exe, count N/A",
+   "nist_local_time": "2015-03-23 15:56:33",
+   "expect": {
+    "kind": "programRun",
+    "obj": "googledrivesync.exe",
+    "aux_contains": "\\Downloads\\googledrivesync.exe",
+    "utc": "2015-03-23T19:56:33"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-05",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe, count N/A",
+   "nist_local_time": "2015-03-23 15:56:33",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GoogleUpdateSetup.exe",
+    "aux_contains": "\\GUMA150.tmp\\GoogleUpdateSetup.exe",
+    "utc": "2015-03-23T19:56:33"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-06",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\informant\\Downloads\\icloudsetup.exe, count N/A",
+   "nist_local_time": "2015-03-23 15:56:33",
+   "expect": {
+    "kind": "programRun",
+    "obj": "icloudsetup.exe",
+    "aux_contains": "\\Downloads\\icloudsetup.exe",
+    "utc": "2015-03-23T19:56:33"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-07",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe, count N/A",
+   "nist_local_time": "2015-03-23 16:00:59",
+   "expect": {
+    "kind": "programRun",
+    "obj": "AppleSoftwareUpdateIco.exe",
+    "aux_contains": "\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe",
+    "utc": "2015-03-23T20:00:59"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-08",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe, count N/A",
+   "nist_local_time": "2015-03-23 16:02:07",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GoogleUpdate.exe",
+    "aux_contains": "\\GUMA150.tmp\\GoogleUpdate.exe",
+    "utc": "2015-03-23T20:02:07"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-09",
+   "question": 11,
+   "page": 18,
+   "nist": "Shimcache: C:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe, count N/A",
+   "nist_local_time": "2015-03-23 16:02:09",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GoogleUpdate.exe",
+    "aux_contains": "\\GUMA94B.tmp\\GoogleUpdate.exe",
+    "utc": "2015-03-23T20:02:09"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-10",
+   "question": 11,
+   "page": 18,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\Microsoft Office\\Office15\\EXCEL.EXE, count 1",
+   "nist_local_time": "2015-03-23 16:26:50",
+   "expect": {
+    "kind": "programRun",
+    "obj": "EXCEL.EXE",
+    "utc": "2015-03-23T20:26:50"
+   }
+  },
+  {
+   "id": "Q11-11",
+   "question": 11,
+   "page": 18,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\Microsoft Office\\Office15\\POWERPNT.EXE, count 2",
+   "nist_local_time": "2015-03-23 16:27:33",
+   "expect": {
+    "kind": "programRun",
+    "obj": "POWERPNT.EXE",
+    "utc": "2015-03-23T20:27:33"
+   }
+  },
+  {
+   "id": "Q11-12",
+   "question": 11,
+   "page": 18,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\MICROSOFT GAMES\\SOLITAIRE\\SOLITAIRE.EXE, count 1",
+   "nist_local_time": "2015-03-24 14:29:07",
+   "expect": {
+    "kind": "programRun",
+    "obj": "SOLITAIRE.EXE",
+    "utc": "2015-03-24T18:29:07"
+   }
+  },
+  {
+   "id": "Q11-13",
+   "question": 11,
+   "page": 18,
+   "nist": "Prefetch: C:\\Windows\\System32\\StikyNot.exe, count 2",
+   "nist_local_time": "2015-03-24 14:31:55",
+   "expect": {
+    "kind": "programRun",
+    "obj": "StikyNot.exe",
+    "utc": "2015-03-24T18:31:55"
+   }
+  },
+  {
+   "id": "Q11-14",
+   "question": 11,
+   "page": 18,
+   "nist": "UserAssist: Microsoft.Windows.StickyNotes, count 13",
+   "nist_local_time": "2015-03-24 14:31:55",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Microsoft.Windows.StickyNotes",
+    "utc": "2015-03-24T18:31:55"
+   }
+  },
+  {
+   "id": "Q11-15",
+   "question": 11,
+   "page": 18,
+   "nist": "Prefetch: C:\\PROGRAM FILES (X86)\\GOOGLE\\CHROME\\APPLICATION\\CHROME.EXE, count 71",
+   "nist_local_time": "2015-03-24 17:05:38",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CHROME.EXE",
+    "utc": "2015-03-24T21:05:38"
+   }
+  },
+  {
+   "id": "Q11-16",
+   "question": 11,
+   "page": 18,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:41:03",
+   "expect": {
+    "kind": "programRun",
+    "obj": "OUTLOOK.EXE",
+    "utc": "2015-03-25T14:41:03"
+   }
+  },
+  {
+   "id": "Q11-17",
+   "question": 11,
+   "page": 18,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE, count 5",
+   "nist_local_time": "2015-03-25 10:41:03",
+   "expect": {
+    "kind": "programRun",
+    "obj": "OUTLOOK.EXE",
+    "utc": "2015-03-25T14:41:03"
+   }
+  },
+  {
+   "id": "Q11-18",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\wmplayer.exe, count 1",
+   "nist_local_time": "2015-03-25 10:42:47",
+   "expect": {
+    "kind": "programRun",
+    "obj": "wmplayer.exe",
+    "utc": "2015-03-25T14:42:47"
+   }
+  },
+  {
+   "id": "Q11-19",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: Microsoft.Windows.MediaPlayer32, count 1",
+   "nist_local_time": "2015-03-25 10:42:47",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Microsoft.Windows.MediaPlayer32",
+    "utc": "2015-03-25T14:42:47"
+   }
+  },
+  {
+   "id": "Q11-20",
+   "question": 11,
+   "page": 19,
+   "nist": "Shimcache: C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe, count N/A",
+   "nist_local_time": "2015-03-25 10:47:40",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Eraser 6.2.0.2962.exe",
+    "aux_contains": "\\Download\\Eraser 6.2.0.2962.exe",
+    "utc": "2015-03-25T14:47:40"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-21",
+   "question": 11,
+   "page": 19,
+   "nist": "Shimcache: C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe, count N/A",
+   "nist_local_time": "2015-03-25 10:48:28",
+   "expect": {
+    "kind": "programRun",
+    "obj": "ccsetup504.exe",
+    "aux_contains": "\\Download\\ccsetup504.exe",
+    "utc": "2015-03-25T14:48:28"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-22",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:50:14",
+   "expect": {
+    "kind": "programRun",
+    "obj": "ERASER 6.2.0.2962.EXE",
+    "utc": "2015-03-25T14:50:14"
+   }
+  },
+  {
+   "id": "Q11-23",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:50:14",
+   "expect": {
+    "kind": "programRun",
+    "obj": "ERASER 6.2.0.2962.EXE",
+    "utc": "2015-03-25T14:50:14"
+   }
+  },
+  {
+   "id": "Q11-24",
+   "question": 11,
+   "page": 19,
+   "nist": "Shimcache: C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe, count N/A",
+   "nist_local_time": "2015-03-25 10:50:15",
+   "expect": {
+    "kind": "programRun",
+    "obj": "dotNetFx40_Full_setup.exe",
+    "aux_contains": "\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe",
+    "utc": "2015-03-25T14:50:15"
+   },
+   "note": "Shimcache row: the key's Considerations say this time is the file's 'Last Modified Time' from file system metadata, not a run time. Kept as programRun with the printed time because the key lists it as an execution log."
+  },
+  {
+   "id": "Q11-25",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:50:15",
+   "expect": {
+    "kind": "programRun",
+    "obj": "DOTNETFX40_FULL_SETUP.EXE",
+    "utc": "2015-03-25T14:50:15"
+   }
+  },
+  {
+   "id": "Q11-26",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:57:56",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCSETUP504.EXE",
+    "utc": "2015-03-25T14:57:56"
+   }
+  },
+  {
+   "id": "Q11-27",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE, count 1",
+   "nist_local_time": "2015-03-25 10:57:56",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCSETUP504.EXE",
+    "utc": "2015-03-25T14:57:56"
+   }
+  },
+  {
+   "id": "Q11-28",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\Eraser\\Eraser.exe, count 1",
+   "nist_local_time": "2015-03-25 11:12:28",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Eraser.exe",
+    "utc": "2015-03-25T15:12:28"
+   }
+  },
+  {
+   "id": "Q11-29",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\Eraser\\Eraser.exe, count 2",
+   "nist_local_time": "2015-03-25 11:13:30",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Eraser.exe",
+    "utc": "2015-03-25T15:13:30"
+   }
+  },
+  {
+   "id": "Q11-30",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE, count 1",
+   "nist_local_time": "2015-03-25 11:15:50",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCLEANER64.EXE",
+    "utc": "2015-03-25T15:15:50"
+   }
+  },
+  {
+   "id": "Q11-31",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE, count 2",
+   "nist_local_time": "2015-03-25 11:15:50",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCLEANER64.EXE",
+    "utc": "2015-03-25T15:15:50"
+   }
+  },
+  {
+   "id": "Q11-32",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES (X86)\\GOOGLE\\UPDATE\\GOOGLEUPDATE.EXE, count 38",
+   "nist_local_time": "2015-03-25 11:16:00",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GOOGLEUPDATE.EXE",
+    "utc": "2015-03-25T15:16:00"
+   }
+  },
+  {
+   "id": "Q11-33",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\CCLEANER\\UNINST.EXE, count 1",
+   "nist_local_time": "2015-03-25 11:18:29",
+   "expect": {
+    "kind": "programRun",
+    "obj": "UNINST.EXE",
+    "utc": "2015-03-25T15:18:29"
+   }
+  },
+  {
+   "id": "Q11-34",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE, count 1",
+   "nist_local_time": "2015-03-25 11:21:30",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GOOGLEDRIVESYNC.EXE",
+    "utc": "2015-03-25T15:21:30"
+   }
+  },
+  {
+   "id": "Q11-35",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE, count 2",
+   "nist_local_time": "2015-03-25 11:21:31",
+   "expect": {
+    "kind": "programRun",
+    "obj": "GOOGLEDRIVESYNC.EXE",
+    "utc": "2015-03-25T15:21:31"
+   }
+  },
+  {
+   "id": "Q11-36",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\INTERNET EXPLORER\\iexplore.exe, count 2",
+   "nist_local_time": "2015-03-25 11:22:06",
+   "expect": {
+    "kind": "programRun",
+    "obj": "iexplore.exe",
+    "utc": "2015-03-25T15:22:06"
+   },
+   "note": "The two iexplore.exe rows are 1 s apart and differ only in the folder (PROGRAM FILES / PROGRAM FILES (X86)); no path matcher on Prefetch rows, so with a 2 s tolerance one extractor row can satisfy both."
+  },
+  {
+   "id": "Q11-37",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES (X86)\\INTERNET EXPLORER\\iexplore.exe, count 14",
+   "nist_local_time": "2015-03-25 11:22:07",
+   "expect": {
+    "kind": "programRun",
+    "obj": "iexplore.exe",
+    "utc": "2015-03-25T15:22:07"
+   },
+   "note": "The two iexplore.exe rows are 1 s apart and differ only in the folder (PROGRAM FILES / PROGRAM FILES (X86)); no path matcher on Prefetch rows, so with a 2 s tolerance one extractor row can satisfy both."
+  },
+  {
+   "id": "Q11-38",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE, count 3",
+   "nist_local_time": "2015-03-25 11:24:48",
+   "expect": {
+    "kind": "programRun",
+    "obj": "WINWORD.EXE",
+    "utc": "2015-03-25T15:24:48"
+   }
+  },
+  {
+   "id": "Q11-39",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE, count 4",
+   "nist_local_time": "2015-03-25 11:24:48",
+   "expect": {
+    "kind": "programRun",
+    "obj": "WINWORD.EXE",
+    "utc": "2015-03-25T15:24:48"
+   }
+  },
+  {
+   "id": "Q11-40",
+   "question": 11,
+   "page": 19,
+   "nist": "Prefetch: C:\\Windows\\System32\\xpsrchvw.exe, count 1",
+   "nist_local_time": "2015-03-25 11:28:47",
+   "expect": {
+    "kind": "programRun",
+    "obj": "xpsrchvw.exe",
+    "utc": "2015-03-25T15:28:47"
+   }
+  },
+  {
+   "id": "Q11-41",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\Windows\\System32\\xpsrchvw.exe, count 1",
+   "nist_local_time": "2015-03-25 11:28:47",
+   "expect": {
+    "kind": "programRun",
+    "obj": "xpsrchvw.exe",
+    "utc": "2015-03-25T15:28:47"
+   }
+  },
+  {
+   "id": "Q11-42",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\Users\\informant\\Downloads\\icloudsetup.exe, count N/A, timestamp N/A",
+   "expect": {
+    "kind": "programRun",
+    "obj": "icloudsetup.exe",
+    "aux_contains": "\\Downloads\\icloudsetup.exe"
+   }
+  },
+  {
+   "id": "Q11-43",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\PROGRAM FILES (X86)\\Common Files\\Apple\\Internet Services\\iCloud.exe, count N/A, timestamp N/A",
+   "expect": {
+    "kind": "programRun",
+    "obj": "iCloud.exe",
+    "aux_contains": "\\Internet Services\\iCloud.exe"
+   }
+  },
+  {
+   "id": "Q11-44",
+   "question": 11,
+   "page": 19,
+   "nist": "UserAssist: C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe, count N/A, timestamp N/A",
+   "expect": {
+    "kind": "programRun",
+    "obj": "dotNetFx40_Full_setup.exe",
+    "aux_contains": "\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe"
+   }
+  },
+  {
+   "id": "Q11-45",
+   "question": 11,
+   "page": 19,
+   "nist": "MuiCache: C:\\Program Files\\Internet Explorer\\iexplorer.exe, no time and no count printed",
+   "expect": {
+    "kind": "programRun",
+    "obj": "iexplorer.exe",
+    "aux_contains": "\\Internet Explorer\\iexplorer.exe"
+   },
+   "note": "File name printed as 'iexplorer.exe'; the other rows print 'iexplore.exe'. Copied as printed."
+  },
+  {
+   "id": "Q11-46",
+   "question": 11,
+   "page": 19,
+   "nist": "MuiCache: C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe, no time and no count printed",
+   "expect": {
+    "kind": "programRun",
+    "obj": "IE11-Windows6.1-x64-en-us.exe",
+    "aux_contains": "\\Download\\IE11-Windows6.1-x64-en-us.exe"
+   }
+  },
+  {
+   "id": "Q11-47",
+   "question": 11,
+   "page": 19,
+   "nist": "MuiCache: C:\\Windows\\System32\\xpsrchvw.exe (XPS Viewer), no time and no count printed",
+   "expect": {
+    "kind": "programRun",
+    "obj": "xpsrchvw.exe",
+    "aux_contains": "\\System32\\xpsrchvw.exe"
+   }
+  },
+  {
+   "id": "Q12-01",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4608 'Starting up'",
+   "nist_local_time": "2015-03-22 10:51:14",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "startup",
+    "utc": "2015-03-22T14:51:14"
+   }
+  },
+  {
+   "id": "Q12-02",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-22 11:00:08",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-22T15:00:08"
+   }
+  },
+  {
+   "id": "Q12-03",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-22 11:22:54",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-22T15:22:54"
+   }
+  },
+  {
+   "id": "Q12-04",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4647 'Logoff'",
+   "nist_local_time": "2015-03-22 12:00:08",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logoff",
+    "utc": "2015-03-22T16:00:08"
+   }
+  },
+  {
+   "id": "Q12-05",
+   "question": 12,
+   "page": 20,
+   "nist": "event 1100 'Shutdown'",
+   "nist_local_time": "2015-03-22 12:00:09",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "shutdown",
+    "utc": "2015-03-22T16:00:09"
+   }
+  },
+  {
+   "id": "Q12-06",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-23 13:24:23",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-23T17:24:23"
+   }
+  },
+  {
+   "id": "Q12-07",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4608 'Starting up'",
+   "nist_local_time": "2015-03-23 13:24:23",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "startup",
+    "utc": "2015-03-23T17:24:23"
+   }
+  },
+  {
+   "id": "Q12-08",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-23 14:36:07",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-23T18:36:07"
+   }
+  },
+  {
+   "id": "Q12-09",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-23 16:00:22",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-23T20:00:22"
+   }
+  },
+  {
+   "id": "Q12-10",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-23 16:01:02",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-23T20:01:02"
+   }
+  },
+  {
+   "id": "Q12-11",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4647 'Logoff'",
+   "nist_local_time": "2015-03-23 17:02:53",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logoff",
+    "utc": "2015-03-23T21:02:53"
+   }
+  },
+  {
+   "id": "Q12-12",
+   "question": 12,
+   "page": 20,
+   "nist": "event 1100 'Shutdown'",
+   "nist_local_time": "2015-03-23 17:02:59",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "shutdown",
+    "utc": "2015-03-23T21:02:59"
+   }
+  },
+  {
+   "id": "Q12-13",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 09:21:29",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T13:21:29"
+   }
+  },
+  {
+   "id": "Q12-14",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4608 'Starting up'",
+   "nist_local_time": "2015-03-24 09:21:29",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "startup",
+    "utc": "2015-03-24T13:21:29"
+   }
+  },
+  {
+   "id": "Q12-15",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 09:23:40",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T13:23:40"
+   }
+  },
+  {
+   "id": "Q12-16",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 11:14:30",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T15:14:30"
+   }
+  },
+  {
+   "id": "Q12-17",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 11:22:39",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T15:22:39"
+   }
+  },
+  {
+   "id": "Q12-18",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 11:46:14",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T15:46:14"
+   }
+  },
+  {
+   "id": "Q12-19",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 14:28:38",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T18:28:38"
+   }
+  },
+  {
+   "id": "Q12-20",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-24 16:58:52",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-24T20:58:52"
+   }
+  },
+  {
+   "id": "Q12-21",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4647 'Logoff'",
+   "nist_local_time": "2015-03-24 17:07:25",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logoff",
+    "utc": "2015-03-24T21:07:25"
+   }
+  },
+  {
+   "id": "Q12-22",
+   "question": 12,
+   "page": 20,
+   "nist": "event 1100 'Shutdown'",
+   "nist_local_time": "2015-03-24 17:07:26",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "shutdown",
+    "utc": "2015-03-24T21:07:26"
+   }
+  },
+  {
+   "id": "Q12-23",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 09:05:41",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T13:05:41"
+   }
+  },
+  {
+   "id": "Q12-24",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4608 'Starting up'",
+   "nist_local_time": "2015-03-25 09:05:41",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "startup",
+    "utc": "2015-03-25T13:05:41"
+   }
+  },
+  {
+   "id": "Q12-25",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 09:07:49",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T13:07:49"
+   }
+  },
+  {
+   "id": "Q12-26",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 09:23:59",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T13:23:59"
+   }
+  },
+  {
+   "id": "Q12-27",
+   "question": 12,
+   "page": 20,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:31:53",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:31:53"
+   }
+  },
+  {
+   "id": "Q12-28",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4637 'Logoff'",
+   "nist_local_time": "2015-03-25 10:45:59",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logoff",
+    "utc": "2015-03-25T14:45:59"
+   },
+   "note": "Event ID printed as 4637; the other Logoff rows print 4647 and the Considerations name 4634 and 4647 for logoff. Copied as printed. Q6 prints informant's last login at 09:45:59 the same day, the same minute and second one hour earlier."
+  },
+  {
+   "id": "Q12-29",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:50:28",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:50:28"
+   }
+  },
+  {
+   "id": "Q12-30",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:50:30",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:50:30"
+   }
+  },
+  {
+   "id": "Q12-31",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:50:50",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:50:50"
+   }
+  },
+  {
+   "id": "Q12-32",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:56:55",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:56:55"
+   }
+  },
+  {
+   "id": "Q12-33",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 10:57:18",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T14:57:18"
+   }
+  },
+  {
+   "id": "Q12-34",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4624 'Logon'",
+   "nist_local_time": "2015-03-25 11:18:54",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logon",
+    "utc": "2015-03-25T15:18:54"
+   }
+  },
+  {
+   "id": "Q12-35",
+   "question": 12,
+   "page": 21,
+   "nist": "event 4647 'Logoff'",
+   "nist_local_time": "2015-03-25 11:30:57",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "logoff",
+    "utc": "2015-03-25T15:30:57"
+   }
+  },
+  {
+   "id": "Q12-36",
+   "question": 12,
+   "page": 21,
+   "nist": "event 1100 'Shutdown'",
+   "nist_local_time": "2015-03-25 11:31:00",
+   "expect": {
+    "kind": "sessionEvent",
+    "obj": "shutdown",
+    "utc": "2015-03-25T15:31:00"
+   }
+  },
+  {
+   "id": "Q13-01",
+   "question": 13,
+   "page": 21,
+   "nist": "browser 'Microsoft Internet Explorer v11.0.9600.17691'",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Internet Explorer",
+    "aux": "11.0.9600.17691"
+   },
+   "note": "Stated as a program with a version; the key reads the version from the Internet Explorer registry key (svcVersion), not from the installed-programs list."
+  },
+  {
+   "id": "Q13-02",
+   "question": 13,
+   "page": 21,
+   "nist": "'(Microsoft Internet Explorer 9 or lower -> updated to IE 11 version)'",
+   "expect": null,
+   "not_expressible": "a statement that an older browser version was upgraded: no kind records an upgrade"
+  },
+  {
+   "id": "Q13-03",
+   "question": 13,
+   "page": 21,
+   "nist": "browser 'Google Chrome v41.0.2272.101'",
+   "expect": {
+    "kind": "programInstalled",
+    "obj_contains": "Google Chrome",
+    "aux": "41.0.2272.101"
+   },
+   "note": "Same program and version as Q10-02; the key reads it from the user's Chrome registry key (BLBeacon version)."
+  },
+  {
+   "id": "Q14-01",
+   "question": 14,
+   "page": 21,
+   "nist": "MS IE (9 or lower) history-related folder 'C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-02",
+   "question": 14,
+   "page": 21,
+   "nist": "MS IE (9 or lower) history-related folder 'C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-03",
+   "question": 14,
+   "page": 21,
+   "nist": "MS IE (9 or lower) history-related folder 'C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Cookies' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-04",
+   "question": 14,
+   "page": 21,
+   "nist": "MS IE 11 history-related file 'C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-05",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related file 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-06",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related folder 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Application Cache\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Application Cache' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-07",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related folder 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Media Cache\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Media Cache' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-08",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related folder 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-09",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related folder 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-10",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related file 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Cookies'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Cookies' and no time, but that would only show the path exists."
+  },
+  {
+   "id": "Q14-11",
+   "question": 14,
+   "page": 21,
+   "nist": "Chrome history-related folder 'C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\'",
+   "expect": null,
+   "not_expressible": "a storage location (a path with a role, no event and no time): no kind states what a path is used for",
+   "note": "Could be checked the way Q55 is, as fileCreated with obj_endswith '\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions' and no time, but that would only show the path exists."
+  }
+ ]
+}

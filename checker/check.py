@@ -36,6 +36,12 @@ _built = False
 
 def render_lean(finding_id: str, facts: List[Fact], claim: claims.Claim) -> str:
     rows = ",\n  ".join(f.to_lean() for f in facts)
+    if claims.census_of(claim):         # about every fact of a kind: `cited` is all of them
+        statement = (f"def census : Census := {claims.to_lean(claim)}\n\n"
+                     f"theorem verified : counts cited census = true := by decide +kernel")
+    else:
+        statement = (f"def claim : Claim := {claims.to_lean(claim)}\n\n"
+                     f"theorem verified : holds cited claim = true := by decide +kernel")
     return f"""import ChainOfProof
 open ChainOfProof
 
@@ -44,9 +50,7 @@ namespace Cert.{finding_id}
 def cited : List Fact := [
   {rows} ]
 
-def claim : Claim := {claims.to_lean(claim)}
-
-theorem verified : holds cited claim = true := by decide +kernel
+{statement}
 
 end Cert.{finding_id}
 
@@ -90,6 +94,10 @@ def explain(facts: List[Fact], claim: claims.Claim) -> List[dict]:
 
     Each part is one set instance; `bricks` lists the primitive checks it expands to.
     """
+    if claims.census_of(claim):
+        actual = claims.census_actual(claim, {f.id: f for f in facts})
+        return [{"part": claims.to_json(claim), "ok": False,
+                 "bricks": [f"FAIL the evidence holds {actual}, not {claim[1][-1]}"]}]
     rows = ", ".join(f.to_lean() for f in facts)
     parts = claims.parts(claim)
     text = f"import ChainOfProof\nopen ChainOfProof\ndef cited : List Fact := [{rows}]\n"
@@ -125,11 +133,7 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
             raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")
         claim = claims.parse(claim_json)
         result["claim"] = claims.to_json(claim)
-        ids = claims.fact_ids(claim)
-        found = source.get(ids)
-        missing = [i for i in ids if i not in found]
-        if missing:
-            raise claims.ClaimError(f"fact ids not in the evidence DB: {missing}")
+        ids, found = claims.cited_facts(claim, source)
         facts = [found[i] for i in ids]
         lean_text = render_lean(finding_id, facts, claim)
         kernel = run_kernel(lean_text, finding_id)

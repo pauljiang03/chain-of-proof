@@ -23,6 +23,24 @@
                                                             entries left outside any current file;
                                                             recovered fileCreated / fileModified rows
                                                             carry the same area id in `aux`)
+    systemSetting setting name             its value       (t = when the setting was written, or
+                                                            the moment the setting itself records)
+    accountSeen   account name or id       what it is an account of (a Windows local account,
+                                                            a cloud service, an e-mail client)
+    sessionEvent  logon / logoff / startup / shutdown / ...   the account, or 0 for the machine
+    programInstalled program name          version
+    programRun    executable name          full path       (one row per recorded run time)
+    webVisit      URL                      browser
+    fileDownloaded saved path              source URL
+    localSearch   text typed               where it was typed
+    cloudFile     file name or cloud path  "<service>: <event>"
+    noteText      text of the note         application
+    folderOpened  folder path              artifact that records it (shell bag, ...)
+    fileRenamed   old name                 new name
+    fileSeen      file path                secondary artifact that records it (search index,
+                                                            thumbnail cache, shadow copy, ...)
+    shadowCopy    shadow copy id           volume
+    fileContent   file path                "sha256:<hex>"  (t = when the image was examined)
 -/
 namespace ChainOfProof
 
@@ -33,6 +51,10 @@ inductive Kind where
   | tag
   | volumeSeen | volumeOnDevice
   | unallocatedOnDevice
+  | systemSetting | accountSeen | sessionEvent | programInstalled | programRun
+  | webVisit | fileDownloaded | localSearch | cloudFile | noteText
+  | folderOpened | fileRenamed | fileSeen | shadowCopy
+  | fileContent
   deriving DecidableEq, Repr
 
 structure Fact where

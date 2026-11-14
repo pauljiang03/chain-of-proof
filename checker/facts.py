@@ -19,6 +19,14 @@ KINDS = (
     "tag",
     "volumeSeen", "volumeOnDevice",
     "unallocatedOnDevice",
+    # the machine, its accounts and what ran on it
+    "systemSetting", "accountSeen", "sessionEvent", "programInstalled", "programRun",
+    # browsers, downloads, cloud clients, notes
+    "webVisit", "fileDownloaded", "localSearch", "cloudFile", "noteText",
+    # what the system remembers about folders and files
+    "folderOpened", "fileRenamed", "fileSeen", "shadowCopy",
+    # file contents
+    "fileContent",
 )
 
 

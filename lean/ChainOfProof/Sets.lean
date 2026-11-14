@@ -68,6 +68,30 @@ def fileDeletedAt (d : Nat) : Claim := .is d .fileDeleted
 def emailed (e : Nat) : Claim := .is e .emailSent
 def burnTrace (b : Nat) : Claim := .is b .cdBurn
 
+def settingRecorded (x : Nat) : Claim := .is x .systemSetting
+def accountRecorded (x : Nat) : Claim := .is x .accountSeen
+def sessionRecorded (x : Nat) : Claim := .is x .sessionEvent
+def programInstalledAt (x : Nat) : Claim := .is x .programInstalled
+def programRan (x : Nat) : Claim := .is x .programRun
+def visited (x : Nat) : Claim := .is x .webVisit
+def downloaded (x : Nat) : Claim := .is x .fileDownloaded
+def typedInSearchBox (x : Nat) : Claim := .is x .localSearch
+def cloudEvent (x : Nat) : Claim := .is x .cloudFile
+def noteFound (x : Nat) : Claim := .is x .noteText
+def folderRecorded (x : Nat) : Claim := .is x .folderOpened
+def renamed (x : Nat) : Claim := .is x .fileRenamed
+def fileRecorded (x : Nat) : Claim := .is x .fileSeen
+def shadowCopyMade (x : Nat) : Claim := .is x .shadowCopy
+def contentHashed (x : Nat) : Claim := .is x .fileContent
+
+/-- R28 (strong): two content records carry the same hash. -/
+def sameContent (a b : Nat) : Claim :=
+  .both (.is a .fileContent) (.both (.is b .fileContent) (.link a .aux b .aux))
+
+/-- R10+R28 (strong): file record `c` and content record `h` name the same path. -/
+def contentOf (c h : Nat) : Claim :=
+  .both (.is c .fileCreated) (.both (.is h .fileContent) (.link c .obj h .obj))
+
 /-- The entity in slot `s` of fact `f` carries tag `tagId`, by tag fact `g`. -/
 def tagged (f : Nat) (s : Slot) (g tagId : Nat) : Claim :=
   .both (.is g .tag) (.both (.val g .aux tagId) (.link g .obj f s))

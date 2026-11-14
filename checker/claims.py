@@ -15,7 +15,11 @@ Agents propose instances of approved sets, snapped together with "both":
     {"sameLabel":          [volume_record, volume_record]} R8 (heuristic)
     {"usbConnected": [usb]}  {"opened": [lnk]}  {"searched": [search]}
     {"fileCreatedAt": [created]}  {"fileModifiedAt": [modified]}
+    {"sameContent": [content, content]}  {"contentOf": [created, content]}   R28
+    one-record forms for every other kind (settingRecorded, programRan, visited, ...)
     {"both":            [claim, claim, ...]}
+    {"exactly": [kind, n]}  {"exactlyDistinct": [kind, slot, n]}
+    {"exactlyWith": [kind, slot, entity_id, n]}      census: about ALL records of a kind
 
 Numbers are fact ids (and one tag id). Nothing here accepts free text, so the Lean
 term and the English sentence are functions of the claim tree and the cited facts
@@ -27,9 +31,10 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Callable, Dict, List, Tuple
 
-from .facts import Fact, FactSource
+from .facts import KINDS, Fact, FactSource
 
 MAX_PARTS = 64
+MAX_CENSUS = 500          # a census cites every fact of its kind
 SLOTS = ("obj", "aux")
 STRENGTHS = ("strong", "heuristic", "judgment")   # weakest last
 
@@ -68,6 +73,14 @@ def _where(place: str) -> str:
     return f"volume {place}"
 
 
+def _none(text: str) -> bool:
+    return text in ("", "(none)")
+
+
+def _who(account: str) -> str:
+    return "the machine" if _none(account) else f"account {account}"
+
+
 _EVENT = {
     "usbInsert": "the connection of USB device {obj}",
     "volumeMount": "the mounting of USB device {obj} as volume {aux}",
@@ -82,12 +95,28 @@ _EVENT = {
     "volumeSeen": 'this PC recording volume {aux} under the label "{obj}"',
     "volumeOnDevice": "the examination of device {obj}, which holds volume {aux}",
     "unallocatedOnDevice": "the examination of the unallocated space of device {obj}",
+    "systemSetting": 'the system setting "{obj}" ({aux})',
+    "accountSeen": "the record of account {obj} ({aux})",
+    "sessionEvent": "the {obj} recorded for {who}",
+    "programInstalled": "the recorded installation of {obj}",
+    "programRun": "the recorded run of {obj}",
+    "webVisit": "the visit to {obj} in {aux}",
+    "fileDownloaded": "the download of {obj} from {aux}",
+    "localSearch": 'the text "{obj}" typed into the {aux}',
+    "cloudFile": 'the cloud record "{aux}" for {obj}',
+    "noteText": 'the {aux} note "{obj}"',
+    "folderOpened": "the {aux} record of folder {obj}",
+    "fileRenamed": "the renaming of {obj} to {aux}",
+    "fileSeen": "the {aux} record of {obj}",
+    "shadowCopy": "the creation of shadow copy {obj}",
+    "fileContent": "the reading of the content of {obj}",
 }
 
 
 def _event(f: Fact, src: FactSource) -> str:
     aux = src.string(f.aux)
-    text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=aux, where=_where(aux))
+    text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=aux, where=_where(aux),
+                                 who=_who(aux))
     return f"{text} ({_utc(f.t)})"
 
 
@@ -228,6 +257,198 @@ def _en_recovered(args, facts, src):
             f"before the device's current file system.")
 
 
+# One record, one sentence. Each says what the artifact records, not more: a record of
+# a run is not proof of who ran it, and a time is the time the artifact attaches.
+
+def _en_setting(args, facts, src):
+    f = facts[args[0]]
+    name, value = src.string(f.obj), src.string(f.aux)
+    if _none(value):
+        return f'The system records "{name}" at {_utc(f.t)}.'
+    return f'The system setting "{name}" is recorded as "{value}" (record time {_utc(f.t)}).'
+
+
+def _en_account(args, facts, src):
+    f = facts[args[0]]
+    return (f"An account named {src.string(f.obj)} is recorded ({src.string(f.aux)}; "
+            f"record time {_utc(f.t)}).")
+
+
+def _en_session(args, facts, src):
+    f = facts[args[0]]
+    return f"A {src.string(f.obj)} is recorded for {_who(src.string(f.aux))} ({_utc(f.t)})."
+
+
+def _en_installed(args, facts, src):
+    f = facts[args[0]]
+    version = src.string(f.aux)
+    name = src.string(f.obj) + ("" if _none(version) else f" {version}")
+    return f"{name} is recorded as installed ({_utc(f.t)})."
+
+
+def _en_ran(args, facts, src):
+    f = facts[args[0]]
+    path = src.string(f.aux)
+    where = "" if _none(path) else f", path {path}"
+    return f"A record shows {src.string(f.obj)} ran ({_utc(f.t)}{where})."
+
+
+def _en_visited(args, facts, src):
+    f = facts[args[0]]
+    return f"The {src.string(f.aux)} history records a visit to {src.string(f.obj)} ({_utc(f.t)})."
+
+
+def _en_downloaded(args, facts, src):
+    f = facts[args[0]]
+    return (f"A download from {src.string(f.aux)} to {src.string(f.obj)} is recorded "
+            f"({_utc(f.t)}).")
+
+
+def _en_typed(args, facts, src):
+    f = facts[args[0]]
+    return (f'The text "{src.string(f.obj)}" is recorded as typed into the {src.string(f.aux)} '
+            f"(record time {_utc(f.t)}).")
+
+
+def _en_cloud(args, facts, src):
+    f = facts[args[0]]
+    return (f'A cloud-client record reads "{src.string(f.aux)}" for {src.string(f.obj)} '
+            f"({_utc(f.t)}).")
+
+
+def _en_note(args, facts, src):
+    f = facts[args[0]]
+    return (f'A {src.string(f.aux)} note reads "{src.string(f.obj)}" (last modified '
+            f"{_utc(f.t)}).")
+
+
+def _en_folder(args, facts, src):
+    f = facts[args[0]]
+    return (f"A {src.string(f.aux)} record names the folder {src.string(f.obj)} (record time "
+            f"{_utc(f.t)}).")
+
+
+def _en_renamed(args, facts, src):
+    f = facts[args[0]]
+    return f"{src.string(f.obj)} was renamed to {src.string(f.aux)} ({_utc(f.t)})."
+
+
+def _en_file_recorded(args, facts, src):
+    f = facts[args[0]]
+    return (f"The {src.string(f.aux)} holds a record of {src.string(f.obj)} (record time "
+            f"{_utc(f.t)}).")
+
+
+def _en_shadow(args, facts, src):
+    f = facts[args[0]]
+    return (f"Shadow copy {src.string(f.obj)} of volume {src.string(f.aux)} was created "
+            f"({_utc(f.t)}).")
+
+
+def _en_content(args, facts, src):
+    f = facts[args[0]]
+    return f"The content of {src.string(f.obj)}, read from the image, has {src.string(f.aux)}."
+
+
+def _en_same_content(args, facts, src):
+    a, b = facts[args[0]], facts[args[1]]
+    return (f"{src.string(a.obj)} and {src.string(b.obj)} have identical content: both read "
+            f"as {src.string(a.aux)}.")
+
+
+def _en_content_of(args, facts, src):
+    c, h = facts[args[0]], facts[args[1]]
+    return (f"{_file_time(c, src, 'created')} The content read for that path has "
+            f"{src.string(h.aux)}.")
+
+
+# ---- Census: statements about all the records of one kind ----------------------------
+
+# kind -> (what one record is, what `obj` holds, what `aux` holds)
+_NOUN = {
+    "usbInsert": ("USB connection", "device serial", "second field"),
+    "volumeMount": ("volume mount", "device serial", "volume serial"),
+    "lnkTarget": ("file-open", "path", "volume or share"),
+    "fileCreated": ("file-creation", "path", "volume or area"),
+    "fileModified": ("file-modification", "path", "volume or area"),
+    "fileDeleted": ("Recycle Bin", "path", "volume"),
+    "webSearch": ("web-search", "search text", "browser"),
+    "emailSent": ("e-mail", "subject", "sender and recipient"),
+    "cdBurn": ("CD-burn trace", "trace", "place it was found"),
+    "tag": ("tag", "tagged entity", "tag"),
+    "volumeSeen": ("recorded-volume", "label", "volume serial"),
+    "volumeOnDevice": ("device-examination", "device", "volume serial"),
+    "unallocatedOnDevice": ("unallocated-space", "device", "area"),
+    "systemSetting": ("system-setting", "setting", "value"),
+    "accountSeen": ("account", "account name", "kind of account"),
+    "sessionEvent": ("session-event", "event", "account"),
+    "programInstalled": ("installed-program", "program", "version"),
+    "programRun": ("program-run", "executable", "path"),
+    "webVisit": ("web-visit", "URL", "browser"),
+    "fileDownloaded": ("download", "saved path", "source URL"),
+    "localSearch": ("search-box", "text", "place it was typed"),
+    "cloudFile": ("cloud-client", "file", "service and event"),
+    "noteText": ("note", "text", "application"),
+    "folderOpened": ("folder", "folder", "artifact"),
+    "fileRenamed": ("rename", "old name", "new name"),
+    "fileSeen": ("secondary file", "path", "artifact"),
+    "shadowCopy": ("shadow-copy", "shadow copy id", "volume"),
+    "fileContent": ("file-content", "path", "content hash"),
+}
+CENSUS_NOTE = ("This counts records in the evidence file. An event that left no record, or "
+               "a record the extractor does not read, is not counted.")
+LIST_UP_TO = 40
+
+
+def _records(n: int, kind: str) -> str:
+    return f"{n} {_NOUN[kind][0]} record{'' if n == 1 else 's'}"
+
+
+def _slot_name(kind: str, slot: str) -> str:
+    return _NOUN[kind][1 if slot == "obj" else 2]
+
+
+def _en_total(args, facts, src):
+    kind, n = args
+    if n == 0:
+        return f"The evidence holds no {_NOUN[kind][0]} record. {CENSUS_NOTE}"
+    text = f"The evidence holds exactly {_records(n, kind)}"
+    rows = sorted(facts.values(), key=lambda f: (f.t, f.id))
+    if len(rows) <= LIST_UP_TO:
+        text += ": " + "; ".join(_event(f, src) for f in rows)
+    return f"{text}. {CENSUS_NOTE}"
+
+
+def _en_distinct(args, facts, src):
+    kind, slot, n = args
+    values = sorted({src.string(getattr(f, slot)) for f in facts.values()})
+    name = _slot_name(kind, slot)
+    text = (f"The {_records(len(facts), kind)} in the evidence name exactly {n} different "
+            f"{name}{'' if n == 1 else 's'}")
+    if 0 < len(values) <= LIST_UP_TO:
+        text += ": " + "; ".join(values)
+    return f"{text}. {CENSUS_NOTE}"
+
+
+def _en_total_with(args, facts, src):
+    kind, slot, value, n = args
+    how_many = "none has" if n == 0 else f"exactly {n} {'has' if n == 1 else 'have'}"
+    return (f"Of the {_records(len(facts), kind)} in the evidence, {how_many} "
+            f"{_slot_name(kind, slot)} {src.string(value)}. {CENSUS_NOTE}")
+
+
+def census_actual(part: Claim, facts: Dict[int, Fact]) -> int:
+    """What the count really is, in plain Python. Feedback for a refused census only:
+    the verdict is the kernel's."""
+    name, args = part
+    rows = list(facts.values())
+    if name == "exactly":
+        return len(rows)
+    if name == "exactlyDistinct":
+        return len({getattr(f, args[1]) for f in rows})
+    return sum(getattr(f, args[1]) == args[2] for f in rows)
+
+
 def _en_tagged(args, facts, src):
     f, slot, g, tag_id = args
     entity = src.string(getattr(facts[f], slot))
@@ -284,7 +505,34 @@ SETS: Dict[str, SetDef] = {
                              _en_device_examined),
     "recoveredOnDevice": SetDef(("fact", "fact"), "Sets.recoveredOnDevice", ("R10", "R13"),
                                 "strong", _en_recovered),
+    "settingRecorded": SetDef(("fact",), "Sets.settingRecorded", ("R14",), "strong", _en_setting),
+    "accountRecorded": SetDef(("fact",), "Sets.accountRecorded", ("R15",), "strong", _en_account),
+    "sessionRecorded": SetDef(("fact",), "Sets.sessionRecorded", ("R16",), "strong", _en_session),
+    "programInstalledAt": SetDef(("fact",), "Sets.programInstalledAt", ("R17",), "strong",
+                                 _en_installed),
+    "programRan": SetDef(("fact",), "Sets.programRan", ("R18",), "strong", _en_ran),
+    "visited": SetDef(("fact",), "Sets.visited", ("R19",), "strong", _en_visited),
+    "downloaded": SetDef(("fact",), "Sets.downloaded", ("R20",), "strong", _en_downloaded),
+    "typedInSearchBox": SetDef(("fact",), "Sets.typedInSearchBox", ("R21",), "strong", _en_typed),
+    "cloudEvent": SetDef(("fact",), "Sets.cloudEvent", ("R22",), "strong", _en_cloud),
+    "noteFound": SetDef(("fact",), "Sets.noteFound", ("R23",), "strong", _en_note),
+    "folderRecorded": SetDef(("fact",), "Sets.folderRecorded", ("R24",), "strong", _en_folder),
+    "renamed": SetDef(("fact",), "Sets.renamed", ("R25",), "strong", _en_renamed),
+    "fileRecorded": SetDef(("fact",), "Sets.fileRecorded", ("R26",), "strong", _en_file_recorded),
+    "shadowCopyMade": SetDef(("fact",), "Sets.shadowCopyMade", ("R27",), "strong", _en_shadow),
+    "contentHashed": SetDef(("fact",), "Sets.contentHashed", ("R28",), "strong", _en_content),
+    "sameContent": SetDef(("fact", "fact"), "Sets.sameContent", ("R28",), "strong",
+                          _en_same_content),
+    "contentOf": SetDef(("fact", "fact"), "Sets.contentOf", ("R10", "R28"), "strong",
+                        _en_content_of),
+    # census forms: Lean type `Census`, checked by `counts` against every fact of the kind
+    "exactly": SetDef(("kind", "count"), ".total", ("C1",), "strong", _en_total),
+    "exactlyDistinct": SetDef(("kind", "slot", "count"), ".distinct", ("C1",), "strong",
+                              _en_distinct),
+    "exactlyWith": SetDef(("kind", "slot", "const", "count"), ".totalWith", ("C1",), "strong",
+                          _en_total_with),
 }
+CENSUS = ("exactly", "exactlyDistinct", "exactlyWith")
 
 
 # ---- Parsing ----------------------------------------------------------------------
@@ -308,6 +556,9 @@ def _parse(obj) -> Claim:
         if not isinstance(args, list) or len(args) < 2:
             raise ClaimError('"both" takes a list of two or more claims')
         items = [_parse(a) for a in args]
+        if any(i[0] in CENSUS for i in items):
+            raise ClaimError("a census statement (exactly...) stands alone; it cannot be "
+                             'part of "both"')
         claim = items[-1]
         for p in reversed(items[:-1]):
             claim = ("both", p, claim)
@@ -318,11 +569,16 @@ def _parse(obj) -> Claim:
     if not isinstance(args, list) or len(args) != len(params):
         raise ClaimError(f'"{name}" takes {len(params)} arguments {list(params)}, got {args!r}')
     for kind, a in zip(params, args):
-        if (a not in SLOTS) if kind == "slot" else (not _is_id(a)):
-            want = 'one of "obj", "aux"' if kind == "slot" else "a non-negative integer id"
+        if kind == "slot":
+            ok, want = a in SLOTS, 'one of "obj", "aux"'
+        elif kind == "kind":
+            ok, want = isinstance(a, str) and a in KINDS, f"a record kind, one of {list(KINDS)}"
+        else:
+            ok, want = _is_id(a), "a non-negative integer"
+        if not ok:
             raise ClaimError(f'"{name}": expected {want}, got {a!r}')
-    if name == "sameLabel" and args[0] == args[1]:
-        raise ClaimError('"sameLabel" needs two different facts')
+    if name in ("sameLabel", "sameContent") and args[0] == args[1]:
+        raise ClaimError(f'"{name}" needs two different facts')
     return (name, tuple(args))
 
 
@@ -347,6 +603,29 @@ def fact_ids(c: Claim) -> List[int]:
     return list(seen)
 
 
+def census_of(c: Claim):
+    """The census part if the claim is one, else None. A census is always the whole claim."""
+    return c if c[0] in CENSUS else None
+
+
+def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
+    """The facts a certificate for this claim cites: the ids the claim names, or, for a
+    census, every fact of its kind in the evidence. Raises if one is missing."""
+    census = census_of(c)
+    if census:
+        rows = [f for f in src.all() if f.kind == census[1][0]]
+        if len(rows) > MAX_CENSUS:
+            raise ClaimError(f"the evidence holds {len(rows)} records of kind {census[1][0]}; "
+                             f"a census can cover at most {MAX_CENSUS}")
+        return [f.id for f in rows], {f.id: f for f in rows}
+    ids = fact_ids(c)
+    found = src.get(ids)
+    missing = [i for i in ids if i not in found]
+    if missing:
+        raise ClaimError(f"fact ids not in the evidence DB: {missing}")
+    return ids, found
+
+
 def rules(c: Claim) -> List[str]:
     return sorted({r for name, _ in parts(c) for r in SETS[name].rules})
 
@@ -366,7 +645,7 @@ def to_lean(c: Claim) -> str:
     if c[0] == "both":
         return f".both ({to_lean(c[1])}) ({to_lean(c[2])})"
     name, args = c
-    rendered = " ".join(f".{a}" if kind == "slot" else str(a)
+    rendered = " ".join(f".{a}" if kind in ("slot", "kind") else str(a)
                         for kind, a in zip(SETS[name].params, args))
     return f"{SETS[name].lean} {rendered}"
 

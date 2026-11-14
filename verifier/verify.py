@@ -3,7 +3,8 @@
     python -m verifier.verify certs/F7.json --facts fixtures/sample_facts.json
 
 Three checks, all rebuilt from the evidence DB:
-  1. every cited fact still matches its DB row (row_sha256);
+  1. every cited fact still matches its DB row (row_sha256); for a census ("exactly n
+     records of this kind") the cited facts must be every fact of that kind in the DB;
   2. the claim, regenerated as Lean from those rows, is accepted by the kernel;
   3. the English sentence is exactly what the templates produce for that claim.
 """
@@ -27,11 +28,15 @@ def verify(cert: dict, source: FactSource) -> List[str]:
         claim = claims.parse(cert["claim"])
     except claims.ClaimError as e:
         return [f"claim does not parse: {e}"]
-    ids = claims.fact_ids(claim)
+    try:
+        # for a census this is every fact of the kind now in the evidence: if the
+        # certificate lists fewer or more, its count is about a different evidence file
+        ids, found = claims.cited_facts(claim, source)
+    except claims.ClaimError:
+        ids, found = claims.fact_ids(claim), source.get(claims.fact_ids(claim))
     cited = {c["id"]: c for c in cert.get("cited_facts", [])}
     if set(cited) != set(ids):
         problems.append(f"cited facts {sorted(cited)} differ from the ids in the claim {sorted(ids)}")
-    found = source.get(ids)
     for i in ids:
         if i not in found:
             problems.append(f"fact {i} is not in the evidence DB")
