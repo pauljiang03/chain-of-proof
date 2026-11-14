@@ -1,0 +1,2145 @@
+{
+ "evidence": {
+  "path": "evidence/case_facts.json",
+  "facts": 242,
+  "sha256": "bbd0d73c10c1a347c56551fb20ac4dd865fa86462306b67834efcb5625137006"
+ },
+ "reference": {
+  "source": "NIST CFReDS Data Leakage Case, answer key dated 2018-07-23: https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf",
+  "items": 96,
+  "tolerance_s": 2
+ },
+ "extraction": [
+  {
+   "id": "Q16-01",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    121
+   ]
+  },
+  {
+   "id": "Q16-02",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    122
+   ]
+  },
+  {
+   "id": "Q16-03",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    125
+   ]
+  },
+  {
+   "id": "Q16-04",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    131
+   ]
+  },
+  {
+   "id": "Q16-05",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    132
+   ]
+  },
+  {
+   "id": "Q16-06",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    137,
+    138
+   ]
+  },
+  {
+   "id": "Q16-07",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    140
+   ]
+  },
+  {
+   "id": "Q16-08",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    141
+   ]
+  },
+  {
+   "id": "Q16-09",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    143
+   ]
+  },
+  {
+   "id": "Q16-10",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    144
+   ]
+  },
+  {
+   "id": "Q16-11",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    145
+   ]
+  },
+  {
+   "id": "Q16-12",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    146
+   ]
+  },
+  {
+   "id": "Q16-13",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    147
+   ]
+  },
+  {
+   "id": "Q16-14",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    148
+   ]
+  },
+  {
+   "id": "Q16-15",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    150
+   ]
+  },
+  {
+   "id": "Q16-16",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    151
+   ]
+  },
+  {
+   "id": "Q16-17",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    152
+   ]
+  },
+  {
+   "id": "Q16-18",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    153
+   ]
+  },
+  {
+   "id": "Q16-19",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    154
+   ]
+  },
+  {
+   "id": "Q16-20",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    155
+   ]
+  },
+  {
+   "id": "Q16-21",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    157
+   ]
+  },
+  {
+   "id": "Q16-22",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    160
+   ]
+  },
+  {
+   "id": "Q16-23",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    163
+   ]
+  },
+  {
+   "id": "Q16-24",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    164
+   ]
+  },
+  {
+   "id": "Q16-25",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    193
+   ]
+  },
+  {
+   "id": "Q16-26",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    194,
+    195
+   ]
+  },
+  {
+   "id": "Q16-27",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    196
+   ]
+  },
+  {
+   "id": "Q16-28",
+   "question": 16,
+   "status": "match",
+   "fact_ids": [
+    197
+   ]
+  },
+  {
+   "id": "Q21-01",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-02",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-03",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-04",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-05",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-06",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-07",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-08",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-09",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-10",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-11",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q21-12",
+   "question": 21,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q22-01",
+   "question": 22,
+   "status": "match",
+   "fact_ids": [
+    1
+   ]
+  },
+  {
+   "id": "Q22-02",
+   "question": 22,
+   "status": "match",
+   "fact_ids": [
+    2
+   ]
+  },
+  {
+   "id": "Q22-03",
+   "question": 22,
+   "status": "match",
+   "fact_ids": [
+    3,
+    4
+   ]
+  },
+  {
+   "id": "Q22-04",
+   "question": 22,
+   "status": "match",
+   "fact_ids": [
+    3,
+    4
+   ]
+  },
+  {
+   "id": "Q26-01",
+   "question": 26,
+   "status": "match",
+   "fact_ids": [
+    41
+   ]
+  },
+  {
+   "id": "Q26-02",
+   "question": 26,
+   "status": "match",
+   "fact_ids": [
+    42
+   ]
+  },
+  {
+   "id": "Q28-01",
+   "question": 28,
+   "status": "match",
+   "fact_ids": [
+    31,
+    33
+   ]
+  },
+  {
+   "id": "Q28-02",
+   "question": 28,
+   "status": "match",
+   "fact_ids": [
+    35
+   ]
+  },
+  {
+   "id": "Q28-03",
+   "question": 28,
+   "status": "match",
+   "fact_ids": [
+    36,
+    39
+   ]
+  },
+  {
+   "id": "Q28-04",
+   "question": 28,
+   "status": "match",
+   "fact_ids": [
+    40
+   ]
+  },
+  {
+   "id": "Q33-01",
+   "question": 33,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q33-02",
+   "question": 33,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q33-03",
+   "question": 33,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q33-04",
+   "question": 33,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q33-05",
+   "question": 33,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q35-01",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    44
+   ]
+  },
+  {
+   "id": "Q35-02",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    45
+   ]
+  },
+  {
+   "id": "Q35-03",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    46
+   ]
+  },
+  {
+   "id": "Q35-04",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    47
+   ]
+  },
+  {
+   "id": "Q35-05",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    48
+   ]
+  },
+  {
+   "id": "Q35-06",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    51
+   ]
+  },
+  {
+   "id": "Q35-07",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    52
+   ]
+  },
+  {
+   "id": "Q35-08",
+   "question": 35,
+   "status": "match",
+   "fact_ids": [
+    53
+   ]
+  },
+  {
+   "id": "Q36-01",
+   "question": 36,
+   "status": "match",
+   "fact_ids": [
+    85
+   ]
+  },
+  {
+   "id": "Q36-02",
+   "question": 36,
+   "status": "match",
+   "fact_ids": [
+    111
+   ]
+  },
+  {
+   "id": "Q51-01",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-02",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-03",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-04",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-05",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-06",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-07",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-08",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-09",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-10",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-11",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-12",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-13",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q51-14",
+   "question": 51,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-01",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-02",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-03",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-04",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-05",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-06",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-07",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-08",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-09",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-10",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-11",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-12",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-13",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-14",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-15",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-16",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  },
+  {
+   "id": "Q55-17",
+   "question": 55,
+   "status": "missing",
+   "fact_ids": []
+  }
+ ],
+ "gate": [
+  {
+   "id": "T01",
+   "label": true,
+   "ask": "Is the USB device with serial ...1593 the seized RM#1?",
+   "basis": "Q22 and section 2: RM#1 serial 4C530012450531101593",
+   "verdict": "verified",
+   "claim": {
+    "deviceHolds": [
+     1,
+     241
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T02",
+   "label": true,
+   "ask": "Was the proposal opened from RM#1?",
+   "basis": "Section 3: the suspect opened RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+   "verdict": "verified",
+   "claim": {
+    "openedFromDevice": [
+     21,
+     241
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T03",
+   "label": true,
+   "ask": "Was the design concept opened from RM#1?",
+   "basis": "Section 3: the suspect opened RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+   "verdict": "verified",
+   "claim": {
+    "openedFromDevice": [
+     26,
+     241
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T04",
+   "label": true,
+   "ask": "Did the search for leakage methods come before the proposal was opened?",
+   "basis": "Q16 (14:02:09) and section 3 (file opened 14:37)",
+   "verdict": "verified",
+   "claim": {
+    "before": [
+     121,
+     21
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T05",
+   "label": true,
+   "ask": "Was the zip opened from a volume labeled IAMAN $_@?",
+   "basis": "Q26 and Q22: opened on E:, volume name IAMAN $_@",
+   "verdict": "verified",
+   "claim": {
+    "openedFromRecorded": [
+     41,
+     237
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T06",
+   "label": true,
+   "ask": "Did this PC see two volumes labeled IAMAN $_@?",
+   "basis": "Q22 (volume name) and Q54 (RM#2 was quick-formatted, which assigns a new volume serial)",
+   "verdict": "verified",
+   "claim": {
+    "sameLabel": [
+     237,
+     238
+    ]
+   },
+   "strength": "heuristic",
+   "as_expected": true
+  },
+  {
+   "id": "T07",
+   "label": true,
+   "ask": "Is the second IAMAN $_@ volume the one on the seized RM#2?",
+   "basis": "Section 2: RM#2 volume label IAMAN $_@; Q54",
+   "verdict": "verified",
+   "claim": {
+    "recordedOnDevice": [
+     238,
+     242
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T08",
+   "label": true,
+   "ask": "Was the zip opened from RM#2? (heuristic chain across the format)",
+   "basis": "Q26: the zip was opened in RM#2; Q54: RM#2 was quick-formatted afterwards",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "openedFromRecorded": [
+       41,
+       237
+      ]
+     },
+     {
+      "sameLabel": [
+       237,
+       238
+      ]
+     },
+     {
+      "recordedOnDevice": [
+       238,
+       242
+      ]
+     },
+     {
+      "deviceHolds": [
+       3,
+       242
+      ]
+     }
+    ]
+   },
+   "strength": "heuristic",
+   "as_expected": true
+  },
+  {
+   "id": "T09",
+   "label": true,
+   "ask": "Was RM#2 connected before the zip was opened?",
+   "basis": "Q22 (09:58:33) and Q26 (10:01:23)",
+   "verdict": "verified",
+   "claim": {
+    "before": [
+     3,
+     41
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T10",
+   "label": true,
+   "ask": "Was the resignation letter created before it was last modified?",
+   "basis": "Q36: created 14:48:40, modified 14:59:30",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "fileCreatedAt": [
+       85
+      ]
+     },
+     {
+      "fileModifiedAt": [
+       111
+      ]
+     },
+     {
+      "before": [
+       85,
+       111
+      ]
+     }
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T11",
+   "label": true,
+   "ask": "Is RM#1 the authorized device?",
+   "basis": "Section 2, note 5: RM#1 is the company's authorized USB memory stick",
+   "verdict": "verified",
+   "claim": {
+    "tagged": [
+     1,
+     "obj",
+     198,
+     115
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T12",
+   "label": true,
+   "ask": "Was the zip opened from RM#2 before it was opened from the CD?",
+   "basis": "Q26 (10:01:23) and Q35 (16:44:18)",
+   "verdict": "verified",
+   "claim": {
+    "before": [
+     41,
+     48
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T13",
+   "label": true,
+   "ask": "Did the suspect search for anti-forensics?",
+   "basis": "Q16: anti-forensics, 14:17:14",
+   "verdict": "verified",
+   "claim": {
+    "searched": [
+     154
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T14",
+   "label": true,
+   "ask": "Was the pricing decision opened from the network share?",
+   "basis": "Q28: \\\\10.11.11.128\\SECURED_DRIVE\\...\\(secret_project)_pricing_decision.xlsx, 16:26:53",
+   "verdict": "verified",
+   "claim": {
+    "opened": [
+     31
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T15",
+   "label": true,
+   "ask": "Was the zip opened from the volume now on the seized RM#2? (strong chain)",
+   "basis": "Q26 says the zip was opened in RM#2. True, but the volume serial changed when RM#2 was formatted (Q54), so a strong chain cannot show it. Expected: refused. This row is here to count what strong rules alone miss.",
+   "verdict": "rejected",
+   "claim": {
+    "openedFromDevice": [
+     41,
+     242
+    ]
+   },
+   "as_expected": false
+  },
+  {
+   "id": "F01",
+   "label": false,
+   "ask": "Was the zip opened from the authorized USB (RM#1)?",
+   "basis": "Q26: it was opened in RM#2",
+   "verdict": "rejected",
+   "claim": {
+    "openedFromDevice": [
+     41,
+     241
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F02",
+   "label": false,
+   "ask": "Was the design concept opened from RM#2?",
+   "basis": "Section 3: it was opened from RM#1",
+   "verdict": "rejected",
+   "claim": {
+    "openedFromDevice": [
+     26,
+     242
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F03",
+   "label": false,
+   "ask": "Was the zip opened before RM#2 was connected?",
+   "basis": "Q22 (09:58:33) and Q26 (10:01:23)",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     41,
+     3
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F04",
+   "label": false,
+   "ask": "Was the proposal opened before the search for leakage methods?",
+   "basis": "Q16 (14:02:09) and section 3 (14:37)",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     21,
+     121
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F05",
+   "label": false,
+   "ask": "Is RM#2 an authorized device?",
+   "basis": "Section 2: only RM#1 is authorized; RM#2 is the suspect's own stick",
+   "verdict": "rejected",
+   "claim": {
+    "tagged": [
+     3,
+     "obj",
+     198,
+     115
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F06",
+   "label": false,
+   "ask": "Is the USB record for ...1593 the seized RM#2?",
+   "basis": "Q22: different serials",
+   "verdict": "rejected",
+   "claim": {
+    "deviceHolds": [
+     1,
+     242
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F07",
+   "label": false,
+   "ask": "Is the first IAMAN $_@ volume the one on RM#1?",
+   "basis": "Section 2: RM#1 holds the volume labeled Authorized USB",
+   "verdict": "rejected",
+   "claim": {
+    "recordedOnDevice": [
+     237,
+     241
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F08",
+   "label": false,
+   "ask": "Was the resignation letter modified before it was created?",
+   "basis": "Q36",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     111,
+     85
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F09",
+   "label": false,
+   "ask": "Is the shortcut to the design concept a web search?",
+   "basis": "Wrong kind of record",
+   "verdict": "rejected",
+   "claim": {
+    "searched": [
+     26
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F10",
+   "label": false,
+   "ask": "Was the zip opened from the CD before it was opened from RM#2?",
+   "basis": "Q26 (10:01:23) and Q35 (16:44:18)",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     48,
+     41
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F11",
+   "label": false,
+   "ask": "Was the design concept opened from the IAMAN $_@ volume?",
+   "basis": "Section 3: opened from RM#1 (Authorized USB)",
+   "verdict": "rejected",
+   "claim": {
+    "openedFromRecorded": [
+     26,
+     237
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F12",
+   "label": false,
+   "ask": "Do the Authorized USB volume and the IAMAN $_@ volume share a label?",
+   "basis": "Section 2: different labels",
+   "verdict": "rejected",
+   "claim": {
+    "sameLabel": [
+     236,
+     238
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F13",
+   "label": false,
+   "ask": "Did the search for anti-forensic tools come before RM#2 was connected?",
+   "basis": "Q16 (2015-03-25 10:46:44) and Q22 (2015-03-24 09:58:33)",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     194,
+     3
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F14",
+   "label": false,
+   "ask": "Is RM#1 tagged unauthorized?",
+   "basis": "Section 2, note 5",
+   "verdict": "rejected",
+   "claim": {
+    "tagged": [
+     1,
+     "obj",
+     199,
+     116
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F15",
+   "label": false,
+   "ask": "Was the zip opened from RM#1? (heuristic chain pointed at the wrong device)",
+   "basis": "Q26",
+   "verdict": "rejected",
+   "claim": {
+    "both": [
+     {
+      "openedFromRecorded": [
+       41,
+       237
+      ]
+     },
+     {
+      "sameLabel": [
+       237,
+       236
+      ]
+     },
+     {
+      "recordedOnDevice": [
+       236,
+       241
+      ]
+     },
+     {
+      "deviceHolds": [
+       1,
+       241
+      ]
+     }
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F16",
+   "label": false,
+   "ask": "Does a record that is not in the evidence come before the zip being opened?",
+   "basis": "Fact id 999999 does not exist",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     999999,
+     41
+    ]
+   },
+   "as_expected": true
+  }
+ ],
+ "run": {
+  "path": "runs/agent1/run.json",
+  "proposals": 193,
+  "verified": 191,
+  "rejected": 2,
+  "by_strength": {
+   "strong": 189,
+   "heuristic": 2
+  },
+  "items": [
+   {
+    "id": "Q16-01",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A023"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-02",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A024"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-03",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A027"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-04",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A033"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-05",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A034",
+     "A173"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-06",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A039",
+     "A040"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-07",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A042"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-08",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A043"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-09",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A045"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-10",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A046"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-11",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A047"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-12",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A048"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-13",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A049",
+     "A175",
+     "A187"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-14",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A050"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-15",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A052"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-16",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A053",
+     "A179"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-17",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A054"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-18",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A055"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-19",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A056"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-20",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A057"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-21",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A059"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-22",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A062"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-23",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A065",
+     "A180"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-24",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A066",
+     "A181"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-25",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A095",
+     "A191",
+     "A192"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-26",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A096",
+     "A097",
+     "A192"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-27",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A098"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q16-28",
+    "question": 16,
+    "certified": true,
+    "findings": [
+     "A099",
+     "A193"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q21-01",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-02",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-03",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-04",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-05",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-06",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-07",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-08",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-09",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-10",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-11",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q21-12",
+    "question": 21,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q22-01",
+    "question": 22,
+    "certified": true,
+    "findings": [
+     "A001",
+     "A005",
+     "A013",
+     "A109",
+     "A110",
+     "A173",
+     "A174"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q22-02",
+    "question": 22,
+    "certified": true,
+    "findings": [
+     "A002",
+     "A182",
+     "A183"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q22-03",
+    "question": 22,
+    "certified": true,
+    "findings": [
+     "A003",
+     "A004",
+     "A006",
+     "A014",
+     "A127",
+     "A129",
+     "A183"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q22-04",
+    "question": 22,
+    "certified": true,
+    "findings": [
+     "A003",
+     "A004",
+     "A006",
+     "A014",
+     "A127",
+     "A129",
+     "A183"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q26-01",
+    "question": 26,
+    "certified": true,
+    "findings": [
+     "A123",
+     "A125",
+     "A127",
+     "A128",
+     "A129",
+     "A184",
+     "A186"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q26-02",
+    "question": 26,
+    "certified": true,
+    "findings": [
+     "A124"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q28-01",
+    "question": 28,
+    "certified": true,
+    "findings": [
+     "A111",
+     "A113",
+     "A121",
+     "A176"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q28-02",
+    "question": 28,
+    "certified": true,
+    "findings": [
+     "A115"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q28-03",
+    "question": 28,
+    "certified": true,
+    "findings": [
+     "A116",
+     "A119",
+     "A122"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q28-04",
+    "question": 28,
+    "certified": true,
+    "findings": [
+     "A120",
+     "A182"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q33-01",
+    "question": 33,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q33-02",
+    "question": 33,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q33-03",
+    "question": 33,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q33-04",
+    "question": 33,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q33-05",
+    "question": 33,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q35-01",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A130",
+     "A185",
+     "A186",
+     "A188"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-02",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A131"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-03",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A132"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-04",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A133"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-05",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A134"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-06",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A137"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-07",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A138"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q35-08",
+    "question": 35,
+    "certified": true,
+    "findings": [
+     "A139"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q36-01",
+    "question": 36,
+    "certified": true,
+    "findings": [
+     "A141",
+     "A149",
+     "A184",
+     "A185"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q36-02",
+    "question": 36,
+    "certified": true,
+    "findings": [
+     "A142",
+     "A149"
+    ],
+    "best_strength": "strong"
+   },
+   {
+    "id": "Q51-01",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-02",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-03",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-04",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-05",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-06",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-07",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-08",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-09",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-10",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-11",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-12",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-13",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q51-14",
+    "question": 51,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-01",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-02",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-03",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-04",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-05",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-06",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-07",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-08",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-09",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-10",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-11",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-12",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-13",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-14",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-15",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-16",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   },
+   {
+    "id": "Q55-17",
+    "question": 55,
+    "certified": false,
+    "findings": [],
+    "best_strength": null
+   }
+  ],
+  "findings_outside_reference": [
+   "A007",
+   "A008",
+   "A011",
+   "A012",
+   "A015",
+   "A016",
+   "A017",
+   "A018",
+   "A019",
+   "A020",
+   "A021",
+   "A022",
+   "A025",
+   "A026",
+   "A028",
+   "A029",
+   "A030",
+   "A031",
+   "A032",
+   "A035",
+   "A036",
+   "A037",
+   "A038",
+   "A041",
+   "A044",
+   "A051",
+   "A058",
+   "A060",
+   "A061",
+   "A063",
+   "A064",
+   "A067",
+   "A068",
+   "A069",
+   "A070",
+   "A071",
+   "A072",
+   "A073",
+   "A074",
+   "A075",
+   "A076",
+   "A077",
+   "A078",
+   "A079",
+   "A080",
+   "A081",
+   "A082",
+   "A083",
+   "A084",
+   "A085",
+   "A086",
+   "A087",
+   "A088",
+   "A089",
+   "A090",
+   "A091",
+   "A092",
+   "A093",
+   "A094",
+   "A100",
+   "A101",
+   "A102",
+   "A103",
+   "A104",
+   "A105",
+   "A106",
+   "A107",
+   "A108",
+   "A112",
+   "A114",
+   "A117",
+   "A118",
+   "A126",
+   "A135",
+   "A136",
+   "A140",
+   "A143",
+   "A144",
+   "A145",
+   "A146",
+   "A147",
+   "A148",
+   "A150",
+   "A151",
+   "A152",
+   "A153",
+   "A154",
+   "A155",
+   "A156",
+   "A157",
+   "A158",
+   "A159",
+   "A160",
+   "A161",
+   "A162",
+   "A163",
+   "A164",
+   "A165",
+   "A166",
+   "A167",
+   "A168",
+   "A169",
+   "A170",
+   "A171",
+   "A172",
+   "A177",
+   "A178",
+   "A189",
+   "A190"
+  ]
+ }
+}

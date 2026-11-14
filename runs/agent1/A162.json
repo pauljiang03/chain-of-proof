@@ -1,0 +1,76 @@
+{
+  "finding_id": "A162",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "tagged": [
+      150,
+      "obj",
+      226,
+      117
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "external device and forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
+  "cited_facts": [
+    {
+      "id": 150,
+      "kind": "webSearch",
+      "t": 1427134451977428,
+      "res": 1,
+      "obj": 89,
+      "obj_text": "external device and forensics",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "285de2e16778d7cd4f9d07b52bf7a5e5f80cf0ec8e33170bc5d2dac88953a826",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 226,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 89,
+      "obj_text": "external device and forensics",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "6abb3ad3edb74d7193f9be3f077c365006ffab4ba170438f914c7b03fdf66d24",
+      "prov": {
+        "rule": "search term contains the watch-list word \"forensic\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          150,
+          "obj",
+          226,
+          117
+        ]
+      },
+      "english": "external device and forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A162.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

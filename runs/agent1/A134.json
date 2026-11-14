@@ -1,0 +1,58 @@
+{
+  "finding_id": "A134",
+  "question": "3. Which files were opened from the CD-R?",
+  "claim": {
+    "opened": [
+      48
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\de\\winter_whether_advisory.zip on volume E297F1A5 was opened (2015-03-24 20:44:18 UTC).",
+  "cited_facts": [
+    {
+      "id": 48,
+      "kind": "lnkTarget",
+      "t": 1427229858901833,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 35,
+      "aux_text": "E297F1A5",
+      "row_sha256": "3e097f0e0cd665c178809773def7ad4d9352d340841d6619b184d2f24f1d0201",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\winter_whether_advisory.zip.lnk",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427205683425224,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          48
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip on volume E297F1A5 was opened (2015-03-24 20:44:18 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A134.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

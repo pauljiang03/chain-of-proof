@@ -1,0 +1,81 @@
+{
+  "finding_id": "A006",
+  "question": "1. Which external storage devices were attached to the PC, and when?",
+  "claim": {
+    "deviceHolds": [
+      3,
+      242
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial holds volume B4D85399.",
+  "cited_facts": [
+    {
+      "id": 3,
+      "kind": "usbInsert",
+      "t": 1427205512859000,
+      "res": 1000,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d7b4abaf42dea7fc25ca5e2212ec4f4d64180dd2dc265c86a25d6b6f2386f4d5",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 242,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "c395aad376b19988abd9eab210a2826f6d1891ff1a994775de4639813a57ec68",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 65536",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E221034C",
+        "exhibit": "RM#2",
+        "filesystem": "fat",
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "IAMAN $_@"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "deviceHolds": [
+          3,
+          242
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial holds volume B4D85399.",
+      "rules": [
+        "R1",
+        "R7"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "R7"
+  ],
+  "strength": "strong",
+  "lean_file": "A006.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

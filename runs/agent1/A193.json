@@ -1,0 +1,76 @@
+{
+  "finding_id": "A193",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      197,
+      55
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"ccleaner\" (2015-03-25 14:47:51 UTC) happened before the opening of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-25 15:28:09 UTC): the gap of 2418.5 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 197,
+      "kind": "webSearch",
+      "t": 1427294871248203,
+      "res": 1,
+      "obj": 114,
+      "obj_text": "ccleaner",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "103c52b9be337ca0ac003ddbded663debe9310fbf708e3e0174b2b8ea0f559f8",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 55,
+      "kind": "lnkTarget",
+      "t": 1427297289748404,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "5d5ad0dd1f88ff42c84b7d1189875869b4d192816d1981bb846ab6796a1eb1bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK",
+        "drive_letter": "C:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427222921342758,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": ""
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          197,
+          55
+        ]
+      },
+      "english": "The web search \"ccleaner\" (2015-03-25 14:47:51 UTC) happened before the opening of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-25 15:28:09 UTC): the gap of 2418.5 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A193.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

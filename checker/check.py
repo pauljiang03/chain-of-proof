@@ -108,7 +108,7 @@ def explain(facts: List[Fact], claim: claims.Claim) -> List[dict]:
 
 
 def check(claim_json, finding_id: str, source: FactSource, question: str = "",
-          out_dir: Path = CERTS_DIR) -> dict:
+          out_dir: Path = CERTS_DIR, proposer: str = "") -> dict:
     """Check one proposed claim. Writes certs/<id>.lean and .json only if it verifies.
 
     Every call, verified or not, is appended to <out_dir>/proposals.jsonl.
@@ -118,6 +118,8 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
     out_dir.mkdir(parents=True, exist_ok=True)
     result: Dict = {"finding_id": finding_id, "question": question, "claim": claim_json,
                     "status": "rejected"}
+    if proposer:
+        result["proposer"] = proposer       # who proposed it: miner, probe, or an agent
     try:
         if not _ID.match(finding_id):
             raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")

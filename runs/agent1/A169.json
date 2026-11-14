@@ -1,0 +1,76 @@
+{
+  "finding_id": "A169",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "tagged": [
+      160,
+      "obj",
+      222,
+      117
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "data recovery tools is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+  "cited_facts": [
+    {
+      "id": 160,
+      "kind": "webSearch",
+      "t": 1427134743860449,
+      "res": 1,
+      "obj": 96,
+      "obj_text": "data recovery tools",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "e94452b237ab3e32c64057685b08eb4e09a3ca39ad50cd1e6fd492ac1c9eeb36",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 222,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 96,
+      "obj_text": "data recovery tools",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "fb5279f7069db3f5f38b1185937ca0c5be2d3ad0448ed0459802bd8b02bd0f70",
+      "prov": {
+        "rule": "search term contains the watch-list word \"recover\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          160,
+          "obj",
+          222,
+          117
+        ]
+      },
+      "english": "data recovery tools is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A169.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

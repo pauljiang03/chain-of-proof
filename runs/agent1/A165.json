@@ -1,0 +1,76 @@
+{
+  "finding_id": "A165",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "tagged": [
+      153,
+      "obj",
+      227,
+      117
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",
+  "cited_facts": [
+    {
+      "id": 153,
+      "kind": "webSearch",
+      "t": 1427134615783075,
+      "res": 1,
+      "obj": 92,
+      "obj_text": "how to delete data",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "45852c78bd660ef07195ec4bad801685442c3cd66511d58a930d0698c9aa5e32",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 227,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 92,
+      "obj_text": "how to delete data",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "a2370024cf41120be4916f97438947629d3d66fc660258140761cb681591ed09",
+      "prov": {
+        "rule": "search term contains the watch-list word \"delet\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          153,
+          "obj",
+          227,
+          117
+        ]
+      },
+      "english": "how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A165.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

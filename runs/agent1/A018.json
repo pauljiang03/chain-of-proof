@@ -1,0 +1,55 @@
+{
+  "finding_id": "A018",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      116
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"outlook 2013 settings\" was made in chrome (2015-03-22 15:27:59 UTC).",
+  "cited_facts": [
+    {
+      "id": 116,
+      "kind": "webSearch",
+      "t": 1427038079597811,
+      "res": 1,
+      "obj": 71,
+      "obj_text": "outlook 2013 settings",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "330fbfe208c989098b36e7395a83e6872ae35404f6c257d09e3ac7dffed78d6c",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/#q=outlook+2013+settings",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          116
+        ]
+      },
+      "english": "A web search for \"outlook 2013 settings\" was made in chrome (2015-03-22 15:27:59 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A018.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

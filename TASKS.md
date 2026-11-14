@@ -59,13 +59,15 @@ Two rules for anything shown on screen:
 ## Lane 1: Pipeline — @pauljiang03
 
 Done: extractor for USB devices, volumes, shortcuts, jump lists, searches and file
-times; miner; scorer; first real `run.json`.
+times; miner; scorer; first real `run.json`; AI investigator with one scored run
+(`runs/agent1/run.json`, same shape as `ui/public/run.json`, 191 findings).
 
 Next, in the order the scorer says matters (rows of the answer key each would add):
 
 1. Files copied to RM#2, recovered from FAT directory entries after the format (17).
 2. Recycle Bin records (14). 3. E-mail from the Outlook OST (12). 4. CD burns (5).
-5. Agent loop with `sql`, `get_fact`, `check`; challenger pass. Scored by `eval.score`.
+5. Show the kernel stopping a wrong LLM claim: a free-text report from the same
+   model, turned into claims and checked. Run the API (deepagents) backend once a key exists.
 6. A closed-world brick for absence claims.
 - **Done when:** `python3 -m eval.baseline` shows every question above zero and an
   agent run beats the miner's row count.

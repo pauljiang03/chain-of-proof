@@ -1,0 +1,71 @@
+{
+  "finding_id": "A149",
+  "question": "4. When was the resignation letter on the Desktop created and last modified?",
+  "claim": {
+    "before": [
+      85,
+      111
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:59:30 UTC): the gap of 649.877 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 85,
+      "kind": "fileCreated",
+      "t": 1427222920734358,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "910e48c10b9af6a63835b13598dd8c60420fa0ff953d8ffdab0d258a1f54af1d",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 11893,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 111,
+      "kind": "fileModified",
+      "t": 1427223570611170,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "ac348310c34918269ecd0d7c068f1563ce8f3f89710ac0fd43302ace472070c8",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 11893,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          85,
+          111
+        ]
+      },
+      "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:59:30 UTC): the gap of 649.877 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A149.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

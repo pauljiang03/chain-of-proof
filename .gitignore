@@ -15,6 +15,12 @@ data/
 *.duckdb
 *.duckdb.wal
 
+# Secrets and agent session transcripts (transcripts carry local paths)
+.env
+.env.*
+runs/*/transcript.jsonl
+runs/dev/
+
 # Event handbook (not ours to redistribute)
 F26 Onsite Hacker Packet.pdf
 

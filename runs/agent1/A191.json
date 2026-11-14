@@ -1,0 +1,71 @@
+{
+  "finding_id": "A191",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      238,
+      193
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "This PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC) happened before the web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC): the gap of 256.417 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 238,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "IAMAN $_@",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "e8bb7604d4170668f9edbcc09e2e1dd387c92b238d87ef5d4a8e2e917f41a319",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 193,
+      "kind": "webSearch",
+      "t": 1427231210726427,
+      "res": 1,
+      "obj": 111,
+      "obj_text": "security checkpoint cd-r",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "ad5a6595a72143fbea7d57fb2bd6d65862e5f827fa73445f5eafdc46d1a5ffb1",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/#q=security+checkpoint+cd-r",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          238,
+          193
+        ]
+      },
+      "english": "This PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC) happened before the web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC): the gap of 256.417 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A191.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

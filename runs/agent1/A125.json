@@ -1,0 +1,80 @@
+{
+  "finding_id": "A125",
+  "question": "3. Which files were opened from RM#2?",
+  "claim": {
+    "openedFromRecorded": [
+      41,
+      237
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC).",
+  "cited_facts": [
+    {
+      "id": 41,
+      "kind": "lnkTarget",
+      "t": 1427205683393024,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "319140a409af9fc7f4c53d06c1c23cc845ac9837aa17f378f477f3b85409b86a",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+        "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN $_@"
+      }
+    },
+    {
+      "id": 237,
+      "kind": "volumeSeen",
+      "t": 1427205514439312,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "IAMAN $_@",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "b78dd7c1aa8c814b9e899f9ea3207f94598a0312bd8673d395c940c04e1b1751",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          41,
+          237
+        ]
+      },
+      "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6"
+  ],
+  "strength": "strong",
+  "lean_file": "A125.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,54 @@
+{
+  "finding_id": "A142",
+  "question": "4. When was the resignation letter on the Desktop created and last modified?",
+  "claim": {
+    "fileModifiedAt": [
+      111
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was last modified on volume CA0C7A48 (2015-03-24 18:59:30 UTC).",
+  "cited_facts": [
+    {
+      "id": 111,
+      "kind": "fileModified",
+      "t": 1427223570611170,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "ac348310c34918269ecd0d7c068f1563ce8f3f89710ac0fd43302ace472070c8",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 11893,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileModifiedAt": [
+          111
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was last modified on volume CA0C7A48 (2015-03-24 18:59:30 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "A142.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

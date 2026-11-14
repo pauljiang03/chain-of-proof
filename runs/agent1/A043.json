@@ -1,0 +1,55 @@
+{
+  "finding_id": "A043",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      141
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC).",
+  "cited_facts": [
+    {
+      "id": 141,
+      "kind": "webSearch",
+      "t": 1427134134101318,
+      "res": 1,
+      "obj": 82,
+      "obj_text": "e-mail investigation",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "9e9667268b49bfc06403f1a178d46e9cdfcc09c536799eae8433488349fede6f",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          141
+        ]
+      },
+      "english": "A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A043.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

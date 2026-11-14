@@ -1,0 +1,55 @@
+{
+  "finding_id": "A039",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      137
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"file sharing and tethering\" was made in iexplore (2015-03-23 18:07:58 UTC).",
+  "cited_facts": [
+    {
+      "id": 137,
+      "kind": "webSearch",
+      "t": 1427134078080700,
+      "res": 1,
+      "obj": 80,
+      "obj_text": "file sharing and tethering",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "023ddd7a896e28d5581a523699d044b0cd51c69f6853a9ec12598d5981da63b0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          137
+        ]
+      },
+      "english": "A web search for \"file sharing and tethering\" was made in iexplore (2015-03-23 18:07:58 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A039.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

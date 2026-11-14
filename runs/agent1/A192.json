@@ -1,0 +1,73 @@
+{
+  "finding_id": "A192",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      193,
+      194
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC) happened before the web search \"anti-forensic tools\" (2015-03-25 14:46:44 UTC): the gap of 63594 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 193,
+      "kind": "webSearch",
+      "t": 1427231210726427,
+      "res": 1,
+      "obj": 111,
+      "obj_text": "security checkpoint cd-r",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "ad5a6595a72143fbea7d57fb2bd6d65862e5f827fa73445f5eafdc46d1a5ffb1",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/#q=security+checkpoint+cd-r",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 194,
+      "kind": "webSearch",
+      "t": 1427294804752905,
+      "res": 1,
+      "obj": 112,
+      "obj_text": "anti-forensic tools",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "c04a0b90953aff7461091b591e6f81c3ce9de2b8b5b9676c4793e69ecdcf0847",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          193,
+          194
+        ]
+      },
+      "english": "The web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC) happened before the web search \"anti-forensic tools\" (2015-03-25 14:46:44 UTC): the gap of 63594 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A192.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

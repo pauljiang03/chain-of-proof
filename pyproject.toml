@@ -8,3 +8,5 @@ dependencies = ["duckdb>=1.0"]
 [project.optional-dependencies]
 # needed only to rebuild evidence/case_facts.json from the disk images
 extract = ["dissect>=3.20"]
+# needed only for the API-key backend of the AI investigator (agent/run.py --backend deepagents)
+agent = ["deepagents>=0.7", "langchain-anthropic>=1.7"]

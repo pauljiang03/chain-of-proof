@@ -1,0 +1,55 @@
+{
+  "finding_id": "A092",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      190
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"health news\" was made in iexplore (2015-03-23 20:55:58 UTC).",
+  "cited_facts": [
+    {
+      "id": 190,
+      "kind": "webSearch",
+      "t": 1427144158742157,
+      "res": 1,
+      "obj": 110,
+      "obj_text": "health news",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "aa87ada7643fb34cd77ce18b43865f866a1da64ab7e3c2707f91f367b02b766d",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/news?q=health+news&FORM=NSBABR",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          190
+        ]
+      },
+      "english": "A web search for \"health news\" was made in iexplore (2015-03-23 20:55:58 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A092.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

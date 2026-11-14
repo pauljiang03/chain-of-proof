@@ -21,7 +21,7 @@ Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain
 | Extractor: the real PC and USB images → evidence file (`extractor/`) | Working for USB devices, volumes, shortcuts, jump lists, web searches, file times. Not yet: e-mail, Recycle Bin, CD burning, deleted files on RM#2 |
 | Miner (`miner/`): every instance of the approved sets, no LLM | Working on the real evidence |
 | Scorer against the NIST answer key (`eval/`) | Working; numbers below |
-| Agents | Not started |
+| AI investigator (`agent/`): an LLM with four tools and no file or shell access | Working on a Claude Code login; one scored run. The API backend (LangChain deepagents) is written but has not been run |
 | UI | In progress (see [TASKS.md](TASKS.md)); `ui/public/run.json` is a real run |
 
 The numbers in this README come from the real case images, not from a fixture.
@@ -234,6 +234,26 @@ kernel, and scores the result against 96 rows of the NIST answer key.
 | Q51 Recycle Bin | 14 | 0 | 0 |
 | Q55 files copied to RM#2 | 17 | 0 | 0 |
 
+**With the AI investigator** (`python3 -m agent.run`, one run, Claude Opus through
+Claude Code, 144 seconds, 25 tool calls):
+
+| | Miner (no LLM) | AI investigator |
+|---|---:|---:|
+| Claims proposed | 100 | 193 |
+| Certified by the kernel | 100 | 191 |
+| Refused by the kernel | 0 | 2 |
+| Answer-key rows stated by a certified finding | 43 / 96 | 48 / 96 |
+| ... of the 48 rows present in the evidence | 43 | 48 |
+
+The investigator was given the case brief and the case's questions, never the answer
+key: it has four tools (`forms`, `sql`, `fact`, `check`) and no access to files or a
+shell. It certified every answer-key row the evidence holds. Both refusals were
+malformed claims (a tag name where an id belongs), not false statements, so this run
+does not yet show the kernel stopping a wrong claim from an LLM. It does show the other
+half: the closing summary ([`runs/agent1/summary.md`](runs/agent1/summary.md)) says
+"not established" for the CD-R link, for how the data left, and for everything in
+question 5, because nothing it could cite would certify. One run only; LLM runs vary.
+
 What the table says: where we extract an artifact, it agrees with NIST to the second.
 Half the reference is still out of reach because four extractors are not written. The
 five searches in evidence but not certified are the ones the miner's watch list does not
@@ -294,11 +314,13 @@ cannot produce yet.
 nothing about facts the reference does not mention. Rules R1 to R10 are assumptions
 about Windows, listed on every certificate, not proved.
 
-**Tests in this repo** (`tests/`, 14 cases, each runs the real kernel): the ten checker
+**Tests in this repo** (`tests/`, 19 cases; most run the real kernel): the ten checker
 and verifier cases on the fixture (golden certificate with no axioms, tagged narrative,
 five kinds of rejection, malformed claims, tampering, DuckDB backend), plus four on the
 real evidence: extraction still matches the answer key, the gate refuses every labeled
-false claim, the miner is deterministic, and a row is only credited when stated.
+false claim, the miner is deterministic, and a row is only credited when stated; and
+five on the investigator's tools (read-only SQL, refusals that name the values that
+disagree, no duplicate logging, exactly four tools offered).
 
 ## Quickstart
 
@@ -321,8 +343,11 @@ python3 -m verifier.verify fixtures/sample_cert/N1.json --facts fixtures/sample_
 # the real case: mine, kernel-check and score against the NIST answer key (about 30 s)
 python3 -m eval.baseline
 
-# score any run file (an agent run, later) with the same scorer
-python3 -m eval.score --run ui/public/run.json
+# the AI investigator, on this machine's Claude Code login; scored the same way
+python3 -m agent.run --name agent1
+
+# score any run file with the same scorer
+python3 -m eval.score --run runs/agent1/run.json
 
 # re-check every certificate of the real run from the evidence file alone
 python3 -m verifier.verify certs/*.json --facts evidence/case_facts.json
@@ -366,7 +391,8 @@ ui/public/run.json             the same run, bundled for the front end
 fixtures/                      synthetic sample facts and certificate, for unit tests
 tests/                         checker, verifier, scorer and miner tests
 scripts/fetch_data.sh          download the case images
-agent/                         not started
+agent/                         the AI investigator: tools, MCP server, brief, runner
+runs/agent1/                   its first scored run: certificates, proposal log, summary
 ```
 
 ## Sources

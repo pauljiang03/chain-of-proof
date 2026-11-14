@@ -1,0 +1,55 @@
+{
+  "finding_id": "A067",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      165
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"external device and forensics\" was made in iexplore (2015-03-23 20:43:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 165,
+      "kind": "webSearch",
+      "t": 1427143427512482,
+      "res": 1,
+      "obj": 89,
+      "obj_text": "external device and forensics",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "2ff73231c34a398361b559f7ef53661111dcac729dfcfefa50a0fde07d1bf46d",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          165
+        ]
+      },
+      "english": "A web search for \"external device and forensics\" was made in iexplore (2015-03-23 20:43:47 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A067.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

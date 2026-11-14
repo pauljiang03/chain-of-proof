@@ -1,0 +1,55 @@
+{
+  "finding_id": "A066",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      164
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"google drive\" was made in chrome (2015-03-23 19:56:04 UTC).",
+  "cited_facts": [
+    {
+      "id": 164,
+      "kind": "webSearch",
+      "t": 1427140564087328,
+      "res": 1,
+      "obj": 99,
+      "obj_text": "google drive",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "a2733023bd2bfead1374dbb9212ae3cc5c929f3f6d40098c6d40657964898010",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=google+drive",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          164
+        ]
+      },
+      "english": "A web search for \"google drive\" was made in chrome (2015-03-23 19:56:04 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A066.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,57 @@
+{
+  "finding_id": "A132",
+  "question": "3. Which files were opened from the CD-R?",
+  "claim": {
+    "opened": [
+      46
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\de\\winter_whether_advisory.zip\\ppt\\slides was opened (2015-03-24 20:44:16 UTC). The record does not name the volume.",
+  "cited_facts": [
+    {
+      "id": 46,
+      "kind": "lnkTarget",
+      "t": 1427229856507227,
+      "res": 1,
+      "obj": 37,
+      "obj_text": "\\de\\winter_whether_advisory.zip\\ppt\\slides",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d86f184179979b58cb5f1742272651307ed1d16a72c62bf4c9382150c15016f5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream f",
+        "destlist_path": "D:\\de\\winter_whether_advisory.zip\\ppt\\slides",
+        "drive_letter": "D:",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume": "not recorded by this jump list entry"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          46
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip\\ppt\\slides was opened (2015-03-24 20:44:16 UTC). The record does not name the volume.",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A132.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

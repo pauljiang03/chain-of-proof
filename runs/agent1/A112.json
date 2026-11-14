@@ -1,0 +1,56 @@
+{
+  "finding_id": "A112",
+  "question": "3. Which files were opened from the company's network drive?",
+  "claim": {
+    "opened": [
+      32
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Secret Project Data\\pricing decision on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:26:53 UTC).",
+  "cited_facts": [
+    {
+      "id": 32,
+      "kind": "lnkTarget",
+      "t": 1427142413924193,
+      "res": 1,
+      "obj": 27,
+      "obj_text": "\\Secret Project Data\\pricing decision",
+      "aux": 26,
+      "aux_text": "\\\\10.11.11.128\\secured_drive",
+      "row_sha256": "baad988a215d820ced438a8a66160d0fcd4ab61f331c2f7b4c1facf394fc8270",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 8",
+        "destlist_path": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          32
+        ]
+      },
+      "english": "\\Secret Project Data\\pricing decision on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:26:53 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A112.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

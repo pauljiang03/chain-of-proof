@@ -1,0 +1,178 @@
+"""What the AI investigator is allowed to do. Three abilities and nothing else:
+
+  sql / fact   look at the extracted records (read-only)
+  forms        see which kinds of statement it may propose
+  check        propose a statement; the Lean kernel accepts or refuses it
+
+The investigator never writes a finding. It names records by id and picks a statement
+form; the sentence shown to a person is generated from the records after the kernel
+accepts. Every proposal, accepted or refused, is logged in the run directory.
+"""
+from __future__ import annotations
+
+import json
+import re
+import sqlite3
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Dict, List, Optional
+
+from checker import check as checker
+from checker import claims
+from checker.facts import Fact, open_source
+
+ROW_LIMIT = 60
+CELL_LIMIT = 240
+STEP_LIMIT = 20_000_000     # stop runaway queries
+
+# One line per statement form: its arguments, and what the generated sentence says.
+FORMS = {
+    "usbConnected":       ("[usbInsert]", "USB device S was connected to this PC (time)."),
+    "deviceHolds":        ("[usbInsert, volumeOnDevice]", "USB device S was connected (time); the seized device with that serial holds volume V. Needs the same device serial in both."),
+    "opened":             ("[lnkTarget]", "Path P on volume/share X was opened (time)."),
+    "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "P was opened (time) from volume V, the volume on seized device S. Needs the same volume serial in both."),
+    "openedFromRecorded": ("[lnkTarget, volumeSeen]", "P was opened (time) from volume V, which this PC recorded under label L. Needs the same volume serial."),
+    "recordedOnDevice":   ("[volumeSeen, volumeOnDevice]", "Volume V, recorded by this PC under label L, is the volume on seized device S. Needs the same volume serial."),
+    "sameLabel":          ("[volumeSeen, volumeSeen]", "HEURISTIC. Two volumes were recorded under the same label, which suggests one physical device. Needs the same label, two different records."),
+    "searched":           ("[webSearch]", 'A web search for "Q" was made in browser B (time).'),
+    "fileCreatedAt":      ("[fileCreated]", "P was created on volume V (time)."),
+    "fileModifiedAt":     ("[fileModified]", "P was last modified on volume V (time)."),
+    "copiedHere":         ("[fileCreated, fileModified]", "HEURISTIC. P was likely copied onto volume V: created there after its last modification. Needs the same path and volume, and modified before created."),
+    "deletedAfter":       ("[fileDeleted, any record]", "P was deleted (time) after the other event."),
+    "before":             ("[any record, any record]", "The first event happened before the second, by more than both timestamps' uncertainty."),
+    "tagged":             ('[record, "obj" or "aux", tag record, tag record\'s aux_id]', "The entity in that slot of the record carries this tag. Take aux_id from `fact <tag id>`."),
+    "usbMountedAs":       ("[usbInsert, volumeMount]", "USB device S was connected and mounted as volume V. (No volumeMount records exist in this case.)"),
+    "openedFromMount":    ("[lnkTarget, volumeMount]", "P was opened from the volume a mount record names. (No volumeMount records exist in this case.)"),
+}
+
+
+def _utc(t: int) -> str:
+    dt = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=t)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _read_only(action, *_):
+    allowed = (sqlite3.SQLITE_SELECT, sqlite3.SQLITE_READ, sqlite3.SQLITE_FUNCTION,
+               sqlite3.SQLITE_RECURSIVE)
+    return sqlite3.SQLITE_OK if action in allowed else sqlite3.SQLITE_DENY
+
+
+class Workbench:
+    def __init__(self, facts_path, run_dir, proposer: str = "agent"):
+        self.source = open_source(facts_path)
+        self.run_dir = Path(run_dir)
+        self.proposer = proposer
+        self._db = self._load()
+
+    # ---- looking at records -------------------------------------------------------
+
+    def _load(self) -> sqlite3.Connection:
+        db = sqlite3.connect(":memory:")
+        db.execute("CREATE TABLE facts (id INTEGER PRIMARY KEY, kind TEXT, time_utc TEXT, "
+                   "t_us INTEGER, uncertainty_us INTEGER, obj TEXT, aux TEXT, exhibit TEXT, "
+                   "artifact TEXT, detail TEXT)")
+        for f in self.source.all():
+            prov = {k: v for k, v in f.prov.items() if k not in ("image", "tool")}
+            exhibit, artifact = prov.pop("exhibit", ""), prov.pop("artifact", "")
+            db.execute("INSERT INTO facts VALUES (?,?,?,?,?,?,?,?,?,?)",
+                       (f.id, f.kind, _utc(f.t), f.t, f.res, self.source.string(f.obj),
+                        self.source.string(f.aux), exhibit, artifact,
+                        json.dumps(prov, sort_keys=True, ensure_ascii=False)))
+        db.commit()
+        db.set_authorizer(_read_only)
+        steps = {"n": 0}
+
+        def tick():
+            steps["n"] += 1
+            return 1 if steps["n"] * 10_000 > STEP_LIMIT else 0
+        db.set_progress_handler(tick, 10_000)
+        self._steps = steps
+        return db
+
+    def sql(self, query: str) -> dict:
+        """Run one read-only SELECT over the `facts` table."""
+        self._steps["n"] = 0
+        try:
+            cur = self._db.execute(query)
+            cols = [c[0] for c in cur.description or []]
+            rows = cur.fetchmany(ROW_LIMIT + 1)
+        except (sqlite3.Error, sqlite3.Warning) as e:   # Warning: more than one statement
+            return {"error": str(e), "hint": "one SELECT over table facts(id, kind, time_utc, "
+                    "t_us, uncertainty_us, obj, aux, exhibit, artifact, detail)"}
+        clip = lambda v: v[:CELL_LIMIT] + "…" if isinstance(v, str) and len(v) > CELL_LIMIT else v
+        out = {"columns": cols, "rows": [[clip(v) for v in r] for r in rows[:ROW_LIMIT]]}
+        if len(rows) > ROW_LIMIT:
+            out["truncated"] = f"more than {ROW_LIMIT} rows; narrow the query"
+        return out
+
+    def fact(self, fact_id: int) -> dict:
+        found = self.source.get([fact_id])
+        if fact_id not in found:
+            return {"error": f"no record with id {fact_id}"}
+        f = found[fact_id]
+        return {"id": f.id, "kind": f.kind, "time_utc": _utc(f.t), "t_us": f.t,
+                "uncertainty_us": f.res, "obj": self.source.string(f.obj), "obj_id": f.obj,
+                "aux": self.source.string(f.aux), "aux_id": f.aux, "provenance": f.prov}
+
+    def forms(self) -> dict:
+        return {"how": 'A claim is {"form": [record ids...]}. Join several with '
+                       '{"both": [claim, claim, ...]}: every part must hold.',
+                "forms": {name: {"arguments": args, "says": says,
+                                 "strength": claims.SETS[name].strength}
+                          for name, (args, says) in FORMS.items()}}
+
+    # ---- proposing ----------------------------------------------------------------
+
+    def _log(self) -> List[dict]:
+        path = self.run_dir / "proposals.jsonl"
+        if not path.is_file():
+            return []
+        return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+    def check(self, question: str, claim) -> dict:
+        """Propose a claim. Returns the kernel's verdict, with the reason if refused."""
+        if isinstance(claim, str):
+            try:
+                claim = json.loads(claim)
+            except json.JSONDecodeError as e:
+                return {"status": "rejected", "reason": f"claim is not valid JSON: {e}"}
+        log = self._log()
+        key = json.dumps(claim, sort_keys=True)
+        for earlier in log:
+            if json.dumps(earlier.get("claim"), sort_keys=True) == key:
+                return dict(self._brief(earlier), note=f"already proposed as {earlier['finding_id']}")
+        result = checker.check(claim, f"A{len(log) + 1:03d}", self.source, question,
+                               self.run_dir, proposer=self.proposer)
+        return self._brief(result)
+
+    def _brief(self, r: dict) -> dict:
+        if r["status"] == "verified":
+            return {"status": "verified", "finding_id": r["finding_id"], "strength": r["strength"],
+                    "rules": r["rules"], "sentence": r["english"]}
+        out = {"status": "rejected", "finding_id": r["finding_id"], "reason": r.get("reason", "")}
+        failing = [b for p in r.get("parts", []) for b in p["bricks"] if b.startswith("FAIL")]
+        if failing:
+            out["failing_checks"] = [self._why(b) for b in failing]
+        return out
+
+    def _why(self, brick: str) -> str:
+        """Spell out a failing check with the values involved (for feedback only)."""
+        ids = [int(n) for n in re.findall(r"\b\d+\b", brick)]
+        slots = re.findall(r"\b(obj|aux)\b", brick)
+        got: Dict[int, Fact] = self.source.get(ids)
+        name = brick.split()[1] if len(brick.split()) > 1 else ""
+        s = self.source.string
+        try:
+            if name == "link" and len(ids) >= 2 and len(slots) >= 2:
+                a, b = got[ids[0]], got[ids[1]]
+                return (f"{brick}: record {a.id} {slots[0]} is {s(getattr(a, slots[0]))!r} but "
+                        f"record {b.id} {slots[1]} is {s(getattr(b, slots[1]))!r}")
+            if name == "before" and len(ids) >= 2:
+                a, b = got[ids[0]], got[ids[1]]
+                return (f"{brick}: record {a.id} is at {_utc(a.t)} and record {b.id} at "
+                        f"{_utc(b.t)}; the first is not earlier by more than the uncertainty")
+            if name == "is" and ids:
+                return f"{brick}: record {ids[0]} is of kind {got[ids[0]].kind}"
+        except (KeyError, IndexError):
+            pass
+        return brick

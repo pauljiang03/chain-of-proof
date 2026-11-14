@@ -1,0 +1,55 @@
+{
+  "finding_id": "A021",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      119
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"Emmy Noether\" was made in chrome (2015-03-23 17:27:05 UTC).",
+  "cited_facts": [
+    {
+      "id": 119,
+      "kind": "webSearch",
+      "t": 1427131625838400,
+      "res": 1,
+      "obj": 73,
+      "obj_text": "Emmy Noether",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "f416419d1a1cdfe5ed57e2d6ebbdde349100afbb7c9933ea89650a6f7d4d0099",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#q=Emmy+Noether&oi=ddle&ct=emmy-noethers-133rd-birthday-5681045017985024-hp&hl=en",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          119
+        ]
+      },
+      "english": "A web search for \"Emmy Noether\" was made in chrome (2015-03-23 17:27:05 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A021.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,76 @@
+{
+  "finding_id": "A011",
+  "question": "1. Which external storage devices were attached to the PC, and when?",
+  "claim": {
+    "tagged": [
+      1,
+      "obj",
+      198,
+      115
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 1,
+      "kind": "usbInsert",
+      "t": 1427135470593000,
+      "res": 1000,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "b7fa4f0cc38b0f86c6cb68eabcc5c034e560803b816e91a85da49117f1659d7b",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 55402",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 198,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 115,
+      "aux_text": "authorized-device",
+      "row_sha256": "f2a0cdcf87e4216573dff3f2a1f4e597ed1d76bb4d7acb0a8ba54298a0a1d6f9",
+      "prov": {
+        "rule": "device serial is on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          1,
+          "obj",
+          198,
+          115
+        ]
+      },
+      "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A011.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

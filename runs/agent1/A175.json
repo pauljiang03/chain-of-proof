@@ -1,0 +1,76 @@
+{
+  "finding_id": "A175",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      147,
+      30
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"cd burning method\" (2015-03-23 18:13:20 UTC) happened before the opening of \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt on volume 5C754D3E (2015-03-23 18:38:23 UTC): the gap of 1502.55 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 147,
+      "kind": "webSearch",
+      "t": 1427134400892344,
+      "res": 1,
+      "obj": 87,
+      "obj_text": "cd burning method",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "af4c5e0a88b93c16ae1916609b01e2eea3e1e217dd0adff12e316df9971cc66f",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 30,
+      "kind": "lnkTarget",
+      "t": 1427135903445366,
+      "res": 1,
+      "obj": 22,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "e8a90f34e6686cce6994a8da96db0957788614d1d4f74b4ef5e2f6d830e06954",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\[secret_project]_design_concept.LNK",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135903414165,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          147,
+          30
+        ]
+      },
+      "english": "The web search \"cd burning method\" (2015-03-23 18:13:20 UTC) happened before the opening of \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt on volume 5C754D3E (2015-03-23 18:38:23 UTC): the gap of 1502.55 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A175.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

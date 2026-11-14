@@ -1,0 +1,55 @@
+{
+  "finding_id": "A086",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      184
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"business news\" was made in iexplore (2015-03-23 20:55:54 UTC).",
+  "cited_facts": [
+    {
+      "id": 184,
+      "kind": "webSearch",
+      "t": 1427144154827650,
+      "res": 1,
+      "obj": 107,
+      "obj_text": "business news",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "faf384637ef381b1683c293068ccf2f9b56eefa2df8412e7184570ee8a4303fd",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          184
+        ]
+      },
+      "english": "A web search for \"business news\" was made in iexplore (2015-03-23 20:55:54 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A086.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

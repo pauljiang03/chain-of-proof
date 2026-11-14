@@ -1,0 +1,76 @@
+{
+  "finding_id": "A158",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "tagged": [
+      145,
+      "obj",
+      232,
+      117
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
+  "cited_facts": [
+    {
+      "id": 145,
+      "kind": "webSearch",
+      "t": 1427134310582693,
+      "res": 1,
+      "obj": 85,
+      "obj_text": "investigation on windows machine",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "7eb59833d8dd479075fd9f9b4a59431d44dfc42f2e3073d414505b971113d0c2",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 232,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 85,
+      "obj_text": "investigation on windows machine",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "b95f3b746a7680c9f31ef32a35c9e0654171b6788985a29c813bee30abe2ca59",
+      "prov": {
+        "rule": "search term contains the watch-list word \"investigat\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          145,
+          "obj",
+          232,
+          117
+        ]
+      },
+      "english": "investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A158.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

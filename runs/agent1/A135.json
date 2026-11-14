@@ -1,0 +1,58 @@
+{
+  "finding_id": "A135",
+  "question": "3. Which files were opened from the CD-R?",
+  "claim": {
+    "opened": [
+      49
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\ on volume A58AD72A was opened (2015-03-24 20:47:30 UTC).",
+  "cited_facts": [
+    {
+      "id": 49,
+      "kind": "lnkTarget",
+      "t": 1427230050485174,
+      "res": 1,
+      "obj": 23,
+      "obj_text": "\\",
+      "aux": 39,
+      "aux_text": "A58AD72A",
+      "row_sha256": "456fa3b0223c82162d71e4b37eec41f76501b705688fc6690bf0af2327782599",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427230042034159,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          49
+        ]
+      },
+      "english": "\\ on volume A58AD72A was opened (2015-03-24 20:47:30 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A135.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

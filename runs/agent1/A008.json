@@ -1,0 +1,79 @@
+{
+  "finding_id": "A008",
+  "question": "1. Which external storage devices were attached to the PC, and when?",
+  "claim": {
+    "recordedOnDevice": [
+      238,
+      242
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "Volume B4D85399, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC), is the volume on seized device 4C530012550531106501.",
+  "cited_facts": [
+    {
+      "id": 238,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "IAMAN $_@",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "e8bb7604d4170668f9edbcc09e2e1dd387c92b238d87ef5d4a8e2e917f41a319",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 242,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "c395aad376b19988abd9eab210a2826f6d1891ff1a994775de4639813a57ec68",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 65536",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E221034C",
+        "exhibit": "RM#2",
+        "filesystem": "fat",
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "IAMAN $_@"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "recordedOnDevice": [
+          238,
+          242
+        ]
+      },
+      "english": "Volume B4D85399, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC), is the volume on seized device 4C530012550531106501.",
+      "rules": [
+        "R6",
+        "R7"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R6",
+    "R7"
+  ],
+  "strength": "strong",
+  "lean_file": "A008.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

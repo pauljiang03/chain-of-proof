@@ -1,0 +1,75 @@
+{
+  "finding_id": "A184",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      41,
+      85
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The opening of \\Secret Project Data\\design\\winter_whether_advisory.zip on volume 9E6A5B82 (2015-03-24 14:01:23 UTC) happened before the creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC): the gap of 17237.3 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 41,
+      "kind": "lnkTarget",
+      "t": 1427205683393024,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "319140a409af9fc7f4c53d06c1c23cc845ac9837aa17f378f477f3b85409b86a",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+        "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN $_@"
+      }
+    },
+    {
+      "id": 85,
+      "kind": "fileCreated",
+      "t": 1427222920734358,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "910e48c10b9af6a63835b13598dd8c60420fa0ff953d8ffdab0d258a1f54af1d",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 11893,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          41,
+          85
+        ]
+      },
+      "english": "The opening of \\Secret Project Data\\design\\winter_whether_advisory.zip on volume 9E6A5B82 (2015-03-24 14:01:23 UTC) happened before the creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC): the gap of 17237.3 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A184.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}
