@@ -1,0 +1,21 @@
+# Lean build output
+.lake/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Evidence images and derived databases (large; fetch with scripts/fetch_data.sh)
+data/
+*.E0[0-9]
+*.7z
+*.7z.[0-9]*
+*.dd
+*.duckdb
+*.duckdb.wal
+
+# Event handbook (not ours to redistribute)
+F26 Onsite Hacker Packet.pdf
+
+.DS_Store
