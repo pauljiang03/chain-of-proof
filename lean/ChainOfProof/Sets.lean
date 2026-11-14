@@ -88,10 +88,6 @@ def contentHashed (x : Nat) : Claim := .is x .fileContent
 def sameContent (a b : Nat) : Claim :=
   .both (.is a .fileContent) (.both (.is b .fileContent) (.link a .aux b .aux))
 
-/-- R10+R28 (strong): file record `c` and content record `h` name the same path. -/
-def contentOf (c h : Nat) : Claim :=
-  .both (.is c .fileCreated) (.both (.is h .fileContent) (.link c .obj h .obj))
-
 /-- The entity in slot `s` of fact `f` carries tag `tagId`, by tag fact `g`. -/
 def tagged (f : Nat) (s : Slot) (g tagId : Nat) : Claim :=
   .both (.is g .tag) (.both (.val g .aux tagId) (.link g .obj f s))

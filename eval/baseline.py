@@ -28,6 +28,8 @@ def main(argv=None) -> int:
     ap.add_argument("--facts", default="evidence/case_facts.json")
     ap.add_argument("--certs", default="certs")
     ap.add_argument("--run", default="ui/public/run.json")
+    ap.add_argument("--reference", help="answer key to score against (default: the open-book 10 questions)")
+    ap.add_argument("--out", default="eval/results.json")
     args = ap.parse_args(argv)
     certs = Path(args.certs)
     if certs.exists():
@@ -37,7 +39,7 @@ def main(argv=None) -> int:
     print(f"miner: {len(mined)} candidates, "
           f"{sum(r['status'] == 'verified' for r in mined)} certified")
 
-    reference = json.loads(scorer.REFERENCE.read_text())
+    reference = json.loads(Path(args.reference or scorer.REFERENCE).read_text())
     labeled = json.loads(scorer.LABELED.read_text())
     labeled["claims"] = [c for c in labeled["claims"] if not c["label"]]
     for c in labeled["claims"]:
@@ -52,7 +54,8 @@ def main(argv=None) -> int:
     data = export.bundle(certs, "NIST CFReDS Data Leakage Case")
     run.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     print(f"{run}: {len(data['findings'])} findings, {len(data['rejections'])} rejections\n")
-    return scorer.main(["--facts", args.facts, "--run", str(run)])
+    extra = ["--reference", args.reference] if args.reference else []
+    return scorer.main(["--facts", args.facts, "--run", str(run), "--out", args.out] + extra)
 
 
 if __name__ == "__main__":

@@ -48,16 +48,44 @@ Times are UTC; the PC ran on New York time (UTC-4 on these dates).
                   (its time is when the image was examined, not an event)
   tag             obj = the entity tagged, aux = tag name   (time = when it was tagged)
                   Tags are computed by fixed rules; `fact <id>` shows the rule.
+  systemSetting   obj = setting name (computer name, operating system, time zone, ...),
+                  aux = its value
+  accountSeen     obj = account name or address, aux = what it is an account of
+  sessionEvent    obj = logon / logoff / startup / shutdown / time change, aux = account
+  programInstalled  obj = program name, aux = version
+  programRun      obj = executable name, aux = path     a recorded run (`detail` says
+                  which artifact, and whether the time is a run time)
+  webVisit        obj = URL, aux = browser
+  fileDownloaded  obj = saved path, aux = source URL
+  localSearch     obj = text typed, aux = where it was typed
+  cloudFile       obj = file in the cloud folder, aux = "<service>: <event>"
+  noteText        obj = the note's text, aux = application
+  folderOpened    obj = folder path, aux = the artifact that recorded it
+  fileRenamed     obj = old name, aux = new name
+  fileSeen        obj = file path, aux = the secondary artifact that names it (search
+                  index, thumbnail cache, shadow copy, recent list, print job, ...)
+  shadowCopy      obj = shadow copy id, aux = volume
+  fileContent     obj = file path, aux = sha256 of the bytes read (exhibit in `detail`;
+                  equal hashes mean identical content)
+Some kinds hold hundreds of rows. Use GROUP BY, LIKE and time windows; `detail` (JSON)
+names the artifact each row came from.
 
 QUESTIONS
- 1. Which external storage devices were attached to the PC, and when?
- 2. List the web searches made on this PC (keywords and times).
- 3. Which files were opened from RM#1? From RM#2? From the company's network drive?
-    From the CD-R?
- 4. When was the resignation letter on the Desktop created and last modified?
- 5. Which files were copied to RM#2? What was deleted? What e-mails were exchanged?
-    When was the CD burned?
- 6. The story: in what order did the key events happen, and how did confidential data
+ 1. The machine and its users: what system is it, which accounts exist, who used it and
+    when?
+ 2. External storage: which devices were attached, when, and what does each hold now?
+ 3. Programs: what was installed or run in the period that could move data out or
+    remove traces?
+ 4. The web: what was searched for, visited and downloaded?
+ 5. E-mail and cloud storage: which messages were exchanged, which accounts and file
+    events did a cloud client record?
+ 6. Files: which confidential files were opened and from where (network drive, each
+    device, the disc)? What was created, copied, renamed or deleted on each device,
+    including records recovered from formatted media? Which copies have identical
+    content?
+ 7. The disc: what is on it, and when was it written?
+ 8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?
+ 9. The story: in what order did the key events happen, and how did confidential data
     leave the company?
 
 """
@@ -73,24 +101,37 @@ A refusal is information. Read which check failed, look at the records again, th
 the claim or drop it. Never re-propose a refused claim unchanged, and never describe a
 refused claim as a finding.
 
-YOUR TOOLS (these four are all you have)
+YOUR TOOLS (these five are all you have)
   forms                      the statement forms you may propose, with their arguments
   sql(query)                 one read-only SELECT over the records table
   fact(id)                   one record in full, with where it came from
   check(question, claims)    propose claims; each is certified or refused
+  conclude(text, finding_ids)   record a conclusion you draw from certified findings
 
 """ + RECORDS + """\
 HOW TO WORK
-Start with `forms`, then look around with `sql`. For each question, certify every
-specific finding the records support: each device, each search, each opened file. Where
-the records allow it, tie a file to a physical device with a chain of claims joined by
-"both". Use `before` for the order claims your story depends on. Put several claims
-in one `check` call when they answer the same question.
+Start with `forms`, then look around with `sql`. For each question, certify the
+specific findings that matter to it: each device, each search, each opened file, each
+program used to move or remove data. You do not need to restate every row of a long
+list; pick what an investigator needs, and join related records in one claim with
+"both" (up to 64 parts). Where the records allow it, tie a file to a physical device
+with a chain of claims. Use `before` for the order claims your story depends on, and
+the `exactly...` forms where a count matters ("exactly two USB devices"). Put several
+claims in one `check` call when they answer the same question.
+
+CONCLUSIONS
+Some things the checker can never certify: intent, cause, what a pattern means, how the
+data left. State those with `conclude`, citing the certified findings they rest on. A
+conclusion is shown to the reader as your judgment, never as a finding, so say what you
+infer and how sure you are. It may not carry any date, time, number or name that is not
+in the findings it cites (write times as the findings do, in UTC). If the records leave
+a question open, say that in a conclusion too. Do not conclude what the records
+contradict: check first.
 
 WHEN YOU ARE DONE
 Reply with a short summary. For each question, give the ids of the certified findings
-that answer it, and say plainly what could not be established and why. Quote only
-sentences the checker returned.
+and conclusions that answer it, and say plainly what could not be established and why.
+Quote only sentences the checker returned.
 """
 
 REPORT_BRIEF = CASE + """\

@@ -37,6 +37,18 @@ TOOLS = [
                      "required": ["question", "claims"]}},
 ]
 
+CONCLUDE_TOOL = {
+    "name": "conclude",
+    "description": "Record one conclusion you draw from certified findings: an inference "
+                   "the checker cannot prove (intent, cause, what a pattern means). It is "
+                   "shown as your judgment, never as a finding. Every date, time, number "
+                   "and name in it must appear in the findings you cite.",
+    "inputSchema": {"type": "object",
+                    "properties": {"text": {"type": "string"},
+                                   "finding_ids": {"type": "array", "minItems": 1,
+                                                   "items": {"type": "string"}}},
+                    "required": ["text", "finding_ids"]}}
+
 VERDICTS = ("certified", "weaker", "refused", "no_records", "cannot_express")
 RECORD_TOOL = {
     "name": "record",
@@ -51,7 +63,7 @@ RECORD_TOOL = {
 
 def tools_for(names) -> list:
     """The tools a session is given. COP_TOOLS picks them; the default is the four."""
-    by_name = {t["name"]: t for t in TOOLS + [RECORD_TOOL]}
+    by_name = {t["name"]: t for t in TOOLS + [RECORD_TOOL, CONCLUDE_TOOL]}
     return [by_name[n] for n in names]
 
 
@@ -71,6 +83,9 @@ def record(bench: Workbench, args: dict) -> str:
 def call(bench: Workbench, name: str, args: dict) -> str:
     if name == "record":
         return record(bench, args)
+    if name == "conclude":
+        return json.dumps(bench.conclude(args.get("text", ""), args.get("finding_ids")),
+                          ensure_ascii=False)
     if name == "forms":
         return json.dumps(bench.forms(), indent=1, ensure_ascii=False)
     if name == "sql":

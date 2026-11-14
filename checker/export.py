@@ -10,7 +10,11 @@ The front end reads only this file. Shape:
       "stats": {"proposals", "verified", "rejected", "by_strength": {...}, "by_rule": {...}},
       "findings":   [certificate, ...],      # verified, each with "lean" source attached
       "rejections": [rejected proposal, ...] # with the failing bricks named
+      "conclusions": [{conclusion_id, text, finding_ids, strength: "judgment", note}, ...]
     }
+
+Conclusions are the investigator's own inferences. They are not checked by the kernel
+and must never be shown as findings: see agent/conclusions.py.
 
 A certificate is exactly what check() returns for a verified claim; see
 fixtures/sample_cert/N1.json. Nothing here is recomputed or reworded.
@@ -40,6 +44,10 @@ def bundle(certs_dir: Path, case_name: str) -> dict:
     if log.is_file():
         proposals = [json.loads(line) for line in log.read_text().splitlines() if line.strip()]
     rejections = [p for p in proposals if p.get("status") == "rejected"]
+    conclusions = []
+    notes = certs_dir / "conclusions.jsonl"
+    if notes.is_file():
+        conclusions = [json.loads(line) for line in notes.read_text().splitlines() if line.strip()]
     return {
         "version": 1,
         "case": {"name": case_name,
@@ -53,6 +61,8 @@ def bundle(certs_dir: Path, case_name: str) -> dict:
         },
         "findings": findings,
         "rejections": rejections,
+        # the investigator's judgment: NOT checked by the kernel, each cites certified findings
+        "conclusions": conclusions,
     }
 
 

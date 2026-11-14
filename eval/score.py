@@ -303,8 +303,8 @@ def report(results: dict) -> str:
     return "\n".join(L)
 
 
-def score(facts_path: Path, run_path: Optional[Path]) -> dict:
-    reference = json.loads(REFERENCE.read_text())
+def score(facts_path: Path, run_path: Optional[Path], reference_path: Optional[Path] = None) -> dict:
+    reference = json.loads(Path(reference_path or REFERENCE).read_text())
     labeled = json.loads(LABELED.read_text())
     source = open_source(facts_path)
     rows = rows_of(source)
@@ -326,8 +326,10 @@ def main(argv=None) -> int:
     ap.add_argument("--facts", default="evidence/case_facts.json")
     ap.add_argument("--run", help="a run.json to score (optional)")
     ap.add_argument("--out", default="eval/results.json")
+    ap.add_argument("--reference", help="answer key (default eval/reference.json, the 10 "
+                    "open-book questions; eval/reference_full.json is all 57)")
     args = ap.parse_args(argv)
-    results = score(Path(args.facts), Path(args.run) if args.run else None)
+    results = score(Path(args.facts), Path(args.run) if args.run else None, args.reference)
     Path(args.out).write_text(json.dumps(results, indent=1, ensure_ascii=False) + "\n")
     print(report(results))
     gate_ok = all(g["as_expected"] or g["id"] in KNOWN_MISSES for g in results["gate"])

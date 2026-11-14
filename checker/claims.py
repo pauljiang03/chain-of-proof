@@ -345,21 +345,34 @@ def _en_shadow(args, facts, src):
             f"({_utc(f.t)}).")
 
 
+def _on(f: Fact) -> str:
+    """Where a content record was read from, taken from the record's own provenance."""
+    exhibit = f.prov.get("exhibit")
+    return f" on exhibit {exhibit}" if exhibit else ""
+
+
+def _read_how(f: Fact) -> str:
+    """How the bytes were read, when the record says it was not an ordinary file read
+    (a recovered entry, a derived layout). Such bytes may not be the file's own."""
+    how, layout = f.prov.get("read_as"), f.prov.get("layout")
+    if not how and not layout:
+        return ""
+    text = " The bytes were read as " + str(how or "one run") + (f" ({layout} layout)" if layout else "") + "."
+    if layout or str(f.prov.get("recovered")) == "True":
+        text += " If that space was reused since, they are not the file's original content."
+    return text
+
+
 def _en_content(args, facts, src):
     f = facts[args[0]]
-    return f"The content of {src.string(f.obj)}, read from the image, has {src.string(f.aux)}."
+    return (f"The content of {src.string(f.obj)}{_on(f)}, read from the image, has "
+            f"{src.string(f.aux)}.{_read_how(f)}")
 
 
 def _en_same_content(args, facts, src):
     a, b = facts[args[0]], facts[args[1]]
-    return (f"{src.string(a.obj)} and {src.string(b.obj)} have identical content: both read "
-            f"as {src.string(a.aux)}.")
-
-
-def _en_content_of(args, facts, src):
-    c, h = facts[args[0]], facts[args[1]]
-    return (f"{_file_time(c, src, 'created')} The content read for that path has "
-            f"{src.string(h.aux)}.")
+    return (f"{src.string(a.obj)}{_on(a)} and {src.string(b.obj)}{_on(b)} have identical "
+            f"content: both read as {src.string(a.aux)}.")
 
 
 # ---- Census: statements about all the records of one kind ----------------------------
@@ -523,8 +536,6 @@ SETS: Dict[str, SetDef] = {
     "contentHashed": SetDef(("fact",), "Sets.contentHashed", ("R28",), "strong", _en_content),
     "sameContent": SetDef(("fact", "fact"), "Sets.sameContent", ("R28",), "strong",
                           _en_same_content),
-    "contentOf": SetDef(("fact", "fact"), "Sets.contentOf", ("R10", "R28"), "strong",
-                        _en_content_of),
     # census forms: Lean type `Census`, checked by `counts` against every fact of the kind
     "exactly": SetDef(("kind", "count"), ".total", ("C1",), "strong", _en_total),
     "exactlyDistinct": SetDef(("kind", "slot", "count"), ".distinct", ("C1",), "strong",

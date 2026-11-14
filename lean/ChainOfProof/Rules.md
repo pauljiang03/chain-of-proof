@@ -67,7 +67,6 @@ approves the template, because that is where the meaning lives.
 | `before a b` | none | Strong | {event a} happened before {event b}: the gap of {Δ} exceeds the combined timestamp uncertainty of {r}. |
 | `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds, e.g. "A record shows {exe} ran ({time}, path {path})." |
 | `sameContent a b` | R28 | Strong | {path a} and {path b} have identical content: both read as {hash}. |
-| `contentOf c h` | R10, R28 | Strong | {path} was created on {volume} ({time}). The content read for that path has {hash}. |
 | `exactly kind n` | C1 | Strong | The evidence holds exactly {n} {kind} records: {each one}. This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted. |
 | `exactlyDistinct kind slot n` | C1 | Strong | The {N} {kind} records in the evidence name exactly {n} different {field}s: {values}. (Same closing note.) |
 | `exactlyWith kind slot v n` | C1 | Strong | Of the {N} {kind} records in the evidence, exactly {n} have {field} {v} ("none has" when n is 0). (Same closing note.) |

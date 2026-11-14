@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 from checker import check as checker
+from checker import claims
 from checker.facts import Fact, FactSource, open_source
 
 Q_DEVICES = "Which USB devices were connected to this PC, and what do they hold?"
@@ -31,6 +32,34 @@ Q_EMAIL = "Which e-mails does the user's mailbox hold?"
 Q_BURN = "What traces of disc burning are there?"
 Q_SAME = "Which files in different places have the same size and last-modified time?"
 SAME = "same size and last-modified time as a file elsewhere"
+Q_CONTENT = "Which files in different places have identical content?"
+Q_COUNT = "How many records of each kind does the evidence hold?"
+
+# kind -> (form that states one record, question). Every record of these kinds is stated,
+# in batches: the miner does not choose which ones matter.
+ONE_RECORD = (
+    ("systemSetting", "settingRecorded", "How is the system set up?"),
+    ("accountSeen", "accountRecorded", "Which accounts are recorded?"),
+    ("sessionEvent", "sessionRecorded", "When was the system started, shut down, logged on to and off?"),
+    ("programInstalled", "programInstalledAt", "Which programs were installed?"),
+    ("programRun", "programRan", "Which programs were run?"),
+    ("webVisit", "visited", "Which web pages were visited?"),
+    ("fileDownloaded", "downloaded", "Which files were downloaded?"),
+    ("localSearch", "typedInSearchBox", "What was typed into the system's search box?"),
+    ("cloudFile", "cloudEvent", "What did the cloud storage client record?"),
+    ("noteText", "noteFound", "Which notes were kept?"),
+    ("folderOpened", "folderRecorded", "Which folders were opened?"),
+    ("fileRenamed", "renamed", "Which files were renamed?"),
+    ("fileSeen", "fileRecorded", "Which files do secondary records name?"),
+    ("shadowCopy", "shadowCopyMade", "Which shadow copies exist?"),
+    ("fileContent", "contentHashed", "What content do the files have?"),
+)
+BATCH = 40                 # one-record statements per finding
+RESTATE_UP_TO = 2000       # a kind with more records than this is not restated one by one:
+                           # the records stay in the evidence for queries and for the agent
+COUNTED = ("usbInsert", "volumeOnDevice", "fileDeleted", "emailSent", "cdBurn", "accountSeen",
+           "programInstalled", "fileDownloaded", "localSearch", "cloudFile", "noteText",
+           "shadowCopy")
 
 
 def precedes(x: Fact, y: Fact) -> bool:
@@ -160,6 +189,31 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
         out.append((Q_EMAIL, _both([{"emailed": [e.id]}] + tagged(e, "obj"))))
     for b in by_kind["cdBurn"]:
         out.append((Q_BURN, {"burnTrace": [b.id]}))
+
+    for kind, form, question in ONE_RECORD:
+        rows = sorted(by_kind[kind], key=lambda f: (f.t, f.id))
+        if len(rows) > RESTATE_UP_TO:
+            continue
+        for i in range(0, len(rows), BATCH):
+            out.append((question, _both([{form: [f.id]} for f in rows[i:i + BATCH]])))
+
+    # files whose content hash is the same in more than one place: one finding per hash
+    same_hash = defaultdict(list)
+    for h in by_kind["fileContent"]:
+        same_hash[h.aux].append(h)
+    for digest in sorted(same_hash):
+        group = sorted(same_hash[digest], key=lambda f: f.id)
+        places = {(f.prov.get("exhibit"), f.obj) for f in group}
+        if len(places) > 1 and len(group) <= 12:
+            out.append((Q_CONTENT, _both([{"sameContent": [a.id, b.id]}
+                                          for a, b in zip(group, group[1:])])))
+
+    for kind in COUNTED:
+        n = len(by_kind[kind])
+        if 0 < n <= claims.MAX_CENSUS:
+            out.append((Q_COUNT, {"exactly": [kind, n]}))
+    if usbs:
+        out.append((Q_COUNT, {"exactlyDistinct": ["usbInsert", "obj", len({u.obj for u in usbs})]}))
     return out
 
 

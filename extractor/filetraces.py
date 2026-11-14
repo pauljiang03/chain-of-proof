@@ -1,0 +1,1203 @@
+"""What the PC remembers about folders and files, apart from the files themselves.
+
+    folderOpened  shell bags of every user hive, typed paths, Run dialog paths, network
+                  drive lists, mount points, Office recent places, open/save dialog folders
+    fileSeen      desktop search index, thumbnail caches, recent-document lists, Office
+                  and other per-application recent-file lists, print spool traces, files
+                  that a shadow copy still holds but the live volume does not
+    shadowCopy    every volume shadow copy
+    fileRenamed   every rename in the NTFS change journal
+
+Every row is read from bytes of the image. Parsing helpers at the top are pure Python
+(no dissect), so they can be tested on synthetic bytes; dissect is imported lazily.
+"""
+from __future__ import annotations
+
+import re
+import struct
+import uuid
+from datetime import datetime, timedelta, timezone
+
+from .store import us, us_from_filetime, us_from_unix
+
+# --------------------------------------------------------------------------- pure helpers
+
+PATH_LIKE = re.compile(r"^(?:[A-Za-z]:\\|\\\\[^\\])")
+OFFICE_MRU = re.compile(r"^\[F([0-9A-Fa-f]+)\]\[T([0-9A-Fa-f]+)\](?:\[O[0-9A-Fa-f]+\])?\*(.*)$", re.S)
+EPOCH = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+# Shell namespace identifiers documented by Microsoft (CLSIDs and KNOWNFOLDERIDs).
+KNOWN_GUIDS = {
+    "20d04fe0-3aea-1069-a2d8-08002b30309d": "My Computer",
+    "208d2c60-3aea-1069-a2d7-08002b30309d": "Network",
+    "f02c1a0d-be21-4350-88b0-7367fc96ef3c": "Network",
+    "031e4825-7b94-4dc3-b131-e946b44c8dd5": "Libraries",
+    "26ee0668-a00a-44d7-9371-beb064c98683": "Control Panel",
+    "21ec2020-3aea-1069-a2dd-08002b30309d": "Control Panel",
+    "645ff040-5081-101b-9f08-00aa002f954e": "Recycle Bin",
+    "450d8fba-ad25-11d0-98a8-0800361b1103": "My Documents",
+    "374de290-123f-4565-9164-39c4925e467b": "Downloads",
+    "b4bfcc3a-db2c-424c-b029-7fe99a87c641": "Desktop",
+    "fdd39ad0-238f-46af-adb4-6c85480369c7": "Documents",
+    "33e28130-4e1e-4676-835a-98395c3bc3bb": "Pictures",
+    "4bd8d571-6d19-48d3-be97-422220080e43": "Music",
+    "18989b1d-99b5-455b-841c-ab7c74e4ddfc": "Videos",
+    "7b0db17d-9cd2-4a93-9733-46cc89022e7c": "Documents",
+    "a990ae9f-a03b-4e80-94bc-9912d7504104": "Pictures",
+    "2112ab0a-c86a-4ffe-a368-0de96e47012e": "Music",
+    "491e922f-5643-4af4-a7eb-4e7a138d8174": "Videos",
+    "59031a47-3f72-44a7-89c5-5595fe6b30ee": "Users Files",
+}
+USERS_FILES = "59031a47-3f72-44a7-89c5-5595fe6b30ee"     # namespace root = the user's profile folder
+CONTROL_PANEL_CATEGORIES = {
+    0: "All Control Panel Items", 1: "Appearance and Personalization", 2: "Hardware and Sound",
+    3: "Network and Internet", 4: "Sounds, Speech, and Audio Devices", 5: "System and Security",
+    6: "Clock, Language, and Region", 7: "Ease of Access", 8: "Programs", 9: "User Accounts",
+    10: "Security Center", 11: "Mobile PC",
+}
+ITEM_NAME_DISPLAY = ("b725f130-47ef-101a-a5f1-02608c9eebac", 10)
+NAMED_PROPERTIES = "d5cdd505-2e9c-101b-9397-08002b2cf9ae"
+PROPERTY_VIEW_SIGNATURES = (0x10141981, 0x23A3DFD5, 0x23FEBBEE, 0x3B93AFBB, 0xBEEBEE00)
+DRIVE_CLASSES = (0x23, 0x25, 0x29, 0x2A, 0x2F)
+FILE_CLASSES = (0x30, 0x31, 0x32, 0x35, 0x36, 0xB1)
+NETWORK_CLASSES = (0x41, 0x42, 0x46, 0x47, 0x4C, 0xC3)
+
+USN_FILE_CREATE, USN_FILE_DELETE = 0x100, 0x200
+USN_RENAME_OLD, USN_RENAME_NEW = 0x1000, 0x2000
+
+
+def _u16(buf, off):
+    return struct.unpack_from("<H", buf, off)[0]
+
+
+def _u32(buf, off):
+    return struct.unpack_from("<I", buf, off)[0]
+
+
+def iso(t_us: int) -> str:
+    return (EPOCH + timedelta(microseconds=t_us)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def dos_datetime(date: int, time: int):
+    """FAT date and time words -> 'YYYY-MM-DD HH:MM:SS' exactly as stored, or None."""
+    day, month, year = date & 0x1F, (date >> 5) & 0x0F, 1980 + (date >> 9)
+    sec, minute, hour = (time & 0x1F) * 2, (time >> 5) & 0x3F, time >> 11
+    if not (1 <= day <= 31 and 1 <= month <= 12 and hour < 24 and minute < 60 and sec < 60):
+        return None
+    return "%04d-%02d-%02d %02d:%02d:%02d" % (year, month, day, hour, minute, sec)
+
+
+def utf16_strings(buf: bytes, min_chars: int = 4, limit: int = 6) -> list:
+    found = re.findall(rb"(?:[\x20-\x7e]\x00){%d,}" % min_chars, bytes(buf))
+    return [s.decode("utf-16-le") for s in found[:limit]]
+
+
+def split_idlist(buf: bytes) -> list:
+    """A shell item id list -> the raw bytes of each item (size word included)."""
+    out, off = [], 0
+    while off + 2 <= len(buf):
+        size = _u16(buf, off)
+        if size < 2 or off + size > len(buf):
+            break
+        out.append(bytes(buf[off:off + size]))
+        off += size
+    return out
+
+
+def property_strings(buf: bytes) -> list:
+    """String values of every serialized property store ('1SPS') inside a shell item:
+    [(format id, property id or name, text)]."""
+    out, pos = [], 0
+    while True:
+        i = buf.find(b"1SPS", pos)
+        if i < 0:
+            break
+        pos = i + 4
+        if i < 4 or i + 20 > len(buf):
+            continue
+        start = i - 4
+        size = _u32(buf, start)
+        end = min(len(buf), start + size) if size >= 24 else len(buf)
+        fmtid = str(uuid.UUID(bytes_le=bytes(buf[i + 4:i + 20])))
+        p = i + 20
+        while p + 9 <= end:
+            vsize = _u32(buf, p)
+            if vsize < 9 or p + vsize > end:
+                break
+            q = p + 4
+            if fmtid == NAMED_PROPERTIES:
+                nsize = _u32(buf, q)
+                key = bytes(buf[q + 5:q + 5 + nsize]).decode("utf-16-le", "replace").rstrip("\x00")
+                q += 5 + nsize
+            else:
+                key = _u32(buf, q)
+                q += 5
+            if q + 8 <= p + vsize and _u16(buf, q) == 0x1F:          # VT_LPWSTR
+                chars = _u32(buf, q + 4)
+                text = bytes(buf[q + 8:min(q + 8 + 2 * chars, p + vsize)])
+                out.append((fmtid, key, text.decode("utf-16-le", "replace").split("\x00")[0]))
+            p += vsize
+    return out
+
+
+def beef0004(buf: bytes):
+    """The first file-entry extension block (signature 0xBEEF0004) of a shell item:
+    {'long_name', 'created', 'accessed'} or None."""
+    q = buf.find(b"\x04\x00\xef\xbe")
+    if q < 4 or q + 14 > len(buf):
+        return None
+    ext = q - 4
+    version = _u16(buf, ext + 2)
+    out = {"created": dos_datetime(_u16(buf, ext + 8), _u16(buf, ext + 10)),
+           "accessed": dos_datetime(_u16(buf, ext + 12), _u16(buf, ext + 14)), "long_name": ""}
+    p = ext + 18
+    if version >= 7:
+        p += 18
+    if version >= 3:
+        p += 2
+    if version >= 9:
+        p += 4
+    if version >= 8:
+        p += 4
+    if version >= 3 and p < len(buf):
+        raw = bytes(buf[p:])
+        raw = raw[:len(raw) - len(raw) % 2]
+        out["long_name"] = raw.decode("utf-16-le", "replace").split("\x00")[0]
+    return out
+
+
+def _file_entry(buf: bytes, name_at: int = 14) -> dict:
+    cls = buf[2]
+    if cls & 0x04:
+        raw = bytes(buf[name_at:])
+        primary = raw[:len(raw) - len(raw) % 2].decode("utf-16-le", "replace").split("\x00")[0]
+    else:
+        primary = bytes(buf[name_at:]).split(b"\x00")[0].decode("cp1252", "replace")
+    ext = beef0004(buf) or {}
+    it = {"type": "folder" if cls & 0x01 else "file" if cls & 0x02 else "file system item",
+          "name": ext.get("long_name") or primary}
+    if primary and primary != it["name"]:
+        it["short_name"] = primary
+    if len(buf) >= name_at:
+        it["size"] = _u32(buf, name_at - 10)
+        modified = dos_datetime(_u16(buf, name_at - 6), _u16(buf, name_at - 4))
+        if modified:
+            it["item_modified"] = modified
+    for k in ("created", "accessed"):
+        if ext.get(k):
+            it["item_" + k] = ext[k]
+    return it
+
+
+def _zip_item(buf: bytes):
+    """An entry inside a compressed (zip) folder: name length at 0x54, name at 0x5C."""
+    n = len(buf)
+    if n < 0x60:
+        return None
+    n1, n2 = _u32(buf, 0x54), _u32(buf, 0x58)
+    end = 0x5C + 2 * n1
+    if not 0 < n1 < 260 or n2 > 1024 or end + 2 > n or bytes(buf[end:end + 2]) != b"\x00\x00":
+        return None
+    try:
+        name = bytes(buf[0x5C:end]).decode("utf-16-le")
+    except UnicodeDecodeError:
+        return None
+    if "\x00" in name or not name.isprintable():
+        return None
+    parent = bytes(buf[end + 2:end + 2 + 2 * n2]).decode("utf-16-le", "replace").split("\x00")[0]
+    return name, parent
+
+
+def parse_shell_item(buf: bytes, guid_names: dict = None) -> dict:
+    """One shell item -> {'type', 'name', ...}. Only what the bytes hold; an item this
+    code does not understand keeps a placeholder name and its readable strings."""
+    names = guid_names or {}
+
+    def guid_name(raw):
+        g = str(uuid.UUID(bytes_le=bytes(raw)))
+        return g, names.get(g) or KNOWN_GUIDS.get(g) or "{%s}" % g
+
+    n = len(buf)
+    if n < 3:
+        return {"type": "unknown", "name": "<empty shell item>"}
+    cls = buf[2]
+    sig4 = _u32(buf, 4) if n >= 8 else None
+    sig6 = _u32(buf, 6) if n >= 10 else None
+    if sig4 == 0x4D677541 and n >= 0x24:                       # 'AugM': CD burn staging
+        inner = bytes(buf[0x14:0x14 + _u16(buf, 0x14)])
+        if len(inner) >= 16:
+            it = _file_entry(inner)
+            it["type"] = "cd burn folder"
+            return it
+    if sig4 == 0x39DE2184 and n >= 12:
+        cat = _u32(buf, 8)
+        return {"type": "control panel category",
+                "name": CONTROL_PANEL_CATEGORIES.get(cat, "<control panel category %d>" % cat)}
+    if sig6 in PROPERTY_VIEW_SIGNATURES:
+        props = property_strings(buf)
+        display = next((s for f, k, s in props if (f, k) == ITEM_NAME_DISPLAY and s), "")
+        it = {"type": "property view item", "name": display or "<property view item 0x%08X>" % sig6}
+        if sig6 == 0x23FEBBEE and n >= 0x1E:
+            it["guid"], it["name"] = guid_name(buf[0x0E:0x1E])
+            it["type"] = "known folder"
+        elif sig6 == 0x23A3DFD5:
+            it.update(type="search folder", name=display or "Search Folder",
+                      strings=utf16_strings(buf[:0x400]))
+        fs_path = next((s for _f, _k, s in props if PATH_LIKE.match(s)), "")
+        if fs_path:
+            it["fs_path"] = fs_path
+        return it
+    if sig6 == 0x46534643 and n >= 0x1A:                       # 'CFSF': delegate folder
+        return _file_entry(bytes(buf[:2]) + bytes(buf[0x0C:0x0D]) + bytes(buf[3:]), name_at=0x18)
+    if cls == 0x1F and n >= 20:
+        g, name = guid_name(buf[4:20])
+        return {"type": "root folder", "name": name, "guid": g}
+    if cls == 0x2E and n >= 20:
+        g, name = guid_name(buf[4:20])
+        return {"type": "shell folder", "name": name, "guid": g}
+    if cls in DRIVE_CLASSES:
+        name = bytes(buf[3:]).split(b"\x00")[0].decode("cp1252", "replace")
+        return {"type": "drive", "name": name}
+    if cls in FILE_CLASSES and n >= 16:
+        return _file_entry(buf)
+    if cls in NETWORK_CLASSES and n >= 6:
+        parts = bytes(buf[5:]).split(b"\x00")
+        it = {"type": "network location", "name": parts[0].decode("cp1252", "replace")}
+        flags, rest = buf[4], parts[1:]
+        if flags & 0x80 and rest:
+            it["description"] = rest.pop(0).decode("cp1252", "replace")
+        if flags & 0x40 and rest:
+            it["comment"] = rest.pop(0).decode("cp1252", "replace")
+        return it
+    if cls == 0x71 and n >= 30:
+        g, name = guid_name(buf[14:30])
+        return {"type": "control panel item", "name": name, "guid": g}
+    z = _zip_item(buf)
+    if z:
+        it = {"type": "zip folder entry", "name": z[0]}
+        if z[1]:
+            it["path_in_zip"] = z[1]
+        return it
+    return {"type": "unknown", "name": "<shell item type 0x%02X>" % cls, "strings": utf16_strings(buf)}
+
+
+def compose_path(parent, item: dict) -> str:
+    """Path of a shell item under its parent. A drive or a network share starts the
+    path anew; a file-system item directly under the namespace root is on the Desktop."""
+    name = item["name"]
+    if item["type"] == "drive":
+        return name if name.endswith("\\") else name + "\\"
+    if item["type"] == "network location" and name.startswith("\\\\"):
+        return name
+    if item.get("fs_path"):
+        return item["fs_path"]
+    if parent is None:
+        return "Desktop\\" + name if item["type"] in ("folder", "file", "file system item") else name
+    return parent.rstrip("\\") + "\\" + name
+
+
+def idlist_path(buf: bytes, guid_names: dict = None):
+    """(path, items) of a whole shell item id list."""
+    path, items = None, []
+    for raw in split_idlist(buf):
+        it = parse_shell_item(raw, guid_names)
+        path = compose_path(path, it)
+        items.append(it)
+    return path, items
+
+
+def mru_order_ex(data) -> list:
+    """MRUListEx: 32-bit entry numbers, most recent first, ended by 0xFFFFFFFF."""
+    out = []
+    if not isinstance(data, (bytes, bytearray)):
+        return out
+    for off in range(0, len(data) - 3, 4):
+        v = _u32(data, off)
+        if v == 0xFFFFFFFF:
+            break
+        out.append(v)
+    return out
+
+
+def recentdocs_name(data: bytes) -> str:
+    """RecentDocs value: UTF-16 file name, a null, then the shortcut's shell item."""
+    raw = bytes(data)
+    for off in range(0, len(raw) - 1, 2):
+        if raw[off:off + 2] == b"\x00\x00":
+            return raw[:off].decode("utf-16-le", "replace")
+    return raw[:len(raw) - len(raw) % 2].decode("utf-16-le", "replace")
+
+
+def parse_office_mru(text: str):
+    """'[F00000000][T01D0...][O00000000]*path' -> (FILETIME, path), or None."""
+    m = OFFICE_MRU.match(text or "")
+    return (int(m.group(2), 16), m.group(3)) if m else None
+
+
+def mountpoint_to_unc(name: str):
+    """MountPoints2 key '##server#share' -> '\\\\server\\share' (the key name cannot hold
+    a backslash, so Explorer writes '#'), or None for any other key."""
+    return name.replace("#", "\\") if name.startswith("##") and len(name) > 2 else None
+
+
+def search_filetime(raw, big_endian: bool):
+    """8-byte date of the search index -> FILETIME, or None when unset. Windows Vista/7
+    (table SystemIndex_0A) store it big-endian, later versions little-endian."""
+    if not isinstance(raw, (bytes, bytearray)) or len(raw) != 8:
+        return None
+    ft = int.from_bytes(raw, "big" if big_endian else "little")
+    return ft if ft > 1 else None
+
+
+def thumbcache_id(raw: bytes) -> str:
+    """Cache entry hash bytes -> the 16-digit id Windows prints (and the search index
+    stores as System.ThumbnailCacheId)."""
+    return "%016x" % int.from_bytes(bytes(raw), "little")
+
+
+def pair_renames(records):
+    """Change-journal records in journal order, as (usn, filetime, file ref, parent ref,
+    name, reason), -> ([rename dicts], number of old-name records left without a new name)."""
+    pending, out = {}, []
+    for usn, ft, ref, parent, name, reason in records:
+        if reason & USN_RENAME_OLD:
+            pending[ref] = (usn, ft, parent, name)
+        elif reason & USN_RENAME_NEW and ref in pending:
+            o_usn, o_ft, o_parent, o_name = pending.pop(ref)
+            out.append({"ref": ref, "old_usn": o_usn, "old_name": o_name, "old_parent": o_parent,
+                        "new_usn": usn, "new_name": name, "new_parent": parent,
+                        "filetime": ft, "old_filetime": o_ft})
+    return out, len(pending)
+
+
+def name_at(history, usn):
+    """history: [(usn, name, parent reference)] of one file reference in journal order ->
+    (name, parent reference) it had at that journal position. Before its first record it
+    had the name that first record carries (the first record of a rename holds the old name)."""
+    best = history[0]
+    for entry in history:
+        if entry[0] > usn:
+            break
+        best = entry
+    return best[1], best[2]
+
+
+# --------------------------------------------------------------------------- registry
+
+BAG_ROOTS = ("Software\\Microsoft\\Windows\\Shell", "Software\\Microsoft\\Windows\\ShellNoRoam",
+             "Local Settings\\Software\\Microsoft\\Windows\\Shell",
+             "Local Settings\\Software\\Microsoft\\Windows\\ShellNoRoam",
+             "Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\Shell",
+             "Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\ShellNoRoam")
+EXPLORER = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer"
+KEY_TIME = "registry key last-write time"
+LIST_TIME = ("registry key last-write time (the moment the list last changed; only the "
+             "most recent entry was added then)")
+
+
+def _win(path) -> str:
+    return str(path).replace("/", "\\")
+
+
+def _guid_names() -> dict:
+    try:
+        from dissect.target.helpers import shell_folder_ids
+        return dict(shell_folder_ids.DESCRIPTIONS)
+    except Exception:
+        return {}
+
+
+def _hives(ev, target):
+    """Every user registry hive on the volume: (account, profile folder, hive path, open hive)."""
+    from dissect.regf import RegistryHive
+    fs, seen, out = target.fs, set(), []
+    homes = []
+    for base in ("C:/Users", "C:/Documents and Settings", "C:/Windows/ServiceProfiles"):
+        p = fs.path(base)
+        try:
+            if p.exists() and p.is_dir():
+                homes += sorted((d for d in p.iterdir() if d.is_dir()), key=lambda d: d.name.lower())
+        except Exception as e:
+            ev.problem(_win(p), e)
+    homes += [fs.path("C:/Windows/System32/config/systemprofile"),
+              fs.path("C:/Windows/SysWOW64/config/systemprofile")]
+    for home in homes:
+        for rel in ("NTUSER.DAT", "AppData/Local/Microsoft/Windows/UsrClass.dat",
+                    "Local Settings/Application Data/Microsoft/Windows/UsrClass.dat"):
+            p = home.joinpath(rel)
+            try:
+                if not p.exists():
+                    continue
+                st = p.stat()
+                if st.st_ino in seen or st.st_size == 0:
+                    continue
+                seen.add(st.st_ino)
+                out.append((home.name, _win(home), _win(p), RegistryHive(p.open("rb"))))
+            except Exception as e:
+                ev.problem(_win(p), e)
+    return out
+
+
+def _open(hive, path):
+    try:
+        return hive.open(path)
+    except Exception:
+        return None
+
+
+def _values(key) -> dict:
+    out = {}
+    for v in key.values():
+        try:
+            out[v.name] = v.value
+        except Exception:
+            out[v.name] = None
+    return out
+
+
+def _item_prov(it: dict) -> dict:
+    return {k: v for k, v in it.items() if k not in ("name", "type") and v not in ("", None, [])}
+
+
+def _walk_bags(ev, key, key_path, parent_path, hive_path, account, names, common, home=None, alias=None):
+    values = _values(key)
+    order = mru_order_ex(values.get("MRUListEx"))
+    for name in sorted((n for n in values if n.isdigit()), key=int):
+        where = f"{hive_path} key {key_path} value {name}"
+        raw = values[name]
+        try:
+            items = split_idlist(raw) if isinstance(raw, (bytes, bytearray)) else []
+            if not items:
+                raise ValueError("no shell item in value")
+            it = parse_shell_item(items[0], names)
+            path = compose_path(parent_path, it)
+            shell_path = (parent_path.rstrip("\\") + "\\" if parent_path else "") + it["name"]
+            try:
+                child = key.subkey(name)
+            except Exception:
+                child = None
+            prov = dict(artifact=where, account=account, item_type=it["type"],
+                        mru_position=order.index(int(name)) if int(name) in order else None,
+                        **_item_prov(it), **common)
+            if path != shell_path and it.get("fs_path"):
+                prov["shell_path"] = shell_path
+            fs_alias = None                  # the same folder as a disk path, where that is certain
+            if it["type"] == "root folder" and it.get("guid") == USERS_FILES:
+                fs_alias = home
+            elif alias and it["type"] in ("folder", "file", "file system item"):
+                fs_alias = alias + "\\" + it["name"]
+            if fs_alias:
+                prov.update(file_system_path=fs_alias, file_system_path_note="the namespace root "
+                            "{%s} is the profile folder of the hive's owner" % USERS_FILES)
+            own = us(child.timestamp) if child is not None else None
+            if own is not None:
+                node = _values(child).get("NodeSlot")
+                ev.add("folderOpened", own, 1, path, "shell bag", node_slot=node,
+                       time_meaning="last-write time of this folder's own BagMRU key", **prov)
+            parent_t = us(key.timestamp)
+            if order[:1] == [int(name)] and parent_t != own:
+                ev.add("folderOpened", parent_t, 1, path, "shell bag",
+                       time_meaning="last-write time of the parent BagMRU key, which lists "
+                                    "this folder first in its most-recently-used order", **prov)
+            elif own is None:
+                ev.add("folderOpened", parent_t, 1, path, "shell bag",
+                       time_meaning="last-write time of the parent BagMRU key (this folder "
+                                    "has no key of its own)", **prov)
+            if child is not None:
+                _walk_bags(ev, child, key_path + "\\" + name, path, hive_path, account, names, common,
+                           home, fs_alias)
+        except Exception as e:
+            ev.problem(where, e)
+
+
+def _mru_letters(values: dict):
+    """Old-style MRU key (values a, b, c... plus MRUList): [(position, name, text)]."""
+    order = values.get("MRUList") if isinstance(values.get("MRUList"), str) else ""
+    out = []
+    for name, val in sorted(values.items()):
+        if len(name) == 1 and name.isalpha() and isinstance(val, str):
+            out.append((order.index(name) if name in order else None, name, val))
+    return out
+
+
+def _explorer_lists(ev, hive, hive_path, account, names, common):
+    base = dict(account=account, **common)
+
+    key = _open(hive, EXPLORER + "\\TypedPaths")
+    if key is not None:
+        for name, val in sorted(_values(key).items()):
+            if isinstance(val, str) and val:
+                ev.add("folderOpened", us(key.timestamp), 1, val, "typed path", value=name,
+                       artifact=f"{hive_path} key {EXPLORER}\\TypedPaths value {name}",
+                       time_meaning=LIST_TIME, **base)
+
+    key = _open(hive, EXPLORER + "\\RunMRU")
+    if key is not None:
+        for pos, name, val in _mru_letters(_values(key)):
+            typed = val[:-2] if val.endswith("\\1") else val
+            if PATH_LIKE.match(typed):
+                ev.add("folderOpened", us(key.timestamp), 1, typed, "run dialog", mru_position=pos,
+                       artifact=f"{hive_path} key {EXPLORER}\\RunMRU value {name}",
+                       note="a path typed into the Run dialog", time_meaning=LIST_TIME, **base)
+
+    key = _open(hive, EXPLORER + "\\Map Network Drive MRU")
+    if key is not None:
+        for pos, name, val in _mru_letters(_values(key)):
+            ev.add("folderOpened", us(key.timestamp), 1, val, "map network drive", mru_position=pos,
+                   artifact=f"{hive_path} key {EXPLORER}\\Map Network Drive MRU value {name}",
+                   time_meaning=LIST_TIME, **base)
+
+    key = _open(hive, EXPLORER + "\\MountPoints2")
+    if key is not None:
+        for sub in key.subkeys():
+            unc = mountpoint_to_unc(sub.name)
+            if unc:
+                ev.add("folderOpened", us(sub.timestamp), 1, unc, "mount point",
+                       artifact=f"{hive_path} key {EXPLORER}\\MountPoints2\\{sub.name}",
+                       time_meaning=KEY_TIME, **base)
+
+    key = _open(hive, "Network")
+    if key is not None:
+        for sub in key.subkeys():
+            remote = _values(sub).get("RemotePath")
+            if isinstance(remote, str) and remote:
+                ev.add("folderOpened", us(sub.timestamp), 1, remote, "mapped network drive",
+                       drive_letter=sub.name.upper() + ":", artifact=f"{hive_path} key Network\\{sub.name}",
+                       time_meaning=KEY_TIME, **base)
+
+    key = _open(hive, EXPLORER + "\\RecentDocs")
+    if key is not None:
+        for sub_name, k in [("", key)] + [(s.name, s) for s in key.subkeys()]:
+            values = _values(k)
+            order = mru_order_ex(values.get("MRUListEx"))
+            key_path = EXPLORER + "\\RecentDocs" + ("\\" + sub_name if sub_name else "")
+            for name in sorted((n for n in values if n.isdigit()), key=int):
+                where = f"{hive_path} key {key_path} value {name}"
+                try:
+                    doc = recentdocs_name(values[name])
+                    if not doc:
+                        raise ValueError("no name in value")
+                    folder = sub_name.lower() == "folder"
+                    ev.add("folderOpened" if folder else "fileSeen", us(k.timestamp), 1, doc,
+                           "recent documents", artifact=where,
+                           mru_position=order.index(int(name)) if int(name) in order else None,
+                           note="the list keeps the name only, not the path",
+                           time_meaning=LIST_TIME, **base)
+                except Exception as e:
+                    ev.problem(where, e)
+
+    for list_name, kind in (("OpenSavePidlMRU", "fileSeen"), ("LastVisitedPidlMRU", "folderOpened")):
+        key = _open(hive, EXPLORER + "\\ComDlg32\\" + list_name)
+        if key is None:
+            continue
+        for sub_name, k in [("", key)] + [(s.name, s) for s in key.subkeys()]:
+            values = _values(k)
+            order = mru_order_ex(values.get("MRUListEx"))
+            key_path = EXPLORER + "\\ComDlg32\\" + list_name + ("\\" + sub_name if sub_name else "")
+            for name in sorted((n for n in values if n.isdigit()), key=int):
+                where = f"{hive_path} key {key_path} value {name}"
+                try:
+                    raw, extra = bytes(values[name]), {}
+                    if kind == "folderOpened":          # program name, a null, then the id list
+                        extra["application"] = recentdocs_name(raw)
+                        raw = raw[2 * len(extra["application"]) + 2:]
+                    path, items = idlist_path(raw, names)
+                    if not path and kind == "folderOpened" and raw[:2] == b"\x00\x00":
+                        path, items = "Desktop", [{"type": "root folder", "name": "Desktop",
+                                                   "note": "empty id list: the shell namespace root"}]
+                    if not path:
+                        raise ValueError("no shell items in value")
+                    last = items[-1]
+                    ev.add(kind, us(k.timestamp), 1, path, "open/save dialog", artifact=where,
+                           mru_position=order.index(int(name)) if int(name) in order else None,
+                           item_type=last["type"], time_meaning=LIST_TIME,
+                           **_item_prov(last), **extra, **base)
+                except Exception as e:
+                    ev.problem(where, e)
+    for list_name, kind in (("OpenSaveMRU", "fileSeen"), ("LastVisitedMRU", "folderOpened")):
+        key = _open(hive, EXPLORER + "\\ComDlg32\\" + list_name)
+        if key is None:
+            continue
+        for sub_name, k in [("", key)] + [(s.name, s) for s in key.subkeys()]:
+            key_path = EXPLORER + "\\ComDlg32\\" + list_name + ("\\" + sub_name if sub_name else "")
+            for pos, name, val in _mru_letters(_values(k)):
+                ev.add(kind, us(k.timestamp), 1, val, "open/save dialog", mru_position=pos,
+                       artifact=f"{hive_path} key {key_path} value {name}",
+                       time_meaning=LIST_TIME, **base)
+
+
+def _local_minutes(text: str, tz: str):
+    """'2015-03-24T14:59' in the PC's zone -> UTC microseconds."""
+    from zoneinfo import ZoneInfo
+    local = datetime.strptime(text.strip(), "%Y-%m-%dT%H:%M").replace(tzinfo=ZoneInfo(tz))
+    return us(local.astimezone(timezone.utc))
+
+
+def _application_lists(ev, key, key_path, hive_path, account, tz, common, depth=0):
+    """Recent-file lists that applications keep under their own keys, found by key name."""
+    base = dict(account=account, **common)
+    lname = key.name.lower()
+    parts = key_path.split("\\")
+    app = ""
+    if "Office" in parts and parts.index("Office") + 2 < len(parts):
+        app = parts[parts.index("Office") + 2]
+    try:
+        if lname in ("file mru", "place mru"):
+            for name, val in sorted(_values(key).items()):
+                parsed = parse_office_mru(val) if isinstance(val, str) else None
+                if parsed is None:
+                    continue
+                kind, aux = (("fileSeen", "office recent files") if lname == "file mru"
+                             else ("folderOpened", "office recent places"))
+                ev.add(kind, us_from_filetime(parsed[0]), 1, parsed[1], aux, application=app,
+                       artifact=f"{hive_path} key {key_path} value {name}",
+                       time_meaning="time stored in the list entry (last opened in this application)",
+                       **base)
+        elif lname == "reading locations":
+            for sub in key.subkeys():
+                values = _values(sub)
+                path, when = values.get("File Path"), values.get("Datetime")
+                where = f"{hive_path} key {key_path}\\{sub.name}"
+                if not isinstance(path, str) or not path:
+                    continue
+                ev.add("fileSeen", us(sub.timestamp), 1, path, "office reading locations",
+                       application=app, artifact=where, time_meaning=KEY_TIME, **base)
+                if isinstance(when, str) and when and tz:
+                    try:
+                        ev.add("fileSeen", _local_minutes(when, tz), 60_000_000, path,
+                               "office reading locations", application=app, artifact=where,
+                               stored_text=when, time_zone=f"local time, converted from {tz}",
+                               time_meaning="Datetime value of the entry (when the document was "
+                                            "last closed), stored to the minute", **base)
+                    except Exception as e:
+                        ev.problem(where, e)
+        elif lname == "trustrecords":
+            for name, val in sorted(_values(key).items()):
+                if isinstance(val, (bytes, bytearray)) and len(val) >= 8:
+                    ev.add("fileSeen", us_from_filetime(struct.unpack_from("<Q", val, 0)[0]), 1, name,
+                           "office trusted documents", application=app,
+                           artifact=f"{hive_path} key {key_path} value {name}",
+                           time_meaning="time stored in the trust record", **base)
+        elif lname in ("recent file list", "recentfilelist", "recenturllist"):
+            for name, val in sorted(_values(key).items()):
+                if isinstance(val, str) and val:
+                    owner = parts[-2] if len(parts) > 1 else ""
+                    ev.add("fileSeen", us(key.timestamp), 1, val, f"{owner} recent files".strip().lower(),
+                           artifact=f"{hive_path} key {key_path} value {name}",
+                           time_meaning=LIST_TIME, **base)
+    except Exception as e:
+        ev.problem(f"{hive_path} key {key_path}", e)
+    if depth < 12 and lname not in ("bagmru", "bags", "clsid", "muicache"):
+        try:
+            subs = list(key.subkeys())
+        except Exception as e:
+            ev.problem(f"{hive_path} key {key_path}", e)
+            subs = []
+        for sub in subs:
+            _application_lists(ev, sub, key_path + "\\" + sub.name, hive_path, account, tz, common, depth + 1)
+
+
+def _registry(ev, target, tz, common):
+    names = _guid_names()
+    for account, home, hive_path, hive in _hives(ev, target):
+        for root in BAG_ROOTS:
+            key = _open(hive, root + "\\BagMRU")
+            if key is not None:
+                _walk_bags(ev, key, root + "\\BagMRU", None, hive_path, account, names, common, home)
+        try:
+            _explorer_lists(ev, hive, hive_path, account, names, common)
+        except Exception as e:
+            ev.problem(hive_path + " Explorer lists", e)
+        software = _open(hive, "Software")
+        if software is not None:
+            _application_lists(ev, software, "Software", hive_path, account, tz, common)
+
+
+# --------------------------------------------------------------------------- search index
+
+SEARCH_DB = "C:/ProgramData/Microsoft/Search/Data/Applications/Windows/Windows.edb"
+SEARCH_TABLES = (("SystemIndex_0A", True), ("SystemIndex_PropertyStore", False))
+SEARCH_TIMES = (
+    ("System_Search_GatherTime", "when the indexer last gathered the item"),
+    ("System_DateModified", "the item's last-modified time as the index stores it"),
+    ("System_DateCreated", "the item's creation time as the index stores it"),
+    ("System_DateAccessed", "the item's last-access time as the index stores it"),
+    ("System_Message_DateSent", "message sent time as the index stores it"),
+    ("System_Message_DateReceived", "message received time as the index stores it"),
+    ("System_Link_DateVisited", "link last-visited time as the index stores it"),
+)
+SID = re.compile(r"\{(S-1-[0-9-]+)\}")
+
+
+def _sid_names(target) -> dict:
+    out = {}
+    try:
+        key = target.registry.key("HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList")
+        for sub in key.subkeys():
+            try:
+                out[sub.name] = str(sub.value("ProfileImagePath").value).replace("/", "\\").rsplit("\\", 1)[-1]
+            except Exception:
+                continue
+    except Exception:
+        pass
+    return out
+
+
+def _search_index(ev, target, common) -> dict:
+    """Rows for every item of the search index. Returns thumbnail cache id -> [(path, DocID)]."""
+    thumbs = {}
+    p = target.fs.path(SEARCH_DB)
+    if not p.exists():
+        return thumbs
+    from dissect.database.ese import ESE
+    source, sids = _win(p), _sid_names(target)
+    db = ESE(p.open("rb"))
+    try:
+        state = int(db.header.dbstate)
+        if state != 3:
+            ev.problem(source, RuntimeWarning(
+                f"database state {state}, not a clean shutdown: its transaction logs were not "
+                "replayed, so the newest index changes may be missing"))
+    except Exception:
+        pass
+    table = big_endian = None
+    for name, big in SEARCH_TABLES:
+        try:
+            table, big_endian = db.table(name), big
+            break
+        except Exception:
+            continue
+    if table is None:
+        ev.problem(source, ValueError("no property table found"))
+        return thumbs
+    cols = {c.split("-", 1)[-1]: c for c in table.column_names}
+    date_cols = [c for c in cols if "Date" in c or c.endswith("GatherTime")]
+    row_cols = {c for c, _ in SEARCH_TIMES}
+    for record in table.records():
+        def get(name, record=record):
+            return record.get(cols[name]) if name in cols else None
+        doc = get("DocID") if "DocID" in cols else get("WorkID")
+        where = f"{source} table {table.name} DocID {doc}"
+        try:
+            url = get("System_ItemUrl")
+            path = get("System_ItemPathDisplay") or url
+            if not isinstance(path, str) or not path:
+                continue
+            cache_id = get("System_ThumbnailCacheId")
+            if isinstance(cache_id, (bytes, bytearray)) and len(cache_id) == 8:
+                cid = "%016x" % int.from_bytes(cache_id, "big" if big_endian else "little")
+                thumbs.setdefault(cid, []).append((path, doc))
+            size = get("System_Size")
+            prov = dict(artifact=where, item_url=url, store=get("System_Search_Store"),
+                        item_type=get("System_ItemType"), **common)
+            if isinstance(size, (bytes, bytearray)) and len(size) == 8:
+                prov["size"] = int.from_bytes(size, "big" if big_endian else "little")
+            title = get("System_ItemNameDisplay")
+            if isinstance(title, str) and title and title != path:
+                prov["display_name"] = title[:200]
+            m = SID.search(url or "")
+            if m:
+                prov["sid"] = m.group(1)
+                if m.group(1) in sids:
+                    prov["account"] = sids[m.group(1)]
+            other = {}
+            for c in date_cols:
+                ft = search_filetime(get(c), big_endian)
+                if ft and c not in row_cols and us_from_filetime(ft) >= 0:
+                    other[c] = iso(us_from_filetime(ft))
+            if other:
+                prov["other_dates"] = other
+            times = {}                                   # one row per distinct stored time
+            for col, meaning in SEARCH_TIMES:
+                ft = search_filetime(get(col), big_endian)
+                if ft is None:
+                    continue
+                t = us_from_filetime(ft)
+                if t < 0:
+                    ev.problem(where, ValueError(f"{col} is before 1970 and was left out"))
+                    continue
+                times.setdefault(t, []).append((col, meaning))
+            for t, same in sorted(times.items()):
+                ev.add("fileSeen", t, 1, path, "windows search index",
+                       column=", ".join(c for c, _ in same),
+                       time_meaning="; ".join(m for _, m in same), **prov)
+        except Exception as e:
+            ev.problem(where, e)
+    return thumbs
+
+
+# --------------------------------------------------------------------------- thumbnail caches
+
+def _thumbnail_caches(ev, target, thumbs, common):
+    from dissect.thumbcache.index import ThumbnailIndex
+    from dissect.thumbcache.thumbcache_file import ThumbcacheFile
+    users = target.fs.path("C:/Users")
+    if not users.exists():
+        return
+    for home in sorted(users.iterdir(), key=lambda d: d.name.lower()):
+        folder = home.joinpath("AppData/Local/Microsoft/Windows/Explorer")
+        try:
+            if not folder.exists() or home.is_symlink():
+                continue
+            files = sorted((f for f in folder.iterdir() if f.name.lower().startswith("thumbcache_")
+                            and f.name.lower().endswith(".db")), key=lambda f: f.name.lower())
+        except Exception as e:
+            ev.problem(_win(folder), e)
+            continue
+        found = {}          # cache id -> {"t": creation of the first file holding it, "entries": [...]}
+        for f in files:
+            source = _win(f)
+            try:
+                created = us_from_unix(f.lstat().st_birthtime)
+                if f.name.lower().endswith("_idx.db"):
+                    for entry in ThumbnailIndex(f.open("rb")).entries():
+                        cid = thumbcache_id(entry.identifier)
+                        found.setdefault(cid, {"t": created, "entries": []})["entries"].append(
+                            {"file": f.name, "index_flags": int(entry.flags)})
+                    continue
+                cache = ThumbcacheFile(f.open("rb"))
+                offset = int(cache.header.Offset)
+                for entry in cache.entries():
+                    size = int(entry._header.Size)
+                    if int(entry.hash, 16):
+                        cid = thumbcache_id(bytes.fromhex(entry.hash))
+                        found.setdefault(cid, {"t": created, "entries": []})["entries"].append(
+                            {"file": f.name, "offset": offset, "image_bytes": len(entry.data)})
+                    if size <= 0:
+                        break
+                    offset += size
+            except Exception as e:
+                ev.problem(source, e)
+        for cid, info in sorted(found.items()):
+            matches = thumbs.get(cid, [])
+            prov = dict(artifact=f"{_win(folder)}\\thumbcache_*.db cache id {cid}", account=home.name,
+                        cache_id=cid, entries=info["entries"],
+                        time_meaning="creation time of the thumbnail cache file: a cache entry "
+                                     "stores no time, the thumbnail was added at or after this",
+                        **common)
+            if matches:
+                for path, doc in matches:
+                    ev.add("fileSeen", info["t"], 1, path, "thumbnail cache",
+                           path_source=f"search index DocID {doc} has this System.ThumbnailCacheId",
+                           **prov)
+            else:
+                ev.add("fileSeen", info["t"], 1, f"thumbnail cache id {cid}", "thumbnail cache",
+                       path_source="the cache keeps no path and the search index does not hold this id",
+                       **prov)
+
+
+# --------------------------------------------------------------------------- NTFS: journal, shadow copies
+
+def _ntfs_volumes(target):
+    """(drive letter or volume name, filesystem) for each NTFS volume."""
+    letters = {}
+    for name, fs in target.fs.mounts.items():
+        if re.match(r"^[a-z]:$", name):
+            letters[id(fs)] = name.upper()
+    out = []
+    for fs in target.filesystems:
+        if getattr(fs, "__type__", "") == "ntfs":
+            serial = "%08X" % (fs.ntfs.serial & 0xFFFFFFFF)
+            out.append((letters.get(id(fs), f"volume {serial}"), serial, fs))
+    return out
+
+
+def _ref(r):
+    return (r.SegmentNumberLowPart | (r.SegmentNumberHighPart << 32), r.SequenceNumber)
+
+
+def _folder_path(ntfs, cache, ref):
+    """Path of a folder from its file reference, as the file table has it now; None when
+    that record has since been reused (sequence number differs)."""
+    if ref not in cache:
+        path = None
+        try:
+            rec = ntfs.mft(ref[0])
+            if rec.header.SequenceNumber == ref[1]:
+                path = "" if ref[0] == 5 else (rec.full_path() or "").replace("/", "\\").strip("\\")
+        except Exception:
+            path = None
+        cache[ref] = path
+    return cache[ref]
+
+
+def _folder_at(ntfs, cache, history, ref, usn, depth=0):
+    """(path, True when the journal supplied the name) of a folder as it was at a journal
+    position: the journal's own record of that folder where it has one, else the file table."""
+    if ref[0] != 5 and ref in history and depth < 64:
+        name, parent = name_at(history[ref], usn)
+        up, _ = _folder_at(ntfs, cache, history, parent, usn, depth + 1)
+        if up is not None:
+            return (up + "\\" if up else "") + name, True
+    return _folder_path(ntfs, cache, ref), False
+
+
+def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, **source):
+    """Renames and print-spool traces of one change journal. Returns its first USN."""
+    journal = ntfs.usnjrnl
+    if not journal:
+        return None
+    artifact = f"{drive}\\$Extend\\$UsnJrnl:$J"
+    spool_ref = None
+    if spool_dir:
+        try:
+            rec = ntfs.mft.get(spool_dir[3:].replace("\\", "/"))
+            spool_ref = (rec.segment, rec.header.SequenceNumber)
+        except Exception:
+            spool_ref = None
+    wanted, spool, first, history, unreadable = [], {}, None, {}, 0
+    for r in journal.records():
+        rec = r.record
+        if first is None:
+            first = int(rec.Usn)
+        if only_before is not None and int(rec.Usn) >= only_before:
+            break
+        try:
+            name = r.filename
+        except Exception:
+            unreadable += 1
+            continue
+        reason = int(rec.Reason)
+        fref, parent = _ref(rec.FileReferenceNumber), _ref(rec.ParentFileReferenceNumber)
+        known = history.setdefault(fref, [])          # every name and folder this file had
+        if not known or known[-1][1:] != (name, parent):
+            known.append((int(rec.Usn), name, parent))
+        if reason & (USN_RENAME_OLD | USN_RENAME_NEW):
+            wanted.append((int(rec.Usn), int(rec.TimeStamp), fref, parent, name, reason))
+        if spool_ref is not None and parent == spool_ref:
+            info = spool.setdefault((fref, name), {})
+            for flag, what in ((USN_FILE_CREATE, "created"), (USN_FILE_DELETE, "deleted")):
+                if reason & flag and what not in info:
+                    info[what] = (int(rec.TimeStamp), int(rec.Usn))
+    if unreadable:
+        ev.problem(artifact, RuntimeWarning(f"{unreadable} journal records have no readable name"))
+    renames, unpaired = pair_renames(wanted)
+    if unpaired:
+        ev.problem(artifact, RuntimeWarning(f"{unpaired} old-name records have no new-name record"))
+    cache = {}
+    for rn in renames:
+        old_dir, old_j = _folder_at(ntfs, cache, history, rn["old_parent"], rn["old_usn"])
+        new_dir, new_j = _folder_at(ntfs, cache, history, rn["new_parent"], rn["new_usn"])
+
+        def full(folder, name):
+            return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
+        ev.add("fileRenamed", us_from_filetime(rn["filetime"]), 1, full(old_dir, rn["old_name"]),
+               full(new_dir, rn["new_name"]), artifact=f"{artifact} USN {rn['new_usn']}",
+               old_name=rn["old_name"], new_name=rn["new_name"], old_name_usn=rn["old_usn"],
+               file_record=rn["ref"][0], file_sequence=rn["ref"][1],
+               parent_folder=(drive + "\\" + old_dir) if old_dir is not None else "not resolved",
+               new_parent_folder=(drive + "\\" + new_dir) if new_dir is not None else "not resolved",
+               parent_record=rn["old_parent"][0], new_parent_record=rn["new_parent"][0],
+               moved=rn["old_parent"] != rn["new_parent"],
+               folder_names_from="change journal" if old_j or new_j else "file table",
+               path_source="the journal stores names and folder references; a folder is named as "
+                           "the journal itself recorded it at that moment where it has a record "
+                           "of the folder, otherwise as the file table names that reference now",
+               time_meaning="time of the journal's new-name record", **source, **common)
+    for (ref, name), info in sorted(spool.items()):
+        for what, (ft, usn) in sorted(info.items()):
+            ev.add("fileSeen", us_from_filetime(ft), 1, spool_dir + "\\" + name, "print job",
+                   artifact=f"{artifact} USN {usn}", file_record=ref[0],
+                   note="spool file of a print job, known only from the change journal",
+                   time_meaning=f"spool file {what}", **source, **common)
+    return first
+
+
+def _spool_dir(target) -> str:
+    try:
+        key = target.registry.key("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Print\\Printers")
+        val = str(key.value("DefaultSpoolDirectory").value)
+        if re.match(r"^[A-Za-z]:\\", val):
+            return val.rstrip("\\")
+    except Exception:
+        pass
+    return "C:\\Windows\\System32\\spool\\PRINTERS"
+
+
+def _spool_files(ev, target, spool_dir, common):
+    """Spool files still on disk. Their job records (.SHD) are listed, not decoded."""
+    folder = target.fs.path(spool_dir.replace("\\", "/"))
+    try:
+        files = sorted(folder.iterdir(), key=lambda f: f.name.lower()) if folder.exists() else []
+    except Exception as e:
+        ev.problem(spool_dir, e)
+        return
+    for f in files:
+        try:
+            st = f.lstat()
+            ev.add("fileSeen", us_from_unix(st.st_birthtime), 1, _win(f), "print job", size=st.st_size,
+                   artifact=_win(f), time_meaning="spool file creation time", **common)
+            if f.name.lower().endswith(".shd"):
+                ev.problem(_win(f), NotImplementedError("print job record not decoded"))
+        except Exception as e:
+            ev.problem(_win(f), e)
+
+
+def _print_log(ev, target, common):
+    """Event 307 (document printed) of the PrintService logs, where the log is enabled."""
+    logs = target.fs.path("C:/Windows/System32/winevt/Logs")
+    if not logs.exists():
+        return
+    from dissect.eventlog.evtx import Evtx
+    for f in sorted(logs.iterdir(), key=lambda f: f.name.lower()):
+        if "printservice" not in f.name.lower():
+            continue
+        try:
+            for rec in Evtx(f.open("rb")):
+                if str(rec.get("EventID")) != "307":
+                    continue
+                params = {k: str(v) for k, v in rec.items() if "Param" in k}
+                doc = next((v for k, v in sorted(params.items()) if k.endswith("Param2")), "")
+                when = rec.get("TimeCreated_SystemTime")
+                if not doc or when is None:
+                    raise ValueError(f"event record {rec.get('EventRecordID')}: no document name")
+                ev.add("fileSeen", us(when), 1, doc, "print job",
+                       artifact=f"{_win(f)} record {rec.get('EventRecordID')}", fields=params,
+                       time_meaning="event time (document printed)", **common)
+        except Exception as e:
+            ev.problem(_win(f), e)
+
+
+PROFILE_ROOTS = ("Users", "Documents and Settings")
+
+
+def _profile_files(top, rel, out, problems):
+    """Every file under a folder record, by name index, without following reparse points:
+    path lower-cased -> (path, size, modified, created, changed, accessed)."""
+    try:
+        entries = list(top.iterdir(ignore_dos=True))
+    except Exception as e:
+        problems.append((rel, e))
+        return
+    for entry in entries:
+        try:
+            fn = entry.attribute
+            a = fn.attr
+            attrs, path = int(a.FileAttributes), rel + "\\" + fn.file_name
+            if attrs & 0x10000000:                       # a folder
+                if not attrs & 0x400:                    # not a junction or symbolic link
+                    _profile_files(entry.dereference(), path, out, problems)
+            else:
+                out[path.lower()] = (path, int(a.FileSize), int(a.LastModificationTime),
+                                     int(a.CreationTime), int(a.LastChangeTime), int(a.LastAccessTime))
+        except Exception as e:
+            problems.append((rel, e))
+
+
+def _tree(ntfs):
+    out, problems = {}, []
+    for root in PROFILE_ROOTS:
+        try:
+            top = ntfs.mft.get(root)
+        except Exception:
+            continue
+        if top.is_dir() and not top.is_reparse_point():
+            _profile_files(top, root, out, problems)
+    return out, problems
+
+
+def _shadow_copies(ev, target, spool_dir, common):
+    from dissect.ntfs import NTFS
+    from dissect.volume.vss import VSS
+    for drive, serial, fs in _ntfs_volumes(target):
+        try:
+            live_first = _journal(ev, fs.ntfs, drive, spool_dir if spool_dir[:2].upper() == drive else "", common)
+        except Exception as e:
+            ev.problem(f"{drive}\\$Extend\\$UsnJrnl:$J", e)
+            live_first = None
+        try:
+            vss = VSS(fs.volume)
+        except Exception as e:
+            if "VSS identifier" not in str(e):
+                ev.problem(f"{drive} shadow copy storage", e)
+            continue
+        live = None
+        for store in vss.catalog.stores:
+            copy_id = "{%s}" % store.copy_identifier
+            store_id = "{%s}" % uuid.UUID(bytes_le=bytes(store.desc2.store_identifier))
+            artifact = f"{drive}\\System Volume Information\\{store_id}{{3808876b-c176-4e48-b7ae-04046e6cc752}}"
+            try:
+                created = us_from_filetime(int(store.creation_time))
+                ev.add("shadowCopy", created, 1, copy_id, drive, artifact=artifact,
+                       volume_serial=serial, store_id=store_id,
+                       shadow_copy_set_id="{%s}" % store.copy_set_identifier,
+                       originating_machine=str(store.information.operating_machine),
+                       service_machine=str(store.information.service_machine),
+                       attributes=str(store.information.attributes).split(".")[-1],
+                       time_meaning="creation time in the shadow copy catalog", **common)
+                snap = NTFS(store.open())
+                source = dict(shadow_copy=copy_id)
+                if live_first is not None:
+                    _journal(ev, snap, drive, spool_dir if spool_dir[:2].upper() == drive else "",
+                             common, only_before=live_first,
+                             journal_source=f"journal as kept in shadow copy {copy_id}")
+                if live is None:
+                    live, problems = _tree(fs.ntfs)
+                    for where, e in problems:
+                        ev.problem(f"{drive}\\{where}", e)
+                old, problems = _tree(snap)
+                for where, e in problems:
+                    ev.problem(f"shadow copy {copy_id} {drive}\\{where}", e)
+                for low, (path, size, modified, born, changed, accessed) in sorted(old.items()):
+                    now = live.get(low)
+                    if now is not None and now[1] == size and now[2] == modified:
+                        continue
+                    state = ("missing on the live volume" if now is None else
+                             "different on the live volume: " + ", ".join(
+                                 w for w, differs in (("size", now[1] != size), ("modified time", now[2] != modified))
+                                 if differs))
+                    prov = dict(artifact=f"shadow copy {copy_id} of {drive} ({artifact})", state=state,
+                                size=size, modified=iso(us_from_filetime(modified)),
+                                created=iso(us_from_filetime(born)), record_changed=iso(us_from_filetime(changed)),
+                                accessed=iso(us_from_filetime(accessed)), volume_serial=serial,
+                                **source, **common)
+                    if now is not None:
+                        prov.update(live_size=now[1], live_modified=iso(us_from_filetime(now[2])))
+                    m = re.match(r"^(?:Users|Documents and Settings)\\([^\\]+)\\", path)
+                    if m:
+                        prov["account"] = m.group(1)
+                    ev.add("fileSeen", created, 1, drive + "\\" + path, "shadow copy",
+                           time_meaning="creation time of the shadow copy: the file existed "
+                                        "in this state then", **prov)
+                    times = {}                           # one row per distinct file time
+                    for ft, meaning in ((born, "the file's creation time in the shadow copy"),
+                                        (modified, "the file's last-modified time in the shadow copy")):
+                        if us_from_filetime(ft) >= 0:
+                            times.setdefault(us_from_filetime(ft), []).append(meaning)
+                    for t, meanings in sorted(times.items()):
+                        ev.add("fileSeen", t, 1, drive + "\\" + path, "shadow copy",
+                               time_meaning="; ".join(meanings), **prov)
+            except Exception as e:
+                ev.problem(artifact, e)
+
+
+# --------------------------------------------------------------------------- entry point
+
+def extract(ev, target, ctx):
+    common = dict(ctx["common"])
+    try:
+        tz = str(target.timezone)
+    except Exception as e:
+        ev.problem("time zone in the registry", e)
+        tz = ""
+    try:
+        _registry(ev, target, tz, common)
+    except Exception as e:
+        ev.problem("user registry hives", e)
+    thumbs = {}
+    try:
+        thumbs = _search_index(ev, target, common)
+    except Exception as e:
+        ev.problem(_win(SEARCH_DB), e)
+    try:
+        _thumbnail_caches(ev, target, thumbs, common)
+    except Exception as e:
+        ev.problem("thumbnail caches", e)
+    spool_dir = _spool_dir(target)
+    for step, where in ((lambda: _shadow_copies(ev, target, spool_dir, common), "change journal and shadow copies"),
+                        (lambda: _spool_files(ev, target, spool_dir, common), spool_dir),
+                        (lambda: _print_log(ev, target, common), "PrintService event logs")):
+        try:
+            step()
+        except Exception as e:
+            ev.problem(where, e)

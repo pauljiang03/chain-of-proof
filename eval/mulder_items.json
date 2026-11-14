@@ -1,0 +1,29 @@
+{
+ "source": "https://github.com/calebevans/mulder/tree/main/examples/ndlc-v1.5.2 (opus-4.6-run1/ACCURACY-REPORT.md), read 2026-11-14",
+ "rubric": [
+  "a wrong detail (edition, date, timezone, device) is PARTIAL, mention without evidence is PARTIAL, and only claims the answer key contradicts or causal attributions the evidence does not support count as FALSE POSITIVE. Hedged inferences labelled as such are not counted; a claim carried unhedged into the narrative, IOC table or containment actions is.",
+  "Full match is FOUND/20. Detection is (FOUND+PARTIAL)/20. The false-positive rate is contradicted claims/20 and includes claims outside the 20 items."
+ ],
+ "items": [
+  "Suspect identity: \"Iaman Informant\" (iaman.informant@nist.gov)",
+  "PC OS: Windows 7 Ultimate 64-bit, standalone WORKGROUP",
+  "USB Device 1: SanDisk Cruzer Fit, S/N 4C530012450531101593, exFAT, \"Authorized USB\"",
+  "USB Device 2: SanDisk Cruzer Fit, S/N 4C530012550531106501, FAT32, \"IAMAN $_@\"",
+  "RM3: CD-ROM, UDF filesystem, formatted March 24, 2015 (16:53:17 UTC)",
+  "Five Secret Project documents exfiltrated to USB",
+  "File masquerading: documents renamed with false extensions on RM2 FAT32",
+  "Anti-forensics tools: CCleaner and Eraser deployed",
+  "Search history reveals premeditation (leakage methods, anti-forensics)",
+  "Google Drive sync installed for cloud exfiltration",
+  "iCloud setup downloaded (secondary cloud channel)",
+  "USB connection timestamps via EVTX System log",
+  "Exfiltration timeline: Feb 15 bulk copy (42-second window)",
+  "Anti-forensics: CCleaner deployed but did not clean (launched and closed without action)",
+  "Systematic file deletion on RM2 FAT32 (Mar 24, 09:54–10:00)",
+  "RM3 contains government documents matching Secret Project content",
+  "Files opened in RM2 (list all accessed files)",
+  "Network drive directories traversed",
+  "Email communication with spy.conspirator@nist.gov",
+  "FAT32 timezone offset (local time vs UTC)"
+ ]
+}

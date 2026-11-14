@@ -13,6 +13,7 @@ import argparse
 import json
 import sys
 from datetime import datetime, timezone
+from importlib import import_module
 from importlib.metadata import version
 from pathlib import Path
 
@@ -24,6 +25,12 @@ from extractor.store import Evidence, us           # noqa: E402
 from extractor.tags import add_tags                # noqa: E402
 from extractor.windows import extract_pc           # noqa: E402
 
+# Readers written without sight of the answer key (see eval/blind_audit.py), by role of
+# the image. They are called as written: nothing they emit is filtered or edited here.
+READERS = {"pc": ("system", "webcloud", "filetraces", "content"),
+           "removable": ("content",),
+           "optical": ("optical", "content")}
+OPEN_TARGET = ("system", "webcloud", "filetraces")     # these take an open dissect Target
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Extract facts from the case images.")
@@ -48,6 +55,23 @@ def main(argv=None) -> int:
     for name, exhibit in exhibits.items():
         if isinstance(exhibit, dict) and exhibit.get("role") == "removable" and (images / name).exists():
             log += extract_media(ev, images / name, exhibit, fat_tz, examined_at, tool)
+    for name, exhibit in exhibits.items():
+        if not isinstance(exhibit, dict) or not (images / name).exists():
+            continue
+        ctx = {"common": {"image": name, "exhibit": exhibit["exhibit"], "tool": tool},
+               "examined_at": examined_at, "pc_time_zone": fat_tz}
+        for reader in READERS.get(exhibit.get("role"), ()):
+            before = len(ev.rows())
+            try:
+                module = import_module(f"extractor.{reader}")
+                if reader in OPEN_TARGET:
+                    from dissect.target import Target
+                    module.extract(ev, Target.open(images / name), ctx)
+                else:
+                    module.extract(ev, images / name, ctx)
+            except Exception as e:                      # a reader must not stop the build
+                ev.problem(f"{name}: reader {reader}", e)
+            log.append(f"{name}: reader {reader}: {len(ev.rows()) - before} new rows")
     tags = add_tags(ev, examined_at)
 
     meta = ev.write_json(args.out, {

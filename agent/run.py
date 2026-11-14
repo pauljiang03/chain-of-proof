@@ -23,11 +23,11 @@ import time
 from pathlib import Path
 
 from agent.brief import BRIEF
-from checker import export
+from checker import export, report
 from eval import score as scorer
 
 ROOT = Path(__file__).resolve().parent.parent
-INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check")
+INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude")
 
 
 def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt: str = BRIEF,
@@ -124,6 +124,7 @@ def main(argv=None) -> int:
     ap.add_argument("--model", help="default: opus (claude-code) or claude-opus-5-5 (deepagents)")
     ap.add_argument("--facts", default="evidence/case_facts.json")
     ap.add_argument("--minutes", type=int, default=45, help="time limit for the run")
+    ap.add_argument("--reference", help="answer key to score against (default: eval/reference.json)")
     args = ap.parse_args(argv)
 
     model = args.model or ("opus" if args.backend == "claude-code" else "claude-opus-5-5")
@@ -143,13 +144,15 @@ def main(argv=None) -> int:
     data = export.bundle(run_dir, "NIST CFReDS Data Leakage Case")
     data["case"].update(backend=args.backend, model=model, **meta)
     (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    (run_dir / "report.md").write_text(report.render(data))
     print(f"\n{meta['tool_calls']} tool calls, {meta['seconds']} s, ended: {meta['ended']}")
     print(f"proposals {data['stats']['proposals']}, certified {data['stats']['verified']}, "
-          f"refused {data['stats']['rejected']}\n")
+          f"refused {data['stats']['rejected']}, conclusions {len(data['conclusions'])}\n")
     os.chdir(ROOT)      # relative paths in results.json, not this machine's directories
     rel = run_dir.relative_to(ROOT)
+    extra = ["--reference", args.reference] if args.reference else []
     return scorer.main(["--facts", args.facts, "--run", str(rel / "run.json"),
-                        "--out", str(rel / "results.json")])
+                        "--out", str(rel / "results.json")] + extra)
 
 
 if __name__ == "__main__":
