@@ -2,6 +2,10 @@
 
 Updated: 2026-11-14. Read this before assigning more agents.
 
+Current implementation split: [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md). Original terminal owns F1 audit, F2 citations,
+and F3 proof-gap diagnostics. Other terminal owns F4 portable verification, F5 coverage, and F6 revision history.
+The hardening branch at `c411fe6` is now integrated; use the feature handoff for current file ownership.
+
 ## Objective and constraints
 
 Finish a usable AI-led investigation workflow quickly. Keep the existing Lean verification gate. The deterministic miner is an optional baseline.
@@ -47,7 +51,7 @@ The adapter derives values from cited records and could otherwise repair an inva
 Paired claim filtering and full question accuracy must remain distinct until the common projection is ready.
 
 The other terminal's `finish/parallel-hardening` branch contains API/CLI fixes and private reference-review notes.
-It has not been merged into this checkpoint. Follow its `eval/review_notes/PARALLEL_FIX_HANDOFF.md` for validation and integration.
+It was integrated at `c411fe6`. Its `eval/review_notes/PARALLEL_FIX_HANDOFF.md` records validation and remaining limits.
 Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
