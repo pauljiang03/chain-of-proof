@@ -17,7 +17,8 @@ Finish a usable AI-led investigation workflow quickly. Keep the existing Lean ve
 
 ## Current terminal: ownership and state
 
-All three subagent lanes are frozen after validation. The root agent owns final integration and the push.
+The original three implementation lanes are complete. The root agent owns final integration and the push.
+The `a0b4fce` checkpoint is pushed. The second terminal is working in separate worktrees.
 
 | ID | Owner | State | Work and owned files |
 |---|---|---|---|
@@ -26,7 +27,28 @@ All three subagent lanes are frozen after validation. The root agent owns final 
 | C2 | `optical_timestamps` | Complete; frozen | `eval/nist_answers.py`, `extractor/webcloud.py`, mailbox sections of `extractor/windows.py`, related tests. Correct source/time vocabulary, extensionless browser paths, unavailable senders, inventory answers. Original-20 package and final validation. |
 | C3 | `lean_gap_types` | Complete; frozen | Acquisition identity, explicit public policy, bounded journal path observations, existing Lean rules, `eval/package.py`, `comparison/mulder/`, package tests. New metadata schema was stopped before any repository edits. |
 
-Do not edit these files in this shared checkout while C0 is preparing the push. Use a separate worktree for new work.
+Use a separate worktree for new work and agree on file ownership before integration.
+
+## A–D preparation and demonstration
+
+The user selected all four configurations: unchecked AI proposals (A), offline checking of those exact proposals (B), online proof feedback (C), and Mulder (D).
+Preparation is authorized. The full comparison remains unrun and must be finalized before execution.
+
+| ID | Owner | Scope |
+|---|---|---|
+| X0 | Root | `comparison/HACKPRINCETON.md`: sourced event guidance, pitch, limits, and two-minute demonstration plan. |
+| X1 | `lean_gap_types` | `comparison/abcd/`: experiment protocol and unfinished freeze manifest. No model calls. |
+| X2 | `optical_timestamps` | `scripts/demo_proof_gate.py`, `tests/test_demo_proof_gate.py`: synthetic acceptance, wrong-device refusal, independent verification, and certificate tampering. Five tests and the CLI demo pass. |
+| X3 | `journal_gaps` | `eval/review_notes/abcd_runtime_review.md`: implementation and scoring boundaries. Read-only review; existing runtime unchanged. |
+
+A/B runtime support and a shared claim-faithful answer projection remain to be implemented.
+Do not relabel unchecked proposals as verified to use the current answer adapter.
+The adapter derives values from cited records and could otherwise repair an invalid proposal during scoring.
+Paired claim filtering and full question accuracy must remain distinct until the common projection is ready.
+
+The other terminal's `finish/parallel-hardening` branch contains API/CLI fixes and private reference-review notes.
+It has not been merged into this checkpoint. Follow its `eval/review_notes/PARALLEL_FIX_HANDOFF.md` for validation and integration.
+Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
 

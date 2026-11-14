@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "protocol_id": "X1-ABCD",
+  "status": "draft_prepare_only",
+  "execution_authorized": false,
+  "frozen": false,
+  "execution_validator_implemented": false,
+  "blockers": {
+    "neutral_A_recorder": "pending: current live submission always invokes the checker",
+    "exact_A_to_B_offline_filter": "pending: replay immutable A candidates without AI or repairs",
+    "blocked_projection": "pending: shared claim-faithful A/B/C projection; current certified-only adapter cannot be reused by changing status or substituting actual cited facts for the claim",
+    "matched_budget_accounting": "pending: aggregate tokens, utilities, retries, preparation and end-to-end deadline",
+    "D_all_model_routes": "pending: pin every planner, executor, analyst and utility/repair invocation",
+    "reference_review": "pending: independent review, list scope and visible unresolved-question treatment",
+    "claim_error_audit": "pending: frozen independent evidence rubric and blinded human review plan",
+    "execution_manifest_validation": "pending: no aliases, placeholders or unset active requirements at execution"
+  },
+  "case": {
+    "case_id": "nist-cfreds-data-leakage",
+    "evaluation_use": "development_not_blind",
+    "question_count": 60,
+    "currently_provisionally_scorable": 46,
+    "currently_unresolved": ["Q1", "Q2", "Q6", "Q10", "Q16", "Q19", "Q29", "Q30", "Q33", "Q39", "Q48", "Q53", "Q58", "Q60"],
+    "frozen_reference_review_record": null,
+    "second_case": {
+      "included": false,
+      "reason": "Optional independent case requires its own public context and reviewed reference before addition"
+    }
+  },
+  "replicates": {
+    "planned_count": 3,
+    "planned_live_investigations": 9,
+    "planned_offline_B_passes": 3,
+    "live_order": [["A", "C", "D"], ["C", "D", "A"], ["D", "A", "C"]],
+    "B_source": "Exact immutable A candidate stream from the same replicate",
+    "fresh_sessions": true,
+    "retain_failures_and_timeouts": true,
+    "synthetic_smokes_count_as_trials": false,
+    "availability": "pending: credentials, finalized runtime and resources; no automatic reduction"
+  },
+  "arms": {
+    "A": {"live": true, "semantic_gate": false, "feedback": "receipt_and_candidate_id_only", "publication_status": "unverified"},
+    "B": {"live": false, "model_calls": 0, "source_arm": "A", "repair_allowed": false, "candidate_unit": "whole top-level submitted claim, including both"},
+    "C": {"live": true, "semantic_gate": true, "feedback": "verdict_and_repair_diagnostics", "reverify_published_certificates": true},
+    "D": {"live": true, "system": "Mulder", "tools": "native", "same_source_images_and_public_context": true, "role_mismatch_excludes_exact_model_comparison": true}
+  },
+  "inputs": {
+    "source_image_manifest": {"path": "comparison/mulder/manifest.json", "sha256": null},
+    "source_image_directory": null,
+    "records_snapshot": {"path": null, "sha256": null},
+    "public_case_profile": {"path": "comparison/mulder/case-profile.json", "sha256": null},
+    "public_questions": {"path": "comparison/mulder/questions.json", "sha256": null},
+    "private_reference": {"path": "eval/benchmark_nist.json", "sha256": null, "available_to_investigators": false},
+    "private_prior_outputs_available_to_investigators": false,
+    "acquisition_policy": "Only identical public acquisition information; no answer-key serial mapping exclusive to one arm"
+  },
+  "software": {
+    "chain_of_proof_commit": null,
+    "extractor_commit_and_files_sha256": null,
+    "lean_version_and_toolchain_sha256": null,
+    "python_and_dependencies_lock_sha256": null,
+    "AI_backend_version_and_configuration_sha256": null,
+    "claim_schema_and_templates_sha256": null,
+    "tool_interface_sha256": null,
+    "A_prompt_sha256": null,
+    "C_prompt_sha256": null,
+    "allowed_A_C_prompt_difference": "declared gate behavior and receipt versus semantic feedback only",
+    "Mulder_commit": null,
+    "Mulder_container_digest_or_native_environment_lock_sha256": null,
+    "Mulder_configuration_and_prompt_sha256": null,
+    "shared_projector_commit_and_sha256": null,
+    "scorer_commit_and_sha256": null,
+    "claim_audit_rubric_sha256": null
+  },
+  "model": {
+    "provider": null,
+    "endpoint_and_region": null,
+    "immutable_model_id_and_revision": null,
+    "aliases_allowed": false,
+    "sampling_parameters": null,
+    "seed_policy_and_replicate_values_or_explicit_non_support": null,
+    "Mulder_all_role_and_utility_overrides": null,
+    "record_requested_and_returned_model_ids_for_every_call": true
+  },
+  "matched_per_trial_budget": {
+    "max_total_model_tokens": null,
+    "max_output_tokens_per_call": null,
+    "max_end_to_end_wall_seconds": null,
+    "token_and_cost_accounting_rule": null,
+    "reasoning_feedback_retries_and_utilities_count": true,
+    "source_preparation_debited_from_total": true,
+    "extra_budget_after_failure": false,
+    "B_model_calls": 0,
+    "B_checks_timed_separately": true
+  },
+  "timing_environment": {
+    "hardware_OS_and_resource_limits": null,
+    "cache_treatment": null,
+    "A_C_preparation": "Measure shared source extraction per replicate; disclose sharing and charge the measured cost to each arm",
+    "B_total": "A end-to-end cost plus offline filtering",
+    "D_total": "Raw-image preparation plus native investigation and output generation",
+    "reported_components": ["preparation", "investigation", "gate_and_replay", "end_to_end_total"],
+    "warm_vs_cold_speed_superiority_claims_allowed": false
+  },
+  "serialization_and_projection": {
+    "claim_candidate_schema_sha256": null,
+    "answer_schema_version": 2,
+    "JSON_encoding_and_canonicalization": null,
+    "immutable_candidate_id_and_order_policy": null,
+    "duplicate_and_list_policy": null,
+    "candidate_to_answer_leaf_dependency_policy": null,
+    "B_leaf_removal_and_structural_pruning_policy": null,
+    "unprojectable_claim_policy": "Report separately with denominator; never repair or silently omit",
+    "fake_verified_status_allowed": false,
+    "answer_key_value_filtering_allowed": false,
+    "unified_A_B_C_answer_accuracy_ready": false,
+    "claim_level_A_B_separate_from_question_accuracy": true
+  },
+  "analysis": {
+    "report_all_replicates_and_paired_changes": true,
+    "claim_labels": ["supported", "independently_established_error", "unresolved"],
+    "independent_audit_reviewer_and_blinding_plan": null,
+    "claim_metrics": ["retained", "supported_lost", "errors_removed", "errors_retained", "repair_attempts", "repair_successes", "abandonment", "answer_leaves_lost"],
+    "distinct_failure_categories": ["contract_mismatch", "semantic_refusal", "malformed_input", "timeout_or_tool_failure", "certificate_replay_failure", "independently_established_forensic_error"],
+    "LLM_judge": false,
+    "refusal_implies_forensic_error": false,
+    "universal_false_positive_guarantee": false,
+    "D_interpretation": "External system baseline with different tools, not an isolation of Lean's effect",
+    "Python_equal_rules_baseline": "Optional identical-rule implementation for agreement and cost; not evidence of Lean forensic-accuracy superiority"
+  },
+  "execution_record": {
+    "frozen_manifest_sha256": null,
+    "authorization_record": null,
+    "immutable_output_root": null,
+    "trial_artifact_manifest_format": null
+  }
+}
