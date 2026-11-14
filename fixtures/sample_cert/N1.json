@@ -137,6 +137,77 @@
       }
     }
   ],
+  "parts": [
+    {
+      "part": {
+        "usbMountedAs": [
+          4512,
+          4513
+        ]
+      },
+      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+      "rules": [
+        "R1",
+        "R2"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "openedFromMount": [
+          4600,
+          4513
+        ]
+      },
+      "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+      "rules": [
+        "R2",
+        "R3"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          4600,
+          "obj",
+          9001,
+          50
+        ]
+      },
+      "english": "E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          4512,
+          "obj",
+          9002,
+          51
+        ]
+      },
+      "english": "SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          3100,
+          4512
+        ]
+      },
+      "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
   "rules": [
     "R1",
     "R2",

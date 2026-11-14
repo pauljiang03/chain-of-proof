@@ -1,0 +1,913 @@
+{
+  "version": 1,
+  "case": {
+    "name": "Sample run (synthetic facts)",
+    "generated_at": "2026-11-14T06:36:04Z"
+  },
+  "stats": {
+    "proposals": 11,
+    "verified": 7,
+    "rejected": 4,
+    "by_strength": {
+      "strong": 5,
+      "heuristic": 1,
+      "judgment": 1
+    },
+    "by_rule": {
+      "R1": 4,
+      "R2": 4,
+      "R3": 2,
+      "R4": 1,
+      "R5": 1,
+      "T": 2
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "F1",
+      "question": "Which USB devices were connected, and as which volumes?",
+      "claim": {
+        "usbMountedAs": [
+          4512,
+          4513
+        ]
+      },
+      "status": "verified",
+      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+      "cited_facts": [
+        {
+          "id": 4512,
+          "kind": "usbInsert",
+          "t": 1427119200000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "0e0b39b0cb0744811a8b7c57bb6e1750c8a5dd00d8fe4d882962304a1efe5c41",
+          "prov": {
+            "image": "sample",
+            "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4513,
+          "kind": "volumeMount",
+          "t": 1427119201000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "853bd962119751b6b43a64103dc7d0097e1084f596a10d5fc46ad3301e3fcdab",
+          "prov": {
+            "image": "sample",
+            "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "usbMountedAs": [
+              4512,
+              4513
+            ]
+          },
+          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "rules": [
+            "R1",
+            "R2"
+          ],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "R1",
+        "R2"
+      ],
+      "strength": "strong",
+      "lean_file": "F1.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4512 4513\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F1\n\n#print axioms Cert.F1.verified\n"
+    },
+    {
+      "finding_id": "F2",
+      "question": "Which USB devices were connected, and as which volumes?",
+      "claim": {
+        "usbMountedAs": [
+          4510,
+          4511
+        ]
+      },
+      "status": "verified",
+      "english": "USB device SAMPLE-SERIAL-RM1 was connected (2015-03-23 13:00:00 UTC) and mounted as volume SAMPLE-VOL-RM1.",
+      "cited_facts": [
+        {
+          "id": 4510,
+          "kind": "usbInsert",
+          "t": 1427115600000000,
+          "res": 1,
+          "obj": 102,
+          "obj_text": "SAMPLE-SERIAL-RM1",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "646d2f5423d557550b2556ca9b873cd50ed69a988f4c1d571150c809bf564a55",
+          "prov": {
+            "image": "sample",
+            "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4511,
+          "kind": "volumeMount",
+          "t": 1427115601000000,
+          "res": 1,
+          "obj": 102,
+          "obj_text": "SAMPLE-SERIAL-RM1",
+          "aux": 89,
+          "aux_text": "SAMPLE-VOL-RM1",
+          "row_sha256": "c21b22cdb89fae84e9245868e0542ced3eab12117fc945fda3e1bdc41f9732de",
+          "prov": {
+            "image": "sample",
+            "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "usbMountedAs": [
+              4510,
+              4511
+            ]
+          },
+          "english": "USB device SAMPLE-SERIAL-RM1 was connected (2015-03-23 13:00:00 UTC) and mounted as volume SAMPLE-VOL-RM1.",
+          "rules": [
+            "R1",
+            "R2"
+          ],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "R1",
+        "R2"
+      ],
+      "strength": "strong",
+      "lean_file": "F2.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F2\n\ndef cited : List Fact := [\n  ⟨4510, .usbInsert, 1427115600000000, 1, 102, 0⟩,\n  ⟨4511, .volumeMount, 1427115601000000, 1, 102, 89⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4510 4511\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F2\n\n#print axioms Cert.F2.verified\n"
+    },
+    {
+      "finding_id": "F3",
+      "question": "Was a confidential file opened from a removable device?",
+      "claim": {
+        "both": [
+          {
+            "usbMountedAs": [
+              4512,
+              4513
+            ]
+          },
+          {
+            "openedFromMount": [
+              4600,
+              4513
+            ]
+          },
+          {
+            "before": [
+              4512,
+              4600
+            ]
+          }
+        ]
+      },
+      "status": "verified",
+      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. The connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC) happened before the opening of E:\\sample\\design_concept.ppt on volume SAMPLE-VOL-RM2 (2015-03-23 14:28:20 UTC): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "cited_facts": [
+        {
+          "id": 4512,
+          "kind": "usbInsert",
+          "t": 1427119200000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "0e0b39b0cb0744811a8b7c57bb6e1750c8a5dd00d8fe4d882962304a1efe5c41",
+          "prov": {
+            "image": "sample",
+            "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4513,
+          "kind": "volumeMount",
+          "t": 1427119201000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "853bd962119751b6b43a64103dc7d0097e1084f596a10d5fc46ad3301e3fcdab",
+          "prov": {
+            "image": "sample",
+            "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4600,
+          "kind": "lnkTarget",
+          "t": 1427120900000000,
+          "res": 1,
+          "obj": 913,
+          "obj_text": "E:\\sample\\design_concept.ppt",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "159da3c8845a87064ee0c5a9039a7679528da909cd12a0a4a59bbb0f194d0fff",
+          "prov": {
+            "image": "sample",
+            "artifact": "Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "usbMountedAs": [
+              4512,
+              4513
+            ]
+          },
+          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "rules": [
+            "R1",
+            "R2"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "openedFromMount": [
+              4600,
+              4513
+            ]
+          },
+          "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+          "rules": [
+            "R2",
+            "R3"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "before": [
+              4512,
+              4600
+            ]
+          },
+          "english": "The connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC) happened before the opening of E:\\sample\\design_concept.ppt on volume SAMPLE-VOL-RM2 (2015-03-23 14:28:20 UTC): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "rules": [],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "strength": "strong",
+      "lean_file": "F3.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F3\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.before 4512 4600))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F3\n\n#print axioms Cert.F3.verified\n"
+    },
+    {
+      "finding_id": "F4",
+      "question": "Were files copied onto the unauthorized device?",
+      "claim": {
+        "copiedHere": [
+          4701,
+          4700
+        ]
+      },
+      "status": "verified",
+      "english": "E:\\sample\\pricing.xlsx was likely copied onto volume SAMPLE-VOL-RM2: it was created there (2015-03-23 14:13:20 UTC) after its last modification (2015-03-22 13:13:20 UTC). This rests on heuristic rule R4.",
+      "cited_facts": [
+        {
+          "id": 4701,
+          "kind": "fileCreated",
+          "t": 1427120000000000,
+          "res": 10000,
+          "obj": 914,
+          "obj_text": "E:\\sample\\pricing.xlsx",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "8abd14db036ea7b7fb750c4a697da8502dbfeada6e3aa731505fa501cf66e78d",
+          "prov": {
+            "image": "sample",
+            "artifact": "FAT32 directory entry",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4700,
+          "kind": "fileModified",
+          "t": 1427030000000000,
+          "res": 2000000,
+          "obj": 914,
+          "obj_text": "E:\\sample\\pricing.xlsx",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "c9bb88588192a37af0d97cefce132bf64742c051a4f272f5349c9df22f55cd85",
+          "prov": {
+            "image": "sample",
+            "artifact": "FAT32 directory entry",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "copiedHere": [
+              4701,
+              4700
+            ]
+          },
+          "english": "E:\\sample\\pricing.xlsx was likely copied onto volume SAMPLE-VOL-RM2: it was created there (2015-03-23 14:13:20 UTC) after its last modification (2015-03-22 13:13:20 UTC). This rests on heuristic rule R4.",
+          "rules": [
+            "R4"
+          ],
+          "strength": "heuristic"
+        }
+      ],
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic",
+      "lean_file": "F4.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F4\n\ndef cited : List Fact := [\n  ⟨4701, .fileCreated, 1427120000000000, 10000, 914, 88⟩,\n  ⟨4700, .fileModified, 1427030000000000, 2000000, 914, 88⟩ ]\n\ndef claim : Claim := Sets.copiedHere 4701 4700\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F4\n\n#print axioms Cert.F4.verified\n"
+    },
+    {
+      "finding_id": "F5",
+      "question": "Was anything deleted afterwards?",
+      "claim": {
+        "deletedAfter": [
+          4800,
+          4701
+        ]
+      },
+      "status": "verified",
+      "english": "E:\\sample\\pricing.xlsx was deleted (2015-03-23 15:36:40 UTC) after the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC).",
+      "cited_facts": [
+        {
+          "id": 4800,
+          "kind": "fileDeleted",
+          "t": 1427125000000000,
+          "res": 1,
+          "obj": 914,
+          "obj_text": "E:\\sample\\pricing.xlsx",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "69533257e5c3939099fa6a515478db97c422a65fceead349d01f6b881badc4c9",
+          "prov": {
+            "image": "sample",
+            "artifact": "$Recycle.Bin $I record",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4701,
+          "kind": "fileCreated",
+          "t": 1427120000000000,
+          "res": 10000,
+          "obj": 914,
+          "obj_text": "E:\\sample\\pricing.xlsx",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "8abd14db036ea7b7fb750c4a697da8502dbfeada6e3aa731505fa501cf66e78d",
+          "prov": {
+            "image": "sample",
+            "artifact": "FAT32 directory entry",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "deletedAfter": [
+              4800,
+              4701
+            ]
+          },
+          "english": "E:\\sample\\pricing.xlsx was deleted (2015-03-23 15:36:40 UTC) after the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC).",
+          "rules": [
+            "R5"
+          ],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong",
+      "lean_file": "F5.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F5\n\ndef cited : List Fact := [\n  ⟨4800, .fileDeleted, 1427125000000000, 1, 914, 88⟩,\n  ⟨4701, .fileCreated, 1427120000000000, 10000, 914, 88⟩ ]\n\ndef claim : Claim := Sets.deletedAfter 4800 4701\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F5\n\n#print axioms Cert.F5.verified\n"
+    },
+    {
+      "finding_id": "J1",
+      "question": "Was the web search related to the leak?",
+      "claim": {
+        "both": [
+          {
+            "tagged": [
+              3100,
+              "obj",
+              9003,
+              52
+            ]
+          },
+          {
+            "before": [
+              3100,
+              4512
+            ]
+          }
+        ]
+      },
+      "status": "verified",
+      "english": "sample data leakage methods is tagged \"leakage-related\" (an LLM judgment, shown as an assumption and not as evidence). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "cited_facts": [
+        {
+          "id": 3100,
+          "kind": "webSearch",
+          "t": 1427119000000000,
+          "res": 1,
+          "obj": 700,
+          "obj_text": "sample data leakage methods",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "79710e3d726fbfef447be89bfc0eaef55df97927151fe1a515a135b0fe239879",
+          "prov": {
+            "image": "sample",
+            "artifact": "Chrome History",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 9003,
+          "kind": "tag",
+          "t": 1794636000000000,
+          "res": 1,
+          "obj": 700,
+          "obj_text": "sample data leakage methods",
+          "aux": 52,
+          "aux_text": "leakage-related",
+          "row_sha256": "8a18b3d80e8ab4edd77a4f1fe3eba689efeaec38b1ff2ab39b415691ab875a50",
+          "prov": {
+            "source": "llm",
+            "model": "sample"
+          }
+        },
+        {
+          "id": 4512,
+          "kind": "usbInsert",
+          "t": 1427119200000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "0e0b39b0cb0744811a8b7c57bb6e1750c8a5dd00d8fe4d882962304a1efe5c41",
+          "prov": {
+            "image": "sample",
+            "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "tagged": [
+              3100,
+              "obj",
+              9003,
+              52
+            ]
+          },
+          "english": "sample data leakage methods is tagged \"leakage-related\" (an LLM judgment, shown as an assumption and not as evidence).",
+          "rules": [
+            "T"
+          ],
+          "strength": "judgment"
+        },
+        {
+          "part": {
+            "before": [
+              3100,
+              4512
+            ]
+          },
+          "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "rules": [],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "T"
+      ],
+      "strength": "judgment",
+      "lean_file": "J1.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.J1\n\ndef cited : List Fact := [\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0⟩,\n  ⟨9003, .tag, 1794636000000000, 1, 700, 52⟩,\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩ ]\n\ndef claim : Claim := .both (Sets.tagged 3100 .obj 9003 52) (.before 3100 4512)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.J1\n\n#print axioms Cert.J1.verified\n"
+    },
+    {
+      "finding_id": "N1",
+      "question": "Was a confidential file opened from an unauthorized USB device?",
+      "claim": {
+        "both": [
+          {
+            "usbMountedAs": [
+              4512,
+              4513
+            ]
+          },
+          {
+            "openedFromMount": [
+              4600,
+              4513
+            ]
+          },
+          {
+            "tagged": [
+              4600,
+              "obj",
+              9001,
+              50
+            ]
+          },
+          {
+            "tagged": [
+              4512,
+              "obj",
+              9002,
+              51
+            ]
+          },
+          {
+            "before": [
+              3100,
+              4512
+            ]
+          }
+        ]
+      },
+      "status": "verified",
+      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "cited_facts": [
+        {
+          "id": 4512,
+          "kind": "usbInsert",
+          "t": 1427119200000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "0e0b39b0cb0744811a8b7c57bb6e1750c8a5dd00d8fe4d882962304a1efe5c41",
+          "prov": {
+            "image": "sample",
+            "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4513,
+          "kind": "volumeMount",
+          "t": 1427119201000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "853bd962119751b6b43a64103dc7d0097e1084f596a10d5fc46ad3301e3fcdab",
+          "prov": {
+            "image": "sample",
+            "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 4600,
+          "kind": "lnkTarget",
+          "t": 1427120900000000,
+          "res": 1,
+          "obj": 913,
+          "obj_text": "E:\\sample\\design_concept.ppt",
+          "aux": 88,
+          "aux_text": "SAMPLE-VOL-RM2",
+          "row_sha256": "159da3c8845a87064ee0c5a9039a7679528da909cd12a0a4a59bbb0f194d0fff",
+          "prov": {
+            "image": "sample",
+            "artifact": "Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk",
+            "tool": "hand-written"
+          }
+        },
+        {
+          "id": 9001,
+          "kind": "tag",
+          "t": 1794636000000000,
+          "res": 1,
+          "obj": 913,
+          "obj_text": "E:\\sample\\design_concept.ppt",
+          "aux": 50,
+          "aux_text": "confidential",
+          "row_sha256": "01f826fa5178109b046ebdf532a6f7f04ae774a8da342a622cb7c8ad7c453781",
+          "prov": {
+            "source": "deterministic",
+            "rule": "path is under a folder the case brief lists as confidential"
+          }
+        },
+        {
+          "id": 9002,
+          "kind": "tag",
+          "t": 1794636000000000,
+          "res": 1,
+          "obj": 101,
+          "obj_text": "SAMPLE-SERIAL-RM2",
+          "aux": 51,
+          "aux_text": "unauthorized-device",
+          "row_sha256": "06f1b2b3940f32505433d845d4f4d67a29ffe348fed83a99f1809c58125fe856",
+          "prov": {
+            "source": "deterministic",
+            "rule": "device serial is not on the case brief's authorized list"
+          }
+        },
+        {
+          "id": 3100,
+          "kind": "webSearch",
+          "t": 1427119000000000,
+          "res": 1,
+          "obj": 700,
+          "obj_text": "sample data leakage methods",
+          "aux": 0,
+          "aux_text": "(none)",
+          "row_sha256": "79710e3d726fbfef447be89bfc0eaef55df97927151fe1a515a135b0fe239879",
+          "prov": {
+            "image": "sample",
+            "artifact": "Chrome History",
+            "tool": "hand-written"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "part": {
+            "usbMountedAs": [
+              4512,
+              4513
+            ]
+          },
+          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "rules": [
+            "R1",
+            "R2"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "openedFromMount": [
+              4600,
+              4513
+            ]
+          },
+          "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+          "rules": [
+            "R2",
+            "R3"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "tagged": [
+              4600,
+              "obj",
+              9001,
+              50
+            ]
+          },
+          "english": "E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential).",
+          "rules": [
+            "T"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "tagged": [
+              4512,
+              "obj",
+              9002,
+              51
+            ]
+          },
+          "english": "SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list).",
+          "rules": [
+            "T"
+          ],
+          "strength": "strong"
+        },
+        {
+          "part": {
+            "before": [
+              3100,
+              4512
+            ]
+          },
+          "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "rules": [],
+          "strength": "strong"
+        }
+      ],
+      "rules": [
+        "R1",
+        "R2",
+        "R3",
+        "T"
+      ],
+      "strength": "strong",
+      "lean_file": "N1.lean",
+      "trust_tier": "kernel",
+      "axioms": [],
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.N1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88⟩,\n  ⟨9001, .tag, 1794636000000000, 1, 913, 50⟩,\n  ⟨9002, .tag, 1794636000000000, 1, 101, 51⟩,\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.both (Sets.tagged 4600 .obj 9001 50) (.both (Sets.tagged 4512 .obj 9002 51) (.before 3100 4512))))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.N1\n\n#print axioms Cert.N1.verified\n"
+    }
+  ],
+  "rejections": [
+    {
+      "finding_id": "X1",
+      "question": "Was a confidential file opened from a removable device?",
+      "claim": {
+        "both": [
+          {
+            "usbMountedAs": [
+              4510,
+              4511
+            ]
+          },
+          {
+            "openedFromMount": [
+              4600,
+              4511
+            ]
+          }
+        ]
+      },
+      "status": "rejected",
+      "reason": "the cited facts do not support this claim",
+      "parts": [
+        {
+          "part": {
+            "usbMountedAs": [
+              4510,
+              4511
+            ]
+          },
+          "ok": true,
+          "bricks": [
+            "ok   is 4510 (usbInsert)",
+            "ok   is 4511 (volumeMount)",
+            "ok   link 4510 (obj) 4511 (obj)"
+          ]
+        },
+        {
+          "part": {
+            "openedFromMount": [
+              4600,
+              4511
+            ]
+          },
+          "ok": false,
+          "bricks": [
+            "ok   is 4600 (lnkTarget)",
+            "ok   is 4511 (volumeMount)",
+            "FAIL link 4600 (aux) 4511 (aux)"
+          ]
+        }
+      ],
+      "checked_in_ms": 344
+    },
+    {
+      "finding_id": "X2",
+      "question": "Were files copied onto the unauthorized device?",
+      "claim": {
+        "copiedHere": [
+          4703,
+          4702
+        ]
+      },
+      "status": "rejected",
+      "reason": "the cited facts do not support this claim",
+      "parts": [
+        {
+          "part": {
+            "copiedHere": [
+              4703,
+              4702
+            ]
+          },
+          "ok": false,
+          "bricks": [
+            "ok   is 4703 (fileCreated)",
+            "ok   is 4702 (fileModified)",
+            "ok   link 4703 (obj) 4702 (obj)",
+            "ok   link 4703 (aux) 4702 (aux)",
+            "FAIL before 4702 4703"
+          ]
+        }
+      ],
+      "checked_in_ms": 333
+    },
+    {
+      "finding_id": "X3",
+      "question": "Did the search come after the device was connected?",
+      "claim": {
+        "before": [
+          4512,
+          3100
+        ]
+      },
+      "status": "rejected",
+      "reason": "the cited facts do not support this claim",
+      "parts": [
+        {
+          "part": {
+            "before": [
+              4512,
+              3100
+            ]
+          },
+          "ok": false,
+          "bricks": [
+            "FAIL before 4512 3100"
+          ]
+        }
+      ],
+      "checked_in_ms": 340
+    },
+    {
+      "finding_id": "X4",
+      "question": "Was the authorized device tagged unauthorized?",
+      "claim": {
+        "tagged": [
+          4510,
+          "obj",
+          9002,
+          51
+        ]
+      },
+      "status": "rejected",
+      "reason": "the cited facts do not support this claim",
+      "parts": [
+        {
+          "part": {
+            "tagged": [
+              4510,
+              "obj",
+              9002,
+              51
+            ]
+          },
+          "ok": false,
+          "bricks": [
+            "ok   is 9002 (tag)",
+            "ok   val 9002 (aux) 51",
+            "FAIL link 9002 (obj) 4510 (obj)"
+          ]
+        }
+      ],
+      "checked_in_ms": 333
+    }
+  ]
+}

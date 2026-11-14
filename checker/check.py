@@ -147,6 +147,12 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
                      "aux": f.aux, "aux_text": source.string(f.aux),
                      "row_sha256": f.row_sha256(), "prov": f.prov}
                     for f in facts],
+                "parts": [
+                    {"part": claims.to_json(part),
+                     "english": claims.english(part, found, source),
+                     "rules": claims.rules(part),
+                     "strength": claims.strength(part, found)}
+                    for part in claims.parts(claim)],
                 "rules": claims.rules(claim),
                 "strength": claims.strength(claim, found),
                 "lean_file": f"{finding_id}.lean",
