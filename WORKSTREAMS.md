@@ -2,9 +2,10 @@
 
 Updated: 2026-11-14. Read this before assigning more agents.
 
-Current implementation split: [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md). Original terminal owns F1 audit, F2 citations,
-and F3 proof-gap diagnostics. Other terminal owns F4 portable verification, F5 coverage, and F6 revision history.
-The hardening branch at `c411fe6` is now integrated; use the feature handoff for current file ownership.
+The two-terminal feature split is integrated. See [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md) for interfaces and ownership.
+The original terminal supplied audits, citations, and proof-gap diagnostics.
+The other terminal supplied portable verification, coverage, and claim history.
+Both coordinators connected the modules to the runner and report.
 
 ## Objective and constraints
 
@@ -21,16 +22,9 @@ Finish a usable AI-led investigation workflow quickly. Keep the existing Lean ve
 
 ## Current terminal: ownership and state
 
-The original three implementation lanes are complete. The root agent owns final integration and the push.
-The `a0b4fce` checkpoint is pushed. The second terminal is working in separate worktrees.
-
-| ID | Owner | State | Work and owned files |
-|---|---|---|---|
-| C0 | Root | Final integration / push | `agent/run.py`, deadline tests, `README.md`, `TASKS.md`, `WORKSTREAMS.md`, `runs/current/`. Integrate completed lanes; preserve current results and provenance. |
-| C1 | `journal_gaps` | Complete; frozen | JumpList sections of `extractor/windows.py`, `extractor/inventory.py`, `tests/test_jumplists.py`, inventory tests. Windows 10 v4 parsing, valid empty CFB handling, concrete container inventory. Fresh evidence build is ready. |
-| C2 | `optical_timestamps` | Complete; frozen | `eval/nist_answers.py`, `extractor/webcloud.py`, mailbox sections of `extractor/windows.py`, related tests. Correct source/time vocabulary, extensionless browser paths, unavailable senders, inventory answers. Original-20 package and final validation. |
-| C3 | `lean_gap_types` | Complete; frozen | Acquisition identity, explicit public policy, bounded journal path observations, existing Lean rules, `eval/package.py`, `comparison/mulder/`, package tests. New metadata schema was stopped before any repository edits. |
-
+All six feature lanes are complete. The root agent owns the final checkpoint and push.
+The other terminal worked on `finish/evidence-features` in separate worktrees.
+No agent may change saved benchmark results as part of this feature work.
 Use a separate worktree for new work and agree on file ownership before integration.
 
 ## A–D preparation and demonstration
@@ -56,7 +50,8 @@ Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
 
-- 281 regression tests pass. Lean builds successfully.
+- 452 regression tests pass with the optional API dependencies installed. Lean builds successfully.
+- The synthetic workflow verifies refusal, explicit revision, linked reports, portable packages, and tamper rejection without a model call.
 - All 473 certificates in the current saved report independently verify.
 - All 24 known false-claim regression probes are refused.
 - No LLM grader remains in the current evaluation path.
@@ -120,16 +115,15 @@ After credentials are available, the root coordinator can use a new run name:
 For a controlled comparison, replace `opus` with the same exact model ID and provider used by Mulder. The alias command above is a development run, not that comparison.
 The optional API backend is `--backend deepagents`; install `.[agent]` and configure credentials locally first. It has not yet had a live integration run here.
 
-## Available assignments for a new terminal
+## Next parallel assignments
 
 Take one label per agent. Work in a separate worktree. Announce the label and files before editing.
 
 | ID | Assignment | Allowed work | Completion evidence |
 |---|---|---|---|
-| N1 | API integration readiness | Existing API backend and isolated integration tests. Verify restricted evidence tools, explicit model selection, time limits, error reporting, and dependency setup. Coordinate `agent/run.py` ownership with C0. Do not launch paid trials or Mulder on your own. | Reproducible setup and a mocked test or authorized live smoke test. No new agent framework. |
-| N2 | Public subject scope | Investigate Q15's all-profile export. Propose the smallest explicit public account selector shared by both systems; never infer it from the key. Own a proposal/test file first, coordinate adapter edits with C0. | Tests with two users, an unknown user, and another case. No hidden NIST username fallback. |
-| N3 | Reference contract review | Read the original PDF/text and the 14 unresolved question notes. Write source-grounded findings under `eval/review_notes/`. Do not edit the reference, assign new model grades, or mark independent human review complete. | Exact source pages/lines, the ambiguity, and the smallest proposed contract decision. |
-| N4 | Release smoke test | Read-only checks of CLI commands, package inputs, local links, output preservation, and failure messages. Put findings in a new file under `eval/review_notes/`. | Reproducible command and observed failure. Fix only after file ownership is agreed. |
+| B1 | Unchecked proposal capture | Implement A's receipt-only mode and replay its exact claims through B. Coordinate runner and tool ownership with root. A must receive no proof feedback. | Frozen claim IDs and hashes; no altered or silently discarded proposals. |
+| B2 | Shared answer projection | Define one claim-faithful answer path for A, B, and C. Do not mark unchecked claims verified to reuse the current adapter. | Invalid proposed values remain invalid in A; B filters exact claims; source links are retained. |
+| B3 | Reference decisions | Review the existing source-grounded notes for the 14 unresolved questions. Keep human review and mechanical source checks distinct. | Explicit approved contract decisions, fixed before model execution. |
 
 Do not start thumbnail interpretation, ESE recovery engines, exhaustive journal proof sweeps, or new Lean metadata schemas in this finish pass.
 They remain useful later work, not hidden completion requirements for this checkpoint.

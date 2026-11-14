@@ -182,6 +182,10 @@ class AuditLog:
             call_id = "call-" + uuid.uuid4().hex
             try:
                 result = action()
+                # A completed action may return bytes or non-finite numbers.
+                # Treat an unrecordable result as a logged tool failure, while
+                # leaving valid return objects untouched.
+                _canonical(result)
             except BaseException as error:
                 self._append(state, tool, arguments, call_id, start,
                              time.perf_counter_ns() - clock, None,

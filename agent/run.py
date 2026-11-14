@@ -350,12 +350,12 @@ def main(argv=None) -> int:
                 "ended": "backend_error", "is_error": True, "error_type": type(error).__name__}
         print(f"  stopped: backend failed ({meta['error_type']}); see run.json")
     (run_dir / "summary.md").write_text(meta.pop("summary") + "\n")
-    data = export.bundle(run_dir, profile.name)
-    data["case"].update(backend=args.backend, model=model, case_id=profile.case_id,
+    case_metadata = dict(backend=args.backend, model=model, case_id=profile.case_id,
                         time_zone=profile.time_zone, profile_source=profile_source,
                         scoring_requested=plan.measured,
                         run_manifest="run-manifest.json",
                         facts_sha256=manifest["inputs"]["facts"]["sha256"], **meta)
+    data = export.bundle(run_dir, profile.name, case_metadata=case_metadata)
     (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     (run_dir / "report.md").write_text(report.render(data))
     print(f"\n{meta['tool_calls']} tool calls, {meta['seconds']} s, ended: {meta['ended']}")
@@ -374,6 +374,7 @@ def main(argv=None) -> int:
                           "error_type": type(error).__name__}
             data["case"]["gate_error_type"] = type(error).__name__
             (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+            (run_dir / "report.md").write_text(report.render(data))
             print(f"  gate failed ({type(error).__name__}); see run.json")
     try:
         pipeline.evaluate(plan, data, run_dir / "answers.json", run_dir / "results.json",
@@ -381,13 +382,23 @@ def main(argv=None) -> int:
                           verification_output=run_dir / "verification.json")
     except (ValueError, OSError) as error:
         ap.error(str(error))
+    if (run_dir / "answers.json").is_file():
+        # Count answer presence only after the explicit evaluation path produced
+        # a submission. Preserve the already exported audit/certificate snapshot;
+        # this summary never reads the reference or awards correctness credit.
+        from agent.coverage import summarize_coverage
+        submission = json.loads((run_dir / "answers.json").read_text())
+        data["coverage"]["questions"] = summarize_coverage(data,
+            public_questions=plan.questions, answers=submission)["questions"]
+        (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+        (run_dir / "report.md").write_text(report.render(data))
     if backend_error is not None and not _expected_backend_error(backend_error):
         raise backend_error
     if gate_error is not None and not isinstance(
             gate_error, (OSError, ValueError, RuntimeError, subprocess.SubprocessError)):
         raise gate_error
     failed_execution = _execution_failed(meta)
-    return 1 if failed_execution or gate_error is not None or (
+    return 1 if failed_execution or gate_error is not None or data["audit"]["status"] == "invalid" or (
         regression and not regression["all_as_expected"]) else 0
 
 

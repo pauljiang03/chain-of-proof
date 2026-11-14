@@ -22,6 +22,178 @@ from pathlib import Path
 from . import citations
 
 
+def _object(value):
+    return value if isinstance(value, dict) else {}
+
+
+def _supplied(mapping, key, absent="unavailable"):
+    value = mapping.get(key)
+    if value is None:
+        return absent
+    if isinstance(value, (dict, list)):
+        value = json.dumps(value, sort_keys=True, ensure_ascii=False)
+    return citations.text(value)
+
+
+def _metric(section, field, *, known_total=False):
+    section = _object(section)
+    if section.get("status") == "invalid":
+        return "invalid"
+    if section.get("status") != "measured" and not known_total:
+        return "unmeasured"
+    return _supplied(section, field, "unmeasured")
+
+
+def _problems(label, section):
+    return [f"- {label}: {citations.text(problem)}" for problem in section.get("problems", []) or []]
+
+
+def _audit_summary(run):
+    if "audit" not in run:
+        return []
+    audit = _object(run["audit"])
+    lines = ["## Audit integrity", ""]
+    if audit.get("status") == "invalid" or audit.get("passed") is False:
+        lines += ["**INVALID AUDIT — recorded events are diagnostic only.**", ""]
+    elif audit.get("status") == "valid" and audit.get("passed") is True:
+        lines += ["The bundle reports a passed audit integrity check. This renderer does not recheck the log.", ""]
+    else:
+        lines += ["Audit integrity is unavailable or not established by this bundle.", ""]
+    lines += [f"- Declared status: {_supplied(audit, 'status')}; passed: {_supplied(audit, 'passed')}",
+              f"- Recorded events: {_supplied(audit, 'count', 'unmeasured')}",
+              f"- Audit file (literal path): {_supplied(audit, 'path')}",
+              f"- File SHA-256: {_supplied(audit, 'sha256')}",
+              f"- Chain head: {_supplied(audit, 'head')}",
+              f"- Expected head supplied to audit check: {_supplied(audit, 'expected_head', 'not supplied')}"]
+    if audit.get("scope"):
+        lines.append("- Recorded scope: " + citations.text(audit["scope"]))
+    lines += _problems("Audit problem", audit)
+    lines += ["", "Inspect the separately supplied audit file to review its entries. Integrity does not "
+              "establish authorship or complete history; detecting a complete rewrite requires an "
+              "independently retained checkpoint. No audit-file link is inferred.", ""]
+    return lines
+
+
+def _coverage_summary(run):
+    if "coverage" not in run:
+        return []
+    coverage = _object(run["coverage"])
+    if coverage.get("schema_version") != 1:
+        return ["## Recorded coverage", "", "Coverage summary is unavailable or has an unsupported schema.", ""]
+    lines = ["## Recorded coverage", "",
+             "These counts describe supplied records and logged activity. They do not establish "
+             "investigation completeness. Answer presence is not answer accuracy. Unmeasured is not zero.", "",
+             "| Recorded measure | Count | Status |", "| --- | ---: | --- |"]
+    for key, field, label in (("extraction", "record_count", "Extracted records"),
+                              ("inspection", "record_count", "Records explicitly returned by the fact tool"),
+                              ("citations", "record_count", "Distinct cited records"),
+                              ("certification", "finding_count", "Findings recorded as accepted")):
+        section = _object(coverage.get(key))
+        lines.append(f"| {label} | {_metric(section, field)} | {_supplied(section, 'status', 'unmeasured')} |")
+    lines += ["", "Inspection counts do not include SQL aggregates or establish that a model understood "
+              "a record. Accepted counts use recorded checker status, not an independent replay.",
+              "Inspection audit integrity: " + _supplied(_object(coverage.get("inspection")), "audit_integrity") + ".", ""]
+    questions = _object(coverage.get("questions"))
+    lines += [f"Public question answer presence ({_supplied(questions, 'status', 'unmeasured')}): "
+              f"total {_metric(questions, 'total_count', known_total=True)}; "
+              + "; ".join(f"{label} {_metric(questions, field)}" for field, label in
+                          (("answered_count", "answered"), ("unknown_count", "unknown"),
+                           ("unanswered_count", "unanswered"), ("missing_count", "missing response"))) + ".", ""]
+    for field, label in (("unknown_ids", "Unknown questions"), ("unanswered_ids", "Unanswered questions"),
+                         ("missing_ids", "Questions with no response"), ("unexpected_ids", "Unexpected response IDs")):
+        if questions.get(field):
+            lines.append(f"- {label}: {_supplied(questions, field)}")
+    failures = _object(coverage.get("failures"))
+    execution, tools, extraction = (_object(failures.get(key)) for key in ("run", "tools", "extraction"))
+    lines += ["", f"Run status: {_supplied(execution, 'status', 'unmeasured')}; ended: {_supplied(execution, 'ended')}.",
+              f"Tool outcomes ({_supplied(tools, 'status', 'unmeasured')}): errors {_metric(tools, 'error_count')}; "
+              f"refused calls {_metric(tools, 'rejected_count')}.",
+              f"Extraction issues ({_supplied(extraction, 'status', 'unmeasured')}): "
+              + "; ".join(f"{label} {_metric(extraction, field)}" for field, label in
+                          (("reader_failure_count", "reader failures"), ("unsupported_source_count", "unsupported sources"),
+                           ("warning_count", "warnings"), ("unclassified_issue_count", "unclassified issues"))) + ".", ""]
+    for issue in extraction.get("issues", []) or []:
+        if isinstance(issue, dict):
+            lines.append(f"- Extraction {_supplied(issue, 'category')}: {_supplied(issue, 'message')}")
+    for error in tools.get("errors", []) or []:
+        if isinstance(error, dict):
+            lines.append(f"- Tool error at recorded sequence {_supplied(error, 'sequence')}: "
+                         f"{_supplied(error, 'tool')} ({_supplied(error, 'error_type')}); call {_supplied(error, 'call_id')}.")
+    for key in ("extraction", "inspection", "citations", "certification", "questions"):
+        lines += _problems(f"{key} summary problem", _object(coverage.get(key)))
+    for key, section in (("tool outcomes", tools), ("extraction issues", extraction)):
+        lines += _problems(f"{key} summary problem", section)
+    for limitation in coverage.get("limitations", []) or []:
+        lines.append("- Limitation: " + citations.text(limitation))
+    return lines + [""]
+
+
+def _attempt_table(attempts):
+    lines = ["| Recorded attempt | Finding | Outcome | Started / completed | Explicit revision |",
+             "| --- | --- | --- | --- | --- |"]
+    for raw in attempts:
+        attempt = _object(raw)
+        outcome = _supplied(attempt, "status", "unknown")
+        if attempt.get("duplicate_of") is not None:
+            outcome += " of " + _supplied(attempt, "duplicate_of") + " (no new proof)"
+        revision = "none recorded"
+        if attempt.get("revises") is not None or attempt.get("revision_status") not in (None, "none"):
+            revision = (f"revises {_supplied(attempt, 'revises')}; "
+                        f"status {_supplied(attempt, 'revision_status', 'unknown')}")
+        if attempt.get("revision_error"):
+            revision += ": " + citations.text(attempt["revision_error"])
+        lines.append(f"| {_supplied(attempt, 'attempt_id')} | {_supplied(attempt, 'finding_id')} | {outcome} | "
+                     f"{_supplied(attempt, 'started_at')} / {_supplied(attempt, 'completed_at')} | {revision} |")
+        if attempt.get("error"):
+            lines.append(f"| Recorded error | | {citations.text(attempt['error'])} | | |")
+        for problem in attempt.get("problems", []) or []:
+            lines.append(f"| Attempt diagnostic | | {citations.text(problem)} | | |")
+    return lines + [""]
+
+
+def _history_summary(run):
+    if "history" not in run:
+        return []
+    history = _object(run["history"])
+    if history.get("schema_version") != 1:
+        return ["## Recorded claim attempts", "", "Attempt history is unavailable or has an unsupported schema.", ""]
+    lines = ["## Recorded claim attempts", "",
+             "Recorded attempts only, not a complete history guarantee. Outcomes are recorded checker "
+             "results, not independent verification. No revision or repair is inferred from similar claims.", ""]
+    integrity = _object(history.get("audit_integrity"))
+    if integrity.get("status") == "failed":
+        lines += ["**INVALID HISTORY AUDIT — these events are diagnostic only.**", ""]
+    elif integrity.get("status") in (None, "unavailable", "not_checked"):
+        lines += [f"History audit integrity: {_supplied(integrity, 'status')}. "
+                  "No integrity guarantee is supplied for these events.", ""]
+    else:
+        lines += [f"History audit integrity: {_supplied(integrity, 'status')}; integrity does not establish completeness.", ""]
+    if history.get("available") is not True:
+        lines += ["History is unavailable; this does not establish that no attempts occurred.", ""]
+    counts = _object(history.get("counts"))
+    lines += ["Recorded counts: " + "; ".join(f"{label} {_supplied(counts, key, 'unmeasured')}" for key, label in
+              (("attempts", "attempts"), ("accepted", "accepted"), ("refused", "refused"),
+               ("duplicate", "duplicate"), ("failed", "failed"), ("unknown", "unknown"),
+               ("explicit_revisions", "explicit revisions"), ("invalid_revisions", "invalid revision links"))) + ".", "",
+              f"Order supplied by the history summary: {_supplied(history, 'ordering')}. "
+              "Audit order is completed-event order; proposal-only logs retain their recorded order. "
+              "Missing timestamps are not reconstructed.", ""]
+    if isinstance(history.get("attempts"), list) and history["attempts"]:
+        lines += _attempt_table(history["attempts"])
+    coverage = _object(history.get("coverage"))
+    lines += [f"Unmatched proposal rows: {_supplied(coverage, 'unmatched_proposal_rows', 'unmeasured')}; "
+              f"attempts without timestamps: {_supplied(coverage, 'attempts_without_timestamps', 'unmeasured')}; "
+              f"interrupted calls: {_supplied(coverage, 'interrupted_calls', 'unmeasured')}.", ""]
+    if isinstance(history.get("unmatched_proposals"), list) and history["unmatched_proposals"]:
+        lines += ["### Proposals with unknown placement relative to audit events", "",
+                  "These rows are separate from the attempt sequence and its counts.", ""]
+        lines += _attempt_table(history["unmatched_proposals"])
+    lines += _problems("History problem", history)
+    if history.get("disclaimer"):
+        lines += ["", citations.text(history["disclaimer"])]
+    return lines + [""]
+
+
 def _proof_gaps(run: dict) -> list:
     gaps = [(r, r.get("proof_gap")) for r in run.get("rejections", [])
             if isinstance(r.get("proof_gap"), dict) and r["proof_gap"].get("status") == "diagnostic"]
@@ -55,6 +227,8 @@ def render(run: dict, include_judgments: bool = False) -> str:
     if include_judgments:
         L += [f"{len(run.get('conclusions', []))} unverified judgments are included in a "
               "separate appendix at the reader's explicit request.", ""]
+    L += _audit_summary(run)
+    L += _coverage_summary(run)
     L += ["", "## Certified findings", "",
           "Each sentence was generated from extracted records and checked by the proof "
           "checker. `strong`: follows from what the artifacts record. `heuristic`: rests on "
@@ -75,6 +249,7 @@ def render(run: dict, include_judgments: bool = False) -> str:
                      f"[Proof record](#proof-f{number}).")
         L.append("")
     L += _proof_gaps(run)
+    L += _history_summary(run)
     L += ["## Evidence records", "",
           "Every copied citation is shown below, scoped to its finding. Repeated fact IDs "
           "are not merged. Provenance is copied metadata; its presence does not prove the "

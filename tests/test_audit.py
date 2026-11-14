@@ -132,6 +132,29 @@ class ToolAudit(unittest.TestCase):
         self.assertEqual(event["error"], {"type": "TypeError"})
         self.assertEqual(event["arguments"], {"positional": [], "keyword": {}})
 
+    def test_non_json_sql_results_log_sanitized_failures_and_keep_chain_valid(self):
+        cases = [("SELECT 1e999 AS n", ValueError),
+                 ("SELECT x'41' AS blob", TypeError)]
+        for index, (query, error_type) in enumerate(cases, 1):
+            with self.subTest(query=query):
+                with self.assertRaises(error_type) as raised:
+                    self.bench.sql(query)
+                events = self.events()
+                self.assertEqual(len(events), index)
+                event = events[-1]
+                self.assertEqual(event["arguments"], {"query": query})
+                self.assertEqual(event["error"], {"type": error_type.__name__})
+                self.assertEqual(event["outcome"], "error")
+                self.assertFalse(event["success"])
+                self.assertIsNone(event["result"])
+                self.assertNotIn(str(raised.exception), self.path.read_text())
+                state = verify_audit(self.path)
+                self.assertTrue(state["passed"], state)
+                self.assertEqual(state["count"], index)
+        self.assertEqual(self.bench.sql("SELECT id FROM facts")["rows"], [[1]])
+        self.assertEqual(verify_audit(self.path)["count"], 3)
+        self.assertTrue(verify_audit(self.path)["passed"])
+
     def test_concurrent_calls_keep_sequential_unique_events_and_correct_results(self):
         def work(index):
             if index % 2:

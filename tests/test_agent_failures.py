@@ -57,6 +57,8 @@ class AgentFailures(unittest.TestCase):
         self.assertEqual(self.local_cli({"type": "result", "subtype": "success", "result": "done"}, 0), 0)
         self.finalized()
         self.assertEqual(self.saved()["case"]["ended"], "success")
+        self.assertEqual(self.saved()["coverage"]["failures"]["run"],
+                         {"status": "completed", "ended": "success"})
         self.assertEqual((self.output / "summary.md").read_text(), "done\n")
 
     def test_success_event_does_not_hide_nonzero_exit(self):
@@ -72,6 +74,7 @@ class AgentFailures(unittest.TestCase):
         self.finalized()
         meta = self.saved()["case"]
         self.assertTrue(meta["is_error"])
+        self.assertEqual(self.saved()["coverage"]["failures"]["run"]["status"], "failed")
         self.assertEqual(meta["result_subtype"], "error_during_execution")
         self.assertEqual(meta["exit_code"], 1)
 
@@ -224,6 +227,9 @@ class AgentFailures(unittest.TestCase):
         self.assertFalse(result["gate_regression"]["measured"])
         self.assertNotIn("all_as_expected", result["gate_regression"])
         self.assertEqual([f["finding_id"] for f in self.saved()["findings"]], ["A001"])
+        questions = self.saved()["coverage"]["questions"]
+        self.assertEqual((questions["status"], questions["total_count"], questions["answered_count"]),
+                         ("measured", 1, 1))
         self.assert_no_exception_payload()
 
     def test_gate_error_does_not_hide_failed_certificate_verification(self):

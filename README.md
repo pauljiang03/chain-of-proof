@@ -47,12 +47,16 @@ flowchart TD
     C --> G[Generate Lean code]
     F --> G
     G --> K{Lean kernel accepts?}
-    K -->|No| X[Refusal with reasons]
+    K -->|No| X[Refusal and evidence requirements]
     X --> S
     K -->|Yes| B[Certificate and fixed sentence]
     B --> V[Independent certificate verifier]
     F --> V
     V --> R[Certified report]
+    S --> L[Tool audit and explicit claim history]
+    L --> R
+    R --> Z[Portable verification package]
+    F --> Z
     V --> A[Answer adapter]
     Q --> A
     A --> J[Structured answers with source links]
@@ -112,6 +116,45 @@ Parsers, source interpretation, sentence templates, and answer adapters still re
 A certificate can include a heuristic rule.
 Its strength label identifies this dependency.
 A proof of that rule's conditions does not make the heuristic certain.
+
+## Inspect an investigation
+
+Each finding links to all its cited records and its proof in the report.
+The record view shows extracted values, timestamps, uncertainty, and available source details.
+It does not invent a source offset when the reader did not provide one.
+
+Future investigator runs record each completed evidence-tool call in `audit.jsonl`.
+The log includes arguments, results, times, durations, and hashes.
+Its integrity check can detect changes relative to a retained hash.
+It does not authenticate the author. An interrupted call can be absent.
+The run manifest binds the supplied facts, public prompt, software, and requested model.
+An unobserved model revision remains unknown.
+
+Refused claims can include a diagnostic statement of what is still required.
+For example, the checker can identify a missing record, different device identities,
+insufficient timestamp precision, or an unsupported claim form.
+These statements are not findings or promises that supporting evidence exists.
+If the records contradict the proposed relationship, the diagnostic says so.
+
+An investigator can mark a changed claim with the earlier proposal ID in `revises`.
+The new claim receives a new check. The history records this explicit link.
+It does not infer corrections from similar wording.
+Coverage separates extracted, explicitly inspected, and cited records from accepted findings.
+Answer presence is separate from answer accuracy. Missing measurements remain unknown.
+
+Create a portable directory with the report, complete fact store, certificates, and available logs:
+
+```sh
+.venv/bin/python -m verifier.package build \
+  --run runs/current/run.json --facts evidence/case_facts.json \
+  --out /path/new-verification-package
+.venv/bin/python -m verifier.package verify --bundle /path/new-verification-package
+```
+
+The package verifier checks file hashes and regenerates proofs from the copied facts.
+Keep its manifest hash separately if you need to detect replacement of the whole package.
+The original disk images and private answer key are not included.
+Old runs can lack audit or model information; packaging does not reconstruct that history.
 
 ## Formal claims
 

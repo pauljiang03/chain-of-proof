@@ -4,6 +4,18 @@ Updated 2026-11-14. The user authorized all six features and parallel work acros
 This is implementation work. No live AI or Mulder benchmark is authorized by this handoff.
 Keep the existing Lean gate and private-reference isolation. Do not build a new framework or UI.
 
+## Integrated result
+
+All six lanes and both coordinator integrations are complete. The table below records ownership; it is not an open assignment list.
+Future runs include tool audits, linked citations, proof-gap diagnostics, coverage, and explicit claim history.
+The package CLI exports a complete fact store and independently checks its certificates and file hashes.
+An offline fixture exercises refusal, explicit revision, report export, portable verification, and tamper rejection.
+The optional API graph is tested without a provider call. Saved benchmark results are unchanged.
+
+Final review added checks for modified package files during verification, non-finite audit JSON,
+and SQL results that cannot be serialized. Those SQL failures now leave sanitized error events.
+See `TASKS.md` for the final test count and `WORKSTREAMS.md` for the remaining comparison work.
+
 ## Shared base and ownership
 
 C0 integrated the other terminal's tested hardening branch at `c411fe6` into `main`.

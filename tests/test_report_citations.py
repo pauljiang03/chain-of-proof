@@ -1,10 +1,16 @@
 """Inspectable citations remain literal, complete, and separate from diagnostics."""
 import copy
+import hashlib
 import html
 import json
+from pathlib import Path
 import re
+import tempfile
 import unittest
 
+from agent.audit import AuditLog, verify_audit
+from agent.coverage import summarize_coverage
+from agent.history import summarize_history
 from checker import citations, report
 
 
@@ -50,6 +56,31 @@ def outside_fences(markdown):
     if opening:
         raise AssertionError("unclosed code fence")
     return "\n".join(lines)
+
+
+def logged_calls(*calls):
+    """Use the real log format; these are synthetic tool returns, not proofs."""
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder) / "audit.jsonl"
+        log = AuditLog(path)
+        for tool, arguments, result in calls:
+            def action(result=result):
+                if isinstance(result, Exception):
+                    raise result
+                return result
+            try:
+                log.record(tool, arguments, action)
+            except RuntimeError:
+                pass
+        verification = verify_audit(path)
+        raw = path.read_bytes()
+        return [json.loads(line) for line in raw.splitlines()], verification, hashlib.sha256(raw).hexdigest()
+
+
+def public_questions():
+    return {"schema_version": 2, "case_id": "sample", "questions": [
+        {"id": f"Q{i}", "prompt": "Synthetic public question", "answer_schema": {}}
+        for i in range(1, 6)]}
 
 
 class ReportCitations(unittest.TestCase):
@@ -167,6 +198,154 @@ class ReportCitations(unittest.TestCase):
         self.assertNotIn("<a href", rendered)
         self.assertNotIn("javascript:", rendered)
         self.assertIn(attack, html.unescape(rendered))
+
+    def test_actual_coverage_and_audit_helpers_render_distinct_counts_and_answer_presence(self):
+        data = run(finding(rows=[fact(7001), fact(7002), fact(7003)]))
+        data["case"].update(case_id="sample", ended="success")
+        events, verified, digest = logged_calls(
+            ("fact", {"fact_id": 7001}, fact()),
+            ("sql", {"query": "SELECT count(*) FROM facts"}, {"rows": [[12]]}),
+            ("check", {"claim": {}}, {"status": "rejected"}),
+            ("fact", {"fact_id": 9000}, RuntimeError("message must not enter log")))
+        self.assertTrue(verified["passed"])
+        answers = {"schema_version": 2, "case_id": "sample", "answers": [
+            {"question_id": "Q1", "status": "answered", "answer": False},
+            {"question_id": "Q2", "status": "answered", "answer": None},
+            {"question_id": "Q3", "status": "unknown"},
+            {"question_id": "Q4", "status": "unanswered"}]}
+        data["coverage"] = summarize_coverage(
+            data, facts_metadata={"facts": 12, "by_kind": {"lnkTarget": 12}},
+            audit_events=events, audit_verification=verified,
+            public_questions=public_questions(), answers=answers,
+            health={"fact_count": 12, "issues": ["pc.E01: reader content: RuntimeError: stopped",
+                    "source is not supported", "RuntimeWarning: partial source"]})
+        data["audit"] = {"status": "valid", "path": "audit.jsonl", "sha256": digest,
+                         "expected_head": None, "scope": "Recorded completed tool calls", **verified}
+        before = copy.deepcopy(data)
+        markdown = report.render(data)
+        plain = html.unescape(markdown)
+        for row in ("| Extracted records | 12 | measured |",
+                    "| Records explicitly returned by the fact tool | 1 | measured |",
+                    "| Distinct cited records | 3 | measured |",
+                    "| Findings recorded as accepted | 1 | measured |"):
+            self.assertIn(row, plain)
+        self.assertIn("total 5; answered 2; unknown 1; unanswered 1; missing response 1", plain)
+        self.assertIn("Tool outcomes (measured): errors 1; refused calls 1", plain)
+        self.assertIn("reader failures 1; unsupported sources 1; warnings 1", plain)
+        self.assertIn("Inspection audit integrity: passed", plain)
+        self.assertIn("bundle reports a passed audit integrity check", plain)
+        self.assertIn("Answer presence is not answer accuracy", plain)
+        self.assertIn("Expected head supplied to audit check: not supplied", plain)
+        self.assertIn(digest, plain)
+        self.assertNotIn("](audit.jsonl)", markdown)
+        self.assertLess(plain.index("## Recorded coverage"), plain.index("## Certified findings"))
+        self.assertEqual(report.render(data), markdown)
+        self.assertEqual(data, before)
+
+    def test_optional_absent_unknown_and_measured_zero_are_different(self):
+        data = run()
+        absent = report.render(data)
+        for heading in ("## Audit integrity", "## Recorded coverage", "## Recorded claim attempts"):
+            self.assertNotIn(heading, absent)
+        data["coverage"] = summarize_coverage({}, public_questions=public_questions())
+        data["history"] = summarize_history(None)
+        data["audit"] = {"status": "unavailable", "passed": None, "count": None, "path": None}
+        unknown = html.unescape(report.render(data))
+        self.assertIn("| Extracted records | unmeasured | unmeasured |", unknown)
+        self.assertIn("total 5; answered unmeasured", unknown)
+        self.assertIn("Recorded counts: attempts unmeasured; accepted unmeasured", unknown)
+        self.assertIn("History is unavailable; this does not establish that no attempts occurred", unknown)
+        self.assertIn("Recorded events: unmeasured", unknown)
+        data["coverage"] = summarize_coverage(data, facts_metadata={"facts": 0, "by_kind": {}, "unparsed": []}, audit_events=[])
+        data["history"] = summarize_history([])
+        measured = html.unescape(report.render(data))
+        self.assertIn("| Extracted records | 0 | measured |", measured)
+        self.assertIn("| Records explicitly returned by the fact tool | 0 | measured |", measured)
+        self.assertIn("Recorded counts: attempts 0; accepted 0", measured)
+        self.assertIn("Inspection audit integrity: not_checked", measured)
+        data["coverage"] = {"schema_version": 99}
+        data["history"] = {"schema_version": 99}
+        unsupported = report.render(data)
+        self.assertEqual(unsupported.count("unavailable or has an unsupported schema"), 2)
+
+    def test_actual_history_keeps_recorded_order_explicit_revisions_and_all_outcomes(self):
+        old = {"finding_id": "Z999", "status": "rejected", "claim": {"searched": [7001]}}
+        new = {"finding_id": "A001", "status": "verified", "claim": {"searched": [7002]}}
+        events, verified, _ = logged_calls(
+            ("check", {"question": "Synthetic question", "claim": old["claim"]}, {"finding_id": "Z999", "status": "rejected"}),
+            ("check", {"question": "Synthetic question", "claim": new["claim"], "revises": "Z999"}, {"finding_id": "A001", "status": "verified"}),
+            ("check", {"question": "Synthetic question", "claim": new["claim"]}, {"finding_id": "A001", "status": "verified", "note": "already proposed as A001"}),
+            ("check", {"question": "Synthetic question", "claim": {}}, RuntimeError("not retained")),
+            ("check", {"question": "Synthetic question", "claim": {}}, None))
+        data = run()
+        data["history"] = summarize_history([old, new], events, verified)
+        self.assertEqual([a["status"] for a in data["history"]["attempts"]],
+                         ["refused", "accepted", "duplicate", "failed", "unknown"])
+        before = copy.deepcopy(data)
+        plain = html.unescape(report.render(data))
+        self.assertIn("attempts 5; accepted 1; refused 1; duplicate 1; failed 1; unknown 1", plain)
+        self.assertIn("revises Z999; status valid", plain)
+        self.assertIn("duplicate of A001 (no new proof)", plain)
+        self.assertIn("| Recorded error | | RuntimeError |", plain)
+        self.assertLess(plain.index("| audit:1 | Z999 | refused |"), plain.index("| audit:2 | A001 | accepted |"))
+        self.assertIn("Audit order is completed-event order", plain)
+        self.assertIn("interrupted calls: unmeasured", plain)
+        self.assertIn("No revision or repair is inferred from similar claims", plain)
+        self.assertEqual(data, before)
+
+    def test_partial_history_keeps_unknown_placement_and_invalid_revision_visible(self):
+        old = {"finding_id": "Z999", "status": "rejected", "claim": {"searched": [7001]}}
+        new = {"finding_id": "A001", "status": "verified", "claim": {"searched": [7001]}}
+        events, _, _ = logged_calls(("check", {"question": "Synthetic question", "claim": new["claim"], "revises": "unknown-id"},
+                                      {"finding_id": "A001", "status": "verified"}))
+        data = run()
+        data["history"] = summarize_history([old, new], events)
+        plain = html.unescape(report.render(data))
+        self.assertIn("attempts 1; accepted 1; refused 0", plain)
+        self.assertIn("revises unknown-id; status invalid", plain)
+        self.assertIn("Unmatched proposal rows: 1", plain)
+        self.assertLess(plain.index("## Recorded claim attempts"),
+                        plain.index("### Proposals with unknown placement relative to audit events"))
+        sequence, unmatched = plain.split("### Proposals with unknown placement relative to audit events", 1)
+        self.assertNotIn("| Z999 | refused |", sequence)
+        self.assertIn("| Z999 | refused | unavailable / unavailable | none recorded |", unmatched)
+        self.assertIn("These rows are separate from the attempt sequence and its counts", unmatched)
+
+    def test_failed_integrity_is_conspicuous_and_invalid_counts_are_not_zero(self):
+        events, _, _ = logged_calls(("fact", {"id": 7001}, fact()))
+        data = run()
+        data["audit"] = {"status": "invalid", "passed": False, "count": 1,
+                         "path": "audit.jsonl", "problems": ["event digest mismatch"]}
+        data["coverage"] = summarize_coverage(data, audit_events=events, audit_verification={"passed": False})
+        data["history"] = summarize_history([], events, {"passed": False})
+        plain = html.unescape(report.render(data))
+        self.assertIn("**INVALID AUDIT — recorded events are diagnostic only.**", plain)
+        self.assertIn("**INVALID HISTORY AUDIT — these events are diagnostic only.**", plain)
+        self.assertIn("| Records explicitly returned by the fact tool | invalid | invalid |", plain)
+        self.assertIn("Tool outcomes (invalid): errors invalid; refused calls invalid", plain)
+        self.assertIn("event digest mismatch", plain)
+        self.assertNotIn("bundle reports a passed audit integrity check", plain)
+
+    def test_optional_summary_metadata_cannot_create_html_links_or_table_cells(self):
+        attack = '<script>x</script> [x](javascript:evil) | table\n## forged'
+        data = run()
+        data["audit"] = {"status": "invalid", "passed": False, "path": attack, "scope": attack,
+                         "head": attack, "sha256": attack, "expected_head": attack, "problems": [attack]}
+        data["coverage"] = summarize_coverage({})
+        data["coverage"]["questions"]["missing_ids"] = [attack]
+        data["coverage"]["limitations"] = [attack]
+        data["coverage"]["failures"]["extraction"]["issues"] = [{"category": attack, "message": attack}]
+        data["history"] = summarize_history(None)
+        data["history"]["attempts"] = [{"attempt_id": attack, "finding_id": attack, "status": attack,
+            "started_at": attack, "completed_at": attack, "revises": attack, "revision_status": attack,
+            "revision_error": attack, "error": attack, "problems": [attack]}]
+        data["history"]["problems"] = [attack]
+        visible = outside_fences(report.render(data))
+        self.assertNotIn("<script", visible)
+        self.assertNotIn("javascript:", visible)
+        self.assertNotIn("\n## forged", visible)
+        self.assertNotIn("| table", visible)
+        self.assertIn(attack.replace("\n", r"\u000a"), html.unescape(visible))
 
 
 if __name__ == "__main__":
