@@ -56,14 +56,26 @@ class InvestigationDeadline(unittest.TestCase):
                 raise
 
         backend = Mock();backend.ainvoke = silent
-        deep = types.ModuleType("deepagents");deep.create_deep_agent = Mock(return_value=backend)
         tools = types.ModuleType("langchain_core.tools");tools.tool = lambda function: function
         with tempfile.TemporaryDirectory() as directory, \
-             patch.dict("sys.modules", {"deepagents": deep, "langchain_core.tools": tools}), \
+             patch.dict("sys.modules", {"langchain_core.tools": tools}), \
+             patch("agent.run._create_api_agent", return_value=backend), \
              patch("agent.tools.Workbench"):
             result = run_deepagents("test", Path(directory), "unused", "PUBLIC PROMPT", timeout_s=0.01)
         self.assertEqual(result["ended"], "time_limit")
         self.assertEqual(cancelled, [True])
+
+    def test_provider_timeout_is_not_reported_as_our_budget(self):
+        async def provider_failure(*args, **kwargs):
+            raise TimeoutError("provider failed before the overall deadline")
+
+        backend = Mock();backend.ainvoke = provider_failure
+        tools = types.ModuleType("langchain_core.tools");tools.tool = lambda function: function
+        with tempfile.TemporaryDirectory() as directory, \
+             patch.dict("sys.modules", {"langchain_core.tools": tools}), \
+             patch("agent.run._create_api_agent", return_value=backend), \
+             patch("agent.tools.Workbench"), self.assertRaises(TimeoutError):
+            run_deepagents("test", Path(directory), "unused", "PUBLIC PROMPT", timeout_s=10)
 
 
 if __name__ == "__main__":

@@ -123,10 +123,17 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
             "exit_code": proc.returncode}
 
 
+def _create_api_agent(model, tools):
+    from deepagents import create_deep_agent
+    from agent.api import EvidenceToolsOnly
+
+    return create_deep_agent(model=model, tools=tools,
+                             middleware=[EvidenceToolsOnly(INVESTIGATOR_TOOLS)])
+
+
 def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
                    timeout_s: int = 45 * 60) -> dict:
     """The investigator as a LangChain deep agent. Untested until an API key is present."""
-    from deepagents import create_deep_agent
     from langchain_core.tools import tool
 
     from agent.tools import Workbench
@@ -158,17 +165,22 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
         """Record an uncertified inference citing certified findings from this run."""
         return json.dumps(bench.conclude(text, finding_ids), ensure_ascii=False)
 
-    agent = create_deep_agent(model=f"anthropic:{model}",
-                             tools=[forms, sql, fact, check, conclude])
+    agent = _create_api_agent(model=f"anthropic:{model}",
+                              tools=[forms, sql, fact, check, conclude])
     started = time.time()
     async def invoke():
-        return await asyncio.wait_for(
-            agent.ainvoke({"messages": [{"role": "user", "content": prompt}]},
-                          config={"recursion_limit": 500}), timeout=timeout_s)
+        task = asyncio.create_task(agent.ainvoke(
+            {"messages": [{"role": "user", "content": prompt}]},
+            config={"recursion_limit": 500}))
+        try:
+            return await asyncio.wait_for(task, timeout=timeout_s)
+        except asyncio.TimeoutError:
+            if not task.cancelled():
+                raise  # A provider/tool timeout is a failed run, not our budget.
+            return None
 
-    try:
-        state = asyncio.run(invoke())
-    except asyncio.TimeoutError:
+    state = asyncio.run(invoke())
+    if state is None:
         return {"summary": "Investigation time limit reached. Saved certificates remain available.",
                 "turns": None, "tool_calls": None, "seconds": round(time.time() - started),
                 "ended": "time_limit"}
