@@ -1,0 +1,77 @@
+{
+  "finding_id": "A166",
+  "question": "3d. Which files were opened from the CD-R?",
+  "claim": {
+    "sameLabel": [
+      369,
+      370
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "This PC recorded volume A58AD72A (2015-03-24 20:47:30 UTC) and volume AE88F176 (2015-03-24 21:01:10 UTC) under the same label \"IAMAN CD\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+  "cited_facts": [
+    {
+      "id": 369,
+      "kind": "volumeSeen",
+      "t": 1427230050485174,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 39,
+      "aux_text": "A58AD72A",
+      "row_sha256": "06fa2f903be9c95c063af130808cacd22efb102b435d7b970accf4009228d1a4",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 370,
+      "kind": "volumeSeen",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "355074af2362cebb5db4e3b31f8bc4aeda6d68a970e19835b0df2c3aa4f9a4c2",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameLabel": [
+          369,
+          370
+        ]
+      },
+      "english": "This PC recorded volume A58AD72A (2015-03-24 20:47:30 UTC) and volume AE88F176 (2015-03-24 21:01:10 UTC) under the same label \"IAMAN CD\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+      "rules": [
+        "R6",
+        "R8"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R6",
+    "R8"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A166.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

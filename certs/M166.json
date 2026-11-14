@@ -1,0 +1,100 @@
+{
+  "finding_id": "M166",
+  "question": "Which e-mails does the user's mailbox hold?",
+  "claim": {
+    "both": [
+      {
+        "emailed": [
+          300
+        ]
+      },
+      {
+        "tagged": [
+          300,
+          "obj",
+          319,
+          196
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC). RE: It's me is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+  "cited_facts": [
+    {
+      "id": 300,
+      "kind": "emailSent",
+      "t": 1427143279000000,
+      "res": 1000000,
+      "obj": 179,
+      "obj_text": "RE: It's me",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "be161ae5d4c8bfadc98fa1ec6fd6fc8a4c62712ab7ef66176a8b9b252b56ecd9",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 319,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 179,
+      "obj_text": "RE: It's me",
+      "aux": 196,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "82c8742b421546fb657b4f37d3adfe09b071de6e8323930c5002513cc8f39643",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          300
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          300,
+          "obj",
+          319,
+          196
+        ]
+      },
+      "english": "RE: It's me is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M166.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

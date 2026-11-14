@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          196
+          292
         ]
       },
       {
         "tagged": [
-          196,
+          292,
           "obj",
-          225,
-          117
+          353,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"eraser\" was made in iexplore (2015-03-25 14:46:54 UTC). eraser is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"eras\").",
   "cited_facts": [
     {
-      "id": 196,
+      "id": 292,
       "kind": "webSearch",
       "t": 1427294814471205,
       "res": 1,
-      "obj": 113,
+      "obj": 169,
       "obj_text": "eraser",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "571a91d6a900221c0eb20b6cae623ba72b1e6702e454e35726ec8607684abdd3",
+      "row_sha256": "9820e07fc18973e5e67e014db7387b63ea9b78262be77ee2b18eb0625bbee053",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 225,
+      "id": 353,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 113,
+      "obj": 169,
       "obj_text": "eraser",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "2105a5e3d053c85b525cee1ba855fe69b6667e7c085d4cb15d02199fede14458",
+      "row_sha256": "7d98f104997fa0d4fc68c0789bd551faf003ef47b2d5b14778c7de993e696f3b",
       "prov": {
         "rule": "search term contains the watch-list word \"eras\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          196
+          292
         ]
       },
       "english": "A web search for \"eraser\" was made in iexplore (2015-03-25 14:46:54 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          196,
+          292,
           "obj",
-          225,
-          117
+          353,
+          195
         ]
       },
       "english": "eraser is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"eras\").",

@@ -1,0 +1,54 @@
+{
+  "finding_id": "A283",
+  "question": "6. The story: was cloud storage set up as a leak channel?",
+  "claim": {
+    "fileCreatedAt": [
+      83
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Users\\informant\\Downloads\\icloudsetup.exe was created on volume CA0C7A48 (2015-03-23 19:55:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 83,
+      "kind": "fileCreated",
+      "t": 1427140547296776,
+      "res": 1,
+      "obj": 66,
+      "obj_text": "\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "764281155ccf5062aeb904a2a12fa7ea53a2f81e4d1e9ca49f99c12f3e3cc268",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\icloudsetup.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 71647536,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          83
+        ]
+      },
+      "english": "\\Users\\informant\\Downloads\\icloudsetup.exe was created on volume CA0C7A48 (2015-03-23 19:55:47 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "A283.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

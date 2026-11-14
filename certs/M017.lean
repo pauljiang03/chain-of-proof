@@ -5,9 +5,9 @@ namespace Cert.M017
 
 def cited : List Fact := [
   ⟨34, .lnkTarget, 1427142414002193, 1, 27, 26⟩,
-  ⟨213, .tag, 1794614400000000, 1, 27, 118⟩ ]
+  ⟨337, .tag, 1794614400000000, 1, 27, 197⟩ ]
 
-def claim : Claim := .both (Sets.opened 34) (Sets.tagged 34 .obj 213 118)
+def claim : Claim := .both (Sets.opened 34) (Sets.tagged 34 .obj 337 197)
 
 theorem verified : holds cited claim = true := by decide +kernel
 

@@ -1,0 +1,55 @@
+{
+  "finding_id": "A257",
+  "question": "5c. What e-mails were exchanged? 5d. When was the CD burned?",
+  "claim": {
+    "burnTrace": [
+      306
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "cited_facts": [
+    {
+      "id": 306,
+      "kind": "cdBurn",
+      "t": 1427226467657431,
+      "res": 1,
+      "obj": 186,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 187,
+      "aux_text": "System event log",
+      "row_sha256": "74407d29ba1d04524bc12a6bc4bb9ccb8a45de8287bc8a29989ed3be1c8c9139",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1412",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "burnTrace": [
+          306
+        ]
+      },
+      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R12"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A257.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

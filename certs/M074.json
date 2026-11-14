@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          197
+          293
         ]
       },
       {
         "tagged": [
-          197,
+          293,
           "obj",
-          217,
-          117
+          345,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"ccleaner\" was made in iexplore (2015-03-25 14:47:51 UTC). ccleaner is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"clean\").",
   "cited_facts": [
     {
-      "id": 197,
+      "id": 293,
       "kind": "webSearch",
       "t": 1427294871248203,
       "res": 1,
-      "obj": 114,
+      "obj": 170,
       "obj_text": "ccleaner",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "103c52b9be337ca0ac003ddbded663debe9310fbf708e3e0174b2b8ea0f559f8",
+      "row_sha256": "84e9418e108d0c2ff3ae5b65538ba84ded10e0bea6a601b10bf6b62fa4e6e5de",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 217,
+      "id": 345,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 114,
+      "obj": 170,
       "obj_text": "ccleaner",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "d27d76c5bebebbfc06a4b3a89212fe13fe8021d3e48e6f585d1b9d4605315639",
+      "row_sha256": "0574ea41f1c0a532a21c8c71956a7a75a05cba430f9698a9c9700e2388d4d0a4",
       "prov": {
         "rule": "search term contains the watch-list word \"clean\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          197
+          293
         ]
       },
       "english": "A web search for \"ccleaner\" was made in iexplore (2015-03-25 14:47:51 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          197,
+          293,
           "obj",
-          217,
-          117
+          345,
+          195
         ]
       },
       "english": "ccleaner is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"clean\").",

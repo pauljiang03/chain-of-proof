@@ -5,10 +5,11 @@ namespace Cert.M083
 
 def cited : List Fact := [
   ⟨69, .fileCreated, 1424037132550000, 10000, 53, 19⟩,
-  ⟨94, .fileModified, 1418939458000000, 10000, 53, 19⟩,
-  ⟨207, .tag, 1794614400000000, 1, 53, 118⟩ ]
+  ⟨161, .fileModified, 1418939458000000, 10000, 53, 19⟩,
+  ⟨329, .tag, 1794614400000000, 1, 53, 197⟩,
+  ⟨330, .tag, 1794614400000000, 1, 53, 200⟩ ]
 
-def claim : Claim := .both (Sets.copiedHere 69 94) (Sets.tagged 69 .obj 207 118)
+def claim : Claim := .both (Sets.copiedHere 69 161) (.both (Sets.tagged 69 .obj 329 197) (Sets.tagged 69 .obj 330 200))
 
 theorem verified : holds cited claim = true := by decide +kernel
 

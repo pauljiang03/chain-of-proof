@@ -1,0 +1,56 @@
+{
+  "finding_id": "A147",
+  "question": "3c. Which files were opened from the company's network drive (secured_drive)?",
+  "claim": {
+    "opened": [
+      39
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:27:33 UTC).",
+  "cited_facts": [
+    {
+      "id": 39,
+      "kind": "lnkTarget",
+      "t": 1427142453345068,
+      "res": 1,
+      "obj": 28,
+      "obj_text": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
+      "aux": 26,
+      "aux_text": "\\\\10.11.11.128\\secured_drive",
+      "row_sha256": "9c21db65b90611507c2dbd20c0f396a07dabb2a2326e1d5178e98cfbc735e5be",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_final_meeting.pptx.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "network_share": "\\\\10.11.11.128\\secured_drive",
+        "shortcut_created": 1427142453329468,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          39
+        ]
+      },
+      "english": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:27:33 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A147.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

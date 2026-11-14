@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          140
+          236
         ]
       },
       {
         "tagged": [
-          140,
+          236,
           "obj",
-          200,
-          117
+          316,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"DLP DRM\" was made in iexplore (2015-03-23 18:08:31 UTC). DLP DRM is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"dlp\").",
   "cited_facts": [
     {
-      "id": 140,
+      "id": 236,
       "kind": "webSearch",
       "t": 1427134111817280,
       "res": 1,
-      "obj": 81,
+      "obj": 137,
       "obj_text": "DLP DRM",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "290a9a0ba048fee1558f85b66e912595cf76b3d81866a6f3b34d8705331dc91f",
+      "row_sha256": "0f297c5533260e92109901e65976ea99a2061f15b913afe1345df957730f6642",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 200,
+      "id": 316,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 81,
+      "obj": 137,
       "obj_text": "DLP DRM",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "0283c01c69d9c3d72710786ea117b71161e9c1dace038ee4cf673da010a73c95",
+      "row_sha256": "137c49983a28956c6a4ff6ed2529cd165fcc242a0de1a37aaa080ec3bb6941c5",
       "prov": {
         "rule": "search term contains the watch-list word \"dlp\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          140
+          236
         ]
       },
       "english": "A web search for \"DLP DRM\" was made in iexplore (2015-03-23 18:08:31 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          140,
+          236,
           "obj",
-          200,
-          117
+          316,
+          195
         ]
       },
       "english": "DLP DRM is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"dlp\").",

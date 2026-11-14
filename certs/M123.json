@@ -1,0 +1,264 @@
+{
+  "finding_id": "M123",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
+  "claim": {
+    "both": [
+      {
+        "recoveredOnDevice": [
+          109,
+          376
+        ]
+      },
+      {
+        "deviceExamined": [
+          3,
+          376
+        ]
+      },
+      {
+        "tagged": [
+          3,
+          "obj",
+          315,
+          194
+        ]
+      },
+      {
+        "before": [
+          3,
+          109
+        ]
+      },
+      {
+        "copiedHere": [
+          109,
+          160
+        ]
+      },
+      {
+        "tagged": [
+          109,
+          "obj",
+          340,
+          198
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A directory entry for \\[lost folder 3]\\design\\winter_whether_advisory.zip, created (2015-03-24 13:59:37 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system. USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space. 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief). The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before the creation of \\[lost folder 3]\\design\\winter_whether_advisory.zip on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 13:59:37 UTC): the gap of 64.771 s exceeds the combined timestamp uncertainty of 11 ms. \\[lost folder 3]\\design\\winter_whether_advisory.zip was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 13:59:37 UTC) after its last modification (2014-12-16 16:10:26 UTC). This rests on heuristic rule R4. \\[lost folder 3]\\design\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+  "cited_facts": [
+    {
+      "id": 109,
+      "kind": "fileCreated",
+      "t": 1427205577630000,
+      "res": 10000,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "6378788082aa103fc4641653e9d990733c604301ab114288be2c09531be7be7c",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4",
+        "exhibit": "RM#2",
+        "first_cluster": 3557,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "WINTER~1.ZIP",
+        "size": 16381123,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 376,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "prov": {
+        "artifact": "FAT32 clusters the allocation table marks free",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "exhibit": "RM#2",
+        "file_entries": 41,
+        "folders": 8,
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 3,
+      "kind": "usbInsert",
+      "t": 1427205512859000,
+      "res": 1000,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d7b4abaf42dea7fc25ca5e2212ec4f4d64180dd2dc265c86a25d6b6f2386f4d5",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 315,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 194,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "prov": {
+        "rule": "device serial is not on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 160,
+      "kind": "fileModified",
+      "t": 1418746226000000,
+      "res": 2000000,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "25ed989bf8d09ac3216c531675c557bd16bea18b30486945a5284e73299c3a53",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4",
+        "exhibit": "RM#2",
+        "first_cluster": 3557,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "WINTER~1.ZIP",
+        "size": 16381123,
+        "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 340,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 198,
+      "aux_text": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC",
+      "row_sha256": "3d531347c6760327961955244f938c3231cd776cc715973ff6c54c2e12896b02",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "recoveredOnDevice": [
+          109,
+          376
+        ]
+      },
+      "english": "A directory entry for \\[lost folder 3]\\design\\winter_whether_advisory.zip, created (2015-03-24 13:59:37 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "deviceExamined": [
+          3,
+          376
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
+      "rules": [
+        "R1",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          3,
+          "obj",
+          315,
+          194
+        ]
+      },
+      "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          3,
+          109
+        ]
+      },
+      "english": "The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before the creation of \\[lost folder 3]\\design\\winter_whether_advisory.zip on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 13:59:37 UTC): the gap of 64.771 s exceeds the combined timestamp uncertainty of 11 ms.",
+      "rules": [],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          109,
+          160
+        ]
+      },
+      "english": "\\[lost folder 3]\\design\\winter_whether_advisory.zip was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 13:59:37 UTC) after its last modification (2014-12-16 16:10:26 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          109,
+          "obj",
+          340,
+          198
+        ]
+      },
+      "english": "\\[lost folder 3]\\design\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "R10",
+    "R13",
+    "R4",
+    "T"
+  ],
+  "strength": "heuristic",
+  "lean_file": "M123.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

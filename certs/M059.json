@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          152
+          248
         ]
       },
       {
         "tagged": [
-          152,
+          248,
           "obj",
-          223,
-          117
+          351,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"digital forensics\" was made in chrome (2015-03-23 18:15:44 UTC). digital forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
   "cited_facts": [
     {
-      "id": 152,
+      "id": 248,
       "kind": "webSearch",
       "t": 1427134544517540,
       "res": 1,
-      "obj": 91,
+      "obj": 147,
       "obj_text": "digital forensics",
-      "aux": 69,
+      "aux": 125,
       "aux_text": "chrome",
-      "row_sha256": "3393bb71ef5ea4705affc5854681d9d613972e1911ea47f532d5c00fb84d4518",
+      "row_sha256": "f55b21ae7d31abf10ee6d92dcd446260591e218f9291762a426bf651e4f07d38",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 223,
+      "id": 351,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 91,
+      "obj": 147,
       "obj_text": "digital forensics",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "c2e93bf0345c209f18cebfc7f2ee3d557812c7b7ef3145298b0adfb906575954",
+      "row_sha256": "525533027c1de96cd8c8a5045630b3f6449d9776270c89ed1e2cbe273a07bd87",
       "prov": {
         "rule": "search term contains the watch-list word \"forensic\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          152
+          248
         ]
       },
       "english": "A web search for \"digital forensics\" was made in chrome (2015-03-23 18:15:44 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          152,
+          248,
           "obj",
-          223,
-          117
+          351,
+          195
         ]
       },
       "english": "digital forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",

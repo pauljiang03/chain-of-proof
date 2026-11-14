@@ -2,12 +2,13 @@
   "finding_id": "M031",
   "question": "Which files were opened from removable devices or network shares?",
   "claim": {
-    "opened": [
-      49
+    "openedFromRecorded": [
+      49,
+      369
     ]
   },
   "status": "verified",
-  "english": "\\ on volume A58AD72A was opened (2015-03-24 20:47:30 UTC).",
+  "english": "\\ was opened (2015-03-24 20:47:30 UTC) from volume A58AD72A, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:47:30 UTC).",
   "cited_facts": [
     {
       "id": 49,
@@ -31,24 +32,46 @@
         "user": "informant",
         "volume_label": "IAMAN CD"
       }
+    },
+    {
+      "id": 369,
+      "kind": "volumeSeen",
+      "t": 1427230050485174,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 39,
+      "aux_text": "A58AD72A",
+      "row_sha256": "06fa2f903be9c95c063af130808cacd22efb102b435d7b970accf4009228d1a4",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
     }
   ],
   "parts": [
     {
       "part": {
-        "opened": [
-          49
+        "openedFromRecorded": [
+          49,
+          369
         ]
       },
-      "english": "\\ on volume A58AD72A was opened (2015-03-24 20:47:30 UTC).",
+      "english": "\\ was opened (2015-03-24 20:47:30 UTC) from volume A58AD72A, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:47:30 UTC).",
       "rules": [
-        "R3"
+        "R3",
+        "R6"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R3"
+    "R3",
+    "R6"
   ],
   "strength": "strong",
   "lean_file": "M031.lean",

@@ -55,24 +55,39 @@ def _span(us: int) -> str:
     return f"{us / 1e6:g} s"
 
 
+UNALLOCATED = "unallocated space of device "   # prefix of the area id the extractor writes
+
+
+def _where(place: str) -> str:
+    """How a file record's `aux` reads in a sentence."""
+    if place.startswith(UNALLOCATED):
+        return (f"an earlier file system of device {place[len(UNALLOCATED):]} (a directory "
+                f"entry recovered from unallocated space)")
+    if place in ("", "(none)"):
+        return "a volume the record does not name"
+    return f"volume {place}"
+
+
 _EVENT = {
     "usbInsert": "the connection of USB device {obj}",
     "volumeMount": "the mounting of USB device {obj} as volume {aux}",
     "lnkTarget": "the opening of {obj} on volume {aux}",
-    "fileCreated": "the creation of {obj} on volume {aux}",
-    "fileModified": "the last modification of {obj} on volume {aux}",
+    "fileCreated": "the creation of {obj} on {where}",
+    "fileModified": "the last modification of {obj} on {where}",
     "fileDeleted": "the deletion of {obj} from volume {aux}",
     "webSearch": 'the web search "{obj}"',
-    "emailSent": "the sending of email {obj} to {aux}",
-    "cdBurn": "the CD burn {obj}",
+    "emailSent": 'the sending of the e-mail "{obj}" {aux}',
+    "cdBurn": "the CD-burn trace ({obj})",
     "tag": 'the tagging of {obj} as "{aux}"',
     "volumeSeen": 'this PC recording volume {aux} under the label "{obj}"',
     "volumeOnDevice": "the examination of device {obj}, which holds volume {aux}",
+    "unallocatedOnDevice": "the examination of the unallocated space of device {obj}",
 }
 
 
 def _event(f: Fact, src: FactSource) -> str:
-    text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=src.string(f.aux))
+    aux = src.string(f.aux)
+    text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=aux, where=_where(aux))
     return f"{text} ({_utc(f.t)})"
 
 
@@ -100,7 +115,7 @@ def _en_opened(args, facts, src):
 
 def _en_copied(args, facts, src):
     c, m = facts[args[0]], facts[args[1]]
-    return (f"{src.string(c.obj)} was likely copied onto volume {src.string(c.aux)}: it was "
+    return (f"{src.string(c.obj)} was likely copied onto {_where(src.string(c.aux))}: it was "
             f"created there ({_utc(c.t)}) after its last modification ({_utc(m.t)}). "
             f"This rests on heuristic rule R4.")
 
@@ -163,14 +178,54 @@ def _en_searched(args, facts, src):
     return f'A web search for "{src.string(w.obj)}" was made in {src.string(w.aux)} ({_utc(w.t)}).'
 
 
+def _file_time(f, src, verb: str) -> str:
+    place = src.string(f.aux)
+    if place.startswith(UNALLOCATED):
+        return (f"A directory entry for {src.string(f.obj)}, {verb} ({_utc(f.t)}), was recovered "
+                f"from the unallocated space of device {place[len(UNALLOCATED):]}.")
+    if place in ("", "(none)"):
+        return f"{src.string(f.obj)} was {verb} ({_utc(f.t)}). The record does not name the volume."
+    return f"{src.string(f.obj)} was {verb} on volume {place} ({_utc(f.t)})."
+
+
 def _en_created(args, facts, src):
-    c = facts[args[0]]
-    return f"{src.string(c.obj)} was created on volume {src.string(c.aux)} ({_utc(c.t)})."
+    return _file_time(facts[args[0]], src, "created")
 
 
 def _en_modified(args, facts, src):
-    m = facts[args[0]]
-    return f"{src.string(m.obj)} was last modified on volume {src.string(m.aux)} ({_utc(m.t)})."
+    return _file_time(facts[args[0]], src, "last modified")
+
+
+def _en_file_deleted(args, facts, src):
+    d = facts[args[0]]
+    return (f"{src.string(d.obj)} on volume {src.string(d.aux)} was sent to the Recycle Bin "
+            f"({_utc(d.t)}).")
+
+
+def _en_emailed(args, facts, src):
+    e = facts[args[0]]
+    return (f'An e-mail with the subject "{src.string(e.obj)}" was sent {src.string(e.aux)} '
+            f"({_utc(e.t)}).")
+
+
+def _en_burn_trace(args, facts, src):
+    b = facts[args[0]]
+    return (f"CD-burn trace in the {src.string(b.aux)}: {src.string(b.obj)} ({_utc(b.t)}). "
+            f"Windows leaves this trace when it writes a disc; it does not show what was "
+            f"written (heuristic rule R12).")
+
+
+def _en_device_examined(args, facts, src):
+    u, d = facts[args[0]], facts[args[1]]
+    return (f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)}). The "
+            f"seized device with that serial has directory entries left in unallocated space.")
+
+
+def _en_recovered(args, facts, src):
+    c, d = facts[args[0]], facts[args[1]]
+    return (f"A directory entry for {src.string(c.obj)}, created ({_utc(c.t)}), was recovered "
+            f"from unallocated space on seized device {src.string(d.obj)}. It was written "
+            f"before the device's current file system.")
 
 
 def _en_tagged(args, facts, src):
@@ -222,6 +277,13 @@ SETS: Dict[str, SetDef] = {
     "searched": SetDef(("fact",), "Sets.searched", ("R9",), "strong", _en_searched),
     "fileCreatedAt": SetDef(("fact",), "Sets.fileCreatedAt", ("R10",), "strong", _en_created),
     "fileModifiedAt": SetDef(("fact",), "Sets.fileModifiedAt", ("R10",), "strong", _en_modified),
+    "fileDeletedAt": SetDef(("fact",), "Sets.fileDeletedAt", ("R5",), "strong", _en_file_deleted),
+    "emailed": SetDef(("fact",), "Sets.emailed", ("R11",), "strong", _en_emailed),
+    "burnTrace": SetDef(("fact",), "Sets.burnTrace", ("R12",), "heuristic", _en_burn_trace),
+    "deviceExamined": SetDef(("fact", "fact"), "Sets.deviceExamined", ("R1", "R13"), "strong",
+                             _en_device_examined),
+    "recoveredOnDevice": SetDef(("fact", "fact"), "Sets.recoveredOnDevice", ("R10", "R13"),
+                                "strong", _en_recovered),
 }
 
 

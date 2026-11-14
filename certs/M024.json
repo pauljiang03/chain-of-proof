@@ -6,41 +6,41 @@
       {
         "openedFromRecorded": [
           41,
-          237
+          366
         ]
       },
       {
         "tagged": [
           41,
           "obj",
-          209,
-          118
+          333,
+          197
         ]
       },
       {
         "sameLabel": [
-          237,
-          238
+          366,
+          371
         ]
       },
       {
         "recordedOnDevice": [
-          238,
-          242
+          371,
+          375
         ]
       },
       {
         "deviceHolds": [
           3,
-          242
+          375
         ]
       },
       {
         "tagged": [
           3,
           "obj",
-          199,
-          116
+          315,
+          194
         ]
       }
     ]
@@ -72,15 +72,15 @@
       }
     },
     {
-      "id": 237,
+      "id": 366,
       "kind": "volumeSeen",
       "t": 1427205514439312,
       "res": 1,
-      "obj": 120,
+      "obj": 203,
       "obj_text": "IAMAN $_@",
       "aux": 31,
       "aux_text": "9E6A5B82",
-      "row_sha256": "b78dd7c1aa8c814b9e899f9ea3207f94598a0312bd8673d395c940c04e1b1751",
+      "row_sha256": "89405d7410361924c029ccba19554c5d27dd0e4e308c8d251b82e52791b05928",
       "prov": {
         "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
         "exhibit": "PC",
@@ -90,30 +90,30 @@
       }
     },
     {
-      "id": 209,
+      "id": 333,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 30,
       "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "5419ae2cb673dec3f2bbd84d74f0437d7b500cacf608933efe2d76f7f27d9f13",
+      "row_sha256": "b739bc9832e2b1ead0f92d08425a11ed2e47901d308b27619c63fbce5395d177",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 238,
+      "id": 371,
       "kind": "volumeSeen",
       "t": 1427230954309607,
       "res": 1,
-      "obj": 120,
+      "obj": 203,
       "obj_text": "IAMAN $_@",
-      "aux": 121,
+      "aux": 205,
       "aux_text": "B4D85399",
-      "row_sha256": "e8bb7604d4170668f9edbcc09e2e1dd387c92b238d87ef5d4a8e2e917f41a319",
+      "row_sha256": "50da6af2eba7bbf440077484ab18eeda43757929e774c418a44cccc02292e7ff",
       "prov": {
         "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
         "exhibit": "PC",
@@ -123,15 +123,15 @@
       }
     },
     {
-      "id": 242,
+      "id": 375,
       "kind": "volumeOnDevice",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 121,
+      "aux": 205,
       "aux_text": "B4D85399",
-      "row_sha256": "c395aad376b19988abd9eab210a2826f6d1891ff1a994775de4639813a57ec68",
+      "row_sha256": "44dc419ed5fcec98396140fdf70d925414e4581636ded700c7d2acc616995625",
       "prov": {
         "artifact": "volume boot record, partition at byte offset 65536",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -165,15 +165,15 @@
       }
     },
     {
-      "id": 199,
+      "id": 315,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 116,
+      "aux": 194,
       "aux_text": "unauthorized-device",
-      "row_sha256": "2d1c6ac7dcdd20bf12744e61affda8d9d3212d3b752d696639b35fe65cb5f299",
+      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
@@ -185,7 +185,7 @@
       "part": {
         "openedFromRecorded": [
           41,
-          237
+          366
         ]
       },
       "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC).",
@@ -200,8 +200,8 @@
         "tagged": [
           41,
           "obj",
-          209,
-          118
+          333,
+          197
         ]
       },
       "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
@@ -213,8 +213,8 @@
     {
       "part": {
         "sameLabel": [
-          237,
-          238
+          366,
+          371
         ]
       },
       "english": "This PC recorded volume 9E6A5B82 (2015-03-24 13:58:34 UTC) and volume B4D85399 (2015-03-24 21:02:34 UTC) under the same label \"IAMAN $_@\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
@@ -227,8 +227,8 @@
     {
       "part": {
         "recordedOnDevice": [
-          238,
-          242
+          371,
+          375
         ]
       },
       "english": "Volume B4D85399, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC), is the volume on seized device 4C530012550531106501.",
@@ -242,7 +242,7 @@
       "part": {
         "deviceHolds": [
           3,
-          242
+          375
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial holds volume B4D85399.",
@@ -257,8 +257,8 @@
         "tagged": [
           3,
           "obj",
-          199,
-          116
+          315,
+          194
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",

@@ -1,0 +1,76 @@
+{
+  "finding_id": "A117",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      242,
+      "obj",
+      363,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",
+  "cited_facts": [
+    {
+      "id": 242,
+      "kind": "webSearch",
+      "t": 1427134355567263,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "windows event logs",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "fd144ffdc6ae91dca9cb07622d4ac30e4fa658ea2443d000a5a61a388569e393",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 363,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "windows event logs",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "1597a84f0064b5cf21b8d9d9fecdea6cbc9ed38038ca01d075e51c3387b678fa",
+      "prov": {
+        "rule": "search term contains the watch-list word \"event log\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          242,
+          "obj",
+          363,
+          195
+        ]
+      },
+      "english": "windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A117.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

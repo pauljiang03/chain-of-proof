@@ -6,29 +6,29 @@
       {
         "openedFromDevice": [
           24,
-          241
+          374
         ]
       },
       {
         "tagged": [
           24,
           "obj",
-          206,
-          118
+          328,
+          197
         ]
       },
       {
         "deviceHolds": [
           1,
-          241
+          374
         ]
       },
       {
         "tagged": [
           1,
           "obj",
-          198,
-          115
+          314,
+          193
         ]
       }
     ]
@@ -60,7 +60,7 @@
       }
     },
     {
-      "id": 241,
+      "id": 374,
       "kind": "volumeOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -68,7 +68,7 @@
       "obj_text": "4C530012450531101593",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "8dbb9b60879674b0c2cfa46e2dcc5ee1da4b35f3db48803d3573b8ee0d3f9fd0",
+      "row_sha256": "d226163e36c46deacef90d25d6acd1dc3b5b4432d8c55e5bdbba54cdec6e15be",
       "prov": {
         "artifact": "volume boot record, partition at byte offset 16384",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -82,15 +82,15 @@
       }
     },
     {
-      "id": 206,
+      "id": 328,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 20,
       "obj_text": "\\RM#1\\Secret Project Data\\proposal",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "3e4d248fc6848641f5f8feb1e29bec41f9a44fc4ff8f3706af674694be796457",
+      "row_sha256": "8b3f6aa9f8df1bdd4b9a3e6b9c8eef3f16b4195653da5140da66f94a2ad925cd",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
@@ -117,15 +117,15 @@
       }
     },
     {
-      "id": 198,
+      "id": 314,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 1,
       "obj_text": "4C530012450531101593",
-      "aux": 115,
+      "aux": 193,
       "aux_text": "authorized-device",
-      "row_sha256": "f2a0cdcf87e4216573dff3f2a1f4e597ed1d76bb4d7acb0a8ba54298a0a1d6f9",
+      "row_sha256": "06fd6fa2e09684992072f70df827daff1cd9b7a94d59dafa416a3bc40e280c72",
       "prov": {
         "rule": "device serial is on the authorized list in the case brief",
         "source": "deterministic"
@@ -137,7 +137,7 @@
       "part": {
         "openedFromDevice": [
           24,
-          241
+          374
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal was opened (2015-03-23 18:37:54 UTC) from volume 5C754D3E, the volume on seized device 4C530012450531101593.",
@@ -152,8 +152,8 @@
         "tagged": [
           24,
           "obj",
-          206,
-          118
+          328,
+          197
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
@@ -166,7 +166,7 @@
       "part": {
         "deviceHolds": [
           1,
-          241
+          374
         ]
       },
       "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-23 18:31:10 UTC). The seized device with that serial holds volume 5C754D3E.",
@@ -181,8 +181,8 @@
         "tagged": [
           1,
           "obj",
-          198,
-          115
+          314,
+          193
         ]
       },
       "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",

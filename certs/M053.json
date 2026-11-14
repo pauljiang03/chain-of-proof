@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          145
+          241
         ]
       },
       {
         "tagged": [
-          145,
+          241,
           "obj",
-          232,
-          117
+          360,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"investigation on windows machine\" was made in iexplore (2015-03-23 18:11:50 UTC). investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
   "cited_facts": [
     {
-      "id": 145,
+      "id": 241,
       "kind": "webSearch",
       "t": 1427134310582693,
       "res": 1,
-      "obj": 85,
+      "obj": 141,
       "obj_text": "investigation on windows machine",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "7eb59833d8dd479075fd9f9b4a59431d44dfc42f2e3073d414505b971113d0c2",
+      "row_sha256": "1085a5423657a0f01f5d4a187579b1d9b04f8759dabb2398e62acf24994c0e1f",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 232,
+      "id": 360,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 85,
+      "obj": 141,
       "obj_text": "investigation on windows machine",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "b95f3b746a7680c9f31ef32a35c9e0654171b6788985a29c813bee30abe2ca59",
+      "row_sha256": "0b4a93eed2b0911b115eb734d6d445cf89b2accf2b3e8a1b6d5bf48461dbd366",
       "prov": {
         "rule": "search term contains the watch-list word \"investigat\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          145
+          241
         ]
       },
       "english": "A web search for \"investigation on windows machine\" was made in iexplore (2015-03-23 18:11:50 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          145,
+          241,
           "obj",
-          232,
-          117
+          360,
+          195
         ]
       },
       "english": "investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",

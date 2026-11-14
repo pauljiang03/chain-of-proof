@@ -6,21 +6,29 @@
       {
         "copiedHere": [
           67,
-          93
+          159
         ]
       },
       {
         "tagged": [
           67,
           "obj",
-          204,
-          118
+          324,
+          197
+        ]
+      },
+      {
+        "tagged": [
+          67,
+          "obj",
+          325,
+          198
         ]
       }
     ]
   },
   "status": "verified",
-  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:09 UTC) after its last modification (2014-12-16 16:10:26 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:09 UTC) after its last modification (2014-12-16 16:10:26 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
       "id": 67,
@@ -42,7 +50,7 @@
       }
     },
     {
-      "id": 93,
+      "id": 159,
       "kind": "fileModified",
       "t": 1418746226000000,
       "res": 10000,
@@ -50,7 +58,7 @@
       "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "ba4ddb9d569c8be3317ef6f2731efc61ebf33503451eade5b5c1476204ab6a2c",
+      "row_sha256": "9ad4e1a87da0f0444ea4c5478a3e4540045498a5f8cafb395334433aef10dc21",
       "prov": {
         "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
         "exhibit": "RM#1",
@@ -61,17 +69,32 @@
       }
     },
     {
-      "id": 204,
+      "id": 324,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 51,
       "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "73a6f99cc10f7df0b00bd19bd690b6ef0b11296abc07fd995537e069d1fd9a07",
+      "row_sha256": "20ff7609826946ce6320b86b8e500ea2b6a86fdbb9d6aeccf7b34941321f441a",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 325,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 198,
+      "aux_text": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC",
+      "row_sha256": "182dac14a0afdd0b225e8515562568d13295e26ad1b7797040be7ee18cae4901",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
       }
     }
@@ -81,7 +104,7 @@
       "part": {
         "copiedHere": [
           67,
-          93
+          159
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:09 UTC) after its last modification (2014-12-16 16:10:26 UTC). This rests on heuristic rule R4.",
@@ -95,11 +118,26 @@
         "tagged": [
           67,
           "obj",
-          204,
-          118
+          324,
+          197
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          67,
+          "obj",
+          325,
+          198
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
       "rules": [
         "T"
       ],

@@ -1,0 +1,58 @@
+{
+  "finding_id": "A177",
+  "question": "4. When was the resignation letter on the Desktop created and last modified?",
+  "claim": {
+    "opened": [
+      58
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 was opened (2015-03-25 15:28:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 58,
+      "kind": "lnkTarget",
+      "t": 1427297327141605,
+      "res": 1,
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "c9b6ba8b9273fe42b287ebfb764682d451e1bb0e5c1a64202337b9bdbc499f5f",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\e36bfc8972e5ab1d.automaticDestinations-ms stream 1",
+        "destlist_path": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+        "drive_letter": "C:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": ""
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          58
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 was opened (2015-03-25 15:28:47 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A177.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

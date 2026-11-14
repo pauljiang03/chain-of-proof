@@ -2,12 +2,13 @@
   "finding_id": "M034",
   "question": "Which files were opened from removable devices or network shares?",
   "claim": {
-    "opened": [
-      52
+    "openedFromRecorded": [
+      52,
+      370
     ]
   },
   "status": "verified",
-  "english": "\\Koala.jpg on volume AE88F176 was opened (2015-03-24 21:01:12 UTC).",
+  "english": "\\Koala.jpg was opened (2015-03-24 21:01:12 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
   "cited_facts": [
     {
       "id": 52,
@@ -31,24 +32,46 @@
         "user": "informant",
         "volume_label": "IAMAN CD"
       }
+    },
+    {
+      "id": 370,
+      "kind": "volumeSeen",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "355074af2362cebb5db4e3b31f8bc4aeda6d68a970e19835b0df2c3aa4f9a4c2",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
     }
   ],
   "parts": [
     {
       "part": {
-        "opened": [
-          52
+        "openedFromRecorded": [
+          52,
+          370
         ]
       },
-      "english": "\\Koala.jpg on volume AE88F176 was opened (2015-03-24 21:01:12 UTC).",
+      "english": "\\Koala.jpg was opened (2015-03-24 21:01:12 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
       "rules": [
-        "R3"
+        "R3",
+        "R6"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R3"
+    "R3",
+    "R6"
   ],
   "strength": "strong",
   "lean_file": "M034.lean",

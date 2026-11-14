@@ -1,0 +1,55 @@
+{
+  "finding_id": "A015",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      214
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"comapny\" was made in chrome (2015-03-22 15:55:44 UTC).",
+  "cited_facts": [
+    {
+      "id": 214,
+      "kind": "webSearch",
+      "t": 1427039744335028,
+      "res": 1,
+      "obj": 128,
+      "obj_text": "comapny",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "b6f8fcf1c3b52bb5a36a461c3f68d5b196a958a91dd736d80f5413da3ea3e651",
+      "prov": {
+        "artifact": "\\C:\\Users\\admin11\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=comapny",
+        "user": "admin11"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          214
+        ]
+      },
+      "english": "A web search for \"comapny\" was made in chrome (2015-03-22 15:55:44 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A015.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

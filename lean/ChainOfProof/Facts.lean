@@ -14,11 +14,15 @@
     fileModified  file path                volume serial
     fileDeleted   original path            volume serial
     webSearch     query string             browser / profile
-    emailSent     message id               recipient
-    cdBurn        burn session / path      0
+    emailSent     subject                  "from A to B", as the mailbox records them
+    cdBurn        the trace found          where it was found
     tag           tagged entity            tag id
-    volumeSeen    volume label             volume serial   (the PC's registry recorded it)
+    volumeSeen    volume label             volume serial   (the PC's registry or a shortcut recorded it)
     volumeOnDevice device serial           volume serial   (read from the seized device's image)
+    unallocatedOnDevice device serial      area id         (the seized device's image has directory
+                                                            entries left outside any current file;
+                                                            recovered fileCreated / fileModified rows
+                                                            carry the same area id in `aux`)
 -/
 namespace ChainOfProof
 
@@ -28,6 +32,7 @@ inductive Kind where
   | webSearch | emailSent | cdBurn
   | tag
   | volumeSeen | volumeOnDevice
+  | unallocatedOnDevice
   deriving DecidableEq, Repr
 
 structure Fact where

@@ -1,0 +1,76 @@
+{
+  "finding_id": "A281",
+  "question": "6. The story: in what order did the key events happen, and how did confidential data leave the company?",
+  "claim": {
+    "before": [
+      304,
+      289
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC) happened before the web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC): the gap of 101.047 s exceeds the combined timestamp uncertainty of 1 s.",
+  "cited_facts": [
+    {
+      "id": 304,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 183,
+      "obj_text": "Done",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "e0ad8690966080d16d7816680fd8bf4cf7b0febc204bb5053bd2a5fa877052bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 289,
+      "kind": "webSearch",
+      "t": 1427231210726427,
+      "res": 1,
+      "obj": 167,
+      "obj_text": "security checkpoint cd-r",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "7bc27bbf2257a15f32f139016be1614210bc9f0841d362a8e216c7336e7bfe6c",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/#q=security+checkpoint+cd-r",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          304,
+          289
+        ]
+      },
+      "english": "The sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC) happened before the web search \"security checkpoint cd-r\" (2015-03-24 21:06:50 UTC): the gap of 101.047 s exceeds the combined timestamp uncertainty of 1 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A281.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

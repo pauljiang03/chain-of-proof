@@ -6,15 +6,15 @@
       {
         "deviceHolds": [
           4,
-          242
+          375
         ]
       },
       {
         "tagged": [
           4,
           "obj",
-          199,
-          116
+          315,
+          194
         ]
       }
     ]
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 242,
+      "id": 375,
       "kind": "volumeOnDevice",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 121,
+      "aux": 205,
       "aux_text": "B4D85399",
-      "row_sha256": "c395aad376b19988abd9eab210a2826f6d1891ff1a994775de4639813a57ec68",
+      "row_sha256": "44dc419ed5fcec98396140fdf70d925414e4581636ded700c7d2acc616995625",
       "prov": {
         "artifact": "volume boot record, partition at byte offset 65536",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -64,15 +64,15 @@
       }
     },
     {
-      "id": 199,
+      "id": 315,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 116,
+      "aux": 194,
       "aux_text": "unauthorized-device",
-      "row_sha256": "2d1c6ac7dcdd20bf12744e61affda8d9d3212d3b752d696639b35fe65cb5f299",
+      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
@@ -84,7 +84,7 @@
       "part": {
         "deviceHolds": [
           4,
-          242
+          375
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:33 UTC). The seized device with that serial holds volume B4D85399.",
@@ -99,8 +99,8 @@
         "tagged": [
           4,
           "obj",
-          199,
-          116
+          315,
+          194
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",

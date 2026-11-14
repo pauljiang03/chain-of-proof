@@ -27,10 +27,11 @@ from checker import export
 from eval import score as scorer
 
 ROOT = Path(__file__).resolve().parent.parent
-TOOL_NAMES = ["mcp__cop__forms", "mcp__cop__sql", "mcp__cop__fact", "mcp__cop__check"]
+INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check")
 
 
-def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int) -> dict:
+def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt: str = BRIEF,
+                    tools=INVESTIGATOR_TOOLS, transcript: str = "transcript.jsonl") -> dict:
     """The investigator as a headless Claude Code session.
 
     It gets our four tools through agent/mcp_server.py and nothing else: every built-in
@@ -40,13 +41,14 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int) -> dic
         "command": sys.executable, "args": ["-m", "agent.mcp_server"],
         "env": {"PYTHONPATH": str(ROOT), "COP_FACTS": env["COP_FACTS"],
                 "COP_RUN_DIR": env["COP_RUN_DIR"], "COP_PROPOSER": env["COP_PROPOSER"],
+                "COP_TOOLS": ",".join(tools),
                 "PATH": os.environ.get("PATH", ""), "HOME": os.environ.get("HOME", "")}}}}
-    cmd = ["claude", "-p", BRIEF, "--tools", "", "--mcp-config", json.dumps(servers),
-           "--strict-mcp-config", "--allowedTools", ",".join(TOOL_NAMES),
+    cmd = ["claude", "-p", prompt, "--tools", "", "--mcp-config", json.dumps(servers),
+           "--strict-mcp-config", "--allowedTools", ",".join(f"mcp__cop__{t}" for t in tools),
            "--permission-prompts", "none", "--model", model,
            "--output-format", "stream-json", "--verbose"]
     started, final, calls = time.time(), {}, 0
-    with tempfile.TemporaryDirectory() as empty, open(run_dir / "transcript.jsonl", "w") as log:
+    with tempfile.TemporaryDirectory() as empty, open(run_dir / transcript, "w") as log:
         proc = subprocess.Popen(cmd, cwd=empty, stdout=subprocess.PIPE, text=True)
         try:
             for line in proc.stdout:

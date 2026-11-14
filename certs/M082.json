@@ -6,21 +6,29 @@
       {
         "copiedHere": [
           68,
-          96
+          176
         ]
       },
       {
         "tagged": [
           68,
           "obj",
-          205,
-          118
+          326,
+          197
+        ]
+      },
+      {
+        "tagged": [
+          68,
+          "obj",
+          327,
+          199
         ]
       }
     ]
   },
   "status": "verified",
-  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:10 UTC) after its last modification (2015-01-23 20:47:10 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:10 UTC) after its last modification (2015-01-23 20:47:10 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt is tagged \"same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
       "id": 68,
@@ -42,7 +50,7 @@
       }
     },
     {
-      "id": 96,
+      "id": 176,
       "kind": "fileModified",
       "t": 1422046030000000,
       "res": 10000,
@@ -50,7 +58,7 @@
       "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "817a4234ed7daea0a702838878445762b2aa796c54f61b6c3e9d679de00da7aa",
+      "row_sha256": "ad9dde8ea5d67d79e02175be52c0a02e6131caaa5c5404d680e7251c787bd453",
       "prov": {
         "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
         "exhibit": "RM#1",
@@ -61,17 +69,32 @@
       }
     },
     {
-      "id": 205,
+      "id": 326,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 52,
       "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "18cc4fd2778517d2b4d4499be3eff6231e1cbf2ff3534d99d5f645d278a5b445",
+      "row_sha256": "e6328260c3b14f634a32943269b576a4a2e75a92d9370e5e6127179e17f46c47",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 327,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 52,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+      "aux": 199,
+      "aux_text": "same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC",
+      "row_sha256": "bf0409fd677163fe14840150617c29f0099d1f245dd4bdcf33f3dda059cf6753",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
       }
     }
@@ -81,7 +104,7 @@
       "part": {
         "copiedHere": [
           68,
-          96
+          176
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:10 UTC) after its last modification (2015-01-23 20:47:10 UTC). This rests on heuristic rule R4.",
@@ -95,11 +118,26 @@
         "tagged": [
           68,
           "obj",
-          205,
-          118
+          326,
+          197
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          68,
+          "obj",
+          327,
+          199
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt is tagged \"same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
       "rules": [
         "T"
       ],

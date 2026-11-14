@@ -6,15 +6,15 @@
       {
         "deviceHolds": [
           2,
-          241
+          374
         ]
       },
       {
         "tagged": [
           2,
           "obj",
-          198,
-          115
+          314,
+          193
         ]
       }
     ]
@@ -42,7 +42,7 @@
       }
     },
     {
-      "id": 241,
+      "id": 374,
       "kind": "volumeOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -50,7 +50,7 @@
       "obj_text": "4C530012450531101593",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "8dbb9b60879674b0c2cfa46e2dcc5ee1da4b35f3db48803d3573b8ee0d3f9fd0",
+      "row_sha256": "d226163e36c46deacef90d25d6acd1dc3b5b4432d8c55e5bdbba54cdec6e15be",
       "prov": {
         "artifact": "volume boot record, partition at byte offset 16384",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -64,15 +64,15 @@
       }
     },
     {
-      "id": 198,
+      "id": 314,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 1,
       "obj_text": "4C530012450531101593",
-      "aux": 115,
+      "aux": 193,
       "aux_text": "authorized-device",
-      "row_sha256": "f2a0cdcf87e4216573dff3f2a1f4e597ed1d76bb4d7acb0a8ba54298a0a1d6f9",
+      "row_sha256": "06fd6fa2e09684992072f70df827daff1cd9b7a94d59dafa416a3bc40e280c72",
       "prov": {
         "rule": "device serial is on the authorized list in the case brief",
         "source": "deterministic"
@@ -84,7 +84,7 @@
       "part": {
         "deviceHolds": [
           2,
-          241
+          374
         ]
       },
       "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-24 13:38:00 UTC). The seized device with that serial holds volume 5C754D3E.",
@@ -99,8 +99,8 @@
         "tagged": [
           2,
           "obj",
-          198,
-          115
+          314,
+          193
         ]
       },
       "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",

@@ -12,8 +12,8 @@
         "tagged": [
           42,
           "obj",
-          210,
-          118
+          334,
+          197
         ]
       }
     ]
@@ -44,15 +44,15 @@
       }
     },
     {
-      "id": 210,
+      "id": 334,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 32,
       "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip\\ppt",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "b25fa5092e02bc9f5eeef718c78959311a4adb811bbdd93ef854fb4c247e756e",
+      "row_sha256": "0d13bb0dd07cf0a1e91c828798b78175f2853270dfca6a868aed08d25196f99f",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
@@ -77,8 +77,8 @@
         "tagged": [
           42,
           "obj",
-          210,
-          118
+          334,
+          197
         ]
       },
       "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip\\ppt is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",

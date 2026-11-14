@@ -25,6 +25,12 @@ Q_OPENED = "Which files were opened from removable devices or network shares?"
 Q_SEARCH = "Which web searches match the watch list?"
 Q_COPIED = "Which files look copied onto a volume?"
 Q_TIMES = "When were the user's files created and last modified?"
+Q_RECOVERED = "Which file records were recovered from a seized device's unallocated space?"
+Q_DELETED = "Which files were sent to the Recycle Bin?"
+Q_EMAIL = "Which e-mails does the user's mailbox hold?"
+Q_BURN = "What traces of disc burning are there?"
+Q_SAME = "Which files in different places have the same size and last-modified time?"
+SAME = "same size and last-modified time as a file elsewhere"
 
 
 def precedes(x: Fact, y: Fact) -> bool:
@@ -72,7 +78,7 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
         if l.aux in own:
             continue
         on_device = [d for d in devs if d.aux == l.aux]
-        recorded = [s for s in seen if s.aux == l.aux]
+        recorded = sorted((s for s in seen if s.aux == l.aux), key=lambda x: (x.t, x.id))[:1]
         if on_device:
             for d in on_device:
                 out.append((Q_OPENED, _both([{"openedFromDevice": [l.id, d.id]}]
@@ -80,8 +86,9 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
         elif recorded:
             for s in recorded:
                 base = [{"openedFromRecorded": [l.id, s.id]}] + tagged(l, "obj")
-                bridges = [(s2, d2) for s2 in seen if s2.obj == s.obj and s2.id != s.id
+                bridges = [(s2, d2) for s2 in seen if s2.obj == s.obj and s2.aux != s.aux
                            for d2 in devs if d2.aux == s2.aux]
+                bridges = sorted(bridges, key=lambda b: (b[0].t, b[0].id))[:1]
                 if not bridges:
                     out.append((Q_OPENED, _both(base)))
                 for s2, d2 in bridges:
@@ -95,10 +102,31 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
         if tags.get(w.obj):
             out.append((Q_SEARCH, _both([{"searched": [w.id]}] + tagged(w, "obj"))))
 
+    areas = {d.aux: d for d in by_kind["unallocatedOnDevice"]}
+
+    def recovered_parts(c: Fact) -> List[dict]:
+        """Tie a recovered directory entry to its device and that device's first connection."""
+        d = areas.get(c.aux)
+        if d is None:
+            return []
+        parts = [{"recoveredOnDevice": [c.id, d.id]}]
+        mine = [u for u in usbs if u.obj == d.obj]
+        if mine:
+            u = min(mine, key=lambda x: (x.t, x.id))
+            parts += [{"deviceExamined": [u.id, d.id]}] + tagged(u, "obj")
+            if precedes(u, c):
+                parts.append({"before": [u.id, c.id]})
+        return parts
+
     modified = defaultdict(list)
     for m in by_kind["fileModified"]:
         modified[(m.obj, m.aux)].append(m)
     for c in by_kind["fileCreated"]:
+        if c.aux in areas:
+            copied = [{"copiedHere": [c.id, m.id]} for m in modified.get((c.obj, c.aux), [])
+                      if precedes(m, c)]
+            out.append((Q_RECOVERED, _both(recovered_parts(c) + copied + tagged(c, "obj"))))
+            continue
         for m in modified.get((c.obj, c.aux), []):
             if precedes(m, c):
                 out.append((Q_COPIED, _both([{"copiedHere": [c.id, m.id]}] + tagged(c, "obj"))))
@@ -107,6 +135,31 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
                 if precedes(c, m):
                     parts.append({"before": [c.id, m.id]})
                 out.append((Q_TIMES, _both(parts)))
+    # one finding per group of file records that share a same-size-and-time tag
+    shared = defaultdict(list)
+    for g in by_kind["tag"]:
+        if source.string(g.aux).startswith(SAME):
+            shared[g.aux].extend((m, g) for m in by_kind["fileModified"] if m.obj == g.obj)
+    for tag_id in sorted(shared):
+        pairs = sorted(shared[tag_id], key=lambda p: p[0].id)
+        parts = []
+        for m, g in pairs:
+            parts += [{"fileModifiedAt": [m.id]}, {"tagged": [m.id, "obj", g.id, tag_id]}]
+            if m.aux in areas:
+                parts.append({"recoveredOnDevice": [next(
+                    c.id for c in by_kind["fileCreated"] if (c.obj, c.aux) == (m.obj, m.aux)),
+                    areas[m.aux].id]})
+            parts += [{"tagged": [m.id, "obj", t.id, t.aux]} for t in tags.get(m.obj, [])
+                      if t.aux != tag_id]
+        if len(pairs) > 1:
+            out.append((Q_SAME, _both(parts)))
+
+    for d in by_kind["fileDeleted"]:
+        out.append((Q_DELETED, _both([{"fileDeletedAt": [d.id]}] + tagged(d, "obj"))))
+    for e in by_kind["emailSent"]:
+        out.append((Q_EMAIL, _both([{"emailed": [e.id]}] + tagged(e, "obj"))))
+    for b in by_kind["cdBurn"]:
+        out.append((Q_BURN, {"burnTrace": [b.id]}))
     return out
 
 

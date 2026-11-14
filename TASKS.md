@@ -24,8 +24,9 @@ The split is by lane, not by known skills: swap if someone else is the better fi
 
 The front end is a static site that reads one JSON file. No backend to build or host.
 
-- **Real data is here:** [`ui/public/run.json`](ui/public/run.json): 100 findings and
-  16 rejections from the real case images. Regenerate with `python3 -m eval.baseline`.
+- **Real data is here:** [`ui/public/run.json`](ui/public/run.json): 179 findings and
+  24 rejections from the real case images. Regenerate with `python3 -m eval.baseline`.
+  Finding ids changed when the evidence grew (2026-11-14): look findings up by content.
 - **Small file for layout work:** [`ui/public/run.sample.json`](ui/public/run.sample.json)
   (7 findings, 4 rejections, synthetic).
 - Good ones to design around: `M024` (heuristic chain across a reformatted USB stick,
@@ -41,7 +42,7 @@ run.json
 │   ├── parts[]             { part, english, rules, strength }: one sentence per brick set
 │   ├── cited_facts[]       { id, kind, t, res, obj_text, aux_text, row_sha256, prov }
 │   │                       t is UTC microseconds; prov has image, artifact, tool
-│   ├── rules[]             R1…R5, T: see lean/ChainOfProof/Rules.md
+│   ├── rules[]             R1…R13, T: see lean/ChainOfProof/Rules.md
 │   ├── strength            "strong" | "heuristic" | "judgment"
 │   ├── trust_tier, axioms  "kernel" and [] for everything so far
 │   └── lean                the Lean source of the certificate, for a "show proof" panel
@@ -58,19 +59,27 @@ Two rules for anything shown on screen:
 
 ## Lane 1: Pipeline — @pauljiang03
 
-Done: extractor for USB devices, volumes, shortcuts, jump lists, searches and file
-times; miner; scorer; first real `run.json`; AI investigator with one scored run
-(`runs/agent1/run.json`, same shape as `ui/public/run.json`, 191 findings).
+Done: extractor for USB devices, volumes, shortcuts, jump lists, searches, file times,
+Recycle Bin records, CD-burn traces, e-mail, and file records left on the formatted
+RM#2 (95 of the 96 reference rows are now in evidence); miner; scorer; AI investigator;
+the plain-report audit (`python3 -m agent.audit`); a tag for files that share a size
+and last-modified time across devices (how the renamed copies show up).
 
-Next, in the order the scorer says matters (rows of the answer key each would add):
+Next:
 
-1. Files copied to RM#2, recovered from FAT directory entries after the format (17).
-2. Recycle Bin records (14). 3. E-mail from the Outlook OST (12). 4. CD burns (5).
-5. Show the kernel stopping a wrong LLM claim: a free-text report from the same
-   model, turned into claims and checked. Run the API (deepagents) backend once a key exists.
-6. A closed-world brick for absence claims.
-- **Done when:** `python3 -m eval.baseline` shows every question above zero and an
-  agent run beats the miner's row count.
+1. Read the CD-R image (RM#3): its volume, its files, the deleted ones. Today a file
+   "opened from the CD" is only tied to a volume labelled `IAMAN CD`, not to the disc.
+2. A strong link across the format of RM#2: the shortcut stores the opened file's size
+   and creation time; the recovered folder record has the same file. Also the disk
+   signature in `MountedDevices`, which a format does not change.
+3. A closed-world brick for absence claims ("no other USB device was connected").
+4. The rest of the answer key: installed programs and their use (CCleaner, Eraser,
+   Google Drive, iCloud), logons, shell bags, the purged e-mail.
+5. Compare file contents (hashes) where both copies survive, and file type against
+   extension, so "renamed copy" rests on more than size and time.
+6. Run the API (deepagents) backend once a key exists; repeat the AI runs for a range.
+- **Done** (2026-11-14): the AI run certifies 95 rows against the miner's 90, and the
+  report audit found sentences in a plain report that the records contradict.
 
 ## Lane 2: Evidence graph and timeline — @Taygeta-gl
 
@@ -116,7 +125,7 @@ The numbers and the story. The scorer and a 96-row reference exist (`eval/`); ru
    scores (https://pypi.org/project/mulder-dfir/), so we can print a row comparable to
    theirs. Add any of the 20 we lack.
 3. **Scoreboard** panel in the UI from `eval/results.json`: the per-question table, the
-   gate result (16/16 false claims refused), and Mulder's published rows beside ours.
+   gate result (24/24 false claims refused), and Mulder's published rows beside ours.
 4. **Demo.** Two-minute script, backup recording, video, Devpost text. Opening line and
    the rejection moment first; the reformatted-USB finding (`M024`) is the story.
 - **Done when:** the scoreboard renders from `results.json`, and a full demo has been

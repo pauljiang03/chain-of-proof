@@ -1,0 +1,54 @@
+{
+  "finding_id": "A219",
+  "question": "5a. Which files were copied to RM#2? (renamed copies matching RM#1 confidential files)",
+  "claim": {
+    "fileModifiedAt": [
+      161
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was last modified on volume 5C754D3E (2014-12-18 21:50:58 UTC).",
+  "cited_facts": [
+    {
+      "id": 161,
+      "kind": "fileModified",
+      "t": 1418939458000000,
+      "res": 10000,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "98f65ddebe8cbc1e39395b92fa6dc5315d77a23640800a477730f947d823715d",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 35226880,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileModifiedAt": [
+          161
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was last modified on volume 5C754D3E (2014-12-18 21:50:58 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "A219.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

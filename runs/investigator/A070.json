@@ -1,0 +1,55 @@
+{
+  "finding_id": "A070",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      269
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"us news\" was made in iexplore (2015-03-23 20:55:08 UTC).",
+  "cited_facts": [
+    {
+      "id": 269,
+      "kind": "webSearch",
+      "t": 1427144108521080,
+      "res": 1,
+      "obj": 159,
+      "obj_text": "us news",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "7ef8fbcb592decef45d52f9bb7753e5760647aa68f4813ed6a1135642505aaab",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          269
+        ]
+      },
+      "english": "A web search for \"us news\" was made in iexplore (2015-03-23 20:55:08 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A070.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

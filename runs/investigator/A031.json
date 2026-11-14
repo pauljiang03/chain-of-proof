@@ -1,0 +1,55 @@
+{
+  "finding_id": "A031",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      230
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"Top Stories\" was made in iexplore (2015-03-23 18:07:54 UTC).",
+  "cited_facts": [
+    {
+      "id": 230,
+      "kind": "webSearch",
+      "t": 1427134074981194,
+      "res": 1,
+      "obj": 135,
+      "obj_text": "Top Stories",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "b42b5149bf321aeb1004a35e9359c05313d6afcac35734ea9917d6cfd5a78af0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          230
+        ]
+      },
+      "english": "A web search for \"Top Stories\" was made in iexplore (2015-03-23 18:07:54 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A031.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

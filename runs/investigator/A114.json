@@ -1,0 +1,76 @@
+{
+  "finding_id": "A114",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      241,
+      "obj",
+      360,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
+  "cited_facts": [
+    {
+      "id": 241,
+      "kind": "webSearch",
+      "t": 1427134310582693,
+      "res": 1,
+      "obj": 141,
+      "obj_text": "investigation on windows machine",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "1085a5423657a0f01f5d4a187579b1d9b04f8759dabb2398e62acf24994c0e1f",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 360,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 141,
+      "obj_text": "investigation on windows machine",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "0b4a93eed2b0911b115eb734d6d445cf89b2accf2b3e8a1b6d5bf48461dbd366",
+      "prov": {
+        "rule": "search term contains the watch-list word \"investigat\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          241,
+          "obj",
+          360,
+          195
+        ]
+      },
+      "english": "investigation on windows machine is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A114.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -12,8 +12,8 @@
         "tagged": [
           36,
           "obj",
-          212,
-          118
+          336,
+          197
         ]
       }
     ]
@@ -43,15 +43,15 @@
       }
     },
     {
-      "id": 212,
+      "id": 336,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 28,
       "obj_text": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "2b9e7dbb8203878b38d1bad23898dfb03491eb6ae1b60acb69829aa39548af1d",
+      "row_sha256": "0ae2b43a3d6598636e51b9454157f7ac7fb115ba7f8b7b4e6b8746c776975280",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
@@ -76,8 +76,8 @@
         "tagged": [
           36,
           "obj",
-          212,
-          118
+          336,
+          197
         ]
       },
       "english": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",

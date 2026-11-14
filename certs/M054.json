@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          146
+          242
         ]
       },
       {
         "tagged": [
-          146,
+          242,
           "obj",
-          235,
-          117
+          363,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC). windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",
   "cited_facts": [
     {
-      "id": 146,
+      "id": 242,
       "kind": "webSearch",
       "t": 1427134355567263,
       "res": 1,
-      "obj": 86,
+      "obj": 142,
       "obj_text": "windows event logs",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "7344471c02fcdc8fb353f7311edfb77e090b8a6e86deba786315c93df59c6366",
+      "row_sha256": "fd144ffdc6ae91dca9cb07622d4ac30e4fa658ea2443d000a5a61a388569e393",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 235,
+      "id": 363,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 86,
+      "obj": 142,
       "obj_text": "windows event logs",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "24d29a29d2fb82afd68cc5beb484c329bb63f0f7b6ed3aba1985a8ebae5ab0e4",
+      "row_sha256": "1597a84f0064b5cf21b8d9d9fecdea6cbc9ed38038ca01d075e51c3387b678fa",
       "prov": {
         "rule": "search term contains the watch-list word \"event log\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          146
+          242
         ]
       },
       "english": "A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          146,
+          242,
           "obj",
-          235,
-          117
+          363,
+          195
         ]
       },
       "english": "windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",

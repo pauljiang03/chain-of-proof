@@ -1,0 +1,76 @@
+{
+  "finding_id": "A113",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      227,
+      "obj",
+      359,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "intellectual property theft is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"theft\").",
+  "cited_facts": [
+    {
+      "id": 227,
+      "kind": "webSearch",
+      "t": 1427133948655159,
+      "res": 1,
+      "obj": 133,
+      "obj_text": "intellectual property theft",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "909b71720aba46bad1dd90c1fb04e50a80b171087f8fda0f6e9ca58aba49b0ae",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 359,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 133,
+      "obj_text": "intellectual property theft",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "5d0a122fdbf0a3f4277368fe44cfaffdbbd39bcb34d24fac4fca0f6c6297b53e",
+      "prov": {
+        "rule": "search term contains the watch-list word \"theft\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          227,
+          "obj",
+          359,
+          195
+        ]
+      },
+      "english": "intellectual property theft is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"theft\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A113.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

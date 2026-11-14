@@ -48,12 +48,25 @@ def recordedOnDevice (s d : Nat) : Claim :=
 def sameLabel (a b : Nat) : Claim :=
   .both (.is a .volumeSeen) (.both (.is b .volumeSeen) (.link a .obj b .obj))
 
+/-- R1+R13 (strong): USB record `u` and the examination `d` of a seized device's
+    unallocated space name the same device serial. -/
+def deviceExamined (u d : Nat) : Claim :=
+  .both (.is u .usbInsert) (.both (.is d .unallocatedOnDevice) (.link u .obj d .obj))
+
+/-- R10+R13 (strong): file-creation record `c` is a directory entry recovered from the
+    unallocated space of the examined device `d`. -/
+def recoveredOnDevice (c d : Nat) : Claim :=
+  .both (.is c .fileCreated) (.both (.is d .unallocatedOnDevice) (.link c .aux d .aux))
+
 /-- Single-fact sets: the claim is that the cited record exists and is of this kind. -/
 def usbConnected (u : Nat) : Claim := .is u .usbInsert
 def opened (l : Nat) : Claim := .is l .lnkTarget
 def searched (w : Nat) : Claim := .is w .webSearch
 def fileCreatedAt (c : Nat) : Claim := .is c .fileCreated
 def fileModifiedAt (m : Nat) : Claim := .is m .fileModified
+def fileDeletedAt (d : Nat) : Claim := .is d .fileDeleted
+def emailed (e : Nat) : Claim := .is e .emailSent
+def burnTrace (b : Nat) : Claim := .is b .cdBurn
 
 /-- The entity in slot `s` of fact `f` carries tag `tagId`, by tag fact `g`. -/
 def tagged (f : Nat) (s : Slot) (g tagId : Nat) : Claim :=

@@ -4,9 +4,10 @@ open ChainOfProof
 namespace Cert.M030
 
 def cited : List Fact := [
-  ⟨48, .lnkTarget, 1427229858901833, 1, 34, 35⟩ ]
+  ⟨48, .lnkTarget, 1427229858901833, 1, 34, 35⟩,
+  ⟨368, .volumeSeen, 1427229853752619, 1, 204, 35⟩ ]
 
-def claim : Claim := Sets.opened 48
+def claim : Claim := Sets.openedFromRecorded 48 368
 
 theorem verified : holds cited claim = true := by decide +kernel
 

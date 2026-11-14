@@ -1,0 +1,81 @@
+{
+  "finding_id": "A154",
+  "question": "3d. Which files were opened from the CD-R?",
+  "claim": {
+    "openedFromRecorded": [
+      48,
+      368
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:18 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC).",
+  "cited_facts": [
+    {
+      "id": 48,
+      "kind": "lnkTarget",
+      "t": 1427229858901833,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 35,
+      "aux_text": "E297F1A5",
+      "row_sha256": "3e097f0e0cd665c178809773def7ad4d9352d340841d6619b184d2f24f1d0201",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\winter_whether_advisory.zip.lnk",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427205683425224,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    },
+    {
+      "id": 368,
+      "kind": "volumeSeen",
+      "t": 1427229853752619,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 35,
+      "aux_text": "E297F1A5",
+      "row_sha256": "7c8f8513bd274962c55c2674f56eadcca9ae20e1389c41a7f42b2e006d24080c",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          48,
+          368
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:18 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6"
+  ],
+  "strength": "strong",
+  "lean_file": "A154.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

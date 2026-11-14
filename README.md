@@ -18,7 +18,7 @@ Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain
 | Lean core: facts, brick IR, checker, sets, theorems about the checker | Working, tested |
 | `check`: claim JSON → Lean certificate → kernel verdict, with per-brick feedback on rejection | Working, tested |
 | Verifier: re-check a certificate from the evidence DB alone | Working, tested |
-| Extractor: the real PC and USB images → evidence file (`extractor/`) | Working for USB devices, volumes, shortcuts, jump lists, web searches, file times. Not yet: e-mail, Recycle Bin, CD burning, deleted files on RM#2 |
+| Extractor: the real PC and USB images → evidence file (`extractor/`) | Working for USB devices, volumes, shortcuts, jump lists, web searches, file times, Recycle Bin records, CD-burn traces, e-mail, and file records left on a formatted USB stick. Not yet: the CD-R image, purged e-mail, and the rest of the answer key (see Evaluation) |
 | Miner (`miner/`): every instance of the approved sets, no LLM | Working on the real evidence |
 | Scorer against the NIST answer key (`eval/`) | Working; numbers below |
 | AI investigator (`agent/`): an LLM with four tools and no file or shell access | Working on a Claude Code login; one scored run. The API backend (LangChain deepagents) is written but has not been run |
@@ -186,6 +186,41 @@ and a false positive is a claim the answer key contradicts.
 The number we target is the false-positive column. Coverage will be lower than
 Mulder's: we certify only what the IR can express.
 
+**Our own reading against Mulder's 20 items.** Not a like-for-like score: the item
+labels are paraphrased from Mulder's published scorecard
+([Opus run 1](https://github.com/calebevans/mulder/blob/main/examples/ndlc-v1.5.2/opus-4.6-run1/ACCURACY-REPORT.md)),
+we marked our own output, and nobody has audited the marking (TASKS.md, lane 4).
+"Stated" means a certified finding says the exact fact.
+
+| | Mulder, Claude Opus 4.6 (published, median of 3 runs) | Chain of Proof (self-marked, 1 run) |
+|---|---:|---:|
+| Items stated exactly | 45% (45–50), 9 of 20 | 35%, 7 of 20 |
+| Items with at least related evidence | 95% (90–95), 19 of 20 | 75%, 15 of 20 |
+| Claims the answer key contradicts | 10% (5–10), 1 to 2 claims per run | none found; 24 of 24 known-false claims refused |
+| Time per run | 68 to 79 min | 4 min for the AI run, 45 s for the miner |
+| Each sentence can be re-checked from the evidence | no | yes |
+
+| Mulder item | Ours | What our certified findings say |
+|---|---|---|
+| 3, 4. The two USB sticks: serial, label | Stated | Serial, label and connection time; not the file system type |
+| 9. Searches show premeditation | Stated | All 28 searches of the answer key, with times |
+| 11. iCloud installer downloaded | Stated | `icloudsetup.exe` created in Downloads |
+| 12. USB connection times | Stated | From the device install log and registry, not the event log |
+| 17. Files opened on RM#2 | Stated | Both answer-key rows |
+| 19. E-mail with the outside contact | Stated | 11 of the 12 messages |
+| 6. Five project documents on USB | Partly | The five files on RM#1 and their copy signature (heuristic) |
+| 7. Files disguised on RM#2 | Partly | 17 recovered names; 4 match a confidential file's size and modified time |
+| 8. CCleaner and Eraser | Partly | The searches for them; not their installation or use |
+| 10. Google Drive installed | Partly | The installer download and the search |
+| 13. Bulk copy on Feb 15 | Partly | Creation times of the five files on RM#1 |
+| 15. Files removed from RM#2 | Partly | Their records in unallocated space; the format is not stated |
+| 18. Network folders browsed | Partly | Files opened on the share; not the folders |
+| 20. FAT time zone | Partly | Applied and recorded on each row; not a finding |
+| 1. Suspect identity | No | |
+| 2. Operating system | No | In the extractor's metadata only |
+| 5, 16. The CD-R: format, contents | No | The CD image is not read |
+| 14. CCleaner run without cleaning | No | |
+
 ### Checker performance (measured)
 
 Apple Silicon laptop, Lean 4.35.0, core library only.
@@ -208,56 +243,91 @@ certificates use `decide +kernel`.
 
 ### Results on the real case images
 
-One command, no LLM, about 30 seconds: `python3 -m eval.baseline`. It mines every
+One command, no LLM, about 45 seconds: `python3 -m eval.baseline`. It mines every
 instance of the approved sets from the extracted evidence, sends each through the Lean
 kernel, and scores the result against 96 rows of the NIST answer key.
 
 | Check | Result |
 |---|---|
-| A. Answer-key rows found in the extracted evidence | **48 / 96**; all 48 within 2 s of NIST's timestamp |
-| B. False claims (per the answer key) refused by the kernel | **16 / 16** |
-| B. True claims (per the answer key) certified | 14 / 15 |
-| C. Answer-key rows stated by a certified finding | **43 / 96** |
-| Certified findings | 100: 94 strong, 6 heuristic, 0 judgment |
-| Certificates that re-verify from the evidence file alone | 100 / 100 |
+| A. Answer-key rows found in the extracted evidence | **95 / 96**; all 95 within 2 s of NIST's timestamp |
+| B. False claims (per the answer key) refused by the kernel | **24 / 24** |
+| B. True claims (per the answer key) certified | 21 / 22 |
+| C. Answer-key rows stated by a certified finding | **90 / 96** |
+| Certified findings | 179: 124 strong, 55 heuristic, 0 judgment |
+| Certificates that re-verify from the evidence file alone | 179 / 179 |
 
 | Answer-key question | Rows | In evidence | Certified |
 |---|---:|---:|---:|
 | Q16 web searches | 28 | 28 | 23 |
+| Q21 e-mails | 12 | 11 | 11 |
 | Q22 USB devices attached | 4 | 4 | 4 |
 | Q26 files opened on RM#2 | 2 | 2 | 2 |
 | Q28 files opened on the network drive | 4 | 4 | 4 |
+| Q33 CD burns | 5 | 5 | 5 |
 | Q35 files opened from the CD-R | 8 | 8 | 8 |
 | Q36 resignation letter timestamps | 2 | 2 | 2 |
-| Q21 e-mails | 12 | 0 | 0 |
-| Q33 CD burns | 5 | 0 | 0 |
-| Q51 Recycle Bin | 14 | 0 | 0 |
-| Q55 files copied to RM#2 | 17 | 0 | 0 |
+| Q51 Recycle Bin | 14 | 14 | 14 |
+| Q55 files copied to RM#2 | 17 | 17 | 17 |
 
 **With the AI investigator** (`python3 -m agent.run`, one run, Claude Opus through
-Claude Code, 144 seconds, 25 tool calls):
+Claude Code, 228 seconds, 43 tool calls):
 
 | | Miner (no LLM) | AI investigator |
 |---|---:|---:|
-| Claims proposed | 100 | 193 |
-| Certified by the kernel | 100 | 191 |
-| Refused by the kernel | 0 | 2 |
-| Answer-key rows stated by a certified finding | 43 / 96 | 48 / 96 |
-| ... of the 48 rows present in the evidence | 43 | 48 |
+| Claims proposed | 179 | 286 |
+| Certified by the kernel | 179 | 285 |
+| Refused by the kernel | 0 | 1 |
+| Answer-key rows stated by a certified finding | 90 / 96 | 95 / 96 |
+| ... of the 95 rows present in the evidence | 90 | 95 |
+| Certificates that re-verify from the evidence file alone | 179 / 179 | 285 / 285 |
 
 The investigator was given the case brief and the case's questions, never the answer
 key: it has four tools (`forms`, `sql`, `fact`, `check`) and no access to files or a
-shell. It certified every answer-key row the evidence holds. Both refusals were
-malformed claims (a tag name where an id belongs), not false statements, so this run
-does not yet show the kernel stopping a wrong claim from an LLM. It does show the other
-half: the closing summary ([`runs/agent1/summary.md`](runs/agent1/summary.md)) says
-"not established" for the CD-R link, for how the data left, and for everything in
-question 5, because nothing it could cite would certify. One run only; LLM runs vary.
+shell. It certified every answer-key row the evidence holds.
+
+The one refusal was a wrong claim, not a malformed one. The investigator claimed the
+zip was opened from the volume now on the seized RM#2. Refused,
+`FAIL link 41 (aux) 375 (aux)`: the shortcut names volume `9E6A5B82`, the seized stick
+holds `B4D85399`. It then certified what the records do support, the same-label link,
+which is heuristic and says so. This is the claim a fluent report gets wrong: the
+stick was reformatted, so "opened from RM#2" is an inference, not a record.
+
+An earlier run on a previous build of the evidence had two refusals of the same kind:
+a copy claimed for a file modified after it was created, and two events claimed in the
+wrong order (31 minutes apart; the investigator then certified the right order).
+
+Its closing summary ([`runs/investigator/summary.md`](runs/investigator/summary.md))
+lists what the records cannot show: that both volumes are the same physical stick,
+that the files on RM#2 have the confidential files' contents (only size and
+last-modified time match), what the burns wrote, and that the volumes labelled
+`IAMAN CD` are the seized disc. One run only; LLM runs vary.
 
 What the table says: where we extract an artifact, it agrees with NIST to the second.
-Half the reference is still out of reach because four extractors are not written. The
-five searches in evidence but not certified are the ones the miner's watch list does not
-flag; they are work for the agents.
+The one row not in evidence is an e-mail purged from the mailbox, which the mailbox
+library's Python interface cannot recover. The five searches in evidence but not
+certified by the miner are the ones its watch list does not flag.
+
+Three of these come from places a normal file listing does not reach:
+
+- **Files copied to RM#2.** The stick was quick-formatted and lists no files. Its old
+  folder clusters are still there: 41 file records in 8 folders, among them all 17 files
+  NIST names, created 09:59:27 to 10:00:18 local time, one minute after the stick was
+  connected. The folder that held them was named in the overwritten root directory, so
+  its path reads `\[lost folder 3]\design\...`; nothing is guessed.
+- **The disguised files.** Four of the recovered records have exactly the size and
+  last-modified time of four confidential files on RM#1: `winter_whether_advisory.zip`
+  is 16,381,123 bytes, modified 2014-12-16 16:10:26 UTC, and so is
+  `[secret_project]_detailed_design.pptx`. NIST's answer key pairs the same files. The
+  extractor tags such pairs; the tag says contents were not compared. Getting here
+  needed one correction: Windows writes FAT times with the UTC offset in force when it
+  writes, so a December time written in March is 4 hours from UTC, not 5. Our first
+  build was an hour off on these 17 modified times. The plain-report run noticed the
+  constant one-hour gap, which is how we found it.
+- **Recycle Bin.** It was emptied. The 14 index files are deleted, but each still sits
+  inside its file-table record with the original path and deletion time.
+- **CD burns.** Three independent traces: the burner's temporary files in the NTFS
+  change journal, the `cdrom` driver's event 133, and the user's CD Burning settings.
+  A finding built on them is labeled heuristic: they show a disc was written, not what.
 
 **The one true claim the gate refuses is the most useful result so far.** NIST says
 `winter_whether_advisory.zip` was opened from the suspect's own stick, RM#2. The
@@ -267,9 +337,13 @@ RM#2" as a strong claim, correctly: no record links those two serials. The regis
 does show both volumes under the label `IAMAN $_@`, so the miner certifies the same
 conclusion as a *heuristic* finding that names the weak link (rule R8, shared label).
 An LLM report would state the conclusion flat. Ours shows where the inference is.
+The recovered folder records now add a second, independent line: a record for
+`winter_whether_advisory.zip`, created 09:59:37, sits in the unallocated space of the
+seized RM#2 itself (strong, rule R13), 106 seconds before the shortcut shows a file of
+that name being opened.
 
-These numbers are not yet comparable with Mulder's columns above: Mulder scores 20
-items, we score 96 answer-key rows. Mapping to Mulder's 20 is open.
+Our 96 rows and Mulder's 20 items measure different things; the self-marked table under
+[Baseline on the same case](#baseline-on-the-same-case) is the closest comparison so far.
 
 ## Evaluation
 
@@ -288,7 +362,7 @@ cannot produce yet.
 | Check | Question it answers | How |
 |---|---|---|
 | A. Extraction | Is the evidence right? Lean cannot check this. | For each reference row: is there a fact of that kind, for that entity, within 2 s of NIST's time? Reported as match, time differs, or missing. |
-| B. Gate | Does the kernel separate true from false? | [`eval/labeled_claims.json`](eval/labeled_claims.json): 15 claims the answer key supports and 16 it contradicts. True ones must certify, false ones must be refused. |
+| B. Gate | Does the kernel separate true from false? | [`eval/labeled_claims.json`](eval/labeled_claims.json): 22 claims the answer key supports and 24 it contradicts. True ones must certify, false ones must be refused. |
 | C. Run | How much of the answer key does a run certify? | A row counts only if a verified finding *states* it: the fact is an argument of a set whose sentence prints its entity and time. Citing it through a tag does not count. |
 
 **What is deterministic, and what is not.**
@@ -305,22 +379,27 @@ cannot produce yet.
 
 1. *No certified finding is contradicted by the answer key.* Check B is the direct
    test: every false claim must be refused. A single acceptance falsifies it.
-2. *The check does real work.* The 16 refusals name the failing brick, e.g.
+2. *The check does real work.* The 24 refusals name the failing brick, e.g.
    `FAIL link 41 (aux) 241 (aux)`: the shortcut's volume is not the device's volume.
 3. *The IR covers enough to matter.* Check C, per question, with the misses listed.
 
 **What this evaluation does not show.** The reference covers ten of the answer key's
-57 questions. The rows were transcribed by hand. Agreement with NIST on 48 rows says
-nothing about facts the reference does not mention. Rules R1 to R10 are assumptions
-about Windows, listed on every certificate, not proved.
+57 questions. The rows were transcribed by hand. Agreement with NIST on 95 rows says
+nothing about facts the reference does not mention. The extractors for e-mail, the
+Recycle Bin, CD burns and RM#2 were written after the first scored run, with the answer
+key's method notes open: they show that we read the artifacts NIST names and get NIST's
+values, not that we would have found them unaided. Rules R1 to R13 are assumptions about
+Windows, listed on every certificate, not proved.
 
-**Tests in this repo** (`tests/`, 19 cases; most run the real kernel): the ten checker
+**Tests in this repo** (`tests/`, 26 cases; most run the real kernel): the ten checker
 and verifier cases on the fixture (golden certificate with no axioms, tagged narrative,
-five kinds of rejection, malformed claims, tampering, DuckDB backend), plus four on the
-real evidence: extraction still matches the answer key, the gate refuses every labeled
-false claim, the miner is deterministic, and a row is only credited when stated; and
-five on the investigator's tools (read-only SQL, refusals that name the values that
-disagree, no duplicate logging, exactly four tools offered).
+five kinds of rejection, malformed claims, tampering, DuckDB backend); four on the
+real evidence (extraction still matches the answer key, the gate refuses every labeled
+false claim, the miner is deterministic, a row is only credited when stated); eight on
+the investigator's tools and the report audit (read-only SQL, refusals that name the
+values that disagree, no duplicate logging, a verdict counts only with a certificate
+behind it); and four on recovering FAT directory entries and converting their times, on bytes
+built in the test.
 
 ## Quickstart
 
@@ -340,14 +419,14 @@ python3 -m checker.check --facts fixtures/sample_facts.json --id F8 \
 # re-check a stored certificate from the evidence alone
 python3 -m verifier.verify fixtures/sample_cert/N1.json --facts fixtures/sample_facts.json
 
-# the real case: mine, kernel-check and score against the NIST answer key (about 30 s)
+# the real case: mine, kernel-check and score against the NIST answer key (about 45 s)
 python3 -m eval.baseline
 
 # the AI investigator, on this machine's Claude Code login; scored the same way
-python3 -m agent.run --name agent1
+python3 -m agent.run --name investigator
 
 # score any run file with the same scorer
-python3 -m eval.score --run runs/agent1/run.json
+python3 -m eval.score --run runs/investigator/run.json
 
 # re-check every certificate of the real run from the evidence file alone
 python3 -m verifier.verify certs/*.json --facts evidence/case_facts.json
@@ -355,7 +434,7 @@ python3 -m verifier.verify certs/*.json --facts evidence/case_facts.json
 # tests (add `uv run` to include the DuckDB backend test)
 python3 -m unittest discover -s tests -t .
 
-# optional: rebuild the evidence file from the images (7.7 GB download, then 10 s)
+# optional: rebuild the evidence file from the images (7.7 GB download, then 25 s)
 scripts/fetch_data.sh --pc
 uv run --extra extract python -I extractor/build.py data --out evidence/case_facts.json
 ```
@@ -380,10 +459,10 @@ lean/
 checker/                       claim JSON → Lean certificate → kernel verdict; English templates
 verifier/                      re-check certificates against the evidence
 extractor/                     case images → evidence file (dissect); schema.sql; exhibits.json
-evidence/case_facts.json       facts extracted from the real images (242 rows)
+evidence/case_facts.json       facts extracted from the real images (376 rows)
 miner/                         every instance of the approved sets, no LLM
 eval/reference.json            96 answer-key rows (the ground truth)
-eval/labeled_claims.json       31 claims with a known answer
+eval/labeled_claims.json       46 claims with a known answer
 eval/score.py, baseline.py     the scorer and the reproducible baseline run
 eval/results.json              last scored result, row by row
 certs/                         certificates and proposal log of the baseline run
@@ -392,7 +471,7 @@ fixtures/                      synthetic sample facts and certificate, for unit 
 tests/                         checker, verifier, scorer and miner tests
 scripts/fetch_data.sh          download the case images
 agent/                         the AI investigator: tools, MCP server, brief, runner
-runs/agent1/                   its first scored run: certificates, proposal log, summary
+runs/investigator/             its scored run on the current evidence: certificates, proposal log, summary
 ```
 
 ## Sources

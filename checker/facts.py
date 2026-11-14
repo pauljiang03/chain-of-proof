@@ -18,6 +18,7 @@ KINDS = (
     "webSearch", "emailSent", "cdBurn",
     "tag",
     "volumeSeen", "volumeOnDevice",
+    "unallocatedOnDevice",
 )
 
 

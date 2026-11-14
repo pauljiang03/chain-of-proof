@@ -1,0 +1,15 @@
+import ChainOfProof
+open ChainOfProof
+
+namespace Cert.A258
+
+def cited : List Fact := [
+  ⟨307, .cdBurn, 1427226961607515, 1, 188, 185⟩ ]
+
+def claim : Claim := Sets.burnTrace 307
+
+theorem verified : holds cited claim = true := by decide +kernel
+
+end Cert.A258
+
+#print axioms Cert.A258.verified

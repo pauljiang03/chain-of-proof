@@ -1,0 +1,76 @@
+{
+  "finding_id": "A095",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      236,
+      "obj",
+      316,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "DLP DRM is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"dlp\").",
+  "cited_facts": [
+    {
+      "id": 236,
+      "kind": "webSearch",
+      "t": 1427134111817280,
+      "res": 1,
+      "obj": 137,
+      "obj_text": "DLP DRM",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "0f297c5533260e92109901e65976ea99a2061f15b913afe1345df957730f6642",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 316,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 137,
+      "obj_text": "DLP DRM",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "137c49983a28956c6a4ff6ed2529cd165fcc242a0de1a37aaa080ec3bb6941c5",
+      "prov": {
+        "rule": "search term contains the watch-list word \"dlp\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          236,
+          "obj",
+          316,
+          195
+        ]
+      },
+      "english": "DLP DRM is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"dlp\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A095.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

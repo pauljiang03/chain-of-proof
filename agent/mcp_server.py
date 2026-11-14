@@ -37,8 +37,40 @@ TOOLS = [
                      "required": ["question", "claims"]}},
 ]
 
+VERDICTS = ("certified", "weaker", "refused", "no_records", "cannot_express")
+RECORD_TOOL = {
+    "name": "record",
+    "description": "File your verdict on one statement of the report being audited.",
+    "inputSchema": {"type": "object",
+                    "properties": {"statement": {"type": "integer"},
+                                   "verdict": {"type": "string", "enum": list(VERDICTS)},
+                                   "finding_ids": {"type": "array", "items": {"type": "string"}},
+                                   "reason": {"type": "string"}},
+                    "required": ["statement", "verdict", "reason"]}}
+
+
+def tools_for(names) -> list:
+    """The tools a session is given. COP_TOOLS picks them; the default is the four."""
+    by_name = {t["name"]: t for t in TOOLS + [RECORD_TOOL]}
+    return [by_name[n] for n in names]
+
+
+def record(bench: Workbench, args: dict) -> str:
+    verdict = args.get("verdict")
+    if verdict not in VERDICTS:
+        return f"verdict must be one of {list(VERDICTS)}"
+    row = {"statement": int(args["statement"]), "verdict": verdict,
+           "finding_ids": [str(i) for i in args.get("finding_ids") or []],
+           "reason": str(args.get("reason", ""))}
+    bench.run_dir.mkdir(parents=True, exist_ok=True)
+    with open(bench.run_dir / "audit.jsonl", "a") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    return f"recorded F{row['statement']}: {verdict}"
+
 
 def call(bench: Workbench, name: str, args: dict) -> str:
+    if name == "record":
+        return record(bench, args)
     if name == "forms":
         return json.dumps(bench.forms(), indent=1, ensure_ascii=False)
     if name == "sql":
@@ -61,6 +93,8 @@ def main() -> int:
     bench = Workbench(os.environ.get("COP_FACTS", "evidence/case_facts.json"),
                       os.environ.get("COP_RUN_DIR", "runs/dev"),
                       os.environ.get("COP_PROPOSER", "agent"))
+    offered = tools_for(os.environ.get("COP_TOOLS", "forms,sql,fact,check").split(","))
+    names = {t["name"] for t in offered}
     for line in sys.stdin:
         line = line.strip()
         if not line:
@@ -78,10 +112,12 @@ def main() -> int:
         elif method == "ping":
             reply["result"] = {}
         elif method == "tools/list":
-            reply["result"] = {"tools": TOOLS}
+            reply["result"] = {"tools": offered}
         elif method == "tools/call":
             params = msg.get("params", {})
             try:
+                if params.get("name") not in names:
+                    raise KeyError(f"tool {params.get('name')!r} is not offered in this session")
                 text, failed = call(bench, params.get("name", ""), params.get("arguments") or {}), False
             except Exception as e:                     # report to the model, keep serving
                 text, failed = f"{type(e).__name__}: {e}", True

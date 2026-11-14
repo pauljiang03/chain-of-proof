@@ -1,8 +1,8 @@
 {
  "evidence": {
   "path": "evidence/case_facts.json",
-  "facts": 242,
-  "sha256": "bbd0d73c10c1a347c56551fb20ac4dd865fa86462306b67834efcb5625137006"
+  "facts": 376,
+  "sha256": "525c02e89beaf983721db2e551be1368dad4a96058429d443332a1a9c62a1e8d"
  },
  "reference": {
   "source": "NIST CFReDS Data Leakage Case, answer key dated 2018-07-23: https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf",
@@ -15,7 +15,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    121
+    217
    ]
   },
   {
@@ -23,7 +23,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    122
+    218
    ]
   },
   {
@@ -31,7 +31,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    125
+    221
    ]
   },
   {
@@ -39,7 +39,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    131
+    227
    ]
   },
   {
@@ -47,7 +47,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    132
+    228
    ]
   },
   {
@@ -55,8 +55,8 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    137,
-    138
+    233,
+    234
    ]
   },
   {
@@ -64,7 +64,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    140
+    236
    ]
   },
   {
@@ -72,7 +72,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    141
+    237
    ]
   },
   {
@@ -80,7 +80,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    143
+    239
    ]
   },
   {
@@ -88,7 +88,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    144
+    240
    ]
   },
   {
@@ -96,7 +96,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    145
+    241
    ]
   },
   {
@@ -104,7 +104,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    146
+    242
    ]
   },
   {
@@ -112,7 +112,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    147
+    243
    ]
   },
   {
@@ -120,7 +120,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    148
+    244
    ]
   },
   {
@@ -128,7 +128,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    150
+    246
    ]
   },
   {
@@ -136,7 +136,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    151
+    247
    ]
   },
   {
@@ -144,7 +144,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    152
+    248
    ]
   },
   {
@@ -152,7 +152,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    153
+    249
    ]
   },
   {
@@ -160,7 +160,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    154
+    250
    ]
   },
   {
@@ -168,7 +168,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    155
+    251
    ]
   },
   {
@@ -176,7 +176,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    157
+    253
    ]
   },
   {
@@ -184,7 +184,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    160
+    256
    ]
   },
   {
@@ -192,7 +192,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    163
+    259
    ]
   },
   {
@@ -200,7 +200,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    164
+    260
    ]
   },
   {
@@ -208,7 +208,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    193
+    289
    ]
   },
   {
@@ -216,8 +216,8 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    194,
-    195
+    290,
+    291
    ]
   },
   {
@@ -225,7 +225,7 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    196
+    292
    ]
   },
   {
@@ -233,44 +233,56 @@
    "question": 16,
    "status": "match",
    "fact_ids": [
-    197
+    293
    ]
   },
   {
    "id": "Q21-01",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    294
+   ]
   },
   {
    "id": "Q21-02",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    295
+   ]
   },
   {
    "id": "Q21-03",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    296
+   ]
   },
   {
    "id": "Q21-04",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    297
+   ]
   },
   {
    "id": "Q21-05",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    298
+   ]
   },
   {
    "id": "Q21-06",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    299
+   ]
   },
   {
    "id": "Q21-07",
@@ -281,32 +293,42 @@
   {
    "id": "Q21-08",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    300
+   ]
   },
   {
    "id": "Q21-09",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    301
+   ]
   },
   {
    "id": "Q21-10",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    302
+   ]
   },
   {
    "id": "Q21-11",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    303
+   ]
   },
   {
    "id": "Q21-12",
    "question": 21,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    304
+   ]
   },
   {
    "id": "Q22-01",
@@ -395,32 +417,44 @@
   {
    "id": "Q33-01",
    "question": 33,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    305,
+    306
+   ]
   },
   {
    "id": "Q33-02",
    "question": 33,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    307
+   ]
   },
   {
    "id": "Q33-03",
    "question": 33,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    309
+   ]
   },
   {
    "id": "Q33-04",
    "question": 33,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    311,
+    312
+   ]
   },
   {
    "id": "Q33-05",
    "question": 33,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    313
+   ]
   },
   {
    "id": "Q35-01",
@@ -491,7 +525,7 @@
    "question": 36,
    "status": "match",
    "fact_ids": [
-    85
+    125
    ]
   },
   {
@@ -499,194 +533,256 @@
    "question": 36,
    "status": "match",
    "fact_ids": [
-    111
+    192
    ]
   },
   {
    "id": "Q51-01",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    197
+   ]
   },
   {
    "id": "Q51-02",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    196
+   ]
   },
   {
    "id": "Q51-03",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    195
+   ]
   },
   {
    "id": "Q51-04",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    198
+   ]
   },
   {
    "id": "Q51-05",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    201
+   ]
   },
   {
    "id": "Q51-06",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    203
+   ]
   },
   {
    "id": "Q51-07",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    207
+   ]
   },
   {
    "id": "Q51-08",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    206
+   ]
   },
   {
    "id": "Q51-09",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    200
+   ]
   },
   {
    "id": "Q51-10",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    208
+   ]
   },
   {
    "id": "Q51-11",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    202
+   ]
   },
   {
    "id": "Q51-12",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    199
+   ]
   },
   {
    "id": "Q51-13",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    204
+   ]
   },
   {
    "id": "Q51-14",
    "question": 51,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    205
+   ]
   },
   {
    "id": "Q55-01",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    108
+   ]
   },
   {
    "id": "Q55-02",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    109
+   ]
   },
   {
    "id": "Q55-03",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    110
+   ]
   },
   {
    "id": "Q55-04",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    111
+   ]
   },
   {
    "id": "Q55-05",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    112
+   ]
   },
   {
    "id": "Q55-06",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    113
+   ]
   },
   {
    "id": "Q55-07",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    114
+   ]
   },
   {
    "id": "Q55-08",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    115
+   ]
   },
   {
    "id": "Q55-09",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    116
+   ]
   },
   {
    "id": "Q55-10",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    117
+   ]
   },
   {
    "id": "Q55-11",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    118
+   ]
   },
   {
    "id": "Q55-12",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    119
+   ]
   },
   {
    "id": "Q55-13",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    120
+   ]
   },
   {
    "id": "Q55-14",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    121
+   ]
   },
   {
    "id": "Q55-15",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    122
+   ]
   },
   {
    "id": "Q55-16",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    123
+   ]
   },
   {
    "id": "Q55-17",
    "question": 55,
-   "status": "missing",
-   "fact_ids": []
+   "status": "match",
+   "fact_ids": [
+    124
+   ]
   }
  ],
  "gate": [
@@ -699,7 +795,7 @@
    "claim": {
     "deviceHolds": [
      1,
-     241
+     374
     ]
    },
    "strength": "strong",
@@ -714,7 +810,7 @@
    "claim": {
     "openedFromDevice": [
      21,
-     241
+     374
     ]
    },
    "strength": "strong",
@@ -729,7 +825,7 @@
    "claim": {
     "openedFromDevice": [
      26,
-     241
+     374
     ]
    },
    "strength": "strong",
@@ -743,7 +839,7 @@
    "verdict": "verified",
    "claim": {
     "before": [
-     121,
+     217,
      21
     ]
    },
@@ -759,7 +855,7 @@
    "claim": {
     "openedFromRecorded": [
      41,
-     237
+     366
     ]
    },
    "strength": "strong",
@@ -773,8 +869,8 @@
    "verdict": "verified",
    "claim": {
     "sameLabel": [
-     237,
-     238
+     366,
+     371
     ]
    },
    "strength": "heuristic",
@@ -788,8 +884,8 @@
    "verdict": "verified",
    "claim": {
     "recordedOnDevice": [
-     238,
-     242
+     371,
+     375
     ]
    },
    "strength": "strong",
@@ -806,25 +902,25 @@
      {
       "openedFromRecorded": [
        41,
-       237
+       366
       ]
      },
      {
       "sameLabel": [
-       237,
-       238
+       366,
+       371
       ]
      },
      {
       "recordedOnDevice": [
-       238,
-       242
+       371,
+       375
       ]
      },
      {
       "deviceHolds": [
        3,
-       242
+       375
       ]
      }
     ]
@@ -857,18 +953,18 @@
     "both": [
      {
       "fileCreatedAt": [
-       85
+       125
       ]
      },
      {
       "fileModifiedAt": [
-       111
+       192
       ]
      },
      {
       "before": [
-       85,
-       111
+       125,
+       192
       ]
      }
     ]
@@ -886,8 +982,8 @@
     "tagged": [
      1,
      "obj",
-     198,
-     115
+     314,
+     193
     ]
    },
    "strength": "strong",
@@ -916,7 +1012,7 @@
    "verdict": "verified",
    "claim": {
     "searched": [
-     154
+     250
     ]
    },
    "strength": "strong",
@@ -945,10 +1041,161 @@
    "claim": {
     "openedFromDevice": [
      41,
-     242
+     375
     ]
    },
    "as_expected": false
+  },
+  {
+   "id": "T16",
+   "label": true,
+   "ask": "Is there a record of winter_whether_advisory.zip on the seized RM#2, written before its current file system?",
+   "basis": "Q53: \\DESIGN\\winter_whether_advisory.zip recovered from RM#2's FAT directory entries; Q54: quick format",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "recoveredOnDevice": [
+       109,
+       376
+      ]
+     },
+     {
+      "deviceExamined": [
+       3,
+       376
+      ]
+     }
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T17",
+   "label": true,
+   "ask": "Was RM#2 connected before that file record was created on it?",
+   "basis": "Section 3: 2015-03-24 09:58 connect RM#2, 09:59 copy files to RM#2",
+   "verdict": "verified",
+   "claim": {
+    "before": [
+     3,
+     109
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T18",
+   "label": true,
+   "ask": "Was the zip likely copied onto RM#2? (heuristic)",
+   "basis": "Q55: winter_whether_advisory.zip was copied from the PC to RM#2",
+   "verdict": "verified",
+   "claim": {
+    "copiedHere": [
+     109,
+     160
+    ]
+   },
+   "strength": "heuristic",
+   "as_expected": true
+  },
+  {
+   "id": "T19",
+   "label": true,
+   "ask": "Was the burn folder item 'prop' sent to the Recycle Bin?",
+   "basis": "Q51: $I40295N, 2015-03-24 15:51:47, ...\\Burn\\Burn\\prop",
+   "verdict": "verified",
+   "claim": {
+    "fileDeletedAt": [
+     197
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T20",
+   "label": true,
+   "ask": "Did the first burn trace come before 'prop' was sent to the Recycle Bin?",
+   "basis": "Q33 (2015-03-24 15:47:47) and Q51 (2015-03-24 15:51:47)",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "burnTrace": [
+       305
+      ]
+     },
+     {
+      "before": [
+       305,
+       197
+      ]
+     }
+    ]
+   },
+   "strength": "heuristic",
+   "as_expected": true
+  },
+  {
+   "id": "T21",
+   "label": true,
+   "ask": "Was 'Hello, Iaman' sent before 'Done'?",
+   "basis": "Q21: 2015-03-23 13:29:27 and 2015-03-24 17:05:09",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "emailed": [
+       294
+      ]
+     },
+     {
+      "emailed": [
+       304
+      ]
+     },
+     {
+      "before": [
+       294,
+       304
+      ]
+     }
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
+  },
+  {
+   "id": "T22",
+   "label": true,
+   "ask": "Do the zip on RM#2 and the detailed design on RM#1 have the same size and last-modified time?",
+   "basis": "Q55 and Q56: winter_whether_advisory.zip is [secret_project]_detailed_design.pptx renamed (PPTX, 15.6 MB)",
+   "verdict": "verified",
+   "claim": {
+    "both": [
+     {
+      "tagged": [
+       160,
+       "obj",
+       340,
+       198
+      ]
+     },
+     {
+      "tagged": [
+       159,
+       "obj",
+       325,
+       198
+      ]
+     }
+    ]
+   },
+   "strength": "strong",
+   "as_expected": true
   },
   {
    "id": "F01",
@@ -959,7 +1206,7 @@
    "claim": {
     "openedFromDevice": [
      41,
-     241
+     374
     ]
    },
    "as_expected": true
@@ -973,7 +1220,7 @@
    "claim": {
     "openedFromDevice": [
      26,
-     242
+     375
     ]
    },
    "as_expected": true
@@ -1001,7 +1248,7 @@
    "claim": {
     "before": [
      21,
-     121
+     217
     ]
    },
    "as_expected": true
@@ -1016,8 +1263,8 @@
     "tagged": [
      3,
      "obj",
-     198,
-     115
+     314,
+     193
     ]
    },
    "as_expected": true
@@ -1031,7 +1278,7 @@
    "claim": {
     "deviceHolds": [
      1,
-     242
+     375
     ]
    },
    "as_expected": true
@@ -1044,8 +1291,8 @@
    "verdict": "rejected",
    "claim": {
     "recordedOnDevice": [
-     237,
-     241
+     366,
+     374
     ]
    },
    "as_expected": true
@@ -1058,8 +1305,8 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     111,
-     85
+     192,
+     125
     ]
    },
    "as_expected": true
@@ -1100,7 +1347,7 @@
    "claim": {
     "openedFromRecorded": [
      26,
-     237
+     366
     ]
    },
    "as_expected": true
@@ -1113,8 +1360,8 @@
    "verdict": "rejected",
    "claim": {
     "sameLabel": [
-     236,
-     238
+     364,
+     371
     ]
    },
    "as_expected": true
@@ -1127,7 +1374,7 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     194,
+     290,
      3
     ]
    },
@@ -1143,8 +1390,8 @@
     "tagged": [
      1,
      "obj",
-     199,
-     116
+     315,
+     194
     ]
    },
    "as_expected": true
@@ -1160,25 +1407,25 @@
      {
       "openedFromRecorded": [
        41,
-       237
+       366
       ]
      },
      {
       "sameLabel": [
-       237,
-       236
+       366,
+       364
       ]
      },
      {
       "recordedOnDevice": [
-       236,
-       241
+       364,
+       374
       ]
      },
      {
       "deviceHolds": [
        1,
-       241
+       374
       ]
      }
     ]
@@ -1198,16 +1445,128 @@
     ]
    },
    "as_expected": true
+  },
+  {
+   "id": "F17",
+   "label": false,
+   "ask": "Is a file that sits on RM#1 a record recovered from RM#2's unallocated space?",
+   "basis": "Q53 lists only RM#2's recovered entries; the file is live on RM#1",
+   "verdict": "rejected",
+   "claim": {
+    "recoveredOnDevice": [
+     66,
+     376
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F18",
+   "label": false,
+   "ask": "Does the seized RM#1 have directory entries left in unallocated space?",
+   "basis": "Q54: only RM#2 was quick-formatted; the unallocated-space record names RM#2's serial",
+   "verdict": "rejected",
+   "claim": {
+    "deviceExamined": [
+     1,
+     376
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F19",
+   "label": false,
+   "ask": "Was the zip's record on RM#2 created before RM#2 was first connected?",
+   "basis": "Section 3: 09:58 connect, 09:59 copy",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     109,
+     3
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F20",
+   "label": false,
+   "ask": "Was 'prop' sent to the Recycle Bin before the first burn trace?",
+   "basis": "Q33 (15:47:47) and Q51 (15:51:47)",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     197,
+     305
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F21",
+   "label": false,
+   "ask": "Was 'Done' sent before 'Hello, Iaman'?",
+   "basis": "Q21: 2015-03-24 17:05:09 and 2015-03-23 13:29:27",
+   "verdict": "rejected",
+   "claim": {
+    "before": [
+     304,
+     294
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F22",
+   "label": false,
+   "ask": "Is the web search 'data leakage methods' an e-mail?",
+   "basis": "Q16 lists it as a search; Q21 has no such subject",
+   "verdict": "rejected",
+   "claim": {
+    "emailed": [
+     217
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F23",
+   "label": false,
+   "ask": "Was the resignation letter sent to the Recycle Bin?",
+   "basis": "Q51 lists 14 Recycle Bin items; the letter is not among them (Q36: it is on the Desktop)",
+   "verdict": "rejected",
+   "claim": {
+    "fileDeletedAt": [
+     125
+    ]
+   },
+   "as_expected": true
+  },
+  {
+   "id": "F24",
+   "label": false,
+   "ask": "Does winter_storm.amr on RM#2 have the size and last-modified time of the detailed design?",
+   "basis": "Q55 and Q56: winter_storm.amr is the 13.8 MB PPT ([secret_project]_revised_points.ppt), not the 15.6 MB PPTX",
+   "verdict": "rejected",
+   "claim": {
+    "tagged": [
+     177,
+     "obj",
+     340,
+     198
+    ]
+   },
+   "as_expected": true
   }
  ],
  "run": {
   "path": "ui/public/run.json",
-  "proposals": 116,
-  "verified": 100,
-  "rejected": 16,
+  "proposals": 203,
+  "verified": 179,
+  "rejected": 24,
   "by_strength": {
-   "strong": 94,
-   "heuristic": 6
+   "strong": 124,
+   "heuristic": 55
   },
   "items": [
    {
@@ -1456,44 +1815,56 @@
    {
     "id": "Q21-01",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M160"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-02",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M161"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-03",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M162"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-04",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M163"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-05",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M164"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-06",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M165"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-07",
@@ -1505,37 +1876,47 @@
    {
     "id": "Q21-08",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M166"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-09",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M167"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-10",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M168"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-11",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M169"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q21-12",
     "question": 21,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M170"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q22-01",
@@ -1571,7 +1952,48 @@
     "findings": [
      "M003",
      "M004",
-     "M024"
+     "M024",
+     "M099",
+     "M100",
+     "M101",
+     "M102",
+     "M103",
+     "M104",
+     "M105",
+     "M106",
+     "M107",
+     "M108",
+     "M109",
+     "M110",
+     "M111",
+     "M112",
+     "M113",
+     "M114",
+     "M115",
+     "M116",
+     "M117",
+     "M118",
+     "M119",
+     "M120",
+     "M121",
+     "M122",
+     "M123",
+     "M124",
+     "M125",
+     "M126",
+     "M127",
+     "M128",
+     "M129",
+     "M130",
+     "M131",
+     "M132",
+     "M133",
+     "M134",
+     "M135",
+     "M136",
+     "M137",
+     "M138",
+     "M140"
     ],
     "best_strength": "strong"
    },
@@ -1582,7 +2004,48 @@
     "findings": [
      "M003",
      "M004",
-     "M024"
+     "M024",
+     "M099",
+     "M100",
+     "M101",
+     "M102",
+     "M103",
+     "M104",
+     "M105",
+     "M106",
+     "M107",
+     "M108",
+     "M109",
+     "M110",
+     "M111",
+     "M112",
+     "M113",
+     "M114",
+     "M115",
+     "M116",
+     "M117",
+     "M118",
+     "M119",
+     "M120",
+     "M121",
+     "M122",
+     "M123",
+     "M124",
+     "M125",
+     "M126",
+     "M127",
+     "M128",
+     "M129",
+     "M130",
+     "M131",
+     "M132",
+     "M133",
+     "M134",
+     "M135",
+     "M136",
+     "M137",
+     "M138",
+     "M140"
     ],
     "best_strength": "strong"
    },
@@ -1645,37 +2108,49 @@
    {
     "id": "Q33-01",
     "question": 33,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M171",
+     "M172"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q33-02",
     "question": 33,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M173"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q33-03",
     "question": 33,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M175"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q33-04",
     "question": 33,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M177",
+     "M178"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q33-05",
     "question": 33,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M179"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q35-01",
@@ -1754,7 +2229,7 @@
     "question": 36,
     "certified": true,
     "findings": [
-     "M099"
+     "M139"
     ],
     "best_strength": "strong"
    },
@@ -1763,226 +2238,292 @@
     "question": 36,
     "certified": true,
     "findings": [
-     "M099"
+     "M139"
     ],
     "best_strength": "strong"
    },
    {
     "id": "Q51-01",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M148"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-02",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M147"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-03",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M146"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-04",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M149"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-05",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M152"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-06",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M154"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-07",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M158"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-08",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M157"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-09",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M151"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-10",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M159"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-11",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M153"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-12",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M150"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-13",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M155"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q51-14",
     "question": 51,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M156"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q55-01",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M122",
+     "M143"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q55-02",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M123",
+     "M142"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q55-03",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M124"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-04",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M125"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-05",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M126"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-06",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M127"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-07",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M128"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-08",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M129"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-09",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M130"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-10",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M131",
+     "M144"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q55-11",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M132",
+     "M145"
+    ],
+    "best_strength": "strong"
    },
    {
     "id": "Q55-12",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M133"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-13",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M134"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-14",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M135"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-15",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M136"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-16",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M137"
+    ],
+    "best_strength": "heuristic"
    },
    {
     "id": "Q55-17",
     "question": 55,
-    "certified": false,
-    "findings": [],
-    "best_strength": null
+    "certified": true,
+    "findings": [
+     "M138"
+    ],
+    "best_strength": "heuristic"
    }
   ],
   "findings_outside_reference": [
@@ -2031,7 +2572,9 @@
    "M096",
    "M097",
    "M098",
-   "M100"
+   "M141",
+   "M174",
+   "M176"
   ]
  }
 }

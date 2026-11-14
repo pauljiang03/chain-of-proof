@@ -1,0 +1,76 @@
+{
+  "finding_id": "A105",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      248,
+      "obj",
+      351,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "digital forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
+  "cited_facts": [
+    {
+      "id": 248,
+      "kind": "webSearch",
+      "t": 1427134544517540,
+      "res": 1,
+      "obj": 147,
+      "obj_text": "digital forensics",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "f55b21ae7d31abf10ee6d92dcd446260591e218f9291762a426bf651e4f07d38",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 351,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 147,
+      "obj_text": "digital forensics",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "525533027c1de96cd8c8a5045630b3f6449d9776270c89ed1e2cbe273a07bd87",
+      "prov": {
+        "rule": "search term contains the watch-list word \"forensic\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          248,
+          "obj",
+          351,
+          195
+        ]
+      },
+      "english": "digital forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A105.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

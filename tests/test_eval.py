@@ -22,7 +22,7 @@ class RealEvidence(unittest.TestCase):
         result = score.score_extraction(self.reference, self.rows)
         status = [r["status"] for r in result]
         # a drop here means the extractor lost rows the answer key confirms
-        self.assertGreaterEqual(status.count("match"), 48)
+        self.assertGreaterEqual(status.count("match"), 95)
         self.assertEqual(status.count("time_differs"), 0)
 
     def test_gate_refuses_every_false_claim_and_certifies_the_true_ones(self):

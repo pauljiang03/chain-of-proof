@@ -12,8 +12,8 @@
         "tagged": [
           33,
           "obj",
-          214,
-          118
+          338,
+          197
         ]
       }
     ]
@@ -43,15 +43,15 @@
       }
     },
     {
-      "id": 214,
+      "id": 338,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 25,
       "obj_text": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "37d924d4d763e4b33a32c38b746daa90a7cfaf696990b50ceebac492c9a5ce01",
+      "row_sha256": "f06a9efedc89075cdb9269ca28d96c5d73186494bbc1bd8e1078902105a47135",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
@@ -76,8 +76,8 @@
         "tagged": [
           33,
           "obj",
-          214,
-          118
+          338,
+          197
         ]
       },
       "english": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",

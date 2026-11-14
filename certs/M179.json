@@ -1,0 +1,53 @@
+{
+  "finding_id": "M179",
+  "question": "What traces of disc burning are there?",
+  "claim": {
+    "burnTrace": [
+      313
+    ]
+  },
+  "status": "verified",
+  "english": "CD-burn trace in the registry: CD Burning settings of user informant last changed (DefaultToMastered=0) (2015-03-24 20:53:16 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "cited_facts": [
+    {
+      "id": 313,
+      "kind": "cdBurn",
+      "t": 1427230396668583,
+      "res": 1,
+      "obj": 191,
+      "obj_text": "CD Burning settings of user informant last changed (DefaultToMastered=0)",
+      "aux": 192,
+      "aux_text": "registry",
+      "row_sha256": "90d7d0acfa58c69d3d6096c04c44b6437c9f5adcfa6af9f3e8b2070e0097ed6a",
+      "prov": {
+        "artifact": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD Burning",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "staging_path": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "burnTrace": [
+          313
+        ]
+      },
+      "english": "CD-burn trace in the registry: CD Burning settings of user informant last changed (DefaultToMastered=0) (2015-03-24 20:53:16 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R12"
+  ],
+  "strength": "heuristic",
+  "lean_file": "M179.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

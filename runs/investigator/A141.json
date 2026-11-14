@@ -1,0 +1,56 @@
+{
+  "finding_id": "A141",
+  "question": "3c. Which files were opened from the company's network drive (secured_drive)?",
+  "claim": {
+    "opened": [
+      33
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:26:53 UTC).",
+  "cited_facts": [
+    {
+      "id": 33,
+      "kind": "lnkTarget",
+      "t": 1427142413986593,
+      "res": 1,
+      "obj": 25,
+      "obj_text": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+      "aux": 26,
+      "aux_text": "\\\\10.11.11.128\\secured_drive",
+      "row_sha256": "460b730b954b4d2d42f8f8b22f180c8bded11cdaa873dd90f2806073058c6181",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\(secret_project)_pricing_decision.xlsx.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+        "shortcut_created": 1427142413986593,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          33
+        ]
+      },
+      "english": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx on network share \\\\10.11.11.128\\secured_drive was opened (2015-03-23 20:26:53 UTC).",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "A141.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

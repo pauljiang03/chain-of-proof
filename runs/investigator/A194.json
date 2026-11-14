@@ -1,0 +1,83 @@
+{
+  "finding_id": "A194",
+  "question": "5a. Which files were copied to RM#2?",
+  "claim": {
+    "recoveredOnDevice": [
+      123,
+      376
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#3d.txt, created (2015-03-24 14:00:15 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+  "cited_facts": [
+    {
+      "id": 123,
+      "kind": "fileCreated",
+      "t": 1427205615650000,
+      "res": 10000,
+      "obj": 107,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3d.txt",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "3ad8497b079ead901b07e012fa0d25de73da4c6a070258e977a34ca125c3ea47",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197",
+        "exhibit": "RM#2",
+        "first_cluster": 24783,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "DI4C63~1.TXT",
+        "size": 2360832,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 376,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "prov": {
+        "artifact": "FAT32 clusters the allocation table marks free",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "exhibit": "RM#2",
+        "file_entries": 41,
+        "folders": 8,
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "recoveredOnDevice": [
+          123,
+          376
+        ]
+      },
+      "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#3d.txt, created (2015-03-24 14:00:15 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10",
+    "R13"
+  ],
+  "strength": "strong",
+  "lean_file": "A194.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

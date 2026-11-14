@@ -4,10 +4,10 @@ open ChainOfProof
 namespace Cert.M072
 
 def cited : List Fact := [
-  ⟨195, .webSearch, 1427294804771004, 1, 112, 70⟩,
-  ⟨215, .tag, 1794614400000000, 1, 112, 117⟩ ]
+  ⟨291, .webSearch, 1427294804771004, 1, 168, 126⟩,
+  ⟨343, .tag, 1794614400000000, 1, 168, 195⟩ ]
 
-def claim : Claim := .both (Sets.searched 195) (Sets.tagged 195 .obj 215 117)
+def claim : Claim := .both (Sets.searched 291) (Sets.tagged 291 .obj 343 195)
 
 theorem verified : holds cited claim = true := by decide +kernel
 

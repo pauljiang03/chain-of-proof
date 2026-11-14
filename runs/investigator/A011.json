@@ -1,0 +1,55 @@
+{
+  "finding_id": "A011",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      210
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"internet explorer 11\" was made in iexplore (2015-03-22 15:24:21 UTC).",
+  "cited_facts": [
+    {
+      "id": 210,
+      "kind": "webSearch",
+      "t": 1427037861900251,
+      "res": 1,
+      "obj": 124,
+      "obj_text": "internet explorer 11",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "cefb9263906048dbc9b31fdd116e211e371a22b8eb77871700fe3941982843f5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          210
+        ]
+      },
+      "english": "A web search for \"internet explorer 11\" was made in iexplore (2015-03-22 15:24:21 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A011.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

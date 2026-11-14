@@ -6,21 +6,29 @@
       {
         "copiedHere": [
           70,
-          95
+          163
         ]
       },
       {
         "tagged": [
           70,
           "obj",
-          208,
-          118
+          331,
+          197
+        ]
+      },
+      {
+        "tagged": [
+          70,
+          "obj",
+          332,
+          201
         ]
       }
     ]
   },
   "status": "verified",
-  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:20 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:20 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
       "id": 70,
@@ -42,7 +50,7 @@
       }
     },
     {
-      "id": 95,
+      "id": 163,
       "kind": "fileModified",
       "t": 1419018826000000,
       "res": 10000,
@@ -50,7 +58,7 @@
       "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "df78b591109d09109bb034e484b51cfda378ab0ad5d3a755f32d53f61d36080e",
+      "row_sha256": "91c740a52b599616003e67ea3fce3d0a2e6c9fe09aa4b5ed48f701f47f896df5",
       "prov": {
         "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
         "exhibit": "RM#1",
@@ -61,17 +69,32 @@
       }
     },
     {
-      "id": 208,
+      "id": 331,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 18,
       "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
-      "aux": 118,
+      "aux": 197,
       "aux_text": "confidential",
-      "row_sha256": "6ca9054fa6aaa89fd100c6379044952054b5802b5c803d36fdc1b5aa95d317ef",
+      "row_sha256": "5e3e111525ca6f03576c806ff7287ec4175f1dd5973b2e95ebc4f81f871bdfe4",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 332,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 201,
+      "aux_text": "same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC",
+      "row_sha256": "cd6b39e6e456ec706856736dd6428c487ea971272d7513337c7f7d816b861a73",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
       }
     }
@@ -81,7 +104,7 @@
       "part": {
         "copiedHere": [
           70,
-          95
+          163
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:20 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4.",
@@ -95,11 +118,26 @@
         "tagged": [
           70,
           "obj",
-          208,
-          118
+          331,
+          197
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          70,
+          "obj",
+          332,
+          201
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
       "rules": [
         "T"
       ],

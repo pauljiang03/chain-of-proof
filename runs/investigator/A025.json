@@ -1,0 +1,55 @@
+{
+  "finding_id": "A025",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      224
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:05:18 UTC).",
+  "cited_facts": [
+    {
+      "id": 224,
+      "kind": "webSearch",
+      "t": 1427133918131407,
+      "res": 1,
+      "obj": 132,
+      "obj_text": "information leakage cases",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "20533ee397e656cd8860fccf196ed40de7b449bdd2588447f1cfa7e8e99daa17",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&source=lnms&tbm=isch&sa=X&ei=21UQVb20Eu-HsQTJ5IDAAQ&ved=0CAgQ_AUoAw",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          224
+        ]
+      },
+      "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:05:18 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A025.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

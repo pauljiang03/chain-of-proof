@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          147
+          243
         ]
       },
       {
         "tagged": [
-          147,
+          243,
           "obj",
-          218,
-          117
+          346,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC). cd burning method is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cd burn\").",
   "cited_facts": [
     {
-      "id": 147,
+      "id": 243,
       "kind": "webSearch",
       "t": 1427134400892344,
       "res": 1,
-      "obj": 87,
+      "obj": 143,
       "obj_text": "cd burning method",
-      "aux": 70,
+      "aux": 126,
       "aux_text": "iexplore",
-      "row_sha256": "af4c5e0a88b93c16ae1916609b01e2eea3e1e217dd0adff12e316df9971cc66f",
+      "row_sha256": "77e622ebba3394d627cbbb2051577a32b6e388f3300d60c92efcb9c26136776c",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 218,
+      "id": 346,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 87,
+      "obj": 143,
       "obj_text": "cd burning method",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "cb4ac323e662c950a80cf649676b6503d4f6344802b1c7f8f6b0816510ec5bc2",
+      "row_sha256": "e434daf2276af1f1ba7741ee70aa9d7879655b76362e0cfd5674d4d56e361f54",
       "prov": {
         "rule": "search term contains the watch-list word \"cd burn\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          147
+          243
         ]
       },
       "english": "A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          147,
+          243,
           "obj",
-          218,
-          117
+          346,
+          195
         ]
       },
       "english": "cd burning method is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cd burn\").",

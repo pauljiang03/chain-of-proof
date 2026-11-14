@@ -1,109 +1,208 @@
 {
   "finding_id": "M099",
-  "question": "When were the user's files created and last modified?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
     "both": [
       {
-        "fileCreatedAt": [
-          85
-        ]
-      },
-      {
-        "fileModifiedAt": [
-          111
-        ]
-      },
-      {
-        "before": [
+        "recoveredOnDevice": [
           85,
-          111
+          376
+        ]
+      },
+      {
+        "deviceExamined": [
+          3,
+          376
+        ]
+      },
+      {
+        "tagged": [
+          3,
+          "obj",
+          315,
+          194
+        ]
+      },
+      {
+        "copiedHere": [
+          85,
+          154
         ]
       }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was created on volume CA0C7A48 (2015-03-24 18:48:40 UTC). \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was last modified on volume CA0C7A48 (2015-03-24 18:59:30 UTC). The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:59:30 UTC): the gap of 649.877 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "english": "A directory entry for \\[lost folder at cluster 45007, older layout]\\amalfi.bmp, created (2015-03-23 20:55:17 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system. USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space. 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief). \\[lost folder at cluster 45007, older layout]\\amalfi.bmp was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-23 20:55:17 UTC) after its last modification (2013-05-07 19:19:42 UTC). This rests on heuristic rule R4.",
   "cited_facts": [
     {
       "id": 85,
       "kind": "fileCreated",
-      "t": 1427222920734358,
-      "res": 1,
-      "obj": 44,
-      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "910e48c10b9af6a63835b13598dd8c60420fa0ff953d8ffdab0d258a1f54af1d",
+      "t": 1427144117150000,
+      "res": 10000,
+      "obj": 68,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\amalfi.bmp",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "097c2bb2cd05bc0a98547d7f9fd00ffcb67caabac24a7dfda71ace6c6ce927d6",
       "prov": {
-        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "size": 11893,
-        "tool": "dissect.target 3.25.1",
-        "user": "informant"
+        "artifact": "FAT directory entry in unallocated cluster 45007",
+        "exhibit": "RM#2",
+        "first_cluster": 11493,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "amalfi.bmp",
+        "size": 921654,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
       }
     },
     {
-      "id": 111,
-      "kind": "fileModified",
-      "t": 1427223570611170,
+      "id": 376,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
       "res": 1,
-      "obj": 44,
-      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "ac348310c34918269ecd0d7c068f1563ce8f3f89710ac0fd43302ace472070c8",
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
       "prov": {
-        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "artifact": "FAT32 clusters the allocation table marks free",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "exhibit": "RM#2",
+        "file_entries": 41,
+        "folders": 8,
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 3,
+      "kind": "usbInsert",
+      "t": 1427205512859000,
+      "res": 1000,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d7b4abaf42dea7fc25ca5e2212ec4f4d64180dd2dc265c86a25d6b6f2386f4d5",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
         "exhibit": "PC",
         "image": "pc.E01",
-        "size": 11893,
-        "tool": "dissect.target 3.25.1",
-        "user": "informant"
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 315,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 194,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "prov": {
+        "rule": "device serial is not on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 154,
+      "kind": "fileModified",
+      "t": 1367954382000000,
+      "res": 2000000,
+      "obj": 68,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\amalfi.bmp",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "5ddb842159e848c23f975cab099662463f41cf32ccde14ab66f4cfd99c7e352c",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007",
+        "exhibit": "RM#2",
+        "first_cluster": 11493,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "amalfi.bmp",
+        "size": 921654,
+        "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+        "tool": "dissect.target 3.25.1"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileCreatedAt": [
-          85
-        ]
-      },
-      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was created on volume CA0C7A48 (2015-03-24 18:48:40 UTC).",
-      "rules": [
-        "R10"
-      ],
-      "strength": "strong"
-    },
-    {
-      "part": {
-        "fileModifiedAt": [
-          111
-        ]
-      },
-      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was last modified on volume CA0C7A48 (2015-03-24 18:59:30 UTC).",
-      "rules": [
-        "R10"
-      ],
-      "strength": "strong"
-    },
-    {
-      "part": {
-        "before": [
+        "recoveredOnDevice": [
           85,
-          111
+          376
         ]
       },
-      "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:59:30 UTC): the gap of 649.877 s exceeds the combined timestamp uncertainty of 2 µs.",
-      "rules": [],
+      "english": "A directory entry for \\[lost folder at cluster 45007, older layout]\\amalfi.bmp, created (2015-03-23 20:55:17 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
       "strength": "strong"
+    },
+    {
+      "part": {
+        "deviceExamined": [
+          3,
+          376
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
+      "rules": [
+        "R1",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          3,
+          "obj",
+          315,
+          194
+        ]
+      },
+      "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          85,
+          154
+        ]
+      },
+      "english": "\\[lost folder at cluster 45007, older layout]\\amalfi.bmp was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-23 20:55:17 UTC) after its last modification (2013-05-07 19:19:42 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
     }
   ],
   "rules": [
-    "R10"
+    "R1",
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M099.lean",
   "trust_tier": "kernel",
   "axioms": []

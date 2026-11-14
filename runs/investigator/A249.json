@@ -1,0 +1,58 @@
+{
+  "finding_id": "A249",
+  "question": "5c. What e-mails were exchanged? 5d. When was the CD burned?",
+  "claim": {
+    "emailed": [
+      298
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "An e-mail with the subject \"Important request\" was sent from spy to iaman (2015-03-23 19:26:22 UTC).",
+  "cited_facts": [
+    {
+      "id": 298,
+      "kind": "emailSent",
+      "t": 1427138782000000,
+      "res": 1000000,
+      "obj": 177,
+      "obj_text": "Important request",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "f55ad7331f24ac862801dbfdeab4611a0851afd72902b92038ae272e9be73278",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB01564098B5C82EDB2AE0CD618C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          298
+        ]
+      },
+      "english": "An e-mail with the subject \"Important request\" was sent from spy to iaman (2015-03-23 19:26:22 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "A249.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

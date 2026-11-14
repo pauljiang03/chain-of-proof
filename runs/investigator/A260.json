@@ -1,0 +1,55 @@
+{
+  "finding_id": "A260",
+  "question": "5c. What e-mails were exchanged? 5d. When was the CD burned?",
+  "claim": {
+    "burnTrace": [
+      309
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "cited_facts": [
+    {
+      "id": 309,
+      "kind": "cdBurn",
+      "t": 1427228659896305,
+      "res": 1,
+      "obj": 189,
+      "obj_text": "temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp",
+      "aux": 185,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "72add272d72c584abbc724a27f337cd8f7093b0600a2b7634b66011b6f4706a7",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64418464,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "burnTrace": [
+          309
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R12"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A260.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

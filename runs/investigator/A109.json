@@ -1,0 +1,76 @@
+{
+  "finding_id": "A109",
+  "question": "2. List the web searches made on this PC (keywords and times) — which ones are on the watch list?",
+  "claim": {
+    "tagged": [
+      249,
+      "obj",
+      355,
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",
+  "cited_facts": [
+    {
+      "id": 249,
+      "kind": "webSearch",
+      "t": 1427134615783075,
+      "res": 1,
+      "obj": 148,
+      "obj_text": "how to delete data",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "dc7f5bb5142a58d046b3c029b64dbae9f334ce186c48b0e60e983dc5e04b9609",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 355,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 148,
+      "obj_text": "how to delete data",
+      "aux": 195,
+      "aux_text": "watch-list-search",
+      "row_sha256": "caec9a365a1603e5219898cedca9fc93316413bc2ce49968ee28edc02dc02a07",
+      "prov": {
+        "rule": "search term contains the watch-list word \"delet\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          249,
+          "obj",
+          355,
+          195
+        ]
+      },
+      "english": "how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A109.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

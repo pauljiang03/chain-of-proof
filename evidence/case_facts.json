@@ -19,16 +19,20 @@
   "examined_at": "2026-11-14T00:00:00+00:00",
   "tool": "dissect.target 3.25.1",
   "note": "Extracted from the real images. Regenerate with extractor/build.py.",
-  "facts": 242,
+  "facts": 376,
   "by_kind": {
    "usbInsert": 4,
    "lnkTarget": 56,
-   "fileCreated": 26,
-   "fileModified": 26,
+   "fileCreated": 67,
+   "fileModified": 67,
+   "fileDeleted": 14,
    "webSearch": 85,
-   "tag": 38,
-   "volumeSeen": 5,
-   "volumeOnDevice": 2
+   "emailSent": 11,
+   "cdBurn": 9,
+   "tag": 50,
+   "volumeSeen": 10,
+   "volumeOnDevice": 2,
+   "unallocatedOnDevice": 1
   },
   "unparsed": []
  },
@@ -101,62 +105,146 @@
   "65": "\\Users\\temporary\\Downloads\\desktop.ini",
   "66": "\\Users\\informant\\Downloads\\icloudsetup.exe",
   "67": "\\Users\\informant\\Downloads\\googledrivesync.exe",
-  "68": "internet explorer 11",
-  "69": "chrome",
-  "70": "iexplore",
-  "71": "outlook 2013 settings",
-  "72": "comapny",
-  "73": "Emmy Noether",
-  "74": "data leakage methods",
-  "75": "leaking confidential information",
-  "76": "information leakage cases",
-  "77": "intellectual property theft",
-  "78": "how to leak a secret",
-  "79": "Top Stories",
-  "80": "file sharing and tethering",
-  "81": "DLP DRM",
-  "82": "e-mail investigation",
-  "83": "Forensic Email Investigation",
-  "84": "what is windows system artifacts",
-  "85": "investigation on windows machine",
-  "86": "windows event logs",
-  "87": "cd burning method",
-  "88": "cd burning method in windows",
-  "89": "external device and forensics",
-  "90": "cloud storage",
-  "91": "digital forensics",
-  "92": "how to delete data",
-  "93": "anti-forensics",
-  "94": "system cleaner",
-  "95": "how to recover data",
-  "96": "data recovery tools",
-  "97": "google",
-  "98": "apple icloud",
-  "99": "google drive",
-  "100": "science technology news",
-  "101": "Soccer News",
-  "102": "top stories",
-  "103": "us news",
-  "104": "world news",
-  "105": "local",
-  "106": "entertainment news",
-  "107": "business news",
-  "108": "political news",
-  "109": "sports news",
-  "110": "health news",
-  "111": "security checkpoint cd-r",
-  "112": "anti-forensic tools",
-  "113": "eraser",
-  "114": "ccleaner",
-  "115": "authorized-device",
-  "116": "unauthorized-device",
-  "117": "watch-list-search",
-  "118": "confidential",
-  "119": "Authorized USB",
-  "120": "IAMAN $_@",
-  "121": "B4D85399",
-  "122": "System Reserved",
-  "123": "180A0125"
+  "68": "\\[lost folder at cluster 45007, older layout]\\amalfi.bmp",
+  "69": "unallocated space of device 4C530012550531106501",
+  "70": "\\[lost folder at cluster 45007, older layout]\\bamboo-clump-anamated.gif",
+  "71": "\\[lost folder at cluster 45007, older layout]\\barn.gif",
+  "72": "\\[lost folder at cluster 45007, older layout]\\blini.gif",
+  "73": "\\[lost folder at cluster 45007, older layout]\\boudicca.bmp",
+  "74": "\\[lost folder at cluster 45007, older layout]\\cactus.png",
+  "75": "\\[lost folder at cluster 45007, older layout]\\cave.png",
+  "76": "\\[lost folder at cluster 45007, older layout]\\cutty-sark.JPG",
+  "77": "\\[lost folder at cluster 45007, older layout]\\eggs.gif",
+  "78": "\\[lost folder at cluster 45007, older layout]\\forsythia.png",
+  "79": "\\[lost folder at cluster 45007, older layout]\\injera.gif",
+  "80": "\\[lost folder at cluster 45007, older layout]\\jack-o-lantern.tiff",
+  "81": "\\[lost folder at cluster 45007, older layout]\\jump.jpg",
+  "82": "\\[lost folder at cluster 45007, older layout]\\leaf.jpg",
+  "83": "\\[lost folder at cluster 45007, older layout]\\oak-snow.jpg",
+  "84": "\\[lost folder at cluster 45007, older layout]\\orchid.png",
+  "85": "\\[lost folder at cluster 45007, older layout]\\piazza-dei-miracoli.JPG",
+  "86": "\\[lost folder at cluster 45007, older layout]\\pisa.JPG",
+  "87": "\\[lost folder at cluster 45007, older layout]\\SPQR.JPG",
+  "88": "\\[lost folder at cluster 45007, older layout]\\stonehenge.JPG",
+  "89": "\\[lost folder at cluster 45007, older layout]\\tapas.gif",
+  "90": "\\[lost folder at cluster 45007, older layout]\\tomatoes.gif",
+  "91": "\\[lost folder at cluster 45007, older layout]\\wat.gif",
+  "92": "\\[lost folder 3]\\design\\winter_storm.amr",
+  "93": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+  "94": "\\[lost folder 3]\\pricing decision\\my_favorite_cars.db",
+  "95": "\\[lost folder 3]\\pricing decision\\my_favorite_movies.7z",
+  "96": "\\[lost folder 3]\\pricing decision\\new_years_day.jpg",
+  "97": "\\[lost folder 3]\\pricing decision\\super_bowl.avi",
+  "98": "\\[lost folder 3]\\progress\\my_friends.svg",
+  "99": "\\[lost folder 3]\\progress\\my_smartphone.png",
+  "100": "\\[lost folder 3]\\progress\\new_year_calendar.one",
+  "101": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif",
+  "102": "\\[lost folder 3]\\proposal\\landscape.png",
+  "103": "\\[lost folder 3]\\technical review\\diary_#1d.txt",
+  "104": "\\[lost folder 3]\\technical review\\diary_#1p.txt",
+  "105": "\\[lost folder 3]\\technical review\\diary_#2d.txt",
+  "106": "\\[lost folder 3]\\technical review\\diary_#2p.txt",
+  "107": "\\[lost folder 3]\\technical review\\diary_#3d.txt",
+  "108": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+  "109": "\\[lost folder 25440]\\desktop.ini",
+  "110": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+  "111": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog",
+  "112": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop",
+  "113": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr",
+  "114": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg",
+  "115": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg",
+  "116": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas.jpg",
+  "117": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6.1-x64-en-us.exe",
+  "118": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg",
+  "119": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg",
+  "120": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg",
+  "121": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg",
+  "122": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg",
+  "123": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini",
+  "124": "internet explorer 11",
+  "125": "chrome",
+  "126": "iexplore",
+  "127": "outlook 2013 settings",
+  "128": "comapny",
+  "129": "Emmy Noether",
+  "130": "data leakage methods",
+  "131": "leaking confidential information",
+  "132": "information leakage cases",
+  "133": "intellectual property theft",
+  "134": "how to leak a secret",
+  "135": "Top Stories",
+  "136": "file sharing and tethering",
+  "137": "DLP DRM",
+  "138": "e-mail investigation",
+  "139": "Forensic Email Investigation",
+  "140": "what is windows system artifacts",
+  "141": "investigation on windows machine",
+  "142": "windows event logs",
+  "143": "cd burning method",
+  "144": "cd burning method in windows",
+  "145": "external device and forensics",
+  "146": "cloud storage",
+  "147": "digital forensics",
+  "148": "how to delete data",
+  "149": "anti-forensics",
+  "150": "system cleaner",
+  "151": "how to recover data",
+  "152": "data recovery tools",
+  "153": "google",
+  "154": "apple icloud",
+  "155": "google drive",
+  "156": "science technology news",
+  "157": "Soccer News",
+  "158": "top stories",
+  "159": "us news",
+  "160": "world news",
+  "161": "local",
+  "162": "entertainment news",
+  "163": "business news",
+  "164": "political news",
+  "165": "sports news",
+  "166": "health news",
+  "167": "security checkpoint cd-r",
+  "168": "anti-forensic tools",
+  "169": "eraser",
+  "170": "ccleaner",
+  "171": "Hello, Iaman",
+  "172": "from spy to iaman",
+  "173": "RE: Hello, Iaman",
+  "174": "from iaman to spy",
+  "175": "Good job, buddy.",
+  "176": "RE: Good job, buddy.",
+  "177": "Important request",
+  "178": "RE: Important request",
+  "179": "RE: It's me",
+  "180": "Last request",
+  "181": "RE: Last request",
+  "182": "RE: Watch out!",
+  "183": "Done",
+  "184": "temporary files DAT67383.tmp, DAT34216.tmp, FIL39751.tmp, POST39751.tmp",
+  "185": "NTFS change journal",
+  "186": "cdrom driver event 133 for \\Device\\CdRom0",
+  "187": "System event log",
+  "188": "temporary files DAT32224.tmp, DAT08538.tmp, FIL66692.tmp, POST66692.tmp",
+  "189": "temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp",
+  "190": "temporary files DAT85234.tmp, DAT11399.tmp, FIL61821.tmp, POST61821.tmp",
+  "191": "CD Burning settings of user informant last changed (DefaultToMastered=0)",
+  "192": "registry",
+  "193": "authorized-device",
+  "194": "unauthorized-device",
+  "195": "watch-list-search",
+  "196": "e-mail in the Deleted Items folder",
+  "197": "confidential",
+  "198": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC",
+  "199": "same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC",
+  "200": "same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC",
+  "201": "same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC",
+  "202": "Authorized USB",
+  "203": "IAMAN $_@",
+  "204": "IAMAN CD",
+  "205": "B4D85399",
+  "206": "System Reserved",
+  "207": "180A0125"
  },
  "facts": [
   {
@@ -1708,6 +1796,806 @@
   {
    "id": 85,
    "kind": "fileCreated",
+   "t": 1427144117150000,
+   "res": 10000,
+   "obj": 68,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11493,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "amalfi.bmp",
+    "size": 921654,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 86,
+   "kind": "fileCreated",
+   "t": 1427144117410000,
+   "res": 10000,
+   "obj": 70,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11550,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "BAMBOO~1.GIF",
+    "size": 6717692,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 87,
+   "kind": "fileCreated",
+   "t": 1427144119270000,
+   "res": 10000,
+   "obj": 71,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11961,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "barn.gif",
+    "size": 3352929,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 88,
+   "kind": "fileCreated",
+   "t": 1427144120150000,
+   "res": 10000,
+   "obj": 72,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12166,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "blini.gif",
+    "size": 2125114,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 89,
+   "kind": "fileCreated",
+   "t": 1427144120630000,
+   "res": 10000,
+   "obj": 73,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12296,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "boudicca.bmp",
+    "size": 8798374,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 90,
+   "kind": "fileCreated",
+   "t": 1427144122950000,
+   "res": 10000,
+   "obj": 74,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12834,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "cactus.png",
+    "size": 6164389,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 91,
+   "kind": "fileCreated",
+   "t": 1427144124710000,
+   "res": 10000,
+   "obj": 75,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13211,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "cave.png",
+    "size": 8182655,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 92,
+   "kind": "fileCreated",
+   "t": 1427144126870000,
+   "res": 10000,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13711,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "CUTTY-~1.JPG",
+    "size": 1625241,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 93,
+   "kind": "fileCreated",
+   "t": 1427144127180000,
+   "res": 10000,
+   "obj": 77,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13811,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "eggs.gif",
+    "size": 2284125,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 94,
+   "kind": "fileCreated",
+   "t": 1427144127900000,
+   "res": 10000,
+   "obj": 78,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13951,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "FORSYT~1.PNG",
+    "size": 8107995,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 95,
+   "kind": "fileCreated",
+   "t": 1427144130110000,
+   "res": 10000,
+   "obj": 79,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14446,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "injera.gif",
+    "size": 34480,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 96,
+   "kind": "fileCreated",
+   "t": 1427144130130000,
+   "res": 10000,
+   "obj": 80,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14449,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "JACK-O~1.TIF",
+    "size": 7545856,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 97,
+   "kind": "fileCreated",
+   "t": 1427144132060000,
+   "res": 10000,
+   "obj": 81,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14910,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "jump.jpg",
+    "size": 2015880,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 98,
+   "kind": "fileCreated",
+   "t": 1427144132650000,
+   "res": 10000,
+   "obj": 82,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15034,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "leaf.jpg",
+    "size": 798064,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 99,
+   "kind": "fileCreated",
+   "t": 1427144132760000,
+   "res": 10000,
+   "obj": 83,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15083,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "oak-snow.jpg",
+    "size": 1370140,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 100,
+   "kind": "fileCreated",
+   "t": 1427144133200000,
+   "res": 10000,
+   "obj": 84,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15167,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "orchid.png",
+    "size": 8455527,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 101,
+   "kind": "fileCreated",
+   "t": 1427144135420000,
+   "res": 10000,
+   "obj": 85,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15684,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "PIAZZA~1.JPG",
+    "size": 1267394,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 102,
+   "kind": "fileCreated",
+   "t": 1427144135830000,
+   "res": 10000,
+   "obj": 86,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15762,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "pisa.JPG",
+    "size": 847709,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 103,
+   "kind": "fileCreated",
+   "t": 1427144136010000,
+   "res": 10000,
+   "obj": 87,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15814,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "SPQR.JPG",
+    "size": 897275,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 104,
+   "kind": "fileCreated",
+   "t": 1427144136210000,
+   "res": 10000,
+   "obj": 88,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15869,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "STONEH~1.JPG",
+    "size": 1236401,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 105,
+   "kind": "fileCreated",
+   "t": 1427144136610000,
+   "res": 10000,
+   "obj": 89,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15945,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "tapas.gif",
+    "size": 2242264,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 106,
+   "kind": "fileCreated",
+   "t": 1427144137180000,
+   "res": 10000,
+   "obj": 90,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 16082,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "tomatoes.gif",
+    "size": 2240548,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 107,
+   "kind": "fileCreated",
+   "t": 1427144137810000,
+   "res": 10000,
+   "obj": 91,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 16219,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "wat.gif",
+    "size": 32186,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 108,
+   "kind": "fileCreated",
+   "t": 1427205567120000,
+   "res": 10000,
+   "obj": 92,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 4",
+    "exhibit": "RM#2",
+    "first_cluster": 5,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "WINTER~1.AMR",
+    "size": 14547968,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 109,
+   "kind": "fileCreated",
+   "t": 1427205577630000,
+   "res": 10000,
+   "obj": 93,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 4",
+    "exhibit": "RM#2",
+    "first_cluster": 3557,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "WINTER~1.ZIP",
+    "size": 16381123,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 110,
+   "kind": "fileCreated",
+   "t": 1427205579580000,
+   "res": 10000,
+   "obj": 94,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7558,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FAV~1.DB",
+    "size": 1260544,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 111,
+   "kind": "fileCreated",
+   "t": 1427205579680000,
+   "res": 10000,
+   "obj": 95,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7866,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FAV~1.7Z",
+    "size": 100078,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 112,
+   "kind": "fileCreated",
+   "t": 1427205579710000,
+   "res": 10000,
+   "obj": 96,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7891,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "NEW_YE~1.JPG",
+    "size": 10237535,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 113,
+   "kind": "fileCreated",
+   "t": 1427205580710000,
+   "res": 10000,
+   "obj": 97,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 10391,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "SUPER_~1.AVI",
+    "size": 10289152,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 114,
+   "kind": "fileCreated",
+   "t": 1427205583520000,
+   "res": 10000,
+   "obj": 98,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 12904,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FRI~1.SVG",
+    "size": 58368,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 115,
+   "kind": "fileCreated",
+   "t": 1427205583550000,
+   "res": 10000,
+   "obj": 99,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 12919,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_SMA~1.PNG",
+    "size": 4440235,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 116,
+   "kind": "fileCreated",
+   "t": 1427205584810000,
+   "res": 10000,
+   "obj": 100,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 14004,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "NEW_YE~1.ONE",
+    "size": 27414,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 117,
+   "kind": "fileCreated",
+   "t": 1427205584860000,
+   "res": 10000,
+   "obj": 101,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 14011",
+    "exhibit": "RM#2",
+    "first_cluster": 14012,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "A_GIFT~1.GIF",
+    "size": 35226880,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 118,
+   "kind": "fileCreated",
+   "t": 1427205606780000,
+   "res": 10000,
+   "obj": 102,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 14011",
+    "exhibit": "RM#2",
+    "first_cluster": 22613,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "LANDSC~1.PNG",
+    "size": 6484502,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 119,
+   "kind": "fileCreated",
+   "t": 1427205612590000,
+   "res": 10000,
+   "obj": 103,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24198,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~1.TXT",
+    "size": 121441,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 120,
+   "kind": "fileCreated",
+   "t": 1427205612970000,
+   "res": 10000,
+   "obj": 104,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24228,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~2.TXT",
+    "size": 458267,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 121,
+   "kind": "fileCreated",
+   "t": 1427205613550000,
+   "res": 10000,
+   "obj": 105,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24340,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~3.TXT",
+    "size": 658922,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 122,
+   "kind": "fileCreated",
+   "t": 1427205614340000,
+   "res": 10000,
+   "obj": 106,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24501,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~4.TXT",
+    "size": 1154560,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 123,
+   "kind": "fileCreated",
+   "t": 1427205615650000,
+   "res": 10000,
+   "obj": 107,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24783,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DI4C63~1.TXT",
+    "size": 2360832,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 124,
+   "kind": "fileCreated",
+   "t": 1427205618410000,
+   "res": 10000,
+   "obj": 108,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 25360,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DI1C44~1.TXT",
+    "size": 325120,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 125,
+   "kind": "fileCreated",
    "t": 1427222920734358,
    "res": 1,
    "obj": 44,
@@ -1722,7 +2610,27 @@
    }
   },
   {
-   "id": 86,
+   "id": 126,
+   "kind": "fileCreated",
+   "t": 1427226707220000,
+   "res": 10000,
+   "obj": 109,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 25440",
+    "exhibit": "RM#2",
+    "first_cluster": 25441,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "desktop.ini",
+    "size": 129,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 127,
    "kind": "fileCreated",
    "t": 1427297313647604,
    "res": 1,
@@ -1738,7 +2646,107 @@
    }
   },
   {
-   "id": 87,
+   "id": 128,
+   "kind": "fileModified",
+   "t": 1097745676000000,
+   "res": 2000000,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13711,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "CUTTY-~1.JPG",
+    "size": 1625241,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 129,
+   "kind": "fileModified",
+   "t": 1097745680000000,
+   "res": 2000000,
+   "obj": 88,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15869,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "STONEH~1.JPG",
+    "size": 1236401,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 130,
+   "kind": "fileModified",
+   "t": 1097745684000000,
+   "res": 2000000,
+   "obj": 87,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15814,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "SPQR.JPG",
+    "size": 897275,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 131,
+   "kind": "fileModified",
+   "t": 1113140944000000,
+   "res": 2000000,
+   "obj": 86,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15762,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "pisa.JPG",
+    "size": 847709,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 132,
+   "kind": "fileModified",
+   "t": 1113140946000000,
+   "res": 2000000,
+   "obj": 85,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15684,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "PIAZZA~1.JPG",
+    "size": 1267394,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 133,
    "kind": "fileModified",
    "t": 1247547264280521,
    "res": 1,
@@ -1754,7 +2762,7 @@
    }
   },
   {
-   "id": 88,
+   "id": 134,
    "kind": "fileModified",
    "t": 1247547264280521,
    "res": 1,
@@ -1770,7 +2778,7 @@
    }
   },
   {
-   "id": 89,
+   "id": 135,
    "kind": "fileModified",
    "t": 1247547264327320,
    "res": 1,
@@ -1786,7 +2794,7 @@
    }
   },
   {
-   "id": 90,
+   "id": 136,
    "kind": "fileModified",
    "t": 1247547264483320,
    "res": 1,
@@ -1802,7 +2810,7 @@
    }
   },
   {
-   "id": 91,
+   "id": 137,
    "kind": "fileModified",
    "t": 1247547264483320,
    "res": 1,
@@ -1818,7 +2826,407 @@
    }
   },
   {
-   "id": 92,
+   "id": 138,
+   "kind": "fileModified",
+   "t": 1264362260000000,
+   "res": 2000000,
+   "obj": 82,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15034,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "leaf.jpg",
+    "size": 798064,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 139,
+   "kind": "fileModified",
+   "t": 1264362300000000,
+   "res": 2000000,
+   "obj": 83,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15083,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "oak-snow.jpg",
+    "size": 1370140,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 140,
+   "kind": "fileModified",
+   "t": 1358878452000000,
+   "res": 2000000,
+   "obj": 70,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11550,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "BAMBOO~1.GIF",
+    "size": 6717692,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 141,
+   "kind": "fileModified",
+   "t": 1358878658000000,
+   "res": 2000000,
+   "obj": 71,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11961,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "barn.gif",
+    "size": 3352929,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 142,
+   "kind": "fileModified",
+   "t": 1358878760000000,
+   "res": 2000000,
+   "obj": 74,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12834,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "cactus.png",
+    "size": 6164389,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 143,
+   "kind": "fileModified",
+   "t": 1358878838000000,
+   "res": 2000000,
+   "obj": 75,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13211,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "cave.png",
+    "size": 8182655,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 144,
+   "kind": "fileModified",
+   "t": 1358878896000000,
+   "res": 2000000,
+   "obj": 77,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13811,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "eggs.gif",
+    "size": 2284125,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 145,
+   "kind": "fileModified",
+   "t": 1358878968000000,
+   "res": 2000000,
+   "obj": 78,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 13951,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "FORSYT~1.PNG",
+    "size": 8107995,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 146,
+   "kind": "fileModified",
+   "t": 1358879424000000,
+   "res": 2000000,
+   "obj": 84,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15167,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "orchid.png",
+    "size": 8455527,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 147,
+   "kind": "fileModified",
+   "t": 1363557684000000,
+   "res": 2000000,
+   "obj": 81,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14910,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "jump.jpg",
+    "size": 2015880,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 148,
+   "kind": "fileModified",
+   "t": 1367952524000000,
+   "res": 2000000,
+   "obj": 73,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12296,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "boudicca.bmp",
+    "size": 8798374,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 149,
+   "kind": "fileModified",
+   "t": 1367953792000000,
+   "res": 2000000,
+   "obj": 72,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 12166,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "blini.gif",
+    "size": 2125114,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 150,
+   "kind": "fileModified",
+   "t": 1367953820000000,
+   "res": 2000000,
+   "obj": 79,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14446,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "injera.gif",
+    "size": 34480,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 151,
+   "kind": "fileModified",
+   "t": 1367953850000000,
+   "res": 2000000,
+   "obj": 90,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 16082,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "tomatoes.gif",
+    "size": 2240548,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 152,
+   "kind": "fileModified",
+   "t": 1367953870000000,
+   "res": 2000000,
+   "obj": 89,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 15945,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "tapas.gif",
+    "size": 2242264,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 153,
+   "kind": "fileModified",
+   "t": 1367953948000000,
+   "res": 2000000,
+   "obj": 91,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 16219,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "wat.gif",
+    "size": 32186,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 154,
+   "kind": "fileModified",
+   "t": 1367954382000000,
+   "res": 2000000,
+   "obj": 68,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 11493,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "amalfi.bmp",
+    "size": 921654,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 155,
+   "kind": "fileModified",
+   "t": 1367955476000000,
+   "res": 2000000,
+   "obj": 80,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 45007",
+    "exhibit": "RM#2",
+    "first_cluster": 14449,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "JACK-O~1.TIF",
+    "size": 7545856,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 156,
+   "kind": "fileModified",
+   "t": 1417459826000000,
+   "res": 2000000,
+   "obj": 96,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7891,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "NEW_YE~1.JPG",
+    "size": 10237535,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 157,
+   "kind": "fileModified",
+   "t": 1417541338000000,
+   "res": 2000000,
+   "obj": 97,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 10391,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "SUPER_~1.AVI",
+    "size": 10289152,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 158,
    "kind": "fileModified",
    "t": 1417706690000000,
    "res": 10000,
@@ -1834,7 +3242,7 @@
    }
   },
   {
-   "id": 93,
+   "id": 159,
    "kind": "fileModified",
    "t": 1418746226000000,
    "res": 10000,
@@ -1850,7 +3258,27 @@
    }
   },
   {
-   "id": 94,
+   "id": 160,
+   "kind": "fileModified",
+   "t": 1418746226000000,
+   "res": 2000000,
+   "obj": 93,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 4",
+    "exhibit": "RM#2",
+    "first_cluster": 3557,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "WINTER~1.ZIP",
+    "size": 16381123,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 161,
    "kind": "fileModified",
    "t": 1418939458000000,
    "res": 10000,
@@ -1866,7 +3294,27 @@
    }
   },
   {
-   "id": 95,
+   "id": 162,
+   "kind": "fileModified",
+   "t": 1418939458000000,
+   "res": 2000000,
+   "obj": 101,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 14011",
+    "exhibit": "RM#2",
+    "first_cluster": 14012,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "A_GIFT~1.GIF",
+    "size": 35226880,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 163,
    "kind": "fileModified",
    "t": 1419018826000000,
    "res": 10000,
@@ -1882,7 +3330,247 @@
    }
   },
   {
-   "id": 96,
+   "id": 164,
+   "kind": "fileModified",
+   "t": 1419018826000000,
+   "res": 2000000,
+   "obj": 102,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 14011",
+    "exhibit": "RM#2",
+    "first_cluster": 22613,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "LANDSC~1.PNG",
+    "size": 6484502,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 165,
+   "kind": "fileModified",
+   "t": 1420473442000000,
+   "res": 2000000,
+   "obj": 99,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 12919,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_SMA~1.PNG",
+    "size": 4440235,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 166,
+   "kind": "fileModified",
+   "t": 1420485308000000,
+   "res": 2000000,
+   "obj": 104,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24228,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~2.TXT",
+    "size": 458267,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 167,
+   "kind": "fileModified",
+   "t": 1420491668000000,
+   "res": 2000000,
+   "obj": 103,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24198,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~1.TXT",
+    "size": 121441,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 168,
+   "kind": "fileModified",
+   "t": 1420751304000000,
+   "res": 2000000,
+   "obj": 95,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7866,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FAV~1.7Z",
+    "size": 100078,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 169,
+   "kind": "fileModified",
+   "t": 1421087022000000,
+   "res": 2000000,
+   "obj": 100,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 14004,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "NEW_YE~1.ONE",
+    "size": 27414,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 170,
+   "kind": "fileModified",
+   "t": 1421090426000000,
+   "res": 2000000,
+   "obj": 106,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24501,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~4.TXT",
+    "size": 1154560,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 171,
+   "kind": "fileModified",
+   "t": 1421097940000000,
+   "res": 2000000,
+   "obj": 105,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24340,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DIARY_~3.TXT",
+    "size": 658922,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 172,
+   "kind": "fileModified",
+   "t": 1421435424000000,
+   "res": 2000000,
+   "obj": 94,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 7557",
+    "exhibit": "RM#2",
+    "first_cluster": 7558,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FAV~1.DB",
+    "size": 1260544,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 173,
+   "kind": "fileModified",
+   "t": 1421766824000000,
+   "res": 2000000,
+   "obj": 98,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 12903",
+    "exhibit": "RM#2",
+    "first_cluster": 12904,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "MY_FRI~1.SVG",
+    "size": 58368,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 174,
+   "kind": "fileModified",
+   "t": 1421777886000000,
+   "res": 2000000,
+   "obj": 108,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 25360,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DI1C44~1.TXT",
+    "size": 325120,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 175,
+   "kind": "fileModified",
+   "t": 1421784300000000,
+   "res": 2000000,
+   "obj": 107,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 24197",
+    "exhibit": "RM#2",
+    "first_cluster": 24783,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "DI4C63~1.TXT",
+    "size": 2360832,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 176,
    "kind": "fileModified",
    "t": 1422046030000000,
    "res": 10000,
@@ -1898,7 +3586,27 @@
    }
   },
   {
-   "id": 97,
+   "id": 177,
+   "kind": "fileModified",
+   "t": 1422046030000000,
+   "res": 2000000,
+   "obj": 92,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 4",
+    "exhibit": "RM#2",
+    "first_cluster": 5,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "WINTER~1.AMR",
+    "size": 14547968,
+    "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 178,
    "kind": "fileModified",
    "t": 1427034899825943,
    "res": 1,
@@ -1914,7 +3622,7 @@
    }
   },
   {
-   "id": 98,
+   "id": 179,
    "kind": "fileModified",
    "t": 1427034899857143,
    "res": 1,
@@ -1930,7 +3638,7 @@
    }
   },
   {
-   "id": 99,
+   "id": 180,
    "kind": "fileModified",
    "t": 1427034899872744,
    "res": 1,
@@ -1946,7 +3654,7 @@
    }
   },
   {
-   "id": 100,
+   "id": 181,
    "kind": "fileModified",
    "t": 1427037064851734,
    "res": 1,
@@ -1962,7 +3670,7 @@
    }
   },
   {
-   "id": 101,
+   "id": 182,
    "kind": "fileModified",
    "t": 1427037112048820,
    "res": 1,
@@ -1978,7 +3686,7 @@
    }
   },
   {
-   "id": 102,
+   "id": 183,
    "kind": "fileModified",
    "t": 1427037112048820,
    "res": 1,
@@ -1994,7 +3702,7 @@
    }
   },
   {
-   "id": 103,
+   "id": 184,
    "kind": "fileModified",
    "t": 1427039642655743,
    "res": 1,
@@ -2010,7 +3718,7 @@
    }
   },
   {
-   "id": 104,
+   "id": 185,
    "kind": "fileModified",
    "t": 1427039642686943,
    "res": 1,
@@ -2026,7 +3734,7 @@
    }
   },
   {
-   "id": 105,
+   "id": 186,
    "kind": "fileModified",
    "t": 1427039642702543,
    "res": 1,
@@ -2042,7 +3750,7 @@
    }
   },
   {
-   "id": 106,
+   "id": 187,
    "kind": "fileModified",
    "t": 1427039767040279,
    "res": 1,
@@ -2058,7 +3766,7 @@
    }
   },
   {
-   "id": 107,
+   "id": 188,
    "kind": "fileModified",
    "t": 1427039767055880,
    "res": 1,
@@ -2074,7 +3782,7 @@
    }
   },
   {
-   "id": 108,
+   "id": 189,
    "kind": "fileModified",
    "t": 1427039767071480,
    "res": 1,
@@ -2090,7 +3798,7 @@
    }
   },
   {
-   "id": 109,
+   "id": 190,
    "kind": "fileModified",
    "t": 1427140593481297,
    "res": 1,
@@ -2106,7 +3814,7 @@
    }
   },
   {
-   "id": 110,
+   "id": 191,
    "kind": "fileModified",
    "t": 1427140613339270,
    "res": 1,
@@ -2122,7 +3830,7 @@
    }
   },
   {
-   "id": 111,
+   "id": 192,
    "kind": "fileModified",
    "t": 1427223570611170,
    "res": 1,
@@ -2138,7 +3846,27 @@
    }
   },
   {
-   "id": 112,
+   "id": 193,
+   "kind": "fileModified",
+   "t": 1427226708000000,
+   "res": 2000000,
+   "obj": 109,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT directory entry in unallocated cluster 25440",
+    "exhibit": "RM#2",
+    "first_cluster": 25441,
+    "image": "rm2.E01",
+    "recovered": true,
+    "removed_before_format": false,
+    "short_name": "desktop.ini",
+    "size": 129,
+    "time_zone": "FAT local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 194,
    "kind": "fileModified",
    "t": 1427297314552404,
    "res": 1,
@@ -2154,12 +3882,278 @@
    }
   },
   {
-   "id": 113,
+   "id": 195,
+   "kind": "fileDeleted",
+   "t": 1427226707117000,
+   "res": 1,
+   "obj": 110,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $I55Z163, file table record 74311",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 21887309,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 196,
+   "kind": "fileDeleted",
+   "t": 1427226707133000,
+   "res": 1,
+   "obj": 111,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IXWGVWC, file table record 74312",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 4526017,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 197,
+   "kind": "fileDeleted",
+   "t": 1427226707133000,
+   "res": 1,
+   "obj": 112,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $I40295N, file table record 74313",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 41711382,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 198,
+   "kind": "fileDeleted",
+   "t": 1427226707149000,
+   "res": 1,
+   "obj": 113,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $I9M7UMY, file table record 74395",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 5079142,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 199,
+   "kind": "fileDeleted",
+   "t": 1427227902836000,
+   "res": 1,
+   "obj": 114,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IKXD1U3.jpg, file table record 74757",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 879394,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 200,
+   "kind": "fileDeleted",
+   "t": 1427227902836000,
+   "res": 1,
+   "obj": 115,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $II3FM2A.jpg, file table record 74758",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 845941,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 201,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 116,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $I508CBB.jpg, file table record 74760",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 595284,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 202,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 117,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IJEMT64.exe, file table record 74761",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 55915216,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 203,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 118,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $I8YP3XK.jpg, file table record 74762",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 775702,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 204,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 119,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IU3FKWI.jpg, file table record 74763",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 780831,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 205,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 120,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IX538VH.jpg, file table record 74764",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 561276,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 206,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 121,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IFVCH5V.jpg, file table record 74765",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 777835,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 207,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 122,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IDOI3HE.jpg, file table record 74766",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 620888,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 208,
+   "kind": "fileDeleted",
+   "t": 1427227902851000,
+   "res": 1,
+   "obj": 123,
+   "aux": 4,
+   "prov": {
+    "artifact": "Recycle Bin index $IIQGWTT.ini, file table record 74759",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "index_record_in_use": false,
+    "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+    "original_drive": "C:",
+    "size": 174,
+    "time_meaning": "deletion time stored in the Recycle Bin index",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 209,
    "kind": "webSearch",
    "t": 1427037052000000,
    "res": 1,
-   "obj": 68,
-   "aux": 69,
+   "obj": 124,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2171,12 +4165,12 @@
    }
   },
   {
-   "id": 114,
+   "id": 210,
    "kind": "webSearch",
    "t": 1427037861900251,
    "res": 1,
-   "obj": 68,
-   "aux": 70,
+   "obj": 124,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2188,12 +4182,12 @@
    }
   },
   {
-   "id": 115,
+   "id": 211,
    "kind": "webSearch",
    "t": 1427037863631855,
    "res": 1,
-   "obj": 68,
-   "aux": 70,
+   "obj": 124,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2205,12 +4199,12 @@
    }
   },
   {
-   "id": 116,
+   "id": 212,
    "kind": "webSearch",
    "t": 1427038079597811,
    "res": 1,
-   "obj": 71,
-   "aux": 69,
+   "obj": 127,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2222,12 +4216,12 @@
    }
   },
   {
-   "id": 117,
+   "id": 213,
    "kind": "webSearch",
    "t": 1427038096952833,
    "res": 1,
-   "obj": 71,
-   "aux": 69,
+   "obj": 127,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2239,12 +4233,12 @@
    }
   },
   {
-   "id": 118,
+   "id": 214,
    "kind": "webSearch",
    "t": 1427039744335028,
    "res": 1,
-   "obj": 72,
-   "aux": 69,
+   "obj": 128,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\admin11\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2256,12 +4250,12 @@
    }
   },
   {
-   "id": 119,
+   "id": 215,
    "kind": "webSearch",
    "t": 1427131625838400,
    "res": 1,
-   "obj": 73,
-   "aux": 69,
+   "obj": 129,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2273,12 +4267,12 @@
    }
   },
   {
-   "id": 120,
+   "id": 216,
    "kind": "webSearch",
    "t": 1427131676613960,
    "res": 1,
-   "obj": 73,
-   "aux": 69,
+   "obj": 129,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2290,12 +4284,12 @@
    }
   },
   {
-   "id": 121,
+   "id": 217,
    "kind": "webSearch",
    "t": 1427133729303892,
    "res": 1,
-   "obj": 74,
-   "aux": 69,
+   "obj": 130,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2307,12 +4301,12 @@
    }
   },
   {
-   "id": 122,
+   "id": 218,
    "kind": "webSearch",
    "t": 1427133764343210,
    "res": 1,
-   "obj": 75,
-   "aux": 69,
+   "obj": 131,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2324,12 +4318,12 @@
    }
   },
   {
-   "id": 123,
+   "id": 219,
    "kind": "webSearch",
    "t": 1427133797161615,
    "res": 1,
-   "obj": 75,
-   "aux": 69,
+   "obj": 131,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2341,12 +4335,12 @@
    }
   },
   {
-   "id": 124,
+   "id": 220,
    "kind": "webSearch",
    "t": 1427133811261408,
    "res": 1,
-   "obj": 75,
-   "aux": 69,
+   "obj": 131,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2358,12 +4352,12 @@
    }
   },
   {
-   "id": 125,
+   "id": 221,
    "kind": "webSearch",
    "t": 1427133820424839,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2375,12 +4369,12 @@
    }
   },
   {
-   "id": 126,
+   "id": 222,
    "kind": "webSearch",
    "t": 1427133873578434,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2392,12 +4386,12 @@
    }
   },
   {
-   "id": 127,
+   "id": 223,
    "kind": "webSearch",
    "t": 1427133915865196,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2409,12 +4403,12 @@
    }
   },
   {
-   "id": 128,
+   "id": 224,
    "kind": "webSearch",
    "t": 1427133918131407,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2426,12 +4420,12 @@
    }
   },
   {
-   "id": 129,
+   "id": 225,
    "kind": "webSearch",
    "t": 1427133919638342,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2443,12 +4437,12 @@
    }
   },
   {
-   "id": 130,
+   "id": 226,
    "kind": "webSearch",
    "t": 1427133922229486,
    "res": 1,
-   "obj": 76,
-   "aux": 69,
+   "obj": 132,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2460,12 +4454,12 @@
    }
   },
   {
-   "id": 131,
+   "id": 227,
    "kind": "webSearch",
    "t": 1427133948655159,
    "res": 1,
-   "obj": 77,
-   "aux": 69,
+   "obj": 133,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2477,12 +4471,12 @@
    }
   },
   {
-   "id": 132,
+   "id": 228,
    "kind": "webSearch",
    "t": 1427133987545120,
    "res": 1,
-   "obj": 78,
-   "aux": 69,
+   "obj": 134,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2494,12 +4488,12 @@
    }
   },
   {
-   "id": 133,
+   "id": 229,
    "kind": "webSearch",
    "t": 1427134072314186,
    "res": 1,
-   "obj": 79,
-   "aux": 70,
+   "obj": 135,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2511,12 +4505,12 @@
    }
   },
   {
-   "id": 134,
+   "id": 230,
    "kind": "webSearch",
    "t": 1427134074981194,
    "res": 1,
-   "obj": 79,
-   "aux": 70,
+   "obj": 135,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2528,12 +4522,12 @@
    }
   },
   {
-   "id": 135,
+   "id": 231,
    "kind": "webSearch",
    "t": 1427134074991194,
    "res": 1,
-   "obj": 79,
-   "aux": 70,
+   "obj": 135,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2545,12 +4539,12 @@
    }
   },
   {
-   "id": 136,
+   "id": 232,
    "kind": "webSearch",
    "t": 1427134077288696,
    "res": 1,
-   "obj": 79,
-   "aux": 70,
+   "obj": 135,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2562,12 +4556,12 @@
    }
   },
   {
-   "id": 137,
+   "id": 233,
    "kind": "webSearch",
    "t": 1427134078080700,
    "res": 1,
-   "obj": 80,
-   "aux": 70,
+   "obj": 136,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2579,12 +4573,12 @@
    }
   },
   {
-   "id": 138,
+   "id": 234,
    "kind": "webSearch",
    "t": 1427134079890207,
    "res": 1,
-   "obj": 80,
-   "aux": 70,
+   "obj": 136,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2596,12 +4590,12 @@
    }
   },
   {
-   "id": 139,
+   "id": 235,
    "kind": "webSearch",
    "t": 1427134103642269,
    "res": 1,
-   "obj": 80,
-   "aux": 70,
+   "obj": 136,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2613,12 +4607,12 @@
    }
   },
   {
-   "id": 140,
+   "id": 236,
    "kind": "webSearch",
    "t": 1427134111817280,
    "res": 1,
-   "obj": 81,
-   "aux": 70,
+   "obj": 137,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2630,12 +4624,12 @@
    }
   },
   {
-   "id": 141,
+   "id": 237,
    "kind": "webSearch",
    "t": 1427134134101318,
    "res": 1,
-   "obj": 82,
-   "aux": 70,
+   "obj": 138,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2647,12 +4641,12 @@
    }
   },
   {
-   "id": 142,
+   "id": 238,
    "kind": "webSearch",
    "t": 1427134171496372,
    "res": 1,
-   "obj": 82,
-   "aux": 70,
+   "obj": 138,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2664,12 +4658,12 @@
    }
   },
   {
-   "id": 143,
+   "id": 239,
    "kind": "webSearch",
    "t": 1427134203820419,
    "res": 1,
-   "obj": 83,
-   "aux": 70,
+   "obj": 139,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2681,12 +4675,12 @@
    }
   },
   {
-   "id": 144,
+   "id": 240,
    "kind": "webSearch",
    "t": 1427134227643461,
    "res": 1,
-   "obj": 84,
-   "aux": 70,
+   "obj": 140,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2698,12 +4692,12 @@
    }
   },
   {
-   "id": 145,
+   "id": 241,
    "kind": "webSearch",
    "t": 1427134310582693,
    "res": 1,
-   "obj": 85,
-   "aux": 70,
+   "obj": 141,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2715,12 +4709,12 @@
    }
   },
   {
-   "id": 146,
+   "id": 242,
    "kind": "webSearch",
    "t": 1427134355567263,
    "res": 1,
-   "obj": 86,
-   "aux": 70,
+   "obj": 142,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2732,12 +4726,12 @@
    }
   },
   {
-   "id": 147,
+   "id": 243,
    "kind": "webSearch",
    "t": 1427134400892344,
    "res": 1,
-   "obj": 87,
-   "aux": 70,
+   "obj": 143,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2749,12 +4743,12 @@
    }
   },
   {
-   "id": 148,
+   "id": 244,
    "kind": "webSearch",
    "t": 1427134417494371,
    "res": 1,
-   "obj": 88,
-   "aux": 70,
+   "obj": 144,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2766,12 +4760,12 @@
    }
   },
   {
-   "id": 149,
+   "id": 245,
    "kind": "webSearch",
    "t": 1427134438392908,
    "res": 1,
-   "obj": 80,
-   "aux": 70,
+   "obj": 136,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2783,12 +4777,12 @@
    }
   },
   {
-   "id": 150,
+   "id": 246,
    "kind": "webSearch",
    "t": 1427134451977428,
    "res": 1,
-   "obj": 89,
-   "aux": 70,
+   "obj": 145,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -2800,12 +4794,12 @@
    }
   },
   {
-   "id": 151,
+   "id": 247,
    "kind": "webSearch",
    "t": 1427134490369135,
    "res": 1,
-   "obj": 90,
-   "aux": 69,
+   "obj": 146,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2817,12 +4811,12 @@
    }
   },
   {
-   "id": 152,
+   "id": 248,
    "kind": "webSearch",
    "t": 1427134544517540,
    "res": 1,
-   "obj": 91,
-   "aux": 69,
+   "obj": 147,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2834,12 +4828,12 @@
    }
   },
   {
-   "id": 153,
+   "id": 249,
    "kind": "webSearch",
    "t": 1427134615783075,
    "res": 1,
-   "obj": 92,
-   "aux": 69,
+   "obj": 148,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2851,12 +4845,12 @@
    }
   },
   {
-   "id": 154,
+   "id": 250,
    "kind": "webSearch",
    "t": 1427134634631105,
    "res": 1,
-   "obj": 93,
-   "aux": 69,
+   "obj": 149,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2868,12 +4862,12 @@
    }
   },
   {
-   "id": 155,
+   "id": 251,
    "kind": "webSearch",
    "t": 1427134690237438,
    "res": 1,
-   "obj": 94,
-   "aux": 69,
+   "obj": 150,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2885,12 +4879,12 @@
    }
   },
   {
-   "id": 156,
+   "id": 252,
    "kind": "webSearch",
    "t": 1427134695855272,
    "res": 1,
-   "obj": 94,
-   "aux": 69,
+   "obj": 150,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2902,12 +4896,12 @@
    }
   },
   {
-   "id": 157,
+   "id": 253,
    "kind": "webSearch",
    "t": 1427134710872763,
    "res": 1,
-   "obj": 95,
-   "aux": 69,
+   "obj": 151,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2919,12 +4913,12 @@
    }
   },
   {
-   "id": 158,
+   "id": 254,
    "kind": "webSearch",
    "t": 1427134723263901,
    "res": 1,
-   "obj": 95,
-   "aux": 69,
+   "obj": 151,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2936,12 +4930,12 @@
    }
   },
   {
-   "id": 159,
+   "id": 255,
    "kind": "webSearch",
    "t": 1427134726050680,
    "res": 1,
-   "obj": 95,
-   "aux": 69,
+   "obj": 151,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2953,12 +4947,12 @@
    }
   },
   {
-   "id": 160,
+   "id": 256,
    "kind": "webSearch",
    "t": 1427134743860449,
    "res": 1,
-   "obj": 96,
-   "aux": 69,
+   "obj": 152,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2970,12 +4964,12 @@
    }
   },
   {
-   "id": 161,
+   "id": 257,
    "kind": "webSearch",
    "t": 1427140063009623,
    "res": 1,
-   "obj": 96,
-   "aux": 69,
+   "obj": 152,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -2987,12 +4981,12 @@
    }
   },
   {
-   "id": 162,
+   "id": 258,
    "kind": "webSearch",
    "t": 1427140099531147,
    "res": 1,
-   "obj": 97,
-   "aux": 69,
+   "obj": 153,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -3004,12 +4998,12 @@
    }
   },
   {
-   "id": 163,
+   "id": 259,
    "kind": "webSearch",
    "t": 1427140509975901,
    "res": 1,
-   "obj": 98,
-   "aux": 69,
+   "obj": 154,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -3021,12 +5015,12 @@
    }
   },
   {
-   "id": 164,
+   "id": 260,
    "kind": "webSearch",
    "t": 1427140564087328,
    "res": 1,
-   "obj": 99,
-   "aux": 69,
+   "obj": 155,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -3038,12 +5032,12 @@
    }
   },
   {
-   "id": 165,
+   "id": 261,
    "kind": "webSearch",
    "t": 1427143427512482,
    "res": 1,
-   "obj": 89,
-   "aux": 70,
+   "obj": 145,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3055,12 +5049,12 @@
    }
   },
   {
-   "id": 166,
+   "id": 262,
    "kind": "webSearch",
    "t": 1427143432477705,
    "res": 1,
-   "obj": 89,
-   "aux": 70,
+   "obj": 145,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3072,12 +5066,12 @@
    }
   },
   {
-   "id": 167,
+   "id": 263,
    "kind": "webSearch",
    "t": 1427143497831177,
    "res": 1,
-   "obj": 100,
-   "aux": 70,
+   "obj": 156,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3089,12 +5083,12 @@
    }
   },
   {
-   "id": 168,
+   "id": 264,
    "kind": "webSearch",
    "t": 1427143522377234,
    "res": 1,
-   "obj": 100,
-   "aux": 70,
+   "obj": 156,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3106,12 +5100,12 @@
    }
   },
   {
-   "id": 169,
+   "id": 265,
    "kind": "webSearch",
    "t": 1427143530127247,
    "res": 1,
-   "obj": 101,
-   "aux": 70,
+   "obj": 157,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3123,12 +5117,12 @@
    }
   },
   {
-   "id": 170,
+   "id": 266,
    "kind": "webSearch",
    "t": 1427143530137247,
    "res": 1,
-   "obj": 101,
-   "aux": 70,
+   "obj": 157,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3140,12 +5134,12 @@
    }
   },
   {
-   "id": 171,
+   "id": 267,
    "kind": "webSearch",
    "t": 1427144026618464,
    "res": 1,
-   "obj": 102,
-   "aux": 70,
+   "obj": 158,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3157,12 +5151,12 @@
    }
   },
   {
-   "id": 172,
+   "id": 268,
    "kind": "webSearch",
    "t": 1427144026658464,
    "res": 1,
-   "obj": 102,
-   "aux": 70,
+   "obj": 158,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3174,12 +5168,12 @@
    }
   },
   {
-   "id": 173,
+   "id": 269,
    "kind": "webSearch",
    "t": 1427144108521080,
    "res": 1,
-   "obj": 103,
-   "aux": 70,
+   "obj": 159,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3191,12 +5185,12 @@
    }
   },
   {
-   "id": 174,
+   "id": 270,
    "kind": "webSearch",
    "t": 1427144108553579,
    "res": 1,
-   "obj": 103,
-   "aux": 70,
+   "obj": 159,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3208,12 +5202,12 @@
    }
   },
   {
-   "id": 175,
+   "id": 271,
    "kind": "webSearch",
    "t": 1427144110333084,
    "res": 1,
-   "obj": 104,
-   "aux": 70,
+   "obj": 160,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3225,12 +5219,12 @@
    }
   },
   {
-   "id": 176,
+   "id": 272,
    "kind": "webSearch",
    "t": 1427144110353085,
    "res": 1,
-   "obj": 104,
-   "aux": 70,
+   "obj": 160,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3242,12 +5236,12 @@
    }
   },
   {
-   "id": 177,
+   "id": 273,
    "kind": "webSearch",
    "t": 1427144117465595,
    "res": 1,
-   "obj": 105,
-   "aux": 70,
+   "obj": 161,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3259,12 +5253,12 @@
    }
   },
   {
-   "id": 178,
+   "id": 274,
    "kind": "webSearch",
    "t": 1427144117475595,
    "res": 1,
-   "obj": 105,
-   "aux": 70,
+   "obj": 161,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3276,12 +5270,12 @@
    }
   },
   {
-   "id": 179,
+   "id": 275,
    "kind": "webSearch",
    "t": 1427144118330597,
    "res": 1,
-   "obj": 106,
-   "aux": 70,
+   "obj": 162,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3293,12 +5287,12 @@
    }
   },
   {
-   "id": 180,
+   "id": 276,
    "kind": "webSearch",
    "t": 1427144118340597,
    "res": 1,
-   "obj": 106,
-   "aux": 70,
+   "obj": 162,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3310,12 +5304,12 @@
    }
   },
   {
-   "id": 181,
+   "id": 277,
    "kind": "webSearch",
    "t": 1427144129240612,
    "res": 1,
-   "obj": 100,
-   "aux": 70,
+   "obj": 156,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3327,12 +5321,12 @@
    }
   },
   {
-   "id": 182,
+   "id": 278,
    "kind": "webSearch",
    "t": 1427144129265612,
    "res": 1,
-   "obj": 100,
-   "aux": 70,
+   "obj": 156,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3344,12 +5338,12 @@
    }
   },
   {
-   "id": 183,
+   "id": 279,
    "kind": "webSearch",
    "t": 1427144154787651,
    "res": 1,
-   "obj": 107,
-   "aux": 70,
+   "obj": 163,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3361,12 +5355,12 @@
    }
   },
   {
-   "id": 184,
+   "id": 280,
    "kind": "webSearch",
    "t": 1427144154827650,
    "res": 1,
-   "obj": 107,
-   "aux": 70,
+   "obj": 163,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3378,12 +5372,12 @@
    }
   },
   {
-   "id": 185,
+   "id": 281,
    "kind": "webSearch",
    "t": 1427144156134653,
    "res": 1,
-   "obj": 108,
-   "aux": 70,
+   "obj": 164,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3395,12 +5389,12 @@
    }
   },
   {
-   "id": 186,
+   "id": 282,
    "kind": "webSearch",
    "t": 1427144156154654,
    "res": 1,
-   "obj": 108,
-   "aux": 70,
+   "obj": 164,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3412,12 +5406,12 @@
    }
   },
   {
-   "id": 187,
+   "id": 283,
    "kind": "webSearch",
    "t": 1427144157412157,
    "res": 1,
-   "obj": 109,
-   "aux": 70,
+   "obj": 165,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3429,12 +5423,12 @@
    }
   },
   {
-   "id": 188,
+   "id": 284,
    "kind": "webSearch",
    "t": 1427144157439657,
    "res": 1,
-   "obj": 109,
-   "aux": 70,
+   "obj": 165,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3446,12 +5440,12 @@
    }
   },
   {
-   "id": 189,
+   "id": 285,
    "kind": "webSearch",
    "t": 1427144158732159,
    "res": 1,
-   "obj": 110,
-   "aux": 70,
+   "obj": 166,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3463,12 +5457,12 @@
    }
   },
   {
-   "id": 190,
+   "id": 286,
    "kind": "webSearch",
    "t": 1427144158742157,
    "res": 1,
-   "obj": 110,
-   "aux": 70,
+   "obj": 166,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3480,12 +5474,12 @@
    }
   },
   {
-   "id": 191,
+   "id": 287,
    "kind": "webSearch",
    "t": 1427144168707174,
    "res": 1,
-   "obj": 102,
-   "aux": 70,
+   "obj": 158,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3497,12 +5491,12 @@
    }
   },
   {
-   "id": 192,
+   "id": 288,
    "kind": "webSearch",
    "t": 1427144278459051,
    "res": 1,
-   "obj": 102,
-   "aux": 70,
+   "obj": 158,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3514,12 +5508,12 @@
    }
   },
   {
-   "id": 193,
+   "id": 289,
    "kind": "webSearch",
    "t": 1427231210726427,
    "res": 1,
-   "obj": 111,
-   "aux": 69,
+   "obj": 167,
+   "aux": 125,
    "prov": {
     "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
     "exhibit": "PC",
@@ -3531,12 +5525,12 @@
    }
   },
   {
-   "id": 194,
+   "id": 290,
    "kind": "webSearch",
    "t": 1427294804752905,
    "res": 1,
-   "obj": 112,
-   "aux": 70,
+   "obj": 168,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3548,12 +5542,12 @@
    }
   },
   {
-   "id": 195,
+   "id": 291,
    "kind": "webSearch",
    "t": 1427294804771004,
    "res": 1,
-   "obj": 112,
-   "aux": 70,
+   "obj": 168,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3565,12 +5559,12 @@
    }
   },
   {
-   "id": 196,
+   "id": 292,
    "kind": "webSearch",
    "t": 1427294814471205,
    "res": 1,
-   "obj": 113,
-   "aux": 70,
+   "obj": 169,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3582,12 +5576,12 @@
    }
   },
   {
-   "id": 197,
+   "id": 293,
    "kind": "webSearch",
    "t": 1427294871248203,
    "res": 1,
-   "obj": 114,
-   "aux": 70,
+   "obj": 170,
+   "aux": 126,
    "prov": {
     "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
     "exhibit": "PC",
@@ -3599,467 +5593,983 @@
    }
   },
   {
-   "id": 198,
+   "id": 294,
+   "kind": "emailSent",
+   "t": 1427131767000000,
+   "res": 1000000,
+   "obj": 171,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Inbox",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB0156C790B3BF198BDDCD14748C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 295,
+   "kind": "emailSent",
+   "t": 1427136271719000,
+   "res": 1000000,
+   "obj": 173,
+   "aux": 174,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Sent Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "",
+    "sender_address": "",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 296,
+   "kind": "emailSent",
+   "t": 1427138098000000,
+   "res": 1000000,
+   "obj": 175,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Inbox",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB0156CB1C7533F5F2094F2F778C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 297,
+   "kind": "emailSent",
+   "t": 1427138441000000,
+   "res": 1000000,
+   "obj": 176,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Inbox",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB0156AAB40F3D3AEFECD4C1078C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 298,
+   "kind": "emailSent",
+   "t": 1427138782000000,
+   "res": 1000000,
+   "obj": 177,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Inbox",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB01564098B5C82EDB2AE0CD618C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 299,
+   "kind": "emailSent",
+   "t": 1427138825282000,
+   "res": 1000000,
+   "obj": 178,
+   "aux": 174,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Sent Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "",
+    "sender_address": "",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 300,
+   "kind": "emailSent",
+   "t": 1427143279000000,
+   "res": 1000000,
+   "obj": 179,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Deleted Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 301,
+   "kind": "emailSent",
+   "t": 1427203557000000,
+   "res": 1000000,
+   "obj": 180,
+   "aux": 172,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Inbox",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+    "sender_address": "spy.conspirator@nist.gov",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 302,
+   "kind": "emailSent",
+   "t": 1427204110365000,
+   "res": 1000000,
+   "obj": 181,
+   "aux": 174,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Deleted Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "",
+    "sender_address": "",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 303,
+   "kind": "emailSent",
+   "t": 1427225642435000,
+   "res": 1000000,
+   "obj": 182,
+   "aux": 174,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Deleted Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "",
+    "sender_address": "",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 304,
+   "kind": "emailSent",
+   "t": 1427231109679000,
+   "res": 1000000,
+   "obj": 183,
+   "aux": 174,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+    "attachments": 0,
+    "exhibit": "PC",
+    "folder": "Deleted Items",
+    "image": "pc.E01",
+    "mailbox_user": "informant",
+    "message_id": "",
+    "sender_address": "",
+    "time_meaning": "client submit time stored in the message",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 305,
+   "kind": "cdBurn",
+   "t": 1427226467407829,
+   "res": 1,
+   "obj": 184,
+   "aux": 185,
+   "prov": {
+    "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+    "exhibit": "PC",
+    "first_usn": 64362016,
+    "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+    "image": "pc.E01",
+    "time_meaning": "creation of the first temporary file of the session",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 306,
+   "kind": "cdBurn",
+   "t": 1427226467657431,
+   "res": 1,
+   "obj": 186,
+   "aux": 187,
+   "prov": {
+    "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+    "channel": "System",
+    "event_record_id": "1412",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "event time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 307,
+   "kind": "cdBurn",
+   "t": 1427226961607515,
+   "res": 1,
+   "obj": 188,
+   "aux": 185,
+   "prov": {
+    "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+    "exhibit": "PC",
+    "first_usn": 64388776,
+    "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+    "image": "pc.E01",
+    "time_meaning": "creation of the first temporary file of the session",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 308,
+   "kind": "cdBurn",
+   "t": 1427226971965935,
+   "res": 1,
+   "obj": 186,
+   "aux": 187,
+   "prov": {
+    "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+    "channel": "System",
+    "event_record_id": "1416",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "event time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 309,
+   "kind": "cdBurn",
+   "t": 1427228659896305,
+   "res": 1,
+   "obj": 189,
+   "aux": 185,
+   "prov": {
+    "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+    "exhibit": "PC",
+    "first_usn": 64418464,
+    "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+    "image": "pc.E01",
+    "time_meaning": "creation of the first temporary file of the session",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 310,
+   "kind": "cdBurn",
+   "t": 1427228686429152,
+   "res": 1,
+   "obj": 186,
+   "aux": 187,
+   "prov": {
+    "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+    "channel": "System",
+    "event_record_id": "1425",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "event time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 311,
+   "kind": "cdBurn",
+   "t": 1427229681619709,
+   "res": 1,
+   "obj": 190,
+   "aux": 185,
+   "prov": {
+    "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+    "exhibit": "PC",
+    "first_usn": 64434064,
+    "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+    "image": "pc.E01",
+    "time_meaning": "creation of the first temporary file of the session",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 312,
+   "kind": "cdBurn",
+   "t": 1427229681884909,
+   "res": 1,
+   "obj": 186,
+   "aux": 187,
+   "prov": {
+    "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+    "channel": "System",
+    "event_record_id": "1428",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "event time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 313,
+   "kind": "cdBurn",
+   "t": 1427230396668583,
+   "res": 1,
+   "obj": 191,
+   "aux": 192,
+   "prov": {
+    "artifact": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD Burning",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "staging_path": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 314,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 1,
-   "aux": 115,
+   "aux": 193,
    "prov": {
     "rule": "device serial is on the authorized list in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 199,
+   "id": 315,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 2,
-   "aux": 116,
+   "aux": 194,
    "prov": {
     "rule": "device serial is not on the authorized list in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 200,
+   "id": 316,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 81,
-   "aux": 117,
+   "obj": 137,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"dlp\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 201,
+   "id": 317,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 83,
-   "aux": 117,
+   "obj": 183,
+   "aux": 196,
+   "prov": {
+    "rule": "the mailbox file lists this message in its Deleted Items folder",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 318,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 139,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"forensic\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 202,
+   "id": 319,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 179,
+   "aux": 196,
+   "prov": {
+    "rule": "the mailbox file lists this message in its Deleted Items folder",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 320,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 181,
+   "aux": 196,
+   "prov": {
+    "rule": "the mailbox file lists this message in its Deleted Items folder",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 321,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 182,
+   "aux": 196,
+   "prov": {
+    "rule": "the mailbox file lists this message in its Deleted Items folder",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 322,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 24,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 203,
+   "id": 323,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 22,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 204,
+   "id": 324,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 51,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 205,
+   "id": 325,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 51,
+   "aux": 198,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 326,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 52,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 206,
+   "id": 327,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 52,
+   "aux": 199,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 328,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 20,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 207,
+   "id": 329,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 53,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 208,
+   "id": 330,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 53,
+   "aux": 200,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 331,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 18,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 209,
+   "id": 332,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 18,
+   "aux": 201,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 333,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 30,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 210,
+   "id": 334,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 32,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 211,
+   "id": 335,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 29,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 212,
+   "id": 336,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 28,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 213,
+   "id": 337,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 27,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 214,
+   "id": 338,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 25,
-   "aux": 118,
+   "aux": 197,
    "prov": {
     "rule": "path carries the confidential-project marker named in the case brief",
     "source": "deterministic"
    }
   },
   {
-   "id": 215,
+   "id": 339,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 112,
-   "aux": 117,
+   "obj": 92,
+   "aux": 199,
    "prov": {
-    "rule": "search term contains the watch-list word \"forensic\"",
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
     "source": "deterministic"
    }
   },
   {
-   "id": 216,
+   "id": 340,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
    "obj": 93,
-   "aux": 117,
+   "aux": 198,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 341,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 101,
+   "aux": 200,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 342,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 102,
+   "aux": 201,
+   "prov": {
+    "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 343,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 168,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"forensic\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 217,
+   "id": 344,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 114,
-   "aux": 117,
+   "obj": 149,
+   "aux": 195,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 345,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 170,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"clean\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 218,
+   "id": 346,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 87,
-   "aux": 117,
+   "obj": 143,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"cd burn\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 219,
+   "id": 347,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 88,
-   "aux": 117,
+   "obj": 144,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"cd burn\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 220,
+   "id": 348,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 90,
-   "aux": 117,
+   "obj": 146,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"cloud storage\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 221,
+   "id": 349,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 74,
-   "aux": 117,
+   "obj": 130,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"leak\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 222,
+   "id": 350,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 96,
-   "aux": 117,
+   "obj": 152,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"recover\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 223,
+   "id": 351,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 91,
-   "aux": 117,
+   "obj": 147,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"forensic\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 224,
+   "id": 352,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 82,
-   "aux": 117,
+   "obj": 138,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"investigat\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 225,
+   "id": 353,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 113,
-   "aux": 117,
+   "obj": 169,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"eras\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 226,
+   "id": 354,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 89,
-   "aux": 117,
+   "obj": 145,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"forensic\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 227,
+   "id": 355,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 92,
-   "aux": 117,
+   "obj": 148,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"delet\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 228,
+   "id": 356,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 78,
-   "aux": 117,
+   "obj": 134,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"leak\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 229,
+   "id": 357,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 95,
-   "aux": 117,
+   "obj": 151,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"recover\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 230,
+   "id": 358,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 76,
-   "aux": 117,
+   "obj": 132,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"leak\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 231,
+   "id": 359,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 77,
-   "aux": 117,
+   "obj": 133,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"theft\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 232,
+   "id": 360,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 85,
-   "aux": 117,
+   "obj": 141,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"investigat\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 233,
+   "id": 361,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 75,
-   "aux": 117,
+   "obj": 131,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"leak\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 234,
+   "id": 362,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 94,
-   "aux": 117,
+   "obj": 150,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"clean\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 235,
+   "id": 363,
    "kind": "tag",
    "t": 1794614400000000,
    "res": 1,
-   "obj": 86,
-   "aux": 117,
+   "obj": 142,
+   "aux": 195,
    "prov": {
     "rule": "search term contains the watch-list word \"event log\"",
     "source": "deterministic"
    }
   },
   {
-   "id": 236,
+   "id": 364,
    "kind": "volumeSeen",
    "t": 1427135472853809,
    "res": 1,
-   "obj": 119,
+   "obj": 202,
    "aux": 19,
    "prov": {
     "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\JOJ___Authorized USB_1551191358",
@@ -4070,11 +6580,27 @@
    }
   },
   {
-   "id": 237,
+   "id": 365,
+   "kind": "volumeSeen",
+   "t": 1427135840499256,
+   "res": 1,
+   "obj": 202,
+   "aux": 19,
+   "prov": {
+    "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+    "drive_type": "fixed",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "when the shortcut's target was opened",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 366,
    "kind": "volumeSeen",
    "t": 1427205514439312,
    "res": 1,
-   "obj": 120,
+   "obj": 203,
    "aux": 31,
    "prov": {
     "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
@@ -4085,12 +6611,76 @@
    }
   },
   {
-   "id": 238,
+   "id": 367,
+   "kind": "volumeSeen",
+   "t": 1427205683393024,
+   "res": 1,
+   "obj": 203,
+   "aux": 31,
+   "prov": {
+    "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+    "drive_type": "fixed",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "when the shortcut's target was opened",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 368,
+   "kind": "volumeSeen",
+   "t": 1427229853752619,
+   "res": 1,
+   "obj": 204,
+   "aux": 35,
+   "prov": {
+    "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
+    "drive_type": "CD-ROM",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "when the shortcut's target was opened",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 369,
+   "kind": "volumeSeen",
+   "t": 1427230050485174,
+   "res": 1,
+   "obj": 204,
+   "aux": 39,
+   "prov": {
+    "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+    "drive_type": "CD-ROM",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "when the shortcut's target was opened",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 370,
+   "kind": "volumeSeen",
+   "t": 1427230870763657,
+   "res": 1,
+   "obj": 204,
+   "aux": 40,
+   "prov": {
+    "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+    "drive_type": "CD-ROM",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "when the shortcut's target was opened",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 371,
    "kind": "volumeSeen",
    "t": 1427230954309607,
    "res": 1,
-   "obj": 120,
-   "aux": 121,
+   "obj": 203,
+   "aux": 205,
    "prov": {
     "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
     "exhibit": "PC",
@@ -4100,7 +6690,7 @@
    }
   },
   {
-   "id": 239,
+   "id": 372,
    "kind": "volumeSeen",
    "t": 1427278553344902,
    "res": 1,
@@ -4115,12 +6705,12 @@
    }
   },
   {
-   "id": 240,
+   "id": 373,
    "kind": "volumeSeen",
    "t": 1427279598964331,
    "res": 1,
-   "obj": 122,
-   "aux": 123,
+   "obj": 206,
+   "aux": 207,
    "prov": {
     "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\ED_Q__System Reserved_403308837",
     "exhibit": "PC",
@@ -4130,7 +6720,7 @@
    }
   },
   {
-   "id": 241,
+   "id": 374,
    "kind": "volumeOnDevice",
    "t": 1794614400000000,
    "res": 1,
@@ -4149,12 +6739,12 @@
    }
   },
   {
-   "id": 242,
+   "id": 375,
    "kind": "volumeOnDevice",
    "t": 1794614400000000,
    "res": 1,
    "obj": 2,
-   "aux": 121,
+   "aux": 205,
    "prov": {
     "artifact": "volume boot record, partition at byte offset 65536",
     "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -4165,6 +6755,24 @@
     "time_meaning": "when the image was examined, not an event on the device",
     "tool": "dissect.target 3.25.1",
     "volume_label": "IAMAN $_@"
+   }
+  },
+  {
+   "id": 376,
+   "kind": "unallocatedOnDevice",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 2,
+   "aux": 69,
+   "prov": {
+    "artifact": "FAT32 clusters the allocation table marks free",
+    "device_serial_source": "exhibits.json (NIST case documentation)",
+    "exhibit": "RM#2",
+    "file_entries": 41,
+    "folders": 8,
+    "image": "rm2.E01",
+    "time_meaning": "when the image was examined, not an event on the device",
+    "tool": "dissect.target 3.25.1"
    }
   }
  ]

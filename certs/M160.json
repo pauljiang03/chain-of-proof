@@ -1,0 +1,57 @@
+{
+  "finding_id": "M160",
+  "question": "Which e-mails does the user's mailbox hold?",
+  "claim": {
+    "emailed": [
+      294
+    ]
+  },
+  "status": "verified",
+  "english": "An e-mail with the subject \"Hello, Iaman\" was sent from spy to iaman (2015-03-23 17:29:27 UTC).",
+  "cited_facts": [
+    {
+      "id": 294,
+      "kind": "emailSent",
+      "t": 1427131767000000,
+      "res": 1000000,
+      "obj": 171,
+      "obj_text": "Hello, Iaman",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "6fa2310abda4d1a255660726d22d867a3c30f9cc8a183bae4ede61d5570ee1ea",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156C790B3BF198BDDCD14748C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          294
+        ]
+      },
+      "english": "An e-mail with the subject \"Hello, Iaman\" was sent from spy to iaman (2015-03-23 17:29:27 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "M160.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

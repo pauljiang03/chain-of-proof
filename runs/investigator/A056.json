@@ -1,0 +1,55 @@
+{
+  "finding_id": "A056",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      255
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:46 UTC).",
+  "cited_facts": [
+    {
+      "id": 255,
+      "kind": "webSearch",
+      "t": 1427134726050680,
+      "res": 1,
+      "obj": 151,
+      "obj_text": "how to recover data",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "01af57070547ea33499cb3e8a0700a4d302bc0094806728a8357b35f272d61c4",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#q=how+to+recover+data&hl=en&start=10",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          255
+        ]
+      },
+      "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:46 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A056.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,128 @@
+{
+  "finding_id": "A127",
+  "question": "3a. Which files were opened from RM#1 (the authorized company USB stick)?",
+  "claim": {
+    "both": [
+      {
+        "openedFromRecorded": [
+          21,
+          365
+        ]
+      },
+      {
+        "recordedOnDevice": [
+          365,
+          374
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:20 UTC) from volume 5C754D3E, which this PC recorded under the label \"Authorized USB\" (2015-03-23 18:37:20 UTC). Volume 5C754D3E, which this PC recorded under the label \"Authorized USB\" (2015-03-23 18:37:20 UTC), is the volume on seized device 4C530012450531101593.",
+  "cited_facts": [
+    {
+      "id": 21,
+      "kind": "lnkTarget",
+      "t": 1427135840499256,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "958eb3d46a81852722a264a94a97dbe2e29889bf03913fe1a3412d3bce4083e5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135840312056,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    },
+    {
+      "id": 365,
+      "kind": "volumeSeen",
+      "t": 1427135840499256,
+      "res": 1,
+      "obj": 202,
+      "obj_text": "Authorized USB",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "3e3f248cd72e0d268688d0aee11cea93407d23d4334df856eb791ac5b21591ef",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+        "drive_type": "fixed",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 374,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "d226163e36c46deacef90d25d6acd1dc3b5b4432d8c55e5bdbba54cdec6e15be",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 16384",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E22103D8",
+        "exhibit": "RM#1",
+        "filesystem": "exfat",
+        "image": "rm1.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "Authorized"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          21,
+          365
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:20 UTC) from volume 5C754D3E, which this PC recorded under the label \"Authorized USB\" (2015-03-23 18:37:20 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "recordedOnDevice": [
+          365,
+          374
+        ]
+      },
+      "english": "Volume 5C754D3E, which this PC recorded under the label \"Authorized USB\" (2015-03-23 18:37:20 UTC), is the volume on seized device 4C530012450531101593.",
+      "rules": [
+        "R6",
+        "R7"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6",
+    "R7"
+  ],
+  "strength": "strong",
+  "lean_file": "A127.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

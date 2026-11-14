@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          121
+          217
         ]
       },
       {
         "tagged": [
-          121,
+          217,
           "obj",
-          221,
-          117
+          349,
+          195
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"data leakage methods\" was made in chrome (2015-03-23 18:02:09 UTC). data leakage methods is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
   "cited_facts": [
     {
-      "id": 121,
+      "id": 217,
       "kind": "webSearch",
       "t": 1427133729303892,
       "res": 1,
-      "obj": 74,
+      "obj": 130,
       "obj_text": "data leakage methods",
-      "aux": 69,
+      "aux": 125,
       "aux_text": "chrome",
-      "row_sha256": "9078fd94b9017dc1dfaeda6a8c146fa5cbaa7b1695e585ae7a5eca9ad48807cf",
+      "row_sha256": "9be48aea2fefbed2a122314a750751f27e121ade456fb68fac7e567d0bedde79",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 221,
+      "id": 349,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 74,
+      "obj": 130,
       "obj_text": "data leakage methods",
-      "aux": 117,
+      "aux": 195,
       "aux_text": "watch-list-search",
-      "row_sha256": "ccd1fe50714af82fe1b47c983cf25034ac9c7f89e5a62809162a7d0f370e258a",
+      "row_sha256": "42d5dbbe685ffab9f77c6f8de241efbcf60cf28ff1ced46f7879e6461ad74855",
       "prov": {
         "rule": "search term contains the watch-list word \"leak\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          121
+          217
         ]
       },
       "english": "A web search for \"data leakage methods\" was made in chrome (2015-03-23 18:02:09 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          121,
+          217,
           "obj",
-          221,
-          117
+          349,
+          195
         ]
       },
       "english": "data leakage methods is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",

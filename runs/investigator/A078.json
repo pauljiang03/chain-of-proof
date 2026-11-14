@@ -1,0 +1,55 @@
+{
+  "finding_id": "A078",
+  "question": "2. List the web searches made on this PC (keywords and times).",
+  "claim": {
+    "searched": [
+      277
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"science technology news\" was made in iexplore (2015-03-23 20:55:29 UTC).",
+  "cited_facts": [
+    {
+      "id": 277,
+      "kind": "webSearch",
+      "t": 1427144129240612,
+      "res": 1,
+      "obj": 156,
+      "obj_text": "science technology news",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "2fb5b17c569cdf429b9a5eecebc2be24964804de57d48ee2f9695d416ceafda6",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          277
+        ]
+      },
+      "english": "A web search for \"science technology news\" was made in iexplore (2015-03-23 20:55:29 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A078.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

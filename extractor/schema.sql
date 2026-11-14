@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS facts (
         'usbInsert', 'volumeMount', 'lnkTarget',
         'fileCreated', 'fileModified', 'fileDeleted',
         'webSearch', 'emailSent', 'cdBurn', 'tag',
-        'volumeSeen', 'volumeOnDevice')),
+        'volumeSeen', 'volumeOnDevice', 'unallocatedOnDevice')),
     t    BIGINT NOT NULL CHECK (t   >= 0),  -- UTC microseconds since the Unix epoch
     res  BIGINT NOT NULL CHECK (res >= 1),  -- timestamp uncertainty in microseconds
     obj  BIGINT NOT NULL,                   -- strings.id; meaning per kind: see Facts.lean
