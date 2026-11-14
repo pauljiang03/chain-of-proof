@@ -424,12 +424,15 @@ def verify_package(bundle, expected_manifest_sha256=None):
         with _open_read(bundle / "report.md") as stream:
             if stream.read().decode("utf-8") != _render_report(data, source):
                 raise ValueError("report differs from regeneration; use the recorded renderer version")
-        # Refuse changes observed while the expensive proof check was running.
-        if _fingerprint(bundle / "manifest.json")["sha256"] != digest:
-            raise ValueError("manifest changed during verification")
-        for name in ("run.json", manifest["facts"]["path"]):
+        # Proof checking can take long enough for any artifact to change. Recheck
+        # every listed payload, not only the run and its fact store.
+        for name in files:
             if _fingerprint(bundle / name) != {key: files[name][key] for key in ("sha256", "bytes")}:
                 raise ValueError(f"{name} changed during verification")
+        if {path.name for path in bundle.iterdir()} != set(files) | {"manifest.json"}:
+            raise ValueError("package inventory changed during verification")
+        if _fingerprint(bundle / "manifest.json")["sha256"] != digest:
+            raise ValueError("manifest changed during verification")
         result["passed"] = True
     except (ValueError, OSError, KeyError, TypeError, subprocess.SubprocessError) as error:
         result["problems"].append(str(error))

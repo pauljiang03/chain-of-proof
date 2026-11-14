@@ -147,6 +147,31 @@ class VerificationPackage(unittest.TestCase):
                 verify.assert_not_called()
                 path.write_bytes(original)
 
+    def test_audit_changes_and_new_files_during_proof_verification_are_refused(self):
+        from verifier.package import verify_run as actual_verify_run
+        audit = self.package / "audit.jsonl"
+        original_audit = audit.read_bytes()
+        unlisted = self.package / "added-during-verification"
+        for change in ("audit", "inventory"):
+            with self.subTest(change=change):
+                def change_after_proofs(*args, **kwargs):
+                    result = actual_verify_run(*args, **kwargs)
+                    if change == "audit":
+                        audit.write_bytes(original_audit + b"\n")
+                    else:
+                        unlisted.write_text("unexpected file")
+                    return result
+
+                with patch("verifier.package.verify_run", side_effect=change_after_proofs):
+                    result = verify_package(self.package)
+                self.assertFalse(result["passed"])
+                self.assertTrue(result["certificates"]["passed"])
+                self.assertIn("changed during verification", result["problems"][0])
+                self.assertFalse(verify_package(self.package)["passed"])
+                audit.write_bytes(original_audit)
+                if unlisted.exists():
+                    unlisted.unlink()
+
     def test_missing_manifest_and_unlisted_entries_fail_closed(self):
         original = (self.package / "manifest.json").read_bytes()
         (self.package / "manifest.json").unlink()
