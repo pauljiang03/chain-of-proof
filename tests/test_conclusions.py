@@ -54,8 +54,12 @@ class Recording(unittest.TestCase):
         self.assertEqual([c["conclusion_id"] for c in run["conclusions"]], ["C001"])
         self.assertEqual(run["findings"], [])              # a conclusion is never a finding
         text = report.render(run)
+        self.assertNotIn("He meant", text)
+        self.assertNotIn("(inference, unverified)", text)
+        self.assertNotIn("The personal stick", text)
+        text = report.render(run, include_judgments=True)
         self.assertIn("(inference, unverified) The personal stick", text)
-        self.assertLess(text.index("Conclusions (judgment"), text.index("## Certified findings"))
+        self.assertLess(text.index("## Certified findings"), text.index("## Appendix: unverified"))
 
 
 if __name__ == "__main__":

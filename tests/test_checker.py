@@ -112,6 +112,25 @@ class CheckerTest(unittest.TestCase):
         claim["claim"] = {"before": [4600, 4512]}
         self.assertTrue(verify(claim, self.src))
 
+    def test_verifier_rejects_changed_copies_even_with_original_hash_and_english(self):
+        self.run_check(GOLDEN, "F10")
+        cert = json.loads((self.out / "F10.json").read_text())
+        for field, value in (("t", 123), ("obj_text", "fabricated entity"),
+                             ("prov", {"artifact": "invented"}), ("res", True)):
+            altered = copy.deepcopy(cert)
+            altered["cited_facts"][0][field] = value
+            self.assertTrue(verify(altered, self.src), field)
+        for field, value in (("rules", []), ("status", "rejected")):
+            altered = copy.deepcopy(cert)
+            altered[field] = value
+            self.assertTrue(verify(altered, self.src), field)
+        altered = copy.deepcopy(cert)
+        altered["parts"][0]["english"] = "Invented finding in the certificate viewer"
+        self.assertTrue(verify(altered, self.src))
+        altered = copy.deepcopy(cert)
+        altered["cited_facts"].append(altered["cited_facts"][0])
+        self.assertTrue(verify(altered, self.src))
+
     def test_duckdb_source_matches_fixture(self):
         try:
             import duckdb

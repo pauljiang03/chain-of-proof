@@ -40,8 +40,35 @@ def candCopied (fs : Array Fact) : Array Brick := Id.run do
         out := out.push ⟨Sets.copiedHere c.id m.id, [c, m]⟩
   return out
 
+/-- Record observations keep their own types; no promotion into filesystem events. -/
+def candRecordedObservations (fs : Array Fact) : Array Brick := Id.run do
+  let mut out := #[]
+  for f in fs do
+    if f.kind == .fileRemoved then
+      out := out.push ⟨Sets.fileRemovedAt f.id, [f]⟩
+    if f.kind == .volumeRecorded then
+      out := out.push ⟨Sets.volumeRecordedAt f.id, [f]⟩
+    if f.kind == .fileCreationRecorded then
+      out := out.push ⟨Sets.fileCreationRecordedAt f.id, [f]⟩
+    if f.kind == .journalName then
+      out := out.push ⟨Sets.journalNamed f.id, [f]⟩
+    if f.kind == .journalParent then
+      out := out.push ⟨Sets.journalParentRecorded f.id, [f]⟩
+    if f.kind == .journalRemoval then
+      out := out.push ⟨Sets.journalRemovalObserved f.id, [f]⟩
+  return out
+
+def candCreatedAfterVolume (fs : Array Fact) : Array Brick := Id.run do
+  let vs := fs.filter (·.kind == .volumeRecorded)
+  let mut out := #[]
+  for c in fs do
+    if c.kind == .fileCreated then
+      for v in vs do
+        out := out.push ⟨Sets.createdAfterVolumeRecord c.id v.id, [c, v]⟩
+  return out
+
 def candidates (fs : Array Fact) : Array Brick :=
-  candUsbMounted fs ++ candCopied fs
+  candUsbMounted fs ++ candCopied fs ++ candRecordedObservations fs ++ candCreatedAfterVolume fs
 
 /-- Keep only candidates that hold on their own cited facts. -/
 def mine (fs : Array Fact) : List Brick :=

@@ -1,0 +1,700 @@
+{
+  "source_sha256": "149266965308d5d7d343e924566a36c9d8963a156d7d0c1dc1f73d6fd90d1bd1",
+  "source_pdf_sha256": "218165427fcb2f490b44eccf7fbc9bf3700b938ea976004051a067e79e0da62b",
+  "document_errors": [],
+  "questions": [
+    {
+      "id": "Q1",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 15,
+      "literally_or_arithmetically_bound_leaves": 12,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The Possible Answer omits RM#1 and does not answer the acquisition-versus-verification subquestion. Listed digests are retained, but a full-question expected answer is incomplete.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q2",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 12,
+      "literally_or_arithmetically_bound_leaves": 4,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "review_status": "needs_review",
+        "reason": "PDF inspection confirms the asterisk is printed on partition 2, while raw-image partition boot flags differ. Whether the key means the OS boot partition or the MBR active flag needs independent review. Keep the printed candidate values; do not replace them from our evidence."
+      }
+    },
+    {
+      "id": "Q3",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 6,
+      "literally_or_arithmetically_bound_leaves": 3,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q4",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 3,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q5",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q6",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 32,
+      "literally_or_arithmetically_bound_leaves": 8,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "Table says only timezone applied; its offset relative to Q4/Q12 needs independent review. Local printed values retained without choosing the old reference's inferred UTC-5.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q7",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q8",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 0,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q9",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 8,
+      "literally_or_arithmetically_bound_leaves": 7,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q10",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 45,
+      "literally_or_arithmetically_bound_leaves": 19,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The timezone-applied caption does not resolve the table's offset relative to other tables. Preserve printed local times pending independent review; do not inherit the old reference's inferred UTC-5.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q11",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 235,
+      "literally_or_arithmetically_bound_leaves": 99,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q12",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 108,
+      "literally_or_arithmetically_bound_leaves": 36,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q13",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 5,
+      "literally_or_arithmetically_bound_leaves": 4,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q14",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 22,
+      "literally_or_arithmetically_bound_leaves": 19,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q15",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 222,
+      "literally_or_arithmetically_bound_leaves": 110,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q16",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 112,
+      "literally_or_arithmetically_bound_leaves": 61,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The first printed keyword is singular \u201cdata leakage method\u201d while its printed URL records plural \u201cmethods\u201d. Both strings are preserved; a correct keyword normalization needs explicit independent resolution.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q17",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q18",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q19",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "Possible Answer says Microsoft\\Office, while its quoted registry evidence says Microsoft\\Outlook. Preserve the answer and discrepancy; do not choose by our extraction output.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q20",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q21",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 84,
+      "literally_or_arithmetically_bound_leaves": 49,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q22",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 10,
+      "literally_or_arithmetically_bound_leaves": 3,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q23",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 120,
+      "literally_or_arithmetically_bound_leaves": 48,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q24",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q25",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 24,
+      "literally_or_arithmetically_bound_leaves": 8,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q26",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 9,
+      "literally_or_arithmetically_bound_leaves": 5,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q27",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 54,
+      "literally_or_arithmetically_bound_leaves": 20,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q28",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 24,
+      "literally_or_arithmetically_bound_leaves": 6,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q29",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 36,
+      "literally_or_arithmetically_bound_leaves": 24,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "Printed paths use \\User and omit \\Local, while other source sections use different paths. Preserve every trace and deletion annotation pending path review instead of silently comparing only suffixes.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q30",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 6,
+      "literally_or_arithmetically_bound_leaves": 2,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The Possible Answer table and its quoted transaction records associate the two modification times differently. Retain table values; adjudication needs independent source review, not our evidence output.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q31",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q32",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q33",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 65,
+      "literally_or_arithmetically_bound_leaves": 31,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The source mixes host burn records, a registry selection, a descriptor labeled formatting, and a minute-precision interval; two rows have the same System-log label. Full event semantics and timestamp offsets need review before this can be scored as a complete question.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q34",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 20,
+      "literally_or_arithmetically_bound_leaves": 0,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q35",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 24,
+      "literally_or_arithmetically_bound_leaves": 12,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q36",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 30,
+      "literally_or_arithmetically_bound_leaves": 10,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q37",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 3,
+      "literally_or_arithmetically_bound_leaves": 2,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q38",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 4,
+      "literally_or_arithmetically_bound_leaves": 4,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q39",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 7,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The answer comprises six thumbnail images. Titles were visually transcribed, but a reviewed image/content identity criterion is required before title-only JSON can count as a complete visual answer.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q40",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 1,
+      "literally_or_arithmetically_bound_leaves": 1,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q41",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 0,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q42",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 6,
+      "literally_or_arithmetically_bound_leaves": 5,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q43",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 7,
+      "literally_or_arithmetically_bound_leaves": 6,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q44",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 92,
+      "literally_or_arithmetically_bound_leaves": 32,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q45",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 112,
+      "literally_or_arithmetically_bound_leaves": 66,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q46",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 46,
+      "literally_or_arithmetically_bound_leaves": 0,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q47",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 5,
+      "literally_or_arithmetically_bound_leaves": 2,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q48",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 21,
+      "literally_or_arithmetically_bound_leaves": 9,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "Printed VSC paths have the same unresolved abbreviated/misspelled form as Q29. The causal logoff wording also requires a reviewed answer convention; preserve it, not replace it with an observation-only subset.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q49",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 32,
+      "literally_or_arithmetically_bound_leaves": 8,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q50",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 4,
+      "literally_or_arithmetically_bound_leaves": 3,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q51",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 42,
+      "literally_or_arithmetically_bound_leaves": 18,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q52",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 83,
+      "literally_or_arithmetically_bound_leaves": 41,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q53",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 100,
+      "literally_or_arithmetically_bound_leaves": 65,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The 17 recovery rows are explicit, but the full Possible Answer also calls an open-ended set of carved files unrelated to the scenario. A bounded relevance criterion and complete carving inventory are not supplied.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q54",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 2,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q55",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 68,
+      "literally_or_arithmetically_bound_leaves": 52,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q56",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 70,
+      "literally_or_arithmetically_bound_leaves": 51,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q57",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 10,
+      "literally_or_arithmetically_bound_leaves": 4,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q58",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 8,
+      "literally_or_arithmetically_bound_leaves": 8,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The answer delegates a detailed timeline to Section 3, including observations not exactly recoverable from images. Daily summaries are retained as context, but they cannot replace the requested detailed timeline. A reviewed event-level timeline contract is required.",
+        "review_status": "needs_review"
+      }
+    },
+    {
+      "id": "Q59",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 18,
+      "literally_or_arithmetically_bound_leaves": 11,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "scorable"
+      }
+    },
+    {
+      "id": "Q60",
+      "source_binding_passed": true,
+      "issues": [],
+      "expected_leaves": 2,
+      "literally_or_arithmetically_bound_leaves": 0,
+      "checked_timestamp_conversions": 0,
+      "evaluation": {
+        "status": "unevaluable",
+        "reason": "The key explicitly permits each analyst's own visual diagram and supplies an example, not an exact graph or visual-quality rubric. A neutral structure/content adequacy criterion requires independent review; exact-text matching cannot grade this question.",
+        "review_status": "needs_review"
+      }
+    }
+  ],
+  "source_binding_passed": true,
+  "review_status": "draft_requires_independent_review",
+  "semantic_correctness": "not_proved",
+  "note": "Hashes prove binding to the supplied source text, not faithful interpretation or fidelity of PDF-to-text extraction. Literal/declared time conversion checks cover only listed fields. Independent review and raw-evidence validation remain necessary.",
+  "reference_sha256": "9b66a5acb55049acb9be8ff217a17fdd398e687cd15979cb6c073e073c47bdfa"
+}

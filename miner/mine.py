@@ -1,6 +1,10 @@
-"""The deterministic miner: every instance of the approved sets, no LLM.
+"""The deterministic miner: approved set instances, no LLM.
 
     python3 -m miner.mine --facts evidence/case_facts.json --out certs
+
+The default bounded mode omits one-record kinds over RESTATE_UP_TO rows and reports
+them explicitly. It also omits compound journal identity joins if any participating
+kind exceeds that cap. Use --complete to include both the records and their joins.
 
 Candidate generation here is untrusted Python: a bug can miss a finding, but it cannot
 certify a false one, because every candidate still goes through checker.check and the
@@ -53,13 +57,19 @@ ONE_RECORD = (
     ("fileSeen", "fileRecorded", "Which files do secondary records name?"),
     ("shadowCopy", "shadowCopyMade", "Which shadow copies exist?"),
     ("fileContent", "contentHashed", "What content do the files have?"),
+    ("fileRemoved", "fileRemovedAt", "Which removals does the NTFS journal record?"),
+    ("volumeRecorded", "volumeRecordedAt", "What timestamps do the discs' file-set descriptors record?"),
+    ("fileCreationRecorded", "fileCreationRecordedAt", "Which creation flags does the NTFS journal record?"),
+    ("journalName", "journalNamed", "Which file identities and names does the journal record?"),
+    ("journalParent", "journalParentRecorded", "Which parent-directory identities does the journal record?"),
+    ("journalRemoval", "journalRemovalObserved", "Which file identities carry journal removal flags?"),
 )
 BATCH = 40                 # one-record statements per finding
 RESTATE_UP_TO = 2000       # a kind with more records than this is not restated one by one:
                            # the records stay in the evidence for queries and for the agent
 COUNTED = ("usbInsert", "volumeOnDevice", "fileDeleted", "emailSent", "cdBurn", "accountSeen",
            "programInstalled", "fileDownloaded", "localSearch", "cloudFile", "noteText",
-           "shadowCopy")
+           "shadowCopy", "fileRemoved", "volumeRecorded", "fileCreationRecorded")
 
 
 def precedes(x: Fact, y: Fact) -> bool:
@@ -70,7 +80,18 @@ def _both(parts: List[dict]) -> dict:
     return parts[0] if len(parts) == 1 else {"both": parts}
 
 
-def candidates(source: FactSource) -> List[Tuple[str, dict]]:
+def skipped_kinds(source: FactSource, complete: bool = False) -> Dict[str, int]:
+    """Kinds omitted by the bounded one-record enumeration, with their record counts."""
+    if complete:
+        return {}
+    counts: Dict[str, int] = defaultdict(int)
+    for f in source.all():
+        counts[f.kind] += 1
+    return {kind: counts[kind] for kind, _form, _question in ONE_RECORD
+            if counts[kind] > RESTATE_UP_TO}
+
+
+def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, dict]]:
     facts = source.all()
     by_kind: Dict[str, List[Fact]] = defaultdict(list)
     for f in facts:
@@ -151,11 +172,17 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
     for m in by_kind["fileModified"]:
         modified[(m.obj, m.aux)].append(m)
     for c in by_kind["fileCreated"]:
+        for v in by_kind["volumeRecorded"]:
+            if c.aux == v.aux and precedes(v, c):
+                out.append((Q_TIMES, {"createdAfterVolumeRecord": [c.id, v.id]}))
         if c.aux in areas:
             copied = [{"copiedHere": [c.id, m.id]} for m in modified.get((c.obj, c.aux), [])
                       if precedes(m, c)]
             out.append((Q_RECOVERED, _both(recovered_parts(c) + copied + tagged(c, "obj"))))
             continue
+        if not modified.get((c.obj, c.aux)):
+            # A filesystem creation record need not have a modification partner.
+            out.append((Q_TIMES, _both([{"fileCreatedAt": [c.id]}] + tagged(c, "obj"))))
         for m in modified.get((c.obj, c.aux), []):
             if precedes(m, c):
                 out.append((Q_COPIED, _both([{"copiedHere": [c.id, m.id]}] + tagged(c, "obj"))))
@@ -175,9 +202,12 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
         for m, g in pairs:
             parts += [{"fileModifiedAt": [m.id]}, {"tagged": [m.id, "obj", g.id, tag_id]}]
             if m.aux in areas:
-                parts.append({"recoveredOnDevice": [next(
-                    c.id for c in by_kind["fileCreated"] if (c.obj, c.aux) == (m.obj, m.aux)),
-                    areas[m.aux].id]})
+                created = next((c for c in by_kind["fileCreated"]
+                                if (c.obj, c.aux) == (m.obj, m.aux)), None)
+                # Plain UDF file entries contain no creation timestamp. Preserve
+                # their modification evidence without inventing one for this form.
+                if created is not None:
+                    parts.append({"recoveredOnDevice": [created.id, areas[m.aux].id]})
             parts += [{"tagged": [m.id, "obj", t.id, t.aux]} for t in tags.get(m.obj, [])
                       if t.aux != tag_id]
         if len(pairs) > 1:
@@ -192,10 +222,35 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
 
     for kind, form, question in ONE_RECORD:
         rows = sorted(by_kind[kind], key=lambda f: (f.t, f.id))
-        if len(rows) > RESTATE_UP_TO:
+        if not complete and len(rows) > RESTATE_UP_TO:
             continue
         for i in range(0, len(rows), BATCH):
             out.append((question, _both([{form: [f.id]} for f in rows[i:i + BATCH]])))
+
+    # Identity joins are generic and bounded by the same opt-in as journal names.
+    # Each name and removal retains its own timestamp; no alias rewrites an event.
+    identity_kinds = ("journalName", "journalParent", "journalRemoval")
+    if complete or all(len(by_kind[k]) <= RESTATE_UP_TO for k in identity_kinds):
+        names = defaultdict(list)
+        for f in sorted(by_kind["journalName"], key=lambda f: (f.t, f.id)):
+            names[f.aux].append(f)
+        joins = []
+        for identity in sorted(names):
+            group = names[identity]
+            joins.extend({"sameJournalFile": [a.id, b.id]} for a, b in zip(group, group[1:]))
+        for r in by_kind["journalRemoval"]:
+            earlier = [n for n in names[r.aux] if precedes(n, r)]
+            if earlier:
+                for n in {earlier[0].id: earlier[0], earlier[-1].id: earlier[-1]}.values():
+                    joins.append({"removedFilePreviouslyNamed": [n.id, r.id]})
+        for p in by_kind["journalParent"]:
+            children, directories = names[p.obj], names[p.aux]
+            if children:
+                child = next((n for n in children if n.t == p.t), children[0])
+                joins.extend({"journalChildNamedDirectory": [child.id, p.id, d.id]} for d in directories)
+        for i in range(0, len(joins), BATCH):
+            out.append(("How do journal names, directory identities and removal observations connect?",
+                        _both(joins[i:i + BATCH])))
 
     # files whose content hash is the same in more than one place: one finding per hash
     same_hash = defaultdict(list)
@@ -217,9 +272,9 @@ def candidates(source: FactSource) -> List[Tuple[str, dict]]:
     return out
 
 
-def mine(source: FactSource, out_dir: Path, prefix: str = "M") -> List[dict]:
+def mine(source: FactSource, out_dir: Path, prefix: str = "M", complete: bool = False) -> List[dict]:
     results = []
-    for n, (question, claim) in enumerate(candidates(source), start=1):
+    for n, (question, claim) in enumerate(candidates(source, complete=complete), start=1):
         results.append(checker.check(claim, f"{prefix}{n:03d}", source, question, out_dir))
     return results
 
@@ -228,8 +283,15 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Mine every instance of the approved sets.")
     ap.add_argument("--facts", required=True)
     ap.add_argument("--out", default="certs")
+    ap.add_argument("--complete", action="store_true", help="include large one-record kinds and compound journal identity joins")
     args = ap.parse_args(argv)
-    results = mine(open_source(args.facts), Path(args.out))
+    source = open_source(args.facts)
+    skipped = skipped_kinds(source, complete=args.complete)
+    if skipped:
+        print(f"bounded mode omits one-record statements for {skipped}; use --complete to include them")
+        if set(skipped) & {"journalName", "journalParent", "journalRemoval"}:
+            print("bounded mode also omits compound journal identity joins; --complete includes them")
+    results = mine(source, Path(args.out), complete=args.complete)
     ok = sum(r["status"] == "verified" for r in results)
     print(f"{len(results)} candidates, {ok} verified, {len(results) - ok} rejected")
     return 0

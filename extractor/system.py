@@ -244,6 +244,15 @@ def parse_shimcache_nt61(data):
     return out
 
 
+def shimcache_entry(item):
+    """Normalize a generic parser entry; the unset 1601 time is not an event."""
+    raw = item[0]
+    modified = _as_us(raw) if raw is not None else None
+    return {"path": item[1], "modified": modified if modified is not None and modified >= 0 else None,
+            "raw_modified": raw.isoformat() if isinstance(raw, datetime) else str(raw) if raw is not None else None,
+            "executed": None, "file_flags": None, "shim_flags": None}
+
+
 def parse_recentfilecache(data):
     """RecentFileCache.bcf: a 20-byte header, then length-prefixed UTF-16 paths."""
     if len(data) < 20 or struct.unpack_from("<I", data, 0)[0] != 0xFFEEFFFE:
@@ -967,9 +976,12 @@ def _shimcache(out, ev, target, hives):
                     entries = []
                     for item in ShimCache(io.BytesIO(raw), str(target.ntversion), False):
                         if isinstance(item, Exception):
-                            raise item
-                        entries.append({"path": item[1], "modified": us(item[0]) if item[0] else None,
-                                        "executed": None, "file_flags": None, "shim_flags": None})
+                            ev.problem(art, item)
+                            continue
+                        try:
+                            entries.append(shimcache_entry(item))
+                        except (ValueError, TypeError, OverflowError) as e:
+                            ev.problem(art, e)
             except Exception as e:
                 ev.problem(art, e)
                 continue
@@ -983,6 +995,7 @@ def _shimcache(out, ev, target, hives):
                 out.add("programRun", t, 1, exe_name(shown), shown, _copy=copy,
                         artifact="%s entry %d" % (art, n), source="application compatibility cache",
                         path_recorded=e["path"], executed_flag=e["executed"], control_set=cs,
+                        raw_modified_time=e.get("raw_modified"),
                         time_meaning=meaning, **_where(h))
 
 

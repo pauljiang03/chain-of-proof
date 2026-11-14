@@ -27,6 +27,10 @@ KINDS = (
     "folderOpened", "fileRenamed", "fileSeen", "shadowCopy",
     # file contents
     "fileContent",
+    # Recorded removal and optical volume timestamps; preserve the preceding kind order.
+    "fileRemoved", "volumeRecorded",
+    "fileCreationRecorded",
+    "journalName", "journalParent", "journalRemoval",
 )
 
 

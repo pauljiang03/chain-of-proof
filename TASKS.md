@@ -1,5 +1,11 @@
 # Work split
 
+Current development checkpoint (2026-11-14): see [evaluation](eval/EVALUATION.md)
+and [remaining support](eval/MISS_SUPPORT.md). The corrected combined report states
+456/613 encoded items; all 473 unique certificates reverify. This is combined saved
+output, not another blind AI trial. The new 60-question neutral reference is a draft
+requiring independent review. Historical 20-item LLM grades are retired.
+
 One person runs the pipeline; three build what the judges see. The two sides meet at
 one file, `run.json`, and a sample of it exists today, so nobody waits for anyone.
 
@@ -24,8 +30,10 @@ The split is by lane, not by known skills: swap if someone else is the better fi
 
 The front end is a static site that reads one JSON file. No backend to build or host.
 
-- **Real data is here:** [`ui/public/run.json`](ui/public/run.json): 179 findings and
-  24 rejections from the real case images. Regenerate with `python3 -m eval.baseline`.
+- **Historical real data:** [`ui/public/run.json`](ui/public/run.json): 372 findings and
+  24 rejections from the real case images. Preserve it as the original run; its English
+  predates the optical corrections. Use `eval.recheck`/`checker.combine` for new output
+  and `eval.baseline` with unused output paths for a new investigation.
   Finding ids changed when the evidence grew (2026-11-14): look findings up by content.
 - **Small file for layout work:** [`ui/public/run.sample.json`](ui/public/run.sample.json)
   (7 findings, 4 rejections, synthetic).
@@ -59,27 +67,28 @@ Two rules for anything shown on screen:
 
 ## Lane 1: Pipeline — @pauljiang03
 
-Done: extractor for USB devices, volumes, shortcuts, jump lists, searches, file times,
-Recycle Bin records, CD-burn traces, e-mail, and file records left on the formatted
-RM#2 (95 of the 96 reference rows are now in evidence); miner; scorer; AI investigator;
-the plain-report audit (`python3 -m agent.audit`); a tag for files that share a size
-and last-modified time across devices (how the renamed copies show up).
+Done: Windows, USB and optical readers; recorded UDF timestamps; journal creation,
+removal and identity observations; typed Lean statements and identity/order rules;
+case-specific public investigator profiles; deterministic item and question scoring;
+combined certified reports; corrected optical templates and explicit judgment appendix.
+Frozen extraction recovered 367/517 closed-book items. The newer readers' additional
+records do not automatically count as correct answers under that frozen contract.
 
 Next:
 
-1. Read the CD-R image (RM#3): its volume, its files, the deleted ones. Today a file
-   "opened from the CD" is only tied to a volume labelled `IAMAN CD`, not to the disc.
+1. Recover remaining CD-R contents and prove physical-media attribution where the
+   artifacts support it. A shared label alone does not identify the disc.
 2. A strong link across the format of RM#2: the shortcut stores the opened file's size
    and creation time; the recovered folder record has the same file. Also the disk
    signature in `MountedDevices`, which a format does not change.
 3. A closed-world brick for absence claims ("no other USB device was connected").
-4. The rest of the answer key: installed programs and their use (CCleaner, Eraser,
-   Google Drive, iCloud), logons, shell bags, the purged e-mail.
+4. Close the [remaining reader and answer-contract gaps](eval/MISS_SUPPORT.md),
+   especially staging/rename identity, purged e-mail and content recovery.
 5. Compare file contents (hashes) where both copies survive, and file type against
    extension, so "renamed copy" rests on more than size and time.
 6. Run the API (deepagents) backend once a key exists; repeat the AI runs for a range.
-- **Done** (2026-11-14): the AI run certifies 95 rows against the miner's 90, and the
-  report audit found sentences in a plain report that the records contradict.
+- Historical open-book numbers are retained in the README; current reports lead
+  with final-output item coverage and explicitly state the scoring contract.
 
 ## Lane 2: Evidence graph and timeline — @Taygeta-gl
 
@@ -114,18 +123,19 @@ The frame everything sits in, and the two views that make the trust argument.
 
 ## Lane 4: Eval and demo — @michellejiang2017
 
-The numbers and the story. The scorer and a 96-row reference exist (`eval/`); run
-`python3 -m eval.baseline` to see them.
+The numbers and the story. Preserve the frozen 613-item results. Develop the new
+60-question neutral benchmark separately and review every transcription/source link.
 
 1. **Audit the reference.** Spot-check `eval/reference.json` against the
    [NIST answer key](https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf)
    (each row has its page). It was transcribed by hand; a second pair of eyes makes the
    numbers defensible.
-2. **Mulder mapping.** Mark which reference rows correspond to the 20 items Mulder
-   scores (https://pypi.org/project/mulder-dfir/), so we can print a row comparable to
-   theirs. Add any of the 20 we lack.
-3. **Scoreboard** panel in the UI from `eval/results.json`: the per-question table, the
-   gate result (24/24 false claims refused), and Mulder's published rows beside ours.
+2. **Common evaluation.** Give both systems the same public questions and typed
+   answer contract; retain the original Mulder 20-item subset separately. Do not
+   present its published scores as a controlled comparison with our item coverage.
+3. **Scoreboard.** Show final-report answers, misses and incorrect answers under the
+   declared contract, with certificate verification and the fixed 24-claim rejection
+   test separately. Neither the rejection test nor coverage establishes zero false positives.
 4. **Demo.** Two-minute script, backup recording, video, Devpost text. Opening line and
    the rejection moment first; the reformatted-USB finding (`M024`) is the story.
 - **Done when:** the scoreboard renders from `results.json`, and a full demo has been

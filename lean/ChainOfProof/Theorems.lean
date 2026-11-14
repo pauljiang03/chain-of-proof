@@ -42,6 +42,19 @@ theorem holds_both_iff (fs : List Fact) (c d : Claim) :
     holds fs (.both c d) = true ↔ holds fs c = true ∧ holds fs d = true := by
   simp [holds]
 
+/-- A kind assertion gives the exact cited row and its kind, not another kind's meaning. -/
+theorem holds_is_iff (fs : List Fact) (a : Nat) (k : Kind) :
+    holds fs (.is a k) = true ↔ ∃ x, lookup fs a = some x ∧ x.kind = k := by
+  simp [holds, with1_iff]
+
+theorem holds_is_kind_unique {fs : List Fact} {a : Nat} {k l : Kind}
+    (hk : holds fs (.is a k) = true) (hl : holds fs (.is a l) = true) : k = l := by
+  obtain ⟨x, hx, hkind⟩ := (holds_is_iff fs a k).mp hk
+  obtain ⟨y, hy, hother⟩ := (holds_is_iff fs a l).mp hl
+  have same : x = y := Option.some.inj (hx.symm.trans hy)
+  subst y
+  exact hkind.symm.trans hother
+
 /-- The snapping lemma: two proven bricks give a proven bigger brick. -/
 theorem holds_both {fs : List Fact} {c d : Claim}
     (h₁ : holds fs c = true) (h₂ : holds fs d = true) : holds fs (.both c d) = true := by
@@ -156,5 +169,103 @@ theorem usbMountedAs_sound (fs : List Fact) (u m : Nat)
   have : y = y' := Option.some.inj (hy.symm.trans hy')
   subst this
   exact ⟨x, y, hx, hy, by simpa using hkx, by simpa using hky, by simpa [Fact.get] using hl⟩
+
+/-- Journal removal has its own kind; it does not imply use of the Recycle Bin. -/
+theorem fileRemoved_not_recycleBin (fs : List Fact) (a : Nat)
+    (h : holds fs (Sets.fileRemovedAt a) = true) :
+    holds fs (Sets.fileDeletedAt a) = false := by
+  cases h' : holds fs (Sets.fileDeletedAt a) with
+  | false => rfl
+  | true => cases holds_is_kind_unique h h'
+
+/-- An accumulated journal creation flag is not a filesystem creation timestamp. -/
+theorem journalCreation_not_filesystemCreation (fs : List Fact) (a : Nat)
+    (h : holds fs (Sets.fileCreationRecordedAt a) = true) :
+    holds fs (Sets.fileCreatedAt a) = false := by
+  cases h' : holds fs (Sets.fileCreatedAt a) with
+  | false => rfl
+  | true => cases holds_is_kind_unique h h'
+
+/-- What the optical timeline set establishes: typed records, a common volume,
+    and a timestamp gap greater than the two uncertainties. -/
+theorem createdAfterVolumeRecord_sound (fs : List Fact) (c v : Nat)
+    (h : holds fs (Sets.createdAfterVolumeRecord c v) = true) :
+    ∃ x y, lookup fs c = some x ∧ lookup fs v = some y ∧
+      x.kind = .fileCreated ∧ y.kind = .volumeRecorded ∧ x.aux = y.aux ∧
+      y.t + y.res + x.res < x.t := by
+  simp only [Sets.createdAfterVolumeRecord, holds_both_iff, holds_is_iff,
+             holds_link_iff, holds_before_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨x', y', hx', hy', heq⟩,
+           ⟨y'', x'', hy'', hx'', ht⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  have : x = x'' := Option.some.inj (hx.symm.trans hx'')
+  subst x''
+  have : y = y'' := Option.some.inj (hy.symm.trans hy'')
+  subst y''
+  exact ⟨x, y, hx, hy, hkx, hky, by simpa [Fact.get] using heq, ht⟩
+
+/-- Name equality here is equality of scoped NTFS identities, never path similarity. -/
+theorem sameJournalFile_sound (fs : List Fact) (a b : Nat)
+    (h : holds fs (Sets.sameJournalFile a b) = true) :
+    ∃ x y, lookup fs a = some x ∧ lookup fs b = some y ∧
+      x.kind = .journalName ∧ y.kind = .journalName ∧ x.aux = y.aux := by
+  simp only [Sets.sameJournalFile, holds_both_iff, holds_is_iff, holds_link_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨x', y', hx', hy', heq⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  exact ⟨x, y, hx, hy, hkx, hky, by simpa [Fact.get] using heq⟩
+
+/-- Linking an old name to a removal flag preserves identity and strict observation order. -/
+theorem removedFilePreviouslyNamed_sound (fs : List Fact) (n r : Nat)
+    (h : holds fs (Sets.removedFilePreviouslyNamed n r) = true) :
+    ∃ x y, lookup fs n = some x ∧ lookup fs r = some y ∧
+      x.kind = .journalName ∧ y.kind = .journalRemoval ∧ x.aux = y.aux ∧
+      x.t + x.res + y.res < y.t := by
+  simp only [Sets.removedFilePreviouslyNamed, holds_both_iff, holds_is_iff,
+             holds_link_iff, holds_before_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨x', y', hx', hy', heq⟩,
+           ⟨x'', y'', hx'', hy'', ht⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  have : x = x'' := Option.some.inj (hx.symm.trans hx'')
+  subst x''
+  have : y = y'' := Option.some.inj (hy.symm.trans hy'')
+  subst y''
+  exact ⟨x, y, hx, hy, hkx, hky, by simpa [Fact.get] using heq, ht⟩
+
+/-- The two identity joins needed to name a child's separately observed directory. -/
+theorem journalChildNamedDirectory_sound (fs : List Fact) (c p d : Nat)
+    (h : holds fs (Sets.journalChildNamedDirectory c p d) = true) :
+    ∃ x y z, lookup fs c = some x ∧ lookup fs p = some y ∧ lookup fs d = some z ∧
+      x.kind = .journalName ∧ y.kind = .journalParent ∧ z.kind = .journalName ∧
+      x.aux = y.obj ∧ y.aux = z.aux := by
+  simp only [Sets.journalChildNamedDirectory, holds_both_iff, holds_is_iff, holds_link_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨z, hz, hkz⟩,
+           ⟨x', y', hx', hy', hxy⟩, ⟨y'', z', hy'', hz', hyz⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  have : y = y'' := Option.some.inj (hy.symm.trans hy'')
+  subst y''
+  have : z = z' := Option.some.inj (hz.symm.trans hz')
+  subst z'
+  exact ⟨x, y, z, hx, hy, hz, hkx, hky, hkz,
+         by simpa [Fact.get] using hxy, by simpa [Fact.get] using hyz⟩
+
+/-- A typed journal name cannot be promoted to a filesystem creation event. -/
+theorem journalName_not_filesystemCreation (fs : List Fact) (a : Nat)
+    (h : holds fs (Sets.journalNamed a) = true) :
+    holds fs (Sets.fileCreatedAt a) = false := by
+  cases h' : holds fs (Sets.fileCreatedAt a) with
+  | false => rfl
+  | true => cases holds_is_kind_unique h h'
 
 end ChainOfProof

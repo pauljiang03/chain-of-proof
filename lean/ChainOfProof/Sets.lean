@@ -84,6 +84,44 @@ def fileRecorded (x : Nat) : Claim := .is x .fileSeen
 def shadowCopyMade (x : Nat) : Claim := .is x .shadowCopy
 def contentHashed (x : Nat) : Claim := .is x .fileContent
 
+/-- R29 (strong): a journal record carrying a removal flag, not deletion onset or wiping. -/
+def fileRemovedAt (x : Nat) : Claim := .is x .fileRemoved
+
+/-- R30 (strong): the UDF file-set descriptor's recording timestamp on a physical disc.
+    It does not state that formatting or burning completed at that time. -/
+def volumeRecordedAt (x : Nat) : Claim := .is x .volumeRecorded
+
+/-- R31 (strong): a journal record carrying a creation flag, not a filesystem timestamp. -/
+def fileCreationRecordedAt (x : Nat) : Claim := .is x .fileCreationRecorded
+
+/-- R32: names and parent references as observed in the NTFS journal. -/
+def journalNamed (x : Nat) : Claim := .is x .journalName
+def journalParentRecorded (x : Nat) : Claim := .is x .journalParent
+def journalRemovalObserved (x : Nat) : Claim := .is x .journalRemoval
+
+/-- Two separately timed names denote the same scoped file-record identity. -/
+def sameJournalFile (a b : Nat) : Claim :=
+  .both (.is a .journalName) (.both (.is b .journalName) (.link a .aux b .aux))
+
+/-- A later removal flag refers to the identity of an earlier name observation.
+    It does not say the earlier path was removed, or that content was wiped. -/
+def removedFilePreviouslyNamed (n r : Nat) : Claim :=
+  .both (.is n .journalName) (.both (.is r .journalRemoval)
+    (.both (.link n .aux r .aux) (.before n r)))
+
+/-- Join a child name, its parent reference, and a directory name. Each observation
+    keeps its own timestamp; this is not presence at an alias at a different time. -/
+def journalChildNamedDirectory (c p d : Nat) : Claim :=
+  .both (.is c .journalName) (.both (.is p .journalParent) (.both (.is d .journalName)
+    (.both (.link c .aux p .obj) (.link p .aux d .aux))))
+
+/-- R10+R30: a filesystem creation timestamp follows the UDF file-set recording
+    timestamp for the same volume. This is not a completed-write assertion. -/
+def createdAfterVolumeRecord (c v : Nat) : Claim :=
+  .both (.is c .fileCreated)
+    (.both (.is v .volumeRecorded)
+      (.both (.link c .aux v .aux) (.before v c)))
+
 /-- R28 (strong): two content records carry the same hash. -/
 def sameContent (a b : Nat) : Claim :=
   .both (.is a .fileContent) (.both (.is b .fileContent) (.link a .aux b .aux))

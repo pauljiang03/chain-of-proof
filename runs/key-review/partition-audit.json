@@ -1,0 +1,30 @@
+{
+  "image": "data/pc.E01",
+  "artifact": "MBR sector 0",
+  "sha256": "e9bb09c38e854318cc0b6c625cd2de04684a414c00f9a8a097642487616b4c42",
+  "partitions": [
+    {
+      "number": 1,
+      "type": 7,
+      "bootable": true,
+      "start": 2048,
+      "sectors": 204800
+    },
+    {
+      "number": 2,
+      "type": 7,
+      "bootable": false,
+      "start": 206848,
+      "sectors": 41734144
+    }
+  ],
+  "partition_entry_hex": [
+    "8020210007df130c0008000000200300",
+    "00df140c07feffff0028030000d07c02"
+  ],
+  "key_source": "data/reference/leakage-answers.pdf page16 Q2",
+  "key_bootable_marker_partition": 2,
+  "raw_mbr_active_partition": 1,
+  "status": "requires independent semantic review; printed key retained",
+  "note": "The PDF visually places the Bootable marker on partition2. The first MBR entry has active byte0x80, second0x00. Distinguish the active boot-loader partition from the OS partition before changing the benchmark."
+}

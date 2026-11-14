@@ -289,10 +289,11 @@ BURN_KEY = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD Bur
 
 
 def _burn_traces(ev, t, common):
-    """Traces Windows leaves when its built-in burner writes a disc (Rules.md, R12).
+    """Optical-disc-related records, not proof of a completed write (Rules.md, R12).
 
     Three independent sources: temporary files in the change journal, the cdrom
-    driver's event 133 in the System log, and the user's CD Burning settings key."""
+    driver's exclusive-access event 133, and the user's CD Burning settings key.
+    None identifies the physical disc. A registry last-write is not a burn time."""
     n = 0
     # 1. change journal: the first creation of each DAT/FIL/POST#####.tmp file
     first = {}
@@ -318,7 +319,7 @@ def _burn_traces(ev, t, common):
                folder=files[0][2].rsplit("\\", 1)[0], first_usn=files[0][3],
                time_meaning="creation of the first temporary file of the session", **common)
         n += 1
-    # 2. System event log: cdrom driver event 133
+    # 2. System event log: cdrom driver event 133 (exclusive-access lock)
     try:
         for r in t.evtx():
             d = r._asdict()
@@ -327,7 +328,8 @@ def _burn_traces(ev, t, common):
             ev.add("cdBurn", us(d["ts"]), 1, f"cdrom driver event 133 for {d.get('Data_0')}",
                    "System event log", artifact=str(d.get("source", "")).replace("/", "\\"),
                    event_record_id=str(d.get("EventRecordID")), channel=str(d.get("Channel")),
-                   time_meaning="event time", **common)
+                   event_id=int(d["EventID"]), event_meaning="device locked for exclusive access",
+                   physical_disc_identified=False, time_meaning="exclusive-access event time", **common)
             n += 1
     except Exception as e:
         ev.problem("System event log", e)
@@ -432,9 +434,9 @@ def _step(ev: Evidence, name: str, fn, default=0):
         return default
 
 
-def extract_pc(ev: Evidence, path, tool: str):
+def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC"):
     t = Target.open(path)
-    common = dict(image=path.name, exhibit="PC", tool=tool)
+    common = dict(image=path.name, exhibit=exhibit, tool=tool)
     _step(ev, "USB devices in the registry", lambda: _usb(ev, t, common))
     _step(ev, "device install log", lambda: _setupapi(ev, t, common, str(t.timezone)))
     _step(ev, "volumes recorded in the registry", lambda: _volumes_seen(ev, t, common))

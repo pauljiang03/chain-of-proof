@@ -41,6 +41,17 @@
                                                             thumbnail cache, shadow copy, ...)
     shadowCopy    shadow copy id           volume
     fileContent   file path                "sha256:<hex>"  (t = when the image was examined)
+    fileRemoved   file path                volume serial   (t = journal record carrying FILE_DELETE;
+                                                            not exact deletion onset or a wiping assertion)
+    volumeRecorded physical disc id        volume serial   (t = UDF file-set descriptor recording
+                                                            time, not examination or write completion)
+    fileCreationRecorded file path         volume serial   (t = journal record carrying FILE_CREATE;
+                                                            not a filesystem creation timestamp)
+    journalName   observed name/path       scoped NTFS identity (image, full volume serial,
+                                                            file record and sequence; journal observation time)
+    journalParent scoped child identity    scoped parent identity (journal observation time)
+    journalRemoval observed name/path      scoped NTFS identity (removal-flag observation,
+                                                            not onset, every alias removed, or wiping)
 -/
 namespace ChainOfProof
 
@@ -55,6 +66,9 @@ inductive Kind where
   | webVisit | fileDownloaded | localSearch | cloudFile | noteText
   | folderOpened | fileRenamed | fileSeen | shadowCopy
   | fileContent
+  | fileRemoved | volumeRecorded
+  | fileCreationRecorded
+  | journalName | journalParent | journalRemoval
   deriving DecidableEq, Repr
 
 structure Fact where

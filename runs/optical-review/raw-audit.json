@@ -1,0 +1,67 @@
+{
+  "image": "data/pc.E01",
+  "log_path": "C:/Windows/system32/winevt/logs/System.evtx",
+  "log_sha256": "cf1586aa80a7b2223120bb97675871164313c3a59a9fbb456246030dfe59b412",
+  "dissect_events": [
+    {
+      "record_id": 1412,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "utc": "2015-03-24 19:47:47.657431+00:00"
+    },
+    {
+      "record_id": 1416,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "utc": "2015-03-24 19:56:11.965935+00:00"
+    },
+    {
+      "record_id": 1425,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "utc": "2015-03-24 20:24:46.429152+00:00"
+    },
+    {
+      "record_id": 1428,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "utc": "2015-03-24 20:41:21.884909+00:00"
+    }
+  ],
+  "python_evtx_events": [
+    {
+      "record_id": 1412,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "xml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"cdrom\"></Provider>\n<EventID Qualifiers=\"16388\">133</EventID>\n<Level>4</Level>\n<Task>0</Task>\n<Keywords>0x0080000000000000</Keywords>\n<TimeCreated SystemTime=\"2015-03-24 19:47:47.657431+00:00\"></TimeCreated>\n<EventRecordID>1412</EventRecordID>\n<Channel>System</Channel>\n<Computer>informant-PC</Computer>\n<Security UserID=\"\"></Security>\n</System>\n<EventData><Data>&lt;string&gt;\\Device\\CdRom0&lt;/string&gt;\n</Data>\n<Binary>DgBAAAEAAAAAAAAAhQAEQAEAAAAAAAAAAAAAAFzAAgAAAAAAAAAAAFdpbmRvd3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Binary>\n</EventData>\n</Event>\n"
+    },
+    {
+      "record_id": 1416,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "xml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"cdrom\"></Provider>\n<EventID Qualifiers=\"16388\">133</EventID>\n<Level>4</Level>\n<Task>0</Task>\n<Keywords>0x0080000000000000</Keywords>\n<TimeCreated SystemTime=\"2015-03-24 19:56:11.965935+00:00\"></TimeCreated>\n<EventRecordID>1416</EventRecordID>\n<Channel>System</Channel>\n<Computer>informant-PC</Computer>\n<Security UserID=\"\"></Security>\n</System>\n<EventData><Data>&lt;string&gt;\\Device\\CdRom0&lt;/string&gt;\n</Data>\n<Binary>DgBAAAEAAAAAAAAAhQAEQAEAAAAAAAAAAAAAAFzAAgAAAAAAAAAAAFdpbmRvd3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Binary>\n</EventData>\n</Event>\n"
+    },
+    {
+      "record_id": 1425,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "xml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"cdrom\"></Provider>\n<EventID Qualifiers=\"16388\">133</EventID>\n<Level>4</Level>\n<Task>0</Task>\n<Keywords>0x0080000000000000</Keywords>\n<TimeCreated SystemTime=\"2015-03-24 20:24:46.429152+00:00\"></TimeCreated>\n<EventRecordID>1425</EventRecordID>\n<Channel>System</Channel>\n<Computer>informant-PC</Computer>\n<Security UserID=\"\"></Security>\n</System>\n<EventData><Data>&lt;string&gt;\\Device\\CdRom0&lt;/string&gt;\n</Data>\n<Binary>DgBAAAEAAAAAAAAAhQAEQAEAAAAAAAAAAAAAAFzAAgAAAAAAAAAAAFdpbmRvd3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Binary>\n</EventData>\n</Event>\n"
+    },
+    {
+      "record_id": 1428,
+      "event_id": 133,
+      "qualifiers": 16388,
+      "xml": "<Event xmlns=\"http://schemas.microsoft.com/win/2004/08/events/event\"><System><Provider Name=\"cdrom\"></Provider>\n<EventID Qualifiers=\"16388\">133</EventID>\n<Level>4</Level>\n<Task>0</Task>\n<Keywords>0x0080000000000000</Keywords>\n<TimeCreated SystemTime=\"2015-03-24 20:41:21.884909+00:00\"></TimeCreated>\n<EventRecordID>1428</EventRecordID>\n<Channel>System</Channel>\n<Computer>informant-PC</Computer>\n<Security UserID=\"\"></Security>\n</System>\n<EventData><Data>&lt;string&gt;\\Device\\CdRom0&lt;/string&gt;\n</Data>\n<Binary>DgBAAAEAAAAAAAAAhQAEQAEAAAAAAAAAAAAAAFzAAgAAAAAAAAAAAFdpbmRvd3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</Binary>\n</EventData>\n</Event>\n"
+    }
+  ],
+  "parsers_agree": true,
+  "provider_registry_key": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\System\\cdrom",
+  "registered_message_file": "%SystemRoot%\\System32\\IoLogMsg.dll",
+  "message_resource": "C:/Windows/System32/en-US/IoLogMsg.dll.mui",
+  "message_resource_sha256": "659e711af4d46d11181b1b815d15e9928a7b0f3450b3ae6ec6e4ec629cc75974",
+  "messages": {
+    "0x40040085": "Device %1 is locked for exclusive access."
+  },
+  "answer_key_event_id": 113,
+  "disposition": "Preserve the raw ID. An exclusive-access lock is not proof of a write or of which physical disc was inserted. Keep the answer-key discrepancy visible; do not silently amend the score."
+}

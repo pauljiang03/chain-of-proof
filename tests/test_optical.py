@@ -339,7 +339,8 @@ class Disc(unittest.TestCase):
         area = "unallocated space of device disc T#1"
         got = sorted((k, obj, aux) for k, _t, obj, aux, _p in ev.rows)
         self.assertEqual(got, sorted(
-            [("volumeOnDevice", "disc T#1", serial), ("unallocatedOnDevice", "disc T#1", area)]
+            [("volumeOnDevice", "disc T#1", serial), ("volumeRecorded", "disc T#1", serial),
+             ("unallocatedOnDevice", "disc T#1", area)]
             + [(k, p, serial) for k in ("fileCreated", "fileModified") for p in ("\\c.txt", "\\sub\\b.bin")]
             + [(k, "\\a.txt", area) for k in ("fileCreated", "fileModified")]))
         rows = {(k, obj): (t, p) for k, t, obj, _aux, p in ev.rows}
@@ -349,6 +350,70 @@ class Disc(unittest.TestCase):
         self.assertEqual(rows[("fileCreated", "\\a.txt")][1]["size"], len(PAYLOAD))
         self.assertEqual(rows[("fileCreated", "\\c.txt")][0], us(2015, 3, 24, 20, 57, 0))
         self.assertEqual(rows[("volumeOnDevice", "disc T#1")][1]["volume_label"], "TESTDISC")
+        self.assertEqual(rows[("volumeOnDevice", "disc T#1")][0], CTX["examined_at"])
+        recorded, prov = rows[("volumeRecorded", "disc T#1")]
+        self.assertEqual(recorded, us(2015, 3, 24, 20, 53, 17) + 880500)
+        self.assertEqual(prov["timestamp_offset"], 288 * S + 16)
+        self.assertEqual(prov["timestamp_bytes"], self.fsd[16:28].hex())
+        self.assertEqual(prov["time_meaning"], "UDF file-set descriptor recording time")
+        self.assertIn("-240", prov["time_zone"])
+
+    def test_repeated_descriptors_are_one_record_with_all_copy_locations(self):
+        image = self.path.read_bytes()
+        extra_sector = len(image) // S
+        self.path.write_bytes(image + sector(self.fsd))
+        ev = Collector()
+        o.extract(ev, self.path, CTX)
+        self.assertEqual(ev.problems, [])
+        records = [r for r in ev.rows if r[0] == "volumeRecorded"]
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0][4]["equivalent_record_copies_at_sectors"], [288, extra_sector])
+        self.assertEqual(records[0][4]["timestamp_offset"], extra_sector * S + 16)
+
+    def test_unreferenced_descriptor_has_its_own_recorded_time(self):
+        image = self.path.read_bytes()
+        extra_sector = len(image) // S
+        raw = bytearray(self.fsd)
+        raw[16:28] = stamp(2015, 3, 24, 17, 10, 0, offset=-240)
+        raw = tag(o.TAG_FSD, bytes(raw[16:]), 0)
+        self.path.write_bytes(image + sector(raw))
+        ev = Collector()
+        o.extract(ev, self.path, CTX)
+        self.assertEqual(ev.problems, [])
+        records = [r for r in ev.rows if r[0] == "volumeRecorded"]
+        self.assertEqual(len(records), 2)
+        record = next(r for r in records if r[1] == us(2015, 3, 24, 21, 10, 0))
+        self.assertEqual(record[3], "%08X" % o.udf_serial32(raw))
+        self.assertEqual(record[4]["referenced_by_allocation_tables_at_sectors"], [])
+        self.assertEqual(record[4]["equivalent_record_copies_at_sectors"], [extra_sector])
+
+    def test_invalid_descriptor_time_is_reported_without_an_examination_time_event(self):
+        image = bytearray(self.path.read_bytes())
+        raw = bytearray(self.fsd)
+        raw[16:28] = bytes(12)
+        image[288 * S:289 * S] = sector(tag(o.TAG_FSD, bytes(raw[16:]), 0))
+        self.path.write_bytes(image)
+        ev = Collector()
+        o.extract(ev, self.path, CTX)
+        self.assertEqual([r for r in ev.rows if r[0] == "volumeRecorded"], [])
+        self.assertEqual(len(ev.problems), 1)
+        self.assertIn("recording time", ev.problems[0])
+        observed = next(r for r in ev.rows if r[0] == "volumeOnDevice")
+        self.assertEqual(observed[1], CTX["examined_at"])
+        self.assertNotIn("file_set_recorded_utc", observed[4])
+
+    def test_descriptor_without_offset_uses_the_explicit_case_zone(self):
+        image = bytearray(self.path.read_bytes())
+        raw = bytearray(self.fsd)
+        raw[16:28] = stamp(2015, 1, 23, 16, 47, 10, offset=-2047)
+        image[288 * S:289 * S] = sector(tag(o.TAG_FSD, bytes(raw[16:]), 0))
+        self.path.write_bytes(image)
+        ev = Collector()
+        o.extract(ev, self.path, dict(CTX, pc_time_zone="America/New_York"))
+        self.assertEqual(ev.problems, [])
+        record = next(r for r in ev.rows if r[0] == "volumeRecorded")
+        self.assertEqual(record[1], us(2015, 1, 23, 21, 47, 10))  # winter UTC-5
+        self.assertIn("America/New_York", record[4]["time_zone"])
 
     def test_unreadable_sector_blocks_content(self):
         s = o.survey(self.path)

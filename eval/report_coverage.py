@@ -3,14 +3,14 @@
     python3 -m eval.report_coverage --report runs/investigator/report.md --label ours
     python3 -m eval.report_coverage --report data/baselines/mulder/opus-4.6-run1/ndlc.report.md --label mulder-run1
 
-The scorer in eval/score.py needs structured rows, which only our pipeline has. To put
-another tool's prose report on the same footing, this reads any report as plain text
-and asks two things of every answer-key row:
+The answer scorer in eval/score.py accepts structured rows from any system. This
+separate diagnostic searches prose for mentions; it does not assess correctness.
+It asks two things of each supported reference row:
 
   named       the row's entity (file name, URL, search text, serial, program, value)
               appears in the report
   with time   and the row's time appears within 400 characters of it, to the second,
-              in UTC or in either of the key's local offsets (UTC-4, UTC-5)
+              in UTC or in the reference's declared local timezone
 
 It is a text match, so it is blunt in both directions: it cannot tell a correct mention
 from a wrong one, it credits an everyday word that happens to be a folder name ("final",
@@ -26,8 +26,9 @@ import json
 import re
 import sys
 from collections import OrderedDict
-from datetime import datetime, timedelta
+from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from eval import score as scorer
 
@@ -61,20 +62,26 @@ def entity(expect: dict):
     return norm(raw).strip() or None
 
 
-def clock_strings(utc: str):
-    t = datetime.fromisoformat(utc)
-    return {(t - timedelta(hours=h)).strftime("%H:%M:%S") for h in (0, 4, 5)}
+def clock_strings(utc: str, time_zone=None):
+    t = datetime.fromisoformat(utc.replace("Z", "+00:00"))
+    if t.tzinfo is None:
+        t = t.replace(tzinfo=timezone.utc)
+    clocks = {t.astimezone(timezone.utc).strftime("%H:%M:%S")}
+    if time_zone is not None:
+        clocks.add(t.astimezone(ZoneInfo(time_zone)).strftime("%H:%M:%S"))
+    return clocks
 
 
-def score(reference: dict, report: str) -> dict:
+def score(reference: dict, report: str, time_zone=None) -> dict:
     text = norm(report)
+    zone = scorer.reference_zone(reference, time_zone)
     items = []
     for item in reference["items"]:
         e = item["expect"]
-        if e is None:
+        if not scorer.supported_expect(e):
             continue
         name = entity(e)
-        clocks = clock_strings(e["utc"]) if "utc" in e else set()
+        clocks = clock_strings(e["utc"], zone) if "utc" in e else set()
         if name is None:
             named, timed = None, any(c in text for c in clocks) if clocks else None
         else:
@@ -95,7 +102,10 @@ def score(reference: dict, report: str) -> dict:
         q["named"] += bool(i["named"]) if i["named"] is not None else bool(i["with_time"])
         q["timed_rows"] += i["with_time"] is not None
         q["with_time"] += bool(i["with_time"])
-    return {"items": items, "by_question": by_q,
+    return {"items": items, "by_question": by_q, "time_zone": zone,
+            "metric": "prose_mention_diagnostic",
+            "note": "Mentions do not establish correct answers or evidence support. "
+                    "Use eval.score --answers for structured answer matching.",
             "totals": {k: sum(q[k] for q in by_q.values())
                        for k in ("rows", "named", "timed_rows", "with_time")}}
 
@@ -107,20 +117,23 @@ def line(label: str, result: dict) -> str:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Text-match a report against the NIST answer rows.")
+    ap = argparse.ArgumentParser(description="Search a report for reference-row mentions (not correctness).")
     ap.add_argument("--report", required=True)
     ap.add_argument("--label", required=True)
     ap.add_argument("--reference", default=str(FULL))
+    ap.add_argument("--time-zone", help="IANA zone overriding reference.time_zone")
     ap.add_argument("--out", help="write the per-row result here")
     args = ap.parse_args(argv)
-    result = score(json.loads(Path(args.reference).read_text()), Path(args.report).read_text())
+    reference = json.loads(Path(args.reference).read_text())
+    result = score(reference, Path(args.report).read_text(), args.time_zone)
     result["label"] = args.label
     if args.out:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(json.dumps(result, indent=1) + "\n")
     print(line(args.label, result))
     for q, c in result["by_question"].items():
-        print(f"   Q{int(q):<3}{scorer.QUESTION_NAMES.get(int(q), ''):<34}{c['named']:>4} /{c['rows']:>4}"
+        label = f"Q{q} {scorer.question_name(reference, q)}".strip()
+        print(f"   {label:<38}{c['named']:>4} /{c['rows']:>4}"
               f"   time {c['with_time']:>3} /{c['timed_rows']:>3}")
     return 0
 

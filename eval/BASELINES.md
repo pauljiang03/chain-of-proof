@@ -56,12 +56,35 @@ Mulder's 20 scored items (text from `opus-4.6-run1/ACCURACY-REPORT.md`):
 | Agent-log forensics, arXiv 2610.09581 | unsupported source assertions in 26 of 28 cases |
 | Our own plain-report test (`runs/report-audit`) | 24 of 50 sentences said more than the records certify; 0 contradicted |
 
+## What Mulder's award establishes
+
+SANS awarded Mulder first place in Find Evil! 2026 after a competition-wide 1,775
+practitioner evaluations of 123 finalists by 90 reviewers. Its announcement emphasizes
+Mulder's five-phase investigation, evidence citations, adversarial self-challenge and
+a logged investigation spanning 11 systems and 120 GB. This is practitioner validation
+of the system; it is not a common 60-question NIST accuracy ranking.
+[SANS announcement](https://www.sans.org/press/announcements/sans-names-the-five-winners-of-find-evil-2026).
+
+Judging equally weighted autonomous execution, IR accuracy, breadth/depth, architectural
+constraints, audit trails and usability/documentation.
+[Competition rules](https://findevil.devpost.com/rules).
+
+Our conservative crosswalk finds about 16 numbered question topics behind Mulder's
+20 criteria: Q3, Q4, Q11, Q16, Q20, Q21, Q22, Q26, Q27, Q29, Q33, Q52, Q53, Q54,
+Q55 and Q56. This is our interpretation, not an official one-to-one mapping. Q22
+feeds three criteria; some criteria add scenario-level interpretation or claims with
+no exact numbered-question counterpart. It does not mean 16 complete questions are tested.
+
 ## What is comparable
 
-- Directly, on this case: Mulder's 20 items (the only repeated, item-level rows) and
-  RepertIA's per-question count (a no-AI ceiling, tuned to the case).
+- Same case, different contracts: Mulder's repeated 20-item checklist and RepertIA's
+  per-question count. Neither can be directly ranked against our 613-item coverage.
 - In kind only: scores on other disk images (TRUDI and verdict-dfir on the NIST Hacking
   Case; SecRespond), and the hallucination rates above.
 - Known answer-key quirks, reported independently by RepertIA and by our own
   transcription: the burn event is 133 in the data where the key prints 113, and two
   of the key's tables are one hour off.
+
+The [new typed reference](benchmark_nist.json) is a draft expansion to all 60 questions.
+It needs independent review before supporting a controlled comparison. Our archived
+LLM regrades are not benchmark scores; see [the evaluation contract](EVALUATION.md).

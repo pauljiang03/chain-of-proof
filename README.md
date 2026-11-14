@@ -2,8 +2,8 @@
 
 **Machine-checked digital forensics: the LLM proposes, Lean 4 decides.**
 
-An AI forensic investigator whose report contains only findings that a proof checker has
-accepted. LLM agents and a brute-force miner search a disk image for findings. Each
+An AI forensic investigator that generates certified findings. Unverified
+AI judgments are available in an optional separate appendix. LLM agents and a brute-force miner search a disk image for findings. Each
 finding is written in a small Lean 4 intermediate representation and checked by the Lean
 kernel against facts that deterministic forensic tools extracted from the image. A
 finding that fails the check never reaches the report. One that passes comes with a
@@ -18,10 +18,10 @@ Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain
 | Lean core: facts, brick IR, checker, sets, theorems about the checker | Working, tested |
 | `check`: claim JSON → Lean certificate → kernel verdict, with per-brick feedback on rejection | Working, tested |
 | Verifier: re-check a certificate from the evidence DB alone | Working, tested |
-| Extractor: the real PC and USB images → evidence file (`extractor/`) | Working for USB devices, volumes, shortcuts, jump lists, web searches, file times, Recycle Bin records, CD-burn traces, e-mail, and file records left on a formatted USB stick. Not yet: the CD-R image, purged e-mail, and the rest of the answer key (see Evaluation) |
+| Extractor: real case images → evidence file (`extractor/`) | Windows, USB and optical readers; typed journal creation/removal observations and UDF recording times. Remaining recovery, identity joins and answer contracts are listed in [MISS_SUPPORT.md](eval/MISS_SUPPORT.md). |
 | Miner (`miner/`): every instance of the approved sets, no LLM | Working on the real evidence |
 | Scorer against the NIST answer key (`eval/`) | Working; numbers below |
-| AI investigator (`agent/`): an LLM with four tools and no file or shell access | Working on a Claude Code login; one scored run. The API backend (LangChain deepagents) is written but has not been run |
+| AI investigator (`agent/`): an LLM with five tools and no file or shell access | Working on a Claude Code login; one saved scored run. The API backend (LangChain deepagents) is written but has not been run |
 | UI | In progress (see [TASKS.md](TASKS.md)); `ui/public/run.json` is a real run |
 
 The numbers in this README come from the real case images, not from a fixture.
@@ -59,8 +59,8 @@ a Windows 7 PC and three removable media in an insider data-theft scenario, with
 
 - **Investigators cannot rely on LLM output as it stands.** One fabricated timeline entry
   or wrong attribution can send people after the wrong suspect.
-- **Existing LLM forensic agents check less than they appear to.** The strongest open
-  agent we know of, [Mulder](https://pypi.org/project/mulder-dfir/), requires every finding
+- **Citations and entailment are separate checks.** [Mulder](https://github.com/calebevans/mulder),
+  the SANS Find Evil! winner, requires every finding
   to cite a real tool call and rejects findings that cite nonexistent ones. That shows a
   citation exists. It does not show the cited evidence supports the sentence. On this
   same case its best published configuration still states claims the answer key
@@ -133,10 +133,10 @@ theorem verified : holds cited claim = true := by decide +kernel
 | Property | How |
 |---|---|
 | The agent cannot write Lean | It writes claim JSON with fact ids only. `checker/` generates the Lean text and reads the cited rows from the evidence DB itself. |
-| The sentence shown is the sentence checked | English comes from a fixed template per set, filled from the cited facts. No LLM writes report text. |
+| Certified finding text comes from the checked claim | Fixed templates render the formal claim and its cited facts. Template semantics remain a reviewed trust boundary. |
 | Two statements are linked only if the evidence links them | Claims carry fact ids, never raw values. Joins are `link` bricks or shared facts. |
 | A certificate rests on the kernel alone | `holds` is written so that `#print axioms` reports no axioms for a certificate. |
-| A certificate can be re-checked later | `verifier/` rebuilds the Lean file from the DB rows, re-runs the kernel, and compares row hashes and the English. |
+| A certificate can be re-checked later | `verifier/` rebuilds the Lean file from the DB, re-runs the kernel, and compares hashes, copied fields/strings, provenance, English, parts and rule labels. |
 | Weak links are visible | Each finding carries the rules it used and a strength: `strong`, `heuristic` (e.g. the copy signature), or `judgment` (an LLM-assigned tag). |
 
 ### What Lean adds over a checker script
@@ -183,43 +183,41 @@ three runs, range in parentheses):
 Full match means the exact fact is stated, detection means related evidence was found,
 and a false positive is a claim the answer key contradicts.
 
-The number we target is the false-positive column. Coverage will be lower than
-Mulder's: we certify only what the IR can express.
+**Our current report result: 456/613 encoded answer items (74.4%).** The combined
+miner + AI report matches every encoded item for 24/57 questions (42.1%), some items
+for 20 questions and none for 13. All 473 unique certificates reverified.
+This combines existing claims under corrected templates; it is not a new AI trial
+or a new blind score. [Report](runs/optical-review/combined-report.md) ·
+[score and per-item results](runs/optical-review/combined-results.json).
 
-**Our own reading against Mulder's 20 items.** Not a like-for-like score: the item
-labels are paraphrased from Mulder's published scorecard
-([Opus run 1](https://github.com/calebevans/mulder/blob/main/examples/ndlc-v1.5.2/opus-4.6-run1/ACCURACY-REPORT.md)),
-we marked our own output, and nobody has audited the marking (TASKS.md, lane 4).
-"Stated" means a certified finding says the exact fact.
+These are answer-item coverage measures, not precision or full original-question
+accuracy. The original NIST key has 60 questions; our reference covers Q1–Q57 and
+omits some answer attributes. Its 68 unsupported items remain in the denominator.
+Contradictory extra answers are not yet scored. A neutral, complete common-test
+comparison with Mulder still needs the [remaining evaluation work](eval/EVALUATION.md).
 
-| | Mulder, Claude Opus 4.6 (published, median of 3 runs) | Chain of Proof (self-marked, 1 run) |
-|---|---:|---:|
-| Items stated exactly | 45% (45–50), 9 of 20 | 35%, 7 of 20 |
-| Items with at least related evidence | 95% (90–95), 19 of 20 | 75%, 15 of 20 |
-| Claims the answer key contradicts | 10% (5–10), 1 to 2 claims per run | none found; 24 of 24 known-false claims refused |
-| Time per run | 68 to 79 min | 4 min for the AI run, 45 s for the miner |
-| Each sentence can be re-checked from the evidence | no | yes |
+**Stage diagnostics.** The frozen 613-row reference includes 517 formerly closed-book
+rows and 96 earlier open-book rows.
 
-| Mulder item | Ours | What our certified findings say |
-|---|---|---|
-| 3, 4. The two USB sticks: serial, label | Stated | Serial, label and connection time; not the file system type |
-| 9. Searches show premeditation | Stated | All 28 searches of the answer key, with times |
-| 11. iCloud installer downloaded | Stated | `icloudsetup.exe` created in Downloads |
-| 12. USB connection times | Stated | From the device install log and registry, not the event log |
-| 17. Files opened on RM#2 | Stated | Both answer-key rows |
-| 19. E-mail with the outside contact | Stated | 11 of the 12 messages |
-| 6. Five project documents on USB | Partly | The five files on RM#1 and their copy signature (heuristic) |
-| 7. Files disguised on RM#2 | Partly | 17 recovered names; 4 match a confidential file's size and modified time |
-| 8. CCleaner and Eraser | Partly | The searches for them; not their installation or use |
-| 10. Google Drive installed | Partly | The installer download and the search |
-| 13. Bulk copy on Feb 15 | Partly | Creation times of the five files on RM#1 |
-| 15. Files removed from RM#2 | Partly | Their records in unallocated space; the format is not stated |
-| 18. Network folders browsed | Partly | Files opened on the share; not the folders |
-| 20. FAT time zone | Partly | Applied and recorded on each row; not a finding |
-| 1. Suspect identity | No | |
-| 2. Operating system | No | In the extractor's metadata only |
-| 5, 16. The CD-R: format, contents | No | The CD image is not read |
-| 14. CCleaner run without cleaning | No | |
+| Deterministic measure | Chain of Proof | Mulder |
+|---|---:|---|
+| Closed-book rows present in extracted evidence | 367/517 (71.0%) | Not measured with this scorer |
+| Closed-book rows stated by the miner | 340/517 (65.8%) | Not applicable |
+| All answer rows stated by the AI run's certified findings | 164/613 (26.8%) | Not measured with this scorer |
+| Known-false test claims refused | 24/24 | Not measured with this gate |
+
+These measure different stages. Mulder's published
+20-item self-scores above use another denominator. LLM-grader outputs have been
+retired from performance reporting; `eval/mulder.py` now only displays their archive.
+See [evaluation limits and comparison protocol](eval/EVALUATION.md),
+[per-question frozen scores](eval/RESULTS.md), [misses and required support](eval/MISS_SUPPORT.md),
+and [the optical-record correction](eval/OPTICAL_REVIEW.md).
+
+The new [60-question benchmark draft](eval/benchmark_nist.json) and
+[public answer contract](eval/benchmark_nist_questions.json) extend this evaluation
+with typed answers independent of Lean's record kinds, contradiction handling and
+source-text audits. It requires independent transcription review; no final score
+or controlled Mulder comparison is claimed on that draft.
 
 ### Checker performance (measured)
 
@@ -241,11 +239,12 @@ every mined brick can be kernel-checked rather than left at a weaker tier. One l
 plain `decide` exceeds its recursion limit near 200 cited facts in one claim, so
 certificates use `decide +kernel`.
 
-### Results on the real case images
+### Historical results on the earlier 96-row reference
 
-One command, no LLM, about 45 seconds: `python3 -m eval.baseline`. It mines every
+The historical baseline took about 45 seconds with no LLM. It mined
 instance of the approved sets from the extracted evidence, sends each through the Lean
-kernel, and scores the result against 96 rows of the NIST answer key.
+kernel, and scored the result against 96 rows of the NIST answer key.
+New baseline runs require unused output paths so saved certificates and scores are preserved.
 
 | Check | Result |
 |---|---|
@@ -375,6 +374,10 @@ Our 96 rows and Mulder's 20 items measure different things; the self-marked tabl
 
 ## Evaluation
 
+The authoritative current score is [eval/RESULTS.md](eval/RESULTS.md). The details
+below describe the earlier 96-row experiment; current comparison limits are in
+[eval/EVALUATION.md](eval/EVALUATION.md).
+
 The scorer has no LLM in it. Same evidence, same reference, same run: same numbers.
 
 **Reference.** [`eval/reference.json`](eval/reference.json): 96 rows transcribed from
@@ -405,8 +408,9 @@ cannot produce yet.
 
 **Claims we are testing.**
 
-1. *No certified finding is contradicted by the answer key.* Check B is the direct
-   test: every false claim must be refused. A single acceptance falsifies it.
+1. *The gate refuses the fixed known-false test claims.* This is a regression test
+   over 24 examples, not a universal false-positive guarantee. Extractor and template
+   semantics require separate evidence review.
 2. *The check does real work.* The 24 refusals name the failing brick, e.g.
    `FAIL link 41 (aux) 241 (aux)`: the shortcut's volume is not the device's volume.
 3. *The IR covers enough to matter.* Check C, per question, with the misses listed.

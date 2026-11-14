@@ -1,34 +1,14 @@
-"""What each AI role is told. All three get the same public case brief, the same
-description of the records and the same six questions. None of them ever sees the
-answer key, the reference, or another run's findings.
+"""Shared record/tool instructions rendered with public context for one case.
 
-  BRIEF         the investigator: may only state what the checker certifies
-  REPORT_BRIEF  the same model writing a normal report, with no checker
-  audit_brief() an auditor that puts each sentence of that report through the checker
+BRIEF and REPORT_BRIEF retain the original public NIST context for legacy callers.
+The investigator runtime selects a profile and calls investigator_brief explicitly.
+No prompt builder reads scoring references or another run's findings.
 """
+from agent.case import CaseProfile, LEGACY_PROFILE
 
-CASE = """\
-You are the investigator on a suspected data-leak case.
-
-THE CASE
-'Iaman Informant' (Windows account `informant`) is a manager at a technology company.
-He is suspected of leaking confidential files about a secret project to 'Spy
-Conspirator', who works for a competitor. Company policy: confidential files may be kept
-only on authorized external storage and on the secured network drive, and personal
-storage devices are forbidden. He was stopped at the security checkpoint carrying a USB
-memory stick and a CD. Four things were seized and imaged: his work PC, a company-issued
-USB stick (exhibit RM#1), his own USB stick (RM#2) and a CD-R (RM#3).
-
-Deterministic tools extracted records from those images into one table. Not everything
-has been extracted yet. If the records needed for a question are missing, say so. Do
-not guess.
-
-"""
-
-RECORDS = """\
+RECORD_DESCRIPTIONS = """\
 THE RECORDS
 Table facts(id, kind, time_utc, t_us, uncertainty_us, obj, aux, exhibit, artifact, detail).
-Times are UTC; the PC ran on New York time (UTC-4 on these dates).
   usbInsert       obj = device serial                 a USB storage device was connected
   volumeOnDevice  obj = device serial, aux = volume serial found on the seized device
                   (its time is when the image was examined, not an event)
@@ -38,10 +18,26 @@ Times are UTC; the PC ran on New York time (UTC-4 on these dates).
   fileCreated     obj = path, aux = volume serial
   fileModified    obj = path, aux = volume serial
   fileDeleted     obj = original path, aux = volume serial   sent to the Recycle Bin
+  fileRemoved     obj = path, aux = volume serial   NTFS journal record carrying a removal
+                  flag; flags can accumulate until close, so not exact deletion onset,
+                  wiping, Recycle Bin use or unrecoverable content
+  fileCreationRecorded obj = path, aux = volume serial   NTFS journal record carrying a
+                  creation flag; not a filesystem creation timestamp for copiedHere
+  volumeRecorded  obj = physical disc id, aux = volume serial   UDF file-set descriptor
+                  recording time; not examination time or completion of a format/write
+  journalName     obj = observed name/path, aux = scoped NTFS identity (image, full volume
+                  serial, file record and sequence). Full historical paths require a chain
+                  of preceding directory-name observations; otherwise obj is the raw name.
+  journalParent   obj = child identity, aux = parent identity, at journal observation time
+  journalRemoval  obj = observed name/path, aux = scoped NTFS identity, carrying a removal
+                  flag. Link names by identity, never by a similar-looking path. A later
+                  alias does not assign a new path to an earlier creation/removal timestamp.
   webSearch       obj = search terms, aux = browser
   emailSent       obj = subject, aux = "from A to B"   a message in the user's mailbox file
-  cdBurn          obj = the trace, aux = where it was found   a trace Windows leaves when
-                  it writes a disc
+  cdBurn          obj = the trace, aux = where it was found. Legacy name for optical-disc
+                  activity: temporary files, drive locks, or burn-option changes. None
+                  alone proves a write or identifies the physical disc. Event 133 is an
+                  exclusive-access lock; a registry last-write is a settings change.
   unallocatedOnDevice  obj = device serial, aux = area id. Directory entries were
                   recovered from that device's unallocated space; the recovered
                   fileCreated / fileModified records carry the same area id as their aux
@@ -70,27 +66,9 @@ Times are UTC; the PC ran on New York time (UTC-4 on these dates).
 Some kinds hold hundreds of rows. Use GROUP BY, LIKE and time windows; `detail` (JSON)
 names the artifact each row came from.
 
-QUESTIONS
- 1. The machine and its users: what system is it, which accounts exist, who used it and
-    when?
- 2. External storage: which devices were attached, when, and what does each hold now?
- 3. Programs: what was installed or run in the period that could move data out or
-    remove traces?
- 4. The web: what was searched for, visited and downloaded?
- 5. E-mail and cloud storage: which messages were exchanged, which accounts and file
-    events did a cloud client record?
- 6. Files: which confidential files were opened and from where (network drive, each
-    device, the disc)? What was created, copied, renamed or deleted on each device,
-    including records recovered from formatted media? Which copies have identical
-    content?
- 7. The disc: what is on it, and when was it written?
- 8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?
- 9. The story: in what order did the key events happen, and how did confidential data
-    leave the company?
-
 """
 
-BRIEF = CASE + """\
+INVESTIGATOR_TOOLS = """\
 THE ONE RULE
 You cannot state findings. The only findings that count are statements the checker
 certifies. You propose a claim by naming record ids in one of the approved forms. A
@@ -108,7 +86,9 @@ YOUR TOOLS (these five are all you have)
   check(question, claims)    propose claims; each is certified or refused
   conclude(text, finding_ids)   record a conclusion you draw from certified findings
 
-""" + RECORDS + """\
+"""
+
+INVESTIGATOR_WORK = """\
 HOW TO WORK
 Start with `forms`, then look around with `sql`. For each question, certify the
 specific findings that matter to it: each device, each search, each opened file, each
@@ -128,21 +108,31 @@ in the findings it cites (write times as the findings do, in UTC). If the record
 a question open, say that in a conclusion too. Do not conclude what the records
 contradict: check first.
 
+Before assigning a time to a physical device, establish the device link separately
+from the time ordering. The same volume label on different serials is not that link.
+For an optical disc, inspect its own file-set timestamp and file-creation records.
+Do not turn PC-wide locks, temporary-file sessions, or burn-option changes into a
+write window for a seized disc. Check whether the disc's own records fall outside
+your proposed window. Recovered optical entries may be older states of the same
+file system; they do not by themselves imply a reformat.
+
 WHEN YOU ARE DONE
 Reply with a short summary. For each question, give the ids of the certified findings
 and conclusions that answer it, and say plainly what could not be established and why.
 Quote only sentences the checker returned.
 """
 
-REPORT_BRIEF = CASE + """\
+REPORT_TOOLS = """\
 YOUR TOOLS (these two are all you have)
   sql(query)                 one read-only SELECT over the records table
   fact(id)                   one record in full, with where it came from
 
-""" + RECORDS + """\
+"""
+
+REPORT_WORK = """\
 WRITE YOUR REPORT
-Look through the records with `sql`, then write your findings for the company's legal
-team. Answer the six questions, including the conclusions you draw for question 6.
+Look through the records with `sql`, then write your findings for the case
+reviewer. Answer all the questions supplied in this case profile.
 
 Write each finding as one sentence on its own line, numbered F1:, F2:, F3: and so on.
 One fact per finding: what happened, to what, and when. Aim for about 40 findings. For
@@ -150,8 +140,40 @@ long lists, such as the web searches, report the ones that matter to the case. A
 the findings you may add a short paragraph headed "Limits".
 """
 
+def case_context(profile: CaseProfile) -> str:
+    return f"CASE: {profile.name}\n{profile.brief.strip()}\n\n"
 
-def audit_brief(statements, only=None) -> str:
+
+def record_context(profile: CaseProfile) -> str:
+    zone = (f"The case's local time zone is {profile.time_zone}; use its date-specific UTC "
+            "offset, including daylight saving time where applicable." if profile.time_zone else
+            "No local time zone is supplied; do not assume a local UTC offset.")
+    return "Times in the records are UTC. " + zone + "\n\n" + RECORD_DESCRIPTIONS
+
+
+def question_context(profile: CaseProfile) -> str:
+    return "QUESTIONS\n" + "\n".join(
+        f" {n}. {q}" for n, q in enumerate(profile.questions, 1)) + "\n\n"
+
+
+def investigator_brief(profile: CaseProfile) -> str:
+    return (case_context(profile) + INVESTIGATOR_TOOLS + record_context(profile)
+            + question_context(profile) + INVESTIGATOR_WORK)
+
+
+def report_brief(profile: CaseProfile) -> str:
+    return (case_context(profile) + REPORT_TOOLS + record_context(profile)
+            + question_context(profile) + REPORT_WORK)
+
+
+# Backward-compatible public constants for the original case and audit command.
+CASE = case_context(LEGACY_PROFILE)
+RECORDS = record_context(LEGACY_PROFILE) + question_context(LEGACY_PROFILE)
+BRIEF = investigator_brief(LEGACY_PROFILE)
+REPORT_BRIEF = report_brief(LEGACY_PROFILE)
+
+
+def audit_brief(statements, only=None, profile: CaseProfile = LEGACY_PROFILE) -> str:
     """`only`: statement numbers to audit in this session; the rest of the report is
     given for context (a sentence may lean on the one before it)."""
     listing = "\n".join(f"F{n}: {text}" for n, text in statements)
@@ -159,7 +181,7 @@ def audit_brief(statements, only=None) -> str:
     scope = ("Audit every statement." if not only else
              "Audit only these statements: " + ", ".join(f"F{n}" for n in wanted) +
              ". The others are there for context; do not record a verdict on them.")
-    return CASE + """\
+    return case_context(profile) + """\
 YOUR JOB
 Another analyst wrote the report below from the same records. You are auditing it. For
 every numbered statement, find out whether a proof checker will certify it.
@@ -175,7 +197,7 @@ YOUR TOOLS (these five are all you have)
   check(question, claims)    propose claims; each is certified or refused
   record(statement, verdict, finding_ids, reason)   file your verdict on one statement
 
-""" + RECORDS.split("QUESTIONS")[0] + """\
+""" + record_context(profile) + """\
 HOW TO AUDIT
 For each statement, look up the records and propose the claim whose generated sentence
 says the same thing. Then call `record` once for that statement, with one verdict:

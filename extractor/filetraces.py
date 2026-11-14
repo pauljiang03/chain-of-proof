@@ -7,6 +7,8 @@
                   that a shadow copy still holds but the live volume does not
     shadowCopy    every volume shadow copy
     fileRenamed   every rename in the NTFS change journal
+    fileCreationRecorded  the first retained CREATE-flag observation per journal close cycle
+    fileRemoved   the first retained DELETE-flag observation per journal close cycle
 
 Every row is read from bytes of the image. Parsing helpers at the top are pure Python
 (no dissect), so they can be tested on synthetic bytes; dissect is imported lazily.
@@ -14,6 +16,7 @@ Every row is read from bytes of the image. Parsing helpers at the top are pure P
 from __future__ import annotations
 
 import re
+import json
 import struct
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -64,6 +67,7 @@ NETWORK_CLASSES = (0x41, 0x42, 0x46, 0x47, 0x4C, 0xC3)
 
 USN_FILE_CREATE, USN_FILE_DELETE = 0x100, 0x200
 USN_RENAME_OLD, USN_RENAME_NEW = 0x1000, 0x2000
+USN_CLOSE = 0x80000000
 
 
 def _u16(buf, off):
@@ -914,26 +918,65 @@ def _folder_path(ntfs, cache, ref):
         try:
             rec = ntfs.mft(ref[0])
             if rec.header.SequenceNumber == ref[1]:
-                path = "" if ref[0] == 5 else (rec.full_path() or "").replace("/", "\\").strip("\\")
+                raw = rec.full_path()
+                path = "" if ref[0] == 5 else (raw.replace("/", "\\").strip("\\") if raw else None)
         except Exception:
             path = None
         cache[ref] = path
     return cache[ref]
 
 
-def _folder_at(ntfs, cache, history, ref, usn, depth=0):
+def _folder_at(ntfs, cache, history, ref, usn, depth=0, allow_future=True):
     """(path, True when the journal supplied the name) of a folder as it was at a journal
     position: the journal's own record of that folder where it has one, else the file table."""
     if ref[0] != 5 and ref in history and depth < 64:
-        name, parent = name_at(history[ref], usn)
-        up, _ = _folder_at(ntfs, cache, history, parent, usn, depth + 1)
-        if up is not None:
-            return (up + "\\" if up else "") + name, True
+        past = history[ref] if allow_future else [r for r in history[ref] if r[0] <= usn]
+        if past:
+            name, parent = name_at(past, usn)
+            up, _ = _folder_at(ntfs, cache, history, parent, usn, depth + 1, allow_future)
+            if up is not None:
+                return (up + "\\" if up else "") + name, True
     return _folder_path(ntfs, cache, ref), False
 
 
-def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, **source):
-    """Renames and print-spool traces of one change journal. Returns its first USN."""
+def _historical_folder(ntfs, cache, history, ref, usn, seen=()):
+    """Resolve only a chain of preceding journal names to the volume root.
+
+    A current MFT name or a later rename's old name is useful context, but does
+    not establish a directory's name at an earlier journal observation.
+    """
+    if ref in seen or len(seen) >= 64:
+        return None
+    if ref[0] == 5:
+        return _folder_path(ntfs, cache, ref)
+    past = [entry for entry in history.get(ref, []) if entry[0] <= usn]
+    if not past:
+        return None
+    _when, name, parent = past[-1]
+    above = _historical_folder(ntfs, cache, history, parent, usn, seen + (ref,))
+    return None if above is None else (above + "\\" if above else "") + name
+
+
+def _journal_identity(common, serial, ref):
+    """Scoped identity, never a path: full NTFS volume serial plus record+sequence.
+
+    Image/exhibit scope prevents joining unrelated evidence images that happen to
+    carry the same serial. Shadow copies from that image retain the same scope.
+    """
+    return "NTFS identity " + json.dumps(
+        [common.get("image", ""), common.get("exhibit", ""), f"{serial:016X}", *ref],
+        ensure_ascii=False, separators=(",", ":"))
+
+
+def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial=None, **source):
+    """Creation/removal observations, renames and spool traces of one change journal.
+
+    Reason flags accumulate until CLOSE (MS-FSCC USN_RECORD_V2, 2.3.62.2). Emit
+    their first retained occurrence in that cycle, not a new action for each
+    accumulated flag. The timestamp is when that observation was logged: a
+    close-only record cannot recover the exact earlier action time. Return the
+    first USN for the caller's live/VSS overlap boundary.
+    """
     journal = ntfs.usnjrnl
     if not journal:
         return None
@@ -946,24 +989,49 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, **source):
         except Exception:
             spool_ref = None
     wanted, spool, first, history, unreadable = [], {}, None, {}, 0
+    events, active, observations = [], {}, []
     for r in journal.records():
         rec = r.record
         if first is None:
             first = int(rec.Usn)
         if only_before is not None and int(rec.Usn) >= only_before:
             break
+        reason = int(rec.Reason)
+        fref, parent = _ref(rec.FileReferenceNumber), _ref(rec.ParentFileReferenceNumber)
+        usn, filetime = int(rec.Usn), int(rec.TimeStamp)
         try:
             name = r.filename
         except Exception:
             unreadable += 1
+            # A malformed filename must not make accumulated flags leak into the
+            # next close cycle for the same file reference.
+            if reason & USN_CLOSE:
+                for flag in (USN_FILE_CREATE, USN_FILE_DELETE):
+                    event = active.pop((fref, flag), None)
+                    if event is not None:
+                        event["close_usn"] = usn
             continue
-        reason = int(rec.Reason)
-        fref, parent = _ref(rec.FileReferenceNumber), _ref(rec.ParentFileReferenceNumber)
         known = history.setdefault(fref, [])          # every name and folder this file had
         if not known or known[-1][1:] != (name, parent):
             known.append((int(rec.Usn), name, parent))
+        observations.append((usn, filetime, fref, parent, name, reason))
         if reason & (USN_RENAME_OLD | USN_RENAME_NEW):
             wanted.append((int(rec.Usn), int(rec.TimeStamp), fref, parent, name, reason))
+        for flag, kind in ((USN_FILE_CREATE, "fileCreationRecorded"), (USN_FILE_DELETE, "fileRemoved")):
+            if reason & flag:
+                key = fref, flag
+                if key not in active:
+                    event = dict(kind=kind, usn=usn, filetime=filetime, ref=fref,
+                                 parent=parent, name=name, reason=reason,
+                                 matching_usns=[], close_usn=None)
+                    active[key] = event
+                    events.append(event)
+                active[key]["matching_usns"].append(usn)
+        if reason & USN_CLOSE:
+            for flag in (USN_FILE_CREATE, USN_FILE_DELETE):
+                event = active.pop((fref, flag), None)
+                if event is not None:
+                    event["close_usn"] = usn
         if spool_ref is not None and parent == spool_ref:
             info = spool.setdefault((fref, name), {})
             for flag, what in ((USN_FILE_CREATE, "created"), (USN_FILE_DELETE, "deleted")):
@@ -975,24 +1043,125 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, **source):
     if unpaired:
         ev.problem(artifact, RuntimeWarning(f"{unpaired} old-name records have no new-name record"))
     cache = {}
-    for rn in renames:
-        old_dir, old_j = _folder_at(ntfs, cache, history, rn["old_parent"], rn["old_usn"])
-        new_dir, new_j = _folder_at(ntfs, cache, history, rn["new_parent"], rn["new_usn"])
 
-        def full(folder, name):
-            return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
+    def full(folder, name):
+        # The filename is copied as stored. Do not normalize slash-like characters
+        # inside a raw name or invent a parent when its reference cannot be resolved.
+        return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
+
+    serial = volume_serial or ("%08X" % (ntfs.serial & 0xFFFFFFFF))
+    # Name and parent observations expose identity as an IR field, not merely
+    # provenance. Keep each transition, but collapse repeated same-state flags.
+    names, parents, latest_name, latest_parent = [], [], {}, {}
+    for usn, filetime, fref, parent, name, reason in observations:
+        t = us_from_filetime(filetime)
+        if t < 0:
+            continue
+        folder = _historical_folder(ntfs, cache, history, parent, usn)
+        path = full(folder, name)
+        context, _ = _folder_at(ntfs, cache, history, parent, usn, allow_future=False)
+        identity = _journal_identity(common, ntfs.serial, fref)
+        parent_identity = _journal_identity(common, ntfs.serial, parent)
+        detail = dict(usn=usn, raw_name=name, file_record=fref[0], file_sequence=fref[1],
+                      parent_record=parent[0], parent_sequence=parent[1], volume_serial=serial,
+                      ntfs_volume_serial=f"{ntfs.serial:016X}", reason_flags=reason,
+                      timestamp_semantics="journal_observation", historical_path_resolved=folder is not None,
+                      context_path=full(context, name),
+                      context_path_source="journal or current file table; not asserted as the historical path",
+                      last_observation_usn=usn, observation_count=1)
+        old = latest_name.get(fref)
+        name_key = (path, parent, folder is not None)
+        if old is not None and old[0] == name_key:
+            old[1][4]["last_observation_usn"] = usn
+            old[1][4]["observation_count"] += 1
+        else:
+            row = (t, path, identity, usn, dict(detail))
+            names.append(row)
+            latest_name[fref] = (name_key, row)
+        old = latest_parent.get(fref)
+        if old is not None and old[0] == parent:
+            old[1][4]["last_observation_usn"] = usn
+            old[1][4]["observation_count"] += 1
+        else:
+            row = (t, identity, parent_identity, usn, dict(detail))
+            parents.append(row)
+            latest_parent[fref] = (parent, row)
+    for kind, rows in (("journalName", names), ("journalParent", parents)):
+        for t, obj, aux, usn, detail in rows:
+            ev.add(kind, t, 1, obj, aux, artifact=f"{artifact} USN {usn}",
+                   time_meaning="first journal observation of this consecutive name/parent state; "
+                                "not creation onset or continuous presence between observations",
+                   path_source="a full path is used only when preceding journal directory names "
+                               "resolve every ancestor to the volume root; otherwise raw_name is retained",
+                   **detail, **source, **common)
+    for event in events:
+        folder = _historical_folder(ntfs, cache, history, event["parent"], event["usn"])
+        context, _ = _folder_at(ntfs, cache, history, event["parent"], event["usn"],
+                                allow_future=False)
+        t = us_from_filetime(event["filetime"])
+        if t < 0:
+            ev.problem(f"{artifact} USN {event['usn']}", ValueError("journal time is before 1970"))
+            continue
+        flag_name = "FILE_CREATE" if event["kind"] == "fileCreationRecorded" else "FILE_DELETE"
+        ev.add(event["kind"], t, 1, full(folder, event["name"]), serial,
+               artifact=f"{artifact} USN {event['usn']}", usn=event["usn"],
+               raw_name=event["name"], file_record=event["ref"][0],
+               file_sequence=event["ref"][1], parent_record=event["parent"][0],
+               parent_sequence=event["parent"][1], volume_serial=serial,
+               parent_folder=(drive + "\\" + folder) if folder is not None else "not resolved",
+               path_resolved=folder is not None,
+               folder_names_from="change journal" if folder is not None else "not resolved",
+               context_path=full(context, event["name"]),
+               context_path_source="journal or current file table; not asserted as the historical path",
+               reason_flags=event["reason"], matching_usns=event["matching_usns"],
+               close_usn=event["close_usn"], timestamp_semantics="journal_observation",
+               path_source="full path only when preceding journal directory names resolve "
+                           "every ancestor to the volume root; otherwise the recorded basename "
+                           "is retained and current file-table paths are context only",
+               time_meaning=f"time the first retained {flag_name} observation was logged in "
+                            "this close cycle, not a file-system timestamp or proof of exact "
+                            "action onset; repeated accumulated flags before CLOSE are grouped",
+               **source, **common)
+        if event["kind"] == "fileRemoved":
+            ev.add("journalRemoval", t, 1, full(folder, event["name"]),
+                   _journal_identity(common, ntfs.serial, event["ref"]),
+                   artifact=f"{artifact} USN {event['usn']}", usn=event["usn"],
+                   raw_name=event["name"], file_record=event["ref"][0], file_sequence=event["ref"][1],
+                   parent_record=event["parent"][0], parent_sequence=event["parent"][1],
+                   volume_serial=serial, ntfs_volume_serial=f"{ntfs.serial:016X}",
+                   historical_path_resolved=folder is not None,
+                   reason_flags=event["reason"], matching_usns=event["matching_usns"],
+                   close_usn=event["close_usn"], timestamp_semantics="journal_observation",
+                   time_meaning="first retained FILE_DELETE flag observation in this close cycle; "
+                                "not deletion onset, removal of every alias, or secure wiping",
+                   **source, **common)
+    for rn in renames:
+        old_dir = _historical_folder(ntfs, cache, history, rn["old_parent"], rn["old_usn"])
+        new_dir = _historical_folder(ntfs, cache, history, rn["new_parent"], rn["new_usn"])
+        old_context, _ = _folder_at(ntfs, cache, history, rn["old_parent"], rn["old_usn"],
+                                    allow_future=False)
+        new_context, _ = _folder_at(ntfs, cache, history, rn["new_parent"], rn["new_usn"],
+                                    allow_future=False)
+
         ev.add("fileRenamed", us_from_filetime(rn["filetime"]), 1, full(old_dir, rn["old_name"]),
                full(new_dir, rn["new_name"]), artifact=f"{artifact} USN {rn['new_usn']}",
                old_name=rn["old_name"], new_name=rn["new_name"], old_name_usn=rn["old_usn"],
                file_record=rn["ref"][0], file_sequence=rn["ref"][1],
+               volume_serial=serial, ntfs_volume_serial=f"{ntfs.serial:016X}",
+               file_identity=_journal_identity(common, ntfs.serial, rn["ref"]),
                parent_folder=(drive + "\\" + old_dir) if old_dir is not None else "not resolved",
                new_parent_folder=(drive + "\\" + new_dir) if new_dir is not None else "not resolved",
                parent_record=rn["old_parent"][0], new_parent_record=rn["new_parent"][0],
+               parent_sequence=rn["old_parent"][1], new_parent_sequence=rn["new_parent"][1],
                moved=rn["old_parent"] != rn["new_parent"],
-               folder_names_from="change journal" if old_j or new_j else "file table",
-               path_source="the journal stores names and folder references; a folder is named as "
-                           "the journal itself recorded it at that moment where it has a record "
-                           "of the folder, otherwise as the file table names that reference now",
+               old_path_resolved=old_dir is not None, new_path_resolved=new_dir is not None,
+               context_path=full(old_context, rn["old_name"]),
+               new_context_path=full(new_context, rn["new_name"]),
+               context_path_source="journal or current file table; not asserted as historical paths",
+               folder_names_from="change journal where ancestors resolve; otherwise raw basenames",
+               path_source="each rename side uses its own USN and preceding journal directory "
+                           "names to resolve the ancestor chain; otherwise its raw basename "
+                           "is retained. Current or later paths do not rewrite either side",
                time_meaning="time of the journal's new-name record", **source, **common)
     for (ref, name), info in sorted(spool.items()):
         for what, (ft, usn) in sorted(info.items()):
@@ -1101,7 +1270,8 @@ def _shadow_copies(ev, target, spool_dir, common):
     from dissect.volume.vss import VSS
     for drive, serial, fs in _ntfs_volumes(target):
         try:
-            live_first = _journal(ev, fs.ntfs, drive, spool_dir if spool_dir[:2].upper() == drive else "", common)
+            live_first = _journal(ev, fs.ntfs, drive, spool_dir if spool_dir[:2].upper() == drive else "",
+                                  common, volume_serial=serial)
         except Exception as e:
             ev.problem(f"{drive}\\$Extend\\$UsnJrnl:$J", e)
             live_first = None
@@ -1129,7 +1299,7 @@ def _shadow_copies(ev, target, spool_dir, common):
                 source = dict(shadow_copy=copy_id)
                 if live_first is not None:
                     _journal(ev, snap, drive, spool_dir if spool_dir[:2].upper() == drive else "",
-                             common, only_before=live_first,
+                             common, only_before=live_first, volume_serial=serial, shadow_copy=copy_id,
                              journal_source=f"journal as kept in shadow copy {copy_id}")
                 if live is None:
                     live, problems = _tree(fs.ntfs)

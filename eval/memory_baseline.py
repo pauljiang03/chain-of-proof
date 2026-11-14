@@ -113,13 +113,14 @@ def parse(answer: str):
     return rows
 
 
-def score(reference: dict, rows) -> dict:
+def score(reference: dict, rows, time_zone=None) -> dict:
     """Per reference item: did a remembered row name the entity, and the time as well?"""
     tol = reference["tolerance_s"]
+    zone = scorer.reference_zone(reference, time_zone)
     items = []
     for item in reference["items"]:
         e = item["expect"]
-        if e is None:
+        if not scorer.supported_expect(e):
             continue
         # the model was not asked for volume serials or exhibits on file rows
         loose = {k: v for k, v in e.items() if k not in ("aux", "aux_contains", "exhibit")}
@@ -128,7 +129,7 @@ def score(reference: dict, rows) -> dict:
         same = [r for r in rows if scorer.same_entity(loose, r)]
         timed = "utc" in e or "local_day" in e
         full = [r for r in same if r["t"] is not None and timed
-                and scorer.time_match(e, r, tol) in ("tolerance", "day")]
+                and scorer.time_match(e, r, tol, zone) in ("tolerance", "day")]
         items.append({"id": item["id"], "question": item["question"],
                       "book": item.get("book", "open"), "entity": bool(same),
                       "timed": timed, "full": bool(full) if timed else None})
@@ -142,12 +143,13 @@ def score(reference: dict, rows) -> dict:
     matched = set()
     for item in reference["items"]:
         e = item["expect"]
-        if e is None:
+        if not scorer.supported_expect(e):
             continue
         loose = {k: v for k, v in e.items() if k not in ("aux", "aux_contains", "exhibit")}
         matched.update(r["id"] for r in rows if scorer.same_entity(loose, r))
     return {"rows_remembered": len(rows), "rows_matching_no_answer": len(rows) - len(matched),
-            "items": items, "by_question": by_q,
+            "items": items, "by_question": by_q, "time_zone": zone,
+            "question_names": {str(q): scorer.question_name(reference, q) for q in by_q},
             "totals": {k: sum(q[k] for q in by_q.values()) for k in ("rows", "entity", "timed", "full")}}
 
 
@@ -156,8 +158,9 @@ def report(result: dict) -> str:
          f"{result['rows_matching_no_answer']} of them match no answer-key row",
          f"   {'question':<32}{'rows':>5}{'entity':>8}{'with time':>11}"]
     for q, c in result["by_question"].items():
-        name = scorer.QUESTION_NAMES.get(int(q), "")
-        L.append(f"   Q{int(q):<3}{name:<28}{c['rows']:>5}{c['entity']:>8}"
+        name = result.get("question_names", {}).get(str(q), "")
+        label = f"Q{q} {name}".strip()
+        L.append(f"   {label:<32}{c['rows']:>5}{c['entity']:>8}"
                  f"{c['full']:>6} /{c['timed']:>3}")
     t = result["totals"]
     L.append(f"   {'total':<32}{t['rows']:>5}{t['entity']:>8}{t['full']:>6} /{t['timed']:>3}")

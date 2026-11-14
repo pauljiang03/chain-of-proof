@@ -9,9 +9,10 @@ is accepted into the report only if:
   2. every specific detail in it (a date, a time, a number, a serial, a file name, a
      quoted name) appears in the sentences of the findings it cites.
 
-Rule 2 is a text check, not a proof. It stops a conclusion from carrying a fact that no
-certificate stands behind; the inference itself remains the investigator's, and the
-report says so.
+Rule 2 is a limited text check, not a proof: it recognizes some tokens, not every
+name, number or relationship. Explicit optical-write assertions also undergo the
+narrow contradiction checks in consistency.py. These checks do not make arbitrary
+inferences verified; the inference itself remains the investigator's.
 """
 from __future__ import annotations
 
@@ -20,10 +21,12 @@ import re
 from pathlib import Path
 from typing import List
 
+from .consistency import optical_conflicts
+
 MAX_CHARS = 700
-NOTE = ("Judgment, not checked by the proof checker. Every finding it cites is certified, "
-        "and every date, time, number and name in it appears in those findings. The "
-        "inference is the investigator's.")
+NOTE = ("Judgment, not checked by the proof checker. Cited findings are certified. "
+        "Limited token and optical-timeline checks passed; they do not verify all "
+        "details, device links, or inferences.")
 MONTHS = {m: i for i, m in enumerate(
     ("january", "february", "march", "april", "may", "june", "july", "august",
      "september", "october", "november", "december"), 1)}
@@ -98,6 +101,10 @@ class Conclusions:
         bad = [i for i in ids if by_id.get(i, {}).get("status") != "verified"]
         if bad:
             return {"status": "rejected", "reason": f"not certified findings of this run: {bad}"}
+        conflicts = optical_conflicts(text, [by_id[i] for i in ids])
+        if conflicts:
+            return {"status": "rejected", "conflicts": conflicts,
+                    "reason": "optical evidence conflict: " + "; ".join(conflicts)}
         loose = ungrounded(text, [by_id[i]["english"] for i in ids])
         if loose:
             return {"status": "rejected", "not_in_cited_findings": loose,

@@ -52,7 +52,7 @@ def main(argv=None) -> int:
 
     pc = next((n for n, e in exhibits.items() if isinstance(e, dict) and e.get("role") == "pc"), None)
     if pc and (images / pc).exists():
-        info, lines = extract_pc(ev, images / pc, tool)
+        info, lines = extract_pc(ev, images / pc, tool, exhibits[pc]["exhibit"])
         log += lines
     fat_tz = info.get("time_zone") or "UTC"
     for name, exhibit in exhibits.items():

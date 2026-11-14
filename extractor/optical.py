@@ -4,6 +4,8 @@ What is read, and from where:
 
 * the volume serial, the way the Windows UDF driver derives it: four byte-wise sums
   over the 512-byte File Set Descriptor;
+* the recording timestamp stored in each distinct File Set Descriptor. This is a
+  descriptor timestamp, not proof of a format action or a completed write;
 * the files the disc lists now;
 * files the disc no longer lists. A write-once disc written in packets never loses
   anything: every change appends new file entries and a new allocation table (the
@@ -1000,6 +1002,20 @@ def extract(ev, path, ctx) -> None:
         ev.problem(f"{path.name}: {where}", err)
     common = dict(common, parser=PARSER)
 
+    # Read each descriptor itself, including descriptors no surviving VAT references.
+    # A serial is only a 32-bit sum, so do not use it alone to deduplicate timestamps.
+    recordings = {}
+    recorded_groups = {}
+    for sector, raw in sorted(udf.fsd_copies.items()):
+        try:
+            fsd = parse_fsd(raw)
+            timestamp, conversion = stamp_utc(fsd.recorded, zone)
+        except ValueError as e:
+            ev.problem(f"{path.name}: UDF file set descriptor at sector {sector} recording time", e)
+            continue
+        recordings[sector] = (timestamp, conversion, fsd)
+        recorded_groups.setdefault((udf_serial32(raw), timestamp), []).append(sector)
+
     # one row per distinct serial; the newest state that carries it describes it
     by_serial: Dict[int, Version] = {}
     for v in udf.versions:
@@ -1029,12 +1045,28 @@ def extract(ev, path, ctx) -> None:
         if session is not None:
             prov.update(session=session, track=session,
                         session_source=f"E01 session section ({len(s.info['sessions'])} entry)")
-        if v and v.fsd:
-            try:
-                prov["file_set_recorded_utc"] = iso(stamp_utc(v.fsd.recorded, zone)[0])
-            except ValueError:
-                pass
+        if fsd_sector in recordings:
+            prov["file_set_recorded_utc"] = iso(recordings[fsd_sector][0])
         ev.add("volumeOnDevice", examined, 1, disc, "%08X" % serial, **prov)
+
+    # One event per disc/serial/recording-time; repeat FSD copies are provenance,
+    # not extra events. Keep the examination observation above at examined_at.
+    for (serial, timestamp), sectors_ in sorted(recorded_groups.items()):
+        sector = sectors_[-1]
+        _timestamp, conversion, fsd = recordings[sector]
+        ev.add("volumeRecorded", timestamp, 1, disc, "%08X" % serial,
+               artifact=f"UDF file set descriptor at sector {sector} (byte offset {sector * SECTOR})",
+               filesystem="udf", udf_revision=udf.lvd.revision, volume_label=fsd.label,
+               file_set=fsd.file_set, offset=sector * SECTOR,
+               timestamp_offset=sector * SECTOR + 16,
+               timestamp_bytes=fsd.recorded.hex(), time_zone=conversion,
+               equivalent_record_copies_at_sectors=sectors_,
+               referenced_by_allocation_tables_at_sectors=[
+                   v.vat_sector for v in udf.versions
+                   if v.fsd_sector in sectors_ and v.vat_sector is not None],
+               time_meaning="UDF file-set descriptor recording time",
+               note="This timestamp does not by itself establish a format action, "
+                    "the start of writing files, or completion of a write.", **common)
 
     seen = set()
 

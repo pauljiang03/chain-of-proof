@@ -28,8 +28,10 @@ class Matchers(unittest.TestCase):
     def test_a_date_only_answer_is_compared_in_the_cases_local_zone(self):
         e = {"kind": "programInstalled", "local_day": "2015-03-23"}
         # 02:00 UTC on the 24th is 22:00 on the 23rd in New York
-        self.assertEqual(score.time_match(e, row("programInstalled", "x", utc="2015-03-24T02:00:00"), 2), "day")
-        self.assertIsNone(score.time_match(e, row("programInstalled", "x", utc="2015-03-24T05:00:00"), 2))
+        self.assertEqual(score.time_match(e, row("programInstalled", "x", utc="2015-03-24T02:00:00"),
+                                         2, "America/New_York"), "day")
+        self.assertIsNone(score.time_match(e, row("programInstalled", "x", utc="2015-03-24T05:00:00"),
+                                          2, "America/New_York"))
 
     def test_an_answer_no_kind_can_state_is_counted_not_dropped(self):
         ref = {"tolerance_s": 2, "items": [
@@ -59,7 +61,7 @@ class Memory(unittest.TestCase):
 
 
 class ReportText(unittest.TestCase):
-    REF = {"items": [
+    REF = {"time_zone": "America/New_York", "items": [
         {"id": "a", "question": 16, "expect": {"kind": "webSearch", "obj": "anti-forensic tools",
                                                "utc": "2015-03-23T18:17:14"}},
         {"id": "b", "question": 3, "expect": {"kind": "systemSetting", "obj": "computer name",

@@ -148,6 +148,15 @@ class ProgramsRun(unittest.TestCase):
         with self.assertRaises(ValueError):
             s.parse_shimcache_nt61(bytes(0x100))
 
+    def test_generic_shimcache_unset_time_preserves_path_without_inventing_event_time(self):
+        entry = s.shimcache_entry((datetime(1601, 1, 1, tzinfo=timezone.utc), r"C:\Tools\a.exe"))
+        self.assertIsNone(entry["modified"])
+        self.assertEqual(entry["path"], r"C:\Tools\a.exe")
+        self.assertEqual(entry["raw_modified"], "1601-01-01T00:00:00+00:00")
+        self.assertIsNone(entry["executed"])
+        later = s.shimcache_entry((datetime(2015, 3, 25, tzinfo=timezone.utc), r"C:\Tools\b.exe"))
+        self.assertEqual(later["modified"], US_2015_03_25)
+
     def test_recentfilecache(self):
         raw = struct.pack("<5I", 0xFFEEFFFE, 0x2211, 3, 1, 0)
         for path in ("c:\\a\\one.exe", "c:\\two.exe"):

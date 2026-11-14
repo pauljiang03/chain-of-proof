@@ -66,8 +66,8 @@ UNALLOCATED = "unallocated space of device "   # prefix of the area id the extra
 def _where(place: str) -> str:
     """How a file record's `aux` reads in a sentence."""
     if place.startswith(UNALLOCATED):
-        return (f"an earlier file system of device {place[len(UNALLOCATED):]} (a directory "
-                f"entry recovered from unallocated space)")
+        return (f"device {place[len(UNALLOCATED):]} (a recovered directory entry; "
+                f"this does not establish a previous file system)")
     if place in ("", "(none)"):
         return "a volume the record does not name"
     return f"volume {place}"
@@ -90,7 +90,7 @@ _EVENT = {
     "fileDeleted": "the deletion of {obj} from volume {aux}",
     "webSearch": 'the web search "{obj}"',
     "emailSent": 'the sending of the e-mail "{obj}" {aux}',
-    "cdBurn": "the CD-burn trace ({obj})",
+    "cdBurn": "the optical-disc-related record ({obj})",
     "tag": 'the tagging of {obj} as "{aux}"',
     "volumeSeen": 'this PC recording volume {aux} under the label "{obj}"',
     "volumeOnDevice": "the examination of device {obj}, which holds volume {aux}",
@@ -110,6 +110,12 @@ _EVENT = {
     "fileSeen": "the {aux} record of {obj}",
     "shadowCopy": "the creation of shadow copy {obj}",
     "fileContent": "the reading of the content of {obj}",
+    "fileRemoved": "the journal record carrying a removal flag for {obj} on volume {aux}",
+    "volumeRecorded": "the UDF file-set descriptor recording on {obj}, volume {aux}",
+    "fileCreationRecorded": "the journal record carrying a creation flag for {obj} on volume {aux}",
+    "journalName": "the journal name observation {obj} for {aux}",
+    "journalParent": "the journal parent-reference observation linking {obj} to {aux}",
+    "journalRemoval": "the journal removal-flag observation under name {obj} for {aux}",
 }
 
 
@@ -183,7 +189,7 @@ def _en_same_label(args, facts, src):
     a, b = facts[args[0]], facts[args[1]]
     return (f"This PC recorded volume {src.string(a.aux)} ({_utc(a.t)}) and volume "
             f'{src.string(b.aux)} ({_utc(b.t)}) under the same label "{src.string(a.obj)}". '
-            f"A shared label suggests one physical device but does not prove it "
+            f"A shared label does not identify a physical device; different devices can share it "
             f"(heuristic rule R8).")
 
 
@@ -231,6 +237,87 @@ def _en_file_deleted(args, facts, src):
             f"({_utc(d.t)}).")
 
 
+def _en_file_removed(args, facts, src):
+    f = facts[args[0]]
+    return (f"An NTFS change-journal record for {src.string(f.obj)} on volume "
+            f"{src.string(f.aux)} carries a removal flag ({_utc(f.t)}). This is the record's "
+            f"timestamp, not necessarily the deletion onset: flags can accumulate until "
+            f"close. It does not establish Recycle Bin use, wiping, or unrecoverable content.")
+
+
+def _en_file_creation_recorded(args, facts, src):
+    f = facts[args[0]]
+    return (f"An NTFS change-journal record for {src.string(f.obj)} on volume "
+            f"{src.string(f.aux)} carries a creation flag ({_utc(f.t)}). This is the record's "
+            f"timestamp, not a filesystem creation timestamp or necessarily the creation "
+            f"onset: flags can accumulate until close.")
+
+
+def _en_volume_recorded(args, facts, src):
+    f = facts[args[0]]
+    return (f"The UDF file-set descriptor on {src.string(f.obj)}, volume {src.string(f.aux)}, "
+            f"records its timestamp as {_utc(f.t)}. This is the descriptor's recording "
+            f"time, not the examination time or proof that formatting or writing completed.")
+
+
+def _en_created_after_volume(args, facts, src):
+    c, v = facts[args[0]], facts[args[1]]
+    return (f"The filesystem creation timestamp of {src.string(c.obj)} on volume "
+            f"{src.string(c.aux)} ({_utc(c.t)}) follows the UDF file-set descriptor's "
+            f"recording timestamp on {src.string(v.obj)}, the same volume ({_utc(v.t)}), "
+            f"by more than the combined timestamp uncertainty. This orders recorded "
+            f"timestamps; it does not establish that a burn or copy completed.")
+
+
+def _en_journal_named(args, facts, src):
+    f = facts[args[0]]
+    return (f"The journal records the name/path {src.string(f.obj)} for {src.string(f.aux)} "
+            f"({_utc(f.t)}). This is a name observation, not creation onset or continuous "
+            f"presence. A full path is used only when preceding journal names resolve "
+            f"its ancestor chain; otherwise the recorded basename is retained.")
+
+
+def _en_journal_parent(args, facts, src):
+    f = facts[args[0]]
+    return (f"The journal records {src.string(f.obj)} with parent {src.string(f.aux)} "
+            f"({_utc(f.t)}). This observes a parent reference; it does not assign a "
+            f"different-time directory name to this observation.")
+
+
+def _en_journal_removal(args, facts, src):
+    f = facts[args[0]]
+    return (f"The journal carries a removal flag under name/path {src.string(f.obj)} "
+            f"for {src.string(f.aux)} ({_utc(f.t)}). Flags can accumulate until close: "
+            f"this is not necessarily deletion onset, removal of every alias, or secure wiping.")
+
+
+def _en_same_journal_file(args, facts, src):
+    a, b = facts[args[0]], facts[args[1]]
+    return (f"The journal name/path {src.string(a.obj)} ({_utc(a.t)}) and name/path "
+            f"{src.string(b.obj)} ({_utc(b.t)}) share {src.string(a.aux)}. This links "
+            f"the same image-scoped volume, file record and sequence; it does not "
+            f"prove unchanged content or simultaneous existence of the names.")
+
+
+def _en_removed_previously_named(args, facts, src):
+    n, r = facts[args[0]], facts[args[1]]
+    return (f"A journal removal flag under name/path {src.string(r.obj)} ({_utc(r.t)}) "
+            f"shares {src.string(r.aux)} with the earlier journal name/path "
+            f"{src.string(n.obj)} ({_utc(n.t)}), with the observations separated beyond "
+            f"timestamp uncertainty. This does not place deletion at the earlier alias, "
+            f"establish exact deletion onset, or prove secure wiping.")
+
+
+def _en_child_named_directory(args, facts, src):
+    c, p, d = (facts[i] for i in args)
+    return (f"The journal records name/path {src.string(c.obj)} for {src.string(c.aux)} "
+            f"({_utc(c.t)}); that child identity is recorded with parent {src.string(p.aux)} "
+            f"({_utc(p.t)}); that parent identity is recorded under name/path "
+            f"{src.string(d.obj)} ({_utc(d.t)}). Each timestamp belongs to its own "
+            f"observation. This does not establish the child's presence at a directory "
+            f"alias at a different time, creation onset, copying, or a disc write.")
+
+
 def _en_emailed(args, facts, src):
     e = facts[args[0]]
     return (f'An e-mail with the subject "{src.string(e.obj)}" was sent {src.string(e.aux)} '
@@ -239,9 +326,14 @@ def _en_emailed(args, facts, src):
 
 def _en_burn_trace(args, facts, src):
     b = facts[args[0]]
-    return (f"CD-burn trace in the {src.string(b.aux)}: {src.string(b.obj)} ({_utc(b.t)}). "
-            f"Windows leaves this trace when it writes a disc; it does not show what was "
-            f"written (heuristic rule R12).")
+    trace = src.string(b.obj)
+    meaning = (" cdrom event 133 records an exclusive-access lock."
+               if trace.startswith("cdrom driver event 133 ") else
+               " This is a configuration change." if src.string(b.aux) == "registry" else "")
+    return (f"Optical-disc-related record in the {src.string(b.aux)}: "
+            f"{trace} ({_utc(b.t)}).{meaning} "
+            f"This record alone does not establish a write, its completion, its contents, "
+            f"or the physical disc involved (rule R12).")
 
 
 def _en_device_examined(args, facts, src):
@@ -253,8 +345,9 @@ def _en_device_examined(args, facts, src):
 def _en_recovered(args, facts, src):
     c, d = facts[args[0]], facts[args[1]]
     return (f"A directory entry for {src.string(c.obj)}, created ({_utc(c.t)}), was recovered "
-            f"from unallocated space on seized device {src.string(d.obj)}. It was written "
-            f"before the device's current file system.")
+            f"from the recovery area on seized device {src.string(d.obj)}. Recovery alone "
+            f"does not establish that the device was reformatted; an optical disc may "
+            f"retain older states of the same file system.")
 
 
 # One record, one sentence. Each says what the artifact records, not more: a record of
@@ -387,7 +480,7 @@ _NOUN = {
     "fileDeleted": ("Recycle Bin", "path", "volume"),
     "webSearch": ("web-search", "search text", "browser"),
     "emailSent": ("e-mail", "subject", "sender and recipient"),
-    "cdBurn": ("CD-burn trace", "trace", "place it was found"),
+    "cdBurn": ("optical-disc-related", "record", "place it was found"),
     "tag": ("tag", "tagged entity", "tag"),
     "volumeSeen": ("recorded-volume", "label", "volume serial"),
     "volumeOnDevice": ("device-examination", "device", "volume serial"),
@@ -407,6 +500,12 @@ _NOUN = {
     "fileSeen": ("secondary file", "path", "artifact"),
     "shadowCopy": ("shadow-copy", "shadow copy id", "volume"),
     "fileContent": ("file-content", "path", "content hash"),
+    "fileRemoved": ("journal-removal", "path", "volume"),
+    "volumeRecorded": ("UDF file-set recording", "physical disc", "volume serial"),
+    "fileCreationRecorded": ("journal-creation-flag", "path", "volume"),
+    "journalName": ("journal-name", "observed name/path", "scoped NTFS file identity"),
+    "journalParent": ("journal-parent", "scoped child identity", "scoped parent identity"),
+    "journalRemoval": ("journal-removal-identity", "observed name/path", "scoped NTFS file identity"),
 }
 CENSUS_NOTE = ("This counts records in the evidence file. An event that left no record, or "
                "a record the extractor does not read, is not counted.")
@@ -536,6 +635,21 @@ SETS: Dict[str, SetDef] = {
     "contentHashed": SetDef(("fact",), "Sets.contentHashed", ("R28",), "strong", _en_content),
     "sameContent": SetDef(("fact", "fact"), "Sets.sameContent", ("R28",), "strong",
                           _en_same_content),
+    "fileRemovedAt": SetDef(("fact",), "Sets.fileRemovedAt", ("R29",), "strong", _en_file_removed),
+    "volumeRecordedAt": SetDef(("fact",), "Sets.volumeRecordedAt", ("R30",), "strong",
+                              _en_volume_recorded),
+    "fileCreationRecordedAt": SetDef(("fact",), "Sets.fileCreationRecordedAt", ("R31",), "strong",
+                                    _en_file_creation_recorded),
+    "createdAfterVolumeRecord": SetDef(("fact", "fact"), "Sets.createdAfterVolumeRecord",
+                                      ("R10", "R30"), "strong", _en_created_after_volume),
+    "journalNamed": SetDef(("fact",), "Sets.journalNamed", ("R32",), "strong", _en_journal_named),
+    "journalParentRecorded": SetDef(("fact",), "Sets.journalParentRecorded", ("R32",), "strong", _en_journal_parent),
+    "journalRemovalObserved": SetDef(("fact",), "Sets.journalRemovalObserved", ("R32",), "strong", _en_journal_removal),
+    "sameJournalFile": SetDef(("fact", "fact"), "Sets.sameJournalFile", ("R32",), "strong", _en_same_journal_file),
+    "removedFilePreviouslyNamed": SetDef(("fact", "fact"), "Sets.removedFilePreviouslyNamed",
+                                         ("R32",), "strong", _en_removed_previously_named),
+    "journalChildNamedDirectory": SetDef(("fact", "fact", "fact"), "Sets.journalChildNamedDirectory",
+                                         ("R32",), "strong", _en_child_named_directory),
     # census forms: Lean type `Census`, checked by `counts` against every fact of the kind
     "exactly": SetDef(("kind", "count"), ".total", ("C1",), "strong", _en_total),
     "exactlyDistinct": SetDef(("kind", "slot", "count"), ".distinct", ("C1",), "strong",
@@ -588,7 +702,7 @@ def _parse(obj) -> Claim:
             ok, want = _is_id(a), "a non-negative integer"
         if not ok:
             raise ClaimError(f'"{name}": expected {want}, got {a!r}')
-    if name in ("sameLabel", "sameContent") and args[0] == args[1]:
+    if name in ("sameLabel", "sameContent", "sameJournalFile") and args[0] == args[1]:
         raise ClaimError(f'"{name}" needs two different facts')
     return (name, tuple(args))
 
