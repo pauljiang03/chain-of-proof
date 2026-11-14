@@ -52,13 +52,19 @@ def main(argv=None):
     parser.add_argument("--questions", required=True)
     parser.add_argument("--out", required=True)
     args = parser.parse_args(argv)
-    answer = extract(Path(args.report).read_text(), read_question_profile(Path(args.questions)))
-    answer["submission_origin"] = {"method": "verbatim JSON block extraction; no LLM judge",
-                                    "report_sha256": hashlib.sha256(Path(args.report).read_bytes()).hexdigest()}
     output = Path(args.out)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    with output.open("x") as stream:
-        stream.write(json.dumps(answer, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    try:
+        if output.exists() or output.is_symlink():
+            raise ValueError(f"refusing to overwrite existing submission output: {output}")
+        answer = extract(Path(args.report).read_text(), read_question_profile(Path(args.questions)))
+        answer["submission_origin"] = {"method": "verbatim JSON block extraction; no LLM judge",
+                                        "report_sha256": hashlib.sha256(Path(args.report).read_bytes()).hexdigest()}
+        encoded = json.dumps(answer, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open("x") as stream:
+            stream.write(encoded)
+    except (ValueError, KeyError, TypeError, OSError) as error:
+        parser.error(str(error))
     return 0
 
 

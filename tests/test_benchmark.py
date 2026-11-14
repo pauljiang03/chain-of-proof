@@ -237,8 +237,10 @@ class BenchmarkInterface(unittest.TestCase):
             self.assertIn("FOUND 1", printed.getvalue())
             self.assertEqual(len(result["inputs"]["reference"]["sha256"]), 64)
             self.assertEqual(len(result["scorer_sha256"]), 64)
+            repeated = root / "repeated-results.json"
             with contextlib.redirect_stdout(io.StringIO()):
-                b.main(args)
+                b.main(args[:-1] + [str(repeated)])
+            self.assertEqual(repeated.read_text(), first)
             self.assertEqual(out.read_text(), first)
 
 

@@ -498,7 +498,10 @@ def report(result):
 def _load(path):
     def invalid(value):
         raise ValueError(f"non-finite JSON number: {value}")
-    return json.loads(Path(path).read_text(), parse_constant=invalid)
+    value = json.loads(Path(path).read_text(), parse_constant=invalid)
+    if not isinstance(value, dict):
+        raise ValueError(f"scoring input must be a JSON object: {path}")
+    return value
 
 
 def main(argv=None):
@@ -507,15 +510,20 @@ def main(argv=None):
     parser.add_argument("--answers", required=True)
     parser.add_argument("--out", required=True)
     args = parser.parse_args(argv)
+    output = Path(args.out)
     try:
+        if output.exists() or output.is_symlink():
+            raise ValueError(f"refusing to overwrite existing scoring output: {output}")
         result = score(_load(args.reference), _load(args.answers))
+        result["inputs"] = {name: {"path": str(path), "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest()}
+                            for name, path in (("reference", args.reference), ("answers", args.answers))}
+        encoded = json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        # Exclusive creation also protects a file or symlink created after the check.
+        with output.open("x") as stream:
+            stream.write(encoded)
     except (ValueError, KeyError, TypeError, OSError) as error:
         parser.error(str(error))
-    result["inputs"] = {name: {"path": str(path), "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest()}
-                        for name, path in (("reference", args.reference), ("answers", args.answers))}
-    output = Path(args.out)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
     print(report(result))
     return 0
 
