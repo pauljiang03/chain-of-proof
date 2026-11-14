@@ -105,10 +105,21 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
                 proc.stdout.close()
     if expired.is_set():
         print("  stopped: time limit reached")
-    return {"summary": final.get("result", ""), "turns": final.get("num_turns"),
+    subtype = final.get("subtype")
+    result_error = bool(final.get("is_error")) or (
+        isinstance(subtype, str) and subtype.startswith("error"))
+    if expired.is_set():
+        ended = "time_limit"
+    elif proc.returncode:
+        ended = "process_error"
+    elif result_error:
+        ended = subtype if isinstance(subtype, str) and subtype.startswith("error") else "result_error"
+    else:
+        ended = subtype or "no result event"
+    summary = final.get("result")
+    return {"summary": summary if isinstance(summary, str) else "", "turns": final.get("num_turns"),
             "tool_calls": calls, "seconds": round(time.time() - started),
-            "ended": ("time_limit" if expired.is_set() else
-                      final.get("subtype", "process_error" if proc.returncode else "no result event")),
+            "ended": ended, "result_subtype": subtype, "is_error": result_error,
             "exit_code": proc.returncode}
 
 
@@ -195,6 +206,31 @@ def _input_path(value: str) -> Path:
     return path
 
 
+def _expected_backend_error(error: Exception) -> bool:
+    """Recognize setup/runtime and optional SDK failures without requiring the SDK.
+
+    A provider used by the backend is already imported when its exception escapes.
+    Keep unexpected programming errors visible after saving the failed run.
+    """
+    if isinstance(error, (OSError, ImportError, RuntimeError)):
+        return True
+    for module_name, base_name in (("anthropic", "AnthropicError"), ("httpx", "HTTPError")):
+        base = getattr(sys.modules.get(module_name), base_name, None)
+        if isinstance(base, type) and isinstance(error, base):
+            return True
+    return False
+
+
+def _execution_failed(meta: dict) -> bool:
+    # Reaching our own budget remains an ordinary partial run. A provider error
+    # observed before that deadline still fails, even if the watchdog later fires.
+    if meta.get("is_error"):
+        return True
+    if meta.get("ended") == "time_limit":
+        return False
+    return meta.get("ended") != "success" or meta.get("exit_code") not in (None, 0)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Run the investigator; optionally evaluate neutral structured answers.")
     ap.add_argument("--name", default="dev/agent")
@@ -237,13 +273,25 @@ def main(argv=None) -> int:
     (run_dir / "case-profile.json").write_text(json.dumps(profile.public_dict(), indent=2) + "\n")
     (run_dir / "prompt.md").write_text(prompt)
     print(f"investigator: {args.backend} / {model} -> {run_dir.relative_to(ROOT)}")
-    if args.backend == "claude-code":
-        env = dict(COP_FACTS=str(facts_path), COP_RUN_DIR=str(run_dir),
-                   COP_PROPOSER=f"agent:claude-code:{model}")
-        meta = run_claude_code(model, run_dir, env, args.minutes * 60, prompt=prompt)
-    else:
-        meta = run_deepagents(model, run_dir, str(facts_path), prompt=prompt,
-                             timeout_s=args.minutes * 60)
+    started = time.monotonic()
+    backend_error = None
+    try:
+        if args.backend == "claude-code":
+            env = dict(COP_FACTS=str(facts_path), COP_RUN_DIR=str(run_dir),
+                       COP_PROPOSER=f"agent:claude-code:{model}")
+            meta = run_claude_code(model, run_dir, env, args.minutes * 60, prompt=prompt)
+        else:
+            meta = run_deepagents(model, run_dir, str(facts_path), prompt=prompt,
+                                 timeout_s=args.minutes * 60)
+    except Exception as error:
+        # Only the backend invocation is caught: even an unexpected backend bug
+        # must not erase the trial from our records. Re-raise such bugs below,
+        # after finalization. Never serialize exception text or request payloads.
+        backend_error = error
+        meta = {"summary": "Investigation failed. Saved proposals and certificates remain available.",
+                "turns": None, "tool_calls": None, "seconds": round(time.monotonic() - started),
+                "ended": "backend_error", "is_error": True, "error_type": type(error).__name__}
+        print(f"  stopped: backend failed ({meta['error_type']}); see run.json")
     (run_dir / "summary.md").write_text(meta.pop("summary") + "\n")
     # Regression probes are isolated from findings and never enter the investigator prompt.
     regression = gate.measure(labeled, open_source(facts_path), profile.case_id,
@@ -263,7 +311,9 @@ def main(argv=None) -> int:
                           verification_output=run_dir / "verification.json")
     except (ValueError, OSError) as error:
         ap.error(str(error))
-    failed_execution = meta.get("ended") in ("process_error", "no result event")
+    if backend_error is not None and not _expected_backend_error(backend_error):
+        raise backend_error
+    failed_execution = _execution_failed(meta)
     return 1 if failed_execution or (regression and not regression["all_as_expected"]) else 0
 
 
