@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import re
 import sqlite3
+import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -95,6 +96,9 @@ def _read_only(action, *_):
 
 class Workbench:
     def __init__(self, facts_path, run_dir, proposer: str = "agent"):
+        # API tools can run in worker threads. Share one evidence store, while
+        # serializing its cursors, query budget, and run-log ID allocation.
+        self._lock = threading.RLock()
         self.source = open_source(facts_path)
         self.run_dir = Path(run_dir)
         self.proposer = proposer
@@ -103,7 +107,7 @@ class Workbench:
     # ---- looking at records -------------------------------------------------------
 
     def _load(self) -> sqlite3.Connection:
-        db = sqlite3.connect(":memory:")
+        db = sqlite3.connect(":memory:", check_same_thread=False)
         db.execute("CREATE TABLE facts (id INTEGER PRIMARY KEY, kind TEXT, time_utc TEXT, "
                    "t_us INTEGER, uncertainty_us INTEGER, obj TEXT, aux TEXT, exhibit TEXT, "
                    "artifact TEXT, detail TEXT)")
@@ -127,14 +131,19 @@ class Workbench:
 
     def sql(self, query: str) -> dict:
         """Run one read-only SELECT over the `facts` table."""
-        self._steps["n"] = 0
-        try:
-            cur = self._db.execute(query)
-            cols = [c[0] for c in cur.description or []]
-            rows = cur.fetchmany(ROW_LIMIT + 1)
-        except (sqlite3.Error, sqlite3.Warning) as e:   # Warning: more than one statement
-            return {"error": str(e), "hint": "one SELECT over table facts(id, kind, time_utc, "
-                    "t_us, uncertainty_us, obj, aux, exhibit, artifact, detail)"}
+        with self._lock:
+            self._steps["n"] = 0
+            cur = None
+            try:
+                cur = self._db.execute(query)
+                cols = [c[0] for c in cur.description or []]
+                rows = cur.fetchmany(ROW_LIMIT + 1)
+            except (sqlite3.Error, sqlite3.Warning) as e:   # Warning: more than one statement
+                return {"error": str(e), "hint": "one SELECT over table facts(id, kind, time_utc, "
+                        "t_us, uncertainty_us, obj, aux, exhibit, artifact, detail)"}
+            finally:
+                if cur is not None:
+                    cur.close()
         clip = lambda v: v[:CELL_LIMIT] + "…" if isinstance(v, str) and len(v) > CELL_LIMIT else v
         out = {"columns": cols, "rows": [[clip(v) for v in r] for r in rows[:ROW_LIMIT]]}
         if len(rows) > ROW_LIMIT:
@@ -142,13 +151,14 @@ class Workbench:
         return out
 
     def fact(self, fact_id: int) -> dict:
-        found = self.source.get([fact_id])
-        if fact_id not in found:
-            return {"error": f"no record with id {fact_id}"}
-        f = found[fact_id]
-        return {"id": f.id, "kind": f.kind, "time_utc": _utc(f.t), "t_us": f.t,
-                "uncertainty_us": f.res, "obj": self.source.string(f.obj), "obj_id": f.obj,
-                "aux": self.source.string(f.aux), "aux_id": f.aux, "provenance": f.prov}
+        with self._lock:
+            found = self.source.get([fact_id])
+            if fact_id not in found:
+                return {"error": f"no record with id {fact_id}"}
+            f = found[fact_id]
+            return {"id": f.id, "kind": f.kind, "time_utc": _utc(f.t), "t_us": f.t,
+                    "uncertainty_us": f.res, "obj": self.source.string(f.obj), "obj_id": f.obj,
+                    "aux": self.source.string(f.aux), "aux_id": f.aux, "provenance": f.prov}
 
     def forms(self) -> dict:
         return {"how": 'A claim is {"form": [record ids...]}. Join several with '
@@ -160,10 +170,11 @@ class Workbench:
     # ---- proposing ----------------------------------------------------------------
 
     def _log(self) -> List[dict]:
-        path = self.run_dir / "proposals.jsonl"
-        if not path.is_file():
-            return []
-        return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        with self._lock:
+            path = self.run_dir / "proposals.jsonl"
+            if not path.is_file():
+                return []
+            return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
     def check(self, question: str, claim) -> dict:
         """Propose a claim. Returns the kernel's verdict, with the reason if refused."""
@@ -172,19 +183,21 @@ class Workbench:
                 claim = json.loads(claim)
             except json.JSONDecodeError as e:
                 return {"status": "rejected", "reason": f"claim is not valid JSON: {e}"}
-        log = self._log()
-        key = json.dumps(claim, sort_keys=True)
-        for earlier in log:
-            if json.dumps(earlier.get("claim"), sort_keys=True) == key:
-                return dict(self._brief(earlier), note=f"already proposed as {earlier['finding_id']}")
-        result = checker.check(claim, f"A{len(log) + 1:03d}", self.source, question,
-                               self.run_dir, proposer=self.proposer)
-        return self._brief(result)
+        with self._lock:
+            log = self._log()
+            key = json.dumps(claim, sort_keys=True)
+            for earlier in log:
+                if json.dumps(earlier.get("claim"), sort_keys=True) == key:
+                    return dict(self._brief(earlier), note=f"already proposed as {earlier['finding_id']}")
+            result = checker.check(claim, f"A{len(log) + 1:03d}", self.source, question,
+                                   self.run_dir, proposer=self.proposer)
+            return self._brief(result)
 
     def conclude(self, text: str, finding_ids) -> dict:
         """Record a conclusion (judgment). It must rest on certified findings of this run."""
         from agent.conclusions import Conclusions
-        return Conclusions(self.run_dir).add(text, finding_ids, self._log(), self.proposer)
+        with self._lock:
+            return Conclusions(self.run_dir).add(text, finding_ids, self._log(), self.proposer)
 
     def _brief(self, r: dict) -> dict:
         if r["status"] == "verified":
