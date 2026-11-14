@@ -6,7 +6,7 @@ import tempfile
 import types
 import unittest
 from pathlib import Path
-from unittest.mock import Mock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 from agent import run
 from agent.brief import investigator_brief
@@ -141,7 +141,7 @@ class CaseProfiles(unittest.TestCase):
         self.assertEqual(sentinel.read_text(), 'keep')
 
     def test_deepagents_uses_selected_prompt_and_exposes_original_tools(self):
-        backend = Mock();backend.invoke.return_value = {'messages': [types.SimpleNamespace(content='done')]}
+        backend = Mock();backend.ainvoke = AsyncMock(return_value={'messages': [types.SimpleNamespace(content='done')]})
         create = Mock(return_value=backend)
         deep_module = types.ModuleType('deepagents');deep_module.create_deep_agent = create
         tools_module = types.ModuleType('langchain_core.tools');tools_module.tool = lambda function: function
@@ -153,7 +153,7 @@ class CaseProfiles(unittest.TestCase):
             self.assertEqual(set(tools), set(run.INVESTIGATOR_TOOLS))
             tools['conclude']('uncertain', ['A001'])
             bench.return_value.conclude.assert_called_once_with('uncertain', ['A001'])
-        self.assertEqual(backend.invoke.call_args.args[0]['messages'][0]['content'], 'PUBLIC ONLY')
+        self.assertEqual(backend.ainvoke.call_args.args[0]['messages'][0]['content'], 'PUBLIC ONLY')
 
 
 if __name__ == '__main__':

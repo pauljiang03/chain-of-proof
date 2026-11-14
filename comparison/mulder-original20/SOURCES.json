@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "mulder-ndlc-original20",
+  "status": "prepared_not_run_requires_rubric_review",
+  "repository": "https://github.com/calebevans/mulder",
+  "source_revision": "f3f1952ba610bb2b7e6bd6548c903546f8ec5f63",
+  "source_revision_selection": "Pinned upstream main revision when this package was prepared; report files exactly match the existing local Opus copies.",
+  "reported_release_tag": "v1.5.2",
+  "reported_release_commit": "77eee1d47a49caece7c2f2f345c70df2e61b7498",
+  "release_note": "The executable release commit and later report-source commit are distinct. No container digest or exact original grader environment is established here.",
+  "license": "Apache-2.0",
+  "license_path": "LICENSE",
+  "notice_file": "No NOTICE file found in the complete pinned repository tree.",
+  "grading_provenance": {
+    "actor": "not_disclosed",
+    "method": "not_disclosed",
+    "evidence": "Report prose and README identify the investigating model, not a grader. Source history does not establish a grading actor.",
+    "opus_report_history_commit": "1122fe4c47cf5d883039f399e3bb6c1ad7c5f58c",
+    "history_note": "This commit has a Claude coauthor trailer and describes removing other model directories. That is not proof of who performed report grading.",
+    "original_report_history_commits": [
+      "8b815d41ed339c1f99ab9bd9b44ee82026ebbc70",
+      "1ebf4c8469801d7ddaf2a0c91f652dbe61469625",
+      "4d2ed2797abcc1bdd3c7d8387819522674d9907b"
+    ]
+  },
+  "standalone_original_question_prompt_found": false,
+  "prompt_search_scope": "Pinned full tree paths and the original plus three Opus example READMEs and accuracy reports. Generic investigator prompts exist in source; no standalone original 20-question test input or executable 20-item grader was found.",
+  "original_input_evidence": {
+    "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run1/README.md",
+    "line": 47,
+    "url": "https://github.com/calebevans/mulder/blob/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run1/README.md#L47"
+  },
+  "evidence_source": "https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html",
+  "answer_key_source": "https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf",
+  "files": [
+    {
+      "path": "LICENSE",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "unchanged": true,
+      "matches_existing_local_copy": null
+    },
+    {
+      "path": "private/upstream/examples/ndlc/ACCURACY-REPORT.md",
+      "upstream_path": "examples/ndlc/ACCURACY-REPORT.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc/ACCURACY-REPORT.md",
+      "sha256": "cbbe43fa590080fcd8684fe251085c846b30d8b8e0c5c31de8761fa9533d3792",
+      "bytes": 14650,
+      "unchanged": true,
+      "matches_existing_local_copy": null
+    },
+    {
+      "path": "private/upstream/examples/ndlc/README.md",
+      "upstream_path": "examples/ndlc/README.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc/README.md",
+      "sha256": "831436888d61e2ce02597cfbbe4a2540743c1b0222b0eb19d24bbcac9e95660e",
+      "bytes": 3999,
+      "unchanged": true,
+      "matches_existing_local_copy": null
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run1/ACCURACY-REPORT.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run1/ACCURACY-REPORT.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run1/ACCURACY-REPORT.md",
+      "sha256": "467ed6be9db615569a0fda70492bf5ecc3869bb963c12838eb94390ccd11f911",
+      "bytes": 56209,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run1/README.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run1/README.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run1/README.md",
+      "sha256": "ab215503e9f2d154765b6d445fe156ee88de04d7a74ca053546be97438a9677e",
+      "bytes": 5568,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run2/ACCURACY-REPORT.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run2/ACCURACY-REPORT.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run2/ACCURACY-REPORT.md",
+      "sha256": "46e47fbf894c78959171bbd34abb9e9a5d44b8d6f83694d7fa59de2c59b815c0",
+      "bytes": 61445,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run2/README.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run2/README.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run2/README.md",
+      "sha256": "066da4b57e73d4ad61ad6a7882ca8349b7ff852e6538575b76fd8ea69094bb34",
+      "bytes": 5012,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run3/ACCURACY-REPORT.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run3/ACCURACY-REPORT.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run3/ACCURACY-REPORT.md",
+      "sha256": "e6ebf58792b5289628b0b650ddd5fe6ec4c7f2983bf8b738f42e7d7cf701df7d",
+      "bytes": 56581,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    },
+    {
+      "path": "private/upstream/examples/ndlc-v1.5.2/opus-4.6-run3/README.md",
+      "upstream_path": "examples/ndlc-v1.5.2/opus-4.6-run3/README.md",
+      "url": "https://raw.githubusercontent.com/calebevans/mulder/f3f1952ba610bb2b7e6bd6548c903546f8ec5f63/examples/ndlc-v1.5.2/opus-4.6-run3/README.md",
+      "sha256": "fa7c11a7373f01d3f2c254f72e6f4566ec7d1b249a3cec905a396eb196a11629",
+      "bytes": 5019,
+      "unchanged": true,
+      "matches_existing_local_copy": true
+    }
+  ]
+}

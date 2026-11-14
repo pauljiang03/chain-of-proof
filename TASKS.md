@@ -1,20 +1,27 @@
-# Work remaining
+# Finish pass
 
-The implementation and evaluation are in development.
-Do not run Mulder until finalization and the user's instruction.
+The AI investigator is the primary workflow. The miner is an optional baseline.
+Keep essential evidence access, Lean verification, explicit limits, and reproducible evaluation.
 
-1. Rebuild facts with source-derived acquisition identity and explicit public policy.
-2. Complete answer export for the new concrete artifact inventory.
-3. Use the same public path, name, and time rules for both systems.
-4. Prepare the separate original Mulder 20-item rubric and label its derived public prompt.
-5. Review parser failures and new record semantics before generating the next report.
-6. Complete answer support for concrete file inventory, CD staging, recovery, content, and full timelines.
-7. Independently review the full reference. Resolve every unevaluable question or publish an explicit unresolved contract.
-8. Freeze the comparison inputs, model, budgets, versions, and scoring rules.
-9. Run the controlled comparison only after the user gives the instruction.
-10. Add an independently reviewed contract for the second case and evaluate it separately.
+## Ready
 
-Current development output belongs in `runs/dev/`.
-The published snapshot belongs in `runs/current/`.
-The public Mulder preparation package belongs in `comparison/mulder/`.
-Source evidence and the original answer document must remain available for review.
+- Reader and answer-export fixes are integrated.
+- The latest full NIST fact build is ready outside Git.
+- Both Mulder test packages are prepared and remain unrun.
+- 281 tests pass. The Lean build passes.
+- All 473 saved certificates verify. All 24 false probes are refused.
+
+## Next
+
+1. Configure model access locally. The installed Claude CLI was signed out at the last check.
+2. Run the AI with the new evidence, public context, and all public questions.
+3. Independently verify its certificates and score its structured answers.
+4. Review missing answers and actual source errors. Keep unsupported inferences separate.
+5. Finalize comparison inputs and reference decisions. Run Mulder only after the user's instruction.
+
+The saved report still has 9 complete, 17 partial, and 20 unanswered questions.
+Another 14 questions require reference review.
+These are development results, not a finished benchmark claim.
+
+New schemas, exhaustive mining, image interpretation, and presentation extras are deferred.
+Use [WORKSTREAMS.md](WORKSTREAMS.md) for ownership, available parallel tasks, paths, and run commands.

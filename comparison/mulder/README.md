@@ -7,7 +7,8 @@ This package contains:
 
 | File | Purpose |
 |---|---|
-| `MULDER.md` | Public instructions and all 60 question structures. |
+| `MULDER.md` | The shared public case brief, instructions, and all 60 question structures. |
+| `case-profile.json` | The same reviewed public case context used by Chain of Proof. No device serial mapping or expected answers. |
 | `questions.json` | The same public profile used by Chain of Proof. |
 | `answers.template.json` | One unknown response for each question. It contains no expected values. |
 | `manifest.json` | Input hashes, evidence segment hashes, and unfinished comparison settings. |
@@ -44,17 +45,41 @@ and [README](https://github.com/calebevans/mulder/blob/main/README.md) when the 
 No installation or model call has been performed for this package.
 
 On the chosen host, create a dedicated evidence directory.
-Copy only the seven listed image segments, `MULDER.md`, and `questions.json` into it.
+Copy only the seven listed image segments, `MULDER.md`, `case-profile.json`, and `questions.json` into it.
 Verify their hashes against the manifest.
 Do not mount the repository or answer-key directory as investigator input.
 Use a separate writable directory for each trial's logs and reports.
 
 ## Submission and scoring
 
-Both systems receive the same public question structures and comparison rules.
+Both systems receive the same public case brief, question structures, and comparison rules.
 The private expected answers remain outside their inputs.
 The report must contain one complete schema-version-2 answer block.
 A missing supported value must remain unknown.
+
+For our investigator, select the copied public context explicitly, including when using a
+freshly rebuilt facts file:
+
+```sh
+.venv/bin/python -m agent.run \
+  --facts /path/fresh-case-facts.json \
+  --case-profile comparison/mulder/case-profile.json \
+  --questions comparison/mulder/questions.json \
+  --name dev/nist-trial-1 --no-score
+```
+
+Mulder receives the identical brief through the prepared `MULDER.md` and the copied
+`case-profile.json`; its environment-specific launch command is finalized separately.
+Recreate a package in a new directory with both public inputs:
+
+```sh
+.venv/bin/python -m eval.package \
+  --case-profile comparison/mulder/case-profile.json \
+  --questions comparison/mulder/questions.json \
+  --images data/pc.E01 data/pc.E02 data/pc.E03 data/pc.E04 \
+    data/rm1.E01 data/rm2.E01 data/rm3.E01 \
+  --out /path/new-public-package
+```
 
 After an authorized trial, extract that block without interpreting its prose:
 

@@ -44,7 +44,8 @@
   "inputs": {
     "questions.json": "d3595618d737c2ffcaf92e364a9b0a485409885c2e0227af45507fb58a03f25a",
     "answers.template.json": "a8fd26725e894b33932c77f1fe5e482ac47b435d2013230199bf7ef6a9e1c2d9",
-    "MULDER.md": "4f9665da0f23957558220a51a93f02cd14ddde405a59d1120e5d4c4c9d5bde24"
+    "MULDER.md": "d7d112585622a4a499e51053738ab8397519145c9f9ebc981d584c7c10605971",
+    "case-profile.json": "88199c3549afcd624cc61151d3ce5504c549dc6062de22cd7646b3ab4281e493"
   },
   "comparison": {
     "trials_per_system": 3,

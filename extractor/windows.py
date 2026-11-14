@@ -116,19 +116,91 @@ def _lnk_files(ev, t, common):
     return n
 
 
+class _EmptyOLEChain:
+    def open(self):
+        return io.BytesIO(b"")
+
+
+class _JumpListOLE(OLE):
+    """Dissect OLE 3.12 treats an absent MiniFAT's ENDOFCHAIN as a sector number.
+
+    MS-CFB 2.4 permits no MiniFAT/mini stream. Handle only explicitly empty
+    chains; inconsistent nonzero sizes/counts still fail. No input bytes change.
+    https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/c5d235f7-b73c-4ec5-bf8d-5c08306cd023
+    """
+    def chain(self, sect, size=None):
+        if sect == 0xFFFFFFFE:
+            if self.header._sectDirStart == sect:
+                raise ValueError("CFB directory chain is absent")
+            if size == 0 or (size is None and self.header._sectMiniFatStart == sect
+                             and self.header._csectMiniFat == 0):
+                return _EmptyOLEChain()
+            raise ValueError("CFB nonempty chain starts at ENDOFCHAIN")
+        return super().chain(sect, size)
+
+    def minichain(self, sect, size=None):
+        if sect == 0xFFFFFFFE:
+            if size == 0:
+                return _EmptyOLEChain()
+            raise ValueError("CFB nonempty mini stream starts at ENDOFCHAIN")
+        return super().minichain(sect, size)
+
+
 def _destlist(data: bytes) -> dict:
-    """Windows 7 DestList (version 1): stream name -> (last access FILETIME, path)."""
-    if len(data) < 32 or struct.unpack_from("<I", data, 0)[0] != 1:
+    """DestList v1-v4: numbered LNK stream -> (entry-update FILETIME, raw path).
+
+    Layout: libyal/dtformats Jump lists format, DestList entry v1 and v2+;
+    the v2+ trailer is a property-store byte count, not unconditional padding.
+    https://github.com/libyal/dtformats/blob/main/documentation/Jump%20lists%20format.asciidoc
+    https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Automatic/DestList.cs
+    Truncated/unsupported layouts are reported, never silently treated as empty.
+    """
+    if not data:                         # an empty DestList stream is valid
         return {}
+    if len(data) < 32:
+        raise ValueError("DestList header is truncated")
+    version, count = struct.unpack_from("<II", data)
+    if version not in (1, 2, 3, 4):
+        raise ValueError(f"unsupported DestList version {version}")
+    path_offset = 112 if version == 1 else 128
     out, off = {}, 32
-    while off + 0x72 <= len(data):
-        entry = struct.unpack_from("<Q", data, off + 0x58)[0]
-        filetime = struct.unpack_from("<Q", data, off + 0x64)[0]
-        length = struct.unpack_from("<H", data, off + 0x70)[0]
-        path = data[off + 0x72: off + 0x72 + 2 * length].decode("utf-16-le", "replace")
-        out["%x" % entry] = (filetime, path)
-        off += 0x72 + 2 * length
+    for _ in range(count):
+        if off + path_offset + 2 > len(data):
+            raise ValueError(f"DestList entry header is truncated at byte {off}")
+        entry = struct.unpack_from("<I", data, off + 88)[0]
+        filetime = struct.unpack_from("<Q", data, off + 100)[0]
+        length = struct.unpack_from("<H", data, off + path_offset)[0]
+        start, end = off + path_offset + 2, off + path_offset + 2 + 2 * length
+        if end > len(data):
+            raise ValueError(f"DestList path is truncated at byte {off}")
+        path = data[start:end].decode("utf-16-le")
+        if "\x00" in path:
+            raise ValueError(f"DestList path contains a NUL at byte {off}")
+        if version > 1:
+            if end + 4 > len(data):
+                raise ValueError(f"DestList property-store size is truncated at byte {end}")
+            extra = struct.unpack_from("<I", data, end)[0]
+            end += 4 + extra
+            if end > len(data):
+                raise ValueError(f"DestList property store is truncated at byte {off}")
+        key = f"{entry:x}"
+        if key in out:
+            raise ValueError(f"duplicate DestList stream number {key}")
+        out[key] = (filetime, path)
+        off = end
+    if off != len(data):
+        raise ValueError(f"DestList header declares {count} entries but {len(data) - off} bytes remain")
     return out
+
+
+def _jumplist_stream(ole, name):
+    entry = ole.get(name)
+    if entry.size > 16 * 1024 * 1024:
+        raise ValueError(f"JumpList stream {name} exceeds the 16 MiB parsing limit")
+    data = entry.open().read()
+    if len(data) != entry.size:
+        raise ValueError(f"JumpList stream {name} read {len(data)} of {entry.size} bytes")
+    return data
 
 
 def _jumplists(ev, t, common):
@@ -139,31 +211,43 @@ def _jumplists(ev, t, common):
             continue
         for p in sorted(folder.iterdir(), key=lambda x: x.name):
             try:
-                ole = OLE(p.open("rb"))
-                names = list(ole.root.listdir())
-                if "DestList" not in names:
-                    continue
-                dest = _destlist(ole.get("DestList").open().read())
-                for name in names:
-                    if name == "DestList" or name not in dest:
+                with p.open("rb") as stream:
+                    ole = _JumpListOLE(stream)
+                    names = list(ole.root.listdir())
+                    if "DestList" not in names:
                         continue
-                    filetime, dest_path = dest[name]
-                    t_us = us_from_filetime(filetime)
-                    if not 0 < t_us < 4_102_444_800_000_000:   # sanity: before 2100
-                        continue
-                    lnk = Lnk(io.BytesIO(ole.get(name).open().read()))
-                    prov = dict(artifact=f"{str(p).replace('/', chr(92))} stream {name}",
-                                user=user.name, destlist_path=dest_path,
-                                time_meaning="jump list DestList last-access time for this entry")
-                    if _lnk_fact(ev, lnk, t_us, common, **prov):
-                        n += 1
-                    elif re.match(r"^[A-Za-z]:\\", dest_path):
-                        # no LinkInfo block, so no volume serial: keep the path, leave
-                        # the volume empty rather than guess it from the drive letter
-                        ev.add("lnkTarget", t_us, 1, dest_path[2:].rstrip("\\") or "\\", "",
-                               drive_letter=dest_path[:2],
-                               volume="not recorded by this jump list entry", **prov, **common)
-                        n += 1
+                    raw = _jumplist_stream(ole, "DestList")
+                    dest = _destlist(raw)
+                    version = struct.unpack_from("<I", raw)[0] if raw else None
+                    for name, (filetime, dest_path) in dest.items():
+                        where = f"{str(p).replace('/', chr(92))} stream {name}"
+                        try:
+                            if name not in names:
+                                raise ValueError("DestList references a missing numbered LNK stream")
+                            t_us = us_from_filetime(filetime)
+                            if not 0 < t_us < 4_102_444_800_000_000:
+                                raise ValueError("DestList entry FILETIME is outside supported 1970-2100 range")
+                            lnk = Lnk(io.BytesIO(_jumplist_stream(ole, name)))
+                            prov = dict(artifact=where, user=user.name, destlist_path=dest_path,
+                                        destlist_version=version, destlist_filetime=filetime,
+                                        timestamp_semantics="destlist_entry_update", source="JumpList",
+                                        time_meaning="jump list DestList entry last-update FILETIME "
+                                                     "(shell access record, not target-file modification)")
+                            if _lnk_fact(ev, lnk, t_us, common, **prov):
+                                n += 1
+                            elif re.match(r"^[A-Za-z]:\\", dest_path):
+                                # The entry stores a path but no volume serial. Never
+                                # infer the volume from a drive letter.
+                                ev.add("lnkTarget", t_us, 1, dest_path[2:].rstrip("\\") or "\\", "",
+                                       drive_letter=dest_path[:2],
+                                       volume="not recorded by this jump list entry", **prov, **common)
+                                n += 1
+                            else:
+                                ev.problem(where, ValueError(
+                                    "DestList target is not a supported filesystem path; "
+                                    "no file-target fact emitted: " + repr(dest_path)))
+                        except Exception as error:
+                            ev.problem(where, error)
             except Exception as e:
                 ev.problem(str(p), e)
     return n
@@ -360,14 +444,26 @@ def _burn_traces(ev, t, common):
 MAPI_DISPLAY_TO, MAPI_SENDER_SMTP, MAPI_MESSAGE_ID = 0x0E04, 0x5D01, 0x1035
 
 
-def _mapi_text(message, wanted: int) -> str:
+def _mapi_text_property(message, wanted: int):
+    """Return a string and availability state without conflating absence with empty.
+
+    Availability describes this property, not whether a sender or message exists.
+    """
     for record_set in message.record_sets:
         for entry in record_set.entries:
-            if entry.entry_type == wanted and entry.data:
+            if entry.entry_type == wanted:
+                if entry.data is None or entry.value_type not in (0x1E, 0x1F):
+                    return None, "unavailable"
                 if entry.value_type == 0x1F:
-                    return entry.data.decode("utf-16-le", "replace").rstrip("\x00")
-                return entry.data.decode("utf-8", "replace").rstrip("\x00")
-    return ""
+                    value = entry.data.decode("utf-16-le", "replace").rstrip("\x00")
+                else:
+                    value = entry.data.decode("utf-8", "replace").rstrip("\x00")
+                return value, "present" if value else "empty"
+    return None, "missing"
+
+
+def _mapi_text(message, wanted: int) -> str:
+    return _mapi_text_property(message, wanted)[0] or ""
 
 
 def _email(ev, t, common):
@@ -400,10 +496,11 @@ def _email(ev, t, common):
                 sent = m.get_client_submit_time_as_integer()
                 if not to or not subject or not sent or "Sync Issues" in here:
                     continue                      # Outlook's own synchronization logs
+                sender, sender_status = _mapi_text_property(m, MAPI_SENDER_SMTP)
                 ev.add("emailSent", us_from_filetime(sent), 1_000_000, subject,
                        f"from {m.sender_name} to {to}",
                        artifact=f"{source} folder {' / '.join(here[-2:])}", mailbox_user=user,
-                       folder=here[-1], sender_address=_mapi_text(m, MAPI_SENDER_SMTP),
+                       folder=here[-1], sender_address=sender, sender_address_status=sender_status,
                        message_id=_mapi_text(m, MAPI_MESSAGE_ID),
                        attachments=m.number_of_attachments,
                        time_meaning="client submit time stored in the message", **common)
@@ -417,7 +514,9 @@ def _email(ev, t, common):
         source = str(path).replace("/", "\\")
         try:
             box = pypff.file()
-            box.open_file_object(io.BytesIO(path.open("rb").read()))
+            with path.open("rb") as handle:
+                contents = handle.read()
+            box.open_file_object(io.BytesIO(contents))
             walk(box.get_root_folder(), [], user, source)
         except Exception as e:
             ev.problem(source, e)

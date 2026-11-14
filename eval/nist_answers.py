@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 from checker import claims
 
 
-VERSION = "1.0"
+VERSION = "1.2"
 
 
 def utc(us):
@@ -163,6 +163,72 @@ def _artifact_path(value):
     return found.group(1) if found else None
 
 
+def _browser_source_file(fact):
+    """Prefer the reader's file field; recognize only known legacy locator forms.
+
+    Chrome's history databases have no extension. The tail describes a database
+    record, not part of the filename. An arbitrary locator is not a file path.
+    """
+    prov = fact.get("prov", {})
+    if "source_file" in prov:
+        value = prov["source_file"]
+        slot = "prov.source_file"
+    else:
+        locator = prov.get("artifact", "")
+        match = None
+        if fact.get("aux_text", "").casefold() == "chrome":
+            match = re.fullmatch(r"(.+) table (?:visits|urls|omni_box_shortcuts) id \d+", locator)
+            if match is None:
+                match = re.fullmatch(r"(.+) entry for history id \d+", locator)
+        value = match[1] if match else _artifact_path(locator)
+        slot = "prov.artifact"
+    if not concrete_path(value):
+        return None
+    value = normalized_path(value)
+    if not re.match(r"^[A-Za-z]:\\|^\\\\[^\\]+\\", value):
+        return None
+    return slot, value
+
+
+def _program_contract_fields(evidence, fact):
+    """Translate known artifact semantics into the public answer vocabulary.
+
+    A source name alone cannot turn a file/key timestamp into execution. Unknown
+    descriptions stay explicit; they are not silently assigned a familiar meaning.
+    """
+    slot, source = _source(fact)
+    names = {"prefetch": "Prefetch", "userassist": "UserAssist",
+             "application compatibility cache": "Shimcache", "shimcache": "Shimcache",
+             "muicache": "MuiCache"}
+    canonical = names.get(source.casefold(), source)
+    original = fact.get("prov", {}).get("time_meaning", "")
+    meaning = None
+    if canonical == "Prefetch" and re.fullmatch(r"(?:last run time|earlier run time \d+) in the prefetch header", original):
+        meaning = "execution"
+    elif canonical == "UserAssist" and original == "last run time stored in the UserAssist entry":
+        meaning = "execution"
+    elif canonical == "Shimcache" and original == "last-modified time of the file as stored in the compatibility cache; not a run time":
+        meaning = "file modification"
+    no_time = ((canonical == "MuiCache" or source == "Program Compatibility Assistant")
+               and original == "last-write time of the registry key; the list keeps no time per program")
+    no_time = no_time or (source == "RecentFileCache.bcf" and original == "last-modified time of RecentFileCache.bcf; the cache keeps no time per program")
+    no_time = no_time or (source == "open/save dialog history" and original == "last-write time of the registry key (set when the most recent entry, position 1, was written); the list keeps no time per program")
+    if canonical == "Shimcache" and original == "last-write time of the AppCompatCache key; this entry stores no file time":
+        no_time = True
+    if no_time:
+        meaning = "unreported"
+    source_value = evidence.value(fact, slot, lambda _: canonical, "artifact source name in the public vocabulary")
+    meaning_value = (evidence.value(fact, "prov.time_meaning", lambda _: meaning,
+                                   "known artifact timestamp semantics in the public vocabulary")
+                     if meaning else evidence.value(fact, "prov.time_meaning"))
+    if meaning_value is not None and meaning:
+        meaning_value.support.extend(source_value.support)
+    timestamp = (evidence.value(fact, "prov.time_meaning", lambda _: None,
+                                "artifact explicitly stores no per-program timestamp")
+                 if no_time else evidence.time(fact))
+    return source_value, meaning_value, timestamp
+
+
 def _full_path(fact):
     p = fact.get("prov", {})
     if p.get("destlist_path"):
@@ -188,6 +254,65 @@ def _source(fact):
     return "aux_text", fact["aux_text"]
 
 
+def inventory_paths(evidence):
+    """Concrete paths of fully hashed containers, classified by bound provenance.
+
+    The certificate proves the fileContent row; directory-layout classification is
+    hashed metadata, not a proof of container contents, usage, ownership or completeness.
+    Unreadable fileSeen inventories and census-only claims are not used here.
+    """
+    paths = defaultdict(dict)
+    categories = {"outlook_mailbox", "thumbnail_cache", "sticky_notes", "windows_search"}
+    for fact in evidence.of("fileContent"):
+        prov = fact.get("prov", {})
+        category = prov.get("inventory_category")
+        path = fact.get("obj_text")
+        if (category not in categories or not concrete_path(path)
+                or not re.match(r"^[A-Za-z]:\\|^\\\\[^\\]+\\", path)
+                or prov.get("source_path") != path
+                or prov.get("timestamp_semantics") != "examination_observation"
+                or prov.get("hash_complete") is not True
+                or prov.get("hash_algorithm") != "sha256"
+                or not re.fullmatch(r"sha256:[0-9a-f]{64}", fact.get("aux_text", ""))
+                or not any(s["set"] == "contentHashed" for s in evidence.support[fact["id"]])):
+            continue
+        value = evidence.value(fact, "obj_text", normalized_path, "concrete hashed container path")
+        for slot in ("inventory_category", "source_path", "hash_complete", "hash_algorithm", "timestamp_semantics"):
+            value.support.extend(evidence.value(fact, "prov." + slot).support)
+        value.support.extend(evidence.value(fact, "aux_text").support)
+        value.support = [support for support in value.support if support["set"] == "contentHashed"]
+        key = value.value.casefold()
+        if key in paths[category]:
+            paths[category][key].support.extend(value.support)
+        else:
+            paths[category][key] = value
+    return paths
+
+
+def _merge_scalar_inventory(answer, qid, field, paths, other_paths=()):
+    """A scalar contract cannot select one of multiple observed container paths."""
+    if not paths:
+        return
+    candidates = dict(paths)
+    previous = answer.get(qid, {}).get(field)
+    for value in list(other_paths) + ([previous] if previous is not None else []):
+        key = normalized_path(value.value).casefold()
+        if key in candidates:
+            for support in value.support:
+                if support not in candidates[key].support:
+                    candidates[key].support.append(support)
+        else:
+            candidates[key] = value
+    if len(candidates) == 1:
+        answer.setdefault(qid, {})[field] = next(iter(candidates.values()))
+        return True
+    else:
+        # Preserve other independently supported fields; do not choose by profile
+        # name, expected answer, first sighting, timestamp, or lexicographic order.
+        answer.setdefault(qid, {}).pop(field, None)
+        return False
+
+
 def generate(run, profile):
     if profile.get("schema_version") != 2 or not profile.get("case_id"):
         raise ValueError("public questions need schema_version 2 and case_id")
@@ -203,6 +328,7 @@ def generate(run, profile):
     zone = ZoneInfo(profile.get("time_zone", "UTC"))
     e = Evidence(run)
     answer = {}
+    unresolved = {}
     settings = defaultdict(list)
     for f in e.of("systemSetting"):
         settings[f["obj_text"].casefold()].append(f)
@@ -281,13 +407,10 @@ def generate(run, profile):
     if installed:
         answer["Q10"] = {"applications": installed}
     for f in e.of("programRun"):
-        source_slot, source = _source(f)
-        meaning = f.get("prov", {}).get("time_meaning", "")
-        timestamp = (e.value(f, "prov.time_meaning", lambda _: None, "artifact explicitly stores no per-program timestamp")
-                     if "no time per program" in meaning else e.time(f))
+        source, meaning, timestamp = _program_contract_fields(e, f)
         executions.append(_clean({"timestamp": timestamp, "path_or_application_id": e.value(f, "aux_text") if f["aux_text"] not in ("", "(none)") else e.value(f, "obj_text"),
-            "execution_count": e.value(f, "prov.run_count"), "source": e.value(f, source_slot, lambda _, s=source: s, "artifact source classification"),
-            "time_meaning": e.value(f, "prov.time_meaning")}))
+            "execution_count": e.value(f, "prov.run_count"), "source": source,
+            "time_meaning": meaning}))
     if executions:
         answer["Q11"] = {"records": executions}
     q12 = next((q for q in questions if str(q["id"]) == "Q12"), {})
@@ -313,12 +436,14 @@ def generate(run, profile):
     browser_artifacts = {}
     for f in e.of("webVisit"):
         p = f.get("prov", {})
-        for slot in ("prov.container_folder", "prov.artifact"):
-            raw = p.get(slot[5:])
-            if not raw:
-                continue
-            path = normalized_path(raw) if slot.endswith("container_folder") else _artifact_path(raw)
-            if path and concrete_path(path):
+        candidates = []
+        if concrete_path(p.get("container_folder")):
+            candidates.append(("prov.container_folder", normalized_path(p["container_folder"])))
+        source_file = _browser_source_file(f)
+        if source_file is not None:
+            candidates.append(source_file)
+        for slot, path in candidates:
+            if re.match(r"^[A-Za-z]:\\|^\\\\[^\\]+\\", path):
                 browser_artifacts.setdefault((f["aux_text"], path.casefold()), {
                     "browser": e.value(f, "aux_text"),
                     "path": e.value(f, slot, lambda _, path=path: path, "history artifact path from the recorded locator")})
@@ -337,12 +462,22 @@ def generate(run, profile):
     if mail_accounts and len({f["obj_text"].casefold() for f in mail_accounts}) == 1:
         answer["Q20"] = {"account": e.value(mail_accounts[0], "obj_text")}
     mailbox = next((f for f in mail_accounts if _artifact_path(f.get("prov", {}).get("artifact", ""))), None)
+    mailbox_paths = [e.value(f, "prov.artifact", _artifact_path, "mailbox file path from artifact locator")
+                     for f in mail_accounts if _artifact_path(f.get("prov", {}).get("artifact", ""))]
     if mailbox:
         answer["Q19"] = {"path_as_printed": e.value(mailbox, "prov.artifact", _artifact_path, "mailbox file path from artifact locator")}
     messages = []
     for f in e.of("emailSent"):
+        sender = f.get("prov", {}).get("sender_address")
+        sender_status = f.get("prov", {}).get("sender_address_status")
+        # Legacy readers used an empty string for an unavailable MAPI property.
+        # Neither an absent property nor an empty address supplies a sender.
+        sender_known = isinstance(sender, str) and bool(sender.strip()) and sender_status not in ("missing", "unavailable", "empty")
         message = _clean({"timestamp": e.time(f), "subject": e.value(f, "obj_text"),
-                          "folder_or_recovery_source": e.value(f, "prov.folder"), "from": e.value(f, "prov.sender_address")})
+                          "folder_or_recovery_source": e.value(f, "prov.folder"),
+                          "from": e.value(f, "prov.sender_address") if sender_known else None})
+        if sender_known and sender_status is not None:
+            message["from"].support.extend(e.value(f, "prov.sender_address_status").support)
         if f.get("prov", {}).get("attachments") == 0:
             message["attachments"] = e.value(f, "prov.attachments", lambda _: [], "recorded zero attachment count")
         messages.append(message)
@@ -426,16 +561,21 @@ def generate(run, profile):
         answer["Q31"] = {"account": e.value(first, "obj_text"), "logon_time": e.interpreted_time(first)}
 
     notes, caches, desktop_index, copies, recycling = [], {}, [], [], []
+    note_paths, search_paths = [], []
     for f in e.of("noteText"):
         # A compound-storage stream timestamp is not the containing file's time.
         if "last-modified time of the" in f.get("prov", {}).get("time_meaning", "") and "file" in f["prov"]["time_meaning"]:
             notes.append({"file_modified": e.interpreted_time(f), "content": e.value(f, "obj_text")})
         path = _artifact_path(f.get("prov", {}).get("artifact", ""))
         if path:
-            answer.setdefault("Q40", {"path": e.value(f, "prov.artifact", _artifact_path, "note storage file from artifact locator")})
+            value = e.value(f, "prov.artifact", _artifact_path, "note storage file from artifact locator")
+            note_paths.append(value)
+            answer.setdefault("Q40", {"path": value})
     if notes:
         answer["Q41"] = {"notes": notes}
     for f in e.of("fileSeen"):
+        if "inventory_category" in f.get("prov", {}):
+            continue  # Inventory answer export requires a complete contentHashed claim.
         artifact = f.get("prov", {}).get("artifact", "")
         cache = re.search(r"([A-Za-z]:\\.*?thumbcache_[^\\ ]+\.db)\b", artifact, re.I)
         if cache and concrete_path(cache[1]):
@@ -443,7 +583,9 @@ def generate(run, profile):
         if f["aux_text"] == "windows search index":
             database = _artifact_path(artifact)
             if database:
-                answer.setdefault("Q42", {"database_path": e.value(f, "prov.artifact", _artifact_path, "search database from artifact locator")})
+                value = e.value(f, "prov.artifact", _artifact_path, "search database from artifact locator")
+                search_paths.append(value)
+                answer.setdefault("Q42", {"database_path": value})
             if "\\desktop\\" in f["obj_text"].casefold() and f.get("prov", {}).get("column") == "System_DateCreated":
                 desktop_index.append({"date_created": e.interpreted_time(f, "prov.column"), "path": e.value(f, "obj_text", normalized_path, "canonical path separators")})
     if caches:
@@ -468,11 +610,27 @@ def generate(run, profile):
     if recycling:
         answer["Q51"] = {"records": recycling}
 
+    inventory = inventory_paths(e)
+    for qid, field, category, other_paths in (
+            ("Q19", "path_as_printed", "outlook_mailbox", mailbox_paths),
+            ("Q40", "path", "sticky_notes", note_paths),
+            ("Q42", "database_path", "windows_search", search_paths)):
+        if _merge_scalar_inventory(answer, qid, field, inventory[category], other_paths) is False:
+            unresolved[qid] = ("Multiple supported container paths conflict with the scalar public answer field; "
+                               "no path selected without independently supported scope.")
+    if inventory["thumbnail_cache"]:
+        for key, value in inventory["thumbnail_cache"].items():
+            if key in caches:
+                value.support.extend(caches[key].support)
+            caches[key] = value
+        answer["Q38"] = {"paths": [caches[key] for key in sorted(caches)]}
+
     responses = []
     for qid in question_ids:
         value = answer.get(qid)
         if not value:
-            responses.append({"question_id": qid, "status": "unknown", "reason": "No supported mapping from the supplied certified statements; no negative or intent inferred."})
+            responses.append({"question_id": qid, "status": "unknown", "reason": unresolved.get(qid,
+                              "No supported mapping from the supplied certified statements; no negative or intent inferred.")})
             continue
         rendered, support = _render(value)
         responses.append({"question_id": qid, "status": "answered", "answer": rendered,

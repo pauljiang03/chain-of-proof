@@ -2,13 +2,36 @@
 
 NIST CFReDS Data Leakage: 60 public question contracts
 
-Use only the supplied images and this public question contract.
+Use only the supplied images, public case context, and public question contract.
 Answer every question. Give complete requested lists and attributes.
 Use unknown when the evidence does not support an answer.
 Keep evidence citations in the investigation report.
 Include exactly one JSON code block with the complete schema_version 2 submission.
 Use the case_id and question_id values in the contract.
 The JSON block must contain answers, not a self-assessed score.
+
+## Public case context
+
+NIST CFReDS Data Leakage Case
+
+You are the investigator on a suspected data-leak case.
+
+THE CASE
+'Iaman Informant' (Windows account `informant`) is a manager at a technology company.
+He is suspected of leaking confidential files about a secret project to 'Spy
+Conspirator', who works for a competitor. Company policy: confidential files may be kept
+only on authorized external storage and on the secured network drive, and personal
+storage devices are forbidden. He was stopped at the security checkpoint carrying a USB
+memory stick and a CD. Four things were seized and imaged: his work PC, a company-issued
+USB stick (exhibit RM#1), his own USB stick (RM#2) and a CD-R (RM#3).
+
+Deterministic tools extracted records from those images into one table. Not everything
+has been extracted yet. If the records needed for a question are missing, say so. Do
+not guess.
+
+The same case-profile.json and questions.json are supplied to both systems.
+
+Declared case timezone: America/New_York
 
 ## Public contract
 

@@ -6,8 +6,12 @@ import struct
 import unittest
 import uuid
 from datetime import datetime, timezone
+import json
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from extractor import webcloud as w
+from extractor.store import Evidence
 
 
 def utc_us(*parts):
@@ -88,6 +92,22 @@ class InternetExplorer(unittest.TestCase):
 
 
 class ChromeCache(unittest.TestCase):
+    def test_history_reader_records_source_file_separately_from_row_locator(self):
+        source = r"E:\Profiles\Another Person\Profile 7\History"
+        rows = {"urls": [SimpleNamespace(id=1, url="https://different.test/", title="Page", last_visit_time=0),
+                         SimpleNamespace(id=2, url="https://unvisited.test/", title="Cached", last_visit_time=13_000_000_000_000_001)],
+                "visits": [SimpleNamespace(id=37, url=1, transition=1, from_visit=0, visit_time=13_000_000_000_000_000)]}
+        evidence = Evidence()
+        with patch.object(w, "_rows", side_effect=lambda db, name: rows.get(name, [])):
+            w._chrome_history(evidence, object(), source, "Another Person", {"image": "different.E01"})
+        self.assertFalse(evidence.problems)
+        self.assertEqual(len(evidence.rows()), 2)
+        metadata = [json.loads(row[-1]) for row in evidence.rows()]
+        self.assertTrue(all(p["source_file"] == source for p in metadata))
+        self.assertTrue(all(p["account"] == "Another Person" for p in metadata))
+        self.assertEqual({p["artifact"] for p in metadata},
+                         {source + " table visits id 37", source + " table urls id 2"})
+
     def test_history_provider_cache(self):
         visit = pb_field(1, 13_000_000_000_000_000) + pb_field(2, 805306368)
         entry = (pb_field(1, 7) + pb_field(2, 3) + pb_field(3, 1) + pb_field(4, 13_000_000_000_000_001)

@@ -101,9 +101,17 @@ def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, di
     for g in by_kind["tag"]:
         tags[g.obj].append(g)
     usbs, devs, seen = by_kind["usbInsert"], by_kind["volumeOnDevice"], by_kind["volumeSeen"]
-    # the PC's own volumes: anything hosting a file extracted from the PC image
-    own = {f.aux for k in ("fileCreated", "fileModified") for f in by_kind[k]
-           if f.prov.get("exhibit") == "PC"}
+    # Local files and shortcuts must come from the same image and exhibit.
+    # A display name such as "PC" is not a portable case-role identifier.
+    def scope(f):
+        image, exhibit = f.prov.get("image"), f.prov.get("exhibit")
+        return (image, exhibit) if image and exhibit else None
+
+    own = defaultdict(set)
+    for kind in ("fileCreated", "fileModified"):
+        for fact in by_kind[kind]:
+            if scope(fact) is not None:
+                own[scope(fact)].add(fact.aux)
 
     def tagged(f: Fact, slot: str) -> List[dict]:
         return [{"tagged": [f.id, slot, g.id, g.aux]} for g in tags.get(getattr(f, slot), [])]
@@ -126,7 +134,7 @@ def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, di
             out.append((Q_DEVICES, _both([{"usbConnected": [u.id]}] + tagged(u, "obj"))))
 
     for l in by_kind["lnkTarget"]:
-        if l.aux in own:
+        if l.aux in own.get(scope(l), set()):
             continue
         on_device = [d for d in devs if d.aux == l.aux]
         recorded = sorted((s for s in seen if s.aux == l.aux), key=lambda x: (x.t, x.id))[:1]

@@ -16,12 +16,15 @@ Backends
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -54,7 +57,27 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
            "--output-format", "stream-json", "--verbose"]
     started, final, calls = time.time(), {}, 0
     with tempfile.TemporaryDirectory() as empty, open(run_dir / transcript, "w") as log:
-        proc = subprocess.Popen(cmd, cwd=empty, stdout=subprocess.PIPE, text=True)
+        proc = subprocess.Popen(cmd, cwd=empty, stdout=subprocess.PIPE, text=True,
+                                start_new_session=(os.name == "posix"))
+        expired = threading.Event()
+
+        def stop():
+            try:
+                if os.name == "posix":
+                    os.killpg(proc.pid, signal.SIGKILL)
+                else:
+                    proc.kill()
+            except ProcessLookupError:
+                pass
+
+        def expire():
+            expired.set()
+            stop()
+
+        # A silent subprocess must not evade the investigation time limit.
+        watchdog = threading.Timer(timeout_s, expire)
+        watchdog.daemon = True
+        watchdog.start()
         try:
             for line in proc.stdout:
                 log.write(line)
@@ -71,18 +94,26 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
                                   f"{what[:140]}", flush=True)
                 elif event.get("type") == "result":
                     final = event
-                if time.time() - started > timeout_s:
-                    proc.kill()
-                    print("  stopped: time limit reached")
-                    break
+        except BaseException:
+            stop()
+            raise
         finally:
-            proc.wait()
+            try:
+                proc.wait()
+            finally:
+                watchdog.cancel()
+                proc.stdout.close()
+    if expired.is_set():
+        print("  stopped: time limit reached")
     return {"summary": final.get("result", ""), "turns": final.get("num_turns"),
             "tool_calls": calls, "seconds": round(time.time() - started),
-            "ended": final.get("subtype", "no result event")}
+            "ended": ("time_limit" if expired.is_set() else
+                      final.get("subtype", "process_error" if proc.returncode else "no result event")),
+            "exit_code": proc.returncode}
 
 
-def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str) -> dict:
+def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
+                   timeout_s: int = 45 * 60) -> dict:
     """The investigator as a LangChain deep agent. Untested until an API key is present."""
     from deepagents import create_deep_agent
     from langchain_core.tools import tool
@@ -119,8 +150,17 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str) -> dict:
     agent = create_deep_agent(model=f"anthropic:{model}",
                              tools=[forms, sql, fact, check, conclude])
     started = time.time()
-    state = agent.invoke({"messages": [{"role": "user", "content": prompt}]},
-                         config={"recursion_limit": 500})
+    async def invoke():
+        return await asyncio.wait_for(
+            agent.ainvoke({"messages": [{"role": "user", "content": prompt}]},
+                          config={"recursion_limit": 500}), timeout=timeout_s)
+
+    try:
+        state = asyncio.run(invoke())
+    except asyncio.TimeoutError:
+        return {"summary": "Investigation time limit reached. Saved certificates remain available.",
+                "turns": None, "tool_calls": None, "seconds": round(time.time() - started),
+                "ended": "time_limit"}
     last = state["messages"][-1].content
     text = last if isinstance(last, str) else "".join(
         b.get("text", "") for b in last if isinstance(b, dict))
@@ -202,7 +242,8 @@ def main(argv=None) -> int:
                    COP_PROPOSER=f"agent:claude-code:{model}")
         meta = run_claude_code(model, run_dir, env, args.minutes * 60, prompt=prompt)
     else:
-        meta = run_deepagents(model, run_dir, str(facts_path), prompt=prompt)
+        meta = run_deepagents(model, run_dir, str(facts_path), prompt=prompt,
+                             timeout_s=args.minutes * 60)
     (run_dir / "summary.md").write_text(meta.pop("summary") + "\n")
     # Regression probes are isolated from findings and never enter the investigator prompt.
     regression = gate.measure(labeled, open_source(facts_path), profile.case_id,
@@ -222,7 +263,8 @@ def main(argv=None) -> int:
                           verification_output=run_dir / "verification.json")
     except (ValueError, OSError) as error:
         ap.error(str(error))
-    return 1 if regression and not regression["all_as_expected"] else 0
+    failed_execution = meta.get("ended") in ("process_error", "no result event")
+    return 1 if failed_execution or (regression and not regression["all_as_expected"]) else 0
 
 
 if __name__ == "__main__":

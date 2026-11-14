@@ -432,9 +432,9 @@ def _ie_webcache(ev, target, common, zone):
                 where = f"{source} table Container_{cid} ({name}) EntryId {r.get('EntryId')}"
                 try:
                     if name.lower() == "iedownload":
-                        _ie_download(ev, r, where, user, folder, common)
+                        _ie_download(ev, r, where, user, folder, dict(common, source_file=source))
                     else:
-                        _ie_visit(ev, r, where, user, name, folder, days, zone, common)
+                        _ie_visit(ev, r, where, user, name, folder, days, zone, dict(common, source_file=source))
                 except Exception as e:
                     ev.problem(where, e)
 
@@ -565,6 +565,7 @@ def _chrome(ev, target, common):
                         if r.url and r.last_access_time:
                             ev.add("webVisit", webkit_us(r.last_access_time), 1, r.url, "Chrome",
                                    artifact=f"{_win(path)} table omni_box_shortcuts id {r.id}",
+                                   source_file=_win(path),
                                    account=user, typed_text=r.text or "", hits=r.number_of_hits or 0,
                                    time_meaning="last time this address-bar shortcut was used",
                                    **common)
@@ -575,7 +576,7 @@ def _chrome(ev, target, common):
                 try:
                     for row in parse_history_provider_cache(path.open("rb").read()):
                         prov = dict(artifact=f"{_win(path)} entry for history id {row.get('history_id')}",
-                                    account=user, title=row.get("title", ""), **common)
+                                    source_file=_win(path), account=user, title=row.get("title", ""), **common)
                         for when, transition in row["visits"]:
                             ev.add("webVisit", webkit_us(when), 1, row["url"], "Chrome",
                                    time_meaning="visit time kept in Chrome's cache of its history",
@@ -598,7 +599,7 @@ def _chrome_history(ev, db, source, user, common):
             ev.problem(f"{source} table visits id {v.id}", ValueError(f"no urls row {v.url}"))
             continue
         visited.add(v.url)
-        prov = dict(artifact=f"{source} table visits id {v.id}", account=user, title=u.title or "",
+        prov = dict(artifact=f"{source} table visits id {v.id}", source_file=source, account=user, title=u.title or "",
                     transition=v.transition or 0, from_visit=v.from_visit or 0,
                     time_meaning="visit time", **common)
         if v.id in sources:
@@ -607,7 +608,7 @@ def _chrome_history(ev, db, source, user, common):
     for uid, u in sorted(urls.items()):
         if uid not in visited and u.url and u.last_visit_time:
             ev.add("webVisit", webkit_us(u.last_visit_time), 1, u.url, "Chrome",
-                   artifact=f"{source} table urls id {uid}", account=user, title=u.title or "",
+                   artifact=f"{source} table urls id {uid}", source_file=source, account=user, title=u.title or "",
                    time_meaning="last-visit time of a URL row that has no visit rows", **common)
     chains = {}
     for c in _rows(db, "downloads_url_chains"):
@@ -623,7 +624,7 @@ def _chrome_history(ev, db, source, user, common):
         for index, url in chain:
             ev.add("fileDownloaded", webkit_us(d.start_time), 1, saved, url,
                    artifact=f"{source} table downloads id {d.id}, downloads_url_chains index {index}",
-                   account=user, browser="Chrome", url_chain_position=f"{index + 1} of {len(chain)}",
+                   source_file=source, account=user, browser="Chrome", url_chain_position=f"{index + 1} of {len(chain)}",
                    end_time=webkit_us(d.end_time) if d.get("end_time") else 0,
                    received_bytes=d.get("received_bytes") or 0, total_bytes=d.get("total_bytes") or 0,
                    state=d.get("state") or 0, referrer=d.get("referrer") or "",

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "mulder-ndlc-original20-question-projection",
+  "source_benchmark_id": "mulder-ndlc-original20",
+  "case_id": "nist-cfreds-data-leakage",
+  "status": "prepared_not_run",
+  "input_equivalence": "New question-only projection; not a published original Mulder prompt. Supplying this list changes the historical autonomous-investigation input.",
+  "questions": [
+    {
+      "id": "M01",
+      "prompt": "Identify the suspect user and associated email identity. Cite the evidence for attribution."
+    },
+    {
+      "id": "M02",
+      "prompt": "Identify the PC operating-system version, edition, architecture, and domain or workgroup configuration."
+    },
+    {
+      "id": "M03",
+      "prompt": "Identify removable device RM1: manufacturer, model, device serial number, filesystem, and volume label."
+    },
+    {
+      "id": "M04",
+      "prompt": "Identify removable device RM2: manufacturer, model, device serial number, filesystem, and volume label."
+    },
+    {
+      "id": "M05",
+      "prompt": "Identify RM3 media type and filesystem. Report relevant recorded creation or format timestamps, their time zones, and what the source timestamps mean."
+    },
+    {
+      "id": "M06",
+      "prompt": "Identify the project documents present on USB media. Report filenames, sizes, locations, and evidence for any transfer conclusion."
+    },
+    {
+      "id": "M07",
+      "prompt": "Investigate filename or extension masquerading on RM2. Enumerate recoverable disguised files and supported original-to-renamed mappings."
+    },
+    {
+      "id": "M08",
+      "prompt": "Identify anti-forensic applications and evidence of their download, installation, execution, or removal."
+    },
+    {
+      "id": "M09",
+      "prompt": "Report relevant search-history evidence and state what conclusions about planning it supports. Label inferences."
+    },
+    {
+      "id": "M10",
+      "prompt": "Report cloud synchronization applications, their installation or execution evidence, and evidence for any data-transfer conclusion."
+    },
+    {
+      "id": "M11",
+      "prompt": "Report additional cloud-service installer downloads or executions and the evidence for their possible role."
+    },
+    {
+      "id": "M12",
+      "prompt": "Report USB connection timestamps, associate each event with its device, and identify the event-log or other source."
+    },
+    {
+      "id": "M13",
+      "prompt": "Reconstruct the timeline of project-document copies onto USB media, including the bounds and sources of any bulk-copy interval."
+    },
+    {
+      "id": "M14",
+      "prompt": "For identified cleanup software, distinguish installation and launch from actions actually performed. Cite evidence for any claimed artifact destruction or absence of action."
+    },
+    {
+      "id": "M15",
+      "prompt": "Investigate deletion of files on RM2. Report the affected filesystem, files, timing, and time-zone interpretation."
+    },
+    {
+      "id": "M16",
+      "prompt": "Enumerate recoverable RM3 documents and explain supported relationships to project documents on the other evidence media."
+    },
+    {
+      "id": "M17",
+      "prompt": "List the files opened or accessed on RM2 and cite evidence that links each access to that device."
+    },
+    {
+      "id": "M18",
+      "prompt": "Identify network shares and directories traversed. Cite evidence and relevant access times."
+    },
+    {
+      "id": "M19",
+      "prompt": "Reconstruct relevant email communications, including correspondents and messages supported by the evidence."
+    },
+    {
+      "id": "M20",
+      "prompt": "Explain FAT filesystem timestamp interpretation relative to UTC and the case time zone. Apply any supported offset consistently."
+    }
+  ]
+}

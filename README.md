@@ -1,7 +1,8 @@
 # Chain of Proof
 
 Chain of Proof produces forensic findings with Lean proofs.
-An AI agent or a fixed search program proposes a claim.
+The AI investigator searches records and proposes claims.
+An optional miner supplies a baseline with preset search rules.
 The Lean kernel verifies the formal claim against extracted records.
 The report uses fixed sentences from accepted claims.
 
@@ -28,7 +29,7 @@ See the [current results](runs/current/results.json) for each question.
 All 473 certificates in this snapshot pass independent verification.
 This count measures certificate validity, not answer accuracy.
 
-The [Mulder package](comparison/mulder/README.md) is prepared only.
+The [60-question package](comparison/mulder/README.md) and [original 20-item package](comparison/mulder-original20/README.md) are prepared only.
 We will run it after implementation and reference review are complete, with the user's instruction.
 Old reports and old scoring methods are available in Git history.
 
@@ -40,7 +41,7 @@ flowchart TD
     E --> F[Fact store and source details]
     Q[Public questions and answer format] --> S[AI agent]
     F --> S
-    F --> M[Fixed miner]
+    F --> M[Optional miner]
     S --> C[Claim in JSON]
     M --> C
     C --> G[Generate Lean code]
@@ -73,7 +74,7 @@ Those judgments have no Lean certificate.
 2. The fact store assigns each record an identifier.
    It stores text separately from the numeric fields used by Lean.
 3. The AI agent searches the fact store through restricted tools.
-   The miner uses fixed rules to produce candidate claims.
+   The optional miner uses preset rules to produce candidate claims.
 4. The checker converts each candidate claim into Lean code.
    The agent cannot supply its own Lean proof.
 5. The Lean kernel accepts or rejects the claim for the cited records.
@@ -248,3 +249,4 @@ An unsupported case receives no automatic NIST score.
 This document uses ASD-STE100 writing conventions and the technical terms above.
 See [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 See [TASKS.md](TASKS.md) for the work that remains.
+See [WORKSTREAMS.md](WORKSTREAMS.md) for task ownership and the terminal handoff.
