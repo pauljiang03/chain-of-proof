@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from checker import check as checker
-from checker import claims
+from checker import claims, needs
 from checker.facts import Fact, open_source
 from agent.audit import AuditLog, audited
 
@@ -190,22 +190,33 @@ class Workbench:
             return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
     @audited
-    def check(self, question: str, claim) -> dict:
+    def check(self, question: str, claim, revises=None) -> dict:
         """Propose a claim. Returns the kernel's verdict, with the reason if refused."""
         if isinstance(claim, str):
             try:
                 claim = json.loads(claim)
             except json.JSONDecodeError as e:
-                from checker import needs
                 reason = f"claim is not valid JSON: {e}"
                 return {"status": "rejected", "reason": reason,
                         "proof_gap": needs.malformed(reason)}
         with self._lock:
             log = self._log()
+            if revises is not None:
+                from agent.history import validate_revision
+                try:
+                    validate_revision(revises, log, current_id=f"A{len(log) + 1:03d}")
+                except ValueError as error:
+                    return {"status": "rejected", "reason": str(error),
+                            "proof_gap": needs.malformed(str(error))}
             key = json.dumps(claim, sort_keys=True)
             for earlier in log:
                 if json.dumps(earlier.get("claim"), sort_keys=True) == key:
-                    return dict(self._brief(earlier), note=f"already proposed as {earlier['finding_id']}")
+                    if revises is None:
+                        return dict(self._brief(earlier), note=f"already proposed as {earlier['finding_id']}")
+                    if earlier["finding_id"] == revises:
+                        reason = "An explicit revision must change the earlier claim; this proposal is unchanged."
+                        return {"status": "rejected", "reason": reason,
+                                "proof_gap": needs.malformed(reason)}
             result = checker.check(claim, f"A{len(log) + 1:03d}", self.source, question,
                                    self.run_dir, proposer=self.proposer)
             return self._brief(result)

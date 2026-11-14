@@ -29,11 +29,13 @@ TOOLS = [
                      "required": ["id"]}},
     {"name": "check",
      "description": "Propose one or more claims that answer a question. The proof checker "
-                    "certifies or refuses each, and says which check failed on a refusal.",
+                    "certifies or refuses each, and says which check failed on a refusal. "
+                    "Optionally name a prior proposal with revises to record an explicit correction.",
      "inputSchema": {"type": "object",
                      "properties": {"question": {"type": "string"},
                                     "claims": {"type": "array", "minItems": 1,
-                                               "items": {"type": "object"}}},
+                                               "items": {"type": "object"}},
+                                    "revises": {"type": "string"}},
                      "required": ["question", "claims"]}},
 ]
 
@@ -72,7 +74,8 @@ def call(bench: Workbench, name: str, args: dict) -> str:
         return json.dumps(bench.fact(int(args.get("id", -1))), indent=1, ensure_ascii=False)
     if name == "check":
         question = str(args.get("question", ""))
-        return json.dumps([bench.check(question, c) for c in args.get("claims", [])],
+        revision = {"revises": args["revises"]} if "revises" in args else {}
+        return json.dumps([bench.check(question, c, **revision) for c in args.get("claims", [])],
                           indent=1, ensure_ascii=False)
     raise KeyError(name)
 

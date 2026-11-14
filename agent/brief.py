@@ -83,12 +83,17 @@ writes the sentence. If they do not, it refuses and tells you which check failed
 A refusal is information. Read which check failed, look at the records again, then fix
 the claim or drop it. Never re-propose a refused claim unchanged, and never describe a
 refused claim as a finding.
+The `proof_gap` response is diagnostic guidance, not a finding. It identifies missing
+records, conflicting values, uncertain order, or unsupported rules where possible.
+Suggested evidence may not exist. Preserve contradictory records and uncertainty.
+When you correct a previous proposal, pass its ID as `revises` to `check`; this records
+the relationship and checks the changed claim again. Do not invent revision links.
 
 YOUR TOOLS (these five are all you have)
   forms                      the statement forms you may propose, with their arguments
   sql(query)                 one read-only SELECT over the records table
   fact(id)                   one record in full, with where it came from
-  check(question, claims)    propose claims; each is certified or refused
+  check(question, claims, revises?)    propose claims; optionally name an earlier proposal being corrected
   conclude(text, finding_ids)   record a conclusion you draw from certified findings
 
 """

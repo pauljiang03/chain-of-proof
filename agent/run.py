@@ -154,7 +154,7 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
     class ToolBudgetExpired(Exception):
         """Stop queued evidence work without confusing a provider timeout."""
 
-    def call_tool(function, *args):
+    def call_tool(function, *args, **kwargs):
         # Cancelling an asyncio task does not stop its worker thread. Check after
         # acquiring this lock so queued calls cannot begin after cancellation.
         with tool_lock:
@@ -164,7 +164,7 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
                 budget_expired.set()
                 stop_work.set()
                 raise ToolBudgetExpired()
-            return function(*args)
+            return function(*args, **kwargs)
 
     @tool
     def forms() -> str:
@@ -182,11 +182,12 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
         return json.dumps(call_tool(bench.fact, id), ensure_ascii=False)
 
     @tool
-    def check(question: str, claims: list) -> str:
-        """Propose claims (a list of claim objects). Each is certified or refused."""
+    def check(question: str, claims: list, revises: str | None = None) -> str:
+        """Propose claims for checking; optionally name the prior proposal being revised."""
         # Each proof is one synchronous operation; stop between claims instead
         # of finishing an unbounded batch after the investigation has expired.
-        return json.dumps([call_tool(bench.check, question, c) for c in claims], ensure_ascii=False)
+        revision = {"revises": revises} if revises is not None else {}
+        return json.dumps([call_tool(bench.check, question, c, **revision) for c in claims], ensure_ascii=False)
 
     @tool
     def conclude(text: str, finding_ids: list[str]) -> str:
