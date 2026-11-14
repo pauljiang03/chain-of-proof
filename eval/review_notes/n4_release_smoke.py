@@ -107,7 +107,12 @@ def backend_outcomes():
             with patch.object(run, "ROOT", directory), patch.object(run, function, side_effect=error), \
                  contextlib.redirect_stdout(io.StringIO()):
                 try:
-                    run.main(["--name", "probe", "--backend", backend, "--facts", str(facts), "--no-score"])
+                    code = run.main(["--name", "probe", "--backend", backend, "--facts", str(facts), "--no-score"])
+                    output = directory / "runs/probe"
+                    saved = json.loads((output / "run.json").read_text())
+                    observations[label] = {"cli_exit_code": code, "ended": saved["case"]["ended"],
+                        "error_type": saved["case"].get("error_type"),
+                        "remaining_artifacts": sorted(p.name for p in output.iterdir())}
                 except Exception as exc:
                     observations[label] = {"uncaught_exception": type(exc).__name__,
                         "remaining_artifacts": sorted(p.name for p in (directory / "runs/probe").iterdir())}

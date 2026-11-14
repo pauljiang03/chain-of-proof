@@ -141,17 +141,22 @@ class CaseProfiles(unittest.TestCase):
         self.assertEqual(sentinel.read_text(), 'keep')
 
     def test_deepagents_uses_selected_prompt_and_exposes_original_tools(self):
-        backend = Mock();backend.ainvoke = AsyncMock(return_value={'messages': [types.SimpleNamespace(content='done')]})
+        async def invoke(*args, **kwargs):
+            offered = {t.__name__: t for t in create.call_args.kwargs['tools']}
+            self.assertEqual(set(offered), set(run.INVESTIGATOR_TOOLS))
+            # Tool use belongs to the active investigation, before cancellation
+            # shuts down access to queued work at the end of the run.
+            offered['conclude']('uncertain', ['A001'])
+            return {'messages': [types.SimpleNamespace(content='done')]}
+
+        backend = Mock();backend.ainvoke = AsyncMock(side_effect=invoke)
         create = Mock(return_value=backend)
-        deep_module = types.ModuleType('deepagents');deep_module.create_deep_agent = create
         tools_module = types.ModuleType('langchain_core.tools');tools_module.tool = lambda function: function
-        with patch.dict('sys.modules', {'deepagents': deep_module, 'langchain_core.tools': tools_module}), \
+        with patch.dict('sys.modules', {'langchain_core.tools': tools_module}), \
+             patch('agent.run._create_api_agent', create), \
              patch('agent.tools.Workbench') as bench:
             bench.return_value.conclude.return_value = {'status': 'accepted'}
             run.run_deepagents('test', self.root, str(self.facts), prompt='PUBLIC ONLY')
-            tools = {t.__name__: t for t in create.call_args.kwargs['tools']}
-            self.assertEqual(set(tools), set(run.INVESTIGATOR_TOOLS))
-            tools['conclude']('uncertain', ['A001'])
             bench.return_value.conclude.assert_called_once_with('uncertain', ['A001'])
         self.assertEqual(backend.ainvoke.call_args.args[0]['messages'][0]['content'], 'PUBLIC ONLY')
 

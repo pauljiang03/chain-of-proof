@@ -3,6 +3,10 @@
 Reviewed 2026-11-14 at checkpoint `a0b4fce7b530581b170dc4a7a5d68cdd57260f63`.
 Lane: N4. Branch: `finish/n4-release-smoke`.
 
+Follow-up: the user subsequently authorized parallel implementation. The fixes
+and final validation are recorded in [PARALLEL_FIX_HANDOFF.md](PARALLEL_FIX_HANDOFF.md).
+The findings and snapshot below preserve the original pre-fix observations.
+
 This lane owns only these new review notes and the offline reproduction script.
 No production files, expected answers, saved results, or comparison settings were changed.
 Per `WORKSTREAMS.md`, production fixes need ownership coordination with C0.

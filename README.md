@@ -178,9 +178,12 @@ lake build
 ```
 
 Return to the repository root.
-Run the regression tests:
+The full regression suite requires the Dissect readers.
+The optional API graph tests also run when `.[agent]` is installed.
+Install the readers and run the regression tests:
 
 ```sh
+.venv/bin/python -m pip install 'dissect>=3.20'
 .venv/bin/python -m unittest discover -s tests -t .
 ```
 
