@@ -1,0 +1,101 @@
+{
+  "finding_id": "A078",
+  "question": "F36-F42 e-mails",
+  "claim": {
+    "both": [
+      {
+        "emailed": [
+          304
+        ]
+      },
+      {
+        "tagged": [
+          304,
+          "obj",
+          317,
+          196
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC). Done is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+  "cited_facts": [
+    {
+      "id": 304,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 183,
+      "obj_text": "Done",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "e0ad8690966080d16d7816680fd8bf4cf7b0febc204bb5053bd2a5fa877052bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 317,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 183,
+      "obj_text": "Done",
+      "aux": 196,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "648434cb82e65f8d9f18fb5d53e055a7171273c76236012b40001c017930c23f",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          304
+        ]
+      },
+      "english": "An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          304,
+          "obj",
+          317,
+          196
+        ]
+      },
+      "english": "Done is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A078.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

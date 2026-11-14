@@ -1,0 +1,178 @@
+{
+  "finding_id": "A070",
+  "question": "F32-F33, F35 reformat and burn staging deletions",
+  "claim": {
+    "both": [
+      {
+        "fileDeletedAt": [
+          195
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          196
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          197
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          198
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 195,
+      "kind": "fileDeleted",
+      "t": 1427226707117000,
+      "res": 1,
+      "obj": 110,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "0cb7c2bc457af874b35450c99bc0df12fc3926a3182eef89dd3b28309bf021d3",
+      "prov": {
+        "artifact": "Recycle Bin index $I55Z163, file table record 74311",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 21887309,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 196,
+      "kind": "fileDeleted",
+      "t": 1427226707133000,
+      "res": 1,
+      "obj": 111,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "c265c69412d71c84308fe32a664314394bf1c953c94488d7fc4bd8e6d23075fc",
+      "prov": {
+        "artifact": "Recycle Bin index $IXWGVWC, file table record 74312",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 4526017,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 197,
+      "kind": "fileDeleted",
+      "t": 1427226707133000,
+      "res": 1,
+      "obj": 112,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "638ffedf4317e0757e69a08fc9274b47ff7ec63c588ff37e1f7eafb6624021ea",
+      "prov": {
+        "artifact": "Recycle Bin index $I40295N, file table record 74313",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 41711382,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 198,
+      "kind": "fileDeleted",
+      "t": 1427226707149000,
+      "res": 1,
+      "obj": 113,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "bec292764dc3df9d3db1e7c515348576d311834e7e0cae5aa68edcadc2df1c9a",
+      "prov": {
+        "artifact": "Recycle Bin index $I9M7UMY, file table record 74395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 5079142,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          195
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          196
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          197
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prop on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          198
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "A070.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

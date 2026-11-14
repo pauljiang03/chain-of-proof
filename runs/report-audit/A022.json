@@ -1,0 +1,54 @@
+{
+  "finding_id": "A022",
+  "question": "F14, F17-F20 opens and downloads",
+  "claim": {
+    "fileCreatedAt": [
+      84
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Users\\informant\\Downloads\\googledrivesync.exe was created on volume CA0C7A48 (2015-03-23 19:56:30 UTC).",
+  "cited_facts": [
+    {
+      "id": 84,
+      "kind": "fileCreated",
+      "t": 1427140590661442,
+      "res": 1,
+      "obj": 67,
+      "obj_text": "\\Users\\informant\\Downloads\\googledrivesync.exe",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "e0dd8a6bc316fde08a58fcff92ec3c282b8ad80b569dec840e8aaeee55b3b751",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\googledrivesync.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 880208,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          84
+        ]
+      },
+      "english": "\\Users\\informant\\Downloads\\googledrivesync.exe was created on volume CA0C7A48 (2015-03-23 19:56:30 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "A022.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

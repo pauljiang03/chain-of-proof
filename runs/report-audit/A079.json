@@ -1,0 +1,318 @@
+{
+  "finding_id": "A079",
+  "question": "F44-F46 burn traces and timeline",
+  "claim": {
+    "both": [
+      {
+        "burnTrace": [
+          305
+        ]
+      },
+      {
+        "burnTrace": [
+          306
+        ]
+      },
+      {
+        "burnTrace": [
+          307
+        ]
+      },
+      {
+        "burnTrace": [
+          308
+        ]
+      },
+      {
+        "burnTrace": [
+          309
+        ]
+      },
+      {
+        "burnTrace": [
+          310
+        ]
+      },
+      {
+        "burnTrace": [
+          311
+        ]
+      },
+      {
+        "burnTrace": [
+          312
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "CD-burn trace in the NTFS change journal: temporary files DAT67383.tmp, DAT34216.tmp, FIL39751.tmp, POST39751.tmp (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the NTFS change journal: temporary files DAT32224.tmp, DAT08538.tmp, FIL66692.tmp, POST66692.tmp (2015-03-24 19:56:01 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:56:11 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:24:46 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the NTFS change journal: temporary files DAT85234.tmp, DAT11399.tmp, FIL61821.tmp, POST61821.tmp (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12). CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "cited_facts": [
+    {
+      "id": 305,
+      "kind": "cdBurn",
+      "t": 1427226467407829,
+      "res": 1,
+      "obj": 184,
+      "obj_text": "temporary files DAT67383.tmp, DAT34216.tmp, FIL39751.tmp, POST39751.tmp",
+      "aux": 185,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "51577663fcea60c7d1ef5049d891cf9b75f2b0847b44804f210e8e821bde19bc",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64362016,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 306,
+      "kind": "cdBurn",
+      "t": 1427226467657431,
+      "res": 1,
+      "obj": 186,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 187,
+      "aux_text": "System event log",
+      "row_sha256": "74407d29ba1d04524bc12a6bc4bb9ccb8a45de8287bc8a29989ed3be1c8c9139",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1412",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 307,
+      "kind": "cdBurn",
+      "t": 1427226961607515,
+      "res": 1,
+      "obj": 188,
+      "obj_text": "temporary files DAT32224.tmp, DAT08538.tmp, FIL66692.tmp, POST66692.tmp",
+      "aux": 185,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "7f716606c09498d569756029c4b6a1481689aa9f9dd35c1bf1410f237c6ec17c",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64388776,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 308,
+      "kind": "cdBurn",
+      "t": 1427226971965935,
+      "res": 1,
+      "obj": 186,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 187,
+      "aux_text": "System event log",
+      "row_sha256": "569da492aa3e1bab1381367dc7c649e1bccc91d3900e3d51051f3d7ca3f93004",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1416",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 309,
+      "kind": "cdBurn",
+      "t": 1427228659896305,
+      "res": 1,
+      "obj": 189,
+      "obj_text": "temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp",
+      "aux": 185,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "72add272d72c584abbc724a27f337cd8f7093b0600a2b7634b66011b6f4706a7",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64418464,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 310,
+      "kind": "cdBurn",
+      "t": 1427228686429152,
+      "res": 1,
+      "obj": 186,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 187,
+      "aux_text": "System event log",
+      "row_sha256": "ddc669294e5d819ff5d102ba6a15223912166f2b0ed5f89af8f5045648054467",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1425",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 311,
+      "kind": "cdBurn",
+      "t": 1427229681619709,
+      "res": 1,
+      "obj": 190,
+      "obj_text": "temporary files DAT85234.tmp, DAT11399.tmp, FIL61821.tmp, POST61821.tmp",
+      "aux": 185,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "b33937f1af2332be2ccd449db7dea534dcd5740652f1ecdba81f28e61945be30",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64434064,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 312,
+      "kind": "cdBurn",
+      "t": 1427229681884909,
+      "res": 1,
+      "obj": 186,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 187,
+      "aux_text": "System event log",
+      "row_sha256": "172f244ac092bf8b0d289095f9c1ded15a774d92119c16a21eaabd024d20cee4",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1428",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "burnTrace": [
+          305
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT67383.tmp, DAT34216.tmp, FIL39751.tmp, POST39751.tmp (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          306
+        ]
+      },
+      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:47:47 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          307
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT32224.tmp, DAT08538.tmp, FIL66692.tmp, POST66692.tmp (2015-03-24 19:56:01 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          308
+        ]
+      },
+      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:56:11 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          309
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          310
+        ]
+      },
+      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:24:46 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          311
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT85234.tmp, DAT11399.tmp, FIL61821.tmp, POST61821.tmp (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "burnTrace": [
+          312
+        ]
+      },
+      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R12"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A079.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

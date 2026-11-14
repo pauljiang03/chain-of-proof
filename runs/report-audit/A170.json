@@ -1,0 +1,57 @@
+{
+  "finding_id": "A170",
+  "question": "F35: On 2015-03-24 at 20:11:42, eight Windows sample pictures, an IE11 installer and a desktop.ini were also deleted from the burn staging folder.",
+  "claim": {
+    "fileDeletedAt": [
+      207
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 207,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 122,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "81aa5375fdb83def9a4acb5061743dc29f5f243e8c26049561b09b03721eca28",
+      "prov": {
+        "artifact": "Recycle Bin index $IDOI3HE.jpg, file table record 74766",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 620888,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          207
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "A170.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

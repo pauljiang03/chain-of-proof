@@ -1,0 +1,55 @@
+{
+  "finding_id": "A111",
+  "question": "F12: Between 18:14:50 and 18:19:03 on 2015-03-23 the informant account searched in Chrome for \"cloud storage\", \"digital forensics\", \"how to delete data\", \"anti-forensics\", \"system cleaner\", \"how to recover data\" and \"data recovery tools\".",
+  "claim": {
+    "searched": [
+      253
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:30 UTC).",
+  "cited_facts": [
+    {
+      "id": 253,
+      "kind": "webSearch",
+      "t": 1427134710872763,
+      "res": 1,
+      "obj": 151,
+      "obj_text": "how to recover data",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "f5ea69dc5b5a3b6f1cff57c71f2bfb2b7ea6dd1732f90b8658fbae96eb657f75",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          253
+        ]
+      },
+      "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:30 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A111.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

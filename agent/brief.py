@@ -110,8 +110,14 @@ the findings you may add a short paragraph headed "Limits".
 """
 
 
-def audit_brief(statements) -> str:
+def audit_brief(statements, only=None) -> str:
+    """`only`: statement numbers to audit in this session; the rest of the report is
+    given for context (a sentence may lean on the one before it)."""
     listing = "\n".join(f"F{n}: {text}" for n, text in statements)
+    wanted = sorted(only) if only else [n for n, _ in statements]
+    scope = ("Audit every statement." if not only else
+             "Audit only these statements: " + ", ".join(f"F{n}" for n in wanted) +
+             ". The others are there for context; do not record a verdict on them.")
     return CASE + """\
 YOUR JOB
 Another analyst wrote the report below from the same records. You are auditing it. For
@@ -150,8 +156,12 @@ Be strict and do not help the report. A statement is `certified` only if a reade
 the certified sentences alone would learn everything the statement asserts. If the
 report states flatly something the records only suggest, that is `weaker`.
 
+Take one statement at a time, and call `record` for it before you look at the next.
+A verdict that is not recorded is lost if the session ends early.
+
 THE REPORT
 """ + listing + """
 
-When every statement has a verdict, reply with one line: the count of each verdict.
+""" + scope + """
+When each of them has a verdict, reply with one line: the count of each verdict.
 """

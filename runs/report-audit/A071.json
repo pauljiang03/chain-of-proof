@@ -1,0 +1,412 @@
+{
+  "finding_id": "A071",
+  "question": "F32-F33, F35 reformat and burn staging deletions",
+  "claim": {
+    "both": [
+      {
+        "fileDeletedAt": [
+          199
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          200
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          201
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          202
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          203
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          204
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          205
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          206
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          207
+        ]
+      },
+      {
+        "fileDeletedAt": [
+          208
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC). \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 199,
+      "kind": "fileDeleted",
+      "t": 1427227902836000,
+      "res": 1,
+      "obj": 114,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "f1db0af35aded17de049f715b2ac75187c0c5896413eb0d69f481b81852dbdf5",
+      "prov": {
+        "artifact": "Recycle Bin index $IKXD1U3.jpg, file table record 74757",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 879394,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 200,
+      "kind": "fileDeleted",
+      "t": 1427227902836000,
+      "res": 1,
+      "obj": 115,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "b4ebf3ce2e99020f8c3b87d8dbfdfca54adb358a9cdb43ac3d2334797f2a7bdb",
+      "prov": {
+        "artifact": "Recycle Bin index $II3FM2A.jpg, file table record 74758",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 845941,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 201,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 116,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "0518c7e4ec2fc75d3b49f082513a241ba29e1be890f14297d50b5cae14c6de88",
+      "prov": {
+        "artifact": "Recycle Bin index $I508CBB.jpg, file table record 74760",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 595284,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 202,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 117,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "021a9240eb0b83705392e9e99cf67a20726ae07e5086a0672f811d8733d68d55",
+      "prov": {
+        "artifact": "Recycle Bin index $IJEMT64.exe, file table record 74761",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 55915216,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 203,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 118,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "b33b523d65e9f91d8e85459b1eb38bf66362fb7cd0a4801639908f4889c167ce",
+      "prov": {
+        "artifact": "Recycle Bin index $I8YP3XK.jpg, file table record 74762",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 775702,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 204,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 119,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "589c4e9874e822671b6e78da91a0d0e15931d7c94a9d0558d9e55a851c092472",
+      "prov": {
+        "artifact": "Recycle Bin index $IU3FKWI.jpg, file table record 74763",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 780831,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 205,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "bbf3a9755b3eb76895714f9ae7c624adaaef6b21fbf0b6d7b1b8d11929f1a0ef",
+      "prov": {
+        "artifact": "Recycle Bin index $IX538VH.jpg, file table record 74764",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 561276,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 206,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 121,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "95bb702fbe50dbfcc4ceb67fa276a6a7be4e14fe2768b2fbda4044be4882b19f",
+      "prov": {
+        "artifact": "Recycle Bin index $IFVCH5V.jpg, file table record 74765",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 777835,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 207,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 122,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "81aa5375fdb83def9a4acb5061743dc29f5f243e8c26049561b09b03721eca28",
+      "prov": {
+        "artifact": "Recycle Bin index $IDOI3HE.jpg, file table record 74766",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 620888,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 208,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 123,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "fc17e64877cb53679ce48a0c611b663d4b587017812040eb2f2b786f515fe9fe",
+      "prov": {
+        "artifact": "Recycle Bin index $IIQGWTT.ini, file table record 74759",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 174,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          199
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          200
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          201
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Hydrangeas.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          202
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          203
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          204
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          205
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          206
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          207
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Tulips.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileDeletedAt": [
+          208
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "A071.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

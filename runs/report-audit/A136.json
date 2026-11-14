@@ -1,0 +1,83 @@
+{
+  "finding_id": "A136",
+  "question": "F27: 17 files in five sub-folders written to RM#2 2015-03-24 13:59:27–14:00:18, about one minute after RM#2 first connected",
+  "claim": {
+    "recoveredOnDevice": [
+      118,
+      376
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "A directory entry for \\[lost folder 3]\\proposal\\landscape.png, created (2015-03-24 14:00:06 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+  "cited_facts": [
+    {
+      "id": 118,
+      "kind": "fileCreated",
+      "t": 1427205606780000,
+      "res": 10000,
+      "obj": 102,
+      "obj_text": "\\[lost folder 3]\\proposal\\landscape.png",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "81f77b406b8edd6e3898ca0486027daa1bcc21f55ace1fec0505a81a612de5ed",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 14011",
+        "exhibit": "RM#2",
+        "first_cluster": 22613,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "LANDSC~1.PNG",
+        "size": 6484502,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 376,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "prov": {
+        "artifact": "FAT32 clusters the allocation table marks free",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "exhibit": "RM#2",
+        "file_entries": 41,
+        "folders": 8,
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "recoveredOnDevice": [
+          118,
+          376
+        ]
+      },
+      "english": "A directory entry for \\[lost folder 3]\\proposal\\landscape.png, created (2015-03-24 14:00:06 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10",
+    "R13"
+  ],
+  "strength": "strong",
+  "lean_file": "A136.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

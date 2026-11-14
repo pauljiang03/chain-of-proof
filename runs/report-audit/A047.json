@@ -1,0 +1,81 @@
+{
+  "finding_id": "A047",
+  "question": "F21-F26 opens and file times",
+  "claim": {
+    "openedFromRecorded": [
+      53,
+      370
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Tulips.jpg was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+  "cited_facts": [
+    {
+      "id": 53,
+      "kind": "lnkTarget",
+      "t": 1427230874320463,
+      "res": 1,
+      "obj": 43,
+      "obj_text": "\\Tulips.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "448a03228bea011e7659911dbd93144c7196d3f289ecb0924fd8cad505574e03",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Tulips.jpg.lnk",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427230050469574,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    },
+    {
+      "id": 370,
+      "kind": "volumeSeen",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "355074af2362cebb5db4e3b31f8bc4aeda6d68a970e19835b0df2c3aa4f9a4c2",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          53,
+          370
+        ]
+      },
+      "english": "\\Tulips.jpg was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6"
+  ],
+  "strength": "strong",
+  "lean_file": "A047.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

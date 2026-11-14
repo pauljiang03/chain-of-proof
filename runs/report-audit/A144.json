@@ -1,0 +1,75 @@
+{
+  "finding_id": "A144",
+  "question": "F28: RM#2's winter_whether_advisory.zip has the same size and last-modified time as RM#1's confidential [secret_project]_detailed_design.pptx (16,381,123 bytes, 2014-12-16 16:10:26)",
+  "claim": {
+    "tagged": [
+      159,
+      "obj",
+      324,
+      197
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+  "cited_facts": [
+    {
+      "id": 159,
+      "kind": "fileModified",
+      "t": 1418746226000000,
+      "res": 10000,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "9ad4e1a87da0f0444ea4c5478a3e4540045498a5f8cafb395334433aef10dc21",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 16381123,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 324,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 197,
+      "aux_text": "confidential",
+      "row_sha256": "20ff7609826946ce6320b86b8e500ea2b6a86fdbb9d6aeccf7b34941321f441a",
+      "prov": {
+        "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          159,
+          "obj",
+          324,
+          197
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A144.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

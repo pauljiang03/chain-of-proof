@@ -94,6 +94,22 @@ class Audit(unittest.TestCase):
                                4: "no_records", 5: "not_audited"})
         self.assertEqual(out["statements"][0]["findings"][0]["finding_id"], real)
 
+    def test_an_interrupted_audit_resumes_with_the_statements_left(self):
+        from agent.audit import chunks, recorded
+        from agent.brief import audit_brief
+        run_dir = Path(self.tmp.name)
+        self.assertEqual(recorded(run_dir), set())
+        for n in (1, 2, 4):
+            mcp_server.call(self.bench, "record", {"statement": n, "verdict": "no_records", "reason": ""})
+        statements = [(n, f"sentence {n}") for n in range(1, 8)]
+        todo = [n for n, _ in statements if n not in recorded(run_dir)]
+        self.assertEqual(todo, [3, 5, 6, 7])
+        self.assertEqual(chunks(todo, 3), [[3, 5, 6], [7]])
+        brief = audit_brief(statements, only=[3, 5, 6])
+        self.assertIn("Audit only these statements: F3, F5, F6.", brief)
+        self.assertIn("F1: sentence 1", brief)                 # the whole report, for context
+        self.assertIn("Audit every statement.", audit_brief(statements))
+
 
 if __name__ == "__main__":
     unittest.main()

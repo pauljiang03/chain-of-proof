@@ -1,0 +1,79 @@
+{
+  "finding_id": "A184",
+  "question": "F40: The spy sent \"Last request\" on 2015-03-24 at 13:25:57, and the informant's reply at 13:35:10 was later moved to Deleted Items.",
+  "claim": {
+    "before": [
+      301,
+      302
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "The sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC) happened before the sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC): the gap of 553.365 s exceeds the combined timestamp uncertainty of 2 s.",
+  "cited_facts": [
+    {
+      "id": 301,
+      "kind": "emailSent",
+      "t": 1427203557000000,
+      "res": 1000000,
+      "obj": 180,
+      "obj_text": "Last request",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "22ab3055ccf25652c2afa0ea775cf41dd861995db0ce7f2314f873cc44af03e3",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 302,
+      "kind": "emailSent",
+      "t": 1427204110365000,
+      "res": 1000000,
+      "obj": 181,
+      "obj_text": "RE: Last request",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "69b32f235f76b72021d04ab502453a8028b90469bf867ba8b001362f0989e1d0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          301,
+          302
+        ]
+      },
+      "english": "The sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC) happened before the sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC): the gap of 553.365 s exceeds the combined timestamp uncertainty of 2 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A184.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

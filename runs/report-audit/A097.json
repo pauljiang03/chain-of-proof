@@ -1,0 +1,97 @@
+{
+  "finding_id": "A097",
+  "question": "F4: RM#2 (serial 4C530012550531106501, not authorized) was first connected to the PC on 2015-03-24 at 13:58:32.",
+  "claim": {
+    "both": [
+      {
+        "usbConnected": [
+          4
+        ]
+      },
+      {
+        "tagged": [
+          4,
+          "obj",
+          315,
+          194
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:33 UTC). 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 4,
+      "kind": "usbInsert",
+      "t": 1427205513550110,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "abafce8b9e06ea2e9272447e94d7438f0d4320fbd50fc5d1b57b483be2712fb4",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012550531106501&0",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 315,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 194,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "prov": {
+        "rule": "device serial is not on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "usbConnected": [
+          4
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:33 UTC).",
+      "rules": [
+        "R1"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          4,
+          "obj",
+          315,
+          194
+        ]
+      },
+      "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A097.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

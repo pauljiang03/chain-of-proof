@@ -1,0 +1,58 @@
+{
+  "finding_id": "A187",
+  "question": "F42: The informant sent \"Done\" to the spy on 2015-03-24 at 21:05:09, and it was later moved to Deleted Items.",
+  "claim": {
+    "emailed": [
+      304
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC).",
+  "cited_facts": [
+    {
+      "id": 304,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 183,
+      "obj_text": "Done",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "e0ad8690966080d16d7816680fd8bf4cf7b0febc204bb5053bd2a5fa877052bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          304
+        ]
+      },
+      "english": "An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "A187.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

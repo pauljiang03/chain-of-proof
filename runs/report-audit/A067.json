@@ -1,0 +1,74 @@
+{
+  "finding_id": "A067",
+  "question": "F32-F33, F35 reformat and burn staging deletions",
+  "claim": {
+    "before": [
+      193,
+      371
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "The last modification of \\[lost folder 25440]\\desktop.ini on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 19:51:48 UTC) happened before this PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC): the gap of 4246.31 s exceeds the combined timestamp uncertainty of 2 s.",
+  "cited_facts": [
+    {
+      "id": 193,
+      "kind": "fileModified",
+      "t": 1427226708000000,
+      "res": 2000000,
+      "obj": 109,
+      "obj_text": "\\[lost folder 25440]\\desktop.ini",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "bb1b26f5c08d6358cb6d0bbb62fe881f1e6166408eac87653c9b24ddb80bda48",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 25440",
+        "exhibit": "RM#2",
+        "first_cluster": 25441,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "desktop.ini",
+        "size": 129,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 371,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 203,
+      "obj_text": "IAMAN $_@",
+      "aux": 205,
+      "aux_text": "B4D85399",
+      "row_sha256": "50da6af2eba7bbf440077484ab18eeda43757929e774c418a44cccc02292e7ff",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          193,
+          371
+        ]
+      },
+      "english": "The last modification of \\[lost folder 25440]\\desktop.ini on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 19:51:48 UTC) happened before this PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC): the gap of 4246.31 s exceeds the combined timestamp uncertainty of 2 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A067.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,55 @@
+{
+  "finding_id": "A107",
+  "question": "F12: Between 18:14:50 and 18:19:03 on 2015-03-23 the informant account searched in Chrome for \"cloud storage\", \"digital forensics\", \"how to delete data\", \"anti-forensics\", \"system cleaner\", \"how to recover data\" and \"data recovery tools\".",
+  "claim": {
+    "searched": [
+      248
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "A web search for \"digital forensics\" was made in chrome (2015-03-23 18:15:44 UTC).",
+  "cited_facts": [
+    {
+      "id": 248,
+      "kind": "webSearch",
+      "t": 1427134544517540,
+      "res": 1,
+      "obj": 147,
+      "obj_text": "digital forensics",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "f55b21ae7d31abf10ee6d92dcd446260591e218f9291762a426bf651e4f07d38",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          248
+        ]
+      },
+      "english": "A web search for \"digital forensics\" was made in chrome (2015-03-23 18:15:44 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A107.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

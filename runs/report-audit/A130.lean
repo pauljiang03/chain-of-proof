@@ -1,0 +1,16 @@
+import ChainOfProof
+open ChainOfProof
+
+namespace Cert.A130
+
+def cited : List Fact := [
+  ⟨112, .fileCreated, 1427205579710000, 10000, 96, 69⟩,
+  ⟨376, .unallocatedOnDevice, 1794614400000000, 1, 2, 69⟩ ]
+
+def claim : Claim := Sets.recoveredOnDevice 112 376
+
+theorem verified : holds cited claim = true := by decide +kernel
+
+end Cert.A130
+
+#print axioms Cert.A130.verified

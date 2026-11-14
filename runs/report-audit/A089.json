@@ -1,0 +1,96 @@
+{
+  "finding_id": "A089",
+  "question": "F9-F13, F15-F16 web searches",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          243
+        ]
+      },
+      {
+        "searched": [
+          244
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC). A web search for \"cd burning method in windows\" was made in iexplore (2015-03-23 18:13:37 UTC).",
+  "cited_facts": [
+    {
+      "id": 243,
+      "kind": "webSearch",
+      "t": 1427134400892344,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "cd burning method",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "77e622ebba3394d627cbbb2051577a32b6e388f3300d60c92efcb9c26136776c",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 244,
+      "kind": "webSearch",
+      "t": 1427134417494371,
+      "res": 1,
+      "obj": 144,
+      "obj_text": "cd burning method in windows",
+      "aux": 126,
+      "aux_text": "iexplore",
+      "row_sha256": "049586d6ba5ade10db6834811a431a098a1593ec6721ffb14f01da36278655f6",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          243
+        ]
+      },
+      "english": "A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          244
+        ]
+      },
+      "english": "A web search for \"cd burning method in windows\" was made in iexplore (2015-03-23 18:13:37 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A089.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

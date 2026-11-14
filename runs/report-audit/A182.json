@@ -1,0 +1,58 @@
+{
+  "finding_id": "A182",
+  "question": "F40: The spy sent \"Last request\" on 2015-03-24 at 13:25:57, and the informant's reply at 13:35:10 was later moved to Deleted Items.",
+  "claim": {
+    "emailed": [
+      301
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"Last request\" was sent from spy to iaman (2015-03-24 13:25:57 UTC).",
+  "cited_facts": [
+    {
+      "id": 301,
+      "kind": "emailSent",
+      "t": 1427203557000000,
+      "res": 1000000,
+      "obj": 180,
+      "obj_text": "Last request",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "22ab3055ccf25652c2afa0ea775cf41dd861995db0ce7f2314f873cc44af03e3",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          301
+        ]
+      },
+      "english": "An e-mail with the subject \"Last request\" was sent from spy to iaman (2015-03-24 13:25:57 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "A182.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

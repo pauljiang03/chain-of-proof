@@ -1,0 +1,79 @@
+{
+  "finding_id": "A083",
+  "question": "F44-F46 burn traces and timeline",
+  "claim": {
+    "before": [
+      302,
+      124
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "The sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC) happened before the creation of \\[lost folder 3]\\technical review\\diary_#3p.txt on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 14:00:18 UTC): the gap of 1508.05 s exceeds the combined timestamp uncertainty of 1.01 s.",
+  "cited_facts": [
+    {
+      "id": 302,
+      "kind": "emailSent",
+      "t": 1427204110365000,
+      "res": 1000000,
+      "obj": 181,
+      "obj_text": "RE: Last request",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "69b32f235f76b72021d04ab502453a8028b90469bf867ba8b001362f0989e1d0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 124,
+      "kind": "fileCreated",
+      "t": 1427205618410000,
+      "res": 10000,
+      "obj": 108,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "61b77da85be727b4a9b89bb1ce38da2bcb017b7aeb02de8c0c9007a0989a5843",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197",
+        "exhibit": "RM#2",
+        "first_cluster": 25360,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "DI1C44~1.TXT",
+        "size": 325120,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          302,
+          124
+        ]
+      },
+      "english": "The sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC) happened before the creation of \\[lost folder 3]\\technical review\\diary_#3p.txt on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 14:00:18 UTC): the gap of 1508.05 s exceeds the combined timestamp uncertainty of 1.01 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A083.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

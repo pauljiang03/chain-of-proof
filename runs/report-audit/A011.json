@@ -1,0 +1,71 @@
+{
+  "finding_id": "A011",
+  "question": "F1-F8 device/volume statements",
+  "claim": {
+    "before": [
+      3,
+      366
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before this PC recording volume 9E6A5B82 under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC): the gap of 1.58031 s exceeds the combined timestamp uncertainty of 1.001 ms.",
+  "cited_facts": [
+    {
+      "id": 3,
+      "kind": "usbInsert",
+      "t": 1427205512859000,
+      "res": 1000,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d7b4abaf42dea7fc25ca5e2212ec4f4d64180dd2dc265c86a25d6b6f2386f4d5",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 366,
+      "kind": "volumeSeen",
+      "t": 1427205514439312,
+      "res": 1,
+      "obj": 203,
+      "obj_text": "IAMAN $_@",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "89405d7410361924c029ccba19554c5d27dd0e4e308c8d251b82e52791b05928",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          3,
+          366
+        ]
+      },
+      "english": "The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before this PC recording volume 9E6A5B82 under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC): the gap of 1.58031 s exceeds the combined timestamp uncertainty of 1.001 ms.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A011.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,58 @@
+{
+  "finding_id": "A173",
+  "question": "F36: On 2015-03-23 at 17:29:27, spy.conspirator@nist.gov e-mailed the informant \"Hello, Iaman\", and the informant replied at 18:44:31.",
+  "claim": {
+    "emailed": [
+      295
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+  "cited_facts": [
+    {
+      "id": 295,
+      "kind": "emailSent",
+      "t": 1427136271719000,
+      "res": 1000000,
+      "obj": 173,
+      "obj_text": "RE: Hello, Iaman",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "23574b1a73dec099bc90ab81bcf31ebc45ff9ecc36cb2161a6143f7098c3abf4",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Sent Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          295
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "A173.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

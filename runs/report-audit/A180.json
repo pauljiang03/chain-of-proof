@@ -1,0 +1,58 @@
+{
+  "finding_id": "A180",
+  "question": "F39: The spy sent \"RE: It's me\" at 20:41:19 on 2015-03-23, and the message was later moved to Deleted Items.",
+  "claim": {
+    "emailed": [
+      300
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC).",
+  "cited_facts": [
+    {
+      "id": 300,
+      "kind": "emailSent",
+      "t": 1427143279000000,
+      "res": 1000000,
+      "obj": 179,
+      "obj_text": "RE: It's me",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "be161ae5d4c8bfadc98fa1ec6fd6fc8a4c62712ab7ef66176a8b9b252b56ecd9",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          300
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "A180.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

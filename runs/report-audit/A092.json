@@ -1,0 +1,55 @@
+{
+  "finding_id": "A092",
+  "question": "F9-F13, F15-F16 web searches",
+  "claim": {
+    "searched": [
+      289
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "A web search for \"security checkpoint cd-r\" was made in chrome (2015-03-24 21:06:50 UTC).",
+  "cited_facts": [
+    {
+      "id": 289,
+      "kind": "webSearch",
+      "t": 1427231210726427,
+      "res": 1,
+      "obj": 167,
+      "obj_text": "security checkpoint cd-r",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "7bc27bbf2257a15f32f139016be1614210bc9f0841d362a8e216c7336e7bfe6c",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/#q=security+checkpoint+cd-r",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          289
+        ]
+      },
+      "english": "A web search for \"security checkpoint cd-r\" was made in chrome (2015-03-24 21:06:50 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A092.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

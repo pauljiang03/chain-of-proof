@@ -1,0 +1,57 @@
+{
+  "finding_id": "A158",
+  "question": "F33: On 2015-03-24 at 19:51:47, pd, prog, prop and tr were deleted from the Windows CD-burning staging folder, and the Recycle Bin was later emptied.",
+  "claim": {
+    "fileDeletedAt": [
+      195
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 195,
+      "kind": "fileDeleted",
+      "t": 1427226707117000,
+      "res": 1,
+      "obj": 110,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "0cb7c2bc457af874b35450c99bc0df12fc3926a3182eef89dd3b28309bf021d3",
+      "prov": {
+        "artifact": "Recycle Bin index $I55Z163, file table record 74311",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 21887309,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          195
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "A158.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,209 @@
+{
+  "finding_id": "A102",
+  "question": "F8: Optical discs labelled \"IAMAN CD\" were read in the PC's D: drive on 2015-03-24 with three volume serials: E297F1A5 at 20:44:13, A58AD72A at 20:47:30 and AE88F176 at 21:01:10.",
+  "claim": {
+    "both": [
+      {
+        "openedFromRecorded": [
+          44,
+          368
+        ]
+      },
+      {
+        "openedFromRecorded": [
+          49,
+          369
+        ]
+      },
+      {
+        "openedFromRecorded": [
+          50,
+          370
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:13 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC). \\ was opened (2015-03-24 20:47:30 UTC) from volume A58AD72A, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:47:30 UTC). \\ was opened (2015-03-24 21:01:10 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+  "cited_facts": [
+    {
+      "id": 44,
+      "kind": "lnkTarget",
+      "t": 1427229853752619,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 35,
+      "aux_text": "E297F1A5",
+      "row_sha256": "9120295f61b77550e8680044bfef07a0a5c0b214426b812b8a52595e5ada8f71",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
+        "destlist_path": "D:\\de\\winter_whether_advisory.zip",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    },
+    {
+      "id": 368,
+      "kind": "volumeSeen",
+      "t": 1427229853752619,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 35,
+      "aux_text": "E297F1A5",
+      "row_sha256": "7c8f8513bd274962c55c2674f56eadcca9ae20e1389c41a7f42b2e006d24080c",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 49,
+      "kind": "lnkTarget",
+      "t": 1427230050485174,
+      "res": 1,
+      "obj": 23,
+      "obj_text": "\\",
+      "aux": 39,
+      "aux_text": "A58AD72A",
+      "row_sha256": "456fa3b0223c82162d71e4b37eec41f76501b705688fc6690bf0af2327782599",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427230042034159,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    },
+    {
+      "id": 369,
+      "kind": "volumeSeen",
+      "t": 1427230050485174,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 39,
+      "aux_text": "A58AD72A",
+      "row_sha256": "06fa2f903be9c95c063af130808cacd22efb102b435d7b970accf4009228d1a4",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 50,
+      "kind": "lnkTarget",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 23,
+      "obj_text": "\\",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "924b34b4c7403a6ccb806550a7ee91e46653701edf75f4272e04a45a85b92315",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "destlist_path": "D:\\",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    },
+    {
+      "id": 370,
+      "kind": "volumeSeen",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "IAMAN CD",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "355074af2362cebb5db4e3b31f8bc4aeda6d68a970e19835b0df2c3aa4f9a4c2",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          44,
+          368
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:13 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "openedFromRecorded": [
+          49,
+          369
+        ]
+      },
+      "english": "\\ was opened (2015-03-24 20:47:30 UTC) from volume A58AD72A, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:47:30 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "openedFromRecorded": [
+          50,
+          370
+        ]
+      },
+      "english": "\\ was opened (2015-03-24 21:01:10 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6"
+  ],
+  "strength": "strong",
+  "lean_file": "A102.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

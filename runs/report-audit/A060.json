@@ -1,0 +1,79 @@
+{
+  "finding_id": "A060",
+  "question": "F28-F31 same size and mtime between RM#2 recovered files and RM#1 confidential files",
+  "claim": {
+    "tagged": [
+      160,
+      "obj",
+      340,
+      198
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\[lost folder 3]\\design\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+  "cited_facts": [
+    {
+      "id": 160,
+      "kind": "fileModified",
+      "t": 1418746226000000,
+      "res": 2000000,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "25ed989bf8d09ac3216c531675c557bd16bea18b30486945a5284e73299c3a53",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4",
+        "exhibit": "RM#2",
+        "first_cluster": 3557,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "WINTER~1.ZIP",
+        "size": 16381123,
+        "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 340,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 198,
+      "aux_text": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC",
+      "row_sha256": "3d531347c6760327961955244f938c3231cd776cc715973ff6c54c2e12896b02",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          160,
+          "obj",
+          340,
+          198
+        ]
+      },
+      "english": "\\[lost folder 3]\\design\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A060.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,76 @@
+{
+  "finding_id": "A080",
+  "question": "F44-F46 burn traces and timeline",
+  "claim": {
+    "before": [
+      294,
+      217
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "The sending of the e-mail \"Hello, Iaman\" from spy to iaman (2015-03-23 17:29:27 UTC) happened before the web search \"data leakage methods\" (2015-03-23 18:02:09 UTC): the gap of 1962.3 s exceeds the combined timestamp uncertainty of 1 s.",
+  "cited_facts": [
+    {
+      "id": 294,
+      "kind": "emailSent",
+      "t": 1427131767000000,
+      "res": 1000000,
+      "obj": 171,
+      "obj_text": "Hello, Iaman",
+      "aux": 172,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "6fa2310abda4d1a255660726d22d867a3c30f9cc8a183bae4ede61d5570ee1ea",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156C790B3BF198BDDCD14748C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 217,
+      "kind": "webSearch",
+      "t": 1427133729303892,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "data leakage methods",
+      "aux": 125,
+      "aux_text": "chrome",
+      "row_sha256": "9be48aea2fefbed2a122314a750751f27e121ade456fb68fac7e567d0bedde79",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          294,
+          217
+        ]
+      },
+      "english": "The sending of the e-mail \"Hello, Iaman\" from spy to iaman (2015-03-23 17:29:27 UTC) happened before the web search \"data leakage methods\" (2015-03-23 18:02:09 UTC): the gap of 1962.3 s exceeds the combined timestamp uncertainty of 1 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A080.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,84 @@
+{
+  "finding_id": "A027",
+  "question": "F14, F17-F20 opens and downloads",
+  "claim": {
+    "openedFromDevice": [
+      22,
+      374
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:54 UTC) from volume 5C754D3E, the volume on seized device 4C530012450531101593.",
+  "cited_facts": [
+    {
+      "id": 22,
+      "kind": "lnkTarget",
+      "t": 1427135874491716,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "d312ae0de004d8417080f055385104793a96858c775acffaf1d8f8e8f396ef25",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\[secret_project]_proposal.LNK",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135874491716,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    },
+    {
+      "id": 374,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "d226163e36c46deacef90d25d6acd1dc3b5b4432d8c55e5bdbba54cdec6e15be",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 16384",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E22103D8",
+        "exhibit": "RM#1",
+        "filesystem": "exfat",
+        "image": "rm1.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "Authorized"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromDevice": [
+          22,
+          374
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:54 UTC) from volume 5C754D3E, the volume on seized device 4C530012450531101593.",
+      "rules": [
+        "R3",
+        "R7"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R7"
+  ],
+  "strength": "strong",
+  "lean_file": "A027.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -302,6 +302,34 @@ that the files on RM#2 have the confidential files' contents (only size and
 last-modified time match), what the burns wrote, and that the volumes labelled
 `IAMAN CD` are the seized disc. One run only; LLM runs vary.
 
+**The same AI without the checker** (`python3 -m agent.audit`, one run). The model
+wrote a normal findings report from the same records, with no checker. A second session
+then put each of its 50 sentences through the checker
+([`runs/report-audit/audit.json`](runs/report-audit/audit.json) has every sentence
+beside the certified text):
+
+| Verdict | Sentences |
+|---|---:|
+| Certified in full | 23 |
+| Only a weaker statement could be certified | 24 |
+| Contradicted by the records | 0 |
+| The forms cannot state it (a size, a count) | 3 |
+
+The 24 are where a fluent report says more than its records do. Three kinds:
+
+- *An inference stated as a fact.* "From RM#2, the zip was opened" and "9E6A5B82 was
+  RM#2's volume": the records tie that volume to the stick only by a shared label. "Four
+  CD-burn sessions ran": the records hold traces that suggest burns.
+- *An actor the records do not name.* "It [the informant account] searched for ...": the
+  search records carry a browser and a time. Ten sentences.
+- *Conclusions.* "He tried to hide the activity", "the data was meant to leave on
+  removable media": each rests on certified facts, none is itself certifiable.
+
+Whether a certified sentence says the same as a report sentence is the auditing
+model's judgment, shown side by side so a person can check it. One run. On an earlier
+build of the evidence the same test found one sentence the records contradicted ("less
+than 25 minutes" where the records say 32.6).
+
 What the table says: where we extract an artifact, it agrees with NIST to the second.
 The one row not in evidence is an e-mail purged from the mailbox, which the mailbox
 library's Python interface cannot recover. The five searches in evidence but not
@@ -472,6 +500,7 @@ tests/                         checker, verifier, scorer and miner tests
 scripts/fetch_data.sh          download the case images
 agent/                         the AI investigator: tools, MCP server, brief, runner
 runs/investigator/             its scored run on the current evidence: certificates, proposal log, summary
+runs/report-audit/             a plain report by the same model, and the checker's verdict on each sentence
 ```
 
 ## Sources

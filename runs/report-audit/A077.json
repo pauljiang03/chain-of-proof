@@ -1,0 +1,101 @@
+{
+  "finding_id": "A077",
+  "question": "F36-F42 e-mails",
+  "claim": {
+    "both": [
+      {
+        "emailed": [
+          303
+        ]
+      },
+      {
+        "tagged": [
+          303,
+          "obj",
+          321,
+          196
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "auditor:claude-code:opus",
+  "english": "An e-mail with the subject \"RE: Watch out!\" was sent from iaman to spy (2015-03-24 19:34:02 UTC). RE: Watch out! is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+  "cited_facts": [
+    {
+      "id": 303,
+      "kind": "emailSent",
+      "t": 1427225642435000,
+      "res": 1000000,
+      "obj": 182,
+      "obj_text": "RE: Watch out!",
+      "aux": 174,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "8ec1f2bea80496e604735815f04bd04f521bcb37a61abf033ee25dbe165124a8",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 321,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 182,
+      "obj_text": "RE: Watch out!",
+      "aux": 196,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "ab8a609603bc2e1ad4c0a0fa0747a5ae3bdfaf44207556bae2540650387b8982",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          303
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: Watch out!\" was sent from iaman to spy (2015-03-24 19:34:02 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          303,
+          "obj",
+          321,
+          196
+        ]
+      },
+      "english": "RE: Watch out! is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A077.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}
