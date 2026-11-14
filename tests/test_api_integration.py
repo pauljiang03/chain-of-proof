@@ -78,6 +78,14 @@ class APIIntegration(unittest.TestCase):
         ])["mutate"]
         self.assertIn("not authorized", json.loads(result.content)["error"])
 
+    def test_large_evidence_is_not_evicted_behind_a_disabled_file_tool(self):
+        evidence = {"id": 3100, "provenance": {"text": "evidence " * 12000 + "END-OF-EVIDENCE"}}
+        with patch("agent.tools.Workbench.fact", return_value=evidence):
+            result = self.invoke([
+                {"name": "fact", "args": {"id": 3100}, "id": "large-record"},
+            ])["large-record"]
+        self.assertEqual(json.loads(result.content), evidence)
+
 
 if __name__ == "__main__":
     unittest.main()

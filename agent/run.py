@@ -125,15 +125,22 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
 
 def _create_api_agent(model, tools):
     from deepagents import create_deep_agent
+    from deepagents.middleware import FilesystemMiddleware
     from agent.api import EvidenceToolsOnly
 
     return create_deep_agent(model=model, tools=tools,
-                             middleware=[EvidenceToolsOnly(INVESTIGATOR_TOOLS)])
+        middleware=[
+            # A restricted investigator cannot retrieve an evicted result through
+            # read_file. Keep supplied evidence and public prompts in messages.
+            FilesystemMiddleware(tool_token_limit_before_evict=None,
+                                 human_message_token_limit_before_evict=None),
+            EvidenceToolsOnly(INVESTIGATOR_TOOLS),
+        ])
 
 
 def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
                    timeout_s: int = 45 * 60) -> dict:
-    """The investigator as a LangChain deep agent. Untested until an API key is present."""
+    """API investigator, covered by offline graph tests; live access needs credentials."""
     from langchain_core.tools import tool
 
     from agent.tools import Workbench
