@@ -112,6 +112,20 @@ class ExportMetadata(unittest.TestCase):
         mismatched = bundle(self.directory, "Wrong anchor", audit_expected_head="0" * 64)
         self.assertFalse(mismatched["audit"]["passed"])
 
+    def test_invalid_nonfinite_audit_values_cannot_enter_exported_history(self):
+        self.audit()
+        path = self.directory / "audit.jsonl"
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        for value in (float("nan"), float("inf"), float("-inf")):
+            with self.subTest(value=value):
+                rows[2]["arguments"]["claim"] = value
+                path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+                result = bundle(self.directory, "Invalid audit numbers")
+                self.assertFalse(result["audit"]["passed"])
+                self.assertEqual(result["coverage"]["inspection"]["status"], "invalid")
+                self.assertEqual(len(result["findings"]), 1)
+                json.dumps(result, allow_nan=False)
+
     def test_empty_valid_audit_is_distinct_from_missing_audit(self):
         AuditLog(self.directory / "audit.jsonl")
         result = bundle(self.directory, "Empty trace")

@@ -66,8 +66,12 @@ def _audit_snapshot(directory, expected_head):
         result = verify_audit(snapshot, expected_head=expected_head)
     summary.update({key: result[key] for key in ("passed", "count", "head", "problems")})
     summary["status"] = "valid" if result["passed"] else "invalid"
+
+    def reject_constant(value):
+        raise ValueError("non-finite audit JSON number")
+
     try:
-        events = [json.loads(line) for line in raw.splitlines()]
+        events = [json.loads(line, parse_constant=reject_constant) for line in raw.splitlines()]
     except (ValueError, UnicodeError):
         events = []
     return summary, events
@@ -82,6 +86,8 @@ def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
     Optional fixed sidecars are used only when the corresponding value is absent.
     Missing logs are unmeasured, not evidence that no tool calls occurred.
     Case metadata is merged before coverage evaluates execution and question scope.
+    Certificates need a verified proposal entry or a same-ID Lean artifact; unrelated
+    JSON files are never opened to discover certificates.
     """
     from agent.coverage import summarize_coverage
     from agent.history import summarize_history
