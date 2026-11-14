@@ -1,94 +1,98 @@
-"""The reproducible baseline run: miner findings plus the labeled false claims as probes.
+"""Mine certified findings, optionally verify/export/score neutral answers.
 
-    python3 -m eval.baseline --facts evidence/case_facts.json
+    python -m eval.baseline --facts evidence/case_facts.json \
+        --certs runs/dev/miner/certs --run runs/dev/miner/run.json \
+        --out runs/dev/miner/results.json --questions eval/benchmark_nist_questions.json \
+        --reference eval/benchmark_nist.json --adapter nist
 
-Writes certs/ (every certificate and the full proposal log) and ui/public/run.json, then
-scores the run. Outputs must be new paths; existing runs are never deleted.
-Custom evidence requires an explicit reference and does not inherit NIST probes.
-No LLM: the same evidence file always gives the same findings.
-
-The labeled *true* claims are not part of the run. They were written with the answer key
-open, so counting them as findings would inflate coverage. The labeled *false* claims are
-included as probes: they can only add refusals.
+No answer key or labeled claim helps select mined findings. Gate probes are optional,
+explicit and kept in a separate directory. Every output path must be new.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
 
-from agent.case import select_case
-from checker import export
+from agent.case import select_case, read_question_profile, with_questions
+from checker import export, report
 from checker.facts import open_source
-from eval import score as scorer
+from eval import gate, pipeline
 from miner import mine as miner
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Run the deterministic baseline and score it.")
+    ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--facts", default="evidence/case_facts.json")
-    ap.add_argument("--certs", default="certs")
-    ap.add_argument("--run", default="ui/public/run.json")
-    ap.add_argument("--reference", help="answer key to score against (default: the open-book 10 questions)")
-    gate = ap.add_mutually_exclusive_group()
-    gate.add_argument("--labeled-claims", help="case-specific false-claim probes; legacy defaults apply only to original evidence")
-    gate.add_argument("--no-gate", action="store_true", help="omit labeled-claim probes and gate scoring")
-    ap.add_argument("--out", default="eval/results.json")
-    ap.add_argument("--complete", action="store_true", help="include large one-record kinds and compound journal identity joins")
+    ap.add_argument("--certs", default="runs/dev/miner/certs")
+    ap.add_argument("--run", default="runs/dev/miner/run.json")
+    ap.add_argument("--out", default="runs/dev/miner/results.json")
+    ap.add_argument("--case-profile", help="public case context; no expected answers")
+    ap.add_argument("--questions", help="public schema-v2 question/answer-shape profile")
+    ap.add_argument("--reference", help="explicit private schema-v2 evaluation reference")
+    answers = ap.add_mutually_exclusive_group()
+    answers.add_argument("--adapter", choices=("nist",))
+    answers.add_argument("--answers", help="external structured answers for another case or system")
+    probes = ap.add_mutually_exclusive_group()
+    probes.add_argument("--labeled-claims", help="explicit false-claim gate regression fixture")
+    probes.add_argument("--no-gate", action="store_true", help="do not measure gate regression")
+    ap.add_argument("--no-score", action="store_true")
+    ap.add_argument("--complete", action="store_true", help="include large record kinds and journal identity joins")
     args = ap.parse_args(argv)
     certs, run, output = Path(args.certs), Path(args.run), Path(args.out)
+    answers_output = output.with_name("answers.json")
+    verification_output = output.with_name("verification.json")
+    report_output = run.with_name("report.md")
     try:
-        profile, profile_source = select_case(Path(args.facts))
-        if not args.reference and profile_source != "legacy":
-            raise ValueError("nondefault facts require an explicit --reference")
-        reference_path = Path(args.reference or scorer.REFERENCE)
-        reference = json.loads(reference_path.read_text())
-        zone = scorer.reference_zone(reference)
-        gate_path = (None if args.no_gate else Path(args.labeled_claims) if args.labeled_claims else
-                     scorer.LABELED if profile_source == "legacy" and scorer.is_nist_reference(reference)
-                     else None)
-        labeled = json.loads(gate_path.read_text()) if gate_path is not None else None
-        if len({p.resolve() for p in (certs, run, output)}) != 3:
-            raise ValueError("--certs, --run and --out must be distinct output paths")
-        for path in (certs, run, output):
+        profile, profile_source = select_case(Path(args.facts),
+                                               Path(args.case_profile) if args.case_profile else None)
+        if args.questions:
+            profile = with_questions(profile, read_question_profile(args.questions))
+            profile_source += "+questions"
+        plan = pipeline.prepare(args.reference, args.questions, args.adapter, args.answers,
+                                profile.case_id, args.no_score)
+        if args.labeled_claims:
+            gate.load_fixture(args.labeled_claims, profile.case_id, profile.time_zone)
+        paths = [certs, run, output, answers_output, verification_output, report_output]
+        if len({p.resolve() for p in paths}) != len(paths):
+            raise ValueError("output paths must be distinct")
+        for path in paths:
             if path.exists() or path.is_symlink():
                 raise ValueError(f"refusing to overwrite existing output: {path}; choose a new path")
-    except (ValueError, OSError) as exc:
-        ap.error(str(exc))
+        for a in paths:
+            for b in paths:
+                if a != b and a != certs and a.resolve() in b.resolve().parents:
+                    raise ValueError("output file paths cannot contain another output")
+    except (ValueError, OSError) as error:
+        ap.error(str(error))
     source = open_source(args.facts)
     skipped = miner.skipped_kinds(source, complete=args.complete)
     if skipped:
         print(f"bounded mode omits one-record statements for {skipped}; use --complete to include them")
-        if set(skipped) & {"journalName", "journalParent", "journalRemoval"}:
-            print("bounded mode also omits compound journal identity joins; --complete includes them")
+        if set(skipped) & {"journalName", "journalParent", "journalRemoval", "journalPath"}:
+            print("bounded mode also omits compound journal identity joins")
+    # Reserve the certificate directory, including empty runs, without replacing prior data.
+    certs.mkdir(parents=True, exist_ok=False)
     mined = miner.mine(source, certs, complete=args.complete)
-    print(f"miner: {len(mined)} candidates, "
-          f"{sum(r['status'] == 'verified' for r in mined)} certified")
-
-    if labeled is not None:
-        labeled["claims"] = [c for c in labeled["claims"] if not c["label"]]
-        for n, c in enumerate(labeled["claims"], 1):
-            # Gate fixture IDs may be arbitrary; keep output IDs distinct from miner M*.
-            c["id"] = ("P" + c["id"][1:] if gate_path.resolve() == scorer.LABELED.resolve()
-                       else f"P{n:03d}")
-        probes = scorer.score_gate(labeled, source, scorer.rows_of(source),
-                                   reference["tolerance_s"], out_dir=certs, time_zone=zone)
-        print(f"probes: {len(probes)} false claims, "
-              f"{sum(p['verdict'] == 'rejected' for p in probes)} refused")
-    else:
-        print("probes: not measured; no labeled claims selected for this case")
-
-    run.parent.mkdir(parents=True, exist_ok=True)
+    print(f"miner: {len(mined)} candidates, {sum(r['status'] == 'verified' for r in mined)} certified")
+    regression = gate.measure(args.labeled_claims, source, profile.case_id, profile.time_zone,
+                              certs / "gate-probes") if args.labeled_claims else None
     data = export.bundle(certs, profile.name)
-    data["case"]["time_zone"] = profile.time_zone
-    data["case"]["mining"] = {"complete": args.complete, "omitted_one_record_kinds": skipped}
-    run.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
-    print(f"{run}: {len(data['findings'])} findings, {len(data['rejections'])} rejections\n")
-    extra = ["--reference", str(reference_path)]
-    extra += ["--labeled-claims", str(gate_path)] if gate_path is not None else ["--no-gate"]
-    return scorer.main(["--facts", args.facts, "--run", str(run), "--out", args.out] + extra)
+    data["case"].update(case_id=profile.case_id, time_zone=profile.time_zone,
+                        profile_source=profile_source,
+                        mining={"complete": args.complete, "omitted_one_record_kinds": skipped})
+    run.parent.mkdir(parents=True, exist_ok=True)
+    with run.open("x") as stream:
+        stream.write(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    with report_output.open("x") as stream:
+        stream.write(report.render(data))
+    try:
+        pipeline.evaluate(plan, data, answers_output, output, regression,
+                          facts_path=args.facts, verification_output=verification_output)
+    except (ValueError, OSError) as error:
+        ap.error(str(error))
+    return 1 if regression and not regression["all_as_expected"] else 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

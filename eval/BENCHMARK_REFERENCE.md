@@ -3,7 +3,7 @@
 [benchmark_nist.json](benchmark_nist.json) contains all **60 original questions**.
 [benchmark_nist_questions.json](benchmark_nist_questions.json) is the public prompt and
 answer-shape profile. It contains no expected answers, answer excerpts or literal bindings.
-The old [reference_full.json](reference_full.json) and historical scores are unchanged.
+Superseded references and scores are retained in Git history.
 
 This is an **AI-assisted development transcription requiring independent review**.
 It is not a blind benchmark result, a claim of verified key correctness, or a new system
@@ -48,8 +48,7 @@ An answer outside the key is not automatically a forensic false positive.
 | Q53, Q55, Q56 | Formats, displayed sizes, viewability, corroborating PC entries and filename basis. |
 | Q58–Q60 | Original timeline, methodology and visual-summary prompts, without substituting a shorter task. |
 
-The old 68 unsupported rows are no longer automatically classified by application
-vocabulary. Ordinary properties are typed answers; harder content and narrative questions
+Ordinary properties are typed answers. Harder content and narrative questions
 remain visible with explicit review requirements. Full correctness requires every declared
 field and source row, including repeated rows; additional incorrect fields prevent full credit.
 
@@ -62,7 +61,7 @@ The source text and PDF have file hashes. Every question has an inclusive, one-b
 "\n".join(source_lines[start_line - 1:end_line]) + "\n"
 ```
 
-All 60 source-span hashes were checked. **1,001 exact string leaves** have `field_sources`
+All 60 source-span hashes were checked. **1,009 exact string leaves** have `field_sources`
 entries naming their JSON pointer, literal and source line range. These literal checks
 passed. There are 1,793 string leaves total; unbound strings include normalized wrapped
 text, derived timestamps and interpreted labels. Missing bindings are not fabricated.
@@ -120,3 +119,39 @@ Next review should check every table cell against the PDF, validate each time co
 resolve source ambiguities explicitly and approve content/narrative criteria. Keep an
 auditable revision history. Only then call the reference independently reviewed; later
 system improvements remain development results until assessed on a held-out dataset.
+
+## Author visual review after the first checkpoint
+
+This is a second pass by the transcription author, **not independent approval**.
+The source PDF was rendered with PDFium and checked directly at these PDF page numbers:
+
+| Question | Pages | Visual check |
+|---|---|---|
+| Q26 | 32 | Three rows: two JumpList records and one ShellBag-created record; both 10:01:29 rows remain distinct. |
+| Q28 | 34 | Eight rows, with all Windows/Office source distinctions and the four timestamp groups associated correctly. |
+| Q33 | 36–37 | Eleven rows. The temporary-file row at 16:41:21 really is labeled System event log; preserve that label. |
+| Q36 | 39 | Four SI timestamps, four FN timestamps and two OOXML timestamps; merged source cells were associated correctly. |
+
+No table-count or timestamp-to-source association error was found in this pass.
+Two literal details were corrected: Q33's printed method includes the extra slash in
+`CD/DVD/ player`; Q28's Registry row uses a lower-case network-share spelling.
+The second change does not affect the declared case-insensitive match policy.
+Q33 still needs review of its event semantics and minute-precision interval.
+
+The public profile previously inherited the private draft's incomplete candidate shapes.
+It now permits the full original prompts: Q1 requires acquisition/verification comparisons;
+Q39 allows thumbnail artifacts and identity evidence; Q53 allows an optional actual carving
+inventory; Q58 requires detailed events; Q60 requires a diagram or portable specification.
+Unevaluable questions permit additional evidence-backed fields. They must not force an
+analyst to answer only the parts for which the draft key happens to contain candidate values.
+
+Public descriptions now declare Q4's display-zone convention, Q11's source/time-meaning
+vocabulary and Q36's source/type vocabulary. These are structural comparison conventions,
+not case evidence. Other free-text normalization choices still require review.
+Q16 remains unevaluable: requiring an evidence-only system to reproduce a typo in an
+unseen key would not resolve its singular/plural discrepancy. Both source strings remain
+available for a future, explicit accepted-alternative or diagnostic contract.
+
+The source-binding audit was rerun to a new output path; the first published audit was
+not overwritten. All 60 question spans and the updated 1,009 literal anchors pass.
+This establishes source binding only; interpretation and reference completeness remain draft.

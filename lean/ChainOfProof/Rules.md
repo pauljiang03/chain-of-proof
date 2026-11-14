@@ -12,7 +12,7 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 | R4 | Windows keeps the modified time on copy and sets a new created time, so created after modified means the file was copied here | **Heuristic** | Archive extraction and some downloads leave the same signature |
 | R5 | A Recycle Bin `$I` record gives the original path and the deletion time | Strong | That the content is unrecoverable |
 | R6 | A ReadyBoost (`EMDMgmt`) registry key, or the volume block inside a shortcut, means this PC saw a volume with this label and serial; its time is the key's last write, or when the shortcut's target was opened | Strong | Which physical device carried the volume |
-| R7 | The volume serial read from a seized device's image is the volume that device holds now; the device's serial comes from the acquisition record | Strong | What volume the device held earlier: a format assigns a new serial |
+| R7 | The volume serial read from a seized image identifies the volume in that image. A hardware device serial comes only from supported removable-device E01 acquisition metadata or an explicit shared acquisition manifest; otherwise the device identity is scoped to the image and exhibit | Strong | What volume the device held earlier; a USB identity for an image-scoped unknown device; an optical drive serial does not identify its disc |
 | R8 | Two volume records share a user-chosen label; this is a candidate association only | **Heuristic** | Physical-device identity or reformatting: labels are not unique |
 | R9 | A browser history row means this search URL was visited in this profile at this time | Strong | Who typed it, and that it was typed and not followed as a link |
 | R10 | A file system timestamp is what the file system recorded | Strong | That the clock was right, or that the timestamp was not set by a tool |
@@ -23,7 +23,7 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 | R15 | An account record is what the account database or a client's configuration holds | Strong | Who used the account |
 | R16 | A logon, logoff, startup or shutdown record is what the account database or an event log recorded | Strong | That every such event was logged; logs roll over and can be cleared |
 | R17 | An installed-program record is what the system's uninstall list holds | Strong | That the program was ever run, or is still present |
-| R18 | A run record (prefetch, per-user run counter, compatibility cache) means the system recorded this executable running at this time | Strong | Who ran it and what it did; some artifacts keep only the last run |
+| R18 | An application artifact names an executable/path and attaches a timestamp with its declared meaning. Only explicit prefetch, UserAssist or process-creation run-time provenance is rendered as execution time | Strong, about the artifact | Compatibility-cache file modification, cache modification, registry last-write or task configuration records do not establish execution at that time. An execution flag cannot turn file mtime into run time. Missing/unknown provenance remains an application observation; no attribution to a user or inference of behavior |
 | R19 | A browser history row means this URL was loaded in this browser profile at this time | Strong | Who was at the keyboard, and that the page was read |
 | R20 | A download record gives the source URL, the saved path and the start time as the browser stored them | Strong | That the file was opened, or still exists |
 | R21 | Text kept by the operating system's search box was typed there | Strong | When, beyond the time the artifact attaches |
@@ -38,6 +38,7 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 | R30 | A UDF file-set descriptor read from an identified disc records this timestamp for this volume | Strong, about the descriptor | Examination time, completion of a format or write, or whether a PC-wide lock involved this disc |
 | R31 | An NTFS change-journal record carries a FILE_CREATE creation flag for this path and volume at its recorded time | Strong, about the record | Exact creation onset (flags can accumulate until CLOSE), a filesystem creation timestamp, or a copy signature |
 | R32 | Journal name, parent-reference and removal-flag observations carry an image-scoped identity consisting of full NTFS volume serial, file record and sequence. Exact identity equality supports joins; each observation retains its own timestamp | Strong, about recorded identities | Creation onset, unchanged content, continuous existence, an earlier event at a later alias, deletion of every hardlink, secure wiping, copying or a disc write. Current MFT names are context only when preceding journal names cannot resolve the historical ancestor chain |
+| R33 | A child journal path can be constrained by directory identities and an intact retained USN-v2 byte interval. Every record is size/version/offset/name validated; only zero tail padding to the immediately next page is permitted. A future OLD_NAME needs a following NEW_NAME and no conflicting directory state, creation, removal, rename-new or hard-link change in between. Unknown higher ancestors are marked explicitly | Strong, about reconstructed journal state under the NTFS journal contract | Filesystem creation onset, copies, disc writes, secure wiping, facts outside the validated interval, or an invented current-MFT prefix. This does not prove the journal was never tampered with; the extractor/raw-byte trust boundary remains |
 | C1 | A census counts every record of one kind in the evidence file. The kernel checks the count over the list in the certificate; the verifier checks that the list is every record of that kind | Strong, about the records | Anything about events that left no record, or records the extractor does not read. The sentence says so every time |
 | T | A tag fact says the extractor (or an LLM, if `prov.source = "llm"`) labeled an entity | Depends on the tag's source | Anything beyond the stated rule; an LLM tag is a judgment, never evidence |
 
@@ -69,7 +70,7 @@ approves the template, because that is where the meaning lives.
 | `recoveredOnDevice c d` | R10, R13 | Strong | A directory entry for {path}, created ({time}), was recovered from the recovery area on seized device {serial}. Recovery alone does not establish a reformat; an optical disc may retain older states of the same filesystem. |
 | `tagged f s g T` | T | Strong, or judgment for an LLM tag | {entity} is tagged "{tag}" ({rule that computed it, or "an LLM judgment"}). |
 | `before a b` | none | Strong | {event a} happened before {event b}: the gap of {Δ} exceeds the combined timestamp uncertainty of {r}. |
-| `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds, e.g. "A record shows {exe} ran ({time}, path {path})." |
+| `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves the artifact's timestamp meaning and states execution time only for explicit run-time sources. |
 | `sameContent a b` | R28 | Strong | {path a} and {path b} have identical content: both read as {hash}. |
 | `fileRemovedAt r` | R29 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a removal flag ({time}). This is the record timestamp, not necessarily deletion onset; it does not establish wiping or Recycle Bin use. |
 | `fileCreationRecordedAt r` | R31 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a creation flag ({time}). This is not a filesystem creation timestamp and cannot be used by `copiedHere`. |
@@ -79,6 +80,7 @@ approves the template, because that is where the meaning lives.
 | `sameJournalFile a b` | R32 | Strong | The two names at their own observation times share the same scoped NTFS file-record identity, not necessarily unchanged contents or simultaneous aliases. |
 | `removedFilePreviouslyNamed n r` | R32 | Strong | A later removal-flag observation shares the identity of the earlier name, beyond timestamp uncertainty. It does not assign the removal time to the earlier alias or prove wiping. |
 | `journalChildNamedDirectory c p d` | R32 | Strong | The child's name, child-parent reference and directory's name join through their scoped identities. Each retains its own time; no presence at a different-time alias, creation onset, copy or disc write is inferred. |
+| `journalPathAt p`, `journalPathForFile n p` | R33; R32+R33 | Strong | A bounded path or explicitly incomplete suffix belongs to the child's journal observation time; a direct name joins only through the same scoped identity. No filesystem birth, copying or disc-write time is asserted. |
 | `exactly kind n` | C1 | Strong | The evidence holds exactly {n} {kind} records: {each one}. This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted. |
 | `exactlyDistinct kind slot n` | C1 | Strong | The {N} {kind} records in the evidence name exactly {n} different {field}s: {values}. (Same closing note.) |
 | `exactlyWith kind slot v n` | C1 | Strong | Of the {N} {kind} records in the evidence, exactly {n} have {field} {v} ("none has" when n is 0). (Same closing note.) |
@@ -90,11 +92,16 @@ other claims with `both`.
 ## Deterministic tags
 
 Tags are computed by plain code in `extractor/tags.py`; each tag fact carries its rule.
+Case-specific tags require an explicit public manifest `_policy`, shared with all compared
+systems. Its optional fields are `source`, `authorized_device_serials`,
+`authorized_device_serials_complete`, and `confidential_path_markers`. An absent policy
+adds no authorization or confidentiality labels. Unknown image-scoped device identities
+are never classified from the authorization list.
 
 | Tag | Rule | What it does not establish |
 |---|---|---|
-| `authorized-device` / `unauthorized-device` | The device serial is, or is not, on the authorized list in the case brief | Who owns the device |
-| `confidential` | The path carries the confidential-project marker named in the case brief | What the file contains |
+| `authorized-device` / `unauthorized-device` | A known hardware serial is on the supplied public allowlist; a nonmember is tagged only if `authorized_device_serials_complete` is true | Who owns the device; an incomplete list does not classify nonmembers |
+| `confidential` | The path carries a confidential-path marker from the supplied public policy | What the file contains |
 | `watch-list-search` | The search term contains a word from a generic watch list written before looking at this case | Intent |
 | `e-mail in the Deleted Items folder` | The mailbox file lists every message with this subject in its Deleted Items folder | Who moved it there, or when |
 | `same size and last-modified time as a file elsewhere: N bytes, T` | Another file record, on a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s). A copy keeps both, so this is how a renamed copy shows up | That the contents are the same: nothing was hashed or compared |

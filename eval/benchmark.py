@@ -17,6 +17,8 @@ import argparse
 import hashlib
 import json
 import math
+import ntpath
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import date, datetime, timezone
@@ -130,26 +132,62 @@ def _day(value, zone):
     return _instant(value, zone).astimezone(ZoneInfo(zone)).date()
 
 
+def _windows_path(value, rule):
+    """Canonicalize spelling while retaining an explicit drive/share identity.
+
+    A declared root permits image-relative paths to match that one volume. It
+    never strips or replaces a different drive or UNC share in an answer.
+    """
+    if not isinstance(value, str) or not value:
+        raise ValueError("path must be a nonempty string")
+    value = value.replace("/", "\\")
+    if value.startswith("\\\\?\\UNC\\"):
+        value = "\\\\" + value[8:]
+    elif value.startswith("\\\\?\\"):
+        value = value[4:]
+    if any(c in value for c in "*?"):
+        raise ValueError("a concrete path cannot contain wildcards")
+    drive, tail = ntpath.splitdrive(value)
+    if drive and not tail.startswith("\\"):
+        raise ValueError("drive-relative paths have an unknown current directory")
+    root = rule.get("root")
+    if not drive and root:
+        value = root.rstrip("\\") + "\\" + tail.lstrip("\\")
+    value = ntpath.normpath(value)
+    return value if rule.get("case_sensitive", False) else value.casefold()
+
+
+def _normalize_string(value, mode):
+    if mode == "casefold":
+        return value.casefold()
+    if mode == "casefold_whitespace":
+        return " ".join(value.casefold().split())
+    return value
+
+
 def _assignment(weights):
-    """Maximum-weight square bipartite assignment (Hungarian, no dependencies)."""
+    """Maximum-weight rectangular assignment, with rows <= columns (Hungarian)."""
     n = len(weights)
     if not n:
         return []
-    u, v, p, way = [0] * (n + 1), [0] * (n + 1), [0] * (n + 1), [0] * (n + 1)
+    m = len(weights[0])
+    if n > m or any(len(row) != m for row in weights):
+        raise ValueError("assignment needs a rectangular matrix with rows <= columns")
+    u, v, p, way = [0] * (n + 1), [0] * (m + 1), [0] * (m + 1), [0] * (m + 1)
     for i in range(1, n + 1):
         p[0], j0 = i, 0
-        minimum, used = [math.inf] * (n + 1), [False] * (n + 1)
+        minimum, used = [math.inf] * (m + 1), [False] * (m + 1)
         while True:
             used[j0] = True
             i0, delta, j1 = p[j0], math.inf, 0
-            for j in range(1, n + 1):
+            for j in range(1, m + 1):
                 if not used[j]:
                     cost = -weights[i0 - 1][j - 1] - u[i0] - v[j]
                     if cost < minimum[j]:
                         minimum[j], way[j] = cost, j0
                     if minimum[j] < delta:
                         delta, j1 = minimum[j], j
-            for j in range(n + 1):
+            for j in range(m + 1):
                 if used[j]:
                     u[p[j]] += delta
                     v[j] -= delta
@@ -164,7 +202,7 @@ def _assignment(weights):
             j0 = j1
             if j0 == 0:
                 break
-    return sorted((p[j] - 1, j - 1) for j in range(1, n + 1))
+    return sorted((p[j] - 1, j - 1) for j in range(1, m + 1) if p[j])
 
 
 class Matcher:
@@ -173,7 +211,7 @@ class Matcher:
         self.zone = time_zone
         if self.zone is not None:
             ZoneInfo(self.zone)
-        unknown = set(self.config) - {"strings", "string_modes", "list_order", "timestamps"}
+        unknown = set(self.config) - {"strings", "string_modes", "string_aliases", "paths", "list_order", "timestamps"}
         if unknown:
             raise ValueError(f"unknown matching settings: {sorted(unknown)}")
         if self.config.get("strings", "exact") not in STRING_MODES:
@@ -183,6 +221,23 @@ class Matcher:
         for pointer, mode in self.config.get("string_modes", {}).items():
             if (pointer and not pointer.startswith("/")) or mode not in STRING_MODES:
                 raise ValueError("string_modes needs JSON pointers and recognized modes")
+        for pointer, groups in self.config.get("string_aliases", {}).items():
+            if (pointer and not pointer.startswith("/")) or not isinstance(groups, list):
+                raise ValueError("string_aliases needs JSON pointers and lists of equivalence classes")
+            if any(not isinstance(g, list) or len(g) < 2 or
+                   any(not isinstance(s, str) or not s for s in g) for g in groups):
+                raise ValueError("string alias classes need at least two nonempty strings")
+        for pointer, rule in self.config.get("paths", {}).items():
+            if (pointer and not pointer.startswith("/")) or not isinstance(rule, dict):
+                raise ValueError("paths needs JSON pointers and rule objects")
+            if set(rule) - {"style", "root", "case_sensitive", "scope"} or rule.get("style") != "windows":
+                raise ValueError("path rules require style windows and recognized settings")
+            if not isinstance(rule.get("case_sensitive", False), bool):
+                raise ValueError("path case_sensitive must be boolean")
+            root = rule.get("root")
+            if root is not None and (not isinstance(root, str) or not (
+                    re.fullmatch(r"[A-Za-z]:", root) or re.fullmatch(r"\\\\[^\\*?]+\\[^\\*?]+", root))):
+                raise ValueError("path root must identify one drive or UNC share")
         for pointer, rule in self.config.get("timestamps", {}).items():
             if (pointer and not pointer.startswith("/")) or not isinstance(rule, dict):
                 raise ValueError("timestamps needs JSON pointers and rule objects")
@@ -199,6 +254,9 @@ class Matcher:
     def validate_expected(self, expected):
         _json(expected)
         for path, value in _atoms(expected):
+            path_rule = _rule(self.config.get("paths", {}), path)
+            if path_rule is not None and value is not None:
+                _windows_path(value, path_rule)
             rule = _rule(self.config.get("timestamps", {}), path)
             if rule is not None and value is not None:
                 zone = rule.get("time_zone", self.zone)
@@ -208,6 +266,16 @@ class Matcher:
                 raise ValueError("an empty prefix would accept every string")
 
     def compare(self, expected, actual, ep="", ap=""):
+        path_rule = _rule(self.config.get("paths", {}), ep)
+        if path_rule is not None and expected is not None:
+            wanted = _windows_path(expected, path_rule)
+            try:
+                equal = wanted == _windows_path(actual, path_rule)
+            except (ValueError, TypeError):
+                equal = False
+            if equal:
+                return [_event("match", ep, ap, expected, actual, "declared volume-aware path contract")]
+            return _missing(expected, ep, "path or volume mismatch") + _wrong(actual, ap, "path or volume mismatch")
         rule = _rule(self.config.get("timestamps", {}), ep)
         if rule is not None and expected is not None:
             zone = rule.get("time_zone", self.zone)
@@ -241,35 +309,46 @@ class Matcher:
                     else:
                         events.extend(self.compare(expected[i], actual[i], _pointer(ep, i), _pointer(ap, i)))
                 return events
-            n = max(len(expected), len(actual))
-            pairs, weights = {}, []
+            # Rectangular matching avoids padding a short reference list to the
+            # size of a large submitted list. Only chosen pairs retain audits.
+            transpose = len(expected) > len(actual)
+            n, m = min(len(expected), len(actual)), max(len(expected), len(actual))
+            weights = []
             scale = len(_atoms(expected)) + len(_atoms(actual)) + 1
+            expected_sizes = [len(_atoms(value)) for value in expected]
+            actual_sizes = [len(_atoms(value)) for value in actual]
             for i in range(n):
                 row = []
-                for j in range(n):
-                    if i >= len(expected):
-                        events = _wrong(actual[j], _pointer(ap, j), "extra list member") if j < len(actual) else []
-                    elif j >= len(actual):
-                        events = _missing(expected[i], _pointer(ep, i), "list member missing")
-                    else:
-                        events = self.compare(expected[i], actual[j], _pointer(ep, i), _pointer(ap, j))
-                    pairs[i, j] = events
+                for j in range(m):
+                    ei, ai = (j, i) if transpose else (i, j)
+                    events = self.compare(expected[ei], actual[ai], _pointer(ep, ei), _pointer(ap, ai))
                     counts = _counts(events)
-                    row.append(counts["true_positive"] * scale - counts["missing"] - counts["wrong"])
+                    # Missing-all and wrong-all are the constant unmatched
+                    # baseline. Reward the improvement from joining this pair.
+                    row.append(counts["true_positive"] * scale + expected_sizes[ei] + actual_sizes[ai]
+                               - counts["missing"] - counts["wrong"])
                 weights.append(row)
-            return [event for pair in _assignment(weights) for event in pairs[pair]]
+            pairs = [(j, i) if transpose else (i, j) for i, j in _assignment(weights)]
+            used_expected, used_actual = {i for i, _ in pairs}, {j for _, j in pairs}
+            events = [event for i, j in sorted(pairs)
+                      for event in self.compare(expected[i], actual[j], _pointer(ep, i), _pointer(ap, j))]
+            events.extend(event for i, value in enumerate(expected) if i not in used_expected
+                          for event in _missing(value, _pointer(ep, i), "list member missing"))
+            events.extend(event for j, value in enumerate(actual) if j not in used_actual
+                          for event in _wrong(value, _pointer(ap, j), "extra list member"))
+            return events
         # bool is intentionally different from 0/1 despite Python's equality rules.
         numeric = (isinstance(expected, (int, float)) and not isinstance(expected, bool)
                    and isinstance(actual, (int, float)) and not isinstance(actual, bool))
         equal = (numeric or type(expected) is type(actual)) and expected == actual
         if isinstance(expected, str) and isinstance(actual, str):
             mode = _rule(self.config.get("string_modes", {}), ep, self.config.get("strings", "exact"))
-            if mode == "casefold":
-                equal = expected.casefold() == actual.casefold()
-            elif mode == "casefold_whitespace":
-                equal = " ".join(expected.casefold().split()) == " ".join(actual.casefold().split())
-            elif mode == "prefix":
-                equal = actual.startswith(expected)
+            equal = (actual.startswith(expected) if mode == "prefix" else
+                     _normalize_string(expected, mode) == _normalize_string(actual, mode))
+            for group in _rule(self.config.get("string_aliases", {}), ep, []):
+                normalized = {_normalize_string(s, mode) for s in group}
+                if _normalize_string(expected, mode) in normalized and _normalize_string(actual, mode) in normalized:
+                    equal = True
         if equal:
             return [_event("match", ep, ap, expected, actual)]
         # Empty submitted containers have no factual assertions when nonempty
@@ -373,6 +452,9 @@ def score(reference, submission):
     expected_atoms = totals["true_positive"] + totals["missing"]
     attempted_atoms = totals["true_positive"] + totals["wrong"]
     denominator = expected_atoms + unscored_atoms
+    extra_reasons = {"extra list member", "unexpected field", "duplicate question response", "unexpected question id"}
+    wrong_events = [event for item in results + unexpected for event in item["audit"] if event["status"] == "wrong"]
+    extra_atoms = sum(event.get("reason") in extra_reasons for event in wrong_events)
     return {"schema_version": 2, "scorer_version": VERSION, "case_id": reference["case_id"],
             "reference_sha256": _hash(reference), "submission_sha256": _hash(submission),
             "scorer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -383,6 +465,8 @@ def score(reference, submission):
             "scorable_question_rate": (question_counts["fully_correct"] / scorable_questions if scorable_questions else None),
             "mulder_style_labels": {RUBRIC[k]: question_counts[k] for k in RUBRIC},
             "atomic": {**{k: totals[k] for k in ("true_positive", "missing", "wrong")},
+                       "extra_or_unexpected_atoms": extra_atoms,
+                       "mismatched_value_atoms": totals["wrong"] - extra_atoms,
                        "scorable_reference_atoms": expected_atoms, "unscored_expected_atoms": unscored_atoms,
                        "known_reference_atoms": denominator,
                        "match_rate": totals["true_positive"] / denominator if denominator else None,
@@ -406,6 +490,8 @@ def report(result):
             f"unevaluable {q['unevaluable']} (unresolved, not failed)\n{labels}\n"
             f"Atomic answers: {a['true_positive']} matched, {a['missing']} missing, {a['wrong']} wrong; "
             f"{a['unscored_expected_atoms']} known atoms unevaluable\n"
+            f"Contract mismatches: {a['extra_or_unexpected_atoms']} extra/unexpected atoms, "
+            f"{a['mismatched_value_atoms']} unequal values (not forensic false-positive counts)\n"
             f"Unexpected question responses: {len(result['unexpected_questions'])}\n{result['note']}")
 
 

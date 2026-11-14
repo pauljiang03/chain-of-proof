@@ -28,7 +28,8 @@
     "Default casefold_whitespace comparison ignores case and PDF whitespace, not arbitrary paraphrase. URL paths use exact or explicitly declared printed-prefix matching.",
     "Sizes keep printed precision. File paths retain printed spelling except documented line-wrap/separator normalization.",
     "Source excerpts and hashes permit transcription audit, not proof that the key's narrative interpretation is correct.",
-    "field_sources binds exact literal strings to source line ranges only. It does not certify that a literal belongs to the correct expected field or that derived values are correct."
+    "field_sources binds exact literal strings to source line ranges only. It does not certify that a literal belongs to the correct expected field or that derived values are correct.",
+    "Q13 publishes standard browser-name equivalence classes. Q38/Q40 publish a Windows path contract binding image-relative paths to the PC system volume C:; explicit other drives and UNC shares remain distinct, and wildcard filenames do not match concrete paths."
   ],
   "questions": [
     {
@@ -2451,7 +2452,32 @@
       "match": {
         "strings": "casefold_whitespace",
         "list_order": "unordered",
-        "timestamps": {}
+        "timestamps": {},
+        "string_aliases": {
+          "/browsers/*/name": [
+            [
+              "Microsoft Internet Explorer",
+              "Internet Explorer",
+              "IE"
+            ],
+            [
+              "Google Chrome",
+              "Chrome"
+            ],
+            [
+              "Mozilla Firefox",
+              "Firefox"
+            ],
+            [
+              "Microsoft Edge",
+              "Edge"
+            ],
+            [
+              "Apple Safari",
+              "Safari"
+            ]
+          ]
+        }
       },
       "source": {
         "start_line": 1501,
@@ -4059,7 +4085,8 @@
       },
       "review_status": "draft_requires_independent_review",
       "transcription_notes": [
-        "All 28 keywords also retain the printed URLs and browser labels, previously omitted. The first-row discrepancy is not silently repaired."
+        "All 28 keywords also retain the printed URLs and browser labels, previously omitted. The first-row discrepancy is not silently repaired.",
+        "Self-review retained unevaluable status: a system cannot reproduce a printed-key typo field from evidence alone. The URL and printed keyword are both preserved, but no accepted-alternative or separate diagnostic contract is silently introduced."
       ],
       "field_sources": [
         {
@@ -5940,7 +5967,8 @@
       },
       "review_status": "draft_requires_independent_review",
       "transcription_notes": [
-        "All three printed rows are retained, including ShellBag. The key says these are directory traversal records from which opening the ZIP is inferred."
+        "All three printed rows are retained, including ShellBag. The key says these are directory traversal records from which opening the ZIP is inferred.",
+        "All three rows are present: JumpList at 10:01:23 for the ZIP, JumpList at 10:01:29 for its ppt directory, and ShellBag (created) at 10:01:29 for the ZIP. The key describes directory traces supporting a file-open inference."
       ],
       "field_sources": [
         {
@@ -5983,6 +6011,15 @@
         "string_leaves": 9,
         "semantic_review_completed": false,
         "note": "Exact containment only. Repeated literals, inferred field association, normalized paths, timestamp conversion and narrative interpretation still require review."
+      },
+      "author_visual_review": {
+        "source_pdf_pages": [
+          32
+        ],
+        "printed_table_rows": 3,
+        "review_kind": "same_author_self_review",
+        "independent_review_completed": false,
+        "findings": "All three rows are present: JumpList at 10:01:23 for the ZIP, JumpList at 10:01:29 for its ppt directory, and ShellBag (created) at 10:01:29 for the ZIP. The key describes directory traces supporting a file-open inference."
       }
     },
     {
@@ -6273,7 +6310,7 @@
           },
           {
             "timestamp": "2015-03-23T20:26:56Z",
-            "path": "\\\\10.11.11.128\\SECURED_DRIVE\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+            "path": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
             "source": "Registry (Office)"
           },
           {
@@ -6321,7 +6358,8 @@
       },
       "review_status": "draft_requires_independent_review",
       "transcription_notes": [
-        "All eight source-specific rows are retained; equal times do not collapse independent artifacts."
+        "All eight source-specific rows are retained; equal times do not collapse independent artifacts.",
+        "Eight source rows confirmed. The spreadsheet has three 16:26:53 rows and one 16:26:56 Registry row; the presentation has two 16:27:33 and two 16:27:37 rows. Retained Office/Windows distinctions; restored printed lower-case share on the Registry row."
       ],
       "field_sources": [
         {
@@ -6372,6 +6410,15 @@
         "string_leaves": 24,
         "semantic_review_completed": false,
         "note": "Exact containment only. Repeated literals, inferred field association, normalized paths, timestamp conversion and narrative interpretation still require review."
+      },
+      "author_visual_review": {
+        "source_pdf_pages": [
+          34
+        ],
+        "printed_table_rows": 8,
+        "review_kind": "same_author_self_review",
+        "independent_review_completed": false,
+        "findings": "Eight source rows confirmed. The spreadsheet has three 16:26:53 rows and one 16:26:56 Registry row; the presentation has two 16:27:33 and two 16:27:37 rows. Retained Office/Windows distinctions; restored printed lower-case share on the Registry row."
       }
     },
     {
@@ -6792,7 +6839,7 @@
           {
             "timestamp": "2015-03-24T19:47:47Z",
             "source": "$UsnJrnl",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": [
               "DAT67383.tmp",
@@ -6804,14 +6851,14 @@
           {
             "timestamp": "2015-03-24T19:47:47Z",
             "source": "Event Log (System)",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": []
           },
           {
             "timestamp": "2015-03-24T19:56:01Z",
             "source": "$UsnJrnl",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": [
               "DAT32224.tmp",
@@ -6823,14 +6870,14 @@
           {
             "timestamp": "2015-03-24T19:56:11Z",
             "source": "Event Log (System)",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": []
           },
           {
             "timestamp": "2015-03-24T20:24:19Z",
             "source": "$UsnJrnl",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": [
               "DAT67829.tmp",
@@ -6842,14 +6889,14 @@
           {
             "timestamp": "2015-03-24T20:24:46Z",
             "source": "Event Log (System)",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": []
           },
           {
             "timestamp": "2015-03-24T20:41:21Z",
             "source": "Event Log (System)",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": [
               "DAT85234.tmp",
@@ -6861,7 +6908,7 @@
           {
             "timestamp": "2015-03-24T20:41:21Z",
             "source": "Event Log (System)",
-            "method": "With a CD/DVD player (Mastered)",
+            "method": "With a CD/DVD/ player (Mastered)",
             "activity": "burning",
             "temporary_files": []
           }
@@ -6928,7 +6975,8 @@
       },
       "review_status": "draft_requires_independent_review",
       "transcription_notes": [
-        "All 11 printed rows are retained (eight mastered records plus method selection, formatting and an interval). The descriptor time is not silently replaced by extraction results; this reference is not a proof of the key's causal wording."
+        "All 11 printed rows are retained (eight mastered records plus method selection, formatting and an interval). The descriptor time is not silently replaced by extraction results; this reference is not a proof of the key's causal wording.",
+        "Eleven rows confirmed. The seventh mastered row is actually labeled Event Log (System), even though its description lists temporary files; that label is preserved. Restored the literal extra slash in CD/DVD/ player. The final interval is printed only to minutes, so exact onset/end-second semantics remain unresolved."
       ],
       "field_sources": [
         {
@@ -6937,6 +6985,13 @@
           "start_line": 3049,
           "end_line": 3049,
           "candidate_occurrences": 4
+        },
+        {
+          "pointer": "/records/0/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
         },
         {
           "pointer": "/records/0/activity",
@@ -6970,6 +7025,13 @@
           "end_line": 3052
         },
         {
+          "pointer": "/records/1/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
+        },
+        {
           "pointer": "/records/1/activity",
           "literal": "burning",
           "start_line": 3104,
@@ -6982,6 +7044,13 @@
           "start_line": 3049,
           "end_line": 3049,
           "candidate_occurrences": 4
+        },
+        {
+          "pointer": "/records/2/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
         },
         {
           "pointer": "/records/2/activity",
@@ -7015,6 +7084,13 @@
           "end_line": 3064
         },
         {
+          "pointer": "/records/3/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
+        },
+        {
           "pointer": "/records/3/activity",
           "literal": "burning",
           "start_line": 3104,
@@ -7027,6 +7103,13 @@
           "start_line": 3049,
           "end_line": 3049,
           "candidate_occurrences": 4
+        },
+        {
+          "pointer": "/records/4/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
         },
         {
           "pointer": "/records/4/activity",
@@ -7060,11 +7143,25 @@
           "end_line": 3076
         },
         {
+          "pointer": "/records/5/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
+        },
+        {
           "pointer": "/records/5/activity",
           "literal": "burning",
           "start_line": 3104,
           "end_line": 3104,
           "candidate_occurrences": 10
+        },
+        {
+          "pointer": "/records/6/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
         },
         {
           "pointer": "/records/6/activity",
@@ -7096,6 +7193,13 @@
           "literal": "POST61821.tmp",
           "start_line": 3090,
           "end_line": 3090
+        },
+        {
+          "pointer": "/records/7/method",
+          "literal": "With a CD/DVD/ player (Mastered)",
+          "start_line": 3049,
+          "end_line": 3049,
+          "candidate_occurrences": 9
         },
         {
           "pointer": "/records/7/activity",
@@ -7134,10 +7238,20 @@
         }
       ],
       "source_audit": {
-        "literal_bindings": 31,
+        "literal_bindings": 39,
         "string_leaves": 57,
         "semantic_review_completed": false,
         "note": "Exact containment only. Repeated literals, inferred field association, normalized paths, timestamp conversion and narrative interpretation still require review."
+      },
+      "author_visual_review": {
+        "source_pdf_pages": [
+          36,
+          37
+        ],
+        "printed_table_rows": 11,
+        "review_kind": "same_author_self_review",
+        "independent_review_completed": false,
+        "findings": "Eleven rows confirmed. The seventh mastered row is actually labeled Event Log (System), even though its description lists temporary files; that label is preserved. Restored the literal extra slash in CD/DVD/ player. The final interval is printed only to minutes, so exact onset/end-second semantics remain unresolved."
       }
     },
     {
@@ -7437,7 +7551,8 @@
       },
       "review_status": "draft_requires_independent_review",
       "transcription_notes": [
-        "All ten timestamps are retained: four per NTFS attribute and two internal OOXML timestamps. Equal values do not erase source/type distinctions."
+        "All ten timestamps are retained: four per NTFS attribute and two internal OOXML timestamps. Equal values do not erase source/type distinctions.",
+        "Merged source cells cover four timestamps each for NTFS $STANDARD_INFORMATION and $FILE_NAME, followed by two OOXML timestamps. All ten type/source/time associations agree with the PDF."
       ],
       "field_sources": [
         {
@@ -7516,6 +7631,15 @@
         "string_leaves": 30,
         "semantic_review_completed": false,
         "note": "Exact containment only. Repeated literals, inferred field association, normalized paths, timestamp conversion and narrative interpretation still require review."
+      },
+      "author_visual_review": {
+        "source_pdf_pages": [
+          39
+        ],
+        "printed_table_rows": 10,
+        "review_kind": "same_author_self_review",
+        "independent_review_completed": false,
+        "findings": "Merged source cells cover four timestamps each for NTFS $STANDARD_INFORMATION and $FILE_NAME, followed by two OOXML timestamps. All ten type/source/time associations agree with the PDF."
       }
     },
     {
@@ -7587,7 +7711,15 @@
       "match": {
         "strings": "casefold_whitespace",
         "list_order": "unordered",
-        "timestamps": {}
+        "timestamps": {},
+        "paths": {
+          "/paths/*": {
+            "style": "windows",
+            "root": "C:",
+            "case_sensitive": false,
+            "scope": "PC system volume"
+          }
+        }
       },
       "source": {
         "start_line": 3298,
@@ -7695,7 +7827,15 @@
       "match": {
         "strings": "casefold_whitespace",
         "list_order": "unordered",
-        "timestamps": {}
+        "timestamps": {},
+        "paths": {
+          "/path": {
+            "style": "windows",
+            "root": "C:",
+            "case_sensitive": false,
+            "scope": "PC system volume"
+          }
+        }
       },
       "source": {
         "start_line": 3320,
@@ -12123,5 +12263,6 @@
         "note": "Exact containment only. Repeated literals, inferred field association, normalized paths, timestamp conversion and narrative interpretation still require review."
       }
     }
-  ]
+  ],
+  "public_contract_revision": "author-visual-review-1"
 }

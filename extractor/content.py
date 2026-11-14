@@ -16,12 +16,12 @@ functions that open an image.
 from __future__ import annotations
 
 import hashlib
-import json
 import struct
 from pathlib import Path
 from typing import Iterable, List, Optional, Sequence, Tuple
 
 from . import optical
+from .acquisition import area, fallback, provenance
 
 OBSERVED = "when the image was examined, not an event on the device"
 FAT_EPOCH = 315532800           # what an unset FAT timestamp decodes to (see extractor/media.py)
@@ -194,6 +194,8 @@ def _row(ev, ctx, obj: str, digest: str, size: int, head: bytes, location: str, 
                 **extra, **ctx["common"])
     if detail:
         prov["signature_detail"] = detail
+    if ctx.get("acquisition"):
+        prov.update(provenance(ctx["acquisition"]))
     if signature != "unknown":
         prov["extension_fits_signature"] = extension in EXTENSIONS.get(signature, ())
     ev.add("fileContent", ctx["examined_at"], 1, obj, "sha256:" + digest, **prov)
@@ -243,7 +245,7 @@ def _pc(ev, target, ctx) -> None:
                      f"NTFS $DATA of {rel}", account=user.name)
 
 
-def _recovered(ev, vol, fs, ctx, device_serial: Optional[str]) -> None:
+def _recovered(ev, vol, fs, ctx, identity: dict) -> None:
     """Content of the entries extractor/media.py recovers from unallocated FAT32 clusters."""
     from .fatcarve import carve_fat32, folder_paths
     bpb = fs.fatfs.bpb
@@ -255,12 +257,7 @@ def _recovered(ev, vol, fs, ctx, device_serial: Optional[str]) -> None:
     if not found:
         return
     image = ctx["common"]["image"]
-    if not device_serial:
-        ev.problem(f"{image} recovered entries", ValueError(
-            "no device serial for this image in extractor/exhibits.json, so the area id "
-            "of the fileCreated rows cannot be rebuilt; no content rows for recovered entries"))
-        return
-    area = f"unallocated space of device {device_serial}"
+    location = area(identity)
     paths = folder_paths(found)
     cluster_size = bps * spc
     data_start = (rsv + nf * fat_sectors) * bps
@@ -339,7 +336,7 @@ def _recovered(ev, vol, fs, ctx, device_serial: Optional[str]) -> None:
                        f"layout's cluster size and data-area start (volume byte {older}) are recorded "
                        f"nowhere any more; they were derived as the only power-of-two cluster size at "
                        f"which this folder's files do not overlap and the data area starts inside the volume")
-        _row(ev, ctx, obj, digest, size, head, area,
+        _row(ev, ctx, obj, digest, size, head, location,
              f"FAT directory entry in unallocated cluster {cluster}; content at volume byte offset {offset}",
              recovered=True, first_cluster=e.first_cluster, clusters=count, cluster_size=size_here,
              volume_offset=offset, layout="current" if older is None else "older, derived",
@@ -381,7 +378,7 @@ def _exfat_chunks(fs, entry, step: int = 1 << 20):
         raise ValueError(f"the allocation chain is {left} bytes shorter than the file")
 
 
-def _removable(ev, target, ctx, device_serial: Optional[str]) -> None:
+def _removable(ev, target, ctx, identity: dict) -> None:
     image = ctx["common"]["image"]
     for vol in target.volumes:
         fs = vol.fs
@@ -412,7 +409,7 @@ def _removable(ev, target, ctx, device_serial: Optional[str]) -> None:
                      f"content of {rel}, read through its {kind} allocation chain")
         if kind == "fat":
             try:
-                _recovered(ev, vol, fs, ctx, device_serial)
+                _recovered(ev, vol, fs, ctx, identity)
             except Exception as e:
                 ev.problem(f"{image} recovered entries", e)
 
@@ -465,28 +462,21 @@ def _disc_rows(ev, path: Path, ctx, s, zone) -> None:
              parser=optical.PARSER, **extra)
 
 
-def device_serial_of(image_name: str) -> Optional[str]:
-    """The seized device's serial for an image, from extractor/exhibits.json (the same
-    acquisition record extractor/media.py takes it from)."""
-    try:
-        exhibits = json.loads(Path(__file__).with_name("exhibits.json").read_text())
-    except (OSError, ValueError):
-        return None
-    entry = exhibits.get(image_name)
-    return entry.get("device_serial") if isinstance(entry, dict) else None
-
-
 def extract(ev, path, ctx) -> None:
     target = None
     if not isinstance(path, (str, Path)):           # an open dissect Target
         target, path = path, Path(str(path.path))
     path = Path(path)
+    identity = ctx.get("acquisition") or fallback(path.name, ctx["common"]["exhibit"])
+    ctx = dict(ctx, acquisition=identity)
     try:
         optical.emit_image_digests(ev, path, ctx)
     except Exception as e:
         ev.problem(f"{path.name} (E01 container)", e)
     try:
-        disc = optical.is_optical(path)
+        disc = identity.get("is_optical")
+        if disc is None:
+            disc = optical.is_optical(path)
     except Exception:
         disc = False
     try:
@@ -499,6 +489,6 @@ def extract(ev, path, ctx) -> None:
         if str(target.os) == "windows":
             _pc(ev, target, ctx)
         else:
-            _removable(ev, target, ctx, device_serial_of(path.name))
+            _removable(ev, target, ctx, identity)
     except Exception as e:
         ev.problem(f"{path.name} (file contents)", e)

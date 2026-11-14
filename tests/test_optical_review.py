@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 class OpticalReview(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.saved_run = json.loads((ROOT / 'runs/investigator-1/run.json').read_text())
+        cls.saved_run = json.loads((ROOT / 'fixtures/optical_regression.json').read_text())
         cls.src = open_source(ROOT / 'evidence/case_facts.json')
 
     def sentence(self, name):

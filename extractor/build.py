@@ -21,16 +21,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))   # run with `python -I`: the repo root is added explicitly
 
 from extractor.media import extract_media          # noqa: E402
+from extractor.acquisition import resolve           # noqa: E402
 from extractor.store import Evidence, us           # noqa: E402
-from extractor.tags import add_tags                # noqa: E402
+from extractor.tags import add_tags, public_policy # noqa: E402
 from extractor.windows import extract_pc           # noqa: E402
 
-# Readers written without sight of the answer key (see eval/blind_audit.py), by role of
-# the image. They are called as written: nothing they emit is filtered or edited here.
-READERS = {"pc": ("system", "webcloud", "filetraces", "content"),
+# Readers run by image role. Current development includes answer-key review;
+# this pipeline is not a new blind experiment.
+READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content"),
            "removable": ("content",),
            "optical": ("optical", "content")}
-OPEN_TARGET = ("system", "webcloud", "filetraces")     # these take an open dissect Target
+OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory")  # take an open dissect Target
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Extract facts from the case images.")
@@ -46,9 +47,14 @@ def main(argv=None) -> int:
 
     images = Path(args.images)
     exhibits = json.loads(Path(args.exhibits).read_text())
+    policy = public_policy(exhibits.get("_policy"))
     examined_at = us(datetime.fromisoformat(args.examined_at).astimezone(timezone.utc))
     tool = f"dissect.target {version('dissect.target')}"
     ev, log, info = Evidence(), [], {}
+    acquisition = {name: resolve(images / name, exhibit,
+                                f"acquisition manifest {Path(args.exhibits).name}: {exhibits.get('_source', 'user supplied')}")
+                   for name, exhibit in exhibits.items()
+                   if isinstance(exhibit, dict) and (images / name).exists()}
 
     pc = next((n for n, e in exhibits.items() if isinstance(e, dict) and e.get("role") == "pc"), None)
     if pc and (images / pc).exists():
@@ -57,12 +63,14 @@ def main(argv=None) -> int:
     fat_tz = info.get("time_zone") or "UTC"
     for name, exhibit in exhibits.items():
         if isinstance(exhibit, dict) and exhibit.get("role") == "removable" and (images / name).exists():
-            log += extract_media(ev, images / name, exhibit, fat_tz, examined_at, tool)
+            log += extract_media(ev, images / name, exhibit, fat_tz, examined_at, tool,
+                                 acquisition=acquisition[name])
     for name, exhibit in exhibits.items():
         if not isinstance(exhibit, dict) or not (images / name).exists():
             continue
         ctx = {"common": {"image": name, "exhibit": exhibit["exhibit"], "tool": tool},
-               "examined_at": examined_at, "pc_time_zone": fat_tz}
+               "examined_at": examined_at, "pc_time_zone": fat_tz,
+               "acquisition": acquisition[name]}
         for reader in READERS.get(exhibit.get("role"), ()):
             before = len(ev.rows())
             try:
@@ -75,12 +83,14 @@ def main(argv=None) -> int:
             except Exception as e:                      # a reader must not stop the build
                 ev.problem(f"{name}: reader {reader}", e)
             log.append(f"{name}: reader {reader}: {len(ev.rows()) - before} new rows")
-    tags = add_tags(ev, examined_at)
+    tags = add_tags(ev, examined_at, policy=policy)
 
     meta = ev.write_json(args.out, {
         "case": args.case,
         "images": sorted(p.name for p in images.glob("*.E0*")),
         "pc": info, "fat_time_zone": fat_tz, "examined_at": args.examined_at, "tool": tool,
+        "acquisition": acquisition,
+        "public_policy": policy,
         "note": "Extracted from the real images. Regenerate with extractor/build.py.",
     })
     if args.duckdb:

@@ -9,7 +9,7 @@ from checker.check import check
 from checker.combine import combine
 from checker.export import bundle
 from checker.facts import open_source
-from eval.score import score_run
+from eval.benchmark import score
 from verifier.verify import verify
 
 
@@ -74,14 +74,23 @@ class CombineTest(unittest.TestCase):
 
     def test_complementary_rows_increase_deterministic_score(self):
         # This synthetic reference is used only by the test, never by combine().
-        reference = {'tolerance_s': 0, 'items': [
-            {'id': 'search', 'question': 'Search',
-             'expect': {'kind': 'webSearch', 'obj': 'sample data leakage methods'}},
-            {'id': 'usb', 'question': 'Device',
-             'expect': {'kind': 'usbInsert', 'obj': 'SAMPLE-SERIAL-RM2'}}]}
+        reference = {'schema_version': 2, 'case_id': 'synthetic', 'questions': [
+            {'id': 'search', 'prompt': 'Which search?', 'expected': 'sample data leakage methods'},
+            {'id': 'usb', 'prompt': 'Which device?', 'expected': 'SAMPLE-SERIAL-RM2'}]}
         first = dict(self.first, findings=[f for f in self.first['findings']
                                           if f['status'] == 'verified'])
-        counts = [sum(i['certified'] for i in score_run(reference, run)['items'])
+        def answers(run):
+            # Test-only export of two known statement forms; no reference-driven selection.
+            values = {}
+            for finding in run['findings']:
+                for part in finding['parts']:
+                    name, ids = next(iter(part['part'].items()))
+                    qid = {'searched': 'search', 'usbConnected': 'usb'}[name]
+                    values[qid] = next(f['obj_text'] for f in finding['cited_facts'] if f['id'] == ids[0])
+            return {'schema_version': 2, 'case_id': 'synthetic', 'answers': [
+                {'question_id': qid, 'status': 'answered', 'answer': value}
+                for qid, value in values.items()]}
+        counts = [score(reference, answers(run))['question_counts']['fully_correct']
                   for run in (first, self.second, self.combined)]
         self.assertEqual(counts, [1, 1, 2])
 

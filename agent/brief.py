@@ -1,10 +1,9 @@
 """Shared record/tool instructions rendered with public context for one case.
 
-BRIEF and REPORT_BRIEF retain the original public NIST context for legacy callers.
 The investigator runtime selects a profile and calls investigator_brief explicitly.
 No prompt builder reads scoring references or another run's findings.
 """
-from agent.case import CaseProfile, LEGACY_PROFILE
+from agent.case import CaseProfile
 
 RECORD_DESCRIPTIONS = """\
 THE RECORDS
@@ -32,6 +31,10 @@ Table facts(id, kind, time_utc, t_us, uncertainty_us, obj, aux, exhibit, artifac
   journalRemoval  obj = observed name/path, aux = scoped NTFS identity, carrying a removal
                   flag. Link names by identity, never by a similar-looking path. A later
                   alias does not assign a new path to an earlier creation/removal timestamp.
+  journalPath     obj = a path or explicitly incomplete ancestor suffix, aux = scoped
+                  identity. The reader checks intact retained USN byte intervals before
+                  using a future OLD_NAME/NEW_NAME pair to constrain a directory name at
+                  the child observation. Its timestamp is not filesystem creation onset.
   webSearch       obj = search terms, aux = browser
   emailSent       obj = subject, aux = "from A to B"   a message in the user's mailbox file
   cdBurn          obj = the trace, aux = where it was found. Legacy name for optical-disc
@@ -49,8 +52,10 @@ Table facts(id, kind, time_utc, t_us, uncertainty_us, obj, aux, exhibit, artifac
   accountSeen     obj = account name or address, aux = what it is an account of
   sessionEvent    obj = logon / logoff / startup / shutdown / time change, aux = account
   programInstalled  obj = program name, aux = version
-  programRun      obj = executable name, aux = path     a recorded run (`detail` says
-                  which artifact, and whether the time is a run time)
+  programRun      obj = application name, aux = path. Legacy kind includes execution
+                  records AND artifact sightings. Prefetch/UserAssist/process-creation
+                  records can name execution times; Shimcache file modification, cache
+                  timestamps and registry key timestamps cannot. Inspect `detail`.
   webVisit        obj = URL, aux = browser
   fileDownloaded  obj = saved path, aux = source URL
   localSearch     obj = text typed, aux = where it was typed
@@ -91,17 +96,19 @@ YOUR TOOLS (these five are all you have)
 INVESTIGATOR_WORK = """\
 HOW TO WORK
 Start with `forms`, then look around with `sql`. For each question, certify the
-specific findings that matter to it: each device, each search, each opened file, each
-program used to move or remove data. You do not need to restate every row of a long
-list; pick what an investigator needs, and join related records in one claim with
+specific findings requested by it: each device, each search, each opened file, each
+program and every requested list member, source distinction and attribute. Cover the
+public question's full scope; do not omit supported answers merely to shorten a list.
+If records or approved forms are missing, identify the unanswered fields explicitly.
+Use only the public questions and evidence to select claims. Join related records with
 "both" (up to 64 parts). Where the records allow it, tie a file to a physical device
 with a chain of claims. Use `before` for the order claims your story depends on, and
 the `exactly...` forms where a count matters ("exactly two USB devices"). Put several
 claims in one `check` call when they answer the same question.
 
 CONCLUSIONS
-Some things the checker can never certify: intent, cause, what a pattern means, how the
-data left. State those with `conclude`, citing the certified findings they rest on. A
+The current forms do not certify every inference about intent, cause, patterns or how
+data left. State unsupported inferences with `conclude`, citing their findings. A
 conclusion is shown to the reader as your judgment, never as a finding, so say what you
 infer and how sure you are. It may not carry any date, time, number or name that is not
 in the findings it cites (write times as the findings do, in UTC). If the records leave
@@ -120,24 +127,6 @@ WHEN YOU ARE DONE
 Reply with a short summary. For each question, give the ids of the certified findings
 and conclusions that answer it, and say plainly what could not be established and why.
 Quote only sentences the checker returned.
-"""
-
-REPORT_TOOLS = """\
-YOUR TOOLS (these two are all you have)
-  sql(query)                 one read-only SELECT over the records table
-  fact(id)                   one record in full, with where it came from
-
-"""
-
-REPORT_WORK = """\
-WRITE YOUR REPORT
-Look through the records with `sql`, then write your findings for the case
-reviewer. Answer all the questions supplied in this case profile.
-
-Write each finding as one sentence on its own line, numbered F1:, F2:, F3: and so on.
-One fact per finding: what happened, to what, and when. Aim for about 40 findings. For
-long lists, such as the web searches, report the ones that matter to the case. After
-the findings you may add a short paragraph headed "Limits".
 """
 
 def case_context(profile: CaseProfile) -> str:
@@ -159,72 +148,3 @@ def question_context(profile: CaseProfile) -> str:
 def investigator_brief(profile: CaseProfile) -> str:
     return (case_context(profile) + INVESTIGATOR_TOOLS + record_context(profile)
             + question_context(profile) + INVESTIGATOR_WORK)
-
-
-def report_brief(profile: CaseProfile) -> str:
-    return (case_context(profile) + REPORT_TOOLS + record_context(profile)
-            + question_context(profile) + REPORT_WORK)
-
-
-# Backward-compatible public constants for the original case and audit command.
-CASE = case_context(LEGACY_PROFILE)
-RECORDS = record_context(LEGACY_PROFILE) + question_context(LEGACY_PROFILE)
-BRIEF = investigator_brief(LEGACY_PROFILE)
-REPORT_BRIEF = report_brief(LEGACY_PROFILE)
-
-
-def audit_brief(statements, only=None, profile: CaseProfile = LEGACY_PROFILE) -> str:
-    """`only`: statement numbers to audit in this session; the rest of the report is
-    given for context (a sentence may lean on the one before it)."""
-    listing = "\n".join(f"F{n}: {text}" for n, text in statements)
-    wanted = sorted(only) if only else [n for n, _ in statements]
-    scope = ("Audit every statement." if not only else
-             "Audit only these statements: " + ", ".join(f"F{n}" for n in wanted) +
-             ". The others are there for context; do not record a verdict on them.")
-    return case_context(profile) + """\
-YOUR JOB
-Another analyst wrote the report below from the same records. You are auditing it. For
-every numbered statement, find out whether a proof checker will certify it.
-
-You propose a claim by naming record ids in one of the approved forms. The checker
-decides whether those records support the claim. If they do, it writes the sentence. If
-not, it refuses and tells you which check failed.
-
-YOUR TOOLS (these five are all you have)
-  forms                      the statement forms you may propose, with their arguments
-  sql(query)                 one read-only SELECT over the records table
-  fact(id)                   one record in full, with where it came from
-  check(question, claims)    propose claims; each is certified or refused
-  record(statement, verdict, finding_ids, reason)   file your verdict on one statement
-
-""" + record_context(profile) + """\
-HOW TO AUDIT
-For each statement, look up the records and propose the claim whose generated sentence
-says the same thing. Then call `record` once for that statement, with one verdict:
-
-  certified       certified sentences say everything the statement says, including its
-                  times, its devices and its order of events
-  weaker          only a weaker statement could be certified: "likely" where the report
-                  states a fact, or the event without the device, order or person the
-                  report asserts. Give the certified ids, and say in `reason` exactly
-                  what the report claims that the certificates do not
-  refused         the checker refused the claim that says this, or the records
-                  contradict the statement
-  no_records      the records contain nothing that bears on it
-  cannot_express  the approved forms cannot say this kind of thing (an opinion, a
-                  count, a kind of fact the forms do not cover). This is not a judgment
-                  on whether it is true
-
-Be strict and do not help the report. A statement is `certified` only if a reader of
-the certified sentences alone would learn everything the statement asserts. If the
-report states flatly something the records only suggest, that is `weaker`.
-
-Take one statement at a time, and call `record` for it before you look at the next.
-A verdict that is not recorded is lost if the session ends early.
-
-THE REPORT
-""" + listing + """
-
-""" + scope + """
-When each of them has a verdict, reply with one line: the count of each verdict.
-"""

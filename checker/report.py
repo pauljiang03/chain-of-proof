@@ -1,6 +1,6 @@
 """The written report of a run: what an investigator is handed.
 
-    python3 -m checker.report runs/investigator/run.json > report.md
+    python3 -m checker.report runs/current/run.json > report.md
 
 Certified findings by default; an explicitly requested appendix stays separate:
 

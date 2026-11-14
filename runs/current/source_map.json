@@ -1,0 +1,3840 @@
+{
+  "sources": [
+    {
+      "run": "runs/dev/optical-review-investigator/run.json",
+      "sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+      "certified_findings": 105,
+      "nonverified_findings_ignored": 0,
+      "source_rejected_proposals": 3,
+      "source_declared_rejections": 3,
+      "excluded_unverified_conclusions": 12
+    },
+    {
+      "run": "runs/dev/optical-review-miner/run.json",
+      "sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+      "certified_findings": 372,
+      "nonverified_findings_ignored": 0,
+      "source_rejected_proposals": 24,
+      "source_declared_rejections": 24,
+      "excluded_unverified_conclusions": 0
+    }
+  ],
+  "findings": {
+    "F000001": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A015",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000002": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A088",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000003": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A100",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000004": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A087",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000005": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A081",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000006": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A032",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000007": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A086",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000008": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A031",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000009": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A090",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000010": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A082",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000011": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A095",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000012": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A052",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000013": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A053",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000014": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A093",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000015": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A065",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000016": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A025",
+        "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?"
+      }
+    ],
+    "F000017": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A097",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000018": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A107",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000019": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A046",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000020": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A045",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000021": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A092",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000022": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A096",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000023": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A099",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000024": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A102",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000025": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A106",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000026": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A080",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000027": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A024",
+        "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?"
+      }
+    ],
+    "F000028": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A105",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000029": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A104",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000030": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A071",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000031": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A098",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000032": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A051",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000033": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A064",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000034": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A103",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000035": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M231",
+        "question": "Which accounts are recorded?"
+      }
+    ],
+    "F000036": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A002",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000037": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A003",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000038": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A073",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000039": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M279",
+        "question": "What did the cloud storage client record?"
+      }
+    ],
+    "F000040": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M334",
+        "question": "What content do the files have?"
+      }
+    ],
+    "F000041": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M335",
+        "question": "What content do the files have?"
+      }
+    ],
+    "F000042": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M336",
+        "question": "What content do the files have?"
+      }
+    ],
+    "F000043": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A074",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000044": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A059",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000045": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M080",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000046": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M081",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000047": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M082",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000048": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M083",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000049": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M084",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000050": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A016",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000051": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M001",
+        "question": "Which USB devices were connected to this PC, and what do they hold?"
+      }
+    ],
+    "F000052": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M002",
+        "question": "Which USB devices were connected to this PC, and what do they hold?"
+      }
+    ],
+    "F000053": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A017",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000054": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M003",
+        "question": "Which USB devices were connected to this PC, and what do they hold?"
+      }
+    ],
+    "F000055": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M004",
+        "question": "Which USB devices were connected to this PC, and what do they hold?"
+      }
+    ],
+    "F000056": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M277",
+        "question": "Which files were downloaded?"
+      }
+    ],
+    "F000057": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A040",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000058": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A047",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000059": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A048",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000060": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M216",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000061": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M218",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000062": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M219",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000063": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M220",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000064": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M139",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000065": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M178",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000066": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M075",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000067": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M076",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000068": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M077",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000069": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M078",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000070": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M079",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000071": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A019",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000072": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M085",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000073": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M086",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000074": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M087",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000075": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M088",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000076": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M089",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000077": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M090",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000078": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M091",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000079": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M092",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000080": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M093",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000081": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M094",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000082": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M095",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000083": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M096",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000084": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M097",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000085": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M098",
+        "question": "When were the user's files created and last modified?"
+      }
+    ],
+    "F000086": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A066",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000087": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A067",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000088": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M185",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000089": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M186",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000090": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M179",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000091": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M181",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000092": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M182",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000093": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M188",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000094": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M191",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000095": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M190",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000096": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M184",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000097": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M189",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000098": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M193",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000099": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M192",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000100": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M183",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000101": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M187",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000102": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M195",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000103": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M194",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000104": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M180",
+        "question": "Which files in different places have the same size and last-modified time?"
+      }
+    ],
+    "F000105": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M286",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000106": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M287",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000107": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M288",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000108": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M289",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000109": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M290",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000110": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M291",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000111": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M292",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000112": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M293",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000113": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M294",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000114": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M295",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000115": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M296",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000116": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M297",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000117": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M298",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000118": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M299",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000119": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M300",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000120": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M301",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000121": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M302",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000122": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M303",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000123": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M304",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000124": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M305",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000125": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M306",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000126": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M307",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000127": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M308",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000128": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M309",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000129": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M310",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000130": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M311",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000131": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M312",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000132": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M313",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000133": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M314",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000134": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M315",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000135": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M316",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000136": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M317",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000137": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M318",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000138": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M319",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000139": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M320",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000140": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M321",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000141": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M322",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000142": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M323",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000143": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M324",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000144": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M325",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000145": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M326",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000146": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M327",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000147": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M328",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000148": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M329",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000149": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M330",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000150": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M331",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000151": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A084",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000152": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M332",
+        "question": "Which files do secondary records name?"
+      }
+    ],
+    "F000153": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M281",
+        "question": "Which folders were opened?"
+      }
+    ],
+    "F000154": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M282",
+        "question": "Which folders were opened?"
+      }
+    ],
+    "F000155": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M283",
+        "question": "Which folders were opened?"
+      }
+    ],
+    "F000156": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M284",
+        "question": "Which folders were opened?"
+      }
+    ],
+    "F000157": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M285",
+        "question": "Which folders were opened?"
+      }
+    ],
+    "F000158": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M280",
+        "question": "Which notes were kept?"
+      }
+    ],
+    "F000159": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A055",
+        "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?"
+      }
+    ],
+    "F000160": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M014",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000161": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M015",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000162": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M016",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000163": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M017",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000164": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M018",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000165": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M019",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000166": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M020",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000167": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M021",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000168": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M022",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000169": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M023",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000170": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M025",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000171": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A054",
+        "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?"
+      }
+    ],
+    "F000172": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M005",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000173": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M006",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000174": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M007",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000175": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M008",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000176": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M009",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000177": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M010",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000178": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M011",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000179": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M012",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000180": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M013",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000181": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M024",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000182": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A056",
+        "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?"
+      }
+    ],
+    "F000183": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A057",
+        "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?"
+      }
+    ],
+    "F000184": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M026",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000185": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M030",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000186": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M031",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000187": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M241",
+        "question": "Which programs were installed?"
+      }
+    ],
+    "F000188": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M242",
+        "question": "Which programs were installed?"
+      }
+    ],
+    "F000189": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M243",
+        "question": "Which programs were installed?"
+      }
+    ],
+    "F000190": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A026",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000191": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M244",
+        "question": "Which programs were installed?"
+      }
+    ],
+    "F000192": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A027",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000193": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M246",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000194": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M247",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000195": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M248",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000196": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M249",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000197": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M250",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000198": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M251",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000199": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M252",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000200": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M253",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000201": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A029",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000202": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M254",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000203": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A030",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000204": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M255",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000205": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M256",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000206": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A028",
+        "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?"
+      }
+    ],
+    "F000207": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M257",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000208": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M245",
+        "question": "Which programs were run?"
+      }
+    ],
+    "F000209": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M114",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000210": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M115",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000211": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M116",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000212": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M117",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000213": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M118",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000214": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M119",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000215": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M120",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000216": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M121",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000217": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M122",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000218": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M123",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000219": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A061",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000220": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M124",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000221": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M125",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000222": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M126",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000223": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M127",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000224": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M128",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000225": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M129",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000226": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M130",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000227": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M131",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000228": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M132",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000229": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M133",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000230": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M134",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000231": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M135",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000232": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M136",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000233": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M137",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000234": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M138",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000235": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M140",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000236": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M141",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000237": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M142",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000238": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M143",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000239": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A077",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000240": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M144",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000241": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M145",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000242": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M146",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000243": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M147",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000244": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M148",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000245": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M149",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000246": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M150",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000247": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M151",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000248": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M152",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000249": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M153",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000250": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M154",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000251": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M155",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000252": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M156",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000253": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M157",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000254": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M158",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000255": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M159",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000256": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M160",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000257": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M161",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000258": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M162",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000259": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M163",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000260": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M164",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000261": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M165",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000262": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M166",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000263": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M167",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000264": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M168",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000265": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M169",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000266": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M170",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000267": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M171",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000268": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M172",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000269": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M173",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000270": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M174",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000271": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M099",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000272": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A070",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000273": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M100",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000274": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M101",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000275": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M102",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000276": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M103",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000277": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M104",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000278": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M105",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000279": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M106",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000280": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M107",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000281": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M108",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000282": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M109",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000283": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M110",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000284": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M111",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000285": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M112",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000286": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M113",
+        "question": "Which file records were recovered from a seized device's unallocated space?"
+      }
+    ],
+    "F000287": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A085",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000288": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A089",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      }
+    ],
+    "F000289": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A094",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000290": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A050",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      }
+    ],
+    "F000291": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A060",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000292": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A072",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000293": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A062",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000294": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M337",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000295": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A063",
+        "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?"
+      }
+    ],
+    "F000296": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M338",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000297": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M339",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000298": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M340",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000299": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M344",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000300": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M345",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000301": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M346",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000302": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A078",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000303": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M347",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000304": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M348",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000305": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M349",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000306": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M350",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000307": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M351",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000308": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M352",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000309": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M353",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000310": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M354",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000311": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M355",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000312": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M356",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000313": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M357",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000314": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M358",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000315": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M359",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000316": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A079",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000317": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A033",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000318": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M037",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000319": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M038",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000320": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M039",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000321": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M040",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000322": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M041",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000323": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M042",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000324": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M043",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000325": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M044",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000326": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M045",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000327": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M046",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000328": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M047",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000329": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M048",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000330": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A034",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000331": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M049",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000332": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M050",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000333": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M051",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000334": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M052",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000335": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M053",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000336": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M054",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000337": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M055",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000338": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M056",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000339": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M057",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000340": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A035",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000341": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M058",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000342": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M059",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000343": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M060",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000344": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M061",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000345": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M062",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000346": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M063",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000347": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M064",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000348": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M065",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000349": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M066",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000350": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M067",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000351": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M068",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000352": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A036",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000353": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M069",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000354": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M070",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000355": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A038",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000356": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M071",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000357": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M072",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000358": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M073",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000359": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M074",
+        "question": "Which web searches match the watch list?"
+      }
+    ],
+    "F000360": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M232",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000361": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A004",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000362": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M233",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000363": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M234",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000364": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A005",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000365": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M235",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000366": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M236",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000367": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M237",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000368": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M238",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000369": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M239",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000370": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M240",
+        "question": "When was the system started, shut down, logged on to and off?"
+      }
+    ],
+    "F000371": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M230",
+        "question": "How is the system set up?"
+      }
+    ],
+    "F000372": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A001",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000373": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A013",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000374": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M258",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000375": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M259",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000376": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M260",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000377": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M261",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000378": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M262",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000379": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A041",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000380": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M263",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000381": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M264",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000382": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M265",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000383": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M266",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000384": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M267",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000385": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A044",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000386": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M268",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000387": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A042",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000388": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M269",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000389": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M270",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000390": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M271",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000391": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M272",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000392": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M273",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000393": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M274",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000394": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A043",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000395": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M275",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000396": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M276",
+        "question": "Which web pages were visited?"
+      }
+    ],
+    "F000397": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M221",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000398": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M222",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000399": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M223",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000400": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M224",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000401": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M225",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000402": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M226",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000403": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M227",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000404": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M228",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000405": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M229",
+        "question": "What traces of disc burning are there?"
+      }
+    ],
+    "F000406": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M175",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000407": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M176",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000408": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M177",
+        "question": "Which files look copied onto a volume?"
+      }
+    ],
+    "F000409": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A069",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      }
+    ],
+    "F000410": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A012",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000411": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M210",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000412": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M211",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000413": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M212",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000414": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M213",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000415": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M214",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000416": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M215",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000417": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M217",
+        "question": "Which e-mails does the user's mailbox hold?"
+      }
+    ],
+    "F000418": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M365",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000419": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M364",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000420": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M369",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000421": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A049",
+        "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?"
+      },
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M363",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000422": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A068",
+        "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?"
+      },
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M362",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000423": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M367",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000424": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M368",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000425": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M370",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000426": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M366",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000427": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M371",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000428": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M360",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000429": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M361",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000430": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A007",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000431": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A108",
+        "question": "5. Which cloud services did a cloud client record file events for?"
+      }
+    ],
+    "F000432": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A058",
+        "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?"
+      }
+    ],
+    "F000433": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A008",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      },
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M372",
+        "question": "How many records of each kind does the evidence hold?"
+      }
+    ],
+    "F000434": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A039",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000435": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A076",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000436": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A021",
+        "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?"
+      }
+    ],
+    "F000437": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A020",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000438": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A075",
+        "question": "7. The disc: what is on it, and when was it written?"
+      }
+    ],
+    "F000439": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A022",
+        "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?"
+      }
+    ],
+    "F000440": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A006",
+        "question": "1. The machine and its users: what system is it, which accounts exist, who used it and when?"
+      }
+    ],
+    "F000441": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A023",
+        "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?"
+      }
+    ],
+    "F000442": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M196",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000443": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M197",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000444": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M198",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000445": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M199",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000446": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M200",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000447": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M201",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000448": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M202",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000449": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M203",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000450": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M204",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000451": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M205",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000452": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M206",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000453": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M207",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000454": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M208",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000455": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M209",
+        "question": "Which files were sent to the Recycle Bin?"
+      }
+    ],
+    "F000456": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A101",
+        "question": "9. The story: in what order did the key events happen?"
+      }
+    ],
+    "F000457": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M027",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000458": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M028",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000459": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M029",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000460": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M032",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000461": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M033",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000462": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M034",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000463": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M035",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000464": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M036",
+        "question": "Which files were opened from removable devices or network shares?"
+      }
+    ],
+    "F000465": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A014",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000466": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M341",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000467": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M342",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000468": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M343",
+        "question": "Which files in different places have identical content?"
+      }
+    ],
+    "F000469": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A011",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000470": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A037",
+        "question": "4. The web: what was searched for, visited and downloaded?"
+      }
+    ],
+    "F000471": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A083",
+        "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?"
+      },
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M333",
+        "question": "Which shadow copies exist?"
+      }
+    ],
+    "F000472": [
+      {
+        "run": "runs/dev/optical-review-investigator/run.json",
+        "run_sha256": "7c2fefe563429fe665cd51f4e0af7af7757d96ff32f9600fe14820f0c0ed1973",
+        "finding_id": "A018",
+        "question": "2. External storage: which devices were attached, when, and what does each hold now?"
+      }
+    ],
+    "F000473": [
+      {
+        "run": "runs/dev/optical-review-miner/run.json",
+        "run_sha256": "90ffb528dff9b3620416cbaf6e1fdef5f5d4eb824ea425a52a70c03e6d5e428e",
+        "finding_id": "M278",
+        "question": "What was typed into the system's search box?"
+      }
+    ]
+  },
+  "composition": {
+    "input_certified_findings": 477,
+    "unique_certified_claims": 473,
+    "duplicate_claims_removed": 4,
+    "source_rejected_proposals": 27,
+    "excluded_unverified_conclusions": 12,
+    "selection": "All source findings marked verified, with matching evidence; no reference or answer key used"
+  }
+}

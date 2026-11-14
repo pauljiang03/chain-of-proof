@@ -7,7 +7,6 @@ import unittest
 from checker import claims
 from checker.check import check
 from checker.facts import Fact, FactSource, JsonFacts
-from eval.score import stated_rows
 from miner import mine
 from verifier.verify import verify
 
@@ -61,7 +60,7 @@ class RecordedEvents(unittest.TestCase):
                 self.assertEqual(cert['status'], 'verified')
                 self.assertEqual(cert['axioms'], [])
                 self.assertEqual(verify(cert, self.source), [])
-                self.assertEqual([r['id'] for r in stated_rows(cert)], [row])
+                self.assertEqual([r['id'] for r in cert['cited_facts']], [row])
         removed = json.loads((self.directory / 'fileRemovedAt.json').read_text())['english']
         self.assertIn('not necessarily the deletion onset', removed)
         self.assertIn('does not establish Recycle Bin use, wiping', removed)

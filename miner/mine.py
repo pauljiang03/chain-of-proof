@@ -63,6 +63,7 @@ ONE_RECORD = (
     ("journalName", "journalNamed", "Which file identities and names does the journal record?"),
     ("journalParent", "journalParentRecorded", "Which parent-directory identities does the journal record?"),
     ("journalRemoval", "journalRemovalObserved", "Which file identities carry journal removal flags?"),
+    ("journalPath", "journalPathAt", "Which paths are constrained by intact journal intervals?"),
 )
 BATCH = 40                 # one-record statements per finding
 RESTATE_UP_TO = 2000       # a kind with more records than this is not restated one by one:
@@ -229,7 +230,7 @@ def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, di
 
     # Identity joins are generic and bounded by the same opt-in as journal names.
     # Each name and removal retains its own timestamp; no alias rewrites an event.
-    identity_kinds = ("journalName", "journalParent", "journalRemoval")
+    identity_kinds = ("journalName", "journalParent", "journalRemoval", "journalPath")
     if complete or all(len(by_kind[k]) <= RESTATE_UP_TO for k in identity_kinds):
         names = defaultdict(list)
         for f in sorted(by_kind["journalName"], key=lambda f: (f.t, f.id)):
@@ -248,6 +249,10 @@ def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, di
             if children:
                 child = next((n for n in children if n.t == p.t), children[0])
                 joins.extend({"journalChildNamedDirectory": [child.id, p.id, d.id]} for d in directories)
+        for p in by_kind["journalPath"]:
+            if names[p.aux]:
+                name = next((n for n in names[p.aux] if n.t == p.t), names[p.aux][0])
+                joins.append({"journalPathForFile": [name.id, p.id]})
         for i in range(0, len(joins), BATCH):
             out.append(("How do journal names, directory identities and removal observations connect?",
                         _both(joins[i:i + BATCH])))
@@ -289,7 +294,7 @@ def main(argv=None) -> int:
     skipped = skipped_kinds(source, complete=args.complete)
     if skipped:
         print(f"bounded mode omits one-record statements for {skipped}; use --complete to include them")
-        if set(skipped) & {"journalName", "journalParent", "journalRemoval"}:
+        if set(skipped) & {"journalName", "journalParent", "journalRemoval", "journalPath"}:
             print("bounded mode also omits compound journal identity joins; --complete includes them")
     results = mine(source, Path(args.out), complete=args.complete)
     ok = sum(r["status"] == "verified" for r in results)

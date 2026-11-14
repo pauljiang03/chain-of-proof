@@ -67,6 +67,8 @@ class TypedAnswers(unittest.TestCase):
         extra = b.score(reference([True]), answers([True, False]))
         self.assertEqual(extra["questions"][0]["status"], "partial")
         self.assertEqual(extra["atomic"]["wrong"], 1)
+        self.assertEqual(extra["atomic"]["extra_or_unexpected_atoms"], 1)
+        self.assertEqual(extra["atomic"]["mismatched_value_atoms"], 0)
         duplicated = b.score(reference(["one"]), answers(["one", "one"]))
         self.assertFalse(duplicated["perfect_submission"])
         self.assertEqual(duplicated["atomic"]["wrong"], 1)
@@ -80,6 +82,7 @@ class TypedAnswers(unittest.TestCase):
         self.assertEqual(event["answer_path"], "/answers/0/answer/1/value")
         # A greedy row assignment gets 9; the global assignment gets 17.
         self.assertEqual(b._assignment([[9, 8], [9, 0]]), [(0, 1), (1, 0)])
+        self.assertEqual(b._assignment([[9, 8, 0], [9, 0, 10]]), [(0, 0), (1, 2)])
         for weights in ([[1, 3, 1], [4, 2, 0], [3, 0, 5]], [[-4, -2], [-1, -3]]):
             got = sum(weights[i][j] for i, j in b._assignment(weights))
             wanted = max(sum(weights[i][j] for i, j in enumerate(p))
@@ -181,6 +184,32 @@ class TemporalAnswers(unittest.TestCase):
         ref = reference("2031-08-12T00:00:00Z")
         ref["questions"][0]["match"] = {"timestamps": {"": {}}}
         self.assertEqual(b.score(ref, answers("2031-08-12"))["question_counts"]["incorrect"], 1)
+
+
+class RepresentationContracts(unittest.TestCase):
+    def test_declared_path_root_preserves_drive_and_share_identities(self):
+        ref = reference({"path": r"\Users\Someone\Notes\note.snt"})
+        ref["questions"][0]["match"] = {"paths": {"/path": {
+            "style": "windows", "root": "C:", "case_sensitive": False, "scope": "PC system volume"}}}
+        self.assertTrue(b.score(ref, answers({"path": r"c:\users\Someone\Notes\note.snt"}))["perfect_submission"])
+        self.assertTrue(b.score(ref, answers({"path": "C:/Users/Someone/Notes/note.snt"}))["perfect_submission"])
+        for wrong in (r"D:\Users\Someone\Notes\note.snt", r"\\remote\share\Users\Someone\Notes\note.snt",
+                      r"C:Users\Someone\Notes\note.snt", r"C:\Users\Someone\Notes\*.snt"):
+            self.assertEqual(b.score(ref, answers({"path": wrong}))["question_counts"]["incorrect"], 1)
+
+    def test_no_implicit_drive_stripping_and_no_implicit_product_aliases(self):
+        ref = reference({"path": r"\folder\file.db"})
+        self.assertFalse(b.score(ref, answers({"path": r"C:\folder\file.db"}))["perfect_submission"])
+        ref["questions"][0]["match"] = {"paths": {"/path": {"style": "windows"}}}
+        self.assertFalse(b.score(ref, answers({"path": r"C:\folder\file.db"}))["perfect_submission"])
+        ref = reference({"browsers": [{"name": "Google Chrome", "version": "9.8"}], "upgraded": True})
+        self.assertEqual(b.score(ref, answers({"browsers": [{"name": "Chrome"}]}))["atomic"]["true_positive"], 0)
+        ref["questions"][0]["match"] = {"string_aliases": {"/browsers/*/name": [["Google Chrome", "Chrome"]]}}
+        result = b.score(ref, answers({"browsers": [{"name": "Chrome"}]}))
+        self.assertEqual(result["atomic"]["true_positive"], 1)
+        self.assertEqual(result["atomic"]["missing"], 2)
+        self.assertEqual(result["questions"][0]["status"], "partial")
+        self.assertFalse(b.score(ref, answers({"browsers": [{"name": "Chromium", "version": "9.8"}], "upgraded": True}))["perfect_submission"])
 
 
 class BenchmarkInterface(unittest.TestCase):

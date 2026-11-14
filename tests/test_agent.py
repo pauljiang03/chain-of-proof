@@ -56,59 +56,14 @@ class Tools(unittest.TestCase):
         out = mcp_server.call(self.bench, "sql", {"query": "SELECT count(*) FROM facts"})
         self.assertEqual(out.splitlines()[1], f"[{ROWS}]")
 
-
-class Audit(unittest.TestCase):
-    """The with/without-checker comparison: a verdict counts only with a certificate."""
-
-    def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.bench = Workbench(FACTS, self.tmp.name, "test")
-
-    def tearDown(self):
-        self.tmp.cleanup()
-
-    def test_report_sentences_are_parsed_by_number(self):
-        from agent.audit import parse_statements
-        report = "Intro\nF1: one thing\n**F2:** another\n- not a finding\nF3. third\nF1: repeat"
-        self.assertEqual(parse_statements(report), [(1, "one thing"), (2, "another"), (3, "third")])
-
-    def test_the_report_writer_gets_no_checker(self):
-        from agent.brief import REPORT_BRIEF
-        self.assertEqual([t["name"] for t in mcp_server.tools_for(["sql", "fact"])], ["sql", "fact"])
-        self.assertNotIn("check(", REPORT_BRIEF)
-
-    def test_a_verdict_without_a_certificate_does_not_count(self):
-        from agent.audit import merge
-        usb = self.bench.sql("SELECT id FROM facts WHERE kind='usbInsert' ORDER BY id")["rows"][0][0]
-        real = self.bench.check("q", {"usbConnected": [usb]})["finding_id"]
-        for row in ({"statement": 1, "verdict": "certified", "finding_ids": [real], "reason": "same"},
-                    {"statement": 2, "verdict": "certified", "finding_ids": ["A999"], "reason": "made up"},
-                    {"statement": 3, "verdict": "weaker", "finding_ids": [], "reason": "nothing cited"},
-                    {"statement": 4, "verdict": "no_records", "reason": "none"}):
-            self.assertIn("recorded", mcp_server.call(self.bench, "record", row))
-        self.assertIn("must be one of", mcp_server.call(
-            self.bench, "record", {"statement": 5, "verdict": "true", "reason": ""}))
-        out = merge(Path(self.tmp.name), [(n, f"s{n}") for n in range(1, 6)])
-        got = {r["statement"]: r["verdict"] for r in out["statements"]}
-        self.assertEqual(got, {1: "certified", 2: "refused", 3: "refused",
-                               4: "no_records", 5: "not_audited"})
-        self.assertEqual(out["statements"][0]["findings"][0]["finding_id"], real)
-
-    def test_an_interrupted_audit_resumes_with_the_statements_left(self):
-        from agent.audit import chunks, recorded
-        from agent.brief import audit_brief
-        run_dir = Path(self.tmp.name)
-        self.assertEqual(recorded(run_dir), set())
-        for n in (1, 2, 4):
-            mcp_server.call(self.bench, "record", {"statement": n, "verdict": "no_records", "reason": ""})
-        statements = [(n, f"sentence {n}") for n in range(1, 8)]
-        todo = [n for n, _ in statements if n not in recorded(run_dir)]
-        self.assertEqual(todo, [3, 5, 6, 7])
-        self.assertEqual(chunks(todo, 3), [[3, 5, 6], [7]])
-        brief = audit_brief(statements, only=[3, 5, 6])
-        self.assertIn("Audit only these statements: F3, F5, F6.", brief)
-        self.assertIn("F1: sentence 1", brief)                 # the whole report, for context
-        self.assertIn("Audit every statement.", audit_brief(statements))
+    def test_only_investigation_tools_can_be_offered(self):
+        self.assertEqual([t["name"] for t in mcp_server.tools_for(
+            ("forms", "sql", "fact", "check", "conclude"))],
+            ["forms", "sql", "fact", "check", "conclude"])
+        with self.assertRaises(KeyError):
+            mcp_server.tools_for(["record"])
+        with self.assertRaises(KeyError):
+            mcp_server.call(self.bench, "record", {})
 
 
 if __name__ == "__main__":

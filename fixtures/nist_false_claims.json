@@ -1,0 +1,468 @@
+{
+  "what_this_is": "Independent false-claim regression probes for the Lean gate, not an answer-coverage reference.",
+  "selectors": "A selector picks the lowest-id fact matching kind, obj / obj_endswith, aux and utc (within the reference tolerance).",
+  "facts": {
+    "usb_rm1": {
+      "kind": "usbInsert",
+      "obj": "4C530012450531101593"
+    },
+    "usb_rm2": {
+      "kind": "usbInsert",
+      "obj": "4C530012550531106501"
+    },
+    "dev_rm1": {
+      "kind": "volumeOnDevice",
+      "obj": "4C530012450531101593"
+    },
+    "dev_rm2": {
+      "kind": "volumeOnDevice",
+      "obj": "4C530012550531106501"
+    },
+    "vol_auth": {
+      "kind": "volumeSeen",
+      "obj": "Authorized USB"
+    },
+    "vol_iaman_1": {
+      "kind": "volumeSeen",
+      "obj": "IAMAN $_@",
+      "utc": "2015-03-24T13:58:34"
+    },
+    "vol_iaman_2": {
+      "kind": "volumeSeen",
+      "obj": "IAMAN $_@",
+      "utc": "2015-03-24T21:02:34"
+    },
+    "open_proposal": {
+      "kind": "lnkTarget",
+      "obj": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "utc": "2015-03-23T18:37:20"
+    },
+    "open_design": {
+      "kind": "lnkTarget",
+      "obj": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+      "utc": "2015-03-23T18:38:21"
+    },
+    "open_zip_rm2": {
+      "kind": "lnkTarget",
+      "obj": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "utc": "2015-03-24T14:01:23"
+    },
+    "open_zip_cd": {
+      "kind": "lnkTarget",
+      "obj": "\\de\\winter_whether_advisory.zip",
+      "utc": "2015-03-24T20:44:18"
+    },
+    "open_pricing": {
+      "kind": "lnkTarget",
+      "obj": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+      "aux": "\\\\10.11.11.128\\secured_drive",
+      "utc": "2015-03-23T20:26:53"
+    },
+    "search_leak": {
+      "kind": "webSearch",
+      "obj": "data leakage methods",
+      "utc": "2015-03-23T18:02:09"
+    },
+    "search_anti": {
+      "kind": "webSearch",
+      "obj": "anti-forensics",
+      "utc": "2015-03-23T18:17:14"
+    },
+    "search_tools": {
+      "kind": "webSearch",
+      "obj": "anti-forensic tools",
+      "utc": "2015-03-25T14:46:44"
+    },
+    "letter_made": {
+      "kind": "fileCreated",
+      "obj": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx"
+    },
+    "letter_saved": {
+      "kind": "fileModified",
+      "obj": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx"
+    },
+    "tag_rm1_auth": {
+      "kind": "tag",
+      "obj": "4C530012450531101593",
+      "aux": "authorized-device"
+    },
+    "tag_rm2_unauth": {
+      "kind": "tag",
+      "obj": "4C530012550531106501",
+      "aux": "unauthorized-device"
+    },
+    "area_rm2": {
+      "kind": "unallocatedOnDevice",
+      "obj": "4C530012550531106501"
+    },
+    "rec_zip_made": {
+      "kind": "fileCreated",
+      "obj_endswith": "\\design\\winter_whether_advisory.zip",
+      "exhibit": "RM#2"
+    },
+    "rec_zip_saved": {
+      "kind": "fileModified",
+      "obj_endswith": "\\design\\winter_whether_advisory.zip",
+      "exhibit": "RM#2"
+    },
+    "rm1_file_made": {
+      "kind": "fileCreated",
+      "exhibit": "RM#1"
+    },
+    "del_prop": {
+      "kind": "fileDeleted",
+      "obj_endswith": "\\Burn\\Burn\\prop"
+    },
+    "burn_first": {
+      "kind": "cdBurn",
+      "aux": "NTFS change journal",
+      "utc": "2015-03-24T19:47:47"
+    },
+    "mail_hello": {
+      "kind": "emailSent",
+      "obj": "Hello, Iaman"
+    },
+    "mail_done": {
+      "kind": "emailSent",
+      "obj": "Done"
+    },
+    "rm1_design_saved": {
+      "kind": "fileModified",
+      "obj_endswith": "\\[secret_project]_detailed_design.pptx",
+      "exhibit": "RM#1"
+    },
+    "rec_storm_saved": {
+      "kind": "fileModified",
+      "obj_endswith": "\\design\\winter_storm.amr",
+      "exhibit": "RM#2"
+    },
+    "tag_same_zip": {
+      "kind": "tag",
+      "obj_endswith": "\\design\\winter_whether_advisory.zip",
+      "aux": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC"
+    },
+    "tag_same_design": {
+      "kind": "tag",
+      "obj_endswith": "\\[secret_project]_detailed_design.pptx",
+      "aux": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC"
+    }
+  },
+  "claims": [
+    {
+      "id": "F01",
+      "label": false,
+      "ask": "Was the zip opened from the authorized USB (RM#1)?",
+      "basis": "Q26: it was opened in RM#2",
+      "claim": {
+        "openedFromDevice": [
+          "open_zip_rm2",
+          "dev_rm1"
+        ]
+      }
+    },
+    {
+      "id": "F02",
+      "label": false,
+      "ask": "Was the design concept opened from RM#2?",
+      "basis": "Section 3: it was opened from RM#1",
+      "claim": {
+        "openedFromDevice": [
+          "open_design",
+          "dev_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F03",
+      "label": false,
+      "ask": "Was the zip opened before RM#2 was connected?",
+      "basis": "Q22 (09:58:33) and Q26 (10:01:23)",
+      "claim": {
+        "before": [
+          "open_zip_rm2",
+          "usb_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F04",
+      "label": false,
+      "ask": "Was the proposal opened before the search for leakage methods?",
+      "basis": "Q16 (14:02:09) and section 3 (14:37)",
+      "claim": {
+        "before": [
+          "open_proposal",
+          "search_leak"
+        ]
+      }
+    },
+    {
+      "id": "F05",
+      "label": false,
+      "ask": "Is RM#2 an authorized device?",
+      "basis": "Section 2: only RM#1 is authorized; RM#2 is the suspect's own stick",
+      "claim": {
+        "tagged": [
+          "usb_rm2",
+          "obj",
+          "tag_rm1_auth",
+          "@tag_rm1_auth.aux"
+        ]
+      }
+    },
+    {
+      "id": "F06",
+      "label": false,
+      "ask": "Is the USB record for ...1593 the seized RM#2?",
+      "basis": "Q22: different serials",
+      "claim": {
+        "deviceHolds": [
+          "usb_rm1",
+          "dev_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F07",
+      "label": false,
+      "ask": "Is the first IAMAN $_@ volume the one on RM#1?",
+      "basis": "Section 2: RM#1 holds the volume labeled Authorized USB",
+      "claim": {
+        "recordedOnDevice": [
+          "vol_iaman_1",
+          "dev_rm1"
+        ]
+      }
+    },
+    {
+      "id": "F08",
+      "label": false,
+      "ask": "Was the resignation letter modified before it was created?",
+      "basis": "Q36",
+      "claim": {
+        "before": [
+          "letter_saved",
+          "letter_made"
+        ]
+      }
+    },
+    {
+      "id": "F09",
+      "label": false,
+      "ask": "Is the shortcut to the design concept a web search?",
+      "basis": "Wrong kind of record",
+      "claim": {
+        "searched": [
+          "open_design"
+        ]
+      }
+    },
+    {
+      "id": "F10",
+      "label": false,
+      "ask": "Was the zip opened from the CD before it was opened from RM#2?",
+      "basis": "Q26 (10:01:23) and Q35 (16:44:18)",
+      "claim": {
+        "before": [
+          "open_zip_cd",
+          "open_zip_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F11",
+      "label": false,
+      "ask": "Was the design concept opened from the IAMAN $_@ volume?",
+      "basis": "Section 3: opened from RM#1 (Authorized USB)",
+      "claim": {
+        "openedFromRecorded": [
+          "open_design",
+          "vol_iaman_1"
+        ]
+      }
+    },
+    {
+      "id": "F12",
+      "label": false,
+      "ask": "Do the Authorized USB volume and the IAMAN $_@ volume share a label?",
+      "basis": "Section 2: different labels",
+      "claim": {
+        "sameLabel": [
+          "vol_auth",
+          "vol_iaman_2"
+        ]
+      }
+    },
+    {
+      "id": "F13",
+      "label": false,
+      "ask": "Did the search for anti-forensic tools come before RM#2 was connected?",
+      "basis": "Q16 (2015-03-25 10:46:44) and Q22 (2015-03-24 09:58:33)",
+      "claim": {
+        "before": [
+          "search_tools",
+          "usb_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F14",
+      "label": false,
+      "ask": "Is RM#1 tagged unauthorized?",
+      "basis": "Section 2, note 5",
+      "claim": {
+        "tagged": [
+          "usb_rm1",
+          "obj",
+          "tag_rm2_unauth",
+          "@tag_rm2_unauth.aux"
+        ]
+      }
+    },
+    {
+      "id": "F15",
+      "label": false,
+      "ask": "Was the zip opened from RM#1? (heuristic chain pointed at the wrong device)",
+      "basis": "Q26",
+      "claim": {
+        "both": [
+          {
+            "openedFromRecorded": [
+              "open_zip_rm2",
+              "vol_iaman_1"
+            ]
+          },
+          {
+            "sameLabel": [
+              "vol_iaman_1",
+              "vol_auth"
+            ]
+          },
+          {
+            "recordedOnDevice": [
+              "vol_auth",
+              "dev_rm1"
+            ]
+          },
+          {
+            "deviceHolds": [
+              "usb_rm1",
+              "dev_rm1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "F16",
+      "label": false,
+      "ask": "Does a record that is not in the evidence come before the zip being opened?",
+      "basis": "Fact id 999999 does not exist",
+      "claim": {
+        "before": [
+          999999,
+          "open_zip_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F17",
+      "label": false,
+      "ask": "Is a file that sits on RM#1 a record recovered from RM#2's unallocated space?",
+      "basis": "Q53 lists only RM#2's recovered entries; the file is live on RM#1",
+      "claim": {
+        "recoveredOnDevice": [
+          "rm1_file_made",
+          "area_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F18",
+      "label": false,
+      "ask": "Does the seized RM#1 have directory entries left in unallocated space?",
+      "basis": "Q54: only RM#2 was quick-formatted; the unallocated-space record names RM#2's serial",
+      "claim": {
+        "deviceExamined": [
+          "usb_rm1",
+          "area_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F19",
+      "label": false,
+      "ask": "Was the zip's record on RM#2 created before RM#2 was first connected?",
+      "basis": "Section 3: 09:58 connect, 09:59 copy",
+      "claim": {
+        "before": [
+          "rec_zip_made",
+          "usb_rm2"
+        ]
+      }
+    },
+    {
+      "id": "F20",
+      "label": false,
+      "ask": "Was 'prop' sent to the Recycle Bin before the first burn trace?",
+      "basis": "Q33 (15:47:47) and Q51 (15:51:47)",
+      "claim": {
+        "before": [
+          "del_prop",
+          "burn_first"
+        ]
+      }
+    },
+    {
+      "id": "F21",
+      "label": false,
+      "ask": "Was 'Done' sent before 'Hello, Iaman'?",
+      "basis": "Q21: 2015-03-24 17:05:09 and 2015-03-23 13:29:27",
+      "claim": {
+        "before": [
+          "mail_done",
+          "mail_hello"
+        ]
+      }
+    },
+    {
+      "id": "F22",
+      "label": false,
+      "ask": "Is the web search 'data leakage methods' an e-mail?",
+      "basis": "Q16 lists it as a search; Q21 has no such subject",
+      "claim": {
+        "emailed": [
+          "search_leak"
+        ]
+      }
+    },
+    {
+      "id": "F23",
+      "label": false,
+      "ask": "Was the resignation letter sent to the Recycle Bin?",
+      "basis": "Q51 lists 14 Recycle Bin items; the letter is not among them (Q36: it is on the Desktop)",
+      "claim": {
+        "fileDeletedAt": [
+          "letter_made"
+        ]
+      }
+    },
+    {
+      "id": "F24",
+      "label": false,
+      "ask": "Does winter_storm.amr on RM#2 have the size and last-modified time of the detailed design?",
+      "basis": "Q55 and Q56: winter_storm.amr is the 13.8 MB PPT ([secret_project]_revised_points.ppt), not the 15.6 MB PPTX",
+      "claim": {
+        "tagged": [
+          "rec_storm_saved",
+          "obj",
+          "tag_same_zip",
+          "@tag_same_zip.aux"
+        ]
+      }
+    }
+  ],
+  "case_id": "nist-cfreds-data-leakage",
+  "time_zone": "America/New_York",
+  "tolerance_s": 2
+}

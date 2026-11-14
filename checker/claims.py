@@ -29,6 +29,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+import re
 from typing import Callable, Dict, List, Tuple
 
 from .facts import KINDS, Fact, FactSource
@@ -99,7 +100,7 @@ _EVENT = {
     "accountSeen": "the record of account {obj} ({aux})",
     "sessionEvent": "the {obj} recorded for {who}",
     "programInstalled": "the recorded installation of {obj}",
-    "programRun": "the recorded run of {obj}",
+    "programRun": "the application-artifact record naming {obj}",
     "webVisit": "the visit to {obj} in {aux}",
     "fileDownloaded": "the download of {obj} from {aux}",
     "localSearch": 'the text "{obj}" typed into the {aux}',
@@ -116,10 +117,13 @@ _EVENT = {
     "journalName": "the journal name observation {obj} for {aux}",
     "journalParent": "the journal parent-reference observation linking {obj} to {aux}",
     "journalRemoval": "the journal removal-flag observation under name {obj} for {aux}",
+    "journalPath": "the byte-bounded journal path observation {obj} for {aux}",
 }
 
 
 def _event(f: Fact, src: FactSource) -> str:
+    if f.kind == "programRun":
+        return _program_record(f, src)
     aux = src.string(f.aux)
     text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=aux, where=_where(aux),
                                  who=_who(aux))
@@ -318,6 +322,23 @@ def _en_child_named_directory(args, facts, src):
             f"alias at a different time, creation onset, copying, or a disc write.")
 
 
+def _en_journal_path(args, facts, src):
+    f = facts[args[0]]
+    scope = "path" if f.prov.get("path_complete") is True else "path suffix (higher ancestors unresolved)"
+    return (f"The journal observation for {src.string(f.aux)} resolves to {scope} "
+            f"{src.string(f.obj)} ({_utc(f.t)}). Directory names are constrained by "
+            f"intact retained USN-v2 byte intervals; a future OLD_NAME is used only with "
+            f"a following NEW_NAME and no intervening conflicting directory transition. "
+            f"This is the child record's timestamp, not creation onset, a copy or disc-write time.")
+
+
+def _en_journal_path_for_file(args, facts, src):
+    n, p = facts[args[0]], facts[args[1]]
+    return (f"The journal name/path {src.string(n.obj)} ({_utc(n.t)}) shares "
+            f"{src.string(n.aux)} with the bounded path observation below. "
+            + _en_journal_path([p.id], facts, src))
+
+
 def _en_emailed(args, facts, src):
     e = facts[args[0]]
     return (f'An e-mail with the subject "{src.string(e.obj)}" was sent {src.string(e.aux)} '
@@ -379,11 +400,36 @@ def _en_installed(args, facts, src):
     return f"{name} is recorded as installed ({_utc(f.t)})."
 
 
-def _en_ran(args, facts, src):
-    f = facts[args[0]]
+def _program_record(f: Fact, src: FactSource) -> str:
+    """Legacy programRun includes sightings; only an explicit execution source has run time.
+
+    In particular, a Shimcache execution flag cannot turn the cached file's modification
+    time into an execution time. Missing provenance stays an application observation.
+    """
     path = src.string(f.aux)
     where = "" if _none(path) else f", path {path}"
-    return f"A record shows {src.string(f.obj)} ran ({_utc(f.t)}{where})."
+    source = str(f.prov.get("source") or "unspecified application artifact")
+    meaning = str(f.prov.get("time_meaning") or "unspecified record timestamp")
+    source_key = source.casefold()
+    execution_time = (
+        (source_key == "prefetch" and (
+            meaning == "last run time in the prefetch header"
+            or re.fullmatch(r"earlier run time \d+ in the prefetch header", meaning)))
+        or (source_key == "userassist" and meaning == "last run time stored in the UserAssist entry")
+        or (source_key == "security event log: process creation"
+            and meaning == "time the process was created")
+    ) and ("executed_flag" not in f.prov or f.prov["executed_flag"] is True)
+    if execution_time:
+        return (f"the {source} artifact's recorded execution time for {src.string(f.obj)} "
+                f"({_utc(f.t)}{where}; timestamp meaning: {meaning})")
+    flag = (f"; executed_flag={f.prov['executed_flag']}" if "executed_flag" in f.prov else "")
+    return (f"the application-artifact record naming {src.string(f.obj)} "
+            f"(record time {_utc(f.t)}{where}; source: {source}; timestamp meaning: {meaning}{flag}); "
+            f"this record does not establish execution at that time")
+
+
+def _en_ran(args, facts, src):
+    return _cap(_program_record(facts[args[0]], src)) + "."
 
 
 def _en_visited(args, facts, src):
@@ -489,7 +535,7 @@ _NOUN = {
     "accountSeen": ("account", "account name", "kind of account"),
     "sessionEvent": ("session-event", "event", "account"),
     "programInstalled": ("installed-program", "program", "version"),
-    "programRun": ("program-run", "executable", "path"),
+    "programRun": ("application-artifact", "application name", "recorded path"),
     "webVisit": ("web-visit", "URL", "browser"),
     "fileDownloaded": ("download", "saved path", "source URL"),
     "localSearch": ("search-box", "text", "place it was typed"),
@@ -506,6 +552,7 @@ _NOUN = {
     "journalName": ("journal-name", "observed name/path", "scoped NTFS file identity"),
     "journalParent": ("journal-parent", "scoped child identity", "scoped parent identity"),
     "journalRemoval": ("journal-removal-identity", "observed name/path", "scoped NTFS file identity"),
+    "journalPath": ("bounded-journal-path", "path or explicitly incomplete suffix", "scoped NTFS file identity"),
 }
 CENSUS_NOTE = ("This counts records in the evidence file. An event that left no record, or "
                "a record the extractor does not read, is not counted.")
@@ -650,6 +697,9 @@ SETS: Dict[str, SetDef] = {
                                          ("R32",), "strong", _en_removed_previously_named),
     "journalChildNamedDirectory": SetDef(("fact", "fact", "fact"), "Sets.journalChildNamedDirectory",
                                          ("R32",), "strong", _en_child_named_directory),
+    "journalPathAt": SetDef(("fact",), "Sets.journalPathAt", ("R33",), "strong", _en_journal_path),
+    "journalPathForFile": SetDef(("fact", "fact"), "Sets.journalPathForFile", ("R32", "R33"),
+                                "strong", _en_journal_path_for_file),
     # census forms: Lean type `Census`, checked by `counts` against every fact of the kind
     "exactly": SetDef(("kind", "count"), ".total", ("C1",), "strong", _en_total),
     "exactlyDistinct": SetDef(("kind", "slot", "count"), ".distinct", ("C1",), "strong",

@@ -1,7 +1,7 @@
 """Reissue a saved run under the current checker, without rerunning an investigator.
 
 Always use a new output directory. Historical runs and benchmark scores are untouched.
-    python -m eval.recheck --run runs/investigator-1/run.json --out runs/dev/rechecked
+    python -m eval.recheck --run runs/current/run.json --out runs/dev/rechecked
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor

@@ -1,6 +1,6 @@
 """Re-check a certificate without trusting the agent, the stored Lean file, or the report.
 
-    python -m verifier.verify certs/F7.json --facts fixtures/sample_facts.json
+    python -m verifier.verify --run runs/current/run.json --facts evidence/case_facts.json
 
 Three checks, all rebuilt from the evidence DB:
   1. every copied fact field and string still matches its DB row and row_sha256; for a census ("exactly n
@@ -12,18 +12,21 @@ Three checks, all rebuilt from the evidence DB:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
 from typing import List
 
 from checker import claims
-from checker.check import render_lean, run_kernel
+from checker.check import render_lean, run_kernel, valid_finding_id
 from checker.facts import FactSource, open_source
 
 
 def verify(cert: dict, source: FactSource) -> List[str]:
     """Return the list of problems; empty means the certificate stands."""
+    if not isinstance(cert, dict) or not valid_finding_id(cert.get("finding_id")):
+        return ["finding id must look like F7 (letters, digits, _)"]
     problems: List[str] = []
     try:
         claim = claims.parse(cert["claim"])
@@ -84,12 +87,57 @@ def verify(cert: dict, source: FactSource) -> List[str]:
     return problems
 
 
+def verify_run(run: dict, source: FactSource) -> dict:
+    """Rebuild every certificate; reject malformed bundles and duplicate IDs."""
+    findings = run.get("findings") if isinstance(run, dict) else None
+    if not isinstance(findings, list):
+        raise ValueError("run must contain a findings list")
+    seen, checked = set(), []
+    for cert in findings:
+        fid = cert.get("finding_id") if isinstance(cert, dict) else None
+        if not isinstance(fid, str) or not fid or fid in seen:
+            raise ValueError("run contains missing or duplicate finding IDs")
+        seen.add(fid)
+        try:
+            problems = verify(cert, source)
+        except (ValueError, KeyError, TypeError) as error:
+            problems = [str(error)]
+        checked.append({"finding_id": fid, "problems": problems})
+    failed = sum(bool(item["problems"]) for item in checked)
+    return {"passed": failed == 0, "checked": len(checked),
+            "verified": len(checked) - failed, "failed": failed, "findings": checked}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Re-check certificates against the evidence DB.")
-    ap.add_argument("certs", nargs="+", help="certificate .json files")
+    ap.add_argument("certs", nargs="*", help="certificate .json files")
+    ap.add_argument("--run", help="one bundled run containing certificates")
+    ap.add_argument("--out", help="new JSON verification result (with --run)")
     ap.add_argument("--facts", required=True, help="evidence DB (.duckdb) or fixture (.json)")
     args = ap.parse_args(argv)
+    if bool(args.certs) == bool(args.run):
+        ap.error("provide certificate files or --run")
+    if args.out and not args.run:
+        ap.error("--out requires --run")
+    if args.out and (Path(args.out).exists() or Path(args.out).is_symlink()):
+        ap.error("refusing to overwrite verification output")
     source = open_source(args.facts)
+    if args.run:
+        result = verify_run(json.loads(Path(args.run).read_text()), source)
+        result.update(facts=args.facts,
+                      facts_sha256=hashlib.sha256(Path(args.facts).read_bytes()).hexdigest(),
+                      run=args.run,
+                      run_sha256=hashlib.sha256(Path(args.run).read_bytes()).hexdigest())
+        if args.out:
+            Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+            with Path(args.out).open("x") as stream:
+                stream.write(json.dumps(result, indent=2) + "\n")
+        print(f"{result['verified']}/{result['checked']} certificates verified; "
+              f"{result['failed']} failed")
+        for item in result["findings"]:
+            for problem in item["problems"]:
+                print(f"FAIL {item['finding_id']}: {problem}")
+        return 0 if result["passed"] else 1
     bad = 0
     for path in args.certs:
         problems = verify(json.loads(Path(path).read_text()), source)

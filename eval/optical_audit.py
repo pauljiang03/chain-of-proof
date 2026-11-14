@@ -2,7 +2,7 @@
 
 Requires extraction dependencies, python-evtx and pefile. These two additional
 parsers are audit-only dependencies; they are not used by the production extractor.
-    python -m eval.optical_audit --out runs/optical-review/raw-audit.json
+    python -m eval.optical_audit --out runs/dev/raw-optical-audit.json
 """
 import argparse
 import hashlib

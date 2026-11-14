@@ -56,6 +56,8 @@ def candRecordedObservations (fs : Array Fact) : Array Brick := Id.run do
       out := out.push ⟨Sets.journalParentRecorded f.id, [f]⟩
     if f.kind == .journalRemoval then
       out := out.push ⟨Sets.journalRemovalObserved f.id, [f]⟩
+    if f.kind == .journalPath then
+      out := out.push ⟨Sets.journalPathAt f.id, [f]⟩
   return out
 
 def candCreatedAfterVolume (fs : Array Fact) : Array Brick := Id.run do

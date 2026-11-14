@@ -34,7 +34,13 @@ _ID = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 _built = False
 
 
+def valid_finding_id(value) -> bool:
+    return isinstance(value, str) and _ID.fullmatch(value) is not None
+
+
 def render_lean(finding_id: str, facts: List[Fact], claim: claims.Claim) -> str:
+    if not valid_finding_id(finding_id):
+        raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")
     rows = ",\n  ".join(f.to_lean() for f in facts)
     if claims.census_of(claim):         # about every fact of a kind: `cited` is all of them
         statement = (f"def census : Census := {claims.to_lean(claim)}\n\n"
@@ -129,7 +135,7 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
     if proposer:
         result["proposer"] = proposer       # who proposed it: miner, probe, or an agent
     try:
-        if not _ID.match(finding_id):
+        if not valid_finding_id(finding_id):
             raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")
         claim = claims.parse(claim_json)
         result["claim"] = claims.to_json(claim)

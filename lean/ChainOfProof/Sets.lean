@@ -99,6 +99,13 @@ def journalNamed (x : Nat) : Claim := .is x .journalName
 def journalParentRecorded (x : Nat) : Claim := .is x .journalParent
 def journalRemovalObserved (x : Nat) : Claim := .is x .journalRemoval
 
+/-- R33: a child path observation constrained by intact journal intervals and directory names. -/
+def journalPathAt (x : Nat) : Claim := .is x .journalPath
+
+/-- A direct name and a byte-bounded path observation have the same scoped file identity. -/
+def journalPathForFile (n p : Nat) : Claim :=
+  .both (.is n .journalName) (.both (.is p .journalPath) (.link n .aux p .aux))
+
 /-- Two separately timed names denote the same scoped file-record identity. -/
 def sameJournalFile (a b : Nat) : Claim :=
   .both (.is a .journalName) (.both (.is b .journalName) (.link a .aux b .aux))

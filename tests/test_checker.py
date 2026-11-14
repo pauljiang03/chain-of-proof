@@ -9,6 +9,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from checker import claims
 from checker.check import check
@@ -111,6 +112,14 @@ class CheckerTest(unittest.TestCase):
         claim = copy.deepcopy(cert)
         claim["claim"] = {"before": [4600, 4512]}
         self.assertTrue(verify(claim, self.src))
+
+    def test_verifier_refuses_untrusted_identifiers_before_lean_generation(self):
+        cert = self.run_check(GOLDEN, "SafeID")
+        for invalid in (None, 1, "", "F7\nend Cert.F7", "F7; import Evil", "x" * 33):
+            altered = dict(cert, finding_id=invalid)
+            with self.subTest(finding_id=invalid), patch("verifier.verify.run_kernel") as kernel:
+                self.assertTrue(verify(altered, self.src))
+                kernel.assert_not_called()
 
     def test_verifier_rejects_changed_copies_even_with_original_hash_and_english(self):
         self.run_check(GOLDEN, "F10")

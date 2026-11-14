@@ -268,4 +268,25 @@ theorem journalName_not_filesystemCreation (fs : List Fact) (a : Nat)
   | false => rfl
   | true => cases holds_is_kind_unique h h'
 
+/-- A byte-bounded journal path is still not a filesystem creation timestamp. -/
+theorem journalPath_not_filesystemCreation (fs : List Fact) (a : Nat)
+    (h : holds fs (Sets.journalPathAt a) = true) :
+    holds fs (Sets.fileCreatedAt a) = false := by
+  cases h' : holds fs (Sets.fileCreatedAt a) with
+  | false => rfl
+  | true => cases holds_is_kind_unique h h'
+
+/-- A direct name and a bounded path connect only through the exact scoped identity. -/
+theorem journalPathForFile_sound (fs : List Fact) (n p : Nat)
+    (h : holds fs (Sets.journalPathForFile n p) = true) :
+    ∃ x y, lookup fs n = some x ∧ lookup fs p = some y ∧
+      x.kind = .journalName ∧ y.kind = .journalPath ∧ x.aux = y.aux := by
+  simp only [Sets.journalPathForFile, holds_both_iff, holds_is_iff, holds_link_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨x', y', hx', hy', heq⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  exact ⟨x, y, hx, hy, hkx, hky, by simpa [Fact.get] using heq⟩
+
 end ChainOfProof

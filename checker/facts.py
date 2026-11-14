@@ -31,6 +31,7 @@ KINDS = (
     "fileRemoved", "volumeRecorded",
     "fileCreationRecorded",
     "journalName", "journalParent", "journalRemoval",
+    "journalPath",
 )
 
 

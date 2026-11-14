@@ -52,6 +52,8 @@
     journalParent scoped child identity    scoped parent identity (journal observation time)
     journalRemoval observed name/path      scoped NTFS identity (removal-flag observation,
                                                             not onset, every alias removed, or wiping)
+    journalPath   bounded historical path  scoped NTFS identity (child journal observation time;
+                                                            an incomplete ancestor is marked explicitly)
 -/
 namespace ChainOfProof
 
@@ -69,6 +71,7 @@ inductive Kind where
   | fileRemoved | volumeRecorded
   | fileCreationRecorded
   | journalName | journalParent | journalRemoval
+  | journalPath
   deriving DecidableEq, Repr
 
 structure Fact where

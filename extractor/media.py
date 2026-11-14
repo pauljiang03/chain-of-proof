@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 from dissect.target import Target
 
 from .fatcarve import carve_fat32, fat_times_utc, folder_paths
+from .acquisition import area, provenance, resolve
 from .store import Evidence, us, us_from_unix
 
 FAT_EPOCH = 315532800  # 1980-01-01, what an unset FAT timestamp decodes to
@@ -18,7 +19,7 @@ def _wall(naive_seconds: float) -> datetime:
     return datetime.fromtimestamp(naive_seconds, timezone.utc).replace(tzinfo=None)
 
 
-def _recovered_entries(ev, vol, fs, serial: str, tz: ZoneInfo, examined_at: int, common: dict):
+def _recovered_entries(ev, vol, fs, identity: dict, tz: ZoneInfo, examined_at: int, common: dict):
     """Directory entries left in unallocated FAT32 clusters, for example after a quick
     format. They belonged to an earlier file system whose volume serial is gone, so the
     rows carry an area id in `aux` and one unallocatedOnDevice row ties that area to the
@@ -30,7 +31,7 @@ def _recovered_entries(ev, vol, fs, serial: str, tz: ZoneInfo, examined_at: int,
                         bpb.BPB_NumFATs, fs.fatfs.bpb_ext.BPB_FATSz32, bpb.BPB_TotSec32)
     if not found:
         return 0, 0
-    area = f"unallocated space of device {serial}"
+    location = area(identity)
     paths = folder_paths(found)
     files = 0
     for cluster in sorted(found):
@@ -47,19 +48,21 @@ def _recovered_entries(ev, vol, fs, serial: str, tz: ZoneInfo, examined_at: int,
             base = dict(artifact=f"FAT directory entry in unallocated cluster {cluster}",
                         recovered=True, removed_before_format=e.deleted, size=e.size,
                         short_name=e.short_name, first_cluster=e.first_cluster, **common)
-            ev.add("fileCreated", created, 10_000, rel, area,
+            ev.add("fileCreated", created, 10_000, rel, location,
                    time_zone=f"FAT local time, converted from {tz.key}", **base)
-            ev.add("fileModified", modified, 2_000_000, rel, area, time_zone=note, **base)
+            ev.add("fileModified", modified, 2_000_000, rel, location, time_zone=note, **base)
             files += 1
-    ev.add("unallocatedOnDevice", examined_at, 1, serial, area,
+    ev.add("unallocatedOnDevice", examined_at, 1, identity["device_identity"], location,
            artifact="FAT32 clusters the allocation table marks free", folders=len(found),
-           file_entries=files, device_serial_source="exhibits.json (NIST case documentation)",
+           file_entries=files,
            time_meaning="when the image was examined, not an event on the device", **common)
     return len(found), files
 
 
-def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: int, tool: str):
+def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: int, tool: str,
+                  acquisition: dict = None):
     image = path.name
+    identity = acquisition if acquisition is not None else resolve(path, exhibit)
     target = Target.open(path)
     disk = target.disks[0]
     disk.seek(0x1B8)
@@ -96,11 +99,10 @@ def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: i
                     created, modified = us_from_unix(st.st_ctime), us_from_unix(st.st_mtime)
                     res_c, res_m, zone = 10_000, 10_000, "exFAT local time with its recorded UTC offset"
                 files.append((rel, created, res_c, modified, res_m, zone, st.st_size))
-        common = dict(image=image, exhibit=exhibit["exhibit"], tool=tool)
-        ev.add("volumeOnDevice", examined_at, 1, exhibit["device_serial"], vsn,
+        common = dict(image=image, exhibit=exhibit["exhibit"], tool=tool, **provenance(identity))
+        ev.add("volumeOnDevice", examined_at, 1, identity["device_identity"], vsn,
                artifact=f"volume boot record, partition at byte offset {getattr(vol, 'offset', None)}",
                filesystem=kind, volume_label=label, disk_signature=signature,
-               device_serial_source="exhibits.json (NIST case documentation)",
                time_meaning="when the image was examined, not an event on the device", **common)
         for rel, created, res_c, modified, res_m, zone, size in files:
             base = dict(artifact=f"{kind} directory entry {rel}", size=size, time_zone=zone, **common)
@@ -110,7 +112,7 @@ def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: i
                 f"{len(files)} files")
         if kind == "fat":
             try:
-                got = _recovered_entries(ev, vol, fs, exhibit["device_serial"], ZoneInfo(fat_tz),
+                got = _recovered_entries(ev, vol, fs, identity, ZoneInfo(fat_tz),
                                          examined_at, common)
             except Exception as e:
                 ev.problem(f"{image} unallocated space", e)

@@ -1,0 +1,399 @@
+{
+  "measured": true,
+  "fixture": "fixtures/nist_false_claims.json",
+  "fixture_sha256": "9ac59b1b4bc3d198278799bd9c920353a7ed39b0961f7ad8f8104489ebd5f2e8",
+  "case_id": "nist-cfreds-data-leakage",
+  "time_zone": "America/New_York",
+  "false_only": true,
+  "probes": [
+    {
+      "id": "P0001",
+      "label": false,
+      "ask": "Was the zip opened from the authorized USB (RM#1)?",
+      "basis": "Q26: it was opened in RM#2",
+      "verdict": "rejected",
+      "claim": {
+        "openedFromDevice": [
+          41,
+          496
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F01"
+    },
+    {
+      "id": "P0002",
+      "label": false,
+      "ask": "Was the design concept opened from RM#2?",
+      "basis": "Section 3: it was opened from RM#1",
+      "verdict": "rejected",
+      "claim": {
+        "openedFromDevice": [
+          26,
+          497
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F02"
+    },
+    {
+      "id": "P0003",
+      "label": false,
+      "ask": "Was the zip opened before RM#2 was connected?",
+      "basis": "Q22 (09:58:33) and Q26 (10:01:23)",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          41,
+          3
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F03"
+    },
+    {
+      "id": "P0004",
+      "label": false,
+      "ask": "Was the proposal opened before the search for leakage methods?",
+      "basis": "Q16 (14:02:09) and section 3 (14:37)",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          21,
+          291
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F04"
+    },
+    {
+      "id": "P0005",
+      "label": false,
+      "ask": "Is RM#2 an authorized device?",
+      "basis": "Section 2: only RM#1 is authorized; RM#2 is the suspect's own stick",
+      "verdict": "rejected",
+      "claim": {
+        "tagged": [
+          3,
+          "obj",
+          388,
+          227
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F05"
+    },
+    {
+      "id": "P0006",
+      "label": false,
+      "ask": "Is the USB record for ...1593 the seized RM#2?",
+      "basis": "Q22: different serials",
+      "verdict": "rejected",
+      "claim": {
+        "deviceHolds": [
+          1,
+          497
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F06"
+    },
+    {
+      "id": "P0007",
+      "label": false,
+      "ask": "Is the first IAMAN $_@ volume the one on RM#1?",
+      "basis": "Section 2: RM#1 holds the volume labeled Authorized USB",
+      "verdict": "rejected",
+      "claim": {
+        "recordedOnDevice": [
+          488,
+          496
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F07"
+    },
+    {
+      "id": "P0008",
+      "label": false,
+      "ask": "Was the resignation letter modified before it was created?",
+      "basis": "Q36",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          266,
+          125
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F08"
+    },
+    {
+      "id": "P0009",
+      "label": false,
+      "ask": "Is the shortcut to the design concept a web search?",
+      "basis": "Wrong kind of record",
+      "verdict": "rejected",
+      "claim": {
+        "searched": [
+          26
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F09"
+    },
+    {
+      "id": "P0010",
+      "label": false,
+      "ask": "Was the zip opened from the CD before it was opened from RM#2?",
+      "basis": "Q26 (10:01:23) and Q35 (16:44:18)",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          48,
+          41
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F10"
+    },
+    {
+      "id": "P0011",
+      "label": false,
+      "ask": "Was the design concept opened from the IAMAN $_@ volume?",
+      "basis": "Section 3: opened from RM#1 (Authorized USB)",
+      "verdict": "rejected",
+      "claim": {
+        "openedFromRecorded": [
+          26,
+          488
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F11"
+    },
+    {
+      "id": "P0012",
+      "label": false,
+      "ask": "Do the Authorized USB volume and the IAMAN $_@ volume share a label?",
+      "basis": "Section 2: different labels",
+      "verdict": "rejected",
+      "claim": {
+        "sameLabel": [
+          486,
+          493
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F12"
+    },
+    {
+      "id": "P0013",
+      "label": false,
+      "ask": "Did the search for anti-forensic tools come before RM#2 was connected?",
+      "basis": "Q16 (2015-03-25 10:46:44) and Q22 (2015-03-24 09:58:33)",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          364,
+          3
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F13"
+    },
+    {
+      "id": "P0014",
+      "label": false,
+      "ask": "Is RM#1 tagged unauthorized?",
+      "basis": "Section 2, note 5",
+      "verdict": "rejected",
+      "claim": {
+        "tagged": [
+          1,
+          "obj",
+          389,
+          228
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F14"
+    },
+    {
+      "id": "P0015",
+      "label": false,
+      "ask": "Was the zip opened from RM#1? (heuristic chain pointed at the wrong device)",
+      "basis": "Q26",
+      "verdict": "rejected",
+      "claim": {
+        "both": [
+          {
+            "openedFromRecorded": [
+              41,
+              488
+            ]
+          },
+          {
+            "sameLabel": [
+              488,
+              486
+            ]
+          },
+          {
+            "recordedOnDevice": [
+              486,
+              496
+            ]
+          },
+          {
+            "deviceHolds": [
+              1,
+              496
+            ]
+          }
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F15"
+    },
+    {
+      "id": "P0016",
+      "label": false,
+      "ask": "Does a record that is not in the evidence come before the zip being opened?",
+      "basis": "Fact id 999999 does not exist",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          999999,
+          41
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F16"
+    },
+    {
+      "id": "P0017",
+      "label": false,
+      "ask": "Is a file that sits on RM#1 a record recovered from RM#2's unallocated space?",
+      "basis": "Q53 lists only RM#2's recovered entries; the file is live on RM#1",
+      "verdict": "rejected",
+      "claim": {
+        "recoveredOnDevice": [
+          66,
+          499
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F17"
+    },
+    {
+      "id": "P0018",
+      "label": false,
+      "ask": "Does the seized RM#1 have directory entries left in unallocated space?",
+      "basis": "Q54: only RM#2 was quick-formatted; the unallocated-space record names RM#2's serial",
+      "verdict": "rejected",
+      "claim": {
+        "deviceExamined": [
+          1,
+          499
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F18"
+    },
+    {
+      "id": "P0019",
+      "label": false,
+      "ask": "Was the zip's record on RM#2 created before RM#2 was first connected?",
+      "basis": "Section 3: 09:58 connect, 09:59 copy",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          109,
+          3
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F19"
+    },
+    {
+      "id": "P0020",
+      "label": false,
+      "ask": "Was 'prop' sent to the Recycle Bin before the first burn trace?",
+      "basis": "Q33 (15:47:47) and Q51 (15:51:47)",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          271,
+          379
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F20"
+    },
+    {
+      "id": "P0021",
+      "label": false,
+      "ask": "Was 'Done' sent before 'Hello, Iaman'?",
+      "basis": "Q21: 2015-03-24 17:05:09 and 2015-03-23 13:29:27",
+      "verdict": "rejected",
+      "claim": {
+        "before": [
+          378,
+          368
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F21"
+    },
+    {
+      "id": "P0022",
+      "label": false,
+      "ask": "Is the web search 'data leakage methods' an e-mail?",
+      "basis": "Q16 lists it as a search; Q21 has no such subject",
+      "verdict": "rejected",
+      "claim": {
+        "emailed": [
+          291
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F22"
+    },
+    {
+      "id": "P0023",
+      "label": false,
+      "ask": "Was the resignation letter sent to the Recycle Bin?",
+      "basis": "Q51 lists 14 Recycle Bin items; the letter is not among them (Q36: it is on the Desktop)",
+      "verdict": "rejected",
+      "claim": {
+        "fileDeletedAt": [
+          125
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F23"
+    },
+    {
+      "id": "P0024",
+      "label": false,
+      "ask": "Does winter_storm.amr on RM#2 have the size and last-modified time of the detailed design?",
+      "basis": "Q55 and Q56: winter_storm.amr is the 13.8 MB PPT ([secret_project]_revised_points.ppt), not the 15.6 MB PPTX",
+      "verdict": "rejected",
+      "claim": {
+        "tagged": [
+          251,
+          "obj",
+          414,
+          232
+        ]
+      },
+      "as_expected": true,
+      "source_id": "F24"
+    }
+  ],
+  "all_as_expected": true,
+  "false_claims": 24,
+  "false_claims_rejected": 24,
+  "note": "Gate regression only; not forensic answer accuracy or a false-positive rate."
+}

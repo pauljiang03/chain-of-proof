@@ -22,6 +22,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 
 from .store import us, us_from_filetime, us_from_unix
+from .journal_paths import JournalRanges
 
 # --------------------------------------------------------------------------- pure helpers
 
@@ -990,12 +991,15 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
             spool_ref = None
     wanted, spool, first, history, unreadable = [], {}, None, {}, 0
     events, active, observations = [], {}, []
+    ranges = JournalRanges() if hasattr(journal, 'fh') else None
     for r in journal.records():
         rec = r.record
         if first is None:
             first = int(rec.Usn)
         if only_before is not None and int(rec.Usn) >= only_before:
             break
+        if ranges is not None:
+            ranges.capture(r.offset, int(rec.RecordLength), journal.fh)
         reason = int(rec.Reason)
         fref, parent = _ref(rec.FileReferenceNumber), _ref(rec.ParentFileReferenceNumber)
         usn, filetime = int(rec.Usn), int(rec.TimeStamp)
@@ -1043,6 +1047,11 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
     if unpaired:
         ev.problem(artifact, RuntimeWarning(f"{unpaired} old-name records have no new-name record"))
     cache = {}
+    if ranges is not None:
+        ranges.finish()
+        if ranges.rejected:
+            ev.problem(artifact + ' bounded-path coverage', RuntimeWarning(
+                f'{ranges.rejected} records failed raw continuity checks; no path inference crosses them'))
 
     def full(folder, name):
         # The filename is copied as stored. Do not normalize slash-like characters
@@ -1050,6 +1059,45 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
         return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
 
     serial = volume_serial or ("%08X" % (ntfs.serial & 0xFFFFFFFF))
+    if ranges is not None:
+        try:
+            root_reference = (5, int(ntfs.mft(5).header.SequenceNumber))
+        except Exception:
+            root_reference = None
+        latest_paths = {}
+        for usn, filetime, fref, parent, name, reason in observations:
+            if usn not in ranges.membership or us_from_filetime(filetime) < 0:
+                continue
+            resolved = ranges.folder(parent, usn, root_reference)
+            if resolved is None:
+                continue
+            folders, complete, anchors = resolved
+            if not folders:
+                continue
+            # Existing direct historical names already cover full preceding paths.
+            # This new kind exposes bounded future-name inference and useful suffixes.
+            future = any(a['method'].startswith('future OLD_NAME') for a in anchors)
+            if complete and not future:
+                continue
+            path = (drive + '\\' if complete else '[unresolved ancestor]\\') + '\\'.join(folders + [name])
+            if latest_paths.get(fref) == path:
+                continue
+            latest_paths[fref] = path
+            ev.add('journalPath', us_from_filetime(filetime), 1, path,
+                   _journal_identity(common, ntfs.serial, fref),
+                   artifact=f'{artifact} USN {usn}', usn=usn, raw_name=name,
+                   file_record=fref[0], file_sequence=fref[1],
+                   parent_record=parent[0], parent_sequence=parent[1],
+                   volume_serial=serial, ntfs_volume_serial=f'{ntfs.serial:016X}',
+                   reason_flags=reason, path_complete=complete, directory_anchors=anchors,
+                   bounded_future_old_name=future, timestamp_semantics='journal_observation',
+                   time_meaning='timestamp of the child journal observation; not filesystem creation onset',
+                   rule='directory names constrained by exact identities and intact retained USN-v2 byte '
+                        'intervals; any future OLD_NAME must be followed by NEW_NAME with no intervening '
+                        'creation, removal, rename-new, conflicting name or hard-link change for that directory',
+                   limitation='partial paths have an explicitly unresolved ancestor; this does not prove '
+                              'a copy, disc write, secure wiping or continuous presence outside the interval',
+                   **source, **common)
     # Name and parent observations expose identity as an IR field, not merely
     # provenance. Keep each transition, but collapse repeated same-state flags.
     names, parents, latest_name, latest_parent = [], [], {}, {}

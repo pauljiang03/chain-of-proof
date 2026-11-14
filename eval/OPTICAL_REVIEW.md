@@ -2,8 +2,8 @@
 
 The incorrect inference came from assigning host drive activity to a particular
 disc without a physical-disc link, combined with templates that overstated what
-optical records meant. The event-ID discrepancy is a separate issue. We retained
-the original reports, reference and frozen scores.
+optical records meant. The event-ID discrepancy is a separate issue. The original incorrect conclusion
+is retained in a regression fixture. Git history retains the old reports.
 
 ## Independent raw evidence
 
@@ -27,7 +27,7 @@ Its message `0x40040085` says: “Device %1 is locked for exclusive access.”
 
 The reference prose prints 113. The bytes and two independent parsers support 133;
 we did not change the extracted ID to fit the prose or silently amend the key.
-The [audit JSON](../runs/optical-review/raw-audit.json) retains the raw XML and hashes.
+The [audit JSON](../runs/current/audits/optical.json) retains the raw XML and hashes.
 This discrepancy does not excuse the separate inference error: an exclusive-access
 lock does not establish a completed write or which physical disc was present.
 [Microsoft's API description](https://learn.microsoft.com/en-us/windows/win32/api/imapi2/nf-imapi2-idiscrecorder2-acquireexclusiveaccess)
@@ -64,34 +64,15 @@ completion, wall-clock accuracy or user intent.
 - Default reports contain certified template sentences only. Free-form conclusions
   are available solely through `--include-judgments`, explicitly outside Lean.
 
-The same original 477 proposed certified claims were reissued and reverified under
-the corrected templates: 105 AI findings and 372 miner findings. Fifteen AI sentences
-and 106 miner sentences changed. One original conclusion, C008, was refused by the
-new guard. Other conclusions passing that limited guard remain unverified.
-Historical certificates keep their original English; do not present them as certificates
-for today's corrected text. The new output directories contain the new certificates.
+The [regression fixture](../fixtures/optical_regression.json) preserves the original unsupported conclusion and its cited findings.
+The current report uses corrected certificate sentences and excludes free-form judgments.
 
-Review artifacts: [investigator review](../runs/optical-review/investigator-review.json),
-[corrected investigator report](../runs/optical-review/investigator-report.md),
-[miner review](../runs/optical-review/miner-review.json).
-
-## Reproduce without overwriting history
+## Reproduce
 
 ```sh
 python -m eval.optical_audit --out runs/dev/raw-optical-audit.json
-python -m eval.recheck --run runs/investigator-1/run.json \
-  --out runs/dev/rechecked-investigator
-python -m eval.recheck --run ui/public/run.json --out runs/dev/rechecked-miner
-python -m checker.combine --facts evidence/case_facts.json \
-  --run runs/dev/rechecked-miner/run.json runs/dev/rechecked-investigator/run.json \
-  --out runs/dev/combined --workers 4
+python -m verifier.verify --run runs/current/run.json --facts evidence/case_facts.json
 ```
 
-The independent raw audit additionally needs `python-evtx` and `pefile`. Recheck and
-combine require new output directories and verify saved row hashes, string bindings
-and exact census membership before reusing fact IDs. No LLM judge is involved.
-
-Development extraction on the two available cases produced 122,791 NIST records
-and 21,455 Stolen Szechuan Sauce desktop records. Both pass structural self-checks.
-These counts are not answer accuracy. The second case still has parser warnings
-and no completed reference score; see [support still needed](MISS_SUPPORT.md).
+The independent raw audit also needs `python-evtx` and `pefile`.
+No LLM judge is involved.

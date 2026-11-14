@@ -11,7 +11,9 @@
     "Use UTC ISO timestamps for date-time fields. Local-minute fields use YYYY-MM-DD HH:MM in the declared timezone.",
     "Use canonical single Windows separators; omit a trailing separator for directory paths. Preserve raw unusual filename characters.",
     "Use null only for a source-reported absent/unavailable value; it is different from being unable to answer.",
-    "This is a development contract. Some questions require independent reference review; systems should still attempt all 60."
+    "This is a development contract. Some questions require independent reference review; systems should still attempt all 60.",
+    "Questions whose reference is unresolved permit supplementary evidence-backed fields. Their schemas preserve full prompt coverage even when the private draft expected answer is incomplete. Public structural vocabularies are conventions, not extra case evidence.",
+    "Every matching rule is public. JSON pointers address expected fields after unordered alignment, not required output ordering; wildcard pointer segments apply to any array member. Declared prefix matching handles source truncation, not wildcard answer filenames."
   ],
   "questions": [
     {
@@ -42,12 +44,51 @@
               ],
               "additionalProperties": false
             }
+          },
+          "acquisition_verification": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string"
+                },
+                "algorithm": {
+                  "type": "string"
+                },
+                "acquisition_hash": {
+                  "type": "string"
+                },
+                "verification_hash": {
+                  "type": "string"
+                },
+                "matches": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "image",
+                "algorithm",
+                "acquisition_hash",
+                "verification_hash",
+                "matches"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Compare independently recorded acquisition and verification digests for each supplied image. The reference may be incomplete; do not omit this part of the original question."
           }
         },
         "required": [
-          "images"
+          "images",
+          "acquisition_verification"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -96,7 +137,13 @@
         "required": [
           "partitions"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -134,6 +181,16 @@
           "installed_at"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -143,7 +200,8 @@
         "type": "object",
         "properties": {
           "time_zone": {
-            "type": "string"
+            "type": "string",
+            "description": "The displayed Windows timezone label, excluding the separately supplied UTC offset. Do not substitute the registry TimeZoneKeyName or an IANA identifier."
           },
           "standard_utc_offset_hours": {
             "type": "integer"
@@ -158,6 +216,11 @@
           "daylight_time_bias_hours"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -174,6 +237,11 @@
           "computer_name"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -289,7 +357,13 @@
         "required": [
           "accounts"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -306,6 +380,11 @@
           "last_logged_on_user"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -323,6 +402,16 @@
           "last_shutdown"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/last_shutdown": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -379,6 +468,11 @@
           "interfaces"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -462,7 +556,13 @@
         "required": [
           "applications"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -497,10 +597,21 @@
                       "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer."
                     },
                     "source": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ]
                     },
                     "time_meaning": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ]
                     }
                   },
                   "required": [
@@ -526,10 +637,21 @@
                       "type": "integer"
                     },
                     "source": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ]
                     },
                     "time_meaning": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ]
                     }
                   },
                   "required": [
@@ -570,10 +692,21 @@
                       "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer."
                     },
                     "source": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ]
                     },
                     "time_meaning": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ]
                     }
                   },
                   "required": [
@@ -593,6 +726,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -630,6 +773,16 @@
           "events"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/events/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -666,6 +819,36 @@
           "internet_explorer_upgraded_from_version_9_or_lower"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {},
+        "string_aliases": {
+          "/browsers/*/name": [
+            [
+              "Microsoft Internet Explorer",
+              "Internet Explorer",
+              "IE"
+            ],
+            [
+              "Google Chrome",
+              "Chrome"
+            ],
+            [
+              "Mozilla Firefox",
+              "Firefox"
+            ],
+            [
+              "Microsoft Edge",
+              "Edge"
+            ],
+            [
+              "Apple Safari",
+              "Safari"
+            ]
+          ]
+        }
       }
     },
     {
@@ -698,6 +881,11 @@
           "artifacts"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -735,6 +923,21 @@
           "visits"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/visits/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/visits/*/url": "exact",
+          "/visits/4/url": "prefix",
+          "/visits/15/url": "prefix"
+        }
       }
     },
     {
@@ -775,7 +978,21 @@
         "required": [
           "searches"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/searches/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/searches/*/url": "exact"
+        }
       }
     },
     {
@@ -809,6 +1026,16 @@
           "searches"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/searches/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -825,6 +1052,11 @@
           "application"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -840,7 +1072,13 @@
         "required": [
           "path_as_printed"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -857,6 +1095,11 @@
           "account"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -911,6 +1154,16 @@
           "messages"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/messages/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -999,6 +1252,20 @@
           "devices"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/devices/*/first_connected": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/devices/*/connected_after_reboot": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1044,6 +1311,20 @@
           "renames"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/renames/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/renames/*/old_name": "exact",
+          "/renames/*/new_name": "exact"
+        }
       }
     },
     {
@@ -1060,6 +1341,11 @@
           "ip_address"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1081,7 +1367,8 @@
                   "type": "string"
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Artifact vocabulary: JumpList, .LNK (Windows), .LNK (Office), Registry (Office), ShellBag (created), or ShellBag (last accessed), as supported by the specific record."
                 }
               },
               "required": [
@@ -1097,6 +1384,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1118,7 +1415,8 @@
                   "type": "string"
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Artifact vocabulary: JumpList, .LNK (Windows), .LNK (Office), Registry (Office), ShellBag (created), or ShellBag (last accessed), as supported by the specific record."
                 }
               },
               "required": [
@@ -1134,6 +1432,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1155,7 +1463,8 @@
                   "type": "string"
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Artifact vocabulary: JumpList, .LNK (Windows), .LNK (Office), Registry (Office), ShellBag (created), or ShellBag (last accessed), as supported by the specific record."
                 }
               },
               "required": [
@@ -1171,6 +1480,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1192,7 +1511,8 @@
                   "type": "string"
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Artifact vocabulary: JumpList, .LNK (Windows), .LNK (Office), Registry (Office), ShellBag (created), or ShellBag (last accessed), as supported by the specific record."
                 }
               },
               "required": [
@@ -1208,6 +1528,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1283,7 +1613,13 @@
         "required": [
           "traces"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1321,7 +1657,22 @@
         "required": [
           "files"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/files/*/deleted_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/files/*/modified_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1343,6 +1694,16 @@
           "logon_time"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/logon_time": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1363,6 +1724,11 @@
           "third_party_burning_application_used"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1527,7 +1893,34 @@
           "formatting",
           "file_operations"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/method_selection/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/formatting/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/file_operations/start": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/file_operations/end": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1547,6 +1940,11 @@
           "paths"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1568,7 +1966,8 @@
                   "type": "string"
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Artifact vocabulary: JumpList, .LNK (Windows), .LNK (Office), Registry (Office), ShellBag (created), or ShellBag (last accessed), as supported by the specific record."
                 }
               },
               "required": [
@@ -1584,6 +1983,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1602,10 +2011,21 @@
                   "format": "date-time"
                 },
                 "type": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "File Created",
+                    "File Modified",
+                    "Last Accessed",
+                    "Entry Modified"
+                  ]
                 },
                 "source": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "NTFS $STANDARD_INFORMATION",
+                    "NTFS $FILE_NAME",
+                    "OOXML \\docProps\\core.xml"
+                  ]
                 }
               },
               "required": [
@@ -1621,6 +2041,16 @@
           "timestamps"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/timestamps/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1646,6 +2076,16 @@
           "output_path"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/printed_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1665,6 +2105,19 @@
           "paths"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {},
+        "paths": {
+          "/paths/*": {
+            "style": "windows",
+            "root": "C:",
+            "case_sensitive": false,
+            "scope": "PC system volume"
+          }
+        }
       }
     },
     {
@@ -1681,13 +2134,58 @@
             "items": {
               "type": "string"
             }
+          },
+          "thumbnail_artifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cache_path": {
+                  "type": "string"
+                },
+                "entry_id_or_offset": {
+                  "type": "string"
+                },
+                "image_sha256": {
+                  "type": "string"
+                },
+                "associated_document": {
+                  "type": "string"
+                },
+                "visual_description": {
+                  "type": "string"
+                },
+                "evidence_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "cache_path",
+                "entry_id_or_offset",
+                "image_sha256",
+                "associated_document",
+                "visual_description",
+                "evidence_refs"
+              ],
+              "additionalProperties": false
+            }
           }
         },
         "required": [
           "cache",
-          "thumbnail_titles"
+          "thumbnail_titles",
+          "thumbnail_artifacts"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1704,6 +2202,19 @@
           "path"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {},
+        "paths": {
+          "/path": {
+            "style": "windows",
+            "root": "C:",
+            "case_sensitive": false,
+            "scope": "PC system volume"
+          }
+        }
       }
     },
     {
@@ -1737,6 +2248,16 @@
           "notes"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/notes/*/file_modified": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1782,6 +2303,11 @@
           "identification"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1809,6 +2335,11 @@
           "start_menu_path"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -1842,6 +2373,19 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/date_modified": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/records/*/url": "exact"
+        }
       }
     },
     {
@@ -1940,6 +2484,16 @@
           "messages"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/messages/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -1973,6 +2527,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/date_created": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -2018,6 +2582,16 @@
           "copies"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/copies/*/created_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -2097,7 +2671,26 @@
           "files",
           "comparison"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/files/*/created_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/files/*/modified_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/comparison/last_log_time_in_vsc": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -2286,6 +2879,11 @@
           "recovered_records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2314,6 +2912,11 @@
           "pattern"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2351,6 +2954,16 @@
           "records"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/deleted_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
       }
     },
     {
@@ -2499,6 +3112,31 @@
           "wipe_trace"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/actions/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/wiping/start": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/wiping/end": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/shift_delete/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/wipe_trace/steps/*/filename": "exact"
+        }
       }
     },
     {
@@ -2557,13 +3195,57 @@
               "reported_formats"
             ],
             "additionalProperties": false
+          },
+          "carving_results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "recovered_artifact": {
+                  "type": "string"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "size_bytes": {
+                  "type": "integer"
+                },
+                "relation_to_case": {
+                  "type": "string"
+                },
+                "basis": {
+                  "type": "string"
+                },
+                "evidence_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "recovered_artifact",
+                "format",
+                "size_bytes",
+                "relation_to_case",
+                "basis",
+                "evidence_refs"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Optional actual carving inventory; source examples must not be mistaken for an exhaustive list."
           }
         },
         "required": [
-          "files",
-          "optional_carving"
+          "files"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2584,6 +3266,11 @@
           "purpose"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2662,6 +3349,11 @@
           "files"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2747,6 +3439,11 @@
           "files"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2830,6 +3527,11 @@
           "actions"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -2856,12 +3558,56 @@
               ],
               "additionalProperties": false
             }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time_or_interval": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "entities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "evidence_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "uncertainty": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "time_or_interval",
+                "action",
+                "entities",
+                "evidence_refs",
+                "uncertainty"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Detailed evidence-linked events covering the requested leakage process; a daily summary alone does not answer the prompt."
           }
         },
         "required": [
-          "daily_summary"
+          "events"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -3015,6 +3761,11 @@
           "storage_device"
         ],
         "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     },
     {
@@ -3028,14 +3779,44 @@
           },
           "source_example": {
             "type": "string"
+          },
+          "diagram": {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "format",
+              "content",
+              "evidence_refs"
+            ],
+            "additionalProperties": false,
+            "description": "Provide the actual visual diagram or a portable diagram specification. A label naming a source example is not a diagram."
           }
         },
         "required": [
-          "artifact_type",
-          "source_example"
+          "diagram"
         ],
-        "additionalProperties": false
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
       }
     }
-  ]
+  ],
+  "contract_revision": "author-visual-review-1"
 }

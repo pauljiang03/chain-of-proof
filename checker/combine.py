@@ -1,7 +1,7 @@
 """Reissue the union of certified claims from saved runs, without an answer key.
 
     python -m checker.combine --facts evidence/case_facts.json \
-        --run ui/public/run.json runs/investigator-1/run.json --out runs/combined
+        --run /path/miner/run.json /path/agent/run.json --out runs/dev/combined
 
 Claims are canonicalized, deduplicated and sorted before new certificate IDs are
 assigned. Every claim is checked again against the supplied evidence. Source rows

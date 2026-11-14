@@ -1,169 +1,113 @@
-# Evaluation contract and comparison limits
+# Evaluation procedure
 
-We reuse the NIST images and published answer key. We do not need a new forensic
-dataset to compare systems. We do need a reviewed, versioned encoding of the answers
-and a common scoring contract that is independent of either system's implementation.
-The current scorer is deterministic; LLM grading has been retired.
+Use one public question contract and one private reference for every system.
+The scorer is deterministic. It does not interpret prose with an LLM.
 
-## Current report results
+## Inputs and outputs
 
-The saved combined report states **456 of 613 encoded answer items (74.4%)**.
-It matches every encoded item for **24 of 57 questions (42.1%)**, some items for
-20 questions, and none for 13. These are reference coverage measures, not precision
-or an assertion that every part of 24 original NIST questions has been answered.
+- `benchmark_nist_questions.json`: all 60 public questions and answer structures.
+- `benchmark_nist.json`: expected answers, source bindings, and comparison rules.
+- `runs/current/run.json`: the current saved certificate bundle.
+- `runs/current/verification.json`: independent verification of that bundle.
+- `runs/current/answers.json`: structured answers with field-level support.
+- `runs/current/results.json`: every question's result and comparison details.
+- `runs/current/key-audit.json`: source hashes and exact literal checks.
 
-| Saved output | Encoded answer items stated | Questions with every encoded item matched |
-|---|---:|---:|
-| Original AI investigator alone | 164/613 (26.8%) | 6/57 |
-| Original deterministic miner alone | 430/613 (70.1%) | 24/57 |
-| Combined, corrected certified report | 456/613 (74.4%) | 24/57 |
+The saved bundle combines prior AI and miner claims without using the answer key to select them.
+It was reissued with corrected templates. It uses the saved fact store.
+It is a development snapshot, not a new blind investigation or a controlled comparison.
+New extraction features require a fresh fact build and investigation before their effect can be measured.
 
-The combined output uses the union of the original miner and investigator's claims,
-without looking at the key to choose claims. It adds no new AI trial or extracted facts.
-All 473 unique claims received new certificates and independently reverified.
-The 24 deliberately false probes from the original miner are not part of that union;
-zero rejections in its statistics does not mean zero false positives.
+## Scores
 
-Artifacts: [combined report](../runs/optical-review/combined-report.md),
-[score](../runs/optical-review/combined-results.json),
-[certificate verification and source hashes](../runs/optical-review/combined-verification.json).
-The combined report states 362/517 items in the formerly closed-book portion and
-94/96 in the original open-book portion. It is a development result produced after
-reviewing misses, not a new blind evaluation. The original closed-book extraction
-result remains 367/517 in [the frozen results](results_full.json).
+The primary measure is fully correct questions divided by the complete question count.
+Questions awaiting reference review remain visible as `UNEVALUABLE`.
+Report the complete count and the scorable count together.
+The complete-denominator rate is a confirmed-correct lower bound while reference review remains incomplete.
 
-## What the current reference covers
+The current reference has 60 questions: 46 provisionally scorable and 14 unevaluable.
+A question is fully correct only when all required fields and list entries match.
+Partial answers remain partial. Missing support produces `unknown` or `unanswered`.
+Literal false and null values are distinct from unknown responses.
 
-[reference_full.json](reference_full.json) encodes 613 answer items across Q1–Q57.
-The source key has 60 questions; Q58–Q60 request a summary, timeline and diagram and
-are excluded from this reference. The 613 items are our transcription, not 613
-independent NIST questions. Some rows overlap or repeat the same underlying evidence.
+String, path, timestamp, and list rules belong to the versioned contract.
+Apply the same rules to all submissions.
+Do not alter the reference to make a system's output match.
+A contract mismatch or an additional row is not automatically a forensic false positive.
+Forensic false positives require a separate evidence review of the assertion and its meaning.
 
-The reference has material limits:
+## Evidence and proof
 
-- 68 items have no supported matcher. They remain in the denominator and cannot
-  count as matched; this does not mean Lean can never express them.
-- Positive matchers use the project's record vocabulary. They do not yet constitute
-  an implementation-neutral answer schema.
-- Some attributes appear in the transcribed prose but are not tested: for example
-  some execution counts, sizes, sender/recipient fields and content details.
-- A question is marked complete only under the encoded contract. This does not
-  establish that all attributes requested by the original question were checked.
-- A correct assertion can match even when another submitted assertion contradicts
-  it. Extra assertions are listed as unassessed, not treated as true or false.
-- Internally extracted timestamps can use their recorded uncertainty. The external
-  answer adapter currently uses only the reference tolerance. A fair comparison
-  needs the same predeclared temporal contract for both systems.
+`eval.pipeline` verifies every certificate against the supplied fact store before it invokes our answer adapter.
+A verification failure prevents adaptation and scoring.
+The adapter reads the verified run and public profile only. It does not read expected answers.
+Each answer field identifies its finding, fact, field, hash, and transformation.
 
-Consequently, do not describe current item coverage as unrestricted answer accuracy,
-precision, or a fair head-to-head win over Mulder. Reference transcription and matcher
-design are trusted evaluation work; Lean does not certify their faithfulness to NIST.
+Support marked `certified_core` uses the cited record fields.
+Support marked `bound_provenance` uses metadata bound by the certificate verifier.
+The latter is not an additional Lean theorem about that metadata's forensic meaning.
+The full adapter and its transformations remain reviewed code outside Lean.
 
-## Extending Mulder's approach
+An external system can submit the same answer format without a Lean certificate.
+Its accuracy score does not imply proof certification.
+Matching the key also does not prove that the answer came from evidence.
 
-Mulder publishes a [20-item checklist and reports](https://github.com/calebevans/mulder/tree/main/examples/ndlc-v1.5.2).
-Those items bundle facts and investigative conclusions. They are not simply the
-first 20 NIST questions. Its published full-match and detection rates use that
-checklist, not our 613 items. Our historical LLM regrades are exploratory annotations,
-not benchmark results, and `eval.mulder` now only displays their archive.
+## Reference audit
 
-A common benchmark should extend the checklist method while removing ambiguous
-grading decisions:
-
-1. Freeze a source-linked answer contract with question IDs, all required fields,
-   accepted alternatives, timestamps and tolerances. Audit it against the key before
-   running either system. Preserve the original key and version any corrections.
-2. Use neutral answer types: scalar values, lists/sets, booleans, temporal relations,
-   and explicit conclusions. Distinguish false, unknown and unanswered. Include
-   content identification and exclusions explicitly rather than dropping them.
-3. Define cardinality and contradiction rules. A scalar answer cannot give every
-   possible value and receive full credit. Score missing and incorrect list members
-   separately. Treat evidence support as a separate check from answer equality.
-4. Give both systems identical images, public questions and resource limits. Keep
-   expected values hidden. Require the same output schema; our adapter translates
-   Lean-backed findings, and Mulder's adapter translates its own structured output.
-5. For existing prose-only reports, use audited transcription with source quotations
-   and spans. Do not infer an answer the report did not state. This introduces a
-   human annotation boundary, not an LLM judge.
-6. Report complete-question accuracy and atomic correctness under that contract,
-   unanswered questions, incorrect answers and separately assessed extra claims.
-   Show the original 20-item subset separately for historical comparison.
-7. Publish per-item verdicts, run/model/tool versions, hashes, costs, failures and
-   repeated runs. Use held-out cases to measure generalization after development.
-
-The neutral schema and typed contradiction/extra-answer scoring are now implemented
-in [benchmark.py](benchmark.py). A [draft 60-question reference](benchmark_nist.json)
-retains many attributes the 613-item version omitted; its
-[public questions and answer shapes](benchmark_nist_questions.json) contain no expected
-values. Source bindings are audited by [key_audit.py](key_audit.py).
-This is a new explicit rubric inspired by Mulder's approach, not a reproduction of
-its historical prose judgments. `INCORRECT` means an answer-contract mismatch, not
-Mulder's causal-support false-positive category. Extra list members prevent a full
-match under the declared contract; that does not prove those facts are false.
-
-The new reference is AI-transcribed development work requiring independent review.
-The [source audit](../runs/key-review/reference-source-audit.json) passes all 60
-question-span bindings and 1,001 literal-value bindings; it explicitly does not
-claim semantic correctness. See [reference review notes](BENCHMARK_REFERENCE.md).
-Ambiguous or qualitative questions remain explicitly unevaluable in the full
-question denominator. Source hashes establish traceability, not semantic truth.
-No result on this draft is a final benchmark claim. Mulder has not been run on the
-complete common test in this repository.
+Run the source audit with the local source text and PDF available:
 
 ```sh
-python -m eval.key_audit eval/benchmark_nist.json --out runs/dev/key-audit.json
-python -m eval.benchmark --reference eval/benchmark_nist.json \
-  --answers path/to/typed-answers.json --out runs/dev/benchmark-result.json
+.venv/bin/python -m eval.key_audit eval/benchmark_nist.json \
+  --out runs/dev/key-audit.json
 ```
 
-The typed submission is `{"schema_version":2,"case_id":"...","answers":[
-{"question_id":"Q1","status":"answered","answer":{...}}]}`. The same schema and
-matching rules apply to both systems; `false`, `null`, `unknown` and unanswered are
-distinct. Certificates remain a separate evidence-support measurement.
+This checks file hashes, source spans, exact literals, and declared conversions.
+It does not prove complete transcription, correct field association, or the truth of prose.
+See [BENCHMARK_REFERENCE.md](BENCHMARK_REFERENCE.md) for unresolved questions.
+An author reviewing their own transcription is not independent review.
 
-## Using the implemented scorer
+## External submissions
 
-For an existing trusted checker-produced run:
+A system can emit the requested typed answer block within its report.
+Extract that block without changing its values:
 
 ```sh
-python -m eval.score --facts evidence/case_facts.json \
-  --reference eval/reference_full.json --run runs/dev/combined-reviewed/run.json \
-  --no-gate --out runs/dev/combined-score.json
+.venv/bin/python -m eval.submission \
+  --report /path/report.md --questions eval/benchmark_nist_questions.json \
+  --out runs/dev/external-answers.json
+.venv/bin/python -m eval.benchmark \
+  --reference eval/benchmark_nist.json --answers runs/dev/external-answers.json \
+  --out runs/dev/external-results.json
 ```
 
-For positive structured assertions from any system:
+If no typed block exists, extraction fails. It does not guess answers from prose.
+Any manual transcription needs a published mapping and independent review.
+Do not silently add a separate model that answers missing questions for one system.
 
-```json
-{"answers": [{"kind": "webSearch", "obj": "example search", "aux": "", "utc": "2020-01-02T12:00:00Z", "exhibit": "HOST-1"}]}
-```
+## Controlled comparison
+
+1. Complete reference review and resolve list scope, time semantics, and narrative criteria.
+2. Freeze the public contract, private reference, scorer, code versions, and evidence hashes.
+3. Give both systems identical public acquisition context. Do not supply key-derived identity mappings to one system alone.
+4. Select the same exact model and provider, and declare equal budgets and tool differences.
+5. Run three trials per system with no access to expected answers or previous results.
+6. Retain every trial, including incomplete or failed runs, with logs and resource use.
+7. Score every submission with the same frozen scorer. Publish each score and the range.
+
+The [Mulder package](../comparison/mulder/README.md) is prepared only.
+Execution waits for finalization and the user's instruction.
+
+## False-claim regression
+
+The independent fixture contains 24 known false claims.
+It tests wrong identity joins, kinds, order, and unsupported relations.
+It does not measure general precision or establish zero false positives.
 
 ```sh
-python -m eval.score --reference path/to/reference.json \
-  --answers path/to/answers.json --no-gate --out runs/dev/answer-score.json
+.venv/bin/python -m eval.gate --facts evidence/case_facts.json \
+  --labeled-claims fixtures/nist_false_claims.json \
+  --case-id nist-cfreds-data-leakage --out runs/dev/gate.json
 ```
 
-That adapter cannot score arbitrary prose, negation, images or unsupported conclusions.
-It records incompatible submissions and unassessed extras. It does not grant external
-answers Lean certification. Conversely, `score_run` assumes a trusted checker output;
-merely setting a field to `verified` in JSON is not certificate verification.
-
-Generic cases require an explicit reference. Declare an IANA `time_zone` if matchers
-use local dates. The legacy NIST fallback is scoped to its known reference/evidence;
-other cases do not inherit its questions or false-claim probes. Supply case-specific
-`--labeled-claims`, or `--no-gate`. No probes selected means **not measured**.
-Investigator `--case-profile` contains only public questions/context, not expected answers.
-
-## What zero false positives would require
-
-The fixed gate refused 24/24 known-false claims. This is useful regression evidence,
-not a measured precision of 100% over all possible reports. The retired LLM marker's
-11–13 flags were on Mulder's reports, not ours, and are not a trusted FP count.
-
-Lean proves that a formal claim follows from the cited extracted records under its
-rules. Correct parsers, correctly interpreted artifact semantics and faithful English
-templates remain trust boundaries. A certificate does not prove a heuristic is a
-universal law or certify an unverified narrative. Default reports now exclude the
-AI's free-form conclusions; an explicit optional appendix remains outside Lean.
-
-See [the optical correction](OPTICAL_REVIEW.md) for an actual semantic failure, and
-[misses and required support](MISS_SUPPORT.md) for the remaining extraction/IR gaps.
+For another dataset, declare its case, timezone, questions, expected answers, and support adapter.
+No old NIST answer rows or fallback timezones are used to score an unfamiliar case.
