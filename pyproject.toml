@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "chain-of-proof"
 version = "0.1.0"
@@ -12,3 +16,7 @@ extract = ["dissect>=3.20", "libpff-python>=20231205"]
 # needed only for the API-key backend of the AI investigator (agent/run.py --backend deepagents);
 # deepagents needs Python 3.11 or newer
 agent = ["deepagents>=0.7; python_version >= '3.11'", "langchain-anthropic>=1.7; python_version >= '3.11'"]
+
+[tool.setuptools.packages.find]
+include = ["agent*", "checker*", "eval*", "extractor*", "miner*", "verifier*"]
+namespaces = false

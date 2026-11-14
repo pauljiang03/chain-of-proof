@@ -5,6 +5,7 @@
 __pycache__/
 *.pyc
 .venv/
+*.egg-info/
 
 # Evidence images and derived databases (large; fetch with scripts/fetch_data.sh)
 data/
