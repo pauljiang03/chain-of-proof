@@ -305,9 +305,6 @@ def main(argv=None) -> int:
                 "ended": "backend_error", "is_error": True, "error_type": type(error).__name__}
         print(f"  stopped: backend failed ({meta['error_type']}); see run.json")
     (run_dir / "summary.md").write_text(meta.pop("summary") + "\n")
-    # Regression probes are isolated from findings and never enter the investigator prompt.
-    regression = gate.measure(labeled, open_source(facts_path), profile.case_id,
-                              profile.time_zone, run_dir / "gate-probes") if labeled else None
     data = export.bundle(run_dir, profile.name)
     data["case"].update(backend=args.backend, model=model, case_id=profile.case_id,
                         time_zone=profile.time_zone, profile_source=profile_source,
@@ -317,6 +314,20 @@ def main(argv=None) -> int:
     print(f"\n{meta['tool_calls']} tool calls, {meta['seconds']} s, ended: {meta['ended']}")
     print(f"proposals {data['stats']['proposals']}, certified {data['stats']['verified']}, "
           f"refused {data['stats']['rejected']}, conclusions {len(data['conclusions'])}\n")
+    # Save the investigation before optional regression work can fail. Gate probes
+    # remain separate from findings; a failed gate does not bypass verification.
+    regression, gate_error = None, None
+    if labeled:
+        try:
+            regression = gate.measure(labeled, open_source(facts_path), profile.case_id,
+                                      profile.time_zone, run_dir / "gate-probes")
+        except Exception as error:
+            gate_error = error
+            regression = {"measured": False, "reason": "Gate regression failed",
+                          "error_type": type(error).__name__}
+            data["case"]["gate_error_type"] = type(error).__name__
+            (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+            print(f"  gate failed ({type(error).__name__}); see run.json")
     try:
         pipeline.evaluate(plan, data, run_dir / "answers.json", run_dir / "results.json",
                           regression, facts_path=facts_path,
@@ -325,8 +336,12 @@ def main(argv=None) -> int:
         ap.error(str(error))
     if backend_error is not None and not _expected_backend_error(backend_error):
         raise backend_error
+    if gate_error is not None and not isinstance(
+            gate_error, (OSError, ValueError, RuntimeError, subprocess.SubprocessError)):
+        raise gate_error
     failed_execution = _execution_failed(meta)
-    return 1 if failed_execution or (regression and not regression["all_as_expected"]) else 0
+    return 1 if failed_execution or gate_error is not None or (
+        regression and not regression["all_as_expected"]) else 0
 
 
 if __name__ == "__main__":
