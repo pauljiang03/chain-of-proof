@@ -146,56 +146,84 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
     from agent.tools import Workbench
 
     bench = Workbench(facts, run_dir, f"agent:deepagents:{model}")
+    tool_lock = threading.Lock()
+    stop_work = threading.Event()
+    budget_expired = threading.Event()
+
+    class ToolBudgetExpired(Exception):
+        """Stop queued evidence work without confusing a provider timeout."""
+
+    def call_tool(function, *args):
+        # Cancelling an asyncio task does not stop its worker thread. Check after
+        # acquiring this lock so queued calls cannot begin after cancellation.
+        with tool_lock:
+            if stop_work.is_set():
+                raise ToolBudgetExpired()
+            if time.monotonic() >= deadline:
+                budget_expired.set()
+                stop_work.set()
+                raise ToolBudgetExpired()
+            return function(*args)
 
     @tool
     def forms() -> str:
         """The statement forms you may propose, with their arguments."""
-        return json.dumps(bench.forms(), ensure_ascii=False)
+        return json.dumps(call_tool(bench.forms), ensure_ascii=False)
 
     @tool
     def sql(query: str) -> str:
         """Run one read-only SELECT over the facts table."""
-        return json.dumps(bench.sql(query), ensure_ascii=False)
+        return json.dumps(call_tool(bench.sql, query), ensure_ascii=False)
 
     @tool
     def fact(id: int) -> str:
         """One record in full, with where it came from."""
-        return json.dumps(bench.fact(id), ensure_ascii=False)
+        return json.dumps(call_tool(bench.fact, id), ensure_ascii=False)
 
     @tool
     def check(question: str, claims: list) -> str:
         """Propose claims (a list of claim objects). Each is certified or refused."""
-        return json.dumps([bench.check(question, c) for c in claims], ensure_ascii=False)
+        # Each proof is one synchronous operation; stop between claims instead
+        # of finishing an unbounded batch after the investigation has expired.
+        return json.dumps([call_tool(bench.check, question, c) for c in claims], ensure_ascii=False)
 
     @tool
     def conclude(text: str, finding_ids: list[str]) -> str:
         """Record an uncertified inference citing certified findings from this run."""
-        return json.dumps(bench.conclude(text, finding_ids), ensure_ascii=False)
+        return json.dumps(call_tool(bench.conclude, text, finding_ids), ensure_ascii=False)
 
     agent = _create_api_agent(model=f"anthropic:{model}",
                               tools=[forms, sql, fact, check, conclude])
-    started = time.time()
+    started = time.monotonic()
+    deadline = started + timeout_s
     async def invoke():
         task = asyncio.create_task(agent.ainvoke(
             {"messages": [{"role": "user", "content": prompt}]},
             config={"recursion_limit": 500}))
         try:
-            return await asyncio.wait_for(task, timeout=timeout_s)
+            return await asyncio.wait_for(task, timeout=max(0.0, deadline - time.monotonic()))
+        except ToolBudgetExpired:
+            return None
         except asyncio.TimeoutError:
             if not task.cancelled():
                 raise  # A provider/tool timeout is a failed run, not our budget.
+            budget_expired.set()
             return None
+        finally:
+            # Also stop queued workers when another tool/provider fails. One
+            # already active synchronous proof must finish before asyncio exits.
+            stop_work.set()
 
     state = asyncio.run(invoke())
-    if state is None:
+    if state is None or budget_expired.is_set():
         return {"summary": "Investigation time limit reached. Saved certificates remain available.",
-                "turns": None, "tool_calls": None, "seconds": round(time.time() - started),
+                "turns": None, "tool_calls": None, "seconds": round(time.monotonic() - started),
                 "ended": "time_limit"}
     last = state["messages"][-1].content
     text = last if isinstance(last, str) else "".join(
         b.get("text", "") for b in last if isinstance(b, dict))
     return {"summary": text, "turns": len(state["messages"]), "tool_calls": None,
-            "seconds": round(time.time() - started), "ended": "success"}
+            "seconds": round(time.monotonic() - started), "ended": "success"}
 
 
 def prepare_run_dir(name: str, root: Path = ROOT) -> Path:
