@@ -1,8 +1,18 @@
 # Work split
 
-Four lanes that can run at the same time. Each lane has its own directory, so merges stay
-clean. The lanes meet only at the four contracts below, and all four exist today, so
-nobody has to wait for anyone else to start.
+Four lanes, one owner each, that can run at the same time. Each lane has its own
+directory, so merges stay clean. The lanes meet only at the four contracts below, and
+all four exist today, so nobody has to wait for anyone else to start.
+
+| Lane | Owner | Directory |
+|---|---|---|
+| 1. Data: image → evidence DB | @pauljiang03 | `extractor/` |
+| 2. Lean and the miner | @Taygeta-gl | `lean/`, `checker/` |
+| 3. Agents | @skj04 | `agent/` |
+| 4. UI, eval and demo | @michellejiang2017 | `ui/`, `eval/` |
+
+The split is by lane, not by known skills: swap if someone else is the better fit.
+Lane 2 should go to whoever is most comfortable with Lean.
 
 ## Contracts (change only with everyone's agreement)
 
@@ -16,12 +26,12 @@ nobody has to wait for anyone else to start.
 Adding a fact kind or a set touches three files in one commit: the Lean definition,
 the Python mirror, and (for kinds) `schema.sql`. Say so in the team chat when you do it.
 
-## Lane 1: Data (image → evidence DB)
+## Lane 1: Data (image → evidence DB) — @pauljiang03
 
 **Goal:** `evidence.duckdb` holding real facts from the four NIST images.
 
 - **Have:** schema, download script (`scripts/fetch_data.sh --pc`), sample fixture.
-- **In progress (Paul):** first slice from the real images: USB devices, volume serials,
+- **In progress:** first slice from the real images: USB devices, volume serials,
   LNK targets, file created/modified times.
 - **Open, one file per artifact family under `extractor/`:**
   - browser history and search terms → `webSearch`
@@ -35,7 +45,7 @@ the Python mirror, and (for kinds) `schema.sql`. Say so in the team chat when yo
 - **Done when:** each kind has rows, and three rows per kind have been checked by hand
   against the NIST answer key.
 
-## Lane 2: Lean and the miner
+## Lane 2: Lean and the miner — @Taygeta-gl
 
 **Goal:** every instance of every set found and kernel-checked on the real DB.
 
@@ -52,7 +62,7 @@ the Python mirror, and (for kinds) `schema.sql`. Say so in the team chat when yo
 - **Done when:** `mine` on the real DB writes bricks to `certs/`, all kernel-checked, with
   a count per set.
 
-## Lane 3: Agents
+## Lane 3: Agents — @skj04
 
 **Goal:** an agent that answers case questions using only certified findings.
 
@@ -70,7 +80,7 @@ the Python mirror, and (for kinds) `schema.sql`. Say so in the team chat when yo
 - **Done when:** one command takes a question and produces at least one certificate and
   at least one logged rejection on the real DB.
 
-## Lane 4: UI, eval and demo
+## Lane 4: UI, eval and demo — @michellejiang2017
 
 **Goal:** the two-minute demo and the numbers for the README.
 
