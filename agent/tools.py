@@ -21,6 +21,7 @@ from typing import Dict, List, Optional
 from checker import check as checker
 from checker import claims
 from checker.facts import Fact, open_source
+from agent.audit import AuditLog, audited
 
 ROW_LIMIT = 60
 CELL_LIMIT = 240
@@ -103,6 +104,15 @@ class Workbench:
         self.run_dir = Path(run_dir)
         self.proposer = proposer
         self._db = self._load()
+        self._audit = AuditLog(self.run_dir / "audit.jsonl", self._lock)
+        metadata = getattr(self.source, "metadata", None)
+        if metadata is not None:
+            encoded = json.dumps(metadata, sort_keys=True, indent=2) + "\n"
+            try:
+                with (self.run_dir / "extraction-metadata.json").open("x") as stream:
+                    stream.write(encoded)
+            except FileExistsError:
+                pass
 
     # ---- looking at records -------------------------------------------------------
 
@@ -129,6 +139,7 @@ class Workbench:
         self._steps = steps
         return db
 
+    @audited
     def sql(self, query: str) -> dict:
         """Run one read-only SELECT over the `facts` table."""
         with self._lock:
@@ -150,6 +161,7 @@ class Workbench:
             out["truncated"] = f"more than {ROW_LIMIT} rows; narrow the query"
         return out
 
+    @audited
     def fact(self, fact_id: int) -> dict:
         with self._lock:
             found = self.source.get([fact_id])
@@ -160,6 +172,7 @@ class Workbench:
                     "uncertainty_us": f.res, "obj": self.source.string(f.obj), "obj_id": f.obj,
                     "aux": self.source.string(f.aux), "aux_id": f.aux, "provenance": f.prov}
 
+    @audited
     def forms(self) -> dict:
         return {"how": 'A claim is {"form": [record ids...]}. Join several with '
                        '{"both": [claim, claim, ...]}: every part must hold.',
@@ -176,13 +189,17 @@ class Workbench:
                 return []
             return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
+    @audited
     def check(self, question: str, claim) -> dict:
         """Propose a claim. Returns the kernel's verdict, with the reason if refused."""
         if isinstance(claim, str):
             try:
                 claim = json.loads(claim)
             except json.JSONDecodeError as e:
-                return {"status": "rejected", "reason": f"claim is not valid JSON: {e}"}
+                from checker import needs
+                reason = f"claim is not valid JSON: {e}"
+                return {"status": "rejected", "reason": reason,
+                        "proof_gap": needs.malformed(reason)}
         with self._lock:
             log = self._log()
             key = json.dumps(claim, sort_keys=True)
@@ -193,6 +210,7 @@ class Workbench:
                                    self.run_dir, proposer=self.proposer)
             return self._brief(result)
 
+    @audited
     def conclude(self, text: str, finding_ids) -> dict:
         """Record a conclusion (judgment). It must rest on certified findings of this run."""
         from agent.conclusions import Conclusions
@@ -204,6 +222,8 @@ class Workbench:
             return {"status": "verified", "finding_id": r["finding_id"], "strength": r["strength"],
                     "rules": r["rules"], "sentence": r["english"]}
         out = {"status": "rejected", "finding_id": r["finding_id"], "reason": r.get("reason", "")}
+        if "proof_gap" in r:
+            out["proof_gap"] = r["proof_gap"]
         failing = [b for p in r.get("parts", []) for b in p["bricks"] if b.startswith("FAIL")]
         if failing:
             out["failing_checks"] = [self._why(b) for b in failing]

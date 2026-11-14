@@ -19,23 +19,38 @@ import sys
 from collections import OrderedDict
 from pathlib import Path
 
+from . import citations
 
-def _artifacts(finding: dict, most: int = 2) -> str:
-    seen = OrderedDict()
-    for c in finding.get("cited_facts", []):
-        prov = c.get("prov", {})
-        where = " / ".join(str(prov[k]) for k in ("exhibit", "artifact") if prov.get(k))
-        if where:
-            seen.setdefault(where, None)
-    names = list(seen)
-    more = f" (+{len(names) - most} more)" if len(names) > most else ""
-    return "; ".join(names[:most]) + more
+
+def _proof_gaps(run: dict) -> list:
+    gaps = [(r, r.get("proof_gap")) for r in run.get("rejections", [])
+            if isinstance(r.get("proof_gap"), dict) and r["proof_gap"].get("status") == "diagnostic"]
+    if not gaps:
+        return []
+    lines = ["## Not established / further evidence needed", "",
+             "These are diagnostics for refused proposals, not certified findings. "
+             "Refusal does not establish that a proposed claim is false. Suggested evidence "
+             "does not establish that the claim will become provable.", ""]
+    for rejection, gap in gaps:
+        lines += [f"- **{citations.value(rejection, 'finding_id')}** (diagnostic, not certified): "
+                  f"{citations.value(gap, 'summary')}"]
+        for requirement in gap.get("requirements") or []:
+            if not isinstance(requirement, dict):
+                continue
+            lines += [f"  - **{citations.value(requirement, 'category')}**: {citations.value(requirement, 'reason')}",
+                      f"    Further evidence or action: {citations.value(requirement, 'action')}."]
+            for key, label in (("fact_ids", "Fact IDs"), ("observed", "Observed"), ("required", "Required condition")):
+                if key in requirement:
+                    lines.append(f"    {label}: {citations.text(json.dumps(requirement[key], sort_keys=True, ensure_ascii=False))}.")
+        if gap.get("disclaimer"):
+            lines.append("  " + citations.text(gap["disclaimer"]))
+    return lines + [""]
 
 
 def render(run: dict, include_judgments: bool = False) -> str:
-    L = [f"# Investigation report: {run['case']['name']}", ""]
+    L = [f"# Investigation report: {citations.text(run['case']['name'])}", ""]
     stats = run["stats"]
-    L += [f"{stats['verified']} findings certified by the proof checker, {stats['rejected']} "
+    L += [f"{citations.value(stats, 'verified')} findings certified by the proof checker, {citations.value(stats, 'rejected')} "
           "proposed claims refused.", ""]
     if include_judgments:
         L += [f"{len(run.get('conclusions', []))} unverified judgments are included in a "
@@ -43,16 +58,37 @@ def render(run: dict, include_judgments: bool = False) -> str:
     L += ["", "## Certified findings", "",
           "Each sentence was generated from extracted records and checked by the proof "
           "checker. `strong`: follows from what the artifacts record. `heuristic`: rests on "
-          "a stated rule of thumb.", ""]
+          "a stated rule of thumb. Sentences are reproduced without rewording; markup is "
+          "escaped for display. This renderer does not independently verify certificates.", ""]
     by_q = OrderedDict()
-    for f in run["findings"]:
-        by_q.setdefault(f.get("question") or "(no question given)", []).append(f)
+    for number, f in enumerate(run["findings"], 1):
+        by_q.setdefault(f.get("question") or "(no question given)", []).append((number, f))
     for q, items in by_q.items():
-        L += [f"### {q}", ""]
-        for f in items:
-            L.append(f"- **{f['finding_id']}** ({f['strength']}; rules {', '.join(f['rules'])}) "
-                     f"{f['english']} Evidence: {_artifacts(f)}.")
+        L += [f"### {citations.text(q)}", ""]
+        for number, f in items:
+            links = [f"[fact {citations.value(row, 'id')}](#evidence-f{number}-r{index})"
+                     for index, row in enumerate(f.get("cited_facts", []), 1)]
+            evidence = ", ".join(links) if links else "No copied evidence records were included."
+            L.append(f"- **{citations.value(f, 'finding_id')}** ({citations.value(f, 'strength')}; "
+                     f"rules {citations.text(', '.join(map(str, f.get('rules', []))))}) "
+                     f"{citations.value(f, 'english')} Evidence: {evidence} "
+                     f"[Proof record](#proof-f{number}).")
         L.append("")
+    L += _proof_gaps(run)
+    L += ["## Evidence records", "",
+          "Every copied citation is shown below, scoped to its finding. Repeated fact IDs "
+          "are not merged. Provenance is copied metadata; its presence does not prove the "
+          "parser or its interpretation correct. Source offsets and locations appear only "
+          "when supplied by the record.", ""]
+    conflicts = citations.conflicting_fact_ids(run["findings"])
+    for number, f in enumerate(run["findings"], 1):
+        for index, row in enumerate(f.get("cited_facts", []), 1):
+            L += citations.evidence_record(f, row, number, index, conflicts)
+    L += ["## Proof records", "",
+          "These are the bundle's declared claims and embedded proofs. To verify them, use "
+          "the independent verifier with the original evidence store.", ""]
+    for number, f in enumerate(run["findings"], 1):
+        L += citations.proof_record(f, number)
     if not include_judgments:
         return "\n".join(L) + "\n"
     L += ["## Appendix: unverified investigator conclusions (outside Lean)", "",
@@ -61,8 +97,8 @@ def render(run: dict, include_judgments: bool = False) -> str:
           "The token and consistency checks are limited safeguards, not proofs.", ""]
     for c in run.get("conclusions", []):
         weak = " Rests in part on a heuristic finding." if c.get("rests_on_heuristic") else ""
-        L.append(f"- **{c['conclusion_id']}** (inference, unverified) {c['text']} "
-                 f"[rests on {', '.join(c['finding_ids'])}]{weak}")
+        L.append(f"- **{citations.value(c, 'conclusion_id')}** (inference, unverified) {citations.value(c, 'text')} "
+                 f"(rests on {citations.text(', '.join(map(str, c['finding_ids'])))}){weak}")
     if not run.get("conclusions"):
         L.append("- none recorded")
     return "\n".join(L) + "\n"

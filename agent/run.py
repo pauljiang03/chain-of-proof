@@ -30,6 +30,7 @@ from pathlib import Path
 
 from agent.brief import investigator_brief
 from agent.case import read_question_profile, select_case, with_questions
+from agent import run_manifest
 from checker import export, report
 from checker.facts import open_source
 from eval import gate, pipeline
@@ -319,6 +320,14 @@ def main(argv=None) -> int:
         ap.error(str(exc))
     (run_dir / "case-profile.json").write_text(json.dumps(profile.public_dict(), indent=2) + "\n")
     (run_dir / "prompt.md").write_text(prompt)
+    if questions_path is not None:
+        (run_dir / "questions.json").write_bytes(questions_path.read_bytes())
+    try:
+        manifest = run_manifest.create(run_dir, facts=facts_path, backend=args.backend,
+            model=model, minutes=args.minutes, root=ROOT,
+            questions=run_dir / "questions.json" if questions_path else None)
+    except (ValueError, OSError) as error:
+        ap.error(str(error))
     print(f"investigator: {args.backend} / {model} -> {run_dir.relative_to(ROOT)}")
     started = time.monotonic()
     backend_error = None
@@ -343,7 +352,9 @@ def main(argv=None) -> int:
     data = export.bundle(run_dir, profile.name)
     data["case"].update(backend=args.backend, model=model, case_id=profile.case_id,
                         time_zone=profile.time_zone, profile_source=profile_source,
-                        scoring_requested=plan.measured, **meta)
+                        scoring_requested=plan.measured,
+                        run_manifest="run-manifest.json",
+                        facts_sha256=manifest["inputs"]["facts"]["sha256"], **meta)
     (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     (run_dir / "report.md").write_text(report.render(data))
     print(f"\n{meta['tool_calls']} tool calls, {meta['seconds']} s, ended: {meta['ended']}")

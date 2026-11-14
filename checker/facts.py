@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Iterable, List
@@ -66,6 +67,8 @@ class Fact:
 class FactSource:
     """Read-only access to facts and interned strings."""
 
+    metadata = None
+
     def get(self, ids: Iterable[int]) -> Dict[int, Fact]:
         raise NotImplementedError
 
@@ -90,6 +93,11 @@ class JsonFacts(FactSource):
             if f.id in self._facts:
                 raise ValueError(f"duplicate fact id {f.id}")
             self._facts[f.id] = f
+        meta = data.get("_meta") if isinstance(data.get("_meta"), dict) else {}
+        self.metadata = {"facts": len(self._facts),
+                         "by_kind": dict(Counter(f.kind for f in self._facts.values())),
+                         "unparsed": meta.get("unparsed"),
+                         "scope": "Counts describe this supplied fact store; parser omissions can remain unknown."}
 
     def get(self, ids):
         return {i: self._facts[i] for i in ids if i in self._facts}

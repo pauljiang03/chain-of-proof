@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from . import claims
+from . import claims, needs
 from .facts import Fact, FactSource, open_source
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -134,6 +134,7 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
                     "status": "rejected"}
     if proposer:
         result["proposer"] = proposer       # who proposed it: miner, probe, or an agent
+    claim, found = None, None
     try:
         if not valid_finding_id(finding_id):
             raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")
@@ -175,6 +176,15 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
                 json.dumps(result, indent=2, ensure_ascii=False) + "\n")
     except claims.ClaimError as e:
         result["reason"] = str(e)
+    if result["status"] == "rejected":
+        try:
+            result["proof_gap"] = (needs.malformed(result.get("reason", "invalid finding id"))
+                                   if not valid_finding_id(finding_id) else
+                                   needs.diagnose(claim_json, source, parsed=claim, facts=found,
+                                                  parts=result.get("parts"), reason=result.get("reason", "")))
+        except Exception as error:  # diagnostic failure cannot revise or hide the original refusal
+            result["proof_gap"] = needs.execution(
+                f"Proof-gap diagnostics failed ({type(error).__name__}); the original rejection is retained.")
     result["checked_in_ms"] = round((time.time() - started) * 1000)
     with open(out_dir / "proposals.jsonl", "a") as log:
         log.write(json.dumps(result, ensure_ascii=False) + "\n")
