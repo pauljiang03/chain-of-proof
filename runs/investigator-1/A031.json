@@ -1,0 +1,83 @@
+{
+  "finding_id": "A031",
+  "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?",
+  "claim": {
+    "before": [
+      1451,
+      1455
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The recorded run of ERASER.EXE (2015-03-25 15:13:30 UTC) happened before the recorded run of CCLEANER64.EXE (2015-03-25 15:15:50 UTC): the gap of 139.935 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 1451,
+      "kind": "programRun",
+      "t": 1427296410777005,
+      "res": 1,
+      "obj": 1021,
+      "obj_text": "ERASER.EXE",
+      "aux": 1022,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\ERASER\\ERASER.EXE",
+      "row_sha256": "bd520aca6f9813d93666dbdb434bfbec989fa4093d02d6e3831c39d5d3cde6b9",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ERASER.EXE-CE61944A.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:12:38.875805Z",
+        "prefetch_file_modified": "2015-03-25 15:13:38.811005Z",
+        "prefetch_hash": "CE61944A",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1455,
+      "kind": "programRun",
+      "t": 1427296550711605,
+      "res": 1,
+      "obj": 1028,
+      "obj_text": "CCLEANER64.EXE",
+      "aux": 1029,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE",
+      "row_sha256": "06f452069d07bf7615d47e1c1b56ada887cc54e459ca058ff738b6f54a547dad",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\CCLEANER64.EXE-779BD542.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:58:37.223604Z",
+        "prefetch_file_modified": "2015-03-25 15:15:50.945604Z",
+        "prefetch_hash": "779BD542",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          1451,
+          1455
+        ]
+      },
+      "english": "The recorded run of ERASER.EXE (2015-03-25 15:13:30 UTC) happened before the recorded run of CCLEANER64.EXE (2015-03-25 15:15:50 UTC): the gap of 139.935 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A031.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,74 @@
+{
+  "finding_id": "A105",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "before": [
+      493,
+      378
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "This PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC) happened before the sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC): the gap of 155.369 s exceeds the combined timestamp uncertainty of 1 s.",
+  "cited_facts": [
+    {
+      "id": 493,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 251,
+      "obj_text": "IAMAN $_@",
+      "aux": 253,
+      "aux_text": "B4D85399",
+      "row_sha256": "4978c8dd3582c1fa9b3801754d5c60455cbcb1672f90344755206d50efd47059",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 378,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 217,
+      "obj_text": "Done",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "101580ace6639f7b670bf9e465dd424cd2df5f4b102ad9d09de5de9124386ea4",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          493,
+          378
+        ]
+      },
+      "english": "This PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC) happened before the sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC): the gap of 155.369 s exceeds the combined timestamp uncertainty of 1 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A105.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

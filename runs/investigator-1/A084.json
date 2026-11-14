@@ -1,0 +1,110 @@
+{
+  "finding_id": "A084",
+  "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12639
+        ]
+      },
+      {
+        "fileRecorded": [
+          12640
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-25 14:57:27 UTC).",
+  "cited_facts": [
+    {
+      "id": 12639,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13951,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "faab03726e1a0d88f8b3925e27aaeb46c049e8dfe29402862996d5de4465a4c1",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.800962Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.800962Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.836174Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 879394,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12640,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13957,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Desert.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "0b1e53081066397514370520a3ed419d3f0ec7313b1f1f73aa78e483fdf50610",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.816562Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.816562Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 845941,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12639
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12640
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "A084.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

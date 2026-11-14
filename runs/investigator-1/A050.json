@@ -1,0 +1,427 @@
+{
+  "finding_id": "A050",
+  "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?",
+  "claim": {
+    "both": [
+      {
+        "renamed": [
+          8864
+        ]
+      },
+      {
+        "renamed": [
+          8865
+        ]
+      },
+      {
+        "cloudEvent": [
+          2285
+        ]
+      },
+      {
+        "cloudEvent": [
+          2286
+        ]
+      },
+      {
+        "cloudEvent": [
+          2290
+        ]
+      },
+      {
+        "cloudEvent": [
+          2289
+        ]
+      },
+      {
+        "cloudEvent": [
+          2300
+        ]
+      },
+      {
+        "cloudEvent": [
+          2296
+        ]
+      },
+      {
+        "cloudEvent": [
+          2302
+        ]
+      },
+      {
+        "cloudEvent": [
+          2301
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "C:\\Users\\informant\\Desktop\\S data\\(secret_project)_pricing_decision.xlsx was renamed to C:\\Users\\informant\\Desktop\\S data\\happy_holiday.jpg (2015-03-23 20:30:44 UTC). C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:31:02 UTC). A cloud-client record reads \"google drive: created\" for happy_holiday.jpg (2015-03-23 20:32:35 UTC). A cloud-client record reads \"google drive: created\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:35 UTC). A cloud-client record reads \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC). A cloud-client record reads \"google drive: uploaded\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:37 UTC). A cloud-client record reads \"google drive: synced\" for happy_holiday.jpg (2015-03-23 20:34:35 UTC). A cloud-client record reads \"google drive: synced\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:34:25 UTC). A cloud-client record reads \"google drive: deleted\" for happy_holiday.jpg (2015-03-23 20:42:16 UTC). A cloud-client record reads \"google drive: deleted\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:42:16 UTC).",
+  "cited_facts": [
+    {
+      "id": 8864,
+      "kind": "fileRenamed",
+      "t": 1427142644624013,
+      "res": 1,
+      "obj": 12526,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\(secret_project)_pricing_decision.xlsx",
+      "aux": 12527,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\happy_holiday.jpg",
+      "row_sha256": "32fc55a57f2148c7f5575979f0028a078de6f31e51b8cf8852ef1ce87a80935d",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 58506776",
+        "exhibit": "PC",
+        "file_record": 4174,
+        "file_sequence": 7,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "happy_holiday.jpg",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "new_parent_record": 71147,
+        "old_name": "(secret_project)_pricing_decision.xlsx",
+        "old_name_usn": 58506640,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "parent_record": 71147,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 8865,
+      "kind": "fileRenamed",
+      "t": 1427142662909250,
+      "res": 1,
+      "obj": 12528,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx",
+      "aux": 12529,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3",
+      "row_sha256": "9b19ac127130dd1f4a581867f6b7f5bc9a2c3ffea310d0d212edc6869c4aa748",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 58510424",
+        "exhibit": "PC",
+        "file_record": 4292,
+        "file_sequence": 5,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "do_u_wanna_build_a_snow_man.mp3",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "new_parent_record": 71147,
+        "old_name": "[secret_project]_final_meeting.pptx",
+        "old_name_usn": 58510288,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "parent_record": 71147,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2285,
+      "kind": "cloudFile",
+      "t": 1427142755056000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "e71200e71e417d9445db9ffbe7744836bed6a0fc1d158a3618f0cbe9496d6389",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1344",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent CREATE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2286,
+      "kind": "cloudFile",
+      "t": 1427142755072000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "22e8fc373164680686a60ff2ff2a70a360e323221d0c85e449497ccea16892d9",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1351",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent CREATE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2290,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c614169795bb3d31f87297da492def197420aaabc0defeb4458eb7ba478be7ad",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2289,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c6094953ba357b2711d5d07bab83e31febbf60b24983b96e9c24b9d48c898f21",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2300,
+      "kind": "cloudFile",
+      "t": 1427142875655000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "9fc888173c72bc73aa51501286486ce5145c7e8350d4e4f4c59368c545b4f5ca",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1540",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2296,
+      "kind": "cloudFile",
+      "t": 1427142865884000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "9e4ed0034f2238937b1feb9aa6d9507eb4748dfaf39c0830cc121661222d92b8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1488",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2302,
+      "kind": "cloudFile",
+      "t": 1427143336964000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "2552ebdc3bc2d939ade30579a78701b301e07459c1db049cefeed8c3e890c540",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1602",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2301,
+      "kind": "cloudFile",
+      "t": 1427143336964000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "172a909a0a9d5f8f055aa7bf242d05c85aa8ab1018f7c8b600cb5db92117371a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1600",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "renamed": [
+          8864
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\(secret_project)_pricing_decision.xlsx was renamed to C:\\Users\\informant\\Desktop\\S data\\happy_holiday.jpg (2015-03-23 20:30:44 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          8865
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:31:02 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2285
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: created\" for happy_holiday.jpg (2015-03-23 20:32:35 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2286
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: created\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:35 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2290
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2289
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: uploaded\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:37 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2300
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: synced\" for happy_holiday.jpg (2015-03-23 20:34:35 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2296
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: synced\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:34:25 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2302
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: deleted\" for happy_holiday.jpg (2015-03-23 20:42:16 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "cloudEvent": [
+          2301
+        ]
+      },
+      "english": "A cloud-client record reads \"google drive: deleted\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:42:16 UTC).",
+      "rules": [
+        "R22"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R22",
+    "R25"
+  ],
+  "strength": "strong",
+  "lean_file": "A050.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

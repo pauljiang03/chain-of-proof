@@ -1,0 +1,86 @@
+{
+  "finding_id": "A099",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "before": [
+      375,
+      8981
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip (2015-03-24 13:49:51 UTC): the gap of 1434.9 s exceeds the combined timestamp uncertainty of 1 s.",
+  "cited_facts": [
+    {
+      "id": 375,
+      "kind": "emailSent",
+      "t": 1427203557000000,
+      "res": 1000000,
+      "obj": 214,
+      "obj_text": "Last request",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "e2c83998d84a8725cce0e04ef0d5849c2be50c77766f4ec29e19854a3a7594bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 8981,
+      "kind": "fileRenamed",
+      "t": 1427204991896881,
+      "res": 1,
+      "obj": 12620,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 12621,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "row_sha256": "e23a7e4980221f7a2c138d3ab8d5ee34b6cde61c505f544f7b16fbeaa1ca9c16",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59801816",
+        "exhibit": "PC",
+        "file_record": 48389,
+        "file_sequence": 18,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "winter_whether_advisory.zip",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "new_parent_record": 46256,
+        "old_name": "[secret_project]_detailed_design.pptx",
+        "old_name_usn": 59801680,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "parent_record": 46256,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          375,
+          8981
+        ]
+      },
+      "english": "The sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip (2015-03-24 13:49:51 UTC): the gap of 1434.9 s exceeds the combined timestamp uncertainty of 1 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A099.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

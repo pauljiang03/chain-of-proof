@@ -1,0 +1,355 @@
+{
+  "finding_id": "A034",
+  "question": "4. The web: what was searched for, visited and downloaded?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          310
+        ]
+      },
+      {
+        "searched": [
+          311
+        ]
+      },
+      {
+        "searched": [
+          313
+        ]
+      },
+      {
+        "searched": [
+          314
+        ]
+      },
+      {
+        "searched": [
+          315
+        ]
+      },
+      {
+        "searched": [
+          316
+        ]
+      },
+      {
+        "searched": [
+          317
+        ]
+      },
+      {
+        "searched": [
+          318
+        ]
+      },
+      {
+        "searched": [
+          320
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"DLP DRM\" was made in iexplore (2015-03-23 18:08:31 UTC). A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC). A web search for \"Forensic Email Investigation\" was made in iexplore (2015-03-23 18:10:03 UTC). A web search for \"what is windows system artifacts\" was made in iexplore (2015-03-23 18:10:27 UTC). A web search for \"investigation on windows machine\" was made in iexplore (2015-03-23 18:11:50 UTC). A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC). A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC). A web search for \"cd burning method in windows\" was made in iexplore (2015-03-23 18:13:37 UTC). A web search for \"external device and forensics\" was made in iexplore (2015-03-23 18:14:11 UTC).",
+  "cited_facts": [
+    {
+      "id": 310,
+      "kind": "webSearch",
+      "t": 1427134111817280,
+      "res": 1,
+      "obj": 171,
+      "obj_text": "DLP DRM",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "a5b18b0d5feeb90ba3381badf7fac07f80e870a2f0c383ce90eeb2e7e9d3938d",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 311,
+      "kind": "webSearch",
+      "t": 1427134134101318,
+      "res": 1,
+      "obj": 172,
+      "obj_text": "e-mail investigation",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "bde437a136525dac35c989f029e712a48be7f7be1e1343821b59b0698cb70a60",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 313,
+      "kind": "webSearch",
+      "t": 1427134203820419,
+      "res": 1,
+      "obj": 173,
+      "obj_text": "Forensic Email Investigation",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "ddb0b662a2d633e47f95632a9d0e12b0d925c7520de806cbcefb913124f70e9f",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 314,
+      "kind": "webSearch",
+      "t": 1427134227643461,
+      "res": 1,
+      "obj": 174,
+      "obj_text": "what is windows system artifacts",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "ff35ceec37e750adc1216a2e783207fbf83e5397ff16d70e5542dc90fcbe9b89",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 315,
+      "kind": "webSearch",
+      "t": 1427134310582693,
+      "res": 1,
+      "obj": 175,
+      "obj_text": "investigation on windows machine",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "097ede7d9906bbd1adb1478734f1f3125193681e1f687502d7f0ac9efec8ac41",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 316,
+      "kind": "webSearch",
+      "t": 1427134355567263,
+      "res": 1,
+      "obj": 176,
+      "obj_text": "windows event logs",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "8430c1b069e6a227c9213e60dffc228309b83788658910f6633c86564abe6f71",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 317,
+      "kind": "webSearch",
+      "t": 1427134400892344,
+      "res": 1,
+      "obj": 177,
+      "obj_text": "cd burning method",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "4231bbd6c64420147d8262d3075a7f8698bd77732988a0a33e81a2eab367249e",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 318,
+      "kind": "webSearch",
+      "t": 1427134417494371,
+      "res": 1,
+      "obj": 178,
+      "obj_text": "cd burning method in windows",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "eb7a7d9f7ce26ca3f7042a56fd4f75ac28f174c9af9ba5804302e9266becc282",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 320,
+      "kind": "webSearch",
+      "t": 1427134451977428,
+      "res": 1,
+      "obj": 179,
+      "obj_text": "external device and forensics",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "988bb523dd67a0dd01e520c62a73d62eec4cd84a28d1845cd63a112e75b76b36",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          310
+        ]
+      },
+      "english": "A web search for \"DLP DRM\" was made in iexplore (2015-03-23 18:08:31 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          311
+        ]
+      },
+      "english": "A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          313
+        ]
+      },
+      "english": "A web search for \"Forensic Email Investigation\" was made in iexplore (2015-03-23 18:10:03 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          314
+        ]
+      },
+      "english": "A web search for \"what is windows system artifacts\" was made in iexplore (2015-03-23 18:10:27 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          315
+        ]
+      },
+      "english": "A web search for \"investigation on windows machine\" was made in iexplore (2015-03-23 18:11:50 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          316
+        ]
+      },
+      "english": "A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          317
+        ]
+      },
+      "english": "A web search for \"cd burning method\" was made in iexplore (2015-03-23 18:13:20 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          318
+        ]
+      },
+      "english": "A web search for \"cd burning method in windows\" was made in iexplore (2015-03-23 18:13:37 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          320
+        ]
+      },
+      "english": "A web search for \"external device and forensics\" was made in iexplore (2015-03-23 18:14:11 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A034.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,88 @@
+{
+  "finding_id": "A080",
+  "question": "7. The disc: what is on it, and when was it written?",
+  "claim": {
+    "before": [
+      386,
+      129
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The CD-burn trace (cdrom driver event 133 for \\Device\\CdRom0) (2015-03-24 20:41:21 UTC) happened before the creation of \\de\\winter_whether_advisory.zip on an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space) (2015-03-24 20:54:42 UTC): the gap of 800.791 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 386,
+      "kind": "cdBurn",
+      "t": 1427229681884909,
+      "res": 1,
+      "obj": 220,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 221,
+      "aux_text": "System event log",
+      "row_sha256": "bba4f69e861869c3d1788ca4cc3c2fd40145a275cda625976ec746a8f2d985f4",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1428",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 129,
+      "kind": "fileCreated",
+      "t": 1427230482676152,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "c0f9b2259bb1991d82632bf9d5e1cbe8279867388cc856c5ad6c4ab3f1add81e",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51273 (byte offset 105007104), named by the directory at sector 51241",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:14.201512Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51263,
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 16381123,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 18
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          386,
+          129
+        ]
+      },
+      "english": "The CD-burn trace (cdrom driver event 133 for \\Device\\CdRom0) (2015-03-24 20:41:21 UTC) happened before the creation of \\de\\winter_whether_advisory.zip on an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space) (2015-03-24 20:54:42 UTC): the gap of 800.791 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A080.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

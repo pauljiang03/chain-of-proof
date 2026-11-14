@@ -1,0 +1,88 @@
+{
+  "finding_id": "A088",
+  "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?",
+  "claim": {
+    "before": [
+      10144,
+      1455
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The renaming of C:\\Users\\informant\\Desktop\\temp to C:\\Users\\informant\\Desktop\\t6uk (2015-03-25 15:13:49 UTC) happened before the recorded run of CCLEANER64.EXE (2015-03-25 15:15:50 UTC): the gap of 121.074 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 10144,
+      "kind": "fileRenamed",
+      "t": 1427296429637405,
+      "res": 1,
+      "obj": 13125,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp",
+      "aux": 14020,
+      "aux_text": "C:\\Users\\informant\\Desktop\\t6uk",
+      "row_sha256": "33a09056ca1615270cd589753b209b991b37d0999b38a4829370915202a0be5d",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 68304416",
+        "exhibit": "PC",
+        "file_record": 74402,
+        "file_sequence": 9,
+        "folder_names_from": "file table",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "t6uk",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop",
+        "new_parent_record": 529,
+        "old_name": "temp",
+        "old_name_usn": 68304344,
+        "parent_folder": "C:\\Users\\informant\\Desktop",
+        "parent_record": 529,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1455,
+      "kind": "programRun",
+      "t": 1427296550711605,
+      "res": 1,
+      "obj": 1028,
+      "obj_text": "CCLEANER64.EXE",
+      "aux": 1029,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE",
+      "row_sha256": "06f452069d07bf7615d47e1c1b56ada887cc54e459ca058ff738b6f54a547dad",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\CCLEANER64.EXE-779BD542.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:58:37.223604Z",
+        "prefetch_file_modified": "2015-03-25 15:15:50.945604Z",
+        "prefetch_hash": "779BD542",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          10144,
+          1455
+        ]
+      },
+      "english": "The renaming of C:\\Users\\informant\\Desktop\\temp to C:\\Users\\informant\\Desktop\\t6uk (2015-03-25 15:13:49 UTC) happened before the recorded run of CCLEANER64.EXE (2015-03-25 15:15:50 UTC): the gap of 121.074 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A088.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

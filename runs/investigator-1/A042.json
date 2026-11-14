@@ -1,0 +1,183 @@
+{
+  "finding_id": "A042",
+  "question": "4. The web: what was searched for, visited and downloaded?",
+  "claim": {
+    "both": [
+      {
+        "visited": [
+          1922
+        ]
+      },
+      {
+        "visited": [
+          1954
+        ]
+      },
+      {
+        "visited": [
+          1965
+        ]
+      },
+      {
+        "visited": [
+          2085
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The Chrome history records a visit to https://www.apple.com/icloud/ (2015-03-23 19:55:18 UTC). The Internet Explorer history records a visit to https://accounts.google.com/ServiceLoginAuth (2015-03-23 20:04:53 UTC). The Internet Explorer history records a visit to https://accounts.google.com/o/oauth2/postmessageRelay?parent=https%3A%2F%2Fdrive.google.com (2015-03-23 20:34:29 UTC). The Internet Explorer history records a visit to http://www.wired.com/2015/03/stealing-data-computers-using-heat/ (2015-03-23 20:56:32 UTC).",
+  "cited_facts": [
+    {
+      "id": 1922,
+      "kind": "webVisit",
+      "t": 1427140518593045,
+      "res": 1,
+      "obj": 1246,
+      "obj_text": "https://www.apple.com/icloud/",
+      "aux": 881,
+      "aux_text": "Chrome",
+      "row_sha256": "4b3e9cb7f8298a2627d2e2070a3595d7dba3dd02e9043cf92201643ec04d1f41",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History Provider Cache entry for history id 80",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "visit time kept in Chrome's cache of its history",
+        "title": "Apple - iCloud - Everything you love, everywhere you go.",
+        "tool": "dissect.target 3.25.1",
+        "transition": 1610612736
+      }
+    },
+    {
+      "id": 1954,
+      "kind": "webVisit",
+      "t": 1427141093392629,
+      "res": 1,
+      "obj": 1262,
+      "obj_text": "https://accounts.google.com/ServiceLoginAuth",
+      "aux": 1095,
+      "aux_text": "Internet Explorer",
+      "row_sha256": "3bdb39fe66a6d5491e8bdc47fc8922a4094595fff10631b8c64cc8996a12f4c5",
+      "prov": {
+        "access_count": 1,
+        "accessed_time_utc": 1427141093408229,
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_16 (MSHist012015032320150324) EntryId 35",
+        "container": "MSHist012015032320150324",
+        "container_folder": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\History.IE5\\MSHist012015032320150324\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "period": "2015032320150324",
+        "recorded_user": "informant",
+        "time_meaning": "ModifiedTime of the daily history entry: last visit in that period, stored as local time",
+        "time_zone": "local time, converted from America/New_York (the zone the PC's registry names)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1965,
+      "kind": "webVisit",
+      "t": 1427142869099416,
+      "res": 1,
+      "obj": 1267,
+      "obj_text": "https://accounts.google.com/o/oauth2/postmessageRelay?parent=https%3A%2F%2Fdrive.google.com",
+      "aux": 1095,
+      "aux_text": "Internet Explorer",
+      "row_sha256": "37a67a26a156355aa3424c08428922b421be84d30ed264b736d50924ee448eff",
+      "prov": {
+        "access_count": 2,
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_2 (History) EntryId 44",
+        "container": "History",
+        "container_folder": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\History.IE5\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "recorded_user": "informant",
+        "time_meaning": "AccessedTime of the history entry (last visit, UTC)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2085,
+      "kind": "webVisit",
+      "t": 1427144192855777,
+      "res": 1,
+      "obj": 1333,
+      "obj_text": "http://www.wired.com/2015/03/stealing-data-computers-using-heat/",
+      "aux": 1095,
+      "aux_text": "Internet Explorer",
+      "row_sha256": "03d50de5c13125f0812bbc4e5d042a7f450369bf2ab0b636d37e0467a86b79e4",
+      "prov": {
+        "access_count": 1,
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_6 (History) EntryId 153",
+        "container": "History",
+        "container_folder": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\History\\Low\\History.IE5\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "recorded_user": "informant",
+        "time_meaning": "AccessedTime of the history entry (last visit, UTC)",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "visited": [
+          1922
+        ]
+      },
+      "english": "The Chrome history records a visit to https://www.apple.com/icloud/ (2015-03-23 19:55:18 UTC).",
+      "rules": [
+        "R19"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "visited": [
+          1954
+        ]
+      },
+      "english": "The Internet Explorer history records a visit to https://accounts.google.com/ServiceLoginAuth (2015-03-23 20:04:53 UTC).",
+      "rules": [
+        "R19"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "visited": [
+          1965
+        ]
+      },
+      "english": "The Internet Explorer history records a visit to https://accounts.google.com/o/oauth2/postmessageRelay?parent=https%3A%2F%2Fdrive.google.com (2015-03-23 20:34:29 UTC).",
+      "rules": [
+        "R19"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "visited": [
+          2085
+        ]
+      },
+      "english": "The Internet Explorer history records a visit to http://www.wired.com/2015/03/stealing-data-computers-using-heat/ (2015-03-23 20:56:32 UTC).",
+      "rules": [
+        "R19"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R19"
+  ],
+  "strength": "strong",
+  "lean_file": "A042.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

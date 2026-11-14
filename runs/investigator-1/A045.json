@@ -1,0 +1,78 @@
+{
+  "finding_id": "A045",
+  "question": "4. The web: what was searched for, visited and downloaded?",
+  "claim": {
+    "before": [
+      367,
+      2269
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"ccleaner\" (2015-03-25 14:47:51 UTC) happened before the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:22 UTC): the gap of 30.9256 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 367,
+      "kind": "webSearch",
+      "t": 1427294871248203,
+      "res": 1,
+      "obj": 204,
+      "obj_text": "ccleaner",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "4a0c08fb4951224c97a72ae027a3d6a6926aa7ba760c1a1d9a0ef253cef026ae",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 2269,
+      "kind": "fileDownloaded",
+      "t": 1427294902173805,
+      "res": 1,
+      "obj": 965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+      "aux": 1419,
+      "aux_text": "http://download.piriform.com/ccsetup504.exe",
+      "row_sha256": "75d9100272d6dd50701f79162ee60aa4f88e473bac81099842203fac9c944658",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 2",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{FBD7C447-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://www.piriform.com/ccleaner/download/standard",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\I9XNJ6FX\\ccsetup504[1].exe",
+        "time_meaning": "creation time inside the version-1 GUID that names the download record (when Internet Explorer created the record)",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          367,
+          2269
+        ]
+      },
+      "english": "The web search \"ccleaner\" (2015-03-25 14:47:51 UTC) happened before the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:22 UTC): the gap of 30.9256 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A045.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

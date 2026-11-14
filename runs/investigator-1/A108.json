@@ -1,0 +1,836 @@
+{
+  "finding_id": "A108",
+  "question": "5. Which cloud services did a cloud client record file events for?",
+  "claim": {
+    "exactlyDistinct": [
+      "cloudFile",
+      "aux",
+      6
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The 37 cloud-client records in the evidence name exactly 6 different service and events: google drive: created; google drive: deleted; google drive: downloaded; google drive: modified; google drive: synced; google drive: uploaded. This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+  "cited_facts": [
+    {
+      "id": 2272,
+      "kind": "cloudFile",
+      "t": 1422563714000000,
+      "res": 1000000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "15f48559d5f9ae278a6fd4dd4787703d50707b58066b7a1b049f4fcc90b7efe6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1446",
+        "doc_id": "0Bz0ye6gXtiZaakx6d3R3c0JmM1U",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'modified' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2273,
+      "kind": "cloudFile",
+      "t": 1422563714530000,
+      "res": 10000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "f5c852c7c3cc768893ec558caab100861b188021d5d1452498eb83dd8f8a3b50",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1406",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "md5": "0c77d6a2704155dbfdf29817769b7478",
+        "size": 440517,
+        "time_meaning": "last-modified time of the file itself, as the client stored it for its local entry",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2274,
+      "kind": "cloudFile",
+      "t": 1422636560000000,
+      "res": 1000000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "7686b12d993f14c33c9821f5b5026670d75d1d8c98a1b01bd787c7249760ff9b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1446",
+        "doc_id": "0Bz0ye6gXtiZaVl8yVU5mWHlGbWc",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'modified' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2275,
+      "kind": "cloudFile",
+      "t": 1422636560550000,
+      "res": 10000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "a9ecc080ac1cfd376b4acd7a896cd5c2b158b8f7bdfdd37473834b705968a093",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1413",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "md5": "2c4553f99533d85adb104b3a5c38521a",
+        "size": 6844294,
+        "time_meaning": "last-modified time of the file itself, as the client stored it for its local entry",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2276,
+      "kind": "cloudFile",
+      "t": 1424722168000000,
+      "res": 1000000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "2a9c26a696a30033915b9e792d952217ff3f64a8bcae4029db4329b1742ee816",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 333",
+        "doc_id": "0Bz0ye6gXtiZac3RhcnRlcl9maWxl",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'created' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2277,
+      "kind": "cloudFile",
+      "t": 1424722168000000,
+      "res": 1000000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "215fe1d29925984aa11ba5c3124740161aef43872d8e515ed023c71ddf1629a2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 333",
+        "doc_id": "0Bz0ye6gXtiZac3RhcnRlcl9maWxl",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'modified' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2278,
+      "kind": "cloudFile",
+      "t": 1424722168000000,
+      "res": 1000000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "45694c4ee126877c813d1a27b4565487b16ec90a466efe22253265ddffeddf37",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 485",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "md5": "2f215372c903f401e9e101d1d531e5dd",
+        "size": 3017667,
+        "time_meaning": "last-modified time of the file itself, as the client stored it for its local entry",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2279,
+      "kind": "cloudFile",
+      "t": 1427141134013000,
+      "res": 1000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1427,
+      "aux_text": "google drive: downloaded",
+      "row_sha256": "22837ade029bca4479da1795ee81bc5191d0f671cf20cbc2480673fd286cb17e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 356",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2280,
+      "kind": "cloudFile",
+      "t": 1427141137746000,
+      "res": 1000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1427,
+      "aux_text": "google drive: downloaded",
+      "row_sha256": "8eb60f2ab24f7303a7dab9cd92485a9dcf912aecea935d920aeacdf14482fbc1",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 489",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CREATE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2281,
+      "kind": "cloudFile",
+      "t": 1427141165240000,
+      "res": 10000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "c5149915b96e909c9f3f7117915adfa2dfabc868a3a5463f4490285d6e39cdff",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 535",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\How to get started with Drive",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2282,
+      "kind": "cloudFile",
+      "t": 1427141167426000,
+      "res": 1000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "a169d66610f3b046ad5b575dfb4083960dfab74643500ec38b6692ee84ad8bee",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 555",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\How to get started with Drive",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2283,
+      "kind": "cloudFile",
+      "t": 1427141168000000,
+      "res": 1000000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "93065ad8f43798ee48816c836e9f1a9021ec1874069007ccb304958e4e542e25",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 573",
+        "doc_id": "0Bz0ye6gXtiZac3RhcnRlcl9maWxl",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "server modification time of the cloud-side deletion; the file name is the one this log gives for the document id",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2284,
+      "kind": "cloudFile",
+      "t": 1427141168456000,
+      "res": 1000,
+      "obj": 1425,
+      "obj_text": "How to get started with Drive",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "5c4df9819aaecf6ac9e3c11799bc76dd15ea38ecdabb176ff47f2cabb9beb58d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 562",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\How to get started with Drive",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2285,
+      "kind": "cloudFile",
+      "t": 1427142755056000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "e71200e71e417d9445db9ffbe7744836bed6a0fc1d158a3618f0cbe9496d6389",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1344",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent CREATE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2286,
+      "kind": "cloudFile",
+      "t": 1427142755072000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "22e8fc373164680686a60ff2ff2a70a360e323221d0c85e449497ccea16892d9",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1351",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent CREATE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2287,
+      "kind": "cloudFile",
+      "t": 1427142755072000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "a7b7db4243536290367f7857dbaeba5e86c9c38225ab1661c2293a114da4d61c",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1354",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent MODIFY",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2288,
+      "kind": "cloudFile",
+      "t": 1427142755072000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "65b52fd831b51de3cbf9066888a6fb48dcccef7fe40c523b2440995e9f5a4319",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1347",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent MODIFY",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2289,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c6094953ba357b2711d5d07bab83e31febbf60b24983b96e9c24b9d48c898f21",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2290,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c614169795bb3d31f87297da492def197420aaabc0defeb4458eb7ba478be7ad",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2291,
+      "kind": "cloudFile",
+      "t": 1427142762000000,
+      "res": 1000000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "7fcef3e32bc2a6c9386bf973368838919ff2a3ba88636bb3092d7336ce8fadcf",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1446",
+        "doc_id": "0Bz0ye6gXtiZaakx6d3R3c0JmM1U",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'created' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2292,
+      "kind": "cloudFile",
+      "t": 1427142765000000,
+      "res": 1000000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "c88feb1cf594679fa59d18143781d23e5b114cc60aa23bb1e863eeb72e0758af",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1446",
+        "doc_id": "0Bz0ye6gXtiZaVl8yVU5mWHlGbWc",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'created' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2293,
+      "kind": "cloudFile",
+      "t": 1427142765415000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "b46fac9a5a79e85f986ea6d239f1126c4d38a771d18baa78a391d83f32eb6906",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1417",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2294,
+      "kind": "cloudFile",
+      "t": 1427142765415000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c8fc210a17da0f64b16b15de195cf96d054253a76f75a4cfb5391bc00d5cef02",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1417",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2295,
+      "kind": "cloudFile",
+      "t": 1427142854000000,
+      "res": 1000000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "609ac77c0dee98b42d4c3a625389d207ccfe2f86083f58e010d9e5a6835d804b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1481",
+        "doc_id": "0Bz0ye6gXtiZaVl8yVU5mWHlGbWc",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'modified' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2296,
+      "kind": "cloudFile",
+      "t": 1427142865884000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "9e4ed0034f2238937b1feb9aa6d9507eb4748dfaf39c0830cc121661222d92b8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1488",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2297,
+      "kind": "cloudFile",
+      "t": 1427142865884000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "a6164cdb7cd56077526d7757a937c14272d7b165382349f70676dbcbaa5be644",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1490",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2298,
+      "kind": "cloudFile",
+      "t": 1427142870000000,
+      "res": 1000000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1423,
+      "aux_text": "google drive: modified",
+      "row_sha256": "e9ca0046d4131fa5ba9f3c8ef9f5743d2aad075417046b66a3643c1a4c8d7977",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1531",
+        "doc_id": "0Bz0ye6gXtiZaakx6d3R3c0JmM1U",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "'modified' time of the cloud entry, as the server reported it",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2299,
+      "kind": "cloudFile",
+      "t": 1427142875655000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "0695243d9095329bb516123713a01bfa0d3b46abdee95ed84b9adbeee815f86a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1538",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2300,
+      "kind": "cloudFile",
+      "t": 1427142875655000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1430,
+      "aux_text": "google drive: synced",
+      "row_sha256": "9fc888173c72bc73aa51501286486ce5145c7e8350d4e4f4c59368c545b4f5ca",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1540",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "log_event": "Direction.DOWNLOAD, Action.CHANGE_ACL",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2301,
+      "kind": "cloudFile",
+      "t": 1427143336964000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "172a909a0a9d5f8f055aa7bf242d05c85aa8ab1018f7c8b600cb5db92117371a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1600",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2302,
+      "kind": "cloudFile",
+      "t": 1427143336964000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "2552ebdc3bc2d939ade30579a78701b301e07459c1db049cefeed8c3e890c540",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1602",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2303,
+      "kind": "cloudFile",
+      "t": 1427143339000000,
+      "res": 1000000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "98b63ccbfc726c9e029040c968c01df5414d3e708b87c4263f702e0421d5872e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1651",
+        "doc_id": "0Bz0ye6gXtiZaakx6d3R3c0JmM1U",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "server modification time of the cloud-side deletion; the file name is the one this log gives for the document id",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2304,
+      "kind": "cloudFile",
+      "t": 1427143339369000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "244004b1f583b3c14c9447e6d7f65ba10a8c76ecb894f0082e4948e6a146f868",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1623",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2305,
+      "kind": "cloudFile",
+      "t": 1427143339385000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "358ff7eb0de6a0fddc174ff98b04985209363b86228509cf4fe986d4617ca23d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1626",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2306,
+      "kind": "cloudFile",
+      "t": 1427143340072000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "3eb71b6ca2188dc595321e67ba8a43c1c69734f59246734392bf45d3a9c11a2a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1633",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2307,
+      "kind": "cloudFile",
+      "t": 1427143342000000,
+      "res": 1000000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "a326e4f303efa1442ae84ae0eb53dda8752c27b7de005b7e3d9a954581c179a7",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1651",
+        "doc_id": "0Bz0ye6gXtiZaVl8yVU5mWHlGbWc",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "server modification time of the cloud-side deletion; the file name is the one this log gives for the document id",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2308,
+      "kind": "cloudFile",
+      "t": 1427143342709000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "065420aa33c863f025e6168b4beb41b148c17b8ec314a207553dde41d2db1304",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1640",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "Direction.UPLOAD, Action.DELETE",
+        "time_meaning": "sync worker completed this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "exactlyDistinct": [
+          "cloudFile",
+          "aux",
+          6
+        ]
+      },
+      "english": "The 37 cloud-client records in the evidence name exactly 6 different service and events: google drive: created; google drive: deleted; google drive: downloaded; google drive: modified; google drive: synced; google drive: uploaded. This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+      "rules": [
+        "C1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "C1"
+  ],
+  "strength": "strong",
+  "lean_file": "A108.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

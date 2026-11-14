@@ -1,0 +1,113 @@
+{
+  "finding_id": "A018",
+  "question": "2. External storage: which devices were attached, when, and what does each hold now?",
+  "claim": {
+    "tagged": [
+      498,
+      "obj",
+      473,
+      228
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "disc RM#3 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 498,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "de47239079c25271ac157bd70285064f395c242d1ea2c57556d6dff7e955f45d",
+      "prov": {
+        "allocation_tables_at_sectors": [
+          319,
+          51231,
+          51263,
+          51295,
+          51327,
+          51359,
+          51391,
+          52479,
+          52511
+        ],
+        "artifact": "UDF file set descriptor at sector 52487 (byte offset 107493376)",
+        "exhibit": "RM#3",
+        "file_set_recorded_utc": "2015-03-24T20:53:17.880500Z",
+        "filesystem": "udf",
+        "identical_descriptor_copies_at_sectors": [
+          289,
+          36532,
+          51208,
+          51239,
+          51271,
+          51303,
+          51335,
+          51367,
+          52465,
+          52487
+        ],
+        "image": "rm3.E01",
+        "offset": 107493376,
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "partition_start_sector": 288,
+        "referenced": "by an allocation table",
+        "sectors_in_image": 52513,
+        "sectors_the_imager_could_not_read": 16,
+        "serial_method": "four byte-wise sums over the 512-byte file set descriptor, as the Windows UDF driver computes it",
+        "session": 1,
+        "session_source": "E01 session section (1 entry)",
+        "states_of_the_volume": 9,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "track": 1,
+        "udf_revision": "2.01",
+        "volume_label": "IAMAN CD",
+        "volume_set": "10351158 UDF Volume Set"
+      }
+    },
+    {
+      "id": 473,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 228,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "4f187d9f1f72bcbece8e9fa97c78e0259b7229389fb15d330eb13fbb1ac57093",
+      "prov": {
+        "rule": "device serial is not on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "tagged": [
+          498,
+          "obj",
+          473,
+          228
+        ]
+      },
+      "english": "disc RM#3 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A018.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

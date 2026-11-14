@@ -1,0 +1,217 @@
+{
+  "finding_id": "A074",
+  "question": "7. The disc: what is on it, and when was it written?",
+  "claim": {
+    "both": [
+      {
+        "copiedHere": [
+          161,
+          175
+        ]
+      },
+      {
+        "copiedHere": [
+          162,
+          176
+        ]
+      },
+      {
+        "copiedHere": [
+          163,
+          177
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Koala.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4. \\Penguins.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4. \\Tulips.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:03 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
+  "cited_facts": [
+    {
+      "id": 161,
+      "kind": "fileCreated",
+      "t": 1427230620985995,
+      "res": 1,
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "c2f5974b785286fd4c8faeb15e4655bb4e3e25282fbe420bbc6e9e9ce3266739",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52467 (byte offset 107452416), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 780831,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 38
+      }
+    },
+    {
+      "id": 175,
+      "kind": "fileModified",
+      "t": 1247549551658939,
+      "res": 1,
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "a24a408a9a028b5d75e9eebe264ed8e5939d4757555f0bbf29d4f9713bd7ee78",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52467 (byte offset 107452416), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 780831,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 38
+      }
+    },
+    {
+      "id": 162,
+      "kind": "fileCreated",
+      "t": 1427230620985995,
+      "res": 1,
+      "obj": 41,
+      "obj_text": "\\Penguins.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "d3318e5d5eebaae156071d2bd1c5a9b55f88d232c2cd1e73a44f09f9289d8460",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52468 (byte offset 107454464), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 777835,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 39
+      }
+    },
+    {
+      "id": 176,
+      "kind": "fileModified",
+      "t": 1247549551674540,
+      "res": 1,
+      "obj": 41,
+      "obj_text": "\\Penguins.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "a35ffc1faa106475163b621af84a5ea1d3e2650baba32a87e5019b7f1de45831",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52468 (byte offset 107454464), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 777835,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 39
+      }
+    },
+    {
+      "id": 163,
+      "kind": "fileCreated",
+      "t": 1427230623029598,
+      "res": 1,
+      "obj": 43,
+      "obj_text": "\\Tulips.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "973037d47f3bb7185f99bf591d0c241177a8caed7d0ea75ccfdae8f4430b0122",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52469 (byte offset 107456512), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 620888,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 40
+      }
+    },
+    {
+      "id": 177,
+      "kind": "fileModified",
+      "t": 1247549551674540,
+      "res": 1,
+      "obj": 43,
+      "obj_text": "\\Tulips.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "a6b51453669e80213b19a0aa61266bc70e918bd0fab240745364fff75c8dceeb",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52469 (byte offset 107456512), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 620888,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 40
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "copiedHere": [
+          161,
+          175
+        ]
+      },
+      "english": "\\Koala.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          162,
+          176
+        ]
+      },
+      "english": "\\Penguins.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          163,
+          177
+        ]
+      },
+      "english": "\\Tulips.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:03 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R4"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A074.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

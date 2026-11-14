@@ -1,0 +1,116 @@
+{
+  "finding_id": "A094",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "both": [
+      {
+        "renamed": [
+          8130
+        ]
+      },
+      {
+        "renamed": [
+          8134
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "C:\\Users\\informant\\Desktop\\New folder was renamed to C:\\Users\\informant\\Desktop\\S data (2015-03-23 18:39:03 UTC). C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\landscape.png (2015-03-23 18:41:40 UTC).",
+  "cited_facts": [
+    {
+      "id": 8130,
+      "kind": "fileRenamed",
+      "t": 1427135943459437,
+      "res": 1,
+      "obj": 12119,
+      "obj_text": "C:\\Users\\informant\\Desktop\\New folder",
+      "aux": 12120,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data",
+      "row_sha256": "a6b2771d91d1aa47ef463ec45666626917ef85af762e461d03346a5b29f8d076",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 56293672",
+        "exhibit": "PC",
+        "file_record": 71147,
+        "file_sequence": 6,
+        "folder_names_from": "file table",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "S data",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop",
+        "new_parent_record": 529,
+        "old_name": "New folder",
+        "old_name_usn": 56293592,
+        "parent_folder": "C:\\Users\\informant\\Desktop",
+        "parent_record": 529,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 8134,
+      "kind": "fileRenamed",
+      "t": 1427136100269314,
+      "res": 1,
+      "obj": 12121,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx",
+      "aux": 12122,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\landscape.png",
+      "row_sha256": "c7a17971f911e4d0ad5e4e7dbd44cc59eccaab3a3da876b54c411bff07ccd905",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 56306328",
+        "exhibit": "PC",
+        "file_record": 71150,
+        "file_sequence": 4,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "landscape.png",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "new_parent_record": 71147,
+        "old_name": "[secret_project]_detailed_proposal.docx",
+        "old_name_usn": 56306184,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "parent_record": 71147,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "renamed": [
+          8130
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\New folder was renamed to C:\\Users\\informant\\Desktop\\S data (2015-03-23 18:39:03 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          8134
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\landscape.png (2015-03-23 18:41:40 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R25"
+  ],
+  "strength": "strong",
+  "lean_file": "A094.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

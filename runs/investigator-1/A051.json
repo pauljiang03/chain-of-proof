@@ -1,0 +1,85 @@
+{
+  "finding_id": "A051",
+  "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?",
+  "claim": {
+    "before": [
+      8865,
+      2286
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The renaming of C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx to C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:31:02 UTC) happened before the cloud record \"google drive: created\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:35 UTC): the gap of 92.1628 s exceeds the combined timestamp uncertainty of 1.001 ms.",
+  "cited_facts": [
+    {
+      "id": 8865,
+      "kind": "fileRenamed",
+      "t": 1427142662909250,
+      "res": 1,
+      "obj": 12528,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx",
+      "aux": 12529,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3",
+      "row_sha256": "9b19ac127130dd1f4a581867f6b7f5bc9a2c3ffea310d0d212edc6869c4aa748",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 58510424",
+        "exhibit": "PC",
+        "file_record": 4292,
+        "file_sequence": 5,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "do_u_wanna_build_a_snow_man.mp3",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "new_parent_record": 71147,
+        "old_name": "[secret_project]_final_meeting.pptx",
+        "old_name_usn": 58510288,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "parent_record": 71147,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2286,
+      "kind": "cloudFile",
+      "t": 1427142755072000,
+      "res": 1000,
+      "obj": 1424,
+      "obj_text": "do_u_wanna_build_a_snow_man.mp3",
+      "aux": 1426,
+      "aux_text": "google drive: created",
+      "row_sha256": "22e8fc373164680686a60ff2ff2a70a360e323221d0c85e449497ccea16892d9",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1351",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\do_u_wanna_build_a_snow_man.mp3",
+        "log_event": "RawEvent CREATE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          8865,
+          2286
+        ]
+      },
+      "english": "The renaming of C:\\Users\\informant\\Desktop\\S data\\[secret_project]_final_meeting.pptx to C:\\Users\\informant\\Desktop\\S data\\do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:31:02 UTC) happened before the cloud record \"google drive: created\" for do_u_wanna_build_a_snow_man.mp3 (2015-03-23 20:32:35 UTC): the gap of 92.1628 s exceeds the combined timestamp uncertainty of 1.001 ms.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A051.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

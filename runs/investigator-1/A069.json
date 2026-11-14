@@ -1,0 +1,89 @@
+{
+  "finding_id": "A069",
+  "question": "6. Files: what was deleted on the PC, and what else was recovered from RM#2's unallocated space?",
+  "claim": {
+    "deletedAfter": [
+      269,
+      9453
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd was deleted (2015-03-24 19:51:47 UTC) after the renaming of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pricing decision to C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd (2015-03-24 19:46:38 UTC).",
+  "cited_facts": [
+    {
+      "id": 269,
+      "kind": "fileDeleted",
+      "t": 1427226707117000,
+      "res": 1,
+      "obj": 144,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "62193059ab154ff0128739eb520bf32e253bc961fac5a5d77e9657b287dcbcd4",
+      "prov": {
+        "artifact": "Recycle Bin index $I55Z163, file table record 74311",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 21887309,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 9453,
+      "kind": "fileRenamed",
+      "t": 1427226398814509,
+      "res": 1,
+      "obj": 13109,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pricing decision",
+      "aux": 13110,
+      "aux_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+      "row_sha256": "5e3a656230f8e91ff6d9d04543c8c2920bd09969640c9f8d3d3777ff0fde22a6",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 64360448",
+        "exhibit": "PC",
+        "file_record": 25354,
+        "file_sequence": 5,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "pd",
+        "new_parent_folder": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+        "new_parent_record": 21921,
+        "old_name": "pricing decision",
+        "old_name_usn": 64360336,
+        "parent_folder": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn",
+        "parent_record": 21921,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "deletedAfter": [
+          269,
+          9453
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd was deleted (2015-03-24 19:51:47 UTC) after the renaming of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pricing decision to C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd (2015-03-24 19:46:38 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "A069.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

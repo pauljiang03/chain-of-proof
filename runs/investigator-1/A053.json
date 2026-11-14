@@ -1,0 +1,78 @@
+{
+  "finding_id": "A053",
+  "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?",
+  "claim": {
+    "before": [
+      2290,
+      374
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The cloud record \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC) happened before the sending of the e-mail \"RE: It's me\" from spy to iaman (2015-03-23 20:41:19 UTC): the gap of 521.448 s exceeds the combined timestamp uncertainty of 1.001 s.",
+  "cited_facts": [
+    {
+      "id": 2290,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c614169795bb3d31f87297da492def197420aaabc0defeb4458eb7ba478be7ad",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 374,
+      "kind": "emailSent",
+      "t": 1427143279000000,
+      "res": 1000000,
+      "obj": 213,
+      "obj_text": "RE: It's me",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "a99e781808fc6ae349a720fecab8fc9a632dc271c728892dfc736c86f6ae4d35",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          2290,
+          374
+        ]
+      },
+      "english": "The cloud record \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC) happened before the sending of the e-mail \"RE: It's me\" from spy to iaman (2015-03-23 20:41:19 UTC): the gap of 521.448 s exceeds the combined timestamp uncertainty of 1.001 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A053.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

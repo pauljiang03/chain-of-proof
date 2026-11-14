@@ -1,0 +1,76 @@
+{
+  "finding_id": "A093",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "before": [
+      291,
+      21
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"data leakage methods\" (2015-03-23 18:02:09 UTC) happened before the opening of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on volume 5C754D3E (2015-03-23 18:37:20 UTC): the gap of 2111.2 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 291,
+      "kind": "webSearch",
+      "t": 1427133729303892,
+      "res": 1,
+      "obj": 164,
+      "obj_text": "data leakage methods",
+      "aux": 159,
+      "aux_text": "chrome",
+      "row_sha256": "ce45559b8e916f0f5f96396c04e98d426bb7183199cdc23642ef11a0e5a2a816",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 21,
+      "kind": "lnkTarget",
+      "t": 1427135840499256,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "958eb3d46a81852722a264a94a97dbe2e29889bf03913fe1a3412d3bce4083e5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135840312056,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          291,
+          21
+        ]
+      },
+      "english": "The web search \"data leakage methods\" (2015-03-23 18:02:09 UTC) happened before the opening of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on volume 5C754D3E (2015-03-23 18:37:20 UTC): the gap of 2111.2 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A093.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

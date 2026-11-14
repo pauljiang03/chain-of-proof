@@ -1,0 +1,94 @@
+{
+  "finding_id": "A013",
+  "question": "2. External storage: which devices were attached, when, and what does each hold now?",
+  "claim": {
+    "both": [
+      {
+        "usbConnected": [
+          2
+        ]
+      },
+      {
+        "usbConnected": [
+          4
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-24 13:38:00 UTC). USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:33 UTC).",
+  "cited_facts": [
+    {
+      "id": 2,
+      "kind": "usbInsert",
+      "t": 1427204280014221,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "666595d5405acb79954a631d3f0a29da3f0c8473f4690efeffe6a007eb484698",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012450531101593&0",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 4,
+      "kind": "usbInsert",
+      "t": 1427205513550110,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "abafce8b9e06ea2e9272447e94d7438f0d4320fbd50fc5d1b57b483be2712fb4",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012550531106501&0",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "usbConnected": [
+          2
+        ]
+      },
+      "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-24 13:38:00 UTC).",
+      "rules": [
+        "R1"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "usbConnected": [
+          4
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:33 UTC).",
+      "rules": [
+        "R1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1"
+  ],
+  "strength": "strong",
+  "lean_file": "A013.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

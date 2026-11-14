@@ -1,0 +1,90 @@
+{
+  "finding_id": "A086",
+  "question": "8. Covering tracks: what was deleted, wiped, cleaned or uninstalled, and when?",
+  "claim": {
+    "before": [
+      1449,
+      10082
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The recorded run of Eraser.exe (2015-03-25 15:12:28 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg to C:\\Users\\informant\\Desktop\\temp\\S9(wQm9ff_gd,hZ~c (2015-03-25 15:13:39 UTC): the gap of 70.4348 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 1449,
+      "kind": "programRun",
+      "t": 1427296348735000,
+      "res": 1,
+      "obj": 763,
+      "obj_text": "Eraser.exe",
+      "aux": 1018,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe",
+      "row_sha256": "2679af89b0fb78c2acf2e745f2cb3ff2adce2006dba6cf762f7bc0ff1e4ad93d",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Renfre\\Renfre.rkr",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe",
+        "exhibit": "PC",
+        "focus_count": 2,
+        "focus_time_ms": 70138,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 10082,
+      "kind": "fileRenamed",
+      "t": 1427296419169805,
+      "res": 1,
+      "obj": 13951,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+      "aux": 13952,
+      "aux_text": "C:\\Users\\informant\\Desktop\\temp\\S9(wQm9ff_gd,hZ~c",
+      "row_sha256": "7207906e11faab28f9c33e7fba919c5382ec32151edbbf3177aed00993d517a3",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 68269496",
+        "exhibit": "PC",
+        "file_record": 74620,
+        "file_sequence": 285,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "S9(wQm9ff_gd,hZ~c",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\temp",
+        "new_parent_record": 74402,
+        "old_name": "Chrysanthemum.jpg",
+        "old_name_usn": 68269400,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\temp",
+        "parent_record": 74402,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          1449,
+          10082
+        ]
+      },
+      "english": "The recorded run of Eraser.exe (2015-03-25 15:12:28 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg to C:\\Users\\informant\\Desktop\\temp\\S9(wQm9ff_gd,hZ~c (2015-03-25 15:13:39 UTC): the gap of 70.4348 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A086.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

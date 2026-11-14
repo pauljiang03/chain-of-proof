@@ -1,0 +1,375 @@
+{
+  "finding_id": "A048",
+  "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?",
+  "claim": {
+    "both": [
+      {
+        "emailed": [
+          374
+        ]
+      },
+      {
+        "tagged": [
+          374,
+          "obj",
+          393,
+          230
+        ]
+      },
+      {
+        "emailed": [
+          375
+        ]
+      },
+      {
+        "emailed": [
+          376
+        ]
+      },
+      {
+        "tagged": [
+          376,
+          "obj",
+          394,
+          230
+        ]
+      },
+      {
+        "emailed": [
+          377
+        ]
+      },
+      {
+        "tagged": [
+          377,
+          "obj",
+          395,
+          230
+        ]
+      },
+      {
+        "emailed": [
+          378
+        ]
+      },
+      {
+        "tagged": [
+          378,
+          "obj",
+          391,
+          230
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC). RE: It's me is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder). An e-mail with the subject \"Last request\" was sent from spy to iaman (2015-03-24 13:25:57 UTC). An e-mail with the subject \"RE: Last request\" was sent from iaman to spy (2015-03-24 13:35:10 UTC). RE: Last request is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder). An e-mail with the subject \"RE: Watch out!\" was sent from iaman to spy (2015-03-24 19:34:02 UTC). RE: Watch out! is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder). An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC). Done is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+  "cited_facts": [
+    {
+      "id": 374,
+      "kind": "emailSent",
+      "t": 1427143279000000,
+      "res": 1000000,
+      "obj": 213,
+      "obj_text": "RE: It's me",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "a99e781808fc6ae349a720fecab8fc9a632dc271c728892dfc736c86f6ae4d35",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 393,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 213,
+      "obj_text": "RE: It's me",
+      "aux": 230,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "8955833161b10919b5dbcd9ad62d449e96cead6f9fb786eaad4190f971f9f4ac",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 375,
+      "kind": "emailSent",
+      "t": 1427203557000000,
+      "res": 1000000,
+      "obj": 214,
+      "obj_text": "Last request",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "e2c83998d84a8725cce0e04ef0d5849c2be50c77766f4ec29e19854a3a7594bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 376,
+      "kind": "emailSent",
+      "t": 1427204110365000,
+      "res": 1000000,
+      "obj": 215,
+      "obj_text": "RE: Last request",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "deb591d5476975213f50490b71980ac3a2b9a57c4585f3e557d907aef7184d9c",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 394,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 215,
+      "obj_text": "RE: Last request",
+      "aux": 230,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "dedef20f74d791fb6a645d8c1a1b0e9f86dec6ac8ed2a3af597b6a2be9b3cf41",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 377,
+      "kind": "emailSent",
+      "t": 1427225642435000,
+      "res": 1000000,
+      "obj": 216,
+      "obj_text": "RE: Watch out!",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "02edc06c446cad9098f9a6e3525cc21f173aa7b235b44bddc1f832a9daa44043",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 395,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 216,
+      "obj_text": "RE: Watch out!",
+      "aux": 230,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "e9cc898d196583c71a879ffdd327b5877e16acdfee0862a89ed7eab869110441",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 378,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 217,
+      "obj_text": "Done",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "101580ace6639f7b670bf9e465dd424cd2df5f4b102ad9d09de5de9124386ea4",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 391,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 217,
+      "obj_text": "Done",
+      "aux": 230,
+      "aux_text": "e-mail in the Deleted Items folder",
+      "row_sha256": "7fc75c01a8b0cd76e7d7cf22e4a3b27f9af670e9deecbb12eaa8f99489faac3a",
+      "prov": {
+        "rule": "the mailbox file lists this message in its Deleted Items folder",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          374
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: It's me\" was sent from spy to iaman (2015-03-23 20:41:19 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          374,
+          "obj",
+          393,
+          230
+        ]
+      },
+      "english": "RE: It's me is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "emailed": [
+          375
+        ]
+      },
+      "english": "An e-mail with the subject \"Last request\" was sent from spy to iaman (2015-03-24 13:25:57 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "emailed": [
+          376
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: Last request\" was sent from iaman to spy (2015-03-24 13:35:10 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          376,
+          "obj",
+          394,
+          230
+        ]
+      },
+      "english": "RE: Last request is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "emailed": [
+          377
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: Watch out!\" was sent from iaman to spy (2015-03-24 19:34:02 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          377,
+          "obj",
+          395,
+          230
+        ]
+      },
+      "english": "RE: Watch out! is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "emailed": [
+          378
+        ]
+      },
+      "english": "An e-mail with the subject \"Done\" was sent from iaman to spy (2015-03-24 21:05:09 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          378,
+          "obj",
+          391,
+          230
+        ]
+      },
+      "english": "Done is tagged \"e-mail in the Deleted Items folder\" (rule: the mailbox file lists this message in its Deleted Items folder).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "A048.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

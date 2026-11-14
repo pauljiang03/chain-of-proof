@@ -1,0 +1,76 @@
+{
+  "finding_id": "A102",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "before": [
+      377,
+      380
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The sending of the e-mail \"RE: Watch out!\" from iaman to spy (2015-03-24 19:34:02 UTC) happened before the CD-burn trace (cdrom driver event 133 for \\Device\\CdRom0) (2015-03-24 19:47:47 UTC): the gap of 825.222 s exceeds the combined timestamp uncertainty of 1 s.",
+  "cited_facts": [
+    {
+      "id": 377,
+      "kind": "emailSent",
+      "t": 1427225642435000,
+      "res": 1000000,
+      "obj": 216,
+      "obj_text": "RE: Watch out!",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "02edc06c446cad9098f9a6e3525cc21f173aa7b235b44bddc1f832a9daa44043",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 380,
+      "kind": "cdBurn",
+      "t": 1427226467657431,
+      "res": 1,
+      "obj": 220,
+      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
+      "aux": 221,
+      "aux_text": "System event log",
+      "row_sha256": "3c7e782eabe68101f1b2fb7a7f5426a2856f100902843f009469ff5894664cce",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
+        "channel": "System",
+        "event_record_id": "1412",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "event time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          377,
+          380
+        ]
+      },
+      "english": "The sending of the e-mail \"RE: Watch out!\" from iaman to spy (2015-03-24 19:34:02 UTC) happened before the CD-burn trace (cdrom driver event 133 for \\Device\\CdRom0) (2015-03-24 19:47:47 UTC): the gap of 825.222 s exceeds the combined timestamp uncertainty of 1 s.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A102.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

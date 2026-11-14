@@ -1,0 +1,304 @@
+{
+  "finding_id": "A060",
+  "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?",
+  "claim": {
+    "both": [
+      {
+        "renamed": [
+          8981
+        ]
+      },
+      {
+        "renamed": [
+          8982
+        ]
+      },
+      {
+        "renamed": [
+          9007
+        ]
+      },
+      {
+        "renamed": [
+          9008
+        ]
+      },
+      {
+        "renamed": [
+          9003
+        ]
+      },
+      {
+        "renamed": [
+          8998
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip (2015-03-24 13:49:51 UTC). C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_storm.amr (2015-03-24 13:50:08 UTC). C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\a_gift_from_you.gif (2015-03-24 13:55:08 UTC). C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\landscape.png (2015-03-24 13:55:17 UTC). C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\happy_holiday.jpg (2015-03-24 13:54:05 UTC). C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\do_u_wanna_build_a_snow_man.mp3 (2015-03-24 13:52:35 UTC).",
+  "cited_facts": [
+    {
+      "id": 8981,
+      "kind": "fileRenamed",
+      "t": 1427204991896881,
+      "res": 1,
+      "obj": 12620,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 12621,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "row_sha256": "e23a7e4980221f7a2c138d3ab8d5ee34b6cde61c505f544f7b16fbeaa1ca9c16",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59801816",
+        "exhibit": "PC",
+        "file_record": 48389,
+        "file_sequence": 18,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "winter_whether_advisory.zip",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "new_parent_record": 46256,
+        "old_name": "[secret_project]_detailed_design.pptx",
+        "old_name_usn": 59801680,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "parent_record": 46256,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 8982,
+      "kind": "fileRenamed",
+      "t": 1427205008118110,
+      "res": 1,
+      "obj": 12622,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+      "aux": 12623,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_storm.amr",
+      "row_sha256": "241b60286156136ba7a86e561d54bb98d233642c8720c7fd22d2ccfaae2fcdbb",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59802544",
+        "exhibit": "PC",
+        "file_record": 62477,
+        "file_sequence": 6,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "winter_storm.amr",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "new_parent_record": 46256,
+        "old_name": "[secret_project]_revised_points.ppt",
+        "old_name_usn": 59802408,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design",
+        "parent_record": 46256,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 9007,
+      "kind": "fileRenamed",
+      "t": 1427205308808901,
+      "res": 1,
+      "obj": 12632,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 12664,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\a_gift_from_you.gif",
+      "row_sha256": "354fefb95cb630c888ce9214fc7b0dddd1e27de7fa35a19afec8e8128daeaeed",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59818768",
+        "exhibit": "PC",
+        "file_record": 62922,
+        "file_sequence": 38,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "a_gift_from_you.gif",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal",
+        "new_parent_record": 74297,
+        "old_name": "[secret_project]_detailed_proposal.docx",
+        "old_name_usn": 59818624,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal",
+        "parent_record": 74297,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 9008,
+      "kind": "fileRenamed",
+      "t": 1427205317047716,
+      "res": 1,
+      "obj": 12627,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 12665,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\landscape.png",
+      "row_sha256": "dfabd7d9a831c5fa1f65f354196cb1dc7cb0c1b766f4daf8e14b5508ff4a2bc1",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59819096",
+        "exhibit": "PC",
+        "file_record": 62980,
+        "file_sequence": 6,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "landscape.png",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal",
+        "new_parent_record": 74297,
+        "old_name": "[secret_project]_proposal.docx",
+        "old_name_usn": 59818976,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal",
+        "parent_record": 74297,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 9003,
+      "kind": "fileRenamed",
+      "t": 1427205245485773,
+      "res": 1,
+      "obj": 12656,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+      "aux": 12657,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\happy_holiday.jpg",
+      "row_sha256": "9a0edea8a06f20127f357304f289ae715fca5080b7a5be9030f3326ce8ded125",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59816448",
+        "exhibit": "PC",
+        "file_record": 72157,
+        "file_sequence": 14,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "happy_holiday.jpg",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision",
+        "new_parent_record": 71735,
+        "old_name": "(secret_project)_pricing_decision.xlsx",
+        "old_name_usn": 59816312,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision",
+        "parent_record": 71735,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 8998,
+      "kind": "fileRenamed",
+      "t": 1427205155708597,
+      "res": 1,
+      "obj": 12646,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
+      "aux": 12647,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\do_u_wanna_build_a_snow_man.mp3",
+      "row_sha256": "6111c5806fc44ee61a112efa3c6686128f389f31806f6ca8769b0d5d228e68a5",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 59814488",
+        "exhibit": "PC",
+        "file_record": 71719,
+        "file_sequence": 4,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "do_u_wanna_build_a_snow_man.mp3",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final",
+        "new_parent_record": 71686,
+        "old_name": "[secret_project]_final_meeting.pptx",
+        "old_name_usn": 59814352,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final",
+        "parent_record": 71686,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "renamed": [
+          8981
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_whether_advisory.zip (2015-03-24 13:49:51 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          8982
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\design\\winter_storm.amr (2015-03-24 13:50:08 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          9007
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\a_gift_from_you.gif (2015-03-24 13:55:08 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          9008
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\proposal\\landscape.png (2015-03-24 13:55:17 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          9003
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\pricing decision\\happy_holiday.jpg (2015-03-24 13:54:05 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "renamed": [
+          8998
+        ]
+      },
+      "english": "C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx was renamed to C:\\Users\\informant\\Desktop\\S data\\Secret Project Data\\final\\do_u_wanna_build_a_snow_man.mp3 (2015-03-24 13:52:35 UTC).",
+      "rules": [
+        "R25"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R25"
+  ],
+  "strength": "strong",
+  "lean_file": "A060.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

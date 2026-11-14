@@ -1,0 +1,202 @@
+{
+  "finding_id": "A019",
+  "question": "2. External storage: which devices were attached, when, and what does each hold now?",
+  "claim": {
+    "both": [
+      {
+        "fileCreatedAt": [
+          66
+        ]
+      },
+      {
+        "fileCreatedAt": [
+          67
+        ]
+      },
+      {
+        "fileCreatedAt": [
+          68
+        ]
+      },
+      {
+        "fileCreatedAt": [
+          69
+        ]
+      },
+      {
+        "fileCreatedAt": [
+          70
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt was created on volume 5C754D3E (2015-02-15 21:52:08 UTC). \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was created on volume 5C754D3E (2015-02-15 21:52:09 UTC). \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was created on volume 5C754D3E (2015-02-15 21:52:10 UTC). \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was created on volume 5C754D3E (2015-02-15 21:52:12 UTC). \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was created on volume 5C754D3E (2015-02-15 21:52:20 UTC).",
+  "cited_facts": [
+    {
+      "id": 66,
+      "kind": "fileCreated",
+      "t": 1424037128960000,
+      "res": 10000,
+      "obj": 22,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "40ac82f59d0e70629a6d3fd0e851b2fefb2fe0249306a9e22e24f3e7a93bf347",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 1810432,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 67,
+      "kind": "fileCreated",
+      "t": 1424037129290000,
+      "res": 10000,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "fcfe6979615636eca5c22481f81d3f61c5d12e7746bba86e61a3bd17d8f29b73",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 16381123,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 68,
+      "kind": "fileCreated",
+      "t": 1424037130630000,
+      "res": 10000,
+      "obj": 52,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "174417f314422ae72a7a621504fcce1e53a4d95d1daf6e516b6b69c8ea362cb0",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 14547968,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 69,
+      "kind": "fileCreated",
+      "t": 1424037132550000,
+      "res": 10000,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "7de4ca85eadf4a1023185fdb62bce2ff5c66de0c44469dba0d32081a4d008fcc",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 35226880,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 70,
+      "kind": "fileCreated",
+      "t": 1424037140430000,
+      "res": 10000,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "faf2571410bdc3c821df39d273492657e38a3d2401735fa0c8c0aec9732d76da",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 6484502,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          66
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt was created on volume 5C754D3E (2015-02-15 21:52:08 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileCreatedAt": [
+          67
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx was created on volume 5C754D3E (2015-02-15 21:52:09 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileCreatedAt": [
+          68
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt was created on volume 5C754D3E (2015-02-15 21:52:10 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileCreatedAt": [
+          69
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was created on volume 5C754D3E (2015-02-15 21:52:12 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileCreatedAt": [
+          70
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was created on volume 5C754D3E (2015-02-15 21:52:20 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "A019.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

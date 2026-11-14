@@ -1,0 +1,79 @@
+{
+  "finding_id": "A082",
+  "question": "7. The disc: what is on it, and when was it written?",
+  "claim": {
+    "before": [
+      161,
+      50
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The creation of \\Koala.jpg on volume AE88F176 (2015-03-24 20:57:00 UTC) happened before the opening of \\ on volume AE88F176 (2015-03-24 21:01:10 UTC): the gap of 249.778 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 161,
+      "kind": "fileCreated",
+      "t": 1427230620985995,
+      "res": 1,
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "c2f5974b785286fd4c8faeb15e4655bb4e3e25282fbe420bbc6e9e9ce3266739",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52467 (byte offset 107452416), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 780831,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 38
+      }
+    },
+    {
+      "id": 50,
+      "kind": "lnkTarget",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 23,
+      "obj_text": "\\",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "924b34b4c7403a6ccb806550a7ee91e46653701edf75f4272e04a45a85b92315",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "destlist_path": "D:\\",
+        "drive_letter": "D:",
+        "drive_type": 5,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN CD"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          161,
+          50
+        ]
+      },
+      "english": "The creation of \\Koala.jpg on volume AE88F176 (2015-03-24 20:57:00 UTC) happened before the opening of \\ on volume AE88F176 (2015-03-24 21:01:10 UTC): the gap of 249.778 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A082.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

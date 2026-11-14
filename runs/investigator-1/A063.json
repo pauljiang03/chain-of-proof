@@ -1,0 +1,320 @@
+{
+  "finding_id": "A063",
+  "question": "6. Files: what was created, copied, renamed or deleted on each device, including records recovered from formatted media? Which copies have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12686,
+          12754
+        ]
+      },
+      {
+        "sameContent": [
+          12687,
+          12753
+        ]
+      },
+      {
+        "sameContent": [
+          12688,
+          12771
+        ]
+      },
+      {
+        "sameContent": [
+          12689,
+          12772
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1 and \\de\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt on exhibit RM#1 and \\de\\winter_storm.amr on exhibit RM#3 have identical content: both read as sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx on exhibit RM#1 and \\prop\\a_gift_from_you.gif on exhibit RM#3 have identical content: both read as sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1 and \\prop\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+  "cited_facts": [
+    {
+      "id": 12686,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "7f25a0fb803d56341e7266e12528cbc63fd3292f00a99e5e34b766a311412870",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "pptx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12754,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "991d108abc6c68c7bff71dbfe8db1ee60c6e8e3b61ea7a50501e99c6ee61eb2d",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51273",
+        "exhibit": "RM#3",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 7431,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12687,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 52,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "abd734a4ce525c337b6bac53642f6b1806960262e05f899724b0f829e015160e",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "ppt",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "5C754D3E",
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12753,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 110,
+      "obj_text": "\\de\\winter_storm.amr",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "3ec71b615ac6aeabf89e0d201a3527e03dd9692515d06b50faae528e80db27d1",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51242",
+        "exhibit": "RM#3",
+        "extension": "amr",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 327,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12688,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "25e4e8ccfdaf210c7ade0e45ceb481b4e6730ff991f578040551044c24e89da5",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12771,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 128,
+      "obj_text": "\\prop\\a_gift_from_you.gif",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "34e28d1e93e453e0119e2f68b69cd8c392fd5118bcc207ac2c3f92a387008583",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51338",
+        "exhibit": "RM#3",
+        "extension": "gif",
+        "extension_fits_signature": false,
+        "extents": 2,
+        "first_sector": 28330,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12689,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "c7b711b6e0ab1aadbd9fd6126cb743caf33720f7dc61a2652c41aff372322c1b",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12772,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "9ff23334e2c234b2c53eb4ea3386cf6b1e47c3dbd6223dc0d02637f67b641205",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51369",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 45547,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12686,
+          12754
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1 and \\de\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12687,
+          12753
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt on exhibit RM#1 and \\de\\winter_storm.amr on exhibit RM#3 have identical content: both read as sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12688,
+          12771
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx on exhibit RM#1 and \\prop\\a_gift_from_you.gif on exhibit RM#3 have identical content: both read as sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12689,
+          12772
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1 and \\prop\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "A063.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

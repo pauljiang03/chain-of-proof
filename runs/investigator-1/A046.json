@@ -1,0 +1,78 @@
+{
+  "finding_id": "A046",
+  "question": "4. The web: what was searched for, visited and downloaded?",
+  "claim": {
+    "before": [
+      366,
+      2267
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The web search \"eraser\" (2015-03-25 14:46:54 UTC) happened before the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:33 UTC): the gap of 39.3813 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 366,
+      "kind": "webSearch",
+      "t": 1427294814471205,
+      "res": 1,
+      "obj": 203,
+      "obj_text": "eraser",
+      "aux": 160,
+      "aux_text": "iexplore",
+      "row_sha256": "f63d64cabd5858ab5c8e7b1ffb79fa16a46293d3987f78093d1b7abf84d99dcc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 2267,
+      "kind": "fileDownloaded",
+      "t": 1427294853852505,
+      "res": 1,
+      "obj": 963,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "aux": 1396,
+      "aux_text": "http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+      "row_sha256": "132d7a6bfbaeca01c6afdd02609949d27fe90888211f038e7de1fa16b61eb2db",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 1",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{DF0A857F-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://sourceforge.net/projects/eraser/files/Eraser%206/6.2/Eraser%206.2.0.2962.exe/download",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\OOYOT1KJ\\Eraser%206.2.0.2962[1].exe",
+        "time_meaning": "creation time inside the version-1 GUID that names the download record (when Internet Explorer created the record)",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          366,
+          2267
+        ]
+      },
+      "english": "The web search \"eraser\" (2015-03-25 14:46:54 UTC) happened before the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:33 UTC): the gap of 39.3813 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A046.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

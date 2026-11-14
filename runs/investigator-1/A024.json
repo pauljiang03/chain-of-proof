@@ -1,0 +1,69 @@
+{
+  "finding_id": "A024",
+  "question": "2. External storage: what does RM#2 hold now, and what was on it before it was reformatted?",
+  "claim": {
+    "before": [
+      488,
+      493
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "This PC recording volume 9E6A5B82 under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC) happened before this PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC): the gap of 25439.9 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 488,
+      "kind": "volumeSeen",
+      "t": 1427205514439312,
+      "res": 1,
+      "obj": 251,
+      "obj_text": "IAMAN $_@",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "1db3009ea293262c8d9a257c91fe3a8fbc2764b267b5777c30a86634c4e8f8a6",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 493,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 251,
+      "obj_text": "IAMAN $_@",
+      "aux": 253,
+      "aux_text": "B4D85399",
+      "row_sha256": "4978c8dd3582c1fa9b3801754d5c60455cbcb1672f90344755206d50efd47059",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          488,
+          493
+        ]
+      },
+      "english": "This PC recording volume 9E6A5B82 under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC) happened before this PC recording volume B4D85399 under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC): the gap of 25439.9 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A024.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,86 @@
+{
+  "finding_id": "A095",
+  "question": "9. The story: in what order did the key events happen?",
+  "claim": {
+    "before": [
+      21,
+      8134
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The opening of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on volume 5C754D3E (2015-03-23 18:37:20 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx to C:\\Users\\informant\\Desktop\\S data\\landscape.png (2015-03-23 18:41:40 UTC): the gap of 259.77 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 21,
+      "kind": "lnkTarget",
+      "t": 1427135840499256,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "958eb3d46a81852722a264a94a97dbe2e29889bf03913fe1a3412d3bce4083e5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135840312056,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    },
+    {
+      "id": 8134,
+      "kind": "fileRenamed",
+      "t": 1427136100269314,
+      "res": 1,
+      "obj": 12121,
+      "obj_text": "C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx",
+      "aux": 12122,
+      "aux_text": "C:\\Users\\informant\\Desktop\\S data\\landscape.png",
+      "row_sha256": "c7a17971f911e4d0ad5e4e7dbd44cc59eccaab3a3da876b54c411bff07ccd905",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J USN 56306328",
+        "exhibit": "PC",
+        "file_record": 71150,
+        "file_sequence": 4,
+        "folder_names_from": "change journal",
+        "image": "pc.E01",
+        "moved": false,
+        "new_name": "landscape.png",
+        "new_parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "new_parent_record": 71147,
+        "old_name": "[secret_project]_detailed_proposal.docx",
+        "old_name_usn": 56306184,
+        "parent_folder": "C:\\Users\\informant\\Desktop\\S data",
+        "parent_record": 71147,
+        "path_source": "the journal stores names and folder references; a folder is named as the journal itself recorded it at that moment where it has a record of the folder, otherwise as the file table names that reference now",
+        "time_meaning": "time of the journal's new-name record",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          21,
+          8134
+        ]
+      },
+      "english": "The opening of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on volume 5C754D3E (2015-03-23 18:37:20 UTC) happened before the renaming of C:\\Users\\informant\\Desktop\\S data\\[secret_project]_detailed_proposal.docx to C:\\Users\\informant\\Desktop\\S data\\landscape.png (2015-03-23 18:41:40 UTC): the gap of 259.77 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A095.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

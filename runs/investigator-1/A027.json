@@ -1,0 +1,191 @@
+{
+  "finding_id": "A027",
+  "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?",
+  "claim": {
+    "both": [
+      {
+        "programInstalledAt": [
+          995
+        ]
+      },
+      {
+        "programRan": [
+          1409
+        ]
+      },
+      {
+        "programRan": [
+          1449
+        ]
+      },
+      {
+        "programRan": [
+          1451
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:31 UTC). A record shows ERASER 6.2.0.2962.EXE ran (2015-03-25 14:50:14 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE). A record shows Eraser.exe ran (2015-03-25 15:12:28 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe). A record shows ERASER.EXE ran (2015-03-25 15:13:30 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\ERASER\\ERASER.EXE).",
+  "cited_facts": [
+    {
+      "id": 995,
+      "kind": "programInstalled",
+      "t": 1427295451895803,
+      "res": 1,
+      "obj": 355,
+      "obj_text": "Eraser 6.2.0.2962",
+      "aux": 356,
+      "aux_text": "6.2.2962",
+      "row_sha256": "63aa20b2405f568f88e651f58c0c635c4832abbeb7e5b3d29a30a58590eae915",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{C6E287F1-2E47-45F0-BB51-94F815CFFB48}",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "install_date_value": "20150325",
+        "publisher": "The Eraser Project",
+        "registry_view": "native",
+        "scope": "machine-wide",
+        "time_meaning": "last-write time of the uninstall entry",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1409,
+      "kind": "programRun",
+      "t": 1427295014393805,
+      "res": 1,
+      "obj": 966,
+      "obj_text": "ERASER 6.2.0.2962.EXE",
+      "aux": 967,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE",
+      "row_sha256": "29ee5437602a9b37f0bb544e65747bcb935c56695211800ca516c1f577e38e46",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ERASER 6.2.0.2962.EXE-BE552234.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:50:24.533804Z",
+        "prefetch_file_modified": "2015-03-25 14:50:24.533804Z",
+        "prefetch_hash": "BE552234",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1449,
+      "kind": "programRun",
+      "t": 1427296348735000,
+      "res": 1,
+      "obj": 763,
+      "obj_text": "Eraser.exe",
+      "aux": 1018,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe",
+      "row_sha256": "2679af89b0fb78c2acf2e745f2cb3ff2adce2006dba6cf762f7bc0ff1e4ad93d",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Renfre\\Renfre.rkr",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe",
+        "exhibit": "PC",
+        "focus_count": 2,
+        "focus_time_ms": 70138,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1451,
+      "kind": "programRun",
+      "t": 1427296410777005,
+      "res": 1,
+      "obj": 1021,
+      "obj_text": "ERASER.EXE",
+      "aux": 1022,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\ERASER\\ERASER.EXE",
+      "row_sha256": "bd520aca6f9813d93666dbdb434bfbec989fa4093d02d6e3831c39d5d3cde6b9",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ERASER.EXE-CE61944A.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:12:38.875805Z",
+        "prefetch_file_modified": "2015-03-25 15:13:38.811005Z",
+        "prefetch_hash": "CE61944A",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programInstalledAt": [
+          995
+        ]
+      },
+      "english": "Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:31 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1409
+        ]
+      },
+      "english": "A record shows ERASER 6.2.0.2962.EXE ran (2015-03-25 14:50:14 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1449
+        ]
+      },
+      "english": "A record shows Eraser.exe ran (2015-03-25 15:12:28 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Eraser\\Eraser.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1451
+        ]
+      },
+      "english": "A record shows ERASER.EXE ran (2015-03-25 15:13:30 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\ERASER\\ERASER.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R17",
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "A027.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

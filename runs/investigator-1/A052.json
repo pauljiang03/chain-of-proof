@@ -1,0 +1,77 @@
+{
+  "finding_id": "A052",
+  "question": "5. E-mail and cloud storage: which messages were exchanged, which accounts and file events did a cloud client record?",
+  "claim": {
+    "before": [
+      2290,
+      2302
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "The cloud record \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC) happened before the cloud record \"google drive: deleted\" for happy_holiday.jpg (2015-03-23 20:42:16 UTC): the gap of 579.412 s exceeds the combined timestamp uncertainty of 2 ms.",
+  "cited_facts": [
+    {
+      "id": 2290,
+      "kind": "cloudFile",
+      "t": 1427142757552000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1429,
+      "aux_text": "google drive: uploaded",
+      "row_sha256": "c614169795bb3d31f87297da492def197420aaabc0defeb4458eb7ba478be7ad",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1395",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "Direction.UPLOAD, Action.CREATE",
+        "time_meaning": "sync worker started this change (log line time)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2302,
+      "kind": "cloudFile",
+      "t": 1427143336964000,
+      "res": 1000,
+      "obj": 1422,
+      "obj_text": "happy_holiday.jpg",
+      "aux": 1428,
+      "aux_text": "google drive: deleted",
+      "row_sha256": "2552ebdc3bc2d939ade30579a78701b301e07459c1db049cefeed8c3e890c540",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1602",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "local_path": "C:\\Users\\informant\\Google Drive\\happy_holiday.jpg",
+        "log_event": "RawEvent DELETE",
+        "time_meaning": "time of the file-system event the client saw in its sync folder",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "before": [
+          2290,
+          2302
+        ]
+      },
+      "english": "The cloud record \"google drive: uploaded\" for happy_holiday.jpg (2015-03-23 20:32:37 UTC) happened before the cloud record \"google drive: deleted\" for happy_holiday.jpg (2015-03-23 20:42:16 UTC): the gap of 579.412 s exceeds the combined timestamp uncertainty of 2 ms.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [],
+  "strength": "strong",
+  "lean_file": "A052.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

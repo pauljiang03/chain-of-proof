@@ -1,0 +1,96 @@
+{
+  "finding_id": "A036",
+  "question": "4. The web: what was searched for, visited and downloaded?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          333
+        ]
+      },
+      {
+        "searched": [
+          334
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A web search for \"apple icloud\" was made in chrome (2015-03-23 19:55:09 UTC). A web search for \"google drive\" was made in chrome (2015-03-23 19:56:04 UTC).",
+  "cited_facts": [
+    {
+      "id": 333,
+      "kind": "webSearch",
+      "t": 1427140509975901,
+      "res": 1,
+      "obj": 188,
+      "obj_text": "apple icloud",
+      "aux": 159,
+      "aux_text": "chrome",
+      "row_sha256": "7b60283ba66ab88ee5cebf7ff9dd9f1d61c9e5d60f48812069fd48a65a755006",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=apple+icloud",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 334,
+      "kind": "webSearch",
+      "t": 1427140564087328,
+      "res": 1,
+      "obj": 189,
+      "obj_text": "google drive",
+      "aux": 159,
+      "aux_text": "chrome",
+      "row_sha256": "40578179778a3eaf7a1987596bf4943b96b89601d8ef2e77b2e194eb83889610",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=google+drive",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          333
+        ]
+      },
+      "english": "A web search for \"apple icloud\" was made in chrome (2015-03-23 19:55:09 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "searched": [
+          334
+        ]
+      },
+      "english": "A web search for \"google drive\" was made in chrome (2015-03-23 19:56:04 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9"
+  ],
+  "strength": "strong",
+  "lean_file": "A036.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

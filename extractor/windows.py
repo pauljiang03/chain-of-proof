@@ -422,17 +422,31 @@ def _email(ev, t, common):
     return n
 
 
+def _step(ev: Evidence, name: str, fn, default=0):
+    """Run one part of the reader. An image that lacks the artifact (a PC no USB stick
+    was ever plugged into has no USBSTOR key) is reported, and the reader goes on."""
+    try:
+        return fn()
+    except Exception as e:
+        ev.problem(name, e)
+        return default
+
+
 def extract_pc(ev: Evidence, path, tool: str):
     t = Target.open(path)
     common = dict(image=path.name, exhibit="PC", tool=tool)
-    _usb(ev, t, common)
-    _setupapi(ev, t, common, str(t.timezone))
-    _volumes_seen(ev, t, common)
-    counts = {"shortcuts": _lnk_files(ev, t, common), "jump list entries": _jumplists(ev, t, common),
-              "volume labels in shortcuts": _volumes_in_shortcuts(ev, common),
-              "searches": _searches(ev, t, common), "user files": _user_files(ev, t, common),
-              "Recycle Bin records": _recycle_bin(ev, t, common),
-              "CD-burn traces": _burn_traces(ev, t, common), "e-mails": _email(ev, t, common)}
+    _step(ev, "USB devices in the registry", lambda: _usb(ev, t, common))
+    _step(ev, "device install log", lambda: _setupapi(ev, t, common, str(t.timezone)))
+    _step(ev, "volumes recorded in the registry", lambda: _volumes_seen(ev, t, common))
+    parts = (("shortcuts", lambda: _lnk_files(ev, t, common)),
+             ("jump list entries", lambda: _jumplists(ev, t, common)),
+             ("volume labels in shortcuts", lambda: _volumes_in_shortcuts(ev, common)),
+             ("searches", lambda: _searches(ev, t, common)),
+             ("user files", lambda: _user_files(ev, t, common)),
+             ("Recycle Bin records", lambda: _recycle_bin(ev, t, common)),
+             ("CD-burn traces", lambda: _burn_traces(ev, t, common)),
+             ("e-mails", lambda: _email(ev, t, common)))
+    counts = {name: _step(ev, name, fn) for name, fn in parts}
     info = {"hostname": t.hostname, "os": str(t.version), "time_zone": str(t.timezone)}
     return info, [f"{path.name}: {info['hostname']}, {info['os']}, zone {info['time_zone']}; "
                   + ", ".join(f"{v} {k}" for k, v in counts.items())]

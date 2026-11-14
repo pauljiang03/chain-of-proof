@@ -1,0 +1,154 @@
+{
+  "finding_id": "A029",
+  "question": "3. Programs: what was installed or run in the period that could move data out or remove traces?",
+  "claim": {
+    "both": [
+      {
+        "programRan": [
+          1350
+        ]
+      },
+      {
+        "programRan": [
+          1351
+        ]
+      },
+      {
+        "programRan": [
+          1349
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "A record shows EXCEL.EXE ran (2015-03-23 20:26:50 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE). A record shows POWERPNT.EXE ran (2015-03-23 20:27:33 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE). A record shows cmd.exe ran (2015-03-23 20:10:19 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe).",
+  "cited_facts": [
+    {
+      "id": 1350,
+      "kind": "programRun",
+      "t": 1427142410677000,
+      "res": 1,
+      "obj": 735,
+      "obj_text": "EXCEL.EXE",
+      "aux": 897,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE",
+      "row_sha256": "be689d5e4eb2eac55ee254142e4724f5d8b69e14f99a44f470472e87ddf5d32c",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Bssvpr\\Bssvpr15\\RKPRY.RKR",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 10359,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1351,
+      "kind": "programRun",
+      "t": 1427142453220000,
+      "res": 1,
+      "obj": 741,
+      "obj_text": "POWERPNT.EXE",
+      "aux": 898,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE",
+      "row_sha256": "1cea2bb1726bea5330e6b3377bab45da6a6b93fff8e672236a3a2965a31b5631",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Bssvpr\\Bssvpr15\\CBJRECAG.RKR",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 15835,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 2,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1349,
+      "kind": "programRun",
+      "t": 1427141419749000,
+      "res": 1,
+      "obj": 567,
+      "obj_text": "cmd.exe",
+      "aux": 896,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe",
+      "row_sha256": "9e4fec73c833ea5bcf30d2db652cb5461998f89acf4f27dc96720660bb3c8332",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\pzq.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe",
+        "exhibit": "PC",
+        "focus_count": 2,
+        "focus_time_ms": 39296,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 4,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programRan": [
+          1350
+        ]
+      },
+      "english": "A record shows EXCEL.EXE ran (2015-03-23 20:26:50 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1351
+        ]
+      },
+      "english": "A record shows POWERPNT.EXE ran (2015-03-23 20:27:33 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1349
+        ]
+      },
+      "english": "A record shows cmd.exe ran (2015-03-23 20:10:19 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "A029.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

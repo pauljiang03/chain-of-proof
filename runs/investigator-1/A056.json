@@ -1,0 +1,162 @@
+{
+  "finding_id": "A056",
+  "question": "6. Files: which confidential files were opened and from where (network drive, each device, the disc)?",
+  "claim": {
+    "both": [
+      {
+        "openedFromRecorded": [
+          41,
+          488
+        ]
+      },
+      {
+        "tagged": [
+          41,
+          "obj",
+          407,
+          231
+        ]
+      },
+      {
+        "sameLabel": [
+          488,
+          493
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "proposer": "agent:claude-code:opus",
+  "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC). \\Secret Project Data\\design\\winter_whether_advisory.zip is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). This PC recorded volume 9E6A5B82 (2015-03-24 13:58:34 UTC) and volume B4D85399 (2015-03-24 21:02:34 UTC) under the same label \"IAMAN $_@\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+  "cited_facts": [
+    {
+      "id": 41,
+      "kind": "lnkTarget",
+      "t": 1427205683393024,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "319140a409af9fc7f4c53d06c1c23cc845ac9837aa17f378f477f3b85409b86a",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+        "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN $_@"
+      }
+    },
+    {
+      "id": 488,
+      "kind": "volumeSeen",
+      "t": 1427205514439312,
+      "res": 1,
+      "obj": 251,
+      "obj_text": "IAMAN $_@",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "1db3009ea293262c8d9a257c91fe3a8fbc2764b267b5777c30a86634c4e8f8a6",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 407,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 231,
+      "aux_text": "confidential",
+      "row_sha256": "d7de6a57e0b1b37fac016a5cc84915c1366fffa213705e6942663b115c1e4650",
+      "prov": {
+        "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 493,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 251,
+      "obj_text": "IAMAN $_@",
+      "aux": 253,
+      "aux_text": "B4D85399",
+      "row_sha256": "4978c8dd3582c1fa9b3801754d5c60455cbcb1672f90344755206d50efd47059",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          41,
+          488
+        ]
+      },
+      "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          41,
+          "obj",
+          407,
+          231
+        ]
+      },
+      "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameLabel": [
+          488,
+          493
+        ]
+      },
+      "english": "This PC recorded volume 9E6A5B82 (2015-03-24 13:58:34 UTC) and volume B4D85399 (2015-03-24 21:02:34 UTC) under the same label \"IAMAN $_@\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+      "rules": [
+        "R6",
+        "R8"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R3",
+    "R6",
+    "R8",
+    "T"
+  ],
+  "strength": "heuristic",
+  "lean_file": "A056.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}
