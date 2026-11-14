@@ -9,7 +9,7 @@ kernel against facts that deterministic forensic tools extracted from the image.
 finding that fails the check never reaches the report. One that passes comes with a
 certificate: the artifacts it cites, the rules it assumes, and a proof anyone can re-run.
 
-Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain-of-proof-revised.md).
+Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain-of-proof-revised.md). Who does what: [TASKS.md](TASKS.md).
 
 ## Status
 

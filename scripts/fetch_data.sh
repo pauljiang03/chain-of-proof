@@ -14,8 +14,15 @@ DEST="$(cd "$(dirname "$0")/.." && pwd)/data"
 mkdir -p "$DEST"
 
 fetch() {  # fetch <url path> <local name>
+  local url="$BASE/$1" out="$DEST/$2" want have
+  want=$(curl -sIL "$url" | awk 'tolower($1)=="content-length:"{n=$2} END{print n+0}')
+  have=$(stat -f%z "$out" 2>/dev/null || stat -c%s "$out" 2>/dev/null || echo 0)
+  if [[ "$want" -gt 0 && "$have" -eq "$want" ]]; then
+    echo "== $2 (already complete)"
+    return
+  fi
   echo ">> $2"
-  curl --fail --location --continue-at - --output "$DEST/$2" "$BASE/$1"
+  curl --fail --location --continue-at - --output "$out" "$url"
 }
 
 fetch "rm%231/cfreds_2015_data_leakage_rm%231.E01"        rm1.E01
