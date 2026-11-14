@@ -59,6 +59,12 @@ class VerificationPackage(unittest.TestCase):
         write(cls.original / "questions.json", {
             "schema_version": 2, "case_id": "portable-fixture",
             "questions": [{"id": "Q1", "prompt": "What was recorded?", "answer_schema": {}}]})
+        provenance = json.loads((cls.original / "run-manifest.json").read_text())
+        provenance["inputs"].update({
+            "questions": {"path": "/do-not-follow/questions.json", **fingerprint(cls.original / "questions.json")},
+            "prompt": {"path": "/do-not-follow/prompt.md", "bytes": 10, "sha256": "0" * 64},
+            "case_profile": {"path": "/do-not-follow/case-profile.json", "bytes": 20, "sha256": "1" * 64}})
+        write(cls.original / "run-manifest.json", provenance)
         write(cls.original / "extraction-metadata.json", {"facts": 15, "unparsed": None, "by_kind": {}})
         (cls.original / ".env").write_text("never copy this sibling\n")
         (cls.original / "reference.json").write_text("never copy this sibling either\n")
@@ -105,6 +111,28 @@ class VerificationPackage(unittest.TestCase):
             self.assertFalse((self.package / name).exists())
         for name in ("audit.jsonl", "proposals.jsonl", "run-manifest.json", "questions.json", "extraction-metadata.json"):
             self.assertTrue((self.package / name).is_file())
+        receipts = self.manifest["provenance"]["original_inputs"]["inputs"]
+        self.assertEqual(receipts["questions"], {"status": "packaged_verified", "file": "questions.json"})
+        for role in ("prompt", "case_profile"):
+            self.assertEqual(receipts[role], {"status": "not_packaged", "file": None})
+
+    def test_public_questions_must_match_the_original_run_manifest_binding(self):
+        source = self.case_root / "mismatched-source"
+        shutil.copytree(self.original, source)
+        for field, bad in (("sha256", "f" * 64), ("bytes", 99999)):
+            with self.subTest(field=field):
+                provenance = json.loads((self.original / "run-manifest.json").read_text())
+                provenance["inputs"]["questions"][field] = bad
+                write(source / "run-manifest.json", provenance)
+                output = self.case_root / ("refused-" + field)
+                with self.assertRaisesRegex(ValueError, "questions binding"):
+                    build_package(source / "run.json", FACTS, output)
+                self.assertFalse(output.exists())
+                write(self.package / "run-manifest.json", provenance)
+                self.update_manifest("run-manifest.json")
+                result = verify_package(self.package)
+                self.assertFalse(result["passed"])
+                self.assertIn("questions binding", result["problems"][0])
 
     def test_file_tampering_is_rejected_before_any_kernel_check(self):
         for name in ("facts.json", "run.json", "report.md", "audit.jsonl", "toolchain.json"):

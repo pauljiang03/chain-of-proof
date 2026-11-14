@@ -171,7 +171,28 @@ def _render_report(data, source):
     return report.render(_report_run(data, source)) + "\n## Verification package scope\n\n" + SCOPE + "\n"
 
 
-def _provenance(data, run_manifest, audit):
+def _original_inputs(run_manifest, files, facts_name):
+    if run_manifest is None:
+        return {"status": "unknown", "inputs": {}}
+    inputs = run_manifest["inputs"]
+    receipts = {}
+    for role, binding in inputs.items():
+        name = {"facts": facts_name, "questions": "questions.json"}.get(role)
+        if name is None or name not in files:
+            # Original paths are descriptive only. Do not resolve them to add
+            # prompt, case-profile, health, or other inputs to the package.
+            receipts[role] = {"status": "not_packaged", "file": None}
+        else:
+            if (not isinstance(binding, dict)
+                    or any(binding.get(key) != files[name][key] for key in ("sha256", "bytes"))):
+                raise ValueError(f"run manifest {role} binding differs from the packaged input")
+            receipts[role] = {"status": "packaged_verified", "file": name}
+    if "questions.json" in files and "questions" not in inputs:
+        receipts["questions"] = {"status": "packaged_unbound", "file": "questions.json"}
+    return {"status": "recorded", "inputs": receipts}
+
+
+def _provenance(data, run_manifest, audit, files, facts_name):
     case = data["case"]
     investigator = run_manifest.get("investigator", {}) if run_manifest else {}
     software = run_manifest.get("software", {}) if run_manifest else {}
@@ -190,6 +211,7 @@ def _provenance(data, run_manifest, audit):
                              "run-manifest.json#/investigator/backend" if backend else "run.json#/case/backend"),
         "original_code_revision": _recorded(git.get("commit"), "run-manifest.json#/software/git/commit"),
         "run_manifest": "included" if run_manifest is not None else "unknown",
+        "original_inputs": _original_inputs(run_manifest, files, facts_name),
         "recorded_summaries": {name: "recorded_not_independently_verified" if name in data else "unavailable"
                                for name in ("coverage", "history")},
         "audit": audit,
@@ -284,7 +306,7 @@ def build_package(run, facts, out):
         "facts": {"path": facts_name, "complete_file": True, "records": count},
         "source_bindings": {"run": {"name": run.name, **run_hash},
                             "facts": {"name": facts.name, **facts_hash}},
-        "provenance": _provenance(data, run_manifest, audit),
+        "provenance": _provenance(data, run_manifest, audit, {facts_name: facts_hash, **sidecars}, facts_name),
         "scope": SCOPE,
         "files": {},
     }
@@ -389,7 +411,7 @@ def verify_package(bundle, expected_manifest_sha256=None):
             read_question_profile(bundle / "questions.json")
         if "extraction-metadata.json" in files:
             _object(bundle / "extraction-metadata.json")
-        if _provenance(data, run_manifest, result["audit"]) != provenance:
+        if _provenance(data, run_manifest, result["audit"], files, manifest["facts"]["path"]) != provenance:
             raise ValueError("provenance declaration differs from the packaged run metadata")
         source, count = _facts(bundle / manifest["facts"]["path"])
         if count != manifest["facts"]["records"]:
