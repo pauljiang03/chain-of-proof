@@ -10,7 +10,7 @@
       },
       {
         "fileModifiedAt": [
-          183
+          257
         ]
       }
     ]
@@ -38,7 +38,7 @@
       }
     },
     {
-      "id": 183,
+      "id": 257,
       "kind": "fileModified",
       "t": 1427037112048820,
       "res": 1,
@@ -46,7 +46,7 @@
       "obj_text": "\\Users\\Public\\Desktop\\Google Chrome.lnk",
       "aux": 4,
       "aux_text": "CA0C7A48",
-      "row_sha256": "e44cfb444891892a662d928b28495257587232f0e99919d67274b3c99301bb7a",
+      "row_sha256": "98061dc66699d19f3722d9b2695923abf506854f33bc251e94d9e3a55559905d",
       "prov": {
         "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\Google Chrome.lnk",
         "exhibit": "PC",
@@ -73,7 +73,7 @@
     {
       "part": {
         "fileModifiedAt": [
-          183
+          257
         ]
       },
       "english": "\\Users\\Public\\Desktop\\Google Chrome.lnk was last modified on volume CA0C7A48 (2015-03-22 15:11:52 UTC).",

@@ -1,55 +1,214 @@
 {
   "finding_id": "M149",
-  "question": "Which files were sent to the Recycle Bin?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "fileDeletedAt": [
-      198
+    "both": [
+      {
+        "recoveredOnDevice": [
+          135,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          135,
+          196
+        ]
+      },
+      {
+        "tagged": [
+          135,
+          "obj",
+          436,
+          238
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+  "english": "A directory entry for \\pd\\new_years_day.jpg, created (2015-03-24 20:55:01 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\pd\\new_years_day.jpg was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:01 UTC) after its last modification (2014-12-01 18:50:26 UTC). This rests on heuristic rule R4. \\pd\\new_years_day.jpg is tagged \"same size and last-modified time as a file elsewhere: 10237535 bytes, 2014-12-01 18:50:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 198,
-      "kind": "fileDeleted",
-      "t": 1427226707149000,
+      "id": 135,
+      "kind": "fileCreated",
+      "t": 1427230501973386,
       "res": 1,
-      "obj": 113,
-      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "bec292764dc3df9d3db1e7c515348576d311834e7e0cae5aa68edcadc2df1c9a",
+      "obj": 118,
+      "obj_text": "\\pd\\new_years_day.jpg",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "8f87df7184938cd2b1ba1c4df1b9dbe25d1a697d5e569b4a2e5a69fab690d2a5",
       "prov": {
-        "artifact": "Recycle Bin index $I9M7UMY, file table record 74395",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "index_record_in_use": false,
-        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
-        "original_drive": "C:",
-        "size": 5079142,
-        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36524 (byte offset 74801152), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 10237535,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 22
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 196,
+      "kind": "fileModified",
+      "t": 1417459826000000,
+      "res": 1,
+      "obj": 118,
+      "obj_text": "\\pd\\new_years_day.jpg",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "1656015005cf4d59d16a88ebaeeda7268e7864e46729b0ee8b4c034fae100e47",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36524 (byte offset 74801152), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 10237535,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 22
+      }
+    },
+    {
+      "id": 436,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 118,
+      "obj_text": "\\pd\\new_years_day.jpg",
+      "aux": 238,
+      "aux_text": "same size and last-modified time as a file elsewhere: 10237535 bytes, 2014-12-01 18:50:26 UTC",
+      "row_sha256": "0e908104414a90e7824ce78de81535a2aab38801fd5aa66d9fb2b160fd648899",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileDeletedAt": [
-          198
+        "recoveredOnDevice": [
+          135,
+          500
         ]
       },
-      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\tr on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "english": "A directory entry for \\pd\\new_years_day.jpg, created (2015-03-24 20:55:01 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R5"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          135,
+          196
+        ]
+      },
+      "english": "\\pd\\new_years_day.jpg was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:01 UTC) after its last modification (2014-12-01 18:50:26 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          135,
+          "obj",
+          436,
+          238
+        ]
+      },
+      "english": "\\pd\\new_years_day.jpg is tagged \"same size and last-modified time as a file elsewhere: 10237535 bytes, 2014-12-01 18:50:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R5"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M149.lean",
   "trust_tier": "kernel",
   "axioms": []

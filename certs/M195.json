@@ -1,0 +1,491 @@
+{
+  "finding_id": "M195",
+  "question": "Which files in different places have the same size and last-modified time?",
+  "claim": {
+    "both": [
+      {
+        "fileModifiedAt": [
+          242
+        ]
+      },
+      {
+        "tagged": [
+          242,
+          "obj",
+          457,
+          248
+        ]
+      },
+      {
+        "recoveredOnDevice": [
+          159,
+          500
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          243
+        ]
+      },
+      {
+        "tagged": [
+          243,
+          "obj",
+          463,
+          248
+        ]
+      },
+      {
+        "recoveredOnDevice": [
+          160,
+          500
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          244
+        ]
+      },
+      {
+        "tagged": [
+          244,
+          "obj",
+          429,
+          248
+        ]
+      },
+      {
+        "recoveredOnDevice": [
+          124,
+          499
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A directory entry for \\technical review\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device disc RM#3. \\technical review\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared). A directory entry for \\technical review\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. A directory entry for \\tr\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device disc RM#3. \\tr\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared). A directory entry for \\tr\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. A directory entry for \\[lost folder 3]\\technical review\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device 4C530012550531106501. \\[lost folder 3]\\technical review\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared). A directory entry for \\[lost folder 3]\\technical review\\diary_#3p.txt, created (2015-03-24 14:00:18 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+  "cited_facts": [
+    {
+      "id": 242,
+      "kind": "fileModified",
+      "t": 1421777886000000,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "\\technical review\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "79d8fe0163c906aaee52efbc144e63e410e579d16fcae264ba0f2bf22ed05d67",
+      "prov": {
+        "allocation_table_at_sector": 51359,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51201",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:33.592346Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295,
+          51327,
+          51359
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 457,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "\\technical review\\diary_#3p.txt",
+      "aux": 248,
+      "aux_text": "same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC",
+      "row_sha256": "7b0da83c1478abdb69b5f06886e844a0905d256c9dfd7052c4125639235d8d96",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 159,
+      "kind": "fileCreated",
+      "t": 1427230546948265,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "\\technical review\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "f24496a05839b4d102ac342bbb442b8f1e61cd01abcc1a22fc594ccb7dd255a0",
+      "prov": {
+        "allocation_table_at_sector": 51359,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51201",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:33.592346Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295,
+          51327,
+          51359
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 243,
+      "kind": "fileModified",
+      "t": 1421777886000000,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "6966bcffd9bd9f1c31ddfe7d1b2fb6099c0369a82df585c03f2679edb7565053",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 463,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 248,
+      "aux_text": "same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC",
+      "row_sha256": "6d6087712d6ba6103c5172aa5db70d74115a35d939910e9a26d2af28104ce5b6",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 160,
+      "kind": "fileCreated",
+      "t": 1427230546948265,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "12969a90b134fd2162dab24a6ce67ab3507036365da7291cc4f10f5408703de6",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 244,
+      "kind": "fileModified",
+      "t": 1421777886000000,
+      "res": 2000000,
+      "obj": 108,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "2be291539af01c8c80955e468b6380df7a48ab074aa7cd4dd3c18eed75d935a9",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197",
+        "exhibit": "RM#2",
+        "first_cluster": 25360,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "DI1C44~1.TXT",
+        "size": 325120,
+        "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 429,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 108,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+      "aux": 248,
+      "aux_text": "same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC",
+      "row_sha256": "6ea9f7a64eb0b8238394603c36719ab40b9663585819a6025651a60c2fda375e",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 124,
+      "kind": "fileCreated",
+      "t": 1427205618410000,
+      "res": 10000,
+      "obj": 108,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "61b77da85be727b4a9b89bb1ce38da2bcb017b7aeb02de8c0c9007a0989a5843",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197",
+        "exhibit": "RM#2",
+        "first_cluster": 25360,
+        "image": "rm2.E01",
+        "recovered": true,
+        "removed_before_format": false,
+        "short_name": "DI1C44~1.TXT",
+        "size": 325120,
+        "time_zone": "FAT local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 499,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 69,
+      "aux_text": "unallocated space of device 4C530012550531106501",
+      "row_sha256": "cb478ac99ee7f5f3c7da11e44c32ebee0409ceea0e3884dd3b6ea121c705d881",
+      "prov": {
+        "artifact": "FAT32 clusters the allocation table marks free",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "exhibit": "RM#2",
+        "file_entries": 41,
+        "folders": 8,
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileModifiedAt": [
+          242
+        ]
+      },
+      "english": "A directory entry for \\technical review\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device disc RM#3.",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          242,
+          "obj",
+          457,
+          248
+        ]
+      },
+      "english": "\\technical review\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "recoveredOnDevice": [
+          159,
+          500
+        ]
+      },
+      "english": "A directory entry for \\technical review\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          243
+        ]
+      },
+      "english": "A directory entry for \\tr\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device disc RM#3.",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          243,
+          "obj",
+          463,
+          248
+        ]
+      },
+      "english": "\\tr\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "recoveredOnDevice": [
+          160,
+          500
+        ]
+      },
+      "english": "A directory entry for \\tr\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          244
+        ]
+      },
+      "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#3p.txt, last modified (2015-01-20 18:18:06 UTC), was recovered from the unallocated space of device 4C530012550531106501.",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          244,
+          "obj",
+          429,
+          248
+        ]
+      },
+      "english": "\\[lost folder 3]\\technical review\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "recoveredOnDevice": [
+          124,
+          499
+        ]
+      },
+      "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#3p.txt, created (2015-03-24 14:00:18 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
+      "rules": [
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10",
+    "R13",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M195.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

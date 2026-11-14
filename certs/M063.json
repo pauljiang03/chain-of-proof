@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          252
+          326
         ]
       },
       {
         "tagged": [
-          252,
+          326,
           "obj",
-          362,
-          195
+          484,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"system cleaner\" was made in chrome (2015-03-23 18:18:15 UTC). system cleaner is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"clean\").",
   "cited_facts": [
     {
-      "id": 252,
+      "id": 326,
       "kind": "webSearch",
       "t": 1427134695855272,
       "res": 1,
-      "obj": 150,
+      "obj": 184,
       "obj_text": "system cleaner",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "057503cb6991b5deddc7845c963749f279488cc21599b8b295bbb7a5f69d1ad3",
+      "row_sha256": "67671f50cc35ccc0427f93ef78c175cf6b748b8e78579de0d36b7621019f3a41",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 362,
+      "id": 484,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 150,
+      "obj": 184,
       "obj_text": "system cleaner",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "c163c6c7868738565e78671a0e03e39c387adb479d262d77b26fdc9689345b4e",
+      "row_sha256": "66cae877f66f5ff6416ca4b348b6f6271b2fd160d7054634927ba8a8dd0bd0aa",
       "prov": {
         "rule": "search term contains the watch-list word \"clean\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          252
+          326
         ]
       },
       "english": "A web search for \"system cleaner\" was made in chrome (2015-03-23 18:18:15 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          252,
+          326,
           "obj",
-          362,
-          195
+          484,
+          229
         ]
       },
       "english": "system cleaner is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"clean\").",

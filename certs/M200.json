@@ -1,0 +1,56 @@
+{
+  "finding_id": "M200",
+  "question": "Which files were sent to the Recycle Bin?",
+  "claim": {
+    "fileDeletedAt": [
+      273
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 273,
+      "kind": "fileDeleted",
+      "t": 1427227902836000,
+      "res": 1,
+      "obj": 148,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "68f45e9bd17c57d34f5506d48298753857f4db9c0c18b2bf66834f7ea2e18d34",
+      "prov": {
+        "artifact": "Recycle Bin index $IKXD1U3.jpg, file table record 74757",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 879394,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          273
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Chrysanthemum.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "M200.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

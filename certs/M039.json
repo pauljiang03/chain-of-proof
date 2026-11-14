@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          219
+          293
         ]
       },
       {
         "tagged": [
-          219,
+          293,
           "obj",
-          361,
-          195
+          483,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"leaking confidential information\" was made in chrome (2015-03-23 18:03:17 UTC). leaking confidential information is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
   "cited_facts": [
     {
-      "id": 219,
+      "id": 293,
       "kind": "webSearch",
       "t": 1427133797161615,
       "res": 1,
-      "obj": 131,
+      "obj": 165,
       "obj_text": "leaking confidential information",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "f63c9d98322decb3e00443b614b099e053e96a943c0363a6286077e9c4a60004",
+      "row_sha256": "69902c96c00d3daed60f2ac8badf566681ab6532c52867e66b585797d83c0330",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 361,
+      "id": 483,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 131,
+      "obj": 165,
       "obj_text": "leaking confidential information",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "b58d47a3e1d995bd40631e9f6e017c27a89b6e2e42db871683d08c770a1bfc60",
+      "row_sha256": "79c8145be63622dc0a0bdcf04b6e3318fc5aa5cfb6412400dff805d99036c836",
       "prov": {
         "rule": "search term contains the watch-list word \"leak\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          219
+          293
         ]
       },
       "english": "A web search for \"leaking confidential information\" was made in chrome (2015-03-23 18:03:17 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          219,
+          293,
           "obj",
-          361,
-          195
+          483,
+          229
         ]
       },
       "english": "leaking confidential information is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",

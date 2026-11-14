@@ -1,55 +1,212 @@
 {
   "finding_id": "M155",
-  "question": "Which files were sent to the Recycle Bin?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "fileDeletedAt": [
-      204
+    "both": [
+      {
+        "recoveredOnDevice": [
+          141,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          141,
+          215
+        ]
+      },
+      {
+        "tagged": [
+          141,
+          "obj",
+          443,
+          241
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "english": "A directory entry for \\prog\\my_smartphone.png, created (2015-03-24 20:55:19 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\prog\\my_smartphone.png was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:19 UTC) after its last modification (2015-01-05 15:57:22 UTC). This rests on heuristic rule R4. \\prog\\my_smartphone.png is tagged \"same size and last-modified time as a file elsewhere: 4440235 bytes, 2015-01-05 15:57:22 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 204,
-      "kind": "fileDeleted",
-      "t": 1427227902851000,
+      "id": 141,
+      "kind": "fileCreated",
+      "t": 1427230519305016,
       "res": 1,
-      "obj": 119,
-      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "589c4e9874e822671b6e78da91a0d0e15931d7c94a9d0558d9e55a851c092472",
+      "obj": 124,
+      "obj_text": "\\prog\\my_smartphone.png",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "4412d84042efcf58300f4f44d16c1da9dba80cc4d093749e54eec62a90e9b7df",
       "prov": {
-        "artifact": "Recycle Bin index $IU3FKWI.jpg, file table record 74763",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "index_record_in_use": false,
-        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
-        "original_drive": "C:",
-        "size": 780831,
-        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36528 (byte offset 74809344), named by the directory at sector 51305",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:27.648736Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 4440235,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 26
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 215,
+      "kind": "fileModified",
+      "t": 1420473442000000,
+      "res": 1,
+      "obj": 124,
+      "obj_text": "\\prog\\my_smartphone.png",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "eecf889df599945ce2189f13b19e13c057f037315939bdb7eed5ee5bfc948a99",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36528 (byte offset 74809344), named by the directory at sector 51305",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:27.648736Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 4440235,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 26
+      }
+    },
+    {
+      "id": 443,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 124,
+      "obj_text": "\\prog\\my_smartphone.png",
+      "aux": 241,
+      "aux_text": "same size and last-modified time as a file elsewhere: 4440235 bytes, 2015-01-05 15:57:22 UTC",
+      "row_sha256": "c9d1cc4ceaa1f24cc988b46a18d9bc37bd48abf5a3787ee3468601b13c3c459f",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileDeletedAt": [
-          204
+        "recoveredOnDevice": [
+          141,
+          500
         ]
       },
-      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Koala.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "english": "A directory entry for \\prog\\my_smartphone.png, created (2015-03-24 20:55:19 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R5"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          141,
+          215
+        ]
+      },
+      "english": "\\prog\\my_smartphone.png was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:19 UTC) after its last modification (2015-01-05 15:57:22 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          141,
+          "obj",
+          443,
+          241
+        ]
+      },
+      "english": "\\prog\\my_smartphone.png is tagged \"same size and last-modified time as a file elsewhere: 4440235 bytes, 2015-01-05 15:57:22 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R5"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M155.lean",
   "trust_tier": "kernel",
   "axioms": []

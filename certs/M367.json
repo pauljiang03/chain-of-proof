@@ -1,0 +1,266 @@
+{
+  "finding_id": "M367",
+  "question": "How many records of each kind does the evidence hold?",
+  "claim": {
+    "exactly": [
+      "fileDownloaded",
+      9
+    ]
+  },
+  "status": "verified",
+  "english": "The evidence holds exactly 9 download records: the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from http://download.info.apple.com/Mac_OS_X/031-13122.20141208.abbfo/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-13122.20141208.abbfo/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from https://support.apple.com/downloads/DL1455/en_US/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\googledrivesync.exe from http://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe (2015-03-23 19:56:30 UTC); the download of C:\\Users\\informant\\Downloads\\googledrivesync.exe from https://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe (2015-03-23 19:56:30 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:33 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:44 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:22 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:30 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+  "cited_facts": [
+    {
+      "id": 2262,
+      "kind": "fileDownloaded",
+      "t": 1427140547290982,
+      "res": 1,
+      "obj": 891,
+      "obj_text": "C:\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "aux": 1414,
+      "aux_text": "http://download.info.apple.com/Mac_OS_X/031-13122.20141208.abbfo/icloudsetup.exe",
+      "row_sha256": "7043eb59063894db07b3140a3c39398a89ca3a0c0616e14c62f61b482b1ecdac",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History table downloads id 1, downloads_url_chains index 1",
+        "browser": "Chrome",
+        "end_time": 1427140613339909,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "received_bytes": 71647536,
+        "referrer": "",
+        "state": 1,
+        "time_meaning": "start time of the download",
+        "tool": "dissect.target 3.25.1",
+        "total_bytes": 71647536,
+        "url_chain_position": "2 of 3"
+      }
+    },
+    {
+      "id": 2263,
+      "kind": "fileDownloaded",
+      "t": 1427140547290982,
+      "res": 1,
+      "obj": 891,
+      "obj_text": "C:\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "aux": 1415,
+      "aux_text": "http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-13122.20141208.abbfo/icloudsetup.exe",
+      "row_sha256": "505f8dd50591c5944bc8b275688bd5c39d56eef0abf1b968495d3e7e638a0f52",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History table downloads id 1, downloads_url_chains index 2",
+        "browser": "Chrome",
+        "end_time": 1427140613339909,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "received_bytes": 71647536,
+        "referrer": "",
+        "state": 1,
+        "time_meaning": "start time of the download",
+        "tool": "dissect.target 3.25.1",
+        "total_bytes": 71647536,
+        "url_chain_position": "3 of 3"
+      }
+    },
+    {
+      "id": 2264,
+      "kind": "fileDownloaded",
+      "t": 1427140547290982,
+      "res": 1,
+      "obj": 891,
+      "obj_text": "C:\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "aux": 1416,
+      "aux_text": "https://support.apple.com/downloads/DL1455/en_US/icloudsetup.exe",
+      "row_sha256": "26240d87690219d646fe3a7845519167256f1a09546f948f632baeeda5e96287",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History table downloads id 1, downloads_url_chains index 0",
+        "browser": "Chrome",
+        "end_time": 1427140613339909,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "received_bytes": 71647536,
+        "referrer": "",
+        "state": 1,
+        "time_meaning": "start time of the download",
+        "tool": "dissect.target 3.25.1",
+        "total_bytes": 71647536,
+        "url_chain_position": "1 of 3"
+      }
+    },
+    {
+      "id": 2265,
+      "kind": "fileDownloaded",
+      "t": 1427140590660454,
+      "res": 1,
+      "obj": 889,
+      "obj_text": "C:\\Users\\informant\\Downloads\\googledrivesync.exe",
+      "aux": 1417,
+      "aux_text": "http://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe",
+      "row_sha256": "67d389dc266af9a9c9e843ac4e5524cc3fc178ca405efa581b62af17d9daf550",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History table downloads id 2, downloads_url_chains index 0",
+        "browser": "Chrome",
+        "end_time": 1427140593494522,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "received_bytes": 880208,
+        "referrer": "",
+        "state": 1,
+        "time_meaning": "start time of the download",
+        "tool": "dissect.target 3.25.1",
+        "total_bytes": 880208,
+        "url_chain_position": "1 of 2"
+      }
+    },
+    {
+      "id": 2266,
+      "kind": "fileDownloaded",
+      "t": 1427140590660454,
+      "res": 1,
+      "obj": 889,
+      "obj_text": "C:\\Users\\informant\\Downloads\\googledrivesync.exe",
+      "aux": 1418,
+      "aux_text": "https://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe",
+      "row_sha256": "0b3977a7240d8a4c739333c48b9bef356ab7aedf52d31ca51296c6bc5b0104cf",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History table downloads id 2, downloads_url_chains index 1",
+        "browser": "Chrome",
+        "end_time": 1427140593494522,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "received_bytes": 880208,
+        "referrer": "",
+        "state": 1,
+        "time_meaning": "start time of the download",
+        "tool": "dissect.target 3.25.1",
+        "total_bytes": 880208,
+        "url_chain_position": "2 of 2"
+      }
+    },
+    {
+      "id": 2267,
+      "kind": "fileDownloaded",
+      "t": 1427294853852505,
+      "res": 1,
+      "obj": 963,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "aux": 1396,
+      "aux_text": "http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+      "row_sha256": "132d7a6bfbaeca01c6afdd02609949d27fe90888211f038e7de1fa16b61eb2db",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 1",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{DF0A857F-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://sourceforge.net/projects/eraser/files/Eraser%206/6.2/Eraser%206.2.0.2962.exe/download",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\OOYOT1KJ\\Eraser%206.2.0.2962[1].exe",
+        "time_meaning": "creation time inside the version-1 GUID that names the download record (when Internet Explorer created the record)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2268,
+      "kind": "fileDownloaded",
+      "t": 1427294864103305,
+      "res": 1,
+      "obj": 963,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "aux": 1396,
+      "aux_text": "http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+      "row_sha256": "bc54d9888f80f110c47650e0db38fb38558b98e5ee4d94c0c969075b9164f0ad",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 1",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{DF0A857F-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://sourceforge.net/projects/eraser/files/Eraser%206/6.2/Eraser%206.2.0.2962.exe/download",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\OOYOT1KJ\\Eraser%206.2.0.2962[1].exe",
+        "time_meaning": "AccessedTime of the download record: its last update. The record has no start-time field",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2269,
+      "kind": "fileDownloaded",
+      "t": 1427294902173805,
+      "res": 1,
+      "obj": 965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+      "aux": 1419,
+      "aux_text": "http://download.piriform.com/ccsetup504.exe",
+      "row_sha256": "75d9100272d6dd50701f79162ee60aa4f88e473bac81099842203fac9c944658",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 2",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{FBD7C447-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://www.piriform.com/ccleaner/download/standard",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\I9XNJ6FX\\ccsetup504[1].exe",
+        "time_meaning": "creation time inside the version-1 GUID that names the download record (when Internet Explorer created the record)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2270,
+      "kind": "fileDownloaded",
+      "t": 1427294910739805,
+      "res": 1,
+      "obj": 965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+      "aux": 1419,
+      "aux_text": "http://download.piriform.com/ccsetup504.exe",
+      "row_sha256": "e0877c826e665be9906b2e52fa9f1618118e692387be91ef210b39bccc217e28",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat table Container_22 (iedownload) EntryId 2",
+        "browser": "Internet Explorer",
+        "container_folder": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\IEDownloadHistory\\",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mime_type": "application/x-msdownload",
+        "record_id": "iedownload:{FBD7C447-D2FD-11E4-B734-000C29FF2429}",
+        "referrer": "http://www.piriform.com/ccleaner/download/standard",
+        "temporary_file": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\I9XNJ6FX\\ccsetup504[1].exe",
+        "time_meaning": "AccessedTime of the download record: its last update. The record has no start-time field",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "exactly": [
+          "fileDownloaded",
+          9
+        ]
+      },
+      "english": "The evidence holds exactly 9 download records: the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from http://download.info.apple.com/Mac_OS_X/031-13122.20141208.abbfo/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-13122.20141208.abbfo/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\icloudsetup.exe from https://support.apple.com/downloads/DL1455/en_US/icloudsetup.exe (2015-03-23 19:55:47 UTC); the download of C:\\Users\\informant\\Downloads\\googledrivesync.exe from http://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe (2015-03-23 19:56:30 UTC); the download of C:\\Users\\informant\\Downloads\\googledrivesync.exe from https://dl.google.com/tag/s/appguid%3D%7B3C122445-AECE-4309-90B7-85A6AEF42AC0%7D%26iid%3D%7B135CA63E-67F7-63DE-B9FE-7A9DD0A1CCE9%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Drive%26needsadmin%3Dtrue/drive/googledrivesync.exe (2015-03-23 19:56:30 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:33 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe from http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe (2015-03-25 14:47:44 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:22 UTC); the download of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe from http://download.piriform.com/ccsetup504.exe (2015-03-25 14:48:30 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+      "rules": [
+        "C1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "C1"
+  ],
+  "strength": "strong",
+  "lean_file": "M367.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

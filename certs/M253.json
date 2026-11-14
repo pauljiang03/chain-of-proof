@@ -1,0 +1,1735 @@
+{
+  "finding_id": "M253",
+  "question": "Which programs were run?",
+  "claim": {
+    "both": [
+      {
+        "programRan": [
+          1317
+        ]
+      },
+      {
+        "programRan": [
+          1318
+        ]
+      },
+      {
+        "programRan": [
+          1319
+        ]
+      },
+      {
+        "programRan": [
+          1320
+        ]
+      },
+      {
+        "programRan": [
+          1321
+        ]
+      },
+      {
+        "programRan": [
+          1322
+        ]
+      },
+      {
+        "programRan": [
+          1323
+        ]
+      },
+      {
+        "programRan": [
+          1324
+        ]
+      },
+      {
+        "programRan": [
+          1325
+        ]
+      },
+      {
+        "programRan": [
+          1326
+        ]
+      },
+      {
+        "programRan": [
+          1327
+        ]
+      },
+      {
+        "programRan": [
+          1328
+        ]
+      },
+      {
+        "programRan": [
+          1329
+        ]
+      },
+      {
+        "programRan": [
+          1330
+        ]
+      },
+      {
+        "programRan": [
+          1331
+        ]
+      },
+      {
+        "programRan": [
+          1332
+        ]
+      },
+      {
+        "programRan": [
+          1333
+        ]
+      },
+      {
+        "programRan": [
+          1334
+        ]
+      },
+      {
+        "programRan": [
+          1335
+        ]
+      },
+      {
+        "programRan": [
+          1336
+        ]
+      },
+      {
+        "programRan": [
+          1337
+        ]
+      },
+      {
+        "programRan": [
+          1338
+        ]
+      },
+      {
+        "programRan": [
+          1339
+        ]
+      },
+      {
+        "programRan": [
+          1340
+        ]
+      },
+      {
+        "programRan": [
+          1341
+        ]
+      },
+      {
+        "programRan": [
+          1342
+        ]
+      },
+      {
+        "programRan": [
+          1343
+        ]
+      },
+      {
+        "programRan": [
+          1344
+        ]
+      },
+      {
+        "programRan": [
+          1345
+        ]
+      },
+      {
+        "programRan": [
+          1346
+        ]
+      },
+      {
+        "programRan": [
+          1347
+        ]
+      },
+      {
+        "programRan": [
+          1348
+        ]
+      },
+      {
+        "programRan": [
+          1349
+        ]
+      },
+      {
+        "programRan": [
+          1350
+        ]
+      },
+      {
+        "programRan": [
+          1351
+        ]
+      },
+      {
+        "programRan": [
+          1352
+        ]
+      },
+      {
+        "programRan": [
+          1353
+        ]
+      },
+      {
+        "programRan": [
+          1354
+        ]
+      },
+      {
+        "programRan": [
+          1355
+        ]
+      },
+      {
+        "programRan": [
+          1356
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A record shows Magnify.lnk ran (2015-03-22 15:54:20 UTC, path {A77F5D77-2E2B-44C3-A6A2-ABA601054A51}\\Accessories\\Accessibility\\Magnify.lnk). A record shows Media Center.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Media Center.lnk). A record shows Microsoft.Windows.GettingStarted ran (2015-03-22 15:54:20 UTC). A record shows Microsoft.Windows.MediaCenter ran (2015-03-22 15:54:20 UTC). A record shows Microsoft.Windows.RemoteDesktop ran (2015-03-22 15:54:20 UTC). A record shows Microsoft.Windows.StickyNotes ran (2015-03-22 15:54:20 UTC). A record shows Paint.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Paint.lnk). A record shows Remote Desktop Connection.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Remote Desktop Connection.lnk). A record shows Snipping Tool.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Snipping Tool.lnk). A record shows SnippingTool.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\SnippingTool.exe). A record shows Sticky Notes.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Sticky Notes.lnk). A record shows Welcome Center.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Welcome Center.lnk). A record shows calc.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\calc.exe). A record shows magnify.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\magnify.exe). A record shows mspaint.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\mspaint.exe). A record shows solitaire.exe ran (2015-03-22 15:54:20 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Games\\Solitaire\\solitaire.exe). A record shows {00D8862B-6453-4957-A821-3D98D74C76BE} ran (2015-03-22 15:54:20 UTC, path ::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}). A record shows Chrome ran (2015-03-22 15:55:21 UTC). A record shows Google Chrome.lnk ran (2015-03-22 15:55:21 UTC, path C:\\Users\\Public\\Desktop\\Google Chrome.lnk). A record shows Windows Explorer.lnk ran (2015-03-22 15:56:13 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk). A record shows explorer.exe ran (2015-03-22 15:56:13 UTC, path {F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe). A record shows Windows Explorer.lnk ran (2015-03-22 15:57:08 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk). A record shows explorer.exe ran (2015-03-22 15:57:08 UTC, path {F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe). A record shows WFS.exe ran (2015-03-22 15:57:29 UTC, path C:\\Windows\\system32\\WFS.exe). A record shows NOTEPAD.EXE ran (2015-03-22 15:57:30 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\NOTEPAD.EXE). A record shows Google Chrome.lnk ran (2015-03-23 17:26:50 UTC, path C:\\Users\\Public\\Desktop\\Google Chrome.lnk). A record shows GoogleUpdateSetup.exe ran (2015-03-23 19:56:33 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe). A record shows googledrivesync.exe ran (2015-03-23 19:56:33 UTC, path C:\\Users\\informant\\Downloads\\googledrivesync.exe). A record shows icloudsetup.exe ran (2015-03-23 19:56:53 UTC, path C:\\Users\\informant\\Downloads\\icloudsetup.exe). A record shows AppleSoftwareUpdateIco.exe ran (2015-03-23 20:00:59 UTC, path C:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe). A record shows GoogleUpdate.exe ran (2015-03-23 20:02:07 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe). A record shows GoogleUpdate.exe ran (2015-03-23 20:02:09 UTC, path C:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe). A record shows cmd.exe ran (2015-03-23 20:10:19 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe). A record shows EXCEL.EXE ran (2015-03-23 20:26:50 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE). A record shows POWERPNT.EXE ran (2015-03-23 20:27:33 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE). A record shows msoia.exe ran (2015-03-24 13:51:46 UTC, path C:\\Program Files\\Microsoft Office\\Office15\\msoia.exe). A record shows rundll32.exe ran (2015-03-24 14:16:37 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\rundll32.exe). A record shows {00D8862B-6453-4957-A821-3D98D74C76BE} ran (2015-03-24 18:29:07 UTC, path ::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}). A record shows SOLITAIRE.EXE ran (2015-03-24 18:29:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT GAMES\\SOLITAIRE\\SOLITAIRE.EXE). A record shows Microsoft.Windows.StickyNotes ran (2015-03-24 18:31:55 UTC).",
+  "cited_facts": [
+    {
+      "id": 1317,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 785,
+      "obj_text": "Magnify.lnk",
+      "aux": 786,
+      "aux_text": "{A77F5D77-2E2B-44C3-A6A2-ABA601054A51}\\Accessories\\Accessibility\\Magnify.lnk",
+      "row_sha256": "dbe5e4fa1e19836ea494ddbaf9792a659f539960c14b8395b26c06b17e4d134e",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {N77S5Q77-2R2O-44P3-N6N2-NON601054N51}\\Npprffbevrf\\Npprffvovyvgl\\Zntavsl.yax",
+        "entry": "{A77F5D77-2E2B-44C3-A6A2-ABA601054A51}\\Accessories\\Accessibility\\Magnify.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 7,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 7,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1318,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 787,
+      "obj_text": "Media Center.lnk",
+      "aux": 788,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Media Center.lnk",
+      "row_sha256": "0f77a5a22b9eba1e523bcc3a13aacce3ed92bcd8e1d9ded390cd8a9778716968",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Zrqvn Pragre.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Media Center.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 13,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 13,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1319,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 789,
+      "obj_text": "Microsoft.Windows.GettingStarted",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "eb7526fba5abd5a420cdc8698b83effef400da4543071870979711b256d096a3",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.TrggvatFgnegrq",
+        "entry": "Microsoft.Windows.GettingStarted",
+        "exhibit": "PC",
+        "focus_count": 21,
+        "focus_time_ms": 420000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 14,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1320,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 790,
+      "obj_text": "Microsoft.Windows.MediaCenter",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "b18f28c6ce5172811d2a82dd9ed0b125e0237b26ea5cca6d7b010e371d48c95e",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.ZrqvnPragre",
+        "entry": "Microsoft.Windows.MediaCenter",
+        "exhibit": "PC",
+        "focus_count": 19,
+        "focus_time_ms": 380000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 13,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1321,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 791,
+      "obj_text": "Microsoft.Windows.RemoteDesktop",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "77a0e55218e08e510502e9275888f20f200d12c6e50bfae62f84eee5233af4fd",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.ErzbgrQrfxgbc",
+        "entry": "Microsoft.Windows.RemoteDesktop",
+        "exhibit": "PC",
+        "focus_count": 9,
+        "focus_time_ms": 180000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 8,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1322,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 876,
+      "obj_text": "Microsoft.Windows.StickyNotes",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "1643d0fdc6efc96b9fad09ddf23a63890f0dac80f083397546c7a22bc1021194",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.FgvpxlAbgrf",
+        "entry": "Microsoft.Windows.StickyNotes",
+        "exhibit": "PC",
+        "focus_count": 15,
+        "focus_time_ms": 300000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 11,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1323,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 792,
+      "obj_text": "Paint.lnk",
+      "aux": 793,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Paint.lnk",
+      "row_sha256": "9e721ec25751545d6a7bfbbdb80223a9a44c04eaa150c3a15dbba790c3874afa",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Npprffbevrf\\Cnvag.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Paint.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 9,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 9,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1324,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 794,
+      "obj_text": "Remote Desktop Connection.lnk",
+      "aux": 795,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Remote Desktop Connection.lnk",
+      "row_sha256": "edb7b1fcfd6790f3f650dc0dfcc11e57cd0a1dfa9ae34aed64148e82b555fe4b",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Npprffbevrf\\Erzbgr Qrfxgbc Pbaarpgvba.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Remote Desktop Connection.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 8,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 8,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1325,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 796,
+      "obj_text": "Snipping Tool.lnk",
+      "aux": 797,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Snipping Tool.lnk",
+      "row_sha256": "860501c531596912d86ef3fa98a4470a85928c7566e28cc88c8a49deba5eab00",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Npprffbevrf\\Favccvat Gbby.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Snipping Tool.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 10,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 10,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1326,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 476,
+      "obj_text": "SnippingTool.exe",
+      "aux": 798,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\SnippingTool.exe",
+      "row_sha256": "5652f99a8a66ce45bf66addd2f25b985dbd81d049af8012c43c3bfad25a6862d",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\FavccvatGbby.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\SnippingTool.exe",
+        "exhibit": "PC",
+        "focus_count": 13,
+        "focus_time_ms": 260000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 10,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1327,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 877,
+      "obj_text": "Sticky Notes.lnk",
+      "aux": 878,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Sticky Notes.lnk",
+      "row_sha256": "2a6777b7d8fddf46cc0c79720059babfbd9ffbdd8ffaa9e1cf4e009a96a07556",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Npprffbevrf\\Fgvpxl Abgrf.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Sticky Notes.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 11,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 11,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1328,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 799,
+      "obj_text": "Welcome Center.lnk",
+      "aux": 800,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Welcome Center.lnk",
+      "row_sha256": "8eb0499c3c4a23fd502e0790affdd53dc3e61521a5047c6e261e9a535dc55861",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Npprffbevrf\\Jrypbzr Pragre.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Welcome Center.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 14,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 14,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1329,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 394,
+      "obj_text": "calc.exe",
+      "aux": 801,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\calc.exe",
+      "row_sha256": "7df24287622ec9b20df63d8d28e531a053de1a3200305e1044d1f7f85868ecc0",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\pnyp.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\calc.exe",
+        "exhibit": "PC",
+        "focus_count": 17,
+        "focus_time_ms": 340000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 12,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1330,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 440,
+      "obj_text": "magnify.exe",
+      "aux": 802,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\magnify.exe",
+      "row_sha256": "23f0a197a4b20f0e1a83af3b2e9ecc48108124d9a9a48b5e8aa134e3a97ba65c",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\zntavsl.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\magnify.exe",
+        "exhibit": "PC",
+        "focus_count": 7,
+        "focus_time_ms": 140000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 7,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1331,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 447,
+      "obj_text": "mspaint.exe",
+      "aux": 803,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\mspaint.exe",
+      "row_sha256": "c6fc82ea5edd21fff1270e1650b41485b20f426e85ac97a4df30a06a32df816a",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\zfcnvag.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\mspaint.exe",
+        "exhibit": "PC",
+        "focus_count": 11,
+        "focus_time_ms": 220000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 9,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1332,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 478,
+      "obj_text": "solitaire.exe",
+      "aux": 804,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Games\\Solitaire\\solitaire.exe",
+      "row_sha256": "cc067798c86a7f099c7010ccc730a1b2713d627ed8619208cb67d52a7ce5939d",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Tnzrf\\Fbyvgnver\\fbyvgnver.rkr",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Games\\Solitaire\\solitaire.exe",
+        "exhibit": "PC",
+        "focus_count": 5,
+        "focus_time_ms": 100000,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 6,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1333,
+      "kind": "programRun",
+      "t": 1427039660274498,
+      "res": 1,
+      "obj": 879,
+      "obj_text": "{00D8862B-6453-4957-A821-3D98D74C76BE}",
+      "aux": 880,
+      "aux_text": "::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}",
+      "row_sha256": "4802c777c8db807fac53ca8b897e1bc894715732e1be4e9bbb2519cf637b33c6",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value ::{RQ228SQS-9RN8-4870-83O1-96O02PSR0Q52}\\{00Q8862O-6453-4957-N821-3Q98Q74P76OR}",
+        "entry": "::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 6,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 6,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1334,
+      "kind": "programRun",
+      "t": 1427039721552000,
+      "res": 1,
+      "obj": 881,
+      "obj_text": "Chrome",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "2a6e0ca84ffd91b50be74bfd39dcc2214b6accd80dd3efc4fa7fcad789c91a1c",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Puebzr",
+        "entry": "Chrome",
+        "exhibit": "PC",
+        "focus_count": 1,
+        "focus_time_ms": 21154,
+        "hive": "C:\\Users\\admin11\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1335,
+      "kind": "programRun",
+      "t": 1427039721552000,
+      "res": 1,
+      "obj": 882,
+      "obj_text": "Google Chrome.lnk",
+      "aux": 883,
+      "aux_text": "C:\\Users\\Public\\Desktop\\Google Chrome.lnk",
+      "row_sha256": "36435217d8ef9c0c36ff35a57086dc6302029ac5c2ec36e68bbc17fda5a67d23",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value P:\\Hfref\\Choyvp\\Qrfxgbc\\Tbbtyr Puebzr.yax",
+        "entry": "C:\\Users\\Public\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 1,
+        "hive": "C:\\Users\\admin11\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1336,
+      "kind": "programRun",
+      "t": 1427039773259000,
+      "res": 1,
+      "obj": 884,
+      "obj_text": "Windows Explorer.lnk",
+      "aux": 885,
+      "aux_text": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk",
+      "row_sha256": "b6c14057e985a1582706ee858dd6da84289ec9c784e6d2d7d2c0b10651573b8b",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {9R3995NO-1S9P-4S13-O827-48O24O6P7174}\\GnfxOne\\Jvaqbjf Rkcybere.yax",
+        "entry": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 1,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "User Pinned",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1337,
+      "kind": "programRun",
+      "t": 1427039773259000,
+      "res": 1,
+      "obj": 632,
+      "obj_text": "explorer.exe",
+      "aux": 886,
+      "aux_text": "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe",
+      "row_sha256": "c0137fcabb766f157d57a1f07895c0e854f612a750c73a8cc027371f49779285",
+      "prov": {
+        "account": "temporary",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {S38OS404-1Q43-42S2-9305-67QR0O28SP23}\\rkcybere.rkr",
+        "entry": "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 14477,
+        "hive": "C:\\Users\\temporary\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Windows",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1338,
+      "kind": "programRun",
+      "t": 1427039828314000,
+      "res": 1,
+      "obj": 884,
+      "obj_text": "Windows Explorer.lnk",
+      "aux": 885,
+      "aux_text": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk",
+      "row_sha256": "c390f4f473733adc928c01621e71ce6edf9e173b6815c3a5e7ea34ef7ee632a6",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {9R3995NO-1S9P-4S13-O827-48O24O6P7174}\\GnfxOne\\Jvaqbjf Rkcybere.yax",
+        "entry": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 1,
+        "hive": "C:\\Users\\admin11\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "User Pinned",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1339,
+      "kind": "programRun",
+      "t": 1427039828314000,
+      "res": 1,
+      "obj": 632,
+      "obj_text": "explorer.exe",
+      "aux": 886,
+      "aux_text": "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe",
+      "row_sha256": "48831d937bc62767220e0301ff60355b14954ec7f5069e3fee912f49872bef50",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {S38OS404-1Q43-42S2-9305-67QR0O28SP23}\\rkcybere.rkr",
+        "entry": "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe",
+        "exhibit": "PC",
+        "focus_count": 1,
+        "focus_time_ms": 23649,
+        "hive": "C:\\Users\\admin11\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Windows",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1340,
+      "kind": "programRun",
+      "t": 1427039849834446,
+      "res": 1,
+      "obj": 698,
+      "obj_text": "WFS.exe",
+      "aux": 699,
+      "aux_text": "C:\\Windows\\system32\\WFS.exe",
+      "row_sha256": "d5a3686a7b7e90d958bfd6f01495de9114a5b4a0a6e6148644d80685bde9d973",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache value C:\\Windows\\system32\\WFS.exe",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\usrclass.dat",
+        "image": "pc.E01",
+        "source": "MUICache",
+        "time_meaning": "last-write time of the registry key; the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1341,
+      "kind": "programRun",
+      "t": 1427039850942000,
+      "res": 1,
+      "obj": 453,
+      "obj_text": "NOTEPAD.EXE",
+      "aux": 887,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\NOTEPAD.EXE",
+      "row_sha256": "d78362d9ae66385b09a160d988dae88b76385eb87845913d732a11a3af320907",
+      "prov": {
+        "account": "admin11",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\ABGRCNQ.RKR",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\NOTEPAD.EXE",
+        "exhibit": "PC",
+        "focus_count": 1,
+        "focus_time_ms": 3338,
+        "hive": "C:\\Users\\admin11\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1342,
+      "kind": "programRun",
+      "t": 1427131610084000,
+      "res": 1,
+      "obj": 882,
+      "obj_text": "Google Chrome.lnk",
+      "aux": 883,
+      "aux_text": "C:\\Users\\Public\\Desktop\\Google Chrome.lnk",
+      "row_sha256": "7d18b42128a59f9957b60eb677a639f2c596ff1eb8afc7621e205f1e2fe3fae8",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value P:\\Hfref\\Choyvp\\Qrfxgbc\\Tbbtyr Puebzr.yax",
+        "entry": "C:\\Users\\Public\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 2,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 2,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1343,
+      "kind": "programRun",
+      "t": 1427140593481297,
+      "res": 1,
+      "obj": 835,
+      "obj_text": "GoogleUpdateSetup.exe",
+      "aux": 888,
+      "aux_text": "C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe",
+      "row_sha256": "def5505a494283daddf3c2d70424ece8c4f97285ca609aba05e0b9b6ecb67ee6",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 196",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1344,
+      "kind": "programRun",
+      "t": 1427140593481297,
+      "res": 1,
+      "obj": 765,
+      "obj_text": "googledrivesync.exe",
+      "aux": 889,
+      "aux_text": "C:\\Users\\informant\\Downloads\\googledrivesync.exe",
+      "row_sha256": "9b98d513b1ea9701c0536ba8696ee278cd1f65388567b200bad89780f5873e07",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 172",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\informant\\Downloads\\googledrivesync.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1345,
+      "kind": "programRun",
+      "t": 1427140613339270,
+      "res": 1,
+      "obj": 890,
+      "obj_text": "icloudsetup.exe",
+      "aux": 891,
+      "aux_text": "C:\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "row_sha256": "b460e7c117951b2c66ed07aece8c726cd7e05357f2e92124dc5e23562cd24dc1",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 171",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\informant\\Downloads\\icloudsetup.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1346,
+      "kind": "programRun",
+      "t": 1427140859996950,
+      "res": 1,
+      "obj": 892,
+      "obj_text": "AppleSoftwareUpdateIco.exe",
+      "aux": 893,
+      "aux_text": "C:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe",
+      "row_sha256": "bdcbba14036d5d96118e9d09af23380d27bbaf06ac91f85b8b0f24ee2e443ddc",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 37",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1347,
+      "kind": "programRun",
+      "t": 1427140927567893,
+      "res": 1,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 894,
+      "aux_text": "C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe",
+      "row_sha256": "cc1f6c5c5e8d88e5f17df15291d01aeac004b59f2e3c99a47bf45a60a3efe317",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 197",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1348,
+      "kind": "programRun",
+      "t": 1427140929627907,
+      "res": 1,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 895,
+      "aux_text": "C:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe",
+      "row_sha256": "0eb6fd1725985833a900b4e9aaa7223b4731ac5a3a7ed2a39ee3c01358bc3056",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 195",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1349,
+      "kind": "programRun",
+      "t": 1427141419749000,
+      "res": 1,
+      "obj": 567,
+      "obj_text": "cmd.exe",
+      "aux": 896,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe",
+      "row_sha256": "9e4fec73c833ea5bcf30d2db652cb5461998f89acf4f27dc96720660bb3c8332",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\pzq.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe",
+        "exhibit": "PC",
+        "focus_count": 2,
+        "focus_time_ms": 39296,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 4,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1350,
+      "kind": "programRun",
+      "t": 1427142410677000,
+      "res": 1,
+      "obj": 735,
+      "obj_text": "EXCEL.EXE",
+      "aux": 897,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE",
+      "row_sha256": "be689d5e4eb2eac55ee254142e4724f5d8b69e14f99a44f470472e87ddf5d32c",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Bssvpr\\Bssvpr15\\RKPRY.RKR",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 10359,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1351,
+      "kind": "programRun",
+      "t": 1427142453220000,
+      "res": 1,
+      "obj": 741,
+      "obj_text": "POWERPNT.EXE",
+      "aux": 898,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE",
+      "row_sha256": "1cea2bb1726bea5330e6b3377bab45da6a6b93fff8e672236a3a2965a31b5631",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Bssvpr\\Bssvpr15\\CBJRECAG.RKR",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 15835,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 2,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1352,
+      "kind": "programRun",
+      "t": 1427205106483695,
+      "res": 1,
+      "obj": 715,
+      "obj_text": "msoia.exe",
+      "aux": 716,
+      "aux_text": "C:\\Program Files\\Microsoft Office\\Office15\\msoia.exe",
+      "row_sha256": "24f7a2a83ce07217984df151529dc4741a2187513f9b2e30868b4543b15ed766",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tasks\\{D51142F7-A993-41A8-A11B-FBBD9196663A} value DynamicInfo",
+        "copy": "RegBack backup of the hive",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\RegBack\\SOFTWARE",
+        "image": "pc.E01",
+        "source": "scheduled task (TaskCache)",
+        "task": "\\Microsoft\\Office\\OfficeTelemetryAgentFallBack",
+        "task_file": "C:\\Windows\\System32\\Tasks\\Microsoft\\Office\\OfficeTelemetryAgentFallBack",
+        "time_meaning": "last run time of the scheduled task whose action runs this program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1353,
+      "kind": "programRun",
+      "t": 1427206597941000,
+      "res": 1,
+      "obj": 379,
+      "obj_text": "rundll32.exe",
+      "aux": 899,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\rundll32.exe",
+      "row_sha256": "9b6b75bc54a75ed0ccc60f9d10eec049fb287b73f456bd5bf7a0522b6663185f",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\ehaqyy32.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\rundll32.exe",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 0,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1354,
+      "kind": "programRun",
+      "t": 1427221747178000,
+      "res": 1,
+      "obj": 879,
+      "obj_text": "{00D8862B-6453-4957-A821-3D98D74C76BE}",
+      "aux": 880,
+      "aux_text": "::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}",
+      "row_sha256": "d81f402167252ae591130e44a2462b6975e307ee0a61937fbcaa493bdb38f21a",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value ::{RQ228SQS-9RN8-4870-83O1-96O02PSR0Q52}\\{00Q8862O-6453-4957-N821-3Q98Q74P76OR}",
+        "entry": "::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 7,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 7,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1355,
+      "kind": "programRun",
+      "t": 1427221747209939,
+      "res": 1,
+      "obj": 900,
+      "obj_text": "SOLITAIRE.EXE",
+      "aux": 901,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT GAMES\\SOLITAIRE\\SOLITAIRE.EXE",
+      "row_sha256": "c9fb42edeae1d44fe9a1a4746786fb51b27894f3113fe990fc7f460f7e074ad1",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SOLITAIRE.EXE-906D7E29.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-24 18:29:17.226976Z",
+        "prefetch_file_modified": "2015-03-24 18:29:17.227978Z",
+        "prefetch_hash": "906D7E29",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1356,
+      "kind": "programRun",
+      "t": 1427221915797000,
+      "res": 1,
+      "obj": 876,
+      "obj_text": "Microsoft.Windows.StickyNotes",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "0b42be289c5f10e05ed4f555992ffafd0ba43e1e259f431d08ef5c21d372e349",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.FgvpxlAbgrf",
+        "entry": "Microsoft.Windows.StickyNotes",
+        "exhibit": "PC",
+        "focus_count": 23,
+        "focus_time_ms": 371776,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 13,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programRan": [
+          1317
+        ]
+      },
+      "english": "A record shows Magnify.lnk ran (2015-03-22 15:54:20 UTC, path {A77F5D77-2E2B-44C3-A6A2-ABA601054A51}\\Accessories\\Accessibility\\Magnify.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1318
+        ]
+      },
+      "english": "A record shows Media Center.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Media Center.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1319
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.GettingStarted ran (2015-03-22 15:54:20 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1320
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.MediaCenter ran (2015-03-22 15:54:20 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1321
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.RemoteDesktop ran (2015-03-22 15:54:20 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1322
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.StickyNotes ran (2015-03-22 15:54:20 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1323
+        ]
+      },
+      "english": "A record shows Paint.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Paint.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1324
+        ]
+      },
+      "english": "A record shows Remote Desktop Connection.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Remote Desktop Connection.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1325
+        ]
+      },
+      "english": "A record shows Snipping Tool.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Snipping Tool.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1326
+        ]
+      },
+      "english": "A record shows SnippingTool.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\SnippingTool.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1327
+        ]
+      },
+      "english": "A record shows Sticky Notes.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Sticky Notes.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1328
+        ]
+      },
+      "english": "A record shows Welcome Center.lnk ran (2015-03-22 15:54:20 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Accessories\\Welcome Center.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1329
+        ]
+      },
+      "english": "A record shows calc.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\calc.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1330
+        ]
+      },
+      "english": "A record shows magnify.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\magnify.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1331
+        ]
+      },
+      "english": "A record shows mspaint.exe ran (2015-03-22 15:54:20 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\mspaint.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1332
+        ]
+      },
+      "english": "A record shows solitaire.exe ran (2015-03-22 15:54:20 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Games\\Solitaire\\solitaire.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1333
+        ]
+      },
+      "english": "A record shows {00D8862B-6453-4957-A821-3D98D74C76BE} ran (2015-03-22 15:54:20 UTC, path ::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1334
+        ]
+      },
+      "english": "A record shows Chrome ran (2015-03-22 15:55:21 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1335
+        ]
+      },
+      "english": "A record shows Google Chrome.lnk ran (2015-03-22 15:55:21 UTC, path C:\\Users\\Public\\Desktop\\Google Chrome.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1336
+        ]
+      },
+      "english": "A record shows Windows Explorer.lnk ran (2015-03-22 15:56:13 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1337
+        ]
+      },
+      "english": "A record shows explorer.exe ran (2015-03-22 15:56:13 UTC, path {F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1338
+        ]
+      },
+      "english": "A record shows Windows Explorer.lnk ran (2015-03-22 15:57:08 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Explorer.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1339
+        ]
+      },
+      "english": "A record shows explorer.exe ran (2015-03-22 15:57:08 UTC, path {F38BF404-1D43-42F2-9305-67DE0B28FC23}\\explorer.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1340
+        ]
+      },
+      "english": "A record shows WFS.exe ran (2015-03-22 15:57:29 UTC, path C:\\Windows\\system32\\WFS.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1341
+        ]
+      },
+      "english": "A record shows NOTEPAD.EXE ran (2015-03-22 15:57:30 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\NOTEPAD.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1342
+        ]
+      },
+      "english": "A record shows Google Chrome.lnk ran (2015-03-23 17:26:50 UTC, path C:\\Users\\Public\\Desktop\\Google Chrome.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1343
+        ]
+      },
+      "english": "A record shows GoogleUpdateSetup.exe ran (2015-03-23 19:56:33 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdateSetup.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1344
+        ]
+      },
+      "english": "A record shows googledrivesync.exe ran (2015-03-23 19:56:33 UTC, path C:\\Users\\informant\\Downloads\\googledrivesync.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1345
+        ]
+      },
+      "english": "A record shows icloudsetup.exe ran (2015-03-23 19:56:53 UTC, path C:\\Users\\informant\\Downloads\\icloudsetup.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1346
+        ]
+      },
+      "english": "A record shows AppleSoftwareUpdateIco.exe ran (2015-03-23 20:00:59 UTC, path C:\\Windows\\Installer\\{789A5B64-9DD9-4BA5-915A-F0FC0A1B7BFE}\\AppleSoftwareUpdateIco.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1347
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-23 20:02:07 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\GUMA150.tmp\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1348
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-23 20:02:09 UTC, path C:\\Program Files (x86)\\GUMA94B.tmp\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1349
+        ]
+      },
+      "english": "A record shows cmd.exe ran (2015-03-23 20:10:19 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1350
+        ]
+      },
+      "english": "A record shows EXCEL.EXE ran (2015-03-23 20:26:50 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\EXCEL.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1351
+        ]
+      },
+      "english": "A record shows POWERPNT.EXE ran (2015-03-23 20:27:33 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\POWERPNT.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1352
+        ]
+      },
+      "english": "A record shows msoia.exe ran (2015-03-24 13:51:46 UTC, path C:\\Program Files\\Microsoft Office\\Office15\\msoia.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1353
+        ]
+      },
+      "english": "A record shows rundll32.exe ran (2015-03-24 14:16:37 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\rundll32.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1354
+        ]
+      },
+      "english": "A record shows {00D8862B-6453-4957-A821-3D98D74C76BE} ran (2015-03-24 18:29:07 UTC, path ::{ED228FDF-9EA8-4870-83B1-96B02CFE0D52}\\{00D8862B-6453-4957-A821-3D98D74C76BE}).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1355
+        ]
+      },
+      "english": "A record shows SOLITAIRE.EXE ran (2015-03-24 18:29:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT GAMES\\SOLITAIRE\\SOLITAIRE.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1356
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.StickyNotes ran (2015-03-24 18:31:55 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "M253.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

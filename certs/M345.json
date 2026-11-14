@@ -1,0 +1,131 @@
+{
+  "finding_id": "M345",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12699,
+          12705
+        ]
+      },
+      {
+        "sameContent": [
+          12705,
+          12710
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\admin11\\Documents\\desktop.ini on exhibit PC and \\Users\\informant\\Documents\\desktop.ini on exhibit PC have identical content: both read as sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844. \\Users\\informant\\Documents\\desktop.ini on exhibit PC and \\Users\\temporary\\Documents\\desktop.ini on exhibit PC have identical content: both read as sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+  "cited_facts": [
+    {
+      "id": 12699,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 61,
+      "obj_text": "\\Users\\admin11\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "91427ff7deba42d02d2db80adce98877d90ed8aca8433788d23278e76e030380",
+      "prov": {
+        "account": "admin11",
+        "artifact": "NTFS $DATA of \\Users\\admin11\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12705,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 55,
+      "obj_text": "\\Users\\informant\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "faed53f199e2d3a1d88ece222fe7798f4b67a5df60f1a3c23ee07f76b3381efd",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12710,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 64,
+      "obj_text": "\\Users\\temporary\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "1ce6d95c94d1ce798b15820e18b7af7387114064e64c412e03d47dd04581ae4a",
+      "prov": {
+        "account": "temporary",
+        "artifact": "NTFS $DATA of \\Users\\temporary\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12699,
+          12705
+        ]
+      },
+      "english": "\\Users\\admin11\\Documents\\desktop.ini on exhibit PC and \\Users\\informant\\Documents\\desktop.ini on exhibit PC have identical content: both read as sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12705,
+          12710
+        ]
+      },
+      "english": "\\Users\\informant\\Documents\\desktop.ini on exhibit PC and \\Users\\temporary\\Documents\\desktop.ini on exhibit PC have identical content: both read as sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M345.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

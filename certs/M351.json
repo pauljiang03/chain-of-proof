@@ -1,0 +1,150 @@
+{
+  "finding_id": "M351",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12719,
+          12765
+        ]
+      },
+      {
+        "sameContent": [
+          12765,
+          12768
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\[lost folder 3]\\progress\\my_friends.svg on exhibit RM#2 and \\prog\\my_friends.svg on exhibit RM#3 have identical content: both read as sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. \\prog\\my_friends.svg on exhibit RM#3 and \\progress\\my_friends.svg on exhibit RM#3 have identical content: both read as sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9.",
+  "cited_facts": [
+    {
+      "id": 12719,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 98,
+      "obj_text": "\\[lost folder 3]\\progress\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "d6e2613b3965b4bb6d09fb6e9732326f53294441e63323cc84d674aa4b7607fc",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 12903; content at volume byte offset 57040896",
+        "cluster_size": 4096,
+        "clusters": 15,
+        "exhibit": "RM#2",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "first_cluster": 12904,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 15 clusters from the first cluster (12904); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 57040896
+      }
+    },
+    {
+      "id": 12765,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 122,
+      "obj_text": "\\prog\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "d5abb700a5fe645abc255b0677f2b23b5a2833a030b438b4c2d6b0c6987d654a",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51306",
+        "exhibit": "RM#3",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26118,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12768,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 123,
+      "obj_text": "\\progress\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "3bcae0a4dbae780896afe89e775c28ba3a818576bed8447a8c1041ceb74bf084",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51197",
+        "exhibit": "RM#3",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26118,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12719,
+          12765
+        ]
+      },
+      "english": "\\[lost folder 3]\\progress\\my_friends.svg on exhibit RM#2 and \\prog\\my_friends.svg on exhibit RM#3 have identical content: both read as sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12765,
+          12768
+        ]
+      },
+      "english": "\\prog\\my_friends.svg on exhibit RM#3 and \\progress\\my_friends.svg on exhibit RM#3 have identical content: both read as sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M351.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,336 @@
+{
+  "finding_id": "M244",
+  "question": "Which programs were installed?",
+  "claim": {
+    "both": [
+      {
+        "programInstalledAt": [
+          990
+        ]
+      },
+      {
+        "programInstalledAt": [
+          991
+        ]
+      },
+      {
+        "programInstalledAt": [
+          992
+        ]
+      },
+      {
+        "programInstalledAt": [
+          993
+        ]
+      },
+      {
+        "programInstalledAt": [
+          994
+        ]
+      },
+      {
+        "programInstalledAt": [
+          995
+        ]
+      },
+      {
+        "programInstalledAt": [
+          996
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "Microsoft .NET Framework 4 Client Profile 4.0.30319 is recorded as installed (2015-03-25 14:52:06 UTC). Microsoft .NET Framework 4 Client Profile 4.0.30319 is recorded as installed (2015-03-25 14:53:52 UTC). Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:06 UTC). Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:33 UTC). Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:50 UTC). Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:31 UTC). Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:49 UTC).",
+  "cited_facts": [
+    {
+      "id": 990,
+      "kind": "programInstalled",
+      "t": 1427295126105404,
+      "res": 1,
+      "obj": 357,
+      "obj_text": "Microsoft .NET Framework 4 Client Profile",
+      "aux": 358,
+      "aux_text": "4.0.30319",
+      "row_sha256": "65cc98299a32c05cadcda043519e4a12f89dc1064dedc22b7d5fc51dd802a4ed",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{F5B09CFD-F0B2-36AF-8DF4-1DF6B63FC7B4}",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "install_date_value": "20150325",
+        "publisher": "Microsoft Corporation",
+        "registry_view": "native",
+        "scope": "machine-wide",
+        "system_component": true,
+        "time_meaning": "last-write time of the uninstall entry",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 991,
+      "kind": "programInstalled",
+      "t": 1427295232000000,
+      "res": 1000000,
+      "obj": 357,
+      "obj_text": "Microsoft .NET Framework 4 Client Profile",
+      "aux": 358,
+      "aux_text": "4.0.30319",
+      "row_sha256": "fed74bd1e596a56fa0153253652efc33895503ed34757e6f48426ae0f5ab3ddd",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Application.evtx record 907",
+        "channel": "Application",
+        "data": {
+          "Binary": "7b46354230394346442d463042322d333641462d384446342d3144463642363346433742347d3030303064326562663436383331643263623332396166373637323933656232306366643030303030303030",
+          "Data_0": "Microsoft .NET Framework 4 Client Profile",
+          "Data_1": "4.0.30319",
+          "Data_2": "0",
+          "Data_3": "0",
+          "Data_4": "Microsoft Corporation",
+          "Data_5": "(NULL)",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event_id": 1033,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "MsiInstaller",
+        "publisher": "Microsoft Corporation",
+        "source": "Application event log: Windows Installer installed the product",
+        "time_meaning": "time the Windows Installer logged the completed installation",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 992,
+      "kind": "programInstalled",
+      "t": 1427295246693405,
+      "res": 1,
+      "obj": 359,
+      "obj_text": "Microsoft .NET Framework 4 Extended",
+      "aux": 358,
+      "aux_text": "4.0.30319",
+      "row_sha256": "87a2866774c7c087580a51f6d830442574e4653a88e941ebb9d03b91452c274f",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Microsoft .NET Framework 4 Extended",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "install_location": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\SetupCache\\Extended",
+        "publisher": "Microsoft Corporation",
+        "registry_view": "native",
+        "scope": "machine-wide",
+        "time_meaning": "last-write time of the uninstall entry",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 993,
+      "kind": "programInstalled",
+      "t": 1427295273931004,
+      "res": 1,
+      "obj": 359,
+      "obj_text": "Microsoft .NET Framework 4 Extended",
+      "aux": 358,
+      "aux_text": "4.0.30319",
+      "row_sha256": "de536b6c573d3e6cb0f80fb26a97d6faa9574a59ebd7c84a4964503578099c2a",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{8E34682C-8118-31F1-BC4C-98CD9675E1C2}",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "install_date_value": "20150325",
+        "publisher": "Microsoft Corporation",
+        "registry_view": "native",
+        "scope": "machine-wide",
+        "system_component": true,
+        "time_meaning": "last-write time of the uninstall entry",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 994,
+      "kind": "programInstalled",
+      "t": 1427295290000000,
+      "res": 1000000,
+      "obj": 359,
+      "obj_text": "Microsoft .NET Framework 4 Extended",
+      "aux": 358,
+      "aux_text": "4.0.30319",
+      "row_sha256": "6a1401d9416845b07d329c09374eb23653a127381a87f89d81ba6ec936e2cb56",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Application.evtx record 932",
+        "channel": "Application",
+        "data": {
+          "Binary": "7b38453334363832432d383131382d333146312d424334432d3938434439363735453143327d3030303062343636643138313537643937646633333031633636356265383264336239363030303030303030",
+          "Data_0": "Microsoft .NET Framework 4 Extended",
+          "Data_1": "4.0.30319",
+          "Data_2": "0",
+          "Data_3": "0",
+          "Data_4": "Microsoft Corporation",
+          "Data_5": "(NULL)",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event_id": 1033,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "MsiInstaller",
+        "publisher": "Microsoft Corporation",
+        "source": "Application event log: Windows Installer installed the product",
+        "time_meaning": "time the Windows Installer logged the completed installation",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 995,
+      "kind": "programInstalled",
+      "t": 1427295451895803,
+      "res": 1,
+      "obj": 355,
+      "obj_text": "Eraser 6.2.0.2962",
+      "aux": 356,
+      "aux_text": "6.2.2962",
+      "row_sha256": "63aa20b2405f568f88e651f58c0c635c4832abbeb7e5b3d29a30a58590eae915",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{C6E287F1-2E47-45F0-BB51-94F815CFFB48}",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "install_date_value": "20150325",
+        "publisher": "The Eraser Project",
+        "registry_view": "native",
+        "scope": "machine-wide",
+        "time_meaning": "last-write time of the uninstall entry",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 996,
+      "kind": "programInstalled",
+      "t": 1427295469000000,
+      "res": 1000000,
+      "obj": 355,
+      "obj_text": "Eraser 6.2.0.2962",
+      "aux": 356,
+      "aux_text": "6.2.2962",
+      "row_sha256": "9553c8f8993cfd5c9ac9f3997fe67b06990e276c8b0674daa4fb0ea750299062",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Application.evtx record 941",
+        "channel": "Application",
+        "data": {
+          "Binary": "7b43364532383746312d324534372d343546302d424235312d3934463831354346464234387d3030303037633764303764663232613139646236623537623833376466336662353335373030303030393034",
+          "Data_0": "Eraser 6.2.0.2962",
+          "Data_1": "6.2.2962",
+          "Data_2": "1033",
+          "Data_3": "0",
+          "Data_4": "The Eraser Project",
+          "Data_5": "(NULL)",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event_id": 1033,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "MsiInstaller",
+        "publisher": "The Eraser Project",
+        "source": "Application event log: Windows Installer installed the product",
+        "time_meaning": "time the Windows Installer logged the completed installation",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programInstalledAt": [
+          990
+        ]
+      },
+      "english": "Microsoft .NET Framework 4 Client Profile 4.0.30319 is recorded as installed (2015-03-25 14:52:06 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          991
+        ]
+      },
+      "english": "Microsoft .NET Framework 4 Client Profile 4.0.30319 is recorded as installed (2015-03-25 14:53:52 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          992
+        ]
+      },
+      "english": "Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:06 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          993
+        ]
+      },
+      "english": "Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:33 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          994
+        ]
+      },
+      "english": "Microsoft .NET Framework 4 Extended 4.0.30319 is recorded as installed (2015-03-25 14:54:50 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          995
+        ]
+      },
+      "english": "Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:31 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programInstalledAt": [
+          996
+        ]
+      },
+      "english": "Eraser 6.2.0.2962 6.2.2962 is recorded as installed (2015-03-25 14:57:49 UTC).",
+      "rules": [
+        "R17"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R17"
+  ],
+  "strength": "strong",
+  "lean_file": "M244.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

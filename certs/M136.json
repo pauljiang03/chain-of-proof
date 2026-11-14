@@ -6,21 +6,21 @@
       {
         "recoveredOnDevice": [
           122,
-          376
+          499
         ]
       },
       {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       {
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       {
@@ -32,13 +32,21 @@
       {
         "copiedHere": [
           122,
-          170
+          232
+        ]
+      },
+      {
+        "tagged": [
+          122,
+          "obj",
+          427,
+          246
         ]
       }
     ]
   },
   "status": "verified",
-  "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#2p.txt, created (2015-03-24 14:00:14 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system. USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space. 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief). The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before the creation of \\[lost folder 3]\\technical review\\diary_#2p.txt on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 14:00:14 UTC): the gap of 101.481 s exceeds the combined timestamp uncertainty of 11 ms. \\[lost folder 3]\\technical review\\diary_#2p.txt was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 14:00:14 UTC) after its last modification (2015-01-12 19:20:26 UTC). This rests on heuristic rule R4.",
+  "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#2p.txt, created (2015-03-24 14:00:14 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system. USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space. 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief). The connection of USB device 4C530012550531106501 (2015-03-24 13:58:32 UTC) happened before the creation of \\[lost folder 3]\\technical review\\diary_#2p.txt on an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space) (2015-03-24 14:00:14 UTC): the gap of 101.481 s exceeds the combined timestamp uncertainty of 11 ms. \\[lost folder 3]\\technical review\\diary_#2p.txt was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 14:00:14 UTC) after its last modification (2015-01-12 19:20:26 UTC). This rests on heuristic rule R4. \\[lost folder 3]\\technical review\\diary_#2p.txt is tagged \"same size and last-modified time as a file elsewhere: 1154560 bytes, 2015-01-12 19:20:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
       "id": 122,
@@ -64,7 +72,7 @@
       }
     },
     {
-      "id": 376,
+      "id": 499,
       "kind": "unallocatedOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -72,7 +80,7 @@
       "obj_text": "4C530012550531106501",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "row_sha256": "cb478ac99ee7f5f3c7da11e44c32ebee0409ceea0e3884dd3b6ea121c705d881",
       "prov": {
         "artifact": "FAT32 clusters the allocation table marks free",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -105,22 +113,22 @@
       }
     },
     {
-      "id": 315,
+      "id": 389,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 194,
+      "aux": 228,
       "aux_text": "unauthorized-device",
-      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "row_sha256": "f90f2b944a666b19333d614b1fc179c69d3e4283dc4888cf119bcfe6884c6e3d",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 170,
+      "id": 232,
       "kind": "fileModified",
       "t": 1421090426000000,
       "res": 2000000,
@@ -128,7 +136,7 @@
       "obj_text": "\\[lost folder 3]\\technical review\\diary_#2p.txt",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "f3e837d91e2941beb89cef0a32e789adab70aa1b613d4e4edbae4dbc7c118b60",
+      "row_sha256": "45a8e9ba0d9a51ea36d1acabba12068b911ea808c3a19f85efe6c7a3da38b0b5",
       "prov": {
         "artifact": "FAT directory entry in unallocated cluster 24197",
         "exhibit": "RM#2",
@@ -141,6 +149,21 @@
         "time_zone": "FAT local time, written when the entry was created, so converted with that moment's UTC offset (-0400, zone America/New_York)",
         "tool": "dissect.target 3.25.1"
       }
+    },
+    {
+      "id": 427,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 106,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#2p.txt",
+      "aux": 246,
+      "aux_text": "same size and last-modified time as a file elsewhere: 1154560 bytes, 2015-01-12 19:20:26 UTC",
+      "row_sha256": "779890b32b9b34db91ec51e7fa464a702c566484ae31b7aba1d8dc138e09709a",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
     }
   ],
   "parts": [
@@ -148,7 +171,7 @@
       "part": {
         "recoveredOnDevice": [
           122,
-          376
+          499
         ]
       },
       "english": "A directory entry for \\[lost folder 3]\\technical review\\diary_#2p.txt, created (2015-03-24 14:00:14 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
@@ -162,7 +185,7 @@
       "part": {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
@@ -177,8 +200,8 @@
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
@@ -202,7 +225,7 @@
       "part": {
         "copiedHere": [
           122,
-          170
+          232
         ]
       },
       "english": "\\[lost folder 3]\\technical review\\diary_#2p.txt was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 14:00:14 UTC) after its last modification (2015-01-12 19:20:26 UTC). This rests on heuristic rule R4.",
@@ -210,6 +233,21 @@
         "R4"
       ],
       "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          122,
+          "obj",
+          427,
+          246
+        ]
+      },
+      "english": "\\[lost folder 3]\\technical review\\diary_#2p.txt is tagged \"same size and last-modified time as a file elsewhere: 1154560 bytes, 2015-01-12 19:20:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
     }
   ],
   "rules": [

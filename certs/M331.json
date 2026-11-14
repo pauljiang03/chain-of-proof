@@ -1,0 +1,1811 @@
+{
+  "finding_id": "M331",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12610
+        ]
+      },
+      {
+        "fileRecorded": [
+          12611
+        ]
+      },
+      {
+        "fileRecorded": [
+          12612
+        ]
+      },
+      {
+        "fileRecorded": [
+          12613
+        ]
+      },
+      {
+        "fileRecorded": [
+          12614
+        ]
+      },
+      {
+        "fileRecorded": [
+          12615
+        ]
+      },
+      {
+        "fileRecorded": [
+          12616
+        ]
+      },
+      {
+        "fileRecorded": [
+          12617
+        ]
+      },
+      {
+        "fileRecorded": [
+          12618
+        ]
+      },
+      {
+        "fileRecorded": [
+          12619
+        ]
+      },
+      {
+        "fileRecorded": [
+          12620
+        ]
+      },
+      {
+        "fileRecorded": [
+          12621
+        ]
+      },
+      {
+        "fileRecorded": [
+          12622
+        ]
+      },
+      {
+        "fileRecorded": [
+          12623
+        ]
+      },
+      {
+        "fileRecorded": [
+          12624
+        ]
+      },
+      {
+        "fileRecorded": [
+          12625
+        ]
+      },
+      {
+        "fileRecorded": [
+          12626
+        ]
+      },
+      {
+        "fileRecorded": [
+          12627
+        ]
+      },
+      {
+        "fileRecorded": [
+          12628
+        ]
+      },
+      {
+        "fileRecorded": [
+          12629
+        ]
+      },
+      {
+        "fileRecorded": [
+          12630
+        ]
+      },
+      {
+        "fileRecorded": [
+          12631
+        ]
+      },
+      {
+        "fileRecorded": [
+          12632
+        ]
+      },
+      {
+        "fileRecorded": [
+          12633
+        ]
+      },
+      {
+        "fileRecorded": [
+          12634
+        ]
+      },
+      {
+        "fileRecorded": [
+          12635
+        ]
+      },
+      {
+        "fileRecorded": [
+          12636
+        ]
+      },
+      {
+        "fileRecorded": [
+          12637
+        ]
+      },
+      {
+        "fileRecorded": [
+          12638
+        ]
+      },
+      {
+        "fileRecorded": [
+          12639
+        ]
+      },
+      {
+        "fileRecorded": [
+          12640
+        ]
+      },
+      {
+        "fileRecorded": [
+          12641
+        ]
+      },
+      {
+        "fileRecorded": [
+          12642
+        ]
+      },
+      {
+        "fileRecorded": [
+          12643
+        ]
+      },
+      {
+        "fileRecorded": [
+          12644
+        ]
+      },
+      {
+        "fileRecorded": [
+          12645
+        ]
+      },
+      {
+        "fileRecorded": [
+          12646
+        ]
+      },
+      {
+        "fileRecorded": [
+          12647
+        ]
+      },
+      {
+        "fileRecorded": [
+          12648
+        ]
+      },
+      {
+        "fileRecorded": [
+          12649
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FE-D22E-11E4-B630-000C29FF2429}.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FF-D22E-11E4-B630-000C29FF2429}.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\imagestore\\m1pfyb8\\imagestore.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\~iaman.informant@nist.gov.ost.tmp (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\ZX5B3QYN\\jsonstrings[1].js (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.Word\\~WRS{AEB94BB8-E52C-4CCA-9037-E9BBC4D5994C}.tmp (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat.LOG1 (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.chk (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.log (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.tmp (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x64).msi (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x86).msi (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\~DFC63A36FEE260F768.TMP (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Apple Computer\\MediaStream\\local.db (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Templates\\~$rmalEmail.dotm (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\7e4dca80246863e3.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Google Drive.lnk (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Koala.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Lighthouse.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Penguins.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Tulips.jpg (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\Google Drive\\desktop.ini (record time 2015-03-25 14:57:27 UTC). The shadow copy holds a record of C:\\Users\\informant\\NTUSER.DAT (record time 2015-03-25 14:57:27 UTC).",
+  "cited_facts": [
+    {
+      "id": 12610,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16060,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FE-D22E-11E4-B630-000C29FF2429}.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "b478f393ffb02c4c4e19e4fad36cd3de49f0d56a127833f2c79cbe811a21101e",
+      "prov": {
+        "accessed": "2015-03-24T14:05:15.964751Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T14:05:15.964751Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-24T14:05:15.984751Z",
+        "record_changed": "2015-03-24T14:05:15.984751Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 5632,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12611,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16061,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FF-D22E-11E4-B630-000C29FF2429}.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f5ae88cdd1bbf7e0b96a4f438f11ccf686f96ae9f32a4b65ddf3a44d450e010e",
+      "prov": {
+        "accessed": "2015-03-24T14:05:15.984751Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T14:05:15.984751Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-24T14:05:15.994751Z",
+        "record_changed": "2015-03-24T14:05:15.994751Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 217088,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12612,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16002,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\imagestore\\m1pfyb8\\imagestore.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "54e7aa7c53219b9b98ccb1735f9e1978d663efae978018cb724d5af511a89b1f",
+      "prov": {
+        "accessed": "2015-03-23T17:27:39.918391Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T17:27:39.918391Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:22:10.135005Z",
+        "live_size": 126470,
+        "modified": "2015-03-25T14:49:32.736205Z",
+        "record_changed": "2015-03-25T14:49:32.736205Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 126470,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12613,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16095,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\~iaman.informant@nist.gov.ost.tmp",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "8ca8ad372cce7b62bafe4a3309de7ef38aeebfa1674c275fa2ba959f86ee9aaa",
+      "prov": {
+        "accessed": "2015-03-25T14:41:04.011005Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:41:04.011005Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:41:04.011005Z",
+        "record_changed": "2015-03-25T14:41:04.011005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 131072,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12614,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16087,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "073184b9df8ab83f50c30fed4bc4a6a55936eaa13b5c7e38f778ca7973a7ce0a",
+      "prov": {
+        "accessed": "2015-03-24T19:09:54.265214Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:09:54.265214Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-24T19:09:54.265214Z",
+        "record_changed": "2015-03-24T19:09:54.265214Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 5205,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12615,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16099,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\ZX5B3QYN\\jsonstrings[1].js",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "7e39e582ccef681b223c69f0e794e2f0ab4a60952ea77f3db7684de0c5a52008",
+      "prov": {
+        "accessed": "2015-03-25T14:41:13.246205Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:41:13.246205Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:41:13.246205Z",
+        "record_changed": "2015-03-25T14:41:13.246205Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 2081,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12616,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16098,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.Word\\~WRS{AEB94BB8-E52C-4CCA-9037-E9BBC4D5994C}.tmp",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "2444f5f267d07bd75145f9dab8eaa6020d92342d7b817dd65bfc70726ec4f9e1",
+      "prov": {
+        "accessed": "2015-03-25T14:41:10.251005Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:41:10.251005Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:41:10.251005Z",
+        "record_changed": "2015-03-25T14:41:10.251005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 0,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12617,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15501,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "860a7c618d2ffee9c9b0cdc212e13d7d198f50feb26e71ab144f1d6f71401145",
+      "prov": {
+        "accessed": "2015-03-24T21:07:25.722918Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T14:34:41.651911Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:58.258805Z",
+        "live_size": 786432,
+        "modified": "2015-03-25T14:56:59.260605Z",
+        "record_changed": "2015-03-25T14:56:59.260605Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 786432,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12618,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15502,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat.LOG1",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "a825b751399505b2e50a167f8c774810d1a5ec71d20d4fbf9f5f97f51e790e19",
+      "prov": {
+        "accessed": "2015-03-22T14:34:41.651911Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T14:34:41.651911Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:58.149605Z",
+        "live_size": 254976,
+        "modified": "2015-03-25T14:56:59.198205Z",
+        "record_changed": "2015-03-25T14:56:59.198205Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 254976,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12619,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15862,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.chk",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "59d24f0120187b600847e61530346d51c66d696d9b20544c23b46da87ed36b96",
+      "prov": {
+        "accessed": "2015-03-22T15:24:20.917451Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:24:20.917451Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:56.995205Z",
+        "live_size": 8192,
+        "modified": "2015-03-24T21:07:24.864916Z",
+        "record_changed": "2015-03-24T21:07:24.864916Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 8192,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12620,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 11124,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.log",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f981e7984099ab83acc9e95cb79d4836ffb795e99d1aebba0c22ad91c97d5284",
+      "prov": {
+        "accessed": "2015-03-25T14:47:30.578105Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:24:20.808250Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:56.995205Z",
+        "live_size": 524288,
+        "modified": "2015-03-25T14:47:30.593705Z",
+        "record_changed": "2015-03-25T14:47:30.593705Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 524288,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12621,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15863,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "86dd147f429c778f8cba6751c1e85dac9d98e75a2f18f61037934e942ba10bbc",
+      "prov": {
+        "accessed": "2015-03-22T15:24:20.948651Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:24:20.948651Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:56.995205Z",
+        "live_size": 33619968,
+        "modified": "2015-03-25T14:41:04.635005Z",
+        "record_changed": "2015-03-25T14:41:04.635005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 33619968,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12622,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16096,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.tmp",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "ff8e5e34c59472dcb9943e46bba275f62733de0617f6df4a2b4254100b1b6120",
+      "prov": {
+        "accessed": "2015-03-25T14:41:04.619405Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:41:04.619405Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:41:04.635005Z",
+        "record_changed": "2015-03-25T14:41:04.635005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 524288,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12623,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16107,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x64).msi",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "4cf67b10b1089a38841af589f24d4d2b3171b56aaa0718b1437d8b4804189baf",
+      "prov": {
+        "accessed": "2015-03-25T14:50:14.440605Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:50:14.440605Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:50:15.376605Z",
+        "record_changed": "2015-03-25T14:50:15.376605Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 21409792,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12624,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16108,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x86).msi",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "7ae4c0d9edf80467922e2b7dda30b32401507967b93182b59330e574e539020d",
+      "prov": {
+        "accessed": "2015-03-25T14:50:15.376605Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:50:15.376605Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:50:15.485805Z",
+        "record_changed": "2015-03-25T14:50:15.485805Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 18587648,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12625,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16109,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "59e117e524f7051c04d0135e52741527096b0104b92684c822481d5d512964c6",
+      "prov": {
+        "accessed": "2015-03-25T14:50:15.485805Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:50:15.485805Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:50:15.579405Z",
+        "record_changed": "2015-03-25T14:50:15.579405Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 889416,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12626,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16100,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Temp\\~DFC63A36FEE260F768.TMP",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "333735cd9e53c131d301c0d1c32ddd117b659c7ee962c22149b10537778a4990",
+      "prov": {
+        "accessed": "2015-03-25T14:46:06.397005Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:46:06.397005Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:46:06.397005Z",
+        "record_changed": "2015-03-25T14:46:06.397005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 0,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12627,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16052,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Apple Computer\\MediaStream\\local.db",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "2d05cf64bc5bca1ed7ac469875719b09894ddf17efd44f27012ea125bc50ac52",
+      "prov": {
+        "accessed": "2015-03-23T20:32:44.465230Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:32:44.465230Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-23T20:32:44.730430Z",
+        "record_changed": "2015-03-23T20:32:44.730430Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 71680,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12628,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16086,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "6b7903c4c0513376c1a88f1ea26d40eb8390d4227c3cb7a5bcb4b16beaf50925",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.736411Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:41.342759Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.748405Z",
+        "live_size": 1133,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1133,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12629,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16010,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "3f8245b0bcd90a0af12a6371101704f05f142860b0176885111ef83baee15766",
+      "prov": {
+        "accessed": "2015-03-23T18:37:54.491716Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:54.491716Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.764005Z",
+        "live_size": 478,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 478,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12630,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16001,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "b91d67f6a4de1daff181800f1b801a7e051d34800c20d99aa584abe96ca751bd",
+      "prov": {
+        "accessed": "2015-03-22T15:59:53.844301Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:59:53.844301Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:11:47.645405Z",
+        "live_size": 3225,
+        "modified": "2015-03-24T21:05:28.757912Z",
+        "record_changed": "2015-03-24T21:05:28.757912Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 3225,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12631,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16097,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Templates\\~$rmalEmail.dotm",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f59f75bbfd3dabf243ae1bdce94f48cfe38da50f25fbe7ba300d05b45d8e9dfe",
+      "prov": {
+        "accessed": "2015-03-25T14:41:10.235405Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:41:10.235405Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:41:10.235405Z",
+        "record_changed": "2015-03-25T14:41:10.235405Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 162,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12632,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15543,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "4888b32426fd71cb8ac820c3bc58ba52dd35ab5480cfe5cdbc4b7f5f05bd0973",
+      "prov": {
+        "accessed": "2015-03-22T14:35:02.353147Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T14:35:02.353147Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:47.141000Z",
+        "live_size": 17920,
+        "modified": "2015-03-24T21:01:14.320000Z",
+        "record_changed": "2015-03-24T21:01:14.320463Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 17920,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12633,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16007,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "48c5db17c8a127d0a320864230483f77191ef6b2732cb4f7f903a24e07aa0d56",
+      "prov": {
+        "accessed": "2015-03-23T18:37:07.457633Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:07.457633Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.934000Z",
+        "live_size": 17408,
+        "modified": "2015-03-24T19:09:51.987000Z",
+        "record_changed": "2015-03-24T19:09:51.987610Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 17408,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12634,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15845,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\7e4dca80246863e3.automaticDestinations-ms",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "485e76220c54f5f6db27ed70f861ba17ebd9decd142369f5d29ba997f5248049",
+      "prov": {
+        "accessed": "2015-03-22T14:37:23.259796Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T14:37:23.259796Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:13.342000Z",
+        "live_size": 7680,
+        "modified": "2015-03-24T14:16:25.926000Z",
+        "record_changed": "2015-03-24T14:16:25.942521Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 7168,
+        "state": "different on the live volume: size, modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12635,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16085,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "8bdad2c3298432f9cf6ff2a5445de1b05e89719b460311a9b0480e1c9514eba2",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.003210Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:40.827958Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.981605Z",
+        "live_size": 675,
+        "modified": "2015-03-24T19:09:52.003210Z",
+        "record_changed": "2015-03-24T19:09:52.003210Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 675,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12636,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 963,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "7c8147239a8b6b3f75ed375f17e16e6f242eeaff9758d381ffe93968d8b2522f",
+      "prov": {
+        "accessed": "2015-03-25T14:47:40.156505Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:47:40.125305Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:47:40.265705Z",
+        "record_changed": "2015-03-25T14:47:40.296905Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 8317032,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12637,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "62f6a811640bc3b92d998f73372a116460d3e9a2b8c337cc10884401b26b255c",
+      "prov": {
+        "accessed": "2015-03-25T14:48:28.852205Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-25T14:48:28.789805Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-25T14:48:28.867805Z",
+        "record_changed": "2015-03-25T14:48:28.867805Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 5344528,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12638,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15547,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Google Drive.lnk",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "69d117776acaae32876c777aa2f39eadaee208f5d6c93914e8e4bbf519284285",
+      "prov": {
+        "accessed": "2015-03-23T20:05:32.577298Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:05:32.577298Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-23T20:05:32.577298Z",
+        "record_changed": "2015-03-23T20:05:32.577298Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1665,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12639,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13951,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "faab03726e1a0d88f8b3925e27aaeb46c049e8dfe29402862996d5de4465a4c1",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.800962Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.800962Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.836174Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 879394,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12640,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13957,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Desert.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "0b1e53081066397514370520a3ed419d3f0ec7313b1f1f73aa78e483fdf50610",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.816562Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.816562Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 845941,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12641,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "570a50ba9519412cd89530bd33d6ad899aeec5cff27871635236ea7cf81066b9",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.816562Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.816562Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 595284,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12642,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 834,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "e1502c592a9ec802a79b1c1c5330a94a1cd0abf1d7f5d663896878ea4734f053",
+      "prov": {
+        "accessed": "2015-03-24T19:52:35.727536Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:35.727536Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-22T15:11:04.851735Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 55915216,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12643,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13980,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "a0c34fbb6f46bbaff2571046022821bd15b57c5c0e630158f47ebf3a348505f0",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.832162Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.832162Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 775702,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12644,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13988,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Koala.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "6d28f8e393a08ccebc2f2379abafb4b5134afe9663489923ad591955911cebc9",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.832162Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.832162Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 780831,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12645,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 13997,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Lighthouse.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "29b2181c29cd3ed473132b21cdb1d7dc7e25128d743da940b605824cc6a561e1",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.832162Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.832162Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 561276,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12646,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 14008,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Penguins.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f5a177fbd448e271444e94cb23e9a57a8f10ebcec60cd92ed06d948512efb919",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.847762Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.847762Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 777835,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12647,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 14012,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Tulips.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "c4dadc9f06391fdd0fc73924c143198c07e2256438431ce4983e17f556eb8e05",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.847762Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.847762Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:25:20.406011Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 620888,
+        "state": "missing on the live volume",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12648,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16045,
+      "obj_text": "C:\\Users\\informant\\Google Drive\\desktop.ini",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "1094965d0213b9f140b3f223b15840281ad091b09b3c0ffd2adbf87a57cb136c",
+      "prov": {
+        "accessed": "2015-03-23T20:05:32.358898Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:05:32.218497Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:21:36.813405Z",
+        "live_size": 180,
+        "modified": "2015-03-23T20:05:32.358898Z",
+        "record_changed": "2015-03-23T20:05:32.358898Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 180,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12649,
+      "kind": "fileSeen",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 15484,
+      "obj_text": "C:\\Users\\informant\\NTUSER.DAT",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "a04442ff66f96ee0d5934023acf83fdc6bb31802ee0cc9fd68b2441e9f31674f",
+      "prov": {
+        "accessed": "2015-03-24T21:07:25.629318Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T14:34:41.168310Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:30:58.118405Z",
+        "live_size": 1048576,
+        "modified": "2015-03-25T14:57:26.545005Z",
+        "record_changed": "2015-03-25T14:57:26.545005Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1048576,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "creation time of the shadow copy: the file existed in this state then",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12610
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FE-D22E-11E4-B630-000C29FF2429}.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12611
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{C8D7D5FF-D22E-11E4-B630-000C29FF2429}.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12612
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Internet Explorer\\imagestore\\m1pfyb8\\imagestore.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12613
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\~iaman.informant@nist.gov.ost.tmp (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12614
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12615
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\ZX5B3QYN\\jsonstrings[1].js (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12616
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.Word\\~WRS{AEB94BB8-E52C-4CCA-9037-E9BBC4D5994C}.tmp (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12617
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12618
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat.LOG1 (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12619
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.chk (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12620
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\V01.log (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12621
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12622
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.tmp (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12623
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x64).msi (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12624
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\Eraser (x86).msi (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12625
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12626
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Temp\\~DFC63A36FEE260F768.TMP (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12627
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Apple Computer\\MediaStream\\local.db (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12628
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12629
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12630
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12631
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Templates\\~$rmalEmail.dotm (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12632
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12633
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12634
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\7e4dca80246863e3.automaticDestinations-ms (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12635
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12636
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12637
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12638
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\Google Drive.lnk (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12639
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12640
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12641
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12642
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12643
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12644
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Koala.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12645
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Lighthouse.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12646
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Penguins.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12647
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Tulips.jpg (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12648
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Google Drive\\desktop.ini (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12649
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\NTUSER.DAT (record time 2015-03-25 14:57:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M331.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

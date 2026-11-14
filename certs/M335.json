@@ -1,0 +1,1940 @@
+{
+  "finding_id": "M335",
+  "question": "What content do the files have?",
+  "claim": {
+    "both": [
+      {
+        "contentHashed": [
+          12723
+        ]
+      },
+      {
+        "contentHashed": [
+          12724
+        ]
+      },
+      {
+        "contentHashed": [
+          12725
+        ]
+      },
+      {
+        "contentHashed": [
+          12726
+        ]
+      },
+      {
+        "contentHashed": [
+          12727
+        ]
+      },
+      {
+        "contentHashed": [
+          12728
+        ]
+      },
+      {
+        "contentHashed": [
+          12729
+        ]
+      },
+      {
+        "contentHashed": [
+          12730
+        ]
+      },
+      {
+        "contentHashed": [
+          12731
+        ]
+      },
+      {
+        "contentHashed": [
+          12732
+        ]
+      },
+      {
+        "contentHashed": [
+          12733
+        ]
+      },
+      {
+        "contentHashed": [
+          12734
+        ]
+      },
+      {
+        "contentHashed": [
+          12735
+        ]
+      },
+      {
+        "contentHashed": [
+          12736
+        ]
+      },
+      {
+        "contentHashed": [
+          12737
+        ]
+      },
+      {
+        "contentHashed": [
+          12738
+        ]
+      },
+      {
+        "contentHashed": [
+          12739
+        ]
+      },
+      {
+        "contentHashed": [
+          12740
+        ]
+      },
+      {
+        "contentHashed": [
+          12741
+        ]
+      },
+      {
+        "contentHashed": [
+          12742
+        ]
+      },
+      {
+        "contentHashed": [
+          12743
+        ]
+      },
+      {
+        "contentHashed": [
+          12744
+        ]
+      },
+      {
+        "contentHashed": [
+          12745
+        ]
+      },
+      {
+        "contentHashed": [
+          12746
+        ]
+      },
+      {
+        "contentHashed": [
+          12747
+        ]
+      },
+      {
+        "contentHashed": [
+          12748
+        ]
+      },
+      {
+        "contentHashed": [
+          12749
+        ]
+      },
+      {
+        "contentHashed": [
+          12750
+        ]
+      },
+      {
+        "contentHashed": [
+          12751
+        ]
+      },
+      {
+        "contentHashed": [
+          12752
+        ]
+      },
+      {
+        "contentHashed": [
+          12753
+        ]
+      },
+      {
+        "contentHashed": [
+          12754
+        ]
+      },
+      {
+        "contentHashed": [
+          12755
+        ]
+      },
+      {
+        "contentHashed": [
+          12756
+        ]
+      },
+      {
+        "contentHashed": [
+          12757
+        ]
+      },
+      {
+        "contentHashed": [
+          12758
+        ]
+      },
+      {
+        "contentHashed": [
+          12759
+        ]
+      },
+      {
+        "contentHashed": [
+          12760
+        ]
+      },
+      {
+        "contentHashed": [
+          12761
+        ]
+      },
+      {
+        "contentHashed": [
+          12762
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The content of \\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as one contiguous run of 1584 clusters from the first cluster (22613); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#1d.txt on exhibit RM#2, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as one contiguous run of 30 clusters from the first cluster (24198); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#1p.txt on exhibit RM#2, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as one contiguous run of 112 clusters from the first cluster (24228); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#2d.txt on exhibit RM#2, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as one contiguous run of 161 clusters from the first cluster (24340); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#2p.txt on exhibit RM#2, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as one contiguous run of 282 clusters from the first cluster (24501); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#3d.txt on exhibit RM#2, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as one contiguous run of 577 clusters from the first cluster (24783); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\technical review\\diary_#3p.txt on exhibit RM#2, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as one contiguous run of 80 clusters from the first cluster (25360); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\SPQR.JPG on exhibit RM#2, read from the image, has sha256:2ab04d354dd137d32aa5647ae24c5d04d3efffb4fb541796e5d5de854ffd1e46. The bytes were read as one contiguous run of 55 clusters of 16384 bytes from the first cluster (15814), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\amalfi.bmp on exhibit RM#2, read from the image, has sha256:18f42fa1b94b7b7d7c11f0016ffbdb3bfb97cdc0b80ddd489ec350ba7f494c11. The bytes were read as one contiguous run of 57 clusters of 16384 bytes from the first cluster (11493), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\bamboo-clump-anamated.gif on exhibit RM#2, read from the image, has sha256:f5b1e30d815da1ac9c19a1edaaaef561e3021518395c0dc62352825006a69f66. The bytes were read as one contiguous run of 411 clusters of 16384 bytes from the first cluster (11550), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\barn.gif on exhibit RM#2, read from the image, has sha256:21b185e47c844e2140b290e8c9b835d2c7f98bd2530a0c896243060b36b99186. The bytes were read as one contiguous run of 205 clusters of 16384 bytes from the first cluster (11961), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\blini.gif on exhibit RM#2, read from the image, has sha256:14c16e3863872b17c83e6cf94e3aaa170693b498417c1676a5049e5370f7065a. The bytes were read as one contiguous run of 130 clusters of 16384 bytes from the first cluster (12166), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\boudicca.bmp on exhibit RM#2, read from the image, has sha256:2220148730f9e37a05e87f2b29ee4c49391662c2c8c42344d9583596fa73a6ac. The bytes were read as one contiguous run of 538 clusters of 16384 bytes from the first cluster (12296), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\cactus.png on exhibit RM#2, read from the image, has sha256:f04f71a4bb506a603bc0593fd393b9f09df0b9e171e7f8503eba6df2b1e24351. The bytes were read as one contiguous run of 377 clusters of 16384 bytes from the first cluster (12834), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\cave.png on exhibit RM#2, read from the image, has sha256:45010a8f2bcb941018eb06c6901b471968b80f130612977506848916670e5a0c. The bytes were read as one contiguous run of 500 clusters of 16384 bytes from the first cluster (13211), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\cutty-sark.JPG on exhibit RM#2, read from the image, has sha256:ee8b9c17c44e128e9e95d60fe219e95feae53c463b01016a312f8c5b732f21de. The bytes were read as one contiguous run of 100 clusters of 16384 bytes from the first cluster (13711), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\eggs.gif on exhibit RM#2, read from the image, has sha256:fc2df18e58b7b8dec0ea5514c1f089c4f7e282f5a4a025c348e0407fa48c6995. The bytes were read as one contiguous run of 140 clusters of 16384 bytes from the first cluster (13811), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\forsythia.png on exhibit RM#2, read from the image, has sha256:6d2d88158f04ed5c03d76d218096fd98ec0b6b1a8c30c91ed3c523041a6ffbb8. The bytes were read as one contiguous run of 495 clusters of 16384 bytes from the first cluster (13951), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\injera.gif on exhibit RM#2, read from the image, has sha256:a7459d55dd4558212a663b6ad2e5ed66318e8116dbb4adaed78dda3729d2db1d. The bytes were read as one contiguous run of 3 clusters of 16384 bytes from the first cluster (14446), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\jack-o-lantern.tiff on exhibit RM#2, read from the image, has sha256:ddd6a44c8a1c96b21dd6af3ab38c1acc75a1a2fd0d7d4767ff6bf9b1306d86b8. The bytes were read as one contiguous run of 461 clusters of 16384 bytes from the first cluster (14449), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\jump.jpg on exhibit RM#2, read from the image, has sha256:a7274777fd1953e3725e3a2edc6d4bca0f5b90b9c7c87aba678436b3d3c58267. The bytes were read as one contiguous run of 124 clusters of 16384 bytes from the first cluster (14910), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\leaf.jpg on exhibit RM#2, read from the image, has sha256:04d70813ded4cff38df92b4e0ba3d22fbf38d4c06bc0bb614b673e772599a411. The bytes were read as one contiguous run of 49 clusters of 16384 bytes from the first cluster (15034), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\oak-snow.jpg on exhibit RM#2, read from the image, has sha256:1c212b6b139e2087aba493a0d3dbea6546c6d22a5cf1629256456c5b3e50d8cf. The bytes were read as one contiguous run of 84 clusters of 16384 bytes from the first cluster (15083), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\orchid.png on exhibit RM#2, read from the image, has sha256:e1de76b3a7ac0a2e00f479f5661b5e9d3b26260532fcde56e2e03ee00f786494. The bytes were read as one contiguous run of 517 clusters of 16384 bytes from the first cluster (15167), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\piazza-dei-miracoli.JPG on exhibit RM#2, read from the image, has sha256:c4aeddaaee6176f6318ff4a6bb60ede3692b76a6be4862780cc45c67f0aa5741. The bytes were read as one contiguous run of 78 clusters of 16384 bytes from the first cluster (15684), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\pisa.JPG on exhibit RM#2, read from the image, has sha256:04214f9f9cb78d8c8902b0b4277931b9edd0482a701b4f9c17ad1a4d9b4b8ffd. The bytes were read as one contiguous run of 52 clusters of 16384 bytes from the first cluster (15762), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\stonehenge.JPG on exhibit RM#2, read from the image, has sha256:ef156a7f9d0c1b54430d6aa6d70b7cfb275582118026d2953ef3490f6bc6829e. The bytes were read as one contiguous run of 76 clusters of 16384 bytes from the first cluster (15869), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\tapas.gif on exhibit RM#2, read from the image, has sha256:c842d2dd2c68521ed01c43c1677fd2d42a2696fba2fafbb04540ec9f8e1f5244. The bytes were read as one contiguous run of 137 clusters of 16384 bytes from the first cluster (15945), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\tomatoes.gif on exhibit RM#2, read from the image, has sha256:b1fe1aa976ab2dd064b8c423f4769379a91613b449587f82d560168314410628. The bytes were read as one contiguous run of 137 clusters of 16384 bytes from the first cluster (16082), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder at cluster 45007, older layout]\\wat.gif on exhibit RM#2, read from the image, has sha256:345f0b9c7ba4cc413f80708b5e0e8d621d7d01dca6ae251d69013ab3f5019dcb. The bytes were read as one contiguous run of 2 clusters of 16384 bytes from the first cluster (16219), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content. The content of \\de\\winter_storm.amr on exhibit RM#3, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\de\\winter_whether_advisory.zip on exhibit RM#3, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\design\\winter_storm.amr on exhibit RM#3, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\design\\winter_whether_advisory.zip on exhibit RM#3, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pd\\my_favorite_cars.db on exhibit RM#3, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pd\\my_favorite_movies.7z on exhibit RM#3, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pd\\new_years_day.jpg on exhibit RM#3, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pd\\super_bowl.avi on exhibit RM#3, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pricing decision\\my_favorite_cars.db on exhibit RM#3, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pricing decision\\my_favorite_movies.7z on exhibit RM#3, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+  "cited_facts": [
+    {
+      "id": 12723,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 102,
+      "obj_text": "\\[lost folder 3]\\proposal\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "91b89f956e0dfffc5bdf33a7098c33dfb3d20c28cebb06c9cf1c9864941956d7",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 14011; content at volume byte offset 96808960",
+        "cluster_size": 4096,
+        "clusters": 1584,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "first_cluster": 22613,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 1584 clusters from the first cluster (22613); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 96808960
+      }
+    },
+    {
+      "id": 12724,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 103,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "56265c63c0901dab0e352a86cf05789c371b82b546b780bb0efe093791b28184",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 103301120",
+        "cluster_size": 4096,
+        "clusters": 30,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24198,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 30 clusters from the first cluster (24198); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 103301120
+      }
+    },
+    {
+      "id": 12725,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 104,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#1p.txt",
+      "aux": 16148,
+      "aux_text": "sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f",
+      "row_sha256": "dcbc20841f1558d0094068b4af613a216d525fb60df053c8d6a4027c96113756",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 103424000",
+        "cluster_size": 4096,
+        "clusters": 112,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24228,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 112 clusters from the first cluster (24228); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 458267,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 103424000
+      }
+    },
+    {
+      "id": 12726,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 105,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#2d.txt",
+      "aux": 16149,
+      "aux_text": "sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220",
+      "row_sha256": "889d01adc4fd9689b49da6b6e260636bb531fcdc8b240deff47ef6e72d86932f",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 103882752",
+        "cluster_size": 4096,
+        "clusters": 161,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24340,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 161 clusters from the first cluster (24340); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 658922,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 103882752
+      }
+    },
+    {
+      "id": 12727,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 106,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#2p.txt",
+      "aux": 16150,
+      "aux_text": "sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64",
+      "row_sha256": "9fbbb8782a01cbc9aa79f273e51a94baee1187625c108aa1deadfc2629ff9689",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 104542208",
+        "cluster_size": 4096,
+        "clusters": 282,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24501,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 282 clusters from the first cluster (24501); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 1154560,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 104542208
+      }
+    },
+    {
+      "id": 12728,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 107,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3d.txt",
+      "aux": 16151,
+      "aux_text": "sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df",
+      "row_sha256": "5661f152d6e0f0368f0bb629fd04a1917852332a4f354ef99581dc5fb2d3c20d",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 105697280",
+        "cluster_size": 4096,
+        "clusters": 577,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24783,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 577 clusters from the first cluster (24783); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 2360832,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 105697280
+      }
+    },
+    {
+      "id": 12729,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 108,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#3p.txt",
+      "aux": 16152,
+      "aux_text": "sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea",
+      "row_sha256": "1b7ba5fa4383ff5b066b1c6be932787960e453f6a97f595efd35c2e30c17f0ce",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 108060672",
+        "cluster_size": 4096,
+        "clusters": 80,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 25360,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 80 clusters from the first cluster (25360); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 325120,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 108060672
+      }
+    },
+    {
+      "id": 12730,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 87,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\SPQR.JPG",
+      "aux": 16153,
+      "aux_text": "sha256:2ab04d354dd137d32aa5647ae24c5d04d3efffb4fb541796e5d5de854ffd1e46",
+      "row_sha256": "42ea82813dd0a67884d600763ad7581a7b73dad067240a85b337b62b3f0ccc1a",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 259346432",
+        "cluster_size": 16384,
+        "clusters": 55,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15814,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe11a4d4578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 55 clusters of 16384 bytes from the first cluster (15814), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 897275,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 259346432
+      }
+    },
+    {
+      "id": 12731,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 68,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\amalfi.bmp",
+      "aux": 16154,
+      "aux_text": "sha256:18f42fa1b94b7b7d7c11f0016ffbdb3bfb97cdc0b80ddd489ec350ba7f494c11",
+      "row_sha256": "ba472c8a445d79a28d252ffa336cc77fce3b10235aff1be6aced123cf48c1e03",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 188551168",
+        "cluster_size": 16384,
+        "clusters": 57,
+        "exhibit": "RM#2",
+        "extension": "bmp",
+        "extension_fits_signature": true,
+        "first_cluster": 11493,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "424d36100e000000",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 57 clusters of 16384 bytes from the first cluster (11493), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "bmp",
+        "size": 921654,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 188551168
+      }
+    },
+    {
+      "id": 12732,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 70,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\bamboo-clump-anamated.gif",
+      "aux": 16155,
+      "aux_text": "sha256:f5b1e30d815da1ac9c19a1edaaaef561e3021518395c0dc62352825006a69f66",
+      "row_sha256": "d4e29e82e1910d1d7a9e2cbc3bc8b589f06e5b076340eaa735fa95b1efce5e36",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 189485056",
+        "cluster_size": 16384,
+        "clusters": 411,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 11550,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "474946383961140a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 411 clusters of 16384 bytes from the first cluster (11550), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 6717692,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 189485056
+      }
+    },
+    {
+      "id": 12733,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 71,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\barn.gif",
+      "aux": 16156,
+      "aux_text": "sha256:21b185e47c844e2140b290e8c9b835d2c7f98bd2530a0c896243060b36b99186",
+      "row_sha256": "1719cf676eb61bb9a8c2b5d5df27ed21b7bffdf5f142dcbdf0286aec6444daf7",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 196218880",
+        "cluster_size": 16384,
+        "clusters": 205,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 11961,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "474946383961140a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 205 clusters of 16384 bytes from the first cluster (11961), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 3352929,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 196218880
+      }
+    },
+    {
+      "id": 12734,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 72,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\blini.gif",
+      "aux": 16157,
+      "aux_text": "sha256:14c16e3863872b17c83e6cf94e3aaa170693b498417c1676a5049e5370f7065a",
+      "row_sha256": "7c04d3a8ca1eed9100d7100d09f5e24ba63fc06b8fab29b08635a496a268fe23",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 199577600",
+        "cluster_size": 16384,
+        "clusters": 130,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 12166,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "474946383961140a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 130 clusters of 16384 bytes from the first cluster (12166), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 2125114,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 199577600
+      }
+    },
+    {
+      "id": 12735,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 73,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\boudicca.bmp",
+      "aux": 16158,
+      "aux_text": "sha256:2220148730f9e37a05e87f2b29ee4c49391662c2c8c42344d9583596fa73a6ac",
+      "row_sha256": "09e0514e873b3f47fbb1116b98b2188db653d0de1a436caf2d9ba8f02e909d26",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 201707520",
+        "cluster_size": 16384,
+        "clusters": 538,
+        "exhibit": "RM#2",
+        "extension": "bmp",
+        "extension_fits_signature": true,
+        "first_cluster": 12296,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "424da64086000000",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 538 clusters of 16384 bytes from the first cluster (12296), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "bmp",
+        "size": 8798374,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 201707520
+      }
+    },
+    {
+      "id": 12736,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 74,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\cactus.png",
+      "aux": 16159,
+      "aux_text": "sha256:f04f71a4bb506a603bc0593fd393b9f09df0b9e171e7f8503eba6df2b1e24351",
+      "row_sha256": "a08db838b2df07de963786e0950fd2326ccad1d30e398221bfd343aceee51727",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 210522112",
+        "cluster_size": 16384,
+        "clusters": 377,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": true,
+        "first_cluster": 12834,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "89504e470d0a1a0a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 377 clusters of 16384 bytes from the first cluster (12834), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "png",
+        "size": 6164389,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 210522112
+      }
+    },
+    {
+      "id": 12737,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 75,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\cave.png",
+      "aux": 16160,
+      "aux_text": "sha256:45010a8f2bcb941018eb06c6901b471968b80f130612977506848916670e5a0c",
+      "row_sha256": "8f822e8ec8829f3f99aeddfb17d02c8fbf95710ea3ce370f4a488b463e9f8c21",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 216698880",
+        "cluster_size": 16384,
+        "clusters": 500,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": true,
+        "first_cluster": 13211,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "89504e470d0a1a0a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 500 clusters of 16384 bytes from the first cluster (13211), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "png",
+        "size": 8182655,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 216698880
+      }
+    },
+    {
+      "id": 12738,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 76,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\cutty-sark.JPG",
+      "aux": 16161,
+      "aux_text": "sha256:ee8b9c17c44e128e9e95d60fe219e95feae53c463b01016a312f8c5b732f21de",
+      "row_sha256": "fee4772fc0fe2597a4a8a7cdb48f7a23806689e098e705160d2f92aa841575ca",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 224890880",
+        "cluster_size": 16384,
+        "clusters": 100,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 13711,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe11e7e4578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 100 clusters of 16384 bytes from the first cluster (13711), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 1625241,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 224890880
+      }
+    },
+    {
+      "id": 12739,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 77,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\eggs.gif",
+      "aux": 16162,
+      "aux_text": "sha256:fc2df18e58b7b8dec0ea5514c1f089c4f7e282f5a4a025c348e0407fa48c6995",
+      "row_sha256": "8256a1c2682844f98648f74950d353ea49bcecb673ab8ba338156a4897c14c97",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 226529280",
+        "cluster_size": 16384,
+        "clusters": 140,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 13811,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "474946383961140a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 140 clusters of 16384 bytes from the first cluster (13811), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 2284125,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 226529280
+      }
+    },
+    {
+      "id": 12740,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 78,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\forsythia.png",
+      "aux": 16163,
+      "aux_text": "sha256:6d2d88158f04ed5c03d76d218096fd98ec0b6b1a8c30c91ed3c523041a6ffbb8",
+      "row_sha256": "81be6a5a6e57c2d9fa0065fcc96377fd6c66b0c3985dba4229195b6b84827c0f",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 228823040",
+        "cluster_size": 16384,
+        "clusters": 495,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": true,
+        "first_cluster": 13951,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "89504e470d0a1a0a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 495 clusters of 16384 bytes from the first cluster (13951), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "png",
+        "size": 8107995,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 228823040
+      }
+    },
+    {
+      "id": 12741,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 79,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\injera.gif",
+      "aux": 16164,
+      "aux_text": "sha256:a7459d55dd4558212a663b6ad2e5ed66318e8116dbb4adaed78dda3729d2db1d",
+      "row_sha256": "d45ea592897d222fdec5edda5e78bf867de50a919014d4ae8ed5ea5378380ada",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 236933120",
+        "cluster_size": 16384,
+        "clusters": 3,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 14446,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "4749463839610301",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 3 clusters of 16384 bytes from the first cluster (14446), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 34480,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 236933120
+      }
+    },
+    {
+      "id": 12742,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 80,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\jack-o-lantern.tiff",
+      "aux": 16165,
+      "aux_text": "sha256:ddd6a44c8a1c96b21dd6af3ab38c1acc75a1a2fd0d7d4767ff6bf9b1306d86b8",
+      "row_sha256": "fec731442f5256cb51f8380010c488bb7093fc827a15960aa1ab28ffc80f05c7",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 236982272",
+        "cluster_size": 16384,
+        "clusters": 461,
+        "exhibit": "RM#2",
+        "extension": "tiff",
+        "extension_fits_signature": true,
+        "first_cluster": 14449,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "4d4d002a007312a6",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 461 clusters of 16384 bytes from the first cluster (14449), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "tiff",
+        "size": 7545856,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 236982272
+      }
+    },
+    {
+      "id": 12743,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 81,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\jump.jpg",
+      "aux": 16166,
+      "aux_text": "sha256:a7274777fd1953e3725e3a2edc6d4bca0f5b90b9c7c87aba678436b3d3c58267",
+      "row_sha256": "56dfb43e65263c90bdbb35fc7bddedeae6b0198580157b9f759aecc91c7765fb",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 244535296",
+        "cluster_size": 16384,
+        "clusters": 124,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 14910,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe000104a46",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 124 clusters of 16384 bytes from the first cluster (14910), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 2015880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 244535296
+      }
+    },
+    {
+      "id": 12744,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 82,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\leaf.jpg",
+      "aux": 16167,
+      "aux_text": "sha256:04d70813ded4cff38df92b4e0ba3d22fbf38d4c06bc0bb614b673e772599a411",
+      "row_sha256": "07ef1767889ac6ccd46e1bcdf0ca888927a9726946480653bf0836aff3e4d294",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 246566912",
+        "cluster_size": 16384,
+        "clusters": 49,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15034,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe115404578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 49 clusters of 16384 bytes from the first cluster (15034), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 798064,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 246566912
+      }
+    },
+    {
+      "id": 12745,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 83,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\oak-snow.jpg",
+      "aux": 16168,
+      "aux_text": "sha256:1c212b6b139e2087aba493a0d3dbea6546c6d22a5cf1629256456c5b3e50d8cf",
+      "row_sha256": "f5aa77ca08d6cdf8f46f402d3bebf2d1c5217ca799fbeeda384493aa951a6876",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 247369728",
+        "cluster_size": 16384,
+        "clusters": 84,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15083,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe118594578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 84 clusters of 16384 bytes from the first cluster (15083), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 1370140,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 247369728
+      }
+    },
+    {
+      "id": 12746,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 84,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\orchid.png",
+      "aux": 16169,
+      "aux_text": "sha256:e1de76b3a7ac0a2e00f479f5661b5e9d3b26260532fcde56e2e03ee00f786494",
+      "row_sha256": "7dd4036d6f6c183895a47556014a3504592db110d6482fea9d3e277dffed8ce3",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 248745984",
+        "cluster_size": 16384,
+        "clusters": 517,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": true,
+        "first_cluster": 15167,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "89504e470d0a1a0a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 517 clusters of 16384 bytes from the first cluster (15167), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "png",
+        "size": 8455527,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 248745984
+      }
+    },
+    {
+      "id": 12747,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 85,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\piazza-dei-miracoli.JPG",
+      "aux": 16170,
+      "aux_text": "sha256:c4aeddaaee6176f6318ff4a6bb60ede3692b76a6be4862780cc45c67f0aa5741",
+      "row_sha256": "30eaa85d024485cb7093504de775665727155c36cae88ff0ae53a1408e9f8f95",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 257216512",
+        "cluster_size": 16384,
+        "clusters": 78,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15684,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe11b844578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 78 clusters of 16384 bytes from the first cluster (15684), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 1267394,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 257216512
+      }
+    },
+    {
+      "id": 12748,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 86,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\pisa.JPG",
+      "aux": 16171,
+      "aux_text": "sha256:04214f9f9cb78d8c8902b0b4277931b9edd0482a701b4f9c17ad1a4d9b4b8ffd",
+      "row_sha256": "4925de372ec91c16a729bedf39f4f36e1ac2a1ee79702fd673a4d94b3e57a45a",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 258494464",
+        "cluster_size": 16384,
+        "clusters": 52,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15762,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe117484578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 52 clusters of 16384 bytes from the first cluster (15762), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 847709,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 258494464
+      }
+    },
+    {
+      "id": 12749,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 88,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\stonehenge.JPG",
+      "aux": 16172,
+      "aux_text": "sha256:ef156a7f9d0c1b54430d6aa6d70b7cfb275582118026d2953ef3490f6bc6829e",
+      "row_sha256": "3169d1b603383b1aacbb7422c68a581dc53e1a76efa758b77e73003f4f423513",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 260247552",
+        "cluster_size": 16384,
+        "clusters": 76,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "first_cluster": 15869,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "ffd8ffe11b614578",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 76 clusters of 16384 bytes from the first cluster (15869), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "jpeg",
+        "size": 1236401,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 260247552
+      }
+    },
+    {
+      "id": 12750,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 89,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\tapas.gif",
+      "aux": 16173,
+      "aux_text": "sha256:c842d2dd2c68521ed01c43c1677fd2d42a2696fba2fafbb04540ec9f8e1f5244",
+      "row_sha256": "10976244b434545fa3bd74bfe54ec190f6e129aa8d6d8126663c1a3155fa7443",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 261492736",
+        "cluster_size": 16384,
+        "clusters": 137,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 15945,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "4749463839618c07",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 137 clusters of 16384 bytes from the first cluster (15945), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 2242264,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 261492736
+      }
+    },
+    {
+      "id": 12751,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 90,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\tomatoes.gif",
+      "aux": 16174,
+      "aux_text": "sha256:b1fe1aa976ab2dd064b8c423f4769379a91613b449587f82d560168314410628",
+      "row_sha256": "01381a002c7da27efaf15b1ad8604a4c96b8e40fc19253b9932774780a554113",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 263737344",
+        "cluster_size": 16384,
+        "clusters": 137,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 16082,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "474946383961140a",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 137 clusters of 16384 bytes from the first cluster (16082), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 2240548,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 263737344
+      }
+    },
+    {
+      "id": 12752,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 91,
+      "obj_text": "\\[lost folder at cluster 45007, older layout]\\wat.gif",
+      "aux": 16175,
+      "aux_text": "sha256:345f0b9c7ba4cc413f80708b5e0e8d621d7d01dca6ae251d69013ab3f5019dcb",
+      "row_sha256": "5b0c3d016389f521c784f3ee1f4c7ca1ccd522dbb0f90694fc66fba47c0cc75f",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 45007; content at volume byte offset 265981952",
+        "cluster_size": 16384,
+        "clusters": 2,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": true,
+        "first_cluster": 16219,
+        "image": "rm2.E01",
+        "layout": "older, derived",
+        "leading_bytes": "4749463839610301",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 2 clusters of 16384 bytes from the first cluster (16219), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume",
+        "recovered": true,
+        "signature": "gif",
+        "size": 32186,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 265981952
+      }
+    },
+    {
+      "id": 12753,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 110,
+      "obj_text": "\\de\\winter_storm.amr",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "3ec71b615ac6aeabf89e0d201a3527e03dd9692515d06b50faae528e80db27d1",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51242",
+        "exhibit": "RM#3",
+        "extension": "amr",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 327,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12754,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "991d108abc6c68c7bff71dbfe8db1ee60c6e8e3b61ea7a50501e99c6ee61eb2d",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51273",
+        "exhibit": "RM#3",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 7431,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12755,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 112,
+      "obj_text": "\\design\\winter_storm.amr",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "38975e90fdd802e18f61f657e221018a09ffeb1f6535b431583bcaf1d55b95ab",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36535",
+        "exhibit": "RM#3",
+        "extension": "amr",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 327,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12756,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 113,
+      "obj_text": "\\design\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "5ad8b3c68841ee6bc95faf72f29447b719e85fa455748aca55dab86b8f54cfaa",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51210",
+        "exhibit": "RM#3",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 7431,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12757,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 114,
+      "obj_text": "\\pd\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "0f761dd48a94d6c55aeb8d842645cb9c927adcaeeee27c0f09630469fd47bca6",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36522",
+        "exhibit": "RM#3",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 15430,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12758,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 116,
+      "obj_text": "\\pd\\my_favorite_movies.7z",
+      "aux": 16141,
+      "aux_text": "sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311",
+      "row_sha256": "1e1e2ffd434ca9b17b52ed91c14b84477ae4c87737f27b4aae7aa787ed565b8a",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36523",
+        "exhibit": "RM#3",
+        "extension": "7z",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 16046,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 100078,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12759,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 118,
+      "obj_text": "\\pd\\new_years_day.jpg",
+      "aux": 16142,
+      "aux_text": "sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c",
+      "row_sha256": "c4a681787a5e49559233cdbce7d9ea4beaf5081f363288d16ede5e30952eeca7",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36524",
+        "exhibit": "RM#3",
+        "extension": "jpg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 16095,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 10237535,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12760,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "\\pd\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "9368931f28bc472541f793db3fd48775cd3e2e19ec7f2f4250ce164c323e51cf",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36525",
+        "exhibit": "RM#3",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 21094,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12761,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 115,
+      "obj_text": "\\pricing decision\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "7064d2fe69fbdfc31fcdc78de2b63e25239866701dbb48f43d9ba491aed177fe",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36522",
+        "exhibit": "RM#3",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 15430,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12762,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 117,
+      "obj_text": "\\pricing decision\\my_favorite_movies.7z",
+      "aux": 16141,
+      "aux_text": "sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311",
+      "row_sha256": "516a7f95fffe9e8c8e839dc16da535ff69eabadc24c0a6881786ea68cd10acda",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36523",
+        "exhibit": "RM#3",
+        "extension": "7z",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 16046,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 100078,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "contentHashed": [
+          12723
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as one contiguous run of 1584 clusters from the first cluster (22613); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12724
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#1d.txt on exhibit RM#2, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as one contiguous run of 30 clusters from the first cluster (24198); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12725
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#1p.txt on exhibit RM#2, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as one contiguous run of 112 clusters from the first cluster (24228); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12726
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#2d.txt on exhibit RM#2, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as one contiguous run of 161 clusters from the first cluster (24340); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12727
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#2p.txt on exhibit RM#2, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as one contiguous run of 282 clusters from the first cluster (24501); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12728
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#3d.txt on exhibit RM#2, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as one contiguous run of 577 clusters from the first cluster (24783); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12729
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\technical review\\diary_#3p.txt on exhibit RM#2, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as one contiguous run of 80 clusters from the first cluster (25360); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12730
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\SPQR.JPG on exhibit RM#2, read from the image, has sha256:2ab04d354dd137d32aa5647ae24c5d04d3efffb4fb541796e5d5de854ffd1e46. The bytes were read as one contiguous run of 55 clusters of 16384 bytes from the first cluster (15814), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12731
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\amalfi.bmp on exhibit RM#2, read from the image, has sha256:18f42fa1b94b7b7d7c11f0016ffbdb3bfb97cdc0b80ddd489ec350ba7f494c11. The bytes were read as one contiguous run of 57 clusters of 16384 bytes from the first cluster (11493), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12732
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\bamboo-clump-anamated.gif on exhibit RM#2, read from the image, has sha256:f5b1e30d815da1ac9c19a1edaaaef561e3021518395c0dc62352825006a69f66. The bytes were read as one contiguous run of 411 clusters of 16384 bytes from the first cluster (11550), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12733
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\barn.gif on exhibit RM#2, read from the image, has sha256:21b185e47c844e2140b290e8c9b835d2c7f98bd2530a0c896243060b36b99186. The bytes were read as one contiguous run of 205 clusters of 16384 bytes from the first cluster (11961), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12734
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\blini.gif on exhibit RM#2, read from the image, has sha256:14c16e3863872b17c83e6cf94e3aaa170693b498417c1676a5049e5370f7065a. The bytes were read as one contiguous run of 130 clusters of 16384 bytes from the first cluster (12166), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12735
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\boudicca.bmp on exhibit RM#2, read from the image, has sha256:2220148730f9e37a05e87f2b29ee4c49391662c2c8c42344d9583596fa73a6ac. The bytes were read as one contiguous run of 538 clusters of 16384 bytes from the first cluster (12296), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12736
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\cactus.png on exhibit RM#2, read from the image, has sha256:f04f71a4bb506a603bc0593fd393b9f09df0b9e171e7f8503eba6df2b1e24351. The bytes were read as one contiguous run of 377 clusters of 16384 bytes from the first cluster (12834), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12737
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\cave.png on exhibit RM#2, read from the image, has sha256:45010a8f2bcb941018eb06c6901b471968b80f130612977506848916670e5a0c. The bytes were read as one contiguous run of 500 clusters of 16384 bytes from the first cluster (13211), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12738
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\cutty-sark.JPG on exhibit RM#2, read from the image, has sha256:ee8b9c17c44e128e9e95d60fe219e95feae53c463b01016a312f8c5b732f21de. The bytes were read as one contiguous run of 100 clusters of 16384 bytes from the first cluster (13711), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12739
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\eggs.gif on exhibit RM#2, read from the image, has sha256:fc2df18e58b7b8dec0ea5514c1f089c4f7e282f5a4a025c348e0407fa48c6995. The bytes were read as one contiguous run of 140 clusters of 16384 bytes from the first cluster (13811), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12740
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\forsythia.png on exhibit RM#2, read from the image, has sha256:6d2d88158f04ed5c03d76d218096fd98ec0b6b1a8c30c91ed3c523041a6ffbb8. The bytes were read as one contiguous run of 495 clusters of 16384 bytes from the first cluster (13951), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12741
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\injera.gif on exhibit RM#2, read from the image, has sha256:a7459d55dd4558212a663b6ad2e5ed66318e8116dbb4adaed78dda3729d2db1d. The bytes were read as one contiguous run of 3 clusters of 16384 bytes from the first cluster (14446), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12742
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\jack-o-lantern.tiff on exhibit RM#2, read from the image, has sha256:ddd6a44c8a1c96b21dd6af3ab38c1acc75a1a2fd0d7d4767ff6bf9b1306d86b8. The bytes were read as one contiguous run of 461 clusters of 16384 bytes from the first cluster (14449), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12743
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\jump.jpg on exhibit RM#2, read from the image, has sha256:a7274777fd1953e3725e3a2edc6d4bca0f5b90b9c7c87aba678436b3d3c58267. The bytes were read as one contiguous run of 124 clusters of 16384 bytes from the first cluster (14910), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12744
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\leaf.jpg on exhibit RM#2, read from the image, has sha256:04d70813ded4cff38df92b4e0ba3d22fbf38d4c06bc0bb614b673e772599a411. The bytes were read as one contiguous run of 49 clusters of 16384 bytes from the first cluster (15034), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12745
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\oak-snow.jpg on exhibit RM#2, read from the image, has sha256:1c212b6b139e2087aba493a0d3dbea6546c6d22a5cf1629256456c5b3e50d8cf. The bytes were read as one contiguous run of 84 clusters of 16384 bytes from the first cluster (15083), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12746
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\orchid.png on exhibit RM#2, read from the image, has sha256:e1de76b3a7ac0a2e00f479f5661b5e9d3b26260532fcde56e2e03ee00f786494. The bytes were read as one contiguous run of 517 clusters of 16384 bytes from the first cluster (15167), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12747
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\piazza-dei-miracoli.JPG on exhibit RM#2, read from the image, has sha256:c4aeddaaee6176f6318ff4a6bb60ede3692b76a6be4862780cc45c67f0aa5741. The bytes were read as one contiguous run of 78 clusters of 16384 bytes from the first cluster (15684), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12748
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\pisa.JPG on exhibit RM#2, read from the image, has sha256:04214f9f9cb78d8c8902b0b4277931b9edd0482a701b4f9c17ad1a4d9b4b8ffd. The bytes were read as one contiguous run of 52 clusters of 16384 bytes from the first cluster (15762), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12749
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\stonehenge.JPG on exhibit RM#2, read from the image, has sha256:ef156a7f9d0c1b54430d6aa6d70b7cfb275582118026d2953ef3490f6bc6829e. The bytes were read as one contiguous run of 76 clusters of 16384 bytes from the first cluster (15869), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12750
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\tapas.gif on exhibit RM#2, read from the image, has sha256:c842d2dd2c68521ed01c43c1677fd2d42a2696fba2fafbb04540ec9f8e1f5244. The bytes were read as one contiguous run of 137 clusters of 16384 bytes from the first cluster (15945), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12751
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\tomatoes.gif on exhibit RM#2, read from the image, has sha256:b1fe1aa976ab2dd064b8c423f4769379a91613b449587f82d560168314410628. The bytes were read as one contiguous run of 137 clusters of 16384 bytes from the first cluster (16082), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12752
+        ]
+      },
+      "english": "The content of \\[lost folder at cluster 45007, older layout]\\wat.gif on exhibit RM#2, read from the image, has sha256:345f0b9c7ba4cc413f80708b5e0e8d621d7d01dca6ae251d69013ab3f5019dcb. The bytes were read as one contiguous run of 2 clusters of 16384 bytes from the first cluster (16219), counted in an older layout of the device. That layout's cluster size and data-area start (volume byte 282624) are recorded nowhere any more; they were derived as the only power-of-two cluster size at which this folder's files do not overlap and the data area starts inside the volume (older, derived layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12753
+        ]
+      },
+      "english": "The content of \\de\\winter_storm.amr on exhibit RM#3, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12754
+        ]
+      },
+      "english": "The content of \\de\\winter_whether_advisory.zip on exhibit RM#3, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12755
+        ]
+      },
+      "english": "The content of \\design\\winter_storm.amr on exhibit RM#3, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12756
+        ]
+      },
+      "english": "The content of \\design\\winter_whether_advisory.zip on exhibit RM#3, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12757
+        ]
+      },
+      "english": "The content of \\pd\\my_favorite_cars.db on exhibit RM#3, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12758
+        ]
+      },
+      "english": "The content of \\pd\\my_favorite_movies.7z on exhibit RM#3, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12759
+        ]
+      },
+      "english": "The content of \\pd\\new_years_day.jpg on exhibit RM#3, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12760
+        ]
+      },
+      "english": "The content of \\pd\\super_bowl.avi on exhibit RM#3, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12761
+        ]
+      },
+      "english": "The content of \\pricing decision\\my_favorite_cars.db on exhibit RM#3, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12762
+        ]
+      },
+      "english": "The content of \\pricing decision\\my_favorite_movies.7z on exhibit RM#3, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M335.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

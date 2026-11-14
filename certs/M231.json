@@ -1,0 +1,756 @@
+{
+  "finding_id": "M231",
+  "question": "Which accounts are recorded?",
+  "claim": {
+    "both": [
+      {
+        "accountRecorded": [
+          522
+        ]
+      },
+      {
+        "accountRecorded": [
+          523
+        ]
+      },
+      {
+        "accountRecorded": [
+          524
+        ]
+      },
+      {
+        "accountRecorded": [
+          525
+        ]
+      },
+      {
+        "accountRecorded": [
+          526
+        ]
+      },
+      {
+        "accountRecorded": [
+          527
+        ]
+      },
+      {
+        "accountRecorded": [
+          528
+        ]
+      },
+      {
+        "accountRecorded": [
+          529
+        ]
+      },
+      {
+        "accountRecorded": [
+          530
+        ]
+      },
+      {
+        "accountRecorded": [
+          531
+        ]
+      },
+      {
+        "accountRecorded": [
+          532
+        ]
+      },
+      {
+        "accountRecorded": [
+          533
+        ]
+      },
+      {
+        "accountRecorded": [
+          534
+        ]
+      },
+      {
+        "accountRecorded": [
+          535
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "An account named informant is recorded (windows local account; record time 2015-03-22 14:33:54 UTC). An account named informant is recorded (windows local account; record time 2015-03-22 14:33:54 UTC). An account named iaman.informant@nist.gov is recorded (outlook e-mail; record time 2015-03-22 15:48:21 UTC). An account named admin11 is recorded (windows local account; record time 2015-03-22 15:51:54 UTC). An account named admin11 is recorded (windows local account; record time 2015-03-22 15:51:54 UTC). An account named ITechTeam is recorded (windows local account; record time 2015-03-22 15:52:30 UTC). An account named ITechTeam is recorded (windows local account; record time 2015-03-22 15:52:30 UTC). An account named temporary is recorded (windows local account; record time 2015-03-22 15:53:01 UTC). An account named temporary is recorded (windows local account; record time 2015-03-22 15:53:01 UTC). An account named iaman.informant.personal@gmail.com is recorded (google drive; record time 2015-03-23 20:05:32 UTC). An account named Administrator is recorded (windows local account; record time 2015-03-25 10:33:22 UTC). An account named Guest is recorded (windows local account; record time 2015-03-25 10:33:22 UTC). An account named iaman.informant@nist.gov is recorded (outlook e-mail; record time 2015-03-25 15:00:41 UTC). An account named iaman.informant.personal@gmail.com is recorded (google drive; record time 2015-03-25 15:21:36 UTC).",
+  "cited_facts": [
+    {
+      "id": 522,
+      "kind": "accountSeen",
+      "t": 1427034834422602,
+      "res": 1,
+      "obj": 262,
+      "obj_text": "informant",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "975fdf67ef5d1e9d7d2ccd2108806dab445467acba6b080a8313ec6577c9b4c5",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "password not required",
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\informant",
+        "exhibit": "PC",
+        "failed_logons": 0,
+        "groups": [
+          "Administrators"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "last_failed_logon": "2015-03-25 14:45:43.767405Z",
+        "last_logon": "2015-03-25 14:45:59.180205Z",
+        "last_password_change": "2015-03-22 14:33:54.485002Z",
+        "logon_count": 10,
+        "password_hint": "IAMAN",
+        "profile_path": "C:\\Users\\informant",
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003E8",
+        "rid": 1000,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 523,
+      "kind": "accountSeen",
+      "t": 1427034834422602,
+      "res": 1,
+      "obj": 262,
+      "obj_text": "informant",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "69a55c564007ee0b97bbae6955bc3a7097f7b5b96820c944111fd375baa14068",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 111",
+        "channel": "Security",
+        "created_by": "WIN-D9RGPJQ68G8$",
+        "data": {
+          "AccountExpires": "%%1794",
+          "DisplayName": "%%1793",
+          "HomeDirectory": "%%1793",
+          "HomePath": "%%1793",
+          "LogonHours": "%%1797",
+          "NewUacValue": "0x15",
+          "OldUacValue": "0x0",
+          "PasswordLastSet": "%%1794",
+          "PrimaryGroupId": "513",
+          "ProfilePath": "%%1793",
+          "SamAccountName": "informant",
+          "ScriptPath": "%%1793",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "WIN-D9RGPJQ68G8$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "TargetUserName": "informant",
+          "UserAccountControl": "\r\n\t\t%%2080\r\n\t\t%%2082\r\n\t\t%%2084",
+          "UserParameters": "%%1793",
+          "UserWorkstations": "%%1793"
+        },
+        "event": "a user account was created",
+        "event_id": 4720,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "time_meaning": "time the account-creation event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 524,
+      "kind": "accountSeen",
+      "t": 1427039301326138,
+      "res": 1,
+      "obj": 289,
+      "obj_text": "iaman.informant@nist.gov",
+      "aux": 290,
+      "aux_text": "outlook e-mail",
+      "row_sha256": "0f0a74daad948daad8967b2698d6c6c24b620efe702f8db141c602c64834dab2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 16818176,
+        "time_meaning": "creation time of the mailbox file, which is named after the account (the account's creation time is not recorded)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 525,
+      "kind": "accountSeen",
+      "t": 1427039514524311,
+      "res": 1,
+      "obj": 291,
+      "obj_text": "admin11",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "87a809828dd1a1e708fd9e57ea5f5d595f96313e71bdfc820018a46b5368ffee",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\admin11",
+        "exhibit": "PC",
+        "failed_logons": 0,
+        "full_name": "admin11",
+        "groups": [
+          "Administrators",
+          "Users"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "last_failed_logon": "2015-03-22 15:53:02.134835Z",
+        "last_logon": "2015-03-22 15:57:02.419988Z",
+        "last_password_change": "2015-03-22 15:52:10.872741Z",
+        "logon_count": 2,
+        "profile_path": "C:\\Users\\admin11",
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003E9",
+        "rid": 1001,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 526,
+      "kind": "accountSeen",
+      "t": 1427039514524311,
+      "res": 1,
+      "obj": 291,
+      "obj_text": "admin11",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "f0884b74b2c353e0a9a8bb53d1ff9929adb3e514351e39355b045ba99fab9fad",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 984",
+        "channel": "Security",
+        "created_by": "informant",
+        "data": {
+          "AccountExpires": "%%1794",
+          "DisplayName": "%%1793",
+          "HomeDirectory": "%%1793",
+          "HomePath": "%%1793",
+          "LogonHours": "%%1797",
+          "NewUacValue": "0x15",
+          "OldUacValue": "0x0",
+          "PasswordLastSet": "%%1794",
+          "PrimaryGroupId": "513",
+          "ProfilePath": "%%1793",
+          "SamAccountName": "admin11",
+          "ScriptPath": "%%1793",
+          "SubjectDomainName": "informant-PC",
+          "SubjectLogonId": "0x224e3",
+          "SubjectUserName": "informant",
+          "SubjectUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "TargetDomainName": "informant-PC",
+          "TargetSid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "TargetUserName": "admin11",
+          "UserAccountControl": "\r\n\t\t%%2080\r\n\t\t%%2082\r\n\t\t%%2084",
+          "UserParameters": "%%1793",
+          "UserWorkstations": "%%1793"
+        },
+        "event": "a user account was created",
+        "event_id": 4720,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+        "time_meaning": "time the account-creation event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 527,
+      "kind": "accountSeen",
+      "t": 1427039550742777,
+      "res": 1,
+      "obj": 292,
+      "obj_text": "ITechTeam",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "2cd7aed563ee864bfdb4fdb797064b1ab8d18ed7beb59c554720400b06ce3f8a",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\ITechTeam",
+        "exhibit": "PC",
+        "failed_logons": 1,
+        "full_name": "ITechTeam",
+        "groups": [
+          "Administrators",
+          "Users"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "last_failed_logon": "2015-03-22 15:53:02.144835Z",
+        "last_password_change": "2015-03-22 15:52:45.546404Z",
+        "logon_count": 0,
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003EA",
+        "rid": 1002,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1002",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 528,
+      "kind": "accountSeen",
+      "t": 1427039550742777,
+      "res": 1,
+      "obj": 292,
+      "obj_text": "ITechTeam",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "59f8f2f772f119ffc27367c483c8dd0744647c73b8319c5333aff35aff166bbf",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 995",
+        "channel": "Security",
+        "created_by": "informant",
+        "data": {
+          "AccountExpires": "%%1794",
+          "DisplayName": "%%1793",
+          "HomeDirectory": "%%1793",
+          "HomePath": "%%1793",
+          "LogonHours": "%%1797",
+          "NewUacValue": "0x15",
+          "OldUacValue": "0x0",
+          "PasswordLastSet": "%%1794",
+          "PrimaryGroupId": "513",
+          "ProfilePath": "%%1793",
+          "SamAccountName": "ITechTeam",
+          "ScriptPath": "%%1793",
+          "SubjectDomainName": "informant-PC",
+          "SubjectLogonId": "0x224e3",
+          "SubjectUserName": "informant",
+          "SubjectUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "TargetDomainName": "informant-PC",
+          "TargetSid": "S-1-5-21-2425377081-3129163575-2985601102-1002",
+          "TargetUserName": "ITechTeam",
+          "UserAccountControl": "\r\n\t\t%%2080\r\n\t\t%%2082\r\n\t\t%%2084",
+          "UserParameters": "%%1793",
+          "UserWorkstations": "%%1793"
+        },
+        "event": "a user account was created",
+        "event_id": 4720,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1002",
+        "time_meaning": "time the account-creation event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 529,
+      "kind": "accountSeen",
+      "t": 1427039581900034,
+      "res": 1,
+      "obj": 293,
+      "obj_text": "temporary",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "009fbef7ee48bae75fd967eefa0ced940334091bf80dc98f5d075af4ca3a6f2f",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\temporary",
+        "exhibit": "PC",
+        "failed_logons": 1,
+        "full_name": "temporary",
+        "groups": [
+          "Users"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "last_failed_logon": "2015-03-22 15:56:37.428743Z",
+        "last_logon": "2015-03-22 15:55:57.259062Z",
+        "last_password_change": "2015-03-22 15:53:11.774853Z",
+        "logon_count": 1,
+        "profile_path": "C:\\Users\\temporary",
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003EB",
+        "rid": 1003,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 530,
+      "kind": "accountSeen",
+      "t": 1427039581900034,
+      "res": 1,
+      "obj": 293,
+      "obj_text": "temporary",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "3a3491111f792a6c4abb3f90ad6e0771c242da9bd108a6da27e62da3bc488d84",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1006",
+        "channel": "Security",
+        "created_by": "informant",
+        "data": {
+          "AccountExpires": "%%1794",
+          "DisplayName": "%%1793",
+          "HomeDirectory": "%%1793",
+          "HomePath": "%%1793",
+          "LogonHours": "%%1797",
+          "NewUacValue": "0x15",
+          "OldUacValue": "0x0",
+          "PasswordLastSet": "%%1794",
+          "PrimaryGroupId": "513",
+          "ProfilePath": "%%1793",
+          "SamAccountName": "temporary",
+          "ScriptPath": "%%1793",
+          "SubjectDomainName": "informant-PC",
+          "SubjectLogonId": "0x224e3",
+          "SubjectUserName": "informant",
+          "SubjectUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "TargetDomainName": "informant-PC",
+          "TargetSid": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+          "TargetUserName": "temporary",
+          "UserAccountControl": "\r\n\t\t%%2080\r\n\t\t%%2082\r\n\t\t%%2084",
+          "UserParameters": "%%1793",
+          "UserWorkstations": "%%1793"
+        },
+        "event": "a user account was created",
+        "event_id": 4720,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+        "time_meaning": "time the account-creation event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 531,
+      "kind": "accountSeen",
+      "t": 1427141132279000,
+      "res": 1000,
+      "obj": 294,
+      "obj_text": "iaman.informant.personal@gmail.com",
+      "aux": 189,
+      "aux_text": "google drive",
+      "row_sha256": "b7d950bd9365428377d75b046111c15b75e5fbb97ef220755b5ea378f4dedd66",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 86",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "sync log line where the client starts using this account's credentials (the account's creation time is not recorded)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 532,
+      "kind": "accountSeen",
+      "t": 1427279602864338,
+      "res": 1,
+      "obj": 295,
+      "obj_text": "Administrator",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "39d70334ec16f0a8ac18d6652cc7686056a6396e4d0dcd7fcacc897cbfcbbdad",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "account disabled",
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\Administrator",
+        "comment": "Built-in account for administering the computer/domain",
+        "exhibit": "PC",
+        "failed_logons": 0,
+        "groups": [
+          "Administrators"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "last_logon": "2010-11-21 03:47:20.945242Z",
+        "last_password_change": "2010-11-21 03:57:24.715055Z",
+        "logon_count": 6,
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000001F4",
+        "rid": 500,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-500",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 533,
+      "kind": "accountSeen",
+      "t": 1427279602864338,
+      "res": 1,
+      "obj": 296,
+      "obj_text": "Guest",
+      "aux": 288,
+      "aux_text": "windows local account",
+      "row_sha256": "99f1a152a030011b576ed63ac28c23be2919bcf7a2e481f480771a3b43d36816",
+      "prov": {
+        "account_expires": "never",
+        "account_flags": [
+          "account disabled",
+          "password not required",
+          "normal user account",
+          "password does not expire"
+        ],
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\Guest",
+        "comment": "Built-in account for guest access to the computer/domain",
+        "exhibit": "PC",
+        "failed_logons": 0,
+        "groups": [
+          "Guests"
+        ],
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "logon_count": 0,
+        "record": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000001F5",
+        "rid": 501,
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-501",
+        "time_meaning": "last-write time of the account's SAM Names key, written when the account is created (or renamed)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 534,
+      "kind": "accountSeen",
+      "t": 1427295641025204,
+      "res": 1,
+      "obj": 289,
+      "obj_text": "iaman.informant@nist.gov",
+      "aux": 290,
+      "aux_text": "outlook e-mail",
+      "row_sha256": "4b77c95519e7d58472d8b81526023f1404375618b3dc159c1fa05006d1cca595",
+      "prov": {
+        "account": "informant",
+        "account_name": "iaman.informant@nist.gov",
+        "artifact": "HKCU\\Software\\Microsoft\\Office\\15.0\\Outlook\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676\\00000002",
+        "display_name": "",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "outlook_profile": "Outlook",
+        "servers": "",
+        "service": "MSEMS",
+        "time_meaning": "registry key last-write time (the account's creation time is not recorded)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 535,
+      "kind": "accountSeen",
+      "t": 1427296896782000,
+      "res": 1000,
+      "obj": 294,
+      "obj_text": "iaman.informant.personal@gmail.com",
+      "aux": 189,
+      "aux_text": "google drive",
+      "row_sha256": "27200015765b517aa08e6b3dbb83bb714340c533b694f5df040d5b56f9f10b53",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log line 1819",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "sync log line where the client starts using this account's credentials (the account's creation time is not recorded)",
+        "time_zone": "UTC offset printed on the log line",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "accountRecorded": [
+          522
+        ]
+      },
+      "english": "An account named informant is recorded (windows local account; record time 2015-03-22 14:33:54 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          523
+        ]
+      },
+      "english": "An account named informant is recorded (windows local account; record time 2015-03-22 14:33:54 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          524
+        ]
+      },
+      "english": "An account named iaman.informant@nist.gov is recorded (outlook e-mail; record time 2015-03-22 15:48:21 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          525
+        ]
+      },
+      "english": "An account named admin11 is recorded (windows local account; record time 2015-03-22 15:51:54 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          526
+        ]
+      },
+      "english": "An account named admin11 is recorded (windows local account; record time 2015-03-22 15:51:54 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          527
+        ]
+      },
+      "english": "An account named ITechTeam is recorded (windows local account; record time 2015-03-22 15:52:30 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          528
+        ]
+      },
+      "english": "An account named ITechTeam is recorded (windows local account; record time 2015-03-22 15:52:30 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          529
+        ]
+      },
+      "english": "An account named temporary is recorded (windows local account; record time 2015-03-22 15:53:01 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          530
+        ]
+      },
+      "english": "An account named temporary is recorded (windows local account; record time 2015-03-22 15:53:01 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          531
+        ]
+      },
+      "english": "An account named iaman.informant.personal@gmail.com is recorded (google drive; record time 2015-03-23 20:05:32 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          532
+        ]
+      },
+      "english": "An account named Administrator is recorded (windows local account; record time 2015-03-25 10:33:22 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          533
+        ]
+      },
+      "english": "An account named Guest is recorded (windows local account; record time 2015-03-25 10:33:22 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          534
+        ]
+      },
+      "english": "An account named iaman.informant@nist.gov is recorded (outlook e-mail; record time 2015-03-25 15:00:41 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "accountRecorded": [
+          535
+        ]
+      },
+      "english": "An account named iaman.informant.personal@gmail.com is recorded (google drive; record time 2015-03-25 15:21:36 UTC).",
+      "rules": [
+        "R15"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R15"
+  ],
+  "strength": "strong",
+  "lean_file": "M231.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

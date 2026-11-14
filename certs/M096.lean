@@ -5,9 +5,9 @@ namespace Cert.M096
 
 def cited : List Fact := [
   ⟨82, .fileCreated, 1427039762329069, 1, 65, 4⟩,
-  ⟨188, .fileModified, 1427039767055880, 1, 65, 4⟩ ]
+  ⟨262, .fileModified, 1427039767055880, 1, 65, 4⟩ ]
 
-def claim : Claim := .both (Sets.fileCreatedAt 82) (.both (Sets.fileModifiedAt 188) (.before 82 188))
+def claim : Claim := .both (Sets.fileCreatedAt 82) (.both (Sets.fileModifiedAt 262) (.before 82 262))
 
 theorem verified : holds cited claim = true := by decide +kernel
 

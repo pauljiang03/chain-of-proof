@@ -1,0 +1,197 @@
+{
+  "finding_id": "M337",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12686,
+          12714
+        ]
+      },
+      {
+        "sameContent": [
+          12714,
+          12754
+        ]
+      },
+      {
+        "sameContent": [
+          12754,
+          12756
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1 and \\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. \\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2 and \\de\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. \\de\\winter_whether_advisory.zip on exhibit RM#3 and \\design\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+  "cited_facts": [
+    {
+      "id": 12686,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "7f25a0fb803d56341e7266e12528cbc63fd3292f00a99e5e34b766a311412870",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "pptx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12714,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "64472d5581264db2cc2fcd1c3092acb140eb563ab4b0bc4dc07f6b8fdbfa85fd",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4; content at volume byte offset 18755584",
+        "cluster_size": 4096,
+        "clusters": 4000,
+        "exhibit": "RM#2",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "first_cluster": 3557,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 4000 clusters from the first cluster (3557); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 18755584
+      }
+    },
+    {
+      "id": 12754,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "991d108abc6c68c7bff71dbfe8db1ee60c6e8e3b61ea7a50501e99c6ee61eb2d",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51273",
+        "exhibit": "RM#3",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 7431,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12756,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 113,
+      "obj_text": "\\design\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "5ad8b3c68841ee6bc95faf72f29447b719e85fa455748aca55dab86b8f54cfaa",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51210",
+        "exhibit": "RM#3",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 7431,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12686,
+          12714
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1 and \\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12714,
+          12754
+        ]
+      },
+      "english": "\\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2 and \\de\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12754,
+          12756
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip on exhibit RM#3 and \\design\\winter_whether_advisory.zip on exhibit RM#3 have identical content: both read as sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M337.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,56 @@
+{
+  "finding_id": "M206",
+  "question": "Which files were sent to the Recycle Bin?",
+  "claim": {
+    "fileDeletedAt": [
+      279
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 279,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 154,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "469520df2fde5c2e80e557dbe712626e9ea1f9f8b32d15ddec774e47f9cc273e",
+      "prov": {
+        "artifact": "Recycle Bin index $IX538VH.jpg, file table record 74764",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 561276,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          279
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Lighthouse.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "M206.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

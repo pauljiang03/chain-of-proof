@@ -6,21 +6,21 @@
       {
         "recoveredOnDevice": [
           117,
-          376
+          499
         ]
       },
       {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       {
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       {
@@ -32,15 +32,15 @@
       {
         "copiedHere": [
           117,
-          162
+          210
         ]
       },
       {
         "tagged": [
           117,
           "obj",
-          341,
-          200
+          422,
+          234
         ]
       }
     ]
@@ -72,7 +72,7 @@
       }
     },
     {
-      "id": 376,
+      "id": 499,
       "kind": "unallocatedOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -80,7 +80,7 @@
       "obj_text": "4C530012550531106501",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "row_sha256": "cb478ac99ee7f5f3c7da11e44c32ebee0409ceea0e3884dd3b6ea121c705d881",
       "prov": {
         "artifact": "FAT32 clusters the allocation table marks free",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -113,22 +113,22 @@
       }
     },
     {
-      "id": 315,
+      "id": 389,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 194,
+      "aux": 228,
       "aux_text": "unauthorized-device",
-      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "row_sha256": "f90f2b944a666b19333d614b1fc179c69d3e4283dc4888cf119bcfe6884c6e3d",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 162,
+      "id": 210,
       "kind": "fileModified",
       "t": 1418939458000000,
       "res": 2000000,
@@ -136,7 +136,7 @@
       "obj_text": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "1e9278a8ca2408bbbbea1820841efb4c04faca8b3ada1806f404e9af99c947ff",
+      "row_sha256": "a6ab733b0647b131db2434a025d870dea7bcdf76e889cacf8488d5e51ed48375",
       "prov": {
         "artifact": "FAT directory entry in unallocated cluster 14011",
         "exhibit": "RM#2",
@@ -151,15 +151,15 @@
       }
     },
     {
-      "id": 341,
+      "id": 422,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 101,
       "obj_text": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif",
-      "aux": 200,
+      "aux": 234,
       "aux_text": "same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC",
-      "row_sha256": "95de35a47f52f32c6f1590d6bfe5125cb532db7f1a483248bca6f3e74fee9eb4",
+      "row_sha256": "ae48d63e4f0ad59fabc6e69d4a2fc8ac844d6a396860156f64a2666dbdf0f3b1",
       "prov": {
         "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
@@ -171,7 +171,7 @@
       "part": {
         "recoveredOnDevice": [
           117,
-          376
+          499
         ]
       },
       "english": "A directory entry for \\[lost folder 3]\\proposal\\a_gift_from_you.gif, created (2015-03-24 13:59:44 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
@@ -185,7 +185,7 @@
       "part": {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
@@ -200,8 +200,8 @@
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
@@ -225,7 +225,7 @@
       "part": {
         "copiedHere": [
           117,
-          162
+          210
         ]
       },
       "english": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 13:59:44 UTC) after its last modification (2014-12-18 21:50:58 UTC). This rests on heuristic rule R4.",
@@ -239,8 +239,8 @@
         "tagged": [
           117,
           "obj",
-          341,
-          200
+          422,
+          234
         ]
       },
       "english": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif is tagged \"same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",

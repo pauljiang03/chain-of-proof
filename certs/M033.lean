@@ -5,9 +5,9 @@ namespace Cert.M033
 
 def cited : List Fact := [
   ⟨51, .lnkTarget, 1427230870904057, 1, 41, 40⟩,
-  ⟨370, .volumeSeen, 1427230870763657, 1, 204, 40⟩ ]
+  ⟨498, .volumeOnDevice, 1794614400000000, 1, 249, 40⟩ ]
 
-def claim : Claim := Sets.openedFromRecorded 51 370
+def claim : Claim := Sets.openedFromDevice 51 498
 
 theorem verified : holds cited claim = true := by decide +kernel
 

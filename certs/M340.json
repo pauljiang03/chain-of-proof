@@ -1,0 +1,197 @@
+{
+  "finding_id": "M340",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12689,
+          12723
+        ]
+      },
+      {
+        "sameContent": [
+          12723,
+          12772
+        ]
+      },
+      {
+        "sameContent": [
+          12772,
+          12774
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1 and \\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. \\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2 and \\prop\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. \\prop\\landscape.png on exhibit RM#3 and \\proposal\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+  "cited_facts": [
+    {
+      "id": 12689,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "c7b711b6e0ab1aadbd9fd6126cb743caf33720f7dc61a2652c41aff372322c1b",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12723,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 102,
+      "obj_text": "\\[lost folder 3]\\proposal\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "91b89f956e0dfffc5bdf33a7098c33dfb3d20c28cebb06c9cf1c9864941956d7",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 14011; content at volume byte offset 96808960",
+        "cluster_size": 4096,
+        "clusters": 1584,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "first_cluster": 22613,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 1584 clusters from the first cluster (22613); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 96808960
+      }
+    },
+    {
+      "id": 12772,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "9ff23334e2c234b2c53eb4ea3386cf6b1e47c3dbd6223dc0d02637f67b641205",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51369",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 45547,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12774,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 131,
+      "obj_text": "\\proposal\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "f1b8cec27c2048d7f31e74a8dc456a8280958bac9e685390374cc9ed505a8e11",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51200",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 45547,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12689,
+          12723
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1 and \\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12723,
+          12772
+        ]
+      },
+      "english": "\\[lost folder 3]\\proposal\\landscape.png on exhibit RM#2 and \\prop\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12772,
+          12774
+        ]
+      },
+      "english": "\\prop\\landscape.png on exhibit RM#3 and \\proposal\\landscape.png on exhibit RM#3 have identical content: both read as sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M340.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

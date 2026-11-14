@@ -1,0 +1,1857 @@
+{
+  "finding_id": "M322",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12250
+        ]
+      },
+      {
+        "fileRecorded": [
+          12251
+        ]
+      },
+      {
+        "fileRecorded": [
+          12252
+        ]
+      },
+      {
+        "fileRecorded": [
+          12253
+        ]
+      },
+      {
+        "fileRecorded": [
+          12254
+        ]
+      },
+      {
+        "fileRecorded": [
+          12255
+        ]
+      },
+      {
+        "fileRecorded": [
+          12256
+        ]
+      },
+      {
+        "fileRecorded": [
+          12257
+        ]
+      },
+      {
+        "fileRecorded": [
+          12258
+        ]
+      },
+      {
+        "fileRecorded": [
+          12259
+        ]
+      },
+      {
+        "fileRecorded": [
+          12260
+        ]
+      },
+      {
+        "fileRecorded": [
+          12261
+        ]
+      },
+      {
+        "fileRecorded": [
+          12262
+        ]
+      },
+      {
+        "fileRecorded": [
+          12263
+        ]
+      },
+      {
+        "fileRecorded": [
+          12264
+        ]
+      },
+      {
+        "fileRecorded": [
+          12265
+        ]
+      },
+      {
+        "fileRecorded": [
+          12266
+        ]
+      },
+      {
+        "fileRecorded": [
+          12267
+        ]
+      },
+      {
+        "fileRecorded": [
+          12268
+        ]
+      },
+      {
+        "fileRecorded": [
+          12269
+        ]
+      },
+      {
+        "fileRecorded": [
+          12270
+        ]
+      },
+      {
+        "fileRecorded": [
+          12271
+        ]
+      },
+      {
+        "fileRecorded": [
+          12272
+        ]
+      },
+      {
+        "fileRecorded": [
+          12273
+        ]
+      },
+      {
+        "fileRecorded": [
+          12274
+        ]
+      },
+      {
+        "fileRecorded": [
+          12275
+        ]
+      },
+      {
+        "fileRecorded": [
+          12276
+        ]
+      },
+      {
+        "fileRecorded": [
+          12277
+        ]
+      },
+      {
+        "fileRecorded": [
+          12278
+        ]
+      },
+      {
+        "fileRecorded": [
+          12279
+        ]
+      },
+      {
+        "fileRecorded": [
+          12280
+        ]
+      },
+      {
+        "fileRecorded": [
+          12281
+        ]
+      },
+      {
+        "fileRecorded": [
+          12282
+        ]
+      },
+      {
+        "fileRecorded": [
+          12283
+        ]
+      },
+      {
+        "fileRecorded": [
+          12284
+        ]
+      },
+      {
+        "fileRecorded": [
+          12285
+        ]
+      },
+      {
+        "fileRecorded": [
+          12286
+        ]
+      },
+      {
+        "fileRecorded": [
+          12287
+        ]
+      },
+      {
+        "fileRecorded": [
+          12288
+        ]
+      },
+      {
+        "fileRecorded": [
+          12289
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/It's me (record time 2015-03-23 20:38:47 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/It's me (record time 2015-03-23 20:38:51 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:19 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:22 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:38 UTC). The windows search index holds a record of http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a (record time 2015-03-23 20:43:47 UTC). The windows search index holds a record of http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a (record time 2015-03-23 20:43:47 UTC). The windows search index holds a record of http://www.bing.com/?FORM=Z9FD1 (record time 2015-03-23 20:43:50 UTC). The windows search index holds a record of http://www.bing.com/?FORM=Z9FD1 (record time 2015-03-23 20:43:50 UTC). The windows search index holds a record of http://www.bing.com/news?FORM=Z9LH3 (record time 2015-03-23 20:43:52 UTC). The windows search index holds a record of http://www.bing.com/news?FORM=Z9LH3 (record time 2015-03-23 20:43:52 UTC). The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB (record time 2015-03-23 20:44:57 UTC). The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB (record time 2015-03-23 20:45:18 UTC). The windows search index holds a record of http://www.wired.com/?p=1756538 (record time 2015-03-23 20:45:22 UTC). The windows search index holds a record of http://www.wired.com/?p=1756538 (record time 2015-03-23 20:45:22 UTC). The windows search index holds a record of http://www.bing.com/news?q=Soccer+News&FORM=NSBABR (record time 2015-03-23 20:45:30 UTC). The windows search index holds a record of http://www.bing.com/news?q=Soccer+News&FORM=NSBABR (record time 2015-03-23 20:45:46 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db (record time 2015-03-23 20:47:55 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db (record time 2015-03-23 20:47:55 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log (record time 2015-03-23 20:47:56 UTC). The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NWRFSH (record time 2015-03-23 20:53:46 UTC). The windows search index holds a record of http://www.bing.com/news?q=us+news&FORM=NSBABR (record time 2015-03-23 20:55:08 UTC). The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NWRFSH (record time 2015-03-23 20:55:08 UTC). The windows search index holds a record of http://www.bing.com/news?q=us+news&FORM=NSBABR (record time 2015-03-23 20:55:08 UTC). The windows search index holds a record of http://www.bing.com/news?q=world+news&FORM=NSBABR (record time 2015-03-23 20:55:10 UTC). The windows search index holds a record of http://www.bing.com/news?q=local&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC). The windows search index holds a record of http://www.bing.com/news?q=local&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC). The windows search index holds a record of http://www.bing.com/news?q=world+news&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC). The windows search index holds a record of http://www.bing.com/news?q=entertainment+news&FORM=NSBABR (record time 2015-03-23 20:55:18 UTC). The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NSBABR (record time 2015-03-23 20:55:29 UTC). The windows search index holds a record of http://www.bing.com/news?q=entertainment+news&FORM=NSBABR (record time 2015-03-23 20:55:29 UTC). The windows search index holds a record of http://www.bing.com/news?q=business+news&FORM=NSBABR (record time 2015-03-23 20:55:54 UTC). The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NSBABR (record time 2015-03-23 20:55:54 UTC). The windows search index holds a record of http://www.bing.com/news?q=political+news&FORM=NSBABR (record time 2015-03-23 20:55:56 UTC). The windows search index holds a record of http://www.bing.com/news?q=business+news&FORM=NSBABR (record time 2015-03-23 20:55:56 UTC). The windows search index holds a record of http://www.bing.com/news?q=sports+news&FORM=NSBABR (record time 2015-03-23 20:55:57 UTC). The windows search index holds a record of http://www.bing.com/news?q=political+news&FORM=NSBABR (record time 2015-03-23 20:55:57 UTC). The windows search index holds a record of http://www.bing.com/news?q=health+news&FORM=NSBABR (record time 2015-03-23 20:55:58 UTC). The windows search index holds a record of http://www.bing.com/news?q=sports+news&FORM=NSBABR (record time 2015-03-23 20:55:58 UTC). The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NSBABR (record time 2015-03-23 20:56:08 UTC).",
+  "cited_facts": [
+    {
+      "id": 12250,
+      "kind": "fileSeen",
+      "t": 1427143127764000,
+      "res": 1,
+      "obj": 16053,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/It's me",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "efd53b9b95d6afcec4ef87f63c4f1c9d5d1efe5a3da19e4b9f17836f7d21053b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 428",
+        "column": "System_Message_DateSent",
+        "display_name": "It's me",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂곤강갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T20:38:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 6764,
+        "store": "mapi15",
+        "time_meaning": "message sent time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12251,
+      "kind": "fileSeen",
+      "t": 1427143131289266,
+      "res": 1,
+      "obj": 16053,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/It's me",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2a07d934f6546a8ef25cca6477d1087c238cc2f5cd53c4a7ff1f0f050579ff98",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 428",
+        "column": "System_DateModified",
+        "display_name": "It's me",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂곤강갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T20:38:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 6764,
+        "store": "mapi15",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12252,
+      "kind": "fileSeen",
+      "t": 1427143279000000,
+      "res": 1,
+      "obj": 16054,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/RE: It's me",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "23ebbde9aaa86785345c00f152719d4cc133be11ca24e00770ee67d17eb1bc45",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 429",
+        "column": "System_Message_DateSent",
+        "display_name": "RE: It's me",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갘갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T20:41:22.214265Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 16852,
+        "store": "mapi15",
+        "time_meaning": "message sent time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12253,
+      "kind": "fileSeen",
+      "t": 1427143282214265,
+      "res": 1,
+      "obj": 16054,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/RE: It's me",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "002289b677549ffd71e1f1e9e08a76dbddbb599f359f54e2f6c8a0a405e8f188",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 429",
+        "column": "System_DateModified, System_DateCreated, System_Message_DateReceived",
+        "display_name": "RE: It's me",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갘갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T20:41:22.214265Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 16852,
+        "store": "mapi15",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; message received time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12254,
+      "kind": "fileSeen",
+      "t": 1427143298327579,
+      "res": 1,
+      "obj": 16054,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/RE: It's me",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "71179cedadac2318a3e9ef75c8e0c8492646935c45b7b377459d34f11c958925",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 429",
+        "column": "System_Search_GatherTime",
+        "display_name": "RE: It's me",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갘갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T20:41:22.214265Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 16852,
+        "store": "mapi15",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12255,
+      "kind": "fileSeen",
+      "t": 1427143427512480,
+      "res": 1,
+      "obj": 1269,
+      "obj_text": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a1a8c6947d85579f3681781d8e6b60873ea67c093d3787e8aa40d19d97571c67",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 430",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:47.513003Z",
+          "System_ItemDate": "2015-03-23T20:43:47.512480Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12256,
+      "kind": "fileSeen",
+      "t": 1427143427622981,
+      "res": 1,
+      "obj": 1269,
+      "obj_text": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6fd4e413191e2d42f72f0159f239c0056efc04baf623c3b0efd98f90617cb452",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 430",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:47.513003Z",
+          "System_ItemDate": "2015-03-23T20:43:47.512480Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12257,
+      "kind": "fileSeen",
+      "t": 1427143430358490,
+      "res": 1,
+      "obj": 1337,
+      "obj_text": "http://www.bing.com/?FORM=Z9FD1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3cf089ed17fe2bd7930c3583d6e6c6d5dbfbd29ee044609d54099ed67254498e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 431",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/?FORM=Z9FD1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:50.359013Z",
+          "System_ItemDate": "2015-03-23T20:43:50.358490Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12258,
+      "kind": "fileSeen",
+      "t": 1427143430374090,
+      "res": 1,
+      "obj": 1337,
+      "obj_text": "http://www.bing.com/?FORM=Z9FD1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1948c4c5b3893c7ad6fea81e96ce73acecd7390255cd30851b50fb25fd95a394",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 431",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/?FORM=Z9FD1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:50.359013Z",
+          "System_ItemDate": "2015-03-23T20:43:50.358490Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12259,
+      "kind": "fileSeen",
+      "t": 1427143432457705,
+      "res": 1,
+      "obj": 1272,
+      "obj_text": "http://www.bing.com/news?FORM=Z9LH3",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2903b5ffbbabe47cc77574497aa156c1ffa6a5ca521fb290af32acd8e151f36d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 432",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?FORM=Z9LH3",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:52.458228Z",
+          "System_ItemDate": "2015-03-23T20:43:52.457705Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12260,
+      "kind": "fileSeen",
+      "t": 1427143432477705,
+      "res": 1,
+      "obj": 1272,
+      "obj_text": "http://www.bing.com/news?FORM=Z9LH3",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6039b25fa605102827c86d9ed8dfbafa8ebf0c03ac16ce4525509d2d46935066",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 432",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?FORM=Z9LH3",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:43:52.458228Z",
+          "System_ItemDate": "2015-03-23T20:43:52.457705Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12261,
+      "kind": "fileSeen",
+      "t": 1427143497831177,
+      "res": 1,
+      "obj": 1293,
+      "obj_text": "http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "00deb812791e4458b96835163898f1de38cdb90c3aeeb92bd111ee7ccdd02466",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 434",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:44:57.831700Z",
+          "System_ItemDate": "2015-03-23T20:44:57.831177Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12262,
+      "kind": "fileSeen",
+      "t": 1427143518426208,
+      "res": 1,
+      "obj": 1293,
+      "obj_text": "http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5e505ea04425c16049ded2824048a0fdc2fd7fd661e14ed400748b2f3ffc40ed",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 434",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:44:57.831700Z",
+          "System_ItemDate": "2015-03-23T20:44:57.831177Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12263,
+      "kind": "fileSeen",
+      "t": 1427143522234227,
+      "res": 1,
+      "obj": 1297,
+      "obj_text": "http://www.wired.com/?p=1756538",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "84ab15b74b87585bf835526ec0555a054fd70a5f8ce4ab30d81737cf170b241f",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 435",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.wired.com/?p=1756538",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:45:22.234750Z",
+          "System_ItemDate": "2015-03-23T20:45:22.234227Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12264,
+      "kind": "fileSeen",
+      "t": 1427143522254227,
+      "res": 1,
+      "obj": 1297,
+      "obj_text": "http://www.wired.com/?p=1756538",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2a93bb886e5a9760d7a142de3f31befaae4da72bf507cdb6abd0e5495192c7e6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 435",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.wired.com/?p=1756538",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:45:22.234750Z",
+          "System_ItemDate": "2015-03-23T20:45:22.234227Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12265,
+      "kind": "fileSeen",
+      "t": 1427143530127248,
+      "res": 1,
+      "obj": 1302,
+      "obj_text": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1aca8cd5a4542dbfaeda7a98a9c3c54685a3c3e0de8814d81b090314ede929c8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 436",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:45:30.127771Z",
+          "System_ItemDate": "2015-03-23T20:45:30.127248Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12266,
+      "kind": "fileSeen",
+      "t": 1427143546134771,
+      "res": 1,
+      "obj": 1302,
+      "obj_text": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6a6c53d21b43278dc099300a8fb26f2b6f2b19fa20465a4ddb3b9e5b5f0efdd6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 436",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:45:30.127771Z",
+          "System_ItemDate": "2015-03-23T20:45:30.127248Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12267,
+      "kind": "fileSeen",
+      "t": 1427143675974972,
+      "res": 1,
+      "obj": 16038,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "c9347a1d0de919edebc83bbf5f25575786209aa54056c278164f19df1fc7cedf",
+      "prov": {
+        "accessed": "2015-03-23T20:02:51.018410Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:02:51.018410Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-23T20:47:55.974972Z",
+        "record_changed": "2015-03-23T20:47:55.974972Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 20480,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12268,
+      "kind": "fileSeen",
+      "t": 1427143675994972,
+      "res": 1,
+      "obj": 16039,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "0686c9fcde41da1f7d1d36aa7bb2c441749100147be1f8a3a1374d9f6a50c0ef",
+      "prov": {
+        "accessed": "2015-03-23T20:02:51.174410Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:02:51.174410Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-23T20:47:55.994972Z",
+        "record_changed": "2015-03-23T20:47:55.994972Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 11264,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12269,
+      "kind": "fileSeen",
+      "t": 1427143676774973,
+      "res": 1,
+      "obj": 16036,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "8eabef661ea321f2a8134b344abd76bcd74d2d63b6dc9e733ea8a90943c65bcc",
+      "prov": {
+        "accessed": "2015-03-23T20:02:51.002810Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T20:02:51.002810Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:23:00.771605Z",
+        "live_size": 408238,
+        "modified": "2015-03-23T20:47:56.774973Z",
+        "record_changed": "2015-03-23T20:47:56.774973Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 349702,
+        "state": "different on the live volume: size, modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12270,
+      "kind": "fileSeen",
+      "t": 1427144026618464,
+      "res": 1,
+      "obj": 1311,
+      "obj_text": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8ce4b43c6b42d553bb35f388a3572a130f8fc331219d77e485ad0af209139486",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 438",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:53:46.618987Z",
+          "System_ItemDate": "2015-03-23T20:53:46.618464Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12271,
+      "kind": "fileSeen",
+      "t": 1427144108521079,
+      "res": 1,
+      "obj": 1313,
+      "obj_text": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "14898916204fa83bc0c69bdab7f8c2d80887e8a16418e370e3d1307f419d3c7d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 439",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=us+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:08.521602Z",
+          "System_ItemDate": "2015-03-23T20:55:08.521079Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12272,
+      "kind": "fileSeen",
+      "t": 1427144108613082,
+      "res": 1,
+      "obj": 1311,
+      "obj_text": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "311fb81d66c0bc00614eb2b384e0651b1fae41f2f93961c474af1387956bf7a9",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 438",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:53:46.618987Z",
+          "System_ItemDate": "2015-03-23T20:53:46.618464Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12273,
+      "kind": "fileSeen",
+      "t": 1427144108613082,
+      "res": 1,
+      "obj": 1313,
+      "obj_text": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "09273f4216cdc1f614c860d7aa4d8d7dd2df2f00502d5529a7499e5c18e113b6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 439",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=us+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:08.521602Z",
+          "System_ItemDate": "2015-03-23T20:55:08.521079Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12274,
+      "kind": "fileSeen",
+      "t": 1427144110333085,
+      "res": 1,
+      "obj": 1314,
+      "obj_text": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bc9ef4e86e5f8f9d3153f45b266fa7594cce9ffa866e55c9078a9bfbbf12a92a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 440",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=world+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:10.333608Z",
+          "System_ItemDate": "2015-03-23T20:55:10.333085Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12275,
+      "kind": "fileSeen",
+      "t": 1427144117465595,
+      "res": 1,
+      "obj": 1316,
+      "obj_text": "http://www.bing.com/news?q=local&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7fcb88481f956d83ee1b6a6509db202c11a25299703a69b41b25c6822f701edb",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 441",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=local&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:17.466118Z",
+          "System_ItemDate": "2015-03-23T20:55:17.465595Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12276,
+      "kind": "fileSeen",
+      "t": 1427144117475595,
+      "res": 1,
+      "obj": 1316,
+      "obj_text": "http://www.bing.com/news?q=local&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "17b051931c7f32b0aef83e61e587827f2df6ad4a37b256e6587f864db66270b5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 441",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=local&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:17.466118Z",
+          "System_ItemDate": "2015-03-23T20:55:17.465595Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12277,
+      "kind": "fileSeen",
+      "t": 1427144117490595,
+      "res": 1,
+      "obj": 1314,
+      "obj_text": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f35bb73381169aac85740c9049c8d6f3c0cfbe84d462b86d4070ea7cc66b517c",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 440",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=world+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:10.333608Z",
+          "System_ItemDate": "2015-03-23T20:55:10.333085Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12278,
+      "kind": "fileSeen",
+      "t": 1427144118330597,
+      "res": 1,
+      "obj": 1317,
+      "obj_text": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "52f7528ae9da612f140915ab276eb831ce5c9865416aece92eaf76207a3a4ddf",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 442",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:18.331120Z",
+          "System_ItemDate": "2015-03-23T20:55:18.330597Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12279,
+      "kind": "fileSeen",
+      "t": 1427144129240612,
+      "res": 1,
+      "obj": 1319,
+      "obj_text": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "33d2dc4af350c5f1430da7d02561964d260001d3fc374096d6ff0d7a66be0e06",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 443",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:19.744406Z",
+          "System_ItemDate": "2015-03-23T20:55:29.240612Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12280,
+      "kind": "fileSeen",
+      "t": 1427144129250612,
+      "res": 1,
+      "obj": 1317,
+      "obj_text": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "839f86961f694c38e36c9b9d9a38736ff93a9495b55ec74da753371d54426445",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 442",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:55:18.331120Z",
+          "System_ItemDate": "2015-03-23T20:55:18.330597Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12281,
+      "kind": "fileSeen",
+      "t": 1427144154787650,
+      "res": 1,
+      "obj": 1321,
+      "obj_text": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "51a049aad0bf40113098518c461f6769bc1c2f6474a9f4c9340f3c804b29524a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 444",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=business+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:45.291443Z",
+          "System_ItemDate": "2015-03-23T20:55:54.787650Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12282,
+      "kind": "fileSeen",
+      "t": 1427144154822650,
+      "res": 1,
+      "obj": 1319,
+      "obj_text": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "53277be6622e87b89de72bc6facece6d2204bcd92ba779b57d9af7dab71230e3",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 443",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:19.744406Z",
+          "System_ItemDate": "2015-03-23T20:55:29.240612Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12283,
+      "kind": "fileSeen",
+      "t": 1427144156134654,
+      "res": 1,
+      "obj": 1322,
+      "obj_text": "http://www.bing.com/news?q=political+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0d036ab57eeb908f9f30a1bdea4442ef65534b60863bcd4f3c591399fb2d7ce6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 445",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=political+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:46.638447Z",
+          "System_ItemDate": "2015-03-23T20:55:56.134654Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12284,
+      "kind": "fileSeen",
+      "t": 1427144156144654,
+      "res": 1,
+      "obj": 1321,
+      "obj_text": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5da0003800c96b98bc66db3b644a9acc15debfd71ab67534eb00779cbc156a7c",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 444",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=business+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:45.291443Z",
+          "System_ItemDate": "2015-03-23T20:55:54.787650Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12285,
+      "kind": "fileSeen",
+      "t": 1427144157412156,
+      "res": 1,
+      "obj": 1323,
+      "obj_text": "http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5bad0a52e822a4b031a23c886da8486055dd2d244c9e739ca41f9da1ad0bae39",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 446",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:47.915950Z",
+          "System_ItemDate": "2015-03-23T20:55:57.412156Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12286,
+      "kind": "fileSeen",
+      "t": 1427144157422156,
+      "res": 1,
+      "obj": 1322,
+      "obj_text": "http://www.bing.com/news?q=political+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "cd12cda8a2a9a7904612cabf86f146a8960fa6eee56809ace814760f4920e9cb",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 445",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=political+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:46.638447Z",
+          "System_ItemDate": "2015-03-23T20:55:56.134654Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12287,
+      "kind": "fileSeen",
+      "t": 1427144158742158,
+      "res": 1,
+      "obj": 1324,
+      "obj_text": "http://www.bing.com/news?q=health+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "31c24e9a9b46b610932d6cf7976d76254819a011ba4d5c80165d9ffc876c47c3",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 447",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=health+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:49.245952Z",
+          "System_ItemDate": "2015-03-23T20:55:58.742158Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12288,
+      "kind": "fileSeen",
+      "t": 1427144158752158,
+      "res": 1,
+      "obj": 1323,
+      "obj_text": "http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "651bdccbe101d69dc33de0e0c239781ded5c27ad90c5a0f1eda2eb57c8f2f70a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 446",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:47.915950Z",
+          "System_ItemDate": "2015-03-23T20:55:57.412156Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12289,
+      "kind": "fileSeen",
+      "t": 1427144168707174,
+      "res": 1,
+      "obj": 1326,
+      "obj_text": "http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ff45d3b85d363e4af50cbe55e5430bd052aaadf1eb3f3f9f065e4133dd440bb5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 437",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T20:48:59.210967Z",
+          "System_ItemDate": "2015-03-23T20:56:08.707174Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12250
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/It's me (record time 2015-03-23 20:38:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12251
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/It's me (record time 2015-03-23 20:38:51 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12252
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:19 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12253
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:22 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12254
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/RE: It's me (record time 2015-03-23 20:41:38 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12255
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a (record time 2015-03-23 20:43:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12256
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a (record time 2015-03-23 20:43:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12257
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/?FORM=Z9FD1 (record time 2015-03-23 20:43:50 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12258
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/?FORM=Z9FD1 (record time 2015-03-23 20:43:50 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12259
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?FORM=Z9LH3 (record time 2015-03-23 20:43:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12260
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?FORM=Z9LH3 (record time 2015-03-23 20:43:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12261
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB (record time 2015-03-23 20:44:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12262
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB (record time 2015-03-23 20:45:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12263
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.wired.com/?p=1756538 (record time 2015-03-23 20:45:22 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12264
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.wired.com/?p=1756538 (record time 2015-03-23 20:45:22 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12265
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=Soccer+News&FORM=NSBABR (record time 2015-03-23 20:45:30 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12266
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=Soccer+News&FORM=NSBABR (record time 2015-03-23 20:45:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12267
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db (record time 2015-03-23 20:47:55 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12268
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db (record time 2015-03-23 20:47:55 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12269
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Google\\Drive\\user_default\\sync_log.log (record time 2015-03-23 20:47:56 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12270
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NWRFSH (record time 2015-03-23 20:53:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12271
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=us+news&FORM=NSBABR (record time 2015-03-23 20:55:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12272
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NWRFSH (record time 2015-03-23 20:55:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12273
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=us+news&FORM=NSBABR (record time 2015-03-23 20:55:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12274
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=world+news&FORM=NSBABR (record time 2015-03-23 20:55:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12275
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=local&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12276
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=local&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12277
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=world+news&FORM=NSBABR (record time 2015-03-23 20:55:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12278
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=entertainment+news&FORM=NSBABR (record time 2015-03-23 20:55:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12279
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NSBABR (record time 2015-03-23 20:55:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12280
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=entertainment+news&FORM=NSBABR (record time 2015-03-23 20:55:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12281
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=business+news&FORM=NSBABR (record time 2015-03-23 20:55:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12282
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=science+technology+news&FORM=NSBABR (record time 2015-03-23 20:55:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12283
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=political+news&FORM=NSBABR (record time 2015-03-23 20:55:56 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12284
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=business+news&FORM=NSBABR (record time 2015-03-23 20:55:56 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12285
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=sports+news&FORM=NSBABR (record time 2015-03-23 20:55:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12286
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=political+news&FORM=NSBABR (record time 2015-03-23 20:55:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12287
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=health+news&FORM=NSBABR (record time 2015-03-23 20:55:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12288
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=sports+news&FORM=NSBABR (record time 2015-03-23 20:55:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12289
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news?q=top+stories&FORM=NSBABR (record time 2015-03-23 20:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M322.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

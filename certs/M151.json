@@ -1,55 +1,214 @@
 {
   "finding_id": "M151",
-  "question": "Which files were sent to the Recycle Bin?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "fileDeletedAt": [
-      200
+    "both": [
+      {
+        "recoveredOnDevice": [
+          137,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          137,
+          199
+        ]
+      },
+      {
+        "tagged": [
+          137,
+          "obj",
+          437,
+          239
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "english": "A directory entry for \\pd\\super_bowl.avi, created (2015-03-24 20:55:07 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\pd\\super_bowl.avi was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:07 UTC) after its last modification (2014-12-02 17:28:58 UTC). This rests on heuristic rule R4. \\pd\\super_bowl.avi is tagged \"same size and last-modified time as a file elsewhere: 10289152 bytes, 2014-12-02 17:28:58 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 200,
-      "kind": "fileDeleted",
-      "t": 1427227902836000,
+      "id": 137,
+      "kind": "fileCreated",
+      "t": 1427230507090195,
       "res": 1,
-      "obj": 115,
-      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "b4ebf3ce2e99020f8c3b87d8dbfdfca54adb358a9cdb43ac3d2334797f2a7bdb",
+      "obj": 120,
+      "obj_text": "\\pd\\super_bowl.avi",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "b329bba70bbe5dda1776744f182fa655eff701a543d7036eb53618a67b8253dc",
       "prov": {
-        "artifact": "Recycle Bin index $II3FM2A.jpg, file table record 74758",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "index_record_in_use": false,
-        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
-        "original_drive": "C:",
-        "size": 845941,
-        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36525 (byte offset 74803200), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 10289152,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 23
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 199,
+      "kind": "fileModified",
+      "t": 1417541338000000,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "\\pd\\super_bowl.avi",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "0cb28fae9dc8bd5fcfb51a4a2440f5a42134e65671a3a8c1dc3f2aa719af917a",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36525 (byte offset 74803200), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 10289152,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 23
+      }
+    },
+    {
+      "id": 437,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "\\pd\\super_bowl.avi",
+      "aux": 239,
+      "aux_text": "same size and last-modified time as a file elsewhere: 10289152 bytes, 2014-12-02 17:28:58 UTC",
+      "row_sha256": "90e61f02fa15331d7e0d57b70d176e0c2b31eaf82ea813e938e9166c5ea4d92e",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileDeletedAt": [
-          200
+        "recoveredOnDevice": [
+          137,
+          500
         ]
       },
-      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Desert.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "english": "A directory entry for \\pd\\super_bowl.avi, created (2015-03-24 20:55:07 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R5"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          137,
+          199
+        ]
+      },
+      "english": "\\pd\\super_bowl.avi was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:07 UTC) after its last modification (2014-12-02 17:28:58 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          137,
+          "obj",
+          437,
+          239
+        ]
+      },
+      "english": "\\pd\\super_bowl.avi is tagged \"same size and last-modified time as a file elsewhere: 10289152 bytes, 2014-12-02 17:28:58 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R5"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M151.lean",
   "trust_tier": "kernel",
   "axioms": []

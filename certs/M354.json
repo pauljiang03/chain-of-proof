@@ -1,0 +1,153 @@
+{
+  "finding_id": "M354",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12724,
+          12775
+        ]
+      },
+      {
+        "sameContent": [
+          12775,
+          12781
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\[lost folder 3]\\technical review\\diary_#1d.txt on exhibit RM#2 and \\technical review\\diary_#1d.txt on exhibit RM#3 have identical content: both read as sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. \\technical review\\diary_#1d.txt on exhibit RM#3 and \\tr\\diary_#1d.txt on exhibit RM#3 have identical content: both read as sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a.",
+  "cited_facts": [
+    {
+      "id": 12724,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 103,
+      "obj_text": "\\[lost folder 3]\\technical review\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "56265c63c0901dab0e352a86cf05789c371b82b546b780bb0efe093791b28184",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 24197; content at volume byte offset 103301120",
+        "cluster_size": 4096,
+        "clusters": 30,
+        "exhibit": "RM#2",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "first_cluster": 24198,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 30 clusters from the first cluster (24198); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 103301120
+      }
+    },
+    {
+      "id": 12775,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 132,
+      "obj_text": "\\technical review\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "7658a2df5a27a24b0715b636fe9719b21caa886f29e8637bc5de6c105b7cb52e",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51202",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48714,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12781,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 134,
+      "obj_text": "\\tr\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "22db6ff6775d1b1e365ff4daeccf215d472afb96e149caf4862f662de54062cf",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51202",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48714,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12724,
+          12775
+        ]
+      },
+      "english": "\\[lost folder 3]\\technical review\\diary_#1d.txt on exhibit RM#2 and \\technical review\\diary_#1d.txt on exhibit RM#3 have identical content: both read as sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12775,
+          12781
+        ]
+      },
+      "english": "\\technical review\\diary_#1d.txt on exhibit RM#3 and \\tr\\diary_#1d.txt on exhibit RM#3 have identical content: both read as sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M354.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

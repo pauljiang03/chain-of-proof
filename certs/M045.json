@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          225
+          299
         ]
       },
       {
         "tagged": [
-          225,
+          299,
           "obj",
-          358,
-          195
+          480,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:05:19 UTC). information leakage cases is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
   "cited_facts": [
     {
-      "id": 225,
+      "id": 299,
       "kind": "webSearch",
       "t": 1427133919638342,
       "res": 1,
-      "obj": 132,
+      "obj": 166,
       "obj_text": "information leakage cases",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "07d0c768c567383422d36b868d9b355e6875636de67a9ca9ad8ab8f57a58cf90",
+      "row_sha256": "d4010682e22816d86fb8ffd54f7b60f52b8332c7dae83ea5bc777dc9bdd5c2ce",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 358,
+      "id": 480,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 132,
+      "obj": 166,
       "obj_text": "information leakage cases",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "b282a672a4b904fba5f230e31e90748553788158e59fe9dcdc0cffb2a99bc90e",
+      "row_sha256": "d6062fcf64770db9762cb976ac6b1ce0fec6262491f89241fda2fdee71ea8eb7",
       "prov": {
         "rule": "search term contains the watch-list word \"leak\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          225
+          299
         ]
       },
       "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:05:19 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          225,
+          299,
           "obj",
-          358,
-          195
+          480,
+          229
         ]
       },
       "english": "information leakage cases is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",

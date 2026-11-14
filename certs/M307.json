@@ -1,0 +1,1867 @@
+{
+  "finding_id": "M307",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          11650
+        ]
+      },
+      {
+        "fileRecorded": [
+          11651
+        ]
+      },
+      {
+        "fileRecorded": [
+          11652
+        ]
+      },
+      {
+        "fileRecorded": [
+          11653
+        ]
+      },
+      {
+        "fileRecorded": [
+          11654
+        ]
+      },
+      {
+        "fileRecorded": [
+          11655
+        ]
+      },
+      {
+        "fileRecorded": [
+          11656
+        ]
+      },
+      {
+        "fileRecorded": [
+          11657
+        ]
+      },
+      {
+        "fileRecorded": [
+          11658
+        ]
+      },
+      {
+        "fileRecorded": [
+          11659
+        ]
+      },
+      {
+        "fileRecorded": [
+          11660
+        ]
+      },
+      {
+        "fileRecorded": [
+          11661
+        ]
+      },
+      {
+        "fileRecorded": [
+          11662
+        ]
+      },
+      {
+        "fileRecorded": [
+          11663
+        ]
+      },
+      {
+        "fileRecorded": [
+          11664
+        ]
+      },
+      {
+        "fileRecorded": [
+          11665
+        ]
+      },
+      {
+        "fileRecorded": [
+          11666
+        ]
+      },
+      {
+        "fileRecorded": [
+          11667
+        ]
+      },
+      {
+        "fileRecorded": [
+          11668
+        ]
+      },
+      {
+        "fileRecorded": [
+          11669
+        ]
+      },
+      {
+        "fileRecorded": [
+          11670
+        ]
+      },
+      {
+        "fileRecorded": [
+          11671
+        ]
+      },
+      {
+        "fileRecorded": [
+          11672
+        ]
+      },
+      {
+        "fileRecorded": [
+          11673
+        ]
+      },
+      {
+        "fileRecorded": [
+          11674
+        ]
+      },
+      {
+        "fileRecorded": [
+          11675
+        ]
+      },
+      {
+        "fileRecorded": [
+          11676
+        ]
+      },
+      {
+        "fileRecorded": [
+          11677
+        ]
+      },
+      {
+        "fileRecorded": [
+          11678
+        ]
+      },
+      {
+        "fileRecorded": [
+          11679
+        ]
+      },
+      {
+        "fileRecorded": [
+          11680
+        ]
+      },
+      {
+        "fileRecorded": [
+          11681
+        ]
+      },
+      {
+        "fileRecorded": [
+          11682
+        ]
+      },
+      {
+        "fileRecorded": [
+          11683
+        ]
+      },
+      {
+        "fileRecorded": [
+          11684
+        ]
+      },
+      {
+        "fileRecorded": [
+          11685
+        ]
+      },
+      {
+        "fileRecorded": [
+          11686
+        ]
+      },
+      {
+        "fileRecorded": [
+          11687
+        ]
+      },
+      {
+        "fileRecorded": [
+          11688
+        ]
+      },
+      {
+        "fileRecorded": [
+          11689
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Outlook 2013.lnk (record time 2015-03-22 15:03:29 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\PowerPoint 2013.lnk (record time 2015-03-22 15:03:29 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013 (record time 2015-03-22 15:03:29 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Word 2013.lnk (record time 2015-03-22 15:03:29 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download (record time 2015-03-22 15:08:23 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download (record time 2015-03-22 15:08:35 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites (record time 2015-03-22 15:09:00 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\MSN Websites (record time 2015-03-22 15:09:01 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Websites for United States (record time 2015-03-22 15:09:01 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live (record time 2015-03-22 15:09:01 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Microsoft Websites (record time 2015-03-22 15:09:01 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar (record time 2015-03-22 15:09:17 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url (record time 2015-03-22 15:09:17 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome (record time 2015-03-22 15:09:22 UTC). The windows search index holds a record of http://www.msn.com/?ocid=iehp (record time 2015-03-22 15:09:23 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome (record time 2015-03-22 15:09:39 UTC). The windows search index holds a record of https://www.google.com/?gws_rd=ssl (record time 2015-03-22 15:09:39 UTC). The windows search index holds a record of https://www.google.com/?gws_rd=ssl (record time 2015-03-22 15:09:40 UTC). The windows search index holds a record of https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w (record time 2015-03-22 15:09:48 UTC). The windows search index holds a record of https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w (record time 2015-03-22 15:09:50 UTC). The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A (record time 2015-03-22 15:09:52 UTC). The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A (record time 2015-03-22 15:09:52 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/download-ie (record time 2015-03-22 15:09:54 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/download-ie (record time 2015-03-22 15:09:54 UTC). The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw (record time 2015-03-22 15:09:54 UTC). The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw (record time 2015-03-22 15:09:56 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages (record time 2015-03-22 15:10:24 UTC). The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages (record time 2015-03-22 15:10:31 UTC). The windows search index holds a record of https://www.google.com/webhp?hl=en (record time 2015-03-22 15:10:52 UTC). The windows search index holds a record of https://www.google.com/webhp?hl=en (record time 2015-03-22 15:10:54 UTC). The windows search index holds a record of https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en (record time 2015-03-22 15:10:58 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC). The windows search index holds a record of http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC). The windows search index holds a record of http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC). The windows search index holds a record of https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en (record time 2015-03-22 15:11:06 UTC). The windows search index holds a record of https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1 (record time 2015-03-22 15:11:14 UTC).",
+  "cited_facts": [
+    {
+      "id": 11650,
+      "kind": "fileSeen",
+      "t": 1427036609419118,
+      "res": 1,
+      "obj": 15856,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Outlook 2013.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1939b4cf47e85336f73e2c5f1ccec6603fe46f911084d290f63881f196b5dda9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 222",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Outlook 2013.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013/Outlook 2013.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "size": 2824,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11651,
+      "kind": "fileSeen",
+      "t": 1427036609419118,
+      "res": 1,
+      "obj": 15857,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\PowerPoint 2013.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0122368b77ea8397ace5159e4916a5cd412d9ce3227fc4696746afa7f7b60462",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 226",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "PowerPoint 2013.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013/PowerPoint 2013.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "size": 2807,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11652,
+      "kind": "fileSeen",
+      "t": 1427036609434719,
+      "res": 1,
+      "obj": 15847,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b951df61dc7bf5ebbbb13a3a64a69471612695122d1d797ee2b0b50a6f272a51",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 153",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Microsoft Office 2013",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11653,
+      "kind": "fileSeen",
+      "t": 1427036609434719,
+      "res": 1,
+      "obj": 15858,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Word 2013.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c538ee5351ed125090f13ac916b7f900009ed1adffb3e6c8cebccbdd943068c2",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 218",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Word 2013.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013/Word 2013.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "size": 2837,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11654,
+      "kind": "fileSeen",
+      "t": 1427036903167634,
+      "res": 1,
+      "obj": 15546,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d9aa40e69e46f02a3c7811a8ec5c697d7710ac0e259e80881745002395035060",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 228",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Download",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Desktop/Download",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:08:24.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:08:24.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:08:24.000000Z",
+          "System_ItemDate": "2015-03-22T15:08:24.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11655,
+      "kind": "fileSeen",
+      "t": 1427036915867858,
+      "res": 1,
+      "obj": 15546,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ddf6ae59773e1d5d9326245b49e647b7f818680ed93a55fb29758d6a8d1d4bda",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 228",
+        "column": "System_Search_GatherTime",
+        "display_name": "Download",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Desktop/Download",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:08:24.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:08:24.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:08:24.000000Z",
+          "System_ItemDate": "2015-03-22T15:08:24.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11656,
+      "kind": "fileSeen",
+      "t": 1427036940952702,
+      "res": 1,
+      "obj": 15489,
+      "obj_text": "C:\\Users\\informant\\Favorites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a0bc1e202ab8a889bc2cbaf68d0a98200b9b5845afd445fd83d9f7ebf01565cc",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 160",
+        "column": "System_Search_GatherTime",
+        "display_name": "Favorites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:42.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:42.000000Z",
+          "System_Document_DateSaved": "2015-03-22T14:35:04.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:42.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11657,
+      "kind": "fileSeen",
+      "t": 1427036941904304,
+      "res": 1,
+      "obj": 15525,
+      "obj_text": "C:\\Users\\informant\\Favorites\\MSN Websites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9c4bf6aeb1b710846ff5ff4f5b35bb4d7c117c0598bc577edb7640920b3ad866",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 192",
+        "column": "System_Search_GatherTime",
+        "display_name": "MSN Websites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites/MSN Websites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T14:34:58.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11658,
+      "kind": "fileSeen",
+      "t": 1427036941904304,
+      "res": 1,
+      "obj": 15841,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e7c3bf817606fcd300c1cbbf0cec5f40344461327aa82959d44fd6f2b1c3237a",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 208",
+        "column": "System_Search_GatherTime",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:35:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:35:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T14:35:04.000000Z",
+          "System_ItemDate": "2015-03-22T14:35:04.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11659,
+      "kind": "fileSeen",
+      "t": 1427036941904304,
+      "res": 1,
+      "obj": 15534,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Windows Live",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d8dd0764769870e45860f4d525366095e5ea24ae84466d572bcd1388616aef86",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 199",
+        "column": "System_Search_GatherTime",
+        "display_name": "Windows Live",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites/Windows Live",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T14:34:58.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11660,
+      "kind": "fileSeen",
+      "t": 1427036941919904,
+      "res": 1,
+      "obj": 15522,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Microsoft Websites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b133b458449995af29d02342c121312d19c182db037b62275bc98d7b1eac49ea",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 184",
+        "column": "System_Search_GatherTime",
+        "display_name": "Microsoft Websites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites/Microsoft Websites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T14:34:58.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11661,
+      "kind": "fileSeen",
+      "t": 1427036957878732,
+      "res": 1,
+      "obj": 15539,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Favorites Bar",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6e194c3bef1389e36b39357edf3dc192209b0443823919260225ec326c583696",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 205",
+        "column": "System_DateAccessed",
+        "display_name": "Favorites Bar",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Favorites/Links",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:24:24.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11662,
+      "kind": "fileSeen",
+      "t": 1427036957878732,
+      "res": 1,
+      "obj": 15859,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ef7e0c7975a5201289f12a38c0aae5dfebb6e89d918e3c3ec317477f8040258f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 220",
+        "column": "System_DateCreated",
+        "display_name": "Suggested Sites.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Links/Suggested Sites.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:09:18.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:09:18.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:34.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:18.000000Z"
+        },
+        "size": 302,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11663,
+      "kind": "fileSeen",
+      "t": 1427036962000000,
+      "res": 1,
+      "obj": 1099,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7e2625de62cb21d068ca74fa6055031f02119a3b348655cfdbbd1a26cb74a5fe",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 231",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:22.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:22.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11664,
+      "kind": "fileSeen",
+      "t": 1427036963494000,
+      "res": 1,
+      "obj": 1096,
+      "obj_text": "http://www.msn.com/?ocid=iehp",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ce0814486254b0a1d8ab503bf78714497aad62e7fa5084f253240cd526f298d0",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 224",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.msn.com/?ocid=iehp",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:27:39.684914Z",
+          "System_ItemDate": "2015-03-22T15:09:23.494000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11665,
+      "kind": "fileSeen",
+      "t": 1427036979010971,
+      "res": 1,
+      "obj": 1099,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c64e5a643c13c1d426c9a1d260a9af51cedb9f6f807d726127b22715d2a814be",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 231",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:22.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:22.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11666,
+      "kind": "fileSeen",
+      "t": 1427036979010971,
+      "res": 1,
+      "obj": 1100,
+      "obj_text": "https://www.google.com/?gws_rd=ssl",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ffc61ee134cf3527345785a455433d20a98ea5444b84172f586cc2f87679a04d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 232",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/?gws_rd=ssl",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:40.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:40.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11667,
+      "kind": "fileSeen",
+      "t": 1427036980000000,
+      "res": 1,
+      "obj": 1100,
+      "obj_text": "https://www.google.com/?gws_rd=ssl",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0e91c4abf5beffd8152d9fb705c7410154eeda0266f85f346988c08c55f3bcf5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 232",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/?gws_rd=ssl",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:40.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:40.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11668,
+      "kind": "fileSeen",
+      "t": 1427036988560389,
+      "res": 1,
+      "obj": 1102,
+      "obj_text": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ab8204279059aded5a51233bf7b99713876a25c96ab1020aeeb8892cc40e35d5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 233",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:50.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:50.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11669,
+      "kind": "fileSeen",
+      "t": 1427036990000000,
+      "res": 1,
+      "obj": 1102,
+      "obj_text": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d70dcdf4c79eaa1417ab74e3a3139e24e38d1a102344101a0e79824654624d65",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 233",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:50.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:50.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11670,
+      "kind": "fileSeen",
+      "t": 1427036992000000,
+      "res": 1,
+      "obj": 1103,
+      "obj_text": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a93b8c567eb07500c2cb076f8038a5d3457bb75449bec8c3d30a91da86e1fa36",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 234",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:52.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:52.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11671,
+      "kind": "fileSeen",
+      "t": 1427036992421397,
+      "res": 1,
+      "obj": 1103,
+      "obj_text": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fecb8d27efabe227dcdc6652a9f765301ae0713bd6a3975a2347974851c7542a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 234",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:52.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:52.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11672,
+      "kind": "fileSeen",
+      "t": 1427036994000000,
+      "res": 1,
+      "obj": 1104,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "23f8751c4ec95a45f8b373e730777b59b51f16a120b0d09c5b834ed0111acc15",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 235",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:54.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11673,
+      "kind": "fileSeen",
+      "t": 1427036994262200,
+      "res": 1,
+      "obj": 1104,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4fac8b7668ccc07f741a83f741ca3989ddf09fbc1c914de82d8f5f97afd0a31d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 235",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:54.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11674,
+      "kind": "fileSeen",
+      "t": 1427036994371401,
+      "res": 1,
+      "obj": 1105,
+      "obj_text": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ea2e5f7a70374c6e2583c13227eb5f182b317873202989bce34879a846424c20",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 236",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:56.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:56.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11675,
+      "kind": "fileSeen",
+      "t": 1427036996000000,
+      "res": 1,
+      "obj": 1105,
+      "obj_text": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "12a9417fd653a63f977dcf94b471db998c5e1123c09c779cd7ff8e35b526bf0f",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 236",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:09:56.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:56.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11676,
+      "kind": "fileSeen",
+      "t": 1427037024000000,
+      "res": 1,
+      "obj": 1106,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "35591a8243f8ac022d10e234111beaeb419e71c57bd83d6f38094b64adba7fd2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 237",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:24.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:24.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11677,
+      "kind": "fileSeen",
+      "t": 1427037031472071,
+      "res": 1,
+      "obj": 1106,
+      "obj_text": "http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a22164a402540fe2f4afb2554cf303806085a0431f212ebe490ad760d1646b65",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 237",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:24.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:24.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11678,
+      "kind": "fileSeen",
+      "t": 1427037052056510,
+      "res": 1,
+      "obj": 1107,
+      "obj_text": "https://www.google.com/webhp?hl=en",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "873389347e2ce19ffc00bd5194be83daac09f318cb3f2bd2199195d42be644fc",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 238",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/webhp?hl=en",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:54.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11679,
+      "kind": "fileSeen",
+      "t": 1427037054000000,
+      "res": 1,
+      "obj": 1107,
+      "obj_text": "https://www.google.com/webhp?hl=en",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "553fc28ec45a4b7d5350b9250d2f790e08c85a5389383b8c721f7e29d7289d52",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 238",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/webhp?hl=en",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:54.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11680,
+      "kind": "fileSeen",
+      "t": 1427037058000000,
+      "res": 1,
+      "obj": 1108,
+      "obj_text": "https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8dcf36492e21b6f2b93fcfc978d4d6e7fe3f3e8a3f5146b31f2418136ff341a5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 239",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:58.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11681,
+      "kind": "fileSeen",
+      "t": 1427037064087333,
+      "res": 1,
+      "obj": 833,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "da7cbe115a7807ff3ada37d03ba9d25fe43083d8e8364a8c50c32ea5587fe62c",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 240",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".exe",
+        "item_url": "file:C:/Users/informant/Desktop/Download/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "size": 55915216,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11682,
+      "kind": "fileSeen",
+      "t": 1427037064851735,
+      "res": 1,
+      "obj": 833,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "82af6f8d3ab713f2625951a60694e4019a3601a91e2c83badd8e465d13144b6e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 240",
+        "column": "System_DateModified",
+        "display_name": "IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".exe",
+        "item_url": "file:C:/Users/informant/Desktop/Download/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "size": 55915216,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11683,
+      "kind": "fileSeen",
+      "t": 1427037064851735,
+      "res": 1,
+      "obj": 834,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "17300875be6b3db0e0dc55d1a5b7baef6f8c3ff3ff8c6734bd0374c18b17669c",
+      "prov": {
+        "accessed": "2015-03-24T19:52:35.727536Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:35.727536Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-22T15:11:04.851735Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 55915216,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 11684,
+      "kind": "fileSeen",
+      "t": 1427037064851735,
+      "res": 1,
+      "obj": 834,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d4f1576adecc07e552bb7ff469de7136b14e95ec197e026a34e4d8a7095dadfc",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 451",
+        "column": "System_DateModified",
+        "display_name": "IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".exe",
+        "item_url": "file:C:/Users/informant/Desktop/temp/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "size": 55915216,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11685,
+      "kind": "fileSeen",
+      "t": 1427037066000000,
+      "res": 1,
+      "obj": 1109,
+      "obj_text": "http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "51d465a169860ce1b96cf7d07f5cc0582554b70421a706f7c066d92bdee2630e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 241",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11686,
+      "kind": "fileSeen",
+      "t": 1427037066396139,
+      "res": 1,
+      "obj": 1109,
+      "obj_text": "http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e14d09c95a154976ed0d4903f74a2f1a2f896b174bbf475ca7938794cfa8a9f2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 241",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11687,
+      "kind": "fileSeen",
+      "t": 1427037066411739,
+      "res": 1,
+      "obj": 833,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4627d32f17e47a732d96f8e98292bc029b10c76ef9a7502a70a12f5c72a4f6fa",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 240",
+        "column": "System_Search_GatherTime",
+        "display_name": "IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".exe",
+        "item_url": "file:C:/Users/informant/Desktop/Download/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "size": 55915216,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11688,
+      "kind": "fileSeen",
+      "t": 1427037066411739,
+      "res": 1,
+      "obj": 1108,
+      "obj_text": "https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a37545f64f8d7a9a0867b9ddaa26e3708c8042cbf319a0d41dea0ca41f01e79b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 239",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:10:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:10:58.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11689,
+      "kind": "fileSeen",
+      "t": 1427037074732954,
+      "res": 1,
+      "obj": 1111,
+      "obj_text": "https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bd8f56b016f2663854d1aaafee352d5f4d774d64d519acdf21be50d25c534f6b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 242",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1",
+        "other_dates": {
+          "System_EndDate": "2015-04-17T15:11:16.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:16.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          11650
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Outlook 2013.lnk (record time 2015-03-22 15:03:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11651
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\PowerPoint 2013.lnk (record time 2015-03-22 15:03:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11652
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013 (record time 2015-03-22 15:03:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11653
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Word 2013.lnk (record time 2015-03-22 15:03:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11654
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download (record time 2015-03-22 15:08:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11655
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download (record time 2015-03-22 15:08:35 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11656
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites (record time 2015-03-22 15:09:00 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11657
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\MSN Websites (record time 2015-03-22 15:09:01 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11658
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Websites for United States (record time 2015-03-22 15:09:01 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11659
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live (record time 2015-03-22 15:09:01 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11660
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Microsoft Websites (record time 2015-03-22 15:09:01 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11661
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar (record time 2015-03-22 15:09:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11662
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url (record time 2015-03-22 15:09:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11663
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome (record time 2015-03-22 15:09:22 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11664
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.msn.com/?ocid=iehp (record time 2015-03-22 15:09:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11665
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome (record time 2015-03-22 15:09:39 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11666
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/?gws_rd=ssl (record time 2015-03-22 15:09:39 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11667
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/?gws_rd=ssl (record time 2015-03-22 15:09:40 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11668
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w (record time 2015-03-22 15:09:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11669
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w (record time 2015-03-22 15:09:50 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11670
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A (record time 2015-03-22 15:09:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11671
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A (record time 2015-03-22 15:09:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11672
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/download-ie (record time 2015-03-22 15:09:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11673
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/download-ie (record time 2015-03-22 15:09:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11674
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw (record time 2015-03-22 15:09:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11675
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw (record time 2015-03-22 15:09:56 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11676
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages (record time 2015-03-22 15:10:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11677
+        ]
+      },
+      "english": "The windows search index holds a record of http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages (record time 2015-03-22 15:10:31 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11678
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/webhp?hl=en (record time 2015-03-22 15:10:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11679
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/webhp?hl=en (record time 2015-03-22 15:10:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11680
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en (record time 2015-03-22 15:10:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11681
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11682
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11683
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11684
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11685
+        ]
+      },
+      "english": "The windows search index holds a record of http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11686
+        ]
+      },
+      "english": "The windows search index holds a record of http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11687
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-22 15:11:06 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11688
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en (record time 2015-03-22 15:11:06 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11689
+        ]
+      },
+      "english": "The windows search index holds a record of https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1 (record time 2015-03-22 15:11:14 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M307.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

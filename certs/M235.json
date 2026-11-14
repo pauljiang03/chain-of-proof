@@ -1,0 +1,1901 @@
+{
+  "finding_id": "M235",
+  "question": "When was the system started, shut down, logged on to and off?",
+  "claim": {
+    "both": [
+      {
+        "sessionRecorded": [
+          656
+        ]
+      },
+      {
+        "sessionRecorded": [
+          657
+        ]
+      },
+      {
+        "sessionRecorded": [
+          658
+        ]
+      },
+      {
+        "sessionRecorded": [
+          659
+        ]
+      },
+      {
+        "sessionRecorded": [
+          660
+        ]
+      },
+      {
+        "sessionRecorded": [
+          661
+        ]
+      },
+      {
+        "sessionRecorded": [
+          662
+        ]
+      },
+      {
+        "sessionRecorded": [
+          663
+        ]
+      },
+      {
+        "sessionRecorded": [
+          664
+        ]
+      },
+      {
+        "sessionRecorded": [
+          665
+        ]
+      },
+      {
+        "sessionRecorded": [
+          666
+        ]
+      },
+      {
+        "sessionRecorded": [
+          667
+        ]
+      },
+      {
+        "sessionRecorded": [
+          668
+        ]
+      },
+      {
+        "sessionRecorded": [
+          669
+        ]
+      },
+      {
+        "sessionRecorded": [
+          670
+        ]
+      },
+      {
+        "sessionRecorded": [
+          671
+        ]
+      },
+      {
+        "sessionRecorded": [
+          672
+        ]
+      },
+      {
+        "sessionRecorded": [
+          673
+        ]
+      },
+      {
+        "sessionRecorded": [
+          674
+        ]
+      },
+      {
+        "sessionRecorded": [
+          675
+        ]
+      },
+      {
+        "sessionRecorded": [
+          676
+        ]
+      },
+      {
+        "sessionRecorded": [
+          677
+        ]
+      },
+      {
+        "sessionRecorded": [
+          678
+        ]
+      },
+      {
+        "sessionRecorded": [
+          679
+        ]
+      },
+      {
+        "sessionRecorded": [
+          680
+        ]
+      },
+      {
+        "sessionRecorded": [
+          681
+        ]
+      },
+      {
+        "sessionRecorded": [
+          682
+        ]
+      },
+      {
+        "sessionRecorded": [
+          683
+        ]
+      },
+      {
+        "sessionRecorded": [
+          684
+        ]
+      },
+      {
+        "sessionRecorded": [
+          685
+        ]
+      },
+      {
+        "sessionRecorded": [
+          686
+        ]
+      },
+      {
+        "sessionRecorded": [
+          687
+        ]
+      },
+      {
+        "sessionRecorded": [
+          688
+        ]
+      },
+      {
+        "sessionRecorded": [
+          689
+        ]
+      },
+      {
+        "sessionRecorded": [
+          690
+        ]
+      },
+      {
+        "sessionRecorded": [
+          691
+        ]
+      },
+      {
+        "sessionRecorded": [
+          692
+        ]
+      },
+      {
+        "sessionRecorded": [
+          693
+        ]
+      },
+      {
+        "sessionRecorded": [
+          694
+        ]
+      },
+      {
+        "sessionRecorded": [
+          695
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC). A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC). A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC). A logon is recorded for account temporary (2015-03-22 15:55:57 UTC). A logon is recorded for account temporary (2015-03-22 15:55:57 UTC). A logon is recorded for account temporary (2015-03-22 15:55:57 UTC). A logon is recorded for account temporary (2015-03-22 15:55:57 UTC). A logon is recorded for account temporary (2015-03-22 15:55:57 UTC). A logoff is recorded for account admin11 (2015-03-22 15:56:45 UTC). A logoff is recorded for account admin11 (2015-03-22 15:56:45 UTC). A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC). A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC). A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC). A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC). A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC). A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC). A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC). A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC). A logon is recorded for account informant (2015-03-22 15:57:54 UTC). A logon is recorded for account informant (2015-03-22 15:57:54 UTC). A logoff is recorded for account informant (2015-03-22 15:57:55 UTC). A logoff is recorded for account informant (2015-03-22 15:57:55 UTC). A logoff is recorded for account temporary (2015-03-22 15:57:56 UTC). A logoff is recorded for account admin11 (2015-03-22 15:58:26 UTC). A logoff is recorded for account admin11 (2015-03-22 15:58:26 UTC). A shutdown is recorded for the machine (2015-03-22 16:00:06 UTC). A shutdown is recorded for the machine (2015-03-22 16:00:08 UTC). A logoff is recorded for account informant (2015-03-22 16:00:08 UTC). A logoff is recorded for account informant (2015-03-22 16:00:08 UTC). A logoff is recorded for account informant (2015-03-22 16:00:08 UTC). A logoff is recorded for account informant (2015-03-22 16:00:08 UTC). A shutdown is recorded for the machine (2015-03-22 16:00:09 UTC). A shutdown is recorded for the machine (2015-03-22 16:00:09 UTC). A shutdown is recorded for the machine (2015-03-22 16:00:12 UTC).",
+  "cited_facts": [
+    {
+      "id": 656,
+      "kind": "sessionEvent",
+      "t": 1427039752360653,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "7c35d17b0c6026d949cbe2fae1d4b2ce85ab22c1e1b1d18b4ffc7b1149373f6f",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 15",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_SessionID": "2",
+          "EventXML_User": "informant-PC\\admin11",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logoff succeeded",
+        "event_id": 23,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 657,
+      "kind": "sessionEvent",
+      "t": 1427039752360653,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "05f5ae02f6e4e07d1a70aed7da3c2b2795d340899c6b965582761b66f18c734e",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 27",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "Session": "2"
+        },
+        "event": "received user logoff notification",
+        "event_id": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 658,
+      "kind": "sessionEvent",
+      "t": 1427039752423054,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "f77808d87f67d4b6426ef6848895a7c1a35d3af7852dd3d933ac694415200156",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1007",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "2",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "user logoff notification",
+        "event_id": 7002,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 659,
+      "kind": "sessionEvent",
+      "t": 1427039757259062,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "fd9c17e726cdcc645a84f652824c1a0089a7c89d7c9f7bcc9e554892a6330e8c",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1021",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0x72c",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0xf2cd6",
+          "TargetUserName": "temporary",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 660,
+      "kind": "sessionEvent",
+      "t": 1427039757259062,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "459012ff08798b8ea1ba669cb505f28c1a0a912eaa4a424baf9ae2457737736c",
+      "prov": {
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003EB value F",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "logon_count": 1,
+        "rid": 1003,
+        "source": "account database (SAM)",
+        "time_meaning": "last logon time stored in the account's SAM record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 661,
+      "kind": "sessionEvent",
+      "t": 1427039757274662,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "5f10fe03e8100ecfce242efadc9cf5a3eda722131fd1b32677f250460a9d22d1",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1008",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "3",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1003"
+        },
+        "event": "user logon notification",
+        "event_id": 7001,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 662,
+      "kind": "sessionEvent",
+      "t": 1427039757290262,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "2c7230fc23bc508a0a84b8fddfbff64b64fa67817f2bfb280500fc04805db47b",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 29",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+          "Session": "3"
+        },
+        "event": "received user logon notification",
+        "event_id": 1,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 663,
+      "kind": "sessionEvent",
+      "t": 1427039757680262,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "9a8940054a38e3293ef07501f7069607490ffca4fc106a21cc876cca2cc52254",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 17",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_Address": "LOCAL",
+          "EventXML_SessionID": "3",
+          "EventXML_User": "informant-PC\\temporary",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logon succeeded",
+        "event_id": 21,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 664,
+      "kind": "sessionEvent",
+      "t": 1427039805514757,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "35d281028efc60b6fefc267920db193937ffc3c9a953e6a287e5926c52b6e49c",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1022",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x94b71",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 665,
+      "kind": "sessionEvent",
+      "t": 1427039805514757,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "a8d6bf46675614b37211684676da36d548c550cc41ebcd1c2d1fd6ad142b13e9",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1023",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x94b57",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 666,
+      "kind": "sessionEvent",
+      "t": 1427039818020781,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "d0b635f9bd2b70032b32e2d9e8054a98e38d50ba7d4af2a4b03c5d927cfcfcb8",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1024",
+        "channel": "Security",
+        "data": {
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0xf2cd6",
+          "TargetUserName": "temporary",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1003"
+        },
+        "event": "user initiated logoff",
+        "event_id": 4647,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 667,
+      "kind": "sessionEvent",
+      "t": 1427039818036381,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "6c1461c708b356901cfa139bb984647a5cd2b3755b854d76142ed10c362b55c2",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 19",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_SessionID": "3",
+          "EventXML_User": "informant-PC\\temporary",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logoff succeeded",
+        "event_id": 23,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 668,
+      "kind": "sessionEvent",
+      "t": 1427039818036381,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "04ddd8d7689c3fa3f71a6bcce81e72c035a406a1cdcf775a3da0b6b9ba4c6b71",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 33",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+          "Session": "3"
+        },
+        "event": "received user logoff notification",
+        "event_id": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 669,
+      "kind": "sessionEvent",
+      "t": 1427039818114380,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "cebf05100a31b9af2aa632cf00328905175c3c2c693ca386a8a9f2ae181582e0",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1011",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "3",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1003"
+        },
+        "event": "user logoff notification",
+        "event_id": 7002,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 670,
+      "kind": "sessionEvent",
+      "t": 1427039822419988,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "7255252e53f5147920db4fb684d5f37a937eccc67abf649436cf2ebbed9b6fa5",
+      "prov": {
+        "artifact": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\000003E9 value F",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SAM",
+        "image": "pc.E01",
+        "logon_count": 2,
+        "rid": 1001,
+        "source": "account database (SAM)",
+        "time_meaning": "last logon time stored in the account's SAM record",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 671,
+      "kind": "sessionEvent",
+      "t": 1427039822435589,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "9cb98bce439a7101b47e8c870429225df190afc498d69e7db0534b86693062fb",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 35",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "Session": "2"
+        },
+        "event": "received user logon notification",
+        "event_id": 1,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 672,
+      "kind": "sessionEvent",
+      "t": 1427039822435589,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "b1029514b5cc923f4688533e36055e65f863cbafceb580af2a99688ee81bf603",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1026",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0x954",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x1354b3",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 673,
+      "kind": "sessionEvent",
+      "t": 1427039822435589,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "47e3a2d0ba3539c07b43b000265405fad1ecd8916bb72f4fd783d6b07cc13465",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1027",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0x954",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x1354c8",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 674,
+      "kind": "sessionEvent",
+      "t": 1427039822435589,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "73f37c232dd40ca819bf0c4c475375250c6e636e1e88dfa500a2d83bead8a708",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1012",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "2",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "user logon notification",
+        "event_id": 7001,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 675,
+      "kind": "sessionEvent",
+      "t": 1427039822544788,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "96422f501b43e3dad15c07d8826a1d856cf272d5ea3ffd2d4f2378a0c017e1b6",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 21",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_Address": "LOCAL",
+          "EventXML_SessionID": "2",
+          "EventXML_User": "informant-PC\\admin11",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logon succeeded",
+        "event_id": 21,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 676,
+      "kind": "sessionEvent",
+      "t": 1427039861899269,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "8a18425528f34cd289678b1f0ff98534a427e846b41052b3807cb16c8ef57d95",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1029",
+        "channel": "Security",
+        "data": {
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x1354c8",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "user initiated logoff",
+        "event_id": 4647,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 677,
+      "kind": "sessionEvent",
+      "t": 1427039861914867,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "b6eaa40dd75bbd8b20bd2977a97fd1e4b0923dc0c69f4fd1941de11261e7dfbd",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 23",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_SessionID": "2",
+          "EventXML_User": "informant-PC\\admin11",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logoff succeeded",
+        "event_id": 23,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 678,
+      "kind": "sessionEvent",
+      "t": 1427039861914867,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "793523fe326c271933ec2f9efdd835ff11e9fff055fd1461ce5f9e8b2b73b52c",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 39",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+          "Session": "2"
+        },
+        "event": "received user logoff notification",
+        "event_id": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 679,
+      "kind": "sessionEvent",
+      "t": 1427039861977268,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "485f012c8a1441fd24e12f9e623d94101c852ca9d95ee54aa34a9471b97ca824",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1013",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "2",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "user logoff notification",
+        "event_id": 7002,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 680,
+      "kind": "sessionEvent",
+      "t": 1427039874426090,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "d79ff40c4ef9fc73b2273deabd8ce70dc8617ae9c33df872f7f684a18a397f65",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1031",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0xc1c",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x157b62",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 681,
+      "kind": "sessionEvent",
+      "t": 1427039874426090,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "3293382f5abb640f569a81643b9f73123a10b2f8725327bc09542f0be8499887",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1032",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0xc1c",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x157b78",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 682,
+      "kind": "sessionEvent",
+      "t": 1427039875533691,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "0f6cdf5e06a146c06ed41f70f268eebec6e5b2c99747768135e51c2322b4765b",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1034",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x157b78",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 683,
+      "kind": "sessionEvent",
+      "t": 1427039875533691,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "4dbd0f08a29cba3a8b211937b6326937ce6506aaac9dd64807acdff9cadb6f1a",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1035",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x157b62",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 684,
+      "kind": "sessionEvent",
+      "t": 1427039876376093,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 293,
+      "aux_text": "temporary",
+      "row_sha256": "8b1e65bf67fa396c081d230e84952f225e104199a413e8a1edb991d915bd6e26",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1036",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0xf2cd6",
+          "TargetUserName": "temporary",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1003"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 685,
+      "kind": "sessionEvent",
+      "t": 1427039906374947,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "262bf5cb41f195a82ab165404287eb0e1746f3c5b43f23f13d6b23e5b1d62e81",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1037",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x1354c8",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 686,
+      "kind": "sessionEvent",
+      "t": 1427039906374947,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 291,
+      "aux_text": "admin11",
+      "row_sha256": "d413f569f5e06b624605d5b26b6a1a1efe9121294fad3547fd86770acba11da0",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1038",
+        "channel": "Security",
+        "data": {
+          "LogonType": "2",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x1354b3",
+          "TargetUserName": "admin11",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1001"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 687,
+      "kind": "sessionEvent",
+      "t": 1427040006000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "f0761228cafd23893a970236de56f43f904c3ca86cd43dfaed4d850d9890067e",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1015",
+        "channel": "System",
+        "data": {
+          "Binary": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "Data_0": "Explorer.EXE",
+          "Data_1": "INFORMANT-PC",
+          "Data_2": "Other (Unplanned)",
+          "Data_3": "0x0",
+          "Data_4": "power off",
+          "Data_6": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "a process has initiated the restart or power off of the computer",
+        "event_id": 1074,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "USER32",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 688,
+      "kind": "sessionEvent",
+      "t": 1427040008000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "52978d1c09091c50aaa83682dc242109a349aaba90c07cf5d5538c39cc648721",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1016",
+        "channel": "System",
+        "data": {
+          "Binary": "ff000500000000000000000000000000000000000000000000000000000000000000000000000000",
+          "Data_0": "C:\\Windows\\system32\\winlogon.exe (INFORMANT-PC)",
+          "Data_1": "INFORMANT-PC",
+          "Data_2": "No title for this reason could be found",
+          "Data_3": "0x500ff",
+          "Data_4": "power off",
+          "Data_6": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "a process has initiated the restart or power off of the computer",
+        "event_id": 1074,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "USER32",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 689,
+      "kind": "sessionEvent",
+      "t": 1427040008607128,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "d4bf8ad843a08867c5d51aaf05ebd33de4a468b93c07a3c33b92fe485703838a",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1040",
+        "channel": "Security",
+        "data": {
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x22517",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "user initiated logoff",
+        "event_id": 4647,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 690,
+      "kind": "sessionEvent",
+      "t": 1427040008653929,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "0912d0c360a2e88b9ff393be051bbca980f61e79ef11217426c8bb9bcf5918aa",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 26",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_SessionID": "1",
+          "EventXML_User": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logoff succeeded",
+        "event_id": 23,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 691,
+      "kind": "sessionEvent",
+      "t": 1427040008669529,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "67fb7330872121b52f7230d010c0a9c88b74ee745d23ba70cbaedeb28b28271d",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 41",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "Session": "1"
+        },
+        "event": "received user logoff notification",
+        "event_id": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 692,
+      "kind": "sessionEvent",
+      "t": 1427040008825529,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "2d8b67373a93bb41cd310d795715796d4457073007783e4ad1df75f9a6e12ee2",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1018",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "1",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "user logoff notification",
+        "event_id": 7002,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 693,
+      "kind": "sessionEvent",
+      "t": 1427040009000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "8f446715ab565f56f005de029f59c454cbfa9717045944c2ce53e727052f8b07",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1017",
+        "channel": "System",
+        "data": {
+          "Binary": "0100000000000000"
+        },
+        "event": "the Event Log service was stopped",
+        "event_id": 6006,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "EventLog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 694,
+      "kind": "sessionEvent",
+      "t": 1427040009652330,
+      "res": 1,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "dc3caaa1aa6b352480f2267e800912e82b96cc5c57473e27baa87059c48775f3",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1039",
+        "channel": "Security",
+        "data": {},
+        "event": "the event logging service has shut down",
+        "event_id": 1100,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Eventlog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 695,
+      "kind": "sessionEvent",
+      "t": 1427040012444735,
+      "res": 1,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "9bcefa02c3a632df500825700cb1bf53ade6d24481d72bc91eca62f3fb61ae7f",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1049",
+        "channel": "System",
+        "data": {
+          "ShutdownActionType": "6",
+          "ShutdownEventCode": "0",
+          "ShutdownReason": "0"
+        },
+        "event": "the kernel power manager has initiated a shutdown transition",
+        "event_id": 109,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Kernel-Power",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sessionRecorded": [
+          656
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          657
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          658
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:55:52 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          659
+        ]
+      },
+      "english": "A logon is recorded for account temporary (2015-03-22 15:55:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          660
+        ]
+      },
+      "english": "A logon is recorded for account temporary (2015-03-22 15:55:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          661
+        ]
+      },
+      "english": "A logon is recorded for account temporary (2015-03-22 15:55:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          662
+        ]
+      },
+      "english": "A logon is recorded for account temporary (2015-03-22 15:55:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          663
+        ]
+      },
+      "english": "A logon is recorded for account temporary (2015-03-22 15:55:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          664
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:56:45 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          665
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:56:45 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          666
+        ]
+      },
+      "english": "A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          667
+        ]
+      },
+      "english": "A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          668
+        ]
+      },
+      "english": "A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          669
+        ]
+      },
+      "english": "A logoff is recorded for account temporary (2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          670
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          671
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          672
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          673
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          674
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          675
+        ]
+      },
+      "english": "A logon is recorded for account admin11 (2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          676
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          677
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          678
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          679
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          680
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-22 15:57:54 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          681
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-22 15:57:54 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          682
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 15:57:55 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          683
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 15:57:55 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          684
+        ]
+      },
+      "english": "A logoff is recorded for account temporary (2015-03-22 15:57:56 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          685
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:58:26 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          686
+        ]
+      },
+      "english": "A logoff is recorded for account admin11 (2015-03-22 15:58:26 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          687
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-22 16:00:06 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          688
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-22 16:00:08 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          689
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 16:00:08 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          690
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 16:00:08 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          691
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 16:00:08 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          692
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-22 16:00:08 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          693
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-22 16:00:09 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          694
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-22 16:00:09 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          695
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-22 16:00:12 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R16"
+  ],
+  "strength": "strong",
+  "lean_file": "M235.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

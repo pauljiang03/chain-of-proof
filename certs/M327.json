@@ -1,0 +1,1833 @@
+{
+  "finding_id": "M327",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12450
+        ]
+      },
+      {
+        "fileRecorded": [
+          12451
+        ]
+      },
+      {
+        "fileRecorded": [
+          12452
+        ]
+      },
+      {
+        "fileRecorded": [
+          12453
+        ]
+      },
+      {
+        "fileRecorded": [
+          12454
+        ]
+      },
+      {
+        "fileRecorded": [
+          12455
+        ]
+      },
+      {
+        "fileRecorded": [
+          12456
+        ]
+      },
+      {
+        "fileRecorded": [
+          12457
+        ]
+      },
+      {
+        "fileRecorded": [
+          12458
+        ]
+      },
+      {
+        "fileRecorded": [
+          12459
+        ]
+      },
+      {
+        "fileRecorded": [
+          12460
+        ]
+      },
+      {
+        "fileRecorded": [
+          12461
+        ]
+      },
+      {
+        "fileRecorded": [
+          12462
+        ]
+      },
+      {
+        "fileRecorded": [
+          12463
+        ]
+      },
+      {
+        "fileRecorded": [
+          12464
+        ]
+      },
+      {
+        "fileRecorded": [
+          12465
+        ]
+      },
+      {
+        "fileRecorded": [
+          12466
+        ]
+      },
+      {
+        "fileRecorded": [
+          12467
+        ]
+      },
+      {
+        "fileRecorded": [
+          12468
+        ]
+      },
+      {
+        "fileRecorded": [
+          12469
+        ]
+      },
+      {
+        "fileRecorded": [
+          12470
+        ]
+      },
+      {
+        "fileRecorded": [
+          12471
+        ]
+      },
+      {
+        "fileRecorded": [
+          12472
+        ]
+      },
+      {
+        "fileRecorded": [
+          12473
+        ]
+      },
+      {
+        "fileRecorded": [
+          12474
+        ]
+      },
+      {
+        "fileRecorded": [
+          12475
+        ]
+      },
+      {
+        "fileRecorded": [
+          12476
+        ]
+      },
+      {
+        "fileRecorded": [
+          12477
+        ]
+      },
+      {
+        "fileRecorded": [
+          12478
+        ]
+      },
+      {
+        "fileRecorded": [
+          12479
+        ]
+      },
+      {
+        "fileRecorded": [
+          12480
+        ]
+      },
+      {
+        "fileRecorded": [
+          12481
+        ]
+      },
+      {
+        "fileRecorded": [
+          12482
+        ]
+      },
+      {
+        "fileRecorded": [
+          12483
+        ]
+      },
+      {
+        "fileRecorded": [
+          12484
+        ]
+      },
+      {
+        "fileRecorded": [
+          12485
+        ]
+      },
+      {
+        "fileRecorded": [
+          12486
+        ]
+      },
+      {
+        "fileRecorded": [
+          12487
+        ]
+      },
+      {
+        "fileRecorded": [
+          12488
+        ]
+      },
+      {
+        "fileRecorded": [
+          12489
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\Users\\informant\\Searches\\Sticky Notes (Windows Sticky Notes).searchconnector-ms (record time 2015-03-24 18:30:10 UTC). The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes (record time 2015-03-24 18:31:17 UTC). The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes\\ccbb72fb-d253-11e4-b (record time 2015-03-24 18:31:17 UTC). The windows search index holds a record of C:\\Users\\informant\\My Documents\\Custom Office Templates (record time 2015-03-24 18:47:57 UTC). The windows search index holds a record of C:\\Users\\informant\\My Documents\\Custom Office Templates (record time 2015-03-24 18:47:58 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:40 UTC). The open/save dialog holds a record of Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:40 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-24 18:48:40 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:41 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:41 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-24 18:48:41 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:42 UTC). The office reading locations holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:59:00 UTC). The office reading locations holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:59:30 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-24 19:09:51 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-24 19:09:52 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-24 19:09:52 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-24 19:09:52 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm (record time 2015-03-24 19:09:54 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:32:42 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:32:43 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:00 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:34:02 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:02 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:34:04 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:04 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:05 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp (record time 2015-03-24 19:52:05 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp (record time 2015-03-24 19:52:12 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-24 19:52:35 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-24 19:52:35 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-24 19:52:46 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-24 19:52:46 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-24 19:52:46 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-24 19:52:46 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-24 19:52:46 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-24 19:52:46 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-24 19:52:46 UTC). The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-24 19:52:46 UTC). The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Koala.jpg (record time 2015-03-24 19:52:46 UTC).",
+  "cited_facts": [
+    {
+      "id": 12450,
+      "kind": "fileSeen",
+      "t": 1427221810908078,
+      "res": 1,
+      "obj": 16082,
+      "obj_text": "C:\\Users\\informant\\Searches\\Sticky Notes (Windows Sticky Notes).searchconnector-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "68f27824937c6c2d78ec58aee5532500c4278b802bcbdc29474704e4ba02173b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 470",
+        "column": "System_Search_GatherTime",
+        "display_name": "Sticky Notes (Windows Sticky Notes).searchconnector-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".searchconnector-ms",
+        "item_url": "file:C:/Users/informant/Searches/Sticky Notes (Windows Sticky Notes).searchconnector-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:30:10.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:30:10.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:30:10.000000Z",
+          "System_ItemDate": "2015-03-24T18:30:10.000000Z"
+        },
+        "size": 933,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12451,
+      "kind": "fileSeen",
+      "t": 1427221877089395,
+      "res": 1,
+      "obj": 16083,
+      "obj_text": "\\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "63327eb3f18d14ab93b836555429db7e1d86e981e3c4d63d0603b065207557c5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 469",
+        "column": "System_Search_GatherTime",
+        "display_name": "notes",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Folder",
+        "item_url": "StickyNotes://{S-1-5-21-2425377081-3129163575-2985601102-1000}/notes",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "store": "StickyNotes",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12452,
+      "kind": "fileSeen",
+      "t": 1427221877292195,
+      "res": 1,
+      "obj": 16081,
+      "obj_text": "\\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes\\ccbb72fb-d253-11e4-b",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "aa098cb246635a0f271eb856c7aff9d7a1f49aeafb624bc59e79ea180ddd60c2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 384",
+        "column": "System_Search_GatherTime",
+        "display_name": "Tomorrow...\r\n\r\nEverything will be OK...\r\n\r\n",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "StickyNotes://{S-1-5-21-2425377081-3129163575-2985601102-1000}/notes/ccbb72fb-d253-11e4-b",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T18:30:09.566000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "store": "StickyNotes",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12453,
+      "kind": "fileSeen",
+      "t": 1427222877879082,
+      "res": 1,
+      "obj": 15548,
+      "obj_text": "C:\\Users\\informant\\My Documents\\Custom Office Templates",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d5fef199c425b745da0633a58f5c31cdcbccffc03e4a5b013b4622f2fd66c8bd",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 391",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Custom Office Templates",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Documents/Custom Office Templates",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:47:58.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:47:58.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:47:58.000000Z",
+          "System_ItemDate": "2015-03-24T18:47:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12454,
+      "kind": "fileSeen",
+      "t": 1427222878253483,
+      "res": 1,
+      "obj": 15548,
+      "obj_text": "C:\\Users\\informant\\My Documents\\Custom Office Templates",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "32406f45d0599c940f9cac2b4b5e53567404df8ff72fbc39e89da27c7bffc32e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 391",
+        "column": "System_Search_GatherTime",
+        "display_name": "Custom Office Templates",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Documents/Custom Office Templates",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:47:58.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:47:58.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:47:58.000000Z",
+          "System_ItemDate": "2015-03-24T18:47:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12455,
+      "kind": "fileSeen",
+      "t": 1427222920734358,
+      "res": 1,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a5e0893dce438064b734e692111c55fec5cf2956d97ca0f853c3e1c4269685e9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 416",
+        "column": "System_DateCreated",
+        "display_name": "Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".docx",
+        "item_url": "file:C:/Users/informant/Desktop/Resignation_Letter_(Iaman_Informant).docx",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:48:42.000000Z",
+          "System_ItemDate": "2015-03-24T18:48:42.000000Z"
+        },
+        "size": 11302,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12456,
+      "kind": "fileSeen",
+      "t": 1427222920749958,
+      "res": 1,
+      "obj": 16084,
+      "obj_text": "Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 1549,
+      "aux_text": "open/save dialog",
+      "row_sha256": "9bf99fae0a34e140e3d6022b364eeea97bfcfce38456f2469d38f4b4adad171f",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\OpenSavePidlMRU\\docx value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "file",
+        "mru_position": 0,
+        "size": 0,
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12457,
+      "kind": "fileSeen",
+      "t": 1427222920827958,
+      "res": 1,
+      "obj": 16085,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "85e21b3908abb56f433cf7a8e1dd1ea1063c684b84f49edabc8fbb2d4f1955ea",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.003210Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:40.827958Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.981605Z",
+        "live_size": 675,
+        "modified": "2015-03-24T19:09:52.003210Z",
+        "record_changed": "2015-03-24T19:09:52.003210Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 675,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12458,
+      "kind": "fileSeen",
+      "t": 1427222921202358,
+      "res": 1,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "65429bcd4efb194bf38a1266fa559af4ba9689b3a31a60ad40de58cd4f3e9a23",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 416",
+        "column": "System_DateAccessed",
+        "display_name": "Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".docx",
+        "item_url": "file:C:/Users/informant/Desktop/Resignation_Letter_(Iaman_Informant).docx",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:48:42.000000Z",
+          "System_ItemDate": "2015-03-24T18:48:42.000000Z"
+        },
+        "size": 11302,
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12459,
+      "kind": "fileSeen",
+      "t": 1427222921311559,
+      "res": 1,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5061b0be485c5f203b39ac4b4d43ad9d0cc6fc62a28c59ea643a289f88973616",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 416",
+        "column": "System_DateModified",
+        "display_name": "Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".docx",
+        "item_url": "file:C:/Users/informant/Desktop/Resignation_Letter_(Iaman_Informant).docx",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:48:42.000000Z",
+          "System_ItemDate": "2015-03-24T18:48:42.000000Z"
+        },
+        "size": 11302,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12460,
+      "kind": "fileSeen",
+      "t": 1427222921342759,
+      "res": 1,
+      "obj": 16086,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "48685a071c3b603c4a483671c82b057f41af0356d5003afaa64b57f9d45d50da",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.736411Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:41.342759Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.748405Z",
+        "live_size": 1133,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1133,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12461,
+      "kind": "fileSeen",
+      "t": 1427222922278760,
+      "res": 1,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1905e37be4b974066f8a9cc1ddf7a1decc9fddd53dfff96d5731db10d6236485",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 416",
+        "column": "System_Search_GatherTime",
+        "display_name": "Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".docx",
+        "item_url": "file:C:/Users/informant/Desktop/Resignation_Letter_(Iaman_Informant).docx",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateCreated": "2015-03-24T18:48:42.000000Z",
+          "System_Document_DateSaved": "2015-03-24T18:48:42.000000Z",
+          "System_ItemDate": "2015-03-24T18:48:42.000000Z"
+        },
+        "size": 11302,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12462,
+      "kind": "fileSeen",
+      "t": 1427223540000000,
+      "res": 60000000,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 16011,
+      "aux_text": "office reading locations",
+      "row_sha256": "6fde6914ca87fd9ecf19722c292e627e83c872b33331895656fa79874a81e964",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\Reading Locations\\Document 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "stored_text": "2015-03-24T14:59",
+        "time_meaning": "Datetime value of the entry (when the document was last closed), stored to the minute",
+        "time_zone": "local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12463,
+      "kind": "fileSeen",
+      "t": 1427223570579971,
+      "res": 1,
+      "obj": 13034,
+      "obj_text": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 16011,
+      "aux_text": "office reading locations",
+      "row_sha256": "d53e20ad7ecd9e2cc9f12c686d87b11bf17463069734c14833fa157f27b8086e",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\Reading Locations\\Document 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12464,
+      "kind": "fileSeen",
+      "t": 1427224191987000,
+      "res": 1,
+      "obj": 16007,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "d3ad7ac87931fad283727b9da7378eff284345fb35ede44a3798ba7a6325ac38",
+      "prov": {
+        "accessed": "2015-03-23T18:37:07.457633Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:07.457633Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.934000Z",
+        "live_size": 17408,
+        "modified": "2015-03-24T19:09:51.987000Z",
+        "record_changed": "2015-03-24T19:09:51.987610Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 17408,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12465,
+      "kind": "fileSeen",
+      "t": 1427224192003210,
+      "res": 1,
+      "obj": 16085,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "b6711cf9740e7513c8fb10c4cfa00ca59afa9dd88194ca5506d1dd6726c88de9",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.003210Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:40.827958Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.981605Z",
+        "live_size": 675,
+        "modified": "2015-03-24T19:09:52.003210Z",
+        "record_changed": "2015-03-24T19:09:52.003210Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 675,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12466,
+      "kind": "fileSeen",
+      "t": 1427224192736411,
+      "res": 1,
+      "obj": 16086,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "0ded5e78b573725290705922a60c6be6699070d4d2ce3ed55488efb1443f4474",
+      "prov": {
+        "accessed": "2015-03-24T19:09:52.736411Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T18:48:41.342759Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.748405Z",
+        "live_size": 1133,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1133,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12467,
+      "kind": "fileSeen",
+      "t": 1427224192736411,
+      "res": 1,
+      "obj": 16010,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "7e1f61b5fdef11f42bb25f2210cf3e19a866d058a97a29dc80e26336f62fc655",
+      "prov": {
+        "accessed": "2015-03-23T18:37:54.491716Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:54.491716Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.764005Z",
+        "live_size": 478,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 478,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12468,
+      "kind": "fileSeen",
+      "t": 1427224194265214,
+      "res": 1,
+      "obj": 16087,
+      "obj_text": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "8ff2135707c7d71c45dfe44a75198209227076d6923b1beb2e26174fb0a4306e",
+      "prov": {
+        "accessed": "2015-03-24T19:09:54.265214Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:09:54.265214Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-24T19:09:54.265214Z",
+        "record_changed": "2015-03-24T19:09:54.265214Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 5205,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy; the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12469,
+      "kind": "fileSeen",
+      "t": 1427225562000000,
+      "res": 1,
+      "obj": 16088,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e0964c0542262f701bee1acd2302f903dd50ee15032057e917f7e65aff97f47f",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 415",
+        "column": "System_Message_DateSent",
+        "display_name": "Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:32:43.185468Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 11876,
+        "store": "mapi15",
+        "time_meaning": "message sent time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12470,
+      "kind": "fileSeen",
+      "t": 1427225563185468,
+      "res": 1,
+      "obj": 16088,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "25215f33ea847e5c2be84abcb6a30ea6ccebe732217b7ebffeec50abd36d16c9",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 415",
+        "column": "System_DateCreated, System_Message_DateReceived",
+        "display_name": "Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:32:43.185468Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 11876,
+        "store": "mapi15",
+        "time_meaning": "the item's creation time as the index stores it; message received time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12471,
+      "kind": "fileSeen",
+      "t": 1427225640000000,
+      "res": 1,
+      "obj": 16089,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/RE: Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5752fcfccf43a7b78fd8d7a9565b996a3ed6973a1e78c1c75d4d6b30e9539a37",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 425",
+        "column": "System_DateCreated, System_Message_DateReceived",
+        "display_name": "RE: Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂계갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:34:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 5220,
+        "store": "mapi15",
+        "time_meaning": "the item's creation time as the index stores it; message received time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12472,
+      "kind": "fileSeen",
+      "t": 1427225642420000,
+      "res": 1,
+      "obj": 16088,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7a64a6e266c96f3008945f7751f3a133e1274b890ca72261b5d2f96e26fff833",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 415",
+        "column": "System_DateModified",
+        "display_name": "Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:32:43.185468Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 11876,
+        "store": "mapi15",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12473,
+      "kind": "fileSeen",
+      "t": 1427225642435000,
+      "res": 1,
+      "obj": 16089,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/RE: Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0eded6719689c19617330606b0a502223952c6021d8829e0e9b6b12aee687797",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 425",
+        "column": "System_Message_DateSent",
+        "display_name": "RE: Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂계갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:34:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 5220,
+        "store": "mapi15",
+        "time_meaning": "message sent time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12474,
+      "kind": "fileSeen",
+      "t": 1427225644198562,
+      "res": 1,
+      "obj": 16088,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1b7257abba6cf63d6ecac336722ce5695b1d9f2e2dafd2d11632f82a7bbde921",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 415",
+        "column": "System_Search_GatherTime",
+        "display_name": "Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂간갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:32:43.185468Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 11876,
+        "store": "mapi15",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12475,
+      "kind": "fileSeen",
+      "t": 1427225644432000,
+      "res": 1,
+      "obj": 16089,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/RE: Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6445723b3eb28d8ad9660baff7ebeb8175dd04985c1d9f84ef6ce3516f1d0472",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 425",
+        "column": "System_DateModified",
+        "display_name": "RE: Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂계갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:34:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 5220,
+        "store": "mapi15",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12476,
+      "kind": "fileSeen",
+      "t": 1427225645508964,
+      "res": 1,
+      "obj": 16089,
+      "obj_text": "/iaman.informant@nist.gov/Sent Items/RE: Watch out!",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4c60b41b7222e289ba1e1a85d49f38e4aa43e3361cea78baa31c0dffe041936b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 425",
+        "column": "System_Search_GatherTime",
+        "display_name": "RE: Watch out!",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Sent Items/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂계갟갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-24T19:34:00.000000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 5220,
+        "store": "mapi15",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12477,
+      "kind": "fileSeen",
+      "t": 1427226725744283,
+      "res": 1,
+      "obj": 13125,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "597728cf48ded96077fff2333a856d1a3c48ad27d12f78c945fbd58b85a8f908",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 450",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "temp",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Desktop/temp",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T19:52:06.000000Z",
+          "System_Document_DateCreated": "2015-03-24T19:52:06.000000Z",
+          "System_Document_DateSaved": "2015-03-24T19:52:06.000000Z",
+          "System_ItemDate": "2015-03-24T19:52:06.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12478,
+      "kind": "fileSeen",
+      "t": 1427226732452295,
+      "res": 1,
+      "obj": 13125,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "21ed830d92c50b4fd76c6218a7285c8c12d5164d6d571997b31036965583f502",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 450",
+        "column": "System_Search_GatherTime",
+        "display_name": "temp",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/informant/Desktop/temp",
+        "other_dates": {
+          "System_DateImported": "2015-03-24T19:52:06.000000Z",
+          "System_Document_DateCreated": "2015-03-24T19:52:06.000000Z",
+          "System_Document_DateSaved": "2015-03-24T19:52:06.000000Z",
+          "System_ItemDate": "2015-03-24T19:52:06.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12479,
+      "kind": "fileSeen",
+      "t": 1427226755727536,
+      "res": 1,
+      "obj": 834,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "548448efbe8cd4c7cd8fce1da39f936597e0a8ae1eb25f1433acdfe2dbccbb2b",
+      "prov": {
+        "accessed": "2015-03-24T19:52:35.727536Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:35.727536Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2015-03-22T15:11:04.851735Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 55915216,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12480,
+      "kind": "fileSeen",
+      "t": 1427226755727536,
+      "res": 1,
+      "obj": 834,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bd37d9c8ac1c49d23d2bdff9f0e5ee9540e0c2ff5bc10d1712ac2691c29113ac",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 451",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".exe",
+        "item_url": "file:C:/Users/informant/Desktop/temp/IE11-Windows6.1-x64-en-us.exe",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:06.000000Z"
+        },
+        "size": 55915216,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12481,
+      "kind": "fileSeen",
+      "t": 1427226766800962,
+      "res": 1,
+      "obj": 13951,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "1b8eb8f410b0bb358dfaafc0886506fa444146b90c646cf5b45930f997c51173",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.800962Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.800962Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.836174Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 879394,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12482,
+      "kind": "fileSeen",
+      "t": 1427226766800962,
+      "res": 1,
+      "obj": 13951,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9cd6391aad271e1e35a13679cf79388e3d5b2fd19fa81009c5dab9f3abb0fa76",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 452",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "Chrysanthemum.jpg",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".jpg",
+        "item_url": "file:C:/Users/informant/Desktop/temp/Chrysanthemum.jpg",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateSaved": "2009-07-14T05:32:32.000000Z",
+          "System_ItemDate": "2008-03-14T17:59:26.540000Z",
+          "System_Photo_DateTaken": "2008-03-14T17:59:26.540000Z"
+        },
+        "size": 879394,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12483,
+      "kind": "fileSeen",
+      "t": 1427226766816562,
+      "res": 1,
+      "obj": 13957,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Desert.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "2d3359b00b1b73779f098831644ca2d478c21324917fd66e72541bef785dcaf3",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.816562Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.816562Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 845941,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12484,
+      "kind": "fileSeen",
+      "t": 1427226766816562,
+      "res": 1,
+      "obj": 13957,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Desert.jpg",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "52b3f41049b43ca874677e2590b626e146cdbdc12247f1485545f665cfe49754",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 453",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "Desert.jpg",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".jpg",
+        "item_url": "file:C:/Users/informant/Desktop/temp/Desert.jpg",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateSaved": "2009-07-14T05:32:32.000000Z",
+          "System_ItemDate": "2008-03-14T17:59:26.540000Z",
+          "System_Photo_DateTaken": "2008-03-14T17:59:26.540000Z"
+        },
+        "size": 845941,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12485,
+      "kind": "fileSeen",
+      "t": 1427226766816562,
+      "res": 1,
+      "obj": 13965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "256c471d2939ecf4f9e2997c1cb3ae06c7d9ac6dfbb649a24ea06129301748b1",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.816562Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.816562Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 595284,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12486,
+      "kind": "fileSeen",
+      "t": 1427226766816562,
+      "res": 1,
+      "obj": 13965,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "181ef6de195de2ade78cf650092636c04d4854bc0a0628eaaaa41d1cd0ede28b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 454",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "Hydrangeas.jpg",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".jpg",
+        "item_url": "file:C:/Users/informant/Desktop/temp/Hydrangeas.jpg",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateSaved": "2009-07-14T05:32:32.000000Z",
+          "System_ItemDate": "2008-03-24T20:41:53.000000Z",
+          "System_Photo_DateTaken": "2008-03-24T20:41:53.000000Z"
+        },
+        "size": 595284,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12487,
+      "kind": "fileSeen",
+      "t": 1427226766832162,
+      "res": 1,
+      "obj": 13980,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "1738a2cdb6d2123530c00963627611967a8d6bf151ef369009d5f92f41e21da8",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.832162Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.832162Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.674540Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 775702,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12488,
+      "kind": "fileSeen",
+      "t": 1427226766832162,
+      "res": 1,
+      "obj": 13980,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1d7f7a00e5b9af9e6e0948517b3769c84a7b4efcf26f0b378f2753aa79ef8dcf",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 455",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "Jellyfish.jpg",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".jpg",
+        "item_url": "file:C:/Users/informant/Desktop/temp/Jellyfish.jpg",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:32.000000Z",
+          "System_Document_DateSaved": "2009-07-14T05:32:32.000000Z",
+          "System_ItemDate": "2008-02-11T16:32:24.080000Z",
+          "System_Photo_DateTaken": "2008-02-11T16:32:24.080000Z"
+        },
+        "size": 775702,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12489,
+      "kind": "fileSeen",
+      "t": 1427226766832162,
+      "res": 1,
+      "obj": 13988,
+      "obj_text": "C:\\Users\\informant\\Desktop\\temp\\Koala.jpg",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "83d0408ec821cbf847090681259d95f400e2e63d3f8fccadb725a3899e56342f",
+      "prov": {
+        "accessed": "2015-03-24T19:52:46.832162Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-24T19:52:46.832162Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "modified": "2009-07-14T05:32:31.658939Z",
+        "record_changed": "2015-03-24T20:11:42.851774Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 780831,
+        "state": "missing on the live volume",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12450
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Searches\\Sticky Notes (Windows Sticky Notes).searchconnector-ms (record time 2015-03-24 18:30:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12451
+        ]
+      },
+      "english": "The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes (record time 2015-03-24 18:31:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12452
+        ]
+      },
+      "english": "The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1000}\\notes\\ccbb72fb-d253-11e4-b (record time 2015-03-24 18:31:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12453
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\My Documents\\Custom Office Templates (record time 2015-03-24 18:47:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12454
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\My Documents\\Custom Office Templates (record time 2015-03-24 18:47:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12455
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:40 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12456
+        ]
+      },
+      "english": "The open/save dialog holds a record of Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:40 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12457
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-24 18:48:40 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12458
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12459
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12460
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-24 18:48:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12461
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:48:42 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12462
+        ]
+      },
+      "english": "The office reading locations holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:59:00 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12463
+        ]
+      },
+      "english": "The office reading locations holds a record of C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx (record time 2015-03-24 18:59:30 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12464
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-24 19:09:51 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12465
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk (record time 2015-03-24 19:09:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12466
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK (record time 2015-03-24 19:09:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12467
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-24 19:09:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12468
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\MB6PFF55\\emailhrd[1].htm (record time 2015-03-24 19:09:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12469
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:32:42 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12470
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:32:43 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12471
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:00 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12472
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:34:02 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12473
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:02 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12474
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Watch out! (record time 2015-03-24 19:34:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12475
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12476
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Sent Items/RE: Watch out! (record time 2015-03-24 19:34:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12477
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp (record time 2015-03-24 19:52:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12478
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp (record time 2015-03-24 19:52:12 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12479
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-24 19:52:35 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12480
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe (record time 2015-03-24 19:52:35 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12481
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12482
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12483
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12484
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Desert.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12485
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12486
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12487
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12488
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12489
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\Desktop\\temp\\Koala.jpg (record time 2015-03-24 19:52:46 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M327.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

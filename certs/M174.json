@@ -1,51 +1,206 @@
 {
   "finding_id": "M174",
-  "question": "What traces of disc burning are there?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "burnTrace": [
-      308
+    "both": [
+      {
+        "recoveredOnDevice": [
+          160,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          160,
+          243
+        ]
+      },
+      {
+        "tagged": [
+          160,
+          "obj",
+          463,
+          248
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:56:11 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "english": "A directory entry for \\tr\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\tr\\diary_#3p.txt was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:46 UTC) after its last modification (2015-01-20 18:18:06 UTC). This rests on heuristic rule R4. \\tr\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 308,
-      "kind": "cdBurn",
-      "t": 1427226971965935,
+      "id": 160,
+      "kind": "fileCreated",
+      "t": 1427230546948265,
       "res": 1,
-      "obj": 186,
-      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
-      "aux": 187,
-      "aux_text": "System event log",
-      "row_sha256": "569da492aa3e1bab1381367dc7c649e1bccc91d3900e3d51051f3d7ca3f93004",
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "12969a90b134fd2162dab24a6ce67ab3507036365da7291cc4f10f5408703de6",
       "prov": {
-        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
-        "channel": "System",
-        "event_record_id": "1416",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "time_meaning": "event time",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 243,
+      "kind": "fileModified",
+      "t": 1421777886000000,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "6966bcffd9bd9f1c31ddfe7d1b2fb6099c0369a82df585c03f2679edb7565053",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51207 (byte offset 104871936), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 325120,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 37
+      }
+    },
+    {
+      "id": 463,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 248,
+      "aux_text": "same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC",
+      "row_sha256": "6d6087712d6ba6103c5172aa5db70d74115a35d939910e9a26d2af28104ce5b6",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "burnTrace": [
-          308
+        "recoveredOnDevice": [
+          160,
+          500
         ]
       },
-      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 19:56:11 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "english": "A directory entry for \\tr\\diary_#3p.txt, created (2015-03-24 20:55:46 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R12"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          160,
+          243
+        ]
+      },
+      "english": "\\tr\\diary_#3p.txt was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:46 UTC) after its last modification (2015-01-20 18:18:06 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
       ],
       "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          160,
+          "obj",
+          463,
+          248
+        ]
+      },
+      "english": "\\tr\\diary_#3p.txt is tagged \"same size and last-modified time as a file elsewhere: 325120 bytes, 2015-01-20 18:18:06 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
     }
   ],
   "rules": [
-    "R12"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
   "strength": "heuristic",
   "lean_file": "M174.lean",

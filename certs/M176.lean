@@ -4,9 +4,10 @@ open ChainOfProof
 namespace Cert.M176
 
 def cited : List Fact := [
-  ⟨310, .cdBurn, 1427228686429152, 1, 186, 187⟩ ]
+  ⟨162, .fileCreated, 1427230620985995, 1, 41, 40⟩,
+  ⟨176, .fileModified, 1247549551674540, 1, 41, 40⟩ ]
 
-def claim : Claim := Sets.burnTrace 310
+def claim : Claim := Sets.copiedHere 162 176
 
 theorem verified : holds cited claim = true := by decide +kernel
 

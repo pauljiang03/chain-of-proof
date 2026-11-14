@@ -1,0 +1,1586 @@
+{
+  "finding_id": "M257",
+  "question": "Which programs were run?",
+  "claim": {
+    "both": [
+      {
+        "programRan": [
+          1477
+        ]
+      },
+      {
+        "programRan": [
+          1478
+        ]
+      },
+      {
+        "programRan": [
+          1479
+        ]
+      },
+      {
+        "programRan": [
+          1480
+        ]
+      },
+      {
+        "programRan": [
+          1481
+        ]
+      },
+      {
+        "programRan": [
+          1482
+        ]
+      },
+      {
+        "programRan": [
+          1483
+        ]
+      },
+      {
+        "programRan": [
+          1484
+        ]
+      },
+      {
+        "programRan": [
+          1485
+        ]
+      },
+      {
+        "programRan": [
+          1486
+        ]
+      },
+      {
+        "programRan": [
+          1487
+        ]
+      },
+      {
+        "programRan": [
+          1488
+        ]
+      },
+      {
+        "programRan": [
+          1489
+        ]
+      },
+      {
+        "programRan": [
+          1490
+        ]
+      },
+      {
+        "programRan": [
+          1491
+        ]
+      },
+      {
+        "programRan": [
+          1492
+        ]
+      },
+      {
+        "programRan": [
+          1493
+        ]
+      },
+      {
+        "programRan": [
+          1494
+        ]
+      },
+      {
+        "programRan": [
+          1495
+        ]
+      },
+      {
+        "programRan": [
+          1496
+        ]
+      },
+      {
+        "programRan": [
+          1497
+        ]
+      },
+      {
+        "programRan": [
+          1498
+        ]
+      },
+      {
+        "programRan": [
+          1499
+        ]
+      },
+      {
+        "programRan": [
+          1500
+        ]
+      },
+      {
+        "programRan": [
+          1501
+        ]
+      },
+      {
+        "programRan": [
+          1502
+        ]
+      },
+      {
+        "programRan": [
+          1503
+        ]
+      },
+      {
+        "programRan": [
+          1504
+        ]
+      },
+      {
+        "programRan": [
+          1505
+        ]
+      },
+      {
+        "programRan": [
+          1506
+        ]
+      },
+      {
+        "programRan": [
+          1507
+        ]
+      },
+      {
+        "programRan": [
+          1508
+        ]
+      },
+      {
+        "programRan": [
+          1509
+        ]
+      },
+      {
+        "programRan": [
+          1510
+        ]
+      },
+      {
+        "programRan": [
+          1511
+        ]
+      },
+      {
+        "programRan": [
+          1512
+        ]
+      },
+      {
+        "programRan": [
+          1513
+        ]
+      },
+      {
+        "programRan": [
+          1514
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A record shows WMIPRVSE.EXE ran (2015-03-25 15:15:55 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\WMIPRVSE.EXE). A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe). A record shows TASKENG.EXE ran (2015-03-25 15:16:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\TASKENG.EXE). A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe). A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe). A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe). A record shows GOOGLEUPDATE.EXE ran (2015-03-25 15:16:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\UPDATE\\GOOGLEUPDATE.EXE). A record shows DLLHOST.EXE ran (2015-03-25 15:18:02 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\DLLHOST.EXE). A record shows CONSENT.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONSENT.EXE). A record shows DLLHOST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE). A record shows DLLHOST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE). A record shows UNINST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\CCLEANER\\UNINST.EXE). A record shows AU_.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\~NSU.TMP\\AU_.EXE). A record shows CONHOST.EXE ran (2015-03-25 15:18:36 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONHOST.EXE). A record shows SCHTASKS.EXE ran (2015-03-25 15:18:37 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\SCHTASKS.EXE). A record shows MSIEXEC.EXE ran (2015-03-25 15:18:54 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\MSIEXEC.EXE). A record shows MSIEXEC.EXE ran (2015-03-25 15:19:11 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\MSIEXEC.EXE). A record shows Google Drive.lnk ran (2015-03-25 15:21:30 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Google Drive\\Google Drive.lnk). A record shows googledrivesync.exe ran (2015-03-25 15:21:30 UTC, path {7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Google\\Drive\\googledrivesync.exe). A record shows GOOGLEDRIVESYNC.EXE ran (2015-03-25 15:21:31 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE). A record shows IEXPLORE.EXE ran (2015-03-25 15:22:06 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\INTERNET EXPLORER\\IEXPLORE.EXE). A record shows IEXPLORE.EXE ran (2015-03-25 15:22:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\INTERNET EXPLORER\\IEXPLORE.EXE). A record shows WINWORD.EXE ran (2015-03-25 15:24:48 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\WINWORD.EXE). A record shows WINWORD.EXE ran (2015-03-25 15:24:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE). A record shows OSPPSVC.EXE ran (2015-03-25 15:24:50 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\COMMON FILES\\MICROSOFT SHARED\\OFFICESOFTWAREPROTECTIONPLATFORM\\OSPPSVC.EXE). A record shows DLLHOST.EXE ran (2015-03-25 15:24:53 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE). A record shows WINWORD.EXE ran (2015-03-25 15:28:33 UTC). A record shows iexplore.exe ran (2015-03-25 15:28:33 UTC). A record shows {64E6CC61-64D9-4D71-AC89-A1959E90F8E6} ran (2015-03-25 15:28:33 UTC). A record shows DLLHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE). A record shows SEARCHPROTOCOLHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHPROTOCOLHOST.EXE). A record shows SEARCHFILTERHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHFILTERHOST.EXE). A record shows xpsrchvw.exe ran (2015-03-25 15:28:47 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\xpsrchvw.exe). A record shows XPSRCHVW.EXE ran (2015-03-25 15:28:47 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\XPSRCHVW.EXE). A record shows IE11-Windows6.1-x64-en-us.exe ran (2015-03-25 15:29:12 UTC, path C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe). A record shows WFS.exe ran (2015-03-25 15:29:12 UTC, path C:\\Windows\\system32\\WFS.exe). A record shows iexplore.exe ran (2015-03-25 15:29:12 UTC, path C:\\Program Files\\Internet Explorer\\iexplore.exe). A record shows xpsrchvw.exe ran (2015-03-25 15:29:12 UTC, path C:\\Windows\\System32\\xpsrchvw.exe).",
+  "cited_facts": [
+    {
+      "id": 1477,
+      "kind": "programRun",
+      "t": 1427296555610005,
+      "res": 1,
+      "obj": 1055,
+      "obj_text": "WMIPRVSE.EXE",
+      "aux": 1056,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\WMIPRVSE.EXE",
+      "row_sha256": "3d0c52a4665b3c7e8fda10398108cb3adc25c9bb1c8855a1e7f21c8ea11aa9cc",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WMIPRVSE.EXE-1628051C.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 14:35:47.178427Z",
+        "prefetch_file_modified": "2015-03-25 15:16:05.890404Z",
+        "prefetch_hash": "1628051C",
+        "run_count": 23,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1478,
+      "kind": "programRun",
+      "t": 1427296560196405,
+      "res": 1,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 845,
+      "aux_text": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+      "row_sha256": "ae0db44991b7a8d67acb7175ab59e26626599dae276f44447563d3fcff6c0566",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tasks\\{F43C6189-D285-445C-A811-33CB4E576AA9} value DynamicInfo",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "source": "scheduled task (TaskCache)",
+        "task": "\\GoogleUpdateTaskMachineUA",
+        "task_file": "C:\\Windows\\System32\\Tasks\\GoogleUpdateTaskMachineUA",
+        "time_meaning": "last run time of the scheduled task whose action runs this program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1479,
+      "kind": "programRun",
+      "t": 1427296560196405,
+      "res": 1,
+      "obj": 1057,
+      "obj_text": "TASKENG.EXE",
+      "aux": 1058,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\TASKENG.EXE",
+      "row_sha256": "17d91884e11500561d62e633b4f3cd21daa8150c047ca52dd4e4601b7fc7ac41",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\TASKENG.EXE-48D4E289.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 15:16:10.244955Z",
+        "prefetch_file_modified": "2015-03-25 15:16:10.336405Z",
+        "prefetch_hash": "48D4E289",
+        "run_count": 25,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1480,
+      "kind": "programRun",
+      "t": 1427296560321000,
+      "res": 1000,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 845,
+      "aux_text": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+      "row_sha256": "4e7b7072ca6bd8e750428b10a030eb01d14e8803d28eb23b7e1ebe8b53366580",
+      "prov": {
+        "artifact": "C:\\Windows\\Tasks\\GoogleUpdateTaskMachineUA.job",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "parameters": "/ua /installsource scheduler",
+        "source": "scheduled task file (.job)",
+        "time_meaning": "last run time stored in the task file",
+        "time_zone": "local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1481,
+      "kind": "programRun",
+      "t": 1427296560321205,
+      "res": 1,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 845,
+      "aux_text": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+      "row_sha256": "ee5090b5db88f7e19c2b6e0019a02cfa7c0d4e723a5ce1a6e686ddd1eb382f70",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tasks\\{128F2D0D-6EF3-4D9C-8C8F-A962D35920CD} value DynamicInfo",
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SOFTWARE",
+        "image": "pc.E01",
+        "source": "scheduled task (TaskCache)",
+        "task": "\\GoogleUpdateTaskMachineCore",
+        "task_file": "C:\\Windows\\System32\\Tasks\\GoogleUpdateTaskMachineCore",
+        "time_meaning": "last run time of the scheduled task whose action runs this program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1482,
+      "kind": "programRun",
+      "t": 1427296560336000,
+      "res": 1000,
+      "obj": 840,
+      "obj_text": "GoogleUpdate.exe",
+      "aux": 845,
+      "aux_text": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+      "row_sha256": "59455f07c2c51ea07a294954d9c00a63d03dc69b87f481c11913b8645ccd2a75",
+      "prov": {
+        "artifact": "C:\\Windows\\Tasks\\GoogleUpdateTaskMachineCore.job",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "parameters": "/c",
+        "source": "scheduled task file (.job)",
+        "time_meaning": "last run time stored in the task file",
+        "time_zone": "local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1483,
+      "kind": "programRun",
+      "t": 1427296560336805,
+      "res": 1,
+      "obj": 1059,
+      "obj_text": "GOOGLEUPDATE.EXE",
+      "aux": 1060,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\UPDATE\\GOOGLEUPDATE.EXE",
+      "row_sha256": "4d70301f7fd5a8af7096ae341cfaba3e7ce1ab26002dadc9347ad7c1f55dbba3",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\GOOGLEUPDATE.EXE-B95715F5.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 15:11:26.511576Z",
+        "prefetch_file_modified": "2015-03-25 15:16:01.382004Z",
+        "prefetch_hash": "B95715F5",
+        "run_count": 38,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1484,
+      "kind": "programRun",
+      "t": 1427296682328805,
+      "res": 1,
+      "obj": 906,
+      "obj_text": "DLLHOST.EXE",
+      "aux": 1061,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\DLLHOST.EXE",
+      "row_sha256": "29968363226f58bcdf1867a2a1bce7acb66505e3ca583417a634a3d240d3049e",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DLLHOST.EXE-ECB71776.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-22 14:37:23.244194Z",
+        "prefetch_file_modified": "2015-03-25 15:18:07.430004Z",
+        "prefetch_hash": "ECB71776",
+        "run_count": 14,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1485,
+      "kind": "programRun",
+      "t": 1427296709152405,
+      "res": 1,
+      "obj": 1062,
+      "obj_text": "CONSENT.EXE",
+      "aux": 1063,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONSENT.EXE",
+      "row_sha256": "f9442f263948ec1cf854912113869fabfbea0705945b35c5606e857d71418c6d",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\CONSENT.EXE-531BD9EA.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 14:37:36.693821Z",
+        "prefetch_file_modified": "2015-03-25 15:18:29.526804Z",
+        "prefetch_hash": "531BD9EA",
+        "run_count": 22,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1486,
+      "kind": "programRun",
+      "t": 1427296709526805,
+      "res": 1,
+      "obj": 906,
+      "obj_text": "DLLHOST.EXE",
+      "aux": 907,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE",
+      "row_sha256": "dfcfe4f9859f111e36500c6e7c216b9a0f0edf4ec444d5e1047e5bddee5bfb64",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DLLHOST.EXE-766398D2.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-22 14:34:31.184292Z",
+        "prefetch_file_modified": "2015-03-25 15:18:34.581203Z",
+        "prefetch_hash": "766398D2",
+        "run_count": 33,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1487,
+      "kind": "programRun",
+      "t": 1427296709573605,
+      "res": 1,
+      "obj": 906,
+      "obj_text": "DLLHOST.EXE",
+      "aux": 907,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE",
+      "row_sha256": "050b48e5c336893c69ac39f6344dbbf49197b3a808f7f8afbaa6ec784e16a19e",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DLLHOST.EXE-7FAA2E4C.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 15:18:39.713604Z",
+        "prefetch_file_modified": "2015-03-25 15:18:39.713604Z",
+        "prefetch_hash": "7FAA2E4C",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1488,
+      "kind": "programRun",
+      "t": 1427296709636005,
+      "res": 1,
+      "obj": 1064,
+      "obj_text": "UNINST.EXE",
+      "aux": 1065,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\CCLEANER\\UNINST.EXE",
+      "row_sha256": "440be28092f5816660ce0dd8f64b2e34617c9bd21f6e13fe2a05d82e9148bea2",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\UNINST.EXE-0867DC84.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:18:29.776403Z",
+        "prefetch_file_modified": "2015-03-25 15:18:29.776403Z",
+        "prefetch_hash": "0867DC84",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1489,
+      "kind": "programRun",
+      "t": 1427296709776405,
+      "res": 1,
+      "obj": 1066,
+      "obj_text": "AU_.EXE",
+      "aux": 1067,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\~NSU.TMP\\AU_.EXE",
+      "row_sha256": "08ef4f69ef1bd34ce17498c5a0279d342a498e8f112b50ead433e2863bcce820",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\AU_.EXE-506726E7.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 15:18:39.916405Z",
+        "prefetch_file_modified": "2015-03-25 15:18:39.916405Z",
+        "prefetch_hash": "506726E7",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1490,
+      "kind": "programRun",
+      "t": 1427296716500005,
+      "res": 1,
+      "obj": 1068,
+      "obj_text": "CONHOST.EXE",
+      "aux": 1069,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONHOST.EXE",
+      "row_sha256": "55ef361f1a8eefb41d8f791d5a0a70d2ce1dea6dbdd5f3e4ec626e9477d3792e",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\CONHOST.EXE-1F3E9D7E.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 10:18:11.748343Z",
+        "prefetch_file_modified": "2015-03-25 15:18:36.858805Z",
+        "prefetch_hash": "1F3E9D7E",
+        "run_count": 16,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1491,
+      "kind": "programRun",
+      "t": 1427296717186405,
+      "res": 1,
+      "obj": 1070,
+      "obj_text": "SCHTASKS.EXE",
+      "aux": 1071,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\SCHTASKS.EXE",
+      "row_sha256": "1cf3e5180b370bf356c8d22ac67e1914a68cf10e19f038dbec3b789fed612e65",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SCHTASKS.EXE-AD598958.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:18:36.843204Z",
+        "prefetch_file_modified": "2015-03-25 15:18:37.295605Z",
+        "prefetch_hash": "AD598958",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1492,
+      "kind": "programRun",
+      "t": 1427296734221605,
+      "res": 1,
+      "obj": 1072,
+      "obj_text": "MSIEXEC.EXE",
+      "aux": 1073,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\MSIEXEC.EXE",
+      "row_sha256": "b4b3c0ed79a84f6ff2db7faba2f4cc78b02da08aadf199deaf6eefcc896a1fbb",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MSIEXEC.EXE-A2D55CB6.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:01.100204Z",
+        "prefetch_file_modified": "2015-03-25 15:19:04.385805Z",
+        "prefetch_hash": "A2D55CB6",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1493,
+      "kind": "programRun",
+      "t": 1427296751546205,
+      "res": 1,
+      "obj": 1072,
+      "obj_text": "MSIEXEC.EXE",
+      "aux": 1074,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\MSIEXEC.EXE",
+      "row_sha256": "98acd8d3495bd5708c7587913a70d80fea653212614d17f35ecb7c508c40cdeb",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MSIEXEC.EXE-E09A077A.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:03.190603Z",
+        "prefetch_file_modified": "2015-03-25 15:19:13.418203Z",
+        "prefetch_hash": "E09A077A",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1494,
+      "kind": "programRun",
+      "t": 1427296890604000,
+      "res": 1,
+      "obj": 1075,
+      "obj_text": "Google Drive.lnk",
+      "aux": 1076,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Google Drive\\Google Drive.lnk",
+      "row_sha256": "f5e66496fcaa9c3bcef3176a2621c279b903ce020ce198b615d8316d61007040",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Tbbtyr Qevir\\Tbbtyr Qevir.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Google Drive\\Google Drive.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 1,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1495,
+      "kind": "programRun",
+      "t": 1427296890604000,
+      "res": 1,
+      "obj": 765,
+      "obj_text": "googledrivesync.exe",
+      "aux": 1077,
+      "aux_text": "{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Google\\Drive\\googledrivesync.exe",
+      "row_sha256": "c82e95e5a6662ac3bdde5185b93537169983bd724dcd512f3b9acffebe4ef38d",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {7P5N40RS-N0SO-4OSP-874N-P0S2R0O9SN8R}\\Tbbtyr\\Qevir\\tbbtyrqevirflap.rkr",
+        "entry": "{7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Google\\Drive\\googledrivesync.exe",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 78265,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1496,
+      "kind": "programRun",
+      "t": 1427296891899405,
+      "res": 1,
+      "obj": 1078,
+      "obj_text": "GOOGLEDRIVESYNC.EXE",
+      "aux": 1079,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE",
+      "row_sha256": "aa4798bff23ddc4c8ada0aeca31527e4b4a3cfd191e51142029fc2d1ac43591d",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\GOOGLEDRIVESYNC.EXE-841A0D94.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:21:40.744604Z",
+        "prefetch_file_modified": "2015-03-25 15:21:42.039404Z",
+        "prefetch_hash": "841A0D94",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1497,
+      "kind": "programRun",
+      "t": 1427296926874605,
+      "res": 1,
+      "obj": 749,
+      "obj_text": "IEXPLORE.EXE",
+      "aux": 1080,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\INTERNET EXPLORER\\IEXPLORE.EXE",
+      "row_sha256": "f8df1fa87234931c7efdaf1d89f995411e8d0010d8dc5272fca15123dc65678f",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\IEXPLORE.EXE-908C99F8.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:46:16.102905Z",
+        "prefetch_file_modified": "2015-03-25 15:22:10.259804Z",
+        "prefetch_hash": "908C99F8",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1498,
+      "kind": "programRun",
+      "t": 1427296927405005,
+      "res": 1,
+      "obj": 749,
+      "obj_text": "IEXPLORE.EXE",
+      "aux": 1081,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\INTERNET EXPLORER\\IEXPLORE.EXE",
+      "row_sha256": "96c0f0a991c6e4dc7053a5f6e19fe69d7eb633e2fe7325bdc319b3d4ff75f421",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\IEXPLORE.EXE-4B6C9213.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 15:09:06.521912Z",
+        "prefetch_file_modified": "2015-03-25 15:22:10.228603Z",
+        "prefetch_hash": "4B6C9213",
+        "run_count": 14,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1499,
+      "kind": "programRun",
+      "t": 1427297088177000,
+      "res": 1,
+      "obj": 743,
+      "obj_text": "WINWORD.EXE",
+      "aux": 1082,
+      "aux_text": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\WINWORD.EXE",
+      "row_sha256": "5e3c5282f49b812469c6c3db8cb413be365c8df6804ae6a47e88c1d4ccfd80a8",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {6Q809377-6NS0-444O-8957-N3773S02200R}\\Zvpebfbsg Bssvpr\\Bssvpr15\\JVAJBEQ.RKR",
+        "entry": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\WINWORD.EXE",
+        "exhibit": "PC",
+        "focus_count": 10,
+        "focus_time_ms": 844511,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Program Files (x64)",
+        "run_count": 4,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1500,
+      "kind": "programRun",
+      "t": 1427297088193205,
+      "res": 1,
+      "obj": 743,
+      "obj_text": "WINWORD.EXE",
+      "aux": 1083,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE",
+      "row_sha256": "5859f4bec7825fa8281196b8f5ad490a036be9df57cfd6cc895bf3b40b76535e",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WINWORD.EXE-CECBA770.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-24 18:32:25.737516Z",
+        "prefetch_file_modified": "2015-03-25 15:24:59.409605Z",
+        "prefetch_hash": "CECBA770",
+        "run_count": 3,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1501,
+      "kind": "programRun",
+      "t": 1427297090127605,
+      "res": 1,
+      "obj": 719,
+      "obj_text": "OSPPSVC.EXE",
+      "aux": 1084,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\COMMON FILES\\MICROSOFT SHARED\\OFFICESOFTWAREPROTECTIONPLATFORM\\OSPPSVC.EXE",
+      "row_sha256": "546689b8abad592b3d4dc4e385a6aef97c35a74b7d65c8b3dd35c284a916bbb1",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\OSPPSVC.EXE-E53D3CC0.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 15:04:20.056807Z",
+        "prefetch_file_modified": "2015-03-25 15:25:00.314404Z",
+        "prefetch_hash": "E53D3CC0",
+        "run_count": 12,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1502,
+      "kind": "programRun",
+      "t": 1427297093575205,
+      "res": 1,
+      "obj": 906,
+      "obj_text": "DLLHOST.EXE",
+      "aux": 907,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE",
+      "row_sha256": "3e5682e834bb115912761ffafe5990c0ec97bc875e1b032f99dd675f7cb89206",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DLLHOST.EXE-A8DE6D5B.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-24 18:32:27.843519Z",
+        "prefetch_file_modified": "2015-03-25 15:24:58.660805Z",
+        "prefetch_hash": "A8DE6D5B",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1503,
+      "kind": "programRun",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 743,
+      "obj_text": "WINWORD.EXE",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "6fa3c7031e0d481599d032267dd55c96b1dc19fb5035071143e81d49e2a4e830",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 2",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "mru_position": 1,
+        "source": "open/save dialog history",
+        "time_meaning": "last-write time of the registry key (set when the most recent entry, position 1, was written); the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1504,
+      "kind": "programRun",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 668,
+      "obj_text": "iexplore.exe",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "89775166e04076af3702ee49ea0de81eb7b0e5dd56b375c711e589086217451f",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 0",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "mru_position": 2,
+        "source": "open/save dialog history",
+        "time_meaning": "last-write time of the registry key (set when the most recent entry, position 1, was written); the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1505,
+      "kind": "programRun",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 1085,
+      "obj_text": "{64E6CC61-64D9-4D71-AC89-A1959E90F8E6}",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "b0be6a84eb677d0638017af1ecf58fccd39195b585f3b5bd3e23eea9dc709c45",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 1",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "mru_position": 3,
+        "source": "open/save dialog history",
+        "time_meaning": "last-write time of the registry key (set when the most recent entry, position 1, was written); the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1506,
+      "kind": "programRun",
+      "t": 1427297314022005,
+      "res": 1,
+      "obj": 906,
+      "obj_text": "DLLHOST.EXE",
+      "aux": 907,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE",
+      "row_sha256": "725606c3f81d477f02887fd5efa77cc2fdeff85cf599bf58617e8981424633f3",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DLLHOST.EXE-5E46FA0D.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-22 14:35:10.175161Z",
+        "prefetch_file_modified": "2015-03-25 15:28:40.152803Z",
+        "prefetch_hash": "5E46FA0D",
+        "run_count": 59,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1507,
+      "kind": "programRun",
+      "t": 1427297314552405,
+      "res": 1,
+      "obj": 1086,
+      "obj_text": "SEARCHPROTOCOLHOST.EXE",
+      "aux": 1087,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHPROTOCOLHOST.EXE",
+      "row_sha256": "7d6bfce5122e38037338a47bc10ca4461a63724f45be5449c8c7cd80dea5a12f",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SEARCHPROTOCOLHOST.EXE-0CB8CADE.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 14:34:37.127903Z",
+        "prefetch_file_modified": "2015-03-25 15:28:44.692404Z",
+        "prefetch_hash": "0CB8CADE",
+        "run_count": 76,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1508,
+      "kind": "programRun",
+      "t": 1427297314568005,
+      "res": 1,
+      "obj": 1088,
+      "obj_text": "SEARCHFILTERHOST.EXE",
+      "aux": 1089,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHFILTERHOST.EXE",
+      "row_sha256": "6705f9df01f7a6fda5ca27396520efb25b1f69970c3d4da807b316cf8c1f3c48",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SEARCHFILTERHOST.EXE-77482212.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 14:34:37.143503Z",
+        "prefetch_file_modified": "2015-03-25 15:28:44.723604Z",
+        "prefetch_hash": "77482212",
+        "run_count": 82,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1509,
+      "kind": "programRun",
+      "t": 1427297327126000,
+      "res": 1,
+      "obj": 500,
+      "obj_text": "xpsrchvw.exe",
+      "aux": 1090,
+      "aux_text": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\xpsrchvw.exe",
+      "row_sha256": "f25fb3662527dea476a481caa66e77dec549e11be695b1fbfb013a93e7783a2e",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value {1NP14R77-02R7-4R5Q-O744-2RO1NR5198O7}\\kcfepuij.rkr",
+        "entry": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\xpsrchvw.exe",
+        "exhibit": "PC",
+        "focus_count": 1,
+        "focus_time_ms": 19921,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "System32",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1510,
+      "kind": "programRun",
+      "t": 1427297327126005,
+      "res": 1,
+      "obj": 1091,
+      "obj_text": "XPSRCHVW.EXE",
+      "aux": 1092,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\XPSRCHVW.EXE",
+      "row_sha256": "6529a16c0e6e5e27bbb31cfa20216ac3058941041a0ae8c29f351b003e1d5637",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\XPSRCHVW.EXE-FEB3BF01.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 15:28:57.266005Z",
+        "prefetch_file_modified": "2015-03-25 15:28:57.266005Z",
+        "prefetch_hash": "FEB3BF01",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1511,
+      "kind": "programRun",
+      "t": 1427297352257605,
+      "res": 1,
+      "obj": 828,
+      "obj_text": "IE11-Windows6.1-x64-en-us.exe",
+      "aux": 833,
+      "aux_text": "C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "row_sha256": "3d111357a6d67d58a4027cada1673371c8fee960a1d8873be2f0dcde560a9b50",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache value C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\usrclass.dat",
+        "image": "pc.E01",
+        "source": "MUICache",
+        "time_meaning": "last-write time of the registry key; the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1512,
+      "kind": "programRun",
+      "t": 1427297352257605,
+      "res": 1,
+      "obj": 698,
+      "obj_text": "WFS.exe",
+      "aux": 699,
+      "aux_text": "C:\\Windows\\system32\\WFS.exe",
+      "row_sha256": "c61020fa3a574034cc633338abb35280640cacc6c4feb759d31953923fad0525",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache value C:\\Windows\\system32\\WFS.exe",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\usrclass.dat",
+        "image": "pc.E01",
+        "source": "MUICache",
+        "time_meaning": "last-write time of the registry key; the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1513,
+      "kind": "programRun",
+      "t": 1427297352257605,
+      "res": 1,
+      "obj": 668,
+      "obj_text": "iexplore.exe",
+      "aux": 669,
+      "aux_text": "C:\\Program Files\\Internet Explorer\\iexplore.exe",
+      "row_sha256": "76239e9a1f04306f6f404cdef2746ad0568b92c86ee356ab25715f0b15050ad1",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache value C:\\Program Files\\Internet Explorer\\iexplore.exe",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\usrclass.dat",
+        "image": "pc.E01",
+        "source": "MUICache",
+        "time_meaning": "last-write time of the registry key; the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1514,
+      "kind": "programRun",
+      "t": 1427297352257605,
+      "res": 1,
+      "obj": 500,
+      "obj_text": "xpsrchvw.exe",
+      "aux": 1093,
+      "aux_text": "C:\\Windows\\System32\\xpsrchvw.exe",
+      "row_sha256": "dfbf9c6de741da5979edd31efbd35f89b1a2fd337235b0e7a554ae9bcf657667",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache value C:\\Windows\\System32\\xpsrchvw.exe",
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\usrclass.dat",
+        "image": "pc.E01",
+        "source": "MUICache",
+        "time_meaning": "last-write time of the registry key; the list keeps no time per program",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programRan": [
+          1477
+        ]
+      },
+      "english": "A record shows WMIPRVSE.EXE ran (2015-03-25 15:15:55 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\WMIPRVSE.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1478
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1479
+        ]
+      },
+      "english": "A record shows TASKENG.EXE ran (2015-03-25 15:16:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\TASKENG.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1480
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1481
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1482
+        ]
+      },
+      "english": "A record shows GoogleUpdate.exe ran (2015-03-25 15:16:00 UTC, path C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1483
+        ]
+      },
+      "english": "A record shows GOOGLEUPDATE.EXE ran (2015-03-25 15:16:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\UPDATE\\GOOGLEUPDATE.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1484
+        ]
+      },
+      "english": "A record shows DLLHOST.EXE ran (2015-03-25 15:18:02 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\DLLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1485
+        ]
+      },
+      "english": "A record shows CONSENT.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONSENT.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1486
+        ]
+      },
+      "english": "A record shows DLLHOST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1487
+        ]
+      },
+      "english": "A record shows DLLHOST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1488
+        ]
+      },
+      "english": "A record shows UNINST.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\CCLEANER\\UNINST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1489
+        ]
+      },
+      "english": "A record shows AU_.EXE ran (2015-03-25 15:18:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\~NSU.TMP\\AU_.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1490
+        ]
+      },
+      "english": "A record shows CONHOST.EXE ran (2015-03-25 15:18:36 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\CONHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1491
+        ]
+      },
+      "english": "A record shows SCHTASKS.EXE ran (2015-03-25 15:18:37 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\SCHTASKS.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1492
+        ]
+      },
+      "english": "A record shows MSIEXEC.EXE ran (2015-03-25 15:18:54 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\MSIEXEC.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1493
+        ]
+      },
+      "english": "A record shows MSIEXEC.EXE ran (2015-03-25 15:19:11 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\MSIEXEC.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1494
+        ]
+      },
+      "english": "A record shows Google Drive.lnk ran (2015-03-25 15:21:30 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Google Drive\\Google Drive.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1495
+        ]
+      },
+      "english": "A record shows googledrivesync.exe ran (2015-03-25 15:21:30 UTC, path {7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}\\Google\\Drive\\googledrivesync.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1496
+        ]
+      },
+      "english": "A record shows GOOGLEDRIVESYNC.EXE ran (2015-03-25 15:21:31 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\GOOGLE\\DRIVE\\GOOGLEDRIVESYNC.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1497
+        ]
+      },
+      "english": "A record shows IEXPLORE.EXE ran (2015-03-25 15:22:06 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\INTERNET EXPLORER\\IEXPLORE.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1498
+        ]
+      },
+      "english": "A record shows IEXPLORE.EXE ran (2015-03-25 15:22:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\INTERNET EXPLORER\\IEXPLORE.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1499
+        ]
+      },
+      "english": "A record shows WINWORD.EXE ran (2015-03-25 15:24:48 UTC, path {6D809377-6AF0-444B-8957-A3773F02200E}\\Microsoft Office\\Office15\\WINWORD.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1500
+        ]
+      },
+      "english": "A record shows WINWORD.EXE ran (2015-03-25 15:24:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\WINWORD.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1501
+        ]
+      },
+      "english": "A record shows OSPPSVC.EXE ran (2015-03-25 15:24:50 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\COMMON FILES\\MICROSOFT SHARED\\OFFICESOFTWAREPROTECTIONPLATFORM\\OSPPSVC.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1502
+        ]
+      },
+      "english": "A record shows DLLHOST.EXE ran (2015-03-25 15:24:53 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1503
+        ]
+      },
+      "english": "A record shows WINWORD.EXE ran (2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1504
+        ]
+      },
+      "english": "A record shows iexplore.exe ran (2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1505
+        ]
+      },
+      "english": "A record shows {64E6CC61-64D9-4D71-AC89-A1959E90F8E6} ran (2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1506
+        ]
+      },
+      "english": "A record shows DLLHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\DLLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1507
+        ]
+      },
+      "english": "A record shows SEARCHPROTOCOLHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHPROTOCOLHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1508
+        ]
+      },
+      "english": "A record shows SEARCHFILTERHOST.EXE ran (2015-03-25 15:28:34 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SEARCHFILTERHOST.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1509
+        ]
+      },
+      "english": "A record shows xpsrchvw.exe ran (2015-03-25 15:28:47 UTC, path {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\xpsrchvw.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1510
+        ]
+      },
+      "english": "A record shows XPSRCHVW.EXE ran (2015-03-25 15:28:47 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\XPSRCHVW.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1511
+        ]
+      },
+      "english": "A record shows IE11-Windows6.1-x64-en-us.exe ran (2015-03-25 15:29:12 UTC, path C:\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1512
+        ]
+      },
+      "english": "A record shows WFS.exe ran (2015-03-25 15:29:12 UTC, path C:\\Windows\\system32\\WFS.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1513
+        ]
+      },
+      "english": "A record shows iexplore.exe ran (2015-03-25 15:29:12 UTC, path C:\\Program Files\\Internet Explorer\\iexplore.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1514
+        ]
+      },
+      "english": "A record shows xpsrchvw.exe ran (2015-03-25 15:29:12 UTC, path C:\\Windows\\System32\\xpsrchvw.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "M257.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

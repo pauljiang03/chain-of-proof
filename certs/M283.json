@@ -1,0 +1,1717 @@
+{
+  "finding_id": "M283",
+  "question": "Which folders were opened?",
+  "claim": {
+    "both": [
+      {
+        "folderRecorded": [
+          2391
+        ]
+      },
+      {
+        "folderRecorded": [
+          2392
+        ]
+      },
+      {
+        "folderRecorded": [
+          2393
+        ]
+      },
+      {
+        "folderRecorded": [
+          2394
+        ]
+      },
+      {
+        "folderRecorded": [
+          2395
+        ]
+      },
+      {
+        "folderRecorded": [
+          2396
+        ]
+      },
+      {
+        "folderRecorded": [
+          2397
+        ]
+      },
+      {
+        "folderRecorded": [
+          2398
+        ]
+      },
+      {
+        "folderRecorded": [
+          2399
+        ]
+      },
+      {
+        "folderRecorded": [
+          2400
+        ]
+      },
+      {
+        "folderRecorded": [
+          2401
+        ]
+      },
+      {
+        "folderRecorded": [
+          2402
+        ]
+      },
+      {
+        "folderRecorded": [
+          2403
+        ]
+      },
+      {
+        "folderRecorded": [
+          2404
+        ]
+      },
+      {
+        "folderRecorded": [
+          2405
+        ]
+      },
+      {
+        "folderRecorded": [
+          2406
+        ]
+      },
+      {
+        "folderRecorded": [
+          2407
+        ]
+      },
+      {
+        "folderRecorded": [
+          2408
+        ]
+      },
+      {
+        "folderRecorded": [
+          2409
+        ]
+      },
+      {
+        "folderRecorded": [
+          2410
+        ]
+      },
+      {
+        "folderRecorded": [
+          2411
+        ]
+      },
+      {
+        "folderRecorded": [
+          2412
+        ]
+      },
+      {
+        "folderRecorded": [
+          2413
+        ]
+      },
+      {
+        "folderRecorded": [
+          2414
+        ]
+      },
+      {
+        "folderRecorded": [
+          2415
+        ]
+      },
+      {
+        "folderRecorded": [
+          2416
+        ]
+      },
+      {
+        "folderRecorded": [
+          2417
+        ]
+      },
+      {
+        "folderRecorded": [
+          2418
+        ]
+      },
+      {
+        "folderRecorded": [
+          2419
+        ]
+      },
+      {
+        "folderRecorded": [
+          2420
+        ]
+      },
+      {
+        "folderRecorded": [
+          2421
+        ]
+      },
+      {
+        "folderRecorded": [
+          2422
+        ]
+      },
+      {
+        "folderRecorded": [
+          2423
+        ]
+      },
+      {
+        "folderRecorded": [
+          2424
+        ]
+      },
+      {
+        "folderRecorded": [
+          2425
+        ]
+      },
+      {
+        "folderRecorded": [
+          2426
+        ]
+      },
+      {
+        "folderRecorded": [
+          2427
+        ]
+      },
+      {
+        "folderRecorded": [
+          2428
+        ]
+      },
+      {
+        "folderRecorded": [
+          2429
+        ]
+      },
+      {
+        "folderRecorded": [
+          2430
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A mount point record names the folder \\\\10.11.11.128\\secured_drive (record time 2015-03-23 20:26:04 UTC). A office recent places record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ (record time 2015-03-23 20:26:56 UTC). A shell bag record names the folder V:\\ (record time 2015-03-23 20:27:24 UTC). A shell bag record names the folder V:\\Secret Project Data (record time 2015-03-23 20:27:24 UTC). A shell bag record names the folder V:\\Secret Project Data (record time 2015-03-23 20:27:29 UTC). A shell bag record names the folder V:\\Secret Project Data\\final (record time 2015-03-23 20:27:29 UTC). A office recent places record names the folder V:\\Secret Project Data\\final\\ (record time 2015-03-23 20:27:37 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data (record time 2015-03-23 20:28:17 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision (record time 2015-03-23 20:28:17 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data (record time 2015-03-23 20:28:17 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision (record time 2015-03-23 20:28:17 UTC). A shell bag record names the folder C:\\ (record time 2015-03-23 20:48:10 UTC). A shell bag record names the folder E:\\RM#1 (record time 2015-03-24 13:38:31 UTC). A shell bag record names the folder E:\\RM#1\\Secret Project Data (record time 2015-03-24 13:38:31 UTC). A shell bag record names the folder E:\\RM#1\\Secret Project Data (record time 2015-03-24 13:38:52 UTC). A shell bag record names the folder E:\\RM#1\\Secret Project Data\\design (record time 2015-03-24 13:38:52 UTC). A shell bag record names the folder Desktop\\S data (record time 2015-03-24 13:40:13 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data (record time 2015-03-24 13:40:13 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive (record time 2015-03-24 13:47:54 UTC). A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Past Projects (record time 2015-03-24 13:47:54 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Common Data (record time 2015-03-24 13:47:59 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\design (record time 2015-03-24 13:48:34 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Past Projects (record time 2015-03-24 13:50:50 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\proposal (record time 2015-03-24 13:50:53 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\design (record time 2015-03-24 13:51:23 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\final (record time 2015-03-24 13:51:33 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision (record time 2015-03-24 13:51:51 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data (record time 2015-03-24 13:52:05 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\design (record time 2015-03-24 13:52:05 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\final (record time 2015-03-24 13:52:07 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\pricing decision (record time 2015-03-24 13:52:37 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\progress (record time 2015-03-24 13:54:14 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\technical review (record time 2015-03-24 13:55:18 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data (record time 2015-03-24 13:57:40 UTC). A shell bag record names the folder Desktop\\S data\\Secret Project Data\\design (record time 2015-03-24 13:57:40 UTC). A shell bag record names the folder E:\\ (record time 2015-03-24 14:00:19 UTC). A shell bag record names the folder E:\\Secret Project Data (record time 2015-03-24 14:00:19 UTC). A shell bag record names the folder E:\\Secret Project Data\\technical review (record time 2015-03-24 14:01:11 UTC). A shell bag record names the folder E:\\Secret Project Data\\proposal (record time 2015-03-24 14:01:14 UTC). A shell bag record names the folder E:\\Secret Project Data\\progress (record time 2015-03-24 14:01:15 UTC).",
+  "cited_facts": [
+    {
+      "id": 2391,
+      "kind": "folderOpened",
+      "t": 1427142364407305,
+      "res": 1,
+      "obj": 26,
+      "obj_text": "\\\\10.11.11.128\\secured_drive",
+      "aux": 1485,
+      "aux_text": "mount point",
+      "row_sha256": "6ca1dd545cc863028da992ede428561aa1f73ed1a2a7b99fc2c65b556e3c0a62",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\##10.11.11.128#secured_drive",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2392,
+      "kind": "folderOpened",
+      "t": 1427142416078000,
+      "res": 1,
+      "obj": 1486,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\",
+      "aux": 1469,
+      "aux_text": "office recent places",
+      "row_sha256": "a0d562be80bfcb01863df4811edf8cb145512ce639247ee41ddc1bf20196fdd6",
+      "prov": {
+        "account": "informant",
+        "application": "Excel",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Excel\\Place MRU value Item 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "time stored in the list entry (last opened in this application)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2393,
+      "kind": "folderOpened",
+      "t": 1427142444092247,
+      "res": 1,
+      "obj": 1487,
+      "obj_text": "V:\\",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "762d7c312b798cfcf77c1a7454fe6fa3ec681c00fa62696fabf3a15b0a52643e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "drive",
+        "mru_position": 4,
+        "node_slot": 36,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2394,
+      "kind": "folderOpened",
+      "t": 1427142444092247,
+      "res": 1,
+      "obj": 1488,
+      "obj_text": "V:\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "b48ba823e747f513cbf3383896a9043bfda1a78abc013f45ecdc69a3fe8ff948",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\1 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:24",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:24",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "SECRET~1",
+        "size": 4096,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2395,
+      "kind": "folderOpened",
+      "t": 1427142449630657,
+      "res": 1,
+      "obj": 1488,
+      "obj_text": "V:\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "51ef312b46d1e05e5deea71e8a09a1bc530fb4c8336f76959cddaa101a744c49",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\1 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:24",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:24",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 37,
+        "short_name": "SECRET~1",
+        "size": 4096,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2396,
+      "kind": "folderOpened",
+      "t": 1427142449630657,
+      "res": 1,
+      "obj": 1489,
+      "obj_text": "V:\\Secret Project Data\\final",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "226bccca240dd196c5d89854516abc55d957a8faa3ad68a175db3fab6f235be8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\1\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:22",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:22",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 38,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2397,
+      "kind": "folderOpened",
+      "t": 1427142457248000,
+      "res": 1,
+      "obj": 1490,
+      "obj_text": "V:\\Secret Project Data\\final\\",
+      "aux": 1469,
+      "aux_text": "office recent places",
+      "row_sha256": "9548a05aa8845668393fe4bd0d70368ddbf91a70c90cb05f1d9b1640ce54556d",
+      "prov": {
+        "account": "informant",
+        "application": "PowerPoint",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\PowerPoint\\Place MRU value Item 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "time stored in the list entry (last opened in this application)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2398,
+      "kind": "folderOpened",
+      "t": 1427142497754147,
+      "res": 1,
+      "obj": 1478,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "81cdd497d1c3550a5ddac2bae0e5fbeba02161d3e52342653e4bcd3be08c431e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\0 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:24",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:24",
+        "item_type": "folder",
+        "mru_position": 2,
+        "node_slot": 29,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2399,
+      "kind": "folderOpened",
+      "t": 1427142497754147,
+      "res": 1,
+      "obj": 1479,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "0ce29d48d8e090dfe8662fab4186fc2d8760c5cd72402912cbd3751f0e3d6b8b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\0\\2 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:22",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:22",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "PRICIN~1",
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2400,
+      "kind": "folderOpened",
+      "t": 1427142497769747,
+      "res": 1,
+      "obj": 1478,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "e3351b073b043f637f7d89bbff949e6ba04d52018fda785ead8a8e0832492819",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\Shell\\BagMRU\\0\\0\\0 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:24",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:24",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 5,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2401,
+      "kind": "folderOpened",
+      "t": 1427142497769747,
+      "res": 1,
+      "obj": 1479,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "1d6a8e001d8919df45b3777a227c6fcb30ca2cba1671219be3e896d94038400c",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\Shell\\BagMRU\\0\\0\\0\\2 value 4",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:22",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-03-22 14:52:22",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "PRICIN~1",
+        "size": 4096,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2402,
+      "kind": "folderOpened",
+      "t": 1427143690057993,
+      "res": 1,
+      "obj": 1454,
+      "obj_text": "C:\\",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "5d122849e34abf79199f4caa0a371bdb48ae91dd0615c61d02433ebdafbd9ad0",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "drive",
+        "mru_position": 0,
+        "node_slot": 39,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2403,
+      "kind": "folderOpened",
+      "t": 1427204311111279,
+      "res": 1,
+      "obj": 1491,
+      "obj_text": "E:\\RM#1",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "28da53d629b691a86f1543c423a846ef818c9dbba10f5fca23268533e2c987b1",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-02-15 21:52:08",
+        "item_created": "2015-02-15 21:52:10",
+        "item_modified": "2015-02-15 21:51:38",
+        "item_type": "folder",
+        "mru_position": 1,
+        "node_slot": 40,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2404,
+      "kind": "folderOpened",
+      "t": 1427204311111279,
+      "res": 1,
+      "obj": 1492,
+      "obj_text": "E:\\RM#1\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "4a8a1e6bdca2b30a4e49871b622803e058bea1205bdcdd2b4ef252d548d4f0ee",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-02-15 21:52:08",
+        "item_created": "2015-02-15 21:52:10",
+        "item_modified": "2015-02-15 21:51:38",
+        "item_type": "folder",
+        "mru_position": 0,
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2405,
+      "kind": "folderOpened",
+      "t": 1427204332159714,
+      "res": 1,
+      "obj": 1492,
+      "obj_text": "E:\\RM#1\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "92da8d35af3f0a33a7b2032a1e8adbc7f2903b30ef19f1c49503928ae2475e2a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-02-15 21:52:08",
+        "item_created": "2015-02-15 21:52:10",
+        "item_modified": "2015-02-15 21:51:38",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 41,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2406,
+      "kind": "folderOpened",
+      "t": 1427204332159714,
+      "res": 1,
+      "obj": 1493,
+      "obj_text": "E:\\RM#1\\Secret Project Data\\design",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "8691d2dd4e84708ad12ac814c96e4d8f70516da50bd977805aa329ca900d8f67",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\0\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-02-15 21:52:08",
+        "item_created": "2015-02-15 21:52:10",
+        "item_modified": "2015-02-15 21:51:38",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 42,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2407,
+      "kind": "folderOpened",
+      "t": 1427204413644859,
+      "res": 1,
+      "obj": 1494,
+      "obj_text": "Desktop\\S data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "c5f1388cf0b9bfe02d8c0f063a1818cc8ceb0d6f5a8fffff8f9f5166e9f6b463",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 6",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-23 18:38:54",
+        "item_created": "2015-03-23 18:38:54",
+        "item_modified": "2015-03-23 18:38:54",
+        "item_type": "folder",
+        "mru_position": 10,
+        "node_slot": 23,
+        "short_name": "SDATA~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2408,
+      "kind": "folderOpened",
+      "t": 1427204413644859,
+      "res": 1,
+      "obj": 1495,
+      "obj_text": "Desktop\\S data\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "21b541c28cc166abaa2319a40674137c23606ef37d7db7f48e8885906cdc3d13",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:40:10",
+        "item_created": "2015-03-24 13:40:10",
+        "item_modified": "2015-03-24 13:40:10",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2409,
+      "kind": "folderOpened",
+      "t": 1427204874156872,
+      "res": 1,
+      "obj": 26,
+      "obj_text": "\\\\10.11.11.128\\secured_drive",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "d849e0d3d09afa5436d97117f302aff9aa5a6be764b93ede115625424055f329",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0 value 0",
+        "comment": "Company's Secured Network Drive",
+        "description": "Microsoft Network",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "network location",
+        "mru_position": 0,
+        "node_slot": 26,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2410,
+      "kind": "folderOpened",
+      "t": 1427204874156872,
+      "res": 1,
+      "obj": 1476,
+      "obj_text": "\\\\10.11.11.128\\secured_drive\\Past Projects",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "47a2a5c33ae780a9e1755fd2dfa27cd59db5c930e5435d1b8e5b1ae76d5a0f07",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\8\\0\\0 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 14:52:22",
+        "item_created": "2015-03-22 14:52:22",
+        "item_modified": "2015-02-05 18:06:32",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "PASTPR~1",
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2411,
+      "kind": "folderOpened",
+      "t": 1427204879257280,
+      "res": 1,
+      "obj": 1496,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Common Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "5886e28c374a61ade87cd77934f898cea6f9609be7f835486518af265bb7d308",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:47:58",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:47:58",
+        "item_type": "folder",
+        "mru_position": 7,
+        "node_slot": 44,
+        "short_name": "COMMON~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2412,
+      "kind": "folderOpened",
+      "t": 1427204914247744,
+      "res": 1,
+      "obj": 1497,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\design",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "6288f5c3879188e8849f9005fb6ae8db5a0708e1e25fdb6734ba2c9ee685c2fe",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:40:12",
+        "item_created": "2015-03-24 13:40:10",
+        "item_modified": "2015-03-24 13:40:12",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 45,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2413,
+      "kind": "folderOpened",
+      "t": 1427205050506792,
+      "res": 1,
+      "obj": 1498,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Past Projects",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "92f481d1a98e8d93c8107a025bdd5e1603d128a2272b81d667ce28089171c47a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:47:58",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-02-05 18:06:32",
+        "item_type": "folder",
+        "mru_position": 8,
+        "node_slot": 46,
+        "short_name": "PASTPR~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2414,
+      "kind": "folderOpened",
+      "t": 1427205053798397,
+      "res": 1,
+      "obj": 1499,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\proposal",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "df9a75ce889be2d569441b13a0771fa73f36caf777fe6d9a9425e3327730f173",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 3",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:40:14",
+        "item_created": "2015-03-24 13:40:12",
+        "item_modified": "2015-03-24 13:40:14",
+        "item_type": "folder",
+        "mru_position": 4,
+        "node_slot": 47,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2415,
+      "kind": "folderOpened",
+      "t": 1427205083499252,
+      "res": 1,
+      "obj": 1500,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Secret Project Data\\design",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "8343b2e4655facc2016dd9c52fbc013a824e6073e3a283e8d93494728432ee49",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0\\4 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:51:20",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:51:20",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 49,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2416,
+      "kind": "folderOpened",
+      "t": 1427205093994871,
+      "res": 1,
+      "obj": 1501,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Secret Project Data\\final",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "c187c21747a92b89fbcd270add111ec664bb09e05b2796e98fcb31ba30e1cf83",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0\\4 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:47:58",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:47:58",
+        "item_type": "folder",
+        "mru_position": 2,
+        "node_slot": 50,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2417,
+      "kind": "folderOpened",
+      "t": 1427205111001705,
+      "res": 1,
+      "obj": 1502,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "a2902fecbc028786bbe427af9cb2d2a571e31ab53ea546d0296c7aa34881574b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0\\4 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:48:00",
+        "item_created": "2015-03-24 13:48:00",
+        "item_modified": "2015-03-24 13:48:00",
+        "item_type": "folder",
+        "mru_position": 1,
+        "node_slot": 51,
+        "short_name": "PRICIN~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2418,
+      "kind": "folderOpened",
+      "t": 1427205125601536,
+      "res": 1,
+      "obj": 1503,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "3b170903255832c0150b56b0147ad343b0bcd6fe901b522042734dde3863b31e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 4",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:48:00",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:48:00",
+        "item_type": "folder",
+        "mru_position": 6,
+        "node_slot": 48,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2419,
+      "kind": "folderOpened",
+      "t": 1427205125601536,
+      "res": 1,
+      "obj": 1500,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\Secret Project Data\\design",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "ff7a532fba8af13066bbd155c43d06220a4f43d75f29c5dd1d6baf75c662f7d7",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0\\4 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:51:20",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:51:20",
+        "item_type": "folder",
+        "mru_position": 0,
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2420,
+      "kind": "folderOpened",
+      "t": 1427205127726938,
+      "res": 1,
+      "obj": 1504,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\final",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "15c1035ca883eb0af414bd8a2e4ba978688bfb40c7cffa0d4c0d640f379a0723",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 5",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:47:58",
+        "item_created": "2015-03-24 13:47:58",
+        "item_modified": "2015-03-24 13:47:58",
+        "item_type": "folder",
+        "mru_position": 5,
+        "node_slot": 52,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2421,
+      "kind": "folderOpened",
+      "t": 1427205157682602,
+      "res": 1,
+      "obj": 1505,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\pricing decision",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "942d81863c4f5d47931195b9091094b4fce32ca5d75b095a0d922e45b4256a2c",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 6",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:48:00",
+        "item_created": "2015-03-24 13:48:00",
+        "item_modified": "2015-03-24 13:48:00",
+        "item_type": "folder",
+        "mru_position": 2,
+        "node_slot": 53,
+        "short_name": "PRICIN~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2422,
+      "kind": "folderOpened",
+      "t": 1427205254610796,
+      "res": 1,
+      "obj": 1506,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\progress",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "cd132cd3c99a4a560c70735e7e5f5c07d54657e894c6fed32d8ccaf5d21f7247",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 7",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:48:00",
+        "item_created": "2015-03-24 13:48:00",
+        "item_modified": "2015-03-24 13:48:00",
+        "item_type": "folder",
+        "mru_position": 1,
+        "node_slot": 54,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2423,
+      "kind": "folderOpened",
+      "t": 1427205318165319,
+      "res": 1,
+      "obj": 1507,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\technical review",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "26248cdec9d63ed8233d4dcbc8210ab13167a1f31b05f0d8ea95525ff58affec",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 8",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:48:00",
+        "item_created": "2015-03-24 13:48:00",
+        "item_modified": "2015-03-24 13:48:00",
+        "item_type": "folder",
+        "mru_position": 3,
+        "node_slot": 55,
+        "short_name": "TECHNI~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2424,
+      "kind": "folderOpened",
+      "t": 1427205460731613,
+      "res": 1,
+      "obj": 1495,
+      "obj_text": "Desktop\\S data\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "37379b9798e1b3b1ff50dfb5fa2257e0301bc93c66ee19e4840657dc1aff4f9a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:40:10",
+        "item_created": "2015-03-24 13:40:10",
+        "item_modified": "2015-03-24 13:40:10",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 43,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2425,
+      "kind": "folderOpened",
+      "t": 1427205460731613,
+      "res": 1,
+      "obj": 1497,
+      "obj_text": "Desktop\\S data\\Secret Project Data\\design",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "67f11fb288f8e85715d0d13aae611ff9cfe1d50ccce0dde45b0f650d55d071d4",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\6\\0 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 13:40:12",
+        "item_created": "2015-03-24 13:40:10",
+        "item_modified": "2015-03-24 13:40:12",
+        "item_type": "folder",
+        "mru_position": 0,
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2426,
+      "kind": "folderOpened",
+      "t": 1427205619073307,
+      "res": 1,
+      "obj": 1508,
+      "obj_text": "E:\\",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "35fc5bbf7ad69983f81b940798c30c070aa13c442647d874c68d91a0c4b8f211",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "drive",
+        "mru_position": 1,
+        "node_slot": 21,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2427,
+      "kind": "folderOpened",
+      "t": 1427205619073307,
+      "res": 1,
+      "obj": 1509,
+      "obj_text": "E:\\Secret Project Data",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "2030bd98b564c100614332777167358e2ce8e76e17e1cbcbfad3307e97009005",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 04:00:00",
+        "item_created": "2015-03-24 13:59:28",
+        "item_modified": "2015-03-24 13:57:28",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "SECRET~1",
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2428,
+      "kind": "folderOpened",
+      "t": 1427205671731800,
+      "res": 1,
+      "obj": 1510,
+      "obj_text": "E:\\Secret Project Data\\technical review",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "25328927ae517b9702d35f0cb111239773e46d7071c51fad2399144728363b73",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 04:00:00",
+        "item_created": "2015-03-24 14:00:14",
+        "item_modified": "2015-03-24 13:56:22",
+        "item_type": "folder",
+        "mru_position": 4,
+        "node_slot": 57,
+        "short_name": "TECHNI~1",
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2429,
+      "kind": "folderOpened",
+      "t": 1427205674350805,
+      "res": 1,
+      "obj": 1511,
+      "obj_text": "E:\\Secret Project Data\\proposal",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "54ff2ad821611e8c586dfa0a5e68a48c1b9155d657798cddc4b4635926845592",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1 value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 04:00:00",
+        "item_created": "2015-03-24 13:59:46",
+        "item_modified": "2015-03-24 13:55:18",
+        "item_type": "folder",
+        "mru_position": 3,
+        "node_slot": 58,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2430,
+      "kind": "folderOpened",
+      "t": 1427205675923208,
+      "res": 1,
+      "obj": 1512,
+      "obj_text": "E:\\Secret Project Data\\progress",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "4b4216de0e115fb96c697d709b43457a139ca6032d794a509b443224bf3dc3b2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1\\0\\1 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-24 04:00:00",
+        "item_created": "2015-03-24 13:59:44",
+        "item_modified": "2015-03-24 13:54:54",
+        "item_type": "folder",
+        "mru_position": 0,
+        "node_slot": 59,
+        "size": 0,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "folderRecorded": [
+          2391
+        ]
+      },
+      "english": "A mount point record names the folder \\\\10.11.11.128\\secured_drive (record time 2015-03-23 20:26:04 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2392
+        ]
+      },
+      "english": "A office recent places record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\ (record time 2015-03-23 20:26:56 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2393
+        ]
+      },
+      "english": "A shell bag record names the folder V:\\ (record time 2015-03-23 20:27:24 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2394
+        ]
+      },
+      "english": "A shell bag record names the folder V:\\Secret Project Data (record time 2015-03-23 20:27:24 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2395
+        ]
+      },
+      "english": "A shell bag record names the folder V:\\Secret Project Data (record time 2015-03-23 20:27:29 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2396
+        ]
+      },
+      "english": "A shell bag record names the folder V:\\Secret Project Data\\final (record time 2015-03-23 20:27:29 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2397
+        ]
+      },
+      "english": "A office recent places record names the folder V:\\Secret Project Data\\final\\ (record time 2015-03-23 20:27:37 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2398
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data (record time 2015-03-23 20:28:17 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2399
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision (record time 2015-03-23 20:28:17 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2400
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data (record time 2015-03-23 20:28:17 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2401
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision (record time 2015-03-23 20:28:17 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2402
+        ]
+      },
+      "english": "A shell bag record names the folder C:\\ (record time 2015-03-23 20:48:10 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2403
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\RM#1 (record time 2015-03-24 13:38:31 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2404
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\RM#1\\Secret Project Data (record time 2015-03-24 13:38:31 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2405
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\RM#1\\Secret Project Data (record time 2015-03-24 13:38:52 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2406
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\RM#1\\Secret Project Data\\design (record time 2015-03-24 13:38:52 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2407
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data (record time 2015-03-24 13:40:13 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2408
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data (record time 2015-03-24 13:40:13 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2409
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive (record time 2015-03-24 13:47:54 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2410
+        ]
+      },
+      "english": "A shell bag record names the folder \\\\10.11.11.128\\secured_drive\\Past Projects (record time 2015-03-24 13:47:54 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2411
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Common Data (record time 2015-03-24 13:47:59 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2412
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\design (record time 2015-03-24 13:48:34 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2413
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Past Projects (record time 2015-03-24 13:50:50 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2414
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\proposal (record time 2015-03-24 13:50:53 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2415
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\design (record time 2015-03-24 13:51:23 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2416
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\final (record time 2015-03-24 13:51:33 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2417
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision (record time 2015-03-24 13:51:51 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2418
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data (record time 2015-03-24 13:52:05 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2419
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\Secret Project Data\\design (record time 2015-03-24 13:52:05 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2420
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\final (record time 2015-03-24 13:52:07 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2421
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\pricing decision (record time 2015-03-24 13:52:37 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2422
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\progress (record time 2015-03-24 13:54:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2423
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\technical review (record time 2015-03-24 13:55:18 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2424
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data (record time 2015-03-24 13:57:40 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2425
+        ]
+      },
+      "english": "A shell bag record names the folder Desktop\\S data\\Secret Project Data\\design (record time 2015-03-24 13:57:40 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2426
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\ (record time 2015-03-24 14:00:19 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2427
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\Secret Project Data (record time 2015-03-24 14:00:19 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2428
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\Secret Project Data\\technical review (record time 2015-03-24 14:01:11 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2429
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\Secret Project Data\\proposal (record time 2015-03-24 14:01:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2430
+        ]
+      },
+      "english": "A shell bag record names the folder E:\\Secret Project Data\\progress (record time 2015-03-24 14:01:15 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R24"
+  ],
+  "strength": "strong",
+  "lean_file": "M283.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

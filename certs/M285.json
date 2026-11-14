@@ -1,0 +1,735 @@
+{
+  "finding_id": "M285",
+  "question": "Which folders were opened?",
+  "claim": {
+    "both": [
+      {
+        "folderRecorded": [
+          2471
+        ]
+      },
+      {
+        "folderRecorded": [
+          2472
+        ]
+      },
+      {
+        "folderRecorded": [
+          2473
+        ]
+      },
+      {
+        "folderRecorded": [
+          2474
+        ]
+      },
+      {
+        "folderRecorded": [
+          2475
+        ]
+      },
+      {
+        "folderRecorded": [
+          2476
+        ]
+      },
+      {
+        "folderRecorded": [
+          2477
+        ]
+      },
+      {
+        "folderRecorded": [
+          2478
+        ]
+      },
+      {
+        "folderRecorded": [
+          2479
+        ]
+      },
+      {
+        "folderRecorded": [
+          2480
+        ]
+      },
+      {
+        "folderRecorded": [
+          2481
+        ]
+      },
+      {
+        "folderRecorded": [
+          2482
+        ]
+      },
+      {
+        "folderRecorded": [
+          2483
+        ]
+      },
+      {
+        "folderRecorded": [
+          2484
+        ]
+      },
+      {
+        "folderRecorded": [
+          2485
+        ]
+      },
+      {
+        "folderRecorded": [
+          2486
+        ]
+      },
+      {
+        "folderRecorded": [
+          2487
+        ]
+      },
+      {
+        "folderRecorded": [
+          2488
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A recent documents record names the folder BD-RE Drive (D:) IAMAN CD (record time 2015-03-24 21:01:14 UTC). A recent documents record names the folder final (record time 2015-03-24 21:01:14 UTC). A recent documents record names the folder pricing decision (record time 2015-03-24 21:01:14 UTC). A recent documents record names the folder secret (record time 2015-03-24 21:01:14 UTC). A shell bag record names the folder Recycle bin (record time 2015-03-25 14:14:17 UTC). A shell bag record names the folder Control Panel\\All Control Panel Items (record time 2015-03-25 15:19:20 UTC). A shell bag record names the folder Control Panel\\All Control Panel Items\\Programs and Features (record time 2015-03-25 15:19:20 UTC). A shell bag record names the folder Shared Documents Folder (Users Files) (record time 2015-03-25 15:20:59 UTC). A shell bag record names the folder Shared Documents Folder (Users Files)\\Google Drive (record time 2015-03-25 15:20:59 UTC). A office recent places record names the folder C:\\Users\\informant\\Desktop\\ (record time 2015-03-25 15:24:49 UTC). A shell bag record names the folder Libraries (record time 2015-03-25 15:28:09 UTC). A shell bag record names the folder Libraries\\Documents (record time 2015-03-25 15:28:09 UTC). A open/save dialog record names the folder Desktop (record time 2015-03-25 15:28:33 UTC). A open/save dialog record names the folder Desktop (record time 2015-03-25 15:28:33 UTC). A open/save dialog record names the folder Desktop\\Download (record time 2015-03-25 15:28:33 UTC). A shell bag record names the folder My Computer (record time 2015-03-25 15:30:06 UTC). A shell bag record names the folder C:\\ (record time 2015-03-25 15:30:09 UTC). A shell bag record names the folder My Computer (record time 2015-03-25 15:30:09 UTC).",
+  "cited_facts": [
+    {
+      "id": 2471,
+      "kind": "folderOpened",
+      "t": 1427230874336063,
+      "res": 1,
+      "obj": 1541,
+      "obj_text": "BD-RE Drive (D:) IAMAN CD",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "305096e425f0f751e51cda43b8b862fa32cd8737d928c08c26a68107701ed55e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs\\Folder value 4",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 0,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2472,
+      "kind": "folderOpened",
+      "t": 1427230874336063,
+      "res": 1,
+      "obj": 1542,
+      "obj_text": "final",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "e843e1d9e157f18bcea19184f9920ff4bced0d2c471e9354f5e445e72c4d0efb",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs\\Folder value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 2,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2473,
+      "kind": "folderOpened",
+      "t": 1427230874336063,
+      "res": 1,
+      "obj": 1543,
+      "obj_text": "pricing decision",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "eb8b8d22df210211499af5eb3f618fc3fa11c109bad501f8db336bf0aa69c692",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs\\Folder value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 3,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2474,
+      "kind": "folderOpened",
+      "t": 1427230874336063,
+      "res": 1,
+      "obj": 1420,
+      "obj_text": "secret",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "de5d16449ba96f1a98fbff8f46eb02625f005e26daff6b50a87824dac26ac378",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs\\Folder value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 4,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2475,
+      "kind": "folderOpened",
+      "t": 1427292857975405,
+      "res": 1,
+      "obj": 1544,
+      "obj_text": "Recycle bin",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "00eca46fb0623a4f0b4e0ff06930707d7974aaf57262db759f474cf719bc54e6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 12",
+        "exhibit": "PC",
+        "guid": "645ff040-5081-101b-9f08-00aa002f954e",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 5,
+        "node_slot": 87,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2476,
+      "kind": "folderOpened",
+      "t": 1427296760750204,
+      "res": 1,
+      "obj": 1435,
+      "obj_text": "Control Panel\\All Control Panel Items",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "5809c61e473427a2bec44edb16c822d53e11e845b53b2b5d189fa172789191b2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\0 value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "control panel category",
+        "mru_position": 0,
+        "node_slot": 2,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2477,
+      "kind": "folderOpened",
+      "t": 1427296760750204,
+      "res": 1,
+      "obj": 1545,
+      "obj_text": "Control Panel\\All Control Panel Items\\Programs and Features",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "ddf705e88e54220ba91c151b3bf922b734c860e8cbf24d2a071167d8b83327b1",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\0\\0 value 7",
+        "exhibit": "PC",
+        "guid": "7b81be6a-ce2b-4676-a29e-eb907a5126c5",
+        "image": "pc.E01",
+        "item_type": "control panel item",
+        "mru_position": 0,
+        "node_slot": 88,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2478,
+      "kind": "folderOpened",
+      "t": 1427296859763405,
+      "res": 1,
+      "obj": 1546,
+      "obj_text": "Shared Documents Folder (Users Files)",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "ba3df0e70a45e10975e82c9558c99affe3bb03138fd59668250a66f33e27f8b2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 4",
+        "exhibit": "PC",
+        "file_system_path": "C:\\Users\\informant",
+        "file_system_path_note": "the namespace root {59031a47-3f72-44a7-89c5-5595fe6b30ee} is the profile folder of the hive's owner",
+        "guid": "59031a47-3f72-44a7-89c5-5595fe6b30ee",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 2,
+        "node_slot": null,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2479,
+      "kind": "folderOpened",
+      "t": 1427296859763405,
+      "res": 1,
+      "obj": 1471,
+      "obj_text": "Shared Documents Folder (Users Files)\\Google Drive",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "79e25a502e2144c6556ef396b88b0ba62341cb8c008167f2abc9a53ed7aeb758",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\4 value 1",
+        "exhibit": "PC",
+        "file_system_path": "C:\\Users\\informant\\Google Drive",
+        "file_system_path_note": "the namespace root {59031a47-3f72-44a7-89c5-5595fe6b30ee} is the profile folder of the hive's owner",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-23 20:05:34",
+        "item_created": "2015-03-23 20:05:34",
+        "item_modified": "2015-03-23 20:05:34",
+        "item_type": "folder",
+        "mru_position": 0,
+        "short_name": "GOOGLE~1",
+        "size": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2480,
+      "kind": "folderOpened",
+      "t": 1427297089628000,
+      "res": 1,
+      "obj": 1547,
+      "obj_text": "C:\\Users\\informant\\Desktop\\",
+      "aux": 1469,
+      "aux_text": "office recent places",
+      "row_sha256": "32e1d3854cbc336078b9268d2c5fa6c4bd4b561ce9979efe48509ce75e13d775",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\Place MRU value Item 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "time stored in the list entry (last opened in this application)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2481,
+      "kind": "folderOpened",
+      "t": 1427297289857605,
+      "res": 1,
+      "obj": 1453,
+      "obj_text": "Libraries",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "2b19ebb994c67e287e7029e2adaaf056f8348cbb127f410c6a03ce2c1faff9e8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 7",
+        "exhibit": "PC",
+        "guid": "031e4825-7b94-4dc3-b131-e946b44c8dd5",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 1,
+        "node_slot": 25,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2482,
+      "kind": "folderOpened",
+      "t": 1427297289857605,
+      "res": 1,
+      "obj": 1523,
+      "obj_text": "Libraries\\Documents",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "883368a0a9ab14335cbd268983ff3eda34032130e12b5ffaa9be1151af5afb83",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\7 value 3",
+        "exhibit": "PC",
+        "guid": "7b0db17d-9cd2-4a93-9733-46cc89022e7c",
+        "image": "pc.E01",
+        "item_type": "known folder",
+        "mru_position": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2483,
+      "kind": "folderOpened",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 1548,
+      "obj_text": "Desktop",
+      "aux": 1549,
+      "aux_text": "open/save dialog",
+      "row_sha256": "3d6a9a222537e895d7cbbfe3a4fe2f2c726b8578e1d10831ae864fe3b19386cb",
+      "prov": {
+        "account": "informant",
+        "application": "WINWORD.EXE",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 0,
+        "note": "empty id list: the shell namespace root",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2484,
+      "kind": "folderOpened",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 1548,
+      "obj_text": "Desktop",
+      "aux": 1549,
+      "aux_text": "open/save dialog",
+      "row_sha256": "053968ea9db29f463227988c77d9f412133f1dc57b4bb08972a43b187ad306fa",
+      "prov": {
+        "account": "informant",
+        "application": "{64E6CC61-64D9-4D71-AC89-A1959E90F8E6}",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 2,
+        "note": "empty id list: the shell namespace root",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2485,
+      "kind": "folderOpened",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 1442,
+      "obj_text": "Desktop\\Download",
+      "aux": 1549,
+      "aux_text": "open/save dialog",
+      "row_sha256": "4d9bbb2a1576681530ccc5eb3e38595f45e581f2a009e2cf1fd1ce1ed563c073",
+      "prov": {
+        "account": "informant",
+        "application": "iexplore.exe",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\\LastVisitedPidlMRU value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_accessed": "2015-03-22 15:08:24",
+        "item_created": "2015-03-22 15:08:24",
+        "item_modified": "2015-03-22 15:08:24",
+        "item_type": "folder",
+        "mru_position": 1,
+        "size": 0,
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2486,
+      "kind": "folderOpened",
+      "t": 1427297406592403,
+      "res": 1,
+      "obj": 1455,
+      "obj_text": "My Computer",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "8420b158de5996e6ca76b905cd9095ebf8487ce71f5ffa5e7b1ca072cf96904b",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 1",
+        "exhibit": "PC",
+        "guid": "20d04fe0-3aea-1069-a2d8-08002b30309d",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2487,
+      "kind": "folderOpened",
+      "t": 1427297409057203,
+      "res": 1,
+      "obj": 1454,
+      "obj_text": "C:\\",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "4793360f881a7e8fbebcd1ac88419dc560fba045ca9e51f4360718afa47826ff",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\1 value 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "drive",
+        "mru_position": 0,
+        "time_meaning": "last-write time of the parent BagMRU key, which lists this folder first in its most-recently-used order",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2488,
+      "kind": "folderOpened",
+      "t": 1427297409057203,
+      "res": 1,
+      "obj": 1455,
+      "obj_text": "My Computer",
+      "aux": 1434,
+      "aux_text": "shell bag",
+      "row_sha256": "c270065a2ed3251eaf4d6c9a348c8cedc062ede6bd46ba66be9b81de1e45a3fb",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat key Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU value 1",
+        "exhibit": "PC",
+        "guid": "20d04fe0-3aea-1069-a2d8-08002b30309d",
+        "image": "pc.E01",
+        "item_type": "root folder",
+        "mru_position": 0,
+        "node_slot": 7,
+        "time_meaning": "last-write time of this folder's own BagMRU key",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "folderRecorded": [
+          2471
+        ]
+      },
+      "english": "A recent documents record names the folder BD-RE Drive (D:) IAMAN CD (record time 2015-03-24 21:01:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2472
+        ]
+      },
+      "english": "A recent documents record names the folder final (record time 2015-03-24 21:01:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2473
+        ]
+      },
+      "english": "A recent documents record names the folder pricing decision (record time 2015-03-24 21:01:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2474
+        ]
+      },
+      "english": "A recent documents record names the folder secret (record time 2015-03-24 21:01:14 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2475
+        ]
+      },
+      "english": "A shell bag record names the folder Recycle bin (record time 2015-03-25 14:14:17 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2476
+        ]
+      },
+      "english": "A shell bag record names the folder Control Panel\\All Control Panel Items (record time 2015-03-25 15:19:20 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2477
+        ]
+      },
+      "english": "A shell bag record names the folder Control Panel\\All Control Panel Items\\Programs and Features (record time 2015-03-25 15:19:20 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2478
+        ]
+      },
+      "english": "A shell bag record names the folder Shared Documents Folder (Users Files) (record time 2015-03-25 15:20:59 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2479
+        ]
+      },
+      "english": "A shell bag record names the folder Shared Documents Folder (Users Files)\\Google Drive (record time 2015-03-25 15:20:59 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2480
+        ]
+      },
+      "english": "A office recent places record names the folder C:\\Users\\informant\\Desktop\\ (record time 2015-03-25 15:24:49 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2481
+        ]
+      },
+      "english": "A shell bag record names the folder Libraries (record time 2015-03-25 15:28:09 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2482
+        ]
+      },
+      "english": "A shell bag record names the folder Libraries\\Documents (record time 2015-03-25 15:28:09 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2483
+        ]
+      },
+      "english": "A open/save dialog record names the folder Desktop (record time 2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2484
+        ]
+      },
+      "english": "A open/save dialog record names the folder Desktop (record time 2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2485
+        ]
+      },
+      "english": "A open/save dialog record names the folder Desktop\\Download (record time 2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2486
+        ]
+      },
+      "english": "A shell bag record names the folder My Computer (record time 2015-03-25 15:30:06 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2487
+        ]
+      },
+      "english": "A shell bag record names the folder C:\\ (record time 2015-03-25 15:30:09 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "folderRecorded": [
+          2488
+        ]
+      },
+      "english": "A shell bag record names the folder My Computer (record time 2015-03-25 15:30:09 UTC).",
+      "rules": [
+        "R24"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R24"
+  ],
+  "strength": "strong",
+  "lean_file": "M285.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

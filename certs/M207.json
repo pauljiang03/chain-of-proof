@@ -1,0 +1,56 @@
+{
+  "finding_id": "M207",
+  "question": "Which files were sent to the Recycle Bin?",
+  "claim": {
+    "fileDeletedAt": [
+      280
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 280,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 155,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "1192f311933f22ce7bfaf1716055ba5af9023ff2034bc3c0836508e980746d66",
+      "prov": {
+        "artifact": "Recycle Bin index $IFVCH5V.jpg, file table record 74765",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 777835,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          280
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Penguins.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "M207.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

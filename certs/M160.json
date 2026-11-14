@@ -1,56 +1,212 @@
 {
   "finding_id": "M160",
-  "question": "Which e-mails does the user's mailbox hold?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "emailed": [
-      294
+    "both": [
+      {
+        "recoveredOnDevice": [
+          146,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          146,
+          208
+        ]
+      },
+      {
+        "tagged": [
+          146,
+          "obj",
+          450,
+          234
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "An e-mail with the subject \"Hello, Iaman\" was sent from spy to iaman (2015-03-23 17:29:27 UTC).",
+  "english": "A directory entry for \\proposal\\a_gift_from_you.gif, created (2015-03-24 20:55:22 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\proposal\\a_gift_from_you.gif was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:22 UTC) after its last modification (2014-12-18 21:50:58 UTC). This rests on heuristic rule R4. \\proposal\\a_gift_from_you.gif is tagged \"same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 294,
-      "kind": "emailSent",
-      "t": 1427131767000000,
-      "res": 1000000,
-      "obj": 171,
-      "obj_text": "Hello, Iaman",
-      "aux": 172,
-      "aux_text": "from spy to iaman",
-      "row_sha256": "6fa2310abda4d1a255660726d22d867a3c30f9cc8a183bae4ede61d5570ee1ea",
+      "id": 146,
+      "kind": "fileCreated",
+      "t": 1427230522908622,
+      "res": 1,
+      "obj": 129,
+      "obj_text": "\\proposal\\a_gift_from_you.gif",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9c5ca317b00dddda37ed920b5ffdef6df70c72c3845409586a58eb32ec52f5e2",
       "prov": {
-        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
-        "attachments": 0,
-        "exhibit": "PC",
-        "folder": "Inbox",
-        "image": "pc.E01",
-        "mailbox_user": "informant",
-        "message_id": "<BN1PR09MB0156C790B3BF198BDDCD14748C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
-        "sender_address": "spy.conspirator@nist.gov",
-        "time_meaning": "client submit time stored in the message",
+        "allocation_table_at_sector": 51327,
+        "artifact": "UDF extended file entry at sector 51199 (byte offset 104855552), named by the directory at sector 51198",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:27.648736Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295,
+          51327
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 35226880,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 29
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 208,
+      "kind": "fileModified",
+      "t": 1418939458000000,
+      "res": 1,
+      "obj": 129,
+      "obj_text": "\\proposal\\a_gift_from_you.gif",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "524840749b6b2ff612ee1cdad6f5c603f2cce1cea98a4c84baf9bb177c41ae59",
+      "prov": {
+        "allocation_table_at_sector": 51327,
+        "artifact": "UDF extended file entry at sector 51199 (byte offset 104855552), named by the directory at sector 51198",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:27.648736Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295,
+          51327
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 35226880,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 29
+      }
+    },
+    {
+      "id": 450,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 129,
+      "obj_text": "\\proposal\\a_gift_from_you.gif",
+      "aux": 234,
+      "aux_text": "same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC",
+      "row_sha256": "e1468ba1eee5598f7027319aeff4dba2d7f95a3ce9f6f749156b8455800ed4c7",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "emailed": [
-          294
+        "recoveredOnDevice": [
+          146,
+          500
         ]
       },
-      "english": "An e-mail with the subject \"Hello, Iaman\" was sent from spy to iaman (2015-03-23 17:29:27 UTC).",
+      "english": "A directory entry for \\proposal\\a_gift_from_you.gif, created (2015-03-24 20:55:22 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R11"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          146,
+          208
+        ]
+      },
+      "english": "\\proposal\\a_gift_from_you.gif was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:22 UTC) after its last modification (2014-12-18 21:50:58 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          146,
+          "obj",
+          450,
+          234
+        ]
+      },
+      "english": "\\proposal\\a_gift_from_you.gif is tagged \"same size and last-modified time as a file elsewhere: 35226880 bytes, 2014-12-18 21:50:58 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R11"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M160.lean",
   "trust_tier": "kernel",
   "axioms": []

@@ -4,15 +4,12 @@ open ChainOfProof
 namespace Cert.M143
 
 def cited : List Fact := [
-  ⟨176, .fileModified, 1422046030000000, 10000, 52, 19⟩,
-  ⟨327, .tag, 1794614400000000, 1, 52, 199⟩,
-  ⟨326, .tag, 1794614400000000, 1, 52, 197⟩,
-  ⟨177, .fileModified, 1422046030000000, 2000000, 92, 69⟩,
-  ⟨339, .tag, 1794614400000000, 1, 92, 199⟩,
-  ⟨108, .fileCreated, 1427205567120000, 10000, 92, 69⟩,
-  ⟨376, .unallocatedOnDevice, 1794614400000000, 1, 2, 69⟩ ]
+  ⟨129, .fileCreated, 1427230482676152, 1, 34, 111⟩,
+  ⟨500, .unallocatedOnDevice, 1794614400000000, 1, 249, 111⟩,
+  ⟨203, .fileModified, 1418746226000000, 1, 34, 111⟩,
+  ⟨431, .tag, 1794614400000000, 1, 34, 232⟩ ]
 
-def claim : Claim := .both (Sets.fileModifiedAt 176) (.both (Sets.tagged 176 .obj 327 199) (.both (Sets.tagged 176 .obj 326 197) (.both (Sets.fileModifiedAt 177) (.both (Sets.tagged 177 .obj 339 199) (Sets.recoveredOnDevice 108 376)))))
+def claim : Claim := .both (Sets.recoveredOnDevice 129 500) (.both (Sets.copiedHere 129 203) (Sets.tagged 129 .obj 431 232))
 
 theorem verified : holds cited claim = true := by decide +kernel
 

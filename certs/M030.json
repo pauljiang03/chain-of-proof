@@ -2,13 +2,37 @@
   "finding_id": "M030",
   "question": "Which files were opened from removable devices or network shares?",
   "claim": {
-    "openedFromRecorded": [
-      48,
-      368
+    "both": [
+      {
+        "openedFromRecorded": [
+          48,
+          490
+        ]
+      },
+      {
+        "tagged": [
+          48,
+          "obj",
+          431,
+          232
+        ]
+      },
+      {
+        "sameLabel": [
+          490,
+          492
+        ]
+      },
+      {
+        "recordedOnDevice": [
+          492,
+          498
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:18 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC).",
+  "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:18 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC). \\de\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared). This PC recorded volume E297F1A5 (2015-03-24 20:44:13 UTC) and volume AE88F176 (2015-03-24 21:01:10 UTC) under the same label \"IAMAN CD\". A shared label suggests one physical device but does not prove it (heuristic rule R8). Volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC), is the volume on seized device disc RM#3.",
   "cited_facts": [
     {
       "id": 48,
@@ -34,15 +58,15 @@
       }
     },
     {
-      "id": 368,
+      "id": 490,
       "kind": "volumeSeen",
       "t": 1427229853752619,
       "res": 1,
-      "obj": 204,
+      "obj": 252,
       "obj_text": "IAMAN CD",
       "aux": 35,
       "aux_text": "E297F1A5",
-      "row_sha256": "7c8f8513bd274962c55c2674f56eadcca9ae20e1389c41a7f42b2e006d24080c",
+      "row_sha256": "bb5966466a265cc4cea134c06bcc3f59c74a3e9a269955df75fff2d86dde582a",
       "prov": {
         "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
         "drive_type": "CD-ROM",
@@ -51,6 +75,97 @@
         "time_meaning": "when the shortcut's target was opened",
         "tool": "dissect.target 3.25.1"
       }
+    },
+    {
+      "id": 431,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 34,
+      "obj_text": "\\de\\winter_whether_advisory.zip",
+      "aux": 232,
+      "aux_text": "same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC",
+      "row_sha256": "75c4ea1b0f267167594781995603bbf84d52543002ecef9feee52f19f17971d3",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 492,
+      "kind": "volumeSeen",
+      "t": 1427230870763657,
+      "res": 1,
+      "obj": 252,
+      "obj_text": "IAMAN CD",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "a9b08aa18137ffb95206722b5750bdb4159090cd560f4ce96b8d4670040f7847",
+      "prov": {
+        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+        "drive_type": "CD-ROM",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "when the shortcut's target was opened",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 498,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "de47239079c25271ac157bd70285064f395c242d1ea2c57556d6dff7e955f45d",
+      "prov": {
+        "allocation_tables_at_sectors": [
+          319,
+          51231,
+          51263,
+          51295,
+          51327,
+          51359,
+          51391,
+          52479,
+          52511
+        ],
+        "artifact": "UDF file set descriptor at sector 52487 (byte offset 107493376)",
+        "exhibit": "RM#3",
+        "file_set_recorded_utc": "2015-03-24T20:53:17.880500Z",
+        "filesystem": "udf",
+        "identical_descriptor_copies_at_sectors": [
+          289,
+          36532,
+          51208,
+          51239,
+          51271,
+          51303,
+          51335,
+          51367,
+          52465,
+          52487
+        ],
+        "image": "rm3.E01",
+        "offset": 107493376,
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "partition_start_sector": 288,
+        "referenced": "by an allocation table",
+        "sectors_in_image": 52513,
+        "sectors_the_imager_could_not_read": 16,
+        "serial_method": "four byte-wise sums over the 512-byte file set descriptor, as the Windows UDF driver computes it",
+        "session": 1,
+        "session_source": "E01 session section (1 entry)",
+        "states_of_the_volume": 9,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "track": 1,
+        "udf_revision": "2.01",
+        "volume_label": "IAMAN CD",
+        "volume_set": "10351158 UDF Volume Set"
+      }
     }
   ],
   "parts": [
@@ -58,7 +173,7 @@
       "part": {
         "openedFromRecorded": [
           48,
-          368
+          490
         ]
       },
       "english": "\\de\\winter_whether_advisory.zip was opened (2015-03-24 20:44:18 UTC) from volume E297F1A5, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 20:44:13 UTC).",
@@ -67,13 +182,59 @@
         "R6"
       ],
       "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          48,
+          "obj",
+          431,
+          232
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip is tagged \"same size and last-modified time as a file elsewhere: 16381123 bytes, 2014-12-16 16:10:26 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameLabel": [
+          490,
+          492
+        ]
+      },
+      "english": "This PC recorded volume E297F1A5 (2015-03-24 20:44:13 UTC) and volume AE88F176 (2015-03-24 21:01:10 UTC) under the same label \"IAMAN CD\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+      "rules": [
+        "R6",
+        "R8"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "recordedOnDevice": [
+          492,
+          498
+        ]
+      },
+      "english": "Volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC), is the volume on seized device disc RM#3.",
+      "rules": [
+        "R6",
+        "R7"
+      ],
+      "strength": "strong"
     }
   ],
   "rules": [
     "R3",
-    "R6"
+    "R6",
+    "R7",
+    "R8",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M030.lean",
   "trust_tier": "kernel",
   "axioms": []

@@ -1,0 +1,1869 @@
+{
+  "finding_id": "M309",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          11730
+        ]
+      },
+      {
+        "fileRecorded": [
+          11731
+        ]
+      },
+      {
+        "fileRecorded": [
+          11732
+        ]
+      },
+      {
+        "fileRecorded": [
+          11733
+        ]
+      },
+      {
+        "fileRecorded": [
+          11734
+        ]
+      },
+      {
+        "fileRecorded": [
+          11735
+        ]
+      },
+      {
+        "fileRecorded": [
+          11736
+        ]
+      },
+      {
+        "fileRecorded": [
+          11737
+        ]
+      },
+      {
+        "fileRecorded": [
+          11738
+        ]
+      },
+      {
+        "fileRecorded": [
+          11739
+        ]
+      },
+      {
+        "fileRecorded": [
+          11740
+        ]
+      },
+      {
+        "fileRecorded": [
+          11741
+        ]
+      },
+      {
+        "fileRecorded": [
+          11742
+        ]
+      },
+      {
+        "fileRecorded": [
+          11743
+        ]
+      },
+      {
+        "fileRecorded": [
+          11744
+        ]
+      },
+      {
+        "fileRecorded": [
+          11745
+        ]
+      },
+      {
+        "fileRecorded": [
+          11746
+        ]
+      },
+      {
+        "fileRecorded": [
+          11747
+        ]
+      },
+      {
+        "fileRecorded": [
+          11748
+        ]
+      },
+      {
+        "fileRecorded": [
+          11749
+        ]
+      },
+      {
+        "fileRecorded": [
+          11750
+        ]
+      },
+      {
+        "fileRecorded": [
+          11751
+        ]
+      },
+      {
+        "fileRecorded": [
+          11752
+        ]
+      },
+      {
+        "fileRecorded": [
+          11753
+        ]
+      },
+      {
+        "fileRecorded": [
+          11754
+        ]
+      },
+      {
+        "fileRecorded": [
+          11755
+        ]
+      },
+      {
+        "fileRecorded": [
+          11756
+        ]
+      },
+      {
+        "fileRecorded": [
+          11757
+        ]
+      },
+      {
+        "fileRecorded": [
+          11758
+        ]
+      },
+      {
+        "fileRecorded": [
+          11759
+        ]
+      },
+      {
+        "fileRecorded": [
+          11760
+        ]
+      },
+      {
+        "fileRecorded": [
+          11761
+        ]
+      },
+      {
+        "fileRecorded": [
+          11762
+        ]
+      },
+      {
+        "fileRecorded": [
+          11763
+        ]
+      },
+      {
+        "fileRecorded": [
+          11764
+        ]
+      },
+      {
+        "fileRecorded": [
+          11765
+        ]
+      },
+      {
+        "fileRecorded": [
+          11766
+        ]
+      },
+      {
+        "fileRecorded": [
+          11767
+        ]
+      },
+      {
+        "fileRecorded": [
+          11768
+        ]
+      },
+      {
+        "fileRecorded": [
+          11769
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of /iaman.informant@nist.gov/Deleted Items (record time 2015-03-22 15:48:44 UTC). The windows search index holds a record of C:\\Users\\informant\\Contacts\\informant.contact (record time 2015-03-22 15:53:17 UTC). The windows search index holds a record of C:\\Users\\informant\\Contacts\\informant.contact (record time 2015-03-22 15:53:17 UTC). The windows search index holds a record of C:\\Users\\admin11 (record time 2015-03-22 15:53:44 UTC). The shadow copy holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\Desktop (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\Downloads (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\Favorites (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\Links (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Documents (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Music (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Pictures (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Videos (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\Saved Games (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:53:44 UTC). The shadow copy holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG2 (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11 (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.ini (record time 2015-03-22 15:53:44 UTC). The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:47 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome (record time 2015-03-22 15:53:47 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell (record time 2015-03-22 15:53:47 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Office 2013 Tools (record time 2015-03-22 15:53:47 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Tablet PC (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Ease of Access (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Tablet PC (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\Users\\admin11\\Contacts (record time 2015-03-22 15:53:48 UTC). The windows search index holds a record of C:\\Users\\admin11\\Contacts\\desktop.ini (record time 2015-03-22 15:53:48 UTC).",
+  "cited_facts": [
+    {
+      "id": 11730,
+      "kind": "fileSeen",
+      "t": 1427039324819778,
+      "res": 1,
+      "obj": 15889,
+      "obj_text": "/iaman.informant@nist.gov/Deleted Items",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2b95a8e87e3f857dc5233d631f28d4cd195446e8f1bf4620068675020477d5ba",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 249",
+        "column": "System_Search_GatherTime, System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/Folder",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Deleted Items",
+        "other_dates": {
+          "System_ItemDate": "2015-03-22T15:48:44.819778Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "store": "mapi15",
+        "time_meaning": "when the indexer last gathered the item; the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11731,
+      "kind": "fileSeen",
+      "t": 1427039597298463,
+      "res": 1,
+      "obj": 15505,
+      "obj_text": "C:\\Users\\informant\\Contacts\\informant.contact",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9f23dfc3886bb1e65756ac0c941ccf414a0d4b834ecdc79f109f6a2eee674110",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 167",
+        "column": "System_DateModified",
+        "display_name": "informant.contact",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".contact",
+        "item_url": "file:C:/Users/informant/Contacts/informant.contact",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:48.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:48.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:18.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:18.000000Z"
+        },
+        "size": 44600,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11732,
+      "kind": "fileSeen",
+      "t": 1427039597314063,
+      "res": 1,
+      "obj": 15505,
+      "obj_text": "C:\\Users\\informant\\Contacts\\informant.contact",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "92d46aaadad6fbbd089ca22c8046472f4649ccef24dd371ed7982ab408dc0b04",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 167",
+        "column": "System_Search_GatherTime",
+        "display_name": "informant.contact",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".contact",
+        "item_url": "file:C:/Users/informant/Contacts/informant.contact",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:48.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:48.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:18.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:18.000000Z"
+        },
+        "size": 44600,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11733,
+      "kind": "fileSeen",
+      "t": 1427039624341311,
+      "res": 1,
+      "obj": 15890,
+      "obj_text": "C:\\Users\\admin11",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "05b28b575ba61d1737cc9e139447849b91c75d06b96810cfcf7a16a7a754a8c7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 276",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "admin11",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11734,
+      "kind": "fileSeen",
+      "t": 1427039624388111,
+      "res": 1,
+      "obj": 15891,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "d76b93f3d58f0bb06378a4149d83b41a3742374aab82c191e146c39d4879aa97",
+      "prov": {
+        "accessed": "2015-03-22T15:57:41.930469Z",
+        "account": "admin11",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:53:44.388111Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.046005Z",
+        "live_size": 524288,
+        "modified": "2015-03-22T15:57:41.930469Z",
+        "record_changed": "2015-03-22T15:57:41.930469Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 524288,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 11735,
+      "kind": "fileSeen",
+      "t": 1427039624388111,
+      "res": 1,
+      "obj": 15891,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "033c03826f1492fdd0753535a1cecf384c43470f6c56d477dbaa9f39ade19a53",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 278",
+        "column": "System_DateCreated",
+        "display_name": "NTUSER.DAT",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".DAT",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11736,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15892,
+      "obj_text": "C:\\Users\\admin11\\Desktop",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "66769e01879289da649d236ffce710142d4763539586839bfbfd47f877574691",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 286",
+        "column": "System_DateCreated",
+        "display_name": "Desktop",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Desktop",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11737,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15893,
+      "obj_text": "C:\\Users\\admin11\\Downloads",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "31deab950dde99075d0ce818cac75b59b295302e8a26db06fc2115f0a7d4ef34",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 284",
+        "column": "System_DateCreated",
+        "display_name": "Downloads",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Downloads",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11738,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15894,
+      "obj_text": "C:\\Users\\admin11\\Favorites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9b6e0c5b498bda2c765463954e914306649bfadb2be7b60110fa66857cd5d8d8",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 283",
+        "column": "System_DateCreated",
+        "display_name": "Favorites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Favorites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11739,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15895,
+      "obj_text": "C:\\Users\\admin11\\Links",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "965f4e0b3e859ed525c8d06bdf90729f5149764630007997690f670f7f3fb884",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 282",
+        "column": "System_DateCreated",
+        "display_name": "Links",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Links",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11740,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15896,
+      "obj_text": "C:\\Users\\admin11\\My Documents",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a3b74ea0e7f6025075c8660da70eb9593e4c85532fe61416f66091b9aea284a7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 285",
+        "column": "System_DateCreated",
+        "display_name": "My Documents",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Documents",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11741,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15897,
+      "obj_text": "C:\\Users\\admin11\\My Music",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "24aedac855dacb9d7f6a366e3ceb8f36552cb53f6a97c3ad1b4949fa81e8343d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 281",
+        "column": "System_DateCreated",
+        "display_name": "My Music",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Music",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11742,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15898,
+      "obj_text": "C:\\Users\\admin11\\My Pictures",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "768f029a582d3700c500e4810212510eeb056ee9fb5ba3e67b378bcba96999ea",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 280",
+        "column": "System_DateCreated",
+        "display_name": "My Pictures",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Pictures",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11743,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15899,
+      "obj_text": "C:\\Users\\admin11\\My Videos",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9ac3e3161fca732ccc60119a3900af112cc4031386c1a19eb78871b44a3864e4",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 277",
+        "column": "System_DateCreated",
+        "display_name": "My Videos",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Videos",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11744,
+      "kind": "fileSeen",
+      "t": 1427039624450511,
+      "res": 1,
+      "obj": 15900,
+      "obj_text": "C:\\Users\\admin11\\Saved Games",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3b7f83a454151205870f3a32f0409d5c475ac3f9cabebddc3f9d3353be61aa85",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 279",
+        "column": "System_DateCreated",
+        "display_name": "Saved Games",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Saved Games",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11745,
+      "kind": "fileSeen",
+      "t": 1427039624466111,
+      "res": 1,
+      "obj": 15901,
+      "obj_text": "C:\\Users\\admin11\\AppData",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c2587a79ade07a50b78fd2c4d27b4e2e08a86ebad7fa1aab9467fe3f9ace38a7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 287",
+        "column": "System_DateCreated",
+        "display_name": "AppData",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/AppData",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11746,
+      "kind": "fileSeen",
+      "t": 1427039624606511,
+      "res": 1,
+      "obj": 15902,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "628b4b8b22fafc2e97605efb21ac902e1629702c5e875dc3f857d75145aa8996",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 319",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".blf",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:55:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 65536,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11747,
+      "kind": "fileSeen",
+      "t": 1427039624606511,
+      "res": 1,
+      "obj": 15903,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG1",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "594b3718ebd4d35c9e1d1c1ebae226395502ac13ece8e695b94984b47f793784",
+      "prov": {
+        "accessed": "2015-03-22T15:53:44.606511Z",
+        "account": "admin11",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:53:44.606511Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.373605Z",
+        "live_size": 262144,
+        "modified": "2015-03-22T15:57:41.930469Z",
+        "record_changed": "2015-03-22T15:57:41.930469Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 262144,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 11748,
+      "kind": "fileSeen",
+      "t": 1427039624606511,
+      "res": 1,
+      "obj": 15903,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "12cdb12da08528ee86d5088578aa8aa7fb2fb897561283dc24cc921516e0678b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 320",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "ntuser.dat.LOG1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG1",
+        "item_url": "file:C:/Users/admin11/ntuser.dat.LOG1",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 262144,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11749,
+      "kind": "fileSeen",
+      "t": 1427039624606511,
+      "res": 1,
+      "obj": 15904,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG2",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2290817f831c53bb0187aeddc1689465dffed7ff39b9f2c1f79e97d99080804b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 321",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "ntuser.dat.LOG2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG2",
+        "item_url": "file:C:/Users/admin11/ntuser.dat.LOG2",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 0,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11750,
+      "kind": "fileSeen",
+      "t": 1427039624637711,
+      "res": 1,
+      "obj": 15905,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1df1f7156652013dd5f4df20fde0a56258f4b8873139a3c3700b35217beaa050",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 317",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:55:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11751,
+      "kind": "fileSeen",
+      "t": 1427039624684511,
+      "res": 1,
+      "obj": 15906,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b3231018e62caff9fdfd8f2ab89a34140be09c3d7da3194d12cba38e1f3ddcc9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 318",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:55:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11752,
+      "kind": "fileSeen",
+      "t": 1427039624715711,
+      "res": 1,
+      "obj": 15890,
+      "obj_text": "C:\\Users\\admin11",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "59c6bcfa8a4bb3417a64059aca87166c211540e61f384e1951d76982ee12551b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 276",
+        "column": "System_Search_GatherTime",
+        "display_name": "admin11",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11753,
+      "kind": "fileSeen",
+      "t": 1427039624778112,
+      "res": 1,
+      "obj": 15901,
+      "obj_text": "C:\\Users\\admin11\\AppData",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6266d1d6cba8bbe4c831761945e6a227c8b654dc4d8f485db71eb0558a3182fa",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 287",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "AppData",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/AppData",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11754,
+      "kind": "fileSeen",
+      "t": 1427039624778112,
+      "res": 1,
+      "obj": 15907,
+      "obj_text": "C:\\Users\\admin11\\ntuser.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8e045b9a236c81d7cc03f03e9bcb24d1ab127a9200881f7ba3c89e39b1949204",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 352",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "ntuser.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/ntuser.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 20,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11755,
+      "kind": "fileSeen",
+      "t": 1427039627071316,
+      "res": 1,
+      "obj": 15901,
+      "obj_text": "C:\\Users\\admin11\\AppData",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6f9de6a542a537a4290221b9f93642fe6b7b7af5394df7f1539736c1d06bd707",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 287",
+        "column": "System_Search_GatherTime",
+        "display_name": "AppData",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/AppData",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11756,
+      "kind": "fileSeen",
+      "t": 1427039627196116,
+      "res": 1,
+      "obj": 15860,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "856591567e241d7861add675582659d91a453b654b4d56e033d42205895012a7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 244",
+        "column": "System_Search_GatherTime",
+        "display_name": "Google Chrome",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Google Chrome",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:11:54.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:11:54.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:54.000000Z",
+          "System_ItemDate": "2015-03-22T15:11:54.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11757,
+      "kind": "fileSeen",
+      "t": 1427039627211716,
+      "res": 1,
+      "obj": 15442,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1dcffdcf5462018266c0474fba3471bd91969ffea39b0289349d9d54381c4641",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 70",
+        "column": "System_Search_GatherTime",
+        "display_name": "Windows PowerShell",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/Windows PowerShell",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:57:14.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:57:14.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:57:14.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11758,
+      "kind": "fileSeen",
+      "t": 1427039627211716,
+      "res": 1,
+      "obj": 15848,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Office 2013 Tools",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5464dabca95bbe9cfa614dafda1f61bc48c9d226efd52756094501049ce521d7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 185",
+        "column": "System_Search_GatherTime",
+        "display_name": "Office 2013 Tools",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013/Office 2013 Tools",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11759,
+      "kind": "fileSeen",
+      "t": 1427039628132117,
+      "res": 1,
+      "obj": 15469,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Tablet PC",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f5ee907175fda1285376b537af7d17c0af35d2cdc65f8b55ef298a4ec9d06670",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 68",
+        "column": "System_Search_GatherTime",
+        "display_name": "Tablet PC",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/Tablet PC",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:16:48.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:16:48.000000Z",
+          "System_Document_DateSaved": "2015-03-25T10:18:14.000000Z",
+          "System_ItemDate": "2010-11-21T07:16:48.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11760,
+      "kind": "fileSeen",
+      "t": 1427039628194518,
+      "res": 1,
+      "obj": 15358,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Ease of Access",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6c457c13c831312a6aed586b214ddb4618f075b49852288b3b7f6d6798cfb605",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 54",
+        "column": "System_Search_GatherTime",
+        "display_name": "Ease of Access",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/Accessibility",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:57:08.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11761,
+      "kind": "fileSeen",
+      "t": 1427039628194518,
+      "res": 1,
+      "obj": 15359,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "968860655a03ceb3480ae43d3b2a755db7eddc2f76f150779141c046975df62b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 67",
+        "column": "System_Search_GatherTime",
+        "display_name": "System Tools",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/System Tools",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:57:10.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11762,
+      "kind": "fileSeen",
+      "t": 1427039628194518,
+      "res": 1,
+      "obj": 15470,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Tablet PC",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c53fffde31957aa0f4f8431dbd2444e62881b10027b1f17712d898d0fc7dadb5",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 15",
+        "column": "System_Search_GatherTime",
+        "display_name": "Tablet PC",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Tablet PC",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:16:48.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:16:48.000000Z",
+          "System_Document_DateSaved": "2010-11-21T07:16:48.000000Z",
+          "System_ItemDate": "2010-11-21T07:16:48.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11763,
+      "kind": "fileSeen",
+      "t": 1427039628210118,
+      "res": 1,
+      "obj": 15360,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "419787300f4a9bea152e2c530f1281be802297a072258cd7551beb4507c18653",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 11",
+        "column": "System_Search_GatherTime",
+        "display_name": "Maintenance",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Maintenance",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:57:10.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11764,
+      "kind": "fileSeen",
+      "t": 1427039628210118,
+      "res": 1,
+      "obj": 15361,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "35fa090410af332a042811c0883ad223dcc56b6685abb7664b801a3453fc9098",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 14",
+        "column": "System_Search_GatherTime",
+        "display_name": "Startup",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11765,
+      "kind": "fileSeen",
+      "t": 1427039628225718,
+      "res": 1,
+      "obj": 15357,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "90aa3da6f3f405729cb67433d02dcd503dc6e1a04d98507fabc66811f4332460",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 7",
+        "column": "System_Search_GatherTime",
+        "display_name": "Accessories",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2015-03-25T10:18:14.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11766,
+      "kind": "fileSeen",
+      "t": 1427039628225718,
+      "res": 1,
+      "obj": 15462,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f8ba5de6559f37fb1a300a7105534f2b7a71ab52376d06cdf02dc1c1686a0160",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 8",
+        "column": "System_Search_GatherTime",
+        "display_name": "Administrative Tools",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Administrative Tools",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:40.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:40.000000Z",
+          "System_Document_DateSaved": "2015-03-25T10:18:16.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11767,
+      "kind": "fileSeen",
+      "t": 1427039628225718,
+      "res": 1,
+      "obj": 15463,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "460b4a30615f1933a95289b99f31b4a29561364f44f32faa6fbfab662588fb57",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 10",
+        "column": "System_Search_GatherTime",
+        "display_name": "Games",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Games",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T05:32:40.000000Z",
+          "System_Document_DateCreated": "2009-07-14T05:32:40.000000Z",
+          "System_Document_DateSaved": "2015-03-25T10:18:16.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11768,
+      "kind": "fileSeen",
+      "t": 1427039628256918,
+      "res": 1,
+      "obj": 15908,
+      "obj_text": "C:\\Users\\admin11\\Contacts",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0512dff8c69420d88f853daa4e9f7affc0518e4d55aa4acd88ce3ae7ea4f99e5",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 345",
+        "column": "System_DateCreated",
+        "display_name": "Contacts",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Contacts",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:50.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11769,
+      "kind": "fileSeen",
+      "t": 1427039628256918,
+      "res": 1,
+      "obj": 15909,
+      "obj_text": "C:\\Users\\admin11\\Contacts\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ec81f30c2f1c2fd7642a9b31e64f82b2645752fc459485c0e67d023fc46e0bae",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 346",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Contacts/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:50.000000Z"
+        },
+        "size": 412,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          11730
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Deleted Items (record time 2015-03-22 15:48:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11731
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Contacts\\informant.contact (record time 2015-03-22 15:53:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11732
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Contacts\\informant.contact (record time 2015-03-22 15:53:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11733
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11 (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11734
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11735
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11736
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Desktop (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11737
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Downloads (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11738
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Favorites (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11739
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Links (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11740
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Documents (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11741
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Music (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11742
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Pictures (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11743
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Videos (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11744
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Saved Games (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11745
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11746
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11747
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11748
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11749
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG2 (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11750
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11751
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11752
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11 (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11753
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11754
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.ini (record time 2015-03-22 15:53:44 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11755
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\AppData (record time 2015-03-22 15:53:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11756
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome (record time 2015-03-22 15:53:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11757
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell (record time 2015-03-22 15:53:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11758
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013\\Office 2013 Tools (record time 2015-03-22 15:53:47 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11759
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Tablet PC (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11760
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Ease of Access (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11761
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11762
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Tablet PC (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11763
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11764
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11765
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11766
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11767
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11768
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Contacts (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11769
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Contacts\\desktop.ini (record time 2015-03-22 15:53:48 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M309.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

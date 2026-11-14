@@ -1,0 +1,1854 @@
+{
+  "finding_id": "M317",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12050
+        ]
+      },
+      {
+        "fileRecorded": [
+          12051
+        ]
+      },
+      {
+        "fileRecorded": [
+          12052
+        ]
+      },
+      {
+        "fileRecorded": [
+          12053
+        ]
+      },
+      {
+        "fileRecorded": [
+          12054
+        ]
+      },
+      {
+        "fileRecorded": [
+          12055
+        ]
+      },
+      {
+        "fileRecorded": [
+          12056
+        ]
+      },
+      {
+        "fileRecorded": [
+          12057
+        ]
+      },
+      {
+        "fileRecorded": [
+          12058
+        ]
+      },
+      {
+        "fileRecorded": [
+          12059
+        ]
+      },
+      {
+        "fileRecorded": [
+          12060
+        ]
+      },
+      {
+        "fileRecorded": [
+          12061
+        ]
+      },
+      {
+        "fileRecorded": [
+          12062
+        ]
+      },
+      {
+        "fileRecorded": [
+          12063
+        ]
+      },
+      {
+        "fileRecorded": [
+          12064
+        ]
+      },
+      {
+        "fileRecorded": [
+          12065
+        ]
+      },
+      {
+        "fileRecorded": [
+          12066
+        ]
+      },
+      {
+        "fileRecorded": [
+          12067
+        ]
+      },
+      {
+        "fileRecorded": [
+          12068
+        ]
+      },
+      {
+        "fileRecorded": [
+          12069
+        ]
+      },
+      {
+        "fileRecorded": [
+          12070
+        ]
+      },
+      {
+        "fileRecorded": [
+          12071
+        ]
+      },
+      {
+        "fileRecorded": [
+          12072
+        ]
+      },
+      {
+        "fileRecorded": [
+          12073
+        ]
+      },
+      {
+        "fileRecorded": [
+          12074
+        ]
+      },
+      {
+        "fileRecorded": [
+          12075
+        ]
+      },
+      {
+        "fileRecorded": [
+          12076
+        ]
+      },
+      {
+        "fileRecorded": [
+          12077
+        ]
+      },
+      {
+        "fileRecorded": [
+          12078
+        ]
+      },
+      {
+        "fileRecorded": [
+          12079
+        ]
+      },
+      {
+        "fileRecorded": [
+          12080
+        ]
+      },
+      {
+        "fileRecorded": [
+          12081
+        ]
+      },
+      {
+        "fileRecorded": [
+          12082
+        ]
+      },
+      {
+        "fileRecorded": [
+          12083
+        ]
+      },
+      {
+        "fileRecorded": [
+          12084
+        ]
+      },
+      {
+        "fileRecorded": [
+          12085
+        ]
+      },
+      {
+        "fileRecorded": [
+          12086
+        ]
+      },
+      {
+        "fileRecorded": [
+          12087
+        ]
+      },
+      {
+        "fileRecorded": [
+          12088
+        ]
+      },
+      {
+        "fileRecorded": [
+          12089
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\Users\\temporary\\My Music\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Searches\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Contacts\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Desktop\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Pictures\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Videos\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1003} (record time 2015-03-22 15:56:15 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:56:58 UTC). The shadow copy holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC). The shadow copy holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG2 (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.ini (record time 2015-03-22 15:57:02 UTC). The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1001} (record time 2015-03-22 15:57:10 UTC). The recent documents holds a record of setupapi.dev.log (record time 2015-03-22 15:57:30 UTC). The recent documents holds a record of inf (record time 2015-03-22 15:57:31 UTC). The recent documents holds a record of setupapi.dev.log (record time 2015-03-22 15:57:31 UTC). The shadow copy holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC). The shadow copy holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC). The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC). The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013 (record time 2015-03-22 15:57:54 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs (record time 2015-03-22 15:57:54 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml (record time 2015-03-22 15:59:53 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu (record time 2015-03-22 16:00:06 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Desktop (record time 2015-03-22 16:00:07 UTC). The windows search index holds a record of https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0 (record time 2015-03-23 17:26:32 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url (record time 2015-03-23 17:27:33 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-23 17:27:33 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-23 17:27:33 UTC).",
+  "cited_facts": [
+    {
+      "id": 12050,
+      "kind": "fileSeen",
+      "t": 1427039770108089,
+      "res": 1,
+      "obj": 15976,
+      "obj_text": "C:\\Users\\temporary\\My Music\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6d3e83c3b025348c25e10278d1733b809a1c9ba6f7c3b21163dd690af89fb0d9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 310",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Music/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12051,
+      "kind": "fileSeen",
+      "t": 1427039770108089,
+      "res": 1,
+      "obj": 15978,
+      "obj_text": "C:\\Users\\temporary\\Searches\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1a38d2151db540d402e5690bd4cff09d37d251f4668453689b5469da0e14f238",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 357",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Searches/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 524,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12052,
+      "kind": "fileSeen",
+      "t": 1427039770123689,
+      "res": 1,
+      "obj": 15969,
+      "obj_text": "C:\\Users\\temporary\\Contacts\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "71086d94b78cf6041f9d824cb79b3b83751dae511be35b89aa7ba66c15eaebd7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 304",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Contacts/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:02.000000Z"
+        },
+        "size": 412,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12053,
+      "kind": "fileSeen",
+      "t": 1427039770123689,
+      "res": 1,
+      "obj": 15971,
+      "obj_text": "C:\\Users\\temporary\\Desktop\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9ece1fee2d19a12e4af2a5845c1bd74bb0a888bf6cbcee3aafe59c20bac9ce8b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 308",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Desktop/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 282,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12054,
+      "kind": "fileSeen",
+      "t": 1427039770123689,
+      "res": 1,
+      "obj": 15973,
+      "obj_text": "C:\\Users\\temporary\\My Pictures\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "efd3b407d5941a9fcaafe5b381bf7902be0efd20a154cc0340c96bb0ba6fd791",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 307",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Pictures/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12055,
+      "kind": "fileSeen",
+      "t": 1427039770123689,
+      "res": 1,
+      "obj": 15974,
+      "obj_text": "C:\\Users\\temporary\\My Videos\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "dfe11259a83f8d3978cc42e56efd14ccc3bec02666ef3c7c58c1379d0175d61d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 306",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Videos/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12056,
+      "kind": "fileSeen",
+      "t": 1427039775271698,
+      "res": 1,
+      "obj": 15998,
+      "obj_text": "\\\\{S-1-5-21-2425377081-3129163575-2985601102-1003}",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5c74fd48b85928f460d80eec65efe7f73d070e9d6fea2a9b2d45ff525efb3841",
+      "prov": {
+        "account": "temporary",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 373",
+        "column": "System_Search_GatherTime",
+        "display_name": "{S-1-5-21-2425377081-3129163575-2985601102-1003}",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Folder",
+        "item_url": "csc://{S-1-5-21-2425377081-3129163575-2985601102-1003}",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1003",
+        "store": "csc",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12057,
+      "kind": "fileSeen",
+      "t": 1427039818051980,
+      "res": 1,
+      "obj": 15964,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d1ee3333eb400af3c26e8e1e715aa7e3c642c98397cca418a2c769840ef1b736",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 376",
+        "column": "System_DateModified",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".blf",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 65536,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12058,
+      "kind": "fileSeen",
+      "t": 1427039818051980,
+      "res": 1,
+      "obj": 15965,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3887fa75236c8e0ae2cc93f2c4a5a82d97c33c55b1920969b8b2eb98e663ca0e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 374",
+        "column": "System_DateModified",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12059,
+      "kind": "fileSeen",
+      "t": 1427039818051980,
+      "res": 1,
+      "obj": 15966,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7c72bab1d25a7092898136eb0f48398abd5388b0436c0e1c573281373daa00ef",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 375",
+        "column": "System_DateModified",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12060,
+      "kind": "fileSeen",
+      "t": 1427039818051980,
+      "res": 1,
+      "obj": 15962,
+      "obj_text": "C:\\Users\\temporary\\ntuser.dat.LOG1",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "5f2e299c1e68e15f7579ebd33a0f159f66407e231d12c346d0a5203df2344464",
+      "prov": {
+        "accessed": "2015-03-22T15:55:57.337062Z",
+        "account": "temporary",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:55:57.337062Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.436005Z",
+        "live_size": 262144,
+        "modified": "2015-03-22T15:56:58.051980Z",
+        "record_changed": "2015-03-22T15:56:58.051980Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 262144,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12061,
+      "kind": "fileSeen",
+      "t": 1427039818051980,
+      "res": 1,
+      "obj": 15962,
+      "obj_text": "C:\\Users\\temporary\\ntuser.dat.LOG1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e90f27790009f70c60b515ec0bee9c21fbcaff4eedbdbbe46745cdd28f66f7fa",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 377",
+        "column": "System_DateModified",
+        "display_name": "ntuser.dat.LOG1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG1",
+        "item_url": "file:C:/Users/temporary/ntuser.dat.LOG1",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 262144,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12062,
+      "kind": "fileSeen",
+      "t": 1427039818083180,
+      "res": 1,
+      "obj": 15960,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f2fdff1ea7a7ee978905c71a3c1edb2ad85a277fb729ce6db5df42ab09b3d6ae",
+      "prov": {
+        "accessed": "2015-03-22T15:56:58.083180Z",
+        "account": "temporary",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:55:57.290262Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.108405Z",
+        "live_size": 524288,
+        "modified": "2015-03-22T15:56:58.083180Z",
+        "record_changed": "2015-03-22T15:56:58.083180Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 524288,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12063,
+      "kind": "fileSeen",
+      "t": 1427039818083180,
+      "res": 1,
+      "obj": 15960,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7519994a2a50745832a15a83df0b1c9ebee5914db774c378c1ab02312e1e10ed",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 324",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "NTUSER.DAT",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".DAT",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12064,
+      "kind": "fileSeen",
+      "t": 1427039818083180,
+      "res": 1,
+      "obj": 15964,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b9036f94056759ab9f345a2bcb09ee5fc6ea7aaa1ef8c2d3ef3a5bb13ff7fa56",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 376",
+        "column": "System_Search_GatherTime",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".blf",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 65536,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12065,
+      "kind": "fileSeen",
+      "t": 1427039818083180,
+      "res": 1,
+      "obj": 15963,
+      "obj_text": "C:\\Users\\temporary\\ntuser.dat.LOG2",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "69fb6498dc40f5ff6b5f3b0c04a5d1e3661020dc392cfc7cdff8be48d737c43e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 378",
+        "column": "System_Search_GatherTime",
+        "display_name": "ntuser.dat.LOG2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG2",
+        "item_url": "file:C:/Users/temporary/ntuser.dat.LOG2",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:55:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 0,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12066,
+      "kind": "fileSeen",
+      "t": 1427039818098781,
+      "res": 1,
+      "obj": 15960,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7d9e27a4496e5e6b48ccb31a37fb9058d6fb5472cf5a29b4be7a16f73a50d5df",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 324",
+        "column": "System_Search_GatherTime",
+        "display_name": "NTUSER.DAT",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".DAT",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12067,
+      "kind": "fileSeen",
+      "t": 1427039818098781,
+      "res": 1,
+      "obj": 15965,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b62fbede43dec35362819b973e550256a8ef127a6022a11d39c4549cb07cc558",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 374",
+        "column": "System_Search_GatherTime",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12068,
+      "kind": "fileSeen",
+      "t": 1427039818098781,
+      "res": 1,
+      "obj": 15966,
+      "obj_text": "C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5ea45198520086ab6cfde9201addc7e096ffcdc728cf8d8ad3dc63517c530881",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 375",
+        "column": "System_Search_GatherTime",
+        "display_name": "NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".regtrans-ms",
+        "item_url": "file:C:/Users/temporary/NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12069,
+      "kind": "fileSeen",
+      "t": 1427039818098781,
+      "res": 1,
+      "obj": 15962,
+      "obj_text": "C:\\Users\\temporary\\ntuser.dat.LOG1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9b46e53d9b767b806e5c187aa585d1355c839189fe02161f448bd8856031bd04",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 377",
+        "column": "System_Search_GatherTime",
+        "display_name": "ntuser.dat.LOG1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG1",
+        "item_url": "file:C:/Users/temporary/ntuser.dat.LOG1",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:00.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 262144,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12070,
+      "kind": "fileSeen",
+      "t": 1427039822497988,
+      "res": 1,
+      "obj": 15907,
+      "obj_text": "C:\\Users\\admin11\\ntuser.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "987c31c97299a2ab8cd2026f27409497b6c66c0bd982a25c0b6f51197446b2bd",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 352",
+        "column": "System_Search_GatherTime",
+        "display_name": "ntuser.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/ntuser.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:46.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 20,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12071,
+      "kind": "fileSeen",
+      "t": 1427039830081810,
+      "res": 1,
+      "obj": 15999,
+      "obj_text": "\\\\{S-1-5-21-2425377081-3129163575-2985601102-1001}",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "514e29f12b2b9638818d97c2de720c06617d202918fe4d48f715b6ee66e04e44",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 316",
+        "column": "System_Search_GatherTime",
+        "display_name": "{S-1-5-21-2425377081-3129163575-2985601102-1001}",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Folder",
+        "item_url": "csc://{S-1-5-21-2425377081-3129163575-2985601102-1001}",
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1001",
+        "store": "csc",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12072,
+      "kind": "fileSeen",
+      "t": 1427039850973248,
+      "res": 1,
+      "obj": 16000,
+      "obj_text": "setupapi.dev.log",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "1f2750da8cd498f5cc3e98135f5e1f07f1b2a09f056c29638448928f41e32bc1",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs\\.log value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 0,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12073,
+      "kind": "fileSeen",
+      "t": 1427039851020048,
+      "res": 1,
+      "obj": 1465,
+      "obj_text": "inf",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "3fc26b0a6d9a47586e00e9189703256c77512f72961e8870b610da46303f9dcc",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs value 1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 0,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12074,
+      "kind": "fileSeen",
+      "t": 1427039851020048,
+      "res": 1,
+      "obj": 16000,
+      "obj_text": "setupapi.dev.log",
+      "aux": 1466,
+      "aux_text": "recent documents",
+      "row_sha256": "6c6adfb3f1fec8c04ed3058c328396de9d6093fe3fb369e22e51002ae2e26579",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\NTUSER.DAT key Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs value 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "mru_position": 1,
+        "note": "the list keeps the name only, not the path",
+        "time_meaning": "registry key last-write time (the moment the list last changed; only the most recent entry was added then)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12075,
+      "kind": "fileSeen",
+      "t": 1427039861930469,
+      "res": 1,
+      "obj": 15891,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "c793fae76176794195076aa79e0fee3311d9d1ace2d6f9d05664ac326a20e747",
+      "prov": {
+        "accessed": "2015-03-22T15:57:41.930469Z",
+        "account": "admin11",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:53:44.388111Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.046005Z",
+        "live_size": 524288,
+        "modified": "2015-03-22T15:57:41.930469Z",
+        "record_changed": "2015-03-22T15:57:41.930469Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 524288,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12076,
+      "kind": "fileSeen",
+      "t": 1427039861930469,
+      "res": 1,
+      "obj": 15891,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8f09d0d194385e7afe005e08735771d5d437bcbf29dfcd80a427018b1712dd12",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 278",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "NTUSER.DAT",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".DAT",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12077,
+      "kind": "fileSeen",
+      "t": 1427039861930469,
+      "res": 1,
+      "obj": 15903,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG1",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "380150887f62f0a27cf8a29f2c547267a0b2d13d21a68cb7c3f1a6f7ca8e1b32",
+      "prov": {
+        "accessed": "2015-03-22T15:53:44.606511Z",
+        "account": "admin11",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:53:44.606511Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:18:37.373605Z",
+        "live_size": 262144,
+        "modified": "2015-03-22T15:57:41.930469Z",
+        "record_changed": "2015-03-22T15:57:41.930469Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 262144,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12078,
+      "kind": "fileSeen",
+      "t": 1427039861930469,
+      "res": 1,
+      "obj": 15903,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "dd10f429655f352b808602228b7fa0f0eb893b5990ba954249a6ba45ffbac3c9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 320",
+        "column": "System_DateModified",
+        "display_name": "ntuser.dat.LOG1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG1",
+        "item_url": "file:C:/Users/admin11/ntuser.dat.LOG1",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 262144,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12079,
+      "kind": "fileSeen",
+      "t": 1427039861946069,
+      "res": 1,
+      "obj": 15891,
+      "obj_text": "C:\\Users\\admin11\\NTUSER.DAT",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "621a9ee8e608a00edb7c44a03cf2f2dbd653797de537588c0543896c9d1ab0d6",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 278",
+        "column": "System_Search_GatherTime",
+        "display_name": "NTUSER.DAT",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".DAT",
+        "item_url": "file:C:/Users/admin11/NTUSER.DAT",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 524288,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12080,
+      "kind": "fileSeen",
+      "t": 1427039861946069,
+      "res": 1,
+      "obj": 15903,
+      "obj_text": "C:\\Users\\admin11\\ntuser.dat.LOG1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a02d854892706ba383e229e1b25be8f91351ad60b16245b83e728369115e6d0b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 320",
+        "column": "System_Search_GatherTime",
+        "display_name": "ntuser.dat.LOG1",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".LOG1",
+        "item_url": "file:C:/Users/admin11/ntuser.dat.LOG1",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:46.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:57:42.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:46.000000Z"
+        },
+        "size": 262144,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12081,
+      "kind": "fileSeen",
+      "t": 1427039874550891,
+      "res": 1,
+      "obj": 15847,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d0e835cc80e1dd62f2616ac8c5ee7ec23fdf980eefa3d9272be3dee2641bec5c",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 153",
+        "column": "System_Search_GatherTime",
+        "display_name": "Microsoft Office 2013",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Office 2013",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:03:30.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:03:30.000000Z",
+          "System_ItemDate": "2015-03-22T15:03:30.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12082,
+      "kind": "fileSeen",
+      "t": 1427039874597691,
+      "res": 1,
+      "obj": 15356,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fd36b188e2b326d9959af51638b5043256113266f8d134c0d55848820cb2dc15",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 5",
+        "column": "System_Search_GatherTime",
+        "display_name": "Programs",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:54.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12083,
+      "kind": "fileSeen",
+      "t": 1427039993844301,
+      "res": 1,
+      "obj": 16001,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "f0d0c58b9048646365347c11a79edf38ac29403384aaaad1edfd6d86d7b3db4e",
+      "prov": {
+        "accessed": "2015-03-22T15:59:53.844301Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-22T15:59:53.844301Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:11:47.645405Z",
+        "live_size": 3225,
+        "modified": "2015-03-24T21:05:28.757912Z",
+        "record_changed": "2015-03-24T21:05:28.757912Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 3225,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12084,
+      "kind": "fileSeen",
+      "t": 1427040006933527,
+      "res": 1,
+      "obj": 15355,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8ee475b02d61609479f775dac1112476611dd68689808cbb1a736e2c52fc1cea",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 1",
+        "column": "System_Search_GatherTime",
+        "display_name": "Start Menu",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T05:01:16.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12085,
+      "kind": "fileSeen",
+      "t": 1427040007733528,
+      "res": 1,
+      "obj": 15365,
+      "obj_text": "C:\\Users\\Public\\Public Desktop",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "129c5b012c80a930d641d4207de1c963e7d799615e3717523a6ad412b02d6d79",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 96",
+        "column": "System_Search_GatherTime",
+        "display_name": "Public Desktop",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Desktop",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:11:54.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12086,
+      "kind": "fileSeen",
+      "t": 1427131592706480,
+      "res": 1,
+      "obj": 1118,
+      "obj_text": "https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f2ce905609c2f55f9d2ac73c772b472a67a5f7cea158ff3531053faec80efc19",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 338",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:26:32.707003Z",
+          "System_ItemDate": "2015-03-23T17:26:32.706480Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12087,
+      "kind": "fileSeen",
+      "t": 1427131653959000,
+      "res": 1,
+      "obj": 15859,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "187a08eefb4f3ccc2b76b7d8911138d57acca870c5a41a160355d3b74bb89456",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 220",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Suggested Sites.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Links/Suggested Sites.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:09:18.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:09:18.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:34.000000Z",
+          "System_ItemDate": "2015-03-22T15:09:18.000000Z"
+        },
+        "size": 302,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12088,
+      "kind": "fileSeen",
+      "t": 1427131653959000,
+      "res": 1,
+      "obj": 15542,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Favorites Bar\\Web Slice Gallery.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a360fd77f8b3db3d4197a8f54e0775045a77f8f91d89eec7c37dc8957bc9a46d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 207",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Web Slice Gallery.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Links/Web Slice Gallery.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:34.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "size": 226,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12089,
+      "kind": "fileSeen",
+      "t": 1427131653990000,
+      "res": 1,
+      "obj": 15844,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Websites for United States\\GobiernoUSA.gov.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "dedc322f46c4c5cdf21762c0b8e59f4b3875bfe1e66400215f4cfe654d506ffd",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 211",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "GobiernoUSA.gov.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Links for United States/GobiernoUSA.gov.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:35:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:35:04.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:34.000000Z",
+          "System_ItemDate": "2015-03-22T14:35:04.000000Z"
+        },
+        "size": 134,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12050
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Music\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12051
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Searches\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12052
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Contacts\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12053
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Desktop\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12054
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Pictures\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12055
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Videos\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12056
+        ]
+      },
+      "english": "The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1003} (record time 2015-03-22 15:56:15 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12057
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12058
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12059
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12060
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12061
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12062
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12063
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12064
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12065
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG2 (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12066
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12067
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12068
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12069
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\ntuser.dat.LOG1 (record time 2015-03-22 15:56:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12070
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.ini (record time 2015-03-22 15:57:02 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12071
+        ]
+      },
+      "english": "The windows search index holds a record of \\\\{S-1-5-21-2425377081-3129163575-2985601102-1001} (record time 2015-03-22 15:57:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12072
+        ]
+      },
+      "english": "The recent documents holds a record of setupapi.dev.log (record time 2015-03-22 15:57:30 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12073
+        ]
+      },
+      "english": "The recent documents holds a record of inf (record time 2015-03-22 15:57:31 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12074
+        ]
+      },
+      "english": "The recent documents holds a record of setupapi.dev.log (record time 2015-03-22 15:57:31 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12075
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12076
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12077
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12078
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12079
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\NTUSER.DAT (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12080
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\ntuser.dat.LOG1 (record time 2015-03-22 15:57:41 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12081
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Office 2013 (record time 2015-03-22 15:57:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12082
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs (record time 2015-03-22 15:57:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12083
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Outlook\\Outlook.xml (record time 2015-03-22 15:59:53 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12084
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu (record time 2015-03-22 16:00:06 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12085
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Desktop (record time 2015-03-22 16:00:07 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12086
+        ]
+      },
+      "english": "The windows search index holds a record of https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0 (record time 2015-03-23 17:26:32 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12087
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Suggested Sites.url (record time 2015-03-23 17:27:33 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12088
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-23 17:27:33 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12089
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-23 17:27:33 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M317.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

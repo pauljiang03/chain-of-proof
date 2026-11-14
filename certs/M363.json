@@ -1,0 +1,289 @@
+{
+  "finding_id": "M363",
+  "question": "How many records of each kind does the evidence hold?",
+  "claim": {
+    "exactly": [
+      "emailSent",
+      11
+    ]
+  },
+  "status": "verified",
+  "english": "The evidence holds exactly 11 e-mail records: the sending of the e-mail \"Hello, Iaman\" from spy to iaman (2015-03-23 17:29:27 UTC); the sending of the e-mail \"RE: Hello, Iaman\" from iaman to spy (2015-03-23 18:44:31 UTC); the sending of the e-mail \"Good job, buddy.\" from spy to iaman (2015-03-23 19:14:58 UTC); the sending of the e-mail \"RE: Good job, buddy.\" from spy to iaman (2015-03-23 19:20:41 UTC); the sending of the e-mail \"Important request\" from spy to iaman (2015-03-23 19:26:22 UTC); the sending of the e-mail \"RE: Important request\" from iaman to spy (2015-03-23 19:27:05 UTC); the sending of the e-mail \"RE: It's me\" from spy to iaman (2015-03-23 20:41:19 UTC); the sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC); the sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC); the sending of the e-mail \"RE: Watch out!\" from iaman to spy (2015-03-24 19:34:02 UTC); the sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+  "cited_facts": [
+    {
+      "id": 368,
+      "kind": "emailSent",
+      "t": 1427131767000000,
+      "res": 1000000,
+      "obj": 205,
+      "obj_text": "Hello, Iaman",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "eb4866cb99aaa9fc71d03a796d8462d03f171e01a32889d0269c67de37420ed0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156C790B3BF198BDDCD14748C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 369,
+      "kind": "emailSent",
+      "t": 1427136271719000,
+      "res": 1000000,
+      "obj": 207,
+      "obj_text": "RE: Hello, Iaman",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "070f2b9d218413a4578cd726201b166a17b02dcea4fae2aa0032a7e5dc92579e",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Sent Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 370,
+      "kind": "emailSent",
+      "t": 1427138098000000,
+      "res": 1000000,
+      "obj": 209,
+      "obj_text": "Good job, buddy.",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "28ee2d0ae6c0daf015ee2dcec5d62a0339bf0e5e0ca723d9b9f954b7433dd3fe",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156CB1C7533F5F2094F2F778C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 371,
+      "kind": "emailSent",
+      "t": 1427138441000000,
+      "res": 1000000,
+      "obj": 210,
+      "obj_text": "RE: Good job, buddy.",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "ac909c7ec8819a4b27870d9516df40359a7b0a3513e4e6998a2aa19bef9019b0",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156AAB40F3D3AEFECD4C1078C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 372,
+      "kind": "emailSent",
+      "t": 1427138782000000,
+      "res": 1000000,
+      "obj": 211,
+      "obj_text": "Important request",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "58dea72f7670ed7388a12cf4b44b0eaacc24b00a4e9c2ffcde5da35a89e13442",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB01564098B5C82EDB2AE0CD618C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 373,
+      "kind": "emailSent",
+      "t": 1427138825282000,
+      "res": 1000000,
+      "obj": 212,
+      "obj_text": "RE: Important request",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "256a0e0206d4981d91195137317d5cf34d9751ee6e000647b6c95cef82ff6512",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Sent Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 374,
+      "kind": "emailSent",
+      "t": 1427143279000000,
+      "res": 1000000,
+      "obj": 213,
+      "obj_text": "RE: It's me",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "a99e781808fc6ae349a720fecab8fc9a632dc271c728892dfc736c86f6ae4d35",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB0156F9850927FC57F4601E378C0D0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 375,
+      "kind": "emailSent",
+      "t": 1427203557000000,
+      "res": 1000000,
+      "obj": 214,
+      "obj_text": "Last request",
+      "aux": 206,
+      "aux_text": "from spy to iaman",
+      "row_sha256": "e2c83998d84a8725cce0e04ef0d5849c2be50c77766f4ec29e19854a3a7594bc",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Inbox",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Inbox",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "<BN1PR09MB015610AA8DCFB833D29557538C0A0@BN1PR09MB0156.namprd09.prod.outlook.com>",
+        "sender_address": "spy.conspirator@nist.gov",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 376,
+      "kind": "emailSent",
+      "t": 1427204110365000,
+      "res": 1000000,
+      "obj": 215,
+      "obj_text": "RE: Last request",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "deb591d5476975213f50490b71980ac3a2b9a57c4585f3e557d907aef7184d9c",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 377,
+      "kind": "emailSent",
+      "t": 1427225642435000,
+      "res": 1000000,
+      "obj": 216,
+      "obj_text": "RE: Watch out!",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "02edc06c446cad9098f9a6e3525cc21f173aa7b235b44bddc1f832a9daa44043",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 378,
+      "kind": "emailSent",
+      "t": 1427231109679000,
+      "res": 1000000,
+      "obj": 217,
+      "obj_text": "Done",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "101580ace6639f7b670bf9e465dd424cd2df5f4b102ad9d09de5de9124386ea4",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Deleted Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Deleted Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "exactly": [
+          "emailSent",
+          11
+        ]
+      },
+      "english": "The evidence holds exactly 11 e-mail records: the sending of the e-mail \"Hello, Iaman\" from spy to iaman (2015-03-23 17:29:27 UTC); the sending of the e-mail \"RE: Hello, Iaman\" from iaman to spy (2015-03-23 18:44:31 UTC); the sending of the e-mail \"Good job, buddy.\" from spy to iaman (2015-03-23 19:14:58 UTC); the sending of the e-mail \"RE: Good job, buddy.\" from spy to iaman (2015-03-23 19:20:41 UTC); the sending of the e-mail \"Important request\" from spy to iaman (2015-03-23 19:26:22 UTC); the sending of the e-mail \"RE: Important request\" from iaman to spy (2015-03-23 19:27:05 UTC); the sending of the e-mail \"RE: It's me\" from spy to iaman (2015-03-23 20:41:19 UTC); the sending of the e-mail \"Last request\" from spy to iaman (2015-03-24 13:25:57 UTC); the sending of the e-mail \"RE: Last request\" from iaman to spy (2015-03-24 13:35:10 UTC); the sending of the e-mail \"RE: Watch out!\" from iaman to spy (2015-03-24 19:34:02 UTC); the sending of the e-mail \"Done\" from iaman to spy (2015-03-24 21:05:09 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+      "rules": [
+        "C1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "C1"
+  ],
+  "strength": "strong",
+  "lean_file": "M363.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

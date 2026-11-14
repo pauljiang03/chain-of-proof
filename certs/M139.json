@@ -10,13 +10,13 @@
       },
       {
         "fileModifiedAt": [
-          192
+          266
         ]
       },
       {
         "before": [
           125,
-          192
+          266
         ]
       }
     ]
@@ -44,7 +44,7 @@
       }
     },
     {
-      "id": 192,
+      "id": 266,
       "kind": "fileModified",
       "t": 1427223570611170,
       "res": 1,
@@ -52,7 +52,7 @@
       "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
       "aux": 4,
       "aux_text": "CA0C7A48",
-      "row_sha256": "e6ad371e0bd266e5f64bf7c54f67f919b3a4af16c6cc5180cf7498a6979ba53a",
+      "row_sha256": "3923f97075d99d54ed3c24f669234efbb16789b649887b0ac76f1d09c842ab4a",
       "prov": {
         "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
         "exhibit": "PC",
@@ -79,7 +79,7 @@
     {
       "part": {
         "fileModifiedAt": [
-          192
+          266
         ]
       },
       "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx was last modified on volume CA0C7A48 (2015-03-24 18:59:30 UTC).",
@@ -92,7 +92,7 @@
       "part": {
         "before": [
           125,
-          192
+          266
         ]
       },
       "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:48:40 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on volume CA0C7A48 (2015-03-24 18:59:30 UTC): the gap of 649.877 s exceeds the combined timestamp uncertainty of 2 µs.",

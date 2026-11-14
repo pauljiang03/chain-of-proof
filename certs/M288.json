@@ -1,0 +1,1889 @@
+{
+  "finding_id": "M288",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          10890
+        ]
+      },
+      {
+        "fileRecorded": [
+          10891
+        ]
+      },
+      {
+        "fileRecorded": [
+          10892
+        ]
+      },
+      {
+        "fileRecorded": [
+          10893
+        ]
+      },
+      {
+        "fileRecorded": [
+          10894
+        ]
+      },
+      {
+        "fileRecorded": [
+          10895
+        ]
+      },
+      {
+        "fileRecorded": [
+          10896
+        ]
+      },
+      {
+        "fileRecorded": [
+          10897
+        ]
+      },
+      {
+        "fileRecorded": [
+          10898
+        ]
+      },
+      {
+        "fileRecorded": [
+          10899
+        ]
+      },
+      {
+        "fileRecorded": [
+          10900
+        ]
+      },
+      {
+        "fileRecorded": [
+          10901
+        ]
+      },
+      {
+        "fileRecorded": [
+          10902
+        ]
+      },
+      {
+        "fileRecorded": [
+          10903
+        ]
+      },
+      {
+        "fileRecorded": [
+          10904
+        ]
+      },
+      {
+        "fileRecorded": [
+          10905
+        ]
+      },
+      {
+        "fileRecorded": [
+          10906
+        ]
+      },
+      {
+        "fileRecorded": [
+          10907
+        ]
+      },
+      {
+        "fileRecorded": [
+          10908
+        ]
+      },
+      {
+        "fileRecorded": [
+          10909
+        ]
+      },
+      {
+        "fileRecorded": [
+          10910
+        ]
+      },
+      {
+        "fileRecorded": [
+          10911
+        ]
+      },
+      {
+        "fileRecorded": [
+          10912
+        ]
+      },
+      {
+        "fileRecorded": [
+          10913
+        ]
+      },
+      {
+        "fileRecorded": [
+          10914
+        ]
+      },
+      {
+        "fileRecorded": [
+          10915
+        ]
+      },
+      {
+        "fileRecorded": [
+          10916
+        ]
+      },
+      {
+        "fileRecorded": [
+          10917
+        ]
+      },
+      {
+        "fileRecorded": [
+          10918
+        ]
+      },
+      {
+        "fileRecorded": [
+          10919
+        ]
+      },
+      {
+        "fileRecorded": [
+          10920
+        ]
+      },
+      {
+        "fileRecorded": [
+          10921
+        ]
+      },
+      {
+        "fileRecorded": [
+          10922
+        ]
+      },
+      {
+        "fileRecorded": [
+          10923
+        ]
+      },
+      {
+        "fileRecorded": [
+          10924
+        ]
+      },
+      {
+        "fileRecorded": [
+          10925
+        ]
+      },
+      {
+        "fileRecorded": [
+          10926
+        ]
+      },
+      {
+        "fileRecorded": [
+          10927
+        ]
+      },
+      {
+        "fileRecorded": [
+          10928
+        ]
+      },
+      {
+        "fileRecorded": [
+          10929
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Music\\desktop.ini (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Downloads (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Downloads\\desktop.ini (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries\\desktop.ini (record time 2009-07-14 04:54:23 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Documents\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Desktop\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Videos (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Videos\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Music (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Music\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Pictures (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Downloads (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Downloads\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\Sample Pictures (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\Sample Pictures\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Videos\\Sample Videos (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Videos\\Sample Videos\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Documents\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Music\\Sample Music (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\Public Music\\Sample Music\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\Public\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\Users\\desktop.ini (record time 2009-07-14 04:54:24 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk (record time 2009-07-14 04:54:25 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk (record time 2009-07-14 04:54:25 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Event Viewer.lnk (record time 2009-07-14 04:54:29 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Task Scheduler.lnk (record time 2009-07-14 04:54:29 UTC). The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Task Scheduler.lnk (record time 2009-07-14 04:54:29 UTC).",
+  "cited_facts": [
+    {
+      "id": 10890,
+      "kind": "fileSeen",
+      "t": 1247547263718919,
+      "res": 1,
+      "obj": 15369,
+      "obj_text": "C:\\Users\\Public\\Public Music",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "91b22040c8330eecfec803b700a310541528f7e0e750a8f045d98a7919386307",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 102",
+        "column": "System_DateAccessed",
+        "display_name": "Public Music",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Music",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10891,
+      "kind": "fileSeen",
+      "t": 1247547263718919,
+      "res": 1,
+      "obj": 15394,
+      "obj_text": "C:\\Users\\Public\\Public Music\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b3dbae69ce17e14a4eadd79d0b0d56a14766ba29ff00d35d5fd88a44c07a6c99",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 125",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Music/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 380,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10892,
+      "kind": "fileSeen",
+      "t": 1247547263734519,
+      "res": 1,
+      "obj": 15361,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "224e211c6152dcf052795c42d5c6a721dab61f78b3b903efe512c2e63da09929",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 14",
+        "column": "System_DateAccessed",
+        "display_name": "Startup",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10893,
+      "kind": "fileSeen",
+      "t": 1247547263734519,
+      "res": 1,
+      "obj": 15395,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "04917dc72d63140fb63fabdd07a7f9266a1c837808a7844cb49008e5b2ec48c3",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 20",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10894,
+      "kind": "fileSeen",
+      "t": 1247547263750119,
+      "res": 1,
+      "obj": 15367,
+      "obj_text": "C:\\Users\\Public\\Public Downloads",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d3be8cf5cca9b4dae6b875d0778ae5ea476cd1bbef656ba6768a22ccbb109275",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 99",
+        "column": "System_DateAccessed",
+        "display_name": "Public Downloads",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Downloads",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10895,
+      "kind": "fileSeen",
+      "t": 1247547263750119,
+      "res": 1,
+      "obj": 15396,
+      "obj_text": "C:\\Users\\Public\\Public Downloads\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9a5e1535cb43f5c2919fe0f492f7604da7776e7dcd3e63fa694794d9f11f2b9f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 133",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Downloads/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10896,
+      "kind": "fileSeen",
+      "t": 1247547263765719,
+      "res": 1,
+      "obj": 15397,
+      "obj_text": "C:\\Users\\Public\\Libraries\\Recorded TV.library-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fd77685929291543f712dcc90fd3ed2d08744be11528e7915ca815f5a9af4134",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 132",
+        "column": "System_DateCreated",
+        "display_name": "Recorded TV.library-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".library-ms",
+        "item_url": "file:C:/Users/Public/Libraries/RecordedTV.library-ms",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 876,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10897,
+      "kind": "fileSeen",
+      "t": 1247547263781320,
+      "res": 1,
+      "obj": 15398,
+      "obj_text": "C:\\Users\\Public\\Libraries\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "099b8c202eff7b9d0c6fc533535e9507e61d42bb5eb1447196fe21d65da34526",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 131",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Libraries/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 88,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10898,
+      "kind": "fileSeen",
+      "t": 1247547264093320,
+      "res": 1,
+      "obj": 15399,
+      "obj_text": "C:\\Users\\Public\\Public Documents\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d33b688123377c8896c6e461b8009226ce63a120b1388f842ec4ca5aa986e541",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 134",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Documents/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 278,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10899,
+      "kind": "fileSeen",
+      "t": 1247547264124520,
+      "res": 1,
+      "obj": 15400,
+      "obj_text": "C:\\Users\\Public\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "512cab8b22bc479dcc7901134b70209a24e783210f1e9c68124dbff03bdfb9ff",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 97",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10900,
+      "kind": "fileSeen",
+      "t": 1247547264124520,
+      "res": 1,
+      "obj": 15401,
+      "obj_text": "C:\\Users\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b213ce38e821c9156dd2c2188d574141be2156527eb2358ae81fbcf2cab49a90",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 94",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10901,
+      "kind": "fileSeen",
+      "t": 1247547264280520,
+      "res": 1,
+      "obj": 15390,
+      "obj_text": "C:\\Users\\Public\\Public Desktop\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4399c08bb4c9d6370350b0a3f11c21ba0ae2003ebe657414f7cfc5cc31ac126a",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 135",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Desktop/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10902,
+      "kind": "fileSeen",
+      "t": 1247547264296120,
+      "res": 1,
+      "obj": 15371,
+      "obj_text": "C:\\Users\\Public\\Public Videos",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "19bd4ac99a58f68b3bff202ff66aa24bd115d2641a1db0fc333b4c7e124d5939",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 105",
+        "column": "System_DateModified",
+        "display_name": "Public Videos",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Videos",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10903,
+      "kind": "fileSeen",
+      "t": 1247547264296120,
+      "res": 1,
+      "obj": 15392,
+      "obj_text": "C:\\Users\\Public\\Public Videos\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3c12b94337674313325be10107da43c3dd0d270646126bc75d840631a105bede",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 106",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Videos/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 380,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10904,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15361,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "38f40ba50c6d89708c901b161c2ee41dedd2dd88cb45f8bafad869146f4b0dc8",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 14",
+        "column": "System_DateModified",
+        "display_name": "Startup",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10905,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15395,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2a3f5d4837b78dc10f6e481d74c4e3764b8b6b49a20322b3ac6bcaeab8372f0f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 20",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Startup/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10906,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15369,
+      "obj_text": "C:\\Users\\Public\\Public Music",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fae3758d93f7166beaf9e1d645747084d50ae922faacad6900907bcd5249f114",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 102",
+        "column": "System_DateModified",
+        "display_name": "Public Music",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Music",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10907,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15394,
+      "obj_text": "C:\\Users\\Public\\Public Music\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f81165ac273da1c94adb50d825feaf2822120019da1bd03dba7d1ee551baac54",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 125",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Music/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 380,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10908,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15370,
+      "obj_text": "C:\\Users\\Public\\Public Pictures",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "69f69da5b8218526e87e0682e5d978fe6acd49faf0e0dcf048d8dae55da56b95",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 103",
+        "column": "System_DateModified",
+        "display_name": "Public Pictures",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Pictures",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10909,
+      "kind": "fileSeen",
+      "t": 1247547264311720,
+      "res": 1,
+      "obj": 15391,
+      "obj_text": "C:\\Users\\Public\\Public Pictures\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9d01720f3874ef08c0999dd27f679990436182dddcafdcad2989bf0e2df6690e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 114",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Pictures/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 380,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10910,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15367,
+      "obj_text": "C:\\Users\\Public\\Public Downloads",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "76d453a9a2d5c0bf1ec646f01c14562859d7a73be9a0c0118817f01d044903c7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 99",
+        "column": "System_DateModified",
+        "display_name": "Public Downloads",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Downloads",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10911,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15396,
+      "obj_text": "C:\\Users\\Public\\Public Downloads\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "976b60746a0d6ba71c79ad6876d7dbb4ab79d4eea56f6af43c96bbac394541c9",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 133",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Downloads/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10912,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15402,
+      "obj_text": "C:\\Users\\Public\\Public Pictures\\Sample Pictures",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6d9e251fedb88eb6e66b8f2ba394e8a74966ae52c305e162a272e1ca2a782619",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 115",
+        "column": "System_DateModified",
+        "display_name": "Sample Pictures",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Pictures/Sample Pictures",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10913,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15403,
+      "obj_text": "C:\\Users\\Public\\Public Pictures\\Sample Pictures\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "18e54fe2d3b76eb43ac076e7436e1097beaef70ca1326742e3ee8b37428a28b8",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 118",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Pictures/Sample Pictures/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 1120,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10914,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15404,
+      "obj_text": "C:\\Users\\Public\\Public Videos\\Sample Videos",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "da9f2604d8cae75595c99dd758f67451264b78a41fcce31eda24a717390aebbb",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 107",
+        "column": "System_DateModified",
+        "display_name": "Sample Videos",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Videos/Sample Videos",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10915,
+      "kind": "fileSeen",
+      "t": 1247547264327320,
+      "res": 1,
+      "obj": 15405,
+      "obj_text": "C:\\Users\\Public\\Public Videos\\Sample Videos\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b52cb32eb86c577f5fd134a20ad06dddbc0e278ed63c88a7654e46c8a031c660",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 108",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Videos/Sample Videos/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 326,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10916,
+      "kind": "fileSeen",
+      "t": 1247547264342920,
+      "res": 1,
+      "obj": 15398,
+      "obj_text": "C:\\Users\\Public\\Libraries\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bc3234db219a9a6c206b7f43191bb8cbd1b62058d896b973bd624f3d78232d45",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 131",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Libraries/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 88,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10917,
+      "kind": "fileSeen",
+      "t": 1247547264420921,
+      "res": 1,
+      "obj": 15397,
+      "obj_text": "C:\\Users\\Public\\Libraries\\Recorded TV.library-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "1c9c142d542c96652935fb2adb558eb7bd7eae13892708ff09d40957f8a58951",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 132",
+        "column": "System_DateAccessed",
+        "display_name": "Recorded TV.library-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".library-ms",
+        "item_url": "file:C:/Users/Public/Libraries/RecordedTV.library-ms",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 876,
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10918,
+      "kind": "fileSeen",
+      "t": 1247547264467721,
+      "res": 1,
+      "obj": 15368,
+      "obj_text": "C:\\Users\\Public\\Libraries",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2eeac62f0312e99def83f03dafdf95a67c59f8cf2ae01c6793047e89f96ace36",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 101",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Libraries",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Libraries",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateCreated": "2009-07-14T03:20:10.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T03:20:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10919,
+      "kind": "fileSeen",
+      "t": 1247547264467721,
+      "res": 1,
+      "obj": 15397,
+      "obj_text": "C:\\Users\\Public\\Libraries\\Recorded TV.library-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "30122ab46ab67342e54341fd73e30db255aa312b3ea8fbd655f173402d060f62",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 132",
+        "column": "System_DateModified",
+        "display_name": "Recorded TV.library-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".library-ms",
+        "item_url": "file:C:/Users/Public/Libraries/RecordedTV.library-ms",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:24.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:24.000000Z"
+        },
+        "size": 876,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10920,
+      "kind": "fileSeen",
+      "t": 1247547264483321,
+      "res": 1,
+      "obj": 15399,
+      "obj_text": "C:\\Users\\Public\\Public Documents\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d0791ef607622041f4439a5a72dc912a3b876db7a5c7763029c8feb984b4a70b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 134",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Documents/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 278,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10921,
+      "kind": "fileSeen",
+      "t": 1247547264483321,
+      "res": 1,
+      "obj": 15406,
+      "obj_text": "C:\\Users\\Public\\Public Music\\Sample Music",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "61a5811d5cee76248693a228b8641bd267bb95e3bbf3d261acdd2bbc7c18a13a",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 126",
+        "column": "System_DateModified",
+        "display_name": "Sample Music",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/Public/Music/Sample Music",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T05:32:40.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10922,
+      "kind": "fileSeen",
+      "t": 1247547264483321,
+      "res": 1,
+      "obj": 15407,
+      "obj_text": "C:\\Users\\Public\\Public Music\\Sample Music\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e60c1b148838af1aa4d0c6d17706f8dbf85f4e637e6fb4870c9deb500ca7abf1",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 127",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/Music/Sample Music/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 586,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10923,
+      "kind": "fileSeen",
+      "t": 1247547264483321,
+      "res": 1,
+      "obj": 15400,
+      "obj_text": "C:\\Users\\Public\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5ebde2b887165d236749e07066a3c3fc51a70ab254259ea1773c76b7e34fc460",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 97",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/Public/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10924,
+      "kind": "fileSeen",
+      "t": 1247547264483321,
+      "res": 1,
+      "obj": 15401,
+      "obj_text": "C:\\Users\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4c5e762613c83f158133c7f0607a9c42f17b87dec8adedee9bc309048fcbaad7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 94",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 174,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10925,
+      "kind": "fileSeen",
+      "t": 1247547265887323,
+      "res": 1,
+      "obj": 15408,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ab1c656b964676b8fa58c804f66fa9522baa2e7c12692aecaa69ba4991564c99",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 83",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "Disk Defragmenter.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/System Tools/dfrgui.lnk",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 1290,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10926,
+      "kind": "fileSeen",
+      "t": 1247547265934123,
+      "res": 1,
+      "obj": 15408,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4c6b94a08b36f124ffbbe58a6378fb82fd0746c9c5b9e789f405854725e9cc53",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 83",
+        "column": "System_DateModified",
+        "display_name": "Disk Defragmenter.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/System Tools/dfrgui.lnk",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:26.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:26.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:26.000000Z"
+        },
+        "size": 1290,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10927,
+      "kind": "fileSeen",
+      "t": 1247547269366129,
+      "res": 1,
+      "obj": 15409,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Event Viewer.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f6b78cb82ea51f23999fbfcb7ce79df09d485e30ab46465d815b9b456e168b9e",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 43",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Event Viewer.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Administrative Tools/Event Viewer.lnk",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:30.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:30.000000Z"
+        },
+        "size": 1298,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10928,
+      "kind": "fileSeen",
+      "t": 1247547269444129,
+      "res": 1,
+      "obj": 15410,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Task Scheduler.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "caf2bc7b95d610df889cb4b2f8fe803b52b9f7249631e7d5a54839e800592493",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 51",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Task Scheduler.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Administrative Tools/Task Scheduler.lnk",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:30.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:30.000000Z"
+        },
+        "size": 1262,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 10929,
+      "kind": "fileSeen",
+      "t": 1247547269475330,
+      "res": 1,
+      "obj": 15411,
+      "obj_text": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Task Scheduler.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2870018d18df578eb737a2310eb0b59ae487c7187db814a00e262dca0655712a",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 88",
+        "column": "System_DateModified, System_DateCreated, System_DateAccessed",
+        "display_name": "Task Scheduler.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Accessories/System Tools/Task Scheduler.lnk",
+        "other_dates": {
+          "System_DateImported": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateCreated": "2009-07-14T04:54:30.000000Z",
+          "System_Document_DateSaved": "2009-07-14T04:54:30.000000Z",
+          "System_ItemDate": "2009-07-14T04:54:30.000000Z"
+        },
+        "size": 1268,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          10890
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10891
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music\\desktop.ini (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10892
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10893
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10894
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Downloads (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10895
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Downloads\\desktop.ini (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10896
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10897
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries\\desktop.ini (record time 2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10898
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Documents\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10899
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10900
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10901
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Desktop\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10902
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Videos (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10903
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Videos\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10904
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10905
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10906
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10907
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10908
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Pictures (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10909
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10910
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Downloads (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10911
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Downloads\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10912
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\Sample Pictures (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10913
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Pictures\\Sample Pictures\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10914
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Videos\\Sample Videos (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10915
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Videos\\Sample Videos\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10916
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10917
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10918
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10919
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Libraries\\Recorded TV.library-ms (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10920
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Documents\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10921
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music\\Sample Music (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10922
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\Public Music\\Sample Music\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10923
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\Public\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10924
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\desktop.ini (record time 2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10925
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk (record time 2009-07-14 04:54:25 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10926
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Defragmenter.lnk (record time 2009-07-14 04:54:25 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10927
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Event Viewer.lnk (record time 2009-07-14 04:54:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10928
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Task Scheduler.lnk (record time 2009-07-14 04:54:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          10929
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Task Scheduler.lnk (record time 2009-07-14 04:54:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M288.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

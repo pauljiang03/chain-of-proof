@@ -1,0 +1,1621 @@
+{
+  "finding_id": "M249",
+  "question": "Which programs were run?",
+  "claim": {
+    "both": [
+      {
+        "programRan": [
+          1157
+        ]
+      },
+      {
+        "programRan": [
+          1158
+        ]
+      },
+      {
+        "programRan": [
+          1159
+        ]
+      },
+      {
+        "programRan": [
+          1160
+        ]
+      },
+      {
+        "programRan": [
+          1161
+        ]
+      },
+      {
+        "programRan": [
+          1162
+        ]
+      },
+      {
+        "programRan": [
+          1163
+        ]
+      },
+      {
+        "programRan": [
+          1164
+        ]
+      },
+      {
+        "programRan": [
+          1165
+        ]
+      },
+      {
+        "programRan": [
+          1166
+        ]
+      },
+      {
+        "programRan": [
+          1167
+        ]
+      },
+      {
+        "programRan": [
+          1168
+        ]
+      },
+      {
+        "programRan": [
+          1169
+        ]
+      },
+      {
+        "programRan": [
+          1170
+        ]
+      },
+      {
+        "programRan": [
+          1171
+        ]
+      },
+      {
+        "programRan": [
+          1172
+        ]
+      },
+      {
+        "programRan": [
+          1173
+        ]
+      },
+      {
+        "programRan": [
+          1174
+        ]
+      },
+      {
+        "programRan": [
+          1175
+        ]
+      },
+      {
+        "programRan": [
+          1176
+        ]
+      },
+      {
+        "programRan": [
+          1177
+        ]
+      },
+      {
+        "programRan": [
+          1178
+        ]
+      },
+      {
+        "programRan": [
+          1179
+        ]
+      },
+      {
+        "programRan": [
+          1180
+        ]
+      },
+      {
+        "programRan": [
+          1181
+        ]
+      },
+      {
+        "programRan": [
+          1182
+        ]
+      },
+      {
+        "programRan": [
+          1183
+        ]
+      },
+      {
+        "programRan": [
+          1184
+        ]
+      },
+      {
+        "programRan": [
+          1185
+        ]
+      },
+      {
+        "programRan": [
+          1186
+        ]
+      },
+      {
+        "programRan": [
+          1187
+        ]
+      },
+      {
+        "programRan": [
+          1188
+        ]
+      },
+      {
+        "programRan": [
+          1189
+        ]
+      },
+      {
+        "programRan": [
+          1190
+        ]
+      },
+      {
+        "programRan": [
+          1191
+        ]
+      },
+      {
+        "programRan": [
+          1192
+        ]
+      },
+      {
+        "programRan": [
+          1193
+        ]
+      },
+      {
+        "programRan": [
+          1194
+        ]
+      },
+      {
+        "programRan": [
+          1195
+        ]
+      },
+      {
+        "programRan": [
+          1196
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A record shows schtasks.exe ran (2010-11-21 03:24:26 UTC, path C:\\Windows\\system32\\schtasks.exe). A record shows taskeng.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\system32\\taskeng.exe). A record shows runonce.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\system32\\runonce.exe). A record shows spoolsv.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\System32\\spoolsv.exe). A record shows timedate.cpl ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\System32\\timedate.cpl). A record shows cvtres.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\cvtres.exe). A record shows SearchFolder.dll ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\System32\\SearchFolder.dll). A record shows MsiExec.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\syswow64\\MsiExec.exe). A record shows msiexec.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\system32\\msiexec.exe). A record shows userinit.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\system32\\userinit.exe). A record shows twext.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\SysWOW64\\twext.dll). A record shows ngen.exe ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\ngen.exe). A record shows acppage.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\SysWOW64\\acppage.dll). A record shows Display.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\System32\\Display.dll). A record shows winsat.exe ran (2010-11-21 03:24:35 UTC, path C:\\Windows\\system32\\winsat.exe). A record shows cscui.dll ran (2010-11-21 03:24:41 UTC, path C:\\Windows\\System32\\cscui.dll). A record shows ieframe.dll ran (2010-11-21 03:24:42 UTC, path C:\\Windows\\System32\\ieframe.dll). A record shows iexplore.exe ran (2010-11-21 03:24:43 UTC, path C:\\Program Files\\Internet Explorer\\iexplore.exe). A record shows gameux.dll ran (2010-11-21 03:24:49 UTC, path C:\\Windows\\System32\\gameux.dll). A record shows wsqmcons.exe ran (2010-11-21 03:24:49 UTC, path C:\\Windows\\System32\\wsqmcons.exe). A record shows sbe.dll ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\sbe.dll). A record shows mobsync.exe ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\mobsync.exe). A record shows syncui.dll ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\syncui.dll). A record shows sidebar.exe ran (2010-11-21 03:24:51 UTC, path C:\\Program Files\\Windows Sidebar\\sidebar.exe). A record shows wmpshell.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\wmpshell.dll). A record shows wpdshext.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\wpdshext.dll). A record shows mf.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\mf.dll). A record shows addinutil.exe ran (2010-11-21 03:25:05 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v3.5\\addinutil.exe). A record shows wmpnetwk.exe ran (2010-11-21 03:25:05 UTC, path C:\\Program Files\\Windows Media Player\\wmpnetwk.exe). A record shows PhotoViewer.dll ran (2010-11-21 03:25:06 UTC, path C:\\Program Files\\Windows Photo Viewer\\PhotoViewer.dll). A record shows sdclt.exe ran (2010-11-21 03:25:06 UTC, path C:\\Windows\\System32\\sdclt.exe). A record shows recdisc.exe ran (2010-11-21 03:25:06 UTC, path C:\\Windows\\system32\\recdisc.exe). A record shows WFS.exe ran (2010-11-21 03:25:07 UTC, path C:\\Windows\\system32\\WFS.exe). A record shows ie4uinit.exe ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\SysWOW64\\ie4uinit.exe). A record shows PDMSetup.exe ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\WinSxS\\x86_microsoft-windows-ie-pdm_31bf3856ad364e35_8.0.7601.17514_none_0a379bcfbdcffb74\\PDMSetup.exe). A record shows iexplore.exe ran (2010-11-21 03:25:08 UTC, path C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe). A record shows mssvp.dll ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\System32\\mssvp.dll). A record shows tquery.dll ran (2010-11-21 03:25:09 UTC, path C:\\Windows\\System32\\tquery.dll). A record shows setup_wm.exe ran (2010-11-21 03:25:10 UTC, path C:\\Program Files (x86)\\Windows Media Player\\setup_wm.exe). A record shows wmplayer.exe ran (2010-11-21 03:25:10 UTC, path C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe).",
+  "cited_facts": [
+    {
+      "id": 1157,
+      "kind": "programRun",
+      "t": 1290309866326955,
+      "res": 1,
+      "obj": 554,
+      "obj_text": "schtasks.exe",
+      "aux": 555,
+      "aux_text": "C:\\Windows\\system32\\schtasks.exe",
+      "row_sha256": "b9c55965dba78893d0018c030f13d78cf11e0ea1a4c834c64d2ef1463a95590a",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 135",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\schtasks.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1158,
+      "kind": "programRun",
+      "t": 1290309867122557,
+      "res": 1,
+      "obj": 641,
+      "obj_text": "taskeng.exe",
+      "aux": 642,
+      "aux_text": "C:\\Windows\\system32\\taskeng.exe",
+      "row_sha256": "f08216121b8cbea82172e5ce4995a4e4ab1fe12928e25a0e85ab76992915cdf6",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 59",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\taskeng.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1159,
+      "kind": "programRun",
+      "t": 1290309867184957,
+      "res": 1,
+      "obj": 643,
+      "obj_text": "runonce.exe",
+      "aux": 644,
+      "aux_text": "C:\\Windows\\system32\\runonce.exe",
+      "row_sha256": "9dba501b07077df99141aadea64369a155c606a2bed41ca0c4c9ded958b37427",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 284",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\runonce.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1160,
+      "kind": "programRun",
+      "t": 1290309867637357,
+      "res": 1,
+      "obj": 645,
+      "obj_text": "spoolsv.exe",
+      "aux": 646,
+      "aux_text": "C:\\Windows\\System32\\spoolsv.exe",
+      "row_sha256": "68c2c3e252f4ee3768278f895df2ee15869832695a1a8d2cd1f5c8e87d3c535d",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 145",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\spoolsv.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1161,
+      "kind": "programRun",
+      "t": 1290309868386159,
+      "res": 1,
+      "obj": 647,
+      "obj_text": "timedate.cpl",
+      "aux": 648,
+      "aux_text": "C:\\Windows\\System32\\timedate.cpl",
+      "row_sha256": "1c44403b7a4f40bc47fe08e8016c5557ce5a683844d8b03cf4d94f876ba3e5f8",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 131",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\timedate.cpl",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1162,
+      "kind": "programRun",
+      "t": 1290309868464159,
+      "res": 1,
+      "obj": 649,
+      "obj_text": "cvtres.exe",
+      "aux": 650,
+      "aux_text": "C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\cvtres.exe",
+      "row_sha256": "5aa2456c8f2e0307ecd180ab735fcda822927c57d252bd8cd84c9ac1ac24e23a",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 164",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\cvtres.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1163,
+      "kind": "programRun",
+      "t": 1290309868604559,
+      "res": 1,
+      "obj": 651,
+      "obj_text": "SearchFolder.dll",
+      "aux": 652,
+      "aux_text": "C:\\Windows\\System32\\SearchFolder.dll",
+      "row_sha256": "344a6daf28a9eef8d8437a7eaf5c5bf205d84a81af62337b44a8b84f23e7eee4",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 186",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\SearchFolder.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1164,
+      "kind": "programRun",
+      "t": 1290309868807360,
+      "res": 1,
+      "obj": 653,
+      "obj_text": "MsiExec.exe",
+      "aux": 654,
+      "aux_text": "C:\\Windows\\syswow64\\MsiExec.exe",
+      "row_sha256": "616bf4161cf75e28bfe39de85498487500507e0bae3464a4f6f47cdef4b62103",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 35",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\syswow64\\MsiExec.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1165,
+      "kind": "programRun",
+      "t": 1290309868807360,
+      "res": 1,
+      "obj": 612,
+      "obj_text": "msiexec.exe",
+      "aux": 613,
+      "aux_text": "C:\\Windows\\system32\\msiexec.exe",
+      "row_sha256": "dbc0119fabd040b5f5370c761c7cd9e99f724dcd22b672d0a606ef772fd26b7b",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 86",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\msiexec.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1166,
+      "kind": "programRun",
+      "t": 1290309868932160,
+      "res": 1,
+      "obj": 655,
+      "obj_text": "userinit.exe",
+      "aux": 656,
+      "aux_text": "C:\\Windows\\system32\\userinit.exe",
+      "row_sha256": "1eb276e00e03a3092edb138d17e281c63799f7bbad56ad2689bcfe6d0437b8db",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 143",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\userinit.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1167,
+      "kind": "programRun",
+      "t": 1290309872410966,
+      "res": 1,
+      "obj": 619,
+      "obj_text": "twext.dll",
+      "aux": 657,
+      "aux_text": "C:\\Windows\\SysWOW64\\twext.dll",
+      "row_sha256": "841b60e911d9c801b55ec8f93941739e51770938676f2de9479bd687a405a846",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 214",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\SysWOW64\\twext.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1168,
+      "kind": "programRun",
+      "t": 1290309872457766,
+      "res": 1,
+      "obj": 530,
+      "obj_text": "ngen.exe",
+      "aux": 658,
+      "aux_text": "C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\ngen.exe",
+      "row_sha256": "8787ee6e515d9de6380ff1778c1039fe7a4b2a1d351fd7f50f43513bad609245",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 275",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\ngen.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1169,
+      "kind": "programRun",
+      "t": 1290309872473366,
+      "res": 1,
+      "obj": 626,
+      "obj_text": "acppage.dll",
+      "aux": 659,
+      "aux_text": "C:\\Windows\\SysWOW64\\acppage.dll",
+      "row_sha256": "3de288372d87cc04d3d8963e8bccabede350d3703787bb155aee2d85f3d6aa65",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 213",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\SysWOW64\\acppage.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1170,
+      "kind": "programRun",
+      "t": 1290309872769767,
+      "res": 1,
+      "obj": 660,
+      "obj_text": "Display.dll",
+      "aux": 661,
+      "aux_text": "C:\\Windows\\System32\\Display.dll",
+      "row_sha256": "6faa1e7f72d7acebd0c7b833f675b5e144b142f54445a818aa858c32d81fae12",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 225",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\Display.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1171,
+      "kind": "programRun",
+      "t": 1290309875733772,
+      "res": 1,
+      "obj": 662,
+      "obj_text": "winsat.exe",
+      "aux": 663,
+      "aux_text": "C:\\Windows\\system32\\winsat.exe",
+      "row_sha256": "6906a7a429968be41a352805f5766ddc46b7ef8ccde1f586c0f6233f961b3a4d",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 170",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\winsat.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1172,
+      "kind": "programRun",
+      "t": 1290309881427782,
+      "res": 1,
+      "obj": 664,
+      "obj_text": "cscui.dll",
+      "aux": 665,
+      "aux_text": "C:\\Windows\\System32\\cscui.dll",
+      "row_sha256": "31eac8df89e0a3dd3f1fbb35f625c9fa0eef49546fd0e5533b6ab827e2e9b377",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 12",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\cscui.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1173,
+      "kind": "programRun",
+      "t": 1290309882831784,
+      "res": 1,
+      "obj": 666,
+      "obj_text": "ieframe.dll",
+      "aux": 667,
+      "aux_text": "C:\\Windows\\System32\\ieframe.dll",
+      "row_sha256": "0c7a37bc3ebd3e6c8df4c2af5f6ec35452e9dce0b4a75754932970bca3eed70d",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 270",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\ieframe.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1174,
+      "kind": "programRun",
+      "t": 1290309883034585,
+      "res": 1,
+      "obj": 668,
+      "obj_text": "iexplore.exe",
+      "aux": 669,
+      "aux_text": "C:\\Program Files\\Internet Explorer\\iexplore.exe",
+      "row_sha256": "953d09fe8432e2213dcb0d1923cbb6b43865e63fcc32822c3dfdd2c089be641c",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 253",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files\\Internet Explorer\\iexplore.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1175,
+      "kind": "programRun",
+      "t": 1290309889087395,
+      "res": 1,
+      "obj": 670,
+      "obj_text": "gameux.dll",
+      "aux": 671,
+      "aux_text": "C:\\Windows\\System32\\gameux.dll",
+      "row_sha256": "819dd502c164996db9974ab1a29c5f37852620e886b5252825276b1153107700",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 44",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\gameux.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1176,
+      "kind": "programRun",
+      "t": 1290309889134195,
+      "res": 1,
+      "obj": 672,
+      "obj_text": "wsqmcons.exe",
+      "aux": 673,
+      "aux_text": "C:\\Windows\\System32\\wsqmcons.exe",
+      "row_sha256": "903d11f9d612cf7e210bbc5a693c58e6fa9197dc627d43ef83459243dd91abda",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 136",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\wsqmcons.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1177,
+      "kind": "programRun",
+      "t": 1290309891364999,
+      "res": 1,
+      "obj": 674,
+      "obj_text": "sbe.dll",
+      "aux": 675,
+      "aux_text": "C:\\Windows\\System32\\sbe.dll",
+      "row_sha256": "1678d75fd90d52600a16da59eab4e3ce6413bce769089e4045b5b6e47b65d2c5",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 285",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\sbe.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1178,
+      "kind": "programRun",
+      "t": 1290309891458599,
+      "res": 1,
+      "obj": 676,
+      "obj_text": "mobsync.exe",
+      "aux": 677,
+      "aux_text": "C:\\Windows\\System32\\mobsync.exe",
+      "row_sha256": "6849e41bc7481b938ae95bf0e6d63b9c25b262f9a2ba80dd4af1fe53132dfacb",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 127",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\mobsync.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1179,
+      "kind": "programRun",
+      "t": 1290309891474199,
+      "res": 1,
+      "obj": 678,
+      "obj_text": "syncui.dll",
+      "aux": 679,
+      "aux_text": "C:\\Windows\\System32\\syncui.dll",
+      "row_sha256": "45a4d1635538ac4dfcff9d5b427dad3b55497bd398857cf71533007ac66dd327",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 69",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\syncui.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1180,
+      "kind": "programRun",
+      "t": 1290309891536599,
+      "res": 1,
+      "obj": 680,
+      "obj_text": "sidebar.exe",
+      "aux": 681,
+      "aux_text": "C:\\Program Files\\Windows Sidebar\\sidebar.exe",
+      "row_sha256": "0adf1634c2fbc850375a24187afb528f192356f1568f78d2317d7ff235fda666",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 28",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files\\Windows Sidebar\\sidebar.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1181,
+      "kind": "programRun",
+      "t": 1290309892113800,
+      "res": 1,
+      "obj": 682,
+      "obj_text": "wmpshell.dll",
+      "aux": 683,
+      "aux_text": "C:\\Windows\\System32\\wmpshell.dll",
+      "row_sha256": "7fbd2132084f3c9ba695ccc13919fe8073b5eb6686fbedc5b1f15ead4d973272",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 34",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\wmpshell.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1182,
+      "kind": "programRun",
+      "t": 1290309892581801,
+      "res": 1,
+      "obj": 684,
+      "obj_text": "wpdshext.dll",
+      "aux": 685,
+      "aux_text": "C:\\Windows\\System32\\wpdshext.dll",
+      "row_sha256": "8430c97ebaae20e9a10b979a2573d59e20ab986ba6761a2078393a1d09fbb927",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 8",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\wpdshext.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1183,
+      "kind": "programRun",
+      "t": 1290309892800202,
+      "res": 1,
+      "obj": 686,
+      "obj_text": "mf.dll",
+      "aux": 687,
+      "aux_text": "C:\\Windows\\System32\\mf.dll",
+      "row_sha256": "0e69755d90cbc67399c6b1e8fae01c7fc6985b843ff20d0d8f3c5ffe026e3b32",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 154",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\mf.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1184,
+      "kind": "programRun",
+      "t": 1290309905061823,
+      "res": 1,
+      "obj": 688,
+      "obj_text": "addinutil.exe",
+      "aux": 689,
+      "aux_text": "C:\\Windows\\Microsoft.NET\\Framework64\\v3.5\\addinutil.exe",
+      "row_sha256": "265a7cfb6969702778e94de6e0b5510c99631547fd1d24cbc62676d4aa956aeb",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 273",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\Microsoft.NET\\Framework64\\v3.5\\addinutil.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1185,
+      "kind": "programRun",
+      "t": 1290309905155423,
+      "res": 1,
+      "obj": 690,
+      "obj_text": "wmpnetwk.exe",
+      "aux": 691,
+      "aux_text": "C:\\Program Files\\Windows Media Player\\wmpnetwk.exe",
+      "row_sha256": "186fc3340436d655c4c6fee2043515fd5831301b9a3a31e462861413f4d5b59c",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 140",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files\\Windows Media Player\\wmpnetwk.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1186,
+      "kind": "programRun",
+      "t": 1290309906029025,
+      "res": 1,
+      "obj": 692,
+      "obj_text": "PhotoViewer.dll",
+      "aux": 693,
+      "aux_text": "C:\\Program Files\\Windows Photo Viewer\\PhotoViewer.dll",
+      "row_sha256": "807afbfe5455f87f0301d4f9bdfbf55aadba7d1792a7523de84a47159ab5c6f3",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 178",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files\\Windows Photo Viewer\\PhotoViewer.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1187,
+      "kind": "programRun",
+      "t": 1290309906325425,
+      "res": 1,
+      "obj": 694,
+      "obj_text": "sdclt.exe",
+      "aux": 695,
+      "aux_text": "C:\\Windows\\System32\\sdclt.exe",
+      "row_sha256": "c7605de791d336f703b9cee55bc36f522f42f1778c8f46bef444a57edb8a6234",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 130",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\sdclt.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1188,
+      "kind": "programRun",
+      "t": 1290309906419026,
+      "res": 1,
+      "obj": 696,
+      "obj_text": "recdisc.exe",
+      "aux": 697,
+      "aux_text": "C:\\Windows\\system32\\recdisc.exe",
+      "row_sha256": "aa6cb9d7dcb71ddaf0e87b4a42a6bdb9cfec060e50089c39e2300b8321821cb2",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 182",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\recdisc.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1189,
+      "kind": "programRun",
+      "t": 1290309907199027,
+      "res": 1,
+      "obj": 698,
+      "obj_text": "WFS.exe",
+      "aux": 699,
+      "aux_text": "C:\\Windows\\system32\\WFS.exe",
+      "row_sha256": "96d89009ff55fc64f8ad90ba9275a4a65a2ed7d134a4a8b4c8aefd1209dd4202",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 38",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\system32\\WFS.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1190,
+      "kind": "programRun",
+      "t": 1290309908010228,
+      "res": 1,
+      "obj": 431,
+      "obj_text": "ie4uinit.exe",
+      "aux": 700,
+      "aux_text": "C:\\Windows\\SysWOW64\\ie4uinit.exe",
+      "row_sha256": "7f27a122a6684d8ada9486503dc32c9b783336797282ed8c2333a6c84e220f42",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 271",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\SysWOW64\\ie4uinit.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1191,
+      "kind": "programRun",
+      "t": 1290309908603029,
+      "res": 1,
+      "obj": 457,
+      "obj_text": "PDMSetup.exe",
+      "aux": 701,
+      "aux_text": "C:\\Windows\\WinSxS\\x86_microsoft-windows-ie-pdm_31bf3856ad364e35_8.0.7601.17514_none_0a379bcfbdcffb74\\PDMSetup.exe",
+      "row_sha256": "6e6d578552212e7fe89b5363a96cbfaf5c0bb8298d611f78c0fd0566db8f14fb",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 236",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\WinSxS\\x86_microsoft-windows-ie-pdm_31bf3856ad364e35_8.0.7601.17514_none_0a379bcfbdcffb74\\PDMSetup.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1192,
+      "kind": "programRun",
+      "t": 1290309908852630,
+      "res": 1,
+      "obj": 668,
+      "obj_text": "iexplore.exe",
+      "aux": 702,
+      "aux_text": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+      "row_sha256": "90efe9fad2c270fcc587988fe2e34f5a360b167adb5c72d8465a40a5ddc76f42",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 252",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1193,
+      "kind": "programRun",
+      "t": 1290309908977430,
+      "res": 1,
+      "obj": 703,
+      "obj_text": "mssvp.dll",
+      "aux": 704,
+      "aux_text": "C:\\Windows\\System32\\mssvp.dll",
+      "row_sha256": "bb5f5a4d37a4ec31dc18c5c960008f5d25976a954f19455d3e8c5d65f8ff6dde",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 10",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\mssvp.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1194,
+      "kind": "programRun",
+      "t": 1290309909102230,
+      "res": 1,
+      "obj": 705,
+      "obj_text": "tquery.dll",
+      "aux": 706,
+      "aux_text": "C:\\Windows\\System32\\tquery.dll",
+      "row_sha256": "b1bd0b507b94ae6949a321166c8fe8c8e74551a862ca3cf18eb07d8a8896c147",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 223",
+        "control_set": "ControlSet001",
+        "executed_flag": false,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Windows\\System32\\tquery.dll",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1195,
+      "kind": "programRun",
+      "t": 1290309910521833,
+      "res": 1,
+      "obj": 707,
+      "obj_text": "setup_wm.exe",
+      "aux": 708,
+      "aux_text": "C:\\Program Files (x86)\\Windows Media Player\\setup_wm.exe",
+      "row_sha256": "11626c7c819e1e2d403c6d06c141c05172c1a078c01fcf3be7956fde6ce04aaf",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 121",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files (x86)\\Windows Media Player\\setup_wm.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1196,
+      "kind": "programRun",
+      "t": 1290309910584233,
+      "res": 1,
+      "obj": 709,
+      "obj_text": "wmplayer.exe",
+      "aux": 710,
+      "aux_text": "C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe",
+      "row_sha256": "16fa0cdd2eb9034d01a86e1fe2e5a5ed165db17196872e2f9010b1aea1f7ce51",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 41",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programRan": [
+          1157
+        ]
+      },
+      "english": "A record shows schtasks.exe ran (2010-11-21 03:24:26 UTC, path C:\\Windows\\system32\\schtasks.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1158
+        ]
+      },
+      "english": "A record shows taskeng.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\system32\\taskeng.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1159
+        ]
+      },
+      "english": "A record shows runonce.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\system32\\runonce.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1160
+        ]
+      },
+      "english": "A record shows spoolsv.exe ran (2010-11-21 03:24:27 UTC, path C:\\Windows\\System32\\spoolsv.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1161
+        ]
+      },
+      "english": "A record shows timedate.cpl ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\System32\\timedate.cpl).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1162
+        ]
+      },
+      "english": "A record shows cvtres.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\cvtres.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1163
+        ]
+      },
+      "english": "A record shows SearchFolder.dll ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\System32\\SearchFolder.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1164
+        ]
+      },
+      "english": "A record shows MsiExec.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\syswow64\\MsiExec.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1165
+        ]
+      },
+      "english": "A record shows msiexec.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\system32\\msiexec.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1166
+        ]
+      },
+      "english": "A record shows userinit.exe ran (2010-11-21 03:24:28 UTC, path C:\\Windows\\system32\\userinit.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1167
+        ]
+      },
+      "english": "A record shows twext.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\SysWOW64\\twext.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1168
+        ]
+      },
+      "english": "A record shows ngen.exe ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\ngen.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1169
+        ]
+      },
+      "english": "A record shows acppage.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\SysWOW64\\acppage.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1170
+        ]
+      },
+      "english": "A record shows Display.dll ran (2010-11-21 03:24:32 UTC, path C:\\Windows\\System32\\Display.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1171
+        ]
+      },
+      "english": "A record shows winsat.exe ran (2010-11-21 03:24:35 UTC, path C:\\Windows\\system32\\winsat.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1172
+        ]
+      },
+      "english": "A record shows cscui.dll ran (2010-11-21 03:24:41 UTC, path C:\\Windows\\System32\\cscui.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1173
+        ]
+      },
+      "english": "A record shows ieframe.dll ran (2010-11-21 03:24:42 UTC, path C:\\Windows\\System32\\ieframe.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1174
+        ]
+      },
+      "english": "A record shows iexplore.exe ran (2010-11-21 03:24:43 UTC, path C:\\Program Files\\Internet Explorer\\iexplore.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1175
+        ]
+      },
+      "english": "A record shows gameux.dll ran (2010-11-21 03:24:49 UTC, path C:\\Windows\\System32\\gameux.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1176
+        ]
+      },
+      "english": "A record shows wsqmcons.exe ran (2010-11-21 03:24:49 UTC, path C:\\Windows\\System32\\wsqmcons.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1177
+        ]
+      },
+      "english": "A record shows sbe.dll ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\sbe.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1178
+        ]
+      },
+      "english": "A record shows mobsync.exe ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\mobsync.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1179
+        ]
+      },
+      "english": "A record shows syncui.dll ran (2010-11-21 03:24:51 UTC, path C:\\Windows\\System32\\syncui.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1180
+        ]
+      },
+      "english": "A record shows sidebar.exe ran (2010-11-21 03:24:51 UTC, path C:\\Program Files\\Windows Sidebar\\sidebar.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1181
+        ]
+      },
+      "english": "A record shows wmpshell.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\wmpshell.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1182
+        ]
+      },
+      "english": "A record shows wpdshext.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\wpdshext.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1183
+        ]
+      },
+      "english": "A record shows mf.dll ran (2010-11-21 03:24:52 UTC, path C:\\Windows\\System32\\mf.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1184
+        ]
+      },
+      "english": "A record shows addinutil.exe ran (2010-11-21 03:25:05 UTC, path C:\\Windows\\Microsoft.NET\\Framework64\\v3.5\\addinutil.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1185
+        ]
+      },
+      "english": "A record shows wmpnetwk.exe ran (2010-11-21 03:25:05 UTC, path C:\\Program Files\\Windows Media Player\\wmpnetwk.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1186
+        ]
+      },
+      "english": "A record shows PhotoViewer.dll ran (2010-11-21 03:25:06 UTC, path C:\\Program Files\\Windows Photo Viewer\\PhotoViewer.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1187
+        ]
+      },
+      "english": "A record shows sdclt.exe ran (2010-11-21 03:25:06 UTC, path C:\\Windows\\System32\\sdclt.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1188
+        ]
+      },
+      "english": "A record shows recdisc.exe ran (2010-11-21 03:25:06 UTC, path C:\\Windows\\system32\\recdisc.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1189
+        ]
+      },
+      "english": "A record shows WFS.exe ran (2010-11-21 03:25:07 UTC, path C:\\Windows\\system32\\WFS.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1190
+        ]
+      },
+      "english": "A record shows ie4uinit.exe ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\SysWOW64\\ie4uinit.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1191
+        ]
+      },
+      "english": "A record shows PDMSetup.exe ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\WinSxS\\x86_microsoft-windows-ie-pdm_31bf3856ad364e35_8.0.7601.17514_none_0a379bcfbdcffb74\\PDMSetup.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1192
+        ]
+      },
+      "english": "A record shows iexplore.exe ran (2010-11-21 03:25:08 UTC, path C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1193
+        ]
+      },
+      "english": "A record shows mssvp.dll ran (2010-11-21 03:25:08 UTC, path C:\\Windows\\System32\\mssvp.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1194
+        ]
+      },
+      "english": "A record shows tquery.dll ran (2010-11-21 03:25:09 UTC, path C:\\Windows\\System32\\tquery.dll).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1195
+        ]
+      },
+      "english": "A record shows setup_wm.exe ran (2010-11-21 03:25:10 UTC, path C:\\Program Files (x86)\\Windows Media Player\\setup_wm.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1196
+        ]
+      },
+      "english": "A record shows wmplayer.exe ran (2010-11-21 03:25:10 UTC, path C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "M249.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

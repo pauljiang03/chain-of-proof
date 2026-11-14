@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          239
+          313
         ]
       },
       {
         "tagged": [
-          239,
+          313,
           "obj",
-          318,
-          195
+          392,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"Forensic Email Investigation\" was made in iexplore (2015-03-23 18:10:03 UTC). Forensic Email Investigation is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
   "cited_facts": [
     {
-      "id": 239,
+      "id": 313,
       "kind": "webSearch",
       "t": 1427134203820419,
       "res": 1,
-      "obj": 139,
+      "obj": 173,
       "obj_text": "Forensic Email Investigation",
-      "aux": 126,
+      "aux": 160,
       "aux_text": "iexplore",
-      "row_sha256": "fd83a0fbee0f2f1eae394ee5956dbaff7dadb61275c129e802933e94077b40c0",
+      "row_sha256": "ddb0b662a2d633e47f95632a9d0e12b0d925c7520de806cbcefb913124f70e9f",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 318,
+      "id": 392,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 139,
+      "obj": 173,
       "obj_text": "Forensic Email Investigation",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "ea80add68b4dadd8ef889e8a5fadc90064c64c01a137409b37b6de307c9a3572",
+      "row_sha256": "0f307897a402ecea7d74f4c569139e8fea086e455d5f75676862af53eb274a36",
       "prov": {
         "rule": "search term contains the watch-list word \"forensic\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          239
+          313
         ]
       },
       "english": "A web search for \"Forensic Email Investigation\" was made in iexplore (2015-03-23 18:10:03 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          239,
+          313,
           "obj",
-          318,
-          195
+          392,
+          229
         ]
       },
       "english": "Forensic Email Investigation is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",

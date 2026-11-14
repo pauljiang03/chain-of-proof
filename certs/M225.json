@@ -1,0 +1,54 @@
+{
+  "finding_id": "M225",
+  "question": "What traces of disc burning are there?",
+  "claim": {
+    "burnTrace": [
+      383
+    ]
+  },
+  "status": "verified",
+  "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "cited_facts": [
+    {
+      "id": 383,
+      "kind": "cdBurn",
+      "t": 1427228659896305,
+      "res": 1,
+      "obj": 223,
+      "obj_text": "temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp",
+      "aux": 219,
+      "aux_text": "NTFS change journal",
+      "row_sha256": "37d6057431b5ac1d4a95c4cc0c932c900e47349e7c6718dcbbc9c507e49308bf",
+      "prov": {
+        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
+        "exhibit": "PC",
+        "first_usn": 64418464,
+        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
+        "image": "pc.E01",
+        "time_meaning": "creation of the first temporary file of the session",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "burnTrace": [
+          383
+        ]
+      },
+      "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "rules": [
+        "R12"
+      ],
+      "strength": "heuristic"
+    }
+  ],
+  "rules": [
+    "R12"
+  ],
+  "strength": "heuristic",
+  "lean_file": "M225.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

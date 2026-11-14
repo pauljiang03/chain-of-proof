@@ -1,55 +1,210 @@
 {
   "finding_id": "M154",
-  "question": "Which files were sent to the Recycle Bin?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "fileDeletedAt": [
-      203
+    "both": [
+      {
+        "recoveredOnDevice": [
+          140,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          140,
+          240
+        ]
+      },
+      {
+        "tagged": [
+          140,
+          "obj",
+          445,
+          240
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "english": "A directory entry for \\progress\\my_friends.svg, created (2015-03-24 20:55:19 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\progress\\my_friends.svg was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:19 UTC) after its last modification (2015-01-20 15:13:44 UTC). This rests on heuristic rule R4. \\progress\\my_friends.svg is tagged \"same size and last-modified time as a file elsewhere: 58368 bytes, 2015-01-20 15:13:44 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 203,
-      "kind": "fileDeleted",
-      "t": 1427227902851000,
+      "id": 140,
+      "kind": "fileCreated",
+      "t": 1427230519071016,
       "res": 1,
-      "obj": 118,
-      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "b33b523d65e9f91d8e85459b1eb38bf66362fb7cd0a4801639908f4889c167ce",
+      "obj": 123,
+      "obj_text": "\\progress\\my_friends.svg",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "8b7ac77512f57ca4d7390ba785b3c8821c0920fa5189f24966cbbf90880120b2",
       "prov": {
-        "artifact": "Recycle Bin index $I8YP3XK.jpg, file table record 74762",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "index_record_in_use": false,
-        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
-        "original_drive": "C:",
-        "size": 775702,
-        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "allocation_table_at_sector": 51295,
+        "artifact": "UDF extended file entry at sector 51197 (byte offset 104851456), named by the directory at sector 51196",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 58368,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 25
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 240,
+      "kind": "fileModified",
+      "t": 1421766824000000,
+      "res": 1,
+      "obj": 123,
+      "obj_text": "\\progress\\my_friends.svg",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "3a88ed6f398a81c5651d1c266b3c198099d6a18be8fb8bc67289efeff85c9f52",
+      "prov": {
+        "allocation_table_at_sector": 51295,
+        "artifact": "UDF extended file entry at sector 51197 (byte offset 104851456), named by the directory at sector 51196",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:55:47.665866Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51231,
+          51263,
+          51295
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 58368,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 25
+      }
+    },
+    {
+      "id": 445,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 123,
+      "obj_text": "\\progress\\my_friends.svg",
+      "aux": 240,
+      "aux_text": "same size and last-modified time as a file elsewhere: 58368 bytes, 2015-01-20 15:13:44 UTC",
+      "row_sha256": "9f76f3cd9c1ec9a1c8d11cb7baee0b007e7dfe08513adf3fca5235c1df41bf40",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileDeletedAt": [
-          203
+        "recoveredOnDevice": [
+          140,
+          500
         ]
       },
-      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\Jellyfish.jpg on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "english": "A directory entry for \\progress\\my_friends.svg, created (2015-03-24 20:55:19 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R5"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          140,
+          240
+        ]
+      },
+      "english": "\\progress\\my_friends.svg was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:19 UTC) after its last modification (2015-01-20 15:13:44 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          140,
+          "obj",
+          445,
+          240
+        ]
+      },
+      "english": "\\progress\\my_friends.svg is tagged \"same size and last-modified time as a file elsewhere: 58368 bytes, 2015-01-20 15:13:44 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R5"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M154.lean",
   "trust_tier": "kernel",
   "axioms": []

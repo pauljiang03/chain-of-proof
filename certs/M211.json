@@ -1,0 +1,57 @@
+{
+  "finding_id": "M211",
+  "question": "Which e-mails does the user's mailbox hold?",
+  "claim": {
+    "emailed": [
+      369
+    ]
+  },
+  "status": "verified",
+  "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+  "cited_facts": [
+    {
+      "id": 369,
+      "kind": "emailSent",
+      "t": 1427136271719000,
+      "res": 1000000,
+      "obj": 207,
+      "obj_text": "RE: Hello, Iaman",
+      "aux": 208,
+      "aux_text": "from iaman to spy",
+      "row_sha256": "070f2b9d218413a4578cd726201b166a17b02dcea4fae2aa0032a7e5dc92579e",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
+        "attachments": 0,
+        "exhibit": "PC",
+        "folder": "Sent Items",
+        "image": "pc.E01",
+        "mailbox_user": "informant",
+        "message_id": "",
+        "sender_address": "",
+        "time_meaning": "client submit time stored in the message",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "emailed": [
+          369
+        ]
+      },
+      "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+      "rules": [
+        "R11"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R11"
+  ],
+  "strength": "strong",
+  "lean_file": "M211.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

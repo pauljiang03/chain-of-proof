@@ -1,56 +1,208 @@
 {
   "finding_id": "M165",
-  "question": "Which e-mails does the user's mailbox hold?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "emailed": [
-      299
+    "both": [
+      {
+        "recoveredOnDevice": [
+          151,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          151,
+          222
+        ]
+      },
+      {
+        "tagged": [
+          151,
+          "obj",
+          458,
+          243
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "An e-mail with the subject \"RE: Important request\" was sent from iaman to spy (2015-03-23 19:27:05 UTC).",
+  "english": "A directory entry for \\tr\\diary_#1d.txt, created (2015-03-24 20:55:43 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\tr\\diary_#1d.txt was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:43 UTC) after its last modification (2015-01-05 21:01:08 UTC). This rests on heuristic rule R4. \\tr\\diary_#1d.txt is tagged \"same size and last-modified time as a file elsewhere: 121441 bytes, 2015-01-05 21:01:08 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 299,
-      "kind": "emailSent",
-      "t": 1427138825282000,
-      "res": 1000000,
-      "obj": 178,
-      "obj_text": "RE: Important request",
-      "aux": 174,
-      "aux_text": "from iaman to spy",
-      "row_sha256": "a861101ea705089953346c47438bbc051c8d08e172a61a6aee5b0c7583bf5295",
+      "id": 151,
+      "kind": "fileCreated",
+      "t": 1427230543859459,
+      "res": 1,
+      "obj": 134,
+      "obj_text": "\\tr\\diary_#1d.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9adb93e0c0831c3f2c38d6f44fc510e3f3e332cf9212ba4cfbb67eca630065c2",
       "prov": {
-        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
-        "attachments": 0,
-        "exhibit": "PC",
-        "folder": "Sent Items",
-        "image": "pc.E01",
-        "mailbox_user": "informant",
-        "message_id": "",
-        "sender_address": "",
-        "time_meaning": "client submit time stored in the message",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51202 (byte offset 104861696), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 121441,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 32
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 222,
+      "kind": "fileModified",
+      "t": 1420491668000000,
+      "res": 1,
+      "obj": 134,
+      "obj_text": "\\tr\\diary_#1d.txt",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "ad62ce1f36fe9ff97c8d3da5d70866fd7d0da47f451075d118cac7fec060e3cb",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51202 (byte offset 104861696), named by the directory at sector 51370",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:39.567157Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 121441,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 32
+      }
+    },
+    {
+      "id": 458,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 134,
+      "obj_text": "\\tr\\diary_#1d.txt",
+      "aux": 243,
+      "aux_text": "same size and last-modified time as a file elsewhere: 121441 bytes, 2015-01-05 21:01:08 UTC",
+      "row_sha256": "b0221c663eb2cf826382ac64feefa6ea9030c614f94eb6cc03bb8fb6ea1335dd",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "emailed": [
-          299
+        "recoveredOnDevice": [
+          151,
+          500
         ]
       },
-      "english": "An e-mail with the subject \"RE: Important request\" was sent from iaman to spy (2015-03-23 19:27:05 UTC).",
+      "english": "A directory entry for \\tr\\diary_#1d.txt, created (2015-03-24 20:55:43 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R11"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          151,
+          222
+        ]
+      },
+      "english": "\\tr\\diary_#1d.txt was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:43 UTC) after its last modification (2015-01-05 21:01:08 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          151,
+          "obj",
+          458,
+          243
+        ]
+      },
+      "english": "\\tr\\diary_#1d.txt is tagged \"same size and last-modified time as a file elsewhere: 121441 bytes, 2015-01-05 21:01:08 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R11"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M165.lean",
   "trust_tier": "kernel",
   "axioms": []

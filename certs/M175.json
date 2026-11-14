@@ -1,51 +1,79 @@
 {
   "finding_id": "M175",
-  "question": "What traces of disc burning are there?",
+  "question": "Which files look copied onto a volume?",
   "claim": {
-    "burnTrace": [
-      309
+    "copiedHere": [
+      161,
+      175
     ]
   },
   "status": "verified",
-  "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "english": "\\Koala.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
   "cited_facts": [
     {
-      "id": 309,
-      "kind": "cdBurn",
-      "t": 1427228659896305,
+      "id": 161,
+      "kind": "fileCreated",
+      "t": 1427230620985995,
       "res": 1,
-      "obj": 189,
-      "obj_text": "temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp",
-      "aux": 185,
-      "aux_text": "NTFS change journal",
-      "row_sha256": "72add272d72c584abbc724a27f337cd8f7093b0600a2b7634b66011b6f4706a7",
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "c2f5974b785286fd4c8faeb15e4655bb4e3e25282fbe420bbc6e9e9ce3266739",
       "prov": {
-        "artifact": "C:\\$Extend\\$UsnJrnl:$J",
-        "exhibit": "PC",
-        "first_usn": 64418464,
-        "folder": "c:\\Users\\informant\\AppData\\Local\\Temp",
-        "image": "pc.E01",
-        "time_meaning": "creation of the first temporary file of the session",
-        "tool": "dissect.target 3.25.1"
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52467 (byte offset 107452416), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 780831,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 38
+      }
+    },
+    {
+      "id": 175,
+      "kind": "fileModified",
+      "t": 1247549551658939,
+      "res": 1,
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 40,
+      "aux_text": "AE88F176",
+      "row_sha256": "a24a408a9a028b5d75e9eebe264ed8e5939d4757555f0bbf29d4f9713bd7ee78",
+      "prov": {
+        "allocation_table_at_sector": 52511,
+        "artifact": "UDF extended file entry at sector 52467 (byte offset 107452416), named by the directory at sector 52488",
+        "exhibit": "RM#3",
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "session": 1,
+        "size": 780831,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 38
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "burnTrace": [
-          309
+        "copiedHere": [
+          161,
+          175
         ]
       },
-      "english": "CD-burn trace in the NTFS change journal: temporary files DAT67829.tmp, DAT74017.tmp, FIL51898.tmp, POST51898.tmp (2015-03-24 20:24:19 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "english": "\\Koala.jpg was likely copied onto volume AE88F176: it was created there (2015-03-24 20:57:00 UTC) after its last modification (2009-07-14 05:32:31 UTC). This rests on heuristic rule R4.",
       "rules": [
-        "R12"
+        "R4"
       ],
       "strength": "heuristic"
     }
   ],
   "rules": [
-    "R12"
+    "R4"
   ],
   "strength": "heuristic",
   "lean_file": "M175.lean",

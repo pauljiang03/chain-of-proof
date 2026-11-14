@@ -1,55 +1,214 @@
 {
   "finding_id": "M147",
-  "question": "Which files were sent to the Recycle Bin?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "fileDeletedAt": [
-      196
+    "both": [
+      {
+        "recoveredOnDevice": [
+          133,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          133,
+          224
+        ]
+      },
+      {
+        "tagged": [
+          133,
+          "obj",
+          435,
+          237
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+  "english": "A directory entry for \\pd\\my_favorite_movies.7z, created (2015-03-24 20:55:01 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\pd\\my_favorite_movies.7z was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:01 UTC) after its last modification (2015-01-08 21:08:24 UTC). This rests on heuristic rule R4. \\pd\\my_favorite_movies.7z is tagged \"same size and last-modified time as a file elsewhere: 100078 bytes, 2015-01-08 21:08:24 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 196,
-      "kind": "fileDeleted",
-      "t": 1427226707133000,
+      "id": 133,
+      "kind": "fileCreated",
+      "t": 1427230501427385,
       "res": 1,
-      "obj": 111,
-      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog",
-      "aux": 4,
-      "aux_text": "CA0C7A48",
-      "row_sha256": "c265c69412d71c84308fe32a664314394bf1c953c94488d7fc4bd8e6d23075fc",
+      "obj": 116,
+      "obj_text": "\\pd\\my_favorite_movies.7z",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "89a6f64353a3975bf0d96f1bb06736d1a1d71155e33565d11b332504ca11e1f9",
       "prov": {
-        "artifact": "Recycle Bin index $IXWGVWC, file table record 74312",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "index_record_in_use": false,
-        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
-        "original_drive": "C:",
-        "size": 4526017,
-        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36523 (byte offset 74799104), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 100078,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 21
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 224,
+      "kind": "fileModified",
+      "t": 1420751304000000,
+      "res": 1,
+      "obj": 116,
+      "obj_text": "\\pd\\my_favorite_movies.7z",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "d5d21a61096c414eae32cff2f550b47699fa2897f2ac0d268c9bf4c3ba36aa09",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 36523 (byte offset 74799104), named by the directory at sector 51274",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:20.737924Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51295,
+          51327,
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 100078,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 21
+      }
+    },
+    {
+      "id": 435,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 116,
+      "obj_text": "\\pd\\my_favorite_movies.7z",
+      "aux": 237,
+      "aux_text": "same size and last-modified time as a file elsewhere: 100078 bytes, 2015-01-08 21:08:24 UTC",
+      "row_sha256": "c9687cf2b2ad09a76b8d905cdc4521577dbf6647bbf0d4c19be2618dfd12ee60",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "fileDeletedAt": [
-          196
+        "recoveredOnDevice": [
+          133,
+          500
         ]
       },
-      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\prog on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "english": "A directory entry for \\pd\\my_favorite_movies.7z, created (2015-03-24 20:55:01 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R5"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          133,
+          224
+        ]
+      },
+      "english": "\\pd\\my_favorite_movies.7z was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:01 UTC) after its last modification (2015-01-08 21:08:24 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          133,
+          "obj",
+          435,
+          237
+        ]
+      },
+      "english": "\\pd\\my_favorite_movies.7z is tagged \"same size and last-modified time as a file elsewhere: 100078 bytes, 2015-01-08 21:08:24 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R5"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M147.lean",
   "trust_tier": "kernel",
   "axioms": []

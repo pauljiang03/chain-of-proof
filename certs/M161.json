@@ -1,56 +1,210 @@
 {
   "finding_id": "M161",
-  "question": "Which e-mails does the user's mailbox hold?",
+  "question": "Which file records were recovered from a seized device's unallocated space?",
   "claim": {
-    "emailed": [
-      295
+    "both": [
+      {
+        "recoveredOnDevice": [
+          147,
+          500
+        ]
+      },
+      {
+        "copiedHere": [
+          147,
+          211
+        ]
+      },
+      {
+        "tagged": [
+          147,
+          "obj",
+          449,
+          235
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+  "english": "A directory entry for \\prop\\landscape.png, created (2015-03-24 20:55:40 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system. \\prop\\landscape.png was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:40 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4. \\prop\\landscape.png is tagged \"same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
   "cited_facts": [
     {
-      "id": 295,
-      "kind": "emailSent",
-      "t": 1427136271719000,
-      "res": 1000000,
-      "obj": 173,
-      "obj_text": "RE: Hello, Iaman",
-      "aux": 174,
-      "aux_text": "from iaman to spy",
-      "row_sha256": "23574b1a73dec099bc90ab81bcf31ebc45ff9ecc36cb2161a6143f7098c3abf4",
+      "id": 147,
+      "kind": "fileCreated",
+      "t": 1427230540318253,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "0a1bcab6f163e400bfd25666f29c9eb8dcde502b30d702def5ff7d2d3d4a9309",
       "prov": {
-        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Outlook\\iaman.informant@nist.gov.ost folder IPM_SUBTREE / Sent Items",
-        "attachments": 0,
-        "exhibit": "PC",
-        "folder": "Sent Items",
-        "image": "pc.E01",
-        "mailbox_user": "informant",
-        "message_id": "",
-        "sender_address": "",
-        "time_meaning": "client submit time stored in the message",
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51369 (byte offset 105203712), named by the directory at sector 51337",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:33.592346Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 6484502,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 30
+      }
+    },
+    {
+      "id": 500,
+      "kind": "unallocatedOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 249,
+      "obj_text": "disc RM#3",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9154ea197fd8f19e07491431d8bcc6833da4fe6900d77ea4daab4793c33702be",
+      "prov": {
+        "artifact": "UDF directory entries flagged deleted, and file entries reachable only through allocation tables (VAT) older than the current one",
+        "current_allocation_table_at_sector": 52511,
+        "deleted_names_without_a_file_entry": [
+          "\\de",
+          "\\design",
+          "\\pd",
+          "\\pricing decision",
+          "\\prog",
+          "\\progress",
+          "\\prop",
+          "\\proposal",
+          "\\technical review",
+          "\\tr"
+        ],
+        "earlier_states_of_the_volume": 8,
+        "exhibit": "RM#3",
+        "file_entries": 34,
+        "image": "rm3.E01",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "runs_of_content_without_a_file_entry": [],
+        "superseded_copies_at_sectors": [
+          36527,
+          36531,
+          36536,
+          52490,
+          52491,
+          52494,
+          52496,
+          52497
+        ],
+        "superseded_copies_of_file_entries_not_emitted": 8,
+        "time_meaning": "when the image was examined, not an event on the device",
         "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 211,
+      "kind": "fileModified",
+      "t": 1419018826000000,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 111,
+      "aux_text": "unallocated space of device disc RM#3",
+      "row_sha256": "9980d7d78a9a945b53bead382f0bde848a9d73cec98e761d9e55de36aed160a3",
+      "prov": {
+        "allocation_table_at_sector": 52479,
+        "artifact": "UDF extended file entry at sector 51369 (byte offset 105203712), named by the directory at sector 51337",
+        "exhibit": "RM#3",
+        "first_listed_utc": "2015-03-24T20:56:33.592346Z",
+        "flagged_deleted_by_allocation_tables_at_sectors": [],
+        "image": "rm3.E01",
+        "last_listed_utc": "2015-03-24T20:57:03.809600Z",
+        "listed_by_allocation_tables_at_sectors": [
+          51359,
+          51391,
+          52479
+        ],
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "recovered": true,
+        "session": 1,
+        "size": 6484502,
+        "time_zone": "UDF timestamp: local time with its recorded offset of -240 minutes from UTC",
+        "tool": "dissect.target 3.25.1",
+        "unique_id": 30
+      }
+    },
+    {
+      "id": 449,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 235,
+      "aux_text": "same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC",
+      "row_sha256": "3c5b47b19325060cbb01f651b61c486dc25187012b3c92ad24a2094e82184464",
+      "prov": {
+        "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
+        "source": "deterministic"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "emailed": [
-          295
+        "recoveredOnDevice": [
+          147,
+          500
         ]
       },
-      "english": "An e-mail with the subject \"RE: Hello, Iaman\" was sent from iaman to spy (2015-03-23 18:44:31 UTC).",
+      "english": "A directory entry for \\prop\\landscape.png, created (2015-03-24 20:55:40 UTC), was recovered from unallocated space on seized device disc RM#3. It was written before the device's current file system.",
       "rules": [
-        "R11"
+        "R10",
+        "R13"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "copiedHere": [
+          147,
+          211
+        ]
+      },
+      "english": "\\prop\\landscape.png was likely copied onto an earlier file system of device disc RM#3 (a directory entry recovered from unallocated space): it was created there (2015-03-24 20:55:40 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          147,
+          "obj",
+          449,
+          235
+        ]
+      },
+      "english": "\\prop\\landscape.png is tagged \"same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",
+      "rules": [
+        "T"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
-    "R11"
+    "R10",
+    "R13",
+    "R4",
+    "T"
   ],
-  "strength": "strong",
+  "strength": "heuristic",
   "lean_file": "M161.lean",
   "trust_tier": "kernel",
   "axioms": []

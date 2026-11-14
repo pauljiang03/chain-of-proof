@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          262
+          336
         ]
       },
       {
         "tagged": [
-          262,
+          336,
           "obj",
-          354,
-          195
+          476,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"external device and forensics\" was made in iexplore (2015-03-23 20:43:52 UTC). external device and forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",
   "cited_facts": [
     {
-      "id": 262,
+      "id": 336,
       "kind": "webSearch",
       "t": 1427143432477705,
       "res": 1,
-      "obj": 145,
+      "obj": 179,
       "obj_text": "external device and forensics",
-      "aux": 126,
+      "aux": 160,
       "aux_text": "iexplore",
-      "row_sha256": "55ce2d0f62c7ad1722be538f034e2e8a573a0f0e2b7cf53ee3cff02a18c53557",
+      "row_sha256": "b419615af106ab35e4f914b69282e7930c196421fb7a04ac11f2296423b40d36",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 354,
+      "id": 476,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 145,
+      "obj": 179,
       "obj_text": "external device and forensics",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "9b425147f612e284c9fae94b7652e285777175f5480dd0f05999b996668a86dd",
+      "row_sha256": "d98ed65e6753570dce6ff0f7c53558c4c899983d74a2275931b00c1f40b943fc",
       "prov": {
         "rule": "search term contains the watch-list word \"forensic\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          262
+          336
         ]
       },
       "english": "A web search for \"external device and forensics\" was made in iexplore (2015-03-23 20:43:52 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          262,
+          336,
           "obj",
-          354,
-          195
+          476,
+          229
         ]
       },
       "english": "external device and forensics is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"forensic\").",

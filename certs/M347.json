@@ -1,0 +1,150 @@
+{
+  "finding_id": "M347",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12715,
+          12757
+        ]
+      },
+      {
+        "sameContent": [
+          12757,
+          12761
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\[lost folder 3]\\pricing decision\\my_favorite_cars.db on exhibit RM#2 and \\pd\\my_favorite_cars.db on exhibit RM#3 have identical content: both read as sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. \\pd\\my_favorite_cars.db on exhibit RM#3 and \\pricing decision\\my_favorite_cars.db on exhibit RM#3 have identical content: both read as sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037.",
+  "cited_facts": [
+    {
+      "id": 12715,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 94,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "02827b2ed2932b114cfccd7ba4c3d1f31f23b99bb1f327cee84e357d4d719ec5",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 35143680",
+        "cluster_size": 4096,
+        "clusters": 308,
+        "exhibit": "RM#2",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "first_cluster": 7558,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 308 clusters from the first cluster (7558); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 35143680
+      }
+    },
+    {
+      "id": 12757,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 114,
+      "obj_text": "\\pd\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "0f761dd48a94d6c55aeb8d842645cb9c927adcaeeee27c0f09630469fd47bca6",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36522",
+        "exhibit": "RM#3",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 15430,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12761,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 115,
+      "obj_text": "\\pricing decision\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "7064d2fe69fbdfc31fcdc78de2b63e25239866701dbb48f43d9ba491aed177fe",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36522",
+        "exhibit": "RM#3",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 15430,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12715,
+          12757
+        ]
+      },
+      "english": "\\[lost folder 3]\\pricing decision\\my_favorite_cars.db on exhibit RM#2 and \\pd\\my_favorite_cars.db on exhibit RM#3 have identical content: both read as sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12757,
+          12761
+        ]
+      },
+      "english": "\\pd\\my_favorite_cars.db on exhibit RM#3 and \\pricing decision\\my_favorite_cars.db on exhibit RM#3 have identical content: both read as sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M347.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

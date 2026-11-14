@@ -1,0 +1,2115 @@
+{
+  "finding_id": "M237",
+  "question": "When was the system started, shut down, logged on to and off?",
+  "claim": {
+    "both": [
+      {
+        "sessionRecorded": [
+          736
+        ]
+      },
+      {
+        "sessionRecorded": [
+          737
+        ]
+      },
+      {
+        "sessionRecorded": [
+          738
+        ]
+      },
+      {
+        "sessionRecorded": [
+          739
+        ]
+      },
+      {
+        "sessionRecorded": [
+          740
+        ]
+      },
+      {
+        "sessionRecorded": [
+          741
+        ]
+      },
+      {
+        "sessionRecorded": [
+          742
+        ]
+      },
+      {
+        "sessionRecorded": [
+          743
+        ]
+      },
+      {
+        "sessionRecorded": [
+          744
+        ]
+      },
+      {
+        "sessionRecorded": [
+          745
+        ]
+      },
+      {
+        "sessionRecorded": [
+          746
+        ]
+      },
+      {
+        "sessionRecorded": [
+          747
+        ]
+      },
+      {
+        "sessionRecorded": [
+          748
+        ]
+      },
+      {
+        "sessionRecorded": [
+          749
+        ]
+      },
+      {
+        "sessionRecorded": [
+          750
+        ]
+      },
+      {
+        "sessionRecorded": [
+          751
+        ]
+      },
+      {
+        "sessionRecorded": [
+          752
+        ]
+      },
+      {
+        "sessionRecorded": [
+          753
+        ]
+      },
+      {
+        "sessionRecorded": [
+          754
+        ]
+      },
+      {
+        "sessionRecorded": [
+          755
+        ]
+      },
+      {
+        "sessionRecorded": [
+          756
+        ]
+      },
+      {
+        "sessionRecorded": [
+          757
+        ]
+      },
+      {
+        "sessionRecorded": [
+          758
+        ]
+      },
+      {
+        "sessionRecorded": [
+          759
+        ]
+      },
+      {
+        "sessionRecorded": [
+          760
+        ]
+      },
+      {
+        "sessionRecorded": [
+          761
+        ]
+      },
+      {
+        "sessionRecorded": [
+          762
+        ]
+      },
+      {
+        "sessionRecorded": [
+          763
+        ]
+      },
+      {
+        "sessionRecorded": [
+          764
+        ]
+      },
+      {
+        "sessionRecorded": [
+          765
+        ]
+      },
+      {
+        "sessionRecorded": [
+          766
+        ]
+      },
+      {
+        "sessionRecorded": [
+          767
+        ]
+      },
+      {
+        "sessionRecorded": [
+          768
+        ]
+      },
+      {
+        "sessionRecorded": [
+          769
+        ]
+      },
+      {
+        "sessionRecorded": [
+          770
+        ]
+      },
+      {
+        "sessionRecorded": [
+          771
+        ]
+      },
+      {
+        "sessionRecorded": [
+          772
+        ]
+      },
+      {
+        "sessionRecorded": [
+          773
+        ]
+      },
+      {
+        "sessionRecorded": [
+          774
+        ]
+      },
+      {
+        "sessionRecorded": [
+          775
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A logoff is recorded for account informant (2015-03-23 21:02:55 UTC). A shutdown is recorded for the machine (2015-03-23 21:02:59 UTC). A shutdown is recorded for the machine (2015-03-23 21:03:01 UTC). A shutdown is recorded for the machine (2015-03-23 21:03:01 UTC). A shutdown is recorded for the machine (2015-03-23 21:03:12 UTC). A startup is recorded for the machine (2015-03-24 13:21:05 UTC). A startup is recorded for the machine (2015-03-24 13:21:05 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:29 UTC). A startup is recorded for the machine (2015-03-24 13:21:29 UTC). A startup is recorded for the machine (2015-03-24 13:21:36 UTC). A startup is recorded for the machine (2015-03-24 13:21:36 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC). A logon is recorded for account NETWORK SERVICE (2015-03-24 13:21:36 UTC). A logon is recorded for account LOCAL SERVICE (2015-03-24 13:21:36 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:37 UTC). A logon is recorded for account ANONYMOUS LOGON (2015-03-24 13:21:38 UTC). A logon is recorded for account informant (2015-03-24 13:21:44 UTC). A logon is recorded for account informant (2015-03-24 13:21:44 UTC). A logon is recorded for account informant (2015-03-24 13:21:45 UTC). A logon is recorded for account informant (2015-03-24 13:21:45 UTC). A logon is recorded for account informant (2015-03-24 13:21:45 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:21:57 UTC). A logon is recorded for account SYSTEM (2015-03-24 13:23:40 UTC). A logon is recorded for account SYSTEM (2015-03-24 15:14:30 UTC). A logon is recorded for account SYSTEM (2015-03-24 15:21:38 UTC). A logon is recorded for account SYSTEM (2015-03-24 15:21:38 UTC). A logon is recorded for account SYSTEM (2015-03-24 15:22:39 UTC). A logon is recorded for account SYSTEM (2015-03-24 15:46:14 UTC). A logoff is recorded for account informant (2015-03-24 18:28:38 UTC). A logoff is recorded for account informant (2015-03-24 18:28:38 UTC). A logon is recorded for account informant (2015-03-24 18:28:38 UTC). A logon is recorded for account informant (2015-03-24 18:28:38 UTC). A logon is recorded for account SYSTEM (2015-03-24 20:58:52 UTC). A shutdown is recorded for the machine (2015-03-24 21:07:23 UTC). A shutdown is recorded for the machine (2015-03-24 21:07:25 UTC). A logoff is recorded for account informant (2015-03-24 21:07:25 UTC). A logoff is recorded for account informant (2015-03-24 21:07:25 UTC). A logoff is recorded for account informant (2015-03-24 21:07:25 UTC).",
+  "cited_facts": [
+    {
+      "id": 736,
+      "kind": "sessionEvent",
+      "t": 1427144575236378,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "3b48a906da138debd374c245d0de5155a8ce64f44e1b2afb274163e86ba779e9",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1235",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "1",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "user logoff notification",
+        "event_id": 7002,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 737,
+      "kind": "sessionEvent",
+      "t": 1427144579900787,
+      "res": 1,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "7d9b5af93af0c0e30a8a8b304b16e1a20167d5039372363b351719a3ffbe9072",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1085",
+        "channel": "Security",
+        "data": {},
+        "event": "the event logging service has shut down",
+        "event_id": 1100,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Eventlog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 738,
+      "kind": "sessionEvent",
+      "t": 1427144581000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "9bf49778a19b2c2d8e0df924d307627ddbefb2c156a982db1094de7b7443f0ef",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1253",
+        "channel": "System",
+        "data": {
+          "Binary": "01000000a2020000"
+        },
+        "event": "the Event Log service was stopped",
+        "event_id": 6006,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "EventLog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 739,
+      "kind": "sessionEvent",
+      "t": 1427144581959990,
+      "res": 1,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "6529e35edddd47265785500228f978aa42b013bfb94fd642ec237b4ce455df76",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1259",
+        "channel": "System",
+        "data": {
+          "ShutdownActionType": "6",
+          "ShutdownEventCode": "0",
+          "ShutdownReason": "0"
+        },
+        "event": "the kernel power manager has initiated a shutdown transition",
+        "event_id": 109,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Kernel-Power",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 740,
+      "kind": "sessionEvent",
+      "t": 1427144592490009,
+      "res": 1,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d6b48727ff1f7ecff77bb74e674862aec88449edadc9c0d99914fd1a384be2b5",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1267",
+        "channel": "System",
+        "data": {
+          "StopTime": "2015-03-23 21:03:12.490009+00:00"
+        },
+        "event": "the operating system is shutting down",
+        "event_id": 13,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Kernel-General",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 741,
+      "kind": "sessionEvent",
+      "t": 1427203265624800,
+      "res": 1,
+      "obj": 302,
+      "obj_text": "startup",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "ed7ad1c1939225fb94e76f502500f51617d01f792c41c165eebf4c20914e976f",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-Diagnostics-Performance%4Operational.evtx record 23",
+        "channel": "Microsoft-Windows-Diagnostics-Performance/Operational",
+        "data": {
+          "BootAutoChkTime": "0",
+          "BootCriticalServicesInitTime": "674",
+          "BootDegradationDelta": "0",
+          "BootDevicesInitTime": "5813",
+          "BootDriverInitTime": "755",
+          "BootEndTime": "2015-03-24 13:23:16.321270+00:00",
+          "BootExplorerInitTime": "6665",
+          "BootImprovementDelta": "66230",
+          "BootIsDegradation": "0",
+          "BootIsGradualDegradation": "0",
+          "BootIsRebootAfterInstall": "0",
+          "BootIsRootCauseIdentified": "1",
+          "BootIsStepDegradation": "0",
+          "BootKernelInitTime": "23",
+          "BootMachineProfileProcessingTime": "17",
+          "BootNumStartupApps": "0",
+          "BootPNPInitDuration": "5836",
+          "BootPNPInitStartTimeMS": "23",
+          "BootPostBootTime": "17500",
+          "BootPrefetchBytes": "142000128",
+          "BootPrefetchInitTime": "36694",
+          "BootRootCauseGradualDegradationBits": "0",
+          "BootRootCauseGradualImprovementBits": "261",
+          "BootRootCauseStepDegradationBits": "8",
+          "BootRootCauseStepImprovementBits": "16645",
+          "BootSmssInitTime": "8713",
+          "BootStartTime": "2015-03-24 13:21:05.624800+00:00",
+          "BootTime": "56482",
+          "BootTsVersion": "2",
+          "BootUserProfileProcessingTime": "613",
+          "MainPathBootTime": "38982",
+          "OSLoaderDuration": "3720",
+          "OtherKernelInitDuration": "2733",
+          "OtherLogonInitActivityDuration": "13670",
+          "Security_UserID": "S-1-5-19",
+          "Session0InitDuration": "2808",
+          "Session1InitDuration": "121",
+          "SessionInitOtherDuration": "5782",
+          "SessionInitStartTimeMS": "9302",
+          "SystemBootInstance": "9",
+          "SystemPNPInitDuration": "732",
+          "SystemPNPInitStartTimeMS": "8563",
+          "UserBootInstance": "5",
+          "UserLogonWaitDuration": "7705",
+          "WinLogonStartTimeMS": "18015"
+        },
+        "event": "boot performance record",
+        "event_id": 100,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Diagnostics-Performance",
+        "source": "event log",
+        "time_meaning": "BootStartTime field of the event (the event itself was logged 2015-03-24 13:23:18.942074Z)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 742,
+      "kind": "sessionEvent",
+      "t": 1427203265656000,
+      "res": 1,
+      "obj": 302,
+      "obj_text": "startup",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d2a354d98b84712a7a2be207ac1a649f7f0b82ecd3f388b46b32ea99afa08649",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1268",
+        "channel": "System",
+        "data": {
+          "BootMode": "0",
+          "BuildVersion": "7601",
+          "MajorVersion": "6",
+          "MinorVersion": "1",
+          "QfeVersion": "18247",
+          "Security_UserID": "S-1-5-18",
+          "ServiceVersion": "1",
+          "StartTime": "2015-03-24 13:21:05.359600+00:00"
+        },
+        "event": "the operating system started",
+        "event_id": 12,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Kernel-General",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 743,
+      "kind": "sessionEvent",
+      "t": 1427203289399240,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "031b6f4934482ffa84771267f283c3e0f1689fdf101eaac7cd1106c38d4ebc77",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1087",
+        "channel": "Security",
+        "data": {
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonType": "0",
+          "ProcessId": "0x4",
+          "SubjectLogonId": "0x0",
+          "SubjectUserSid": "S-1-0-0",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 744,
+      "kind": "sessionEvent",
+      "t": 1427203289399240,
+      "res": 1,
+      "obj": 302,
+      "obj_text": "startup",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "eac66030a8931645eb462be47f0e15bca3312f0814430faecfbe5dcaa11b1fbe",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1086",
+        "channel": "Security",
+        "data": {},
+        "event": "Windows is starting up",
+        "event_id": 4608,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 745,
+      "kind": "sessionEvent",
+      "t": 1427203296000000,
+      "res": 1000000,
+      "obj": 302,
+      "obj_text": "startup",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "5fc5f0ff849a0c4312d5839f210722c8c7855b345fc47b3f761393f426b6d5c5",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1263",
+        "channel": "System",
+        "data": {
+          "Data_0": "6.01.",
+          "Data_1": "7601",
+          "Data_2": "Service Pack 1",
+          "Data_3": "Multiprocessor Free",
+          "Data_4": "17514"
+        },
+        "event": "operating system version logged at boot",
+        "event_id": 6009,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "EventLog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 746,
+      "kind": "sessionEvent",
+      "t": 1427203296000000,
+      "res": 1000000,
+      "obj": 302,
+      "obj_text": "startup",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "39c284cf650d4e5e2a6b9978d580b4657c1917669aecac60a537c0ecc0d83190",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1264",
+        "channel": "System",
+        "data": {
+          "Binary": "df070300020018000d00150024000a030000000000000000"
+        },
+        "event": "the Event Log service was started",
+        "event_id": 6005,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "EventLog",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 747,
+      "kind": "sessionEvent",
+      "t": 1427203296481653,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "18bddadc96b4c0b7230464b1e10a85719ec695a8439e5042c76c745e4680d1f6",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1089",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 748,
+      "kind": "sessionEvent",
+      "t": 1427203296653254,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 303,
+      "aux_text": "NETWORK SERVICE",
+      "row_sha256": "586f3176b4a048c5c4a1693edb294fa52fc67a718e6167c71882c0235ef386da",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1091",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e4",
+          "TargetUserName": "NETWORK SERVICE",
+          "TargetUserSid": "S-1-5-20"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 749,
+      "kind": "sessionEvent",
+      "t": 1427203296715654,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 304,
+      "aux_text": "LOCAL SERVICE",
+      "row_sha256": "6f9ad2ba9adf582afe4b3f037bed2a55f3780e0b62813e3851f61ca2ecb66676",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1093",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e5",
+          "TargetUserName": "LOCAL SERVICE",
+          "TargetUserSid": "S-1-5-19"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 750,
+      "kind": "sessionEvent",
+      "t": 1427203296824854,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "bcf09f0037906f633b94ee6c57434770b8ba2fcabd1665bb5a5f569dae48ad50",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1095",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 751,
+      "kind": "sessionEvent",
+      "t": 1427203296902853,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "903d76b0346486a25c0478e1d90c33c87af0b6ada990cf41a591ac8c4eafa18e",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1097",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 752,
+      "kind": "sessionEvent",
+      "t": 1427203297949461,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "1172c89fbb0827036e55f8faa65850237639fc6f1c1a3adc47fd58ccb73ef852",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1099",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 753,
+      "kind": "sessionEvent",
+      "t": 1427203298835484,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 305,
+      "aux_text": "ANONYMOUS LOGON",
+      "row_sha256": "b65f10cf99cab74ede3c5b4e05aa3de049d6d2d0e9b8f7cf9170575fe4d9be48",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1103",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "NTLM",
+          "KeyLength": "0",
+          "LmPackageName": "NTLM V1",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "NtLmSsp ",
+          "LogonType": "3",
+          "ProcessId": "0x0",
+          "SubjectLogonId": "0x0",
+          "SubjectUserSid": "S-1-0-0",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x1c0ce",
+          "TargetUserName": "ANONYMOUS LOGON",
+          "TargetUserSid": "S-1-5-7"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 754,
+      "kind": "sessionEvent",
+      "t": 1427203304983509,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "f52aefc7963095c4a3721bc4d66e5e3aba175aad66a1fb246d4ffc1c6536f796",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1105",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0x1b8",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x2269c",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 755,
+      "kind": "sessionEvent",
+      "t": 1427203304983509,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "55f57b144ebed6b5c9ae55c21f39df82d5dfc333281980cccc992bebf17e9155",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1106",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "2",
+          "ProcessId": "0x1b8",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x226c4",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 756,
+      "kind": "sessionEvent",
+      "t": 1427203305045908,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "e2ed2bfc25e2caac952fd9f2ec0e73f47098df4862c0d526b2ce9152ab412b93",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 49",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "Session": "1"
+        },
+        "event": "received user logon notification",
+        "event_id": 1,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 757,
+      "kind": "sessionEvent",
+      "t": 1427203305045908,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "e05132a2e452e8ba3415a5ca73799abc19eb6031f863e29c770558ee1208c6db",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1321",
+        "channel": "System",
+        "data": {
+          "Security_UserID": "S-1-5-18",
+          "TSId": "1",
+          "UserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "user logon notification",
+        "event_id": 7001,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Winlogon",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 758,
+      "kind": "sessionEvent",
+      "t": 1427203305560709,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "f22dc041e55b8a617aabfa5061d21ee110d7f05b1d9b2a29889ae24a4ee0d82e",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 30",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_Address": "LOCAL",
+          "EventXML_SessionID": "1",
+          "EventXML_User": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logon succeeded",
+        "event_id": 21,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 759,
+      "kind": "sessionEvent",
+      "t": 1427203317353931,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "db68ac4fca156931cb890336aa3f480566cf0be13f18f9e5051d942c60836294",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1108",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 760,
+      "kind": "sessionEvent",
+      "t": 1427203420220510,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "47bde12096a87be4cf0f42b34b3bdd1344085d8b55b527fea186b13a24e67e70",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1110",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 761,
+      "kind": "sessionEvent",
+      "t": 1427210070786434,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "9f3816f2e1fb25321bbf78fc762a53cbfa32f8016abcdfb31497abf290a52a98",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1113",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 762,
+      "kind": "sessionEvent",
+      "t": 1427210498226231,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "839912e53c380f6d3b8f66070a0b4e16061d7c8cd893162d561fe4004436cb0d",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1115",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 763,
+      "kind": "sessionEvent",
+      "t": 1427210498507030,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "2a371aaa1eae0e968b30f0333f7be82df6fca0f1ecdd7c594279bde41e7702dc",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1117",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 764,
+      "kind": "sessionEvent",
+      "t": 1427210559911482,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "84d0141a0ca9fe9a6fbf7adfa473067472a76bbe83525a177f13530ae0873572",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1119",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 765,
+      "kind": "sessionEvent",
+      "t": 1427211974466702,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "7a962aac7054eee266e3672fbd01d6dafe404d50382919080c3c3e9cc79152df",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1121",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 766,
+      "kind": "sessionEvent",
+      "t": 1427221718261791,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "7f747e5cc359e40eebc2a7ed9604e18c3b66f16c46a6d7eae2570f4835ee44eb",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1127",
+        "channel": "Security",
+        "data": {
+          "LogonType": "7",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x6cabdd",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 767,
+      "kind": "sessionEvent",
+      "t": 1427221718261791,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "51581e78e017db45bf86f7a0c6f26c95c3c4867b8a6ecb0f1765de488d3fc225",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1128",
+        "channel": "Security",
+        "data": {
+          "LogonType": "7",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x6cabcf",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "an account was logged off",
+        "event_id": 4634,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 768,
+      "kind": "sessionEvent",
+      "t": 1427221718261791,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "76ab55f7b5b5d91f0840f5adb3bc896c1a7b380d80c0bb5078df42548d668da7",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1124",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "7",
+          "ProcessId": "0x1b8",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x6cabcf",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 769,
+      "kind": "sessionEvent",
+      "t": 1427221718261791,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "a2e8594075fb16eba35fde30758329a3c45a37c26e86166d64d961ed51ea7fdf",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1125",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "IpAddress": "127.0.0.1",
+          "IpPort": "0",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "User32 ",
+          "LogonType": "7",
+          "ProcessId": "0x1b8",
+          "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x6cabdd",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "WorkstationName": "INFORMANT-PC"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 770,
+      "kind": "sessionEvent",
+      "t": 1427230732193810,
+      "res": 1,
+      "obj": 297,
+      "obj_text": "logon",
+      "aux": 300,
+      "aux_text": "SYSTEM",
+      "row_sha256": "f85088f0fa0996451041b1d7cf8a52c2220bc718d4d5f45f79ab3bb0d920f735",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1129",
+        "channel": "Security",
+        "data": {
+          "AuthenticationPackageName": "Negotiate",
+          "KeyLength": "0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "LogonProcessName": "Advapi  ",
+          "LogonType": "5",
+          "ProcessId": "0x1e8",
+          "ProcessName": "C:\\Windows\\System32\\services.exe",
+          "SubjectDomainName": "WORKGROUP",
+          "SubjectLogonId": "0x3e7",
+          "SubjectUserName": "INFORMANT-PC$",
+          "SubjectUserSid": "S-1-5-18",
+          "TargetDomainName": "NT AUTHORITY",
+          "TargetLogonId": "0x3e7",
+          "TargetUserName": "SYSTEM",
+          "TargetUserSid": "S-1-5-18"
+        },
+        "event": "an account was successfully logged on",
+        "event_id": 4624,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 771,
+      "kind": "sessionEvent",
+      "t": 1427231243000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "70146eab923d770c91f1ce85cf685a1dd395ac9732663a9132eaaf96373804d7",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1434",
+        "channel": "System",
+        "data": {
+          "Binary": "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "Data_0": "Explorer.EXE",
+          "Data_1": "INFORMANT-PC",
+          "Data_2": "Other (Unplanned)",
+          "Data_3": "0x0",
+          "Data_4": "power off",
+          "Data_6": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "a process has initiated the restart or power off of the computer",
+        "event_id": 1074,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "USER32",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 772,
+      "kind": "sessionEvent",
+      "t": 1427231245000000,
+      "res": 1000000,
+      "obj": 298,
+      "obj_text": "shutdown",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "e9707a20b06b0ffeec306e87ea6a9a7fa883efa8543982ff1941b8455c58be00",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx record 1435",
+        "channel": "System",
+        "data": {
+          "Binary": "ff000500000000000000000000000000000000000000000000000000000000000000000000000000",
+          "Data_0": "C:\\Windows\\system32\\winlogon.exe (INFORMANT-PC)",
+          "Data_1": "INFORMANT-PC",
+          "Data_2": "No title for this reason could be found",
+          "Data_3": "0x500ff",
+          "Data_4": "power off",
+          "Data_6": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "a process has initiated the restart or power off of the computer",
+        "event_id": 1074,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "USER32",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 773,
+      "kind": "sessionEvent",
+      "t": 1427231245488918,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "acca15dc5df2011fe965a0eb2863483e487076d296f1de1c6f4bca791a34dd36",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Security.evtx record 1131",
+        "channel": "Security",
+        "data": {
+          "TargetDomainName": "informant-PC",
+          "TargetLogonId": "0x226c4",
+          "TargetUserName": "informant",
+          "TargetUserSid": "S-1-5-21-2425377081-3129163575-2985601102-1000"
+        },
+        "event": "user initiated logoff",
+        "event_id": 4647,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-Security-Auditing",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 774,
+      "kind": "sessionEvent",
+      "t": 1427231245566917,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "7ada39a1ed08d6fedb608b79fffa8912704b58f815aa0cde1fed9ff2af9da147",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx record 32",
+        "channel": "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+        "data": {
+          "EventXML_SessionID": "1",
+          "EventXML_User": "informant-PC\\informant",
+          "Security_UserID": "S-1-5-18"
+        },
+        "event": "session logoff succeeded",
+        "event_id": 23,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-TerminalServices-LocalSessionManager",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 775,
+      "kind": "sessionEvent",
+      "t": 1427231245566917,
+      "res": 1,
+      "obj": 301,
+      "obj_text": "logoff",
+      "aux": 262,
+      "aux_text": "informant",
+      "row_sha256": "35af17d2036fe5bd41b603e492065e3ac0e126501aa6ffd4a85e01ac98a69a3a",
+      "prov": {
+        "artifact": "C:\\Windows\\system32\\winevt\\logs\\Microsoft-Windows-User Profile Service%4Operational.evtx record 53",
+        "channel": "Microsoft-Windows-User Profile Service/Operational",
+        "data": {
+          "Security_UserID": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+          "Session": "1"
+        },
+        "event": "received user logoff notification",
+        "event_id": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "provider": "Microsoft-Windows-User Profiles Service",
+        "source": "event log",
+        "time_meaning": "time the event was logged",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sessionRecorded": [
+          736
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-23 21:02:55 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          737
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-23 21:02:59 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          738
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-23 21:03:01 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          739
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-23 21:03:01 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          740
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-23 21:03:12 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          741
+        ]
+      },
+      "english": "A startup is recorded for the machine (2015-03-24 13:21:05 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          742
+        ]
+      },
+      "english": "A startup is recorded for the machine (2015-03-24 13:21:05 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          743
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:29 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          744
+        ]
+      },
+      "english": "A startup is recorded for the machine (2015-03-24 13:21:29 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          745
+        ]
+      },
+      "english": "A startup is recorded for the machine (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          746
+        ]
+      },
+      "english": "A startup is recorded for the machine (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          747
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          748
+        ]
+      },
+      "english": "A logon is recorded for account NETWORK SERVICE (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          749
+        ]
+      },
+      "english": "A logon is recorded for account LOCAL SERVICE (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          750
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          751
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:36 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          752
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:37 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          753
+        ]
+      },
+      "english": "A logon is recorded for account ANONYMOUS LOGON (2015-03-24 13:21:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          754
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 13:21:44 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          755
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 13:21:44 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          756
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 13:21:45 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          757
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 13:21:45 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          758
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 13:21:45 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          759
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:21:57 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          760
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 13:23:40 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          761
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 15:14:30 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          762
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 15:21:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          763
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 15:21:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          764
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 15:22:39 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          765
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 15:46:14 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          766
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-24 18:28:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          767
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-24 18:28:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          768
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 18:28:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          769
+        ]
+      },
+      "english": "A logon is recorded for account informant (2015-03-24 18:28:38 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          770
+        ]
+      },
+      "english": "A logon is recorded for account SYSTEM (2015-03-24 20:58:52 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          771
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-24 21:07:23 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          772
+        ]
+      },
+      "english": "A shutdown is recorded for the machine (2015-03-24 21:07:25 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          773
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-24 21:07:25 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          774
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-24 21:07:25 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sessionRecorded": [
+          775
+        ]
+      },
+      "english": "A logoff is recorded for account informant (2015-03-24 21:07:25 UTC).",
+      "rules": [
+        "R16"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R16"
+  ],
+  "strength": "strong",
+  "lean_file": "M237.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

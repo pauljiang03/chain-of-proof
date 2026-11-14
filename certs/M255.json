@@ -1,0 +1,1704 @@
+{
+  "finding_id": "M255",
+  "question": "Which programs were run?",
+  "claim": {
+    "both": [
+      {
+        "programRan": [
+          1397
+        ]
+      },
+      {
+        "programRan": [
+          1398
+        ]
+      },
+      {
+        "programRan": [
+          1399
+        ]
+      },
+      {
+        "programRan": [
+          1400
+        ]
+      },
+      {
+        "programRan": [
+          1401
+        ]
+      },
+      {
+        "programRan": [
+          1402
+        ]
+      },
+      {
+        "programRan": [
+          1403
+        ]
+      },
+      {
+        "programRan": [
+          1404
+        ]
+      },
+      {
+        "programRan": [
+          1405
+        ]
+      },
+      {
+        "programRan": [
+          1406
+        ]
+      },
+      {
+        "programRan": [
+          1407
+        ]
+      },
+      {
+        "programRan": [
+          1408
+        ]
+      },
+      {
+        "programRan": [
+          1409
+        ]
+      },
+      {
+        "programRan": [
+          1410
+        ]
+      },
+      {
+        "programRan": [
+          1411
+        ]
+      },
+      {
+        "programRan": [
+          1412
+        ]
+      },
+      {
+        "programRan": [
+          1413
+        ]
+      },
+      {
+        "programRan": [
+          1414
+        ]
+      },
+      {
+        "programRan": [
+          1415
+        ]
+      },
+      {
+        "programRan": [
+          1416
+        ]
+      },
+      {
+        "programRan": [
+          1417
+        ]
+      },
+      {
+        "programRan": [
+          1418
+        ]
+      },
+      {
+        "programRan": [
+          1419
+        ]
+      },
+      {
+        "programRan": [
+          1420
+        ]
+      },
+      {
+        "programRan": [
+          1421
+        ]
+      },
+      {
+        "programRan": [
+          1422
+        ]
+      },
+      {
+        "programRan": [
+          1423
+        ]
+      },
+      {
+        "programRan": [
+          1424
+        ]
+      },
+      {
+        "programRan": [
+          1425
+        ]
+      },
+      {
+        "programRan": [
+          1426
+        ]
+      },
+      {
+        "programRan": [
+          1427
+        ]
+      },
+      {
+        "programRan": [
+          1428
+        ]
+      },
+      {
+        "programRan": [
+          1429
+        ]
+      },
+      {
+        "programRan": [
+          1430
+        ]
+      },
+      {
+        "programRan": [
+          1431
+        ]
+      },
+      {
+        "programRan": [
+          1432
+        ]
+      },
+      {
+        "programRan": [
+          1433
+        ]
+      },
+      {
+        "programRan": [
+          1434
+        ]
+      },
+      {
+        "programRan": [
+          1435
+        ]
+      },
+      {
+        "programRan": [
+          1436
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A record shows Outlook 2013.lnk ran (2015-03-25 14:41:03 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Microsoft Office 2013\\Outlook 2013.lnk). A record shows OUTLOOK.EXE ran (2015-03-25 14:41:03 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE). A record shows Microsoft.Windows.MediaPlayer32 ran (2015-03-25 14:42:47 UTC). A record shows Windows Media Player.lnk ran (2015-03-25 14:42:47 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Media Player.lnk). A record shows WMPLAYER.EXE ran (2015-03-25 14:42:47 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\WMPLAYER.EXE). A record shows SETUP_WM.EXE ran (2015-03-25 14:42:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\SETUP_WM.EXE). A record shows LOGONUI.EXE ran (2015-03-25 14:45:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LOGONUI.EXE). A record shows Internet Explorer.lnk ran (2015-03-25 14:46:05 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Internet Explorer.lnk). A record shows Microsoft.InternetExplorer.Default ran (2015-03-25 14:46:05 UTC). A record shows Eraser 6.2.0.2962.exe ran (2015-03-25 14:47:40 UTC, path C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe). A record shows ccsetup504.exe ran (2015-03-25 14:48:28 UTC, path C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe). A record shows Eraser 6.2.0.2962.exe ran (2015-03-25 14:50:14 UTC, path C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe). A record shows ERASER 6.2.0.2962.EXE ran (2015-03-25 14:50:14 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE). A record shows dotNetFx40_Full_setup.exe ran (2015-03-25 14:50:15 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe). A record shows DOTNETFX40_FULL_SETUP.EXE ran (2015-03-25 14:50:15 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP.EXE). A record shows SETUP.EXE ran (2015-03-25 14:50:17 UTC, path \\DEVICE\\HARDDISKVOLUME2\\A5DF94FCAC8E62A530D048042C2A\\SETUP.EXE). A record shows WUSA.EXE ran (2015-03-25 14:50:26 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WUSA.EXE). A record shows TRUSTEDINSTALLER.EXE ran (2015-03-25 14:50:28 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SERVICING\\TRUSTEDINSTALLER.EXE). A record shows TMPFF8D.TMP.EXE ran (2015-03-25 14:50:39 UTC). A record shows WUAUCLT.EXE ran (2015-03-25 14:50:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WUAUCLT.EXE). A record shows TMP5B99.TMP.EXE ran (2015-03-25 14:50:53 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\MICROSOFT .NET FRAMEWORK 4 SETUP_4.0.30319\\TMP5B99.TMP.EXE). A record shows REGTLIBV12.EXE ran (2015-03-25 14:51:41 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\REGTLIBV12.EXE). A record shows REGTLIBV12.EXE ran (2015-03-25 14:51:41 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\REGTLIBV12.EXE). A record shows MSCORSVW.EXE ran (2015-03-25 14:53:15 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\MSCORSVW.EXE). A record shows UNLODCTR.EXE ran (2015-03-25 14:54:01 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\UNLODCTR.EXE). A record shows UNLODCTR.EXE ran (2015-03-25 14:54:01 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\UNLODCTR.EXE). A record shows SERVICEMODELREG.EXE ran (2015-03-25 14:54:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\SERVICEMODELREG.EXE). A record shows SC.EXE ran (2015-03-25 14:54:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SC.EXE). A record shows SERVICEMODELREG.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\SERVICEMODELREG.EXE). A record shows WEVTUTIL.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WEVTUTIL.EXE). A record shows WEVTUTIL.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WEVTUTIL.EXE). A record shows ASPNET_REGIIS.EXE ran (2015-03-25 14:54:21 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\ASPNET_REGIIS.EXE). A record shows MOFCOMP.EXE ran (2015-03-25 14:54:23 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\MOFCOMP.EXE). A record shows ASPNET_REGIIS.EXE ran (2015-03-25 14:54:28 UTC). A record shows MOFCOMP.EXE ran (2015-03-25 14:54:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WBEM\\MOFCOMP.EXE). A record shows NGEN.EXE ran (2015-03-25 14:54:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\NGEN.EXE). A record shows MSCORSVW.EXE ran (2015-03-25 14:54:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\MSCORSVW.EXE). A record shows NGEN.EXE ran (2015-03-25 14:54:42 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\NGEN.EXE). A record shows LODCTR.EXE ran (2015-03-25 14:54:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LODCTR.EXE). A record shows LODCTR.EXE ran (2015-03-25 14:54:49 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\LODCTR.EXE).",
+  "cited_facts": [
+    {
+      "id": 1397,
+      "kind": "programRun",
+      "t": 1427294463667000,
+      "res": 1,
+      "obj": 947,
+      "obj_text": "Outlook 2013.lnk",
+      "aux": 948,
+      "aux_text": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Microsoft Office 2013\\Outlook 2013.lnk",
+      "row_sha256": "b4c23269dc1820e5376e0cd959fba7c047de46c048993e3d43cee43d92df4258",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {0139Q44R-6NSR-49S2-8690-3QNSPNR6SSO8}\\Zvpebfbsg Bssvpr 2013\\Bhgybbx 2013.yax",
+        "entry": "{0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Microsoft Office 2013\\Outlook 2013.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 5,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "Programs",
+        "run_count": 5,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1398,
+      "kind": "programRun",
+      "t": 1427294463667805,
+      "res": 1,
+      "obj": 739,
+      "obj_text": "OUTLOOK.EXE",
+      "aux": 949,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE",
+      "row_sha256": "32c3d7adacbf3064a7bd32dbe86af90c64890f62f96303ee28f295afbf026991",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\OUTLOOK.EXE-1DF422BF.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:41:13.168203Z",
+        "prefetch_file_modified": "2015-03-25 14:41:13.168203Z",
+        "prefetch_hash": "1DF422BF",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1399,
+      "kind": "programRun",
+      "t": 1427294567891000,
+      "res": 1,
+      "obj": 950,
+      "obj_text": "Microsoft.Windows.MediaPlayer32",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "43a266e66112a10e6197d75fb0cacb0e27a41383ec7c0ea82623ddc49738ad37",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.Jvaqbjf.ZrqvnCynlre32",
+        "entry": "Microsoft.Windows.MediaPlayer32",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 2403,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1400,
+      "kind": "programRun",
+      "t": 1427294567891000,
+      "res": 1,
+      "obj": 951,
+      "obj_text": "Windows Media Player.lnk",
+      "aux": 952,
+      "aux_text": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Media Player.lnk",
+      "row_sha256": "1706bfae87651a6a49a96a0c0abb8c4efa97a1679d5be78cd790fd0bb739868c",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {9R3995NO-1S9P-4S13-O827-48O24O6P7174}\\GnfxOne\\Jvaqbjf Zrqvn Cynlre.yax",
+        "entry": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Media Player.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 1,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "User Pinned",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1401,
+      "kind": "programRun",
+      "t": 1427294567891405,
+      "res": 1,
+      "obj": 953,
+      "obj_text": "WMPLAYER.EXE",
+      "aux": 954,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\WMPLAYER.EXE",
+      "row_sha256": "1908edd247fdba05e6ee8cbb97bd58f41b8b97aebf46a8c756a033d0ff28ab44",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WMPLAYER.EXE-26C72A86.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:42:48.125404Z",
+        "prefetch_file_modified": "2015-03-25 14:42:48.125404Z",
+        "prefetch_hash": "26C72A86",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1402,
+      "kind": "programRun",
+      "t": 1427294568125405,
+      "res": 1,
+      "obj": 955,
+      "obj_text": "SETUP_WM.EXE",
+      "aux": 956,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\SETUP_WM.EXE",
+      "row_sha256": "277e20b4243466882274a08cfbeecc96c176fe2424e2b288b58686c8468d0fa9",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SETUP_WM.EXE-D33FD27D.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:42:50.793005Z",
+        "prefetch_file_modified": "2015-03-25 14:42:50.793005Z",
+        "prefetch_hash": "D33FD27D",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1403,
+      "kind": "programRun",
+      "t": 1427294700148205,
+      "res": 1,
+      "obj": 957,
+      "obj_text": "LOGONUI.EXE",
+      "aux": 958,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LOGONUI.EXE",
+      "row_sha256": "3577f43e64cb2abd89947060b24141ff727503eb69f1ec46c22aa3256e3f30a9",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\LOGONUI.EXE-09140401.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-24 17:22:15.582176Z",
+        "prefetch_file_modified": "2015-03-25 14:45:10.430204Z",
+        "prefetch_hash": "09140401",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1404,
+      "kind": "programRun",
+      "t": 1427294765975000,
+      "res": 1,
+      "obj": 959,
+      "obj_text": "Internet Explorer.lnk",
+      "aux": 960,
+      "aux_text": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Internet Explorer.lnk",
+      "row_sha256": "025fda73e1e47ce73cbfe977a60f55d7e41194f0d4839f60cacd410232bc8395",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\\Count value {9R3995NO-1S9P-4S13-O827-48O24O6P7174}\\GnfxOne\\Vagrearg Rkcybere.yax",
+        "entry": "{9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Internet Explorer.lnk",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 5,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "known_folder": "User Pinned",
+        "run_count": 5,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}"
+      }
+    },
+    {
+      "id": 1405,
+      "kind": "programRun",
+      "t": 1427294765975000,
+      "res": 1,
+      "obj": 961,
+      "obj_text": "Microsoft.InternetExplorer.Default",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "ef758bdc10022fbf458726fc3b2468e2a441120991a2be96a16c7c5a10eeaf7c",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value Zvpebfbsg.VagreargRkcybere.Qrsnhyg",
+        "entry": "Microsoft.InternetExplorer.Default",
+        "exhibit": "PC",
+        "focus_count": 32,
+        "focus_time_ms": 1200321,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 5,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1406,
+      "kind": "programRun",
+      "t": 1427294860265705,
+      "res": 1,
+      "obj": 962,
+      "obj_text": "Eraser 6.2.0.2962.exe",
+      "aux": 963,
+      "aux_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "row_sha256": "2e95bd986f4d0fe26f892e2a55ad50a877b2a8595464c8a24270560c99cbdfba",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 118",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1407,
+      "kind": "programRun",
+      "t": 1427294908867805,
+      "res": 1,
+      "obj": 964,
+      "obj_text": "ccsetup504.exe",
+      "aux": 965,
+      "aux_text": "C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+      "row_sha256": "34e9c02fcd5d0c8e7e1a7ad56690c88e9d1fef12b4008c1b343a22cc2ba0188a",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 83",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1408,
+      "kind": "programRun",
+      "t": 1427295014393000,
+      "res": 1,
+      "obj": 962,
+      "obj_text": "Eraser 6.2.0.2962.exe",
+      "aux": 963,
+      "aux_text": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+      "row_sha256": "d589939e4d766118ba1e4fd995fd93abd68a145eeeec91f6b3a0bbbbb9780d61",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKU\\S-1-5-21-2425377081-3129163575-2985601102-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\\Count value P:\\Hfref\\vasbeznag\\Qrfxgbc\\Qbjaybnq\\Renfre 6.2.0.2962.rkr",
+        "entry": "C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+        "exhibit": "PC",
+        "focus_count": 0,
+        "focus_time_ms": 2433,
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "run_count": 1,
+        "source": "UserAssist",
+        "time_meaning": "last run time stored in the UserAssist entry",
+        "tool": "dissect.target 3.25.1",
+        "userassist_list": "{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}"
+      }
+    },
+    {
+      "id": 1409,
+      "kind": "programRun",
+      "t": 1427295014393805,
+      "res": 1,
+      "obj": 966,
+      "obj_text": "ERASER 6.2.0.2962.EXE",
+      "aux": 967,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE",
+      "row_sha256": "29ee5437602a9b37f0bb544e65747bcb935c56695211800ca516c1f577e38e46",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ERASER 6.2.0.2962.EXE-BE552234.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:50:24.533804Z",
+        "prefetch_file_modified": "2015-03-25 14:50:24.533804Z",
+        "prefetch_hash": "BE552234",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1410,
+      "kind": "programRun",
+      "t": 1427295015579405,
+      "res": 1,
+      "obj": 968,
+      "obj_text": "dotNetFx40_Full_setup.exe",
+      "aux": 969,
+      "aux_text": "C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe",
+      "row_sha256": "61c317f9fa8b98fd17112ce9b4c1cd42cc96610fc62501bc2f48980f3b573804",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\AppCompatCache value AppCompatCache entry 117",
+        "control_set": "ControlSet001",
+        "executed_flag": true,
+        "exhibit": "PC",
+        "hive": "sysvol\\windows\\system32\\config\\SYSTEM",
+        "image": "pc.E01",
+        "path_recorded": "\\??\\C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe",
+        "source": "application compatibility cache",
+        "time_meaning": "last-modified time of the file as stored in the compatibility cache; not a run time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1411,
+      "kind": "programRun",
+      "t": 1427295015657405,
+      "res": 1,
+      "obj": 970,
+      "obj_text": "DOTNETFX40_FULL_SETUP.EXE",
+      "aux": 971,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP.EXE",
+      "row_sha256": "7915792eb8a9e8326637754b49b94beab309efa991c226988393933bf2383783",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\DOTNETFX40_FULL_SETUP.EXE-5EFD2BFF.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 14:50:25.797403Z",
+        "prefetch_file_modified": "2015-03-25 14:50:25.797403Z",
+        "prefetch_hash": "5EFD2BFF",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1412,
+      "kind": "programRun",
+      "t": 1427295017389005,
+      "res": 1,
+      "obj": 717,
+      "obj_text": "SETUP.EXE",
+      "aux": 972,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\A5DF94FCAC8E62A530D048042C2A\\SETUP.EXE",
+      "row_sha256": "47ecf3aa24a1291799f5bd5df27de1e1329235b20d8fec73c18cec371f1b65a1",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SETUP.EXE-9FA85C1C.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:50:27.529005Z",
+        "prefetch_file_modified": "2015-03-25 14:50:27.529005Z",
+        "prefetch_hash": "9FA85C1C",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1413,
+      "kind": "programRun",
+      "t": 1427295026905005,
+      "res": 1,
+      "obj": 973,
+      "obj_text": "WUSA.EXE",
+      "aux": 974,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WUSA.EXE",
+      "row_sha256": "f03c749f7591c52968662f5f18a61d1ce3b44c2f838c2c02b1ad912eff509e73",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WUSA.EXE-A8D5906C.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:50:37.045004Z",
+        "prefetch_file_modified": "2015-03-25 14:50:37.045004Z",
+        "prefetch_hash": "A8D5906C",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1414,
+      "kind": "programRun",
+      "t": 1427295028948605,
+      "res": 1,
+      "obj": 975,
+      "obj_text": "TRUSTEDINSTALLER.EXE",
+      "aux": 976,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SERVICING\\TRUSTEDINSTALLER.EXE",
+      "row_sha256": "e73f27d317b134a8604168a07981dc48b4c884efd91d06067a8a390b610ce148",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\TRUSTEDINSTALLER.EXE-3CC531E5.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-22 15:12:47.288597Z",
+        "prefetch_file_modified": "2015-03-25 14:50:39.385004Z",
+        "prefetch_hash": "3CC531E5",
+        "run_count": 4,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1415,
+      "kind": "programRun",
+      "t": 1427295039400605,
+      "res": 1,
+      "obj": 977,
+      "obj_text": "TMPFF8D.TMP.EXE",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "cb927a0255f4a6d2db316cc38a9e74f3e0e6ed6cb78bd22eba7c4ae25c6785a9",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\TMPFF8D.TMP.EXE-E479EE08.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "0 entries with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 14:50:47.419004Z",
+        "prefetch_file_modified": "2015-03-25 14:50:47.419004Z",
+        "prefetch_hash": "E479EE08",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1416,
+      "kind": "programRun",
+      "t": 1427295039743805,
+      "res": 1,
+      "obj": 978,
+      "obj_text": "WUAUCLT.EXE",
+      "aux": 979,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WUAUCLT.EXE",
+      "row_sha256": "130c1637a257342bc49b4902d621bebb51c72a46032ee3ce85d25fc42250a110",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WUAUCLT.EXE-70318591.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:50:49.883804Z",
+        "prefetch_file_modified": "2015-03-25 14:50:49.883804Z",
+        "prefetch_hash": "70318591",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1417,
+      "kind": "programRun",
+      "t": 1427295053066205,
+      "res": 1,
+      "obj": 980,
+      "obj_text": "TMP5B99.TMP.EXE",
+      "aux": 981,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\MICROSOFT .NET FRAMEWORK 4 SETUP_4.0.30319\\TMP5B99.TMP.EXE",
+      "row_sha256": "8c1a6c1210155a3ba63de5709461230d28c8f2a68fead861f4b927a5ca864d96",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\TMP5B99.TMP.EXE-6E86E5DD.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "only entry with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 14:50:55.562204Z",
+        "prefetch_file_modified": "2015-03-25 14:50:55.562204Z",
+        "prefetch_hash": "6E86E5DD",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1418,
+      "kind": "programRun",
+      "t": 1427295101426205,
+      "res": 1,
+      "obj": 982,
+      "obj_text": "REGTLIBV12.EXE",
+      "aux": 983,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\REGTLIBV12.EXE",
+      "row_sha256": "5e5ccc2e99a6bf701c617cb9dc09fe250163cec11c81c66e51d79a86c96323a8",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\REGTLIBV12.EXE-D3A27E55.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:40.599403Z",
+        "prefetch_file_modified": "2015-03-25 14:51:41.441805Z",
+        "prefetch_hash": "D3A27E55",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1419,
+      "kind": "programRun",
+      "t": 1427295101473005,
+      "res": 1,
+      "obj": 982,
+      "obj_text": "REGTLIBV12.EXE",
+      "aux": 984,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\REGTLIBV12.EXE",
+      "row_sha256": "e8ea6a029ade7fb2d2ea1855554c3b71c1004afac649adadc77f6a81af21661d",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\REGTLIBV12.EXE-B7C4F383.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:40.771004Z",
+        "prefetch_file_modified": "2015-03-25 14:51:41.504204Z",
+        "prefetch_hash": "B7C4F383",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1420,
+      "kind": "programRun",
+      "t": 1427295195806205,
+      "res": 1,
+      "obj": 927,
+      "obj_text": "MSCORSVW.EXE",
+      "aux": 985,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\MSCORSVW.EXE",
+      "row_sha256": "25bd889b626240d986903f5881f5fb2b5cc2d41e7f6490ae63dd13fa61c22c15",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MSCORSVW.EXE-C3C515BD.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:52:59.363804Z",
+        "prefetch_file_modified": "2015-03-25 14:53:15.884205Z",
+        "prefetch_hash": "C3C515BD",
+        "run_count": 14,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1421,
+      "kind": "programRun",
+      "t": 1427295241826205,
+      "res": 1,
+      "obj": 986,
+      "obj_text": "UNLODCTR.EXE",
+      "aux": 987,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\UNLODCTR.EXE",
+      "row_sha256": "edee47a8fef1ba1973a57cbfc1c92e973e9a9589b2dbb1dff34fe44bf6777dea",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\UNLODCTR.EXE-531FACC7.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:14.906204Z",
+        "prefetch_file_modified": "2015-03-25 14:54:01.873005Z",
+        "prefetch_hash": "531FACC7",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1422,
+      "kind": "programRun",
+      "t": 1427295241919805,
+      "res": 1,
+      "obj": 986,
+      "obj_text": "UNLODCTR.EXE",
+      "aux": 988,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\UNLODCTR.EXE",
+      "row_sha256": "f9e0cfc49aaccf5ead76e318385eae89c620f7c7c50ec2f562f8b0d458baf593",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\UNLODCTR.EXE-A3D4DEEB.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:15.062204Z",
+        "prefetch_file_modified": "2015-03-25 14:54:01.966604Z",
+        "prefetch_hash": "A3D4DEEB",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1423,
+      "kind": "programRun",
+      "t": 1427295247099005,
+      "res": 1,
+      "obj": 989,
+      "obj_text": "SERVICEMODELREG.EXE",
+      "aux": 990,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\SERVICEMODELREG.EXE",
+      "row_sha256": "25195c749793f29e86d66e0760136bbeb9e853572d24ff429464b4955d4bb7d5",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SERVICEMODELREG.EXE-1F42B3E3.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:08.409405Z",
+        "prefetch_file_modified": "2015-03-25 14:54:08.409405Z",
+        "prefetch_hash": "1F42B3E3",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1424,
+      "kind": "programRun",
+      "t": 1427295247629405,
+      "res": 1,
+      "obj": 991,
+      "obj_text": "SC.EXE",
+      "aux": 992,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SC.EXE",
+      "row_sha256": "ff6fe43b4c7d60dfcec623967b1d6c56274891277dd22aef0a6d3290cf447ee7",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SC.EXE-945D79AE.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:07.223804Z",
+        "prefetch_file_modified": "2015-03-25 14:54:07.645004Z",
+        "prefetch_hash": "945D79AE",
+        "run_count": 8,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1425,
+      "kind": "programRun",
+      "t": 1427295249189405,
+      "res": 1,
+      "obj": 989,
+      "obj_text": "SERVICEMODELREG.EXE",
+      "aux": 993,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\SERVICEMODELREG.EXE",
+      "row_sha256": "b7c7775a7b3568aae247035aa7c0ccac231d96a20dfb940f3049cd0ee2b16172",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\SERVICEMODELREG.EXE-AFDDD121.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:09.891405Z",
+        "prefetch_file_modified": "2015-03-25 14:54:09.891405Z",
+        "prefetch_hash": "AFDDD121",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1426,
+      "kind": "programRun",
+      "t": 1427295249595005,
+      "res": 1,
+      "obj": 994,
+      "obj_text": "WEVTUTIL.EXE",
+      "aux": 995,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WEVTUTIL.EXE",
+      "row_sha256": "aa1731ed8334c349fc78c03ac8a4c08873f7e44be10f8085bc16f0d8802965f2",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WEVTUTIL.EXE-400D93E8.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:09.579405Z",
+        "prefetch_file_modified": "2015-03-25 14:54:09.891405Z",
+        "prefetch_hash": "400D93E8",
+        "run_count": 2,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1427,
+      "kind": "programRun",
+      "t": 1427295249657405,
+      "res": 1,
+      "obj": 994,
+      "obj_text": "WEVTUTIL.EXE",
+      "aux": 996,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WEVTUTIL.EXE",
+      "row_sha256": "003288b2231e3de577fab41e862cfd6f6fa5d80dd19851f57486749f60f3bf8f",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\WEVTUTIL.EXE-EF5861C4.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:07.832205Z",
+        "prefetch_file_modified": "2015-03-25 14:54:09.891405Z",
+        "prefetch_hash": "EF5861C4",
+        "run_count": 4,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1428,
+      "kind": "programRun",
+      "t": 1427295261357405,
+      "res": 1,
+      "obj": 997,
+      "obj_text": "ASPNET_REGIIS.EXE",
+      "aux": 998,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\ASPNET_REGIIS.EXE",
+      "row_sha256": "9b510c78ded04cc2db290518148843681e6938da2a7b3f19ea27836e08b96560",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ASPNET_REGIIS.EXE-75651A3C.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:54:28.642605Z",
+        "prefetch_file_modified": "2015-03-25 14:54:28.642605Z",
+        "prefetch_hash": "75651A3C",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1429,
+      "kind": "programRun",
+      "t": 1427295263011005,
+      "res": 1,
+      "obj": 999,
+      "obj_text": "MOFCOMP.EXE",
+      "aux": 1000,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\MOFCOMP.EXE",
+      "row_sha256": "607848f762e3048e7956139f148b7f061382b015a2aaaf576ba0cb22096a4122",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MOFCOMP.EXE-8FE3D558.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:41.987804Z",
+        "prefetch_file_modified": "2015-03-25 14:54:23.806604Z",
+        "prefetch_hash": "8FE3D558",
+        "run_count": 3,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1430,
+      "kind": "programRun",
+      "t": 1427295268767405,
+      "res": 1,
+      "obj": 997,
+      "obj_text": "ASPNET_REGIIS.EXE",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "f03a9790620b129fc346f78883a4e2fbdba3f1872c019aae6bee7b89857af7d3",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\ASPNET_REGIIS.EXE-86915B5A.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "0 entries with this file name in the prefetch file list",
+        "prefetch_file_created": "2015-03-25 14:54:33.899805Z",
+        "prefetch_file_modified": "2015-03-25 14:54:33.899805Z",
+        "prefetch_hash": "86915B5A",
+        "run_count": 1,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1431,
+      "kind": "programRun",
+      "t": 1427295269141805,
+      "res": 1,
+      "obj": 999,
+      "obj_text": "MOFCOMP.EXE",
+      "aux": 1001,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WBEM\\MOFCOMP.EXE",
+      "row_sha256": "a3d098489ae16e8a871e7d0650cefd6d2ce11a375683881901f9473a2839dfc3",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MOFCOMP.EXE-FDE76EFC.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:43.454205Z",
+        "prefetch_file_modified": "2015-03-25 14:54:29.641005Z",
+        "prefetch_hash": "FDE76EFC",
+        "run_count": 3,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1432,
+      "kind": "programRun",
+      "t": 1427295279079005,
+      "res": 1,
+      "obj": 1002,
+      "obj_text": "NGEN.EXE",
+      "aux": 1003,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\NGEN.EXE",
+      "row_sha256": "d46fb4fabcfb7c0ba38458daa20419a963dc6a2328eef6c7df1e24797f2fb470",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\NGEN.EXE-AE594A6B.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:52:15.091003Z",
+        "prefetch_file_modified": "2015-03-25 14:54:39.890203Z",
+        "prefetch_hash": "AE594A6B",
+        "run_count": 4,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1433,
+      "kind": "programRun",
+      "t": 1427295279734205,
+      "res": 1,
+      "obj": 927,
+      "obj_text": "MSCORSVW.EXE",
+      "aux": 1004,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\MSCORSVW.EXE",
+      "row_sha256": "e45c98e6792160cb6027f24dabb366913d42a11baf5f802966c5b05c1a869089",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\MSCORSVW.EXE-57D17DAF.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:52:17.259405Z",
+        "prefetch_file_modified": "2015-03-25 14:54:39.890203Z",
+        "prefetch_hash": "57D17DAF",
+        "run_count": 8,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1434,
+      "kind": "programRun",
+      "t": 1427295282417405,
+      "res": 1,
+      "obj": 1002,
+      "obj_text": "NGEN.EXE",
+      "aux": 1005,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\NGEN.EXE",
+      "row_sha256": "dd0fab0f8c9b8b84c1e943c391594326e268e5adf7c44fc70e0f62eab82dc273",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\NGEN.EXE-EC3F9239.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:52:57.835005Z",
+        "prefetch_file_modified": "2015-03-25 14:54:48.922604Z",
+        "prefetch_hash": "EC3F9239",
+        "run_count": 4,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1435,
+      "kind": "programRun",
+      "t": 1427295288953805,
+      "res": 1,
+      "obj": 1006,
+      "obj_text": "LODCTR.EXE",
+      "aux": 1007,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LODCTR.EXE",
+      "row_sha256": "d1ba9599cf1268dd6009b58fa0ea6708cace749afd0976200e60a09c654ec75d",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\LODCTR.EXE-72CD50D0.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:39.694605Z",
+        "prefetch_file_modified": "2015-03-25 14:54:49.141005Z",
+        "prefetch_hash": "72CD50D0",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 1436,
+      "kind": "programRun",
+      "t": 1427295289187805,
+      "res": 1,
+      "obj": 1006,
+      "obj_text": "LODCTR.EXE",
+      "aux": 1008,
+      "aux_text": "\\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\LODCTR.EXE",
+      "row_sha256": "41103c892eddfc0207e9c58afc58760e021c3b37cc8fcea395090d73db363aa7",
+      "prov": {
+        "artifact": "C:\\Windows\\Prefetch\\LODCTR.EXE-3CCE0534.pf",
+        "exhibit": "PC",
+        "format_version": 23,
+        "image": "pc.E01",
+        "path_source": "path hash in the prefetch header matches this entry of its file list",
+        "prefetch_file_created": "2015-03-25 14:51:39.788204Z",
+        "prefetch_file_modified": "2015-03-25 14:54:49.328205Z",
+        "prefetch_hash": "3CCE0534",
+        "run_count": 7,
+        "source": "prefetch",
+        "time_meaning": "last run time in the prefetch header",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "programRan": [
+          1397
+        ]
+      },
+      "english": "A record shows Outlook 2013.lnk ran (2015-03-25 14:41:03 UTC, path {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}\\Microsoft Office 2013\\Outlook 2013.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1398
+        ]
+      },
+      "english": "A record shows OUTLOOK.EXE ran (2015-03-25 14:41:03 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES\\MICROSOFT OFFICE\\OFFICE15\\OUTLOOK.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1399
+        ]
+      },
+      "english": "A record shows Microsoft.Windows.MediaPlayer32 ran (2015-03-25 14:42:47 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1400
+        ]
+      },
+      "english": "A record shows Windows Media Player.lnk ran (2015-03-25 14:42:47 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Windows Media Player.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1401
+        ]
+      },
+      "english": "A record shows WMPLAYER.EXE ran (2015-03-25 14:42:47 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\WMPLAYER.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1402
+        ]
+      },
+      "english": "A record shows SETUP_WM.EXE ran (2015-03-25 14:42:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\PROGRAM FILES (X86)\\WINDOWS MEDIA PLAYER\\SETUP_WM.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1403
+        ]
+      },
+      "english": "A record shows LOGONUI.EXE ran (2015-03-25 14:45:00 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LOGONUI.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1404
+        ]
+      },
+      "english": "A record shows Internet Explorer.lnk ran (2015-03-25 14:46:05 UTC, path {9E3995AB-1F9C-4F13-B827-48B24B6C7174}\\TaskBar\\Internet Explorer.lnk).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1405
+        ]
+      },
+      "english": "A record shows Microsoft.InternetExplorer.Default ran (2015-03-25 14:46:05 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1406
+        ]
+      },
+      "english": "A record shows Eraser 6.2.0.2962.exe ran (2015-03-25 14:47:40 UTC, path C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1407
+        ]
+      },
+      "english": "A record shows ccsetup504.exe ran (2015-03-25 14:48:28 UTC, path C:\\Users\\informant\\Desktop\\Download\\ccsetup504.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1408
+        ]
+      },
+      "english": "A record shows Eraser 6.2.0.2962.exe ran (2015-03-25 14:50:14 UTC, path C:\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1409
+        ]
+      },
+      "english": "A record shows ERASER 6.2.0.2962.EXE ran (2015-03-25 14:50:14 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1410
+        ]
+      },
+      "english": "A record shows dotNetFx40_Full_setup.exe ran (2015-03-25 14:50:15 UTC, path C:\\Users\\INFORM~1\\AppData\\Local\\Temp\\eraserInstallBootstrapper\\dotNetFx40_Full_setup.exe).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1411
+        ]
+      },
+      "english": "A record shows DOTNETFX40_FULL_SETUP.EXE ran (2015-03-25 14:50:15 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\ERASERINSTALLBOOTSTRAPPER\\DOTNETFX40_FULL_SETUP.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1412
+        ]
+      },
+      "english": "A record shows SETUP.EXE ran (2015-03-25 14:50:17 UTC, path \\DEVICE\\HARDDISKVOLUME2\\A5DF94FCAC8E62A530D048042C2A\\SETUP.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1413
+        ]
+      },
+      "english": "A record shows WUSA.EXE ran (2015-03-25 14:50:26 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WUSA.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1414
+        ]
+      },
+      "english": "A record shows TRUSTEDINSTALLER.EXE ran (2015-03-25 14:50:28 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SERVICING\\TRUSTEDINSTALLER.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1415
+        ]
+      },
+      "english": "A record shows TMPFF8D.TMP.EXE ran (2015-03-25 14:50:39 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1416
+        ]
+      },
+      "english": "A record shows WUAUCLT.EXE ran (2015-03-25 14:50:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WUAUCLT.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1417
+        ]
+      },
+      "english": "A record shows TMP5B99.TMP.EXE ran (2015-03-25 14:50:53 UTC, path \\DEVICE\\HARDDISKVOLUME2\\USERS\\INFORMANT\\APPDATA\\LOCAL\\TEMP\\MICROSOFT .NET FRAMEWORK 4 SETUP_4.0.30319\\TMP5B99.TMP.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1418
+        ]
+      },
+      "english": "A record shows REGTLIBV12.EXE ran (2015-03-25 14:51:41 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\REGTLIBV12.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1419
+        ]
+      },
+      "english": "A record shows REGTLIBV12.EXE ran (2015-03-25 14:51:41 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\REGTLIBV12.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1420
+        ]
+      },
+      "english": "A record shows MSCORSVW.EXE ran (2015-03-25 14:53:15 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\MSCORSVW.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1421
+        ]
+      },
+      "english": "A record shows UNLODCTR.EXE ran (2015-03-25 14:54:01 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\UNLODCTR.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1422
+        ]
+      },
+      "english": "A record shows UNLODCTR.EXE ran (2015-03-25 14:54:01 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\UNLODCTR.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1423
+        ]
+      },
+      "english": "A record shows SERVICEMODELREG.EXE ran (2015-03-25 14:54:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\SERVICEMODELREG.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1424
+        ]
+      },
+      "english": "A record shows SC.EXE ran (2015-03-25 14:54:07 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\SC.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1425
+        ]
+      },
+      "english": "A record shows SERVICEMODELREG.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\SERVICEMODELREG.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1426
+        ]
+      },
+      "english": "A record shows WEVTUTIL.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WEVTUTIL.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1427
+        ]
+      },
+      "english": "A record shows WEVTUTIL.EXE ran (2015-03-25 14:54:09 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WEVTUTIL.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1428
+        ]
+      },
+      "english": "A record shows ASPNET_REGIIS.EXE ran (2015-03-25 14:54:21 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\ASPNET_REGIIS.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1429
+        ]
+      },
+      "english": "A record shows MOFCOMP.EXE ran (2015-03-25 14:54:23 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\WBEM\\MOFCOMP.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1430
+        ]
+      },
+      "english": "A record shows ASPNET_REGIIS.EXE ran (2015-03-25 14:54:28 UTC).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1431
+        ]
+      },
+      "english": "A record shows MOFCOMP.EXE ran (2015-03-25 14:54:29 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\WBEM\\MOFCOMP.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1432
+        ]
+      },
+      "english": "A record shows NGEN.EXE ran (2015-03-25 14:54:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\NGEN.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1433
+        ]
+      },
+      "english": "A record shows MSCORSVW.EXE ran (2015-03-25 14:54:39 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK64\\V4.0.30319\\MSCORSVW.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1434
+        ]
+      },
+      "english": "A record shows NGEN.EXE ran (2015-03-25 14:54:42 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\MICROSOFT.NET\\FRAMEWORK\\V4.0.30319\\NGEN.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1435
+        ]
+      },
+      "english": "A record shows LODCTR.EXE ran (2015-03-25 14:54:48 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSTEM32\\LODCTR.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "programRan": [
+          1436
+        ]
+      },
+      "english": "A record shows LODCTR.EXE ran (2015-03-25 14:54:49 UTC, path \\DEVICE\\HARDDISKVOLUME2\\WINDOWS\\SYSWOW64\\LODCTR.EXE).",
+      "rules": [
+        "R18"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R18"
+  ],
+  "strength": "strong",
+  "lean_file": "M255.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

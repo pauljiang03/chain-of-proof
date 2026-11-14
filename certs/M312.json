@@ -1,0 +1,1965 @@
+{
+  "finding_id": "M312",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          11850
+        ]
+      },
+      {
+        "fileRecorded": [
+          11851
+        ]
+      },
+      {
+        "fileRecorded": [
+          11852
+        ]
+      },
+      {
+        "fileRecorded": [
+          11853
+        ]
+      },
+      {
+        "fileRecorded": [
+          11854
+        ]
+      },
+      {
+        "fileRecorded": [
+          11855
+        ]
+      },
+      {
+        "fileRecorded": [
+          11856
+        ]
+      },
+      {
+        "fileRecorded": [
+          11857
+        ]
+      },
+      {
+        "fileRecorded": [
+          11858
+        ]
+      },
+      {
+        "fileRecorded": [
+          11859
+        ]
+      },
+      {
+        "fileRecorded": [
+          11860
+        ]
+      },
+      {
+        "fileRecorded": [
+          11861
+        ]
+      },
+      {
+        "fileRecorded": [
+          11862
+        ]
+      },
+      {
+        "fileRecorded": [
+          11863
+        ]
+      },
+      {
+        "fileRecorded": [
+          11864
+        ]
+      },
+      {
+        "fileRecorded": [
+          11865
+        ]
+      },
+      {
+        "fileRecorded": [
+          11866
+        ]
+      },
+      {
+        "fileRecorded": [
+          11867
+        ]
+      },
+      {
+        "fileRecorded": [
+          11868
+        ]
+      },
+      {
+        "fileRecorded": [
+          11869
+        ]
+      },
+      {
+        "fileRecorded": [
+          11870
+        ]
+      },
+      {
+        "fileRecorded": [
+          11871
+        ]
+      },
+      {
+        "fileRecorded": [
+          11872
+        ]
+      },
+      {
+        "fileRecorded": [
+          11873
+        ]
+      },
+      {
+        "fileRecorded": [
+          11874
+        ]
+      },
+      {
+        "fileRecorded": [
+          11875
+        ]
+      },
+      {
+        "fileRecorded": [
+          11876
+        ]
+      },
+      {
+        "fileRecorded": [
+          11877
+        ]
+      },
+      {
+        "fileRecorded": [
+          11878
+        ]
+      },
+      {
+        "fileRecorded": [
+          11879
+        ]
+      },
+      {
+        "fileRecorded": [
+          11880
+        ]
+      },
+      {
+        "fileRecorded": [
+          11881
+        ]
+      },
+      {
+        "fileRecorded": [
+          11882
+        ]
+      },
+      {
+        "fileRecorded": [
+          11883
+        ]
+      },
+      {
+        "fileRecorded": [
+          11884
+        ]
+      },
+      {
+        "fileRecorded": [
+          11885
+        ]
+      },
+      {
+        "fileRecorded": [
+          11886
+        ]
+      },
+      {
+        "fileRecorded": [
+          11887
+        ]
+      },
+      {
+        "fileRecorded": [
+          11888
+        ]
+      },
+      {
+        "fileRecorded": [
+          11889
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\Users\\admin11\\Searches\\Everywhere.search-ms (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Favorites Bar\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Links\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Pictures\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Videos\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Saved Games\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Downloads\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Favorites\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Music\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Searches\\desktop.ini (record time 2015-03-22 15:54:03 UTC). The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-22 15:54:04 UTC). The windows search index holds a record of C:\\Users\\admin11\\Contacts\\desktop.ini (record time 2015-03-22 15:54:04 UTC). The windows search index holds a record of C:\\Users\\admin11\\My Documents\\desktop.ini (record time 2015-03-22 15:54:04 UTC). The windows search index holds a record of C:\\Users\\admin11\\Searches\\Indexed Locations.search-ms (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of C:\\Users\\Public\\Public Desktop\\Google Chrome.lnk (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 0924bc51f9b84ee8 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 0b7f10edbdac09b3 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 1ac426ea6b4113fc (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 226ec0af76fd55f7 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 25215604eaeb43aa (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 3ae073b5c12d5b13 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 3b5ea290a193f106 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 3d034b7bb4b60ceb (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 3f680fae66ae8084 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 4c1fa1398eaa017a (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 50437650c6930c63 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 5c2f7b9c554e2272 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 60359eea9bcc1bb6 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 610e9c7639d0788d (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 7160c5b70ff08f29 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 7517728a36ea0587 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 7a2448e17802d22a (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 7bd9cc8989f1ee04 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 7ec37b2b5157d287 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id 903a246b1f772f53 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id a6f47bb0a9e424f6 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id cd2638685d04b68d (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id d529fad897fcaa93 (record time 2015-03-22 15:54:04 UTC). The thumbnail cache holds a record of thumbnail cache id e728566ea2235fea (record time 2015-03-22 15:54:04 UTC). The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Websites for United States (record time 2015-03-22 15:54:05 UTC).",
+  "cited_facts": [
+    {
+      "id": 11850,
+      "kind": "fileSeen",
+      "t": 1427039643326544,
+      "res": 1,
+      "obj": 15925,
+      "obj_text": "C:\\Users\\admin11\\Searches\\Everywhere.search-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6cecedecaadfef1e6720976f036510d9e5d636cb858ff0938e564d181aa165d4",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 297",
+        "column": "System_Search_GatherTime",
+        "display_name": "Everywhere.search-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".search-ms",
+        "item_url": "file:C:/Users/admin11/Searches/Everywhere.search-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 248,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11851,
+      "kind": "fileSeen",
+      "t": 1427039643342144,
+      "res": 1,
+      "obj": 15928,
+      "obj_text": "C:\\Users\\admin11\\Favorites\\Favorites Bar\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6c5346b5a197578247dd5c5d8f3e63cd45e76abdc4a451a78bd571c8a79a0528",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 302",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Favorites/Links/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:54:02.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:54:02.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:02.000000Z",
+          "System_ItemDate": "2015-03-22T15:54:02.000000Z"
+        },
+        "size": 80,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11852,
+      "kind": "fileSeen",
+      "t": 1427039643342144,
+      "res": 1,
+      "obj": 15920,
+      "obj_text": "C:\\Users\\admin11\\Links\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b9dba6660f4649cfa8b360f0dfeb8a97d0f426056b837f00a57f4553f39a9ca2",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 294",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Links/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 580,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11853,
+      "kind": "fileSeen",
+      "t": 1427039643342144,
+      "res": 1,
+      "obj": 15913,
+      "obj_text": "C:\\Users\\admin11\\My Pictures\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b8f656cb8b35a1761f84f7666c5e356c5bf6590829b11c44aaa34d3837460319",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 349",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Pictures/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11854,
+      "kind": "fileSeen",
+      "t": 1427039643342144,
+      "res": 1,
+      "obj": 15914,
+      "obj_text": "C:\\Users\\admin11\\My Videos\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "563eb4e0689dccbe52d1f763a9b7f127665d1d8e577270f50c72b7eea641be7f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 348",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Videos/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11855,
+      "kind": "fileSeen",
+      "t": 1427039643342144,
+      "res": 1,
+      "obj": 15921,
+      "obj_text": "C:\\Users\\admin11\\Saved Games\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ab4bd3c3c7e51570d15377d0b9a93bc5a47db85151382c25272dff48c3b3af19",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 295",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Saved Games/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 282,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11856,
+      "kind": "fileSeen",
+      "t": 1427039643357744,
+      "res": 1,
+      "obj": 15917,
+      "obj_text": "C:\\Users\\admin11\\Downloads\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "5ca73d213d6053429989fd16e380656b5cd0a239299d40c61a64eb194187abf4",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 293",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Downloads/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 282,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11857,
+      "kind": "fileSeen",
+      "t": 1427039643357744,
+      "res": 1,
+      "obj": 15912,
+      "obj_text": "C:\\Users\\admin11\\Favorites\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a768fbb14a7de4d7e9ce65cacd806c7808f4892deff31b547cced431e7db077c",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 288",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Favorites/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 402,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11858,
+      "kind": "fileSeen",
+      "t": 1427039643357744,
+      "res": 1,
+      "obj": 15916,
+      "obj_text": "C:\\Users\\admin11\\My Music\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "214c80becb271ea4df6b6fa408a31b936430b8e213b7353013c400ec4f362800",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 289",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Music/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 504,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11859,
+      "kind": "fileSeen",
+      "t": 1427039643357744,
+      "res": 1,
+      "obj": 15919,
+      "obj_text": "C:\\Users\\admin11\\Searches\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "faecff2816789f165b77c8f9df63fec66f6ed680ebb14c85eb2e4b1a13058015",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 292",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Searches/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 524,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11860,
+      "kind": "fileSeen",
+      "t": 1427039644527746,
+      "res": 1,
+      "obj": 15929,
+      "obj_text": "C:\\Users\\admin11\\Favorites\\Favorites Bar\\Web Slice Gallery.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6f1624e9a2a484f9bf41e20e8727d6e79ee9d55116e2cbab671a5d03565ddea3",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 311",
+        "column": "System_Search_GatherTime",
+        "display_name": "Web Slice Gallery.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/admin11/Favorites/Links/Web Slice Gallery.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:54:02.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:54:02.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:02.000000Z",
+          "System_ItemDate": "2015-03-22T15:54:02.000000Z"
+        },
+        "size": 226,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11861,
+      "kind": "fileSeen",
+      "t": 1427039644543346,
+      "res": 1,
+      "obj": 15909,
+      "obj_text": "C:\\Users\\admin11\\Contacts\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "756b30c3b54f67c8c0befd0d78e985b3ec7bcf7f137dc4068c7a133fd522f221",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 346",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Contacts/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:50.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:50.000000Z"
+        },
+        "size": 412,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11862,
+      "kind": "fileSeen",
+      "t": 1427039644543346,
+      "res": 1,
+      "obj": 15915,
+      "obj_text": "C:\\Users\\admin11\\My Documents\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0576703bacef0a24f7c6fa09cac9daad5f31bf2fe68d353a474bddae963833ac",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 290",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/admin11/Documents/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 402,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11863,
+      "kind": "fileSeen",
+      "t": 1427039644543346,
+      "res": 1,
+      "obj": 15922,
+      "obj_text": "C:\\Users\\admin11\\Searches\\Indexed Locations.search-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4cac5f241664c1a87bc704c470d01d9b271dfcdef0abc911ed39d55f92c3c91b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 296",
+        "column": "System_Search_GatherTime",
+        "display_name": "Indexed Locations.search-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".search-ms",
+        "item_url": "file:C:/Users/admin11/Searches/Indexed Locations.search-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:53:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:53:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:53:58.000000Z"
+        },
+        "size": 248,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11864,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15544,
+      "obj_text": "C:\\Users\\Public\\Public Desktop\\Google Chrome.lnk",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "88d0f2023667d51c8a638d4dd4f26b394d3c1449b44026217b705043e5f60646",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 4bd9954e7f65860d",
+        "cache_id": "4bd9954e7f65860d",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 152
+          },
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 360
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "search index DocID 243 has this System.ThumbnailCacheId",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11865,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15560,
+      "obj_text": "thumbnail cache id 0924bc51f9b84ee8",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "95865e3e9078c3e3dc968c531f2944eafd710bc724d1ea95d10dd8075aa5132b",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 0924bc51f9b84ee8",
+        "cache_id": "0924bc51f9b84ee8",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 24
+          },
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 232
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11866,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15930,
+      "obj_text": "thumbnail cache id 0b7f10edbdac09b3",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "5728ac33315f324ff2513b8d62ce516a55559826bf88cd76e78b6d08aaced0cd",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 0b7f10edbdac09b3",
+        "cache_id": "0b7f10edbdac09b3",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 44474
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11867,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15931,
+      "obj_text": "thumbnail cache id 1ac426ea6b4113fc",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "5ebca0971f8aa80a57882340ea6f708c4ac9c5399de54e3d61665270a1833222",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 1ac426ea6b4113fc",
+        "cache_id": "1ac426ea6b4113fc",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123841
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11868,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15932,
+      "obj_text": "thumbnail cache id 226ec0af76fd55f7",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "b4efdefad42e219c9aa5fb8c7f9d303774cea03a241cba5b778af1e8b5d7ece3",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 226ec0af76fd55f7",
+        "cache_id": "226ec0af76fd55f7",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 520
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11869,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15933,
+      "obj_text": "thumbnail cache id 25215604eaeb43aa",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "d5c72d0244f285018bfa7d8302869de2eec05b225624297c5611140bad8804e0",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 25215604eaeb43aa",
+        "cache_id": "25215604eaeb43aa",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123601
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11870,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15934,
+      "obj_text": "thumbnail cache id 3ae073b5c12d5b13",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "f87200fe62719a1c67dcf21ecaf061bbec532dd6ae778e18f1d71abae281e44d",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 3ae073b5c12d5b13",
+        "cache_id": "3ae073b5c12d5b13",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123761
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11871,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15935,
+      "obj_text": "thumbnail cache id 3b5ea290a193f106",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "8b8aa5ccfeb51462cdae2a0aa09b152426ee7ae3046c64ac868322043fe83681",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 3b5ea290a193f106",
+        "cache_id": "3b5ea290a193f106",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 680
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11872,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15614,
+      "obj_text": "thumbnail cache id 3d034b7bb4b60ceb",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "e32e9c3ee958d4a1f7c9e4c9700f1d266eb216e1db849e738abb43a595aa7a1a",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 3d034b7bb4b60ceb",
+        "cache_id": "3d034b7bb4b60ceb",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 868
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11873,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15936,
+      "obj_text": "thumbnail cache id 3f680fae66ae8084",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "4f02c3041a6caf5312a5b0afe59ff0b969d8eaa9df942aa4300dbd83c2eda15e",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 3f680fae66ae8084",
+        "cache_id": "3f680fae66ae8084",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123361
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11874,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15937,
+      "obj_text": "thumbnail cache id 4c1fa1398eaa017a",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "1c5f29bf98b7870fd9a5453a2a066eab3273c346b149f2157050bbee7b0f398a",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 4c1fa1398eaa017a",
+        "cache_id": "4c1fa1398eaa017a",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 44394
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11875,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15938,
+      "obj_text": "thumbnail cache id 50437650c6930c63",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "966ef83196ee976befc4c4fc3d23fff47f6a2c255f4be95e6d60dfa15ccad86b",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 50437650c6930c63",
+        "cache_id": "50437650c6930c63",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 39673,
+            "offset": 44552
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 134250498
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11876,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15939,
+      "obj_text": "thumbnail cache id 5c2f7b9c554e2272",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "384f80aa41f8ab0ce3c10afd17e669b0b1666d00c3dc8a3bf441908bffe34a68",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 5c2f7b9c554e2272",
+        "cache_id": "5c2f7b9c554e2272",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 84385
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11877,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15940,
+      "obj_text": "thumbnail cache id 60359eea9bcc1bb6",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "a053edacc34c1912e5b16ef1fdc9f9e28f312cbd90fb1b689158b53836cc7d14",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 60359eea9bcc1bb6",
+        "cache_id": "60359eea9bcc1bb6",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123441
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11878,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15941,
+      "obj_text": "thumbnail cache id 610e9c7639d0788d",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "99eb30cae194df0206d817bd4c5f3dd223c6f38b7040e7a38444695b439eaee7",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 610e9c7639d0788d",
+        "cache_id": "610e9c7639d0788d",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 922
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11879,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15942,
+      "obj_text": "thumbnail cache id 7160c5b70ff08f29",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "6cff3d0c217b65485e74d910d25cf9e8644122e18fc8f6435b501855008e0762",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 7160c5b70ff08f29",
+        "cache_id": "7160c5b70ff08f29",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123681
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11880,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15681,
+      "obj_text": "thumbnail cache id 7517728a36ea0587",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "9b6758ad2dfddd956c859e7cfe8636470a54297288def5b8fe2f6b88368ab027",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 7517728a36ea0587",
+        "cache_id": "7517728a36ea0587",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 760
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11881,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15943,
+      "obj_text": "thumbnail cache id 7a2448e17802d22a",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "c874b52407cac70dd087461a2bef78eb90b630fa090ac5096ec1e1bcfafb6e01",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 7a2448e17802d22a",
+        "cache_id": "7a2448e17802d22a",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 38816,
+            "offset": 84465
+          },
+          {
+            "file": "thumbcache_96.db",
+            "image_bytes": 36918,
+            "offset": 24
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 134250498
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11882,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15944,
+      "obj_text": "thumbnail cache id 7bd9cc8989f1ee04",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "c1c229201f5517aec171cecb30afb808ef8792c6ae93dd9c6480de702917a465",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 7bd9cc8989f1ee04",
+        "cache_id": "7bd9cc8989f1ee04",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 84305
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11883,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15945,
+      "obj_text": "thumbnail cache id 7ec37b2b5157d287",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "1e65f7e3bcf10e940c2028b727a2f18c4bc6ff2dd25d72bd130a61a17efb78af",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 7ec37b2b5157d287",
+        "cache_id": "7ec37b2b5157d287",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 600
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11884,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15946,
+      "obj_text": "thumbnail cache id 903a246b1f772f53",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "f07194285246c67c5d91ac8f7d8c3bfabb032a698e93e6b49f992066e6a47148",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 903a246b1f772f53",
+        "cache_id": "903a246b1f772f53",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 43232,
+            "offset": 1082
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 134250498
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11885,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15947,
+      "obj_text": "thumbnail cache id a6f47bb0a9e424f6",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "73269e1c9f76c94a31fb6a1fb83c555284b162d6d913b0bec15ff2d315027ff9",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id a6f47bb0a9e424f6",
+        "cache_id": "a6f47bb0a9e424f6",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 440
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11886,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15948,
+      "obj_text": "thumbnail cache id cd2638685d04b68d",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "ee7ad8f762b7d391a68ab5082c30620ba6d4bd16c9b2bc40a2837a2d253b14b0",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id cd2638685d04b68d",
+        "cache_id": "cd2638685d04b68d",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 123521
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11887,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15949,
+      "obj_text": "thumbnail cache id d529fad897fcaa93",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "97a2ddc1ad3d96c1172e2a965209d755da2e0f032bbf6f4219eeec353f8e3c1d",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id d529fad897fcaa93",
+        "cache_id": "d529fad897fcaa93",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 1002
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11888,
+      "kind": "fileSeen",
+      "t": 1427039644902147,
+      "res": 1,
+      "obj": 15808,
+      "obj_text": "thumbnail cache id e728566ea2235fea",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "d42ffb4748bee0f0235d6df440bdff0cc3e1051a4c16fca3cb4bd006fb7d8560",
+      "prov": {
+        "account": "admin11",
+        "artifact": "C:\\Users\\admin11\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id e728566ea2235fea",
+        "cache_id": "e728566ea2235fea",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 814
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 11889,
+      "kind": "fileSeen",
+      "t": 1427039645089349,
+      "res": 1,
+      "obj": 15950,
+      "obj_text": "C:\\Users\\admin11\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d2dc1040c2c31f534933139f0eda3a8b1dcf6fef2fb0e4fc74c1a4d6d156ef1d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 312",
+        "column": "System_DateCreated",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/admin11/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:54:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:54:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:54:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:54:06.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          11850
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Searches\\Everywhere.search-ms (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11851
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Favorites Bar\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11852
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Links\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11853
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Pictures\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11854
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Videos\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11855
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Saved Games\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11856
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Downloads\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11857
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Favorites\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11858
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Music\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11859
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Searches\\desktop.ini (record time 2015-03-22 15:54:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11860
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11861
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Contacts\\desktop.ini (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11862
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\My Documents\\desktop.ini (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11863
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Searches\\Indexed Locations.search-ms (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11864
+        ]
+      },
+      "english": "The thumbnail cache holds a record of C:\\Users\\Public\\Public Desktop\\Google Chrome.lnk (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11865
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 0924bc51f9b84ee8 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11866
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 0b7f10edbdac09b3 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11867
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 1ac426ea6b4113fc (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11868
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 226ec0af76fd55f7 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11869
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 25215604eaeb43aa (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11870
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 3ae073b5c12d5b13 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11871
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 3b5ea290a193f106 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11872
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 3d034b7bb4b60ceb (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11873
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 3f680fae66ae8084 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11874
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 4c1fa1398eaa017a (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11875
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 50437650c6930c63 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11876
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 5c2f7b9c554e2272 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11877
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 60359eea9bcc1bb6 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11878
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 610e9c7639d0788d (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11879
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 7160c5b70ff08f29 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11880
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 7517728a36ea0587 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11881
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 7a2448e17802d22a (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11882
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 7bd9cc8989f1ee04 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11883
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 7ec37b2b5157d287 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11884
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 903a246b1f772f53 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11885
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id a6f47bb0a9e424f6 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11886
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id cd2638685d04b68d (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11887
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id d529fad897fcaa93 (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11888
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id e728566ea2235fea (record time 2015-03-22 15:54:04 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          11889
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\admin11\\Favorites\\Websites for United States (record time 2015-03-22 15:54:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M312.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

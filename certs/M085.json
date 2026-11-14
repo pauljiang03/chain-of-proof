@@ -10,13 +10,13 @@
       },
       {
         "fileModifiedAt": [
-          178
+          252
         ]
       },
       {
         "before": [
           71,
-          178
+          252
         ]
       }
     ]
@@ -44,7 +44,7 @@
       }
     },
     {
-      "id": 178,
+      "id": 252,
       "kind": "fileModified",
       "t": 1427034899825943,
       "res": 1,
@@ -52,7 +52,7 @@
       "obj_text": "\\Users\\informant\\Desktop\\desktop.ini",
       "aux": 4,
       "aux_text": "CA0C7A48",
-      "row_sha256": "82013e21d89edf9e57e285937e0d9b7dfaeb61290038983b7888b2282d4987ef",
+      "row_sha256": "18c5c8089f14de84495d5af6b1dad47394374c9f9157d01b41f6c491d88bdfc9",
       "prov": {
         "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\desktop.ini",
         "exhibit": "PC",
@@ -79,7 +79,7 @@
     {
       "part": {
         "fileModifiedAt": [
-          178
+          252
         ]
       },
       "english": "\\Users\\informant\\Desktop\\desktop.ini was last modified on volume CA0C7A48 (2015-03-22 14:34:59 UTC).",
@@ -92,7 +92,7 @@
       "part": {
         "before": [
           71,
-          178
+          252
         ]
       },
       "english": "The creation of \\Users\\informant\\Desktop\\desktop.ini on volume CA0C7A48 (2015-03-22 14:34:55 UTC) happened before the last modification of \\Users\\informant\\Desktop\\desktop.ini on volume CA0C7A48 (2015-03-22 14:34:59 UTC): the gap of 4.77361 s exceeds the combined timestamp uncertainty of 2 µs.",

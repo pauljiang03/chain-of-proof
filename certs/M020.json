@@ -12,8 +12,8 @@
         "tagged": [
           37,
           "obj",
-          335,
-          197
+          409,
+          231
         ]
       }
     ]
@@ -43,15 +43,15 @@
       }
     },
     {
-      "id": 335,
+      "id": 409,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 29,
       "obj_text": "\\Secret Project Data\\final",
-      "aux": 197,
+      "aux": 231,
       "aux_text": "confidential",
-      "row_sha256": "72ad9cfaf0e8574fcf07fe54256b294fcd7ca14c8a8d5068dd6479ec8ae27351",
+      "row_sha256": "2851ee674512fc5bb5d5a3476f5224c972510924301b9cc8705c8b70ac8c471f",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
@@ -76,8 +76,8 @@
         "tagged": [
           37,
           "obj",
-          335,
-          197
+          409,
+          231
         ]
       },
       "english": "\\Secret Project Data\\final is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",

@@ -1,0 +1,1164 @@
+{
+  "finding_id": "M336",
+  "question": "What content do the files have?",
+  "claim": {
+    "both": [
+      {
+        "contentHashed": [
+          12763
+        ]
+      },
+      {
+        "contentHashed": [
+          12764
+        ]
+      },
+      {
+        "contentHashed": [
+          12765
+        ]
+      },
+      {
+        "contentHashed": [
+          12766
+        ]
+      },
+      {
+        "contentHashed": [
+          12767
+        ]
+      },
+      {
+        "contentHashed": [
+          12768
+        ]
+      },
+      {
+        "contentHashed": [
+          12769
+        ]
+      },
+      {
+        "contentHashed": [
+          12770
+        ]
+      },
+      {
+        "contentHashed": [
+          12771
+        ]
+      },
+      {
+        "contentHashed": [
+          12772
+        ]
+      },
+      {
+        "contentHashed": [
+          12773
+        ]
+      },
+      {
+        "contentHashed": [
+          12774
+        ]
+      },
+      {
+        "contentHashed": [
+          12775
+        ]
+      },
+      {
+        "contentHashed": [
+          12776
+        ]
+      },
+      {
+        "contentHashed": [
+          12777
+        ]
+      },
+      {
+        "contentHashed": [
+          12778
+        ]
+      },
+      {
+        "contentHashed": [
+          12779
+        ]
+      },
+      {
+        "contentHashed": [
+          12780
+        ]
+      },
+      {
+        "contentHashed": [
+          12781
+        ]
+      },
+      {
+        "contentHashed": [
+          12782
+        ]
+      },
+      {
+        "contentHashed": [
+          12783
+        ]
+      },
+      {
+        "contentHashed": [
+          12784
+        ]
+      },
+      {
+        "contentHashed": [
+          12785
+        ]
+      },
+      {
+        "contentHashed": [
+          12786
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The content of \\pricing decision\\new_years_day.jpg on exhibit RM#3, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\pricing decision\\super_bowl.avi on exhibit RM#3, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\prog\\my_friends.svg on exhibit RM#3, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\prog\\my_smartphone.png on exhibit RM#3, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\prog\\new_year_calendar.one on exhibit RM#3, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\progress\\my_friends.svg on exhibit RM#3, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\progress\\my_smartphone.png on exhibit RM#3, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\progress\\new_year_calendar.one on exhibit RM#3, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\prop\\a_gift_from_you.gif on exhibit RM#3, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\prop\\landscape.png on exhibit RM#3, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\proposal\\a_gift_from_you.gif on exhibit RM#3, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\proposal\\landscape.png on exhibit RM#3, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#1d.txt on exhibit RM#3, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#1p.txt on exhibit RM#3, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#2d.txt on exhibit RM#3, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#2p.txt on exhibit RM#3, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#3d.txt on exhibit RM#3, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\technical review\\diary_#3p.txt on exhibit RM#3, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#1d.txt on exhibit RM#3, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#1p.txt on exhibit RM#3, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#2d.txt on exhibit RM#3, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#2p.txt on exhibit RM#3, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#3d.txt on exhibit RM#3, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content. The content of \\tr\\diary_#3p.txt on exhibit RM#3, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+  "cited_facts": [
+    {
+      "id": 12763,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 119,
+      "obj_text": "\\pricing decision\\new_years_day.jpg",
+      "aux": 16142,
+      "aux_text": "sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c",
+      "row_sha256": "95c81ec51b6b5798aa44fac60574606f9d1a79c6a8f3fded99e1466236fad47f",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36524",
+        "exhibit": "RM#3",
+        "extension": "jpg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 16095,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 10237535,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12764,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 121,
+      "obj_text": "\\pricing decision\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "3e6dd3baff0f80207188dd464558129ebc0b7ecc50682a5021177e19797f4757",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36525",
+        "exhibit": "RM#3",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 21094,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12765,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 122,
+      "obj_text": "\\prog\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "d5abb700a5fe645abc255b0677f2b23b5a2833a030b438b4c2d6b0c6987d654a",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51306",
+        "exhibit": "RM#3",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26118,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12766,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 124,
+      "obj_text": "\\prog\\my_smartphone.png",
+      "aux": 16145,
+      "aux_text": "sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84",
+      "row_sha256": "1925b3506a97f6abb8c87135e3bc038550a1dd2040f4e4b3363a5ac5247d0266",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36528",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26147,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 4440235,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12767,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 126,
+      "obj_text": "\\prog\\new_year_calendar.one",
+      "aux": 16146,
+      "aux_text": "sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30",
+      "row_sha256": "c78f787254af9e3ffb1a3a658fa3eb4572e81dd69c8af3ad66aa8403b88e800c",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36529",
+        "exhibit": "RM#3",
+        "extension": "one",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 28316,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 27414,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12768,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 123,
+      "obj_text": "\\progress\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "3bcae0a4dbae780896afe89e775c28ba3a818576bed8447a8c1041ceb74bf084",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51197",
+        "exhibit": "RM#3",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26118,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12769,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 125,
+      "obj_text": "\\progress\\my_smartphone.png",
+      "aux": 16145,
+      "aux_text": "sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84",
+      "row_sha256": "327bd43612d33d674521e449f2408be14379a46f81ee44724e2e14a96ae61421",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36528",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 26147,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 4440235,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12770,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 127,
+      "obj_text": "\\progress\\new_year_calendar.one",
+      "aux": 16146,
+      "aux_text": "sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30",
+      "row_sha256": "a186472b883b4871121b85092e9b410f50993e5c4d05d38536542dd1e5e3f6f8",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36529",
+        "exhibit": "RM#3",
+        "extension": "one",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 28316,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 27414,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12771,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 128,
+      "obj_text": "\\prop\\a_gift_from_you.gif",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "34e28d1e93e453e0119e2f68b69cd8c392fd5118bcc207ac2c3f92a387008583",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51338",
+        "exhibit": "RM#3",
+        "extension": "gif",
+        "extension_fits_signature": false,
+        "extents": 2,
+        "first_sector": 28330,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12772,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 130,
+      "obj_text": "\\prop\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "9ff23334e2c234b2c53eb4ea3386cf6b1e47c3dbd6223dc0d02637f67b641205",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51369",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 45547,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12773,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 129,
+      "obj_text": "\\proposal\\a_gift_from_you.gif",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "d72b3444c58299048a9ac553c9d57e505c7faeeca2651c7e477bc5c869793382",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51199",
+        "exhibit": "RM#3",
+        "extension": "gif",
+        "extension_fits_signature": false,
+        "extents": 2,
+        "first_sector": 28330,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12774,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 131,
+      "obj_text": "\\proposal\\landscape.png",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "f1b8cec27c2048d7f31e74a8dc456a8280958bac9e685390374cc9ed505a8e11",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51200",
+        "exhibit": "RM#3",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 45547,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12775,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 132,
+      "obj_text": "\\technical review\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "7658a2df5a27a24b0715b636fe9719b21caa886f29e8637bc5de6c105b7cb52e",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51202",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48714,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12776,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 133,
+      "obj_text": "\\technical review\\diary_#1p.txt",
+      "aux": 16148,
+      "aux_text": "sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f",
+      "row_sha256": "980153ecb56e3398a9bc29881e4260f79d1d63e24382d3c9fe09bd21d3823d3f",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51203",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48774,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 458267,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12777,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 136,
+      "obj_text": "\\technical review\\diary_#2d.txt",
+      "aux": 16149,
+      "aux_text": "sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220",
+      "row_sha256": "a0676edb8f614d9be0529f27acdeb0fdcf489de077b297806635ea4916d6670d",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51204",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48998,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 658922,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12778,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 138,
+      "obj_text": "\\technical review\\diary_#2p.txt",
+      "aux": 16150,
+      "aux_text": "sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64",
+      "row_sha256": "e18dd5554f36d069e96356d2468f381598bf04be6912e3341cf5376e9f75b739",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51205",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 49320,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1154560,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12779,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 140,
+      "obj_text": "\\technical review\\diary_#3d.txt",
+      "aux": 16151,
+      "aux_text": "sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df",
+      "row_sha256": "91fb83563eda9af769fd456757c99404271f94bb3175b9e991b76131c862a2cf",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51206",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 49884,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 2360832,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12780,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 142,
+      "obj_text": "\\technical review\\diary_#3p.txt",
+      "aux": 16152,
+      "aux_text": "sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea",
+      "row_sha256": "1d2271687ccc16a5e15e60acf87baac13c2854ae1138f707110d143fae68565b",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51207",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 51037,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 325120,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12781,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 134,
+      "obj_text": "\\tr\\diary_#1d.txt",
+      "aux": 16147,
+      "aux_text": "sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a",
+      "row_sha256": "22db6ff6775d1b1e365ff4daeccf215d472afb96e149caf4862f662de54062cf",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51202",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48714,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 121441,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12782,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 135,
+      "obj_text": "\\tr\\diary_#1p.txt",
+      "aux": 16148,
+      "aux_text": "sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f",
+      "row_sha256": "2d432108d209e1cc7066321e1753326347c24c0c121ba84fb57471e59d5efd94",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51203",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48774,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 458267,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12783,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 137,
+      "obj_text": "\\tr\\diary_#2d.txt",
+      "aux": 16149,
+      "aux_text": "sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220",
+      "row_sha256": "5f303ee20019df2a20d2a161e3e651ed4913a13bd79458e54d8abaa06941f765",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51204",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 48998,
+        "image": "rm3.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 658922,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12784,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 139,
+      "obj_text": "\\tr\\diary_#2p.txt",
+      "aux": 16150,
+      "aux_text": "sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64",
+      "row_sha256": "aa5e0dd7d65d0ae44f8542c4efa76602f1ce8abc2cce487b05c4810ea2850591",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51205",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 49320,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 1154560,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12785,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 141,
+      "obj_text": "\\tr\\diary_#3d.txt",
+      "aux": 16151,
+      "aux_text": "sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df",
+      "row_sha256": "0d0168d17093dac58389b4cc6e48a1cf4b44711166b6ec1cc749adacb8dd7c53",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51206",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 49884,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 2360832,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12786,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 143,
+      "obj_text": "\\tr\\diary_#3p.txt",
+      "aux": 16152,
+      "aux_text": "sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea",
+      "row_sha256": "88f57e281d6f3ca05c194fad06ec965a9d2b272a0efd553e6377f0179b90f415",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 51207",
+        "exhibit": "RM#3",
+        "extension": "txt",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 51037,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 325120,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "contentHashed": [
+          12763
+        ]
+      },
+      "english": "The content of \\pricing decision\\new_years_day.jpg on exhibit RM#3, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12764
+        ]
+      },
+      "english": "The content of \\pricing decision\\super_bowl.avi on exhibit RM#3, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12765
+        ]
+      },
+      "english": "The content of \\prog\\my_friends.svg on exhibit RM#3, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12766
+        ]
+      },
+      "english": "The content of \\prog\\my_smartphone.png on exhibit RM#3, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12767
+        ]
+      },
+      "english": "The content of \\prog\\new_year_calendar.one on exhibit RM#3, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12768
+        ]
+      },
+      "english": "The content of \\progress\\my_friends.svg on exhibit RM#3, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12769
+        ]
+      },
+      "english": "The content of \\progress\\my_smartphone.png on exhibit RM#3, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12770
+        ]
+      },
+      "english": "The content of \\progress\\new_year_calendar.one on exhibit RM#3, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12771
+        ]
+      },
+      "english": "The content of \\prop\\a_gift_from_you.gif on exhibit RM#3, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12772
+        ]
+      },
+      "english": "The content of \\prop\\landscape.png on exhibit RM#3, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12773
+        ]
+      },
+      "english": "The content of \\proposal\\a_gift_from_you.gif on exhibit RM#3, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12774
+        ]
+      },
+      "english": "The content of \\proposal\\landscape.png on exhibit RM#3, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12775
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#1d.txt on exhibit RM#3, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12776
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#1p.txt on exhibit RM#3, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12777
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#2d.txt on exhibit RM#3, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12778
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#2p.txt on exhibit RM#3, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12779
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#3d.txt on exhibit RM#3, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12780
+        ]
+      },
+      "english": "The content of \\technical review\\diary_#3p.txt on exhibit RM#3, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12781
+        ]
+      },
+      "english": "The content of \\tr\\diary_#1d.txt on exhibit RM#3, read from the image, has sha256:54a73cf3ad1e0239ccb2bdf9809952f72e0cc2edbd5b46e9f7a8397b7fca8c4a. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12782
+        ]
+      },
+      "english": "The content of \\tr\\diary_#1p.txt on exhibit RM#3, read from the image, has sha256:f4025d7dc0cc18ebefc72a699d1a71d84b386f7fa7ed3e86a1e39361e495d24f. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12783
+        ]
+      },
+      "english": "The content of \\tr\\diary_#2d.txt on exhibit RM#3, read from the image, has sha256:9b7ce225e972e28ec465b7f4e0b122ccb8b10c08251d77f7fcc5f7671ec7d220. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12784
+        ]
+      },
+      "english": "The content of \\tr\\diary_#2p.txt on exhibit RM#3, read from the image, has sha256:008a205c975760a0d247501b001bb0070efd0dd0b0390a5de67cb3570fa75e64. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12785
+        ]
+      },
+      "english": "The content of \\tr\\diary_#3d.txt on exhibit RM#3, read from the image, has sha256:6e2717ad91c842df49e1209cb30d9ceb4bfc4ca60e90bc2504377a38165d47df. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12786
+        ]
+      },
+      "english": "The content of \\tr\\diary_#3p.txt on exhibit RM#3, read from the image, has sha256:c468256f18fd2a44c6456ef814930f6514b2def3ba6b9d08a4a4d1755f348cea. The bytes were read as the extents its UDF file entry lists. If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M336.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

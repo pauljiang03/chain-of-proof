@@ -1,53 +1,109 @@
 {
   "finding_id": "M178",
-  "question": "What traces of disc burning are there?",
+  "question": "When were the user's files created and last modified?",
   "claim": {
-    "burnTrace": [
-      312
+    "both": [
+      {
+        "fileCreatedAt": [
+          164
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          268
+        ]
+      },
+      {
+        "before": [
+          164,
+          268
+        ]
+      }
     ]
   },
   "status": "verified",
-  "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+  "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was created on volume CA0C7A48 (2015-03-25 15:28:33 UTC). \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was last modified on volume CA0C7A48 (2015-03-25 15:28:34 UTC). The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:33 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:34 UTC): the gap of 904.8 ms exceeds the combined timestamp uncertainty of 2 µs.",
   "cited_facts": [
     {
-      "id": 312,
-      "kind": "cdBurn",
-      "t": 1427229681884909,
+      "id": 164,
+      "kind": "fileCreated",
+      "t": 1427297313647604,
       "res": 1,
-      "obj": 186,
-      "obj_text": "cdrom driver event 133 for \\Device\\CdRom0",
-      "aux": 187,
-      "aux_text": "System event log",
-      "row_sha256": "172f244ac092bf8b0d289095f9c1ded15a774d92119c16a21eaabd024d20cee4",
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "048091438498aebb917db1ca472ed715661bcf30bf9d5a693b145732e09113cd",
       "prov": {
-        "artifact": "C:\\Windows\\system32\\winevt\\logs\\System.evtx",
-        "channel": "System",
-        "event_record_id": "1428",
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
         "exhibit": "PC",
         "image": "pc.E01",
-        "time_meaning": "event time",
-        "tool": "dissect.target 3.25.1"
+        "size": 178139,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 268,
+      "kind": "fileModified",
+      "t": 1427297314552404,
+      "res": 1,
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "c70ed10f4cd3ec5c372b99b13aca3fa7eca1831aff94d0612b6f418171b04f7e",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 178139,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "burnTrace": [
-          312
+        "fileCreatedAt": [
+          164
         ]
       },
-      "english": "CD-burn trace in the System event log: cdrom driver event 133 for \\Device\\CdRom0 (2015-03-24 20:41:21 UTC). Windows leaves this trace when it writes a disc; it does not show what was written (heuristic rule R12).",
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was created on volume CA0C7A48 (2015-03-25 15:28:33 UTC).",
       "rules": [
-        "R12"
+        "R10"
       ],
-      "strength": "heuristic"
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          268
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was last modified on volume CA0C7A48 (2015-03-25 15:28:34 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          164,
+          268
+        ]
+      },
+      "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:33 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:34 UTC): the gap of 904.8 ms exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
     }
   ],
   "rules": [
-    "R12"
+    "R10"
   ],
-  "strength": "heuristic",
+  "strength": "strong",
   "lean_file": "M178.lean",
   "trust_tier": "kernel",
   "axioms": []

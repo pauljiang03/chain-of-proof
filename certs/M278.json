@@ -1,0 +1,56 @@
+{
+  "finding_id": "M278",
+  "question": "What was typed into the system's search box?",
+  "claim": {
+    "typedInSearchBox": [
+      2271
+    ]
+  },
+  "status": "verified",
+  "english": "The text \"secret\" is recorded as typed into the Windows Explorer search box (record time 2015-03-23 18:40:17 UTC).",
+  "cited_facts": [
+    {
+      "id": 2271,
+      "kind": "localSearch",
+      "t": 1427136017278767,
+      "res": 1,
+      "obj": 1420,
+      "obj_text": "secret",
+      "aux": 1421,
+      "aux_text": "Windows Explorer search box",
+      "row_sha256": "79301a9f7554dba92bd2608a708a55ba410ae8eefd021dd6f1820f39fc2a5831",
+      "prov": {
+        "account": "informant",
+        "artifact": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery value 0",
+        "entries": 1,
+        "exhibit": "PC",
+        "hive": "C:\\Users\\informant\\ntuser.dat",
+        "image": "pc.E01",
+        "recency_rank": 1,
+        "time_meaning": "registry key last-write time: the moment the most recent search (recency_rank 1) was typed; older entries were typed at or before it",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "typedInSearchBox": [
+          2271
+        ]
+      },
+      "english": "The text \"secret\" is recorded as typed into the Windows Explorer search box (record time 2015-03-23 18:40:17 UTC).",
+      "rules": [
+        "R21"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R21"
+  ],
+  "strength": "strong",
+  "lean_file": "M278.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

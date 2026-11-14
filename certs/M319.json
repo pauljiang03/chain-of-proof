@@ -1,0 +1,1839 @@
+{
+  "finding_id": "M319",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12130
+        ]
+      },
+      {
+        "fileRecorded": [
+          12131
+        ]
+      },
+      {
+        "fileRecorded": [
+          12132
+        ]
+      },
+      {
+        "fileRecorded": [
+          12133
+        ]
+      },
+      {
+        "fileRecorded": [
+          12134
+        ]
+      },
+      {
+        "fileRecorded": [
+          12135
+        ]
+      },
+      {
+        "fileRecorded": [
+          12136
+        ]
+      },
+      {
+        "fileRecorded": [
+          12137
+        ]
+      },
+      {
+        "fileRecorded": [
+          12138
+        ]
+      },
+      {
+        "fileRecorded": [
+          12139
+        ]
+      },
+      {
+        "fileRecorded": [
+          12140
+        ]
+      },
+      {
+        "fileRecorded": [
+          12141
+        ]
+      },
+      {
+        "fileRecorded": [
+          12142
+        ]
+      },
+      {
+        "fileRecorded": [
+          12143
+        ]
+      },
+      {
+        "fileRecorded": [
+          12144
+        ]
+      },
+      {
+        "fileRecorded": [
+          12145
+        ]
+      },
+      {
+        "fileRecorded": [
+          12146
+        ]
+      },
+      {
+        "fileRecorded": [
+          12147
+        ]
+      },
+      {
+        "fileRecorded": [
+          12148
+        ]
+      },
+      {
+        "fileRecorded": [
+          12149
+        ]
+      },
+      {
+        "fileRecorded": [
+          12150
+        ]
+      },
+      {
+        "fileRecorded": [
+          12151
+        ]
+      },
+      {
+        "fileRecorded": [
+          12152
+        ]
+      },
+      {
+        "fileRecorded": [
+          12153
+        ]
+      },
+      {
+        "fileRecorded": [
+          12154
+        ]
+      },
+      {
+        "fileRecorded": [
+          12155
+        ]
+      },
+      {
+        "fileRecorded": [
+          12156
+        ]
+      },
+      {
+        "fileRecorded": [
+          12157
+        ]
+      },
+      {
+        "fileRecorded": [
+          12158
+        ]
+      },
+      {
+        "fileRecorded": [
+          12159
+        ]
+      },
+      {
+        "fileRecorded": [
+          12160
+        ]
+      },
+      {
+        "fileRecorded": [
+          12161
+        ]
+      },
+      {
+        "fileRecorded": [
+          12162
+        ]
+      },
+      {
+        "fileRecorded": [
+          12163
+        ]
+      },
+      {
+        "fileRecorded": [
+          12164
+        ]
+      },
+      {
+        "fileRecorded": [
+          12165
+        ]
+      },
+      {
+        "fileRecorded": [
+          12166
+        ]
+      },
+      {
+        "fileRecorded": [
+          12167
+        ]
+      },
+      {
+        "fileRecorded": [
+          12168
+        ]
+      },
+      {
+        "fileRecorded": [
+          12169
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Gallery.url (record time 2015-03-23 17:28:05 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Spaces.url (record time 2015-03-23 17:28:05 UTC). The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Mail.url (record time 2015-03-23 17:28:05 UTC). The windows search index holds a record of https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0 (record time 2015-03-23 17:28:05 UTC). The windows search index holds a record of http://www.msn.com/?ocid=iehp (record time 2015-03-23 17:28:05 UTC). The windows search index holds a record of http://www.bing.com/ (record time 2015-03-23 17:28:18 UTC). The windows search index holds a record of http://www.bing.com/ (record time 2015-03-23 17:28:18 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Hello, Iaman (record time 2015-03-23 17:29:27 UTC). The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Hello, Iaman (record time 2015-03-23 17:29:29 UTC). The windows search index holds a record of http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR (record time 2015-03-23 18:07:52 UTC). The windows search index holds a record of http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR (record time 2015-03-23 18:07:52 UTC). The windows search index holds a record of http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1 (record time 2015-03-23 18:07:54 UTC). The windows search index holds a record of http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1 (record time 2015-03-23 18:07:57 UTC). The windows search index holds a record of http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6 (record time 2015-03-23 18:07:58 UTC). The windows search index holds a record of http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1 (record time 2015-03-23 18:07:59 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:16 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:16 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:17 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:17 UTC). The windows search index holds a record of http://sysinfotools.com/blog/tethering-internet-files-sharing/ (record time 2015-03-23 18:08:18 UTC). The windows search index holds a record of http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6 (record time 2015-03-23 18:08:18 UTC). The windows search index holds a record of http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1 (record time 2015-03-23 18:08:18 UTC). The windows search index holds a record of http://sysinfotools.com/blog/tethering-internet-files-sharing/ (record time 2015-03-23 18:11:03 UTC). The windows search index holds a record of http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/ (record time 2015-03-23 18:11:12 UTC). The windows search index holds a record of http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/ (record time 2015-03-23 18:12:01 UTC). The windows search index holds a record of https://technet.microsoft.com/en-us/library/cc162846.aspx (record time 2015-03-23 18:12:07 UTC). The windows search index holds a record of https://technet.microsoft.com/en-us/library/cc162846.aspx (record time 2015-03-23 18:12:07 UTC). The windows search index holds a record of https://support.microsoft.com/en-us/kb/308427 (record time 2015-03-23 18:12:45 UTC). The windows search index holds a record of https://support.microsoft.com/en-us/kb/308427 (record time 2015-03-23 18:12:45 UTC). The windows search index holds a record of http://en.wikipedia.org/wiki/Event_Viewer (record time 2015-03-23 18:12:52 UTC). The windows search index holds a record of http://en.wikipedia.org/wiki/Event_Viewer (record time 2015-03-23 18:12:57 UTC). The windows search index holds a record of https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx (record time 2015-03-23 18:13:57 UTC). The windows search index holds a record of https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx (record time 2015-03-23 18:13:57 UTC). The windows search index holds a record of http://www.forensicswiki.org/wiki/USB_History_Viewing (record time 2015-03-23 18:14:24 UTC). The windows search index holds a record of http://www.forensicswiki.org/wiki/USB_History_Viewing (record time 2015-03-23 18:14:33 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-23 18:37:07 UTC). The office recent files holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:37:54 UTC). The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-23 18:37:54 UTC). The office reading locations holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:38:00 UTC). The office reading locations holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:38:11 UTC).",
+  "cited_facts": [
+    {
+      "id": 12130,
+      "kind": "fileSeen",
+      "t": 1427131685610869,
+      "res": 1,
+      "obj": 15536,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Gallery.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8f5b83d21005624dc9f91cc66ef29eee6f001227078fac74f6b958ff1b4b3804",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 202",
+        "column": "System_Search_GatherTime",
+        "display_name": "Windows Live Gallery.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Windows Live/Windows Live Gallery.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:36.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "size": 133,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12131,
+      "kind": "fileSeen",
+      "t": 1427131685626469,
+      "res": 1,
+      "obj": 15538,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Spaces.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "29ed92d6dc2fb3864d5470d9b114a2ad8381cfa73652728c8466eb9ca4ccd15d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 201",
+        "column": "System_Search_GatherTime",
+        "display_name": "Windows Live Spaces.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Windows Live/Windows Live Spaces.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:36.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "size": 133,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12132,
+      "kind": "fileSeen",
+      "t": 1427131685642069,
+      "res": 1,
+      "obj": 15537,
+      "obj_text": "C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Mail.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c050046754547fd34da9dc06fc937dbc9bfe6826ce648571bc5fb3eb946f05af",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 200",
+        "column": "System_Search_GatherTime",
+        "display_name": "Windows Live Mail.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/informant/Favorites/Windows Live/Windows Live Mail.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T14:34:58.000000Z",
+          "System_Document_DateSaved": "2015-03-23T17:27:36.000000Z",
+          "System_ItemDate": "2015-03-22T14:34:58.000000Z"
+        },
+        "size": 133,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12133,
+      "kind": "fileSeen",
+      "t": 1427131685642069,
+      "res": 1,
+      "obj": 1118,
+      "obj_text": "https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9c7abf96637f9802ae8a8f7cf37c4c8c2cc60d92e801cb49f28580a2714afbdb",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 338",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:26:32.707003Z",
+          "System_ItemDate": "2015-03-23T17:26:32.706480Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12134,
+      "kind": "fileSeen",
+      "t": 1427131685688869,
+      "res": 1,
+      "obj": 1096,
+      "obj_text": "http://www.msn.com/?ocid=iehp",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a46952d5a5fc4dd13deb7e86d95bae06eb9ea9136f58c64f252e4de8d7df7649",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 224",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.msn.com/?ocid=iehp",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:27:39.684914Z",
+          "System_ItemDate": "2015-03-22T15:09:23.494000Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12135,
+      "kind": "fileSeen",
+      "t": 1427131698700305,
+      "res": 1,
+      "obj": 1115,
+      "obj_text": "http://www.bing.com/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "667be0904c2b966d6fc1de9b0376acfbbd0e240c9890d12b188fefea12a07609",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 339",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:21:09.204099Z",
+          "System_ItemDate": "2015-03-23T17:28:18.700305Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12136,
+      "kind": "fileSeen",
+      "t": 1427131698731505,
+      "res": 1,
+      "obj": 1115,
+      "obj_text": "http://www.bing.com/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d299d43afe5608c93240fb5811925f28df9485da02d2e979fc1bcbdc5e7eae42",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 339",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T17:21:09.204099Z",
+          "System_ItemDate": "2015-03-23T17:28:18.700305Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12137,
+      "kind": "fileSeen",
+      "t": 1427131767000000,
+      "res": 1,
+      "obj": 16004,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Hello, Iaman",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "25816c1ac95c3cfd3d46bf27a8a8ea4da05304ff69e75d032c998f2fcc2578f5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 340",
+        "column": "System_Message_DateSent",
+        "display_name": "Hello, Iaman",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂겤간갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T17:29:29.181071Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 13514,
+        "store": "mapi15",
+        "time_meaning": "message sent time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12138,
+      "kind": "fileSeen",
+      "t": 1427131769181071,
+      "res": 1,
+      "obj": 16004,
+      "obj_text": "/iaman.informant@nist.gov/Inbox/Hello, Iaman",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "213ea6cd6fc47e6dbcd1c1ce36a7caabb0cc6d9976fd7f8bec44975cb84b1793",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 340",
+        "column": "System_DateCreated, System_Message_DateReceived",
+        "display_name": "Hello, Iaman",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "MAPI/IPM.Note.Read",
+        "item_url": "mapi15://{S-1-5-21-2425377081-3129163575-2985601102-1000}/iaman.informant@nist.gov($e966451d)/0/Inbox/곯가가가것갇갻곃갱갽걳걋겅겷갹겾갂걟곶겂겤간갠가",
+        "other_dates": {
+          "System_ItemDate": "2015-03-23T17:29:29.181071Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 13514,
+        "store": "mapi15",
+        "time_meaning": "the item's creation time as the index stores it; message received time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12139,
+      "kind": "fileSeen",
+      "t": 1427134072314187,
+      "res": 1,
+      "obj": 1160,
+      "obj_text": "http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "05a320c38c55a0610a133741bbfb57fbbe7d826ffb3c2813a932111b34286f8d",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 343",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:52.314710Z",
+          "System_ItemDate": "2015-03-23T18:07:52.314187Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12140,
+      "kind": "fileSeen",
+      "t": 1427134072334187,
+      "res": 1,
+      "obj": 1160,
+      "obj_text": "http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "c91df3f364003d71e2aaadce2b2f7b6377f5d46e4187ab1e27fc97ee9642c33a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 343",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:52.314710Z",
+          "System_ItemDate": "2015-03-23T18:07:52.314187Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12141,
+      "kind": "fileSeen",
+      "t": 1427134074981192,
+      "res": 1,
+      "obj": 1161,
+      "obj_text": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "22e11880c6601d977c1e3b67a49e5bcec82a1550114f61da1e1374ab51079c3e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 344",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:54.981715Z",
+          "System_ItemDate": "2015-03-23T18:07:54.981192Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12142,
+      "kind": "fileSeen",
+      "t": 1427134077949700,
+      "res": 1,
+      "obj": 1161,
+      "obj_text": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "b11b8bea9099204b4ef99b27b7c072e95979dba9a82f9dab25babd53e313a135",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 344",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:54.981715Z",
+          "System_ItemDate": "2015-03-23T18:07:54.981192Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12143,
+      "kind": "fileSeen",
+      "t": 1427134078080701,
+      "res": 1,
+      "obj": 1164,
+      "obj_text": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4ece6cd936dab789da47b138e7ed346a4bc36e64ef9821d09a260158c442e8fa",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 342",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:58.081224Z",
+          "System_ItemDate": "2015-03-23T18:07:58.080701Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12144,
+      "kind": "fileSeen",
+      "t": 1427134079890207,
+      "res": 1,
+      "obj": 1165,
+      "obj_text": "http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "35e5ec880495ad56d0112a97994873c078e3f9cccb16a11174fe2b8918cbf55f",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 341",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:59.890730Z",
+          "System_ItemDate": "2015-03-23T18:07:59.890207Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12145,
+      "kind": "fileSeen",
+      "t": 1427134096983258,
+      "res": 1,
+      "obj": 16005,
+      "obj_text": "C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "699315412f686217a9f7947282a1d4577a8719c55ee7693d0b452f4bb0b843e4",
+      "prov": {
+        "accessed": "2015-03-23T18:08:16.983258Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:08:16.983258Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:12:59.311805Z",
+        "live_size": 1741,
+        "modified": "2015-03-23T18:08:17.103258Z",
+        "record_changed": "2015-03-23T18:08:17.103258Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1741,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12146,
+      "kind": "fileSeen",
+      "t": 1427134096983258,
+      "res": 1,
+      "obj": 16006,
+      "obj_text": "C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "459a82eb912de46965b2528f85853251ac258d0fc1948978c93f442ed2eff9ca",
+      "prov": {
+        "accessed": "2015-03-23T18:08:16.983258Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:08:16.983258Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:12:59.311805Z",
+        "live_size": 450,
+        "modified": "2015-03-23T18:08:17.103258Z",
+        "record_changed": "2015-03-23T18:08:17.103258Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 450,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12147,
+      "kind": "fileSeen",
+      "t": 1427134097103258,
+      "res": 1,
+      "obj": 16005,
+      "obj_text": "C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "a653b1a72347d97a9ec533d5492b9f364307f44408ff285cf235bab19b48e6de",
+      "prov": {
+        "accessed": "2015-03-23T18:08:16.983258Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:08:16.983258Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:12:59.311805Z",
+        "live_size": 1741,
+        "modified": "2015-03-23T18:08:17.103258Z",
+        "record_changed": "2015-03-23T18:08:17.103258Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 1741,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12148,
+      "kind": "fileSeen",
+      "t": 1427134097103258,
+      "res": 1,
+      "obj": 16006,
+      "obj_text": "C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "24feef48c2d0f78d52839ae140874e53ae760e5dd6f7e004552063f02633b253",
+      "prov": {
+        "accessed": "2015-03-23T18:08:16.983258Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:08:16.983258Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:12:59.311805Z",
+        "live_size": 450,
+        "modified": "2015-03-23T18:08:17.103258Z",
+        "record_changed": "2015-03-23T18:08:17.103258Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 450,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's last-modified time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12149,
+      "kind": "fileSeen",
+      "t": 1427134098133259,
+      "res": 1,
+      "obj": 1169,
+      "obj_text": "http://sysinfotools.com/blog/tethering-internet-files-sharing/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "6463713499578c29c7ea2adfe88631815dca8a7cd771249f9c9389b9d5d8f649",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 351",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://sysinfotools.com/blog/tethering-internet-files-sharing",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:08:18.133782Z",
+          "System_ItemDate": "2015-03-23T18:08:18.133259Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12150,
+      "kind": "fileSeen",
+      "t": 1427134098143259,
+      "res": 1,
+      "obj": 1164,
+      "obj_text": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bde5b5174f5afdb7f2b72a479cb2bb70c40ffd0b0b3753c95335b18b475915d8",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 342",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:58.081224Z",
+          "System_ItemDate": "2015-03-23T18:07:58.080701Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12151,
+      "kind": "fileSeen",
+      "t": 1427134098143259,
+      "res": 1,
+      "obj": 1165,
+      "obj_text": "http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4a4dc84f4faa57b78e57f3bf6a24cc049c1921f32a075d027155c9cff4eb0034",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 341",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:07:59.890730Z",
+          "System_ItemDate": "2015-03-23T18:07:59.890207Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12152,
+      "kind": "fileSeen",
+      "t": 1427134263021023,
+      "res": 1,
+      "obj": 1169,
+      "obj_text": "http://sysinfotools.com/blog/tethering-internet-files-sharing/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "74a59d5f0364092453d1e52a366190b7be1edcd2d78b19b0702d1a99cab2c9db",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 351",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://sysinfotools.com/blog/tethering-internet-files-sharing",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:08:18.133782Z",
+          "System_ItemDate": "2015-03-23T18:08:18.133259Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12153,
+      "kind": "fileSeen",
+      "t": 1427134272889588,
+      "res": 1,
+      "obj": 1188,
+      "obj_text": "http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e682ea471eafb87786ccefa35b6d52f94e46f2f9813f9e20e67074481af3b0f2",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 353",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:04:03.393381Z",
+          "System_ItemDate": "2015-03-23T18:11:12.889588Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12154,
+      "kind": "fileSeen",
+      "t": 1427134321722211,
+      "res": 1,
+      "obj": 1188,
+      "obj_text": "http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e6a3bc9f07e034f556e8a9e1d72d903260de3f64f4a65bc52b3db69907248f43",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 353",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:04:03.393381Z",
+          "System_ItemDate": "2015-03-23T18:11:12.889588Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12155,
+      "kind": "fileSeen",
+      "t": 1427134327649223,
+      "res": 1,
+      "obj": 1196,
+      "obj_text": "https://technet.microsoft.com/en-us/library/cc162846.aspx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "aa3d9d4331bc55300f93fda09440e20bc29ae60488209de7db32f460dbc24cc1",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 354",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://technet.microsoft.com/en-us/library/cc162846.aspx",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:04:58.153017Z",
+          "System_ItemDate": "2015-03-23T18:12:07.649223Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12156,
+      "kind": "fileSeen",
+      "t": 1427134327659223,
+      "res": 1,
+      "obj": 1196,
+      "obj_text": "https://technet.microsoft.com/en-us/library/cc162846.aspx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ce7cc8628854656d183674eb8059bdabdc61f57e4e1002e712c340b677b33e59",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 354",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://technet.microsoft.com/en-us/library/cc162846.aspx",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:04:58.153017Z",
+          "System_ItemDate": "2015-03-23T18:12:07.649223Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12157,
+      "kind": "fileSeen",
+      "t": 1427134365477284,
+      "res": 1,
+      "obj": 1201,
+      "obj_text": "https://support.microsoft.com/en-us/kb/308427",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "cdaec9108461e0b354be9c809eacf11b0725c35ee3fcbffa3744577a03ce47b6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 355",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://support.microsoft.com/en-us/kb/308427",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:05:35.981078Z",
+          "System_ItemDate": "2015-03-23T18:12:45.477284Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12158,
+      "kind": "fileSeen",
+      "t": 1427134365507284,
+      "res": 1,
+      "obj": 1201,
+      "obj_text": "https://support.microsoft.com/en-us/kb/308427",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "81f3c01e076f96da92d2b215f6395288168948439c30c463b604a905fd960ff3",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 355",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://support.microsoft.com/en-us/kb/308427",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:05:35.981078Z",
+          "System_ItemDate": "2015-03-23T18:12:45.477284Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12159,
+      "kind": "fileSeen",
+      "t": 1427134372241296,
+      "res": 1,
+      "obj": 1202,
+      "obj_text": "http://en.wikipedia.org/wiki/Event_Viewer",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "77bc9ab81382e424c8e0559debfe29d0699ce34beb50e8860edb0df801fa4886",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 379",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://en.wikipedia.org/wiki/Event_Viewer",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:05:42.745090Z",
+          "System_ItemDate": "2015-03-23T18:12:52.241296Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12160,
+      "kind": "fileSeen",
+      "t": 1427134377881309,
+      "res": 1,
+      "obj": 1202,
+      "obj_text": "http://en.wikipedia.org/wiki/Event_Viewer",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8cb6b4772390f71acc83ea30f6b3197bb0a112171ff28a0e23fb9c60a7959e8e",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 379",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://en.wikipedia.org/wiki/Event_Viewer",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:05:42.745090Z",
+          "System_ItemDate": "2015-03-23T18:12:52.241296Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12161,
+      "kind": "fileSeen",
+      "t": 1427134437502906,
+      "res": 1,
+      "obj": 1207,
+      "obj_text": "https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e327edb2bdf611f1be10518832f4aff4aa2b3ea91d05cf9377806655bf0252e6",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 380",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:13:57.503429Z",
+          "System_ItemDate": "2015-03-23T18:13:57.502906Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12162,
+      "kind": "fileSeen",
+      "t": 1427134437522906,
+      "res": 1,
+      "obj": 1207,
+      "obj_text": "https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "89d3a71d380742e2df279bd123b6d0a9554d21a2e5d6f3aef12df4175c3dd015",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 380",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:13:57.503429Z",
+          "System_ItemDate": "2015-03-23T18:13:57.502906Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12163,
+      "kind": "fileSeen",
+      "t": 1427134464652450,
+      "res": 1,
+      "obj": 1210,
+      "obj_text": "http://www.forensicswiki.org/wiki/USB_History_Viewing",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "45e7600a94da812f9d28d12d72daad5390641af8c7b38a44b944c1372c0c856a",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 381",
+        "column": "System_DateModified",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.forensicswiki.org/wiki/USB_History_Viewing",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:14:24.652973Z",
+          "System_ItemDate": "2015-03-23T18:14:24.652450Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12164,
+      "kind": "fileSeen",
+      "t": 1427134473644462,
+      "res": 1,
+      "obj": 1210,
+      "obj_text": "http://www.forensicswiki.org/wiki/USB_History_Viewing",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9f88ad4abd72b297b5f2925b4f9a1d12edd9cef38b3b400db17107a856538654",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 381",
+        "column": "System_Search_GatherTime",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": null,
+        "item_url": "iehistory://{S-1-5-21-2425377081-3129163575-2985601102-1000}/http://www.forensicswiki.org/wiki/USB_History_Viewing",
+        "other_dates": {
+          "System_EndDate": "2015-04-18T18:14:24.652973Z",
+          "System_ItemDate": "2015-03-23T18:14:24.652450Z"
+        },
+        "sid": "S-1-5-21-2425377081-3129163575-2985601102-1000",
+        "size": 0,
+        "store": "iehistory",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12165,
+      "kind": "fileSeen",
+      "t": 1427135827457633,
+      "res": 1,
+      "obj": 16007,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "ce0786ce82519ee12b2299d4e4cbdcfa94d1f5810282ecdcf781474da01f567f",
+      "prov": {
+        "accessed": "2015-03-23T18:37:07.457633Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:07.457633Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:29:08.934000Z",
+        "live_size": 17408,
+        "modified": "2015-03-24T19:09:51.987000Z",
+        "record_changed": "2015-03-24T19:09:51.987610Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 17408,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12166,
+      "kind": "fileSeen",
+      "t": 1427135874476000,
+      "res": 1,
+      "obj": 16008,
+      "obj_text": "E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16009,
+      "aux_text": "office recent files",
+      "row_sha256": "71ae7d68358901eb97947af074fd10a0b51c5c12e80924e56cb547b84b9b6459",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\File MRU value Item 2",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "time stored in the list entry (last opened in this application)",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12167,
+      "kind": "fileSeen",
+      "t": 1427135874491716,
+      "res": 1,
+      "obj": 16010,
+      "obj_text": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat",
+      "aux": 15453,
+      "aux_text": "shadow copy",
+      "row_sha256": "46930cf176731e98c582305d3fb09ecfdae1ef6d79b568bdaf670bb2abd8162c",
+      "prov": {
+        "accessed": "2015-03-23T18:37:54.491716Z",
+        "account": "informant",
+        "artifact": "shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} of C: (C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752})",
+        "created": "2015-03-23T18:37:54.491716Z",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "live_modified": "2015-03-25T15:28:09.764005Z",
+        "live_size": 478,
+        "modified": "2015-03-24T19:09:52.736411Z",
+        "record_changed": "2015-03-24T19:09:52.736411Z",
+        "shadow_copy": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+        "size": 478,
+        "state": "different on the live volume: modified time",
+        "time_meaning": "the file's creation time in the shadow copy",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    },
+    {
+      "id": 12168,
+      "kind": "fileSeen",
+      "t": 1427135880000000,
+      "res": 60000000,
+      "obj": 16008,
+      "obj_text": "E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16011,
+      "aux_text": "office reading locations",
+      "row_sha256": "618502b1ad7348597a372fa0cc1b717add24a43d19245cef670fcd27a470f0da",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\Reading Locations\\Document 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "stored_text": "2015-03-23T14:38",
+        "time_meaning": "Datetime value of the entry (when the document was last closed), stored to the minute",
+        "time_zone": "local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12169,
+      "kind": "fileSeen",
+      "t": 1427135891386545,
+      "res": 1,
+      "obj": 16008,
+      "obj_text": "E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16011,
+      "aux_text": "office reading locations",
+      "row_sha256": "5622ab0236a2b1e48bc1b008720a4d0888b32e575d19b71a02bc2f8c5e8dfc73",
+      "prov": {
+        "account": "informant",
+        "application": "Word",
+        "artifact": "C:\\Users\\informant\\NTUSER.DAT key Software\\Microsoft\\Office\\15.0\\Word\\Reading Locations\\Document 0",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12130
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Gallery.url (record time 2015-03-23 17:28:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12131
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Spaces.url (record time 2015-03-23 17:28:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12132
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\informant\\Favorites\\Windows Live\\Windows Live Mail.url (record time 2015-03-23 17:28:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12133
+        ]
+      },
+      "english": "The windows search index holds a record of https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0 (record time 2015-03-23 17:28:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12134
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.msn.com/?ocid=iehp (record time 2015-03-23 17:28:05 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12135
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/ (record time 2015-03-23 17:28:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12136
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/ (record time 2015-03-23 17:28:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12137
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Hello, Iaman (record time 2015-03-23 17:29:27 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12138
+        ]
+      },
+      "english": "The windows search index holds a record of /iaman.informant@nist.gov/Inbox/Hello, Iaman (record time 2015-03-23 17:29:29 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12139
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR (record time 2015-03-23 18:07:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12140
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR (record time 2015-03-23 18:07:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12141
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1 (record time 2015-03-23 18:07:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12142
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1 (record time 2015-03-23 18:07:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12143
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6 (record time 2015-03-23 18:07:58 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12144
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1 (record time 2015-03-23 18:07:59 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12145
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:16 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12146
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:16 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12147
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\Content\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12148
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData\\223DE96EE265046957A660ED7C9DD9E7_EFF9B9BA98DEAA773F261FA85A0B1771 (record time 2015-03-23 18:08:17 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12149
+        ]
+      },
+      "english": "The windows search index holds a record of http://sysinfotools.com/blog/tethering-internet-files-sharing/ (record time 2015-03-23 18:08:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12150
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6 (record time 2015-03-23 18:08:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12151
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1 (record time 2015-03-23 18:08:18 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12152
+        ]
+      },
+      "english": "The windows search index holds a record of http://sysinfotools.com/blog/tethering-internet-files-sharing/ (record time 2015-03-23 18:11:03 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12153
+        ]
+      },
+      "english": "The windows search index holds a record of http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/ (record time 2015-03-23 18:11:12 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12154
+        ]
+      },
+      "english": "The windows search index holds a record of http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/ (record time 2015-03-23 18:12:01 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12155
+        ]
+      },
+      "english": "The windows search index holds a record of https://technet.microsoft.com/en-us/library/cc162846.aspx (record time 2015-03-23 18:12:07 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12156
+        ]
+      },
+      "english": "The windows search index holds a record of https://technet.microsoft.com/en-us/library/cc162846.aspx (record time 2015-03-23 18:12:07 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12157
+        ]
+      },
+      "english": "The windows search index holds a record of https://support.microsoft.com/en-us/kb/308427 (record time 2015-03-23 18:12:45 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12158
+        ]
+      },
+      "english": "The windows search index holds a record of https://support.microsoft.com/en-us/kb/308427 (record time 2015-03-23 18:12:45 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12159
+        ]
+      },
+      "english": "The windows search index holds a record of http://en.wikipedia.org/wiki/Event_Viewer (record time 2015-03-23 18:12:52 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12160
+        ]
+      },
+      "english": "The windows search index holds a record of http://en.wikipedia.org/wiki/Event_Viewer (record time 2015-03-23 18:12:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12161
+        ]
+      },
+      "english": "The windows search index holds a record of https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx (record time 2015-03-23 18:13:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12162
+        ]
+      },
+      "english": "The windows search index holds a record of https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx (record time 2015-03-23 18:13:57 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12163
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.forensicswiki.org/wiki/USB_History_Viewing (record time 2015-03-23 18:14:24 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12164
+        ]
+      },
+      "english": "The windows search index holds a record of http://www.forensicswiki.org/wiki/USB_History_Viewing (record time 2015-03-23 18:14:33 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12165
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms (record time 2015-03-23 18:37:07 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12166
+        ]
+      },
+      "english": "The office recent files holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:37:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12167
+        ]
+      },
+      "english": "The shadow copy holds a record of C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\index.dat (record time 2015-03-23 18:37:54 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12168
+        ]
+      },
+      "english": "The office reading locations holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:38:00 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12169
+        ]
+      },
+      "english": "The office reading locations holds a record of E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx (record time 2015-03-23 18:38:11 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M319.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

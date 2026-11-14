@@ -1,0 +1,1888 @@
+{
+  "finding_id": "M316",
+  "question": "Which files do secondary records name?",
+  "claim": {
+    "both": [
+      {
+        "fileRecorded": [
+          12010
+        ]
+      },
+      {
+        "fileRecorded": [
+          12011
+        ]
+      },
+      {
+        "fileRecorded": [
+          12012
+        ]
+      },
+      {
+        "fileRecorded": [
+          12013
+        ]
+      },
+      {
+        "fileRecorded": [
+          12014
+        ]
+      },
+      {
+        "fileRecorded": [
+          12015
+        ]
+      },
+      {
+        "fileRecorded": [
+          12016
+        ]
+      },
+      {
+        "fileRecorded": [
+          12017
+        ]
+      },
+      {
+        "fileRecorded": [
+          12018
+        ]
+      },
+      {
+        "fileRecorded": [
+          12019
+        ]
+      },
+      {
+        "fileRecorded": [
+          12020
+        ]
+      },
+      {
+        "fileRecorded": [
+          12021
+        ]
+      },
+      {
+        "fileRecorded": [
+          12022
+        ]
+      },
+      {
+        "fileRecorded": [
+          12023
+        ]
+      },
+      {
+        "fileRecorded": [
+          12024
+        ]
+      },
+      {
+        "fileRecorded": [
+          12025
+        ]
+      },
+      {
+        "fileRecorded": [
+          12026
+        ]
+      },
+      {
+        "fileRecorded": [
+          12027
+        ]
+      },
+      {
+        "fileRecorded": [
+          12028
+        ]
+      },
+      {
+        "fileRecorded": [
+          12029
+        ]
+      },
+      {
+        "fileRecorded": [
+          12030
+        ]
+      },
+      {
+        "fileRecorded": [
+          12031
+        ]
+      },
+      {
+        "fileRecorded": [
+          12032
+        ]
+      },
+      {
+        "fileRecorded": [
+          12033
+        ]
+      },
+      {
+        "fileRecorded": [
+          12034
+        ]
+      },
+      {
+        "fileRecorded": [
+          12035
+        ]
+      },
+      {
+        "fileRecorded": [
+          12036
+        ]
+      },
+      {
+        "fileRecorded": [
+          12037
+        ]
+      },
+      {
+        "fileRecorded": [
+          12038
+        ]
+      },
+      {
+        "fileRecorded": [
+          12039
+        ]
+      },
+      {
+        "fileRecorded": [
+          12040
+        ]
+      },
+      {
+        "fileRecorded": [
+          12041
+        ]
+      },
+      {
+        "fileRecorded": [
+          12042
+        ]
+      },
+      {
+        "fileRecorded": [
+          12043
+        ]
+      },
+      {
+        "fileRecorded": [
+          12044
+        ]
+      },
+      {
+        "fileRecorded": [
+          12045
+        ]
+      },
+      {
+        "fileRecorded": [
+          12046
+        ]
+      },
+      {
+        "fileRecorded": [
+          12047
+        ]
+      },
+      {
+        "fileRecorded": [
+          12048
+        ]
+      },
+      {
+        "fileRecorded": [
+          12049
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The thumbnail cache holds a record of thumbnail cache id 8a59b63ceaa9078c (record time 2015-03-22 15:56:08 UTC). The thumbnail cache holds a record of thumbnail cache id e728566ea2235fea (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:08 UTC). The windows search index holds a record of C:\\Users\\temporary\\Desktop (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Searches (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Documents (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Downloads (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Links (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Music (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Pictures (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Saved Games (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Videos (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Contacts (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Links\\Desktop.lnk (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Links\\Downloads.lnk (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Links\\Recent Places.lnk (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Searches\\Everywhere.search-ms (record time 2015-03-22 15:56:09 UTC). The windows search index holds a record of C:\\Users\\temporary\\Searches\\Indexed Locations.search-ms (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Contacts\\temporary.contact (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\ntuser.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Downloads\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Links\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Saved Games\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\Favorites\\desktop.ini (record time 2015-03-22 15:56:10 UTC). The windows search index holds a record of C:\\Users\\temporary\\My Documents\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+  "cited_facts": [
+    {
+      "id": 12010,
+      "kind": "fileSeen",
+      "t": 1427039768413080,
+      "res": 1,
+      "obj": 15995,
+      "obj_text": "thumbnail cache id 8a59b63ceaa9078c",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "1df48a7ca2b7322295dd45b9410fac2f4d1a4f0e6d768bdf9a7d1c02fb0f6f8e",
+      "prov": {
+        "account": "temporary",
+        "artifact": "C:\\Users\\temporary\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id 8a59b63ceaa9078c",
+        "cache_id": "8a59b63ceaa9078c",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 440
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12011,
+      "kind": "fileSeen",
+      "t": 1427039768413080,
+      "res": 1,
+      "obj": 15808,
+      "obj_text": "thumbnail cache id e728566ea2235fea",
+      "aux": 15545,
+      "aux_text": "thumbnail cache",
+      "row_sha256": "bec6a7042d5756b33735ad4b90a61c966acb479985de6e34112af185bdb031f1",
+      "prov": {
+        "account": "temporary",
+        "artifact": "C:\\Users\\temporary\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_*.db cache id e728566ea2235fea",
+        "cache_id": "e728566ea2235fea",
+        "entries": [
+          {
+            "file": "thumbcache_256.db",
+            "image_bytes": 0,
+            "offset": 812
+          },
+          {
+            "file": "thumbcache_idx.db",
+            "index_flags": 2147483650
+          }
+        ],
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "path_source": "the cache keeps no path and the search index does not hold this id",
+        "time_meaning": "creation time of the thumbnail cache file: a cache entry stores no time, the thumbnail was added at or after this",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12012,
+      "kind": "fileSeen",
+      "t": 1427039768428681,
+      "res": 1,
+      "obj": 15954,
+      "obj_text": "C:\\Users\\temporary\\Favorites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8fd1602b57cfb87255fc8f3fb0a357b3aeeda39cdb326c307b24f1b9dbd90071",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 330",
+        "column": "System_DateModified, System_DateAccessed",
+        "display_name": "Favorites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12013,
+      "kind": "fileSeen",
+      "t": 1427039768428681,
+      "res": 1,
+      "obj": 15996,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4100ffa88bfc931bedc2921e1779a39fee911a5d49332866925cd9879be93d50",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 369",
+        "column": "System_DateCreated",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12014,
+      "kind": "fileSeen",
+      "t": 1427039768475481,
+      "res": 1,
+      "obj": 15476,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a318471064f332edf61e9f10ad82ada062bc44e767c3b6c0363f91cdf5f5fa8f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 371",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "USA.gov.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/USA.gov.url",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateSaved": "2010-11-21T07:20:36.000000Z",
+          "System_ItemDate": "2010-11-21T07:20:36.000000Z"
+        },
+        "size": 134,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12015,
+      "kind": "fileSeen",
+      "t": 1427039768475481,
+      "res": 1,
+      "obj": 15997,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a8cce7eecc89be7137ec00652bf9b61ae41d41b60dcb38e6358a6090e9064b9d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 370",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "size": 224,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12016,
+      "kind": "fileSeen",
+      "t": 1427039768491081,
+      "res": 1,
+      "obj": 15996,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "8b42c364b9ea7108d4838f9ce0d7a40ab45eabd45eb98b865569e461b9146f07",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 369",
+        "column": "System_DateAccessed",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12017,
+      "kind": "fileSeen",
+      "t": 1427039768491081,
+      "res": 1,
+      "obj": 15475,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fc767a12f1ff95896a62c053adbfa8771330c6f059159459db22106074197da3",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 372",
+        "column": "System_DateCreated, System_DateAccessed",
+        "display_name": "GobiernoUSA.gov.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/GobiernoUSA.gov.url",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateSaved": "2010-11-21T07:20:36.000000Z",
+          "System_ItemDate": "2010-11-21T07:20:36.000000Z"
+        },
+        "size": 134,
+        "store": "file",
+        "time_meaning": "the item's creation time as the index stores it; the item's last-access time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12018,
+      "kind": "fileSeen",
+      "t": 1427039768506681,
+      "res": 1,
+      "obj": 15996,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "826aaf1e9b7d4d95e79b0c3b4b4376744b120a5bf3d97077737c6aacc7b3b292",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 369",
+        "column": "System_DateModified",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12019,
+      "kind": "fileSeen",
+      "t": 1427039768506681,
+      "res": 1,
+      "obj": 15997,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "77b724b6dd8c18a53c1bf3b4c37714d5b0465f9674b93566a231f5169ec2e748",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 370",
+        "column": "System_DateModified",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "size": 224,
+        "store": "file",
+        "time_meaning": "the item's last-modified time as the index stores it",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12020,
+      "kind": "fileSeen",
+      "t": 1427039769051684,
+      "res": 1,
+      "obj": 15953,
+      "obj_text": "C:\\Users\\temporary\\Desktop",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3f8988632208406b8666589f3dcdc54743f128568e4bf1ca9f54b34fc1f4738d",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 333",
+        "column": "System_Search_GatherTime",
+        "display_name": "Desktop",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Desktop",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12021,
+      "kind": "fileSeen",
+      "t": 1427039769051684,
+      "res": 1,
+      "obj": 15977,
+      "obj_text": "C:\\Users\\temporary\\Searches",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f3447b0331bfbb4a49e4344a67677979de8764233cf79e26e34d185926de184c",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 356",
+        "column": "System_Search_GatherTime",
+        "display_name": "Searches",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Searches",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12022,
+      "kind": "fileSeen",
+      "t": 1427039769061684,
+      "res": 1,
+      "obj": 15956,
+      "obj_text": "C:\\Users\\temporary\\My Documents",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "08721f66d6d469d56b2da0b250780d8d63f69a31c5f5055342bb45b781c3ecdc",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 332",
+        "column": "System_Search_GatherTime",
+        "display_name": "My Documents",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Documents",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12023,
+      "kind": "fileSeen",
+      "t": 1427039769065684,
+      "res": 1,
+      "obj": 1458,
+      "obj_text": "C:\\Users\\temporary\\Downloads",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "917bc5cc7453e1263525d56333b483852b0af92d4f63d7cba32139039dff4332",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 331",
+        "column": "System_Search_GatherTime",
+        "display_name": "Downloads",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Downloads",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12024,
+      "kind": "fileSeen",
+      "t": 1427039769165685,
+      "res": 1,
+      "obj": 15954,
+      "obj_text": "C:\\Users\\temporary\\Favorites",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "19f5e79bb81da4fd40bdd2edf4831a6c1658b14c29968c47dc1ac924f551e56f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 330",
+        "column": "System_Search_GatherTime",
+        "display_name": "Favorites",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12025,
+      "kind": "fileSeen",
+      "t": 1427039769197687,
+      "res": 1,
+      "obj": 15996,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "01168d4f72fd2e17751948fa195fec7646ff3ef06f912e59076e19f87533ade8",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 369",
+        "column": "System_Search_GatherTime",
+        "display_name": "Websites for United States",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12026,
+      "kind": "fileSeen",
+      "t": 1427039769217687,
+      "res": 1,
+      "obj": 15987,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Favorites Bar",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d24b8233ee6ae3a8d06105c6b179e2d74bec473ad9bf8ee018d8ba23e3dfd8de",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 366",
+        "column": "System_Search_GatherTime",
+        "display_name": "Favorites Bar",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Favorites/Links",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12027,
+      "kind": "fileSeen",
+      "t": 1427039769217687,
+      "res": 1,
+      "obj": 15955,
+      "obj_text": "C:\\Users\\temporary\\Links",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ace8989a329d7a48538c09a7d2a83be3bcdc07636f55f5cf771fe229cc4c9f8c",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 329",
+        "column": "System_Search_GatherTime",
+        "display_name": "Links",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Links",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12028,
+      "kind": "fileSeen",
+      "t": 1427039769232687,
+      "res": 1,
+      "obj": 15957,
+      "obj_text": "C:\\Users\\temporary\\My Music",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "83dfdeeafdad2a0553dfe5e9badc04d79c8a3f552a0a84af2fd24ba0633bf613",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 328",
+        "column": "System_Search_GatherTime",
+        "display_name": "My Music",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Music",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12029,
+      "kind": "fileSeen",
+      "t": 1427039769236687,
+      "res": 1,
+      "obj": 15958,
+      "obj_text": "C:\\Users\\temporary\\My Pictures",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9844c5994476d7fa1de1485c084cc742a6d721515b127ee1c71af428f8be51ec",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 327",
+        "column": "System_Search_GatherTime",
+        "display_name": "My Pictures",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Pictures",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12030,
+      "kind": "fileSeen",
+      "t": 1427039769240687,
+      "res": 1,
+      "obj": 15961,
+      "obj_text": "C:\\Users\\temporary\\Saved Games",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d985a5b7ac941808387d9da4489409a9a7f1d1e0dbbb834e95ac0221e9969525",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 326",
+        "column": "System_Search_GatherTime",
+        "display_name": "Saved Games",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Saved Games",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12031,
+      "kind": "fileSeen",
+      "t": 1427039769244688,
+      "res": 1,
+      "obj": 15959,
+      "obj_text": "C:\\Users\\temporary\\My Videos",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "089841603009e8400a00c9996092bb044046a6e4040c44fc14dc465f1d6b7821",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 325",
+        "column": "System_Search_GatherTime",
+        "display_name": "My Videos",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Videos",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12032,
+      "kind": "fileSeen",
+      "t": 1427039769248688,
+      "res": 1,
+      "obj": 15968,
+      "obj_text": "C:\\Users\\temporary\\Contacts",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "a82f53b368386c7f9202c026b9562a69cb07929db56e6250af2329190aaa7333",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 303",
+        "column": "System_Search_GatherTime",
+        "display_name": "Contacts",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": "Directory",
+        "item_url": "file:C:/Users/temporary/Contacts",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:02.000000Z"
+        },
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12033,
+      "kind": "fileSeen",
+      "t": 1427039769269688,
+      "res": 1,
+      "obj": 15475,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "bed7674d431e85bab09ce6aa1fac672342d97dbd11bb967bbfde9587396ecb6b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 372",
+        "column": "System_Search_GatherTime",
+        "display_name": "GobiernoUSA.gov.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/GobiernoUSA.gov.url",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateSaved": "2010-11-21T07:20:36.000000Z",
+          "System_ItemDate": "2010-11-21T07:20:36.000000Z"
+        },
+        "size": 134,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12034,
+      "kind": "fileSeen",
+      "t": 1427039769289688,
+      "res": 1,
+      "obj": 15476,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "fad10d7e3b775558d047d06fa30053a01c67030f6b24f29954801192f846f055",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 371",
+        "column": "System_Search_GatherTime",
+        "display_name": "USA.gov.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/USA.gov.url",
+        "other_dates": {
+          "System_DateImported": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateCreated": "2010-11-21T07:20:36.000000Z",
+          "System_Document_DateSaved": "2010-11-21T07:20:36.000000Z",
+          "System_ItemDate": "2010-11-21T07:20:36.000000Z"
+        },
+        "size": 134,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12035,
+      "kind": "fileSeen",
+      "t": 1427039769299688,
+      "res": 1,
+      "obj": 15997,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "4e6db73df6118bc1cae9a8e4bec8442bab7be7976abd65dd27241aaeb51fa72b",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 370",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Favorites/Links for United States/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:10.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:10.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:10.000000Z"
+        },
+        "size": 224,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12036,
+      "kind": "fileSeen",
+      "t": 1427039769299688,
+      "res": 1,
+      "obj": 15983,
+      "obj_text": "C:\\Users\\temporary\\Links\\Desktop.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "0fb0878e3a7a7904133dcaca0f56a54af1260d279a8678ae4a94ebc8d0f9b8ce",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 364",
+        "column": "System_Search_GatherTime",
+        "display_name": "Desktop.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/Users/temporary/Links/Desktop.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 449,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12037,
+      "kind": "fileSeen",
+      "t": 1427039769309688,
+      "res": 1,
+      "obj": 15984,
+      "obj_text": "C:\\Users\\temporary\\Links\\Downloads.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "7d8c5b137ad1679b018e0026966e30c5c1f6f37585beb42fb2c9e27dfe039595",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 365",
+        "column": "System_Search_GatherTime",
+        "display_name": "Downloads.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/Users/temporary/Links/Downloads.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 872,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12038,
+      "kind": "fileSeen",
+      "t": 1427039769319688,
+      "res": 1,
+      "obj": 15985,
+      "obj_text": "C:\\Users\\temporary\\Links\\Recent Places.lnk",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e3e0db6611387847e6b8677c0a171468eef6ee948adc1dad0fe84ccf9b6e2012",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 363",
+        "column": "System_Search_GatherTime",
+        "display_name": "Recent Places.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".lnk",
+        "item_url": "file:C:/Users/temporary/Links/RecentPlaces.lnk",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 363,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12039,
+      "kind": "fileSeen",
+      "t": 1427039769329688,
+      "res": 1,
+      "obj": 15986,
+      "obj_text": "C:\\Users\\temporary\\Searches\\Everywhere.search-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ee74298c3d00adb0febf5d71f7d16e2015b4b8be38d41bf52529b4a6eb6b53ef",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 362",
+        "column": "System_Search_GatherTime",
+        "display_name": "Everywhere.search-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".search-ms",
+        "item_url": "file:C:/Users/temporary/Searches/Everywhere.search-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 248,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12040,
+      "kind": "fileSeen",
+      "t": 1427039770045689,
+      "res": 1,
+      "obj": 15982,
+      "obj_text": "C:\\Users\\temporary\\Searches\\Indexed Locations.search-ms",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ac4b0998dc9eefc0ca661451738b4befbb81bbffffb6b542d65d5eaddd028f5a",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 361",
+        "column": "System_Search_GatherTime",
+        "display_name": "Indexed Locations.search-ms",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".search-ms",
+        "item_url": "file:C:/Users/temporary/Searches/Indexed Locations.search-ms",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:04.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 248,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12041,
+      "kind": "fileSeen",
+      "t": 1427039770061289,
+      "res": 1,
+      "obj": 15989,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Favorites Bar\\Web Slice Gallery.url",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "2b1ab992651e28df913db3ed4799082ea20d8612c2e36c14f81b3f398094e125",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 368",
+        "column": "System_Search_GatherTime",
+        "display_name": "Web Slice Gallery.url",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".url",
+        "item_url": "file:C:/Users/temporary/Favorites/Links/Web Slice Gallery.url",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:06.000000Z"
+        },
+        "size": 226,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12042,
+      "kind": "fileSeen",
+      "t": 1427039770076889,
+      "res": 1,
+      "obj": 15970,
+      "obj_text": "C:\\Users\\temporary\\Contacts\\temporary.contact",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "e66030e5abbb4cc6026bdb8db9735821733657e09c37017701b946ed64b0373f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 305",
+        "column": "System_Search_GatherTime",
+        "display_name": "temporary.contact",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".contact",
+        "item_url": "file:C:/Users/temporary/Contacts/temporary.contact",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:02.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:02.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:02.000000Z"
+        },
+        "size": 44600,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12043,
+      "kind": "fileSeen",
+      "t": 1427039770076889,
+      "res": 1,
+      "obj": 15967,
+      "obj_text": "C:\\Users\\temporary\\ntuser.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "95c43dd755c9072b1c71f88f7daec6f32f10dc7d3528efb989f74613f3209b48",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 397",
+        "column": "System_Search_GatherTime",
+        "display_name": "ntuser.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/ntuser.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:55:58.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:55:58.000000Z",
+          "System_ItemDate": "2015-03-22T15:55:58.000000Z"
+        },
+        "size": 20,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12044,
+      "kind": "fileSeen",
+      "t": 1427039770092489,
+      "res": 1,
+      "obj": 15979,
+      "obj_text": "C:\\Users\\temporary\\Downloads\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "9d58ebed6b88e7cbdb271267fc93f17beb784157f8d1662ee61c98f233ba39b7",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 358",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Downloads/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 282,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12045,
+      "kind": "fileSeen",
+      "t": 1427039770092489,
+      "res": 1,
+      "obj": 15988,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\Favorites Bar\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "af5e7b6b2074ac28fffa80ab938df2f1fc6518d7ac936dfa041cf73836b629d6",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 367",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Favorites/Links/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:06.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:06.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:06.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:06.000000Z"
+        },
+        "size": 80,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12046,
+      "kind": "fileSeen",
+      "t": 1427039770092489,
+      "res": 1,
+      "obj": 15980,
+      "obj_text": "C:\\Users\\temporary\\Links\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "ef3377fe0d75e6f62668809f114614d2432e8d4f035dd3eb9fa95a6b3fa1f637",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 359",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Links/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 580,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12047,
+      "kind": "fileSeen",
+      "t": 1427039770092489,
+      "res": 1,
+      "obj": 15981,
+      "obj_text": "C:\\Users\\temporary\\Saved Games\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "f97d61100b10cd910711fe266e7ac01565742ea942c67ae872e40afdcdbb8249",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 360",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Saved Games/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 282,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12048,
+      "kind": "fileSeen",
+      "t": 1427039770108089,
+      "res": 1,
+      "obj": 15972,
+      "obj_text": "C:\\Users\\temporary\\Favorites\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "d2d9cfea85db776049e0dca0e1b8f676c68f81d5a6687d4757d6ac2a59efdf48",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 309",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Favorites/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 402,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12049,
+      "kind": "fileSeen",
+      "t": 1427039770108089,
+      "res": 1,
+      "obj": 15975,
+      "obj_text": "C:\\Users\\temporary\\My Documents\\desktop.ini",
+      "aux": 15339,
+      "aux_text": "windows search index",
+      "row_sha256": "3816b1273070772aa21a9cabb169a0c1be314e08b3403eeef323d1b03b647e2f",
+      "prov": {
+        "artifact": "C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb table SystemIndex_0A DocID 323",
+        "column": "System_Search_GatherTime",
+        "display_name": "desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "item_type": ".ini",
+        "item_url": "file:C:/Users/temporary/Documents/desktop.ini",
+        "other_dates": {
+          "System_DateImported": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateCreated": "2015-03-22T15:56:04.000000Z",
+          "System_Document_DateSaved": "2015-03-22T15:56:08.000000Z",
+          "System_ItemDate": "2015-03-22T15:56:04.000000Z"
+        },
+        "size": 402,
+        "store": "file",
+        "time_meaning": "when the indexer last gathered the item",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileRecorded": [
+          12010
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id 8a59b63ceaa9078c (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12011
+        ]
+      },
+      "english": "The thumbnail cache holds a record of thumbnail cache id e728566ea2235fea (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12012
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12013
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12014
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12015
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12016
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12017
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12018
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12019
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:08 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12020
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Desktop (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12021
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Searches (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12022
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Documents (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12023
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Downloads (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12024
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12025
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12026
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12027
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Links (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12028
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Music (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12029
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Pictures (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12030
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Saved Games (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12031
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Videos (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12032
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Contacts (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12033
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\GobiernoUSA.gov.url (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12034
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\USA.gov.url (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12035
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Websites for United States\\desktop.ini (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12036
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Links\\Desktop.lnk (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12037
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Links\\Downloads.lnk (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12038
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Links\\Recent Places.lnk (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12039
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Searches\\Everywhere.search-ms (record time 2015-03-22 15:56:09 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12040
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Searches\\Indexed Locations.search-ms (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12041
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar\\Web Slice Gallery.url (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12042
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Contacts\\temporary.contact (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12043
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\ntuser.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12044
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Downloads\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12045
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\Favorites Bar\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12046
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Links\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12047
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Saved Games\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12048
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\Favorites\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileRecorded": [
+          12049
+        ]
+      },
+      "english": "The windows search index holds a record of C:\\Users\\temporary\\My Documents\\desktop.ini (record time 2015-03-22 15:56:10 UTC).",
+      "rules": [
+        "R26"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R26"
+  ],
+  "strength": "strong",
+  "lean_file": "M316.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

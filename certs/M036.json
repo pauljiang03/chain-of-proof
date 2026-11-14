@@ -2,13 +2,13 @@
   "finding_id": "M036",
   "question": "Which files were opened from removable devices or network shares?",
   "claim": {
-    "openedFromRecorded": [
+    "openedFromDevice": [
       54,
-      370
+      498
     ]
   },
   "status": "verified",
-  "english": "\\ was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+  "english": "\\ was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, the volume on seized device disc RM#3.",
   "cited_facts": [
     {
       "id": 54,
@@ -34,44 +34,82 @@
       }
     },
     {
-      "id": 370,
-      "kind": "volumeSeen",
-      "t": 1427230870763657,
+      "id": 498,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
       "res": 1,
-      "obj": 204,
-      "obj_text": "IAMAN CD",
+      "obj": 249,
+      "obj_text": "disc RM#3",
       "aux": 40,
       "aux_text": "AE88F176",
-      "row_sha256": "355074af2362cebb5db4e3b31f8bc4aeda6d68a970e19835b0df2c3aa4f9a4c2",
+      "row_sha256": "de47239079c25271ac157bd70285064f395c242d1ea2c57556d6dff7e955f45d",
       "prov": {
-        "artifact": "volume block of shortcut: C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
-        "drive_type": "CD-ROM",
-        "exhibit": "PC",
-        "image": "pc.E01",
-        "time_meaning": "when the shortcut's target was opened",
-        "tool": "dissect.target 3.25.1"
+        "allocation_tables_at_sectors": [
+          319,
+          51231,
+          51263,
+          51295,
+          51327,
+          51359,
+          51391,
+          52479,
+          52511
+        ],
+        "artifact": "UDF file set descriptor at sector 52487 (byte offset 107493376)",
+        "exhibit": "RM#3",
+        "file_set_recorded_utc": "2015-03-24T20:53:17.880500Z",
+        "filesystem": "udf",
+        "identical_descriptor_copies_at_sectors": [
+          289,
+          36532,
+          51208,
+          51239,
+          51271,
+          51303,
+          51335,
+          51367,
+          52465,
+          52487
+        ],
+        "image": "rm3.E01",
+        "offset": 107493376,
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "partition_start_sector": 288,
+        "referenced": "by an allocation table",
+        "sectors_in_image": 52513,
+        "sectors_the_imager_could_not_read": 16,
+        "serial_method": "four byte-wise sums over the 512-byte file set descriptor, as the Windows UDF driver computes it",
+        "session": 1,
+        "session_source": "E01 session section (1 entry)",
+        "states_of_the_volume": 9,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "track": 1,
+        "udf_revision": "2.01",
+        "volume_label": "IAMAN CD",
+        "volume_set": "10351158 UDF Volume Set"
       }
     }
   ],
   "parts": [
     {
       "part": {
-        "openedFromRecorded": [
+        "openedFromDevice": [
           54,
-          370
+          498
         ]
       },
-      "english": "\\ was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, which this PC recorded under the label \"IAMAN CD\" (2015-03-24 21:01:10 UTC).",
+      "english": "\\ was opened (2015-03-24 21:01:14 UTC) from volume AE88F176, the volume on seized device disc RM#3.",
       "rules": [
         "R3",
-        "R6"
+        "R7"
       ],
       "strength": "strong"
     }
   ],
   "rules": [
     "R3",
-    "R6"
+    "R7"
   ],
   "strength": "strong",
   "lean_file": "M036.lean",

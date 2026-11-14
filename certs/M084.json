@@ -6,23 +6,23 @@
       {
         "copiedHere": [
           70,
-          163
+          213
         ]
       },
       {
         "tagged": [
           70,
           "obj",
-          331,
-          197
+          405,
+          231
         ]
       },
       {
         "tagged": [
           70,
           "obj",
-          332,
-          201
+          406,
+          235
         ]
       }
     ]
@@ -50,7 +50,7 @@
       }
     },
     {
-      "id": 163,
+      "id": 213,
       "kind": "fileModified",
       "t": 1419018826000000,
       "res": 10000,
@@ -58,7 +58,7 @@
       "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
       "aux": 19,
       "aux_text": "5C754D3E",
-      "row_sha256": "91c740a52b599616003e67ea3fce3d0a2e6c9fe09aa4b5ed48f701f47f896df5",
+      "row_sha256": "a48719da218a0169d3a37252e4018266803834be13ab355a71d639dbc0e35c92",
       "prov": {
         "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
         "exhibit": "RM#1",
@@ -69,30 +69,30 @@
       }
     },
     {
-      "id": 331,
+      "id": 405,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 18,
       "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
-      "aux": 197,
+      "aux": 231,
       "aux_text": "confidential",
-      "row_sha256": "5e3e111525ca6f03576c806ff7287ec4175f1dd5973b2e95ebc4f81f871bdfe4",
+      "row_sha256": "50a6329620431a54d69b6eea4b519a0762b423f04e2f8c39661fe3acc865c925",
       "prov": {
         "rule": "path carries the confidential-project marker named in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 332,
+      "id": 406,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 18,
       "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
-      "aux": 201,
+      "aux": 235,
       "aux_text": "same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC",
-      "row_sha256": "cd6b39e6e456ec706856736dd6428c487ea971272d7513337c7f7d816b861a73",
+      "row_sha256": "43d7dbb5398cd2d09e5dd244e405562ecab5b70f901e4c6a2e714a02ddcc9546",
       "prov": {
         "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
@@ -104,7 +104,7 @@
       "part": {
         "copiedHere": [
           70,
-          163
+          213
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:20 UTC) after its last modification (2014-12-19 19:53:46 UTC). This rests on heuristic rule R4.",
@@ -118,8 +118,8 @@
         "tagged": [
           70,
           "obj",
-          331,
-          197
+          405,
+          231
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
@@ -133,8 +133,8 @@
         "tagged": [
           70,
           "obj",
-          332,
-          201
+          406,
+          235
         ]
       },
       "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"same size and last-modified time as a file elsewhere: 6484502 bytes, 2014-12-19 19:53:46 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",

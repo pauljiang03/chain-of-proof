@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          249
+          323
         ]
       },
       {
         "tagged": [
-          249,
+          323,
           "obj",
-          355,
-          195
+          477,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"how to delete data\" was made in chrome (2015-03-23 18:16:55 UTC). how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",
   "cited_facts": [
     {
-      "id": 249,
+      "id": 323,
       "kind": "webSearch",
       "t": 1427134615783075,
       "res": 1,
-      "obj": 148,
+      "obj": 182,
       "obj_text": "how to delete data",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "dc7f5bb5142a58d046b3c029b64dbae9f334ce186c48b0e60e983dc5e04b9609",
+      "row_sha256": "f2479359413f700cbc39e28c00e625967c4c03147a8d29f44b4424efa54398aa",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 355,
+      "id": 477,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 148,
+      "obj": 182,
       "obj_text": "how to delete data",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "caec9a365a1603e5219898cedca9fc93316413bc2ce49968ee28edc02dc02a07",
+      "row_sha256": "3f7dad3eaf9c6395f1782e6bff6b032126c9e6a3adaaab26b247c3a1e9b13adb",
       "prov": {
         "rule": "search term contains the watch-list word \"delet\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          249
+          323
         ]
       },
       "english": "A web search for \"how to delete data\" was made in chrome (2015-03-23 18:16:55 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          249,
+          323,
           "obj",
-          355,
-          195
+          477,
+          229
         ]
       },
       "english": "how to delete data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"delet\").",

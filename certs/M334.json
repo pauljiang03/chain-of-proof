@@ -1,0 +1,1769 @@
+{
+  "finding_id": "M334",
+  "question": "What content do the files have?",
+  "claim": {
+    "both": [
+      {
+        "contentHashed": [
+          12683
+        ]
+      },
+      {
+        "contentHashed": [
+          12684
+        ]
+      },
+      {
+        "contentHashed": [
+          12685
+        ]
+      },
+      {
+        "contentHashed": [
+          12686
+        ]
+      },
+      {
+        "contentHashed": [
+          12687
+        ]
+      },
+      {
+        "contentHashed": [
+          12688
+        ]
+      },
+      {
+        "contentHashed": [
+          12689
+        ]
+      },
+      {
+        "contentHashed": [
+          12690
+        ]
+      },
+      {
+        "contentHashed": [
+          12691
+        ]
+      },
+      {
+        "contentHashed": [
+          12692
+        ]
+      },
+      {
+        "contentHashed": [
+          12693
+        ]
+      },
+      {
+        "contentHashed": [
+          12694
+        ]
+      },
+      {
+        "contentHashed": [
+          12695
+        ]
+      },
+      {
+        "contentHashed": [
+          12696
+        ]
+      },
+      {
+        "contentHashed": [
+          12697
+        ]
+      },
+      {
+        "contentHashed": [
+          12698
+        ]
+      },
+      {
+        "contentHashed": [
+          12699
+        ]
+      },
+      {
+        "contentHashed": [
+          12700
+        ]
+      },
+      {
+        "contentHashed": [
+          12701
+        ]
+      },
+      {
+        "contentHashed": [
+          12702
+        ]
+      },
+      {
+        "contentHashed": [
+          12703
+        ]
+      },
+      {
+        "contentHashed": [
+          12704
+        ]
+      },
+      {
+        "contentHashed": [
+          12705
+        ]
+      },
+      {
+        "contentHashed": [
+          12706
+        ]
+      },
+      {
+        "contentHashed": [
+          12707
+        ]
+      },
+      {
+        "contentHashed": [
+          12708
+        ]
+      },
+      {
+        "contentHashed": [
+          12709
+        ]
+      },
+      {
+        "contentHashed": [
+          12710
+        ]
+      },
+      {
+        "contentHashed": [
+          12711
+        ]
+      },
+      {
+        "contentHashed": [
+          12712
+        ]
+      },
+      {
+        "contentHashed": [
+          12713
+        ]
+      },
+      {
+        "contentHashed": [
+          12714
+        ]
+      },
+      {
+        "contentHashed": [
+          12715
+        ]
+      },
+      {
+        "contentHashed": [
+          12716
+        ]
+      },
+      {
+        "contentHashed": [
+          12717
+        ]
+      },
+      {
+        "contentHashed": [
+          12718
+        ]
+      },
+      {
+        "contentHashed": [
+          12719
+        ]
+      },
+      {
+        "contentHashed": [
+          12720
+        ]
+      },
+      {
+        "contentHashed": [
+          12721
+        ]
+      },
+      {
+        "contentHashed": [
+          12722
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "The content of \\Koala.jpg on exhibit RM#3, read from the image, has sha256:84a4da0e4c52c469ace6e0c674a9144cd43eb2628c401c8b56b41242e2be4af1. The bytes were read as the extents its UDF file entry lists. The content of \\Penguins.jpg on exhibit RM#3, read from the image, has sha256:7e5bdd023b6cf21efe42a8ec90bc1993fc853980d4b564688e5ac2d28c64223c. The bytes were read as the extents its UDF file entry lists. The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt on exhibit RM#1, read from the image, has sha256:68dd7d714195b1f061798a6b0f05e9db7bce5375cb40a04b1fdf57386764cb77. The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt on exhibit RM#1, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx on exhibit RM#1, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a. The content of \\Tulips.jpg on exhibit RM#3, read from the image, has sha256:b9352f2565260219db72fc1fc896113a26c85866b69c50d3970c4d9f5cce830a. The bytes were read as the extents its UDF file entry lists. The content of \\Users\\All Users\\Desktop\\Google Chrome.lnk on exhibit PC, read from the image, has sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24. The content of \\Users\\All Users\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f. The content of \\Users\\All Users\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8. The content of \\Users\\Public\\Desktop\\Google Chrome.lnk on exhibit PC, read from the image, has sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24. The content of \\Users\\Public\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f. The content of \\Users\\Public\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8. The content of \\Users\\Public\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:6783e0a9fea5beb9ff2bff02264784e42e5890f89da6c0395f6325591c823fbb. The content of \\Users\\admin11\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026. The content of \\Users\\admin11\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844. The content of \\Users\\admin11\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3. The content of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on exhibit PC, read from the image, has sha256:559eafe456e5d29b19cd3a9d6be7c77f3f576a484434bd5b2aa5b6188aaa00b2. The content of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on exhibit PC, read from the image, has sha256:9d20c984d21eb4333029aee1b7ecc3fb80c845a2f3deb5d1df3009d966306c21. The content of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on exhibit PC, read from the image, has sha256:b18a2f5d445b3be2387bfba93e905f6abb04c97c371d74f441259d1dc09c4837. The content of \\Users\\informant\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026. The content of \\Users\\informant\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844. The content of \\Users\\informant\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3. The content of \\Users\\informant\\Downloads\\googledrivesync.exe on exhibit PC, read from the image, has sha256:427a581cef88e1852ea78b041a348cda3f86d625fcf0709d3a010716b7552c1a. The content of \\Users\\informant\\Downloads\\icloudsetup.exe on exhibit PC, read from the image, has sha256:787e9f5f5f69399a2dd564edba872ce3f3550ded4d19038a6dc667da612c6be3. The content of \\Users\\temporary\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026. The content of \\Users\\temporary\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844. The content of \\Users\\temporary\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3. The content of \\[lost folder 25440]\\desktop.ini on exhibit RM#2, read from the image, has sha256:e1b9ce9b57957b1a0607a72a057d6b7a9b34ea60f3f8aa8f38a3af979bd23066. The bytes were read as one contiguous run of 1 clusters from the first cluster (25441); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\design\\winter_storm.amr on exhibit RM#2, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as one contiguous run of 3552 clusters from the first cluster (5); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as one contiguous run of 4000 clusters from the first cluster (3557); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\pricing decision\\my_favorite_cars.db on exhibit RM#2, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as one contiguous run of 308 clusters from the first cluster (7558); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\pricing decision\\my_favorite_movies.7z on exhibit RM#2, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as one contiguous run of 25 clusters from the first cluster (7866); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\pricing decision\\new_years_day.jpg on exhibit RM#2, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as one contiguous run of 2500 clusters from the first cluster (7891); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\pricing decision\\super_bowl.avi on exhibit RM#2, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as one contiguous run of 2512 clusters from the first cluster (10391); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\progress\\my_friends.svg on exhibit RM#2, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as one contiguous run of 15 clusters from the first cluster (12904); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\progress\\my_smartphone.png on exhibit RM#2, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as one contiguous run of 1085 clusters from the first cluster (12919); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\progress\\new_year_calendar.one on exhibit RM#2, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as one contiguous run of 7 clusters from the first cluster (14004); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content. The content of \\[lost folder 3]\\proposal\\a_gift_from_you.gif on exhibit RM#2, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as one contiguous run of 8601 clusters from the first cluster (14012); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+  "cited_facts": [
+    {
+      "id": 12683,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 42,
+      "obj_text": "\\Koala.jpg",
+      "aux": 16119,
+      "aux_text": "sha256:84a4da0e4c52c469ace6e0c674a9144cd43eb2628c401c8b56b41242e2be4af1",
+      "row_sha256": "7e6696a4c40ffca5024e2c27719cde0bed95fb1b45d6ecab03f4796ef5ecb744",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 52467",
+        "exhibit": "RM#3",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "extents": 1,
+        "first_sector": 51399,
+        "image": "rm3.E01",
+        "leading_bytes": "ffd8ffe000104a46",
+        "location": "AE88F176",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "session": 1,
+        "signature": "jpeg",
+        "size": 780831,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12684,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 41,
+      "obj_text": "\\Penguins.jpg",
+      "aux": 16120,
+      "aux_text": "sha256:7e5bdd023b6cf21efe42a8ec90bc1993fc853980d4b564688e5ac2d28c64223c",
+      "row_sha256": "99f50c7004fd07c56856d5a9ed7f182e095b41ea1c43bcf3d81cb2233d1dbdc5",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 52468",
+        "exhibit": "RM#3",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "extents": 1,
+        "first_sector": 51781,
+        "image": "rm3.E01",
+        "leading_bytes": "ffd8ffe000104a46",
+        "location": "AE88F176",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "session": 1,
+        "signature": "jpeg",
+        "size": 777835,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12685,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 22,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+      "aux": 16121,
+      "aux_text": "sha256:68dd7d714195b1f061798a6b0f05e9db7bce5375cb40a04b1fdf57386764cb77",
+      "row_sha256": "711ff9f9bacbfa18146c1ab4f87b09ad180e6413dc640ee713cede972372675a",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "ppt",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "5C754D3E",
+        "signature": "legacy OLE office document",
+        "size": 1810432,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12686,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 51,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "7f25a0fb803d56341e7266e12528cbc63fd3292f00a99e5e34b766a311412870",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "pptx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12687,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 52,
+      "obj_text": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "abd734a4ce525c337b6bac53642f6b1806960262e05f899724b0f829e015160e",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "ppt",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "5C754D3E",
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12688,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "25e4e8ccfdaf210c7ade0e45ceb481b4e6730ff991f578040551044c24e89da5",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12689,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 16125,
+      "aux_text": "sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a",
+      "row_sha256": "c7b711b6e0ab1aadbd9fd6126cb743caf33720f7dc61a2652c41aff372322c1b",
+      "prov": {
+        "artifact": "content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx, read through its exfat allocation chain",
+        "exhibit": "RM#1",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "rm1.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "5C754D3E",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 6484502,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12690,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 43,
+      "obj_text": "\\Tulips.jpg",
+      "aux": 16126,
+      "aux_text": "sha256:b9352f2565260219db72fc1fc896113a26c85866b69c50d3970c4d9f5cce830a",
+      "row_sha256": "bd203536832393e1202a5b69aa04630ad3ed0d571abb6ec84d7280afa4a6d6eb",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 52469",
+        "exhibit": "RM#3",
+        "extension": "jpg",
+        "extension_fits_signature": true,
+        "extents": 1,
+        "first_sector": 52161,
+        "image": "rm3.E01",
+        "leading_bytes": "ffd8ffe000104a46",
+        "location": "AE88F176",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "session": 1,
+        "signature": "jpeg",
+        "size": 620888,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12691,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 58,
+      "obj_text": "\\Users\\All Users\\Desktop\\Google Chrome.lnk",
+      "aux": 16127,
+      "aux_text": "sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24",
+      "row_sha256": "4ccef8f0cafc03faebe6555c6bd0ae7e38a5c405b48653e445261708942fb18b",
+      "prov": {
+        "account": "All Users",
+        "artifact": "NTFS $DATA of \\Users\\All Users\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "extension": "lnk",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "4c00000001140200",
+        "location": "CA0C7A48",
+        "signature": "windows shortcut",
+        "size": 2259,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12692,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 46,
+      "obj_text": "\\Users\\All Users\\Desktop\\desktop.ini",
+      "aux": 16128,
+      "aux_text": "sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f",
+      "row_sha256": "78797c4743cc16d916874e04eb66f64407fb264558eeeb050651a49769b05fb8",
+      "prov": {
+        "account": "All Users",
+        "artifact": "NTFS $DATA of \\Users\\All Users\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 174,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12693,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 49,
+      "obj_text": "\\Users\\All Users\\Documents\\desktop.ini",
+      "aux": 16129,
+      "aux_text": "sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8",
+      "row_sha256": "dfc97b98c0f56cd61c082c3c00f0410ffdc7a305e87ae36c33d4a57b97980506",
+      "prov": {
+        "account": "All Users",
+        "artifact": "NTFS $DATA of \\Users\\All Users\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 278,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12694,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 59,
+      "obj_text": "\\Users\\Public\\Desktop\\Google Chrome.lnk",
+      "aux": 16127,
+      "aux_text": "sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24",
+      "row_sha256": "c3d1a98d3be6eb30dd3e477a45cb489cc54280f3f6d3091849175fd2f62f6fb1",
+      "prov": {
+        "account": "Public",
+        "artifact": "NTFS $DATA of \\Users\\Public\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "extension": "lnk",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "4c00000001140200",
+        "location": "CA0C7A48",
+        "signature": "windows shortcut",
+        "size": 2259,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12695,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 47,
+      "obj_text": "\\Users\\Public\\Desktop\\desktop.ini",
+      "aux": 16128,
+      "aux_text": "sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f",
+      "row_sha256": "eb9bb2f3aa3d703face7c5045df7d11ec6b992fffaf1dc783f2848df11a625cb",
+      "prov": {
+        "account": "Public",
+        "artifact": "NTFS $DATA of \\Users\\Public\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 174,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12696,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 50,
+      "obj_text": "\\Users\\Public\\Documents\\desktop.ini",
+      "aux": 16129,
+      "aux_text": "sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8",
+      "row_sha256": "d8803db93224363f5daaf61c36cb978e75e31384743bbd0c60917ecf214ed4dd",
+      "prov": {
+        "account": "Public",
+        "artifact": "NTFS $DATA of \\Users\\Public\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 278,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12697,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 48,
+      "obj_text": "\\Users\\Public\\Downloads\\desktop.ini",
+      "aux": 16130,
+      "aux_text": "sha256:6783e0a9fea5beb9ff2bff02264784e42e5890f89da6c0395f6325591c823fbb",
+      "row_sha256": "4d5dcdaa932f2bdd49dbfc2d36786ade3114dde1e3c46c5b323c52d4c2d3db49",
+      "prov": {
+        "account": "Public",
+        "artifact": "NTFS $DATA of \\Users\\Public\\Downloads\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 174,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12698,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 60,
+      "obj_text": "\\Users\\admin11\\Desktop\\desktop.ini",
+      "aux": 16131,
+      "aux_text": "sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026",
+      "row_sha256": "b5eca3b3e8b15aac4e3f96e767e204e58743d45e25db3d77edb8736d4000ed26",
+      "prov": {
+        "account": "admin11",
+        "artifact": "NTFS $DATA of \\Users\\admin11\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12699,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 61,
+      "obj_text": "\\Users\\admin11\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "91427ff7deba42d02d2db80adce98877d90ed8aca8433788d23278e76e030380",
+      "prov": {
+        "account": "admin11",
+        "artifact": "NTFS $DATA of \\Users\\admin11\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12700,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 62,
+      "obj_text": "\\Users\\admin11\\Downloads\\desktop.ini",
+      "aux": 16133,
+      "aux_text": "sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3",
+      "row_sha256": "f9c76b8a6de76eda3b495ebd9e16838d4aa447773a8f78b03a840c1701d82d3c",
+      "prov": {
+        "account": "admin11",
+        "artifact": "NTFS $DATA of \\Users\\admin11\\Downloads\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12701,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 57,
+      "obj_text": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 16134,
+      "aux_text": "sha256:559eafe456e5d29b19cd3a9d6be7c77f3f576a484434bd5b2aa5b6188aaa00b2",
+      "row_sha256": "6c26837a9f2f84eda1a0121e01443a7de9052efc1b85085dd5e1065a45d766fe",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "extension": "exe",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "4d5a900003000000",
+        "location": "CA0C7A48",
+        "signature": "windows executable",
+        "size": 55915216,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12702,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 44,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+      "aux": 16135,
+      "aux_text": "sha256:9d20c984d21eb4333029aee1b7ecc3fb80c845a2f3deb5d1df3009d966306c21",
+      "row_sha256": "e21aef66628aad3e18f1826a17124696683fd69dbab4c3e70f452716219dede8",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+        "exhibit": "PC",
+        "extension": "docx",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "504b030414000600",
+        "location": "CA0C7A48",
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 11893,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12703,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 16136,
+      "aux_text": "sha256:b18a2f5d445b3be2387bfba93e905f6abb04c97c371d74f441259d1dc09c4837",
+      "row_sha256": "a7dca83cda89c0131d5c2b5b739ce3483aa346ee38b3e8cb410b6621dc171f80",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+        "exhibit": "PC",
+        "extension": "xps",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "504b030414000800",
+        "location": "CA0C7A48",
+        "signature": "zip",
+        "size": 178139,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12704,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 54,
+      "obj_text": "\\Users\\informant\\Desktop\\desktop.ini",
+      "aux": 16131,
+      "aux_text": "sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026",
+      "row_sha256": "bc2fd5fcd9821a983b0191ce0999e7d3c84441990c18a72ae6d3764663bf4d4a",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12705,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 55,
+      "obj_text": "\\Users\\informant\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "faed53f199e2d3a1d88ece222fe7798f4b67a5df60f1a3c23ee07f76b3381efd",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12706,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 56,
+      "obj_text": "\\Users\\informant\\Downloads\\desktop.ini",
+      "aux": 16133,
+      "aux_text": "sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3",
+      "row_sha256": "3ab817f74203b5147827cc8c047011a2285cdb8e27fe15805f255b4be3d662cf",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Downloads\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12707,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 67,
+      "obj_text": "\\Users\\informant\\Downloads\\googledrivesync.exe",
+      "aux": 16137,
+      "aux_text": "sha256:427a581cef88e1852ea78b041a348cda3f86d625fcf0709d3a010716b7552c1a",
+      "row_sha256": "1c826d83756cf74c6ea0be8ca93d41907a6c566310799c401d0bd8f02f965129",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Downloads\\googledrivesync.exe",
+        "exhibit": "PC",
+        "extension": "exe",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "4d5a900003000000",
+        "location": "CA0C7A48",
+        "signature": "windows executable",
+        "size": 880208,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12708,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 66,
+      "obj_text": "\\Users\\informant\\Downloads\\icloudsetup.exe",
+      "aux": 16138,
+      "aux_text": "sha256:787e9f5f5f69399a2dd564edba872ce3f3550ded4d19038a6dc667da612c6be3",
+      "row_sha256": "f8be23b11a78dc1fca023caf4715eda32dbdd8b56b58759151a36d1375062469",
+      "prov": {
+        "account": "informant",
+        "artifact": "NTFS $DATA of \\Users\\informant\\Downloads\\icloudsetup.exe",
+        "exhibit": "PC",
+        "extension": "exe",
+        "extension_fits_signature": true,
+        "image": "pc.E01",
+        "leading_bytes": "4d5a900003000000",
+        "location": "CA0C7A48",
+        "signature": "windows executable",
+        "size": 71647536,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12709,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 63,
+      "obj_text": "\\Users\\temporary\\Desktop\\desktop.ini",
+      "aux": 16131,
+      "aux_text": "sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026",
+      "row_sha256": "7b7309418629d60b3a02356c690836dd28381517635ad71031c71bdfa67a0f38",
+      "prov": {
+        "account": "temporary",
+        "artifact": "NTFS $DATA of \\Users\\temporary\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12710,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 64,
+      "obj_text": "\\Users\\temporary\\Documents\\desktop.ini",
+      "aux": 16132,
+      "aux_text": "sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844",
+      "row_sha256": "1ce6d95c94d1ce798b15820e18b7af7387114064e64c412e03d47dd04581ae4a",
+      "prov": {
+        "account": "temporary",
+        "artifact": "NTFS $DATA of \\Users\\temporary\\Documents\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 402,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12711,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 65,
+      "obj_text": "\\Users\\temporary\\Downloads\\desktop.ini",
+      "aux": 16133,
+      "aux_text": "sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3",
+      "row_sha256": "5b5cb3bfb202ea85024a149496ef6c0ce85f41bf71344733854d3c1948565288",
+      "prov": {
+        "account": "temporary",
+        "artifact": "NTFS $DATA of \\Users\\temporary\\Downloads\\desktop.ini",
+        "exhibit": "PC",
+        "extension": "ini",
+        "image": "pc.E01",
+        "leading_bytes": "fffe0d000a005b00",
+        "location": "CA0C7A48",
+        "signature": "unknown",
+        "size": 282,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12712,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 109,
+      "obj_text": "\\[lost folder 25440]\\desktop.ini",
+      "aux": 16139,
+      "aux_text": "sha256:e1b9ce9b57957b1a0607a72a057d6b7a9b34ea60f3f8aa8f38a3af979bd23066",
+      "row_sha256": "aea7c52300aa711022052c61380a15434ad08dead6dfb4737991d9ef33e844b3",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 25440; content at volume byte offset 108392448",
+        "cluster_size": 4096,
+        "clusters": 1,
+        "exhibit": "RM#2",
+        "extension": "ini",
+        "first_cluster": 25441,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "5b2e5368656c6c43",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 1 clusters from the first cluster (25441); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "unknown",
+        "size": 129,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 108392448
+      }
+    },
+    {
+      "id": 12713,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 92,
+      "obj_text": "\\[lost folder 3]\\design\\winter_storm.amr",
+      "aux": 16123,
+      "aux_text": "sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937",
+      "row_sha256": "6bcdc3cfbc23121ffc5d5b31d46b731f24733a8280dee050ad44357929178cdc",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4; content at volume byte offset 4206592",
+        "cluster_size": 4096,
+        "clusters": 3552,
+        "exhibit": "RM#2",
+        "extension": "amr",
+        "extension_fits_signature": false,
+        "first_cluster": 5,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 3552 clusters from the first cluster (5); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 14547968,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 4206592
+      }
+    },
+    {
+      "id": 12714,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 93,
+      "obj_text": "\\[lost folder 3]\\design\\winter_whether_advisory.zip",
+      "aux": 16122,
+      "aux_text": "sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09",
+      "row_sha256": "64472d5581264db2cc2fcd1c3092acb140eb563ab4b0bc4dc07f6b8fdbfa85fd",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 4; content at volume byte offset 18755584",
+        "cluster_size": 4096,
+        "clusters": 4000,
+        "exhibit": "RM#2",
+        "extension": "zip",
+        "extension_fits_signature": false,
+        "first_cluster": 3557,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 4000 clusters from the first cluster (3557); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "powerpoint",
+        "size": 16381123,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 18755584
+      }
+    },
+    {
+      "id": 12715,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 94,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\my_favorite_cars.db",
+      "aux": 16140,
+      "aux_text": "sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037",
+      "row_sha256": "02827b2ed2932b114cfccd7ba4c3d1f31f23b99bb1f327cee84e357d4d719ec5",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 35143680",
+        "cluster_size": 4096,
+        "clusters": 308,
+        "exhibit": "RM#2",
+        "extension": "db",
+        "extension_fits_signature": false,
+        "first_cluster": 7558,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 308 clusters from the first cluster (7558); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 1260544,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 35143680
+      }
+    },
+    {
+      "id": 12716,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 95,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\my_favorite_movies.7z",
+      "aux": 16141,
+      "aux_text": "sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311",
+      "row_sha256": "a8785f77cd4426faf9f8e8b8b069544ac50de0e908abcc3ac0800fbb03cb510e",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 36405248",
+        "cluster_size": 4096,
+        "clusters": 25,
+        "exhibit": "RM#2",
+        "extension": "7z",
+        "extension_fits_signature": false,
+        "first_cluster": 7866,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 25 clusters from the first cluster (7866); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 100078,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 36405248
+      }
+    },
+    {
+      "id": 12717,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 96,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\new_years_day.jpg",
+      "aux": 16142,
+      "aux_text": "sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c",
+      "row_sha256": "c989811a775def72912041ebb441fbb6e42f9f29a27c6d2239a6bbe5b9c2666b",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 36507648",
+        "cluster_size": 4096,
+        "clusters": 2500,
+        "exhibit": "RM#2",
+        "extension": "jpg",
+        "extension_fits_signature": false,
+        "first_cluster": 7891,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 2500 clusters from the first cluster (7891); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "excel",
+        "size": 10237535,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 36507648
+      }
+    },
+    {
+      "id": 12718,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 97,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "f03be08aeb6c4e0740506183eb2443b8f21ae8c5af979b3a71df04f6ba3cab04",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 46747648",
+        "cluster_size": 4096,
+        "clusters": 2512,
+        "exhibit": "RM#2",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "first_cluster": 10391,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 2512 clusters from the first cluster (10391); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 46747648
+      }
+    },
+    {
+      "id": 12719,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 98,
+      "obj_text": "\\[lost folder 3]\\progress\\my_friends.svg",
+      "aux": 16144,
+      "aux_text": "sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9",
+      "row_sha256": "d6e2613b3965b4bb6d09fb6e9732326f53294441e63323cc84d674aa4b7607fc",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 12903; content at volume byte offset 57040896",
+        "cluster_size": 4096,
+        "clusters": 15,
+        "exhibit": "RM#2",
+        "extension": "svg",
+        "extension_fits_signature": false,
+        "first_cluster": 12904,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 15 clusters from the first cluster (12904); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 58368,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 57040896
+      }
+    },
+    {
+      "id": 12720,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 99,
+      "obj_text": "\\[lost folder 3]\\progress\\my_smartphone.png",
+      "aux": 16145,
+      "aux_text": "sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84",
+      "row_sha256": "5f028a7d85d6dfa1867f1eb9909b161d4920b582db7c1d0dcee39a21422ceef4",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 12903; content at volume byte offset 57102336",
+        "cluster_size": 4096,
+        "clusters": 1085,
+        "exhibit": "RM#2",
+        "extension": "png",
+        "extension_fits_signature": false,
+        "first_cluster": 12919,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 1085 clusters from the first cluster (12919); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 4440235,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 57102336
+      }
+    },
+    {
+      "id": 12721,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 100,
+      "obj_text": "\\[lost folder 3]\\progress\\new_year_calendar.one",
+      "aux": 16146,
+      "aux_text": "sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30",
+      "row_sha256": "2b1adcdca70dd9a347e3ada9d756a7d7b2de6b3f836fd2bc6202e5910d041d07",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 12903; content at volume byte offset 61546496",
+        "cluster_size": 4096,
+        "clusters": 7,
+        "exhibit": "RM#2",
+        "extension": "one",
+        "extension_fits_signature": false,
+        "first_cluster": 14004,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 7 clusters from the first cluster (14004); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 27414,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 61546496
+      }
+    },
+    {
+      "id": 12722,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 101,
+      "obj_text": "\\[lost folder 3]\\proposal\\a_gift_from_you.gif",
+      "aux": 16124,
+      "aux_text": "sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586",
+      "row_sha256": "066aadb1a7a35d57b123102012f2621f5c1239669f2e72d3acb622be9ed011ab",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 14011; content at volume byte offset 61579264",
+        "cluster_size": 4096,
+        "clusters": 8601,
+        "exhibit": "RM#2",
+        "extension": "gif",
+        "extension_fits_signature": false,
+        "first_cluster": 14012,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "504b030414000600",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 8601 clusters from the first cluster (14012); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "zip-based office document",
+        "signature_detail": "word",
+        "size": 35226880,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 61579264
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "contentHashed": [
+          12683
+        ]
+      },
+      "english": "The content of \\Koala.jpg on exhibit RM#3, read from the image, has sha256:84a4da0e4c52c469ace6e0c674a9144cd43eb2628c401c8b56b41242e2be4af1. The bytes were read as the extents its UDF file entry lists.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12684
+        ]
+      },
+      "english": "The content of \\Penguins.jpg on exhibit RM#3, read from the image, has sha256:7e5bdd023b6cf21efe42a8ec90bc1993fc853980d4b564688e5ac2d28c64223c. The bytes were read as the extents its UDF file entry lists.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12685
+        ]
+      },
+      "english": "The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt on exhibit RM#1, read from the image, has sha256:68dd7d714195b1f061798a6b0f05e9db7bce5375cb40a04b1fdf57386764cb77.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12686
+        ]
+      },
+      "english": "The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx on exhibit RM#1, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12687
+        ]
+      },
+      "english": "The content of \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt on exhibit RM#1, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12688
+        ]
+      },
+      "english": "The content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx on exhibit RM#1, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12689
+        ]
+      },
+      "english": "The content of \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx on exhibit RM#1, read from the image, has sha256:4e1cfaf1b9d18b9606c6ed04e9a96afe3ce919a1233500d5b82c936c4f773e6a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12690
+        ]
+      },
+      "english": "The content of \\Tulips.jpg on exhibit RM#3, read from the image, has sha256:b9352f2565260219db72fc1fc896113a26c85866b69c50d3970c4d9f5cce830a. The bytes were read as the extents its UDF file entry lists.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12691
+        ]
+      },
+      "english": "The content of \\Users\\All Users\\Desktop\\Google Chrome.lnk on exhibit PC, read from the image, has sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12692
+        ]
+      },
+      "english": "The content of \\Users\\All Users\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12693
+        ]
+      },
+      "english": "The content of \\Users\\All Users\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12694
+        ]
+      },
+      "english": "The content of \\Users\\Public\\Desktop\\Google Chrome.lnk on exhibit PC, read from the image, has sha256:615084e1271770071ac1e45d21f24a521190a33d688ff11a519e6611713cef24.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12695
+        ]
+      },
+      "english": "The content of \\Users\\Public\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:7148fbbf1aac8b5a54d248df19b60c00d3c0dcb2fd5bb2a1efd4e0f0eac6dd0f.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12696
+        ]
+      },
+      "english": "The content of \\Users\\Public\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:b18f9a899844d82f60ff3a1ab7fc9efc4a7297d78c04bcda65362b7bce2c02a8.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12697
+        ]
+      },
+      "english": "The content of \\Users\\Public\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:6783e0a9fea5beb9ff2bff02264784e42e5890f89da6c0395f6325591c823fbb.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12698
+        ]
+      },
+      "english": "The content of \\Users\\admin11\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12699
+        ]
+      },
+      "english": "The content of \\Users\\admin11\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12700
+        ]
+      },
+      "english": "The content of \\Users\\admin11\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12701
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on exhibit PC, read from the image, has sha256:559eafe456e5d29b19cd3a9d6be7c77f3f576a484434bd5b2aa5b6188aaa00b2.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12702
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx on exhibit PC, read from the image, has sha256:9d20c984d21eb4333029aee1b7ecc3fb80c845a2f3deb5d1df3009d966306c21.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12703
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on exhibit PC, read from the image, has sha256:b18a2f5d445b3be2387bfba93e905f6abb04c97c371d74f441259d1dc09c4837.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12704
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12705
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12706
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12707
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Downloads\\googledrivesync.exe on exhibit PC, read from the image, has sha256:427a581cef88e1852ea78b041a348cda3f86d625fcf0709d3a010716b7552c1a.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12708
+        ]
+      },
+      "english": "The content of \\Users\\informant\\Downloads\\icloudsetup.exe on exhibit PC, read from the image, has sha256:787e9f5f5f69399a2dd564edba872ce3f3550ded4d19038a6dc667da612c6be3.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12709
+        ]
+      },
+      "english": "The content of \\Users\\temporary\\Desktop\\desktop.ini on exhibit PC, read from the image, has sha256:4b9d687ac625690fd026ed4b236dad1cac90ef69e7ad256cc42766a065b50026.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12710
+        ]
+      },
+      "english": "The content of \\Users\\temporary\\Documents\\desktop.ini on exhibit PC, read from the image, has sha256:cafec240d998e4b6e92ad1329cd417e8e9cbd73157488889fd93a542de4a4844.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12711
+        ]
+      },
+      "english": "The content of \\Users\\temporary\\Downloads\\desktop.ini on exhibit PC, read from the image, has sha256:b029393ea7b7cf644fb1c9f984f57c1980077562ee2e15d0ffd049c4c48098d3.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12712
+        ]
+      },
+      "english": "The content of \\[lost folder 25440]\\desktop.ini on exhibit RM#2, read from the image, has sha256:e1b9ce9b57957b1a0607a72a057d6b7a9b34ea60f3f8aa8f38a3af979bd23066. The bytes were read as one contiguous run of 1 clusters from the first cluster (25441); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12713
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\design\\winter_storm.amr on exhibit RM#2, read from the image, has sha256:38b74ea134cad46638ee8c4e2069b6df3b82c2c8696b0845911a9cc0028cb937. The bytes were read as one contiguous run of 3552 clusters from the first cluster (5); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12714
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\design\\winter_whether_advisory.zip on exhibit RM#2, read from the image, has sha256:e4281831fd9381afe19cdacccaa772bf756511b26b3107a041c3c1dc5c5d0e09. The bytes were read as one contiguous run of 4000 clusters from the first cluster (3557); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12715
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\pricing decision\\my_favorite_cars.db on exhibit RM#2, read from the image, has sha256:c3a27848cc36843e2134581144cf400312a4c99bde3a8ca7a7299f1c69f5a037. The bytes were read as one contiguous run of 308 clusters from the first cluster (7558); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12716
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\pricing decision\\my_favorite_movies.7z on exhibit RM#2, read from the image, has sha256:a21c97be882a8926770fb667ad127e497a3c8879443c089e2477471d3d31a311. The bytes were read as one contiguous run of 25 clusters from the first cluster (7866); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12717
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\pricing decision\\new_years_day.jpg on exhibit RM#2, read from the image, has sha256:61618ba90846a6114d1aa95166aa9bd24822288e4da7202992b8d6de858b048c. The bytes were read as one contiguous run of 2500 clusters from the first cluster (7891); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12718
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\pricing decision\\super_bowl.avi on exhibit RM#2, read from the image, has sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. The bytes were read as one contiguous run of 2512 clusters from the first cluster (10391); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12719
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\progress\\my_friends.svg on exhibit RM#2, read from the image, has sha256:47767b8a114ce027dfcbbecfa962f9cd0bb170eba6d70c4eb107c256ce01bac9. The bytes were read as one contiguous run of 15 clusters from the first cluster (12904); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12720
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\progress\\my_smartphone.png on exhibit RM#2, read from the image, has sha256:6303987dc29d0a329dacc007f313ea96fa2fd0c53e75b99c07372cb90bb20d84. The bytes were read as one contiguous run of 1085 clusters from the first cluster (12919); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12721
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\progress\\new_year_calendar.one on exhibit RM#2, read from the image, has sha256:7a620d5b3e25b0ca1acb82652fcb64c6c4f9c6a6bee918c281a2120bd095fd30. The bytes were read as one contiguous run of 7 clusters from the first cluster (14004); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "contentHashed": [
+          12722
+        ]
+      },
+      "english": "The content of \\[lost folder 3]\\proposal\\a_gift_from_you.gif on exhibit RM#2, read from the image, has sha256:f80cddc25df52bd8cf3828659c15fee5afb9ca245844bd379f59f4265a470586. The bytes were read as one contiguous run of 8601 clusters from the first cluster (14012); the allocation table no longer describes this file, so a fragmented file would hash wrongly (current layout). If that space was reused since, they are not the file's original content.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M334.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

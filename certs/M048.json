@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          228
+          302
         ]
       },
       {
         "tagged": [
-          228,
+          302,
           "obj",
-          356,
-          195
+          478,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"how to leak a secret\" was made in chrome (2015-03-23 18:06:27 UTC). how to leak a secret is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
   "cited_facts": [
     {
-      "id": 228,
+      "id": 302,
       "kind": "webSearch",
       "t": 1427133987545120,
       "res": 1,
-      "obj": 134,
+      "obj": 168,
       "obj_text": "how to leak a secret",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "e76b53c10cb9b1d7a294b460b095ae7450d41f9b1274f01b930f8b0ee0bad011",
+      "row_sha256": "17069544306fc1eb0d284e13dc78d9865467e481edfc23840813e20837a7fab7",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 356,
+      "id": 478,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 134,
+      "obj": 168,
       "obj_text": "how to leak a secret",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "08e0eda31d298dca305398f8d45b748c6a90e2f28a376bc495b9abe9dd0c588b",
+      "row_sha256": "f554b51278827b6dd577c6c11ca5362bc0f49b319b89d6eb50711b2bb025bebf",
       "prov": {
         "rule": "search term contains the watch-list word \"leak\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          228
+          302
         ]
       },
       "english": "A web search for \"how to leak a secret\" was made in chrome (2015-03-23 18:06:27 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          228,
+          302,
           "obj",
-          356,
-          195
+          478,
+          229
         ]
       },
       "english": "how to leak a secret is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",

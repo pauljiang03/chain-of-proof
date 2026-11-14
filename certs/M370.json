@@ -1,0 +1,76 @@
+{
+  "finding_id": "M370",
+  "question": "How many records of each kind does the evidence hold?",
+  "claim": {
+    "exactly": [
+      "noteText",
+      2
+    ]
+  },
+  "status": "verified",
+  "english": "The evidence holds exactly 2 note records: the Sticky Notes note \"Tomorrow...\n\nEverything will be OK...\" (2015-03-24 18:31:17 UTC); the Sticky Notes note \"Tomorrow...\n\nEverything will be OK...\" (2015-03-24 18:31:59 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+  "cited_facts": [
+    {
+      "id": 2309,
+      "kind": "noteText",
+      "t": 1427221877057999,
+      "res": 1,
+      "obj": 1431,
+      "obj_text": "Tomorrow...\n\nEverything will be OK...",
+      "aux": 1432,
+      "aux_text": "Sticky Notes",
+      "row_sha256": "b8e74a3a56a20d16ef58e88472c321d2cf01f731711254efadab8350e0050fdf",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky Notes\\StickyNotes.snt storage ccbb72fb-d253-11e4-b stream 3",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "note_id": "ccbb72fb-d253-11e4-b",
+        "time_meaning": "modified time of this note's storage inside the Sticky Notes file",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 2310,
+      "kind": "noteText",
+      "t": 1427221919462999,
+      "res": 1,
+      "obj": 1431,
+      "obj_text": "Tomorrow...\n\nEverything will be OK...",
+      "aux": 1432,
+      "aux_text": "Sticky Notes",
+      "row_sha256": "131ccba2ac0cff7650883083494155e59efbba19735fd9d0caebb7db713b01d5",
+      "prov": {
+        "account": "informant",
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky Notes\\StickyNotes.snt storage ccbb72fb-d253-11e4-b stream 3",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "note_id": "ccbb72fb-d253-11e4-b",
+        "time_meaning": "last-modified time of the Sticky Notes file",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "exactly": [
+          "noteText",
+          2
+        ]
+      },
+      "english": "The evidence holds exactly 2 note records: the Sticky Notes note \"Tomorrow...\n\nEverything will be OK...\" (2015-03-24 18:31:17 UTC); the Sticky Notes note \"Tomorrow...\n\nEverything will be OK...\" (2015-03-24 18:31:59 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+      "rules": [
+        "C1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "C1"
+  ],
+  "strength": "strong",
+  "lean_file": "M370.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

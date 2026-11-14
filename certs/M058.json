@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          247
+          321
         ]
       },
       {
         "tagged": [
-          247,
+          321,
           "obj",
-          348,
-          195
+          469,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"cloud storage\" was made in chrome (2015-03-23 18:14:50 UTC). cloud storage is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cloud storage\").",
   "cited_facts": [
     {
-      "id": 247,
+      "id": 321,
       "kind": "webSearch",
       "t": 1427134490369135,
       "res": 1,
-      "obj": 146,
+      "obj": 180,
       "obj_text": "cloud storage",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "8f5dc608b19643b65a835f6f00ce36c8123e73ebcb3afb10cf0a6cb740d9cdc9",
+      "row_sha256": "a49baa332744244d9c34397f378cb8c5f23324fedeeba7b0147fc18b206b6701",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 348,
+      "id": 469,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 146,
+      "obj": 180,
       "obj_text": "cloud storage",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "84e3cb8048bf26bd616600f6e5c3ca5bb6a8c047c688920e1f8e67ce546b51fc",
+      "row_sha256": "e966c035ce4f8a5e58c69ce3ec0e138697842bcfe514cefc9e55ccd5622955e4",
       "prov": {
         "rule": "search term contains the watch-list word \"cloud storage\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          247
+          321
         ]
       },
       "english": "A web search for \"cloud storage\" was made in chrome (2015-03-23 18:14:50 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          247,
+          321,
           "obj",
-          348,
-          195
+          469,
+          229
         ]
       },
       "english": "cloud storage is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cloud storage\").",

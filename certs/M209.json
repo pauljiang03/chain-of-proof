@@ -1,0 +1,56 @@
+{
+  "finding_id": "M209",
+  "question": "Which files were sent to the Recycle Bin?",
+  "claim": {
+    "fileDeletedAt": [
+      282
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+  "cited_facts": [
+    {
+      "id": 282,
+      "kind": "fileDeleted",
+      "t": 1427227902851000,
+      "res": 1,
+      "obj": 157,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "82b4d2e48b0e2c368c215d794881d85a0672acbc118fa90ee364965a2ea2e74c",
+      "prov": {
+        "artifact": "Recycle Bin index $IIQGWTT.ini, file table record 74759",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 174,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          282
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\desktop.ini on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 20:11:42 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "M209.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -6,21 +6,21 @@
       {
         "recoveredOnDevice": [
           108,
-          376
+          499
         ]
       },
       {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       {
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       {
@@ -32,15 +32,15 @@
       {
         "copiedHere": [
           108,
-          177
+          251
         ]
       },
       {
         "tagged": [
           108,
           "obj",
-          339,
-          199
+          413,
+          233
         ]
       }
     ]
@@ -72,7 +72,7 @@
       }
     },
     {
-      "id": 376,
+      "id": 499,
       "kind": "unallocatedOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -80,7 +80,7 @@
       "obj_text": "4C530012550531106501",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "row_sha256": "cb478ac99ee7f5f3c7da11e44c32ebee0409ceea0e3884dd3b6ea121c705d881",
       "prov": {
         "artifact": "FAT32 clusters the allocation table marks free",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -113,22 +113,22 @@
       }
     },
     {
-      "id": 315,
+      "id": 389,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 194,
+      "aux": 228,
       "aux_text": "unauthorized-device",
-      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "row_sha256": "f90f2b944a666b19333d614b1fc179c69d3e4283dc4888cf119bcfe6884c6e3d",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 177,
+      "id": 251,
       "kind": "fileModified",
       "t": 1422046030000000,
       "res": 2000000,
@@ -136,7 +136,7 @@
       "obj_text": "\\[lost folder 3]\\design\\winter_storm.amr",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "6521ff62c4b1e5aa33528c82514462e8fd00239ea00708cbfcd991f8d145d181",
+      "row_sha256": "4122ac9e0027d3e29d1b44580829d0c9c8cd987c9ec71e48dfd564776c3e56ca",
       "prov": {
         "artifact": "FAT directory entry in unallocated cluster 4",
         "exhibit": "RM#2",
@@ -151,15 +151,15 @@
       }
     },
     {
-      "id": 339,
+      "id": 413,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 92,
       "obj_text": "\\[lost folder 3]\\design\\winter_storm.amr",
-      "aux": 199,
+      "aux": 233,
       "aux_text": "same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC",
-      "row_sha256": "2bbee23608990a1195b89f6b969441c428b9875ad400db1b4ebada120afa9552",
+      "row_sha256": "a6dd79eb3ad53ec28e8fcf837028fdfea9ec50ed31accaa741f641388c1b5473",
       "prov": {
         "rule": "another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared",
         "source": "deterministic"
@@ -171,7 +171,7 @@
       "part": {
         "recoveredOnDevice": [
           108,
-          376
+          499
         ]
       },
       "english": "A directory entry for \\[lost folder 3]\\design\\winter_storm.amr, created (2015-03-24 13:59:27 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
@@ -185,7 +185,7 @@
       "part": {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
@@ -200,8 +200,8 @@
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
@@ -225,7 +225,7 @@
       "part": {
         "copiedHere": [
           108,
-          177
+          251
         ]
       },
       "english": "\\[lost folder 3]\\design\\winter_storm.amr was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-24 13:59:27 UTC) after its last modification (2015-01-23 20:47:10 UTC). This rests on heuristic rule R4.",
@@ -239,8 +239,8 @@
         "tagged": [
           108,
           "obj",
-          339,
-          199
+          413,
+          233
         ]
       },
       "english": "\\[lost folder 3]\\design\\winter_storm.amr is tagged \"same size and last-modified time as a file elsewhere: 14547968 bytes, 2015-01-23 20:47:10 UTC\" (rule: another file record, in a different volume or in a device's unallocated space, has this size and this last-modified time (within 2 s); contents were not compared).",

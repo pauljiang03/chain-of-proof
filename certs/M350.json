@@ -1,0 +1,150 @@
+{
+  "finding_id": "M350",
+  "question": "Which files in different places have identical content?",
+  "claim": {
+    "both": [
+      {
+        "sameContent": [
+          12718,
+          12760
+        ]
+      },
+      {
+        "sameContent": [
+          12760,
+          12764
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\[lost folder 3]\\pricing decision\\super_bowl.avi on exhibit RM#2 and \\pd\\super_bowl.avi on exhibit RM#3 have identical content: both read as sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30. \\pd\\super_bowl.avi on exhibit RM#3 and \\pricing decision\\super_bowl.avi on exhibit RM#3 have identical content: both read as sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30.",
+  "cited_facts": [
+    {
+      "id": 12718,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 97,
+      "obj_text": "\\[lost folder 3]\\pricing decision\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "f03be08aeb6c4e0740506183eb2443b8f21ae8c5af979b3a71df04f6ba3cab04",
+      "prov": {
+        "artifact": "FAT directory entry in unallocated cluster 7557; content at volume byte offset 46747648",
+        "cluster_size": 4096,
+        "clusters": 2512,
+        "exhibit": "RM#2",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "first_cluster": 10391,
+        "image": "rm2.E01",
+        "layout": "current",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device 4C530012550531106501",
+        "read_as": "one contiguous run of 2512 clusters from the first cluster (10391); the allocation table no longer describes this file, so a fragmented file would hash wrongly",
+        "recovered": true,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_offset": 46747648
+      }
+    },
+    {
+      "id": 12760,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "\\pd\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "9368931f28bc472541f793db3fd48775cd3e2e19ec7f2f4250ce164c323e51cf",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36525",
+        "exhibit": "RM#3",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 21094,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 12764,
+      "kind": "fileContent",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 121,
+      "obj_text": "\\pricing decision\\super_bowl.avi",
+      "aux": 16143,
+      "aux_text": "sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30",
+      "row_sha256": "3e6dd3baff0f80207188dd464558129ebc0b7ecc50682a5021177e19797f4757",
+      "prov": {
+        "artifact": "content described by the UDF file entry at sector 36525",
+        "exhibit": "RM#3",
+        "extension": "avi",
+        "extension_fits_signature": false,
+        "extents": 1,
+        "first_sector": 21094,
+        "image": "rm3.E01",
+        "leading_bytes": "d0cf11e0a1b11ae1",
+        "location": "unallocated space of device disc RM#3",
+        "parser": "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)",
+        "read_as": "the extents its UDF file entry lists",
+        "recovered": true,
+        "session": 1,
+        "signature": "legacy OLE office document",
+        "size": 10289152,
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "sameContent": [
+          12718,
+          12760
+        ]
+      },
+      "english": "\\[lost folder 3]\\pricing decision\\super_bowl.avi on exhibit RM#2 and \\pd\\super_bowl.avi on exhibit RM#3 have identical content: both read as sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameContent": [
+          12760,
+          12764
+        ]
+      },
+      "english": "\\pd\\super_bowl.avi on exhibit RM#3 and \\pricing decision\\super_bowl.avi on exhibit RM#3 have identical content: both read as sha256:1ff92527560b82ad15b09854d3f91425e19c17c4bd5106e3ed8a833edb504e30.",
+      "rules": [
+        "R28"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R28"
+  ],
+  "strength": "strong",
+  "lean_file": "M350.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

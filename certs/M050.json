@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          237
+          311
         ]
       },
       {
         "tagged": [
-          237,
+          311,
           "obj",
-          352,
-          195
+          474,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC). e-mail investigation is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",
   "cited_facts": [
     {
-      "id": 237,
+      "id": 311,
       "kind": "webSearch",
       "t": 1427134134101318,
       "res": 1,
-      "obj": 138,
+      "obj": 172,
       "obj_text": "e-mail investigation",
-      "aux": 126,
+      "aux": 160,
       "aux_text": "iexplore",
-      "row_sha256": "c06d64a792ce1b0e9df6d91cdc997c00cc125547d003c856de619c2229086532",
+      "row_sha256": "bde437a136525dac35c989f029e712a48be7f7be1e1343821b59b0698cb70a60",
       "prov": {
         "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 352,
+      "id": 474,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 138,
+      "obj": 172,
       "obj_text": "e-mail investigation",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "0363e033cb8c391e0367bdbfc9a52ee7fd6d41fc94dacfa683e31969a9040ca6",
+      "row_sha256": "ccc3a294ada069c6702f444d37aa340d30c11cdd0d5bfb4c243e8e8923bfe576",
       "prov": {
         "rule": "search term contains the watch-list word \"investigat\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          237
+          311
         ]
       },
       "english": "A web search for \"e-mail investigation\" was made in iexplore (2015-03-23 18:08:54 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          237,
+          311,
           "obj",
-          352,
-          195
+          474,
+          229
         ]
       },
       "english": "e-mail investigation is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"investigat\").",

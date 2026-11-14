@@ -13,7 +13,9 @@ and asks two things of every answer-key row:
               in UTC or in either of the key's local offsets (UTC-4, UTC-5)
 
 It is a text match, so it is blunt in both directions: it cannot tell a correct mention
-from a wrong one, and it misses a paraphrase. It is blunt in the same way for every
+from a wrong one, it credits an everyday word that happens to be a folder name ("final",
+"design"), and it misses a paraphrase. "With time" is the stricter and more telling
+column. It is blunt in the same way for every
 report, which is the point. Rows with no entity of their own (a logon, a burn trace)
 are matched on the time alone and listed separately.
 """
@@ -76,7 +78,9 @@ def score(reference: dict, report: str) -> dict:
         if name is None:
             named, timed = None, any(c in text for c in clocks) if clocks else None
         else:
-            spots = [m.start() for m in re.finditer(re.escape(name), text)]
+            # as a whole word or name: "pd" must not match inside "updated"
+            spots = [m.start() for m in re.finditer(
+                r"(?<![a-z0-9])" + re.escape(name) + r"(?![a-z0-9])", text)]
             named = bool(spots)
             timed = None
             if clocks:

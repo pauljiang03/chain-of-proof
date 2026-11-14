@@ -1,0 +1,60 @@
+{
+  "finding_id": "M371",
+  "question": "How many records of each kind does the evidence hold?",
+  "claim": {
+    "exactly": [
+      "shadowCopy",
+      1
+    ]
+  },
+  "status": "verified",
+  "english": "The evidence holds exactly 1 shadow-copy record: the creation of shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} (2015-03-25 14:57:27 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+  "cited_facts": [
+    {
+      "id": 12682,
+      "kind": "shadowCopy",
+      "t": 1427295447293805,
+      "res": 1,
+      "obj": 16117,
+      "obj_text": "{8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}",
+      "aux": 16118,
+      "aux_text": "C:",
+      "row_sha256": "391fcce7a6f8e563253d027317b2ff897e54da2086134a8efb9db5013a51988f",
+      "prov": {
+        "artifact": "C:\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{3808876b-c176-4e48-b7ae-04046e6cc752}",
+        "attributes": "VSS_VOLSNAP_ATTR_PERSISTENT|VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE|VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE|VSS_VOLSNAP_ATTR_DIFFERENTIAL|VSS_VOLSNAP_ATTR_AUTORECOVER",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "originating_machine": "informant-PC",
+        "service_machine": "informant-PC",
+        "shadow_copy_set_id": "{56e43eb5-ac18-4f06-a521-1e17712b7ced}",
+        "store_id": "{9b365826-d2ef-11e4-b734-000c29ff2429}",
+        "time_meaning": "creation time in the shadow copy catalog",
+        "tool": "dissect.target 3.25.1",
+        "volume_serial": "CA0C7A48"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "exactly": [
+          "shadowCopy",
+          1
+        ]
+      },
+      "english": "The evidence holds exactly 1 shadow-copy record: the creation of shadow copy {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb} (2015-03-25 14:57:27 UTC). This counts records in the evidence file. An event that left no record, or a record the extractor does not read, is not counted.",
+      "rules": [
+        "C1"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "C1"
+  ],
+  "strength": "strong",
+  "lean_file": "M371.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

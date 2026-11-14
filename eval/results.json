@@ -1,8 +1,8 @@
 {
  "evidence": {
   "path": "evidence/case_facts.json",
-  "facts": 376,
-  "sha256": "525c02e89beaf983721db2e551be1368dad4a96058429d443332a1a9c62a1e8d"
+  "facts": 12786,
+  "sha256": "23c6d3d31a30e0bea8ccd3592cfea2db83544935ea8ae26125a19f25925718bd"
  },
  "reference": {
   "source": "NIST CFReDS Data Leakage Case, answer key dated 2018-07-23: https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf",
@@ -13,776 +13,967 @@
   {
    "id": "Q16-01",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    217
-   ]
+    291
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-02",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    218
-   ]
+    292
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-03",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    221
-   ]
+    295
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-04",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    227
-   ]
+    301
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-05",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    228
-   ]
+    302
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-06",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    233,
-    234
-   ]
+    307,
+    308
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-07",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    236
-   ]
+    310
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-08",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    237
-   ]
+    311
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-09",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    239
-   ]
+    313
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-10",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    240
-   ]
+    314
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-11",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    241
-   ]
+    315
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-12",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    242
-   ]
+    316
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-13",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    243
-   ]
+    317
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-14",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    244
-   ]
+    318
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-15",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    246
-   ]
+    320
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-16",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    247
-   ]
+    321
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-17",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    248
-   ]
+    322
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-18",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    249
-   ]
+    323
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-19",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    250
-   ]
+    324
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-20",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    251
-   ]
+    325
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-21",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    253
-   ]
+    327
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-22",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    256
-   ]
+    330
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-23",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    259
-   ]
+    333
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-24",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    260
-   ]
+    334
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-25",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    289
-   ]
+    363
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-26",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    290,
-    291
-   ]
+    364,
+    365
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-27",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    292
-   ]
+    366
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q16-28",
    "question": 16,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    293
-   ]
+    367
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-01",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    294
-   ]
+    368
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-02",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    295
-   ]
+    369
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-03",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    296
-   ]
+    370
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-04",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    297
-   ]
+    371
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-05",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    298
-   ]
+    372
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-06",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    299
-   ]
+    373
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-07",
    "question": 21,
+   "book": "open",
    "status": "missing",
    "fact_ids": []
   },
   {
    "id": "Q21-08",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    300
-   ]
+    374
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-09",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    301
-   ]
+    375
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-10",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    302
-   ]
+    376
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-11",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    303
-   ]
+    377
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q21-12",
    "question": 21,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    304
-   ]
+    378
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q22-01",
    "question": 22,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     1
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q22-02",
    "question": 22,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     2
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q22-03",
    "question": 22,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     3,
     4
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q22-04",
    "question": 22,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     3,
     4
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q26-01",
    "question": 26,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     41
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q26-02",
    "question": 26,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     42
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q28-01",
    "question": 28,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     31,
     33
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q28-02",
    "question": 28,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     35
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q28-03",
    "question": 28,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     36,
     39
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q28-04",
    "question": 28,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     40
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q33-01",
    "question": 33,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    305,
-    306
-   ]
+    379,
+    380
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q33-02",
    "question": 33,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    307
-   ]
+    381
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q33-03",
    "question": 33,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    309
-   ]
+    383
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q33-04",
    "question": 33,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    311,
-    312
-   ]
+    385,
+    386
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q33-05",
    "question": 33,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    313
-   ]
+    387
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-01",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     44
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-02",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     45
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-03",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     46
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-04",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     47
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-05",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     48
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-06",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     51
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-07",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     52
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q35-08",
    "question": 35,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     53
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q36-01",
    "question": 36,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     125
-   ]
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q36-02",
    "question": 36,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    192
-   ]
+    266
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-01",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    197
-   ]
+    271
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-02",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    196
-   ]
+    270
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-03",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    195
-   ]
+    269
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-04",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    198
-   ]
+    272
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-05",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    201
-   ]
+    275
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-06",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    203
-   ]
+    277
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-07",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    207
-   ]
+    281
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-08",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    206
-   ]
+    280
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-09",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    200
-   ]
+    274
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-10",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    208
-   ]
+    282
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-11",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    202
-   ]
+    276
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-12",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    199
-   ]
+    273
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-13",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    204
-   ]
+    278
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q51-14",
    "question": 51,
+   "book": "open",
    "status": "match",
    "fact_ids": [
-    205
-   ]
+    279
+   ],
+   "within": "tolerance"
   },
   {
    "id": "Q55-01",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     108
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-02",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     109
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-03",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     110
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-04",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     111
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-05",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     112
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-06",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     113
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-07",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     114
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-08",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     115
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-09",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     116
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-10",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     117
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-11",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     118
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-12",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     119
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-13",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     120
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-14",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     121
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-15",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     122
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-16",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     123
-   ]
+   ],
+   "within": "untimed"
   },
   {
    "id": "Q55-17",
    "question": 55,
+   "book": "open",
    "status": "match",
    "fact_ids": [
     124
-   ]
+   ],
+   "within": "untimed"
   }
  ],
  "gate": [
@@ -795,7 +986,7 @@
    "claim": {
     "deviceHolds": [
      1,
-     374
+     496
     ]
    },
    "strength": "strong",
@@ -810,7 +1001,7 @@
    "claim": {
     "openedFromDevice": [
      21,
-     374
+     496
     ]
    },
    "strength": "strong",
@@ -825,7 +1016,7 @@
    "claim": {
     "openedFromDevice": [
      26,
-     374
+     496
     ]
    },
    "strength": "strong",
@@ -839,7 +1030,7 @@
    "verdict": "verified",
    "claim": {
     "before": [
-     217,
+     291,
      21
     ]
    },
@@ -855,7 +1046,7 @@
    "claim": {
     "openedFromRecorded": [
      41,
-     366
+     488
     ]
    },
    "strength": "strong",
@@ -869,8 +1060,8 @@
    "verdict": "verified",
    "claim": {
     "sameLabel": [
-     366,
-     371
+     488,
+     493
     ]
    },
    "strength": "heuristic",
@@ -884,8 +1075,8 @@
    "verdict": "verified",
    "claim": {
     "recordedOnDevice": [
-     371,
-     375
+     493,
+     497
     ]
    },
    "strength": "strong",
@@ -902,25 +1093,25 @@
      {
       "openedFromRecorded": [
        41,
-       366
+       488
       ]
      },
      {
       "sameLabel": [
-       366,
-       371
+       488,
+       493
       ]
      },
      {
       "recordedOnDevice": [
-       371,
-       375
+       493,
+       497
       ]
      },
      {
       "deviceHolds": [
        3,
-       375
+       497
       ]
      }
     ]
@@ -958,13 +1149,13 @@
      },
      {
       "fileModifiedAt": [
-       192
+       266
       ]
      },
      {
       "before": [
        125,
-       192
+       266
       ]
      }
     ]
@@ -982,8 +1173,8 @@
     "tagged": [
      1,
      "obj",
-     314,
-     193
+     388,
+     227
     ]
    },
    "strength": "strong",
@@ -1012,7 +1203,7 @@
    "verdict": "verified",
    "claim": {
     "searched": [
-     250
+     324
     ]
    },
    "strength": "strong",
@@ -1041,7 +1232,7 @@
    "claim": {
     "openedFromDevice": [
      41,
-     375
+     497
     ]
    },
    "as_expected": false
@@ -1057,13 +1248,13 @@
      {
       "recoveredOnDevice": [
        109,
-       376
+       499
       ]
      },
      {
       "deviceExamined": [
        3,
-       376
+       499
       ]
      }
     ]
@@ -1095,7 +1286,7 @@
    "claim": {
     "copiedHere": [
      109,
-     160
+     206
     ]
    },
    "strength": "heuristic",
@@ -1109,7 +1300,7 @@
    "verdict": "verified",
    "claim": {
     "fileDeletedAt": [
-     197
+     271
     ]
    },
    "strength": "strong",
@@ -1125,13 +1316,13 @@
     "both": [
      {
       "burnTrace": [
-       305
+       379
       ]
      },
      {
       "before": [
-       305,
-       197
+       379,
+       271
       ]
      }
     ]
@@ -1149,18 +1340,18 @@
     "both": [
      {
       "emailed": [
-       294
+       368
       ]
      },
      {
       "emailed": [
-       304
+       378
       ]
      },
      {
       "before": [
-       294,
-       304
+       368,
+       378
       ]
      }
     ]
@@ -1178,18 +1369,18 @@
     "both": [
      {
       "tagged": [
-       160,
+       206,
        "obj",
-       340,
-       198
+       414,
+       232
       ]
      },
      {
       "tagged": [
-       159,
+       205,
        "obj",
-       325,
-       198
+       399,
+       232
       ]
      }
     ]
@@ -1206,7 +1397,7 @@
    "claim": {
     "openedFromDevice": [
      41,
-     374
+     496
     ]
    },
    "as_expected": true
@@ -1220,7 +1411,7 @@
    "claim": {
     "openedFromDevice": [
      26,
-     375
+     497
     ]
    },
    "as_expected": true
@@ -1248,7 +1439,7 @@
    "claim": {
     "before": [
      21,
-     217
+     291
     ]
    },
    "as_expected": true
@@ -1263,8 +1454,8 @@
     "tagged": [
      3,
      "obj",
-     314,
-     193
+     388,
+     227
     ]
    },
    "as_expected": true
@@ -1278,7 +1469,7 @@
    "claim": {
     "deviceHolds": [
      1,
-     375
+     497
     ]
    },
    "as_expected": true
@@ -1291,8 +1482,8 @@
    "verdict": "rejected",
    "claim": {
     "recordedOnDevice": [
-     366,
-     374
+     488,
+     496
     ]
    },
    "as_expected": true
@@ -1305,7 +1496,7 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     192,
+     266,
      125
     ]
    },
@@ -1347,7 +1538,7 @@
    "claim": {
     "openedFromRecorded": [
      26,
-     366
+     488
     ]
    },
    "as_expected": true
@@ -1360,8 +1551,8 @@
    "verdict": "rejected",
    "claim": {
     "sameLabel": [
-     364,
-     371
+     486,
+     493
     ]
    },
    "as_expected": true
@@ -1374,7 +1565,7 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     290,
+     364,
      3
     ]
    },
@@ -1390,8 +1581,8 @@
     "tagged": [
      1,
      "obj",
-     315,
-     194
+     389,
+     228
     ]
    },
    "as_expected": true
@@ -1407,25 +1598,25 @@
      {
       "openedFromRecorded": [
        41,
-       366
+       488
       ]
      },
      {
       "sameLabel": [
-       366,
-       364
+       488,
+       486
       ]
      },
      {
       "recordedOnDevice": [
-       364,
-       374
+       486,
+       496
       ]
      },
      {
       "deviceHolds": [
        1,
-       374
+       496
       ]
      }
     ]
@@ -1455,7 +1646,7 @@
    "claim": {
     "recoveredOnDevice": [
      66,
-     376
+     499
     ]
    },
    "as_expected": true
@@ -1469,7 +1660,7 @@
    "claim": {
     "deviceExamined": [
      1,
-     376
+     499
     ]
    },
    "as_expected": true
@@ -1496,8 +1687,8 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     197,
-     305
+     271,
+     379
     ]
    },
    "as_expected": true
@@ -1510,8 +1701,8 @@
    "verdict": "rejected",
    "claim": {
     "before": [
-     304,
-     294
+     378,
+     368
     ]
    },
    "as_expected": true
@@ -1524,7 +1715,7 @@
    "verdict": "rejected",
    "claim": {
     "emailed": [
-     217
+     291
     ]
    },
    "as_expected": true
@@ -1550,10 +1741,10 @@
    "verdict": "rejected",
    "claim": {
     "tagged": [
-     177,
+     251,
      "obj",
-     340,
-     198
+     414,
+     232
     ]
    },
    "as_expected": true
@@ -1561,12 +1752,12 @@
  ],
  "run": {
   "path": "ui/public/run.json",
-  "proposals": 203,
-  "verified": 179,
+  "proposals": 396,
+  "verified": 372,
   "rejected": 24,
   "by_strength": {
-   "strong": 124,
-   "heuristic": 55
+   "strong": 277,
+   "heuristic": 95
   },
   "items": [
    {
@@ -1817,7 +2008,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M160"
+     "M210"
     ],
     "best_strength": "strong"
    },
@@ -1826,7 +2017,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M161"
+     "M211"
     ],
     "best_strength": "strong"
    },
@@ -1835,7 +2026,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M162"
+     "M212"
     ],
     "best_strength": "strong"
    },
@@ -1844,7 +2035,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M163"
+     "M213"
     ],
     "best_strength": "strong"
    },
@@ -1853,7 +2044,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M164"
+     "M214"
     ],
     "best_strength": "strong"
    },
@@ -1862,7 +2053,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M165"
+     "M215"
     ],
     "best_strength": "strong"
    },
@@ -1878,7 +2069,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M166"
+     "M216"
     ],
     "best_strength": "strong"
    },
@@ -1887,7 +2078,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M167"
+     "M217"
     ],
     "best_strength": "strong"
    },
@@ -1896,7 +2087,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M168"
+     "M218"
     ],
     "best_strength": "strong"
    },
@@ -1905,7 +2096,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M169"
+     "M219"
     ],
     "best_strength": "strong"
    },
@@ -1914,7 +2105,7 @@
     "question": 21,
     "certified": true,
     "findings": [
-     "M170"
+     "M220"
     ],
     "best_strength": "strong"
    },
@@ -2110,8 +2301,8 @@
     "question": 33,
     "certified": true,
     "findings": [
-     "M171",
-     "M172"
+     "M221",
+     "M222"
     ],
     "best_strength": "heuristic"
    },
@@ -2120,7 +2311,7 @@
     "question": 33,
     "certified": true,
     "findings": [
-     "M173"
+     "M223"
     ],
     "best_strength": "heuristic"
    },
@@ -2129,7 +2320,7 @@
     "question": 33,
     "certified": true,
     "findings": [
-     "M175"
+     "M225"
     ],
     "best_strength": "heuristic"
    },
@@ -2138,8 +2329,8 @@
     "question": 33,
     "certified": true,
     "findings": [
-     "M177",
-     "M178"
+     "M227",
+     "M228"
     ],
     "best_strength": "heuristic"
    },
@@ -2148,7 +2339,7 @@
     "question": 33,
     "certified": true,
     "findings": [
-     "M179"
+     "M229"
     ],
     "best_strength": "heuristic"
    },
@@ -2159,7 +2350,7 @@
     "findings": [
      "M026"
     ],
-    "best_strength": "strong"
+    "best_strength": "heuristic"
    },
    {
     "id": "Q35-02",
@@ -2195,7 +2386,7 @@
     "findings": [
      "M030"
     ],
-    "best_strength": "strong"
+    "best_strength": "heuristic"
    },
    {
     "id": "Q35-06",
@@ -2247,7 +2438,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M148"
+     "M198"
     ],
     "best_strength": "strong"
    },
@@ -2256,7 +2447,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M147"
+     "M197"
     ],
     "best_strength": "strong"
    },
@@ -2265,7 +2456,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M146"
+     "M196"
     ],
     "best_strength": "strong"
    },
@@ -2274,7 +2465,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M149"
+     "M199"
     ],
     "best_strength": "strong"
    },
@@ -2283,7 +2474,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M152"
+     "M202"
     ],
     "best_strength": "strong"
    },
@@ -2292,7 +2483,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M154"
+     "M204"
     ],
     "best_strength": "strong"
    },
@@ -2301,7 +2492,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M158"
+     "M208"
     ],
     "best_strength": "strong"
    },
@@ -2310,7 +2501,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M157"
+     "M207"
     ],
     "best_strength": "strong"
    },
@@ -2319,7 +2510,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M151"
+     "M201"
     ],
     "best_strength": "strong"
    },
@@ -2328,7 +2519,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M159"
+     "M209"
     ],
     "best_strength": "strong"
    },
@@ -2337,7 +2528,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M153"
+     "M203"
     ],
     "best_strength": "strong"
    },
@@ -2346,7 +2537,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M150"
+     "M200"
     ],
     "best_strength": "strong"
    },
@@ -2355,7 +2546,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M155"
+     "M205"
     ],
     "best_strength": "strong"
    },
@@ -2364,7 +2555,7 @@
     "question": 51,
     "certified": true,
     "findings": [
-     "M156"
+     "M206"
     ],
     "best_strength": "strong"
    },
@@ -2374,7 +2565,7 @@
     "certified": true,
     "findings": [
      "M122",
-     "M143"
+     "M180"
     ],
     "best_strength": "strong"
    },
@@ -2384,7 +2575,7 @@
     "certified": true,
     "findings": [
      "M123",
-     "M142"
+     "M179"
     ],
     "best_strength": "strong"
    },
@@ -2393,63 +2584,70 @@
     "question": 55,
     "certified": true,
     "findings": [
-     "M124"
+     "M124",
+     "M183"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-04",
     "question": 55,
     "certified": true,
     "findings": [
-     "M125"
+     "M125",
+     "M184"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-05",
     "question": 55,
     "certified": true,
     "findings": [
-     "M126"
+     "M126",
+     "M185"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-06",
     "question": 55,
     "certified": true,
     "findings": [
-     "M127"
+     "M127",
+     "M186"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-07",
     "question": 55,
     "certified": true,
     "findings": [
-     "M128"
+     "M128",
+     "M187"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-08",
     "question": 55,
     "certified": true,
     "findings": [
-     "M129"
+     "M129",
+     "M188"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-09",
     "question": 55,
     "certified": true,
     "findings": [
-     "M130"
+     "M130",
+     "M189"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-10",
@@ -2457,7 +2655,7 @@
     "certified": true,
     "findings": [
      "M131",
-     "M144"
+     "M181"
     ],
     "best_strength": "strong"
    },
@@ -2467,7 +2665,7 @@
     "certified": true,
     "findings": [
      "M132",
-     "M145"
+     "M182"
     ],
     "best_strength": "strong"
    },
@@ -2476,54 +2674,60 @@
     "question": 55,
     "certified": true,
     "findings": [
-     "M133"
+     "M133",
+     "M190"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-13",
     "question": 55,
     "certified": true,
     "findings": [
-     "M134"
+     "M134",
+     "M191"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-14",
     "question": 55,
     "certified": true,
     "findings": [
-     "M135"
+     "M135",
+     "M192"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-15",
     "question": 55,
     "certified": true,
     "findings": [
-     "M136"
+     "M136",
+     "M193"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-16",
     "question": 55,
     "certified": true,
     "findings": [
-     "M137"
+     "M137",
+     "M194"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    },
    {
     "id": "Q55-17",
     "question": 55,
     "certified": true,
     "findings": [
-     "M138"
+     "M138",
+     "M195"
     ],
-    "best_strength": "heuristic"
+    "best_strength": "strong"
    }
   ],
   "findings_outside_reference": [
@@ -2573,8 +2777,188 @@
    "M097",
    "M098",
    "M141",
+   "M142",
+   "M143",
+   "M144",
+   "M145",
+   "M146",
+   "M147",
+   "M148",
+   "M149",
+   "M150",
+   "M151",
+   "M152",
+   "M153",
+   "M154",
+   "M155",
+   "M156",
+   "M157",
+   "M158",
+   "M159",
+   "M160",
+   "M161",
+   "M162",
+   "M163",
+   "M164",
+   "M165",
+   "M166",
+   "M167",
+   "M168",
+   "M169",
+   "M170",
+   "M171",
+   "M172",
+   "M173",
    "M174",
-   "M176"
+   "M175",
+   "M176",
+   "M177",
+   "M178",
+   "M224",
+   "M226",
+   "M230",
+   "M231",
+   "M232",
+   "M233",
+   "M234",
+   "M235",
+   "M236",
+   "M237",
+   "M238",
+   "M239",
+   "M240",
+   "M241",
+   "M242",
+   "M243",
+   "M244",
+   "M245",
+   "M246",
+   "M247",
+   "M248",
+   "M249",
+   "M250",
+   "M251",
+   "M252",
+   "M253",
+   "M254",
+   "M255",
+   "M256",
+   "M257",
+   "M258",
+   "M259",
+   "M260",
+   "M261",
+   "M262",
+   "M263",
+   "M264",
+   "M265",
+   "M266",
+   "M267",
+   "M268",
+   "M269",
+   "M270",
+   "M271",
+   "M272",
+   "M273",
+   "M274",
+   "M275",
+   "M276",
+   "M277",
+   "M278",
+   "M279",
+   "M280",
+   "M281",
+   "M282",
+   "M283",
+   "M284",
+   "M285",
+   "M286",
+   "M287",
+   "M288",
+   "M289",
+   "M290",
+   "M291",
+   "M292",
+   "M293",
+   "M294",
+   "M295",
+   "M296",
+   "M297",
+   "M298",
+   "M299",
+   "M300",
+   "M301",
+   "M302",
+   "M303",
+   "M304",
+   "M305",
+   "M306",
+   "M307",
+   "M308",
+   "M309",
+   "M310",
+   "M311",
+   "M312",
+   "M313",
+   "M314",
+   "M315",
+   "M316",
+   "M317",
+   "M318",
+   "M319",
+   "M320",
+   "M321",
+   "M322",
+   "M323",
+   "M324",
+   "M325",
+   "M326",
+   "M327",
+   "M328",
+   "M329",
+   "M330",
+   "M331",
+   "M332",
+   "M333",
+   "M334",
+   "M335",
+   "M336",
+   "M337",
+   "M338",
+   "M339",
+   "M340",
+   "M341",
+   "M342",
+   "M343",
+   "M344",
+   "M345",
+   "M346",
+   "M347",
+   "M348",
+   "M349",
+   "M350",
+   "M351",
+   "M352",
+   "M353",
+   "M354",
+   "M355",
+   "M356",
+   "M357",
+   "M358",
+   "M359",
+   "M360",
+   "M361",
+   "M362",
+   "M363",
+   "M364",
+   "M365",
+   "M366",
+   "M367",
+   "M368",
+   "M369",
+   "M370",
+   "M371",
+   "M372"
   ]
  }
 }

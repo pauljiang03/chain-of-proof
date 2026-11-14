@@ -1,0 +1,56 @@
+{
+  "finding_id": "M196",
+  "question": "Which files were sent to the Recycle Bin?",
+  "claim": {
+    "fileDeletedAt": [
+      269
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+  "cited_facts": [
+    {
+      "id": 269,
+      "kind": "fileDeleted",
+      "t": 1427226707117000,
+      "res": 1,
+      "obj": 144,
+      "obj_text": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "62193059ab154ff0128739eb520bf32e253bc961fac5a5d77e9657b287dcbcd4",
+      "prov": {
+        "artifact": "Recycle Bin index $I55Z163, file table record 74311",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "index_record_in_use": false,
+        "note": "the Recycle Bin was emptied: this index file is deleted, and was read from its file table record",
+        "original_drive": "C:",
+        "size": 21887309,
+        "time_meaning": "deletion time stored in the Recycle Bin index",
+        "tool": "dissect.target 3.25.1"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileDeletedAt": [
+          269
+        ]
+      },
+      "english": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Burn\\Burn\\pd on volume CA0C7A48 was sent to the Recycle Bin (2015-03-24 19:51:47 UTC).",
+      "rules": [
+        "R5"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R5"
+  ],
+  "strength": "strong",
+  "lean_file": "M196.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

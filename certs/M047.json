@@ -5,15 +5,15 @@
     "both": [
       {
         "searched": [
-          227
+          301
         ]
       },
       {
         "tagged": [
-          227,
+          301,
           "obj",
-          359,
-          195
+          481,
+          229
         ]
       }
     ]
@@ -22,15 +22,15 @@
   "english": "A web search for \"intellectual property theft\" was made in chrome (2015-03-23 18:05:48 UTC). intellectual property theft is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"theft\").",
   "cited_facts": [
     {
-      "id": 227,
+      "id": 301,
       "kind": "webSearch",
       "t": 1427133948655159,
       "res": 1,
-      "obj": 133,
+      "obj": 167,
       "obj_text": "intellectual property theft",
-      "aux": 125,
+      "aux": 159,
       "aux_text": "chrome",
-      "row_sha256": "909b71720aba46bad1dd90c1fb04e50a80b171087f8fda0f6e9ca58aba49b0ae",
+      "row_sha256": "a73b80f1af0e24da3e733218b4469b9f7c65f47626a3ef3075b379fc416ef7d1",
       "prov": {
         "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
         "exhibit": "PC",
@@ -42,15 +42,15 @@
       }
     },
     {
-      "id": 359,
+      "id": 481,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
-      "obj": 133,
+      "obj": 167,
       "obj_text": "intellectual property theft",
-      "aux": 195,
+      "aux": 229,
       "aux_text": "watch-list-search",
-      "row_sha256": "5d0a122fdbf0a3f4277368fe44cfaffdbbd39bcb34d24fac4fca0f6c6297b53e",
+      "row_sha256": "96c47c6b1b3fcfbf5a56686f0309768507c15e0ea6f20c5ef3408cee54e47f4e",
       "prov": {
         "rule": "search term contains the watch-list word \"theft\"",
         "source": "deterministic"
@@ -61,7 +61,7 @@
     {
       "part": {
         "searched": [
-          227
+          301
         ]
       },
       "english": "A web search for \"intellectual property theft\" was made in chrome (2015-03-23 18:05:48 UTC).",
@@ -73,10 +73,10 @@
     {
       "part": {
         "tagged": [
-          227,
+          301,
           "obj",
-          359,
-          195
+          481,
+          229
         ]
       },
       "english": "intellectual property theft is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"theft\").",

@@ -6,27 +6,27 @@
       {
         "recoveredOnDevice": [
           100,
-          376
+          499
         ]
       },
       {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       {
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       {
         "copiedHere": [
           100,
-          146
+          186
         ]
       }
     ]
@@ -58,7 +58,7 @@
       }
     },
     {
-      "id": 376,
+      "id": 499,
       "kind": "unallocatedOnDevice",
       "t": 1794614400000000,
       "res": 1,
@@ -66,7 +66,7 @@
       "obj_text": "4C530012550531106501",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "bf94713ad59ed5b80abb07607a94b97e4bf1810f544ea82b8cb13317ad4b6dd6",
+      "row_sha256": "cb478ac99ee7f5f3c7da11e44c32ebee0409ceea0e3884dd3b6ea121c705d881",
       "prov": {
         "artifact": "FAT32 clusters the allocation table marks free",
         "device_serial_source": "exhibits.json (NIST case documentation)",
@@ -99,22 +99,22 @@
       }
     },
     {
-      "id": 315,
+      "id": 389,
       "kind": "tag",
       "t": 1794614400000000,
       "res": 1,
       "obj": 2,
       "obj_text": "4C530012550531106501",
-      "aux": 194,
+      "aux": 228,
       "aux_text": "unauthorized-device",
-      "row_sha256": "58405423431832ab62e0167021845fe1854a1371e247b237c83a409f03ce9f20",
+      "row_sha256": "f90f2b944a666b19333d614b1fc179c69d3e4283dc4888cf119bcfe6884c6e3d",
       "prov": {
         "rule": "device serial is not on the authorized list in the case brief",
         "source": "deterministic"
       }
     },
     {
-      "id": 146,
+      "id": 186,
       "kind": "fileModified",
       "t": 1358879424000000,
       "res": 2000000,
@@ -122,7 +122,7 @@
       "obj_text": "\\[lost folder at cluster 45007, older layout]\\orchid.png",
       "aux": 69,
       "aux_text": "unallocated space of device 4C530012550531106501",
-      "row_sha256": "ef7c1bdde75afad5cebc317e2e02f365ab4ac350f6c9e64054932e21fc79f6f3",
+      "row_sha256": "92d856a368da7c87ea6d73f9bd3172e4df9c2c6309e81eab407c668d8ca794f2",
       "prov": {
         "artifact": "FAT directory entry in unallocated cluster 45007",
         "exhibit": "RM#2",
@@ -142,7 +142,7 @@
       "part": {
         "recoveredOnDevice": [
           100,
-          376
+          499
         ]
       },
       "english": "A directory entry for \\[lost folder at cluster 45007, older layout]\\orchid.png, created (2015-03-23 20:55:33 UTC), was recovered from unallocated space on seized device 4C530012550531106501. It was written before the device's current file system.",
@@ -156,7 +156,7 @@
       "part": {
         "deviceExamined": [
           3,
-          376
+          499
         ]
       },
       "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial has directory entries left in unallocated space.",
@@ -171,8 +171,8 @@
         "tagged": [
           3,
           "obj",
-          315,
-          194
+          389,
+          228
         ]
       },
       "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
@@ -185,7 +185,7 @@
       "part": {
         "copiedHere": [
           100,
-          146
+          186
         ]
       },
       "english": "\\[lost folder at cluster 45007, older layout]\\orchid.png was likely copied onto an earlier file system of device 4C530012550531106501 (a directory entry recovered from unallocated space): it was created there (2015-03-23 20:55:33 UTC) after its last modification (2013-01-22 18:30:24 UTC). This rests on heuristic rule R4.",

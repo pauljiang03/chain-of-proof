@@ -4,10 +4,12 @@ open ChainOfProof
 namespace Cert.M168
 
 def cited : List Fact := [
-  ⟨302, .emailSent, 1427204110365000, 1000000, 181, 174⟩,
-  ⟨320, .tag, 1794614400000000, 1, 181, 196⟩ ]
+  ⟨154, .fileCreated, 1427230543968659, 1, 137, 111⟩,
+  ⟨500, .unallocatedOnDevice, 1794614400000000, 1, 249, 111⟩,
+  ⟨234, .fileModified, 1421097940000000, 1, 137, 111⟩,
+  ⟨460, .tag, 1794614400000000, 1, 137, 245⟩ ]
 
-def claim : Claim := .both (Sets.emailed 302) (Sets.tagged 302 .obj 320 196)
+def claim : Claim := .both (Sets.recoveredOnDevice 154 500) (.both (Sets.copiedHere 154 234) (Sets.tagged 154 .obj 460 245))
 
 theorem verified : holds cited claim = true := by decide +kernel
 

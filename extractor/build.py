@@ -37,12 +37,15 @@ def main(argv=None) -> int:
     ap.add_argument("images", help="directory holding pc.E01, rm1.E01, rm2.E01")
     ap.add_argument("--out", default=str(ROOT / "evidence" / "case_facts.json"))
     ap.add_argument("--duckdb", help="also write a DuckDB evidence database here")
+    ap.add_argument("--exhibits", default=str(ROOT / "extractor" / "exhibits.json"),
+                    help="which image is which exhibit (default: the NIST case)")
+    ap.add_argument("--case", default="NIST CFReDS Data Leakage Case")
     ap.add_argument("--examined-at", default="2026-11-14T00:00:00+00:00",
                     help="timestamp given to facts that are observations, not events")
     args = ap.parse_args(argv)
 
     images = Path(args.images)
-    exhibits = json.loads((ROOT / "extractor" / "exhibits.json").read_text())
+    exhibits = json.loads(Path(args.exhibits).read_text())
     examined_at = us(datetime.fromisoformat(args.examined_at).astimezone(timezone.utc))
     tool = f"dissect.target {version('dissect.target')}"
     ev, log, info = Evidence(), [], {}
@@ -75,7 +78,7 @@ def main(argv=None) -> int:
     tags = add_tags(ev, examined_at)
 
     meta = ev.write_json(args.out, {
-        "case": "NIST CFReDS Data Leakage Case",
+        "case": args.case,
         "images": sorted(p.name for p in images.glob("*.E0*")),
         "pc": info, "fat_time_zone": fat_tz, "examined_at": args.examined_at, "tool": tool,
         "note": "Extracted from the real images. Regenerate with extractor/build.py.",
