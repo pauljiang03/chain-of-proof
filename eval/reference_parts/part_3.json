@@ -1,0 +1,2436 @@
+{
+ "questions": [
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  52,
+  53,
+  54,
+  56,
+  57
+ ],
+ "notes": "Part 3: section 6, questions 37-50, 52, 53, 54, 56, 57 of the NIST CFReDS Data Leakage answer key (2018-07-23). Worked from the answer key text and PDF and the row vocabulary only. 'page' is the PDF page (the '===== PAGE n =====' marker), as in eval/reference.json. TIME ZONES: Q37, Q44, Q45, Q46, Q47, Q48, Q52 carry the caption '(Timezone is applied)' = local time, US Eastern Daylight Time on these dates, utc = printed + 4 h. Q41 has no caption; read as local time (section 3 timeline). Q49 prints its own offsets: created times '(UTC-04)', modified times '(UTC-05)' (January), converted accordingly. Q52 Google Drive log lines print '-0400'; milliseconds dropped. Q38, Q39, Q40, Q42, Q43, Q50, Q53, Q54, Q56, Q57 print no times. GRANULARITY: one item per answer entity (a table row, an e-mail, a database record, a listed file), split per timestamp where a kind exists for that timestamp; attribute cells (size, format, checksum, body text, attachment) are quoted in 'nist' but are not separate items, as in Q21/Q55 of the existing reference. 'Considerations' blocks are not transcribed, except (a) values needed to fill a matcher of an answer row (Q47 shadow copy id) and (b) the Eraser rename chain that the Q52 wiping row points to with '(See below)' (Q52-34..41, marked in their notes). KIND CHOICES: file locations (Q38, Q40, Q42, Q47) are fileCreated with no time, as Q55 in the existing reference. Q44 rows are webVisit (URL exact, browser Internet Explorer); Q45 rows are emailSent with subject and time only, as Q21 in the existing reference (from/to are printed but not matched). Q46 rows are fileSeen / 'windows search index' with the printed Date Created; paths are printed with doubled backslashes, read as single separators. Q48 table rows are fileCreated and fileModified of the files inside the shadow copy; 'exists in VSC' sentences are fileSeen / 'shadow copy'. Q49: the deleted record is cloudFile 'google drive: deleted' (no time), its columns cloudFile created / modified. Q52: Search = webSearch, Download = fileDownloaded with the URL as source, Install/Run/Uninstall = programRun (executable name; printed path not matched), wiped files = fileDeleted on the day (a time range is printed), Shift+Delete and Google Drive 'Deleting file' = fileDeleted. Q52 rows 1, 2, 4 repeat Q16; Q45 repeats most of Q21. Q53 = fileCreated on RM#2 with aux containing 'unallocated space' (Q54: the old directory entries lie in unallocated areas). NOT TRANSCRIBED: Q58-Q60 lie in the line range given for Q57 but are not in this part's question list.",
+ "items": [
+  {
+   "id": "Q37-01",
+   "question": 37,
+   "page": 39,
+   "nist": "resignation letter printed: How 'Printed to XPS format', When 2015-03-25 11:28:34, Where \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+   "nist_local_time": "2015-03-25 11:28:34",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+    "utc": "2015-03-25T15:28:34"
+   },
+   "note": "One event printed as three table rows (How/When/Where). The answer key does not say which file time 'When' is; transcribed as the creation of the XPS output file."
+  },
+  {
+   "id": "Q38-01",
+   "question": 38,
+   "page": 39,
+   "nist": "Thumbcache file location \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db"
+   }
+  },
+  {
+   "id": "Q38-02",
+   "question": 38,
+   "page": 39,
+   "nist": "Thumbcache file location \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_64.db",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_64.db"
+   }
+  },
+  {
+   "id": "Q38-03",
+   "question": 38,
+   "page": 39,
+   "nist": "Thumbcache file location \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db"
+   }
+  },
+  {
+   "id": "Q38-04",
+   "question": 38,
+   "page": 39,
+   "nist": "Thumbcache file location \\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db"
+   }
+  },
+  {
+   "id": "Q39-01",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] final_meeting.pptx'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q39-02",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] revised_points.ppt'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q39-03",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] detailed_design.pptx'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q39-04",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] technical_review_#1.pptx'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q39-05",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] technical_review_#2.ppt'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q39-06",
+   "question": 39,
+   "page": 40,
+   "nist": "thumbcache_256.db thumbnail picture of a first slide reading '[Secret Project] technical_review_#3.ppt'",
+   "expect": null,
+   "not_expressible": "content of a thumbnail picture (text visible on a slide); the answer prints no path, id or time"
+  },
+  {
+   "id": "Q40-01",
+   "question": 40,
+   "page": 40,
+   "nist": "Sticky Note file location \\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky Notes\\StickyNotes.snt",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Sticky Notes\\StickyNotes.snt"
+   }
+  },
+  {
+   "id": "Q41-01",
+   "question": 41,
+   "page": 40,
+   "nist": "sticky note content 'Tomorrow… / Everything will be OK…', Timestamp (File Modified) 2015-03-24 14:31:59",
+   "nist_local_time": "2015-03-24 14:31:59",
+   "expect": {
+    "kind": "noteText",
+    "obj_contains": "Everything will be OK",
+    "aux": "Sticky Notes",
+    "utc": "2015-03-24T18:31:59"
+   },
+   "note": "Table has no time-zone caption; read as local time (section 3 timeline puts the note at 2015-03-24 14:31). Printed with the single character '…'; matcher uses the words only. Answer key: 'Timestamp may not be accurate'."
+  },
+  {
+   "id": "Q42-01",
+   "question": 42,
+   "page": 40,
+   "nist": "Windows Search and Indexing: 'Enabled'",
+   "expect": {
+    "kind": "systemSetting",
+    "obj_contains": "search"
+   },
+   "note": "No fixed systemSetting name covers this; any systemSetting whose name contains 'search' is accepted. Printed value: Enabled."
+  },
+  {
+   "id": "Q42-02",
+   "question": 42,
+   "page": 40,
+   "nist": "Windows Search index database path C:\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb"
+   }
+  },
+  {
+   "id": "Q43-01",
+   "question": 43,
+   "page": 41,
+   "nist": "Windows Search database holds: Internet Explorer History",
+   "expect": null,
+   "not_expressible": "category of indexed data (a summary over many index rows), not one recorded fact; concrete rows are in Q44"
+  },
+  {
+   "id": "Q43-02",
+   "question": 43,
+   "page": 41,
+   "nist": "Windows Search database holds: Microsoft Outlook",
+   "expect": null,
+   "not_expressible": "category of indexed data (a summary over many index rows), not one recorded fact; concrete rows are in Q45"
+  },
+  {
+   "id": "Q43-03",
+   "question": 43,
+   "page": 41,
+   "nist": "Windows Search database holds: Files in %UserProfile% (Excluding 'AppData' directory)",
+   "expect": null,
+   "not_expressible": "category of indexed data (a summary over many index rows), not one recorded fact; concrete rows are in Q46"
+  },
+  {
+   "id": "Q43-04",
+   "question": 43,
+   "page": 41,
+   "nist": "Windows Search database holds: Start Menu (/ProgramData/Microsoft/Windows/Start Menu/)",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_contains": "Start Menu",
+    "aux": "windows search index"
+   },
+   "note": "Category row; expressed as 'some index row under a Start Menu folder exists'. Path is printed with forward slashes, so only the folder name is matched."
+  },
+  {
+   "id": "Q43-05",
+   "question": 43,
+   "page": 41,
+   "nist": "Windows Search database holds: Sticky Note",
+   "expect": null,
+   "not_expressible": "category of indexed data (a summary over many index rows), not one recorded fact; concrete rows are in Q41 (note text)"
+  },
+  {
+   "id": "Q44-01",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+   "nist_local_time": "2015-03-22 11:09:22",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://windows.microsoft.com/en-us/internet-explorer/ie-8-welcome",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:22"
+   }
+  },
+  {
+   "id": "Q44-02",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.msn.com/?ocid=iehp",
+   "nist_local_time": "2015-03-22 11:09:23",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.msn.com/?ocid=iehp",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:23"
+   }
+  },
+  {
+   "id": "Q44-03",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://www.google.com/?gws_rd=ssl",
+   "nist_local_time": "2015-03-22 11:09:40",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/?gws_rd=ssl",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:40"
+   }
+  },
+  {
+   "id": "Q44-04",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+   "nist_local_time": "2015-03-22 11:09:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:50"
+   },
+   "note": "URL joined from 4 printed lines"
+  },
+  {
+   "id": "Q44-05",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+   "nist_local_time": "2015-03-22 11:09:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/download-ie&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CB8QFjAA&usg=AFQjCNEwsIz17kY-jTXbaWPcQDfBbVEi7A",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:52"
+   },
+   "note": "URL joined from 4 printed lines"
+  },
+  {
+   "id": "Q44-06",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+   "nist_local_time": "2015-03-22 11:09:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://windows.microsoft.com/en-us/internet-explorer/download-ie",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:54"
+   }
+  },
+  {
+   "id": "Q44-07",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+   "nist_local_time": "2015-03-22 11:09:56",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.google.com/url?url=http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages&rct=j&frm=1&q=&esrc=s&sa=U&ei=6ykQVZWLGbeJsQT7goDACg&ved=0CCoQFjAB&usg=AFQjCNE7UKIWEBiWO2N96IFeo6ZywhRLfw",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:09:56"
+   },
+   "note": "URL joined from 5 printed lines"
+  },
+  {
+   "id": "Q44-08",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+   "nist_local_time": "2015-03-22 11:10:24",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:10:24"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-09",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://www.google.com/webhp?hl=en",
+   "nist_local_time": "2015-03-22 11:10:54",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/webhp?hl=en",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:10:54"
+   }
+  },
+  {
+   "id": "Q44-10",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+   "nist_local_time": "2015-03-22 11:10:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/chrome/index.html?hl=en&brand=CHNG&utm_source=en-hpp&utm_medium=hpp&utm_campaign=en",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:10:58"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-11",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+   "nist_local_time": "2015-03-22 11:11:06",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://download.microsoft.com/download/7/1/7/7179A150-F2D2-4502-9D70-4B59EA148EAA/IE11-Windows6.1-x64-en-us.exe",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:11:06"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-12",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1",
+   "nist_local_time": "2015-03-22 11:11:16",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://www.google.com/chrome/browser/thankyou.html?brand=CHNG&platform=win&clickonceinstalled=1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-22T15:11:16"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-13",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+   "nist_local_time": "2015-03-23 13:26:33",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://odc.officeapps.live.com/odc/emailhrd?lcid=1033&syslcid=1033&uilcid=1033&app=5&ver=15&build=15.0.4420&p=0&a=1&hm=1&sp=0",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:26:33"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-14",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie",
+   "nist_local_time": "2015-03-23 13:27:49",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.microsoft.com/en-us/ie-firstrun/win-7/ie-11/vie",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:27:49"
+   }
+  },
+  {
+   "id": "Q44-15",
+   "question": 44,
+   "page": 41,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/search",
+   "nist_local_time": "2015-03-23 13:27:49",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:27:49"
+   }
+  },
+  {
+   "id": "Q44-16",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://go.microsoft.com/fwlink/?LinkId=69157",
+   "nist_local_time": "2015-03-23 13:27:49",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://go.microsoft.com/fwlink/?LinkId=69157",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:27:49"
+   }
+  },
+  {
+   "id": "Q44-17",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/",
+   "nist_local_time": "2015-03-23 13:28:19",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T17:28:19"
+   }
+  },
+  {
+   "id": "Q44-18",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 14:07:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:07:52"
+   },
+   "note": "printed with a literal space in the URL"
+  },
+  {
+   "id": "Q44-19",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+   "nist_local_time": "2015-03-23 14:07:55",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:07:55"
+   }
+  },
+  {
+   "id": "Q44-20",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+   "nist_local_time": "2015-03-23 14:07:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:07:58"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-21",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+   "nist_local_time": "2015-03-23 14:08:00",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:08:00"
+   },
+   "note": "URL joined from 3 printed lines"
+  },
+  {
+   "id": "Q44-22",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://sysinfotools.com/blog/tethering-internet-files-sharing/",
+   "nist_local_time": "2015-03-23 14:08:18",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://sysinfotools.com/blog/tethering-internet-files-sharing/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:08:18"
+   }
+  },
+  {
+   "id": "Q44-23",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/",
+   "nist_local_time": "2015-03-23 14:11:13",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://resources.infosecinstitute.com/windows-systems-and-artifacts-in-digital-forensics-part-i-registry/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:11:13"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-24",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://technet.microsoft.com/en-us/library/cc162846.aspx",
+   "nist_local_time": "2015-03-23 14:12:08",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://technet.microsoft.com/en-us/library/cc162846.aspx",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:08"
+   }
+  },
+  {
+   "id": "Q44-25",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://support.microsoft.com/en-us/kb/308427",
+   "nist_local_time": "2015-03-23 14:12:45",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://support.microsoft.com/en-us/kb/308427",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:45"
+   }
+  },
+  {
+   "id": "Q44-26",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://en.wikipedia.org/wiki/Event_Viewer",
+   "nist_local_time": "2015-03-23 14:12:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://en.wikipedia.org/wiki/Event_Viewer",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:12:52"
+   }
+  },
+  {
+   "id": "Q44-27",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+   "nist_local_time": "2015-03-23 14:13:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "https://msdn.microsoft.com/en-us/library/windows/desktop/dd562212(v=vs.85).aspx",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:13:58"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-28",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.forensicswiki.org/wiki/USB_History_Viewing",
+   "nist_local_time": "2015-03-23 14:14:25",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.forensicswiki.org/wiki/USB_History_Viewing",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T18:14:25"
+   }
+  },
+  {
+   "id": "Q44-29",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+   "nist_local_time": "2015-03-23 16:43:48",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:43:48"
+   },
+   "note": "URL joined from 3 printed lines"
+  },
+  {
+   "id": "Q44-30",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/?FORM=Z9FD1",
+   "nist_local_time": "2015-03-23 16:43:50",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/?FORM=Z9FD1",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:43:50"
+   }
+  },
+  {
+   "id": "Q44-31",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?FORM=Z9LH3",
+   "nist_local_time": "2015-03-23 16:43:52",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?FORM=Z9LH3",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:43:52"
+   }
+  },
+  {
+   "id": "Q44-32",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+   "nist_local_time": "2015-03-23 16:44:58",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:44:58"
+   },
+   "note": "URL joined from 2 printed lines"
+  },
+  {
+   "id": "Q44-33",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.wired.com/?p=1756538",
+   "nist_local_time": "2015-03-23 16:45:22",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.wired.com/?p=1756538",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:45:22"
+   }
+  },
+  {
+   "id": "Q44-34",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:45:30",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:45:30"
+   }
+  },
+  {
+   "id": "Q44-35",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+   "nist_local_time": "2015-03-23 16:53:47",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:53:47"
+   }
+  },
+  {
+   "id": "Q44-36",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=us+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:09",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:09"
+   }
+  },
+  {
+   "id": "Q44-37",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=world+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:10",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:10"
+   }
+  },
+  {
+   "id": "Q44-38",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=local&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:17",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=local&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:17"
+   }
+  },
+  {
+   "id": "Q44-39",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:18",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:18"
+   }
+  },
+  {
+   "id": "Q44-40",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:29",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:29"
+   }
+  },
+  {
+   "id": "Q44-41",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=business+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:55",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:55"
+   }
+  },
+  {
+   "id": "Q44-42",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=political+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:56",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=political+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:56"
+   }
+  },
+  {
+   "id": "Q44-43",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:57",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:57"
+   }
+  },
+  {
+   "id": "Q44-44",
+   "question": 44,
+   "page": 42,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=health+news&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:55:59",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=health+news&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:55:59"
+   }
+  },
+  {
+   "id": "Q44-45",
+   "question": 44,
+   "page": 43,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+   "nist_local_time": "2015-03-23 16:56:09",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:56:09"
+   }
+  },
+  {
+   "id": "Q44-46",
+   "question": 44,
+   "page": 43,
+   "nist": "Windows Search (IE history) Date Modified, Microsoft IE TargetUrl http://www.wired.com/2015/03/stealing-data-computers-using-heat/",
+   "nist_local_time": "2015-03-23 16:56:33",
+   "expect": {
+    "kind": "webVisit",
+    "obj": "http://www.wired.com/2015/03/stealing-data-computers-using-heat/",
+    "aux_contains": "Internet Explorer",
+    "utc": "2015-03-23T20:56:33"
+   }
+  },
+  {
+   "id": "Q45-01",
+   "question": 45,
+   "page": 43,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'Hello, Iaman'",
+   "nist_local_time": "2015-03-23 13:29:29",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Hello, Iaman",
+    "utc": "2015-03-23T17:29:29"
+   }
+  },
+  {
+   "id": "Q45-02",
+   "question": 45,
+   "page": 43,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'RE: Hello, Iaman'",
+   "nist_local_time": "2015-03-23 14:44:32",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Hello, Iaman",
+    "utc": "2015-03-23T18:44:32"
+   }
+  },
+  {
+   "id": "Q45-03",
+   "question": 45,
+   "page": 43,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'Good job, buddy.'",
+   "nist_local_time": "2015-03-23 15:14:58",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Good job, buddy.",
+    "utc": "2015-03-23T19:14:58"
+   }
+  },
+  {
+   "id": "Q45-04",
+   "question": 45,
+   "page": 43,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'Good job, buddy.', attachment space_and_earth.mp4 (Windows.edb only)",
+   "nist_local_time": "2015-03-23 15:19:22",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Good job, buddy.",
+    "utc": "2015-03-23T19:19:22"
+   }
+  },
+  {
+   "id": "Q45-05",
+   "question": 45,
+   "page": 43,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'RE: Good job, buddy.'",
+   "nist_local_time": "2015-03-23 15:20:41",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Good job, buddy.",
+    "utc": "2015-03-23T19:20:41"
+   }
+  },
+  {
+   "id": "Q45-06",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'Important request'",
+   "nist_local_time": "2015-03-23 15:26:22",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Important request",
+    "utc": "2015-03-23T19:26:22"
+   }
+  },
+  {
+   "id": "Q45-07",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'RE: Important request'",
+   "nist_local_time": "2015-03-23 15:27:05",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Important request",
+    "utc": "2015-03-23T19:27:05"
+   }
+  },
+  {
+   "id": "Q45-08",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'It's me'",
+   "nist_local_time": "2015-03-23 16:38:48",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "It's me",
+    "utc": "2015-03-23T20:38:48"
+   }
+  },
+  {
+   "id": "Q45-09",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'RE: It's me'",
+   "nist_local_time": "2015-03-23 16:41:19",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: It's me",
+    "utc": "2015-03-23T20:41:19"
+   }
+  },
+  {
+   "id": "Q45-10",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'Last request'",
+   "nist_local_time": "2015-03-24 09:25:57",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Last request",
+    "utc": "2015-03-24T13:25:57"
+   }
+  },
+  {
+   "id": "Q45-11",
+   "question": 45,
+   "page": 44,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'RE: Last request' (Windows.edb only)",
+   "nist_local_time": "2015-03-24 09:30:11",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Last request",
+    "utc": "2015-03-24T13:30:11"
+   }
+  },
+  {
+   "id": "Q45-12",
+   "question": 45,
+   "page": 45,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'RE: Last request' (Windows.edb only)",
+   "nist_local_time": "2015-03-24 09:33:45",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Last request",
+    "utc": "2015-03-24T13:33:45"
+   }
+  },
+  {
+   "id": "Q45-13",
+   "question": 45,
+   "page": 45,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'RE: Last request'",
+   "nist_local_time": "2015-03-24 09:35:10",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Last request",
+    "utc": "2015-03-24T13:35:10"
+   }
+  },
+  {
+   "id": "Q45-14",
+   "question": 45,
+   "page": 45,
+   "nist": "Windows Search e-mail [Inbox] from spy.conspirator@nist.gov to iaman.informant@nist.gov, subject 'Watch out!' (Windows.edb only)",
+   "nist_local_time": "2015-03-24 15:32:42",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Watch out!",
+    "utc": "2015-03-24T19:32:42"
+   }
+  },
+  {
+   "id": "Q45-15",
+   "question": 45,
+   "page": 45,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'RE: Watch out!'",
+   "nist_local_time": "2015-03-24 15:34:02",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "RE: Watch out!",
+    "utc": "2015-03-24T19:34:02"
+   }
+  },
+  {
+   "id": "Q45-16",
+   "question": 45,
+   "page": 46,
+   "nist": "Windows Search e-mail [Sent Items] from iaman.informant@nist.gov to spy.conspirator@nist.gov, subject 'Done'",
+   "nist_local_time": "2015-03-24 17:05:10",
+   "expect": {
+    "kind": "emailSent",
+    "obj": "Done",
+    "utc": "2015-03-24T21:05:10"
+   }
+  },
+  {
+   "id": "Q46-01",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\Google Drive.lnk",
+   "nist_local_time": "2015-03-23 16:05:33",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\Google Drive.lnk",
+    "aux": "windows search index",
+    "utc": "2015-03-23T20:05:33"
+   }
+  },
+  {
+   "id": "Q46-02",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\space_and_earth.mp4",
+   "nist_local_time": "2015-03-24 09:40:09",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\design\\space_and_earth.mp4",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:40:09"
+   }
+  },
+  {
+   "id": "Q46-03",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\winter_whether_advisory.zip",
+   "nist_local_time": "2015-03-24 09:40:09",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\design\\winter_whether_advisory.zip",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:40:09"
+   }
+  },
+  {
+   "id": "Q46-04",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\winter_storm.amr",
+   "nist_local_time": "2015-03-24 09:40:10",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\design\\winter_storm.amr",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:40:10"
+   }
+  },
+  {
+   "id": "Q46-05",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal\\\\[secret_project]_detailed_proposal.docx",
+   "nist_local_time": "2015-03-24 09:40:11",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:40:11"
+   }
+  },
+  {
+   "id": "Q46-06",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal\\\\[secret_project]_proposal.docx",
+   "nist_local_time": "2015-03-24 09:40:13",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:40:13"
+   }
+  },
+  {
+   "id": "Q46-07",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\design\\\\[secret_project]_detailed_design.pptx",
+   "nist_local_time": "2015-03-24 09:47:58",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:58"
+   },
+   "note": "answers.txt shows 'S d ata' (text-extraction artefact); the PDF prints 'S data'"
+  },
+  {
+   "id": "Q46-08",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\final\\\\[secret_project]_final_meeting.pptx",
+   "nist_local_time": "2015-03-24 09:47:58",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:58"
+   }
+  },
+  {
+   "id": "Q46-09",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_market_analysis.xlsx",
+   "nist_local_time": "2015-03-24 09:47:58",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision\\(secret_project)_market_analysis.xlsx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:58"
+   }
+  },
+  {
+   "id": "Q46-10",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_market_shares.xls",
+   "nist_local_time": "2015-03-24 09:47:58",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision\\(secret_project)_market_shares.xls",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:58"
+   }
+  },
+  {
+   "id": "Q46-11",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\pricing decision\\\\(secret_project)_price_analysis_#1.xlsx",
+   "nist_local_time": "2015-03-24 09:47:58",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\pricing decision\\(secret_project)_price_analysis_#1.xlsx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:58"
+   }
+  },
+  {
+   "id": "Q46-12",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\S data\\\\Secret Project Data\\\\Secret Project Data\\\\proposal",
+   "nist_local_time": "2015-03-24 09:47:59",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\S data\\Secret Project Data\\Secret Project Data\\proposal",
+    "aux": "windows search index",
+    "utc": "2015-03-24T13:47:59"
+   }
+  },
+  {
+   "id": "Q46-13",
+   "question": 46,
+   "page": 46,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\Resignation_Letter_(Iaman_Informant).docx",
+   "nist_local_time": "2015-03-24 14:48:41",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+    "aux": "windows search index",
+    "utc": "2015-03-24T18:48:41"
+   }
+  },
+  {
+   "id": "Q46-14",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp",
+   "nist_local_time": "2015-03-24 15:52:06",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:06"
+   }
+  },
+  {
+   "id": "Q46-15",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\IE11-Windows6.1-x64-en-us.exe",
+   "nist_local_time": "2015-03-24 15:52:36",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\IE11-Windows6.1-x64-en-us.exe",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:36"
+   }
+  },
+  {
+   "id": "Q46-16",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Chrysanthemum.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Chrysanthemum.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-17",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Hydrangeas.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Hydrangeas.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-18",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Desert.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Desert.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-19",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Lighthouse.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Lighthouse.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-20",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Koala.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Koala.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-21",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Jellyfish.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Jellyfish.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-22",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Tulips.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Tulips.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q46-23",
+   "question": 46,
+   "page": 47,
+   "nist": "Windows Search index entry, Date Created, Full Path C:\\\\Users\\\\informant\\\\Desktop\\\\temp\\\\Penguins.jpg",
+   "nist_local_time": "2015-03-24 15:52:47",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Users\\informant\\Desktop\\temp\\Penguins.jpg",
+    "aux": "windows search index",
+    "utc": "2015-03-24T19:52:47"
+   }
+  },
+  {
+   "id": "Q47-01",
+   "question": 47,
+   "page": 47,
+   "nist": "Volume Shadow Copy stored in \\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}{Global GUID} (file size 320 MB, 335,544,320 bytes)",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_contains": "\\System Volume Information\\{9b365826-d2ef-11e4-b734-000c29ff2429}"
+   },
+   "note": "Where-row. The row prints the placeholder '{Global GUID}'; Considerations give it as {3808876b-c176-4e48-b7ae-04046e6cc752}. The printed Created Time is carried by the next item."
+  },
+  {
+   "id": "Q47-02",
+   "question": 47,
+   "page": 47,
+   "nist": "Volume Shadow Copy Created Time 2015-03-25 10:57:27 AM",
+   "nist_local_time": "2015-03-25 10:57:27 AM",
+   "expect": {
+    "kind": "shadowCopy",
+    "obj_contains": "8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb",
+    "utc": "2015-03-25T14:57:27"
+   },
+   "note": "Id taken from Considerations ('Shadow Copy ID stored at file offset 144': {8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb}), matched without braces. The answer row itself names only the store file {9b365826-d2ef-11e4-b734-000c29ff2429}."
+  },
+  {
+   "id": "Q48-01",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot.db (20 KB, SQLite) Date Created",
+   "nist_local_time": "2015-03-23 16:02:51",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Google\\Drive\\user_default\\snapshot.db",
+    "utc": "2015-03-23T20:02:51"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-02",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\snapshot.db (20 KB, SQLite) Date Modified",
+   "nist_local_time": "2015-03-23 16:47:55",
+   "expect": {
+    "kind": "fileModified",
+    "obj_endswith": "\\Google\\Drive\\user_default\\snapshot.db",
+    "utc": "2015-03-23T20:47:55"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-03",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config.db (11 KB, SQLite) Date Created",
+   "nist_local_time": "2015-03-23 16:02:51",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_config.db",
+    "utc": "2015-03-23T20:02:51"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-04",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_config.db (11 KB, SQLite) Date Modified",
+   "nist_local_time": "2015-03-23 16:47:55",
+   "expect": {
+    "kind": "fileModified",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_config.db",
+    "utc": "2015-03-23T20:47:55"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-05",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log.log (341 KB, TEXT) Date Created",
+   "nist_local_time": "2015-03-23 16:02:51",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_log.log",
+    "utc": "2015-03-23T20:02:51"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-06",
+   "question": 48,
+   "page": 47,
+   "nist": "in Volume Shadow Copy: \\User\\informant\\AppData\\Google\\Drive\\user_default\\sync_log.log (341 KB, TEXT) Date Modified",
+   "nist_local_time": "2015-03-23 16:47:56",
+   "expect": {
+    "kind": "fileModified",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_log.log",
+    "utc": "2015-03-23T20:47:56"
+   },
+   "note": "Printed path lacks '\\Users' and '\\Local' (Q52 prints C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\...); matcher uses the common tail. The row is about the copy inside the shadow copy; no matcher can require that for this kind."
+  },
+  {
+   "id": "Q48-07",
+   "question": 48,
+   "page": 48,
+   "nist": "last log inside sync_log.log from VSC was added at 2015-03-23 16:47:56",
+   "nist_local_time": "2015-03-23 16:47:56",
+   "expect": null,
+   "not_expressible": "time of the last line inside a log file (file content)"
+  },
+  {
+   "id": "Q48-08",
+   "question": 48,
+   "page": 48,
+   "nist": "SQLite file snapshot.db exists in VSC",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Google\\Drive\\user_default\\snapshot.db",
+    "aux_contains": "shadow copy"
+   }
+  },
+  {
+   "id": "Q48-09",
+   "question": 48,
+   "page": 48,
+   "nist": "SQLite file sync_config.db exists in VSC",
+   "expect": {
+    "kind": "fileSeen",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_config.db",
+    "aux_contains": "shadow copy"
+   }
+  },
+  {
+   "id": "Q48-10",
+   "question": 48,
+   "page": 48,
+   "nist": "snapshot.db deleted because of the logoff activity in 2015-03-25",
+   "nist_local_time": "2015-03-25",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Google\\Drive\\user_default\\snapshot.db",
+    "local_day": "2015-03-25"
+   }
+  },
+  {
+   "id": "Q48-11",
+   "question": 48,
+   "page": 48,
+   "nist": "sync_config.db deleted because of the logoff activity in 2015-03-25",
+   "nist_local_time": "2015-03-25",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Google\\Drive\\user_default\\sync_config.db",
+    "local_day": "2015-03-25"
+   }
+  },
+  {
+   "id": "Q48-12",
+   "question": 48,
+   "page": 48,
+   "nist": "VSC was created before the logoff activity",
+   "expect": null,
+   "not_expressible": "ordering of two events (a conclusion, not a recorded fact)"
+  },
+  {
+   "id": "Q49-01",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record at file offset 0x702 of snapshot.db from VSC: Filename do_u_wanna_build_a_snow_man.mp3 (doc_id 0Bz0ye6gXtiZaVl8yVU5mWHlGbWc, size 6,844,294 bytes, checksum 2c4553f99533d85adb104b3a5c38521a, acl_role 0, doc_type 1, removed 0, shared 1, resource_type file)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "do_u_wanna_build_a_snow_man.mp3",
+    "aux": "google drive: deleted"
+   },
+   "note": "File deleted from Google Drive; the answer key prints no deletion time. Other record fields are attributes, not separate items."
+  },
+  {
+   "id": "Q49-02",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record do_u_wanna_build_a_snow_man.mp3: modified 2015-01-30 11:49:20 (UTC-05)",
+   "nist_local_time": "2015-01-30 11:49:20 (UTC-05)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "do_u_wanna_build_a_snow_man.mp3",
+    "aux": "google drive: modified",
+    "utc": "2015-01-30T16:49:20"
+   }
+  },
+  {
+   "id": "Q49-03",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record do_u_wanna_build_a_snow_man.mp3: created 2015-03-23 16:32:45 (UTC-04)",
+   "nist_local_time": "2015-03-23 16:32:45 (UTC-04)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "do_u_wanna_build_a_snow_man.mp3",
+    "aux": "google drive: created",
+    "utc": "2015-03-23T20:32:45"
+   }
+  },
+  {
+   "id": "Q49-04",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record at file offset 0x77A of snapshot.db from VSC: Filename happy_holiday.jpg (doc_id 0Bz0ye6gXtiZaakx6d3R3c0JmM1U, size 440,517 bytes, checksum 0c77d6a2704155dbfdf29817769b7478, acl_role 0, doc_type 1, removed 0, shared 1, resource_type file)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "happy_holiday.jpg",
+    "aux": "google drive: deleted"
+   },
+   "note": "File deleted from Google Drive; the answer key prints no deletion time. Other record fields are attributes, not separate items."
+  },
+  {
+   "id": "Q49-05",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record happy_holiday.jpg: modified 2015-01-29 15:35:14 (UTC-05)",
+   "nist_local_time": "2015-01-29 15:35:14 (UTC-05)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "happy_holiday.jpg",
+    "aux": "google drive: modified",
+    "utc": "2015-01-29T20:35:14"
+   }
+  },
+  {
+   "id": "Q49-06",
+   "question": 49,
+   "page": 48,
+   "nist": "deleted cloud_entry record happy_holiday.jpg: created 2015-03-23 16:32:42 (UTC-04)",
+   "nist_local_time": "2015-03-23 16:32:42 (UTC-04)",
+   "expect": {
+    "kind": "cloudFile",
+    "obj_endswith": "happy_holiday.jpg",
+    "aux": "google drive: created",
+    "utc": "2015-03-23T20:32:42"
+   }
+  },
+  {
+   "id": "Q50-01",
+   "question": 50,
+   "page": 49,
+   "nist": "Outlook OST files excluded from snapshots: HKLM\\System\\CurrentControlSet\\Control\\BackupRestore\\FilesNotToSnapshot, OutlookOST: $UserProfile$\\AppData\\Local\\Microsoft\\Outlook\\*.ost",
+   "expect": {
+    "kind": "systemSetting",
+    "aux_contains": "$UserProfile$\\AppData\\Local\\Microsoft\\Outlook\\*.ost"
+   },
+   "note": "Setting name is not in the fixed list, so only the printed value is matched."
+  },
+  {
+   "id": "Q52-01",
+   "question": 52,
+   "page": 50,
+   "nist": "Search anti-forensic methods: 'anti-forensic tools'",
+   "nist_local_time": "2015-03-25 10:46:44",
+   "expect": {
+    "kind": "webSearch",
+    "obj": "anti-forensic tools",
+    "utc": "2015-03-25T14:46:44"
+   }
+  },
+  {
+   "id": "Q52-02",
+   "question": 52,
+   "page": 50,
+   "nist": "Search anti-forensic methods: 'eraser'",
+   "nist_local_time": "2015-03-25 10:46:54",
+   "expect": {
+    "kind": "webSearch",
+    "obj": "eraser",
+    "utc": "2015-03-25T14:46:54"
+   }
+  },
+  {
+   "id": "Q52-03",
+   "question": 52,
+   "page": 50,
+   "nist": "Download anti-forensic tools: http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+   "nist_local_time": "2015-03-25 10:47:34",
+   "expect": {
+    "kind": "fileDownloaded",
+    "aux": "http://iweb.dl.sourceforge.net/project/eraser/Eraser%206/6.2/Eraser%206.2.0.2962.exe",
+    "utc": "2015-03-25T14:47:34"
+   },
+   "note": "URL joined from 2 printed lines. Q15 prints the same URL and time as an IE 11 history entry; transcribed as a download because the row's Behavior is 'Download'."
+  },
+  {
+   "id": "Q52-04",
+   "question": 52,
+   "page": 50,
+   "nist": "Search anti-forensic methods: 'ccleaner'",
+   "nist_local_time": "2015-03-25 10:47:51",
+   "expect": {
+    "kind": "webSearch",
+    "obj": "ccleaner",
+    "utc": "2015-03-25T14:47:51"
+   }
+  },
+  {
+   "id": "Q52-05",
+   "question": 52,
+   "page": 50,
+   "nist": "Download anti-forensic tools: http://www.piriform.com/ccleaner/download",
+   "nist_local_time": "2015-03-25 10:48:12",
+   "expect": {
+    "kind": "fileDownloaded",
+    "aux": "http://www.piriform.com/ccleaner/download",
+    "utc": "2015-03-25T14:48:12"
+   },
+   "note": "The printed URL is a web page, not a file. Q15 prints the same URL and time as an IE 11 history entry; transcribed as a download because the row's Behavior is 'Download'."
+  },
+  {
+   "id": "Q52-06",
+   "question": 52,
+   "page": 50,
+   "nist": "Install anti-forensic tools: \\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\ERASER 6.2.0.2962.EXE",
+   "nist_local_time": "2015-03-25 10:50:14",
+   "expect": {
+    "kind": "programRun",
+    "obj": "ERASER 6.2.0.2962.EXE",
+    "utc": "2015-03-25T14:50:14"
+   }
+  },
+  {
+   "id": "Q52-07",
+   "question": 52,
+   "page": 50,
+   "nist": "Install anti-forensic tools: \\USERS\\INFORMANT\\DESKTOP\\DOWNLOAD\\CCSETUP504.EXE",
+   "nist_local_time": "2015-03-25 10:57:56",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCSETUP504.EXE",
+    "utc": "2015-03-25T14:57:56"
+   }
+  },
+  {
+   "id": "Q52-08",
+   "question": 52,
+   "page": 50,
+   "nist": "Run anti-forensic tools: \\PROGRAM FILES\\Eraser\\Eraser.exe",
+   "nist_local_time": "2015-03-25 11:13:30",
+   "expect": {
+    "kind": "programRun",
+    "obj": "Eraser.exe",
+    "utc": "2015-03-25T15:13:30"
+   }
+  },
+  {
+   "id": "Q52-09",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Chrysanthemum.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Chrysanthemum.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-10",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Desert.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Desert.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-11",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Hydrangeas.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Hydrangeas.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-12",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\IE11-Windows6.1-x64-en-us.exe",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\IE11-Windows6.1-x64-en-us.exe",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-13",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Jellyfish.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Jellyfish.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-14",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Koala.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Koala.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-15",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Lighthouse.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Lighthouse.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-16",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Penguins.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Penguins.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-17",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Tulips.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Tulips.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail."
+  },
+  {
+   "id": "Q52-18",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\Tulips.jpg",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp\\Tulips.jpg",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail. This line is printed twice in the answer key."
+  },
+  {
+   "id": "Q52-19",
+   "question": 52,
+   "page": 50,
+   "nist": "Wiping files & directories using Eraser: \\User\\Informant\\Desktop\\Temp\\",
+   "nist_local_time": "2015-03-25 11:13:39 ~ 11:14:44",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Informant\\Desktop\\Temp",
+    "local_day": "2015-03-25"
+   },
+   "note": "Printed as a time range, so only the day is matched. Printed path starts '\\User\\' (other answers print '\\Users\\'); matcher uses the tail. Directory, printed with a trailing backslash."
+  },
+  {
+   "id": "Q52-20",
+   "question": 52,
+   "page": 50,
+   "nist": "Delete files [Shift] + [Delete]: \\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+   "nist_local_time": "2015-03-25 11:15:45",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Users\\informant\\Desktop\\Download\\ccsetup504.exe",
+    "utc": "2015-03-25T15:15:45"
+   }
+  },
+  {
+   "id": "Q52-21",
+   "question": 52,
+   "page": 50,
+   "nist": "Delete files [Shift] + [Delete]: \\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+   "nist_local_time": "2015-03-25 11:15:45",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\Users\\informant\\Desktop\\Download\\Eraser 6.2.0.2962.exe",
+    "utc": "2015-03-25T15:15:45"
+   }
+  },
+  {
+   "id": "Q52-22",
+   "question": 52,
+   "page": 50,
+   "nist": "Run anti-forensic tools: \\PROGRAM FILES\\CCLEANER\\CCLEANER64.EXE",
+   "nist_local_time": "2015-03-25 11:15:50",
+   "expect": {
+    "kind": "programRun",
+    "obj": "CCLEANER64.EXE",
+    "utc": "2015-03-25T15:15:50"
+   }
+  },
+  {
+   "id": "Q52-23",
+   "question": 52,
+   "page": 50,
+   "nist": "Uninstall anti-forensic tools: \\PROGRAM FILES\\CCLEANER\\UNINST.EXE",
+   "nist_local_time": "2015-03-25 11:18:29",
+   "expect": {
+    "kind": "programRun",
+    "obj": "UNINST.EXE",
+    "utc": "2015-03-25T15:18:29"
+   }
+  },
+  {
+   "id": "Q52-24",
+   "question": 52,
+   "page": 50,
+   "nist": "Disconnecting Google drive account: sync_log.log '2015-03-25 11:22:47,053 -0400 ... Signing Out'",
+   "nist_local_time": "2015-03-25 11:22:47",
+   "expect": null,
+   "not_expressible": "sign-out of a cloud account recorded in an application log; sessionEvent covers Windows sessions only"
+  },
+  {
+   "id": "Q52-25",
+   "question": 52,
+   "page": 50,
+   "nist": "sync_log.log '2015-03-25 11:22:48,878 -0400 ... Deleting file: C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db'",
+   "nist_local_time": "2015-03-25 11:22:48,878 -0400",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\AppData\\Local\\Google\\Drive\\user_default\\sync_config.db",
+    "utc": "2015-03-25T15:22:48"
+   },
+   "note": "Printed with the short folder name INFORM~1; matcher uses the tail from \\AppData."
+  },
+  {
+   "id": "Q52-26",
+   "question": 52,
+   "page": 51,
+   "nist": "sync_log.log '2015-03-25 11:22:48,878 -0400 ... Deleting file: C:\\Users\\INFORM~1\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db'",
+   "nist_local_time": "2015-03-25 11:22:48,878 -0400",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "\\AppData\\Local\\Google\\Drive\\user_default\\snapshot.db",
+    "utc": "2015-03-25T15:22:48"
+   },
+   "note": "Printed with the short folder name INFORM~1; matcher uses the tail from \\AppData."
+  },
+  {
+   "id": "Q52-27",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (1) It's me",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-28",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (2) RE: It's me",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-29",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (3) Good job, buddy.",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-30",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (4) RE: Last request",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-31",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (5) Watch out!",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-32",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (6) RE: Watch out!",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-33",
+   "question": 52,
+   "page": 51,
+   "nist": "Delete some e-mails in Outlook (time N/A): (7) Done",
+   "expect": null,
+   "not_expressible": "deletion of a message inside a mailbox, no time printed; no kind states that an e-mail was deleted"
+  },
+  {
+   "id": "Q52-34",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 1: 'Chrysanthemum.jpg' renamed to 'S9(wQm9ff_gd/hZ~c'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "Chrysanthemum.jpg",
+    "aux_contains": "S9(wQm9ff_gd/hZ~c",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's. Names are copied as printed; '/' cannot occur in a Windows file name."
+  },
+  {
+   "id": "Q52-35",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 2: 'S9(wQm9ff_gd/hZ~c' renamed to 'KclInDLFM3YdDX}t1'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "S9(wQm9ff_gd/hZ~c",
+    "aux_contains": "KclInDLFM3YdDX}t1",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's. Names are copied as printed; '/' cannot occur in a Windows file name."
+  },
+  {
+   "id": "Q52-36",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 3: 'KclInDLFM3YdDX}t1' renamed to 'C0jAF)No] VBZJoxE'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "KclInDLFM3YdDX}t1",
+    "aux_contains": "C0jAF)No] VBZJoxE",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's."
+  },
+  {
+   "id": "Q52-37",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 4: 'C0jAF)No] VBZJoxE' renamed to '+a]Zd+UuQ88qn/K9J'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "C0jAF)No] VBZJoxE",
+    "aux_contains": "+a]Zd+UuQ88qn/K9J",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's. Names are copied as printed; '/' cannot occur in a Windows file name."
+  },
+  {
+   "id": "Q52-38",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 5: '+a]Zd+UuQ88qn/K9J' renamed to '2O8josN{78q7Ju7dx'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "+a]Zd+UuQ88qn/K9J",
+    "aux_contains": "2O8josN{78q7Ju7dx",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's. Names are copied as printed; '/' cannot occur in a Windows file name."
+  },
+  {
+   "id": "Q52-39",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 6: '2O8josN{78q7Ju7dx' renamed to 'v1hNH f]1bDJc2'(I'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "2O8josN{78q7Ju7dx",
+    "aux_contains": "v1hNH f]1bDJc2'(I",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's."
+  },
+  {
+   "id": "Q52-40",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 7: 'v1hNH f]1bDJc2'(I' renamed to '8BkLKk2 cBfQ7`SvH'",
+   "expect": {
+    "kind": "fileRenamed",
+    "obj_endswith": "v1hNH f]1bDJc2'(I",
+    "aux_contains": "8BkLKk2 cBfQ7`SvH",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's."
+  },
+  {
+   "id": "Q52-41",
+   "question": 52,
+   "page": 51,
+   "nist": "Eraser trace in $UsnJrnl, step 8: delete the last file '8BkLKk2 cBfQ7`SvH'",
+   "expect": {
+    "kind": "fileDeleted",
+    "obj_endswith": "8BkLKk2 cBfQ7`SvH",
+    "local_day": "2015-03-25"
+   },
+   "note": "From the Considerations block that the wiping row points to with '(See below)'; no time is printed there, the day is the wiping row's."
+  },
+  {
+   "id": "Q53-01",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\DESIGN\\winter_storm.amr, format PPT, 13.8 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\DESIGN\\winter_storm.amr",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-02",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\DESIGN\\winter_whether_advisory.zip, format PPTX, 15.6 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\DESIGN\\winter_whether_advisory.zip",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-03",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\pricing decision\\my_favorite_cars.db, format XLS, 1.20 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\pricing decision\\my_favorite_cars.db",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-04",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\pricing decision\\my_favorite_movies.7z, format XLSX, 97.7 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\pricing decision\\my_favorite_movies.7z",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-05",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\pricing decision\\new_years_day.jpg, format XLSX, 9.76 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\pricing decision\\new_years_day.jpg",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-06",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\pricing decision\\super_bowl.avi, format XLS, 9.81 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\pricing decision\\super_bowl.avi",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-07",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\PROGRESS\\my_friends.svg, format DOC, 57.0 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\PROGRESS\\my_friends.svg",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-08",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\PROGRESS\\my_smartphone.png, format DOCX, 4.23 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\PROGRESS\\my_smartphone.png",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-09",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\PROGRESS\\new_year_calendar.one, format DOCX, 26.7 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\PROGRESS\\new_year_calendar.one",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-10",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\PROPOSAL\\a_gift_from_you.gif, format DOCX, 33.5 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\PROPOSAL\\a_gift_from_you.gif",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-11",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\PROPOSAL\\landscape.png, format DOCX, 6.18 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\PROPOSAL\\landscape.png",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-12",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#1d.txt, format DOCX, 118 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#1d.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-13",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#1p.txt, format PPTX, 447 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#1p.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-14",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#2d.txt, format DOCX, 643 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#2d.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-15",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#2p.txt, format PPT, 1.10 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#2p.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-16",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#3d.txt, format DOC, 2.25 MB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#3d.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-17",
+   "question": 53,
+   "page": 51,
+   "nist": "deleted file recovered from RM#2 (FAT directory entry): \\technical review\\diary_#3p.txt, format PPT, 317 KB, viewable",
+   "expect": {
+    "kind": "fileCreated",
+    "obj_endswith": "\\technical review\\diary_#3p.txt",
+    "aux_contains": "unallocated space",
+    "exhibit": "RM#2"
+   }
+  },
+  {
+   "id": "Q53-18",
+   "question": 53,
+   "page": 51,
+   "nist": "Carving: all other files do not have a relationship with this scenario (PhotoRec results: OGG, 3GP, GIF, JPG, XLS, DOC, MOV, MP4, MPG, PNG, TIF, WMA, WMV, XML…)",
+   "expect": null,
+   "not_expressible": "negative summary statement about carved files"
+  },
+  {
+   "id": "Q54-01",
+   "question": 54,
+   "page": 52,
+   "nist": "RM#2 anti-forensics: Quick format for deleting data",
+   "expect": null,
+   "not_expressible": "an action inferred from recovery results; no time, file or identifier printed"
+  },
+  {
+   "id": "Q56-01",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_revised_points.ppt, format PPT, size 13.8 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-02",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_detailed_design.pptx, format PPTX, size 15.6 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-03",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_price_analysis_#1.xlsx, format XLSX, size 97.7 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-04",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_price_analysis_#2.xls, format XLS, size 1.20 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-05",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_market_analysis.xlsx, format XLSX, size 9.76 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-06",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_market_shares.xls, format XLS, size 9.81 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-07",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_progress_#1.docx, format DOCX, size 4.23 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-08",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_progress_#2.docx, format DOCX, size 26.7 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-09",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_progress_#3.doc, format DOC, size 56.0 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-10",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_detailed_proposal.docx, format DOCX, size -, viewable Partial",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-11",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_proposal.docx, format DOCX, size 6.18 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-12",
+   "question": 56,
+   "page": 52,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#1.docx, format DOCX, size 118 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-13",
+   "question": 56,
+   "page": 53,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#1.pptx, format PPTX, size 447 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-14",
+   "question": 56,
+   "page": 53,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#2.docx, format DOCX, size 643 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-15",
+   "question": 56,
+   "page": 53,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#2.ppt, format PPT, size 1.10 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-16",
+   "question": 56,
+   "page": 53,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#3.doc, format DOC, size 2.25 MB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q56-17",
+   "question": 56,
+   "page": 53,
+   "nist": "file carved from RM#3, name inferred from its first page: [secret_project]_technical_review_#3.ppt, format PPT, size 317 KB, viewable O",
+   "expect": null,
+   "not_expressible": "carved file content identified by what it shows; the name is inferred, not recorded on the disc, and no time or hash is printed"
+  },
+  {
+   "id": "Q57-01",
+   "question": 57,
+   "page": 53,
+   "nist": "RM#3 anti-forensics: (1) Formatting CD-R (Burning Type 1: Like a USB flash drive)",
+   "expect": null,
+   "not_expressible": "an action inferred from examining the disc image; no time, file or identifier printed"
+  },
+  {
+   "id": "Q57-02",
+   "question": 57,
+   "page": 53,
+   "nist": "RM#3 anti-forensics: (2) Copying confidential files and some meaningless files to CD-R",
+   "expect": null,
+   "not_expressible": "an action inferred from examining the disc image; no time, file or identifier printed"
+  },
+  {
+   "id": "Q57-03",
+   "question": 57,
+   "page": 53,
+   "nist": "RM#3 anti-forensics: (3) Deleting confidential files from CD-R for hiding them",
+   "expect": null,
+   "not_expressible": "an action inferred from examining the disc image; no time, file or identifier printed"
+  }
+ ]
+}
