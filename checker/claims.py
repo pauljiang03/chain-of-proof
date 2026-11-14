@@ -8,6 +8,13 @@ Agents propose instances of approved sets, snapped together with "both":
     {"deletedAfter":    [deletion, event]}       R5
     {"tagged":          [fact, "obj"|"aux", tag_fact, tag_id]}
     {"before":          [a, b]}
+    {"deviceHolds":        [usb, device_exam]}       R1+R7
+    {"openedFromDevice":   [lnk, device_exam]}       R3+R7
+    {"openedFromRecorded": [lnk, volume_record]}     R3+R6
+    {"recordedOnDevice":   [volume_record, device_exam]}  R6+R7
+    {"sameLabel":          [volume_record, volume_record]} R8 (heuristic)
+    {"usbConnected": [usb]}  {"opened": [lnk]}  {"searched": [search]}
+    {"fileCreatedAt": [created]}  {"fileModifiedAt": [modified]}
     {"both":            [claim, claim, ...]}
 
 Numbers are fact ids (and one tag id). Nothing here accepts free text, so the Lean
@@ -59,6 +66,8 @@ _EVENT = {
     "emailSent": "the sending of email {obj} to {aux}",
     "cdBurn": "the CD burn {obj}",
     "tag": 'the tagging of {obj} as "{aux}"',
+    "volumeSeen": 'this PC recording volume {aux} under the label "{obj}"',
+    "volumeOnDevice": "the examination of device {obj}, which holds volume {aux}",
 }
 
 
@@ -101,6 +110,69 @@ def _en_deleted(args, facts, src):
     return (f"{src.string(d.obj)} was deleted ({_utc(d.t)}) after {_event(x, src)}.")
 
 
+def _en_device_holds(args, facts, src):
+    u, d = facts[args[0]], facts[args[1]]
+    return (f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)}). The "
+            f"seized device with that serial holds volume {src.string(d.aux)}.")
+
+
+def _en_opened_device(args, facts, src):
+    l, d = facts[args[0]], facts[args[1]]
+    return (f"{src.string(l.obj)} was opened ({_utc(l.t)}) from volume {src.string(l.aux)}, "
+            f"the volume on seized device {src.string(d.obj)}.")
+
+
+def _en_opened_recorded(args, facts, src):
+    l, v = facts[args[0]], facts[args[1]]
+    return (f"{src.string(l.obj)} was opened ({_utc(l.t)}) from volume {src.string(l.aux)}, "
+            f'which this PC recorded under the label "{src.string(v.obj)}" ({_utc(v.t)}).')
+
+
+def _en_recorded_device(args, facts, src):
+    v, d = facts[args[0]], facts[args[1]]
+    return (f'Volume {src.string(v.aux)}, which this PC recorded under the label '
+            f'"{src.string(v.obj)}" ({_utc(v.t)}), is the volume on seized device '
+            f"{src.string(d.obj)}.")
+
+
+def _en_same_label(args, facts, src):
+    a, b = facts[args[0]], facts[args[1]]
+    return (f"This PC recorded volume {src.string(a.aux)} ({_utc(a.t)}) and volume "
+            f'{src.string(b.aux)} ({_utc(b.t)}) under the same label "{src.string(a.obj)}". '
+            f"A shared label suggests one physical device but does not prove it "
+            f"(heuristic rule R8).")
+
+
+def _en_usb_connected(args, facts, src):
+    u = facts[args[0]]
+    return f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)})."
+
+
+def _en_opened_plain(args, facts, src):
+    l = facts[args[0]]
+    where = src.string(l.aux)
+    if where in ("", "(none)"):
+        return (f"{src.string(l.obj)} was opened ({_utc(l.t)}). The record does not name "
+                f"the volume.")
+    place = f"network share {where}" if where.startswith("\\\\") else f"volume {where}"
+    return f"{src.string(l.obj)} on {place} was opened ({_utc(l.t)})."
+
+
+def _en_searched(args, facts, src):
+    w = facts[args[0]]
+    return f'A web search for "{src.string(w.obj)}" was made in {src.string(w.aux)} ({_utc(w.t)}).'
+
+
+def _en_created(args, facts, src):
+    c = facts[args[0]]
+    return f"{src.string(c.obj)} was created on volume {src.string(c.aux)} ({_utc(c.t)})."
+
+
+def _en_modified(args, facts, src):
+    m = facts[args[0]]
+    return f"{src.string(m.obj)} was last modified on volume {src.string(m.aux)} ({_utc(m.t)})."
+
+
 def _en_tagged(args, facts, src):
     f, slot, g, tag_id = args
     entity = src.string(getattr(facts[f], slot))
@@ -135,6 +207,21 @@ SETS: Dict[str, SetDef] = {
     "deletedAfter": SetDef(("fact", "fact"), "Sets.deletedAfter", ("R5",), "strong", _en_deleted),
     "tagged": SetDef(("fact", "slot", "fact", "const"), "Sets.tagged", ("T",), "strong",
                      _en_tagged),
+    "deviceHolds": SetDef(("fact", "fact"), "Sets.deviceHolds", ("R1", "R7"), "strong",
+                          _en_device_holds),
+    "openedFromDevice": SetDef(("fact", "fact"), "Sets.openedFromDevice", ("R3", "R7"), "strong",
+                               _en_opened_device),
+    "openedFromRecorded": SetDef(("fact", "fact"), "Sets.openedFromRecorded", ("R3", "R6"),
+                                 "strong", _en_opened_recorded),
+    "recordedOnDevice": SetDef(("fact", "fact"), "Sets.recordedOnDevice", ("R6", "R7"), "strong",
+                               _en_recorded_device),
+    "sameLabel": SetDef(("fact", "fact"), "Sets.sameLabel", ("R6", "R8"), "heuristic",
+                        _en_same_label),
+    "usbConnected": SetDef(("fact",), "Sets.usbConnected", ("R1",), "strong", _en_usb_connected),
+    "opened": SetDef(("fact",), "Sets.opened", ("R3",), "strong", _en_opened_plain),
+    "searched": SetDef(("fact",), "Sets.searched", ("R9",), "strong", _en_searched),
+    "fileCreatedAt": SetDef(("fact",), "Sets.fileCreatedAt", ("R10",), "strong", _en_created),
+    "fileModifiedAt": SetDef(("fact",), "Sets.fileModifiedAt", ("R10",), "strong", _en_modified),
 }
 
 
@@ -172,6 +259,8 @@ def _parse(obj) -> Claim:
         if (a not in SLOTS) if kind == "slot" else (not _is_id(a)):
             want = 'one of "obj", "aux"' if kind == "slot" else "a non-negative integer id"
             raise ClaimError(f'"{name}": expected {want}, got {a!r}')
+    if name == "sameLabel" and args[0] == args[1]:
+        raise ClaimError('"sameLabel" needs two different facts')
     return (name, tuple(args))
 
 

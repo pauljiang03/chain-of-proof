@@ -4,3 +4,7 @@ version = "0.1.0"
 description = "Machine-checked digital forensics: the LLM proposes, Lean 4 decides."
 requires-python = ">=3.9"
 dependencies = ["duckdb>=1.0"]
+
+[project.optional-dependencies]
+# needed only to rebuild evidence/case_facts.json from the disk images
+extract = ["dissect>=3.20"]

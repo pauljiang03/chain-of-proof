@@ -1,0 +1,110 @@
+{
+  "finding_id": "M088",
+  "question": "When were the user's files created and last modified?",
+  "claim": {
+    "both": [
+      {
+        "fileCreatedAt": [
+          74
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          100
+        ]
+      },
+      {
+        "before": [
+          74,
+          100
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe was created on volume CA0C7A48 (2015-03-22 15:11:04 UTC). \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe was last modified on volume CA0C7A48 (2015-03-22 15:11:04 UTC). The creation of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 (2015-03-22 15:11:04 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 (2015-03-22 15:11:04 UTC): the gap of 764.4 ms exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 74,
+      "kind": "fileCreated",
+      "t": 1427037064087334,
+      "res": 1,
+      "obj": 57,
+      "obj_text": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "adf8fe32f48423c5b5007fb3b83b6ada84e97b18c70e2b94d4e4fe978986cd2d",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 55915216,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 100,
+      "kind": "fileModified",
+      "t": 1427037064851734,
+      "res": 1,
+      "obj": 57,
+      "obj_text": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "b1c27a09164bfd9ce37e51061466f943819dba8c7833341a0af73ab5601ae53b",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 55915216,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          74
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe was created on volume CA0C7A48 (2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          100
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe was last modified on volume CA0C7A48 (2015-03-22 15:11:04 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          74,
+          100
+        ]
+      },
+      "english": "The creation of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 (2015-03-22 15:11:04 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe on volume CA0C7A48 (2015-03-22 15:11:04 UTC): the gap of 764.4 ms exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "M088.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

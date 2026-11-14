@@ -1,0 +1,56 @@
+{
+  "finding_id": "M027",
+  "question": "Which files were opened from removable devices or network shares?",
+  "claim": {
+    "opened": [
+      45
+    ]
+  },
+  "status": "verified",
+  "english": "\\de\\winter_whether_advisory.zip\\ppt was opened (2015-03-24 20:44:14 UTC). The record does not name the volume.",
+  "cited_facts": [
+    {
+      "id": 45,
+      "kind": "lnkTarget",
+      "t": 1427229854570221,
+      "res": 1,
+      "obj": 36,
+      "obj_text": "\\de\\winter_whether_advisory.zip\\ppt",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "2b14ef944d823c9ded860e94db09609df4feae838ff2b3a12cc8547cb0dc3d29",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream e",
+        "destlist_path": "D:\\de\\winter_whether_advisory.zip\\ppt",
+        "drive_letter": "D:",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume": "not recorded by this jump list entry"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "opened": [
+          45
+        ]
+      },
+      "english": "\\de\\winter_whether_advisory.zip\\ppt was opened (2015-03-24 20:44:14 UTC). The record does not name the volume.",
+      "rules": [
+        "R3"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R3"
+  ],
+  "strength": "strong",
+  "lean_file": "M027.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

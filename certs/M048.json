@@ -1,0 +1,97 @@
+{
+  "finding_id": "M048",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          132
+        ]
+      },
+      {
+        "tagged": [
+          132,
+          "obj",
+          228,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"how to leak a secret\" was made in chrome (2015-03-23 18:06:27 UTC). how to leak a secret is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
+  "cited_facts": [
+    {
+      "id": 132,
+      "kind": "webSearch",
+      "t": 1427133987545120,
+      "res": 1,
+      "obj": 78,
+      "obj_text": "how to leak a secret",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "948dc6914fbbe89a3ffe69db8eb14c04697619b7c621e3533cacd7d4bd7ae41b",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 228,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 78,
+      "obj_text": "how to leak a secret",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "cfa605aaca832b2a975939ba6d816a5cfc2f6768fc18c89d714398357fed4448",
+      "prov": {
+        "rule": "search term contains the watch-list word \"leak\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          132
+        ]
+      },
+      "english": "A web search for \"how to leak a secret\" was made in chrome (2015-03-23 18:06:27 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          132,
+          "obj",
+          228,
+          117
+        ]
+      },
+      "english": "how to leak a secret is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M048.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

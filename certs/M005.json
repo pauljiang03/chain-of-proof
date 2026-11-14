@@ -1,0 +1,205 @@
+{
+  "finding_id": "M005",
+  "question": "Which files were opened from removable devices or network shares?",
+  "claim": {
+    "both": [
+      {
+        "openedFromDevice": [
+          21,
+          241
+        ]
+      },
+      {
+        "tagged": [
+          21,
+          "obj",
+          208,
+          118
+        ]
+      },
+      {
+        "deviceHolds": [
+          1,
+          241
+        ]
+      },
+      {
+        "tagged": [
+          1,
+          "obj",
+          198,
+          115
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:20 UTC) from volume 5C754D3E, the volume on seized device 4C530012450531101593. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). USB device 4C530012450531101593 was connected to this PC (2015-03-23 18:31:10 UTC). The seized device with that serial holds volume 5C754D3E. 4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 21,
+      "kind": "lnkTarget",
+      "t": 1427135840499256,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "958eb3d46a81852722a264a94a97dbe2e29889bf03913fe1a3412d3bce4083e5",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "shortcut_created": 1427135840312056,
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "Authorized USB"
+      }
+    },
+    {
+      "id": 241,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "8dbb9b60879674b0c2cfa46e2dcc5ee1da4b35f3db48803d3573b8ee0d3f9fd0",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 16384",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E22103D8",
+        "exhibit": "RM#1",
+        "filesystem": "exfat",
+        "image": "rm1.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "Authorized"
+      }
+    },
+    {
+      "id": 208,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 18,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+      "aux": 118,
+      "aux_text": "confidential",
+      "row_sha256": "6ca9054fa6aaa89fd100c6379044952054b5802b5c803d36fdc1b5aa95d317ef",
+      "prov": {
+        "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 1,
+      "kind": "usbInsert",
+      "t": 1427135470593000,
+      "res": 1000,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "b7fa4f0cc38b0f86c6cb68eabcc5c034e560803b816e91a85da49117f1659d7b",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 55402",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 198,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 115,
+      "aux_text": "authorized-device",
+      "row_sha256": "f2a0cdcf87e4216573dff3f2a1f4e597ed1d76bb4d7acb0a8ba54298a0a1d6f9",
+      "prov": {
+        "rule": "device serial is on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromDevice": [
+          21,
+          241
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx was opened (2015-03-23 18:37:20 UTC) from volume 5C754D3E, the volume on seized device 4C530012450531101593.",
+      "rules": [
+        "R3",
+        "R7"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          21,
+          "obj",
+          208,
+          118
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "deviceHolds": [
+          1,
+          241
+        ]
+      },
+      "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-23 18:31:10 UTC). The seized device with that serial holds volume 5C754D3E.",
+      "rules": [
+        "R1",
+        "R7"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          1,
+          "obj",
+          198,
+          115
+        ]
+      },
+      "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "R3",
+    "R7",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M005.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

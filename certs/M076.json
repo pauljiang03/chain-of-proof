@@ -1,0 +1,110 @@
+{
+  "finding_id": "M076",
+  "question": "When were the user's files created and last modified?",
+  "claim": {
+    "both": [
+      {
+        "fileCreatedAt": [
+          62
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          88
+        ]
+      },
+      {
+        "before": [
+          62,
+          88
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\Public\\Desktop\\desktop.ini was created on volume CA0C7A48 (2009-07-14 04:54:23 UTC). \\Users\\Public\\Desktop\\desktop.ini was last modified on volume CA0C7A48 (2009-07-14 04:54:24 UTC). The creation of \\Users\\Public\\Desktop\\desktop.ini on volume CA0C7A48 (2009-07-14 04:54:23 UTC) happened before the last modification of \\Users\\Public\\Desktop\\desktop.ini on volume CA0C7A48 (2009-07-14 04:54:24 UTC): the gap of 624.002 ms exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 62,
+      "kind": "fileCreated",
+      "t": 1247547263656519,
+      "res": 1,
+      "obj": 47,
+      "obj_text": "\\Users\\Public\\Desktop\\desktop.ini",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "d7c51fd4a6693468f061556aabe7199d34afdad336a3a2b6ece62057bac157de",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 174,
+        "tool": "dissect.target 3.25.1",
+        "user": "Public"
+      }
+    },
+    {
+      "id": 88,
+      "kind": "fileModified",
+      "t": 1247547264280521,
+      "res": 1,
+      "obj": 47,
+      "obj_text": "\\Users\\Public\\Desktop\\desktop.ini",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "c8ce29d91f84880792f29e7fb0370bf7e69e6115e312b21168855b1207b7df40",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\desktop.ini",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 174,
+        "tool": "dissect.target 3.25.1",
+        "user": "Public"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          62
+        ]
+      },
+      "english": "\\Users\\Public\\Desktop\\desktop.ini was created on volume CA0C7A48 (2009-07-14 04:54:23 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          88
+        ]
+      },
+      "english": "\\Users\\Public\\Desktop\\desktop.ini was last modified on volume CA0C7A48 (2009-07-14 04:54:24 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          62,
+          88
+        ]
+      },
+      "english": "The creation of \\Users\\Public\\Desktop\\desktop.ini on volume CA0C7A48 (2009-07-14 04:54:23 UTC) happened before the last modification of \\Users\\Public\\Desktop\\desktop.ini on volume CA0C7A48 (2009-07-14 04:54:24 UTC): the gap of 624.002 ms exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "M076.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,97 @@
+{
+  "finding_id": "M058",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          151
+        ]
+      },
+      {
+        "tagged": [
+          151,
+          "obj",
+          220,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"cloud storage\" was made in chrome (2015-03-23 18:14:50 UTC). cloud storage is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cloud storage\").",
+  "cited_facts": [
+    {
+      "id": 151,
+      "kind": "webSearch",
+      "t": 1427134490369135,
+      "res": 1,
+      "obj": 90,
+      "obj_text": "cloud storage",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "0663a75e26846a99bb9b4df5fcca3170f6f8685b17bd9f816c50606b1948772d",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 220,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 90,
+      "obj_text": "cloud storage",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "f54dbc2c56b98f1d28a213e64c27d6b8a8ec0e1e4a835126a3ef460523acbdb5",
+      "prov": {
+        "rule": "search term contains the watch-list word \"cloud storage\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          151
+        ]
+      },
+      "english": "A web search for \"cloud storage\" was made in chrome (2015-03-23 18:14:50 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          151,
+          "obj",
+          220,
+          117
+        ]
+      },
+      "english": "cloud storage is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"cloud storage\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M058.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

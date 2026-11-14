@@ -18,11 +18,13 @@ Built at HackPrinceton Fall 2026. Full design: [chain-of-proof-revised.md](chain
 | Lean core: facts, brick IR, checker, sets, theorems about the checker | Working, tested |
 | `check`: claim JSON → Lean certificate → kernel verdict, with per-brick feedback on rejection | Working, tested |
 | Verifier: re-check a certificate from the evidence DB alone | Working, tested |
-| Miner core (`lean/Miner.lean`): two generators and `mine_sound` | Compiles; no CLI yet |
-| Extractor (image → evidence DB) | Not started; schema is fixed in `extractor/schema.sql` |
-| Agents, UI, answer-key scorer | Not started |
+| Extractor: the real PC and USB images → evidence file (`extractor/`) | Working for USB devices, volumes, shortcuts, jump lists, web searches, file times. Not yet: e-mail, Recycle Bin, CD burning, deleted files on RM#2 |
+| Miner (`miner/`): every instance of the approved sets, no LLM | Working on the real evidence |
+| Scorer against the NIST answer key (`eval/`) | Working; numbers below |
+| Agents | Not started |
+| UI | In progress (see [TASKS.md](TASKS.md)); `ui/public/run.json` is a real run |
 
-Everything that works today runs on a hand-written sample fixture, not on the case images.
+The numbers in this README come from the real case images, not from a fixture.
 
 ## The idea
 
@@ -204,41 +206,99 @@ every mined brick can be kernel-checked rather than left at a weaker tier. One l
 plain `decide` exceeds its recursion limit near 200 cited facts in one claim, so
 certificates use `decide +kernel`.
 
-### End-to-end results on the case
+### Results on the real case images
 
-Not run yet. This table is filled in by `eval/` once the extractor and agents exist.
+One command, no LLM, about 30 seconds: `python3 -m eval.baseline`. It mines every
+instance of the approved sets from the extracted evidence, sends each through the Lean
+kernel, and scores the result against 96 rows of the NIST answer key.
 
-| Metric | Result |
+| Check | Result |
 |---|---|
-| Answer-key items with a certified finding (coverage) | pending |
-| Certified findings contradicted by the answer key | pending |
-| Agent proposals rejected by Lean | pending |
-| Certified findings by strength (strong / heuristic / judgment) | pending |
-| Image to first certified narrative (wall clock) | pending |
+| A. Answer-key rows found in the extracted evidence | **48 / 96**; all 48 within 2 s of NIST's timestamp |
+| B. False claims (per the answer key) refused by the kernel | **16 / 16** |
+| B. True claims (per the answer key) certified | 14 / 15 |
+| C. Answer-key rows stated by a certified finding | **43 / 96** |
+| Certified findings | 100: 94 strong, 6 heuristic, 0 judgment |
+| Certificates that re-verify from the evidence file alone | 100 / 100 |
+
+| Answer-key question | Rows | In evidence | Certified |
+|---|---:|---:|---:|
+| Q16 web searches | 28 | 28 | 23 |
+| Q22 USB devices attached | 4 | 4 | 4 |
+| Q26 files opened on RM#2 | 2 | 2 | 2 |
+| Q28 files opened on the network drive | 4 | 4 | 4 |
+| Q35 files opened from the CD-R | 8 | 8 | 8 |
+| Q36 resignation letter timestamps | 2 | 2 | 2 |
+| Q21 e-mails | 12 | 0 | 0 |
+| Q33 CD burns | 5 | 0 | 0 |
+| Q51 Recycle Bin | 14 | 0 | 0 |
+| Q55 files copied to RM#2 | 17 | 0 | 0 |
+
+What the table says: where we extract an artifact, it agrees with NIST to the second.
+Half the reference is still out of reach because four extractors are not written. The
+five searches in evidence but not certified are the ones the miner's watch list does not
+flag; they are work for the agents.
+
+**The one true claim the gate refuses is the most useful result so far.** NIST says
+`winter_whether_advisory.zip` was opened from the suspect's own stick, RM#2. The
+shortcut records volume serial `9E6A5B82`. The seized RM#2 holds volume `B4D85399`,
+because the suspect quick-formatted it afterwards. Lean refuses "opened from the seized
+RM#2" as a strong claim, correctly: no record links those two serials. The registry
+does show both volumes under the label `IAMAN $_@`, so the miner certifies the same
+conclusion as a *heuristic* finding that names the weak link (rule R8, shared label).
+An LLM report would state the conclusion flat. Ours shows where the inference is.
+
+These numbers are not yet comparable with Mulder's columns above: Mulder scores 20
+items, we score 96 answer-key rows. Mapping to Mulder's 20 is open.
 
 ## Evaluation
 
-**Protocol.** Run the pipeline on the four case images with no access to the answer key.
-Score the certified findings against the same 20 answer-key items Mulder uses, with the
-same three definitions, so the columns are comparable. Publish every certificate and the
-full proposal log.
+The scorer has no LLM in it. Same evidence, same reference, same run: same numbers.
+
+**Reference.** [`eval/reference.json`](eval/reference.json): 96 rows transcribed from
+the [NIST answer key](https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf),
+each with its question number, page, NIST's local time and the UTC conversion. It
+covers every answer row of ten questions about the leak itself (searches, e-mails,
+devices, opened files, CD burning, the resignation letter, deleted files, files copied
+to RM#2). The list was fixed before the first scored run and includes the rows we
+cannot produce yet.
+
+**Three checks**, all in `python3 -m eval.score`:
+
+| Check | Question it answers | How |
+|---|---|---|
+| A. Extraction | Is the evidence right? Lean cannot check this. | For each reference row: is there a fact of that kind, for that entity, within 2 s of NIST's time? Reported as match, time differs, or missing. |
+| B. Gate | Does the kernel separate true from false? | [`eval/labeled_claims.json`](eval/labeled_claims.json): 15 claims the answer key supports and 16 it contradicts. True ones must certify, false ones must be refused. |
+| C. Run | How much of the answer key does a run certify? | A row counts only if a verified finding *states* it: the fact is an argument of a set whose sentence prints its entity and time. Citing it through a tag does not count. |
+
+**What is deterministic, and what is not.**
+
+| Stage | Deterministic? | Check |
+|---|---|---|
+| Extractor | Yes | Two builds from the same images give the same file (`sha256` recorded in `eval/results.json`) |
+| Miner | Yes | Finding ids and claims depend only on the evidence file (tested) |
+| Kernel verdict | Yes | A certificate either type-checks or does not |
+| Scorer | Yes | Pure function of three JSON files |
+| LLM agents | No | Scored by the same scorer; report the range over several runs. The miner run is the fixed floor to compare against. |
 
 **Claims we are testing.**
 
-1. *No certified finding is contradicted by the answer key.* A single counterexample
-   falsifies it, and would point at a wrong rule, an extractor error, or a template that
-   says more than its set checks.
-2. *The check does real work.* Measured by the share of agent proposals Lean rejects and
-   by what those proposals said. If nothing is ever rejected, the gate is decoration.
-3. *The IR covers enough to matter.* Measured by coverage of answer-key items. Items the
-   IR cannot express are listed, not hidden.
+1. *No certified finding is contradicted by the answer key.* Check B is the direct
+   test: every false claim must be refused. A single acceptance falsifies it.
+2. *The check does real work.* The 16 refusals name the failing brick, e.g.
+   `FAIL link 41 (aux) 241 (aux)`: the shortcut's volume is not the device's volume.
+3. *The IR covers enough to matter.* Check C, per question, with the misses listed.
 
-**Tests in this repo** (`tests/`, 10 cases, each runs the real kernel): a golden
-certificate with no axioms; a multi-brick narrative with tags; rejection of a reversed
-order, of a shortcut tied to another device's volume, of an order inside timestamp
-uncertainty, of the same path on a different volume, and of a tag placed before a real
-event; malformed and injected claims refused before Lean; verifier detection of an
-altered sentence, fact hash or claim; and the DuckDB backend.
+**What this evaluation does not show.** The reference covers ten of the answer key's
+57 questions. The rows were transcribed by hand. Agreement with NIST on 48 rows says
+nothing about facts the reference does not mention. Rules R1 to R10 are assumptions
+about Windows, listed on every certificate, not proved.
+
+**Tests in this repo** (`tests/`, 14 cases, each runs the real kernel): the ten checker
+and verifier cases on the fixture (golden certificate with no axioms, tagged narrative,
+five kinds of rejection, malformed claims, tampering, DuckDB backend), plus four on the
+real evidence: extraction still matches the answer key, the gate refuses every labeled
+false claim, the miner is deterministic, and a row is only credited when stated.
 
 ## Quickstart
 
@@ -258,14 +318,27 @@ python3 -m checker.check --facts fixtures/sample_facts.json --id F8 \
 # re-check a stored certificate from the evidence alone
 python3 -m verifier.verify fixtures/sample_cert/N1.json --facts fixtures/sample_facts.json
 
+# the real case: mine, kernel-check and score against the NIST answer key (about 30 s)
+python3 -m eval.baseline
+
+# score any run file (an agent run, later) with the same scorer
+python3 -m eval.score --run ui/public/run.json
+
+# re-check every certificate of the real run from the evidence file alone
+python3 -m verifier.verify certs/*.json --facts evidence/case_facts.json
+
 # tests (add `uv run` to include the DuckDB backend test)
 python3 -m unittest discover -s tests -t .
 
-# case images: removable media (430 MB); add --pc for the PC image (7.3 GB)
-scripts/fetch_data.sh
+# optional: rebuild the evidence file from the images (7.7 GB download, then 10 s)
+scripts/fetch_data.sh --pc
+uv run --extra extract python -I extractor/build.py data --out evidence/case_facts.json
 ```
 
-`--facts` takes the sample JSON fixture or a DuckDB file with the schema in
+`evidence/case_facts.json` is committed, so nothing above the last two lines needs the
+images.
+
+`--facts` takes a JSON evidence file or a DuckDB file with the schema in
 [`extractor/schema.sql`](extractor/schema.sql).
 
 ## Repository layout
@@ -280,13 +353,20 @@ lean/
   ChainOfProof/Rules.md        rules, strengths, templates, timestamp conventions
   Miner.lean                   brute-force generators and mine_sound
 checker/                       claim JSON → Lean certificate → kernel verdict; English templates
-verifier/                      re-check certificates against the evidence DB
-extractor/schema.sql           evidence DB schema
-fixtures/                      sample facts and a sample certificate (synthetic)
-tests/                         end-to-end tests of checker and verifier
+verifier/                      re-check certificates against the evidence
+extractor/                     case images → evidence file (dissect); schema.sql; exhibits.json
+evidence/case_facts.json       facts extracted from the real images (242 rows)
+miner/                         every instance of the approved sets, no LLM
+eval/reference.json            96 answer-key rows (the ground truth)
+eval/labeled_claims.json       31 claims with a known answer
+eval/score.py, baseline.py     the scorer and the reproducible baseline run
+eval/results.json              last scored result, row by row
+certs/                         certificates and proposal log of the baseline run
+ui/public/run.json             the same run, bundled for the front end
+fixtures/                      synthetic sample facts and certificate, for unit tests
+tests/                         checker, verifier, scorer and miner tests
 scripts/fetch_data.sh          download the case images
-certs/                         generated certificates
-agent/  ui/  eval/             not started
+agent/                         not started
 ```
 
 ## Sources

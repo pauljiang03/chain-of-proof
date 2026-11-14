@@ -17,6 +17,8 @@
     emailSent     message id               recipient
     cdBurn        burn session / path      0
     tag           tagged entity            tag id
+    volumeSeen    volume label             volume serial   (the PC's registry recorded it)
+    volumeOnDevice device serial           volume serial   (read from the seized device's image)
 -/
 namespace ChainOfProof
 
@@ -25,6 +27,7 @@ inductive Kind where
   | fileCreated | fileModified | fileDeleted
   | webSearch | emailSent | cdBurn
   | tag
+  | volumeSeen | volumeOnDevice
   deriving DecidableEq, Repr
 
 structure Fact where

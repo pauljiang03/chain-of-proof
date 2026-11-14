@@ -1,0 +1,283 @@
+{
+  "finding_id": "M024",
+  "question": "Which files were opened from removable devices or network shares?",
+  "claim": {
+    "both": [
+      {
+        "openedFromRecorded": [
+          41,
+          237
+        ]
+      },
+      {
+        "tagged": [
+          41,
+          "obj",
+          209,
+          118
+        ]
+      },
+      {
+        "sameLabel": [
+          237,
+          238
+        ]
+      },
+      {
+        "recordedOnDevice": [
+          238,
+          242
+        ]
+      },
+      {
+        "deviceHolds": [
+          3,
+          242
+        ]
+      },
+      {
+        "tagged": [
+          3,
+          "obj",
+          199,
+          116
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC). \\Secret Project Data\\design\\winter_whether_advisory.zip is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief). This PC recorded volume 9E6A5B82 (2015-03-24 13:58:34 UTC) and volume B4D85399 (2015-03-24 21:02:34 UTC) under the same label \"IAMAN $_@\". A shared label suggests one physical device but does not prove it (heuristic rule R8). Volume B4D85399, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC), is the volume on seized device 4C530012550531106501. USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial holds volume B4D85399. 4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 41,
+      "kind": "lnkTarget",
+      "t": 1427205683393024,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "319140a409af9fc7f4c53d06c1c23cc845ac9837aa17f378f477f3b85409b86a",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+        "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip",
+        "drive_letter": "E:",
+        "drive_type": 3,
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "jump list DestList last-access time for this entry",
+        "tool": "dissect.target 3.25.1",
+        "user": "informant",
+        "volume_label": "IAMAN $_@"
+      }
+    },
+    {
+      "id": 237,
+      "kind": "volumeSeen",
+      "t": 1427205514439312,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "IAMAN $_@",
+      "aux": 31,
+      "aux_text": "9E6A5B82",
+      "row_sha256": "b78dd7c1aa8c814b9e899f9ea3207f94598a0312bd8673d395c940c04e1b1751",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 209,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 30,
+      "obj_text": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+      "aux": 118,
+      "aux_text": "confidential",
+      "row_sha256": "5419ae2cb673dec3f2bbd84d74f0437d7b500cacf608933efe2d76f7f27d9f13",
+      "prov": {
+        "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    },
+    {
+      "id": 238,
+      "kind": "volumeSeen",
+      "t": 1427230954309607,
+      "res": 1,
+      "obj": 120,
+      "obj_text": "IAMAN $_@",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "e8bb7604d4170668f9edbcc09e2e1dd387c92b238d87ef5d4a8e2e917f41a319",
+      "prov": {
+        "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 242,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 121,
+      "aux_text": "B4D85399",
+      "row_sha256": "c395aad376b19988abd9eab210a2826f6d1891ff1a994775de4639813a57ec68",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 65536",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E221034C",
+        "exhibit": "RM#2",
+        "filesystem": "fat",
+        "image": "rm2.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "IAMAN $_@"
+      }
+    },
+    {
+      "id": 3,
+      "kind": "usbInsert",
+      "t": 1427205512859000,
+      "res": 1000,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "d7b4abaf42dea7fc25ca5e2212ec4f4d64180dd2dc265c86a25d6b6f2386f4d5",
+      "prov": {
+        "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "log local time, converted from America/New_York",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 199,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 2,
+      "obj_text": "4C530012550531106501",
+      "aux": 116,
+      "aux_text": "unauthorized-device",
+      "row_sha256": "2d1c6ac7dcdd20bf12744e61affda8d9d3212d3b752d696639b35fe65cb5f299",
+      "prov": {
+        "rule": "device serial is not on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "openedFromRecorded": [
+          41,
+          237
+        ]
+      },
+      "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip was opened (2015-03-24 14:01:23 UTC) from volume 9E6A5B82, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 13:58:34 UTC).",
+      "rules": [
+        "R3",
+        "R6"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          41,
+          "obj",
+          209,
+          118
+        ]
+      },
+      "english": "\\Secret Project Data\\design\\winter_whether_advisory.zip is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "sameLabel": [
+          237,
+          238
+        ]
+      },
+      "english": "This PC recorded volume 9E6A5B82 (2015-03-24 13:58:34 UTC) and volume B4D85399 (2015-03-24 21:02:34 UTC) under the same label \"IAMAN $_@\". A shared label suggests one physical device but does not prove it (heuristic rule R8).",
+      "rules": [
+        "R6",
+        "R8"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "recordedOnDevice": [
+          238,
+          242
+        ]
+      },
+      "english": "Volume B4D85399, which this PC recorded under the label \"IAMAN $_@\" (2015-03-24 21:02:34 UTC), is the volume on seized device 4C530012550531106501.",
+      "rules": [
+        "R6",
+        "R7"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "deviceHolds": [
+          3,
+          242
+        ]
+      },
+      "english": "USB device 4C530012550531106501 was connected to this PC (2015-03-24 13:58:32 UTC). The seized device with that serial holds volume B4D85399.",
+      "rules": [
+        "R1",
+        "R7"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          3,
+          "obj",
+          199,
+          116
+        ]
+      },
+      "english": "4C530012550531106501 is tagged \"unauthorized-device\" (rule: device serial is not on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "R3",
+    "R6",
+    "R7",
+    "R8",
+    "T"
+  ],
+  "strength": "heuristic",
+  "lean_file": "M024.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

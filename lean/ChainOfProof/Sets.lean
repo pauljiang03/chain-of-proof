@@ -28,6 +28,33 @@ def copiedHere (c m : Nat) : Claim :=
 def deletedAfter (d x : Nat) : Claim :=
   .both (.is d .fileDeleted) (.before x d)
 
+/-- R1+R7 (strong): USB record `u` and device examination `d` name the same device serial. -/
+def deviceHolds (u d : Nat) : Claim :=
+  .both (.is u .usbInsert) (.both (.is d .volumeOnDevice) (.link u .obj d .obj))
+
+/-- R3+R7 (strong): LNK `l` targets the volume found on the examined device `d`. -/
+def openedFromDevice (l d : Nat) : Claim :=
+  .both (.is l .lnkTarget) (.both (.is d .volumeOnDevice) (.link l .aux d .aux))
+
+/-- R3+R6 (strong): LNK `l` targets a volume this PC's registry recorded as `s`. -/
+def openedFromRecorded (l s : Nat) : Claim :=
+  .both (.is l .lnkTarget) (.both (.is s .volumeSeen) (.link l .aux s .aux))
+
+/-- R6+R7 (strong): the volume recorded as `s` is the one on the examined device `d`. -/
+def recordedOnDevice (s d : Nat) : Claim :=
+  .both (.is s .volumeSeen) (.both (.is d .volumeOnDevice) (.link s .aux d .aux))
+
+/-- R8 (heuristic): two recorded volumes carry the same label. -/
+def sameLabel (a b : Nat) : Claim :=
+  .both (.is a .volumeSeen) (.both (.is b .volumeSeen) (.link a .obj b .obj))
+
+/-- Single-fact sets: the claim is that the cited record exists and is of this kind. -/
+def usbConnected (u : Nat) : Claim := .is u .usbInsert
+def opened (l : Nat) : Claim := .is l .lnkTarget
+def searched (w : Nat) : Claim := .is w .webSearch
+def fileCreatedAt (c : Nat) : Claim := .is c .fileCreated
+def fileModifiedAt (m : Nat) : Claim := .is m .fileModified
+
 /-- The entity in slot `s` of fact `f` carries tag `tagId`, by tag fact `g`. -/
 def tagged (f : Nat) (s : Slot) (g tagId : Nat) : Claim :=
   .both (.is g .tag) (.both (.val g .aux tagId) (.link g .obj f s))

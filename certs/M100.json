@@ -1,0 +1,110 @@
+{
+  "finding_id": "M100",
+  "question": "When were the user's files created and last modified?",
+  "claim": {
+    "both": [
+      {
+        "fileCreatedAt": [
+          86
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          112
+        ]
+      },
+      {
+        "before": [
+          86,
+          112
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was created on volume CA0C7A48 (2015-03-25 15:28:33 UTC). \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was last modified on volume CA0C7A48 (2015-03-25 15:28:34 UTC). The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:33 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:34 UTC): the gap of 904.8 ms exceeds the combined timestamp uncertainty of 2 µs.",
+  "cited_facts": [
+    {
+      "id": 86,
+      "kind": "fileCreated",
+      "t": 1427297313647604,
+      "res": 1,
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "49148d2dd57f89f6f82d88b5c0fcf3506d081989ad0439ce590404fa70d23256",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 178139,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 112,
+      "kind": "fileModified",
+      "t": 1427297314552404,
+      "res": 1,
+      "obj": 45,
+      "obj_text": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "07f527878f5c0285744f17414690932394e4e8bc5e5a5087d299a650b65a92a7",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 178139,
+        "tool": "dissect.target 3.25.1",
+        "user": "informant"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          86
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was created on volume CA0C7A48 (2015-03-25 15:28:33 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          112
+        ]
+      },
+      "english": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps was last modified on volume CA0C7A48 (2015-03-25 15:28:34 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "before": [
+          86,
+          112
+        ]
+      },
+      "english": "The creation of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:33 UTC) happened before the last modification of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps on volume CA0C7A48 (2015-03-25 15:28:34 UTC): the gap of 904.8 ms exceeds the combined timestamp uncertainty of 2 µs.",
+      "rules": [],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "M100.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

@@ -1,0 +1,117 @@
+{
+  "finding_id": "M083",
+  "question": "Which files look copied onto a volume?",
+  "claim": {
+    "both": [
+      {
+        "copiedHere": [
+          69,
+          94
+        ]
+      },
+      {
+        "tagged": [
+          69,
+          "obj",
+          207,
+          118
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:12 UTC) after its last modification (2014-12-18 21:50:58 UTC). This rests on heuristic rule R4. \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+  "cited_facts": [
+    {
+      "id": 69,
+      "kind": "fileCreated",
+      "t": 1424037132550000,
+      "res": 10000,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "7de4ca85eadf4a1023185fdb62bce2ff5c66de0c44469dba0d32081a4d008fcc",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 35226880,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 94,
+      "kind": "fileModified",
+      "t": 1418939458000000,
+      "res": 10000,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "8cc53f3b8aed054a444677edade54de4f51262e000b8e158c46e13af9e09fc47",
+      "prov": {
+        "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+        "exhibit": "RM#1",
+        "image": "rm1.E01",
+        "size": 35226880,
+        "time_zone": "exFAT local time with its recorded UTC offset",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 207,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 53,
+      "obj_text": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+      "aux": 118,
+      "aux_text": "confidential",
+      "row_sha256": "413d0a44fb0e096e295393b4e4ca9ab79aed19ca940c6fb675f21e9064a3df16",
+      "prov": {
+        "rule": "path carries the confidential-project marker named in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "copiedHere": [
+          69,
+          94
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx was likely copied onto volume 5C754D3E: it was created there (2015-02-15 21:52:12 UTC) after its last modification (2014-12-18 21:50:58 UTC). This rests on heuristic rule R4.",
+      "rules": [
+        "R4"
+      ],
+      "strength": "heuristic"
+    },
+    {
+      "part": {
+        "tagged": [
+          69,
+          "obj",
+          207,
+          118
+        ]
+      },
+      "english": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx is tagged \"confidential\" (rule: path carries the confidential-project marker named in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R4",
+    "T"
+  ],
+  "strength": "heuristic",
+  "lean_file": "M083.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

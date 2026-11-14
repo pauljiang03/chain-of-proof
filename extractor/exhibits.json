@@ -1,0 +1,7 @@
+{
+  "_source": "NIST CFReDS Data Leakage Case, section 2 'Target systems and devices' (https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf). This stands in for the acquisition record that ties an image file to a physical device.",
+  "pc.E01":  {"exhibit": "PC",   "role": "pc"},
+  "rm1.E01": {"exhibit": "RM#1", "role": "removable", "device_serial": "4C530012450531101593"},
+  "rm2.E01": {"exhibit": "RM#2", "role": "removable", "device_serial": "4C530012550531106501"},
+  "rm3.E01": {"exhibit": "RM#3", "role": "optical"}
+}

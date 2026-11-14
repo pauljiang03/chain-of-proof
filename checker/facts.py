@@ -10,13 +10,14 @@ import hashlib
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable
+from typing import Dict, Iterable, List
 
 KINDS = (
     "usbInsert", "volumeMount", "lnkTarget",
     "fileCreated", "fileModified", "fileDeleted",
     "webSearch", "emailSent", "cdBurn",
     "tag",
+    "volumeSeen", "volumeOnDevice",
 )
 
 
@@ -57,6 +58,10 @@ class FactSource:
     def string(self, sid: int) -> str:
         raise NotImplementedError
 
+    def all(self) -> List[Fact]:
+        """Every fact, ordered by id. For the miner and the scorer."""
+        raise NotImplementedError
+
 
 class JsonFacts(FactSource):
     """A JSON file: {"strings": {"<id>": "<text>"}, "facts": [{...}]}. For fixtures and tests."""
@@ -77,6 +82,9 @@ class JsonFacts(FactSource):
 
     def string(self, sid):
         return self._strings.get(sid, f"#{sid}")
+
+    def all(self):
+        return [self._facts[i] for i in sorted(self._facts)]
 
 
 class DuckFacts(FactSource):
@@ -100,6 +108,11 @@ class DuckFacts(FactSource):
     def string(self, sid):
         row = self._db.execute("SELECT s FROM strings WHERE id = ?", [sid]).fetchone()
         return row[0] if row else f"#{sid}"
+
+    def all(self):
+        rows = self._db.execute(
+            "SELECT id, kind, t, res, obj, aux, prov FROM facts ORDER BY id").fetchall()
+        return [Fact(r[0], r[1], r[2], r[3], r[4], r[5], json.loads(r[6] or "{}")) for r in rows]
 
 
 def open_source(path) -> FactSource:

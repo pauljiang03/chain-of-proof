@@ -1,0 +1,97 @@
+{
+  "finding_id": "M064",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          157
+        ]
+      },
+      {
+        "tagged": [
+          157,
+          "obj",
+          229,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:30 UTC). how to recover data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+  "cited_facts": [
+    {
+      "id": 157,
+      "kind": "webSearch",
+      "t": 1427134710872763,
+      "res": 1,
+      "obj": 95,
+      "obj_text": "how to recover data",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "beda7c56698f2ba8f8927d85fb15979d308b0701a2faa409290a860a56371456",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 229,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 95,
+      "obj_text": "how to recover data",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "806044d1b8308f46b50445c71600d6076f46868ef9b0c9916d655ca8af64c960",
+      "prov": {
+        "rule": "search term contains the watch-list word \"recover\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          157
+        ]
+      },
+      "english": "A web search for \"how to recover data\" was made in chrome (2015-03-23 18:18:30 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          157,
+          "obj",
+          229,
+          117
+        ]
+      },
+      "english": "how to recover data is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M064.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

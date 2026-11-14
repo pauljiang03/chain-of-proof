@@ -1,0 +1,97 @@
+{
+  "finding_id": "M068",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          161
+        ]
+      },
+      {
+        "tagged": [
+          161,
+          "obj",
+          222,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"data recovery tools\" was made in chrome (2015-03-23 19:47:43 UTC). data recovery tools is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+  "cited_facts": [
+    {
+      "id": 161,
+      "kind": "webSearch",
+      "t": 1427140063009623,
+      "res": 1,
+      "obj": 96,
+      "obj_text": "data recovery tools",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "1758a69244c0cdc5a8babcd1aa2d522ef90b74d6c0e2102328fd4eb7e7c342bf",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 222,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 96,
+      "obj_text": "data recovery tools",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "fb5279f7069db3f5f38b1185937ca0c5be2d3ad0448ed0459802bd8b02bd0f70",
+      "prov": {
+        "rule": "search term contains the watch-list word \"recover\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          161
+        ]
+      },
+      "english": "A web search for \"data recovery tools\" was made in chrome (2015-03-23 19:47:43 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          161,
+          "obj",
+          222,
+          117
+        ]
+      },
+      "english": "data recovery tools is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"recover\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M068.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

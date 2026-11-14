@@ -24,10 +24,12 @@ The split is by lane, not by known skills: swap if someone else is the better fi
 
 The front end is a static site that reads one JSON file. No backend to build or host.
 
-- **Build against today:** [`ui/public/run.sample.json`](ui/public/run.sample.json)
-  (7 findings, 4 rejections, synthetic facts, real kernel verdicts).
-- **Real data arrives as:** `ui/public/run.json`, same shape, written by
-  `python -m checker.export --certs certs --out ui/public/run.json`.
+- **Real data is here:** [`ui/public/run.json`](ui/public/run.json): 100 findings and
+  16 rejections from the real case images. Regenerate with `python3 -m eval.baseline`.
+- **Small file for layout work:** [`ui/public/run.sample.json`](ui/public/run.sample.json)
+  (7 findings, 4 rejections, synthetic).
+- Good ones to design around: `M024` (heuristic chain across a reformatted USB stick,
+  six parts), `M005` (strong chain, authorized device), `P01` (rejection).
 
 ```
 run.json
@@ -56,13 +58,17 @@ Two rules for anything shown on screen:
 
 ## Lane 1: Pipeline — @pauljiang03
 
-- Real images → `evidence.duckdb` (USB devices, volume serials, LNK targets, file
-  times first; then browser, Recycle Bin, email, CD burning, tags).
-- Miner: every instance of every set, kernel-checked in batches.
-- Agent loop with `sql`, `get_fact`, `check`; challenger pass.
-- New sets and a closed-world brick for absence claims.
-- `run.json` from a real run, refreshed as the pipeline grows.
-- **Done when:** `run.json` holds real certificates that answer answer-key questions.
+Done: extractor for USB devices, volumes, shortcuts, jump lists, searches and file
+times; miner; scorer; first real `run.json`.
+
+Next, in the order the scorer says matters (rows of the answer key each would add):
+
+1. Files copied to RM#2, recovered from FAT directory entries after the format (17).
+2. Recycle Bin records (14). 3. E-mail from the Outlook OST (12). 4. CD burns (5).
+5. Agent loop with `sql`, `get_fact`, `check`; challenger pass. Scored by `eval.score`.
+6. A closed-world brick for absence claims.
+- **Done when:** `python3 -m eval.baseline` shows every question above zero and an
+  agent run beats the miner's row count.
 
 ## Lane 2: Evidence graph and timeline — @Taygeta-gl
 
@@ -97,19 +103,21 @@ The frame everything sits in, and the two views that make the trust argument.
 
 ## Lane 4: Eval and demo — @michellejiang2017
 
-The numbers and the story.
+The numbers and the story. The scorer and a 96-row reference exist (`eval/`); run
+`python3 -m eval.baseline` to see them.
 
-1. **Answer key.** `eval/answer_key.json`: the 20 items Mulder scores on this case
-   (its scorecards are public: https://pypi.org/project/mulder-dfir/), each with the
-   NIST answer and which fact kinds it needs. Source:
-   https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf
-2. **Scorer.** `python -m eval.score ui/public/run.json`: items covered by a certified
-   finding, findings the key contradicts, share of proposals rejected. Same three
-   definitions as Mulder so the columns compare.
-3. **Scoreboard** panel in the UI: our row next to Mulder's published rows.
+1. **Audit the reference.** Spot-check `eval/reference.json` against the
+   [NIST answer key](https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf)
+   (each row has its page). It was transcribed by hand; a second pair of eyes makes the
+   numbers defensible.
+2. **Mulder mapping.** Mark which reference rows correspond to the 20 items Mulder
+   scores (https://pypi.org/project/mulder-dfir/), so we can print a row comparable to
+   theirs. Add any of the 20 we lack.
+3. **Scoreboard** panel in the UI from `eval/results.json`: the per-question table, the
+   gate result (16/16 false claims refused), and Mulder's published rows beside ours.
 4. **Demo.** Two-minute script, backup recording, video, Devpost text. Opening line and
-   the rejection moment first; everything else is optional.
-- **Done when:** the scorer prints the README's results table, and a full demo has been
+   the rejection moment first; the reformatted-USB finding (`M024`) is the story.
+- **Done when:** the scoreboard renders from `results.json`, and a full demo has been
   rehearsed twice with a timer.
 
 ## Checkpoints

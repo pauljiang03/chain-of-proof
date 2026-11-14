@@ -1,0 +1,97 @@
+{
+  "finding_id": "M054",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          146
+        ]
+      },
+      {
+        "tagged": [
+          146,
+          "obj",
+          235,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC). windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",
+  "cited_facts": [
+    {
+      "id": 146,
+      "kind": "webSearch",
+      "t": 1427134355567263,
+      "res": 1,
+      "obj": 86,
+      "obj_text": "windows event logs",
+      "aux": 70,
+      "aux_text": "iexplore",
+      "row_sha256": "7344471c02fcdc8fb353f7311edfb77e090b8a6e86deba786315c93df59c6366",
+      "prov": {
+        "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 235,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 86,
+      "obj_text": "windows event logs",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "24d29a29d2fb82afd68cc5beb484c329bb63f0f7b6ed3aba1985a8ebae5ab0e4",
+      "prov": {
+        "rule": "search term contains the watch-list word \"event log\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          146
+        ]
+      },
+      "english": "A web search for \"windows event logs\" was made in iexplore (2015-03-23 18:12:35 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          146,
+          "obj",
+          235,
+          117
+        ]
+      },
+      "english": "windows event logs is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"event log\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M054.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

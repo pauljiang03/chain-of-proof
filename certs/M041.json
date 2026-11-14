@@ -1,0 +1,97 @@
+{
+  "finding_id": "M041",
+  "question": "Which web searches match the watch list?",
+  "claim": {
+    "both": [
+      {
+        "searched": [
+          125
+        ]
+      },
+      {
+        "tagged": [
+          125,
+          "obj",
+          230,
+          117
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:03:40 UTC). information leakage cases is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
+  "cited_facts": [
+    {
+      "id": 125,
+      "kind": "webSearch",
+      "t": 1427133820424839,
+      "res": 1,
+      "obj": 76,
+      "obj_text": "information leakage cases",
+      "aux": 69,
+      "aux_text": "chrome",
+      "row_sha256": "0bce4bea7a0121c3ecae3eecdc2a77ece31d83154d21051cd60d6ac4bb6fbf66",
+      "prov": {
+        "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "browser history visit time",
+        "tool": "dissect.target 3.25.1",
+        "url": "https://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases",
+        "user": "informant"
+      }
+    },
+    {
+      "id": 230,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 76,
+      "obj_text": "information leakage cases",
+      "aux": 117,
+      "aux_text": "watch-list-search",
+      "row_sha256": "ec348db90bb49df6dc2a1f357caef86363efb8e9e6cac110eb6c31ace5ecdac9",
+      "prov": {
+        "rule": "search term contains the watch-list word \"leak\"",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "searched": [
+          125
+        ]
+      },
+      "english": "A web search for \"information leakage cases\" was made in chrome (2015-03-23 18:03:40 UTC).",
+      "rules": [
+        "R9"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          125,
+          "obj",
+          230,
+          117
+        ]
+      },
+      "english": "information leakage cases is tagged \"watch-list-search\" (rule: search term contains the watch-list word \"leak\").",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R9",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M041.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

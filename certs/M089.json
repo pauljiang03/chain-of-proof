@@ -1,0 +1,93 @@
+{
+  "finding_id": "M089",
+  "question": "When were the user's files created and last modified?",
+  "claim": {
+    "both": [
+      {
+        "fileCreatedAt": [
+          75
+        ]
+      },
+      {
+        "fileModifiedAt": [
+          101
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "\\Users\\All Users\\Desktop\\Google Chrome.lnk was created on volume CA0C7A48 (2015-03-22 15:11:52 UTC). \\Users\\All Users\\Desktop\\Google Chrome.lnk was last modified on volume CA0C7A48 (2015-03-22 15:11:52 UTC).",
+  "cited_facts": [
+    {
+      "id": 75,
+      "kind": "fileCreated",
+      "t": 1427037112048820,
+      "res": 1,
+      "obj": 58,
+      "obj_text": "\\Users\\All Users\\Desktop\\Google Chrome.lnk",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "3fef6dbddf59e5f9c017a592fc3873bfb9d41ebd28a0e09e555c3bf1c89d681f",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 2259,
+        "tool": "dissect.target 3.25.1",
+        "user": "All Users"
+      }
+    },
+    {
+      "id": 101,
+      "kind": "fileModified",
+      "t": 1427037112048820,
+      "res": 1,
+      "obj": 58,
+      "obj_text": "\\Users\\All Users\\Desktop\\Google Chrome.lnk",
+      "aux": 4,
+      "aux_text": "CA0C7A48",
+      "row_sha256": "abd326eb7bc21a727754d392db9a5b57e5a3f731baf8980463491b7da30ea441",
+      "prov": {
+        "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\Google Chrome.lnk",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "size": 2259,
+        "tool": "dissect.target 3.25.1",
+        "user": "All Users"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "fileCreatedAt": [
+          75
+        ]
+      },
+      "english": "\\Users\\All Users\\Desktop\\Google Chrome.lnk was created on volume CA0C7A48 (2015-03-22 15:11:52 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "fileModifiedAt": [
+          101
+        ]
+      },
+      "english": "\\Users\\All Users\\Desktop\\Google Chrome.lnk was last modified on volume CA0C7A48 (2015-03-22 15:11:52 UTC).",
+      "rules": [
+        "R10"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R10"
+  ],
+  "strength": "strong",
+  "lean_file": "M089.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}

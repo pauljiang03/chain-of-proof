@@ -1,0 +1,4171 @@
+{
+ "_meta": {
+  "case": "NIST CFReDS Data Leakage Case",
+  "images": [
+   "pc.E01",
+   "pc.E02",
+   "pc.E03",
+   "pc.E04",
+   "rm1.E01",
+   "rm2.E01",
+   "rm3.E01"
+  ],
+  "pc": {
+   "hostname": "INFORMANT-PC",
+   "os": "Windows 7 Ultimate (NT 6.1) 7601 Service Pack 1",
+   "time_zone": "America/New_York"
+  },
+  "fat_time_zone": "America/New_York",
+  "examined_at": "2026-11-14T00:00:00+00:00",
+  "tool": "dissect.target 3.25.1",
+  "note": "Extracted from the real images. Regenerate with extractor/build.py.",
+  "facts": 242,
+  "by_kind": {
+   "usbInsert": 4,
+   "lnkTarget": 56,
+   "fileCreated": 26,
+   "fileModified": 26,
+   "webSearch": 85,
+   "tag": 38,
+   "volumeSeen": 5,
+   "volumeOnDevice": 2
+  },
+  "unparsed": []
+ },
+ "strings": {
+  "0": "(none)",
+  "1": "4C530012450531101593",
+  "2": "4C530012550531106501",
+  "3": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Documents.library-ms",
+  "4": "CA0C7A48",
+  "5": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Music.library-ms",
+  "6": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Pictures.library-ms",
+  "7": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Videos.library-ms",
+  "8": "\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Documents.library-ms",
+  "9": "\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Music.library-ms",
+  "10": "\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Pictures.library-ms",
+  "11": "\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Videos.library-ms",
+  "12": "\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Documents.library-ms",
+  "13": "\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Music.library-ms",
+  "14": "\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Pictures.library-ms",
+  "15": "\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\Videos.library-ms",
+  "16": "\\Windows\\inf",
+  "17": "\\Windows\\inf\\setupapi.dev.log",
+  "18": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+  "19": "5C754D3E",
+  "20": "\\RM#1\\Secret Project Data\\proposal",
+  "21": "\\Users\\informant\\AppData\\Roaming\\Microsoft\\Templates",
+  "22": "\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+  "23": "\\",
+  "24": "\\RM#1\\Secret Project Data\\design",
+  "25": "\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+  "26": "\\\\10.11.11.128\\secured_drive",
+  "27": "\\Secret Project Data\\pricing decision",
+  "28": "\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
+  "29": "\\Secret Project Data\\final",
+  "30": "\\Secret Project Data\\design\\winter_whether_advisory.zip",
+  "31": "9E6A5B82",
+  "32": "\\Secret Project Data\\design\\winter_whether_advisory.zip\\ppt",
+  "33": "\\Users\\informant\\Desktop",
+  "34": "\\de\\winter_whether_advisory.zip",
+  "35": "E297F1A5",
+  "36": "\\de\\winter_whether_advisory.zip\\ppt",
+  "37": "\\de\\winter_whether_advisory.zip\\ppt\\slides",
+  "38": "\\de\\winter_whether_advisory.zip\\ppt\\slideMasters",
+  "39": "A58AD72A",
+  "40": "AE88F176",
+  "41": "\\Penguins.jpg",
+  "42": "\\Koala.jpg",
+  "43": "\\Tulips.jpg",
+  "44": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+  "45": "\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+  "46": "\\Users\\All Users\\Desktop\\desktop.ini",
+  "47": "\\Users\\Public\\Desktop\\desktop.ini",
+  "48": "\\Users\\Public\\Downloads\\desktop.ini",
+  "49": "\\Users\\All Users\\Documents\\desktop.ini",
+  "50": "\\Users\\Public\\Documents\\desktop.ini",
+  "51": "\\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+  "52": "\\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+  "53": "\\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+  "54": "\\Users\\informant\\Desktop\\desktop.ini",
+  "55": "\\Users\\informant\\Documents\\desktop.ini",
+  "56": "\\Users\\informant\\Downloads\\desktop.ini",
+  "57": "\\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+  "58": "\\Users\\All Users\\Desktop\\Google Chrome.lnk",
+  "59": "\\Users\\Public\\Desktop\\Google Chrome.lnk",
+  "60": "\\Users\\admin11\\Desktop\\desktop.ini",
+  "61": "\\Users\\admin11\\Documents\\desktop.ini",
+  "62": "\\Users\\admin11\\Downloads\\desktop.ini",
+  "63": "\\Users\\temporary\\Desktop\\desktop.ini",
+  "64": "\\Users\\temporary\\Documents\\desktop.ini",
+  "65": "\\Users\\temporary\\Downloads\\desktop.ini",
+  "66": "\\Users\\informant\\Downloads\\icloudsetup.exe",
+  "67": "\\Users\\informant\\Downloads\\googledrivesync.exe",
+  "68": "internet explorer 11",
+  "69": "chrome",
+  "70": "iexplore",
+  "71": "outlook 2013 settings",
+  "72": "comapny",
+  "73": "Emmy Noether",
+  "74": "data leakage methods",
+  "75": "leaking confidential information",
+  "76": "information leakage cases",
+  "77": "intellectual property theft",
+  "78": "how to leak a secret",
+  "79": "Top Stories",
+  "80": "file sharing and tethering",
+  "81": "DLP DRM",
+  "82": "e-mail investigation",
+  "83": "Forensic Email Investigation",
+  "84": "what is windows system artifacts",
+  "85": "investigation on windows machine",
+  "86": "windows event logs",
+  "87": "cd burning method",
+  "88": "cd burning method in windows",
+  "89": "external device and forensics",
+  "90": "cloud storage",
+  "91": "digital forensics",
+  "92": "how to delete data",
+  "93": "anti-forensics",
+  "94": "system cleaner",
+  "95": "how to recover data",
+  "96": "data recovery tools",
+  "97": "google",
+  "98": "apple icloud",
+  "99": "google drive",
+  "100": "science technology news",
+  "101": "Soccer News",
+  "102": "top stories",
+  "103": "us news",
+  "104": "world news",
+  "105": "local",
+  "106": "entertainment news",
+  "107": "business news",
+  "108": "political news",
+  "109": "sports news",
+  "110": "health news",
+  "111": "security checkpoint cd-r",
+  "112": "anti-forensic tools",
+  "113": "eraser",
+  "114": "ccleaner",
+  "115": "authorized-device",
+  "116": "unauthorized-device",
+  "117": "watch-list-search",
+  "118": "confidential",
+  "119": "Authorized USB",
+  "120": "IAMAN $_@",
+  "121": "B4D85399",
+  "122": "System Reserved",
+  "123": "180A0125"
+ },
+ "facts": [
+  {
+   "id": 1,
+   "kind": "usbInsert",
+   "t": 1427135470593000,
+   "res": 1000,
+   "obj": 1,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 55402",
+    "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "device install section start (first connection)",
+    "time_zone": "log local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 2,
+   "kind": "usbInsert",
+   "t": 1427204280014221,
+   "res": 1,
+   "obj": 1,
+   "aux": 0,
+   "prov": {
+    "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012450531101593&0",
+    "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 3,
+   "kind": "usbInsert",
+   "t": 1427205512859000,
+   "res": 1000,
+   "obj": 2,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Windows\\inf\\setupapi.dev.log line 56340",
+    "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "device install section start (first connection)",
+    "time_zone": "log local time, converted from America/New_York",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 4,
+   "kind": "usbInsert",
+   "t": 1427205513550110,
+   "res": 1,
+   "obj": 2,
+   "aux": 0,
+   "prov": {
+    "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012550531106501&0",
+    "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 5,
+   "kind": "lnkTarget",
+   "t": 1427034902353147,
+   "res": 1,
+   "obj": 3,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 1",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Documents.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 6,
+   "kind": "lnkTarget",
+   "t": 1427034902353147,
+   "res": 1,
+   "obj": 5,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 3",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Music.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 7,
+   "kind": "lnkTarget",
+   "t": 1427034902353147,
+   "res": 1,
+   "obj": 6,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 2",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Pictures.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 8,
+   "kind": "lnkTarget",
+   "t": 1427034902353147,
+   "res": 1,
+   "obj": 7,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 4",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Videos.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 9,
+   "kind": "lnkTarget",
+   "t": 1427039644434146,
+   "res": 1,
+   "obj": 8,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 1",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Documents.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 10,
+   "kind": "lnkTarget",
+   "t": 1427039644434146,
+   "res": 1,
+   "obj": 9,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 3",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Music.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 11,
+   "kind": "lnkTarget",
+   "t": 1427039644434146,
+   "res": 1,
+   "obj": 10,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 2",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Pictures.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 12,
+   "kind": "lnkTarget",
+   "t": 1427039644434146,
+   "res": 1,
+   "obj": 11,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 4",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Videos.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 13,
+   "kind": "lnkTarget",
+   "t": 1427039767976281,
+   "res": 1,
+   "obj": 12,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 1",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Documents.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 14,
+   "kind": "lnkTarget",
+   "t": 1427039767976281,
+   "res": 1,
+   "obj": 13,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 3",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Music.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 15,
+   "kind": "lnkTarget",
+   "t": 1427039767976281,
+   "res": 1,
+   "obj": 14,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 2",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Pictures.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 16,
+   "kind": "lnkTarget",
+   "t": 1427039767976281,
+   "res": 1,
+   "obj": 15,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\temporary\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 4",
+    "destlist_path": "::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Videos.library-ms",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 17,
+   "kind": "lnkTarget",
+   "t": 1427039850957648,
+   "res": 1,
+   "obj": 16,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 5",
+    "destlist_path": "C:\\Windows\\inf",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 18,
+   "kind": "lnkTarget",
+   "t": 1427039850957648,
+   "res": 1,
+   "obj": 17,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\9b9cdc69c1c24e2b.automaticDestinations-ms stream 1",
+    "destlist_path": "C:\\Windows\\inf\\setupapi.dev.log",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 19,
+   "kind": "lnkTarget",
+   "t": 1427039850973248,
+   "res": 1,
+   "obj": 17,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\setupapi.dev.lnk",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427039850973248,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 20,
+   "kind": "lnkTarget",
+   "t": 1427039851020048,
+   "res": 1,
+   "obj": 16,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\admin11\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\inf.lnk",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427039851020048,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 21,
+   "kind": "lnkTarget",
+   "t": 1427135840499256,
+   "res": 1,
+   "obj": 18,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_proposal.lnk",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427135840312056,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 22,
+   "kind": "lnkTarget",
+   "t": 1427135874491716,
+   "res": 1,
+   "obj": 18,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\[secret_project]_proposal.LNK",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427135874491716,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 23,
+   "kind": "lnkTarget",
+   "t": 1427135874491716,
+   "res": 1,
+   "obj": 18,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms stream 1",
+    "destlist_path": "E:\\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 24,
+   "kind": "lnkTarget",
+   "t": 1427135874522916,
+   "res": 1,
+   "obj": 20,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 6",
+    "destlist_path": "E:\\RM#1\\Secret Project Data\\proposal",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 25,
+   "kind": "lnkTarget",
+   "t": 1427135892104147,
+   "res": 1,
+   "obj": 21,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Templates.LNK",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427135892104147,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 26,
+   "kind": "lnkTarget",
+   "t": 1427135901167763,
+   "res": 1,
+   "obj": 22,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\4cc9bcff1a772a63.automaticDestinations-ms stream 1",
+    "destlist_path": "E:\\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 27,
+   "kind": "lnkTarget",
+   "t": 1427135901214563,
+   "res": 1,
+   "obj": 23,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 5",
+    "destlist_path": "E:\\",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 28,
+   "kind": "lnkTarget",
+   "t": 1427135901230162,
+   "res": 1,
+   "obj": 22,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_design_concept.lnk",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427135901230162,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 29,
+   "kind": "lnkTarget",
+   "t": 1427135903414167,
+   "res": 1,
+   "obj": 24,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 7",
+    "destlist_path": "E:\\RM#1\\Secret Project Data\\design",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 30,
+   "kind": "lnkTarget",
+   "t": 1427135903445366,
+   "res": 1,
+   "obj": 22,
+   "aux": 19,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\[secret_project]_design_concept.LNK",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427135903414165,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "Authorized USB"
+   }
+  },
+  {
+   "id": 31,
+   "kind": "lnkTarget",
+   "t": 1427142413783793,
+   "res": 1,
+   "obj": 25,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\69bacc0499d41c4.automaticDestinations-ms stream 1",
+    "destlist_path": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision\\(secret_project)_pricing_decision.xlsx",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 32,
+   "kind": "lnkTarget",
+   "t": 1427142413924193,
+   "res": 1,
+   "obj": 27,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 8",
+    "destlist_path": "\\\\10.11.11.128\\secured_drive\\Secret Project Data\\pricing decision",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 33,
+   "kind": "lnkTarget",
+   "t": 1427142413986593,
+   "res": 1,
+   "obj": 25,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\(secret_project)_pricing_decision.xlsx.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+    "shortcut_created": 1427142413986593,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 34,
+   "kind": "lnkTarget",
+   "t": 1427142414002193,
+   "res": 1,
+   "obj": 27,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\pricing decision.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+    "shortcut_created": 1427142414002193,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 35,
+   "kind": "lnkTarget",
+   "t": 1427142416032196,
+   "res": 1,
+   "obj": 25,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\(secret_project)_pricing_decision.xlsx.LNK",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\SECURED_DRIVE",
+    "shortcut_created": 1427142413768192,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 36,
+   "kind": "lnkTarget",
+   "t": 1427142453267067,
+   "res": 1,
+   "obj": 28,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\4cc9bcff1a772a63.automaticDestinations-ms stream 2",
+    "destlist_path": "V:\\Secret Project Data\\final\\[secret_project]_final_meeting.pptx",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\secured_drive",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 37,
+   "kind": "lnkTarget",
+   "t": 1427142453313868,
+   "res": 1,
+   "obj": 29,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 9",
+    "destlist_path": "V:\\Secret Project Data\\final",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\secured_drive",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 38,
+   "kind": "lnkTarget",
+   "t": 1427142453345068,
+   "res": 1,
+   "obj": 29,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\final.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\secured_drive",
+    "shortcut_created": 1427142453345068,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 39,
+   "kind": "lnkTarget",
+   "t": 1427142453345068,
+   "res": 1,
+   "obj": 28,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\[secret_project]_final_meeting.pptx.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\secured_drive",
+    "shortcut_created": 1427142453329468,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 40,
+   "kind": "lnkTarget",
+   "t": 1427142457263674,
+   "res": 1,
+   "obj": 28,
+   "aux": 26,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\[secret_project]_final_meeting.pptx.LNK",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "network_share": "\\\\10.11.11.128\\secured_drive",
+    "shortcut_created": 1427142457248075,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 41,
+   "kind": "lnkTarget",
+   "t": 1427205683393024,
+   "res": 1,
+   "obj": 30,
+   "aux": 31,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream a",
+    "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip",
+    "drive_letter": "E:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN $_@"
+   }
+  },
+  {
+   "id": 42,
+   "kind": "lnkTarget",
+   "t": 1427205689781835,
+   "res": 1,
+   "obj": 32,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream b",
+    "destlist_path": "E:\\Secret Project Data\\design\\winter_whether_advisory.zip\\ppt",
+    "drive_letter": "E:",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume": "not recorded by this jump list entry"
+   }
+  },
+  {
+   "id": 43,
+   "kind": "lnkTarget",
+   "t": 1427222920812357,
+   "res": 1,
+   "obj": 33,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Desktop.LNK",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427222920812357,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 44,
+   "kind": "lnkTarget",
+   "t": 1427229853752619,
+   "res": 1,
+   "obj": 34,
+   "aux": 35,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream d",
+    "destlist_path": "D:\\de\\winter_whether_advisory.zip",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 45,
+   "kind": "lnkTarget",
+   "t": 1427229854570221,
+   "res": 1,
+   "obj": 36,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream e",
+    "destlist_path": "D:\\de\\winter_whether_advisory.zip\\ppt",
+    "drive_letter": "D:",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume": "not recorded by this jump list entry"
+   }
+  },
+  {
+   "id": 46,
+   "kind": "lnkTarget",
+   "t": 1427229856507227,
+   "res": 1,
+   "obj": 37,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream f",
+    "destlist_path": "D:\\de\\winter_whether_advisory.zip\\ppt\\slides",
+    "drive_letter": "D:",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume": "not recorded by this jump list entry"
+   }
+  },
+  {
+   "id": 47,
+   "kind": "lnkTarget",
+   "t": 1427229858080231,
+   "res": 1,
+   "obj": 38,
+   "aux": 0,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 10",
+    "destlist_path": "D:\\de\\winter_whether_advisory.zip\\ppt\\slideMasters",
+    "drive_letter": "D:",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume": "not recorded by this jump list entry"
+   }
+  },
+  {
+   "id": 48,
+   "kind": "lnkTarget",
+   "t": 1427229858901833,
+   "res": 1,
+   "obj": 34,
+   "aux": 35,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\winter_whether_advisory.zip.lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427205683425224,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 49,
+   "kind": "lnkTarget",
+   "t": 1427230050485174,
+   "res": 1,
+   "obj": 23,
+   "aux": 39,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive.lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427230042034159,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 50,
+   "kind": "lnkTarget",
+   "t": 1427230870763657,
+   "res": 1,
+   "obj": 23,
+   "aux": 40,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream 11",
+    "destlist_path": "D:\\",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 51,
+   "kind": "lnkTarget",
+   "t": 1427230870904057,
+   "res": 1,
+   "obj": 41,
+   "aux": 40,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Penguins.jpg.lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427230870904057,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 52,
+   "kind": "lnkTarget",
+   "t": 1427230872900860,
+   "res": 1,
+   "obj": 42,
+   "aux": 40,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Koala.jpg.lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427230042018559,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 53,
+   "kind": "lnkTarget",
+   "t": 1427230874320463,
+   "res": 1,
+   "obj": 43,
+   "aux": 40,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Tulips.jpg.lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427230050469574,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 54,
+   "kind": "lnkTarget",
+   "t": 1427230874336063,
+   "res": 1,
+   "obj": 23,
+   "aux": 40,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CD Drive (2).lnk",
+    "drive_letter": "D:",
+    "drive_type": 5,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427230871013256,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": "IAMAN CD"
+   }
+  },
+  {
+   "id": 55,
+   "kind": "lnkTarget",
+   "t": 1427297289748404,
+   "res": 1,
+   "obj": 44,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Office\\Recent\\Resignation_Letter_(Iaman_Informant).docx.LNK",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427222921342758,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 56,
+   "kind": "lnkTarget",
+   "t": 1427297313663204,
+   "res": 1,
+   "obj": 45,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).xps.lnk",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427297313663204,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 57,
+   "kind": "lnkTarget",
+   "t": 1427297327141605,
+   "res": 1,
+   "obj": 33,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\1b4dd67f29cb1962.automaticDestinations-ms stream c",
+    "destlist_path": "C:\\Users\\informant\\Desktop",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 58,
+   "kind": "lnkTarget",
+   "t": 1427297327141605,
+   "res": 1,
+   "obj": 45,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\e36bfc8972e5ab1d.automaticDestinations-ms stream 1",
+    "destlist_path": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 59,
+   "kind": "lnkTarget",
+   "t": 1427297348934805,
+   "res": 1,
+   "obj": 44,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\47bb2136fda3f1ed.automaticDestinations-ms stream 2",
+    "destlist_path": "C:\\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "jump list DestList last-access time for this entry",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 60,
+   "kind": "lnkTarget",
+   "t": 1427297348981604,
+   "res": 1,
+   "obj": 44,
+   "aux": 4,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\Resignation_Letter_(Iaman_Informant).docx.lnk",
+    "drive_letter": "C:",
+    "drive_type": 3,
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "shortcut_created": 1427222920827957,
+    "time_meaning": "shortcut file last-modified time (last open via the shell)",
+    "tool": "dissect.target 3.25.1",
+    "user": "informant",
+    "volume_label": ""
+   }
+  },
+  {
+   "id": 61,
+   "kind": "fileCreated",
+   "t": 1247547263656519,
+   "res": 1,
+   "obj": 46,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 62,
+   "kind": "fileCreated",
+   "t": 1247547263656519,
+   "res": 1,
+   "obj": 47,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 63,
+   "kind": "fileCreated",
+   "t": 1247547263750120,
+   "res": 1,
+   "obj": 48,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 64,
+   "kind": "fileCreated",
+   "t": 1247547264093319,
+   "res": 1,
+   "obj": 49,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 278,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 65,
+   "kind": "fileCreated",
+   "t": 1247547264093319,
+   "res": 1,
+   "obj": 50,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 278,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 66,
+   "kind": "fileCreated",
+   "t": 1424037128960000,
+   "res": 10000,
+   "obj": 22,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 1810432,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 67,
+   "kind": "fileCreated",
+   "t": 1424037129290000,
+   "res": 10000,
+   "obj": 51,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 16381123,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 68,
+   "kind": "fileCreated",
+   "t": 1424037130630000,
+   "res": 10000,
+   "obj": 52,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 14547968,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 69,
+   "kind": "fileCreated",
+   "t": 1424037132550000,
+   "res": 10000,
+   "obj": 53,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 35226880,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 70,
+   "kind": "fileCreated",
+   "t": 1424037140430000,
+   "res": 10000,
+   "obj": 18,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 6484502,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 71,
+   "kind": "fileCreated",
+   "t": 1427034895052334,
+   "res": 1,
+   "obj": 54,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 72,
+   "kind": "fileCreated",
+   "t": 1427034895067934,
+   "res": 1,
+   "obj": 55,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 73,
+   "kind": "fileCreated",
+   "t": 1427034895145933,
+   "res": 1,
+   "obj": 56,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 74,
+   "kind": "fileCreated",
+   "t": 1427037064087334,
+   "res": 1,
+   "obj": 57,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 55915216,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 75,
+   "kind": "fileCreated",
+   "t": 1427037112048820,
+   "res": 1,
+   "obj": 58,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\Google Chrome.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 2259,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 76,
+   "kind": "fileCreated",
+   "t": 1427037112048820,
+   "res": 1,
+   "obj": 59,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\Google Chrome.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 2259,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 77,
+   "kind": "fileCreated",
+   "t": 1427039636431332,
+   "res": 1,
+   "obj": 60,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 78,
+   "kind": "fileCreated",
+   "t": 1427039636446932,
+   "res": 1,
+   "obj": 61,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 79,
+   "kind": "fileCreated",
+   "t": 1427039636478132,
+   "res": 1,
+   "obj": 62,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 80,
+   "kind": "fileCreated",
+   "t": 1427039762282270,
+   "res": 1,
+   "obj": 63,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 81,
+   "kind": "fileCreated",
+   "t": 1427039762297871,
+   "res": 1,
+   "obj": 64,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 82,
+   "kind": "fileCreated",
+   "t": 1427039762329069,
+   "res": 1,
+   "obj": 65,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 83,
+   "kind": "fileCreated",
+   "t": 1427140547296776,
+   "res": 1,
+   "obj": 66,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\icloudsetup.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 71647536,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 84,
+   "kind": "fileCreated",
+   "t": 1427140590661442,
+   "res": 1,
+   "obj": 67,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\googledrivesync.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 880208,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 85,
+   "kind": "fileCreated",
+   "t": 1427222920734358,
+   "res": 1,
+   "obj": 44,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 11893,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 86,
+   "kind": "fileCreated",
+   "t": 1427297313647604,
+   "res": 1,
+   "obj": 45,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 178139,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 87,
+   "kind": "fileModified",
+   "t": 1247547264280521,
+   "res": 1,
+   "obj": 46,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 88,
+   "kind": "fileModified",
+   "t": 1247547264280521,
+   "res": 1,
+   "obj": 47,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 89,
+   "kind": "fileModified",
+   "t": 1247547264327320,
+   "res": 1,
+   "obj": 48,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 174,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 90,
+   "kind": "fileModified",
+   "t": 1247547264483320,
+   "res": 1,
+   "obj": 49,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 278,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 91,
+   "kind": "fileModified",
+   "t": 1247547264483320,
+   "res": 1,
+   "obj": 50,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 278,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 92,
+   "kind": "fileModified",
+   "t": 1417706690000000,
+   "res": 10000,
+   "obj": 22,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_design_concept.ppt",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 1810432,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 93,
+   "kind": "fileModified",
+   "t": 1418746226000000,
+   "res": 10000,
+   "obj": 51,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_detailed_design.pptx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 16381123,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 94,
+   "kind": "fileModified",
+   "t": 1418939458000000,
+   "res": 10000,
+   "obj": 53,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_detailed_proposal.docx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 35226880,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 95,
+   "kind": "fileModified",
+   "t": 1419018826000000,
+   "res": 10000,
+   "obj": 18,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\proposal\\[secret_project]_proposal.docx",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 6484502,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 96,
+   "kind": "fileModified",
+   "t": 1422046030000000,
+   "res": 10000,
+   "obj": 52,
+   "aux": 19,
+   "prov": {
+    "artifact": "exfat directory entry \\RM#1\\Secret Project Data\\design\\[secret_project]_revised_points.ppt",
+    "exhibit": "RM#1",
+    "image": "rm1.E01",
+    "size": 14547968,
+    "time_zone": "exFAT local time with its recorded UTC offset",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 97,
+   "kind": "fileModified",
+   "t": 1427034899825943,
+   "res": 1,
+   "obj": 54,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 98,
+   "kind": "fileModified",
+   "t": 1427034899857143,
+   "res": 1,
+   "obj": 56,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 99,
+   "kind": "fileModified",
+   "t": 1427034899872744,
+   "res": 1,
+   "obj": 55,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 100,
+   "kind": "fileModified",
+   "t": 1427037064851734,
+   "res": 1,
+   "obj": 57,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Download\\IE11-Windows6.1-x64-en-us.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 55915216,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 101,
+   "kind": "fileModified",
+   "t": 1427037112048820,
+   "res": 1,
+   "obj": 58,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\All Users\\Desktop\\Google Chrome.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 2259,
+    "tool": "dissect.target 3.25.1",
+    "user": "All Users"
+   }
+  },
+  {
+   "id": 102,
+   "kind": "fileModified",
+   "t": 1427037112048820,
+   "res": 1,
+   "obj": 59,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\Public\\Desktop\\Google Chrome.lnk",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 2259,
+    "tool": "dissect.target 3.25.1",
+    "user": "Public"
+   }
+  },
+  {
+   "id": 103,
+   "kind": "fileModified",
+   "t": 1427039642655743,
+   "res": 1,
+   "obj": 60,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 104,
+   "kind": "fileModified",
+   "t": 1427039642686943,
+   "res": 1,
+   "obj": 62,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 105,
+   "kind": "fileModified",
+   "t": 1427039642702543,
+   "res": 1,
+   "obj": 61,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\admin11\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 106,
+   "kind": "fileModified",
+   "t": 1427039767040279,
+   "res": 1,
+   "obj": 63,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Desktop\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 107,
+   "kind": "fileModified",
+   "t": 1427039767055880,
+   "res": 1,
+   "obj": 65,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Downloads\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 282,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 108,
+   "kind": "fileModified",
+   "t": 1427039767071480,
+   "res": 1,
+   "obj": 64,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\temporary\\Documents\\desktop.ini",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 402,
+    "tool": "dissect.target 3.25.1",
+    "user": "temporary"
+   }
+  },
+  {
+   "id": 109,
+   "kind": "fileModified",
+   "t": 1427140593481297,
+   "res": 1,
+   "obj": 67,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\googledrivesync.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 880208,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 110,
+   "kind": "fileModified",
+   "t": 1427140613339270,
+   "res": 1,
+   "obj": 66,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Downloads\\icloudsetup.exe",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 71647536,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 111,
+   "kind": "fileModified",
+   "t": 1427223570611170,
+   "res": 1,
+   "obj": 44,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).docx",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 11893,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 112,
+   "kind": "fileModified",
+   "t": 1427297314552404,
+   "res": 1,
+   "obj": 45,
+   "aux": 4,
+   "prov": {
+    "artifact": "NTFS $STANDARD_INFORMATION of \\Users\\informant\\Desktop\\Resignation_Letter_(Iaman_Informant).xps",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "size": 178139,
+    "tool": "dissect.target 3.25.1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 113,
+   "kind": "webSearch",
+   "t": 1427037052000000,
+   "res": 1,
+   "obj": 68,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 114,
+   "kind": "webSearch",
+   "t": 1427037861900251,
+   "res": 1,
+   "obj": 68,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 115,
+   "kind": "webSearch",
+   "t": 1427037863631855,
+   "res": 1,
+   "obj": 68,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?hl=en&source=hp&q=internet+explorer+11&gbv=2&oq=internet+explorer+11&gs_l=heirloom-hp.3..0l10.5163.7893.0.9562.20.13.0.7.7.0.156.1110.11j2.13.0.msedr...0...1ac.1.34.heirloom-hp..0.20.1250.5j7Xm44tv5w",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 116,
+   "kind": "webSearch",
+   "t": 1427038079597811,
+   "res": 1,
+   "obj": 71,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/#q=outlook+2013+settings",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 117,
+   "kind": "webSearch",
+   "t": 1427038096952833,
+   "res": 1,
+   "obj": 71,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/#q=outlook+2013+settings",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 118,
+   "kind": "webSearch",
+   "t": 1427039744335028,
+   "res": 1,
+   "obj": 72,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\admin11\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=comapny",
+    "user": "admin11"
+   }
+  },
+  {
+   "id": 119,
+   "kind": "webSearch",
+   "t": 1427131625838400,
+   "res": 1,
+   "obj": 73,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=Emmy+Noether&oi=ddle&ct=emmy-noethers-133rd-birthday-5681045017985024-hp&hl=en",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 120,
+   "kind": "webSearch",
+   "t": 1427131676613960,
+   "res": 1,
+   "obj": 73,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=Emmy+Noether&oi=ddle&ct=emmy-noethers-133rd-birthday-5681045017985024-hp&hl=en",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 121,
+   "kind": "webSearch",
+   "t": 1427133729303892,
+   "res": 1,
+   "obj": 74,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=data+leakage+methods",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 122,
+   "kind": "webSearch",
+   "t": 1427133764343210,
+   "res": 1,
+   "obj": 75,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=leaking+confidential+information",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 123,
+   "kind": "webSearch",
+   "t": 1427133797161615,
+   "res": 1,
+   "obj": 75,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=leaking+confidential+information&hl=en&start=10",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 124,
+   "kind": "webSearch",
+   "t": 1427133811261408,
+   "res": 1,
+   "obj": 75,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=leaking+confidential+information&hl=en&start=20",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 125,
+   "kind": "webSearch",
+   "t": 1427133820424839,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=information+leakage+cases",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 126,
+   "kind": "webSearch",
+   "t": 1427133873578434,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=information+leakage+cases&hl=en&tbm=nws",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 127,
+   "kind": "webSearch",
+   "t": 1427133915865196,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#q=information+leakage+cases&hl=en",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 128,
+   "kind": "webSearch",
+   "t": 1427133918131407,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&source=lnms&tbm=isch&sa=X&ei=21UQVb20Eu-HsQTJ5IDAAQ&ved=0CAgQ_AUoAw",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 129,
+   "kind": "webSearch",
+   "t": 1427133919638342,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 130,
+   "kind": "webSearch",
+   "t": 1427133922229486,
+   "res": 1,
+   "obj": 76,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#q=information+leakage+cases&hl=en",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 131,
+   "kind": "webSearch",
+   "t": 1427133948655159,
+   "res": 1,
+   "obj": 77,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=intellectual+property+theft",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 132,
+   "kind": "webSearch",
+   "t": 1427133987545120,
+   "res": 1,
+   "obj": 78,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+leak+a+secret",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 133,
+   "kind": "webSearch",
+   "t": 1427134072314186,
+   "res": 1,
+   "obj": 79,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 134,
+   "kind": "webSearch",
+   "t": 1427134074981194,
+   "res": 1,
+   "obj": 79,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 135,
+   "kind": "webSearch",
+   "t": 1427134074991194,
+   "res": 1,
+   "obj": 79,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=Top+Stories&FORM=HDRSC1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 136,
+   "kind": "webSearch",
+   "t": 1427134077288696,
+   "res": 1,
+   "obj": 79,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news/search?q=Top Stories&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 137,
+   "kind": "webSearch",
+   "t": 1427134078080700,
+   "res": 1,
+   "obj": 80,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 138,
+   "kind": "webSearch",
+   "t": 1427134079890207,
+   "res": 1,
+   "obj": 80,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 139,
+   "kind": "webSearch",
+   "t": 1427134103642269,
+   "res": 1,
+   "obj": 80,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=file+sharing+and+tethering&qs=n&form=QBLH&pq=file+sharing+and+tethering&sc=0-18&sp=-1&sk=&cvid=171b77e4ffd54b2a92c4e97abf995fe1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 140,
+   "kind": "webSearch",
+   "t": 1427134111817280,
+   "res": 1,
+   "obj": 81,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=DLP%20DRM&qs=n&form=QBRE&pq=dlp%20drm&sc=8-7&sp=-1&sk=&cvid=6e206ee8751e4ad89f882ed52daf3aea&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=0",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 141,
+   "kind": "webSearch",
+   "t": 1427134134101318,
+   "res": 1,
+   "obj": 82,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=e-mail%20investigation&qs=n&form=QBRE&pq=e-mail%20investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 142,
+   "kind": "webSearch",
+   "t": 1427134171496372,
+   "res": 1,
+   "obj": 82,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=e-mail+investigation&qs=n&pq=e-mail+investigation&sc=8-7&sp=-1&sk=&cvid=fe1c3738d8c7471284731724166959af&first=9&FORM=PERE&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=2",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 143,
+   "kind": "webSearch",
+   "t": 1427134203820419,
+   "res": 1,
+   "obj": 83,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=Forensic+Email+Investigation&FORM=QSRE1&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=3",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 144,
+   "kind": "webSearch",
+   "t": 1427134227643461,
+   "res": 1,
+   "obj": 84,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=what%20is%20windows%20system%20artifacts&qs=n&form=QBRE&pq=what%20is%20windows%20system%20artifacts&sc=0-27&sp=-1&sk=&cvid=1ef4ace146854d97acf263b53bf97b8c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=4",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 145,
+   "kind": "webSearch",
+   "t": 1427134310582693,
+   "res": 1,
+   "obj": 85,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=investigation%20on%20windows%20machine&qs=n&form=QBRE&pq=investigation%20on%20windows%20machine&sc=8-4&sp=-1&sk=&cvid=eb73de7f523c48769d56201379f55e67&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=5",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 146,
+   "kind": "webSearch",
+   "t": 1427134355567263,
+   "res": 1,
+   "obj": 86,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=windows%20event%20logs&qs=n&form=QBRE&pq=windows%20event%20logs&sc=0-32&sp=-1&sk=&cvid=36b33ac5151246398f7dc1ca79de069c&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=6",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 147,
+   "kind": "webSearch",
+   "t": 1427134400892344,
+   "res": 1,
+   "obj": 87,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=cd%20burning%20method&qs=n&form=QBRE&pq=cd%20burning%20method&sc=8-2&sp=-1&sk=&cvid=b7dbe6fb67424c578172ba57330a0894&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=7",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 148,
+   "kind": "webSearch",
+   "t": 1427134417494371,
+   "res": 1,
+   "obj": 88,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=cd%20burning%20method%20in%20windows&qs=n&form=QBRE&pq=cd%20burning%20method%20in%20windows&sc=0-0&sp=-1&sk=&cvid=acec9b1dcb8146c58258ad65c770d76e&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=8",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 149,
+   "kind": "webSearch",
+   "t": 1427134438392908,
+   "res": 1,
+   "obj": 80,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news/search?q=file+sharing+and+tethering&FORM=HDRSC6",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 150,
+   "kind": "webSearch",
+   "t": 1427134451977428,
+   "res": 1,
+   "obj": 89,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a&sid=BE5E388F8757406CAA32E58334719A20&format=jsonv2&jsoncbid=9",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 151,
+   "kind": "webSearch",
+   "t": 1427134490369135,
+   "res": 1,
+   "obj": 90,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=cloud+storage",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 152,
+   "kind": "webSearch",
+   "t": 1427134544517540,
+   "res": 1,
+   "obj": 91,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=digital+forensics",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 153,
+   "kind": "webSearch",
+   "t": 1427134615783075,
+   "res": 1,
+   "obj": 92,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+delete+data",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 154,
+   "kind": "webSearch",
+   "t": 1427134634631105,
+   "res": 1,
+   "obj": 93,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=anti-forensics",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 155,
+   "kind": "webSearch",
+   "t": 1427134690237438,
+   "res": 1,
+   "obj": 94,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=system+cleaner",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 156,
+   "kind": "webSearch",
+   "t": 1427134695855272,
+   "res": 1,
+   "obj": 94,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#q=system+cleaner&hl=en&start=10",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 157,
+   "kind": "webSearch",
+   "t": 1427134710872763,
+   "res": 1,
+   "obj": 95,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=how+to+recover+data",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 158,
+   "kind": "webSearch",
+   "t": 1427134723263901,
+   "res": 1,
+   "obj": 95,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#q=how+to+recover+data&hl=en&start=20",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 159,
+   "kind": "webSearch",
+   "t": 1427134726050680,
+   "res": 1,
+   "obj": 95,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#q=how+to+recover+data&hl=en&start=10",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 160,
+   "kind": "webSearch",
+   "t": 1427134743860449,
+   "res": 1,
+   "obj": 96,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 161,
+   "kind": "webSearch",
+   "t": 1427140063009623,
+   "res": 1,
+   "obj": 96,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/search?q=information+leakage+cases&hl=en&biw=950&bih=499&site=webhp&tbm=vid&source=lnms&sa=X&ei=3VUQVYH3FMO1sQTf1YGwBw&ved=0CAoQ_AUoBA&dpr=1#hl=en&q=data+recovery+tools",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 162,
+   "kind": "webSearch",
+   "t": 1427140099531147,
+   "res": 1,
+   "obj": 97,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=google",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 163,
+   "kind": "webSearch",
+   "t": 1427140509975901,
+   "res": 1,
+   "obj": 98,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=apple+icloud",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 164,
+   "kind": "webSearch",
+   "t": 1427140564087328,
+   "res": 1,
+   "obj": 99,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/webhp?hl=en#hl=en&q=google+drive",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 165,
+   "kind": "webSearch",
+   "t": 1427143427512482,
+   "res": 1,
+   "obj": 89,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 166,
+   "kind": "webSearch",
+   "t": 1427143432477705,
+   "res": 1,
+   "obj": 89,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=external%20device%20and%20forensics&qs=n&form=QBRE&pq=external%20device%20and%20forensics&sc=8-9&sp=-1&sk=&cvid=c30c4b1f36114b1c9bc683838c69823a",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 167,
+   "kind": "webSearch",
+   "t": 1427143497831177,
+   "res": 1,
+   "obj": 100,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 168,
+   "kind": "webSearch",
+   "t": 1427143522377234,
+   "res": 1,
+   "obj": 100,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=science+technology+news&FORM=NWBTCB",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 169,
+   "kind": "webSearch",
+   "t": 1427143530127247,
+   "res": 1,
+   "obj": 101,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 170,
+   "kind": "webSearch",
+   "t": 1427143530137247,
+   "res": 1,
+   "obj": 101,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=Soccer+News&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 171,
+   "kind": "webSearch",
+   "t": 1427144026618464,
+   "res": 1,
+   "obj": 102,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 172,
+   "kind": "webSearch",
+   "t": 1427144026658464,
+   "res": 1,
+   "obj": 102,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=top+stories&FORM=NWRFSH",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 173,
+   "kind": "webSearch",
+   "t": 1427144108521080,
+   "res": 1,
+   "obj": 103,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 174,
+   "kind": "webSearch",
+   "t": 1427144108553579,
+   "res": 1,
+   "obj": 103,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=us+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 175,
+   "kind": "webSearch",
+   "t": 1427144110333084,
+   "res": 1,
+   "obj": 104,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 176,
+   "kind": "webSearch",
+   "t": 1427144110353085,
+   "res": 1,
+   "obj": 104,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=world+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 177,
+   "kind": "webSearch",
+   "t": 1427144117465595,
+   "res": 1,
+   "obj": 105,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=local&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 178,
+   "kind": "webSearch",
+   "t": 1427144117475595,
+   "res": 1,
+   "obj": 105,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=local&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 179,
+   "kind": "webSearch",
+   "t": 1427144118330597,
+   "res": 1,
+   "obj": 106,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 180,
+   "kind": "webSearch",
+   "t": 1427144118340597,
+   "res": 1,
+   "obj": 106,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=entertainment+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 181,
+   "kind": "webSearch",
+   "t": 1427144129240612,
+   "res": 1,
+   "obj": 100,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 182,
+   "kind": "webSearch",
+   "t": 1427144129265612,
+   "res": 1,
+   "obj": 100,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=science+technology+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 183,
+   "kind": "webSearch",
+   "t": 1427144154787651,
+   "res": 1,
+   "obj": 107,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 184,
+   "kind": "webSearch",
+   "t": 1427144154827650,
+   "res": 1,
+   "obj": 107,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=business+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 185,
+   "kind": "webSearch",
+   "t": 1427144156134653,
+   "res": 1,
+   "obj": 108,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=political+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 186,
+   "kind": "webSearch",
+   "t": 1427144156154654,
+   "res": 1,
+   "obj": 108,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=political+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 187,
+   "kind": "webSearch",
+   "t": 1427144157412157,
+   "res": 1,
+   "obj": 109,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 188,
+   "kind": "webSearch",
+   "t": 1427144157439657,
+   "res": 1,
+   "obj": 109,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=sports+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 189,
+   "kind": "webSearch",
+   "t": 1427144158732159,
+   "res": 1,
+   "obj": 110,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=health+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 190,
+   "kind": "webSearch",
+   "t": 1427144158742157,
+   "res": 1,
+   "obj": 110,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=health+news&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 191,
+   "kind": "webSearch",
+   "t": 1427144168707174,
+   "res": 1,
+   "obj": 102,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 192,
+   "kind": "webSearch",
+   "t": 1427144278459051,
+   "res": 1,
+   "obj": 102,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/news?q=top+stories&FORM=NSBABR",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 193,
+   "kind": "webSearch",
+   "t": 1427231210726427,
+   "res": 1,
+   "obj": 111,
+   "aux": 69,
+   "prov": {
+    "artifact": "\\C:\\Users\\informant\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "https://www.google.com/#q=security+checkpoint+cd-r",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 194,
+   "kind": "webSearch",
+   "t": 1427294804752905,
+   "res": 1,
+   "obj": 112,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 195,
+   "kind": "webSearch",
+   "t": 1427294804771004,
+   "res": 1,
+   "obj": 112,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=anti-forensic+tools&qs=n&form=QBLH&pq=anti-forensic+tools&sc=8-13&sp=-1&sk=&cvid=e799e715fa2244a5a7967675bdcca9d3",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 196,
+   "kind": "webSearch",
+   "t": 1427294814471205,
+   "res": 1,
+   "obj": 113,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=eraser&qs=n&form=QBRE&pq=eraser&sc=8-6&sp=-1&sk=&cvid=e3b983fe889944179093ff5199b2eac4&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=0",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 197,
+   "kind": "webSearch",
+   "t": 1427294871248203,
+   "res": 1,
+   "obj": 114,
+   "aux": 70,
+   "prov": {
+    "artifact": "C:\\Users\\informant\\AppData\\Local\\Microsoft\\Windows\\WebCache\\WebCacheV01.dat",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "browser history visit time",
+    "tool": "dissect.target 3.25.1",
+    "url": "http://www.bing.com/search?q=ccleaner&qs=n&form=QBRE&pq=ccleaner&sc=8-8&sp=-1&sk=&cvid=d434736d4e514ad497f68734a6779104&sid=C7E8F3776E804120B57C623F21EF33C4&format=jsonv2&jsoncbid=1",
+    "user": "informant"
+   }
+  },
+  {
+   "id": 198,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 1,
+   "aux": 115,
+   "prov": {
+    "rule": "device serial is on the authorized list in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 199,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 2,
+   "aux": 116,
+   "prov": {
+    "rule": "device serial is not on the authorized list in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 200,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 81,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"dlp\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 201,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 83,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 202,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 24,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 203,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 22,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 204,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 51,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 205,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 52,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 206,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 20,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 207,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 53,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 208,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 18,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 209,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 30,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 210,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 32,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 211,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 29,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 212,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 28,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 213,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 27,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 214,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 25,
+   "aux": 118,
+   "prov": {
+    "rule": "path carries the confidential-project marker named in the case brief",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 215,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 112,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 216,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 93,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 217,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 114,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"clean\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 218,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 87,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"cd burn\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 219,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 88,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"cd burn\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 220,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 90,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"cloud storage\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 221,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 74,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"leak\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 222,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 96,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"recover\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 223,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 91,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 224,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 82,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"investigat\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 225,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 113,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"eras\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 226,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 89,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"forensic\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 227,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 92,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"delet\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 228,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 78,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"leak\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 229,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 95,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"recover\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 230,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 76,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"leak\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 231,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 77,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"theft\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 232,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 85,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"investigat\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 233,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 75,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"leak\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 234,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 94,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"clean\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 235,
+   "kind": "tag",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 86,
+   "aux": 117,
+   "prov": {
+    "rule": "search term contains the watch-list word \"event log\"",
+    "source": "deterministic"
+   }
+  },
+  {
+   "id": 236,
+   "kind": "volumeSeen",
+   "t": 1427135472853809,
+   "res": 1,
+   "obj": 119,
+   "aux": 19,
+   "prov": {
+    "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\JOJ___Authorized USB_1551191358",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 237,
+   "kind": "volumeSeen",
+   "t": 1427205514439312,
+   "res": 1,
+   "obj": 120,
+   "aux": 31,
+   "prov": {
+    "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_2657770370",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 238,
+   "kind": "volumeSeen",
+   "t": 1427230954309607,
+   "res": 1,
+   "obj": 120,
+   "aux": 121,
+   "prov": {
+    "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\TO_B__IAMAN $_@_3034076057",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 239,
+   "kind": "volumeSeen",
+   "t": 1427278553344902,
+   "res": 1,
+   "obj": 0,
+   "aux": 4,
+   "prov": {
+    "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\ED_Q___3389815368",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 240,
+   "kind": "volumeSeen",
+   "t": 1427279598964331,
+   "res": 1,
+   "obj": 122,
+   "aux": 123,
+   "prov": {
+    "artifact": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt\\ED_Q__System Reserved_403308837",
+    "exhibit": "PC",
+    "image": "pc.E01",
+    "time_meaning": "registry key last-write time",
+    "tool": "dissect.target 3.25.1"
+   }
+  },
+  {
+   "id": 241,
+   "kind": "volumeOnDevice",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 1,
+   "aux": 19,
+   "prov": {
+    "artifact": "volume boot record, partition at byte offset 16384",
+    "device_serial_source": "exhibits.json (NIST case documentation)",
+    "disk_signature": "E22103D8",
+    "exhibit": "RM#1",
+    "filesystem": "exfat",
+    "image": "rm1.E01",
+    "time_meaning": "when the image was examined, not an event on the device",
+    "tool": "dissect.target 3.25.1",
+    "volume_label": "Authorized"
+   }
+  },
+  {
+   "id": 242,
+   "kind": "volumeOnDevice",
+   "t": 1794614400000000,
+   "res": 1,
+   "obj": 2,
+   "aux": 121,
+   "prov": {
+    "artifact": "volume boot record, partition at byte offset 65536",
+    "device_serial_source": "exhibits.json (NIST case documentation)",
+    "disk_signature": "E221034C",
+    "exhibit": "RM#2",
+    "filesystem": "fat",
+    "image": "rm2.E01",
+    "time_meaning": "when the image was examined, not an event on the device",
+    "tool": "dissect.target 3.25.1",
+    "volume_label": "IAMAN $_@"
+   }
+  }
+ ]
+}

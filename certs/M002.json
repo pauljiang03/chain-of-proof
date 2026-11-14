@@ -1,0 +1,122 @@
+{
+  "finding_id": "M002",
+  "question": "Which USB devices were connected to this PC, and what do they hold?",
+  "claim": {
+    "both": [
+      {
+        "deviceHolds": [
+          2,
+          241
+        ]
+      },
+      {
+        "tagged": [
+          2,
+          "obj",
+          198,
+          115
+        ]
+      }
+    ]
+  },
+  "status": "verified",
+  "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-24 13:38:00 UTC). The seized device with that serial holds volume 5C754D3E. 4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+  "cited_facts": [
+    {
+      "id": 2,
+      "kind": "usbInsert",
+      "t": 1427204280014221,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 0,
+      "aux_text": "(none)",
+      "row_sha256": "666595d5405acb79954a631d3f0a29da3f0c8473f4690efeffe6a007eb484698",
+      "prov": {
+        "artifact": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01\\4C530012450531101593&0",
+        "device": "Disk&Ven_SanDisk&Prod_Cruzer_Fit&Rev_2.01",
+        "exhibit": "PC",
+        "image": "pc.E01",
+        "time_meaning": "registry key last-write time",
+        "tool": "dissect.target 3.25.1"
+      }
+    },
+    {
+      "id": 241,
+      "kind": "volumeOnDevice",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 19,
+      "aux_text": "5C754D3E",
+      "row_sha256": "8dbb9b60879674b0c2cfa46e2dcc5ee1da4b35f3db48803d3573b8ee0d3f9fd0",
+      "prov": {
+        "artifact": "volume boot record, partition at byte offset 16384",
+        "device_serial_source": "exhibits.json (NIST case documentation)",
+        "disk_signature": "E22103D8",
+        "exhibit": "RM#1",
+        "filesystem": "exfat",
+        "image": "rm1.E01",
+        "time_meaning": "when the image was examined, not an event on the device",
+        "tool": "dissect.target 3.25.1",
+        "volume_label": "Authorized"
+      }
+    },
+    {
+      "id": 198,
+      "kind": "tag",
+      "t": 1794614400000000,
+      "res": 1,
+      "obj": 1,
+      "obj_text": "4C530012450531101593",
+      "aux": 115,
+      "aux_text": "authorized-device",
+      "row_sha256": "f2a0cdcf87e4216573dff3f2a1f4e597ed1d76bb4d7acb0a8ba54298a0a1d6f9",
+      "prov": {
+        "rule": "device serial is on the authorized list in the case brief",
+        "source": "deterministic"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "part": {
+        "deviceHolds": [
+          2,
+          241
+        ]
+      },
+      "english": "USB device 4C530012450531101593 was connected to this PC (2015-03-24 13:38:00 UTC). The seized device with that serial holds volume 5C754D3E.",
+      "rules": [
+        "R1",
+        "R7"
+      ],
+      "strength": "strong"
+    },
+    {
+      "part": {
+        "tagged": [
+          2,
+          "obj",
+          198,
+          115
+        ]
+      },
+      "english": "4C530012450531101593 is tagged \"authorized-device\" (rule: device serial is on the authorized list in the case brief).",
+      "rules": [
+        "T"
+      ],
+      "strength": "strong"
+    }
+  ],
+  "rules": [
+    "R1",
+    "R7",
+    "T"
+  ],
+  "strength": "strong",
+  "lean_file": "M002.lean",
+  "trust_tier": "kernel",
+  "axioms": []
+}
