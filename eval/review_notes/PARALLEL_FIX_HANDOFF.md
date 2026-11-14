@@ -1,9 +1,10 @@
 # Parallel implementation handoff
 
 The user authorized parallel implementation after the N4 review. Work is integrated
-on `finish/parallel-hardening`, based on `a0b4fce`. The separate checkout is
+on `finish/parallel-hardening`, originally based on `a0b4fce` and now also including
+C0's non-overlapping checkpoint `82beb24`. The separate checkout is
 `/private/tmp/chain-of-proof-n4-smoke`. The original `main` checkout remains owned
-by C0. No push, main merge, live model trial, or Mulder run was performed.
+by C0. This terminal did not update `main`, push, launch a live model trial, or run Mulder.
 
 ## Completed changes
 
@@ -54,10 +55,17 @@ The clean environment initially lacked Dissect, so three extractor test modules
 could not import. Installing the already declared Dissect dependency resolved
 that environment issue. README setup instructions now state this test dependency.
 
-Final validation: **326 tests passed with no skips** in 35.924 seconds, including
+Validation before incorporating C0's new demo checkpoint: **326 tests passed with no skips**
+in 35.924 seconds, including
 all eight optional API integration/deadline tests. `lake build` passed (11 jobs).
 In the original environment without API packages, all 14 case-profile/deadline
 tests also passed; the eight optional API tests skip cleanly there.
+
+After incorporating `82beb24`, its five new demo tests passed in 0.829 seconds via
+`python -m unittest tests.test_demo_proof_gate`. This is 331 distinct passing tests
+across the full regression run and the added demo check, not a claim that one
+331-test discovery command was rerun after the merge. The merge changed no files
+owned by the hardening lanes.
 
 Post-fix smoke assertions confirm that all three scorer overwrite probes preserve
 their original bytes and exit 2; backend error probes exit 1 and retain their
@@ -103,20 +111,21 @@ regressions independently verify their newly generated fixture certificates.
 
 ## Integration
 
-C0 can inspect `git diff a0b4fce..finish/parallel-hardening` and integrate the
+C0 can inspect `git diff 82beb24..finish/parallel-hardening` and integrate the
 branch after reconciling any newer work. The commits are limited to runner/tool
 hardening, CLI preservation, packaging setup, related tests, and review notes.
 The preserved N3 notes contain private answer-source material and must not be
 copied into an investigator package.
 
-If C0 is still at the recorded base checkpoint, the complete commit range is:
+The branch incorporates C0's `82beb24` cleanly. If `main` remains at that checkpoint,
+C0 can fast-forward it to this tested integration branch:
 
 ```sh
-git cherry-pick a0b4fce..finish/parallel-hardening
+git merge --ff-only finish/parallel-hardening
 ```
 
-If the initial N4 review commit `8aea103` is already integrated, omit it from the
-range. This terminal did not run the integration command against `main`.
+If `main` advances again, reconcile that new work in the integration branch first.
+This terminal did not run the integration command against `main`.
 
 Framework references used during the API audit:
 [DeepAgents customization](https://docs.langchain.com/oss/python/deepagents/customization),
