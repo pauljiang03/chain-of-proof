@@ -218,6 +218,28 @@ def catalog():
             'scope': SCOPE}
 
 
+def tool_catalog():
+    """Compact, self-contained tool view; the full internal catalog is unchanged."""
+    result = catalog()
+    shared_types = [role['semantic_type'] for role in result['attribute_roles'].values()]
+    for fields in result['forms'].values():
+        for selector in fields.values():
+            if ('value_role_argument' in selector
+                    and selector.get('allowed_semantic_types') == shared_types):
+                del selector['allowed_semantic_types']
+                selector['allowed_semantic_types_ref'] = '#/attribute_roles'
+    result['view'] = 'compact_tool_catalog'
+    result['attribute_type_lookup'] = (
+        'For a selector with value_role_argument, take that indexed argument from the '
+        'atomic claim. If tuple_entry is present, first select that zero-based tuple '
+        'entry. The argument is an exact approved role key in attribute_roles; its '
+        'semantic_type and value_type define the selected value. '
+        'allowed_semantic_types_ref points to the shared attribute_roles map: its '
+        'semantic_type values are the allowed types, not a type chosen by the model. '
+        'All forms, selectors, role restrictions, formats and native types remain available.')
+    return result
+
+
 def _literal_parts(claim):
     """Parse shapes only; checker-only restrictions must not filter A's meaning.
 

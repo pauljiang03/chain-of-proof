@@ -194,7 +194,7 @@ def _answer(run_dir, question_id, bindings=None, *, replace=False, preview=False
     An empty replacement clears that question's bindings. The tool audit keeps
     prior calls. No candidate or proof is edited by an answer update.
     """
-    from agent.answer_projection import catalog, claim_digest, _path
+    from agent.answer_projection import catalog, tool_catalog, claim_digest, _path
     planner = Investigation(run_dir)
     with planner._locked():
         state = planner._load()
@@ -210,7 +210,7 @@ def _answer(run_dir, question_id, bindings=None, *, replace=False, preview=False
             from agent.answer_requirements import inspect
             fields = catalog()
             question = next(q for q in state['questions'] if q['id'] == question_id)
-            return {'question_id': question_id, 'field_catalog': fields,
+            return {'question_id': question_id, 'field_catalog': tool_catalog(),
                     'field_requirements': inspect(question.get('answer_schema', {}), fields['forms'], require_claim_requirements=True, require_evidence_scope=True),
                     'bindings': [b for b in document['bindings'] if b.get('question_id') == question_id]}
         if not isinstance(bindings, list) or len(bindings) > MAX_BATCH:

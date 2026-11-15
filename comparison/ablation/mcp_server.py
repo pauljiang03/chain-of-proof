@@ -43,10 +43,10 @@ def _neutral_plan(bench):
 class _NeutralWorkflow:
     @audited
     def forms(self):
-        from agent.answer_projection import catalog
+        from agent.answer_projection import tool_catalog
         from agent.tools import Workbench
         # One audit event binds the complete returned static catalog in both arms.
-        return dict(Workbench.forms.__wrapped__(self), answer_projection=catalog())
+        return dict(Workbench.forms.__wrapped__(self), answer_projection=tool_catalog())
 
     @audited
     def plan(self):
