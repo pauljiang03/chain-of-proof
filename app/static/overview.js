@@ -18,7 +18,7 @@
     return node;
   };
   const array = (value) => (Array.isArray(value) ? value : []);
-  const state = { model: null, run: null, brief: null, range: "main", bins: null, hot: -1, painted: false };
+  const state = { model: null, run: null, brief: null, evidence: null, range: "main", bins: null, hot: -1, painted: false };
   const go = (tab) => () => { if (CONAN.app) CONAN.app.switchTab(tab, true); };
 
   // Whole hours, days, weeks, months or years: the finest step that keeps the chart to about 130 columns.
@@ -104,8 +104,8 @@
       : [...new Set(model.records.map((record) => record.exhibit).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
     const hero = el("header", "ov-hero");
-    hero.append(el("h2", "", n.format(findings.length) + (findings.length === 1 ? " finding passed the proof checker" : " findings passed the proof checker")),
-      el("p", "", "Each one is tied to records read from the disk images. Anything the checker refused is kept apart and never shown as a finding."));
+    hero.append(el("h2", "", "Case summary"),
+      el("p", "", n.format(model.records.length) + " cited records across " + n.format(devices.length) + " evidence items. Explore the names, properties, and recorded activity below."));
 
     const tiles = el("div", "ov-tiles");
     tiles.append(
@@ -120,7 +120,9 @@
         S.F.year.format(model.main.to) + " · " + n.format(model.main.count) + " records in " + n.format(days) + (same ? " day" : " days"),
         () => CONAN.timeline && CONAN.timeline.show({ from: model.main.from, to: model.main.to })));
     }
-    host.append(hero, tiles);
+    host.append(hero);
+    if (state.evidence && CONAN.evidence) host.append(CONAN.evidence.highlights(state.evidence));
+    host.append(tiles);
     if (opinions) host.append(el("p", "ov-note", n.format(opinions) + (opinions === 1 ? " interpretation by the investigator is" : " interpretations by the investigator are") + " recorded as not checked. They are under Findings, never counted above."));
 
     if (model.range) {
@@ -317,9 +319,9 @@
 
   function wire() { /* the page is built when a case is rendered */ }
   CONAN.overview = {
-    render(model, run, brief) {
+    render(model, run, brief, evidence) {
       if (state.painted && model === state.model) return;   // the same stored run: nothing to redraw
-      state.model = model; state.run = run; state.brief = brief; state.range = "main"; state.painted = true;
+      state.model = model; state.run = run; state.brief = brief; state.evidence = evidence; state.range = "main"; state.painted = true;
       paint();
     },
     activate() { chart(); },

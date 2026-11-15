@@ -7,7 +7,7 @@
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
     tab: "summary", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
-    needsLimit: 40, loading: false, submitting: false, stopping: false,
+    findingView: "overview", evidenceTopic: "all", evidenceModel: null, needsLimit: 40, loading: false, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
   const statuses = new Set(["running", "completed", "partial", "failed", "cancelled", "saved"]);
@@ -42,7 +42,7 @@
     return element("span", "badge" + (allowed.has(kind) ? " " + kind : ""), text);
   }
   function statusLabel(status) {
-    return ({ running: "Running", completed: "Completed", partial: "Partial report", failed: "Failed", cancelled: "Cancelled", saved: "Saved · execution unknown" })[status] || "Status unknown";
+    return ({ running: "Running", completed: "Completed", partial: "Partial report", failed: "Failed", cancelled: "Cancelled", saved: "Saved report" })[status] || "Status unknown";
   }
   function empty(title, description, symbol = "◇") {
     const box = element("div", "empty-state");
@@ -125,6 +125,7 @@
     state.payload = null;
     state.search = "";
     state.findingLimit = 40;
+    state.evidenceTopic = "all";
     state.needsLimit = 40;
     $("finding-search").value = "";
     clearInspector();
@@ -177,7 +178,6 @@
     if (meta.sample || payload.name === "sample") metadata.append(badge("SYNTHETIC", "synthetic"));
     const generated = object(run.case).generated_at || meta.generated_at;
     if (generated) metadata.append(element("span", "", "Report saved " + date(generated)));
-    if (payload.status === "saved") metadata.append(element("span", "", "Legacy execution status was not recorded."));
     $("sample-banner").hidden = !(meta.sample || payload.name === "sample");
     $("report-actions").hidden = !payload.run;
     for (const format of ["html", "md", "json"]) $("download-" + format).href = reportURL(format, true);
@@ -223,7 +223,8 @@
     // The summary and the timeline draw the same records in plain words; they add no finding.
     const story = CONAN.story ? CONAN.story.open(payload.run, payload.name, revision) : null;
     if (CONAN.timeline) CONAN.timeline.render(story, payload.name);
-    if (CONAN.overview) CONAN.overview.render(story, payload.run, payload.brief);
+    state.evidenceModel = CONAN.evidence ? CONAN.evidence.open(payload.run, revision) : null;
+    if (CONAN.overview) CONAN.overview.render(story, payload.run, payload.brief, state.evidenceModel);
     renderFindings();
     renderNeeds();
     renderActivity();
@@ -257,7 +258,26 @@
     return [finding.finding_id, finding.question, finding.english, array(finding.rules).join(" ")].filter(Boolean).join(" ").toLocaleLowerCase();
   }
   function renderFindings() {
+    const overview = state.findingView === "overview" && state.evidenceModel;
+    $("findings-overview").setAttribute("aria-pressed", String(!!overview));
+    $("findings-exact").setAttribute("aria-pressed", String(!overview));
+    const topics = $("evidence-topics"); topics.hidden = !overview;
+    topics.replaceChildren();
+    if (overview) {
+      const available = CONAN.evidence.categories.filter(category => state.evidenceModel.groups.some(group => group.category === category.key));
+      [{key: "all", label: "All topics"}, ...available].forEach(category => {
+        const amount = state.evidenceModel.groups.filter(group => category.key === "all" || group.category === category.key).length;
+        const button = element("button", "topic-chip" + (category.lane === undefined ? "" : " c" + category.lane), category.label + " · " + amount);
+        button.type = "button"; button.setAttribute("aria-pressed", String(state.evidenceTopic === category.key));
+        button.addEventListener("click", () => { state.evidenceTopic = category.key; renderFindings(); }); topics.append(button);
+      });
+      $("findings-view-count").textContent = state.evidenceModel.groups.length + " entries · " + state.evidenceModel.findings.length + " supporting findings";
+      CONAN.evidence.render($("finding-list"), state.evidenceModel, state.evidenceTopic, state.search);
+      $("finding-pagination").replaceChildren();
+      renderUnverifiedFindings(); renderConclusions(); return;
+    }
     const findings = acceptedFindings();
+    $("findings-view-count").textContent = findings.length + " stored checker outcomes";
     const matches = state.search ? findings.filter((finding) => searchable(finding).includes(state.search.toLocaleLowerCase())) : findings;
     const container = $("finding-list");
     container.replaceChildren();
@@ -277,8 +297,10 @@
         row.dataset.finding = present(finding.finding_id, "");
         const basis = element("td"), statement = element("td");
         basis.append(badge(finding.strength === "heuristic" ? "Heuristic" : present(finding.strength, "Rule type not recorded"), finding.strength === "heuristic" ? "heuristic" : "accepted"));
-        if (finding.question) statement.append(element("div", "question", finding.question));
-        statement.append(element("div", "", present(finding.english, "No fixed sentence was included in this certificate.")));
+        statement.append(element("strong", "finding-heading", CONAN.evidence ? CONAN.evidence.title(finding) : present(finding.question)));
+        statement.append(exactStatements(finding));
+        const inspect = element("button", "text-button", "Inspect evidence & proof →"); inspect.type = "button";
+        inspect.addEventListener("click", event => { event.stopPropagation(); openFinding(finding); }); statement.append(inspect);
         row.append(markCell(finding), element("td", "id", present(finding.finding_id)), basis, statement,
           element("td", "num", count(array(finding.cited_facts).length, "—")), element("td", "id", array(finding.rules).join(" ")));
         row.addEventListener("click", () => openFinding(finding));
@@ -299,6 +321,23 @@
     }
     renderUnverifiedFindings();
     renderConclusions();
+  }
+  function exactStatements(finding) {
+    const details = element("details", "exact-statements"), parts = array(finding.parts).filter(part => typeof object(part).english === "string");
+    details.append(element("summary", "", parts.length > 1 ? "Read " + parts.length + " exact statements" : "Read exact statement"));
+    details.addEventListener("click", event => event.stopPropagation());
+    details.addEventListener("keydown", event => event.stopPropagation());
+    details.addEventListener("toggle", () => { if (details.open && details.childElementCount === 1) {
+      if (parts.length > 1) {
+        const list = element("ol"); parts.forEach(part => list.append(element("li", "", part.english))); details.append(list);
+      } else details.append(element("p", "", present(finding.english, "No fixed sentence was included.")));
+    }});
+    return details;
+  }
+  function browseEvidence(topic = "all", search = "") {
+    state.findingView = "overview"; state.evidenceTopic = topic; state.search = search;
+    $("finding-search").value = search; renderFindings(); switchTab("findings", true);
+    $("panel-findings").scrollTop = 0;
   }
   function renderUnverifiedFindings() {
     const container = $("unverified-findings");
@@ -525,8 +564,9 @@
     record.append(heading);
     if (conflict) record.append(element("div", "notice error", "Conflicting copied rows share this fact ID. This viewer keeps them separate and does not resolve the conflict."));
     const fields = element("dl", "evidence-fields"), provenance = object(row.prov);
-    detailField(fields, "Object", row.obj_text === undefined ? row.obj : row.obj_text);
-    detailField(fields, "Related value", row.aux_text === undefined ? row.aux : row.aux_text);
+    if (CONAN.evidence) CONAN.evidence.properties(row).forEach(property => detailField(fields, property.label, property.value));
+    else { detailField(fields, "Object", row.obj_text === undefined ? row.obj : row.obj_text);
+      detailField(fields, "Related value", row.aux_text === undefined ? row.aux : row.aux_text); }
     detailField(fields, "Image / exhibit", [provenance.image, provenance.exhibit].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
     detailField(fields, "Artifact", provenance.artifact, true);
     detailField(fields, "Recorded time", factTime(row), true);
@@ -593,8 +633,8 @@
     const badges = element("div", "finding-identity");
     badges.append(badge("CHECKER ACCEPTED", "accepted"), badge(present(finding.strength, "Strength not recorded"), finding.strength === "heuristic" ? "heuristic" : ""));
     const summary = [badges];
-    if (finding.question) summary.push(element("p", "finding-question", finding.question));
-    summary.push(element("p", "statement", present(finding.english)));
+    summary.push(element("p", "statement", CONAN.evidence ? CONAN.evidence.title(finding) : present(finding.question)));
+    summary.push(exactStatements(finding));
     const show = element("button", "text-button", "Show in proof graph →");
     show.type = "button";
     show.addEventListener("click", () => { switchTab("graph"); if (CONAN.graph) CONAN.graph.focusFinding(String(finding.finding_id), finding); });
@@ -785,6 +825,10 @@
   $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });
+  for (const [id, view] of [["findings-overview", "overview"], ["findings-exact", "exact"]]) $(id).addEventListener("click", () => {
+    state.findingView = view; state.findingLimit = 40; renderFindings();
+  });
+  $("open-demo").addEventListener("click", async () => { await selectRun("sample"); switchTab("summary", true); });
   $("new-investigation").addEventListener("click", openNew);
   $("welcome-new").addEventListener("click", openNew);
   $("refresh-runs").addEventListener("click", refreshAll);
@@ -805,7 +849,7 @@
   });
   window.addEventListener("beforeunload", () => clearTimeout(state.timer));
 
-  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab };
+  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab, browseEvidence };
 
   async function init() {
     const [config, runs] = await Promise.allSettled([api("/api/config"), api("/api/runs")]);
