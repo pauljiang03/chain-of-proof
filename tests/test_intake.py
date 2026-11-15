@@ -45,6 +45,13 @@ class IntakeFixture(unittest.TestCase):
 
 
 class IntakeTests(IntakeFixture):
+    def test_windows_reader_gets_the_declared_examination_time(self):
+        from datetime import datetime
+        from extractor.store import us
+        stamp = '2026-01-01T00:00:00+00:00'
+        intake(self.images, self.manifest, self.root / 'windows', readers=['windows'], examined_at=stamp)
+        self.assertEqual(build.extract_pc.call_args.kwargs['examined_at'], us(datetime.fromisoformat(stamp)))
+
     def test_narrow_intake_dispatches_only_approved_reader_and_records_hashes_health(self):
         result = self.make()
         self.assertEqual(self.calls, [("inventory", "Computer A")])

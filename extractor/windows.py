@@ -4,10 +4,12 @@ the user's mailbox."""
 from __future__ import annotations
 
 import io
+import hashlib
+import json
 import re
 import struct
-from datetime import datetime
-from urllib.parse import parse_qs, unquote_plus, urlsplit
+from datetime import datetime, timezone
+from urllib.parse import parse_qs, urlsplit
 from zoneinfo import ZoneInfo
 
 from dissect.ole import OLE
@@ -16,10 +18,14 @@ from dissect.target import Target
 
 from .store import Evidence, us, us_from_filetime, us_from_unix
 from .profiles import user_profiles, ntfs_volume_serial
-from .source_scope import base_volume_scope, merge_scope
+from .source_scope import base_volume_scope, merge_scope, subject_scope
+from .attributes import emit_attribute
 
 USER_DIRS = ("Desktop", "Documents", "My Documents", "Downloads")
-SEARCH_PARAMS = {"google.": "q", "bing.": "q", "yahoo.": "p"}
+SEARCH_PARAMS = dict.fromkeys(("google.com", "google.co.uk", "google.ca", "google.de",
+                              "google.fr", "google.com.au", "google.co.jp", "google.co.in",
+                              "bing.com"), "q") | {"yahoo.com": "p"}
+MAX_SEARCH_URL = 65536
 
 
 def _usb(ev, t, common):
@@ -269,25 +275,95 @@ def _jumplists(ev, t, common):
     return n
 
 
-def _searches(ev, t, common):
+def search_query(url):
+    """One form-decoding pass, on a supported search provider's exact host suffix.
+
+    This identifies a URL's retained query text, not who entered it. Unsupported
+    regional domains remain unsupported; substring lookalikes are never accepted.
+    """
+    if not isinstance(url, str) or len(url) > MAX_SEARCH_URL:
+        raise ValueError("search URL is not bounded text")
+    if any(ord(char) < 32 or ord(char) == 127 for char in url):
+        raise ValueError("control character in search URL")
+    parts = urlsplit(url)
+    if parts.scheme.lower() not in ("http", "https") or parts.username is not None:
+        return None
+    host = (parts.hostname or "").lower().rstrip('.')
+    match = next(((domain, param) for domain, param in SEARCH_PARAMS.items()
+                  if host == domain or host.endswith('.' + domain)), None)
+    if match is None:
+        return None
+    domain, param = match
+    prefix = host[:-len(domain)].rstrip('.')
+    allowed_prefixes = ('', 'www', 'images', 'encrypted') if domain.startswith('google.') else (
+        ('', 'www', 'search') if domain == 'yahoo.com' else ('', 'www'))
+    allowed_paths = ('/', '/search', '/webhp') if domain.startswith('google.') else ('/', '/search')
+    if prefix not in allowed_prefixes or (parts.path or '/') not in allowed_paths:
+        return None  # A redirect/login/mail endpoint's q/p parameter is not a search.
+    # Only Google's reviewed fragment convention overrides its query string.
+    locations = [("query", parts.query)]
+    if domain.startswith('google.'):
+        locations.insert(0, ("fragment", parts.fragment))
+    for location, raw in locations:
+        if re.search(r'%(?![0-9a-fA-F]{2})', raw):
+            raise ValueError("malformed percent escape in search parameters")
+        values = parse_qs(raw, keep_blank_values=True, errors='strict', max_num_fields=1024).get(param)
+        if values is None:
+            continue
+        if len(values) != 1:
+            raise ValueError("ambiguous repeated search parameter")
+        query = values[0]  # parse_qs already decodes percent escapes and '+' once.
+        if not query.strip():
+            return None
+        if any(ord(char) < 32 or ord(char) == 127 for char in query):
+            raise ValueError("control character in decoded search query")
+        return query, dict(search_provider_domain=domain, query_parameter=param,
+                           query_component=location, query_decoding='one UTF-8 form-decoding pass')
+    return None
+
+
+def _searches(ev, t, common, *, examined_at=None):
     n = 0
+    typed_time = type(examined_at) is int and examined_at > 0
+    if not typed_time:
+        ev.problem('search attributes', ValueError('explicit positive examination time required; typed fields omitted'))
     if hasattr(t, "has_function") and not t.has_function("browser.history"):
         return n  # Legacy IE history is read separately; no fabricated modern store.
     for r in t.browser.history():
-        url = r.url or ""
-        parts = urlsplit(url)
-        param = next((p for host, p in SEARCH_PARAMS.items() if host in parts.netloc), None)
-        if param is None or r.ts is None:
-            continue
-        # Google puts the search being shown in the fragment (#q=...); the query string
-        # may still carry an earlier search, so the fragment wins.
-        query = parse_qs(parts.fragment).get(param) or parse_qs(parts.query).get(param)
-        if not query or not query[0].strip():
-            continue
-        ev.add("webSearch", us(r.ts), 1, unquote_plus(query[0]).strip(), str(r.browser),
-               artifact=str(r.source).replace("/", "\\"), url=url[:300], user=r.username,
-               time_meaning="browser history visit time", **common)
-        n += 1
+        source = str(r.source or '').replace('/', '\\')
+        try:
+            url = str(r.url or "")
+            parsed = search_query(url)
+            if parsed is None or r.ts is None:
+                continue
+            query, derivation = parsed
+            recorded_us = us(r.ts)  # rejects naive dates; never use examination time.
+            browser = str(r.browser or '')
+            provenance = merge_scope(common, dict(artifact=source, source_path=source,
+                url=url, user=getattr(r, 'username', None), reader='windows.searches',
+                parser='dissect.target.browser.history', **derivation))
+            ev.add("webSearch", recorded_us, 1, query, browser,
+                   time_meaning="browser history visit time", **provenance)
+            n += 1
+            if not typed_time:
+                continue
+            record_id = getattr(r, 'id', None)
+            if not source or record_id is None or not str(record_id) or not browser:
+                raise ValueError("history record lacks a source, record identifier or browser; no typed tuple")
+            provenance.update(history_record_id=str(record_id), recorded_time_us=recorded_us,
+                recorded_time_meaning=('WebCache history AccessedTime' if browser == 'iexplore'
+                                       else 'browser history visit timestamp'),
+                limitation='retained search URL and source timestamp; not physical user attribution')
+            # Include retained values as well as the plugin locator: some ESE
+            # containers reuse EntryId values. Never combine different records.
+            subject = json.dumps(subject_scope(provenance) + [source, browser, str(record_id),
+                recorded_us, url], ensure_ascii=True, separators=(',', ':'))
+            stamp = r.ts.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
+            for role, value in (('browser.search.url', url), ('browser.search.query', query),
+                                ('browser.search.browser', browser), ('browser.search.recorded_time', stamp)):
+                emit_attribute(ev, subject, role, value, examined_at, **provenance)
+        except Exception as error:
+            ev.problem(source or 'browser history search', error)
     return n
 
 
@@ -347,48 +423,108 @@ def _volumes_in_shortcuts(ev, common):
     return len(first)
 
 
-RECYCLE_INDEX = re.compile(r"^\$I[0-9A-Z]{6}(\.[^\\]*)?$")
+RECYCLE_INDEX = re.compile(r"^\$I[0-9A-Z]{6}(\.[^\\/:\x00-\x1f]*)?$", re.I)
+MAX_RECYCLE_INDEX = 28 + 2 * 32768
 
 
-def _recycle_bin(ev, t, common):
+def parse_recycle_index(data):
+    """Validated $I v1/v2 fields, with byte locators and full path preserved.
+
+    The timestamp is the value recorded by the index. It does not prove the
+    original file is now unallocated or identify the person who moved it.
+    """
+    if len(data) < 26 or len(data) > MAX_RECYCLE_INDEX:
+        raise ValueError('truncated or oversized Recycle Bin index')
+    version, size, filetime = struct.unpack_from('<QQQ', data)
+    if version == 1:
+        if len(data) != 544:
+            raise ValueError('version 1 Recycle Bin index must have its 260-character path field')
+        start, raw = 24, data[24:]
+    elif version == 2:
+        if len(data) < 30:
+            raise ValueError('truncated version 2 Recycle Bin index')
+        count = struct.unpack_from('<I', data, 24)[0]
+        if not 1 <= count <= 32768 or len(data) != 28 + count * 2:
+            raise ValueError('version 2 path character count does not match retained bytes')
+        start, raw = 28, data[28:]
+    else:
+        raise ValueError(f'unknown Recycle Bin index version {version}')
+    # Find aligned UTF-16 NUL before decoding; v1 padding after it is not text.
+    end = next((offset for offset in range(0, len(raw), 2) if raw[offset:offset + 2] == b'\0\0'), None)
+    if end is None or (version == 2 and end != len(raw) - 2):
+        raise ValueError('Recycle Bin path lacks its expected UTF-16 terminator')
+    original = raw[:end].decode('utf-16-le', errors='strict')
+    if (not re.match(r'^[A-Za-z]:\\', original)
+            or any(ord(char) < 32 for char in original)):
+        raise ValueError('Recycle Bin original path is not a literal drive-qualified path')
+    ticks = filetime - 116444736000000000
+    if ticks < 0:
+        raise ValueError('Recycle Bin timestamp predates the supported Unix epoch')
+    seconds, fraction = divmod(ticks, 10000000)
+    stamp = datetime.fromtimestamp(seconds, timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
+    stamp += f'.{fraction:07d}Z'  # Keep the source FILETIME's 100-nanosecond precision.
+    return dict(version=version, original_size=size, filetime=filetime,
+                deleted_at=stamp, deleted_at_us=ticks // 10, original_path=original,
+                path_byte_offset=start, path_byte_length=end,
+                path_field_byte_length=len(raw))
+
+
+def _recycle_bin(ev, t, common, *, examined_at=None):
     """Recycle Bin index records ($I files), read from the file table itself.
 
     Emptying the Recycle Bin deletes the $I files, but each is small enough to live
     inside its file-table record, so the original path and the deletion time stay
     readable until that record is reused."""
-    fs = t.fs.mounts["c:"]
-    vsn = "%08X" % (fs.ntfs.serial & 0xFFFFFFFF)
+    typed_time = type(examined_at) is int and examined_at > 0
+    if not typed_time:
+        ev.problem('Recycle Bin attributes', ValueError('explicit positive examination time required; typed fields omitted'))
     n = 0
-    for rec in fs.ntfs.mft.segments():
-        try:
-            name = rec.filename
-        except Exception:
+    seen = set()
+    for mount, fs in sorted(t.fs.mounts.items()):
+        if not re.fullmatch('[A-Za-z]:', mount) or id(fs) in seen or not getattr(fs, 'ntfs', None):
             continue
-        if not name or not RECYCLE_INDEX.match(name):
-            continue
-        try:
-            data = rec.open().read(1100)
-            version, size, filetime = struct.unpack_from("<QQQ", data, 0)
-            if version == 1:
-                raw = data[24:544]
-            elif version == 2:
-                raw = data[28:28 + 2 * struct.unpack_from("<I", data, 24)[0]]
-            else:
-                raise ValueError(f"unknown $I version {version}")
-            original = raw.decode("utf-16-le").split("\x00")[0]
-            if not re.match(r"^[A-Za-z]:\\", original):
-                raise ValueError(f"no original path in {name}")
-        except Exception as e:
-            ev.problem(f"file table record {rec.segment} ({name})", e)
-            continue
-        in_use = bool(rec.header.Flags & 1)
-        ev.add("fileDeleted", us_from_filetime(filetime), 1, original[2:], vsn,
-               artifact=f"Recycle Bin index {name}, file table record {rec.segment}",
-               original_drive=original[:2], size=size, index_record_in_use=in_use,
-               note=("" if in_use else "the Recycle Bin was emptied: this index file is "
-                     "deleted, and was read from its file table record"),
-               time_meaning="deletion time stored in the Recycle Bin index", **common)
-        n += 1
+        seen.add(id(fs))  # Deduplicate aliases only for the identical filesystem object.
+        vsn = "%08X" % (fs.ntfs.serial & 0xFFFFFFFF)
+        for rec in fs.ntfs.mft.segments():
+            name = None
+            try:
+                name = rec.filename
+                if not isinstance(name, str) or not name or not RECYCLE_INDEX.fullmatch(name) or rec.header.Flags & 2:
+                    continue
+                name = str(name)  # Dissect's WCHAR text subclass retains the same characters.
+                with rec.open() as stream:
+                    data = stream.read(MAX_RECYCLE_INDEX + 1)
+                parsed = parse_recycle_index(data)
+                original = parsed['original_path']
+                in_use = bool(rec.header.Flags & 1)
+                provenance = merge_scope(common, dict(
+                    artifact=f'Recycle Bin index {name}, {mount.upper()} file table record {rec.segment}',
+                    source_path=mount.upper() + r'\$MFT', filesystem_mount=mount.upper(),
+                    mft_segment=int(rec.segment), mft_sequence_number=int(rec.header.SequenceNumber),
+                    mft_flags=int(rec.header.Flags), index_file_name=name,
+                    index_sha256=hashlib.sha256(data).hexdigest(), index_bytes=len(data),
+                    index_record_in_use=in_use, original_drive=original[:2],
+                    size=parsed['original_size'], parser='windows.parse_recycle_index',
+                    format_version=parsed['version'], path_byte_offset=parsed['path_byte_offset'],
+                    path_byte_length=parsed['path_byte_length'], time_byte_offset=16, time_byte_length=8,
+                    raw_filetime=parsed['filetime'],
+                    limitation='retained index metadata; not actor identity, emptying of the bin, recoverability or current original-file allocation'))
+                if not in_use:
+                    provenance.update(source_variant='unallocated-recovery', recovered=True)
+                ev.add('fileDeleted', parsed['deleted_at_us'], 1, original[2:], vsn,
+                       time_meaning='deletion time stored in the Recycle Bin index', **provenance)
+                n += 1
+                if not typed_time:
+                    continue
+                subject = json.dumps(subject_scope(provenance) + [mount.upper(), '$MFT',
+                    int(rec.segment), int(rec.header.SequenceNumber), provenance['index_sha256']],
+                    ensure_ascii=True, separators=(',', ':'))
+                for role, value in (('recycle.index_file_name', name),
+                                    ('recycle.original_path', original),
+                                    ('recycle.index_deleted_at', parsed['deleted_at'])):
+                    emit_attribute(ev, subject, role, value, examined_at, **provenance)
+            except Exception as error:
+                ev.problem(f'{mount} file table record {rec.segment} ({name})', error)
     return n
 
 
@@ -560,7 +696,7 @@ def _step(ev: Evidence, name: str, fn, default=0):
         return default
 
 
-def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC"):
+def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC", *, examined_at=None):
     t = Target.open(path)
     common = dict(image=path.name, exhibit=exhibit, tool=tool, **base_volume_scope())
     _step(ev, "USB devices in the registry", lambda: _usb(ev, t, common))
@@ -569,9 +705,9 @@ def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC"):
     parts = (("shortcuts", lambda: _lnk_files(ev, t, common)),
              ("jump list entries", lambda: _jumplists(ev, t, common)),
              ("volume labels in shortcuts", lambda: _volumes_in_shortcuts(ev, common)),
-             ("searches", lambda: _searches(ev, t, common)),
+             ("searches", lambda: _searches(ev, t, common, examined_at=examined_at)),
              ("user files", lambda: _user_files(ev, t, common)),
-             ("Recycle Bin records", lambda: _recycle_bin(ev, t, common)),
+             ("Recycle Bin records", lambda: _recycle_bin(ev, t, common, examined_at=examined_at)),
              ("CD-burn traces", lambda: _burn_traces(ev, t, common)),
              ("e-mails", lambda: _email(ev, t, common)))
     counts = {name: _step(ev, name, fn) for name, fn in parts}

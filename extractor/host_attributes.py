@@ -40,6 +40,91 @@ def build_number(value):
     return number
 
 
+TIME_ZONE_FIELDS = ('Bias', 'StandardBias', 'DaylightBias', 'ActiveTimeBias')
+TIME_ZONE_DISABLE_FIELDS = ('DynamicDaylightTimeDisabled', 'DisableAutoDaylightTimeSet')
+TIME_ZONE_SOURCES = (
+    'https://learn.microsoft.com/en-us/windows/win32/api/timezoneapi/ns-timezoneapi-time_zone_information',
+    'https://learn.microsoft.com/en-us/windows/win32/api/timezoneapi/ns-timezoneapi-dynamic_time_zone_information',
+)
+
+
+def _signed_bias(value, field):
+    """Accept native LONG or DWORD representations, never text/float/bool casts."""
+    if not isinstance(value, int) or isinstance(value, bool) or not -(1 << 31) <= value <= 0xffffffff:
+        raise ValueError(f'{field} is not a signed LONG or unsigned DWORD integer')
+    value = int(value)
+    return value - (1 << 32) if value >= (1 << 31) else value
+
+
+def effective_time_zone(data):
+    """Display only an unambiguous correspondence in the recorded bias fields.
+
+    Microsoft defines UTC = local time + bias, with StandardBias/DaylightBias
+    added to Bias. Those adjustments depend on transition dates at runtime; we
+    do not evaluate dates or claim an actual operating-system DST state here.
+    ActiveTimeBias is compared with the stored sums, not inferred from a clock.
+    A dynamic-DST disable flag alone can still allow fixed transition dates, so
+    the conservative flag check below does not resolve an ambiguous label.
+    """
+    raw, decoded = {}, {}
+    for field in TIME_ZONE_FIELDS:
+        if field not in data:
+            raise ValueError(f'effective recorded time zone needs {field}')
+        raw[field] = data[field]
+        decoded[field] = _signed_bias(data[field], field)
+    disabled = {}
+    for field in TIME_ZONE_DISABLE_FIELDS:
+        if field not in data:
+            continue
+        value = data[field]
+        if not isinstance(value, int) or isinstance(value, bool) or value not in (0, 1):
+            raise ValueError(f'{field} must be a canonical DWORD 0 or 1')
+        raw[field] = value
+        disabled[field] = int(value)
+    if len(set(disabled.values())) > 1:
+        raise ValueError('recorded daylight-control settings differ; this rule does not resolve their combination')
+    totals = {field: decoded['Bias'] + decoded[field] for field in ('StandardBias', 'DaylightBias')}
+    active = decoded['ActiveTimeBias']
+    if any(abs(value) >= 24 * 60 for value in (active, *totals.values())):
+        raise ValueError('recorded bias exceeds the supported UTC offset range (less than 24 hours)')
+    matched = [field for field, total in totals.items() if total == active]
+    if not matched:
+        raise ValueError('ActiveTimeBias matches neither recorded standard nor daylight total')
+    if any(disabled.values()) and 'StandardBias' not in matched:
+        raise ValueError('daylight-only bias correspondence with a daylight-disable setting is unsupported by this rule')
+    labels = {}
+    for field in matched:
+        name_field = field.replace('Bias', 'Name')
+        name = data.get(name_field)
+        if (not isinstance(name, str) or not name.strip() or name != name.strip()
+                or any(ord(char) < 32 or ord(char) == 127 for char in name)
+                or name.startswith('@')):
+            raise ValueError(f'{name_field} is missing, malformed, or an unresolved resource label')
+        raw[name_field] = name
+        labels[name_field] = name
+    if len(set(labels.values())) != 1:
+        raise ValueError('active bias matches different standard/daylight labels; effective display is ambiguous')
+    label = next(iter(labels.values()))
+    offset = -active
+    hours, minutes = divmod(abs(offset), 60)
+    rendered = f'{label} (UTC{"+" if offset >= 0 else "-"}{hours:02d}:{minutes:02d})'
+    return rendered, {
+        'time_zone_registry_inputs': raw,
+        'decoded_bias_minutes': decoded,
+        'standard_total_bias_minutes': totals['StandardBias'],
+        'daylight_total_bias_minutes': totals['DaylightBias'],
+        'matched_bias_fields': matched,
+        'matched_name_fields': list(labels),
+        'daylight_disable_settings': disabled,
+        'utc_offset_minutes': offset,
+        'value_conversion': 'match recorded ActiveTimeBias to Bias + StandardBias/DaylightBias; UTC offset is -ActiveTimeBias',
+        'display_convention': '<literal matched name> (UTC+HH:MM or UTC-HH:MM); zero uses UTC+00:00',
+        'interpretation_sources': list(TIME_ZONE_SOURCES),
+        'limitation': 'recorded active-bias correspondence only; no physical-clock accuracy, actual DST-state, '
+                      'or transition-date correctness claim; no examination-date or calendar inference',
+    }
+
+
 def extract(ev, target, ctx):
     hives = [h for h in system._hives(ev, target) if system._where(h)['source_variant'] == 'primary']
     subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:windows-system"
@@ -106,6 +191,18 @@ def extract(ev, target, ctx):
             if isinstance(data.get(field), str) and data[field]:
                 emit(hive, path, field, "os.time_zone_setting", data[field],
                      bias=data.get("Bias"), daylight_bias=data.get("DaylightBias"))
+            try:
+                display, provenance = effective_time_zone(data)
+                locators = {name: {'artifact': system._art(hive, path, name),
+                                   'source_hive': str(hive.path), 'registry_key': path,
+                                   'registry_value': name}
+                            for name in provenance['time_zone_registry_inputs']}
+                emit(hive, path, 'ActiveTimeBias', 'os.effective_time_zone', display,
+                     registry_input_locators=locators, current_control_set=current,
+                     control_set_selection_artifact=system._art(hive, 'Select', 'Current'),
+                     **provenance)
+            except ValueError as error:
+                ev.problem(system._art(hive, path) + ' effective recorded time zone', error)
             path = current + r"\Control\Windows"
             data = values(hive, path)
             raw = data.get("ShutdownTime")

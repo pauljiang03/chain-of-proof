@@ -99,7 +99,7 @@ def extract(images, exhibits, *, case, examined_at, selected=None, evidence=None
         failure = None
         try:
             if reader == "windows":
-                info, lines = extract_pc(ev, images / name, tool, exhibit_id)
+                info, lines = extract_pc(ev, images / name, tool, exhibit_id, examined_at=observation)
                 pcs[exhibit_id] = info
                 log.extend(lines)
                 zones = {p.get("time_zone") for p in pcs.values() if p.get("time_zone")}

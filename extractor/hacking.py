@@ -531,43 +531,72 @@ def _browser_indexes(ev, paths, ctx):
 
 
 def _recycle(ev, target, paths, ctx):
-    bins = [path for path in paths if re.search(r'\\(?:recycler|recycled)\\', _path(path), re.I)]
-    executables = []
-    for path in bins:
-        if path.suffix.lower() == '.exe':
-            with path.open('rb') as source:
-                if source.read(2) == b'MZ':
-                    executables.append(_path(path))
-                    _emit(ev, ctx, _path(path), 'recycle.file_present', True,
-                          definition='path resolves as a file and starts with MZ; not an execution claim')
-        if path.name.lower() != 'info2':
+    # This reader enumerates concrete drive mounts itself. The caller's bounded
+    # general-purpose path list is not evidence of complete Recycle Bin coverage.
+    from . import recycle_inventory
+
+    inventory = recycle_inventory.collect(ev, target, ctx)
+    recycle_inventory.emit(ev, inventory, ctx)
+    seen_info2 = set()
+    for item in sorted(inventory['files'].values(), key=lambda row: row['source_path']):
+        source, actual = item['source_path'], item['record']
+        if PureWindowsPath(source).name.casefold() != 'info2':
             continue
         try:
-            data = _read(path)
-            _content(ev, ctx, path, data)
+            segment, sequence = recycle_inventory._record_identity(actual) if actual is not None else (None, None)
+            identity = (json.dumps(item['volume'], sort_keys=True), segment, sequence,
+                        source.casefold() if actual is None else '')
+            if identity in seen_info2:
+                continue
+            seen_info2.add(identity)
+            size = recycle_inventory._integer(actual.size() if actual is not None else item['path'].stat().st_size)
+            if size > MAX_FILE:
+                raise ValueError('INFO2 exceeds the bounded reader size limit')
+            with actual.open() if actual is not None else item['path'].open('rb') as stream:
+                data = stream.read(MAX_FILE + 1)
+            if len(data) != size:
+                raise ValueError('INFO2 content length disagrees with its filesystem stream size')
+            _content(ev, ctx, source, data, mft_segment=segment, sequence_number=sequence,
+                     volume=item['volume'])
             for record in info2_records(data):
-                stored = path.parent / ('D' + record['drive'].lower() + str(record['record_index'])
-                                        + PureWindowsPath(record['original_path']).suffix)
-                locator = dict(record, stored_path=_path(stored))
-                subject = _path(path) + ':record:' + str(record['record_index'])
-                _emit(ev, ctx, subject, 'recycle.original_path', record['original_path'], **locator)
-                _emit(ev, ctx, subject, 'recycle.stored_path', _path(stored), **locator)
-                _emit(ev, ctx, subject, 'recycle.file_present', stored.is_file(), **locator)
-                if stored.is_file():
-                    # Read the actual retained file's in-use bit; presence alone
-                    # is not an inverse deletion flag and is never projected as one.
-                    fs = target.fs.mounts[record['drive'].lower() + ':']
-                    entry = fs.ntfs.mft.get(str(stored)[3:])
-                    _emit(ev, ctx, subject, 'filesystem.deleted_flag', not bool(entry.header.Flags & 1),
-                          mft_segment=entry.segment, **locator)
+                stored = str(PureWindowsPath(source).parent / (
+                    'D' + record['drive'].lower() + str(record['record_index'])
+                    + PureWindowsPath(record['original_path']).suffix))
+                locator = dict(record, stored_path=stored, info2_mft_segment=segment,
+                               info2_sequence_number=sequence, volume=item['volume'],
+                               stored_path_basis='INFO2 drive/index and original suffix naming convention')
+                # Record indices may repeat; the physical record offset identifies
+                # this occurrence. A missing historical target is unknown, not false.
+                subject = _subject(ctx, source + ':INFO2-byte:' + str(record['byte_offset']))
+                provenance = merge_scope(ctx['common'], dict(locator, artifact=source, source_path=source,
+                                                             parser='extractor.hacking.info2'))
+                emit_attribute(ev, subject, 'recycle.original_path', record['original_path'],
+                               ctx['examined_at'], **provenance)
+                emit_attribute(ev, subject, 'recycle.stored_path', stored, ctx['examined_at'], **provenance)
+                retained = inventory['files'].get(stored.casefold())
+                if retained is None:
+                    ev.problem(source + ':INFO2-byte:' + str(record['byte_offset']),
+                               ValueError('stored file presence/allocation unknown; no matching validated namespace entry'))
+                elif retained['record'] is None:
+                    emit_attribute(ev, subject, 'recycle.file_present', True, ctx['examined_at'], **provenance)
+                    ev.problem(source + ':INFO2-byte:' + str(record['byte_offset']),
+                               ValueError('stored file is present but actual NTFS allocation flags are unavailable'))
+                else:
+                    stored_record = retained['record']
+                    stored_segment, stored_sequence = recycle_inventory._record_identity(stored_record)
+                    flags = recycle_inventory._integer(stored_record.header.Flags, 0xffff)
+                    actual_locator = dict(provenance, stored_source_path=retained['source_path'],
+                                          stored_volume=retained['volume'], mft_segment=stored_segment,
+                                          sequence_number=stored_sequence, mft_header_flags=flags, flag_mask=1,
+                                          mft_source=retained['volume']['drive'] + r'\$MFT',
+                                          source_field='FILE_RECORD_SEGMENT_HEADER.Flags & FILE_RECORD_SEGMENT_IN_USE')
+                    emit_attribute(ev, subject, 'recycle.file_present', True, ctx['examined_at'], **actual_locator)
+                    emit_attribute(ev, subject, 'filesystem.deleted_flag', not bool(flags & 1),
+                                   ctx['examined_at'], **actual_locator)
                 ev.add('fileDeleted', record['deleted_us'], 1, record['original_path'],
-                       **dict(ctx['common'], artifact=_path(path), parser='extractor.hacking.info2',
-                              time_meaning='time moved to the Recycle Bin, not filesystem deallocation', **locator))
+                       **dict(provenance, time_meaning='time moved to the Recycle Bin, not filesystem deallocation'))
         except Exception as error:
-            ev.problem(_path(path), error)
-    _emit(ev, ctx, 'filesystem Recycle Bin inventory', 'recycle.executable_count', len(executables),
-          source_paths=executables, definition='allocated namespace .exe files under RECYCLER/Recycled with MZ signature',
-          enumeration_complete=True)
+            ev.problem(source, error)
 
 
 def _deleted(ev, target, ctx):
@@ -613,6 +642,7 @@ def _deleted(ev, target, ctx):
 
 def extract(ev, target, ctx):
     """Inspect bounded legacy user/application namespaces; report every reader failure."""
+    from . import yahoo_mail_cache
     paths, seen = [], set()
     # XP profiles and earlier standalone document folders are both supported.
     for root in ('C:/Program Files', 'C:/Program Files (x86)', 'C:/Documents and Settings',
@@ -635,6 +665,7 @@ def extract(ev, target, ctx):
         ('packet capture content', lambda: _traffic(ev, paths, ctx)),
         ('legacy browser cache', lambda: _browser(ev, paths, ctx)),
         ('legacy browser indexes', lambda: _browser_indexes(ev, paths, ctx)),
+        ('Yahoo message cache', lambda: yahoo_mail_cache.extract(ev, paths, ctx)),
         ('legacy Recycle Bin', lambda: _recycle(ev, target, paths, ctx)),
         ('NTFS deleted entries', lambda: _deleted(ev, target, ctx)),
     ):
