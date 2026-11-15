@@ -116,7 +116,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .key p { margin:0; line-height:1.5; }
 .key table { margin:6px 0 2px; font-size:12px; }
 .key th, .key td { padding:4px 8px; white-space:nowrap; overflow-wrap:normal; }
-.devices td:nth-child(4) { white-space:normal; overflow-wrap:anywhere; }
+.devices td:first-child, .devices td:nth-child(2), .devices td:last-child { white-space:normal; overflow-wrap:anywhere; }
 @media(max-width:700px) { .key { grid-template-columns:1fr; } }
 #summary { container-type:inline-size; }   /* the preview pane is narrower than its window */
 @container (max-width:700px) { .key { grid-template-columns:minmax(0,1fr); } .key th,.key td { white-space:normal; } }
@@ -246,6 +246,11 @@ def _span(first, last, tz):
 # Which event groups a summary day names first. The order is by record type and is the same for every case.
 _SUMMARY_ORDER = ('usbInsert', 'cdBurn', 'fileDeleted', 'emailSent', 'fileDownloaded', 'cloudFile', 'webSearch', 'fileRenamed',
                   'localSearch', 'noteText', 'volumeSeen', 'shadowCopy', 'programInstalled', 'lnkTarget')
+_SUMMARY_LABELS = {'usbInsert': 'USB identifier', 'cdBurn': 'disc trace', 'fileDeleted': 'deletion',
+                   'emailSent': 'e-mail', 'fileDownloaded': 'download', 'cloudFile': 'cloud client',
+                   'webSearch': 'web search', 'fileRenamed': 'file rename', 'localSearch': 'local search',
+                   'noteText': 'note text', 'volumeSeen': 'volume', 'shadowCopy': 'shadow copy',
+                   'programInstalled': 'software registration', 'lnkTarget': 'shortcut target'}
 
 
 def _day_events(groups, most=3):
@@ -256,32 +261,34 @@ def _day_events(groups, most=3):
 
 
 def _front(info, tz, case, findings, options, story):
-    """What the records show, the days it happened on, then evidence examined and method."""
+    """Cited record values and source timestamps, then evidence examined and method."""
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
-    out = ['<section id="summary"><h2>Executive summary</h2>']
+    out = ['<section id="summary"><h2>Executive summary</h2><p class="small">' + _h(story['disclaimer']) + '</p>']
     if story['points']:
         out.append('<div class="keys">')
         for point in story['points']:
             body = '<p>' + ' '.join(_h(sentence) for sentence in point['sentences']) + '</p>'
             if point['key'] == 'devices' and story['devices']:
-                body += _table(('Item', 'Device', 'Serial number', 'Volume label', 'First connection', 'Last connection'),
-                               [tuple(_h(row[key]) or '—' for key in ('item', 'device', 'serial', 'label', 'first', 'last'))
+                body += _table(('Record', 'Source', 'Recorded name', 'USB identifier', 'Volume serial', 'Record timestamp'),
+                               [tuple(_h(row[key]) or '—' for key in ('record', 'item', 'device', 'serial', 'volume', 'recorded_time'))
                                 for row in story['devices'][:6]], 'devices')
                 if len(story['devices']) > 6:
-                    body += '<p class="small">The table shows 6 of ' + f"{len(story['devices']):,}" + ' devices.</p>'
+                    body += '<p class="small">The table shows 6 of ' + f"{len(story['devices']):,}" + ' cited storage records.</p>'
             out.append('<div class="key"><h3>' + _h(point['title']) + '</h3><div>' + body + '</div></div>')
         out.append('</div>')
     else:
-        out.append('<p>The findings in this report cite no record of a type that the summary describes.</p>')
+        out.append('<p>The findings in this report cite no record of a type that this limited summary describes. '
+                   'This does not establish absence of evidence. Read the exact statements and cited records in Findings.</p>')
     days = info['days'][:7]
     if days:
         rows = []
         for day in days:
-            events = ' · '.join(_h((group['one'] if group['count'] == 1 else f"{group['count']:,} {group['many']}")
+            events = ' · '.join(_h(f"{group['count']:,} " + _SUMMARY_LABELS.get(group.get('kind'), 'source')
+                                   + (' record' if group['count'] == 1 else ' records')
                                    + ' (' + _span(group['first'], group['last'], tz) + ')') for group in _day_events(day['events']))
             rows.append((_h(_day(day['date'])), events or 'No key events on this day.'))
-        out += ['<h3>Timeline</h3>', _table(('Day', 'Recorded events and times'), rows, 'days')]
+        out += ['<h3>Source-record timeline</h3>', _table(('Day', 'Cited records and source timestamps'), rows, 'days')]
     notes = ['Each statement is a count or a value from the evidence records that the '
              + _plural(counts['findings'], 'finding cites', 'findings cite') + '.', 'Times are in ' + _h(clock_name) + '.']
     if counts['likely']:

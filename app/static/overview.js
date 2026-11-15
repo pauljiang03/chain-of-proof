@@ -12,8 +12,8 @@
   };
   const array = (value) => (Array.isArray(value) ? value : []);
   const clip = (value, max) => (value.length > max ? value.slice(0, max - 1) + "…" : value);
-  const DEVICE = [["item", "Item"], ["device", "Device"], ["serial", "Serial number"], ["label", "Volume label"],
-    ["first", "First connection"], ["last", "Last connection"]];
+  const DEVICE = [["record", "Record"], ["item", "Source"], ["device", "Recorded name"], ["serial", "USB identifier"],
+    ["volume", "Volume serial"], ["recorded_time", "Record timestamp"]];
   const state = { model: null, narrative: null, painted: false };
 
   function devices(list) {
@@ -36,13 +36,14 @@
     const points = array(story && story.points).filter((point) => point && array(point.sentences).length);
     if (!found || !points.length) {
       const empty = el("div", "empty-state");
-      empty.append(el("h3", "", found ? "No key findings to show" : "No findings have passed the checker yet"),
-        el("p", "", found ? "Open Findings to read what was verified." : "This page fills in as findings are accepted."));
+      empty.append(el("h3", "", found ? "No supported summary for these record types" : "No findings have passed the checker yet"),
+        el("p", "", found ? "Open Findings to read the exact statements and cited records. This limited view does not establish absence of evidence." : "This page fills in as findings are accepted."));
       host.append(empty);
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
-    hero.append(el("h2", "", "Key findings"));
+    hero.append(el("h2", "", "Cited record summary"));
+    if (story.disclaimer) hero.append(el("p", "", String(story.disclaimer)));
     points.forEach((point) => {
       const row = el("div", "key-row"), body = el("div", "key-body");
       body.append(el("p", "", array(point.sentences).map(String).join(" ")));
