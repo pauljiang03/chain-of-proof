@@ -90,34 +90,46 @@ cop desktop      # same app in a native window (needs `.[desktop]`)
 
 ## Results so far
 
-The [latest development comparison](comparison/ablation/RESULTS_SOL61_20261115.md) ran
-two investigators over the same 335,509 extracted records and all 60 public questions,
-one run per mode, 15 minutes each, scored by **fixed rules (no LLM judge)**:
+The [latest Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
+used the same 335,509 extracted records and all 60
+public questions. Each investigator had a 15-minute limit. Fixed rules score the
+saved answers; there is no LLM judge.
 
 | Mode | Complete | Partial | Unanswered | Incorrect |
 |---|---:|---:|---:|---:|
-| A — no Lean feedback | 8/46 | 20 | 16 | 2 |
-| B — check A's claims afterward | 8/46 | 20 | 16 | 2 |
-| C — Lean feedback during investigation | 7/46 | 21 | 15 | 3 |
+| A — no Lean feedback | 7/46 | 22 | 16 | 1 |
+| B — check A's exact claims afterward | 7/46 | 22 | 16 | 1 |
+| C — Lean feedback during investigation | Unavailable | Unavailable | Unavailable | Unavailable |
 
-All 63 B certificates and all 96 C certificates in that frozen comparison passed
-independent verification. The separate con-leche checker can also check saved proofs.
-Certificate verification and answer accuracy are different measurements.
+The reference has 46 scorable questions and 14 unresolved questions. All 60 remain
+in the result. A and B matched 544 of 1,627 scorable answer fields (33.4%). They also
+submitted 2,644 extra assertions and 99 unequal values. These are answer-contract
+mismatches, not counts of forensic false positives.
 
-Honest read of these numbers:
+C reached the time limit before it saved its final answer bindings. Its answer
+accuracy is unavailable. It retained 1,017 certified claims, and all 1,017 passed
+independent replay. B retained 84 of A's 87 candidates; three had malformed syntax.
+All 84 B certificates passed replay. Removing those candidates did not change A's
+answers. **A certificate count is not an answer-accuracy score.**
 
-- This pair showed **no answer-accuracy gain from Lean feedback**. It is one
-  development pair, not an unseen-case benchmark.
-- 14 of the 60 questions need reference-review decisions and remain unresolved.
-- A valid, proven claim can still land in the wrong answer field or not answer the full
-  question — the [three incorrect C answers trace to exactly that boundary](docs/INCORRECT_ANSWER_DEBUG.md),
-  not to any proof failure.
-- A public-schema export bug dropped some attempted fields; the fix (shared-field
-  `anyOf` support) landed after this test and carries no new accuracy score.
+The repeat is frozen at `96cd518`. It cannot establish an A-versus-C accuracy result.
+The [earlier completed comparison](comparison/ablation/RESULTS_SOL61_20261115.md)
+showed no overall accuracy gain from Lean feedback. Its three incorrect C answers
+were narrow observations placed in stronger answer fields. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
 
-The earlier DFIR Madness operational test also reverified cleanly (34 C + 10 B certificates).
-That case has no accuracy key and is distinct from the new NIST Hacking Case. The measured code is frozen at `c2b9753`. The full
-A/B/C/D comparison and native-provider validation are still unfinished.
+A [separate three-question diagnostic](comparison/ablation/RESULTS_MEANING_DIAGNOSTIC_20261115.md)
+completed with 21 independently verified
+claims. It preserved narrow observations and left stronger unsupported fields empty.
+The agent submitted no incompatible bindings, so this run does not demonstrate the
+guard catching an error. It has no accuracy key or accuracy score.
+
+The [Hacking Case mechanical workflow](docs/HACKING_CASE_VALIDATION.md)
+extracted 11,939 records and produced reports
+and a portable package. All 58 selected certificates passed replay and con-leche.
+This checks the workflow; it is not the 31-question model test. Stronger attribution,
+subscription state and the partial antivirus scan remain explicit limits.
+The earlier DFIR Madness operational test is a separate case with no accuracy key.
+The full A/B/C/D comparison and native-provider validation remain unfinished.
 
 ## How it works
 
@@ -187,6 +199,11 @@ Public questions go to the investigator; expected answers go only to the scorer.
 A Lean proof establishes that a **formal claim follows from the supplied records and
 rule definitions**. It does *not* prove the parser read the image correctly, the meaning
 of arbitrary English, or that the answer key is right.
+
+The readers produce ordinary typed data, not new Lean axioms. The checker places the
+cited records and the proposed claim in a Lean file. Lean proves that the defined
+claim-checking function returns `true` for those records. The agent can select records
+and propose supported claims. It cannot add an assumption or change a proof rule.
 
 | Component | What it establishes |
 |---|---|

@@ -7,10 +7,10 @@ The project is CONAN-F. The `cop` command and `ChainOfProof` Lean library retain
 
 | Owner | State |
 |---|---|
-| Root Codex | Integrates tested changes and pushes main. Latest worktree: `/private/tmp/cop-answer-meaning`, branch `fix/answer-meaning`. |
-| Other Codex terminal | Completed coverage, reader and comparison work. Frozen A/B/C results and audits are retained; no production-file ownership. |
+| Root Codex | Integrates tested changes and pushes main. Owns README, TASKS and this handoff. Hacking extraction is frozen at `/private/tmp/cop-nist-hacking` (`6cff4fe`). |
+| Other Codex terminal | Owns frozen Data Leakage repeat results, the separate role diagnostic, and the upcoming Hacking C-only test. No production-file ownership; do not duplicate these runs. |
 | Claude | Independent checker, rename, desktop, proof graph and report builder are integrated. Check for new work before assigning UI tasks. |
-| Root helpers | Shared projection, census, reference review, UI correctness review and common-field schema fix are complete. No active implementation ownership. |
+| Root helpers | Hacking reader, proof-role and private-reference work is complete. `optical_timestamps` owns the final mechanical archive and `docs/HACKING_CASE_VALIDATION.md`. |
 
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
@@ -22,17 +22,30 @@ The three incorrect answers were traced to narrow verified observations used as 
 
 ## Latest measured state
 
-[The latest comparison](comparison/ablation/RESULTS_SOL61_20261115.md) is frozen at clean `c2b9753` with requested Sol 6.1, one A run then one C run, each capped at 900 seconds. B replays A exactly without another model call.
+The [latest Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
+is frozen at clean `96cd518` with requested Sol 6.1,
+A then C, each capped at 900 seconds. B replays A exactly without another model call.
 
-- A/B: 8 complete, 20 partial, 16 unanswered and 2 incorrect questions.
-- C: 7 complete, 21 partial, 15 unanswered and 3 incorrect questions.
-- Each has 14 unresolved reference questions, retained in the 60-question result.
-- B reverified 63/63 certificates; C reverified 96/96. There was no demonstrated semantic-predicate refusal.
-- The frozen exporter dropped A120/C96 fields at public `anyOf` schemas. A67/C43 concern scorable questions. A later common-field fix has no new accuracy score.
-- Code after the trial also contains Claude's UI and reviewed fixes for citation identities and stale previews.
-- Final combined regression suite: 775 tests run, 774 passed and one platform test skipped.
+- A/B: 7 complete, 22 partial, 16 unanswered and 1 incorrect question.
+- The reference still has 46 scorable and 14 unresolved questions out of 60.
+- A/B matched 544 of 1,627 scorable atoms, with 2,644 extra and 99 unequal assertions.
+- B verified 84 candidates and refused three malformed candidates; its answers are unchanged.
+- C stopped at its deadline without a final binding document. Accuracy is unavailable.
+- All 84 B and 1,017 C certificates passed independent replay. Claim count is not accuracy.
+- The separate 240-second, three-question meaning diagnostic passed its operational audit.
+  All 21 certificates reverified. It retained narrow observations and left stronger fields empty.
+  The agent made no incompatible bindings; no actual guard intervention was observed.
 
-This pair showed no overall answer-accuracy advantage from Lean feedback. The older literal-answer pilot uses a different answer channel and is not a direct improvement comparison. Keep both frozen; never hand-write retrospective bindings.
+The [earlier completed comparison](comparison/ablation/RESULTS_SOL61_20261115.md)
+remains frozen at `c2b9753`. It showed no overall answer-accuracy advantage from Lean
+feedback. The latest repeat cannot supply an A/C accuracy comparison because C has
+no final submission. Never hand-write retrospective bindings.
+
+Hacking integration passed 834 regression tests (833 passed, one platform skip).
+The final real-image mechanical workflow has 11,939 records and 58 certificates;
+all passed independent replay, con-leche and portable-package verification.
+This is workflow validation, not model answer accuracy. The model/scorer runtime is
+frozen at `08c7ce1`; the later `3da5c93` only adds a package toolchain fingerprint.
 
 ## Inputs and retained outputs
 
@@ -43,10 +56,13 @@ There are 335,509 records, including 11 email records and 32 system settings. Al
 - Public case: `comparison/mulder/case-profile.json`.
 - Public prompts and schema: `eval/QUESTIONS.md`, `eval/benchmark_nist_questions.json`.
 - Private reference: `eval/benchmark_nist.json`, scorer only after investigation stops.
-- Scored archive: `runs/dev/sol61-nist-v2-20261115T0217Z/`.
-- Frozen comparison runtime: `/private/tmp/cop-sol61-smoke-runtime` at `c2b9753`.
+- Latest repeat archive: `runs/dev/sol61-nist-postfix-20261115T0316Z/`.
+- Separate diagnostic archive: `runs/dev/sol61-meaning-diagnostic-20261115T0316Z/`.
+- Frozen repeat runtime: `/private/tmp/cop-sol61-96cd518-runtime` at `96cd518`.
+- Earlier completed comparison archive: `runs/dev/sol61-nist-v2-20261115T0217Z/`;
+  its runtime remains `/private/tmp/cop-sol61-smoke-runtime` at `c2b9753`.
 
-Second-case facts: `/private/tmp/cop-case2-final-20261115T015403Z/evidence/facts.json`.
+Separate DFIR Madness facts: `/private/tmp/cop-case2-final-20261115T015403Z/evidence/facts.json`.
 SHA-256: `0a4d2243adbe10b33eaff335fdc7bbd8be901e55cb3a1bd20f01089437361e61`.
 This is a desktop-only, 1,800-record snapshot with `windows,system` readers and four documented intake issues. It excludes server, memory and network captures.
 
@@ -56,7 +72,7 @@ The mechanical workflow retained 12 independently verified certificates, reports
 
 New workstream: official NIST CFReDS Hacking Case, isolated at `/private/tmp/cop-nist-hacking` on `feature/nist-hacking-case`. Root owns integration, image/scan readers, host attributes and generic subset scoring. `optical_timestamps` delivered the legacy app/browser/traffic/recycle readers and EVT reader. `lean_gap_types` delivered fixed-role typed attributes, joins, digest comparison and kernel tests. `journal_gaps` authored the separate 31-question reference and source audit. Only that reference author read the published answer key.
 
-The first Data Leakage repeat continues in the other terminal on frozen `96cd518`: A then C, 900 seconds each, followed by exact B and the separate 240-second role diagnostic. The new Hacking code must not enter that runtime or mutate its environment. Root integrates public documentation after the coordinator retains the results.
+The Data Leakage repeat and its separate role diagnostic have stopped; the other terminal is retaining their results. Its new Hacking C-only pilot uses a fresh Sol context, 900 seconds total, a predeclared 180-second final-output reserve and investigator-authored incremental answer checkpoints. The new Hacking code must not enter that runtime or mutate its environment. Root integrates public documentation after the coordinator retains the results.
 
 The Hacking intake has been exercised on the official E01 image. All 31 questions have deterministic contracts. Three stronger meanings lack a proof rule; current DBX subscription state lacks a reader. All remain visible. Supporting a dataset does not establish complete answers or zero false positives.
 
