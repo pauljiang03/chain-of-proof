@@ -73,6 +73,18 @@ def case():
 
 
 class Narrative(unittest.TestCase):
+    def test_prose_lead_keeps_identifiers_literals_and_source_time_limits(self):
+        story = narrative.build(case())
+        text = ' '.join(story['lead'])
+        self.assertIn('1 distinct USB identifier', text)
+        self.assertIn('"LAB-PC"', text)
+        self.assertIn('"lab-pc"', text)
+        self.assertIn('1 optical-drive record', text)
+        self.assertIn('These source timestamps range from', text)
+        for stronger in ('USB storage device', 'activity starts', 'activity stops', 'disc-burning record',
+                         'The computer name is'):
+            self.assertNotIn(stronger, text)
+
     def test_every_topic_states_what_its_records_say(self):
         story = narrative.build(case())
         self.assertEqual(story['zone'], 'America/New_York' if story['zone'] else None)

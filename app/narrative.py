@@ -378,28 +378,29 @@ def _lead(case):
     out = []
     items = sorted(_distinct([_s(_prov(entry).get('exhibit')) for entry in case.records if _s(_prov(entry).get('exhibit'))]),
                    key=lambda name: (len(name), name))
-    where = f' from {_n(len(items), "evidence item", "evidence items")}: {_join(items, 6)}' if items else ''
+    where = f' with {_n(len(items), "exhibit label", "exhibit labels")}: {_join(items, 6)}' if items else ''
     out.append(f'The verified findings cite {_n(len(case.records), "record", "records")}{where}.')
     names = _distinct([_aux(entry) for entry in case.of('systemSetting')
                        if _obj(entry).lower() == 'computer name' and _aux(entry) and _aux(entry) != '(none)'])
-    if names and len({name.lower() for name in names}) == 1:
-        out.append(f'The computer name is {sorted(names, key=lambda name: name != name.upper())[0]}.')
+    if names:
+        out.append(f'The recorded computer name values are {_join(names, 6, quote=True)}.')
     serials = _distinct([_obj(entry) for entry in case.of('usbInsert') if _obj(entry)])
     if serials:
-        out.append(f'The records identify {_n(len(serials), "USB storage device", "USB storage devices")}.')
-    counts = [(kind, one, many) for kind, one, many in (('emailSent', 'e-mail', 'e-mails'), ('webSearch', 'web search', 'web searches'),
-              ('fileDeleted', 'deleted file', 'deleted files'), ('cdBurn', 'disc-burning record', 'disc-burning records'))
+        out.append(f'The records contain {_n(len(serials), "distinct USB identifier", "distinct USB identifiers")}.')
+    counts = [(kind, one, many) for kind, one, many in (('emailSent', 'e-mail record', 'e-mail records'),
+              ('webSearch', 'web-search record', 'web-search records'),
+              ('fileDeleted', 'file-deletion record', 'file-deletion records'), ('cdBurn', 'optical-drive record', 'optical-drive records'))
               if case.of(kind)]
     if counts:
         parts = [_n(len(case.of(kind)), one, many) for kind, one, many in counts]
         out.append('The records include ' + (parts[0] if len(parts) == 1 else ', '.join(parts[:-1]) + ' and ' + parts[-1]) + '.')
-        # The dates of this activity only: older system and program records do not move the start.
+        # State the range of cited source timestamps, without asserting activity boundaries.
         stamps = case.times([entry for kind in ('usbInsert', 'emailSent', 'webSearch', 'fileDeleted', 'cdBurn', 'fileDownloaded')
                              for entry in case.of(kind)])
         first, last = (brief.moment(stamps[0], case.tz), brief.moment(stamps[-1], case.tz)) if stamps else (None, None)
         if first is not None and last is not None:
-            out.append(f'This activity starts on {first:%Y-%m-%d} and stops on {last:%Y-%m-%d}.' if first.date() != last.date()
-                       else f'This activity is on {first:%Y-%m-%d}.')
+            out.append(f'These source timestamps range from {first:%Y-%m-%d} to {last:%Y-%m-%d}.' if first.date() != last.date()
+                       else f'These source timestamps are on {first:%Y-%m-%d}.')
     return out
 
 
