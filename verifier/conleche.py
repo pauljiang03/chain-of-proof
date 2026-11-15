@@ -1,6 +1,6 @@
 """Recheck saved certificates with con-leche, a second proof checker.
 
-    python -m verifier.conleche --run runs/current/run.json [--jobs 8] [--out NEW.json]
+    python -m verifier.conleche --run runs/current/run.json --facts evidence/facts.json [--jobs 8] [--out NEW.json]
 
 Lean 4.35 bundles con-leche, a proof checker written separately from Lean's own
 kernel. Its help text states the theorem it carries: in its default mode, a file that
@@ -8,17 +8,19 @@ declares a theorem of type False is never accepted. Here each certificate is com
 its `verified` theorem is exported with the toolchain's `leanexport`, and con-leche
 checks the export.
 
-A certificate passes only if con-leche exits 0 and the export declares the
-certificate's own theorem. con-leche also exits 0 on an export with no declarations,
-so the exit code alone is not enough.
+A run certificate passes only after independent fact-based replay and exact
+regeneration of its saved proof from its finding ID, claim and supplied facts.
+con-leche must then exit 0 and the export must declare that regenerated theorem.
+Missing proofs fail the whole run. An exit code alone is not enough.
 
-This is a second opinion on the proof. It adds nothing about whether the cited records
-match the evidence (verifier.verify checks that) or whether the readers parsed the
-disk images correctly.
+The low-level check() API checks a proof term only; it does not bind an arbitrary
+term to a finding. check_run() performs that binding. Neither proves that readers
+parsed source images correctly or that the evidence is authentic.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -27,8 +29,14 @@ import subprocess
 import sys
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
+from collections import Counter
 from pathlib import Path
 from typing import Dict, List, Optional
+
+from checker import claims
+from checker.check import render_lean, valid_finding_id
+from checker.facts import FactSource, open_source
+from verifier.verify import verify
 
 ROOT = Path(__file__).resolve().parent.parent
 LEAN_DIR = ROOT / "lean"
@@ -119,35 +127,112 @@ def check_export(export_path: Path, theorem: str, tools: Toolchain) -> dict:
 
 
 def check(lean_text: str, tools: Toolchain, workdir: Path) -> dict:
-    """Compile, export and recheck one certificate. Never raises for a bad certificate."""
+    """Check a proof term only. Use check_run to bind a saved finding to its facts."""
     try:
         return check_export(export(lean_text, workdir, tools), theorem_name(lean_text), tools)
     except (ValueError, OSError, subprocess.TimeoutExpired) as error:
         return {"accepted": False, "detail": str(error)}
 
 
-def check_run(run: dict, tools: Toolchain, jobs: int = 4) -> dict:
-    """Recheck every certificate in a run bundle."""
-    findings = [f for f in run.get("findings", []) if f.get("lean")]
+def check_run(run: dict, tools: Toolchain, jobs: int = 4, *,
+              source: Optional[FactSource] = None, facts_sha256: Optional[str] = None) -> dict:
+    """Bind and recheck every finding; absent facts or proof text never pass.
+
+    Source reads and regeneration are serial: a DuckDB connection must not be
+    shared between proof-worker threads. Only already-bound proof text is checked
+    in parallel. Direct callers with a declared run digest must supply its observed
+    source digest; the CLI hashes and checks the actual input file.
+    """
+    findings = run.get('findings') if isinstance(run, dict) else None
+    if not isinstance(findings, list):
+        raise ValueError('run must contain a findings list')
+    ids = [f.get('finding_id') for f in findings if isinstance(f, dict)
+           and isinstance(f.get('finding_id'), str)]
+    duplicate_ids = {fid for fid, count in Counter(ids).items() if count > 1}
+    case = run.get('case', {})
+    if not isinstance(case, dict):
+        raise ValueError('run case metadata must be an object')
+    declared_digest = case.get('facts_sha256')
+    digest_problem = (declared_digest is not None and
+                      (not isinstance(declared_digest, str) or declared_digest != facts_sha256))
+    results, pending = [], []
+    without_proof = 0
+    for index, finding in enumerate(findings):
+        fid = finding.get('finding_id') if isinstance(finding, dict) else None
+        saved = finding.get('lean') if isinstance(finding, dict) else None
+        missing = not isinstance(saved, str) or not saved.strip()
+        without_proof += missing
+        result = {'finding_id': fid, 'accepted': False, 'checked': False}
+        try:
+            if not isinstance(finding, dict) or not valid_finding_id(fid):
+                raise ValueError('finding must have a valid finding ID')
+            if fid in duplicate_ids:
+                raise ValueError('duplicate finding ID')
+            if missing:
+                raise ValueError('required certificate proof text is missing')
+            if source is None:
+                raise ValueError('an explicit facts source is required to bind the certificate')
+            if digest_problem:
+                raise ValueError('run facts digest differs from, or is not bound to, the supplied facts')
+            problems = verify(finding, source)
+            if problems:
+                raise ValueError('fact-based replay failed: ' + '; '.join(problems))
+            claim = claims.parse(finding['claim'])
+            cited, found = claims.cited_facts(claim, source)
+            generated = render_lean(fid, [found[item] for item in cited], claim)
+            if saved != generated:
+                raise ValueError('stored Lean proof differs from regeneration of this finding and its facts')
+            pending.append((index, generated))
+        except (ValueError, KeyError, TypeError, AttributeError, OSError,
+                subprocess.SubprocessError) as error:
+            result['detail'] = str(error)
+        results.append(result)
     with tempfile.TemporaryDirectory(prefix="cop-conleche-") as scratch:
         def one(numbered):
-            index, finding = numbered
+            index, generated = numbered
             workdir = Path(scratch) / str(index)
             workdir.mkdir()
-            result = check(finding["lean"], tools, workdir)
+            result = check(generated, tools, workdir)
             shutil.rmtree(workdir, ignore_errors=True)
-            return {"finding_id": finding.get("finding_id"), **result}
+            return index, result
         with ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
-            results = list(pool.map(one, enumerate(findings)))
+            for index, result in pool.map(one, pending):
+                results[index].update(result, checked=True)
+    accepted = sum(r['accepted'] for r in results)
     return {
         "checker": CHECKER,
         "mode": MODE,
         "lean": tools.version,
         "certificates": len(results),
-        "accepted": sum(r["accepted"] for r in results),
-        "without_proof_text": len(run.get("findings", [])) - len(findings),
+        "total_findings": len(findings),
+        "checked": sum(r['checked'] for r in results),
+        "accepted": accepted,
+        "passed": bool(results) and accepted == len(results),
+        "facts_sha256": facts_sha256,
+        "binding": "independent replay and exact proof regeneration from supplied facts",
+        "without_proof_text": without_proof,
         "not_accepted": [r for r in results if not r["accepted"]],
     }
+
+
+def _sha256(path):
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _snapshot_facts(path, directory):
+    """Hash the exact bytes replay will read, without a pathname open/hash race."""
+    destination = Path(directory) / ('facts.json' if str(path).endswith('.json') else 'facts.duckdb')
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as incoming, destination.open('xb') as outgoing:
+        for block in iter(lambda: incoming.read(1024 * 1024), b''):
+            digest.update(block)
+            outgoing.write(block)
+    destination.chmod(0o400)
+    return destination, digest.hexdigest()
 
 
 def _last_line(text: str) -> str:
@@ -158,6 +243,7 @@ def _last_line(text: str) -> str:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--run", required=True, help="one bundled run containing certificates")
+    ap.add_argument("--facts", required=True, help="explicit evidence DB (.duckdb) or JSON facts")
     ap.add_argument("--jobs", type=int, default=min(8, os.cpu_count() or 1))
     ap.add_argument("--out", help="new JSON result file; an existing file is not overwritten")
     args = ap.parse_args(argv)
@@ -169,15 +255,30 @@ def main(argv=None) -> int:
     except Unavailable as error:
         print(f"con-leche is not available: {error}", file=sys.stderr)
         return 2
-    result = check_run(json.loads(Path(args.run).read_text()), tools, args.jobs)
+    try:
+        # Replay only the privately captured file, not a second open of the
+        # supplied pathname. A->B->A replacement cannot change replayed bytes
+        # while retaining a reported digest for A. A DuckDB input must be a
+        # finalized standalone file; adjacent mutable WAL files are not imported.
+        with tempfile.TemporaryDirectory(prefix='cop-conleche-facts-') as scratch:
+            captured, observed = _snapshot_facts(args.facts, scratch)
+            source = open_source(captured)
+            result = check_run(json.loads(Path(args.run).read_text()), tools, args.jobs,
+                               source=source, facts_sha256=observed)
+            if _sha256(args.facts) != observed:
+                raise ValueError('facts changed during certificate verification')
+    except (ValueError, OSError, KeyError, TypeError) as error:
+        print(f'con-leche verification failed: {error}', file=sys.stderr)
+        return 1
     if out:
         with out.open("x") as stream:
             stream.write(json.dumps(result, indent=2) + "\n")
     for miss in result["not_accepted"]:
         print(f"NOT ACCEPTED {miss['finding_id']}: {miss['detail']}")
     print(f"{result['accepted']}/{result['certificates']} certificates accepted by "
-          f"{CHECKER} ({MODE}); {len(result['not_accepted'])} not accepted")
-    return 0 if result["certificates"] and not result["not_accepted"] else 1
+          f"{CHECKER} ({MODE}); {result['checked']}/{result['total_findings']} second-checked; "
+          f"{len(result['not_accepted'])} not accepted")
+    return 0 if result['passed'] else 1
 
 
 if __name__ == "__main__":
