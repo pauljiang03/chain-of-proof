@@ -20,10 +20,10 @@ Root integrates and pushes `main`. Agents do not merge or push `main`.
 
 The first four implementation lanes are integrated. The second-case mechanical
 smoke passed with 12 independently reverified certificates, reports and a portable
-package. New comparison runtime preparation is in the other Codex terminal.
-It must be frozen before the new model runs. The native Claude test needs approval
+package. The new comparison runtime is integrated and tested. The other Codex
+terminal coordinates the bounded Sol runs after freezing inputs. The native Claude test needs approval
 under the user's Sol-only instruction; automatic review blocked it before execution.
-All 701 integrated regression tests and the Lean build passed at this checkpoint.
+All 738 integrated regression tests and the Lean build passed at this checkpoint.
 
 The shared projection must preserve a proposed claim's meaning. It must not fix
 wrong values from the evidence, infer relevance from the answer key, or present

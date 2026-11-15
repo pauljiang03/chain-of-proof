@@ -11,7 +11,7 @@ See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five authorized prior
 | Owner | State and files |
 | --- | --- |
 | Root Codex | Integration worktree `/private/tmp/cop-final-eval`, branch `finish/final-eval`. Owns product tools, report/evaluation integration, verification, documentation and final push. |
-| Other Codex terminal | Coverage, paging and reader commits are integrated. Preparing the new explicit-binding comparison runtime in `/private/tmp/cop-projection-smoke`, branch `finish/projection-smoke-runtime`. Owns comparison runtime/prompt/pilot/bindings files and their tests. No model run until the integrated checkpoint is frozen. |
+| Other Codex terminal | Coverage, paging, readers and explicit-binding comparison runtime are integrated. Coordinates the new bounded Sol smoke and repeat from a frozen clean checkout. No concurrent production-file ownership. |
 | Claude | Independent con-leche checker, install fix and CONAN-F rename are integrated. Last observed branch: `finish/desktop-ui`. Avoid concurrent UI changes. |
 | Root helpers | Shared projection, census scaling, reference review and second-case mechanical smoke are complete. No active implementation ownership. |
 
