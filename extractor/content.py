@@ -437,12 +437,15 @@ def _disc_rows(ev, path: Path, ctx, s, zone) -> None:
                 continue                                # no fileCreated row exists for it
         except ValueError:
             continue                                    # optical.py reports the unreadable time
-        key = (tuple(f.entry.extents), f.entry.size, f.entry.embedded, f.partition)
         try:
+            # Resolve the selected historical VAT before consulting the cache.
+            # Equal virtual addresses can name different bytes in different states.
+            runs = ([] if f.entry.embedded is not None else
+                    s.udf.runs(f.entry, f.partition, s.vat(f), s.unreadable))
+            key = (tuple(runs), f.entry.size, f.entry.embedded)
             if key not in cache:
-                runs = [] if f.entry.embedded is not None else s.udf.runs(f.entry, f.partition, s.vat(f))
-                cache[key] = digest_of(s.content(f)) + (runs,)
-            digest, size, head, runs = cache[key]
+                cache[key] = digest_of(s.content(f))
+            digest, size, head = cache[key]
             if size != f.entry.size:
                 raise ValueError(f"read {size} bytes; the file entry says {f.entry.size}")
         except Exception as e:
@@ -457,6 +460,9 @@ def _disc_rows(ev, path: Path, ctx, s, zone) -> None:
                      source_variant=("udf-recovered-entry:" + str(f.sector)) if extra.get('recovered') else "primary")
         if placed:
             extra["first_sector"] = placed[0][0]
+        if f.version >= 0:
+            extra["allocation_table_at_sector"] = s.udf.versions[f.version].vat_sector
+            extra["allocation_version_index"] = f.version
         session = s.session(f.sector)
         if session is not None:
             extra["session"] = session

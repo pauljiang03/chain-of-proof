@@ -638,19 +638,32 @@ class Udf:
 
     # -- addressing
     def physical(self, block: int, partition: int, vat: Optional[Vat]) -> int:
-        if partition >= len(self.lvd.maps):
+        if self.lvd is None or self.lvd.block_size != SECTOR:
+            raise ValueError("a supported logical block size is required for addressing")
+        if type(block) is not int or block < 0:
+            raise LookupError(f"invalid logical block {block}")
+        if type(partition) is not int or not 0 <= partition < len(self.lvd.maps):
             raise LookupError(f"partition reference {partition} does not exist")
         m = self.lvd.maps[partition]
         if m.number not in self.partitions:
             raise LookupError(f"partition {m.number} has no descriptor")
-        start = self.partitions[m.number][0]
+        start, length = self.partitions[m.number]
+        if type(start) is not int or start < 0 or type(length) is not int or length <= 0:
+            raise LookupError(f"partition {m.number} has invalid physical bounds")
         if m.kind == "physical":
-            return start + block
-        if m.kind == "virtual":
+            physical_block = block
+        elif m.kind == "virtual":
             if vat is None or block >= len(vat.entries) or vat.entries[block] == UNMAPPED:
                 raise LookupError(f"virtual block {block} is not mapped")
-            return start + vat.entries[block]
-        raise LookupError(f"{m.kind} partition is not handled")
+            physical_block = vat.entries[block]
+        else:
+            raise LookupError(f"{m.kind} partition is not handled")
+        if type(physical_block) is not int or not 0 <= physical_block < length:
+            raise LookupError(f"block {block} maps outside partition {m.number}")
+        sector = start + physical_block
+        if sector >= self.sectors:
+            raise LookupError(f"block {block} maps beyond the image at sector {sector}")
+        return sector
 
     def _physical_ref(self, virtual_ref: Optional[int] = None) -> int:
         """Reference number of the physical partition (the one under a virtual map)."""
@@ -660,7 +673,36 @@ class Udf:
                 return i
         raise LookupError("no physical partition map")
 
-    def runs(self, entry: FileEntry, partition: int, vat: Optional[Vat]) -> List[Tuple[Optional[int], int]]:
+    @staticmethod
+    def _append_run(out, sector, length):
+        """Merge only byte ranges that are demonstrably adjacent."""
+        if not length:
+            return
+        if out:
+            previous, size = out[-1]
+            if ((previous is None and sector is None) or
+                    (previous is not None and sector is not None and size % SECTOR == 0
+                     and previous + size // SECTOR == sector)):
+                out[-1] = (previous, size + length)
+                return
+        out.append((sector, length))
+
+    def _mapped_runs(self, block, length, partition, vat):
+        """Resolve each logical block before forming physical byte ranges.
+
+        Consecutive virtual blocks need not be physically adjacent. This applies
+        to file data, directory data and allocation-descriptor continuations.
+        """
+        if type(length) is not int or length < 0:
+            raise ValueError("invalid extent byte length")
+        out = []
+        for offset in range(0, length, SECTOR):
+            sector = self.physical(block + offset // SECTOR, partition, vat)
+            self._append_run(out, sector, min(SECTOR, length - offset))
+        return out
+
+    def runs(self, entry: FileEntry, partition: int, vat: Optional[Vat],
+             unreadable: frozenset = frozenset()) -> List[Tuple[Optional[int], int]]:
         """Where a file's content is: (first sector, or None for a hole; bytes), in order."""
         out, todo, hops, left = [], list(entry.extents), 0, entry.size
         while todo and left > 0:
@@ -668,16 +710,28 @@ class Udf:
             part = partition if ext.partition is None else ext.partition
             if ext.kind == 3:                               # the list continues elsewhere
                 hops += 1
-                sector = self.physical(ext.block, part, vat)
-                buf = self.read(sector, 1)
+                if hops > 4096 or not 24 <= ext.length <= 16 * 1024 * 1024:
+                    raise ValueError("allocation-descriptor continuation exceeds its parsing bound")
+                locations = self._mapped_runs(ext.block, ext.length, part, vat)
+                sector = locations[0][0]
+                buf = b"".join(self._pieces_from_runs(locations, unreadable))
                 tag = parse_tag(buf)
-                if hops > 4096 or tag is None or tag.ident != TAG_AED:
+                if tag is None or tag.ident != TAG_AED:
                     raise ValueError(f"allocation extent descriptor expected at sector {sector}")
                 l_ad, = struct.unpack_from("<I", buf, 20)
+                step = {0: 8, 1: 16, 2: 20}.get(entry.ad_type)
+                if step is None or l_ad > len(buf) - 24 or l_ad % step:
+                    raise ValueError(f"allocation descriptors are truncated at sector {sector}")
                 todo = parse_allocation_descriptors(buf[24:24 + l_ad], entry.ad_type)
                 continue
             take = min(ext.length, left)
-            out.append((self.physical(ext.block, part, vat) if ext.kind == 0 else None, take))
+            if ext.kind == 0:
+                for sector, length in self._mapped_runs(ext.block, take, part, vat):
+                    self._append_run(out, sector, length)
+            elif ext.kind in (1, 2):
+                self._append_run(out, None, take)
+            else:
+                raise ValueError(f"unsupported allocation extent kind {ext.kind}")
             left -= take
         if left > 0:
             raise ValueError(f"file entry describes {entry.size - left} of its {entry.size} bytes")
@@ -685,13 +739,16 @@ class Udf:
 
     def pieces(self, entry: FileEntry, partition: int, vat: Optional[Vat],
                unreadable: frozenset = frozenset()) -> Iterator[bytes]:
-        """A file's content, in order. Raises before yielding anything if it cannot all be read."""
+        """File bytes in order; validate mappings and known unreadable ranges first."""
         if entry.embedded is not None:
             if len(entry.embedded) != entry.size:
                 raise ValueError("embedded content is not as long as the file entry says")
             yield entry.embedded
             return
-        runs = self.runs(entry, partition, vat)
+        runs = self.runs(entry, partition, vat, unreadable)
+        yield from self._pieces_from_runs(runs, unreadable)
+
+    def _pieces_from_runs(self, runs, unreadable):
         for sector, length in runs:
             if sector is None:
                 continue
