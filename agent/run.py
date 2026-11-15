@@ -37,7 +37,7 @@ from checker.facts import open_source
 from eval import gate, pipeline
 
 ROOT = Path(__file__).resolve().parent.parent
-INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review")
+INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review", "answer", "inventory_page")
 
 
 def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt: str,
@@ -167,6 +167,15 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
                 raise ToolBudgetExpired()
             return function(*args, **kwargs)
 
+    def call_validated(function, *args, **kwargs):
+        # A malformed binding or expired cursor is recoverable model input, not
+        # a reason to discard the rest of the investigation. Audited methods
+        # record the failed call before this response is returned to the model.
+        try:
+            return call_tool(function, *args, **kwargs)
+        except ValueError as error:
+            return {'status': 'not_applied', 'error': str(error)}
+
     @tool
     def forms() -> str:
         """The statement forms you may propose, with their arguments."""
@@ -223,9 +232,22 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
         """Inspect conservative evidence conflict diagnostics; these are not findings."""
         return json.dumps(call_tool(bench.review), ensure_ascii=False)
 
+    @tool
+    def answer(question_id: str, bindings: list[dict] | None = None, replace: bool = False) -> str:
+        """Bind claim fields to answer paths; omit bindings for the catalog. Relevance and completeness are not proved."""
+        return json.dumps(call_validated(bench.answer, question_id, bindings, replace=replace), ensure_ascii=False)
+
+    @tool
+    def inventory_page(question_id: str, kinds: list[str] | None = None,
+                       exhibits: list[str] | None = None, page_size: int = 100,
+                       cursor: str | None = None) -> str:
+        """Read an ID-ordered evidence page; continue with its cursor and unchanged filters. Saves progress."""
+        return json.dumps(call_validated(bench.inventory_page, question_id, kinds=kinds,
+                                   exhibits=exhibits, page_size=page_size, cursor=cursor), ensure_ascii=False)
+
     agent = _create_api_agent(model=f"anthropic:{model}",
                               tools=[forms, sql, fact, check, conclude, plan, update_question,
-                                     evidence_needs, collect, review])
+                                     evidence_needs, collect, review, answer, inventory_page])
     started = time.monotonic()
     deadline = started + timeout_s
     async def invoke():
@@ -321,7 +343,7 @@ def _main(argv=None, *, resources) -> int:
     ap.add_argument("--questions", help="public schema-v2 question/answer-shape profile")
     ap.add_argument("--reference", help="explicit private schema-v2 reference, used only after investigation")
     answer = ap.add_mutually_exclusive_group()
-    answer.add_argument("--adapter", choices=("nist",), help="explicit case adapter over verified certificates")
+    answer.add_argument("--adapter", choices=("nist", "claims"), help="claims: explicit field bindings for any case; nist: legacy case adapter")
     answer.add_argument("--answers", help="external structured answers for another case or system")
     ap.add_argument("--labeled-claims", help="explicit independent false-claim gate fixture")
     ap.add_argument("--resume-from", help="previous run directory; continue in a new run")

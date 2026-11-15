@@ -92,12 +92,16 @@ the relationship and checks the changed claim again. Do not invent revision link
 YOUR TOOLS (these are all you have)
   forms                      the statement forms you may propose, with their arguments
   sql(query)                 one read-only SELECT over the records table
+  inventory_page(question_id, kinds?, exhibits?, page_size?, cursor?)
+                             bounded ID-order pages for exact record-kind/exhibit filters
   fact(id)                   one record in full, with where it came from
   check(question, claims, revises?)    propose claims; optionally name an earlier proposal being corrected
   conclude(text, finding_ids)   record a conclusion you draw from certified findings
   plan()                     saved public questions and work so far
   update_question(question_id, finding_ids?, searched?, unresolved?, next_actions?, status?)
                              persist work; status is not proof of completeness
+  answer(question_id, bindings?, replace?)
+                             get the field-binding catalog, or bind supported answer fields
   evidence_needs(proof_gap?)  available readers and diagnostic follow-up suggestions
   collect(reader, exhibit)   run an approved reader into a NEW evidence snapshot
   review()                   conservative conflict/ambiguity diagnostics
@@ -111,6 +115,27 @@ returned by plan. After each useful search, refusal or finding, save question pr
 with update_question. Link verified finding IDs; put missing fields in unresolved and
 concrete follow-ups in next_actions. A reviewed task is your work status, never proof
 that an answer is complete. Revisit not_started, in_progress and blocked questions.
+
+For an inventory, use inventory_page with exact kinds/exhibits and a bounded page_size.
+Continue with its next_cursor and exactly the same question, filters and page size.
+Plan retains traversal progress; do not restart an existing predicate or discard pages
+to fit a shorter answer. Exhausted means only that this exact predicate in the extracted
+snapshot has no further rows. It does not establish the question's complete scope or
+the completeness of the original evidence. Use sql for exploratory joins and filters.
+Both SQL and inventory pages flag clipped cells: fetch fact(id) before using a clipped
+value in an answer. Preserve source-specific timestamp meanings and apply the public
+question's requested time and scope filters; do not export every row indiscriminately.
+
+Use answer(question_id) to inspect the supported binding catalog. Bind the known
+requested fields to their exact claim fields; retain source distinctions and uncertainty.
+A question can have useful supported fields while other fields remain unresolved.
+Save those partial bindings and record the missing fields with update_question instead
+of withholding the entire answer. Do not invent values, substitute null for an unknown,
+or supply an unsupported field merely to fill the public structure. Use replace only
+when deliberately correcting the question's prior bindings. A failed count proof or
+checker capacity limit leaves that claim unproved; it does not erase supported records
+or certify the completeness of a partial list. Never lower a count to fit a checker limit.
+
 Call review before finalizing; inspect both sides of diagnostics, do not automatically
 choose one source as true. If a reader can fill a gap, call evidence_needs then collect
 with one of its approved reader/exhibit pairs. Extraction creates a new snapshot:
@@ -144,6 +169,13 @@ your proposed window. Recovered optical entries may be older states of the same
 file system; they do not by themselves imply a reformat.
 
 WHEN YOU ARE DONE
+Call plan again and inspect its neutral coverage diagnostics before finishing. Use the
+remaining budget for feasible missing-field searches, unfinished inventory pages and
+supported fields not yet bound into an answer. Prioritize concrete next actions rather
+than repeating the same failed query. If further work requires unavailable evidence,
+an unsupported form, or a new snapshot, record that reason and the next action explicitly.
+Do not clear unresolved notes just to make the plan look finished. Coverage diagnostics
+and a reviewed work status do not establish answer accuracy or forensic completeness.
 Reply with a short summary. For each question, give the ids of the certified findings
 and conclusions that answer it, and say plainly what could not be established and why.
 Quote only sentences the checker returned.

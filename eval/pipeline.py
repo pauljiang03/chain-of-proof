@@ -63,7 +63,9 @@ def prepare(reference=None, questions=None, adapter=None, answers=None, case_id=
     public_prompts = {q["id"]: q["prompt"].strip() for q in public["questions"]}
     if any(q["prompt"].strip() != public_prompts[q["id"]] for q in key["questions"]):
         raise ValueError("reference and public profile question prompts differ")
-    if adapter and (adapter != "nist" or selected_case != NIST_CASE_ID):
+    if adapter not in (None, 'nist', 'claims'):
+        raise ValueError('unknown answer adapter')
+    if adapter == 'nist' and selected_case != NIST_CASE_ID:
         raise ValueError("the nist adapter is only available for the declared NIST case; "
                          "other cases need compatible structured --answers")
     inputs = {"reference": key_input, "public_questions": _load(questions)[1]}
@@ -103,7 +105,7 @@ def evaluate(plan, trusted_run, answers_output, results_output, gate_result=None
         result = {"schema_version": 2, "case_id": plan.case_id,
                   "evaluation": {"measured": False, "reason": plan.reason}}
     else:
-        if plan.adapter == "nist":
+        if plan.adapter in ("nist", "claims"):
             if facts_path is None or verification_output is None:
                 raise ValueError("adapter evaluation requires --facts and a new verification output")
             source = open_source(facts_path)
@@ -113,9 +115,16 @@ def evaluate(plan, trusted_run, answers_output, results_output, gate_result=None
             _write_new(verification_output, verification)
             if not verification["passed"]:
                 raise ValueError("certificate verification failed; no answers or score produced")
-            from .nist_answers import generate
-            submission = generate(trusted_run, plan.questions)
-            origin = "Explicit NIST adapter over independently reverified certificates"
+            if plan.adapter == 'claims':
+                from agent.answer_store import project_bundle
+                projection = project_bundle(trusted_run, plan.questions, authority='independently_replayed')
+                submission = projection['submission']
+                origin = ('Explicit claim-field bindings over independently reverified certificates; '
+                          'question relevance and completeness are not proved')
+            else:
+                from .nist_answers import generate
+                submission = generate(trusted_run, plan.questions)
+                origin = "Explicit NIST adapter over independently reverified certificates"
         else:
             submission = plan.answers
             origin = "Explicit external structured answers; no Lean certification implied"
@@ -138,7 +147,7 @@ def main(argv=None):
     parser.add_argument("--facts", required=True, help="source facts bound by the certificates")
     parser.add_argument("--questions", required=True, help="public schema-v2 question contract")
     parser.add_argument("--reference", required=True, help="private schema-v2 scoring reference")
-    parser.add_argument("--adapter", choices=("nist",), required=True)
+    parser.add_argument("--adapter", choices=("nist", "claims"), required=True)
     parser.add_argument("--out", required=True, help="new directory for answers/results/verification.json")
     args = parser.parse_args(argv)
     output = Path(args.out)

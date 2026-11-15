@@ -17,6 +17,8 @@ from checker.check import valid_finding_id
 
 STATUSES = frozenset({'not_started', 'in_progress', 'blocked', 'reviewed'})
 MAX_QUESTIONS, MAX_ITEMS, MAX_HISTORY, MAX_BYTES = 500, 512, 2000, 16 * 1024 * 1024
+# Certificate references have a separate budget from free-text work notes.
+MAX_FINDING_IDS = 4096
 DISCLAIMER = ('Work status, searches, unresolved fields and next actions are agent-reported notes, '
               'not certified facts or proof of investigation completeness. Reviewed does not mean answered, '
               'accurate or complete. Finding references require current-run certificates; independent replay is separate.')
@@ -33,8 +35,9 @@ def _text(value, name, limit=4000):
 
 
 def _strings(value, name, limit=1000):
-    if not isinstance(value, (list, tuple)) or len(value) > MAX_ITEMS:
-        raise ValueError(f'{name} must be a list of at most {MAX_ITEMS} strings')
+    maximum = MAX_FINDING_IDS if name == 'finding_ids' else MAX_ITEMS
+    if not isinstance(value, (list, tuple)) or len(value) > maximum:
+        raise ValueError(f'{name} must be a list of at most {maximum} strings')
     return list(dict.fromkeys(_text(v, name, limit) for v in value))
 
 

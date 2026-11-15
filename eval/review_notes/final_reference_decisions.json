@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "review_kind": "source-grounded evaluator review; proposed changes only",
+  "reference_modified": false,
+  "public_contract_modified": false,
+  "model_outputs_consulted_for_decisions": false,
+  "reference_sha256": "728960f52fc9225f8b1e902e083a1ace92b6a139549250acdade9773b1c36055",
+  "public_profile_sha256": "d3595618d737c2ffcaf92e364a9b0a485409885c2e0227af45507fb58a03f25a",
+  "source_document": {
+    "path": "data/reference/leakage-answers.txt",
+    "sha256": "149266965308d5d7d343e924566a36c9d8963a156d7d0c1dc1f73d6fd90d1bd1",
+    "pdf_path": "data/reference/leakage-answers.pdf",
+    "pdf_sha256": "218165427fcb2f490b44eccf7fbc9bf3700b938ea976004051a067e79e0da62b",
+    "edition": "2018-07-23"
+  },
+  "source_root_used": "/Users/paul/Documents/hackpton",
+  "source_hashes_verified": true,
+  "source_span_count": 14,
+  "decisions": [
+    {
+      "question_id": "Q1",
+      "category": "input_scope_and_verification",
+      "source": {
+        "start_line": 1014,
+        "end_line": 1034,
+        "sha256": "9de440e3a120313521781cdc405cc5451f75972f7dcb3c5625d1d2fd576b63e3",
+        "pages": [
+          16
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Add the source Section 4.3 RM#1 digests as a source addendum; scope variants to the frozen supplied-image manifest. Preserve distinct container/media hash scopes. Do not invent acquisition-versus-verification equality.",
+      "remaining_boundary": "Need acquisition/verification evidence and selection of supplied RM#3 representation; source hashes alone are not verification.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q2",
+      "category": "property_definition",
+      "source": {
+        "start_line": 1035,
+        "end_line": 1042,
+        "sha256": "21be7caf2e8f332a57dd662f094c690d5bda2435bd3fea1382efe8ad163dc476",
+        "pages": [
+          16
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Preserve the printed partition-2 asterisk. Explicitly distinguish MBR active flag, OS-containing partition and boot capability before comparing a Boolean.",
+      "remaining_boundary": "Choosing the requested meaning is a contract decision; this review makes no replacement Boolean.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q6",
+      "category": "timestamp_semantics",
+      "source": {
+        "start_line": 1068,
+        "end_line": 1104,
+        "sha256": "e1251c08eae923d49bcc8f6751130b9be4b1010b773d1e95d0e98575ece42b03",
+        "pages": [
+          17
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Keep the four account rows and printed local-time strings/nulls. Record the display policy and field meanings before converting to UTC.",
+      "remaining_boundary": "No one-hour tolerance or offset selected from model/extractor output.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q10",
+      "category": "timestamp_semantics",
+      "source": {
+        "start_line": 1124,
+        "end_line": 1195,
+        "sha256": "a1069b7a9c3e7639e6d8eb7c5a600f45468106b0cc5790ba44b29ee97a7af983",
+        "pages": [
+          17,
+          18
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Keep all nine applications and printed installation timestamps; define installation field/event semantics and display offset.",
+      "remaining_boundary": "Installer execution, registration and completion can be different observations; do not replace one with another.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q16",
+      "category": "finite_alias_and_list_scope",
+      "source": {
+        "start_line": 1901,
+        "end_line": 2152,
+        "sha256": "0796dcf5cfb3813f86080142320e7a896721ff3a630c0102567f6250357a15fd",
+        "pages": [
+          24,
+          25,
+          26
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "A single expected-row alias may accept singular/plural forms supported by the printed keyword and its URL; all other fields remain required. Declare duplicate/exclusion scope separately.",
+      "remaining_boundary": "Alias alone does not settle the source omission of duplicated/meaningless items; extra evidence is not automatically false.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q19",
+      "category": "artifact_identity",
+      "source": {
+        "start_line": 2172,
+        "end_line": 2182,
+        "sha256": "5570e4257a618a610f97c17b302ca6a10b1f8c8d7139db18c467e843a9a1d29c",
+        "pages": [
+          27
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Retain both source path statements with their source labels; do not globally equate Office and Outlook directory names.",
+      "remaining_boundary": "The physical-container path and registry locator require an artifact-identity decision, not answer fitting.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q29",
+      "category": "artifact_identity_and_open_scope",
+      "source": {
+        "start_line": 2923,
+        "end_line": 2938,
+        "sha256": "bd3673ffd364884d454f0c5e855b983c116c642c19532738aa44aca9de7cb304",
+        "pages": [
+          34
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Retain abbreviated paths and source cross-references separately. Treat the ellipsis and registry wildcard as open trace categories, not a closed inventory.",
+      "remaining_boundary": "Publish finite path resolution and additional-trace handling before full-question grading.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q30",
+      "category": "source_association",
+      "source": {
+        "start_line": 2939,
+        "end_line": 2995,
+        "sha256": "3d45da4adf13f0f68daed9e0cf7a2b2ed34d3e8b3ab22fd4d62f8d0574e9a91b",
+        "pages": [
+          34,
+          35
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Keep table and quoted-log associations separately. Mechanical epoch arithmetic can be audited, but selecting one association must be an explicit versioned contract decision.",
+      "remaining_boundary": "No change to the printed expected associations is included; no answer-key-error claim.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q33",
+      "category": "representation_patch_ready",
+      "source": {
+        "start_line": 3039,
+        "end_line": 3163,
+        "sha256": "c2f8c7abe69b20fa52433e3956fd1aa846390f2dd5b40bc6def07f892fc11524",
+        "pages": [
+          36,
+          37
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Represent the two printed interval endpoints as local minute strings, with explicit printed precision; preserve all11 source rows.",
+      "remaining_boundary": "Full question still needs distinctions among host observation, method selection, descriptor timestamp and physical write; patch does not resolve causal meaning or offset.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q39",
+      "category": "content_identity",
+      "source": {
+        "start_line": 3312,
+        "end_line": 3319,
+        "sha256": "945cec212d0a5370b220082a5661a29a712b9837c46289f1379011442159432a",
+        "pages": [
+          40
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Require six recovered thumbnail artifacts with cache entry locators and a frozen content-identity criterion; titles alone are incomplete.",
+      "remaining_boundary": "Need reviewed reference image identity/comparison policy; no LLM judge or automatic title-only full credit.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q48",
+      "category": "artifact_identity_and_causal_wording",
+      "source": {
+        "start_line": 3960,
+        "end_line": 4002,
+        "sha256": "92d7aa8615622b634bed92c9090c03dea32907f3d44a302af978228ea868966b",
+        "pages": [
+          47,
+          48
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Use the source application context to define logoff as Google Drive sign-out. Preserve the causal wording with attribution, and retain actual VSC/current-system differences.",
+      "remaining_boundary": "Finite path identity and the causal-comparison convention still require explicit decisions.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q53",
+      "category": "scope_patch_ready",
+      "source": {
+        "start_line": 4301,
+        "end_line": 4342,
+        "sha256": "5943c3ceb5906222b76f4641bfba96f398d6e7e083c0e2df2a6d102d3dd4e1cf",
+        "pages": [
+          51,
+          52
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Require the17 FAT-directory recovery rows; signature-based carving is optional according to the source. Keep viewability and method fields.",
+      "remaining_boundary": "Publish a viewability criterion and optional-output handling. The patch removes no required metadata rows and does not infer viewability from extension/signature.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q58",
+      "category": "event_eligibility",
+      "source": {
+        "start_line": 4423,
+        "end_line": 4431,
+        "sha256": "ca9e00070f0db133de763f187ce425a42e8426b26d7c6bffabcc8b94dfd62565",
+        "pages": [
+          53
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Derive an event-level checklist from Section3 with timestamps/intervals, entities, order and evidence requirements; separate scenario context from disk-recoverable observations.",
+      "remaining_boundary": "Daily labels are insufficient; eligibility and detail must be specified without choosing events from an application report.",
+      "automatic_full_question_resolution": false
+    },
+    {
+      "question_id": "Q60",
+      "category": "diagram_adequacy",
+      "source": {
+        "start_line": 4457,
+        "end_line": 4469,
+        "sha256": "a22b82198ee147159d84ba0768761950dd2723f3edf4005e0712777188061e5d",
+        "pages": [
+          54
+        ]
+      },
+      "source_span_verified": true,
+      "proposed_decision": "Require an actual portable/renderable diagram and a public content checklist tied to the reviewed timeline; keep any aesthetic assessment separate.",
+      "remaining_boundary": "No canonical layout or exact graph is given; a label string is not a diagram.",
+      "automatic_full_question_resolution": false
+    }
+  ],
+  "proposed_patches": [
+    {
+      "id": "q53-optional-carving-scope",
+      "kind": "source-explicit scope clarification",
+      "source_lines": [
+        4337,
+        4341
+      ],
+      "reference_operations": [
+        {
+          "op": "add",
+          "path": "/questions/52/source_supplemental",
+          "value": {
+            "optional_carving": {
+              "other_files_related_to_scenario": false,
+              "reported_formats": [
+                "OGG",
+                "3GP",
+                "GIF",
+                "JPG",
+                "XLS",
+                "DOC",
+                "MOV",
+                "MP4",
+                "MPG",
+                "PNG",
+                "TIF",
+                "WMA",
+                "WMV",
+                "XML"
+              ]
+            }
+          }
+        },
+        {
+          "op": "remove",
+          "path": "/questions/52/expected/optional_carving"
+        }
+      ],
+      "public_instruction": "The mandatory answer is the metadata-based recovered-file inventory. Signature carving is optional. Keep any carving output in a separately labelled appendix. Viewable means recovered content successfully opens/renders in a compatible viewer; a filename extension or format signature alone is insufficient. Record incomplete or failed rendering as such.",
+      "activation_conditions": [
+        "Agree and freeze the viewability criterion before new submissions.",
+        "Handle optional output symmetrically: it must not be counted as unexpected answer atoms. Current scorer has no unscored-field rule; either add that generic rule with tests or use an explicitly separate appendix outside the scored answer.",
+        "Apply the same public/private scope to every system; retain the original source-supplemental statements."
+      ],
+      "evaluation_status_operation": null
+    },
+    {
+      "id": "q33-printed-minute-precision",
+      "kind": "source-explicit representation clarification",
+      "source_lines": [
+        3114,
+        3121
+      ],
+      "reference_operations": [
+        {
+          "op": "replace",
+          "path": "/questions/32/expected/file_operations",
+          "value": {
+            "source": "RM#3 image",
+            "confidential_files_created": 17,
+            "files_renamed": true,
+            "meaningless_files_created": 3,
+            "confidential_files_deleted": 17,
+            "start_local_minute_as_printed": "2015-03-24 16:54",
+            "end_local_minute_as_printed": "2015-03-24 16:58"
+          }
+        },
+        {
+          "op": "remove",
+          "path": "/questions/32/match/timestamps/~1file_operations~1start"
+        },
+        {
+          "op": "remove",
+          "path": "/questions/32/match/timestamps/~1file_operations~1end"
+        }
+      ],
+      "public_operations": [
+        {
+          "op": "replace",
+          "path": "/questions/32/answer_schema/properties/file_operations",
+          "value": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "confidential_files_created": {
+                "type": "integer"
+              },
+              "files_renamed": {
+                "type": "boolean"
+              },
+              "meaningless_files_created": {
+                "type": "integer"
+              },
+              "confidential_files_deleted": {
+                "type": "integer"
+              },
+              "start_local_minute_as_printed": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$",
+                "description": "Printed local minute, without invented seconds or an unreviewed UTC conversion."
+              },
+              "end_local_minute_as_printed": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$",
+                "description": "Printed local minute, without invented seconds or an unreviewed UTC conversion."
+              }
+            },
+            "required": [
+              "start_local_minute_as_printed",
+              "end_local_minute_as_printed",
+              "source",
+              "confidential_files_created",
+              "files_renamed",
+              "meaningless_files_created",
+              "confidential_files_deleted"
+            ],
+            "additionalProperties": false
+          }
+        },
+        {
+          "op": "remove",
+          "path": "/questions/32/match/timestamps/~1file_operations~1start"
+        },
+        {
+          "op": "remove",
+          "path": "/questions/32/match/timestamps/~1file_operations~1end"
+        }
+      ],
+      "activation_conditions": [
+        "Refresh affected field-source/normalization anchors after applying.",
+        "Keep Q33 unevaluable until its remaining event-semantics/offset contract is settled."
+      ],
+      "evaluation_status_operation": null
+    }
+  ],
+  "fresh_pdf_pages_visually_checked": [
+    37,
+    40,
+    52
+  ],
+  "prior_visual_review": "n3_reference_contracts.md records the wider page review; it is not silently claimed as a new inspection.",
+  "primary_sources": {
+    "nist_case": "https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html",
+    "nist_pdf": "https://cfreds-archive.nist.gov/data_leakage_case/leakage-answers.pdf",
+    "case2_case": "https://dfirmadness.com/the-stolen-szechuan-sauce/",
+    "case2_key": "https://dfirmadness.com/answers-to-szechuan-case-001/",
+    "case2_time_note": "https://dfirmadness.com/case-001-the-timing-of-it-all/"
+  },
+  "separate_revised_contract": {
+    "question_id": "Q53",
+    "case_id": "nist-cfreds-data-leakage-q53-metadata-v1",
+    "path": "eval/contracts/nist_q53_metadata_v1",
+    "scope": "Mandatory metadata recovery table, optional carving outside answer",
+    "original_frozen_contract_changed": false,
+    "validation_path": "eval/contracts/nist_q53_metadata_v1/validation.json",
+    "system_accuracy_measured": false
+  }
+}

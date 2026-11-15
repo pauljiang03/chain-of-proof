@@ -5,6 +5,7 @@ import json
 
 from agent.brief import case_context, question_context, record_context
 
+PROTOCOLS = ("literal-v1", "claim-bindings-v2")
 
 GATE = {
     "A": """SUBMISSION BEHAVIOR
@@ -58,9 +59,85 @@ answers in both arms; certification of a claim does not certify the whole answer
 """
 
 
-def build_prompt(profile, public_questions: dict, arm: str) -> str:
+COMMON_BINDINGS = """YOUR SHARED TOOLS
+forms: approved claim forms and the public catalog of semantic fields for answer bindings.
+sql(query): one read-only SELECT over extracted facts; rows and string cells are bounded.
+fact(id): the full source-bound record, including unclipped values and provenance.
+check(question, claim, revises?): submit a JSON object claim; optional revisions name a
+prior proposal. claims may instead be a nonempty ordered batch of JSON objects.
+plan: public question work, unresolved notes and neutral coverage/inventory diagnostics.
+update_question(question_id, searched?, unresolved?, next_actions?, status?): record work
+notes. It cannot attach certified finding IDs or assert that a question is proved complete.
+inventory_page(question_id, kinds?, exhibits?, page_size?, cursor?): exact kind/exhibit
+filters in record-ID order, with bounded pages and saved continuation cursors.
+There is no product answer, conclude, collect, reference, scorer or projection tool.
+
+Use these tools only through the supplied bridge. The terminal is transport, not an
+alternate evidence reader. Do not execute arbitrary commands, inspect other files,
+read private references or prior runs, browse the network, or contact other agents.
+These are procedural restrictions, not an operating-system sandbox.
+
+HOW TO WORK
+Start with plan and forms. Explore with sql, and inspect full records with fact. Link
+each proposed answer field to a semantic field of a specific submitted claim using the
+forms catalog. Use only public questions and supplied evidence, never expected answers.
+For inventories, continue inventory_page with its next_cursor and exactly the same
+question_id, filters and page_size. Returned rows and exhaustion describe that predicate
+in this extracted snapshot; they do not establish inspection or forensic completeness.
+Fetch fact(id) before using clipped values. Preserve artifact-specific timestamp meanings,
+scope and source distinctions. Apply the public question's filters instead of dumping
+unrelated rows. A count certificate alone does not reproduce an inventory's values.
+
+Keep supported partial fields even when another requested field is unknown. Record
+missing fields and concrete next searches with update_question. A checker capacity
+refusal does not erase observed records; keep its limitation explicit. Do not guess
+intent, causation, physical-device identity or dates, equate a shared volume label with
+physical identity, or treat optical settings/locks as a completed physical-disc write.
+
+Before finishing, call plan again. Use remaining time for feasible unresolved fields,
+unfinished pages, and known claim fields not yet bound to the requested answer. Record
+why work remains blocked. Reviewed work notes and coverage diagnostics are not proof
+of answer accuracy or completeness. Respect the controller's fixed time cap.
+
+FINAL RESPONSE: EXPLICIT BINDINGS
+Write a concise evidence summary and exactly one fenced json block in this shape:
+{"schema_version":1,"case_id":"<public case_id>","bindings":[],"unanswered":[]}
+Each binding names candidate_id (use the finding_id returned by C), question_id, path,
+part and field; format is optional and must be listed in the forms catalog. path is an
+array of object keys and zero-based array indices. part is the zero-based index in the
+flattened claim parts. The whole submitted claim remains one filtering dependency.
+For example, a supported device_serial field might bind to ["devices",0,"serial"].
+Use exact returned candidate IDs and catalog fields. Never invent a binding from an
+expected answer. claim_sha256 may be omitted: after the run, the coordinator fills only
+that missing metadata from the exact named saved claim. A supplied hash is never fixed.
+Optional literal value assertions, when supplied, are preserved and never repaired.
+
+Account for every public question through at least one binding or one unanswered item
+{"question_id":"<id>","reason":"<specific remaining gap>"}. Do not use both for the
+same question. For a partial question, bind its known fields and describe the unresolved
+fields in work notes and your summary. Do not turn them into guessed or null values.
+An unanswered item is for a question with no submitted answer-field binding. Unsupported
+bindings and conflicts remain explicit; no prose-to-answer conversion or answer repair
+will occur. The same frozen field projector is used for A and C. B later filters whole
+A candidates without changing their projected values or un-hiding prior conflicts.
+Claim acceptance and answer correctness are separate measurements.
+"""
+
+
+def build_prompt(profile, public_questions: dict, arm: str, protocol="literal-v1") -> str:
     if arm not in GATE:
         raise ValueError("arm must be A or C")
+    if protocol not in PROTOCOLS:
+        raise ValueError("unsupported ablation protocol")
+    if protocol == "claim-bindings-v2":
+        example = {"schema_version": 1, "case_id": public_questions["case_id"],
+                   "bindings": [], "unanswered": [
+                       {"question_id": q["id"], "reason": "Replace with the actual gap, or remove when binding known fields."}
+                       for q in public_questions["questions"]]}
+        return (case_context(profile) + record_context(profile) + question_context(profile)
+                + GATE[arm] + "\n" + COMMON_BINDINGS
+                + "\nSubmission structure (account for every question):\n"
+                + json.dumps(example, ensure_ascii=False, indent=2) + "\n")
     example = {"schema_version": 2, "case_id": public_questions["case_id"],
                "answers": [{"question_id": q["id"], "status": "unknown"}
                            for q in public_questions["questions"]]}

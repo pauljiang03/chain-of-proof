@@ -33,6 +33,12 @@ STANDARD_AXIOMS = {"propext", "Quot.sound", "Classical.choice"}
 _ID = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 _built = False
 
+# Census-only elaboration bounds. Small definitions avoid Lean's giant list
+# declaration recursion limit; flattening still exposes every row to counts.
+CENSUS_CHUNK_SIZE = 128
+CENSUS_MAX_REC_DEPTH = 8192
+CENSUS_MAX_HEARTBEATS = 2_000_000
+
 
 def valid_finding_id(value) -> bool:
     return isinstance(value, str) and _ID.fullmatch(value) is not None
@@ -42,7 +48,19 @@ def render_lean(finding_id: str, facts: List[Fact], claim: claims.Claim) -> str:
     if not valid_finding_id(finding_id):
         raise claims.ClaimError("finding id must look like F7 (letters, digits, _)")
     rows = ",\n  ".join(f.to_lean() for f in facts)
+    cited = f"def cited : List Fact := [\n  {rows} ]"
+    options = ""
     if claims.census_of(claim):         # about every fact of a kind: `cited` is all of them
+        options = (f"set_option maxRecDepth {CENSUS_MAX_REC_DEPTH}\n"
+                   f"set_option maxHeartbeats {CENSUS_MAX_HEARTBEATS}\n\n")
+        if len(facts) > CENSUS_CHUNK_SIZE:
+            chunks, definitions = [], []
+            for start in range(0, len(facts), CENSUS_CHUNK_SIZE):
+                name = f"censusChunk{len(chunks)}"
+                chunks.append(name)
+                chunk = ",\n  ".join(f.to_lean() for f in facts[start:start + CENSUS_CHUNK_SIZE])
+                definitions.append(f"def {name} : List Fact := [\n  {chunk} ]")
+            cited = "\n\n".join(definitions) + "\n\ndef cited : List Fact := List.flatten [" + ", ".join(chunks) + "]"
         statement = (f"def census : Census := {claims.to_lean(claim)}\n\n"
                      f"theorem verified : counts cited census = true := by decide +kernel")
     else:
@@ -51,10 +69,9 @@ def render_lean(finding_id: str, facts: List[Fact], claim: claims.Claim) -> str:
     return f"""import ChainOfProof
 open ChainOfProof
 
-namespace Cert.{finding_id}
+{options}namespace Cert.{finding_id}
 
-def cited : List Fact := [
-  {rows} ]
+{cited}
 
 {statement}
 
@@ -143,12 +160,27 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
         ids, found = claims.cited_facts(claim, source)
         facts = [found[i] for i in ids]
         lean_text = render_lean(finding_id, facts, claim)
-        kernel = run_kernel(lean_text, finding_id)
+        census_timeout = False
+        try:
+            kernel = run_kernel(lean_text, finding_id)
+        except subprocess.TimeoutExpired:
+            if not claims.census_of(claim):
+                raise
+            census_timeout = True
+            kernel = {"ok": False, "output": "census kernel evaluation exceeded the 120-second wall-clock limit"}
         if not kernel["ok"]:
-            result["reason"] = "the cited facts do not support this claim"
-            result["parts"] = explain(facts, claim)
-            if not result["parts"]:
+            if claims.census_of(claim) and (census_timeout or claims.census_actual(claim, found) == claim[1][-1]):
+                # Python can explain a failure, but it never supplies a proof.
+                # A correct count can still fail elaboration/reduction budgets.
+                result["reason"] = ("census kernel evaluation exceeded the 120-second wall-clock limit; no certificate was issued"
+                                    if census_timeout else "census kernel execution did not certify the count within its execution/resource limits; no certificate was issued")
+                result["parts"] = []
                 result["lean_output"] = kernel["output"][-2000:]
+            else:
+                result["reason"] = "the cited facts do not support this claim"
+                result["parts"] = explain(facts, claim)
+                if not result["parts"]:
+                    result["lean_output"] = kernel["output"][-2000:]
         else:
             (out_dir / f"{finding_id}.lean").write_text(lean_text)
             result.update({

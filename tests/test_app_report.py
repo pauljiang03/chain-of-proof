@@ -235,6 +235,17 @@ class AppReport(unittest.TestCase):
         self.assertIn('Certificate: trust tier kernel', rendered)
         self.assertNotIn('example : True', rendered)
 
+    def test_links_into_sections_left_out_become_plain_text(self):
+        data = bundle(finding(), finding(finding_id='F2'))
+        data['case_answers'] = {'questions': [{'question_id': 'Q1', 'certified_findings': [{'finding_id': 'F1'}]}]}
+        complete = Markup(render_html(data))
+        self.assertIn('#proof-f1', complete.links)
+        for sections in (['workflow'], ['workflow', 'evidence'], ['proofs'], []):
+            with self.subTest(sections=sections):
+                parsed = Markup(render_html(data, report_options(sections=sections)))
+                self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
+                self.assertEqual(len(parsed.sentences), 2)
+
     def test_report_without_options_is_complete_and_options_are_validated(self):
         data = bundle(finding(), finding(finding_id='F2'))
         complete = render_html(data)

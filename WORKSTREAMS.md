@@ -1,152 +1,105 @@
 # Workstreams and terminal handoff
 
-Updated: 2026-11-14. Read this before assigning more agents.
+Updated: 2026-11-15 UTC. Read this before assigning more agents.
+The project is now CONAN-F. The `cop` command and `ChainOfProof` Lean library keep
+their existing names for compatibility.
 
-The two-terminal feature split is integrated. See [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md) for interfaces and ownership.
-The original terminal supplied audits, citations, and proof-gap diagnostics.
-The other terminal supplied portable verification, coverage, and claim history.
-Both coordinators connected the modules to the runner and report.
-The CLI and optional local browser interface are also integrated; see [APP_HANDOFF.md](APP_HANDOFF.md).
-The CLI is the primary interface. Both interfaces use the same investigation runner and report outputs.
-The user then authorized six backend workflow additions. See [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md) for the completed split and scope.
+## Current ownership
 
-## Objective and constraints
+See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five authorized priorities.
 
-Finish a usable AI-led investigation workflow quickly. Keep the existing Lean verification gate. The deterministic miner is an optional baseline.
+| Owner | State and files |
+| --- | --- |
+| Root Codex | Integration worktree `/private/tmp/cop-final-eval`, branch `finish/final-eval`. Owns product tools, report/evaluation integration, verification, documentation and final push. |
+| Other Codex terminal | Coverage, paging, readers and explicit-binding comparison runtime are integrated. Coordinates the new bounded Sol smoke and repeat from a frozen clean checkout. No concurrent production-file ownership. |
+| Claude | Independent con-leche checker, install fix and CONAN-F rename are integrated. Last observed branch: `finish/desktop-ui`. Avoid concurrent UI changes. |
+| Root helpers | Shared projection, census scaling, reference review and second-case mechanical smoke are complete. No active implementation ownership. |
 
-- Do not add a new framework, rewrite the fact schema, or build a new UI for this finish pass.
-- Keep findings, unverified judgments, answer accuracy, and certificate validity distinct.
-- Do not use an LLM judge. Do not give the investigator expected answers or old scored reports.
-- Preserve the original answer source. Do not change expected values to fit our output.
-- Keep Mulder's original 20-item prose rubric separate from the expanded 60-question typed test.
-- Prepare Mulder only. Do not execute it until finalization and the user's instruction to run.
-- Do not claim universal zero false positives. Lean proves formal statements relative to extracted facts and declared rules.
-- Credentials belong in the local environment, not chat, Git, or logs.
+The six backend workflow features are integrated. Their interfaces remain in
+[BACKEND_HANDOFF.md](BACKEND_HANDOFF.md). The original app and feature interfaces
+remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
 
-## Current terminal: ownership and state
+## Implementation delivered in this pass
 
-All six feature lanes are complete. The root agent owns the final checkpoint and push.
-The other terminal worked on `finish/evidence-features` in separate worktrees.
-No agent may change saved benchmark results as part of this feature work.
-Use a separate worktree for new work and agree on file ownership before integration.
+- Shared claim-field answer projection for A/B/C and product reports. B removes
+  whole candidates and preserves A's frozen conflict omissions. It cannot repair
+  values or reveal previously hidden values.
+- The `answer` tool records explicit field bindings. HTML, Markdown and JSON
+  outputs retain each field's claim and source links. `--adapter claims` rechecks
+  certificates before deterministic scoring for any case with a public contract.
+- Snapshot-bound inventory pages, separate finding/note limits, and neutral
+  missing-field and unfinished-page diagnostics. The prompt asks the investigator
+  to review those diagnostics within its existing time budget.
+- Census proofs up to 2,048 rows, with unchanged Lean semantics and independent
+  full-source checks. The 518/747 total and distinct-count proofs also passed con-leche.
+- General registry reads for omitted system, timezone, Search and snapshot settings.
+- A separate source-grounded Q53 metadata contract. The frozen full-case key and
+  original pilot remain unchanged.
 
-## A–D preparation and demonstration
+## Measurement boundaries
 
-The user selected all four configurations: unchecked AI proposals (A), offline checking of those exact proposals (B), online proof feedback (C), and Mulder (D).
-Preparation is authorized. The full comparison remains unrun and must be finalized before execution.
+Do not use an LLM judge. Do not give investigators the answer key, private review
+notes, old scored reports or another arm's output. Retain failures and unknowns.
 
-| ID | Owner | Scope |
-|---|---|---|
-| X0 | Root | `comparison/HACKPRINCETON.md`: sourced event guidance, pitch, limits, and two-minute demonstration plan. |
-| X1 | `lean_gap_types` | `comparison/abcd/`: experiment protocol and unfinished freeze manifest. No model calls. |
-| X2 | `optical_timestamps` | `scripts/demo_proof_gate.py`, `tests/test_demo_proof_gate.py`: synthetic acceptance, wrong-device refusal, independent verification, and certificate tampering. Five tests and the CLI demo pass. |
-| X3 | `journal_gaps` | `eval/review_notes/abcd_runtime_review.md`: implementation and scoring boundaries. Read-only review; existing runtime unchanged. |
+Lean proves the declared formal statement relative to the extracted records and
+rules. It does not prove parser correctness, question relevance, list completeness,
+source authenticity or universal zero false positives.
 
-A/B capture/replay runtime and a bounded literal-answer A/C pilot are integrated under `comparison/ablation/`.
-The shared claim-faithful answer projection remains unfinished.
-Do not relabel unchecked proposals as verified to use the current answer adapter.
-The adapter derives values from cited records and could otherwise repair an invalid proposal during scoring.
-Paired claim filtering and full question accuracy must remain distinct until the common projection is ready.
+The original Sol pilot is frozen at `617dc29`. Its [summary](comparison/ablation/PILOT_SOL61_20261115.md)
+reports 11/46 fully correct literal answers for A and 12/46 for C. Those answer
+blocks are unverified. B reverified 169 claims; C reverified 29 unique claims.
+The new projector must not receive retrospective, hand-written bindings to change
+those scores. A new explicit-binding protocol and fresh runs are required.
 
-The other terminal's `finish/parallel-hardening` branch contains API/CLI fixes and private reference-review notes.
-It was integrated at `c411fe6`. Its `eval/review_notes/PARALLEL_FIX_HANDOFF.md` records validation and remaining limits.
-Do not copy evaluator review notes into public investigator inputs.
+The historical `runs/current` union has 9 complete, 17 partial and 20 unanswered
+questions, with 14 unresolved reference questions. Its 473 certificates reverify.
+It is not a new investigation with the latest readers or product workflow.
 
-## Completed and tested
+The full A/B/C/D experiment remains unfinished. Mulder is prepared but unrun.
+Do not describe a development smoke as the full experiment or as a final comparison.
 
-- 627 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
-- The synthetic workflow verifies refusal, explicit revision, linked reports, portable packages, and tamper rejection without a model call.
-- Offline end-to-end tests exercise the CLI and HTTP API through the existing runner and real Lean checks, including cancellation and partial reports.
-- The installed CLI, static assets, and HTML/Markdown/JSON downloads pass a local smoke check. Sample report and workspace inspection passed native Chrome checks.
-- All 473 certificates in the current saved report independently verify.
-- All 24 known false-claim regression probes are refused.
-- No LLM grader remains in the current evaluation path.
-- The original 20-item package preserves source files, exact item wording, license, hashes, and published decisions.
-- Its grading actor and method are not disclosed by the inspected sources. No new judgment was assigned.
-- The full 60-question package gives both systems the same public case context and comparison rules.
-- CLI timeout enforcement works when the process is silent. The API graph also has an asynchronous deadline.
-- API deadline behavior has a synthetic test; a live API investigation still requires credentials and validation.
+## Fresh second-case operational smoke
 
-## Current measured state
+- Output: `/private/tmp/cop-case2-final-20261115T015403Z/`.
+- Facts: `evidence/facts.json`, SHA-256
+  `0a4d2243adbe10b33eaff335fdc7bbd8be901e55cb3a1bd20f01089437361e61`.
+- Scope: desktop image only, `windows,system` readers, 1,800 records.
+- Public contract: `eval/case2/smoke-profile.json`, six generic questions; no accuracy key.
+- Four documented extraction limitations remain in `evidence/health.json`.
+- Mechanical smoke: 46 audited calls, 12 independently verified certificates,
+  36 supported answer fields, HTML/Markdown/JSON report and verified portable package.
+- The runtime manifest records `791df84` with `dirty=true` and individual source
+  hashes. Do not call it a clean-commit trial or an AI accuracy result.
 
-`runs/current/` is the saved AI/miner claim union, replayed with current templates and the latest adapter against `evidence/case_facts.json`.
-It is not a new AI run with the rebuilt evidence.
+## Inputs for the next full NIST development run
 
-| Measure | Current saved report |
-|---|---:|
-| Fully correct questions | 9 |
-| Partial questions | 17 |
-| Unanswered questions | 20 |
-| Unevaluable questions | 14 |
-| Provisionally scorable questions | 46 of 60 |
-| Independently verified certificates | 473 of 473 |
+- Facts: `/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json`.
+- SHA-256: `a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d`.
+- Records: 335,509, including 11 email records and 32 system settings.
+- All 12 reader/exhibit attempts completed without reader-level crashes. Nine
+  unsupported shell targets and the dirty Search database remain explicit limitations.
+- Extraction took 55.96 seconds using the existing complete repository `.venv`.
+  The clean `8a625fc` launch and individual source hashes are recorded beside the facts.
+- Public case: `comparison/mulder/case-profile.json`.
+- Public questions: `eval/benchmark_nist_questions.json`.
+- Private reference: `eval/benchmark_nist.json`, post-investigation only.
 
-Some partial answers contain unequal values. Zero `INCORRECT` whole-question labels does not mean zero false assertions.
-The 14 unevaluable questions are unresolved reference contracts, not failed system answers.
+Do not replace a fact store that saved certificates already bind. Keep the new
+extraction cost and reader limitations visible. An earlier attempt used a separate
+environment without the mailbox library; retain its failure record but do not use
+that incomplete snapshot as the final comparison input.
 
-A separate fresh deterministic miner run certified and reverified 381 claims, with the same question-status counts.
-Its output is under `/private/tmp/cop-latest-nist-miner/`. It used the earlier fresh snapshot, before the final browser/mailbox export corrections.
-Do not present it as the new AI result or mix its atomic counts with the saved union.
+The local Claude login works outside the sandbox; the first sandboxed status check
+could not access it. No API key is present in this process. Live work is restricted
+to the user's Sol 6.1 choice unless another destination is approved. The proposed
+native Claude test was blocked by automatic approval review and did not start.
+Credentials must never be copied into chat, logs or Git. A Codex subagent bridge
+trial is not validation of the native Claude/API product backend.
 
-## Ready inputs for the next AI run
+## Integration rules
 
-Latest full evidence:
-
-- Facts: `/private/tmp/cop-nist-ready-20261114T224105Z/facts.json`
-- SHA-256: `c22bc84acca90791961494d2411938efec8153965cb6f27696011090dc9673b5`
-- Health: `/private/tmp/cop-nist-ready-20261114T224105Z/health.json`
-- Build log: `/private/tmp/cop-nist-ready-20261114T224105Z/build.log`
-- Public case context: `comparison/mulder/case-profile.json`
-- Public questions: `eval/benchmark_nist_questions.json`
-- Private reference, used only after the run: `eval/benchmark_nist.json`
-
-The facts contain 335,498 records. Logged limitations are nine unsupported Control Panel namespace targets and an unclean Windows Search database. There were no reader crashes.
-The 424 MB derived facts remain outside Git. Do not replace the small canonical fact store without also regenerating its bound certificates.
-
-Last authentication check: installed Claude CLI was signed out. No model API key was configured. The user has been asked to authenticate locally.
-The separate terminal completed a bounded Sol with/without-Lean pilot from frozen source `617dc29`.
-Its runtime and result summary are integrated; the saved trials still bind their original source and evidence. No fresh native Mulder trial has started.
-
-After credentials are available, the root coordinator can use a new run name:
-
-```sh
-.venv/bin/python -m agent.run \
-  --backend claude-code --model opus --minutes 15 \
-  --name dev/ai-finish-1 \
-  --facts /private/tmp/cop-nist-ready-20261114T224105Z/facts.json \
-  --case-profile comparison/mulder/case-profile.json \
-  --questions eval/benchmark_nist_questions.json \
-  --reference eval/benchmark_nist.json --adapter nist
-```
-
-For a controlled comparison, replace `opus` with the same exact model ID and provider used by Mulder. The alias command above is a development run, not that comparison.
-The optional API backend is `--backend deepagents`; install `.[agent]` and configure credentials locally first. It has not yet had a live integration run here.
-
-## Next parallel assignments
-
-Take one label per agent. Work in a separate worktree. Announce the label and files before editing.
-The other terminal completed and handed off the first with/without-Lean pilot. The root integrated its comparison-only commits. B1 capture/replay is complete; B2 common projection and B3 reference review remain separate work.
-
-| ID | Assignment | Allowed work | Completion evidence |
-|---|---|---|---|
-| B1 (complete) | Unchecked proposal capture | Implement A's receipt-only mode and replay its exact claims through B. Coordinate runner and tool ownership with root. A must receive no proof feedback. | Frozen claim IDs and hashes; no altered or silently discarded proposals. |
-| B2 | Shared answer projection | Define one claim-faithful answer path for A, B, and C. Do not mark unchecked claims verified to reuse the current adapter. | Invalid proposed values remain invalid in A; B filters exact claims; source links are retained. |
-| B3 | Reference decisions | Review the existing source-grounded notes for the 14 unresolved questions. Keep human review and mechanical source checks distinct. | Explicit approved contract decisions, fixed before model execution. |
-
-Do not start thumbnail interpretation, ESE recovery engines, exhaustive journal proof sweeps, or new Lean metadata schemas in this finish pass.
-They remain useful later work, not hidden completion requirements for this checkpoint.
-
-## Safe branch workflow
-
-Start from the latest pushed checkpoint, not an older checkout. The root terminal pushes `main`.
-Other terminals should commit their own branch and report the commit; do not push or merge `main` concurrently.
-
-Example after the root push is confirmed:
-
-```sh
-git fetch origin
-git worktree add /private/tmp/chain-of-proof-next -b finish-next origin/main
-```
-
-Raw images and temporary fact builds are not copied into a worktree. Use their explicit read-only paths.
-Keep each new run directory separate. Existing output directories must not be overwritten.
+Start from the latest checkpoint in an isolated worktree. Agree on ownership
+before editing shared files. Report completed commits for root integration.
+Inspect `main` again before merging; Claude may advance it in parallel.
+Preserve completed work and saved results. Resolve routine merge conflicts rather
+than resetting or overwriting another terminal's files.

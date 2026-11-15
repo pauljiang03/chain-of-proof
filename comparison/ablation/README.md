@@ -34,8 +34,10 @@ The reported measurements are deliberately separate:
 - **C proof results:** checker attempt history and independently replayed
   certificates, separate from answer correctness.
 
-There is no B answer-accuracy score and no shared claim-to-answer projection in
-this pilot. Unresolved reference questions remain visible and unscored. Missing
+There is no B answer-accuracy score in the original frozen pilot. The new shared
+claim-field projector is available for future trials with explicit model-authored
+bindings. It does not add bindings or new scores to the saved pilot.
+Unresolved reference questions remain visible and unscored. Missing
 or malformed final answer blocks produce an unavailable measurement; they are
 not repaired or converted into invented abstentions. A single pair supplies no
 statistical significance or universal false-positive result.
@@ -64,3 +66,25 @@ post-investigation step. All trial failures and timeouts are retained.
 
 Runtime and replay are experimental tools in the repository checkout. Use
 `python -m comparison.ablation.runtime --help` for their command contract.
+
+## Explicit claim bindings, version 2
+
+The `claim-bindings-v2` protocol is available for new trials. The original
+`literal-v1` protocol remains the default so saved trials retain their meaning.
+Both v2 arms receive the same seven tools, static field catalog, public schemas,
+and neutral work plan. The product's certificate-only `answer` tool is excluded.
+The model must submit its own candidate-to-field bindings before finalization.
+Missing claim hashes are bound only to the exact named candidate; values and
+question placements are not supplied or repaired by the coordinator.
+
+A freezes proposed fields unchanged. B filters that sealed projection using the
+exact offline replay. C requires each admitted proposal to match its own unique,
+independently reverified certificate. A missing certificate makes the projection
+unavailable. Candidate logs are checked against their retained byte hashes.
+Conflicting fields remain omitted after filtering; B cannot invent a new answer
+by exposing a field that A's conflict policy hid.
+
+A workflow smoke can omit an accuracy key. It then reports operation, projection
+and verification results only. It does not create a question-accuracy denominator.
+The coordinator must retain and validate the trial, seal and projection hashes
+before offline B. A digest stored beside an artifact is not proof of authenticity.

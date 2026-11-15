@@ -100,6 +100,9 @@ class Workbench:
         # API tools can run in worker threads. Share one evidence store, while
         # serializing its cursors, query budget, and run-log ID allocation.
         self._lock = threading.RLock()
+        self._inventory_facts_path = Path(facts_path)
+        self._inventory_initial_stat = self._inventory_stat()
+        self._inventory_evidence_sha256 = None
         self.source = open_source(facts_path)
         self.run_dir = Path(run_dir)
         self.proposer = proposer
@@ -155,11 +158,36 @@ class Workbench:
             finally:
                 if cur is not None:
                     cur.close()
-        clip = lambda v: v[:CELL_LIMIT] + "…" if isinstance(v, str) and len(v) > CELL_LIMIT else v
-        out = {"columns": cols, "rows": [[clip(v) for v in r] for r in rows[:ROW_LIMIT]]}
+        from agent.inventory_pages import render_rows
+        out = render_rows(cols, rows[:ROW_LIMIT], CELL_LIMIT)
         if len(rows) > ROW_LIMIT:
             out["truncated"] = f"more than {ROW_LIMIT} rows; narrow the query"
         return out
+
+    def _inventory_stat(self):
+        stat = self._inventory_facts_path.stat()
+        return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+
+    @audited
+    def inventory_page(self, question_id: str, kinds=None, exhibits=None, page_size=100, cursor=None):
+        """Traverse exact kind/exhibit filters in ID order; exhaustion is snapshot scoped."""
+        from agent.inventory_pages import page
+        from agent.investigation import Investigation
+        from agent.run_manifest import file_binding
+        with self._lock:
+            state = Investigation(self.run_dir).snapshot()
+            if question_id not in {row['id'] for row in state.get('questions', [])}:
+                raise ValueError('question_id must name a public question in this run')
+            if self._inventory_stat() != self._inventory_initial_stat:
+                raise ValueError('evidence changed since this workbench was opened')
+            if self._inventory_evidence_sha256 is None:
+                binding = file_binding(self._inventory_facts_path)
+                if self._inventory_stat() != self._inventory_initial_stat:
+                    raise ValueError('evidence changed during inventory binding')
+                self._inventory_evidence_sha256 = binding['sha256']
+            self._steps['n'] = 0
+            return page(self._db, self.run_dir, self._inventory_evidence_sha256,
+                        question_id, kinds, exhibits, page_size, cursor, CELL_LIMIT)
 
     @audited
     def fact(self, fact_id: int) -> dict:
@@ -186,9 +214,44 @@ class Workbench:
     def plan(self) -> dict:
         """Current question work, with agent-reported status separate from proof."""
         from agent.investigation import Investigation
+        from agent.coverage_plan import coverage_pass
+        from agent.inventory_pages import inventory_progress
         state = Investigation(self.run_dir).snapshot()
+        inventory_error = projection_error = None
+        try:
+            inventory = inventory_progress(self.run_dir, evidence_sha256=state.get("facts_sha256"))
+        except Exception as error:
+            inventory = {}
+            inventory_error = type(error).__name__
+        answers = None
+        try:
+            from agent.answer_store import read_projection
+        except ModuleNotFoundError as error:
+            if error.name != "agent.answer_store":
+                projection_error = type(error).__name__
+        except Exception as error:
+            projection_error = type(error).__name__
+        else:
+            try:
+                projection = read_projection(self.run_dir)
+                if projection is None:
+                    answers = None
+                elif isinstance(projection, dict) and "submission" in projection:
+                    answers = projection["submission"]
+                else:
+                    raise ValueError("invalid safe projection result")
+            except Exception as error:
+                projection_error = type(error).__name__
+        coverage = coverage_pass(state, answers={} if projection_error else answers, inventory_progress=inventory)
+        for name, error in (("answers", projection_error), ("inventory", inventory_error)):
+            if error:
+                coverage["inputs"][name] = {"status": "unavailable", "error_type": error,
+                                           "reason": "The saved artifact could not be read safely; diagnostics are unavailable."}
+        if projection_error:
+            for question in coverage["questions"]:
+                question["answer_status"] = "unavailable"
         # Full history stays on disk and in the report; the agent needs current work.
-        return {key: value for key, value in state.items() if key != "history"}
+        return {**{key: value for key, value in state.items() if key != "history"}, "coverage": coverage}
 
     @audited
     def update_question(self, question_id: str, finding_ids=None, searched=None,
@@ -263,10 +326,23 @@ class Workbench:
                                    self.run_dir, proposer=self.proposer)
             if result.get("status") == "verified" and (self.run_dir / "investigation.json").is_file():
                 from agent.investigation import Investigation
-                planner = Investigation(self.run_dir)
-                matched = [q for q in planner.snapshot()["questions"] if question in (q["id"], q["prompt"])]
-                if len(matched) == 1:
-                    planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
+                try:
+                    planner = Investigation(self.run_dir)
+                    matched = [q for q in planner.snapshot()["questions"] if question in (q["id"], q["prompt"])]
+                    if len(matched) == 1:
+                        planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
+                except Exception as error:
+                    # The certificate is already saved. Work-note tracking must
+                    # not turn that accepted checker result into a failed call.
+                    response = self._brief(result)
+                    response["tracking_warning"] = {
+                        "status": "unverified", "stage": "investigation_update",
+                        "error_type": type(error).__name__,
+                        "message": "The finding was certified, but automatic investigation tracking failed. "
+                                   "Inspect the saved plan; it may not include this finding. "
+                                   "This warning is not part of the certificate.",
+                    }
+                    return response
             return self._brief(result)
 
     @audited
@@ -309,3 +385,9 @@ class Workbench:
         except (KeyError, IndexError):
             pass
         return brick
+
+    @audited
+    def answer(self, question_id: str, bindings=None, replace=False) -> dict:
+        """Save explicit claim-field bindings, or show the supported field catalog."""
+        from agent.answer_store import answer
+        return answer(self.run_dir, question_id, bindings, replace=replace)

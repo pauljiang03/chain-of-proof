@@ -9,6 +9,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import platform
 import subprocess
@@ -46,7 +47,14 @@ def _json(path):
     def constant(_):
         raise ValueError("Non-finite JSON number")
 
-    value = json.loads(Path(path).read_text(), object_pairs_hook=pairs, parse_constant=constant)
+    def finite_float(raw):
+        value = float(raw)
+        if not math.isfinite(value):
+            raise ValueError("Non-finite JSON number")
+        return value
+
+    value = json.loads(Path(path).read_text(), object_pairs_hook=pairs,
+                       parse_constant=constant, parse_float=finite_float)
     if not isinstance(value, dict):
         raise ValueError("Expected a JSON object")
     return value
@@ -58,7 +66,7 @@ def _software():
         for path in sorted((ROOT / directory).glob("*.py")):
             sources[str(path.relative_to(ROOT))] = fingerprint(path)["sha256"]
     for name in ("eval/benchmark.py", "eval/submission.py", "lean/lean-toolchain",
-                 "lean/ChainOfProof.lean"):
+                 "lean/ChainOfProof.lean", "lean/lakefile.toml"):
         sources[name] = fingerprint(ROOT / name)["sha256"]
     for path in sorted((ROOT / "lean/ChainOfProof").glob("*.lean")):
         sources[str(path.relative_to(ROOT))] = fingerprint(path)["sha256"]
@@ -70,40 +78,51 @@ def _software():
             "python": platform.python_version(), "platform": platform.platform()}
 
 
-def freeze_pilot(*, facts, case_profile, questions, reference, out, seconds=900):
+def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protocol="literal-v1", seconds=900):
     """Write one immutable-by-convention plan; return its contents and file hash."""
     if type(seconds) is not int or seconds <= 0:
         raise ValueError("The per-arm wall-time cap must be a positive integer")
+    if protocol not in ("literal-v1", "claim-bindings-v2"):
+        raise ValueError("Unsupported pilot runtime protocol")
+    if reference is None and protocol == "literal-v1":
+        raise ValueError("literal-v1 requires a private reference")
     out = Path(out)
     if out.exists() or out.is_symlink():
         raise FileExistsError("Choose a new pilot output directory")
     paths = dict(facts=facts, case_profile=case_profile, questions=questions, reference=reference)
+    if reference is None:
+        del paths["reference"]
     bindings = {name: fingerprint(path) for name, path in paths.items()}
+    _json(case_profile)
+    _json(questions)
     public = read_question_profile(questions)
     with_questions(read_profile(case_profile), public)
-    private = _json(reference)
-    validate_reference(private)
-    if private["case_id"] != public["case_id"] or private.get("time_zone") != public.get("time_zone"):
-        raise ValueError("Public and private case contracts differ")
-    if public.get("contract_revision") != private.get("public_contract_revision"):
-        raise ValueError("Public and private contract revisions differ")
-    expected = {str(q["id"]): q for q in private["questions"]}
-    if {q["id"] for q in public["questions"]} != set(expected):
-        raise ValueError("Public and private question IDs differ")
-    for q in public["questions"]:
-        other = expected[q["id"]]
-        if q["prompt"] != other["prompt"] or q.get("match", {}) != other.get("match", {}):
-            raise ValueError("Public and private question contracts differ")
-    unresolved = [str(q["id"]) for q in private["questions"]
-                  if q.get("evaluation", {}).get("status") == "unevaluable"]
+    private = None
+    unresolved = None
+    if reference is not None:
+        private = _json(reference)
+        validate_reference(private)
+        if private["case_id"] != public["case_id"] or private.get("time_zone") != public.get("time_zone"):
+            raise ValueError("Public and private case contracts differ")
+        if public.get("contract_revision") != private.get("public_contract_revision"):
+            raise ValueError("Public and private contract revisions differ")
+        expected = {str(q["id"]): q for q in private["questions"]}
+        if {q["id"] for q in public["questions"]} != set(expected):
+            raise ValueError("Public and private question IDs differ")
+        for q in public["questions"]:
+            other = expected[q["id"]]
+            if q["prompt"] != other["prompt"] or q.get("match", {}) != other.get("match", {}):
+                raise ValueError("Public and private question contracts differ")
+        unresolved = [str(q["id"]) for q in private["questions"]
+                      if q.get("evaluation", {}).get("status") == "unevaluable"]
     manifest = {
-        "schema_version": 1, "protocol": "sol-subagent-A-C-answer-pilot-and-A-B-claim-filter",
+        "schema_version": 1, "runtime_protocol": protocol, "protocol": "sol-subagent-A-C-answer-pilot-and-A-B-claim-filter",
         "created_at": datetime.now(timezone.utc).isoformat(), "frozen_before_trials": True,
         "evaluation_use": "development_not_blind", "replicates": 1, "order": ["A", "C", "B"],
         "inputs": bindings, "software": _software(),
         "case": {"case_id": public["case_id"], "questions": len(public["questions"]),
-                 "provisionally_scorable": len(public["questions"]) - len(unresolved),
-                 "unevaluable_ids": unresolved, "reference_status": private.get("review_status", "unknown")},
+                 "provisionally_scorable": len(public["questions"]) - len(unresolved) if unresolved is not None else None,
+                 "unevaluable_ids": unresolved, "reference_status": private.get("review_status", "unknown") if private is not None else "unavailable_no_key"},
         "model": {"requested_override": MODEL, "fresh_context": "fork_turns=none",
                   "observed_model_id": None, "immutable_revision": None,
                   "reasoning_effort": "same inherited platform default; not independently observed"},
@@ -129,6 +148,26 @@ def freeze_pilot(*, facts, case_profile, questions, reference, out, seconds=900)
         "preparation": {"facts": "same existing extracted snapshot for both arms",
                         "fresh_extraction_seconds": None, "end_to_end_extraction_comparison": False},
     }
+    if protocol == "claim-bindings-v2":
+        manifest["protocol"] = "sol-subagent-A-B-C-common-claim-field-projection"
+        if private is None:
+            manifest["evaluation_use"] = "workflow_smoke_no_accuracy_key"
+        manifest["isolation"]["allowed_reads"] = (
+            "assigned public brief and shared forms/sql/fact/check/plan/update_question/inventory_page bridge tools")
+        manifest["arms"]["B"] = "offline exact whole-candidate filtering of sealed A; zero model calls"
+        manifest["measurements"]["shared_claim_faithful_projector"] = (
+            "common frozen claim-field projection for A/B/C; B retains bindings only for accepted whole candidates")
+        manifest["measurements"]["answer_accuracy"] = (
+            "common frozen claim-field projection with deterministic scoring against the frozen reference; "
+            "certificate validity remains distinct from question accuracy"
+            if private is not None else
+            "unavailable_no_key: operational smoke only; no question accuracy, correct count or scored denominator")
+        manifest["measurements"]["reference_policy"] = (
+            manifest["measurements"]["reference_policy"] if private is not None else
+            "No private key supplied; scorable denominator and unresolved question IDs are unknown, not zero")
+        manifest["measurements"]["binding_policy"] = (
+            "Model-authored final bindings only; fill absent hashes from exact named saved claims. "
+            "No posthoc binding inference, selector changes, value repair or collision recovery after B filtering")
     # Refuse input changes observed while the contracts were inspected.
     if any(fingerprint(path) != bindings[name] for name, path in paths.items()):
         raise ValueError("An input changed during pilot preparation")
@@ -145,7 +184,14 @@ def validate_frozen(path, *, expected_sha256):
     if fingerprint(path)["sha256"] != expected_sha256:
         raise ValueError("Frozen manifest differs from the retained checkpoint")
     manifest = _json(path)
-    if manifest.get("schema_version") != 1 or set(manifest.get("inputs", {})) != set(INPUTS):
+    protocol = manifest.get("runtime_protocol", "literal-v1")
+    unavailable = manifest.get("case", {}).get("reference_status") == "unavailable_no_key"
+    expected_inputs = set(INPUTS) - {"reference"} if protocol == "claim-bindings-v2" and unavailable else set(INPUTS)
+    if (manifest.get("schema_version") != 1 or protocol not in ("literal-v1", "claim-bindings-v2")
+            or set(manifest.get("inputs", {})) != expected_inputs
+            or (unavailable and protocol != "claim-bindings-v2")
+            or (unavailable and (manifest["case"].get("provisionally_scorable") is not None
+                                or manifest["case"].get("unevaluable_ids") is not None))):
         raise ValueError("Unsupported frozen pilot manifest")
     for binding in manifest["inputs"].values():
         if fingerprint(binding["path"]) != binding:
@@ -160,13 +206,14 @@ def main(argv=None):
     parser.add_argument("--facts", required=True)
     parser.add_argument("--case-profile", required=True)
     parser.add_argument("--questions", required=True)
-    parser.add_argument("--reference", required=True, help="coordinator-only private scoring contract")
+    parser.add_argument("--reference", help="coordinator-only private scoring contract")
+    parser.add_argument("--protocol", choices=("literal-v1", "claim-bindings-v2"), default="literal-v1")
     parser.add_argument("--out", required=True)
     parser.add_argument("--seconds", type=int, default=900)
     args = parser.parse_args(argv)
     try:
         result = freeze_pilot(facts=args.facts, case_profile=args.case_profile, questions=args.questions,
-                              reference=args.reference, out=args.out, seconds=args.seconds)
+                              reference=args.reference, out=args.out, protocol=args.protocol, seconds=args.seconds)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.error(str(error))
     print(json.dumps({"manifest_sha256": result["manifest_sha256"], "output": str(Path(args.out).resolve())}))

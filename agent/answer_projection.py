@@ -1,0 +1,478 @@
+"""Literal claim-field projection, shared by unchecked and checked candidates.
+
+This module does not decide whether claims hold. Selectors follow the proposed
+form, even for a wrong record kind, identity join, count, or time order. B can
+filter a frozen projection without opening the evidence again. Question placement
+and relevance are supplied by the investigator, never proved by this projection.
+"""
+from __future__ import annotations
+
+from collections import defaultdict
+from copy import deepcopy
+from datetime import datetime, timedelta, timezone
+import hashlib
+import json
+import math
+import re
+from zoneinfo import ZoneInfo
+
+from checker import claims
+from checker.facts import KINDS
+
+VERSION = 1
+AUTHORITIES = frozenset({'unchecked', 'recorded_certificates', 'independently_replayed'})
+FORMATS = frozenset({'identity', 'utc_iso', 'local_minute', 'local_date', 'integer'})
+SCOPE = ('Projection preserves the proposed claim semantics; it does not check or repair them. '
+         'Authority is supplied by the caller and is not a new certificate. Accepted semantic fields are '
+         'relative to the cited facts and approved rules. Question placement, relevance, complete lists, '
+         'answer accuracy and investigation completeness are not certified. Missing fields remain omitted.')
+
+
+def _finite(value):
+    if value is None or type(value) in (str, bool, int):
+        return
+    if type(value) is float and math.isfinite(value):
+        return
+    if type(value) is list:
+        for item in value:
+            _finite(item)
+        return
+    if type(value) is dict and all(type(key) is str for key in value):
+        for item in value.values():
+            _finite(item)
+        return
+    raise ValueError('projection inputs must contain finite JSON values only')
+
+
+def _encoded(value):
+    _finite(value)
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False).encode()
+
+
+def claim_digest(claim):
+    """Hash the exact submitted JSON value, without claim normalization."""
+    return hashlib.sha256(_encoded(claim)).hexdigest()
+
+
+def _record(argument, slot, meaning):
+    return {'argument': argument, 'slot': slot, 'semantic_type': meaning}
+
+
+def _argument(index, meaning, decode=False):
+    return {'literal_argument': index, 'semantic_type': meaning, 'decode_entity': decode}
+
+
+def _assertion(meaning):
+    return {'literal': True, 'semantic_type': meaning}
+
+
+# Field roles follow the claim form, never the actual source row's kind. These
+# select only formal core slots / literal claim arguments, not provenance fields.
+_SINGLE = {
+    'usbConnected': ('usbInsert', 'device_serial', 'connection_context'),
+    'opened': ('lnkTarget', 'path', 'volume_or_share'),
+    'searched': ('webSearch', 'query', 'browser'),
+    'fileCreatedAt': ('fileCreated', 'path', 'volume_or_recovery_area'),
+    'fileModifiedAt': ('fileModified', 'path', 'volume_or_recovery_area'),
+    'fileDeletedAt': ('fileDeleted', 'path', 'volume'),
+    'fileRemovedAt': ('fileRemoved', 'name_or_path', 'volume'),
+    'fileCreationRecordedAt': ('fileCreationRecorded', 'name_or_path', 'volume'),
+    'volumeRecordedAt': ('volumeRecorded', 'disc', 'volume'),
+    'emailed': ('emailSent', 'subject', 'address_record'),
+    'burnTrace': ('cdBurn', 'activity_record', 'record_source'),
+    'settingRecorded': ('systemSetting', 'setting', 'value'),
+    'accountRecorded': ('accountSeen', 'account', 'account_context'),
+    'sessionRecorded': ('sessionEvent', 'event', 'account_or_machine'),
+    'programInstalledAt': ('programInstalled', 'program', 'version'),
+    'programRan': ('programRun', 'program', 'path'),
+    'visited': ('webVisit', 'url', 'browser'),
+    'downloaded': ('fileDownloaded', 'path', 'url'),
+    'typedInSearchBox': ('localSearch', 'text', 'search_context'),
+    'cloudEvent': ('cloudFile', 'path', 'service_event'),
+    'noteFound': ('noteText', 'text', 'application'),
+    'folderRecorded': ('folderOpened', 'path', 'record_source'),
+    'renamed': ('fileRenamed', 'old_name_or_path', 'new_name_or_path'),
+    'fileRecorded': ('fileSeen', 'path', 'record_source'),
+    'shadowCopyMade': ('shadowCopy', 'shadow_copy', 'volume'),
+    'contentHashed': ('fileContent', 'path', 'sha256'),
+    'journalNamed': ('journalName', 'name_or_path', 'scoped_identity'),
+    'journalParentRecorded': ('journalParent', 'child_identity', 'parent_identity'),
+    'journalRemovalObserved': ('journalRemoval', 'name_or_path', 'scoped_identity'),
+    'journalPathAt': ('journalPath', 'path_or_incomplete_suffix', 'scoped_identity'),
+}
+_FIELDS = {}
+for _form, (_kind, _obj, _aux) in _SINGLE.items():
+    _FIELDS[_form] = {_obj: _record(0, 'obj', _obj), _aux: _record(0, 'aux', _aux),
+                     'recorded_time_us': _record(0, 't', 'recorded_timestamp_not_action_or_execution_guarantee_us'),
+                     'uncertainty_us': _record(0, 'res', 'timestamp_uncertainty_us'),
+                     'record_kind': {'literal': _kind, 'semantic_type': 'asserted_record_kind'}}
+
+
+def _joined(form, slots, relation):
+    _FIELDS[form] = {name: _record(index, slot, name) for name, index, slot in slots}
+    _FIELDS[form][relation] = _assertion(relation)
+
+
+_joined('before', [('earlier_recorded_time_us', 0, 't'), ('later_recorded_time_us', 1, 't')], 'precedes_beyond_uncertainty')
+_joined('deviceHolds', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_holds_volume')
+_joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_mounted_volume')
+_joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'opened_from_mounted_volume')
+_joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'opened_from_device_volume')
+_joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'same_recorded_volume')
+_joined('recordedOnDevice', [('volume', 0, 'aux'), ('volume_label', 0, 'obj'), ('device_serial', 1, 'obj')], 'same_device_volume')
+_joined('sameLabel', [('first_volume', 0, 'aux'), ('second_volume', 1, 'aux'), ('label', 0, 'obj')], 'same_recorded_label_not_device_identity')
+_joined('copiedHere', [('path', 0, 'obj'), ('volume_or_recovery_area', 0, 'aux'), ('creation_time_us', 0, 't'), ('modification_time_us', 1, 't')], 'likely_copied_heuristic')
+_joined('deletedAfter', [('path', 0, 'obj'), ('deletion_recorded_time_us', 0, 't'), ('earlier_recorded_time_us', 1, 't')], 'deletion_record_after_other_record')
+_joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'same_device_has_unallocated_entries')
+_joined('recoveredOnDevice', [('path', 0, 'obj'), ('device_serial', 1, 'obj'), ('creation_time_us', 0, 't')], 'entry_recovered_from_device')
+_joined('sameContent', [('first_path', 0, 'obj'), ('second_path', 1, 'obj'), ('sha256', 0, 'aux')], 'same_recorded_content_hash')
+_joined('createdAfterVolumeRecord', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('disc', 1, 'obj'), ('creation_time_us', 0, 't'), ('volume_recorded_time_us', 1, 't')], 'creation_timestamp_after_volume_record')
+_joined('sameJournalFile', [('first_name_or_path', 0, 'obj'), ('second_name_or_path', 1, 'obj'), ('scoped_identity', 0, 'aux')], 'same_scoped_file_identity')
+_joined('removedFilePreviouslyNamed', [('earlier_name_or_path', 0, 'obj'), ('removal_name_or_path', 1, 'obj'), ('scoped_identity', 1, 'aux'), ('removal_observed_time_us', 1, 't')], 'same_identity_later_removal_flag')
+_joined('journalChildNamedDirectory', [('child_name_or_path', 0, 'obj'), ('child_identity', 0, 'aux'), ('parent_identity', 1, 'aux'), ('directory_name_or_path', 2, 'obj')], 'observations_join_through_scoped_parent_identity')
+_joined('journalPathForFile', [('name_or_path', 0, 'obj'), ('path_or_incomplete_suffix', 1, 'obj'), ('scoped_identity', 0, 'aux')], 'same_scoped_path_observation_identity')
+_FIELDS['tagged'] = {'entity': {'argument': 0, 'slot_argument': 1, 'semantic_type': 'tagged_entity'},
+                     'tag': _argument(3, 'asserted_tag', True), 'tag_id': _argument(3, 'asserted_tag_entity_id')}
+for _form in claims.CENSUS:
+    _FIELDS[_form] = {'kind': _argument(0, 'counted_record_kind'), 'count': _argument(-1, 'asserted_extracted_record_count')}
+    if _form != 'exactly':
+        _FIELDS[_form]['slot'] = _argument(1, 'counted_record_slot')
+    if _form == 'exactlyWith':
+        _FIELDS[_form]['value'] = _argument(2, 'asserted_count_selector', True)
+
+
+def catalog():
+    """Public field schema only: no evidence queries, private reference or grading."""
+    return {'schema_version': VERSION, 'forms': deepcopy(_FIELDS), 'formats': sorted(FORMATS),
+            'part': 'zero-based index into flattened claim parts; a whole conjunction is one filter dependency',
+            'example': {'candidate_id': 'A001', 'claim_sha256': '<hash of exact claim>', 'question_id': 'Q1',
+                        'path': ['devices', 0, 'serial'], 'part': 0, 'field': 'device_serial'},
+            'scope': SCOPE}
+
+
+def _literal_parts(claim):
+    """Parse shapes only; checker-only restrictions must not filter A's meaning.
+
+    In particular, a sameContent claim citing one ID twice still asserts equal
+    content, even though the checker refuses it. Whole-candidate refusal remains
+    the gate's job. This parser neither checks records nor calls claims.parse.
+    """
+    pending, parts, count = [claim], [], 0
+    while pending:
+        node = pending.pop()
+        count += 1
+        if count > 2048:
+            raise ValueError('projection_claim_shape_limit')
+        if not isinstance(node, dict) or len(node) != 1:
+            raise ValueError('claim_must_have_one_form')
+        form, args = next(iter(node.items()))
+        if form == 'both':
+            if not isinstance(args, list) or len(args) < 2:
+                raise ValueError('both_requires_at_least_two_claims')
+            pending.extend(reversed(args))
+            continue
+        if form not in claims.SETS:
+            raise ValueError('unrecognized_claim_form')
+        params = claims.SETS[form].params
+        if not isinstance(args, list) or len(args) != len(params):
+            raise ValueError('claim_argument_shape_mismatch')
+        for param, value in zip(params, args):
+            valid = (isinstance(value, str) and value in ('obj', 'aux') if param == 'slot' else
+                     isinstance(value, str) and value in KINDS if param == 'kind' else
+                     type(value) is int and value >= 0)
+            if not valid:
+                raise ValueError('claim_argument_type_mismatch')
+        parts.append((form, tuple(args)))
+    return parts
+
+
+def claim_fields(claim, source):
+    """Dereference declared argument roles only; never test kind, equality or order."""
+    output = {'claim_sha256': claim_digest(claim), 'parts': [], 'unsupported': []}
+    try:
+        parts = _literal_parts(claim)
+    except (ValueError, TypeError, RecursionError) as error:
+        output['unsupported'].append({'reason': 'unsupported_or_malformed_claim', 'detail': str(error)})
+        return output
+    ids = list(dict.fromkeys(fid for part in parts for fid in claims.fact_ids(part)))
+    found = source.get(ids)  # A census reads its asserted n, never source.all().
+    for index, part in enumerate(parts):
+        form, args = part
+        row = {'part': index, 'form': form, 'fields': {}, 'unsupported': []}
+        for name, selector in _FIELDS.get(form, {}).items():
+            try:
+                value_ids = []
+                if 'literal' in selector:
+                    value = selector['literal']
+                elif 'literal_argument' in selector:
+                    value = args[selector['literal_argument']]
+                    if selector.get('decode_entity'):
+                        value = source.string(value)
+                else:
+                    fid = args[selector['argument']]
+                    fact = found.get(fid)
+                    if fact is None:
+                        raise ValueError('cited_record_missing')
+                    value_ids.append(fid)
+                    slot = args[selector['slot_argument']] if 'slot_argument' in selector else selector['slot']
+                    value = getattr(fact, slot)
+                    if slot in ('obj', 'aux'):
+                        value = source.string(value)
+                _finite(value)
+                row['fields'][name] = {'value': value, 'selector': deepcopy(selector),
+                    'semantic_type': selector['semantic_type'], 'record_ids': claims.fact_ids(part),
+                    'value_record_ids': value_ids}
+            except (ValueError, KeyError, IndexError, AttributeError) as error:
+                row['unsupported'].append({'field': name, 'reason': str(error)})
+        output['parts'].append(row)
+    output['records'] = [{'id': fid, 'row_sha256': fact.row_sha256(),
+                          'obj': fact.obj, 'obj_text': source.string(fact.obj),
+                          'aux': fact.aux, 'aux_text': source.string(fact.aux)}
+                         for fid, fact in sorted(found.items())]
+    output['missing_record_ids'] = [fid for fid in ids if fid not in found]
+    return output
+
+
+def _public(public):
+    allowed = {'schema_version', 'case_id', 'title', 'time_zone', 'instructions', 'questions', 'contract_revision'}
+    if (not isinstance(public, dict) or public.get('schema_version') != 2 or set(public) - allowed
+            or not isinstance(public.get('case_id'), str) or not public['case_id']
+            or not isinstance(public.get('questions'), list)):
+        raise ValueError('provide a public schema-v2 question contract without private fields')
+    result = {}
+    for question in public['questions']:
+        if (not isinstance(question, dict) or set(question) - {'id', 'prompt', 'answer_schema', 'match'}
+                or not isinstance(question.get('id'), str) or not question['id'] or question['id'] in result
+                or not isinstance(question.get('answer_schema'), dict)):
+            raise ValueError('public questions need unique IDs and explicit answer schemas')
+        result[question['id']] = question
+    return result
+
+
+def _path(path):
+    if not isinstance(path, list) or len(path) > 16 or any(
+            not (type(token) is str and 0 < len(token) <= 200 or type(token) is int and 0 <= token <= 100000)
+            for token in path):
+        raise ValueError('path must have at most 16 object keys or nonnegative array indexes')
+    return path
+
+
+def _schema(schema, path):
+    for token in path:
+        if '$ref' in schema or any(k in schema for k in ('oneOf', 'anyOf', 'allOf')):
+            raise ValueError('unsupported_schema_reference_or_union')
+        kind = schema.get('type')
+        allowed = kind if isinstance(kind, list) else [kind] if kind else []
+        if type(token) is int:
+            if allowed and 'array' not in allowed:
+                raise ValueError('array_path_does_not_match_public_schema')
+            schema = schema.get('items', {})
+        else:
+            if allowed and 'object' not in allowed:
+                raise ValueError('object_path_does_not_match_public_schema')
+            properties = schema.get('properties', {})
+            if token in properties:
+                schema = properties[token]
+            elif schema.get('additionalProperties') is False:
+                raise ValueError('field_not_in_public_schema')
+            else:
+                schema = schema.get('additionalProperties', {})
+                if schema is True:
+                    schema = {}
+        if not isinstance(schema, dict):
+            raise ValueError('unsupported_public_schema_node')
+    return schema
+
+
+def _typed(value, schema):
+    if '$ref' in schema or any(k in schema for k in ('oneOf', 'anyOf', 'allOf')):
+        raise ValueError('unsupported_schema_reference_or_union')
+    kind = schema.get('type')
+    allowed = kind if isinstance(kind, list) else [kind] if kind else []
+    actual = ('null' if value is None else 'boolean' if type(value) is bool else 'integer' if type(value) is int
+              else 'number' if type(value) is float else 'string' if type(value) is str
+              else 'array' if type(value) is list else 'object')
+    if allowed and actual not in allowed and not (actual == 'integer' and 'number' in allowed):
+        raise ValueError('value_type_does_not_match_public_schema')
+
+
+def _format(value, format_name, zone, semantic_type):
+    if format_name not in FORMATS:
+        raise ValueError('unsupported_format')
+    if format_name == 'identity':
+        return value
+    if format_name == 'integer':
+        if type(value) is int:
+            return value
+        if not isinstance(value, str) or not re.fullmatch(r'-?(?:0|[1-9][0-9]*)', value):
+            raise ValueError('integer_format_requires_an_exact_decimal_literal')
+        return int(value)
+    if type(value) is not int or not semantic_type.endswith('_us') or 'uncertainty' in semantic_type:
+        raise ValueError('time_format_requires_a_recorded_timestamp_field')
+    try:
+        stamp = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=value)
+        if format_name == 'utc_iso':
+            return stamp.isoformat().replace('+00:00', 'Z')
+        if not isinstance(zone, str):
+            raise ValueError('local_time_format_requires_public_timezone')
+        local = stamp.astimezone(ZoneInfo(zone))
+        return local.strftime('%Y-%m-%d %H:%M' if format_name == 'local_minute' else '%Y-%m-%d')
+    except (OverflowError, KeyError) as error:
+        raise ValueError('timestamp_or_public_timezone_is_not_displayable') from error
+
+
+def prepare_projection(public, candidates, bindings, source):
+    """Freeze literal values once; no candidate is accepted/refused by this function."""
+    questions = _public(public)
+    if not isinstance(candidates, list) or not isinstance(bindings, list) or len(bindings) > 20000:
+        raise ValueError('candidates and at most 20000 bindings must be lists')
+    _finite(candidates)
+    _finite(bindings)
+    indexed = {}
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            raise ValueError('candidate must be an object')
+        cid = candidate.get('candidate_id', candidate.get('finding_id'))
+        if (not isinstance(cid, str) or not cid or len(cid) > 128 or cid in indexed
+                or 'claim' not in candidate
+                or candidate.get('candidate_id', cid) != candidate.get('finding_id', cid)):
+            raise ValueError('candidate IDs must be unique and unambiguous')
+        indexed[cid] = {'candidate_id': cid, 'claim': deepcopy(candidate['claim']),
+                        **claim_fields(candidate['claim'], source)}
+    prepared, unsupported = [], []
+    for index, raw in enumerate(bindings):
+        entry = {'binding_index': index, 'binding': deepcopy(raw)}
+        try:
+            if (not isinstance(raw, dict) or set(raw) - {'candidate_id', 'claim_sha256', 'question_id', 'path', 'part', 'field', 'format', 'value'}):
+                raise ValueError('invalid_binding_fields')
+            cid, qid = raw.get('candidate_id'), raw.get('question_id')
+            if not isinstance(cid, str) or cid not in indexed:
+                raise ValueError('candidate_not_found')
+            candidate = indexed[cid]
+            if raw.get('claim_sha256') != candidate['claim_sha256']:
+                raise ValueError('claim_hash_mismatch')
+            if not isinstance(qid, str) or qid not in questions:
+                raise ValueError('question_not_in_public_contract')
+            path = _path(raw.get('path'))
+            part = raw.get('part', 0)
+            if type(part) is not int or not 0 <= part < len(candidate['parts']):
+                raise ValueError('claim_part_unavailable')
+            part_row = candidate['parts'][part]
+            field = part_row['fields'].get(raw.get('field'))
+            if field is None:
+                raise ValueError('field_not_supported_or_cited_record_missing')
+            value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
+            if 'value' in raw and _encoded(raw['value']) != _encoded(value):
+                raise ValueError('literal_value_mismatch_not_repaired')
+            _typed(value, _schema(questions[qid]['answer_schema'], path))
+            entry.update(candidate_id=cid, claim_sha256=candidate['claim_sha256'], question_id=qid,
+                         path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
+                         semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],
+                         value_record_ids=field['value_record_ids'], selector=field['selector'])
+            prepared.append(entry)
+        except (ValueError, TypeError, KeyError) as error:
+            entry['reason'] = str(error)
+            unsupported.append(entry)
+    plan = {'schema_version': VERSION, 'kind': 'frozen_claim_field_projection', 'case_id': public['case_id'],
+            'public_sha256': claim_digest(public), 'questions': [q['id'] for q in public['questions']],
+            'candidates': indexed, 'bindings': prepared, 'unsupported': unsupported, 'scope': SCOPE}
+    # Freeze omissions before any gate filtering. Removing a rejected candidate
+    # must not reveal a conflicting value that was absent from A's answer. The
+    # product can correct a collision by explicitly replacing its bindings.
+    grouped = defaultdict(list)
+    for entry in prepared:
+        grouped[entry['question_id']].append(entry)
+    plan['frozen_conflicts'] = [dict(conflict, question_id=qid)
+        for qid in plan['questions'] for conflict in _assemble(grouped[qid])[3]]
+    plan['conflict_policy'] = 'omit_all_conflicting_bindings_before_candidate_filtering'
+    plan['projection_sha256'] = claim_digest(plan)
+    return plan
+
+
+def _assemble(entries):
+    """Omit conflicts; compact arrays without inventing null values for absent rows."""
+    tree = {'leaves': [], 'children': {}}
+    for entry in entries:
+        node = tree
+        for token in entry['path']:
+            node = node['children'].setdefault(token, {'leaves': [], 'children': {}})
+        node['leaves'].append(entry)
+    conflicts, leaves = [], []
+    absent = object()
+    def descendants(node):
+        return node['leaves'] + [entry for child in node['children'].values() for entry in descendants(child)]
+    def visit(node, output_path):
+        records, children = node['leaves'], node['children']
+        reason = ('ancestor_and_descendant_bindings_conflict' if records and children else
+                  'object_and_array_paths_conflict' if len({type(token) for token in children}) > 1 else
+                  'different_values_at_same_path' if len({_encoded(e['value']) for e in records}) > 1 else None)
+        if reason:
+            conflicts.append({'reason': reason, 'binding_indices': [e['binding_index'] for e in descendants(node)]})
+            return absent
+        if records:
+            for entry in records:
+                leaves.append(dict(entry, output_path=deepcopy(output_path)))
+            return deepcopy(records[0]['value'])
+        if not children:
+            return absent
+        array = type(next(iter(children))) is int
+        value = [] if array else {}
+        for token in sorted(children):
+            next_token = len(value) if array else token
+            child = visit(children[token], output_path + [next_token])
+            if child is not absent:
+                if array:
+                    value.append(child)
+                else:
+                    value[token] = child
+        return value if value else absent
+    value = visit(tree, [])
+    return value is not absent, None if value is absent else value, leaves, conflicts
+
+
+def render_projection(plan, admitted_ids=None, authority='unchecked'):
+    """Filter whole candidate dependencies and render frozen values without source access."""
+    if authority not in AUTHORITIES:
+        raise ValueError('unsupported authority label')
+    if (not isinstance(plan, dict) or plan.get('schema_version') != VERSION
+            or plan.get('kind') != 'frozen_claim_field_projection'
+            or plan.get('projection_sha256') != claim_digest({k: v for k, v in plan.items() if k != 'projection_sha256'})):
+        raise ValueError('projection content or digest changed')
+    if admitted_ids is not None:
+        if not isinstance(admitted_ids, (list, tuple, set)) or any(not isinstance(cid, str) for cid in admitted_ids):
+            raise ValueError('admitted_ids must contain candidate IDs')
+        admitted = set(admitted_ids)
+        if admitted - plan['candidates'].keys():
+            raise ValueError('admitted candidate was not in the frozen projection')
+    else:
+        admitted = set(plan['candidates'])
+    frozen_conflicts = plan.get('frozen_conflicts', [])
+    omitted = {index for collision in frozen_conflicts for index in collision['binding_indices']}
+    grouped = defaultdict(list)
+    dropped = []
+    for entry in plan['bindings']:
+        if entry['binding_index'] in omitted:
+            dropped.append(dict(entry, reason='frozen_projection_conflict',
+                                candidate_admitted=entry['candidate_id'] in admitted))
+        elif entry['candidate_id'] not in admitted:
+            dropped.append(dict(entry, reason='whole_candidate_not_admitted'))
+        else:
+            grouped[entry['question_id']].append(entry)
+    answers, leaves, conflicts = [], [], deepcopy(frozen_conflicts)
+    for qid in plan['questions']:
+        present, value, used, collisions = _assemble(grouped[qid])
+        answers.append({'question_id': qid, 'status': 'answered', 'answer': value} if present else
+                       {'question_id': qid, 'status': 'unknown', 'reason': 'No unambiguous supported projection was retained.'})
+        leaves.extend(dict(entry, authority=authority) for entry in used)
+        conflicts.extend(dict(collision, question_id=qid) for collision in collisions)
+    bound = {entry['candidate_id'] for entry in plan['bindings']}
+    return {'schema_version': VERSION, 'projection_sha256': plan['projection_sha256'], 'authority': authority,
+            'submission': {'schema_version': 2, 'case_id': plan['case_id'], 'answers': answers},
+            'leaves': leaves, 'unsupported': deepcopy(plan['unsupported']), 'dropped': dropped, 'conflicts': conflicts,
+            'unbound_candidate_ids': [cid for cid in plan['candidates'] if cid not in bound],
+            'certification': 'not_performed_by_projector', 'question_completeness': 'not_established', 'scope': SCOPE}
+
+
+def project_answers(public, candidates, bindings, source, admitted_ids=None, authority='unchecked'):
+    plan = prepare_projection(public, candidates, bindings, source)
+    return dict(render_projection(plan, admitted_ids=admitted_ids, authority=authority), projection=plan)

@@ -28,7 +28,8 @@ _FIELDS = {"schema_version", "sequence", "call_id", "started_at", "completed_at"
            "duration_ns", "tool", "arguments", "result", "result_sha256", "success",
            "outcome", "error", "finding_id", "previous_sha256", "event_sha256"}
 AUDITED_TOOLS = frozenset(("forms", "sql", "fact", "check", "conclude", "plan",
-                           "update_question", "evidence_needs", "collect", "review"))
+                           "update_question", "evidence_needs", "collect", "review",
+                           "answer", "inventory_page"))
 
 
 class AuditError(RuntimeError):

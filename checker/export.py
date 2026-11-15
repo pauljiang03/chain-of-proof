@@ -172,6 +172,8 @@ def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
         data["run_manifest"] = manifest
     from agent.answers import enrich_bundle
     enrich_bundle(data, certs_dir, public_questions=public_questions)
+    from agent.answer_store import enrich_bundle as enrich_projection
+    enrich_projection(data, certs_dir)
     review = _sidecar(certs_dir, "review.json")
     if review is not None:
         if (not isinstance(review, dict) or review.get("schema_version") != 1
