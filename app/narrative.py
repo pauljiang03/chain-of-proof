@@ -446,10 +446,13 @@ def _story(case, devices, detail=False):
     searches = [entry for entry in case.of('webSearch') if _obj(entry).lower() in watched]
     if searches:
         terms = _distinct([_obj(entry) for entry in searches])
-        shown = 5 if detail else 2
-        named = ', '.join(f'"{term}"' for term in terms[:shown])
-        rest = f' and {len(terms) - shown} other watch-list terms' if len(terms) > shown else ''
-        add(searches, f'{who(searches)} searched the web for {named}{rest}')
+        if detail and len(terms) > 2:
+            add(searches, f'{who(searches)} searched the web for {len(terms)} watch-list terms. '
+                          f'Examples are {_join(terms[:5], 5, quote=True)}')
+        else:
+            named = ', '.join(f'"{term}"' for term in terms[:2])
+            rest = f' and {len(terms) - 2} other watch-list terms' if len(terms) > 2 else ''
+            add(searches, f'{who(searches)} searched the web for {named}{rest}')
 
     first = {}
     for entry in case.of('usbInsert'):
@@ -460,11 +463,12 @@ def _story(case, devices, detail=False):
         names = []
         for serial in first:
             row = labels.get(serial, {})
-            where = ', '.join(part for part in (row.get('item', ''), f'serial {serial}' if detail else '') if part)
             names.append((f'"{row["label"]}"' if row.get('label') else row.get('device') or serial)
-                         + (f' ({where})' if where else ''))
+                         + (f' ({row["item"]})' if row.get('item') else ''))
+        serials = (f'. {"Its serial number is" if len(first) == 1 else "The serial numbers are"} {_join(list(first), 4)}'
+                   if detail else '')
         add(list(first.values()), f'the USB {"device" if len(names) == 1 else "devices"} {_join(names, 4)} '
-                                  f'connected to the computer for the first time')
+                                  f'connected to the computer for the first time{serials}')
 
     shares = {}
     for entry in case.of('folderOpened'):
@@ -503,13 +507,13 @@ def _story(case, devices, detail=False):
         for entry in case.of('localSearch')[:1]:
             add([entry], f'the {_aux(entry) or "local search history"} recorded the search text "{_obj(entry)}"')
         for entry in [entry for entry in case.of('noteText') if 'note' in _s(_prov(entry).get('time_meaning'))][:1]:
-            add([entry], f'the Sticky Notes text "{_obj(entry)[:80]}" was saved')
+            add([entry], f'{who([entry])} saved this Sticky Notes text: "{_obj(entry)[:80]}"')
 
     add(case.of('cdBurn'), 'the computer prepared files for disc writing')
     gone = case.of('fileDeleted')
     if gone:
         emptied = any('emptied' in _s(_prov(entry).get('note')) for entry in gone)
-        add(gone, f'{_n(len(gone), "file went", "files went")} to the Recycle Bin' + (', which was later emptied' if emptied else ''))
+        add(gone, f'{_n(len(gone), "file went", "files went")} to the Recycle Bin' + ('. The Recycle Bin is empty in the image' if emptied else ''))
 
     loads = {}   # one sentence for each day: later downloads often differ in kind from earlier ones
     for entry in case.of('fileDownloaded'):
