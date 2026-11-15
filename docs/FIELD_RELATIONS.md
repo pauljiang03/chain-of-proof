@@ -78,6 +78,10 @@ Data Leakage references still need explicit decisions. No model experiment ran.
 The local archive is `runs/dev/field-relations-20261115T0730Z/`. It preserves
 initial parser and validation-script failures as well as successful checks.
 The archive is local and is not pushed with the source code.
+It is sealed with 211 payload files. The manifest SHA-256 is
+`645a840a9b82fe85310348e596c79f9b100704f536d6a8204b5ba23b9d85dfb9`.
+Only the public-safe reference audit is included; private reference snapshots
+remain isolated from this archive and investigator inputs.
 
 ## Remaining limits
 
