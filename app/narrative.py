@@ -377,6 +377,101 @@ def _notes(case):
     return _point('notes', 'Search box and notes', out, searches[:3] + notes)
 
 
+def _story(case, devices):
+    """What happened, at a high level: one sentence for each kind of key activity, in date order.
+
+    Activities are chosen by record type and by the readers' rule-based tags, never by a model.
+    Each date keeps its record's meaning: a folder list records the latest change ("by").
+    """
+    events = []   # (first stamp, last stamp, 'on' | 'by', clause)
+
+    def add(rows, clause, how='on'):
+        stamps = case.times(rows)
+        if stamps and clause:
+            events.append((stamps[0], stamps[-1], how, clause))
+
+    def who(rows, key='account'):
+        name = case.account(rows) or _s(_prov(rows[0]).get('user'))
+        return f'the account "{name}"' if name else 'a user account'
+
+    mail = case.of('emailSent')
+    if mail:
+        pairs = {match.groups() for match in (re.match(r'^from (.+?) to (.+)$', _aux(entry)) for entry in mail) if match}
+        both = next(((a, b) for a, b in sorted(pairs) if (b, a) in pairs), None)
+        add(mail, f'"{both[0]}" and "{both[1]}" exchanged {_n(len(mail), "e-mail", "e-mails")}' if both
+                  else f'the mailbox received {_n(len(mail), "e-mail", "e-mails")}')
+
+    watched = {_obj(entry).lower() for entry in case.of('tag') if _aux(entry).lower() == 'watch-list-search'}
+    searches = [entry for entry in case.of('webSearch') if _obj(entry).lower() in watched]
+    if searches:
+        terms = _distinct([_obj(entry) for entry in searches])
+        named = ', '.join(f'"{term}"' for term in terms[:2])
+        rest = f' and {len(terms) - 2} other watch-list terms' if len(terms) > 2 else ''
+        add(searches, f'{who(searches)} searched the web for {named}{rest}')
+
+    first = {}
+    for entry in case.of('usbInsert'):
+        if 'first connection' in _s(_prov(entry).get('time_meaning')) and id(entry) in case.stamp:
+            first.setdefault(_obj(entry), entry)
+    if first:
+        labels = {row['serial']: row for row in devices if row.get('serial')}
+        names = []
+        for serial in first:
+            row = labels.get(serial, {})
+            names.append((f'"{row["label"]}"' if row.get('label') else row.get('device') or serial)
+                         + (f' ({row["item"]})' if row.get('item') else ''))
+        add(list(first.values()), f'the USB {"device" if len(names) == 1 else "devices"} {_join(names, 4)} '
+                                  f'connected to the computer for the first time')
+
+    shares = {}
+    for entry in case.of('folderOpened'):
+        parts = _obj(entry).lstrip('\\').split('\\')
+        if _obj(entry).startswith('\\\\') and len(parts) >= 2:
+            shares.setdefault('\\\\' + parts[0] + '\\' + parts[1], []).append(entry)
+    for share, rows in sorted(shares.items(), key=lambda pair: -len(pair[1]))[:1]:
+        stamps = case.times(rows)
+        if stamps:
+            events.append((stamps[-1], stamps[-1], 'by', f'{who(rows)} had opened {_n(len(rows), "folder", "folders")} '
+                                                         f'on the network location {share}'))
+
+    marked = {_base(_obj(entry)).lower() for entry in case.of('tag') if _aux(entry).lower() == 'confidential'}
+    changed = [entry for entry in case.of('fileRenamed')
+               if _extension(_base(_obj(entry))) and _extension(_base(_aux(entry)))
+               and _extension(_base(_obj(entry))) != _extension(_base(_aux(entry)))]
+    if changed:
+        example = next((entry for entry in changed if _base(_obj(entry)).lower() in marked), changed[0])
+        add(changed, f'{_n(len(changed), "file got", "files got")} a different file name extension, for example '
+                     f'{_base(_obj(example))} became {_base(_aux(example))}')
+
+    uploads = [entry for entry in case.of('cloudFile') if _aux(entry).lower().endswith('uploaded')]
+    if uploads:
+        service = _SERVICES.get(_aux(uploads[0]).split(':')[0].strip().lower(), 'the cloud client')
+        add(uploads, f'{service} uploaded {_n(len(_distinct([_obj(entry) for entry in uploads])), "file", "files")}')
+
+    add(case.of('cdBurn'), 'the computer prepared files for disc writing')
+    gone = case.of('fileDeleted')
+    if gone:
+        emptied = any('emptied' in _s(_prov(entry).get('note')) for entry in gone)
+        add(gone, f'{_n(len(gone), "file went", "files went")} to the Recycle Bin' + (', which was later emptied' if emptied else ''))
+
+    loads = {}   # one sentence for each day: later downloads often differ in kind from earlier ones
+    for entry in case.of('fileDownloaded'):
+        if 'AccessedTime' not in _s(_prov(entry).get('time_meaning')) and id(entry) in case.stamp:
+            loads.setdefault(case.at(case.stamp[id(entry)])[:10], []).append(entry)
+    for rows in loads.values():
+        add(rows, f'{who(rows)} downloaded {_join(_distinct([_base(_obj(entry)) for entry in rows]), 4)}')
+
+    out = []
+    for start, end, how, clause in sorted(events, key=lambda event: (event[0], event[3])):
+        a, b = brief.moment(start, case.tz), brief.moment(end, case.tz)
+        if a is None or b is None:
+            continue
+        when = (f'By {b:%Y-%m-%d}' if how == 'by' else f'On {a:%Y-%m-%d}' if a.date() == b.date()
+                else f'From {a:%Y-%m-%d} to {b:%Y-%m-%d}')
+        out.append(f'{when}, {clause}.')
+    return out
+
+
 def _lead(case):
     """A short paragraph in Simplified Technical English: one fact per sentence, counts and values only."""
     if not case.records:
@@ -425,6 +520,6 @@ def build(run, ids=None):
     written = case_info.get('case_summary')
     written = ' '.join(written.split())[:1500] if isinstance(written, str) and ids is None and case.findings else ''
     return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings),
-            'lead': [written] if written else _lead(case), 'lead_by': 'investigator' if written else 'records',
+            'lead': [written] if written else (_story(case, devices) or _lead(case)), 'lead_by': 'investigator' if written else 'records',
             'points': [{name: value for name, value in point.items() if name != '_entries'} for point in points if point],
             'devices': devices}

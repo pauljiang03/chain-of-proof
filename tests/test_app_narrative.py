@@ -137,6 +137,15 @@ class Narrative(unittest.TestCase):
         self.assertEqual(chosen['zone'], story['zone'])            # the case clock does not depend on the selection
         self.assertEqual(narrative.build(data, ids=[])['points'], [])
 
+    def test_lead_tells_what_happened_in_date_order(self):
+        lead = narrative.build(case())['lead']
+        self.assertEqual(lead[0], 'From 2024-05-06 to 2024-05-07, "friend" and "worker" exchanged 2 e-mails.')
+        self.assertEqual(lead[1], 'By 2024-05-06, the account "worker" had opened 2 folders on the network location \\\\server\\share.')
+        self.assertIn('On 2024-05-07, 1 file went to the Recycle Bin.', lead)
+        self.assertIn('On 2024-05-07, the account "worker" downloaded wiper.exe.', lead)
+        self.assertEqual(len(lead), 8)
+        self.assertEqual(narrative.build({})['lead'], [])
+
     def test_investigator_summary_leads_the_whole_case_only(self):
         data = case()
         computed = narrative.build(data)
