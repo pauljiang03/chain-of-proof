@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <!-- CONAN-F mark. Original artwork drawn for this project: a slanted navy fedora on a
-       white tile, its band, brim and crown suggested by loose hand-drawn white lines
-       rather than a solid band. Flat vector, no outlines added by a tool. Copies nothing. -->
+  <!-- CONAN-F mark. Original artwork drawn for this project: a slanted fedora with a
+       mint band on a white tile. Flat vector, navy hat, no outlines. Copies nothing. -->
   <defs></defs>
   <rect width="1024" height="1024" rx="225" fill="#FFFFFF"/>
   <g transform="translate(8 46)">
@@ -11,13 +10,8 @@
           C 896 600 724 632 512 632 C 300 632 128 600 128 560 Z"/>
         <path d="M 332 552 L 372 342 C 384 298 446 272 540 274 C 630 276 690 304 700 346 L 740 552 Z"/>
       </g>
-      <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
-        <!-- band line: loose, non-rigid stroke where the crown meets the brim -->
-        <path d="M 300 556 C 372 544 432 548 494 544 C 572 539 624 548 712 520" stroke-width="20"/>
-        <!-- brim surface: a longer hand-drawn sweep across the front of the brim -->
-        <path d="M 206 582 C 324 616 436 630 526 627 C 652 623 760 602 842 572" stroke-width="16"/>
-        <!-- crown: a soft line hinting the top curve -->
-        <path d="M 398 356 C 458 324 566 320 676 350" stroke-width="15"/>
+      <g fill="#7FD1B5">
+        <path d="M 330 552 L 742 552 L 730 506 L 342 506 Z"/>
       </g>
     </g>
   </g>
