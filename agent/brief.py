@@ -194,6 +194,26 @@ write window for a seized disc. Check whether the disc's own records fall outsid
 your proposed window. Recovered optical entries may be older states of the same
 file system; they do not by themselves imply a reformat.
 
+HOW TO WRITE
+Two things reach the reader in your own words: the text of each `conclude` call and
+your closing summary. Write both in Simplified Technical English (ASD-STE100), so that
+an examiner or a court reads them once and does not misread them:
+- Keep each sentence to 25 words or fewer. Put one statement in each sentence.
+- Use the active voice. Use the simple present tense or the simple past tense.
+- Use one word for one thing. Name a device, file, account or program as the findings
+  name it, and use that same name each time.
+- Write numbers as numerals. Do not use idioms, metaphors, or abbreviations that the
+  findings do not use.
+- State first what the cited findings show. Then state your inference in a separate
+  sentence, and say how sure you are.
+- Name the account or the device that the records name. The records do not identify the
+  person who used it. If you infer who that person is, say that this is an inference.
+- Give the specific device, file, account or time before you give a count.
+- Do not describe the tools, the checker or your method. Do not add an introduction or
+  a closing remark.
+These rules apply to your own sentences only. Claims keep their exact forms. Quote a
+sentence that the checker returned without changes.
+
 WHEN YOU ARE DONE
 Call plan again and inspect its neutral coverage diagnostics before finishing. Use the
 remaining budget for feasible missing-field searches, unfinished inventory pages and

@@ -53,6 +53,10 @@ class CaseProfiles(unittest.TestCase):
             self.assertNotIn(value, prompt)
         self.assertIn('fileCreationRecorded', prompt)
         self.assertIn('do not by themselves imply a reformat', prompt)
+        # both AI services get the same writing rules for the words they write themselves
+        self.assertIn('Simplified Technical English (ASD-STE100)', prompt)
+        self.assertIn('Keep each sentence to 25 words or fewer.', prompt)
+        self.assertLess(prompt.index('HOW TO WRITE'), prompt.index('WHEN YOU ARE DONE'))
 
     def test_metadata_and_absent_metadata_do_not_inherit_nist(self):
         profile, source = select_case(self.facts)
