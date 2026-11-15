@@ -137,9 +137,23 @@ for _form, _relation, _meaning in (
     _FIELDS[_form][_relation]['meaning'] = (
         'Shortcut/DestList target and volume association through the declared join; does not establish actual file opening.')
 
-_joined('recordedOnDevice', [('volume', 0, 'aux'), ('volume_label', 0, 'obj'), ('device_serial', 1, 'obj')], 'same_device_volume')
+# This predicate proves equality of two recorded serial values. A cloned or
+# colliding serial is not a volume or physical-device identity proof. Do not
+# retain the stronger legacy Boolean selector as an alias.
+_joined('recordedOnDevice', [('recorded_volume_serial', 0, 'aux'),
+                           ('recorded_volume_label', 0, 'obj'),
+                           ('examined_device_identifier', 1, 'obj')],
+        'matching_recorded_volume_serials')
+_FIELDS['recordedOnDevice']['examined_device_identifier']['semantic_type'] = 'recorded_examined_device_identifier'
+_FIELDS['recordedOnDevice']['matching_recorded_volume_serials']['meaning'] = (
+    'The PC volume record and examined-device volume record carry equal volume serial values; '
+    'this does not establish that they describe the same volume or physical device.')
 _joined('sameLabel', [('first_volume', 0, 'aux'), ('second_volume', 1, 'aux'), ('label', 0, 'obj')], 'same_recorded_label_not_device_identity')
 _joined('copiedHere', [('path', 0, 'obj'), ('volume_or_recovery_area', 0, 'aux'), ('creation_time_us', 0, 't'), ('modification_time_us', 1, 't')], 'likely_copied_heuristic')
+_FIELDS['copiedHere']['likely_copied_heuristic']['meaning'] = (
+    'The copy heuristic over creation and modification timestamps from one complete scoped '
+    'filesystem-entry occurrence. Matching paths or volume serials alone do not establish '
+    'the shared occurrence; the heuristic does not prove a copy action.')
 _joined('deletedAfter', [('path', 0, 'obj'), ('deletion_recorded_time_us', 0, 't'), ('earlier_recorded_time_us', 1, 't')], 'deletion_record_after_other_record')
 _joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'same_device_has_unallocated_entries')
 # USBSTOR key last-write timestamps do not establish connection onset.
