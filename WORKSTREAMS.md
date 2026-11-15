@@ -44,6 +44,22 @@ mixed containers, foreign snapshots, timestamp meanings and altered provenance.
 Root ran the integrated audit and source-to-report suites together: 18 tests
 passed. This is bounded validation, not a new benchmark score or a zero-FP proof.
 
+The standalone Search timestamp helper at `1fdbced` passes ten interval tests.
+It uses exact 100ns values and explicit half-open bounds, rejecting unsupported
+roles and ambiguous local-day boundaries. It is not wired into answer admission.
+Q44 still needs actual-source IE classification and an explicit public date-window
+policy; see [the proposal](docs/SEARCH_TIME_WINDOW_PROPOSAL.md).
+
+The prospective answer batch at `cbdd4bc` restores narrow Q2/Q46/Q50 mappings
+with source-role, row and origin checks. It adds an explicit timestamp-display
+capability for reviewed time roles and closes conversion of ISO-shaped product
+text. Its implementation owner ran 416 integration tests and nine strict-draft
+checks; root's combined new-feature suites passed 56 tests. The prospective draft
+now has 65 supported and 293 unsupported leaf occurrences. This is capability
+coverage, not measured answer accuracy. Hacking's actual profile and all frozen
+matching rules stay unchanged. Q42 service-only support and Q44 interval admission
+are the next isolated work; both need their declared meanings and source limits.
+
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.
 Use isolated worktrees for new work. Reassign completed workers to independent
