@@ -2,7 +2,9 @@
 from copy import deepcopy
 import json
 import unittest
+from unittest.mock import patch
 
+from comparison.ablation import pilot
 from comparison.ablation.pilot import fingerprint, validate_frozen
 from tests import test_ablation_pilot
 
@@ -20,6 +22,17 @@ class FocusedCFreeze(unittest.TestCase):
                 'evidence_needed': 'Synthetic typed fixture, not a real case answer.'},
                 'x-claim-scope': {'mode': 'unscoped_observation', 'meaning': 'Synthetic freeze fixture only.'}}
         self.questions.write_text(json.dumps(public))
+        # Synthetic fixture freezes may run from a developer's dirty checkout;
+        # production focused freezes require the actual clean runtime identity.
+        original = pilot._software
+        def clean_software(**kwargs):
+            result = original(**kwargs)
+            result['dirty'] = False
+            return result
+        self.clean_software = clean_software
+        software_patch = patch.object(pilot, '_software', side_effect=clean_software)
+        software_patch.start()
+        self.addCleanup(software_patch.stop)
 
     def focused(self, **changes):
         return self.freeze(study='focused-C', protocol='claim-bindings-v3', seconds=300, **changes)
@@ -40,6 +53,10 @@ class FocusedCFreeze(unittest.TestCase):
         self.assertEqual(manifest['measurements']['comparison'], 'not_performed')
         self.assertIn('no causal comparison', manifest['measurements']['claims_allowed'])
         self.assertIn('checkpoint', manifest['measurements']['binding_policy'])
+        self.assertEqual(manifest['software']['fingerprint_scope'], 'focused-source-report-v1')
+        self.assertIn('extractor/host_attributes.py', manifest['software']['source_sha256'])
+        self.assertIn('app/narrative.py', manifest['software']['source_sha256'])
+        self.assertIn('app/static/overview.js', manifest['software']['source_sha256'])
         self.assertNotIn('private value', json.dumps(manifest))
         self.assertEqual(validate_frozen(self.root/'pilot/frozen-manifest.json',
                          expected_sha256=result['manifest_sha256']), manifest)
@@ -115,6 +132,35 @@ class FocusedCFreeze(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             self.focused()
         self.assertEqual(path.read_bytes(), manifest_bytes)
+
+    def test_focused_reader_report_changed_or_removed_binding_is_rejected(self):
+        result = self.focused(); path = self.root/'pilot/frozen-manifest.json'
+        for name in ('extractor/host_attributes.py', 'app/narrative.py', 'app/static/overview.js'):
+            changed = deepcopy(result['manifest']['software'])
+            changed['source_sha256'][name] = '0' * 64
+            with self.subTest(name=name), patch.object(pilot, '_software', return_value=changed):
+                with self.assertRaisesRegex(ValueError, 'implementation changed'):
+                    validate_frozen(path, expected_sha256=result['manifest_sha256'])
+        for removal in ('app/narrative.py', 'extractor/host_attributes.py'):
+            manifest = deepcopy(result['manifest']); del manifest['software']['source_sha256'][removal]
+            path.write_text(json.dumps(manifest))
+            with self.subTest(removal=removal), self.assertRaisesRegex(ValueError, 'implementation changed'):
+                validate_frozen(path, expected_sha256=fingerprint(path)['sha256'])
+        manifest = deepcopy(result['manifest']); del manifest['software']['fingerprint_scope']
+        path.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(ValueError, 'focused-C'):
+            validate_frozen(path, expected_sha256=fingerprint(path)['sha256'])
+
+    def test_dirty_runtime_or_different_commit_cannot_be_focused_input(self):
+        software = self.clean_software(focused=True)
+        with patch.object(pilot, '_software', return_value=dict(software, dirty=True)):
+            with self.assertRaisesRegex(ValueError, 'clean runtime'):
+                self.focused()
+        result = self.focused(); path = self.root/'pilot/frozen-manifest.json'
+        for changed in (dict(software, dirty=True), dict(software, commit='0' * 40)):
+            with patch.object(pilot, '_software', return_value=changed):
+                with self.assertRaisesRegex(ValueError, 'checkout changed or is dirty'):
+                    validate_frozen(path, expected_sha256=result['manifest_sha256'])
 
 
 if __name__ == '__main__':
