@@ -10,6 +10,8 @@ import json
 
 KEY = 'x-claim-requirement'
 ROW_KEY = 'x-claim-row'
+SCOPE_KEY = 'x-claim-scope'
+ORIGIN_KEYS = ('image', 'exhibit', 'source_snapshot', 'source_variant')
 SCOPE = ('Checks compatibility with declared public claim roles only. The requirement itself '
          'needs review; compatibility does not prove question relevance, completeness or truth.')
 
@@ -62,6 +64,175 @@ def _semantic_types(spec):
             or any(not _name(value) for value in variants) or len(set(variants)) != len(variants)):
         raise ValueError('invalid_catalog_semantic_type_variants')
     return variants
+
+
+def parse_scope(raw):
+    if not isinstance(raw, dict):
+        raise ValueError('invalid_public_claim_scope_requirement')
+    if raw.get('mode') in ('unscoped_observation', 'unavailable'):
+        if set(raw) != {'mode', 'meaning'} or not isinstance(raw['meaning'], str) or not 1 <= len(raw['meaning'].strip()) <= 2000:
+            raise ValueError('invalid_public_claim_scope_requirement')
+    elif raw.get('mode') == 'source_records':
+        if set(raw) - {'mode', 'origins', 'evidence_facts_sha256'}:
+            raise ValueError('invalid_public_claim_scope_requirement')
+        origins = raw.get('origins')
+        if not isinstance(origins, list) or not 1 <= len(origins) <= 64:
+            raise ValueError('invalid_public_claim_scope_requirement')
+        for origin in origins:
+            if not isinstance(origin, dict) or set(origin) != set(ORIGIN_KEYS) | ({'input_source'} if origin.get('source_snapshot') == 'examination' else set()) or any(
+                    not isinstance(origin[key], str) or not 1 <= len(origin[key].strip()) <= 2000 or '*' in origin[key]
+                    for key in ORIGIN_KEYS):
+                raise ValueError('invalid_public_claim_scope_requirement')
+            if any(origin[key].strip().lower() == 'unknown' for key in ORIGIN_KEYS):
+                raise ValueError('invalid_public_claim_scope_requirement')
+            if origin['source_snapshot'] == 'examination':
+                input_source = origin['input_source']
+                if origin['source_variant'] != 'antivirus' or not isinstance(input_source, dict) or set(input_source) != {'source_snapshot', 'source_variant'} or any(
+                        not isinstance(value, str) or not 1 <= len(value.strip()) <= 2000 or '*' in value or value.strip().lower() == 'unknown'
+                        for value in input_source.values()):
+                    raise ValueError('invalid_public_claim_scope_requirement')
+        if 'evidence_facts_sha256' in raw and not valid_facts_digest(raw['evidence_facts_sha256']):
+            raise ValueError('invalid_public_claim_scope_requirement')
+    else:
+        raise ValueError('invalid_public_claim_scope_requirement')
+    return deepcopy(raw)
+
+
+def valid_facts_digest(value):
+    return isinstance(value, str) and re.fullmatch('[0-9a-f]{64}', value) is not None
+
+
+def applicable_scopes(schema, path, *, require_evidence_scope=False):
+    """Resolve inherited conjunctions in every alternative without branch choice."""
+    pending, found, visited, applicable = [([schema], 0, [], 0)], [], 0, 0
+    while pending:
+        nodes, position, inherited, depth = pending.pop()
+        visited += len(nodes)
+        if visited > 256 or depth > 32:
+            raise ValueError('public_schema_traversal_limit')
+        scopes = list(inherited)
+        expanded = False
+        for index, node in enumerate(nodes):
+            if not isinstance(node, dict):
+                raise ValueError('unsupported_public_schema_node')
+            if any(key in node for key in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
+                raise ValueError('unsupported_schema_reference_or_union')
+            if 'anyOf' in node:
+                alternatives = node['anyOf']
+                if not isinstance(alternatives, list) or not 1 <= len(alternatives) <= 32:
+                    raise ValueError('unsupported_public_schema_anyof')
+                siblings = {key: value for key, value in node.items() if key != 'anyOf'}
+                for branch in reversed(alternatives):
+                    pending.append((nodes[:index] + [siblings, branch] + nodes[index + 1:], position, inherited, depth + 1))
+                expanded = True
+                break
+        if expanded:
+            continue
+        for node in nodes:
+            if SCOPE_KEY in node:
+                scope = parse_scope(node[SCOPE_KEY])
+                if scope not in scopes:
+                    scopes.append(scope)
+        if position == len(path):
+            applicable += 1
+            if require_evidence_scope and not scopes:
+                raise ValueError('missing_public_claim_scope_requirement')
+            for scope in scopes:
+                if scope not in found:
+                    found.append(scope)
+            continue
+        children = []
+        try:
+            for node in nodes:
+                token = path[position]
+                kind = node.get('type')
+                allowed = kind if isinstance(kind, list) else [kind] if kind else []
+                if type(token) is int:
+                    if allowed and 'array' not in allowed:
+                        raise ValueError('array_path_does_not_match_public_schema')
+                    child = node.get('items', {})
+                else:
+                    if allowed and 'object' not in allowed:
+                        raise ValueError('object_path_does_not_match_public_schema')
+                    properties = node.get('properties', {})
+                    if not isinstance(properties, dict):
+                        raise ValueError('unsupported_public_schema_node')
+                    child = properties.get(token, node.get('additionalProperties', {}))
+                    if child is False:
+                        raise ValueError('field_not_in_public_schema')
+                    if child is True:
+                        child = {}
+                children.append(child)
+        except ValueError as error:
+            # Closed alternative-exclusive paths are not ambiguous meanings of
+            # this leaf. Discard this whole conjunction, never its constraints.
+            if str(error) in ('field_not_in_public_schema', 'object_path_does_not_match_public_schema',
+                              'array_path_does_not_match_public_schema'):
+                continue
+            raise
+        pending.append((children, position + 1, scopes, depth + 1))
+    if not applicable:
+        raise ValueError('field_not_in_public_schema')
+    return found
+
+
+def scope_requirements(schema, *, require_evidence_scope=False):
+    if type(require_evidence_scope) is not bool:
+        raise ValueError('require_evidence_scope must be a boolean')
+    if not require_evidence_scope:
+        try:
+            if '"x-claim-scope":' not in json.dumps(schema, separators=(',', ':')):
+                return [], []
+        except (ValueError, TypeError, RecursionError):
+            pass
+    pending, rows, errors, paths, visited = [(schema, [], [], 0)], [], [], [], 0
+    while pending:
+        node, path, branches, depth = pending.pop()
+        visited += 1
+        if visited > 256 or depth > 32:
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'public_schema_traversal_limit'})
+            break
+        if not isinstance(node, dict):
+            continue
+        if SCOPE_KEY in node:
+            row = {'path': path, 'branches': branches}
+            try:
+                scope = parse_scope(node[SCOPE_KEY])
+                rows.append(dict(row, status='unavailable' if scope['mode'] == 'unavailable' else 'valid', requirement=scope))
+            except ValueError as error:
+                errors.append(dict(row, status='invalid', reason=str(error)))
+        properties = node.get('properties', {})
+        children = []
+        if isinstance(properties, dict):
+            children.extend((child, path + [name], branches, depth + 1) for name, child in properties.items())
+        if 'items' in node:
+            children.append((node['items'], path + ['*'], branches, depth + 1))
+        if isinstance(node.get('additionalProperties'), dict):
+            children.append((node['additionalProperties'], path + [{'additional_property': True}], branches, depth + 1))
+        alternatives = node.get('anyOf', [])
+        if 'anyOf' in node and (not isinstance(alternatives, list) or not 1 <= len(alternatives) <= 32):
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'unsupported_public_schema_anyof'})
+            continue
+        children.extend((child, path, branches + [index], depth + 1) for index, child in enumerate(alternatives))
+        if not children and node.get('type') not in ('object', 'array'):
+            paths.append(path)
+        if visited + len(pending) + len(children) > 256:
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'public_schema_traversal_limit'})
+            break
+        pending.extend(reversed(children))
+    if require_evidence_scope:
+        for path in paths:
+            sample = '__scope_additional_property__'
+            while sample in repr(schema):
+                sample += '_'
+            actual = [0 if token == '*' else sample if isinstance(token, dict) else token for token in path]
+            try:
+                applicable_scopes(schema, actual, require_evidence_scope=True)
+            except (ValueError, TypeError, KeyError) as error:
+                row = {'path': path, 'status': 'invalid', 'reason': str(error)}
+                if row not in errors:
+                    errors.append(row)
+    return rows, errors
 
 
 def row_requirements(schema, *, require_claim_requirements=False):
@@ -147,7 +318,7 @@ def row_requirements(schema, *, require_claim_requirements=False):
     return rows, errors
 
 
-def inspect(schema, forms, *, require_claim_requirements=False):
+def inspect(schema, forms, *, require_claim_requirements=False, require_evidence_scope=False):
     """Bounded preflight of public annotations; available roles are not evidence.
 
     Paths use '*' for an array item and {'additional_property': True} for a
@@ -232,7 +403,9 @@ def inspect(schema, forms, *, require_claim_requirements=False):
     row_policies, row_errors = row_requirements(schema, require_claim_requirements=require_claim_requirements)
     # A policy hidden beyond the scan budget cannot be treated as absent.
     rows.extend(row_errors)
-    return {'requirements': rows, 'row_requirements': row_policies, 'scope': SCOPE,
+    scope_policies, scope_errors = scope_requirements(schema, require_evidence_scope=require_evidence_scope)
+    rows.extend(scope_errors)
+    return {'requirements': rows, 'row_requirements': row_policies, 'scope_requirements': scope_policies, 'scope': SCOPE,
             'unannotated_fields': ('Unannotated answer fields are blocked by strict claim-role policy.'
                                    if require_claim_requirements else
                                    'No declared claim-role requirement; question placement remains unchecked.')}

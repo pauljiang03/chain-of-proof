@@ -10,7 +10,7 @@ import shutil
 import socket
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from agent.answer_store import answer, read_projection, project_bundle, report_projection
 from agent.investigation import Investigation
@@ -27,7 +27,8 @@ FACTS = ROOT / 'fixtures/sample_facts.json'
 def public():
     return {'schema_version': 2, 'case_id': 'portable-other-case', 'title': 'Other case', 'questions': [
         {'id': 'DEVICES', 'prompt': 'Which devices and labels?', 'answer_schema': {
-            'type': 'object', 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {'serial': {'type': 'string', 'x-claim-requirement': {
+            'type': 'object', 'x-claim-scope': {'mode': 'unscoped_observation',
+                'meaning': 'Synthetic context-free device observation; no selected source applicability asserted.'}, 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {'serial': {'type': 'string', 'x-claim-requirement': {
                 'semantic_types': ['device_serial'], 'selectors': [{'form': 'usbConnected', 'field': 'device_serial'}],
                 'meaning': 'Device serial recorded at connection', 'evidence_needed': 'A device connection record with its serial'}},
                 'label': {'type': 'string', 'x-claim-requirement': {
@@ -71,6 +72,123 @@ class AnswerStore(unittest.TestCase):
         self.assertIsNone(report_projection(run)[1])
         self.assertIn('Structured answers from claim fields', report.render(run))
         self.assertIn('href="#proof-f1"', render_html(run))
+
+    def scoped_run(self, *, omit_source_key=None):
+        from agent.run_manifest import file_binding
+        directory = self.path / 'source-scoped'
+        directory.mkdir()
+        facts = json.loads(FACTS.read_text())
+        origin = {'image': 'synthetic.dd', 'exhibit': 'SYNTHETIC-PC',
+                  'source_snapshot': 'live', 'source_variant': 'primary'}
+        for row in facts['facts']:
+            row.setdefault('prov', {}).update(origin)
+            if omit_source_key is not None:
+                row['prov'].pop(omit_source_key, None)
+        facts_path = self.path / 'scoped-facts.json'
+        facts_path.write_text(json.dumps(facts))
+        binding = file_binding(facts_path)
+        manifest = {'inputs': {'facts': binding}}
+        (directory / 'run-manifest.json').write_text(json.dumps(manifest))
+        contract = public()
+        contract['questions'][0]['answer_schema']['x-claim-scope'] = {
+            'mode': 'source_records', 'origins': [origin], 'evidence_facts_sha256': binding['sha256']}
+        Investigation(directory).initialize(contract)
+        (directory / 'questions.json').write_text(json.dumps(contract))
+        certificate = check.check({'usbConnected': [4512]}, 'F1', open_source(facts_path),
+                                  question='DEVICES', out_dir=directory)
+        self.assertEqual(certificate['status'], 'verified')
+        return directory, facts_path, contract, binding['sha256']
+
+    def test_scoped_direct_source_cleanup_and_borrowed_source_ownership(self):
+        directory, facts_path, contract, digest = self.scoped_run()
+        source = open_source(facts_path)
+
+        class ResourceSource:
+            def __init__(self):
+                self._db = Mock()
+            def get(self, ids):
+                return source.get(ids)
+            def string(self, sid):
+                return source.string(sid)
+
+        for fails in (False, True):
+            owned = ResourceSource()
+            with patch('agent.answer_store.open_source', return_value=owned):
+                if fails:
+                    with patch.object(owned, 'get', return_value={}):
+                        result = answer(directory, 'DEVICES', [self.binding], preview=True)
+                    self.assertFalse(result['valid'])
+                else:
+                    self.assertTrue(answer(directory, 'DEVICES', [self.binding], preview=True)['valid'])
+            owned._db.close.assert_called_once_with()
+        borrowed = ResourceSource()
+        self.assertTrue(answer(directory, 'DEVICES', [self.binding], preview=True,
+                               _evidence_source=borrowed, _evidence_facts_sha256=digest)['valid'])
+        borrowed._db.close.assert_not_called()
+        missing_digest = answer(directory, 'DEVICES', [self.binding], preview=True,
+                                _evidence_source=borrowed)
+        self.assertFalse(missing_digest['valid'])
+        borrowed._db.close.assert_not_called()
+
+    def test_source_scoped_answer_binds_actual_rows_and_replay_digest(self):
+        directory, facts_path, contract, digest = self.scoped_run()
+        bench = Workbench(facts_path, directory)
+        with patch('agent.run_manifest.file_binding', wraps=__import__(
+                'agent.run_manifest', fromlist=['file_binding']).file_binding) as measured:
+            result = bench.answer('DEVICES', [self.binding])
+            bench.answer('DEVICES', [self.binding], preview=True)
+            self.assertEqual(measured.call_count, 1)
+        self.assertEqual(result['submission']['answers'][0]['answer'], {'serial': 'SAMPLE-SERIAL-RM2'})
+        self.assertEqual(read_projection(directory), result)
+        run = export.bundle(directory, 'Scoped synthetic case')
+        self.assertEqual(project_bundle(run, contract), result)
+        with self.assertRaisesRegex(ValueError, 'actual verified'):
+            project_bundle(run, contract, authority='independently_replayed')
+        with self.assertRaisesRegex(ValueError, 'differs'):
+            project_bundle(run, contract, authority='independently_replayed', evidence_facts_sha256='0' * 64)
+        replayed = project_bundle(run, contract, authority='independently_replayed', evidence_facts_sha256=digest)
+        self.assertEqual(replayed['submission'], result['submission'])
+        run['run_manifest']['inputs']['facts']['sha256'] = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'differs'):
+            project_bundle(run, contract)
+
+    def test_source_scope_missing_snapshot_is_not_inferred_as_live(self):
+        directory, facts_path, contract, digest = self.scoped_run(omit_source_key='source_snapshot')
+        preview = answer(directory, 'DEVICES', [self.binding], preview=True)
+        self.assertFalse(preview['valid'])
+        self.assertEqual(preview['projection']['unsupported'][0]['reason'],
+                         'claim_records_do_not_meet_public_scope')
+        self.assertFalse((directory / 'answer-bindings.json').exists())
+
+    def test_source_scoped_missing_manifest_and_changed_source_are_rejected(self):
+        directory, facts_path, contract, digest = self.scoped_run()
+        facts_path.write_text(facts_path.read_text() + ' ')
+        with self.assertRaisesRegex(ValueError, 'actual evidence differs'):
+            answer(directory, 'DEVICES', [self.binding])
+        (directory / 'run-manifest.json').unlink()
+        with self.assertRaisesRegex(ValueError, 'evidence changed'):
+            answer(directory, 'DEVICES', [self.binding])
+        self.assertFalse((directory / 'answer-bindings.json').exists())
+
+    def test_coherently_forged_certificate_and_proposal_cannot_replace_source_scope(self):
+        directory, facts_path, contract, digest = self.scoped_run()
+        from checker.facts import Fact
+        certificate_path = directory / 'F1.json'
+        cert = json.loads(certificate_path.read_text())
+        row = cert['cited_facts'][0]
+        row['prov']['source_snapshot'] = 'forged-snapshot'
+        row['row_sha256'] = Fact(row['id'], row['kind'], row['t'], row['res'],
+                                row['obj'], row['aux'], row['prov']).row_sha256()
+        certificate_path.write_text(json.dumps(cert))
+        proposals_path = directory / 'proposals.jsonl'
+        proposals = [json.loads(line) for line in proposals_path.read_text().splitlines()]
+        for proposal in proposals:
+            if proposal.get('finding_id') == 'F1':
+                proposal['cited_facts'] = deepcopy(cert['cited_facts'])
+        proposals_path.write_text(''.join(json.dumps(row) + '\n' for row in proposals))
+        with self.assertRaisesRegex(ValueError, 'row differs from the bound evidence'):
+            answer(directory, 'DEVICES', [self.binding])
+        self.assertFalse((directory / 'answer-bindings.json').exists())
 
     def test_saved_coherent_row_survives_mixed_certificate_preview_and_update(self):
         contract = public()
@@ -251,7 +369,9 @@ class AnswerStore(unittest.TestCase):
 
     def test_actual_tool_is_audited_and_exported_without_claiming_completeness(self):
         bench = Workbench(FACTS, self.path)
-        bench.answer('DEVICES', [self.binding])
+        projected = bench.answer('DEVICES', [self.binding])
+        self.assertEqual(read_projection(self.path), projected)
+        self.assertIsNone(projected['projection']['evidence_facts_sha256'])
         run = self.bundle()
         self.assertEqual(run['audit']['status'], 'valid')
         self.assertEqual(run['answer_projection']['question_completeness'], 'not_established')

@@ -502,10 +502,14 @@ def _row_paths(requirements, path):
     return output
 
 
-def prepare_projection(public, candidates, bindings, source, *, require_claim_requirements=False):
+def prepare_projection(public, candidates, bindings, source, *, require_claim_requirements=False, require_evidence_scope=False, evidence_facts_sha256=None):
     """Freeze literal values once; no candidate is accepted/refused by this function."""
     if type(require_claim_requirements) is not bool:
         raise ValueError('require_claim_requirements must be a boolean')
+    if type(require_evidence_scope) is not bool:
+        raise ValueError('require_evidence_scope must be a boolean')
+    if evidence_facts_sha256 is not None and not answer_requirements.valid_facts_digest(evidence_facts_sha256):
+        raise ValueError('invalid_evidence_facts_sha256')
     questions = _public(public)
     if not isinstance(candidates, list) or not isinstance(bindings, list) or len(bindings) > 20000:
         raise ValueError('candidates and at most 20000 bindings must be lists')
@@ -524,6 +528,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                         **claim_fields(candidate['claim'], source)}
     row_policies = {qid: answer_requirements.row_requirements(question['answer_schema'], require_claim_requirements=require_claim_requirements)
                     for qid, question in questions.items()}
+    scope_policies = {qid: answer_requirements.scope_requirements(question['answer_schema'], require_evidence_scope=require_evidence_scope)
+                      for qid, question in questions.items()}
     prepared, unsupported = [], []
     for index, raw in enumerate(bindings):
         entry = {'binding_index': index, 'binding': deepcopy(raw)}
@@ -551,6 +557,43 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             field = part_row['fields'].get(raw.get('field'))
             if field is None:
                 raise ValueError('field_not_supported_or_cited_record_missing')
+            scope_rows, scope_errors = scope_policies[qid]
+            for error in scope_errors:
+                if error['reason'] != 'missing_public_claim_scope_requirement':
+                    raise ValueError(error['reason'])
+            if require_evidence_scope or scope_rows:
+                scopes = answer_requirements.applicable_scopes(questions[qid]['answer_schema'], path,
+                                                               require_evidence_scope=require_evidence_scope)
+                for scope in sorted(scopes, key=lambda item: item['mode'] != 'unavailable'):
+                    scope_check = {'requirement': deepcopy(scope), 'status': 'compatible',
+                                   'record_ids': list(field['record_ids']),
+                                   'scope': 'Declared evidence origin compatibility; question relevance and completeness are not established.'}
+                    entry.setdefault('scope_checks', []).append(scope_check)
+                    if scope['mode'] == 'unavailable':
+                        scope_check['status'] = 'unavailable'
+                        raise ValueError('public_claim_scope_unavailable')
+                    if scope['mode'] == 'unscoped_observation':
+                        continue
+                    if evidence_facts_sha256 is None:
+                        scope_check['status'] = 'incompatible'
+                        raise ValueError('evidence_facts_sha256_required')
+                    if scope.get('evidence_facts_sha256', evidence_facts_sha256) != evidence_facts_sha256:
+                        scope_check['status'] = 'incompatible'
+                        raise ValueError('evidence_facts_sha256_mismatch')
+                    ids = field['record_ids']
+                    records = source.get(ids)
+                    if not ids or any(fid not in records for fid in ids):
+                        scope_check['status'] = 'incompatible'
+                        raise ValueError('claim_scope_supporting_records_missing')
+                    origins = [{key: (records[fid].prov if isinstance(records[fid].prov, dict) else {}).get(key) for key in answer_requirements.ORIGIN_KEYS}
+                               for fid in ids]
+                    for fid, origin in zip(ids, origins):
+                        if origin['source_snapshot'] == 'examination':
+                            origin['input_source'] = deepcopy((records[fid].prov if isinstance(records[fid].prov, dict) else {}).get('input_source'))
+                    scope_check['record_origins'] = origins
+                    if any(origin not in scope['origins'] for origin in origins):
+                        scope_check['status'] = 'incompatible'
+                        raise ValueError('claim_records_do_not_meet_public_scope')
             value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
             if 'value' in raw and _encoded(raw['value']) != _encoded(value):
                 raise ValueError('literal_value_mismatch_not_repaired')
@@ -574,6 +617,7 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             unsupported.append(entry)
     plan = {'schema_version': VERSION, 'kind': 'frozen_claim_field_projection', 'case_id': public['case_id'],
             'require_claim_requirements': require_claim_requirements,
+            'require_evidence_scope': require_evidence_scope, 'evidence_facts_sha256': evidence_facts_sha256,
             'public_sha256': claim_digest(public), 'questions': [q['id'] for q in public['questions']],
             'candidates': indexed, 'bindings': prepared, 'unsupported': unsupported, 'scope': SCOPE}
     # Freeze omissions before any gate filtering. Removing a rejected candidate
@@ -682,6 +726,7 @@ def render_projection(plan, admitted_ids=None, authority='unchecked'):
             'certification': 'not_performed_by_projector', 'question_completeness': 'not_established', 'scope': SCOPE}
 
 
-def project_answers(public, candidates, bindings, source, admitted_ids=None, authority='unchecked', *, require_claim_requirements=False):
-    plan = prepare_projection(public, candidates, bindings, source, require_claim_requirements=require_claim_requirements)
+def project_answers(public, candidates, bindings, source, admitted_ids=None, authority='unchecked', *, require_claim_requirements=False, require_evidence_scope=False, evidence_facts_sha256=None):
+    plan = prepare_projection(public, candidates, bindings, source, require_claim_requirements=require_claim_requirements,
+                              require_evidence_scope=require_evidence_scope, evidence_facts_sha256=evidence_facts_sha256)
     return dict(render_projection(plan, admitted_ids=admitted_ids, authority=authority), projection=plan)

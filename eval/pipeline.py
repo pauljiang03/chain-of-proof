@@ -117,7 +117,8 @@ def evaluate(plan, trusted_run, answers_output, results_output, gate_result=None
                 raise ValueError("certificate verification failed; no answers or score produced")
             if plan.adapter == 'claims':
                 from agent.answer_store import project_bundle
-                projection = project_bundle(trusted_run, plan.questions, authority='independently_replayed')
+                projection = project_bundle(trusted_run, plan.questions, authority='independently_replayed',
+                                            evidence_facts_sha256=verification['facts_sha256'])
                 submission = projection['submission']
                 origin = ('Explicit claim-field bindings over independently reverified certificates; '
                           'question relevance and completeness are not proved')

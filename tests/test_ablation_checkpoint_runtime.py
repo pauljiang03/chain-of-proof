@@ -14,6 +14,8 @@ class Checkpoints(unittest.TestCase):
         self.public['questions'][0]['answer_schema'][KEY] = {
             'semantic_types': ['device_serial'], 'meaning': 'Device serial',
             'evidence_needed': 'Connection record'}
+        self.public['questions'][0]['answer_schema']['x-claim-scope'] = {
+            'mode': 'unscoped_observation', 'meaning': 'Synthetic context-free device fixture only.'}
         self.questions.write_text(json.dumps(self.public))
     binding = fixture.ProtocolRuntime.binding
 
@@ -45,6 +47,94 @@ class Checkpoints(unittest.TestCase):
         self.assertEqual(ready['unsupported_fields'], 1)
         self.assertEqual(ready['evidence_needs'][0]['status'], 'no_catalog_support')
 
+    def test_declared_unavailable_scope_is_visible_without_changing_leaf_counts(self):
+        from comparison.ablation.checkpoints import public_preflight
+        schema = self.public['questions'][0]['answer_schema']
+        schema['x-claim-scope'] = {'mode': 'unavailable', 'meaning': 'Historical image is absent from this fixture.'}
+        ready = public_preflight(self.public)
+        self.assertEqual(ready['status'], 'ready')
+        self.assertEqual(ready['declared_fields'], 1)
+        self.assertEqual(ready['supported_fields'], 1)
+        self.assertEqual(ready['unsupported_fields'], 0)
+        self.assertEqual(ready['unavailable_scopes'], 1)
+        self.assertEqual(ready['scope_requirements'][0]['status'], 'unavailable')
+        self.assertEqual(ready['evidence_needs'][0]['requirement'], schema['x-claim-scope'])
+        self.questions.write_text(json.dumps(self.public))
+        run = self.init()
+        self.assertIn('Historical image is absent', (run/'prompt.md').read_text())
+        cid = runtime.call_tool(run, 'check', {'question': 'Q1', 'claim': {'usbConnected': [1]}})['candidate_id']
+        preview = runtime.call_tool(run, 'preview', {'document': self.document([self.binding(cid)])})
+        self.assertGreater(preview['diagnostic_count'], 0)
+
+    def test_missing_scope_rejected_before_creating_run(self):
+        del self.public['questions'][0]['answer_schema']['x-claim-scope']
+        self.questions.write_text(json.dumps(self.public))
+        with self.assertRaisesRegex(ValueError, 'scope'):
+            self.init()
+        self.assertFalse((self.root/'run').exists())
+
+    def test_scope_uses_trusted_session_digest_with_identical_a_c_preview(self):
+        origin = {'image': 'fixture.E01', 'exhibit': 'PC',
+                  'source_snapshot': 'current', 'source_variant': 'live'}
+        data = json.loads(self.facts.read_text())
+        data['facts'][0]['prov'].update(origin)
+        data['facts'][0]['prov']['evidence_facts_sha256'] = 'f'*64
+        self.facts.write_text(json.dumps(data))
+        actual_digest = runtime._binding(self.facts)['sha256']
+        self.public['questions'][0]['answer_schema']['x-claim-scope'] = {
+            'mode': 'source_records', 'origins': [origin], 'evidence_facts_sha256': actual_digest}
+        self.questions.write_text(json.dumps(self.public))
+        a, c = self.init(name='A'), self.init('C', 'C')
+        candidate = {'schema_version': 1, 'sequence': 1, 'candidate_id': 'P000001',
+                     'question': 'Q1', 'claim': {'usbConnected': [1]}}
+        for run, filename in ((a, 'candidates.jsonl'), (c, 'proposals.jsonl')):
+            (run/filename).write_text(json.dumps(candidate)+'\n')
+        document = self.document([self.binding('P000001')])
+        left = runtime.call_tool(a, 'preview', {'document': document})
+        self.assertEqual(left, runtime.call_tool(c, 'preview', {'document': document}))
+        self.assertEqual(left['diagnostic_count'], 0, left)
+        runtime.call_tool(a, 'checkpoint', {'document': document})
+        self.summary.write_text('Stopped')
+        trial = runtime.finalize_session(a, summary=self.summary, status='time_limit')
+        self.assertEqual(trial['projection']['status'], 'available')
+        plan = json.loads((a/'projection.json').read_text())['projection']
+        self.assertEqual(plan['evidence_facts_sha256'], actual_digest)
+        self.assertTrue(plan['require_evidence_scope'])
+
+    def test_scope_mismatch_and_missing_provenance_never_repaired(self):
+        origin = {'image': 'fixture.E01', 'exhibit': 'PC',
+                  'source_snapshot': 'historical-VSS-A', 'source_variant': 'shadow'}
+        for index, changed in enumerate(({}, dict(origin, source_snapshot='historical-VSS-B'), origin)):
+            with self.subTest(provenance=changed):
+                data = json.loads(self.facts.read_text())
+                data['facts'][0]['prov'] = dict(changed, evidence_facts_sha256='0'*64)
+                self.facts.write_text(json.dumps(data))
+                self.public['questions'][0]['answer_schema']['x-claim-scope'] = {
+                    'mode': 'source_records', 'origins': [origin],
+                    'evidence_facts_sha256': '0'*64 if index == 2 else runtime._binding(self.facts)['sha256']}
+                self.questions.write_text(json.dumps(self.public))
+                run = self.init(name='scope-'+str(index))
+                cid = runtime.call_tool(run, 'check', {'question': 'Q1', 'claim': {'usbConnected': [1]}})['candidate_id']
+                document = self.document([self.binding(cid)])
+                preview = runtime.call_tool(run, 'preview', {'document': document})
+                checked = self.init('C', name='scope-C-'+str(index))
+                (checked/'proposals.jsonl').write_bytes((run/'candidates.jsonl').read_bytes())
+                self.assertEqual(preview, runtime.call_tool(checked, 'preview', {'document': document}))
+                self.assertGreater(preview['diagnostic_count'], 0)
+                runtime.call_tool(run, 'checkpoint', {'document': document})
+                self.summary.write_text('Stopped')
+                trial = runtime.finalize_session(run, summary=self.summary, status='time_limit')
+                self.assertEqual(trial['projection']['status'], 'available')
+                projection = json.loads((run/'projection.json').read_text())
+                self.assertEqual(projection['submission']['answers'][0]['status'], 'unknown')
+                self.assertTrue(projection['unsupported'])
+                from comparison.ablation.projection import project_b
+                candidate = json.loads((run/'candidates.jsonl').read_text())
+                replay = dict(candidate, status='verified', checker_status='verified', verification={'passed': True})
+                b = project_b(projection, [replay])
+                self.assertEqual(b['projection'], projection['projection'])
+                self.assertEqual(b['submission'], projection['submission'])
+
     def test_timeout_uses_checkpoint_not_final_prose_and_seals(self):
         run = self.init()
         document = self.document()
@@ -62,8 +152,8 @@ class Checkpoints(unittest.TestCase):
         requirement = {'semantic_types': ['device_serial'], 'meaning': 'Recorded device',
                        'evidence_needed': 'Device connection record'}
         self.public['questions'][0]['answer_schema'] = {'type': 'object', 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {
-            'serial': {'type': 'string', KEY: requirement},
-            'unknown': {'type': 'string', KEY: requirement}}}
+            'serial': {'type': 'string', KEY: requirement, 'x-claim-scope': {'mode': 'unscoped_observation', 'meaning': 'Synthetic fixture only.'}},
+            'unknown': {'type': 'string', KEY: requirement, 'x-claim-scope': {'mode': 'unscoped_observation', 'meaning': 'Synthetic fixture only.'}}}}
         self.questions.write_text(json.dumps(self.public))
         run = self.init()
         cid = runtime.call_tool(run, 'check', {'question': 'Q1', 'claim': {'usbConnected': [1]}})['candidate_id']
@@ -137,6 +227,15 @@ class Checkpoints(unittest.TestCase):
         self.assertEqual(json.loads((a/'binding-checkpoint.json').read_text())['document'], document)
 
     def test_c_checkpoint_timeout_independently_replays_exact_certificate(self):
+        origin = {'image': 'fixture.E01', 'exhibit': 'PC',
+                  'source_snapshot': 'current', 'source_variant': 'live'}
+        data = json.loads(self.facts.read_text())
+        data['facts'][0]['prov'].update(origin)
+        self.facts.write_text(json.dumps(data))
+        actual_digest = runtime._binding(self.facts)['sha256']
+        self.public['questions'][0]['answer_schema']['x-claim-scope'] = {
+            'mode': 'source_records', 'origins': [origin], 'evidence_facts_sha256': actual_digest}
+        self.questions.write_text(json.dumps(self.public))
         run = self.init('C')
         receipt = runtime.call_tool(run, 'check', {'question': 'Q1', 'claim': {'usbConnected': [1]}})
         self.assertEqual(receipt['status'], 'verified')
@@ -157,6 +256,9 @@ class Checkpoints(unittest.TestCase):
         self.assertEqual(json.loads((run/'bindings.json').read_text()), document)
         answer = json.loads((run/'projected-answers.json').read_text())['answers'][0]
         self.assertEqual(answer['answer'], 'fixture-device')
+        plan = json.loads((run/'projection.json').read_text())['projection']
+        self.assertEqual(plan['evidence_facts_sha256'], actual_digest)
+        self.assertTrue(plan['require_evidence_scope'])
 
     def test_predicted_future_candidate_never_gains_checkpoint_support(self):
         run = self.init()

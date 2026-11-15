@@ -10,9 +10,10 @@ from __future__ import annotations
 from agent.answer_projection import claim_digest, project_answers, render_projection
 
 
-def project_a(public, candidates, bindings, source, *, require_claim_requirements=False):
+def project_a(public, candidates, bindings, source, *, require_claim_requirements=False, require_evidence_scope=False, evidence_facts_sha256=None):
     """Project every submitted A candidate, regardless of semantic validity."""
-    return dict(project_answers(public, candidates, bindings, source, authority='unchecked', require_claim_requirements=require_claim_requirements),
+    return dict(project_answers(public, candidates, bindings, source, authority='unchecked', require_claim_requirements=require_claim_requirements,
+                                require_evidence_scope=require_evidence_scope, evidence_facts_sha256=evidence_facts_sha256),
                 arm='A', claim_authority='unchecked', source_repair=False)
 
 
@@ -48,11 +49,12 @@ def project_b(a_result, replay_rows):
                 replay_scope='Acceptance and replay results are recorded receipts. This projector does not reverify or authenticate them.')
 
 
-def project_c(public, proposals, bindings, source, *, require_claim_requirements=False):
+def project_c(public, proposals, bindings, source, *, require_claim_requirements=False, require_evidence_scope=False, evidence_facts_sha256=None):
     """Use the identical field engine, retaining recorded verified C proposals only."""
     if not isinstance(proposals, list) or any(not isinstance(row, dict) for row in proposals):
         raise ValueError('C proposals must be a list of recorded proposal objects')
     accepted = [row.get('candidate_id', row.get('finding_id')) for row in proposals if row.get('status') == 'verified']
     return dict(project_answers(public, proposals, bindings, source, admitted_ids=accepted,
-                                authority='recorded_certificates', require_claim_requirements=require_claim_requirements), arm='C', source_repair=False,
+                                authority='recorded_certificates', require_claim_requirements=require_claim_requirements,
+                                require_evidence_scope=require_evidence_scope, evidence_facts_sha256=evidence_facts_sha256), arm='C', source_repair=False,
                 replay_scope='Recorded verified status is supplied by the checked runtime; independent certificate replay remains separate.')

@@ -224,6 +224,8 @@ def _record_call(run, bench, tool, arguments, protocol="literal-v1", session=Non
                    for name in (".finalizing", "trial.json", "seal.json")):
                 raise ValueError("run is frozen")
             deadline(session)
+            if bench._inventory_stat() != bench._inventory_initial_stat:
+                raise ValueError("evidence changed since this bridge was opened")
             if tool in ("checkpoint", "preview"):
                 if set(arguments) != {"document"}:
                     raise ValueError("tool requires only document")
@@ -261,6 +263,11 @@ def _bench(run):
         session = _session(directory)
         bench = make_workbench(session["arm"], session["facts"]["path"], directory, protocol=session.get("protocol", "literal-v1"))
         try:
+            # Validate the bytes again after opening the source, once per bridge
+            # lifetime. Cached trusted session context then serves every call.
+            if session.get("protocol") == "claim-bindings-v3":
+                if _binding(session["facts"]["path"]) != {k: session["facts"][k] for k in ("sha256", "bytes")}:
+                    raise ValueError("facts changed while opening session source")
             yield directory, session, bench
         finally:
             bench._db.close()
@@ -500,7 +507,8 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
             source = open_source(session["facts"]["path"])
             try:
                 projector = project_a if session["arm"] == "A" else project_c
-                projection = projector(public, candidates, resolved, source, **({"require_claim_requirements": True} if strict else {}))
+                projection = projector(public, candidates, resolved, source, **({"require_claim_requirements": True, "require_evidence_scope": True,
+                    "evidence_facts_sha256": session["facts"]["sha256"]} if strict else {}))
             finally:
                 _close_source(source)
             stage = "candidate_integrity"

@@ -27,7 +27,8 @@ def public(typed=True):
                 'COPY': 'complete_copy_destination_path', 'PURPOSE': 'anti_forensic_action'}
     return {'schema_version': 2, 'case_id': 'synthetic-meaning-case', 'questions': [
         {'id': qid, 'prompt': 'Public request for ' + qid, 'answer_schema': {
-            'type': 'string', **({requirements.KEY: need(kind)} if typed else {})}}
+            'type': 'string', 'x-claim-scope': {'mode': 'unscoped_observation',
+                'meaning': 'Synthetic context-free source observation without primary-source applicability.'}, **({requirements.KEY: need(kind)} if typed else {})}}
         for qid, kind in meanings.items()]}
 
 

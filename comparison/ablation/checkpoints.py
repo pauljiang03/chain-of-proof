@@ -17,9 +17,11 @@ def public_preflight(public):
     from agent.answer_requirements import inspect
     from agent.answer_projection import catalog
     forms = catalog()['forms']
-    rows = [{'question_id': question['id'], **row}
-            for question in public['questions']
-            for row in inspect(question['answer_schema'], forms, require_claim_requirements=True)['requirements']]
+    rows, scopes = [], []
+    for question in public['questions']:
+        inspected = inspect(question['answer_schema'], forms, require_claim_requirements=True, require_evidence_scope=True)
+        rows.extend({'question_id': question['id'], **row} for row in inspected['requirements'])
+        scopes.extend({'question_id': question['id'], **row} for row in inspected['scope_requirements'])
     invalid = [row for row in rows if row['status'] in ('missing_annotation', 'invalid')]
     if invalid:
         diagnostics = [{key: row[key] for key in ('question_id', 'path', 'status', 'reason') if key in row}
@@ -27,12 +29,15 @@ def public_preflight(public):
         raise ValueError('v3 public claim contract is not ready: ' + json.dumps(
             {'invalid_count': len(invalid), 'diagnostics': diagnostics}, ensure_ascii=True)[:12000])
     unsupported = [row for row in rows if row['status'] == 'no_catalog_support']
+    unavailable = [row for row in scopes if row['status'] == 'unavailable']
+    needs = unsupported + unavailable
     return {'status': 'ready', 'declared_fields': len(rows),
             'supported_fields': len(rows)-len(unsupported), 'unsupported_fields': len(unsupported),
             'evidence_needs': [{key: row[key] for key in ('question_id', 'path', 'status', 'requirement') if key in row}
-                               for row in unsupported[:100]],
-            'truncated': len(unsupported) > 100,
-            'scope': 'Public declarations only. Unsupported declared roles remain unknown until an approved form and evidence exist.'}
+                               for row in needs[:100]],
+            'scope_requirements': scopes[:100], 'unavailable_scopes': len(unavailable),
+            'truncated': len(needs) > 100 or len(scopes) > 100,
+            'scope': 'Public declarations only. Unsupported declared roles and unavailable source scopes remain explicit gaps; declaring a gap does not enable its bindings.'}
 
 
 def deadline(session):
@@ -71,13 +76,14 @@ def preview(directory, session, bench, document):
     from comparison.ablation.bindings import resolve_hashes
     resolved, _ = resolve_hashes(document['bindings'], candidates)
     result = project_answers(public, candidates, resolved, bench.source,
-                             require_claim_requirements=True, authority='unchecked')
+                             require_claim_requirements=True, require_evidence_scope=True,
+                             evidence_facts_sha256=session['facts']['sha256'], authority='unchecked')
     # Return bounded public diagnostics, never the projected answer population.
     from agent.answer_requirements import inspect
     from agent.answer_projection import catalog
     requirements = [{'question_id': q['id'], **row}
                     for q in public['questions']
-                    for row in inspect(q['answer_schema'], catalog()['forms'], require_claim_requirements=True)['requirements']]
+                    for row in inspect(q['answer_schema'], catalog()['forms'], require_claim_requirements=True, require_evidence_scope=True)['requirements']]
     diagnostics = result['unsupported'] + result['conflicts']
     diagnostics += [row for row in requirements if row['status'] not in ('catalog_support',)]
     return {'status': 'uncertified', 'diagnostics': [{'diagnostic': json.dumps(row, ensure_ascii=True)[:2000]} for row in diagnostics[:100]],

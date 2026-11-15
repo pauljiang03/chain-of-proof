@@ -37,11 +37,11 @@ FORMS = {
                             'Same-subject attributes with the same declared native value type agree exactly. The full triples and value equality are checked.'),
     'imageDigestsAgree': ('[logical subject, role, value, acquisition subject, role, value, "md5"|"sha1"]',
                          'Recomputed logical-image digest equals the retained acquisition digest for the same subject and algorithm. Missing/mismatching values do not certify; equality does not authenticate acquisition.'),
-    "usbConnected":       ("[usbInsert]", "USB device S was connected to this PC (time)."),
-    "deviceHolds":        ("[usbInsert, volumeOnDevice]", "USB device S was connected (time); the seized device with that serial holds volume V. Needs the same device serial in both."),
-    "opened":             ("[lnkTarget]", "Path P on volume/share X was opened (time)."),
-    "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "P was opened (time) from volume V, the volume on seized device S. Needs the same volume serial in both."),
-    "openedFromRecorded": ("[lnkTarget, volumeSeen]", "P was opened (time) from volume V, which this PC recorded under label L. Needs the same volume serial."),
+    "usbConnected":       ("[usbInsert]", "A USB device record names S and its retained timestamp; connection onset is not established."),
+    "deviceHolds":        ("[usbInsert, volumeOnDevice]", "A USB device record names S, joined to a device-volume record for V by the same device serial."),
+    "opened":             ("[lnkTarget]", "A shortcut target record names path P and volume/share X at its recorded timestamp."),
+    "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "A shortcut target record names P on volume V, joined to a device-volume record for S by the same volume serial."),
+    "openedFromRecorded": ("[lnkTarget, volumeSeen]", "A shortcut target record names P on volume V, joined to a recorded volume label L by the same volume serial."),
     "recordedOnDevice":   ("[volumeSeen, volumeOnDevice]", "Volume V, recorded by this PC under label L, is the volume on seized device S. Needs the same volume serial."),
     "sameLabel":          ("[volumeSeen, volumeSeen]", "Two volumes were recorded under the same label. This does not identify one physical device. Needs the same label, two different records."),
     "searched":           ("[webSearch]", 'A web search for "Q" was made in browser B (time).'),
@@ -60,15 +60,15 @@ FORMS = {
     "journalChildNamedDirectory": ("[journalName, journalParent, journalName]", "A child name, its parent reference, and the directory's name join through exact scoped identities. Each keeps its own timestamp; it does not imply presence under a later directory alias."),
     "journalPathAt": ("[journalPath]", "A path or explicitly incomplete suffix at the child journal observation time, reconstructed using intact USN-v2 byte intervals and directory identity/name transitions. Not filesystem creation, copying, or a disc write."),
     "journalPathForFile": ("[journalName, journalPath]", "The direct journal name and bounded path observation share the same scoped NTFS file identity. Each retains its own timestamp."),
-    "emailed":            ("[emailSent]", 'An e-mail with the subject "S" was sent from A to B (time).'),
+    "emailed":            ("[emailSent]", 'A retained message record names subject "S", address text and its recorded timestamp; transmission, delivery and authorship are not established.'),
     "burnTrace":          ("[cdBurn]", "HEURISTIC. Optical-disc activity record (time). A lock or settings change does not establish a write, completion, contents, or physical-disc identity."),
-    "deviceExamined":     ("[usbInsert, unallocatedOnDevice]", "USB device S was connected (time); the seized device with that serial has directory entries left in unallocated space. Needs the same device serial."),
+    "deviceExamined":     ("[usbInsert, unallocatedOnDevice]", "A USB device record names S, joined by device serial to a record of unallocated directory entries."),
     "recoveredOnDevice":  ("[fileCreated, unallocatedOnDevice]", "A directory entry for P, created (time), was recovered from device S. It may be an earlier state of the same file system; it does not establish a reformat. Needs the same area id in both aux fields."),
     "settingRecorded":    ("[systemSetting]", 'The system setting "N" is recorded as "V" (record time).'),
     "accountRecorded":    ("[accountSeen]", "An account named A is recorded (what it is an account of; record time)."),
     "sessionRecorded":    ("[sessionEvent]", "A logon / logoff / startup / shutdown is recorded for account A or the machine (time)."),
-    "programInstalledAt": ("[programInstalled]", "Program N version V is recorded as installed (time)."),
-    "programRan":         ("[programRun]", "An application artifact names E and its recorded timestamp meaning. Only explicit prefetch/UserAssist/process-creation run-time records say execution time; cache/key/file timestamps do not."),
+    "programInstalledAt": ("[programInstalled]", "An installation-related source record names N and detail V at its recorded timestamp; detail is not necessarily a product version."),
+    "programRan":         ("[programRun]", "An application source record names E and its recorded timestamp; this claim does not establish execution or an execution time."),
     "visited":            ("[webVisit]", "Browser B's history records a visit to URL U (time)."),
     "downloaded":         ("[fileDownloaded]", "A download from URL U to path P is recorded (time)."),
     "typedInSearchBox":   ("[localSearch]", 'The text "T" is recorded as typed into a search box of the operating system (record time).'),
@@ -84,11 +84,11 @@ FORMS = {
     "exactlyDistinct":    ('[kind name, "obj" or "aux", n]', "CENSUS. The records of that kind name exactly n different values in that field (for example: usbInsert, obj, 2 = two different device serials)."),
     "exactlyWith":        ('[kind name, "obj" or "aux", entity id, n]', "CENSUS. Exactly n records of that kind have that entity in that field (n = 0: none has). Take the entity id from `fact <id>` (obj_id / aux_id)."),
     "copiedHere":         ("[fileCreated, fileModified]", "HEURISTIC. P was likely copied onto volume V: created there after its last modification. Needs the same path and volume, and modified before created."),
-    "deletedAfter":       ("[fileDeleted, any record]", "P was deleted (time) after the other event."),
-    "before":             ("[any record, any record]", "The first event happened before the second, by more than both timestamps' uncertainty."),
+    "deletedAfter":       ("[fileDeleted, any record]", "A deletion record for P has a timestamp later than the other record beyond their uncertainty; event order is not established."),
+    "before":             ("[any record, any record]", "The first recorded timestamp precedes the second by more than their combined uncertainty; event order is not established."),
     "tagged":             ('[record, "obj" or "aux", tag record, tag record\'s aux_id]', "The entity in that slot of the record carries this tag. Take aux_id from `fact <tag id>`."),
-    "usbMountedAs":       ("[usbInsert, volumeMount]", "USB device S was connected and mounted as volume V."),
-    "openedFromMount":    ("[lnkTarget, volumeMount]", "P was opened from the volume a mount record names."),
+    "usbMountedAs":       ("[usbInsert, volumeMount]", "A USB device record and a device-volume mapping share device serial S and associate it with volume V; an actual mount event is not established."),
+    "openedFromMount":    ("[lnkTarget, volumeMount]", "A shortcut target record names P on the same volume named by a device-volume mapping; actual file opening is not established."),
 }
 
 
@@ -400,4 +400,14 @@ class Workbench:
     def answer(self, question_id: str, bindings=None, replace=False, preview=False) -> dict:
         """Save explicit claim-field bindings, or show the supported field catalog."""
         from agent.answer_store import answer
-        return answer(self.run_dir, question_id, bindings, replace=replace, preview=preview)
+        from agent.run_manifest import file_binding
+        with self._lock:
+            if self._inventory_stat() != self._inventory_initial_stat:
+                raise ValueError('evidence changed since this workbench was opened')
+            if self._inventory_evidence_sha256 is None:
+                self._inventory_evidence_sha256 = file_binding(self._inventory_facts_path)['sha256']
+                if self._inventory_stat() != self._inventory_initial_stat:
+                    raise ValueError('evidence changed during answer source binding')
+            return answer(self.run_dir, question_id, bindings, replace=replace, preview=preview,
+                          _evidence_source=self.source,
+                          _evidence_facts_sha256=self._inventory_evidence_sha256)
