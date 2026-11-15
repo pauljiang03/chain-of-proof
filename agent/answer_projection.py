@@ -165,6 +165,17 @@ for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
         'this does not establish unique physical-device identity, connection onset, mounting '
         'or that the USB record describes the examined physical device.')
 
+# Preserve useful literal selectors while making their source-record scope clear.
+for _form in ('openedFromMount', 'openedFromDevice', 'openedFromRecorded',
+              'deviceHolds', 'usbMountedAs', 'deviceExamined'):
+    if 'volume' in _FIELDS[_form]:
+        _FIELDS[_form]['volume']['meaning'] = (
+            'Volume serial value retained by the selected source record; not a unique volume identity.')
+    if 'device_serial' in _FIELDS[_form]:
+        _FIELDS[_form]['device_serial']['meaning'] = (
+            'Device identifier value retained by the selected source record; may be an acquisition '
+            'identifier and does not prove unique physical-device identity or shared hardware.')
+
 _joined('recoveredOnDevice', [('recorded_file_path', 0, 'obj'),
                             ('recorded_recovery_area_label', 0, 'aux'),
                             ('examined_device_identifier', 1, 'obj'),

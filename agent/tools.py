@@ -83,7 +83,7 @@ FORMS = {
     "fileRecorded":       ("[fileSeen]", "A secondary artifact (search index, thumbnail cache, shadow copy, ...) holds a record of path P (record time)."),
     "shadowCopyMade":     ("[shadowCopy]", "Shadow copy I of volume V was created (time)."),
     "contentHashed":      ("[fileContent]", "The content of path P, read from the image, has SHA-256 H."),
-    "sameContent":        ("[fileContent, fileContent]", "Two paths have identical content. Needs the same hash in both records, two different records."),
+    "sameContent":        ("[fileContent, fileContent]", "Two distinct content records carry the same recorded hash value. This establishes recorded hash agreement, not a byte-for-byte comparison, file identity or a shared source."),
     "exactly":            ('[kind name, n]', "CENSUS. The evidence holds exactly n records of that kind (n may be 0). About the records extracted, not about what happened. Stands alone: not inside `both`."),
     "exactlyDistinct":    ('[kind name, "obj" or "aux", n]', "CENSUS. The records of that kind name exactly n different values in that field (for example: usbInsert, obj, 2 = two different device serials)."),
     "exactlyWith":        ('[kind name, "obj" or "aux", entity id, n]', "CENSUS. Exactly n records of that kind have that entity in that field (n = 0: none has). Take the entity id from `fact <id>` (obj_id / aux_id)."),
