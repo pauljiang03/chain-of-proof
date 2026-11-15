@@ -319,11 +319,18 @@ class Matcher:
         if not isinstance(actual, list):
             return self.missing(expected, ep, "required subset list missing") + _wrong(actual, ap, "expected a list")
         # One-to-one assignment prevents duplicate answers from earning credit twice.
+        # Overlapping alias classes can make the same spelling eligible for more
+        # than one pool entry. Such indistinguishable answers still count once.
+        supports, seen_supports = [], set()
+        for value in actual:
+            support = frozenset(i for i, item in enumerate(expected)
+                                if self._complete_match(item, value, _pointer(ep, i)))
+            supports.append(support if support not in seen_supports else frozenset())
+            if support:
+                seen_supports.add(support)
         transpose = len(expected) > len(actual)
         n, m = min(len(expected), len(actual)), max(len(expected), len(actual))
-        weights = [[int(self._complete_match(expected[j if transpose else i],
-                                            actual[i if transpose else j],
-                                            _pointer(ep, j if transpose else i)))
+        weights = [[int((j if transpose else i) in supports[i if transpose else j])
                     for j in range(m)] for i in range(n)]
         pairs = [(j, i) if transpose else (i, j) for i, j in _assignment(weights)
                  if weights[i][j]]

@@ -49,6 +49,14 @@ class SubsetContracts(unittest.TestCase):
         self.assertEqual(result["atomic"]["true_positive"], 1)
         self.assertEqual(result["atomic"]["wrong"], 1)
 
+    def test_shared_alias_cannot_be_repeated_to_cover_distinct_pool_entries(self):
+        self.ref["questions"][0]["match"]["string_aliases"] = {
+            "/examples/*": [["alpha", "shared"], ["beta", "shared"]]}
+        result = self.result({"examples": ["shared", "SHARED"]})
+        self.assertFalse(result["perfect_submission"])
+        self.assertEqual(result["atomic"]["true_positive"], 1)
+        self.assertEqual(result["atomic"]["wrong"], 1)
+
     def test_invalid_contracts_fail_closed(self):
         for rule in ({"mode": "subset", "count": 0}, {"mode": "subset", "count": True},
                      {"mode": "subset", "count": 4}, {"mode": "anything", "count": 2}):
