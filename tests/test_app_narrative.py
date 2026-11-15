@@ -112,13 +112,13 @@ class Narrative(unittest.TestCase):
         self.assertTrue(mail[1].startswith('The retained source timestamps fall from 2024-05-06 '))
         self.assertEqual(mail[2:], ['1 record carries the address text "from friend to worker".',
                                     '1 record carries the address text "from worker to friend".',
-                                    'These are the subjects: "Plans".'])
+                                    'These are the subjects: "Plans" and "RE: Plans".'])
         cloud = sentences(story, 'cloud')
         self.assertEqual(cloud[0], 'The cited Google Drive client records contain 1 distinct file name.')
         self.assertTrue(cloud[1].startswith('The retained source timestamps fall on 2024-05-07 at '))
         self.assertEqual(cloud[2:], ['1 record carries an uploaded status label.', 'The file names are: budget.xlsx.'])
         self.assertEqual(sentences(story, 'deleted')[0], 'The Recycle Bin index shows 1 deletion record.')
-        self.assertEqual(sentences(story, 'disc')[0], 'The cited records include 1 disc-writing trace record.')
+        self.assertEqual(sentences(story, 'disc')[0], 'The cited records include 1 optical-drive record.')
         self.assertEqual(sentences(story, 'notes'), ['The Windows Explorer search box contains the search text "budget".',
                                                      'A Sticky Notes file contains this text: "Call me later".'])
         # short sentences, and a count of the records and findings each topic rests on

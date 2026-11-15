@@ -238,7 +238,7 @@ interpretation, sentence templates, and answer adapters still require human revi
 certificates carry a heuristic rule, marked with a strength label — proving its
 conditions does not make the heuristic certain.
 
-The formal layer uses five primitive operations that named forensic rules combine. See
+The formal layer combines typed checks, relations and scoped set rules. See
 the [rule definitions](lean/ChainOfProof/Rules.md) and [Lean theorems](lean/ChainOfProof/Theorems.lean).
 
 | Operation | Meaning |
@@ -248,9 +248,11 @@ the [rule definitions](lean/ChainOfProof/Rules.md) and [Lean theorems](lean/Chai
 | `link` | Two record fields contain the same identifier. |
 | `before` | One timestamp precedes another beyond their combined uncertainty. |
 | `both` | Both claims hold. |
+| `sameFileOccurrence` | The records identify the same native file entry, partition and source view. |
 
-For example, a USB mount claim must use the *same device identifier* in both cited
-records — a matching display label is not enough for device identity.
+An identifier join proves equality of recorded values. Physical-device identity
+needs separate evidence. The file timestamp-pattern rule also requires the same
+native file occurrence. It does not prove a copying action.
 
 ## Working with evidence and new cases
 

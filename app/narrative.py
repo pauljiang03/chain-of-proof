@@ -214,7 +214,7 @@ def _disc(case):
     rows = case.of('cdBurn')
     if not rows:
         return None
-    return _point('disc', 'Disc', [f'The cited records include {_n(len(rows), "disc-writing trace record", "disc-writing trace records")}.',
+    return _point('disc', 'Disc', [f'The cited records include {_n(len(rows), "optical-drive record", "optical-drive records")}.',
                                   f'The retained source timestamps fall{case.period(rows)}.' if case.period(rows) else ''], rows)
 
 
@@ -322,7 +322,7 @@ def _mail(case):
     ways = Counter(_aux(entry) for entry in rows if re.match(r'^from \S.* to \S', _aux(entry)))
     for way, count in sorted(ways.items(), key=lambda pair: (-pair[1], pair[0]))[:2]:
         out.append(f'{_n(count, "record carries", "records carry")} the address text "{way}".')
-    subjects = _distinct([re.sub(r'^(?:(?:re|fw|fwd)\s*:\s*)+', '', _obj(entry), flags=re.I) for entry in rows])
+    subjects = _distinct([_obj(entry) for entry in rows])
     if subjects:
         out.append(f'These are the subjects: {_join(subjects, 6, quote=True)}.')
     return _point('mail', 'E-mail', out, rows)
