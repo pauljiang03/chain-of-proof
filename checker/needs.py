@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 
 from . import claims
+from .facts import file_occurrence
 
 DISCLAIMER = (
     "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. "
@@ -80,6 +81,39 @@ def _unclassified(reason, part=None, fact_ids=()):
 
 def _brick_failure(brick, part, facts, source):
     """Recognize only the current Lean primitive diagnostics; no inferred rules."""
+    match = re.fullmatch(r"FAIL sameFileOccurrence (\d+) (\d+)", brick)
+    if match:
+        left_id, right_id = map(int, match.groups())
+        left, right = facts.get(left_id), facts.get(right_id)
+        if left is None or right is None:
+            return _unclassified("Failed occurrence diagnostic has no corresponding cited row.",
+                                 part, [left_id, right_id])
+        identities = [file_occurrence(row.prov) for row in (left, right)]
+        observed = {'records': [dict(_record(row, source), source_identity={
+            key: row.prov.get(key) for key in ('image', 'exhibit', 'source_snapshot',
+                                              'source_variant', 'file_occurrence')})
+                               for row in (left, right)]}
+        required = _required(part, 'complete equal source image/exhibit/view, concrete disk/partition, '
+                                  'and native file-entry identity for both timestamp rows')
+        if any(identity is None for identity in identities):
+            return _need('missing_record',
+                'At least one cited timestamp lacks complete valid source/native file-occurrence metadata.',
+                'Retrieve source-bound creation and modification records carrying the same concrete image, '
+                'partition, source view, and native entry identity. A reviewed reader may need to expose '
+                'the NTFS record and sequence or absolute partition-relative directory/file-entry offset. '
+                'Matching paths or volume serials do not supply this identity; leave the copy pattern '
+                'unproved if that source metadata is unavailable.',
+                [left_id, right_id], observed, required)
+        if identities[0] != identities[1]:
+            return _need('contradictory_identity_or_value',
+                'The cited timestamps belong to different encoded source file occurrences.',
+                'Preserve the conflicting image, partition, view, and native entry identities. '
+                'Review which source file the proposed statement concerns; a same-file claim needs '
+                'independent records for that same occurrence, not edits to make these identities match.',
+                [left_id, right_id], observed, required)
+        return _unclassified('Failed occurrence diagnostic disagrees with the available cited identities.',
+                             part, [left_id, right_id])
+
     match = re.fullmatch(r"FAIL is (\d+) \(?([A-Za-z][A-Za-z0-9]*)\)?", brick)
     if match:
         fid, expected = int(match[1]), match[2]

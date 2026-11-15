@@ -230,6 +230,12 @@ _SPECS = (
     ('event.account_sid', 'string', 'literal account SID field within this source event; not a personal identity'),
     ('mail.recovered.subject_unicode', 'string', 'literal PT_UNICODE subject of a parser-recovered message item in the parser-recovery source variant; not proof of deletion, purge or unallocated status'),
     ('mail.recovered.body_unicode', 'string', 'literal PT_UNICODE body of a parser-recovered message item in the parser-recovery source variant; not proof of deletion, purge, unallocated status or authorship'),
+    ('usb.device_instance_id', 'string', 'complete source USBSTOR device-instance path, including device class and literal instance component; not a hardware serial or physical-device identity'),
+    ('usb.device_id', 'string', 'complete source USBSTOR device-class path; not a hardware serial, unique device or physical-device identity'),
+    ('usb.instance_id', 'string', 'literal complete USBSTOR instance component, without truncating ampersand-delimited location fields; not an established hardware serial'),
+    ('usb.recorded_time', 'string', 'timestamp retained by this USB registry or installation-log source record; not exact connection onset'),
+    ('usb.record_time_meaning', 'string', 'explicit meaning of this USB source timestamp field, such as key last-write or installation-log timestamp; no actual connection-time inference'),
+    ('usb.source_type', 'string', 'reviewed type of the USB source record, such as USBSTOR registry or SetupAPI installation log; not physical-device authenticity'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)

@@ -33,11 +33,16 @@ def with1 (fs : List Fact) (a : Nat) (k : Fact → Bool) : Bool :=
 def with2 (fs : List Fact) (a b : Nat) (k : Fact → Fact → Bool) : Bool :=
   with1 fs a fun x => with1 fs b fun y => k x y
 
+/-- Matching paths or volume serials do not establish one file occurrence. -/
+def sameFileOccurrence (x y : Fact) : Bool :=
+  x.occurrence.complete && y.occurrence.complete && x.occurrence == y.occurrence
+
 def holds (fs : List Fact) : Claim → Bool
   | .is f k => with1 fs f fun x => x.kind == k
   | .val f s v => with1 fs f fun x => Nat.beq (x.get s) v
   | .link a sa b sb => with2 fs a b fun x y => Nat.beq (x.get sa) (y.get sb)
   | .before a b => with2 fs a b precedes
+  | .sameFileOccurrence a b => with2 fs a b sameFileOccurrence
   | .both c d => holds fs c && holds fs d
 
 /-- Per-brick verdicts, for feedback to the agent when a claim is rejected.

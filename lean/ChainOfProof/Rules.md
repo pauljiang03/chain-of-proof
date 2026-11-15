@@ -60,12 +60,12 @@ for exact historical replay, or reissuance under the current templates.
 |---|---|---|---|
 | `usbMountedAs u m` | R1, R2 | Strong | The USB source record names {serial}; it matches the device serial in the mapping for volume {vol}. Its timestamp meaning is stated; exact connection onset is not established. |
 | `openedFromMount l m` | R2, R3 | Strong | The shortcut target record names {path}; its volume serial matches the device-volume mapping. Source artifact and timestamp meaning are stated; opening is not established. |
-| `copiedHere c m` | R4 | Heuristic | {path} was likely copied onto volume {vol}: it was created there ({time}) after its last modification ({time}). This rests on heuristic rule R4. |
+| `copiedHere c m` | R4 | Heuristic | One complete scoped native file occurrence has a recorded creation timestamp after its recorded modification timestamp, beyond uncertainty. This is the timestamp pattern used by copy heuristic R4; it does not establish copying, completion, or an actor. |
 | `deletedAfter d x` | R5 | Strong | The Recycle Bin timestamp for {path} is later than the cited record's timestamp. This orders recorded timestamps. |
 | `deviceHolds u d` | R1, R7 | Strong | The USB source record's device serial matches the examined-device record for volume {vol}. Its timestamp meaning is stated; exact connection onset is not established. |
 | `openedFromDevice l d` | R3, R7 | Strong | The shortcut target record names {path}; its volume serial matches the volume read from examined device {serial}. Opening is not established. |
 | `openedFromRecorded l s` | R3, R6 | Strong | The shortcut target record names {path}; its volume serial matches the volume record labeled {label}. Each source timestamp retains its meaning. Opening is not established. |
-| `recordedOnDevice s d` | R6, R7 | Strong | Volume {vol}, which this PC recorded under the label "{label}" ({time}), is the volume on seized device {serial}. |
+| `recordedOnDevice s d` | R6, R7 | Strong | The volume-label record and examined-device record carry the same recorded volume serial. Matching serials do not establish the same volume or physical device; cloned volumes may share them. |
 | `sameLabel a b` | R6, R8 | Heuristic | This PC recorded volume {vol} ({time}) and volume {vol} ({time}) under the same label "{label}". A shared label does not identify a physical device; different devices can share it (heuristic rule R8). |
 | `usbConnected u` | R1 | Strong | The USB source record names {serial}, with source artifact and timestamp meaning. Exact connection onset and the responsible person are not established. |
 | `opened l` | R3 | Strong | The shortcut target record names {path} and any recorded volume/share, with source artifact and timestamp meaning. This does not establish opening at that time or by a person. |
@@ -96,6 +96,19 @@ for exact historical replay, or reissuance under the current templates.
 A census is checked by `counts` in `Census.lean`, not by `holds`: it is about every
 record of a kind, so adding a record can make it false, and it cannot be joined to
 other claims with `both`.
+
+`copiedHere` additionally requires the kernel's `sameFileOccurrence` brick. Each
+timestamp row must carry explicit source image, exhibit, snapshot and variant,
+concrete disk and partition offset/size, and native entry kind/identity. NTFS uses
+MFT record plus sequence; FAT/exFAT/ISO directory-entry and UDF file-entry offsets
+are absolute offsets within the declared partition, never directory-relative.
+`checker.facts.file_occurrence` validates the versioned source representation and
+encodes text injectively into natural numbers. Lean checks every identity
+dimension is present and equal. Paths, serials and matching partial origin alone
+cannot substitute. Missing or malformed occurrence metadata fails closed; old
+identity-free copy certificates require their retained historical runtime and do
+not pass the repaired rule. This is a specification change, not evidence that
+the old kernel contradicted its old predicate.
 
 ## R34: typed source attributes
 

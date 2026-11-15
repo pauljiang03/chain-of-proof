@@ -42,6 +42,21 @@ theorem holds_both_iff (fs : List Fact) (c d : Claim) :
     holds fs (.both c d) = true ↔ holds fs c = true ∧ holds fs d = true := by
   simp [holds]
 
+theorem fileOccurrence_beq_iff (x y : FileOccurrence) : (x == y) = true ↔ x = y := by
+  cases x
+  cases y
+  simp [BEq.beq, instBEqFileOccurrence.beq]
+
+/-- Complete source scope, partition identity and native entry identity must all
+    agree. A matching path, displayed serial or partial origin cannot suffice. -/
+theorem holds_sameFileOccurrence_iff (fs : List Fact) (a b : Nat) :
+    holds fs (.sameFileOccurrence a b) = true ↔
+      ∃ x y, lookup fs a = some x ∧ lookup fs b = some y ∧
+        x.occurrence.complete = true ∧ y.occurrence.complete = true ∧
+        x.occurrence = y.occurrence := by
+  simp only [holds, with2_iff, sameFileOccurrence, Bool.and_eq_true, fileOccurrence_beq_iff]
+  simp only [and_assoc]
+
 /-- A kind assertion gives the exact cited row and its kind, not another kind's meaning. -/
 theorem holds_is_iff (fs : List Fact) (a : Nat) (k : Kind) :
     holds fs (.is a k) = true ↔ ∃ x, lookup fs a = some x ∧ x.kind = k := by
@@ -137,6 +152,7 @@ theorem holds_mono {fs gs : List Fact}
   | val f s v => exact with1_mono h _ _ hc
   | link a sa b sb => exact with2_mono h _ _ _ hc
   | before a b => exact with2_mono h _ _ _ hc
+  | sameFileOccurrence a b => exact with2_mono h _ _ _ hc
 
 theorem lookup_append {fs : List Fact} {i : Nat} {x : Fact} (extra : List Fact)
     (h : lookup fs i = some x) : lookup (fs ++ extra) i = some x := by
@@ -149,6 +165,28 @@ theorem holds_append (fs extra : List Fact) (c : Claim)
   holds_mono (fun _ _ hx => lookup_append extra hx) c h
 
 /-! ### What a set gives you -/
+
+/-- The copy-pattern heuristic cannot combine different source file occurrences.
+    This theorem concerns the stated timestamp predicate, not an actual copy. -/
+theorem copiedHere_sameOccurrence (fs : List Fact) (c m : Nat)
+    (h : holds fs (Sets.copiedHere c m) = true) :
+    ∃ x y, lookup fs c = some x ∧ lookup fs m = some y ∧
+      x.occurrence.complete = true ∧ y.occurrence.complete = true ∧
+      x.occurrence = y.occurrence := by
+  simp only [Sets.copiedHere, holds_both_iff] at h
+  exact (holds_sameFileOccurrence_iff fs c m).mp h.2.2.1
+
+/-- Identity-free historical rows cannot satisfy the repaired copy predicate. -/
+theorem copiedHere_missingOccurrence (fs : List Fact) (c m : Nat) (x : Fact)
+    (hx : lookup fs c = some x) (missing : x.occurrence.complete = false) :
+    holds fs (Sets.copiedHere c m) = false := by
+  cases hc : holds fs (Sets.copiedHere c m) with
+  | false => rfl
+  | true =>
+    obtain ⟨x', y, hx', _, present, _, _⟩ := copiedHere_sameOccurrence fs c m hc
+    have same : x = x' := Option.some.inj (hx.symm.trans hx')
+    subst x'
+    simp [missing] at present
 
 /-- A USBSTOR or installation-log observation names a device. The core does not
     reinterpret a registry key last-write as exact connection onset. -/
