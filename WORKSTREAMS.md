@@ -8,9 +8,9 @@ The project is CONAN-F. The desktop app is Conan; `conan` opens it. The `cop` co
 | Owner | State |
 |---|---|
 | Root Codex | Integrates tested changes and pushes main. Owns readers, checker/Lean source semantics, docs/UI and final integration. Active fixes: `/private/tmp/cop-evidence-meaning`, branch `fix/evidence-meaning`. |
-| Other Codex terminal (`01a1dc3d`) | Strict field policy and durable checkpoints are complete. Owns answer-row relationships and the separate strict 60-question public contract in `/private/tmp/cop-strict60-public`, branch `fix/strict60-public`. |
-| UI integration terminal (`01a1dd77`) | Desktop merge is complete and pushed as b7d254e: replay, case time display, report layout and graph colors. Its focused suite passed 46 tests; the full UI checkpoint ran 854 tests (843 passed, 11 dependency skips). Root now owns main integration. Claude supplied the desktop branch. |
-| Root helpers | Binary metadata and journal fixes are complete. `optical_timestamps` now owns execution-attribute reader emission; `lean_gap_types` owns its fixed roles, Lean predicates and source sentences. `journal_gaps` is idle. |
+| Other Codex terminal (`01a1dc3d`) | Owns answer-row relationships and separate public-contract reviews in `/private/tmp/cop-strict60-public`, branch `fix/strict60-public`. Selected exhibit/snapshot enforcement is the next separate fix. Strict field policy and durable checkpoints are integrated. |
+| UI terminal (`01a1dd77`) | The earlier desktop merge is integrated. New evidence/property views and an explicitly synthetic frontend sample are isolated in `/private/tmp/conan-findings-ux`, branch `ui/findings-ux`. Owns static assets, their serving allowlist, sample generator and focused UI tests. Root owns main integration. |
+| Root helpers | Binary metadata, journal diagnostics and execution-source fixes are complete. `optical_timestamps` retains the execution validation archive; `lean_gap_types` and `journal_gaps` are idle. |
 
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
@@ -18,7 +18,7 @@ App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATU
 
 ## Latest implementation
 
-The completed source/answer/checkpoint batch passed 913 tests (912 passed, one platform skip). See [the retained validation and remaining gaps](docs/CORRECTNESS_FIXES.md). New model experiments are held while the row-relationship and execution-source follow-ups are checked.
+The integrated source and desktop code at `635de46` passed 938 tests (937 passed, one platform skip). Six real-source execution-attribute claims independently replayed and two deliberate role substitutions were refused. This does not include the other terminal's unfinished answer-row and source-scope changes. See [the retained validation and remaining gaps](docs/CORRECTNESS_FIXES.md). New model experiments are held while row relationships, source scope and the public contracts are checked.
 The Hacking C-only pilot was prepared but never dispatched. Its frozen runtime and
 manifest are preparation artifacts, not a completed or running test.
 

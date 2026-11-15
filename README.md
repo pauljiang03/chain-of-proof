@@ -60,7 +60,9 @@ Other cases use explicit case profiles and evidence manifests.
 The latest [correctness fixes](docs/CORRECTNESS_FIXES.md) require declared meanings
 for typed answer fields, retain partial answers, and save answer checkpoints in the
 new test protocol. They also narrow shortcut, email, installation and USB statements
-to their source evidence. No new accuracy result is claimed for these changes.
+to their source evidence. Fixed execution-artifact roles separate reviewed sources
+from generic application sightings. Answer-row and source-scope checks are still in
+progress. No new accuracy result is claimed for these changes.
 
 ## Try it in 60 seconds
 
