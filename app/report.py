@@ -81,7 +81,7 @@ _CSS = """
 html { scroll-behavior:smooth; }
 .report { margin:0; background:var(--wash); color:var(--ink);
   font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-main { max-width:1100px; margin:40px auto; padding:48px 56px; background:var(--paper);
+main { max-width:1100px; margin:40px auto; padding:56px; background:var(--paper);
   border:1px solid var(--line); border-radius:12px; }
 header { border-top:5px solid var(--accent); padding-top:24px; }
 .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.14em;
@@ -129,7 +129,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
   .key table { font-size:11px; } .key th,.key td { padding:4px 6px; overflow-wrap:anywhere; } }
 /* The short report reads as one or two pages on screen too: bold lead-ins, tight sections. */
 @media screen {
-  main.brief { padding:48px 64px; font-size:14px; line-height:1.6; } .brief table { font-size:12.5px; } .brief .small { font-size:12px; }
+  main.brief { padding:56px; font-size:14px; line-height:1.6; } .brief table { font-size:12.5px; } .brief .small { font-size:12px; }
   .brief .lead { font-size:14.5px; line-height:1.7; }
   .brief header { border-top-width:4px; padding-top:14px; } .brief h1 { font-size:24px; margin:6px 0 10px; }
   .brief h2 { font-size:18px; margin-bottom:12px; } .brief section { margin-top:32px; padding-top:24px; }
@@ -153,10 +153,10 @@ ol { padding-left:22px; } ol li { margin:6px 0; }
 code { font:13px ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--wash); padding:1px 5px; border-radius:4px; }
 summary { cursor:pointer; color:var(--muted); font-size:13px; margin:12px 0; }
 footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; color:var(--muted); font-size:12px; }
-@media(max-width:700px) { main { margin:0; padding:24px 18px; border:0; border-radius:0; }
+@media(max-width:700px) { main { margin:0; padding:24px; border:0; border-radius:0; }
   h1 { font-size:28px; } article { padding:18px; } dl { grid-template-columns:1fr; gap:2px; }
   dd { margin-bottom:9px; } }
-@media print { @page { margin:20mm 22mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
+@media print { @page { margin:20mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
     font:9pt system-ui,sans-serif; color:#536674; } }
   .report,main { background:#fff; }
   .report { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
