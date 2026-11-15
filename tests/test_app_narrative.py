@@ -144,8 +144,9 @@ class Narrative(unittest.TestCase):
         folders = lead.index('By 2024-05-06, the account "worker" had opened 2 folders on the network location \\\\server\\share.')
         self.assertLess(mail, folders)
         self.assertIn('On 2024-05-07, 1 file went to the Recycle Bin.', lead)
-        self.assertIn('On 2024-05-07, the account "worker" downloaded wiper.exe.', lead)
+        self.assertFalse(any('downloaded' in sentence for sentence in lead))   # installers are for the report
         detail = narrative.build(case())['lead_detail']
+        self.assertIn('On 2024-05-07 at 11:30, the account "worker" downloaded wiper.exe.', detail)
         self.assertIn('From 2024-05-06 10:00 to 2024-05-07 11:30, "friend" and "worker" exchanged 2 e-mails. '
                       'The first subject is "Plans" and the last subject is "RE: Plans".', detail)
         self.assertGreater(len(' '.join(detail)), len(' '.join(lead)))
@@ -159,6 +160,24 @@ class Narrative(unittest.TestCase):
         lead = narrative.build(data)['lead']
         self.assertIn('On 2024-05-08, the account "worker" started Wiper.', lead)
         self.assertIn('On 2024-05-08, the computer shut down for the last time in the records.', lead)
+
+    def test_uploads_name_the_confidential_files_they_were_renamed_from(self):
+        data = bundle(finding('F1', [
+            row(1, 'tag', '\\USB1\\[topsecret]_plan.docx', 'confidential'),
+            row(2, 'tag', '\\[topsecret]_prices.xlsx', 'confidential'),
+            row(3, 'fileRenamed', 'C:\\x\\[topsecret]_prices.xlsx', 'C:\\x\\holiday.jpg', t=micro(2024, 5, 6, 10)),
+            row(4, 'fileRenamed', 'C:\\x\\notes.txt', 'C:\\x\\notes.md', t=micro(2024, 5, 6, 10, 1)),
+            row(5, 'cloudFile', 'holiday.jpg', 'google drive: uploaded', t=micro(2024, 5, 6, 10, 5)),
+            row(6, 'usbInsert', 'SER1', None, t=micro(2024, 5, 6, 9), exhibit='PC'),
+            row(7, 'fileCreated', 'x', 'unallocated space of device SER1', exhibit='USB1')]))
+        lead = narrative.build(data)['lead']
+        self.assertIn('On 2024-05-06, 1 confidential file got a new name with a different file type, '
+                      'for example [topsecret]_prices.xlsx became holiday.jpg.', lead)
+        self.assertIn('On 2024-05-06, Google Drive uploaded holiday.jpg. Before a rename, this file had the name [topsecret]_prices.xlsx.', lead)
+        self.assertFalse(any('notes.md' in sentence for sentence in lead))     # a rename without the marker is not news
+        self.assertIn('2 file paths carry the confidential-project marker, 1 on USB1.', lead)
+        cloud = sentences(narrative.build(data), 'cloud')
+        self.assertIn('Before a rename, holiday.jpg had the name [topsecret]_prices.xlsx.', cloud)
 
     def test_investigator_summary_leads_the_whole_case_only(self):
         data = case()

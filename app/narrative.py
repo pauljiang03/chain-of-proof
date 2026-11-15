@@ -274,11 +274,14 @@ def _files(case):
     if renames:
         out.append(f'The file system journal shows {_n(len(renames), "file rename", "file renames")}.')
         used += renames
-    if changed:
-        names = {_base(_obj(entry)).lower() for entry in marked}
-        first = next((entry for entry in changed if _base(_obj(entry)).lower() in names), changed[0])
+    hidden = _hidden(case)
+    if hidden:
+        out.append(f'{_n(len(hidden), "confidential file", "confidential files")} got a new name with a different file type.')
+        out.append(f'One example: {_base(_obj(hidden[0]))} became {_base(_aux(hidden[0]))}.')
+        used += hidden
+    elif changed:
         out.append(f'{_n(len(changed), "rename", "renames")} changed the file name extension.')
-        out.append(f'One example: {_base(_obj(first))} became {_base(_aux(first))}.')
+        out.append(f'One example: {_base(_obj(changed[0]))} became {_base(_aux(changed[0]))}.')
     return _point('files', 'Files', out, used)
 
 
@@ -354,7 +357,13 @@ def _cloud(case):
         out.append(f'{_n(uploads, "event is an upload", "events are uploads")}.')
     if 0 < len(names) <= 3:
         out.append(f'The file names are: {_join(names, 3)}.')
-    return _point('cloud', 'Cloud storage', out, part)
+    earlier = {}
+    for entry in _hidden(case):
+        earlier.setdefault(_base(_aux(entry)).lower(), entry)
+    renamed = [earlier[name.lower()] for name in names if name.lower() in earlier]
+    for entry in renamed[:3]:
+        out.append(f'Before a rename, {_base(_aux(entry))} had the name {_base(_obj(entry))}.')
+    return _point('cloud', 'Cloud storage', out, part + renamed)
 
 
 def _deleted(case):
@@ -375,6 +384,34 @@ def _notes(case):
         place = _aux(next(entry for entry in notes if _obj(entry) == text)) or 'note'
         out.append(f'A {place} file contains this text: "{text[:140]}".')
     return _point('notes', 'Search box and notes', out, searches[:3] + notes)
+
+
+def _marker(case):
+    """The text that most confidential-tagged file names share (for example "secret_project"), or ''."""
+    names = [_base(_obj(entry)).lower() for entry in case.of('tag')
+             if _aux(entry).lower() == 'confidential' and _extension(_base(_obj(entry)))]
+    if len(names) < 2:
+        return ''
+    need, best = max(2, int(len(names) * 0.6 + 0.999)), ''
+    for name in names:
+        for i in range(len(name)):
+            for j in range(i + max(6, len(best) + 1), len(name) + 1):
+                if sum(name[i:j] in other for other in names) >= need:
+                    best = name[i:j]
+                else:
+                    break
+    return best.strip('_-.[]() ')
+
+
+def _hidden(case):
+    """Renames that gave a confidential file a different file type, oldest first."""
+    marker = _marker(case)
+    if not marker:
+        return []
+    rows = [entry for entry in case.of('fileRenamed')
+            if marker in _base(_obj(entry)).lower() and _extension(_base(_obj(entry))) and _extension(_base(_aux(entry)))
+            and _extension(_base(_obj(entry))) != _extension(_base(_aux(entry)))]
+    return sorted(rows, key=lambda entry: case.stamp.get(id(entry), 0))
 
 
 def _story(case, devices, detail=False):
@@ -440,20 +477,28 @@ def _story(case, devices, detail=False):
             events.append((stamps[-1], stamps[-1], 'by', f'{who(rows)} had opened {_n(len(rows), "folder", "folders")} '
                                                          f'on the network location {share}'))
 
-    marked = {_base(_obj(entry)).lower() for entry in case.of('tag') if _aux(entry).lower() == 'confidential'}
-    changed = [entry for entry in case.of('fileRenamed')
-               if _extension(_base(_obj(entry))) and _extension(_base(_aux(entry)))
-               and _extension(_base(_obj(entry))) != _extension(_base(_aux(entry)))]
-    if changed:
-        example = next((entry for entry in changed if _base(_obj(entry)).lower() in marked), changed[0])
-        add(changed, f'{_n(len(changed), "file got", "files got")} a different file name extension, for example '
-                     f'{_base(_obj(example))} became {_base(_aux(example))}')
-
+    hidden = _hidden(case)
     uploads = [entry for entry in case.of('cloudFile') if _aux(entry).lower().endswith('uploaded')]
+    files = _distinct([_obj(entry) for entry in uploads])
+    earlier = {}
+    for entry in hidden:
+        earlier.setdefault(_base(_aux(entry)).lower(), _base(_obj(entry)))
+    linked = [name for name in files if name.lower() in earlier]
+    days = {}
+    for entry in hidden:
+        if id(entry) in case.stamp:
+            days.setdefault(case.at(case.stamp[id(entry)])[:10], []).append(entry)
+    for rows in days.values():
+        example = next((entry for entry in rows if _base(_aux(entry)).lower() not in {name.lower() for name in linked}), rows[0])
+        add(rows, f'{_n(len(rows), "confidential file", "confidential files")} got a new name with a different file type, '
+                  f'for example {_base(_obj(example))} became {_base(_aux(example))}')
     if uploads:
         service = _SERVICES.get(_aux(uploads[0]).split(':')[0].strip().lower(), 'the cloud client')
-        files = _distinct([_obj(entry) for entry in uploads])
-        add(uploads, f'{service} uploaded {_join(files, 4) if detail else _n(len(files), "file", "files")}')
+        clause = f'{service} uploaded {_join(files, 4)}'
+        if linked:
+            clause += (f'. Before a rename, {"this file" if len(linked) == 1 else "these files"} had the '
+                       f'{"name" if len(linked) == 1 else "names"} {_join([earlier[name.lower()] for name in linked], 4)}')
+        add(uploads, clause)
     if detail:
         for entry in case.of('localSearch')[:1]:
             add([entry], f'the {_aux(entry) or "local search history"} recorded the search text "{_obj(entry)}"')
@@ -470,7 +515,7 @@ def _story(case, devices, detail=False):
     for entry in case.of('fileDownloaded'):
         if 'AccessedTime' not in _s(_prov(entry).get('time_meaning')) and id(entry) in case.stamp:
             loads.setdefault(case.at(case.stamp[id(entry)])[:10], []).append(entry)
-    for rows in loads.values():
+    for rows in loads.values() if detail else ():   # the Overview names the programs that ran, not every installer
         add(rows, f'{who(rows)} downloaded {_join(_distinct([_base(_obj(entry)) for entry in rows]), 4)}')
 
     # Programs that a user started (UserAssist) whose names contain a one-word watch-list search term.
@@ -526,16 +571,23 @@ def _story(case, devices, detail=False):
     tags = case.of('tag')
     marked = [entry for entry in tags if _aux(entry).lower() == 'confidential']
     same = [entry for entry in tags if _aux(entry).lower().startswith(_SAME)]
+    items = {_s(_prov(entry).get('exhibit')) for entry in case.records} - {''}
     if marked:
-        last.append(f'{_n(len(marked), "file path carries", "file paths carry")} the confidential-project marker.')
+        where = Counter(found.group(1) for found in (re.match(r'^\\([^\\]+)\\', _obj(entry)) for entry in marked)
+                        if found and found.group(1) in items)
+        spots = [f'{count} on {item}' for item, count in sorted(where.items())]
+        last.append(f'{_n(len(marked), "file path carries", "file paths carry")} the confidential-project marker'
+                    + (f', {_join(spots, 3)}' if spots else '') + '.')
     if same:
         last.append(f'{_n(len(same), "file entry has", "file entries have")} the same size and last-modified time '
                     f'as a file in a different location.')
     found = Counter(_s(_prov(entry).get('exhibit')) for entry in case.of('fileCreated') if _aux(entry).lower().startswith(_UNALLOCATED))
     found = [(item, count) for item, count in sorted(found.items()) if item]
-    if found:
-        last.append('The unallocated space of ' + _join([f'{item} contains {_n(count, "recovered file entry", "recovered file entries")}'
-                                                         for item, count in found], 4) + '.')
+    named = {row['item']: row for row in devices if row.get('item')}
+    for item, count in found:
+        row = named.get(item, {})
+        what = ('the disc ' if row.get('device') == 'disc' else '') + item + (f' ("{row["label"]}")' if row.get('label') else '')
+        last.append(f'The unallocated space of {what} contains {_n(count, "recovered file entry", "recovered file entries")}.')
     if detail:
         first = _lead(case)[:1] + first
     return first + out + last
