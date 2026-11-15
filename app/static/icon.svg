@@ -1,47 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <!-- CONAN-F mark. Original artwork drawn for this project: a detective in profile and a
-       magnifying glass showing a check, for findings that have been checked. -->
+  <!-- CONAN-F mark. Original artwork drawn for this project: an anime-style detective in
+       silhouette, with a magnifying glass showing a check for findings that have been checked.
+       It is an original character and does not copy any existing one. -->
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f7bea"/>
-      <stop offset="1" stop-color="#123a8c"/>
+      <stop offset="0" stop-color="#4f9df5"/>
+      <stop offset="1" stop-color="#173f9e"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#cfe3ff"/>
+    </radialGradient>
     <clipPath id="tile"><rect width="1024" height="1024" rx="228"/></clipPath>
   </defs>
   <g clip-path="url(#tile)">
     <rect width="1024" height="1024" fill="url(#sky)"/>
-    <g transform="translate(-58 -30)">
-      <path fill="#f4f8ff" d="M 204 494
-        C 238 478, 272 450, 302 424
-        C 300 304, 372 222, 450 216
-        C 454 186, 506 186, 510 216
-        C 592 222, 660 300, 672 390
-        C 728 400, 780 430, 816 476
-        C 772 480, 716 476, 664 472
-        C 660 490, 664 506, 672 518
-        C 690 545, 720 572, 734 594
-        C 740 604, 728 614, 700 614
-        C 696 626, 700 640, 706 650
-        C 710 658, 700 663, 691 664
-        C 700 668, 706 678, 702 686
-        C 698 694, 690 698, 690 706
-        C 690 720, 702 732, 698 748
-        C 694 770, 676 784, 652 784
-        C 620 784, 592 778, 570 768
-        C 564 786, 560 800, 560 812
-        C 596 814, 640 824, 676 846
-        C 740 884, 810 960, 850 1060
-        L 190 1060
-        C 190 900, 204 740, 240 594
-        C 276 616, 312 620, 338 606
-        C 328 580, 322 550, 324 522
-        C 284 518, 242 508, 204 494 Z"/>
-      <path d="M 324 444 C 420 340, 560 340, 668 424" fill="none" stroke="#2362cc" stroke-width="10" stroke-linecap="round"/>
-      <path d="M 286 664 C 400 722, 506 780, 566 826" fill="none" stroke="#2362cc" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="512" cy="470" r="420" fill="url(#glow)"/>
+    <g transform="rotate(-6 512 640) translate(-22 10)" fill="#0c1a3d">
+      <!-- coat with a raised collar -->
+      <path d="M 462 730 L 462 806 Q 418 786 372 730 Q 356 800 330 852 Q 262 876 222 950 L 190 1110 L 834 1110 L 802 950
+        Q 762 876 694 852 Q 668 800 652 730 Q 606 786 562 806 L 562 730 Z"/>
+      <!-- head and hair -->
+      <path d="M 308 516 Q 272 526 242 505 Q 280 469 291 417 Q 243 398 216 355 Q 273 355 320 325 Q 291 263 294 196 Q 336 237 394 251 Q 407 185 449 132 Q 452 182 485 220 Q 544 151 623 108 Q 590 165 588 231 Q 670 204 756 210 Q 703 234 672 283 Q 746 296 809 338 Q 761 341 725 373 Q 772 422 790 487 Q 748 486 716 516 Q 750 568 738 638 Q 698 612 690 592 Q 676 664 604 714 Q 556 748 512 750 Q 468 748 420 714 Q 348 664 334 592 Q 326 612 286 638 Q 274 568 308 516 Z"/>
+      <!-- shirt and tie -->
+      <path d="M 474 806 L 512 872 L 550 806 Z" fill="#eaf3ff"/>
+      <path d="M 500 810 L 524 810 L 519 830 L 530 868 L 512 888 L 494 868 L 505 830 Z"/>
+      <!-- large shining glasses -->
+      <ellipse cx="426" cy="560" rx="74" ry="66" fill="#ffffff"/>
+      <ellipse cx="598" cy="560" rx="74" ry="66" fill="#ffffff"/>
+      <path d="M 528 676 Q 560 694 592 668" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
     </g>
     <!-- magnifying glass showing a check -->
-    <path d="M 868 898 L 922 952" fill="none" stroke="#123a8c" stroke-width="78" stroke-linecap="round"/>
-    <circle cx="790" cy="820" r="136" fill="#123a8c"/>
+    <path d="M 868 898 L 922 952" fill="none" stroke="#0c1a3d" stroke-width="78" stroke-linecap="round"/>
+    <circle cx="790" cy="820" r="136" fill="#0c1a3d"/>
     <path d="M 868 898 L 922 952" fill="none" stroke="#f4f8ff" stroke-width="46" stroke-linecap="round"/>
     <circle cx="790" cy="820" r="116" fill="#f4f8ff"/>
     <circle cx="790" cy="820" r="90" fill="#2fbf71"/>
