@@ -196,7 +196,7 @@ assert.equal(story.zone.local, false); assert.equal(story.F.clock.format(usb), '
 state.run = {findings: Array.from({length: 95}, (_, i) => ({finding_id: 'F' + (i + 1), status: 'verified', cited_facts: [{id: i}]}))};
 api.probe.prepare(); api.probe.build();
 assert.equal(state.steps, 95);                      // the slider spans the whole case
-assert.equal(state.step, 95);                       // and starts with everything shown
+assert.equal(state.step, 40);                       // browsing starts at the end of the visible page
 assert.equal(state.page, 0); assert.equal(api.probe.local(), 40);
 api.probe.seek(41);                                 // the first finding of the second page
 assert.equal(state.page, 1); assert.equal(api.probe.local(), 1);

@@ -26,7 +26,7 @@
 
   const state = {
     key: null, signature: null, run: null, events: [], items: [],
-    scope: "", query: "", focus: null, page: 0, step: 0, steps: 0, total: 0,
+    scope: "", query: "", focus: null, page: 0, step: 0, steps: 0, total: 0, browsing: true,
     selected: null, hover: null, view: { x: 24, y: 56, k: 1 }, fitted: false,
     model: { nodes: new Map(), edges: [], shown: [] }, timer: null, drag: null, columns: [], width: 0, examined: new Set(), rowKeys: new WeakMap(),
   };
@@ -250,9 +250,11 @@
     nodes.forEach((item) => { item.x = xs[item.column]; });
 
     // The replay runs through every finding in the selection, not only the page on screen.
-    const keepAll = state.step >= state.steps;
     state.steps = all.length;
-    if (keepAll || state.step > state.steps) state.step = state.steps;
+    // Browsing a page reveals that page, not the end of the entire investigation.
+    // Explicit replay positions always identify the page containing that position.
+    state.step = state.browsing ? Math.min(state.steps, (state.page + 1) * PAGE)
+      : Math.max(0, Math.min(state.steps, state.step));
     state.model = { nodes, edges, shown };
   }
 
@@ -421,26 +423,25 @@
     });
     model.edges.forEach((edge) => edge.el.classList.toggle("hl", Boolean(set && set.has(edge.from.id) && set.has(edge.to.id))));
   }
-  function applyStep(pulse) {
+  function applyStep() {
     const model = state.model, at = local();
     model.nodes.forEach((item) => {
       item.el.classList.toggle("unborn", item.birth > at);
-      if (pulse && item.column === "finding" && item.birth === at) {
-        item.el.classList.add("newborn");
-        setTimeout(() => item.el.classList.remove("newborn"), 1000);
-      }
+      item.el.classList.toggle("current", !state.browsing && item.column === "finding" && item.birth === at);
     });
     model.edges.forEach((edge) => edge.el.classList.toggle("unborn", edge.birth > at));
     const slider = $("graph-step");
     slider.max = String(state.steps);
     slider.value = String(state.step);
-    slider.setAttribute("aria-valuetext", state.step + " of " + state.steps + " checked claims");
+    slider.disabled = !state.steps;
+    slider.setAttribute("aria-valuetext", !state.steps ? "No claims to replay" : state.browsing
+      ? "Viewing claims " + (state.page * PAGE + 1) + " through " + state.step + " of " + state.steps
+      : state.step + " of " + state.steps + " checked claims");
     controls();
     const last = at > 0 ? model.shown[at - 1] : null;
-    $("graph-step-label").textContent = state.steps
-      ? state.step + " / " + state.steps + (state.step >= state.steps && (state.page + 1) * PAGE < state.steps ? "  all shown"
-        : last ? "  " + last.id + (last.refused ? " refused" : " certified") : "  start")
-      : "";
+    $("graph-step-label").textContent = !state.steps ? "No claims to replay"
+      : state.browsing ? "Viewing " + (state.page * PAGE + 1) + "–" + state.step + " / " + state.steps
+      : state.step + " / " + state.steps + (last ? " · " + last.id + (last.refused ? " refused" : " certified") : " · Start");
   }
   function controls() {
     const start = state.total ? state.page * PAGE + 1 : 0, end = Math.min(state.total, (state.page + 1) * PAGE);
@@ -451,10 +452,12 @@
     const focused = state.items.find((item) => item.key === state.focus);
     $("graph-focus-label").textContent = focused ? focused.id + " and related" : "";
     $("graph-focus").title = focused ? "Showing " + focused.id + " and the findings that cite any of the same records" : "";
-    $("graph-play").textContent = state.timer ? "❚❚ Pause" : "▶ Replay";
+    const action = state.timer ? "Pause" : !state.browsing && state.step > 0 && state.step < state.steps ? "Resume" : "Replay";
+    $("graph-play").textContent = (state.timer ? "❚❚ " : "▶ ") + action;
+    $("graph-play").setAttribute("aria-label", action + " the graph");
     $("graph-play").disabled = !state.steps;
     $("graph-start").disabled = !state.steps || state.step === 0;
-    $("graph-end").disabled = !state.steps || (state.step === state.steps && state.page === Math.max(0, Math.ceil(state.steps / PAGE) - 1));
+    $("graph-end").disabled = !state.steps || (!state.browsing && state.step === state.steps && state.page === Math.max(0, Math.ceil(state.steps / PAGE) - 1));
   }
   function scopes() {
     const select = $("graph-scope"), counts = new Map();
@@ -483,43 +486,46 @@
   function stop() { if (state.timer) { clearInterval(state.timer); state.timer = null; controls(); } }
   // Scroll so the finding the replay has just reached is on screen, whether it is playing or being dragged.
   function followTarget(item, host, inset, view) {
-    const target = { ...view }, left = item.x * view.k + view.x, right = (item.x + item.w) * view.k + view.x;
-    const top = (item.y - item.h / 2) * view.k + view.y, bottom = (item.y + item.h / 2) * view.k + view.y;
-    const visibleTop = inset.top + 12, visibleBottom = host.height - inset.bottom - 12;
-    if (left < 20) target.x = 20 - item.x * view.k;
-    else if (right > host.width - 20) target.x = host.width - 20 - (item.x + item.w) * view.k;
-    if (top < visibleTop || bottom > visibleBottom) target.y = (visibleTop + visibleBottom) / 2 - item.y * view.k;
+    const visibleTop = inset.top + 12, visibleBottom = Math.max(visibleTop + 1, host.height - inset.bottom - 12);
+    // A manually enlarged card must still fit when replay takes control again.
+    const k = Math.min(view.k, Math.max(1, host.width - 40) / item.w, (visibleBottom - visibleTop) / item.h);
+    const target = { ...view, k }, left = item.x * k + view.x, right = (item.x + item.w) * k + view.x;
+    const top = (item.y - item.h / 2) * k + view.y, bottom = (item.y + item.h / 2) * k + view.y;
+    if (left < 20) target.x = 20 - item.x * k;
+    else if (right > host.width - 20) target.x = host.width - 20 - (item.x + item.w) * k;
+    if (top < visibleTop || bottom > visibleBottom) target.y = (visibleTop + visibleBottom) / 2 - item.y * k;
     return target;
   }
-  function follow(animate) {
+  function follow() {
     const at = local(), host = $("graph-host").getBoundingClientRect();
     const newest = [...state.model.nodes.values()].find(item => item.column === "finding" && item.birth === at);
     if (!newest || !host.height || !host.width) return;
-    const target = followTarget(newest, host, insets(), state.view);
-    if (animate) {
-      if (target.x === state.view.x && target.y === state.view.y) return;
-      settle(target, motion.frame ? { x: motion.velocity.x, y: motion.velocity.y } : null, 1, 0.20);
-    } else { interrupt(); state.view = target; applyView(); }
+    // Replay positions and the visible card change together, including during fast playback.
+    interrupt();
+    state.view = followTarget(newest, host, insets(), state.view);
+    applyView();
   }
   // Move the replay to a position, turning to the page that holds it.
-  function seek(step, pulse) {
+  function seek(step) {
+    state.browsing = false;
     state.step = Math.max(0, Math.min(state.steps, Math.round(Number(step) || 0)));
     const page = Math.max(0, Math.floor((state.step - 1) / PAGE));
-    if (page === state.page) { applyStep(pulse); return follow(Boolean(pulse) && state.step < state.steps); }
+    if (page === state.page) { applyStep(); return follow(); }
     state.page = page;
     interrupt();
     build();
     draw();
     fit(false, true);
-    follow(false);
+    follow();
   }
   function play() {
     if (state.timer) return stop();
-    if (state.step >= state.steps) seek(0);
+    if (!state.steps) return;
+    if (state.browsing || state.step >= state.steps) seek(0);
     // A short case plays slowly enough to follow; a long one still finishes in about half a minute.
     const pace = Math.max(70, Math.min(520, Math.round(30000 / Math.max(1, state.steps))));
     state.timer = setInterval(() => {
-      seek(state.step + 1, true);
+      seek(state.step + 1);
       if (state.step >= state.steps) stop();
     }, pace);
     controls();
@@ -590,7 +596,7 @@
     return text(item.label);
   }
   function focus(key) {
-    state.focus = key; state.page = 0; state.selected = key; state.step = Infinity;
+    state.focus = key; state.page = 0; state.selected = key; state.browsing = true;
     rebuild(true);
   }
 
@@ -657,15 +663,21 @@
     });
     $("graph-start").addEventListener("click", () => { stop(); seek(0); controls(); });
     $("graph-end").addEventListener("click", () => { stop(); seek(state.steps); controls(); });
-    $("graph-scope").addEventListener("change", (event) => { state.scope = event.target.value; state.focus = null; state.page = 0; state.step = Infinity; rebuild(true); });
+    $("graph-scope").addEventListener("change", (event) => { state.scope = event.target.value; state.focus = null; state.page = 0; state.browsing = true; rebuild(true); });
     $("graph-search").addEventListener("input", (event) => {
-      state.query = event.target.value.trim().toLowerCase(); state.focus = null; state.page = 0; state.step = Infinity;
+      state.query = event.target.value.trim().toLowerCase(); state.focus = null; state.page = 0; state.browsing = true;
       rebuild(true);
     });
-    $("graph-prev").addEventListener("click", () => { state.page -= 1; state.step = Infinity; rebuild(true); });
-    $("graph-next").addEventListener("click", () => { state.page += 1; state.step = Infinity; rebuild(true); });
-    $("graph-focus-clear").addEventListener("click", () => { state.focus = null; state.page = 0; state.step = Infinity; rebuild(true); });
-    window.addEventListener("resize", () => { if (!state.fitted) state.fitted = fit(); });
+    $("graph-prev").addEventListener("click", () => { state.page -= 1; state.browsing = true; rebuild(true); });
+    $("graph-next").addEventListener("click", () => { state.page += 1; state.browsing = true; rebuild(true); });
+    $("graph-focus-clear").addEventListener("click", () => { state.focus = null; state.page = 0; state.browsing = true; rebuild(true); });
+    window.addEventListener("resize", resize);
+    if (typeof ResizeObserver !== "undefined") new ResizeObserver(resize).observe($("graph-host"));
+  }
+
+  function resize() {
+    if (!state.fitted) state.fitted = fit();
+    else if (!state.browsing && state.step > 0) follow();
   }
 
   CONAN.graph = {
@@ -674,7 +686,7 @@
       const signature = revision === null ? JSON.stringify([bundle, array(events)]) : revision;
       const changedCase = key !== state.key;
       if (!changedCase && signature === state.signature) return;
-      if (changedCase) Object.assign(state, { scope: "", query: "", focus: null, page: 0, step: Infinity, selected: null, hover: null, fitted: false });
+      if (changedCase) Object.assign(state, { scope: "", query: "", focus: null, page: 0, step: 0, browsing: true, selected: null, hover: null, fitted: false });
       state.key = key; state.signature = signature; state.run = bundle; state.events = array(events);
       if (changedCase) $("graph-search").value = "";
       prepare();
@@ -687,7 +699,7 @@
       state.model = { nodes: new Map(), edges: [], shown: [] };
       $("graph").replaceChildren();
     },
-    resize() { if (!state.fitted) state.fitted = fit(); },
+    resize,
     focusFinding(id, data = null) {
       const matches = state.items.filter((item) => item.id === id && !item.refused && (!data || item.data === data));
       if (matches.length === 1) focus(matches[0].key);

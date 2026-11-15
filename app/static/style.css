@@ -226,8 +226,12 @@ pre { margin: 6px 0 0; padding: 8px 10px; background: var(--panel-2); border: 1p
 .graph-toolbar label { display: inline-flex; align-items: center; gap: 6px; }
 .graph-page, .replay, .zoom, .graph-focus { display: inline-flex; align-items: center; gap: 4px; }
 .graph-focus { padding: 0 2px 0 8px; height: 26px; border-radius: 13px; background: var(--accent-soft); color: var(--accent); font-family: var(--mono); font-size: 0.71875rem; }
-.replay input[type="range"] { width: clamp(132px, 18vw, 280px); flex: 0 0 auto; padding: 0; }
-#graph-step-label { width: 190px; flex: 0 0 190px; white-space: nowrap; font-size: 0.6875rem; }
+.replay { display: grid; grid-template-columns: 84px 26px minmax(0, 1fr) 26px; gap: 6px; width: 100%; min-width: 0; }
+.replay input[type="range"] { width: 100%; min-width: 0; padding: 0; margin: 0; }
+#graph-play { width: 84px; }
+#graph-step-label { grid-column: 1 / -1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.6875rem; }
+.graph-legend > .spacer { display: none; }
+.graph-legend .legend { flex-wrap: wrap; gap: 6px 14px; }
 /* Both fields give way before the bar wraps onto a second row. */
 .graph-toolbar .search-field { flex: 1 1 110px; max-width: 190px; min-width: 0; }
 #graph-search { min-width: 0; width: 100%; }
@@ -281,8 +285,9 @@ pre { margin: 6px 0 0; padding: 8px 10px; background: var(--panel-2); border: 1p
 .graph.faded .edge:not(.hl) { opacity: .07; }
 .graph .edge.hl { stroke-width: 1.8; opacity: 1; }
 .graph .node.unborn, .graph .edge.unborn { opacity: 0; pointer-events: none; }
-.graph .node.newborn rect.box { animation: born 1s ease-out; }
-@keyframes born { 0% { stroke-width: 6; } 100% { stroke-width: 1; } }
+.graph .node.finding.current { opacity: 1; transition: none; }
+.graph .node.finding.current > * { transition: none; }
+.graph .node.finding.current .box { stroke-width: 3; }
 
 /* Dialog */
 dialog { border: 1px solid var(--line); border-radius: 8px; padding: 0; background: var(--panel); color: var(--text); box-shadow: 0 20px 60px rgba(0, 0, 0, .3); width: min(620px, 92vw); }
