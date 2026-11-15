@@ -390,8 +390,8 @@ class DirectoryIndexTests(unittest.TestCase):
             from dissect.ntfs.c_ntfs import COLLATION
         except ImportError:
             self.skipTest("Dissect extraction dependency is not installed")
-        # This is the reviewer's native Index/cache reproduction. Native search
-        # loops on this cached child; our lookup rejects the repeated VCN first.
+        # Dissect's own Index search loops on this cached child; our lookup
+        # rejects the repeated VCN first.
         script = r'''
 import json
 from functools import lru_cache

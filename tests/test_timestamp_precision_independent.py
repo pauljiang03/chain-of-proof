@@ -1,8 +1,4 @@
-"""Independent integer-tick controls for prospective timestamp scoring.
-
-These use synthetic answer contracts and independently chosen source ticks;
-they do not read private references or change historical scores.
-"""
+"""Timestamp scoring on synthetic answer contracts, checked with independent integer ticks."""
 from copy import deepcopy
 from fractions import Fraction
 import unittest

@@ -1,7 +1,4 @@
-"""Optional, offline integration with the real API graph and a scripted model.
-
-Run after installing .[agent]. No provider credentials or model calls are used.
-"""
+"""Offline integration with the real API graph and a scripted model; needs `.[agent]`, makes no model calls."""
 import importlib.util
 import json
 import os

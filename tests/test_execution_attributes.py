@@ -53,8 +53,7 @@ def userassist_value():
 
 
 def attrs(ev):
-    # This suite checks the original identity-role gates. All metadata roles and
-    # their omission on rejected/unavailable sources are checked separately.
+    # Only the program/path identity roles; metadata roles are tested elsewhere.
     return [(json.loads(row[-1])['attribute_role'], decode_value(row[4], 'string'), json.loads(row[-1]))
             for row in ev.rows() if row[0] == 'attributeTextValue'
             and json.loads(row[-1])['attribute_role'] in ('app.execution.program', 'app.execution.path')]

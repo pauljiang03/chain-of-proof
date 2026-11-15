@@ -1,7 +1,4 @@
-"""Parsing and time-conversion helpers of extractor/webcloud.py, on synthetic values.
-
-    python3 -m unittest tests.test_webcloud
-"""
+"""Parsing and time-conversion helpers of extractor/webcloud.py, on synthetic values."""
 import struct
 import unittest
 import uuid

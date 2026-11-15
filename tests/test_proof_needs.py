@@ -77,8 +77,8 @@ class ProofNeeds(unittest.TestCase):
 
     def test_overlapping_times_require_independent_precision_without_rewriting_uncertainty(self):
         result = self.check({"copiedHere": [4703, 4702]})
-        # This old fixture also lacks native occurrence identity. The timestamp
-        # condition remains independently reported; it is not the only gap.
+        # The fixture also lacks native occurrence identity; the timestamp
+        # condition is still reported on its own.
         gap = next(row for row in result["proof_gap"]["requirements"]
                    if row["category"] == "uncertain_or_wrong_time_order")
         self.assertEqual(gap["category"], "uncertain_or_wrong_time_order")

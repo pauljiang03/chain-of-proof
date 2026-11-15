@@ -172,8 +172,7 @@ class YahooCacheExtractionTests(unittest.TestCase):
                     'source_snapshot': 'base-volume', 'source_variant': 'primary'}}
 
     def observations(self, paths=None, ctx=None):
-        # Interception makes source/negative tests runnable before the central
-        # fixed-role catalog lands. The separate integration test uses real emit.
+        # Capture emit calls directly; the integration test below uses the real emit.
         with patch.object(yahoo, 'emit_attribute') as emit:
             ev = Evidence()
             yahoo.extract(ev, paths or [self.index, self.payload], ctx or self.ctx)

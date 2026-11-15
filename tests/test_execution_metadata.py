@@ -163,7 +163,7 @@ class ExecutionMetadata(unittest.TestCase):
         self.assertNotIn('run_count', fields)
         self.assertIn('interpreted count unavailable', fields['raw_run_count'][1]['run_count_status'])
         self.assertTrue(any('below 5' in problem for problem in self.ev.problems))
-        # Frozen legacy row interpretation is unchanged and explicitly labelled.
+        # The legacy programRun row keeps its own count and says it is a legacy display.
         old = next(row for row in self.ev.rows() if row[0] == 'programRun')
         self.assertEqual(json.loads(old[-1])['run_count'], 0)
         self.assertIn('legacy display', json.loads(old[-1])['run_count_interpretation'])

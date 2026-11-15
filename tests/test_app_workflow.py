@@ -1,4 +1,4 @@
-"""Exercise HTTP -> child worker -> existing proof pipeline without a provider."""
+"""HTTP -> child worker -> proof pipeline, without a model provider."""
 from __future__ import annotations
 
 import http.client

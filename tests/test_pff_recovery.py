@@ -297,7 +297,7 @@ class ProcessAndCapture(unittest.TestCase):
             self.assertNotIn('facts_sha256', receipt)
 
     def test_actual_invalid_native_file_is_isolated_and_produces_failed_receipt(self):
-        # Calls the real reviewed library against synthetic invalid PFF bytes only.
+        # Calls the real library on synthetic invalid PFF bytes only.
         try:
             pff.library_identity()
         except pff.RecoveryError:

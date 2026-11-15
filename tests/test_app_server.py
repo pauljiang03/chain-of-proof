@@ -337,7 +337,7 @@ class AppServer(unittest.TestCase):
         self.assertEqual((self.manager.calls[-1][3]["brief"], self.manager.calls[-1][3]["sections"]), (True, frozenset()))
         self.request("/api/report?name=saved&brief=1")
         self.assertEqual((self.manager.calls[-1][3]["brief"], self.manager.calls[-1][3]["sections"]), (True, None))
-        self.request("/api/report?name=saved")                # no options: the complete report, as before
+        self.request("/api/report?name=saved")                # no options: the complete report
         self.assertEqual(self.manager.calls[-1], ("report", "saved", "html"))
         before = len(self.manager.calls)
         for bad in ("ids=", "ids=F1,F1", "ids=a%20b", "sections=findings", "sections=needs,needs", "brief=0", "brief=", "format=md&brief=1",

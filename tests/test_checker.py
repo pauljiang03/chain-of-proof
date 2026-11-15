@@ -1,9 +1,4 @@
-"""End-to-end tests of the checker and verifier on the sample fixture.
-
-    python3 -m unittest discover -s tests -t .
-
-Needs the Lean toolchain (elan). Each test runs the real kernel.
-"""
+"""End-to-end tests of the checker and verifier on the sample fixture; needs the Lean toolchain."""
 import copy
 import json
 import tempfile
@@ -54,9 +49,8 @@ class CheckerTest(unittest.TestCase):
         self.assertEqual(r["status"], "verified", r)
         self.assertEqual((r["strength"], r["axioms"]), ("strong", []))
         self.assertIn('is tagged "unauthorized-device" (rule: device serial is not on', r["english"])
-        # The historical fixture lacks native file-occurrence identity. Its old
-        # path/serial-only copy heuristic now fails closed (new positives have
-        # explicit source/native identity in test_file_occurrence.py).
+        # The sample fixture lacks native file-occurrence identity, so a copy claim
+        # fails closed (accepted copies are in test_file_occurrence.py).
         self.assertEqual(self.run_check({"copiedHere": [4701, 4700]}, "H1")["status"], "rejected")
         judged = self.run_check({"both": [NARRATIVE, {"tagged": [3100, "obj", 9003, 52]}]}, "J1")
         self.assertEqual((judged["status"], judged["strength"]), ("verified", "judgment"))
