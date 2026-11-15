@@ -64,6 +64,43 @@ class Markup(HTMLParser):
 
 
 class AppReport(unittest.TestCase):
+    def test_professional_fields_and_optional_incident_assessment_stay_author_supplied(self):
+        data = bundle(finding())
+        options = report_options(sections=[], report_id='R-9 <x>', report_version='2',
+                                 address='Lab address', request_date='2026-11-01',
+                                 collection_method='Encrypted delivery', additional_items='E2: not examined',
+                                 method_notes='Procedure A. Reader version 2.', disposition='E1 retained by Lab.',
+                                 authorizer='Reviewer', impact='Service interrupted.', root_cause='See F1.',
+                                 response='Host isolated.', recommendations='Review access. Owner: IT.')
+        rendered = render_html(data, options)
+        self.assertIn('R-9 &lt;x&gt;', rendered)
+        for text in ('Encrypted delivery', 'E2: not examined', 'Procedure A. Reader version 2.',
+                     'E1 retained by Lab.', 'Host isolated.', 'Review access. Owner: IT.'):
+            self.assertIn(text, rendered)
+        self.assertIn('The report author supplies the following incident assessment and actions.', rendered)
+        self.assertNotIn('id="incident"', render_html(data))
+        self.assertNotIn('id="limits"', rendered)
+        self.assertLess(rendered.index('id="signoff"'), rendered.index('id="glossary"'))
+        headings = re.findall(r'<section id="[^"]+"><h2>(.*?)</h2>', rendered)
+        numbered = [text for text in headings if not text.startswith('Appendix')]
+        self.assertEqual([int(text.split('.')[0]) for text in numbered], list(range(1, len(numbered) + 1)))
+        self.assertIn('Appendix A — Terms and abbreviations', headings)
+
+    def test_result_index_and_properties_keep_source_scope_and_exact_statements(self):
+        first = record(prov={'exhibit': 'E1', 'size': 0, 'recovered': False, 'user': '<u>'})
+        second = record(prov={'exhibit': 'E2', 'size': 20, 'user': 'B'})
+        data = bundle(finding(question='Combined certified findings', cited_facts=[first]),
+                      finding(finding_id='F2', cited_facts=[second]))
+        rendered = render_html(data, report_options(ids=['F1'], sections=[]))
+        self.assertIn('Size in bytes: 0', rendered)
+        self.assertIn('Recovered entry: False', rendered)
+        self.assertIn('User: &lt;u&gt;', rendered)
+        self.assertNotIn('Size in bytes: 20', rendered)
+        self.assertNotIn('#finding-f2', rendered)
+        self.assertNotIn('Combined certified findings</h3>', rendered)
+        self.assertIn('<summary>Exact certificate statement</summary>', rendered)
+        self.assertEqual(Markup(rendered).sentences, [finding()['english']])
+
     def test_standalone_literal_sentence_and_full_evidence_have_working_scoped_links(self):
         row = finding(cited_facts=[record(i) for i in (7, 8, 9, 10)])
         data = bundle(row)
@@ -213,12 +250,12 @@ class AppReport(unittest.TestCase):
         self.assertNotIn('finding-f1', parsed.ids)
         self.assertIn('<strong>Selected findings only.</strong> This report shows 1 of the 3 entries', rendered)
         self.assertIn('Entries left out are omitted, not refuted.', rendered)
-        self.assertIn('Left out of this report: question-by-question plan; investigator judgments; '
-                      'full evidence records; Lean proof records; audit, coverage and history.', rendered)
+        self.assertIn('Left out of this report: question-by-question plan, investigator judgments, '
+                      'full evidence records, Lean proof records, audit, coverage and history.', rendered)
         # cover details are text, labelled as the author's own
         self.assertIn('<dt>Case reference</dt><dd>REF-7 &lt;i&gt;</dd>', rendered)
         self.assertIn('<dt>Examiner</dt><dd>A. Examiner</dd>', rendered)
-        self.assertIn('not part of the stored run and were not checked', rendered)
+        self.assertIn('The report author supplies the administrative details and examination notes.', rendered)
         self.assertNotIn('<dt>Organisation</dt>', rendered)
         # sections: refusals kept; judgments, appendices and the plan gone, with no link left dangling
         self.assertIn('id="needs"', rendered)
@@ -248,14 +285,14 @@ class AppReport(unittest.TestCase):
         rendered = render_html(data, options)
         parsed = Markup(rendered)
         order = [rendered.index(f'<section id="{name}">') for name in (
-            'summary', 'exhibits', 'method', 'findings', 'glossary', 'signoff', 'evidence')]
+            'summary', 'request', 'exhibits', 'method', 'findings', 'disposition', 'signoff', 'glossary', 'evidence')]
         self.assertEqual(order, sorted(order))               # the sign-off closes the report; appendices follow it
         self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
         for label, value in (('Requested by', 'Det. &lt;X&gt;'), ('Authority for the request', 'Warrant 7'),
                              ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
             self.assertIn(f'<dt>{label}</dt><dd>{value}</dd>', rendered)
-        self.assertIn('<strong>2 findings</strong> in this report passed the proof checker: 1 follow from the records '
-                      'alone and 1 rest on a stated rule of thumb. They cite 3 evidence records from 2 exhibits.', rendered)
+        self.assertIn('<strong>2 findings</strong> from the supplied examination records. The findings refer to 3 evidence records.', rendered)
+        self.assertIn('1 finding uses a stated heuristic rule.', rendered)
         # evidence items, their stored hash values and the tools are the records' own words, escaped
         self.assertIn('<strong>USB &lt;b&gt;1&lt;/b&gt;</strong>', rendered)
         self.assertIn('<span class="mono">MD5 ' + 'ab' * 16 + '</span> <span class="small">(record 9)</span>', rendered)
@@ -264,19 +301,19 @@ class AppReport(unittest.TestCase):
         self.assertIn('<td>synthetic parser</td><td>Record reader</td><td>2</td>', rendered)
         self.assertNotIn('<b>1</b>', rendered)
         self.assertNotIn('<i>1.0</i>', rendered)
-        self.assertIn('It is not a list of everything submitted', rendered)
+        self.assertIn('The table lists evidence items that the findings cite.', rendered)
         self.assertIn('<div><span>Examiner</span><strong>A. Examiner</strong></div>', rendered)
         self.assertIn('<div><span>Date of report</span><strong>2026-11-14</strong></div>', rendered)
-        self.assertIn('this report does not supply one', rendered)
+        self.assertIn('The signature records authorization of this report.', rendered)
         exact = '2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
-        if '1 cited record names America/New_York' in rendered:   # this system can convert the zone the records name
+        if 'The tables use America/New_York local time.' in rendered:   # this system can convert the zone the records name
             self.assertIn('2023-11-14 17:13:20 local (UTC-05:00)<br><span class="small">' + exact + '</span>', rendered)
             self.assertIn('<td>Tue 14 Nov 2023</td><td>USB device connected (17:13)</td><td>2</td>', rendered)
-            self.assertIn('give that local time first, with its offset, and then UTC', rendered)
+            self.assertIn('Each detailed timestamp includes its offset and Coordinated Universal Time (UTC).' , rendered)
         else:
-            self.assertIn('which this system could not convert', rendered)
+            self.assertIn('This system could not convert that time zone.', rendered)
         plain = render_html(bundle(finding()))
-        self.assertIn('All times in this report are in UTC: the cited records do not name the time zone', plain)
+        self.assertIn('The tables use Coordinated Universal Time (UTC). The cited records contain no local time zone.', plain)
         self.assertIn(exact + '<br><span class="small">Meaning: record observation</span>',
                       render_html(bundle(finding()), report_options(sections=[])))
         self.assertIn('<div><span>Examiner</span><strong></strong></div>', plain)

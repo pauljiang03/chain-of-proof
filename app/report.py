@@ -4,9 +4,9 @@
 builds an examiner's report: chosen findings, chosen sections and cover details. A
 report that leaves anything out says so on its first page.
 
-Every report opens with who asked and why, a summary, the evidence items with their
-identifiers and hash values, and the method and tools. Those pages are counts of the
-bundle's own records (app/brief.py).
+Reports use a conventional examination structure. Administrative details come from
+the report author. Results and source references come from the supplied bundle.
+The report prose uses ASD-STE100 writing rules. Source text remains unchanged.
 """
 from __future__ import annotations
 
@@ -22,10 +22,23 @@ SECTIONS = ('workflow', 'needs', 'judgments', 'evidence', 'proofs', 'activity')
 SECTION_LABELS = {'workflow': 'question-by-question plan', 'needs': 'refused proposals',
                   'judgments': 'investigator judgments', 'evidence': 'full evidence records',
                   'proofs': 'Lean proof records', 'activity': 'audit, coverage and history'}
-COVER = (('reference', 'Case reference'), ('requested_by', 'Requested by'), ('authority', 'Authority for the request'),
-         ('purpose', 'Purpose and scope'), ('received', 'Evidence received'), ('examiner', 'Examiner'),
-         ('organisation', 'Organisation'), ('report_date', 'Date of report'))
-COVER_LIMITS = {'purpose': 600}   # characters; every other cover detail is at most 200
+COVER = (
+    ('reference', 'Case reference'), ('report_id', 'Report number'), ('report_version', 'Report version'),
+    ('examiner', 'Examiner'), ('organisation', 'Organisation'), ('address', 'Organisation address'),
+    ('report_date', 'Date of report'), ('requested_by', 'Requested by'), ('request_date', 'Date of request'),
+    ('authority', 'Authority for the request'), ('purpose', 'Purpose and scope'),
+    ('received', 'Evidence received'), ('submitted_by', 'Submitted by'), ('collection_method', 'Method of receipt or collection'),
+    ('additional_items', 'Other submitted items'), ('method_notes', 'Examination procedures'),
+    ('disposition', 'Evidence disposition'), ('authorizer', 'Report authorizer'),
+    ('impact', 'Incident impact'), ('root_cause', 'Cause of the incident'),
+    ('response', 'Response and recovery'), ('recommendations', 'Recommended actions'),
+)
+COVER_LIMITS = {key: 600 for key in ('purpose', 'additional_items', 'method_notes', 'disposition',
+                                    'impact', 'root_cause', 'response', 'recommendations')}
+_REQUEST_KEYS = ('requested_by', 'request_date', 'authority', 'purpose')
+_INTAKE_KEYS = ('received', 'submitted_by', 'collection_method', 'additional_items')
+_INCIDENT_KEYS = ('impact', 'root_cause', 'response', 'recommendations')
+_HEADER_KEYS = ('reference', 'report_id', 'report_version', 'examiner', 'organisation', 'address', 'report_date')
 MAX_SELECTED = 2000
 _FINDING_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
 
@@ -50,7 +63,7 @@ def report_options(ids=None, sections=None, reference='', examiner='', organisat
         value = given.get(key, '')
         if (not isinstance(value, str) or len(value) > COVER_LIMITS.get(key, 200)
                 or any(ord(c) < 32 or ord(c) == 127 for c in value)):
-            raise ValueError('Cover details must be plain text of at most 200 characters (600 for the purpose and scope).')
+            raise ValueError('Report fields must be plain text. Use at most 200 characters for identifiers and 600 for narrative fields.')
         options[key] = value.strip()
     return options
 
@@ -100,7 +113,11 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
 .days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .days td:last-child, .exhibits td:last-child { white-space:nowrap; overflow-wrap:normal; }
-.exhibits th, .days th, .exhibits td:first-child, .exhibits td:nth-child(2) { white-space:nowrap; overflow-wrap:normal; }
+.exhibits th, .days th { white-space:normal; overflow-wrap:normal; }
+.exhibits { table-layout:fixed; }
+.exhibits th:first-child { width:24%; }
+.exhibits th:nth-child(2) { width:38%; }
+.exact-statement { margin:12px 0; border-left:2px solid var(--line); padding-left:14px; }
 .exhibits td:last-child { white-space:normal; }
 ol { padding-left:22px; } ol li { margin:6px 0; }
 code { font:13px ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--wash); padding:1px 5px; border-radius:4px; }
@@ -122,7 +139,7 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
   article { padding:15px; border-radius:0; } pre { font-size:8pt; overflow:visible; }
   .sentence { font-size:12pt; } .table-wrap { overflow:visible; } tr { break-inside:avoid; }
   details:not([open]) > :not(summary) { display:block !important; }
-  summary { display:none; } a { color:inherit; } .notice { break-inside:avoid; }
+  .exact-statement > summary { display:block; font-weight:600; color:var(--ink); } a { color:inherit; } .notice { break-inside:avoid; }
 }
 """
 
@@ -209,29 +226,26 @@ def _span(first, last, tz):
     return f'{start:%H:%M}' if (last - first) < 60 * 1000000 else f'{start:%H:%M}–{end:%H:%M}'
 
 
-def _front(info, tz, case, metrics=''):
+def _front(info, tz, case, findings, options):
     """Summary, evidence examined and method before the detailed findings."""
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
-    lead = '<strong>' + _plural(counts['findings'], 'finding', 'findings') + '</strong> in this report passed the proof checker'
-    if counts['findings']:
-        lead += (f": {counts['firm']:,} follow from the records alone and {counts['likely']:,} rest on a stated rule of thumb"
-                 if counts['likely'] else ', each following from the records alone')
-    lead += ('. They cite ' + _plural(counts['records'], 'evidence record', 'evidence records') + ' from '
-             + _plural(len([item for item in info['exhibits'] if item['records']]), 'exhibit', 'exhibits') + '. '
-             + (_plural(counts['refused'], 'proposed finding was', 'proposed findings were') + ' refused by the checker'
-                if counts['refused'] else 'No proposed finding was refused') + ' in the stored run.')
-    out = ['<section id="summary"><h2>Summary</h2><p class="lead">' + lead + '</p>',
-           metrics]
+    lead = ('This report contains <strong>' + _plural(counts['findings'], 'finding', 'findings')
+            + '</strong> from the supplied examination records. '
+            + 'The findings refer to ' + _plural(counts['records'], 'evidence record', 'evidence records') + '.')
+    out = ['<section id="summary"><h2>Executive summary</h2><p class="lead">' + lead + '</p>',
+           _result_index(findings)]
+    if counts['likely']:
+        out.append('<p>' + _plural(counts['likely'], 'finding uses', 'findings use')
+                   + ' a stated heuristic rule. The finding identifies this rule.</p>')
     if counts['findings'] != counts['recorded']:
-        out.append(f"<p>The stored run records {counts['recorded']:,} verified findings; the counts in this summary cover "
-                   'only the ones selected for this report.</p>')
+        out.append(f"<p>This report contains {counts['findings']:,} of the {counts['recorded']:,} findings in the stored run.</p>")
     if info['range']:
         first, last = brief.moment(info['range']['from'], tz), brief.moment(info['range']['to'], tz)
         busy = info['busiest']
         start, end = brief.moment(busy['from'], tz), brief.moment(busy['to'], tz)
         if None not in (first, last, start, end):
-            out.append(f"<p>{counts['dated']:,} of the cited records carry the time of an event, from {first:%Y-%m-%d} to "
+            out.append(f"<p>{counts['dated']:,} of the cited records have source timestamps, from {first:%Y-%m-%d} to "
                        f"{last:%Y-%m-%d}. The busiest period runs from {start:%Y-%m-%d} to {end:%Y-%m-%d} and holds "
                        f"{busy['records']:,} of them. Times are in {_h(clock_name)}.</p>")
     if info['days']:
@@ -242,11 +256,16 @@ def _front(info, tz, case, metrics=''):
             rows.append((_h(_day(day['date'])), events or 'No key events on this day.', f"{day['records']:,}"))
         shown = ('the ' + str(len(info['days'])) + ' busiest of ' + str(info['days_total']) + ' days'
                  if info['days_total'] > len(info['days']) else 'each day') + ' of the busiest period'
-        out += ['<h3>Key events by day</h3>', _table(('Day', 'Key events recorded', 'Dated records'), rows, 'days'),
-                '<p class="small">Shown for ' + shown + '. Key events are counted by record type — a device connection, '
-                'an e-mail, a deletion — and are not chosen by a model. A count is a count of evidence records, which can '
-                'be more than the number of things that happened. Each record is under the finding that cites it.</p>']
+        out += ['<h3>Recorded timeline</h3>', _table(('Day', 'Record types and times', 'Dated records'), rows, 'days'),
+                '<p class="small">The table shows ' + shown + '. Counts refer to records. '
+                'Several records can describe the same event. The findings below identify the supporting records.</p>']
+    out.append('</section><section id="request"><h2>Request and scope</h2>')
+    request = _option_fields(options, _REQUEST_KEYS)
+    out.append(request or '<p>The report contains no request details from the author.</p>')
     out.append('</section><section id="exhibits"><h2>Evidence examined</h2>')
+    intake = _option_fields(options, _INTAKE_KEYS)
+    if intake:
+        out.append(intake)
     if info['exhibits']:
         rows = []
         for item in info['exhibits']:
@@ -257,73 +276,142 @@ def _front(info, tz, case, metrics=''):
                        + _h(digest['record']) + ')</span>' for digest in item['digests']]
             acquired = [_h('Time as recorded: ' + value) for value in item['acquired']]
             acquired += [_h('Imaging tool as recorded: ' + value) for value in item['tools']]
-            rows.append(('<strong>' + _h(item['label']) + '</strong>', _h(', '.join(item['images'])) or '—',
-                         '<br>'.join(identity) or '—', '<br>'.join(digests) or 'None among the cited records',
-                         '<br>'.join(acquired) or '—',
-                         f"{item['records']:,} in " + _plural(item['findings'], 'finding', 'findings')))
-        out.append(_table(('Exhibit', 'Image file', 'Identifiers', 'Hash values stored with the image',
-                           'Acquisition', 'Cited records'), rows, 'exhibits'))
+            rows.append(('<strong>' + _h(item['label']) + '</strong><br>' + _h(', '.join(item['images']))
+                         + '<br><span class="small">' + f"{item['records']:,} records in "
+                         + _plural(item['findings'], 'finding', 'findings') + '</span>',
+                         '<br>'.join(identity + acquired) or '—',
+                         '<br>'.join(digests) or 'No stored hash value in the cited records'))
+        out.append(_table(('Evidence item and image', 'Identifiers and acquisition', 'Stored hash values'), rows, 'exhibits'))
     else:
         out.append('<p>The cited evidence records name no exhibit.</p>')
-    out.append('<p class="small">This lists the exhibits named by evidence records that verified findings cite, with the '
-               'identifiers and hash values that are themselves cited records. It is not a list of everything submitted: '
-               'an item that produced no cited record does not appear.'
-               + (' ' + _plural(info['unlabelled'], 'cited record names', 'cited records name') + ' no exhibit.'
+    out.append('<p class="small">The table lists evidence items that the findings cite. '
+               'It includes the identifiers and stored hash values in the records. '
+               'The Other submitted items field lists any additional items that the report author supplies.'
+               + (' ' + _plural(info['unlabelled'], 'record has', 'records have') + ' no evidence item label.'
                   if info['unlabelled'] else '') + '</p></section>')
     checker = info['checker']
-    tally = lambda rows: _h('; '.join(f"{row['name']} ({row['count']:,})" for row in rows)) or 'not stated'
-    out += ['<section id="method"><h2>Method, tools and times</h2><ol>',
-            '<li>Tools read the image files into evidence records. Each record keeps the exhibit, image and artefact it was read from.</li>',
-            '<li>Findings were proposed from those records. Proposer as recorded: ' + tally(checker['proposers']) + '.</li>',
-            '<li>Each proposed finding was given to the Lean proof checker together with the records it cites. Only findings '
-            'the checker accepted are reported as findings. Trust tier as recorded: ' + tally(checker['trust'])
-            + '. Declared axioms: ' + tally(checker['axioms']) + '.</li>',
-            '<li>Opinions of the investigator, where recorded, are printed apart and marked as not checked.</li></ol>']
+    tally = lambda rows: _h(', '.join(f"{row['name']} ({row['count']:,})" for row in rows)) or 'Not supplied'
+    out += ['<section id="method"><h2>Examination methods</h2>',
+            '<p>CONAN-F generates findings from evidence records. Each finding contains a statement, source references, and a proof.</p>',
+            '<p>The stored run identifies the findings that the Lean 4 proof checker accepted. '
+            'This report shows those results. It does not run the proof checker again.</p>',
+            _option_fields(options, ('method_notes',)),
+            '<h3>Tools and source records</h3>']
     named = [(_h(row['name']), 'Tool', f"{row['count']:,}") for row in info['tools']]
     named += [(_h(row['name']), 'Record reader', f"{row['count']:,}") for row in info['readers']]
     if named:
-        out.append(_table(('Named by the evidence records', 'As', 'Records naming it'), named))
+        out.append(_table(('Tool or reader as recorded', 'Function', 'Cited records'), named))
     else:
-        out.append('<p>The cited evidence records name no tool.</p>')
+        out.append('<p>The cited records contain no tool names.</p>')
+    out.append('<p class="small">Tool names include versions only when the source records supply them.</p>')
+    out.append('<h3>Time reference</h3>')
     if tz is not None:
-        out.append('<p><strong>Times.</strong> ' + _plural(where['records'], 'cited record names', 'cited records name') + ' '
-                   + _h(where['name']) + ' as the time zone local times were converted from. Tables in this report give that '
-                   'local time first, with its offset, and then UTC. Finding sentences are reproduced verbatim and quote UTC.</p>')
+        out.append('<p>The tables use ' + _h(where['name']) + ' local time. '
+                   'Each detailed timestamp includes its offset and Coordinated Universal Time (UTC). '
+                   'Exact source statements keep their original times.</p>')
     else:
-        out.append('<p><strong>Times.</strong> All times in this report are in UTC'
-                   + ('; the records name the time zone ' + _h(where['name']) + ', which this system could not convert.'
-                      if where else ': the cited records do not name the time zone of the examined computer.') + '</p>')
+        out.append('<p>The tables use Coordinated Universal Time (UTC). '
+                   + ('The records name ' + _h(where['name']) + '. This system could not convert that time zone.'
+                      if where else 'The cited records contain no local time zone.') + '</p>')
+    out.append('<p>Timeline dates do not include examination times or timestamps with an unknown meaning. '
+               'Each detailed record keeps its original timestamp and meaning.</p>')
+    out.append('<h3>Verification method</h3><p>A strong finding follows from the cited records and the declared proof rules. '
+               'A heuristic finding also uses a stated heuristic rule.</p>')
+    out.append(_fields([('Proposer as recorded', tally(checker['proposers'])),
+                        ('Trust tier as recorded', tally(checker['trust'])), ('Declared axioms', tally(checker['axioms']))]))
     store = case.get('facts_sha256')
-    out.append('<p><strong>Checking this report.</strong> The stored run holds every cited record and every proof. '
-               'An independent party can re-run the checker on it with <code>cop verify</code> and the original evidence store'
-               + ('. Evidence store SHA-256 as recorded: <span class="mono">' + _h(store) + '</span>' if isinstance(store, str) and store else '')
-               + '.</p></section>')
+    out.append('<p>Independent verification uses the stored proof and the original evidence store. '
+               'The verification command is <code>cop verify</code>.</p>')
+    if isinstance(store, str) and store:
+        out.append('<p>Evidence store hash (SHA-256): <span class="mono">' + _h(store) + '</span>.</p>')
+    out.append('</section>')
     return out
 
 
 _GLOSSARY = (
-    ('Exhibit', 'An item submitted for examination, such as a computer or a USB stick, under the label the evidence records use.'),
-    ('Evidence record', 'One fact a tool read from an image file, kept with the place it was read from.'),
-    ('Finding', 'A statement the proof checker accepted because the evidence records it cites support it.'),
-    ('Strong / heuristic', 'A strong finding follows from the records alone. A heuristic finding also relies on a stated rule of thumb.'),
-    ('Refused', 'A proposed finding the checker did not accept. A refusal does not show the statement is false.'),
-    ('Proof checker', 'Lean 4, a program that accepts a statement only when it is given a complete proof of it.'),
-    ('Hash value (MD5, SHA-1)', 'A fingerprint computed from the contents of an image, used to show that a copy has not changed.'),
-    ('UTC', 'Coordinated Universal Time, the reference clock that local times are offset from.'),
+    ('Evidence item (exhibit)', 'A device, image file, or other item with an evidence label.'),
+    ('Evidence record', 'Data from a source, with its source reference and recorded properties.'),
+    ('Finding', 'A statement that the stored run records as accepted by the proof checker.'),
+    ('Heuristic rule', 'A rule that uses a stated assumption to support an interpretation.'),
+    ('Proof checker', 'Lean 4, the software that does a check of a formal proof against its declared rules and assumptions.'),
+    ('Hash value', 'A value calculated from data. A comparison of hash values can detect a change in the data.'),
+    ('MD5 / SHA-1 / SHA-256', 'Hash algorithms: Message-Digest Algorithm 5, Secure Hash Algorithm 1, and Secure Hash Algorithm 256-bit.'),
+    ('UTC', 'Coordinated Universal Time, the reference for local time offsets.'),
+    ('Provenance', 'The recorded source of data and the method used to obtain the data.'),
+    ('Certificate', 'The statement, cited records, and formal proof for a finding.'),
+    ('Trust tier / axiom', 'The recorded verification basis and an assumption that a proof can use.'),
+    ('USB / URL / SID', 'Universal Serial Bus, Uniform Resource Locator, and security identifier.'),
 )
 
 
+def _option_fields(options, keys):
+    return _fields([(label, _h(options[key])) for key, label in COVER if key in keys and options.get(key)]) if any(
+        options.get(key) for key in keys) else ''
+
+
 def _close(options):
-    """A glossary and a place to sign, after the findings and before any appendix."""
-    out = ['<section id="glossary"><h2>Terms used</h2><dl>']
-    out += ['<dt>' + _h(term) + '</dt><dd>' + _h(meaning) + '</dd>' for term, meaning in _GLOSSARY]
-    out += ['</dl></section><section id="signoff"><h2>Sign-off</h2><div class="sign">',
+    """Disposition and report authorization close the main report."""
+    out = ['<section id="disposition"><h2>Evidence disposition</h2>']
+    out.append('<p>' + _h(options['disposition']) + '</p>' if options.get('disposition') else
+               '<p>The report contains no disposition details for the original evidence or its copies.</p>')
+    out += ['</section><section id="signoff"><h2>Report authorization</h2><div class="sign">',
             '<div><span>Examiner</span><strong>' + _h(options.get('examiner') or '') + '</strong></div>',
-            '<div><span>Signature</span><strong></strong></div>',
+            '<div><span>Report authorizer</span><strong>' + _h(options.get('authorizer') or '') + '</strong></div>',
             '<div><span>Date of report</span><strong>' + _h(options.get('report_date') or '') + '</strong></div></div>',
-            '<p class="small">Add any declaration your court or organisation requires; this report does not supply one. '
-            'A name or date printed here was entered by the person who produced the report.</p></section>']
+            '<div class="sign"><div><span>Signature</span><strong></strong></div></div>',
+            '<p class="small">The report author supplies the administrative details and examination notes. '
+            'The signature records authorization of this report.</p></section>']
     return out
+
+
+def _glossary():
+    return ('<section id="glossary"><h2>Terms and abbreviations</h2>'
+            + _fields([(term, _h(meaning)) for term, meaning in _GLOSSARY]) + '</section>')
+
+
+def _finding_title(finding):
+    question = finding.get('question')
+    if isinstance(question, str) and question.strip() and not re.fullmatch(
+            r'(?:combined certified findings|certified findings|finding)', question.strip(), re.I):
+        return question.strip()
+    rows = [_object(row) for row in _rows(finding.get('cited_facts'))]
+    kinds = list(dict.fromkeys(brief.KINDS.get(row.get('kind'), ('other', 'Source record'))[1]
+                              for row in rows if isinstance(row.get('kind'), str)))
+    return ' / '.join(kinds[:3]) or 'Examination result'
+
+
+def _result_index(findings):
+    """A source index, not a new claim or a model-written conclusion."""
+    groups = {key: [] for key, _ in brief.LANES}
+    for number, finding in findings:
+        for row in _rows(finding.get('cited_facts')):
+            row = _object(row)
+            kind = row.get('kind')
+            lane = brief.KINDS.get(kind, ('other',))[0] if isinstance(kind, str) else 'other'
+            prov = _object(row.get('prov'))
+            name = row.get('obj_text')
+            if name is None:
+                continue
+            value = _h(name)
+            if kind == 'systemSetting' and row.get('aux_text') is not None:
+                value += ': ' + _h(row['aux_text'])
+            item = prov.get('exhibit') or prov.get('image')
+            if item:
+                value += ' <span class="small">(' + _h(item) + ')</span>'
+            key = json.dumps(row, ensure_ascii=False, sort_keys=True)
+            if all(old[0] != key for old in groups[lane]):
+                groups[lane].append((key, value, number, finding.get('finding_id', 'Finding')))
+    rows = []
+    for lane, label in brief.LANES:
+        entries = groups[lane]
+        if not entries:
+            continue
+        examples = '<br>'.join(value + f' · <a href="#finding-f{number}">' + _h(fid) + '</a>'
+                              for _, value, number, fid in entries[:3])
+        rows.append((_h(label), examples, f'{len(entries):,}'))
+    return ('<h3>Results by topic</h3><p>The table identifies records that support the findings. '
+            'It shows up to three source entries for each topic.</p>'
+            + _table(('Topic', 'Source entries and finding references', 'Records'), rows)) if rows else ''
 
 
 def _cited(rows, tz=None):
@@ -335,9 +423,16 @@ def _cited(rows, tz=None):
         row = _object(raw)
         prov = _object(row.get('prov'))
         source = ' · '.join(_h(prov[key]) for key in ('exhibit', 'image', 'artifact') if prov.get(key) is not None)
+        properties = []
+        for key, label in (('user', 'User'), ('sender_address', 'Sender'), ('recipient_address', 'Recipient'),
+                           ('attachment_names', 'Attachments'), ('size', 'Size in bytes'), ('device', 'Device model'),
+                           ('volume_label', 'Volume label'), ('filesystem', 'File system'), ('profile_path', 'Profile path'),
+                           ('run_count', 'Recorded run count'), ('source', 'Source type'), ('recovered', 'Recovered entry')):
+            if key in prov and prov[key] is not None:
+                properties.append('<span class="small">' + label + ': ' + _h(prov[key]) + '</span>')
         related = '<br><span class="small">Related value: ' + _v(row, 'aux_text') + '</span>' if row.get('aux_text') is not None else ''
         table.append(('<strong>' + _v(row, 'id') + '</strong><br><span class="small">' + _v(row, 'kind') + '</span>',
-                      _v(row, 'obj_text', '—') + related,
+                      _v(row, 'obj_text', '—') + related + ('<br>' + '<br>'.join(properties) if properties else ''),
                       _time(row, tz) + '<br><span class="small">Meaning: ' + _v(prov, 'time_meaning', 'not stated') + '</span>',
                       source or 'Unknown — not supplied'))
     return _table(('Record', 'Object', 'Recorded timestamp', 'Source'), table, 'cited')
@@ -594,7 +689,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
     if not isinstance(run, dict):
         raise TypeError('run must be a bundle object')
     options = options or {}
-    case, stats = _object(run.get('case')), _object(run.get('stats'))
+    case = _object(run.get('case'))
     findings = [(i, row) for i, row in enumerate(_rows(run.get('findings')), 1)
                 if isinstance(row, dict) and row.get('status') == 'verified']
     recorded, chosen, sections = len(findings), options.get('ids'), options.get('sections')
@@ -617,29 +712,22 @@ def render_html(run: dict, options: dict | None = None) -> str:
            '<meta name="viewport" content="width=device-width,initial-scale=1">',
            '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; '
            'img-src \'none\'; base-uri \'none\'; form-action \'none\'">',
-           '<title>Investigation report — ' + title + '</title><style>' + _CSS + '</style></head><body><main>',
-           '<header><div class="eyebrow">CONAN-F · Forensic examination report</div><h1>' + title + '</h1>']
-    # The first page reads as an examiner's report does: who asked and why, then the summary.
-    cover = [(label, _h(options[key])) for key, label in COVER if options.get(key)]
+           '<title>Report of digital forensic examination — ' + title + '</title><style>' + _CSS + '</style></head><body class="report"><main>',
+           '<header><div class="eyebrow">Report of digital forensic examination</div><h1>' + title + '</h1>']
+    # Report identification precedes the summary. Request details have their own section.
+    cover = [(label, _h(options[key])) for key, label in COVER if key in _HEADER_KEYS and options.get(key)]
     if cover:
-        out.append(_fields(cover) + '<p class="small">Entered by the person who produced this report. '
-                   'These details are not part of the stored run and were not checked.</p>')
-    out.append(_fields([('Run recorded', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))]))
-    metrics = ('<p class="small">Totals the stored run itself reports: ' + ', '.join(
-        _v(stats, key, 'unknown') + ' ' + label for key, label in (
-            ('verified', 'accepted'), ('rejected', 'refused'), ('proposals', 'proposed'))) + '.</p>')
-    navigation = [('findings', 'Findings'), ('needs', 'Not established'), ('judgments', 'Judgments'),
-                  ('glossary', 'Terms'), ('signoff', 'Sign-off'),
+        out.append(_fields(cover))
+    out.append('<p class="small">Source run: ' + _v(case, 'generated_at') + '</p>')
+    navigation = [('findings', 'Findings'), ('judgments', 'Conclusions'),
+                  ('disposition', 'Disposition'), ('signoff', 'Authorization'), ('glossary', 'Terms'),
+                  ('needs', 'Refused proposals'),
                   ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity')]
     navigation = [(anchor, label) for anchor, label in navigation
-                  if anchor in ('findings', 'glossary', 'signoff') or show(anchor)]
-    if show('workflow'):
-        navigation = [(anchor, label) for key, anchor, label in (
-            ('collection', 'collection', 'New evidence'),
-            ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
-            ('answer_projection', 'structured-answers', 'Structured answers'),
-            ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
-    navigation = [('summary', 'Summary'), ('exhibits', 'Evidence examined'), ('method', 'Method')] + navigation
+                  if anchor in ('findings', 'glossary', 'signoff', 'disposition') or show(anchor)]
+    if any(options.get(key) for key in _INCIDENT_KEYS):
+        navigation.insert(2, ('incident', 'Incident response'))
+    navigation = [('summary', 'Executive summary'), ('request', 'Request'), ('exhibits', 'Evidence examined'), ('method', 'Methods')] + navigation
     scope = []
     if chosen is not None:
         scope.append(f'<p class="notice warning"><strong>Selected findings only.</strong> This report shows {len(findings)} '
@@ -647,41 +735,40 @@ def render_html(run: dict, options: dict | None = None) -> str:
                      'Entries left out are omitted, not refuted.</p>')
     if left_out:
         scope.append('<p class="small">Left out of this report: '
-                     + _h('; '.join(SECTION_LABELS[name] for name in left_out)) + '. The complete run bundle holds them.</p>')
+                     + _h(', '.join(SECTION_LABELS[name] for name in left_out)) + '. The complete run bundle holds them.</p>')
     out += [''.join(scope) + '</header>',
             '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
                                                           for anchor, label in navigation) + '</nav>',
-            *_front(info, tz, case, metrics),
-            _workflow(run, findings) if show('workflow') else '',
-            '<section id="findings"><h2>Recorded certified findings</h2>',
-            '<p class="muted">Sentences are reproduced verbatim. “Strong” describes what the records support; '
-            '“heuristic” relies on a stated rule of thumb. These labels do not prove parser correctness or real-world completeness.</p>']
+            *_front(info, tz, case, findings, options),
+            '<section id="findings"><h2>Examination findings</h2>',
+            '<p>Each finding identifies its source records. Open the exact statement to read the original certificate text. '
+            'The report keeps that text unchanged.</p>']
     if not findings:
         out.append('<p>No entries marked verified were supplied. This does not establish that no relevant evidence exists.</p>')
     for number, finding in findings:
-        out += [f'<article id="finding-f{number}"><h3>' + _v(finding, 'finding_id') + '</h3>',
+        out += [f'<article id="finding-f{number}"><h3>' + _v(finding, 'finding_id') + ' · ' + _h(_finding_title(finding)) + '</h3>',
                 '<span class="badge">' + _v(finding, 'strength') + '</span><span class="badge">Recorded as verified</span>',
-                '<p class="small">Question: ' + _v(finding, 'question') + '</p>',
+                '<details class="exact-statement"><summary>Exact certificate statement</summary>',
                 '<p class="sentence">' + _v(finding, 'english') + '</p>',
-                '<p class="small">Rules: ' + _v(finding, 'rules') + '</p>']
+                '<p class="small">Rules: ' + _v(finding, 'rules') + '</p></details>']
         rows = _rows(finding.get('cited_facts'))
         links = [f'<a href="#evidence-f{number}-r{index}">Fact ' + _v(_object(row), 'id') + '</a>'
                  for index, row in enumerate(rows, 1)]
         pointers = []
+        out.append(_cited(rows, tz))
         if show('evidence'):
             pointers.append(', '.join(links) if links else 'No copied evidence records supplied.')
-        else:
-            out.append(_cited(rows, tz))
         if show('proofs'):
             pointers.append(f'<a href="#proof-f{number}">Proof record</a>')
         else:
-            out.append('<p class="small">Certificate: trust tier ' + _v(finding, 'trust_tier') + '; declared axioms '
+            out.append('<p class="small">Certificate: trust tier ' + _v(finding, 'trust_tier') + '. Declared axioms: '
                        + _v(finding, 'axioms') + '. The Lean source is in the run bundle.</p>')
         out.append(('<p>' + ' · '.join(pointers) + '</p>' if pointers else '') + '</article>')
     if unverified:
         out += ['<p class="notice warning">Some entries in the findings list are not marked verified. '
                 'They are not displayed as certified findings.</p>', _details('Unverified or malformed finding entries', unverified)]
     out.append('</section>')
+    refusal_start = len(out)
     if show('needs'):
         out.append('<section id="needs"><h2>Not established / further evidence needed</h2>'
                    '<p class="muted">Refused proposals and their diagnostics are not certified findings. Refusal alone does not '
@@ -706,8 +793,10 @@ def render_html(run: dict, options: dict | None = None) -> str:
                 out.append('<p>Further-evidence requirements are unknown; no recognized diagnostic was supplied.</p>')
             out.append(_details('Supplied rejected proposal', raw) + '</article>')
         out.append('</section>')
+    refusals = out[refusal_start:]
+    del out[refusal_start:]
     if show('judgments'):
-        out.append('<section id="judgments"><h2>Investigator judgments — outside Lean</h2>'
+        out.append('<section id="judgments"><h2>Analysis and conclusions</h2>'
                    '<p class="muted">These are unverified inferences. Citing certified findings does not certify a conclusion, '
                    'intent, causation or device attribution.</p>')
         conclusions = _rows(run.get('conclusions'))
@@ -720,7 +809,16 @@ def render_html(run: dict, options: dict | None = None) -> str:
                        + _fields([('Stated supporting finding IDs', _v(row, 'finding_ids'))])
                        + _details('Supplied judgment record', raw) + '</article>')
         out.append('</section>')
+    if any(options.get(key) for key in _INCIDENT_KEYS):
+        out.append('<section id="incident"><h2>Incident response</h2>'
+                   '<p>The report author supplies the following incident assessment and actions.</p>'
+                   + _option_fields(options, _INCIDENT_KEYS) + '</section>')
     out += _close(options)
+    out.append('<div class="appendices">')
+    out.append(_glossary())
+    out.extend(refusals)
+    if show('workflow'):
+        out.append(_workflow(run, findings))
     if show('evidence'):
         out.append('<section id="evidence"><h2>Evidence records</h2>'
                    '<p class="muted">Every copied citation is shown in its finding’s scope. Provenance is supplied metadata, '
@@ -766,8 +864,23 @@ def render_html(run: dict, options: dict | None = None) -> str:
         out.append('</section>')
     out += [_activity(run) if show('activity') else '', '<footer>CONAN-F · Report rendering only. '
             'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks. '
-            'To print, use your browser’s Print / Save as PDF; all content is embedded and nothing is loaded from elsewhere.</footer>',
+            'To print, use Print / Save as PDF in the browser. The report contains all displayed content.</footer></div>',
             '</main></body></html>']
+    main_number, appendix_number, in_appendix = 0, 0, False
+    for i, block in enumerate(out):
+        if block == '<div class="appendices">':
+            in_appendix = True
+        if '<section id=' in block:
+            def numbered(match):
+                nonlocal main_number, appendix_number
+                if in_appendix:
+                    appendix_number += 1
+                    prefix = 'Appendix ' + chr(64 + appendix_number) + ' — '
+                else:
+                    main_number += 1
+                    prefix = str(main_number) + '. '
+                return match[1] + prefix + match[2] + '</h2>'
+            out[i] = re.sub(r'(<section id="[^"]+"><h2>)([^<]+)</h2>', numbered, block)
     rendered = '\n'.join(out) + '\n'
     if left_out:   # links into sections this report leaves out become plain text
         present = set(re.findall(r' id="([^"]+)"', rendered))

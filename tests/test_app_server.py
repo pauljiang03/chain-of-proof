@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 
 from app.server import create_server
+from app.report import COVER
 
 
 class FakeManager:
@@ -274,14 +275,22 @@ class AppServer(unittest.TestCase):
         self.assertEqual(headers["Content-Disposition"], 'attachment; filename="saved.html"')
         options = self.manager.calls[-1][3]
         self.assertEqual(self.manager.calls[-1][:3], ("report", "saved", "html"))
-        self.assertEqual(options, {"ids": ["F1", "F2"], "sections": frozenset(("needs", "proofs")),
-                                   "reference": "R-1", "examiner": "A B", "organisation": "Lab", "requested_by": "",
-                                   "authority": "", "purpose": "", "received": "", "report_date": ""})
+        expected = {key: "" for key, _ in COVER}
+        expected.update(ids=["F1", "F2"], sections=frozenset(("needs", "proofs")),
+                        reference="R-1", examiner="A B", organisation="Lab")
+        self.assertEqual(options, expected)
         self.request("/api/report?name=saved&requested_by=Det.%20X&authority=Warrant%207&purpose=" + "p" * 600
                      + "&received=2026-11-01&report_date=2026-11-14")
         self.assertEqual({key: self.manager.calls[-1][3][key] for key in ("requested_by", "authority", "received", "report_date")},
                          {"requested_by": "Det. X", "authority": "Warrant 7", "received": "2026-11-01", "report_date": "2026-11-14"})
         self.assertEqual(len(self.manager.calls[-1][3]["purpose"]), 600)
+        self.request("/api/report?name=saved&report_id=REP-1&request_date=2026-11-13"
+                     "&disposition=Retained%20by%20lab&authorizer=Reviewer&impact=Unknown"
+                     "&response=No%20response%20recorded&method_notes=Recorded%20procedure")
+        for key, value in {"report_id": "REP-1", "request_date": "2026-11-13", "disposition": "Retained by lab",
+                           "authorizer": "Reviewer", "impact": "Unknown", "response": "No response recorded",
+                           "method_notes": "Recorded procedure"}.items():
+            self.assertEqual(self.manager.calls[-1][3][key], value)
         self.request("/api/report?name=saved&sections=")      # findings alone
         self.assertEqual(self.manager.calls[-1][3]["sections"], frozenset())
         self.assertIsNone(self.manager.calls[-1][3]["ids"])
