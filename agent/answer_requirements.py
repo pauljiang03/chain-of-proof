@@ -166,8 +166,10 @@ def _semantic_types(spec):
     variants = spec.get('allowed_semantic_types')
     if variants is None:
         return [spec['semantic_type']]
-    if (not isinstance(variants, list) or not 1 <= len(variants) <= 128
-            or any(not _name(value) for value in variants) or len(set(variants)) != len(variants)):
+    approved = {role.semantic_type for role in ROLES.values()}
+    if (not isinstance(variants, list) or not 1 <= len(variants) <= len(approved)
+            or any(not _name(value) or value not in approved for value in variants)
+            or len(set(variants)) != len(variants)):
         raise ValueError('invalid_catalog_semantic_type_variants')
     return variants
 

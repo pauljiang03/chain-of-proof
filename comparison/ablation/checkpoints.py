@@ -136,9 +136,10 @@ def preview(directory, session, bench, document):
     # Return bounded public diagnostics, never the projected answer population.
     from agent.answer_requirements import inspect
     from agent.answer_projection import catalog
+    forms = catalog()['forms']
     requirements = [{'question_id': q['id'], **row}
                     for q in public['questions']
-                    for row in inspect(q['answer_schema'], catalog()['forms'], require_claim_requirements=True, require_evidence_scope=True)['requirements']]
+                    for row in inspect(q['answer_schema'], forms, require_claim_requirements=True, require_evidence_scope=True)['requirements']]
     diagnostics = result['unsupported'] + result['conflicts']
     diagnostics += [row for row in requirements if row['status'] not in ('catalog_support',)]
     from agent.completion_diagnostics import completion_diagnostics

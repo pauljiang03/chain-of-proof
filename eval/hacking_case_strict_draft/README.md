@@ -7,6 +7,11 @@ meanings; these counts describe declared compatibility, not evidence presence or
 answer accuracy. The 26 same-part objects and six independent collection wrappers
 remain unchanged.
 
+`case-profile.json` is the public context derivative for this case ID. Its brief,
+question list and other context values are identical to the original profile;
+only the case identifier changes. This resolves context compatibility without
+releasing the held public or scoring review.
+
 Q4 uses the dedicated effective-time-zone role and its reviewed registry
 bias-agreement display convention. It does not establish physical clock accuracy
 or actual daylight-saving state. Q27 requires a validated Yahoo Mail message URL

@@ -28,6 +28,17 @@ class HackingFinalFields(unittest.TestCase):
     def leaf(self, qid):
         return next(iter(self.questions[qid]['answer_schema']['properties'].values()))
 
+    def test_public_context_derivative_preserves_brief_and_matches_case(self):
+        from agent.case import read_profile, with_questions
+        original = json.loads((ROOT / 'eval/hacking_case/case-profile.json').read_text())
+        path = ROOT / 'eval/hacking_case_strict_draft/case-profile.json'
+        derivative = json.loads(path.read_text())
+        self.assertEqual(dict(derivative, case_id=original['case_id']), original)
+        self.assertEqual(derivative['case_id'], self.public['case_id'])
+        context = with_questions(read_profile(path), self.public)
+        self.assertEqual(context.case_id, self.public['case_id'])
+        self.assertTrue(context.brief.startswith(original['brief']))
+
     def test_original_prompts_shapes_matching_rules_and_held_status_preserved(self):
         original = json.loads((ROOT / 'eval/hacking_case/questions.json').read_text())
         self.assertEqual(without_annotations(self.public['questions']), without_annotations(original['questions']))
