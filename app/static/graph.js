@@ -249,8 +249,9 @@
     state.columns.forEach((column) => { xs[column.key] = column.x; });
     nodes.forEach((item) => { item.x = xs[item.column]; });
 
+    // The replay runs through every finding in the selection, not only the page on screen.
     const keepAll = state.step >= state.steps;
-    state.steps = shown.length;
+    state.steps = all.length;
     if (keepAll || state.step > state.steps) state.step = state.steps;
     state.model = { nodes, edges, shown };
   }
@@ -367,8 +368,10 @@
     return { width: host.width, height: host.height, minX: margin - state.width * k, maxX: host.width - margin,
       minY: margin - box.bottom * k, maxY: host.height - margin - box.top * k };
   }
-  function bounds() {
-    const ys = [...state.model.nodes.values()].filter((item) => item.birth <= Math.max(state.step, 1));
+  // How far the replay has come on the page being shown.
+  const local = () => Math.max(0, Math.min(state.model ? state.model.shown.length : 0, state.step - state.page * PAGE));
+  function bounds(whole) {
+    const ys = [...state.model.nodes.values()].filter((item) => whole || item.birth <= Math.max(local(), 1));
     if (!ys.length) return null;
     return { top: Math.min(...ys.map((item) => item.y - item.h / 2)) - 34, bottom: Math.max(...ys.map((item) => item.y + item.h / 2)) };
   }
@@ -377,8 +380,8 @@
     const bar = document.querySelector(".graph-toolbar").getBoundingClientRect(), legend = document.querySelector(".graph-legend").getBoundingClientRect();
     return { top: Math.max(0, bar.bottom - host.top) + 12, bottom: Math.max(0, host.bottom - legend.top) + 10 };
   }
-  function fit(animate) {
-    const host = $("graph-host").getBoundingClientRect(), box = bounds();
+  function fit(animate, whole) {
+    const host = $("graph-host").getBoundingClientRect(), box = bounds(whole);
     if (!host.width || !host.height || !box) return false;
     // Never start smaller than readable: a wide graph begins at its evidence side and pans.
     const k = Math.max(MIN_FIT, Math.min(1, (host.width - 40) / state.width)), inset = insets();
@@ -419,10 +422,10 @@
     model.edges.forEach((edge) => edge.el.classList.toggle("hl", Boolean(set && set.has(edge.from.id) && set.has(edge.to.id))));
   }
   function applyStep(pulse) {
-    const model = state.model;
+    const model = state.model, at = local();
     model.nodes.forEach((item) => {
-      item.el.classList.toggle("unborn", item.birth > state.step);
-      if (pulse && item.column === "finding" && item.birth === state.step) {
+      item.el.classList.toggle("unborn", item.birth > at);
+      if (pulse && item.column === "finding" && item.birth === at) {
         item.el.classList.add("newborn");
         setTimeout(() => item.el.classList.remove("newborn"), 1000);
         const host = $("graph-host").getBoundingClientRect(), screenY = item.y * state.view.k + state.view.y;
@@ -430,13 +433,14 @@
         if (host.height && (screenY < inset.top + 30 || screenY > host.height - inset.bottom - 40)) settle({ ...state.view, y: host.height * 0.55 - item.y * state.view.k });
       }
     });
-    model.edges.forEach((edge) => edge.el.classList.toggle("unborn", edge.birth > state.step));
+    model.edges.forEach((edge) => edge.el.classList.toggle("unborn", edge.birth > at));
     const slider = $("graph-step");
     slider.max = String(state.steps);
     slider.value = String(state.step);
-    const last = state.step > 0 ? model.shown[state.step - 1] : null;
+    const last = at > 0 ? model.shown[at - 1] : null;
     $("graph-step-label").textContent = state.steps
-      ? state.step + " / " + state.steps + (last ? "  " + last.id + (last.refused ? " refused" : " certified") : "  start")
+      ? state.step + " / " + state.steps + (state.step >= state.steps && (state.page + 1) * PAGE < state.steps ? "  all shown"
+        : last ? "  " + last.id + (last.refused ? " refused" : " certified") : "  start")
       : "";
   }
   function controls() {
@@ -476,14 +480,26 @@
 
   // ---- replay -------------------------------------------------------------
   function stop() { if (state.timer) { clearInterval(state.timer); state.timer = null; controls(); } }
+  // Move the replay to a position, turning to the page that holds it.
+  function seek(step, pulse) {
+    state.step = Math.max(0, Math.min(state.steps, step));
+    const page = Math.max(0, Math.floor((state.step - 1) / PAGE));
+    if (page === state.page) return applyStep(pulse);
+    state.page = page;
+    interrupt();
+    build();
+    draw();
+    fit(false, true);
+  }
   function play() {
     if (state.timer) return stop();
-    if (state.step >= state.steps) { state.step = 0; applyStep(); }
+    if (state.step >= state.steps) seek(0);
+    // A short case plays slowly enough to follow; a long one still finishes in about half a minute.
+    const pace = Math.max(70, Math.min(520, Math.round(30000 / Math.max(1, state.steps))));
     state.timer = setInterval(() => {
-      state.step += 1;
-      applyStep(true);
+      seek(state.step + 1, true);
       if (state.step >= state.steps) stop();
-    }, 520);
+    }, pace);
     controls();
   }
 
@@ -611,7 +627,7 @@
     $("graph-zoom-out").addEventListener("click", () => zoom(0.8, undefined, undefined, true));
     $("graph-fit").addEventListener("click", () => fit(true));
     $("graph-play").addEventListener("click", play);
-    $("graph-step").addEventListener("input", (event) => { stop(); state.step = Number(event.target.value); applyStep(); });
+    $("graph-step").addEventListener("input", (event) => { stop(); seek(Number(event.target.value)); });
     $("graph-scope").addEventListener("change", (event) => { state.scope = event.target.value; state.focus = null; state.page = 0; state.step = Infinity; rebuild(true); });
     $("graph-search").addEventListener("input", (event) => {
       state.query = event.target.value.trim().toLowerCase(); state.focus = null; state.page = 0; state.step = Infinity;

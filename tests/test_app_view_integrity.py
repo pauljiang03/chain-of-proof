@@ -20,7 +20,10 @@ class AppViewIntegrity(unittest.TestCase):
         self.assertEqual(source.count(tail), 1)
         if asset == 'graph.js':
             probe = ('  scopes = () => {}; rebuild = () => build();\n'
-                     '  CONAN.probe = {state, prepare, build, selection};\n})();')
+                     '  draw = () => {}; fit = () => true; interrupt = () => {}; applyStep = () => {};\n'
+                     '  CONAN.probe = {state, prepare, build, selection, seek, local};\n})();')
+        elif asset == 'timeline.js':
+            probe = '  CONAN.probe = {view, hit, nearest};\n})();'
         else:
             probe = '  CONAN.probe = {state, refresh};\n})();'
         source = source.replace(tail, probe)
@@ -83,6 +86,60 @@ api.graph.focusFinding('DUP'); assert.equal(state.focus, null); // label alone i
 api.graph.focusFinding('DUP', second);
 assert.equal(api.probe.selection()[0].data.english, 'SECOND');
 assert.equal(state.selected, state.items.find(item => item.data === second).key);
+''')
+
+    def test_timeline_places_only_dated_records_of_accepted_findings(self):
+        self.run_js('timeline.js', r'''
+const story = api.story, DAY = 86400000, at = (ms) => ms * 1000;
+const base = Date.UTC(2015, 2, 22, 14, 0, 0);
+const usb = {id: 1, kind: 'usbInsert', t: at(base), obj_text: 'SERIAL-1', aux_text: '(none)', prov: {exhibit: 'PC', time_meaning: 'first connection'}};
+const mail = {id: 2, kind: 'emailSent', t: at(base + 3600000), obj_text: 'Subject', aux_text: 'from a to b', prov: {exhibit: 'PC'}};
+const old = {id: 3, kind: 'programInstalled', t: at(Date.UTC(2009, 6, 14)), obj_text: 'Old program', prov: {exhibit: 'PC'}};
+const examined = {id: 4, kind: 'fileContent', t: at(Date.UTC(2026, 10, 14)), obj_text: 'a.txt', prov: {exhibit: 'RM#1', time_meaning: 'when the image was examined'}};
+const label = {id: 5, kind: 'tag', t: at(Date.UTC(2026, 10, 14)), obj_text: 'a.txt', aux_text: 'confidential'};
+const unknown = {id: 6, kind: 'somethingNew', t: at(base + 60000), obj_text: 'x', prov: {exhibit: 'PC'}};
+const copy = {...usb, obj_text: 'SERIAL-2'};                     // same id, different content
+const reordered = {prov: usb.prov, aux_text: '(none)', obj_text: 'SERIAL-1', t: usb.t, kind: 'usbInsert', id: 1};
+const model = story.build({findings: [
+  {finding_id: 'F1', status: 'verified', strength: 'strong', cited_facts: [usb, mail, old, examined, label]},
+  {finding_id: 'F2', status: 'verified', strength: 'heuristic', cited_facts: [usb, unknown, copy]},
+  {finding_id: 'F3', status: 'refused', cited_facts: [{id: 9, kind: 'cdBurn', t: at(base)}]},
+  {finding_id: 'F4', status: 'verified', cited_facts: [reordered]},
+]});
+assert.equal(model.findings.length, 3);                        // the refused proposal contributes nothing
+assert.equal(model.records.length, 7);                         // conflicting copies stay apart
+assert.equal(model.events.length, 5);                          // examination times and labels are not events
+assert.deepEqual(Array.from(model.events, (r) => r.row.id), [3, 1, 1, 6, 2]);
+assert.equal(model.records.find((r) => r.obj === 'SERIAL-1').findings.length, 3);   // a reordered copy is the same record
+assert.equal(model.main.count, 4);                             // the old install date is outside the busiest period
+assert.equal(model.main.from, base); assert.equal(model.main.to, base + 3600000);
+const lanes = Object.fromEntries(story.LANES.map((lane, i) => [lane.key, model.lanes[i]]));
+assert.equal(lanes.devices.events, 2); assert.equal(lanes.messages.events, 1); assert.equal(lanes.other.records, 2); assert.equal(lanes.other.events, 1);
+assert.equal(story.describe(model.events[1]), 'USB device connected: SERIAL-1');
+assert.equal(story.describe(model.events[4]), 'E-mail: Subject — from a to b');
+assert.equal(model.records.find((r) => r.kind === 'somethingNew').marked, false);
+assert.equal(story.open({findings: []}, 'a', 'r1'), story.open({findings: [{status: 'verified', cited_facts: [usb]}]}, 'a', 'r1'));   // one model per stored revision
+const marks = story.ticks(base, 2 * DAY, 920).list;
+assert.ok(marks.length >= 4 && marks.every((mark, i) => !i || mark.t > marks[i - 1].t));
+assert.equal(marks.filter((mark) => mark.major).length, 2);    // two UTC midnights in view
+const near = api.probe.nearest(['a', 'b', 'c', 'd'], [10, 20, 30, 40], 24, 12, 2);
+assert.equal(near.count, 2); assert.deepEqual(Array.from(near.items), ['b', 'c']);
+''')
+
+    def test_replay_runs_through_every_finding_not_only_one_page(self):
+        self.run_js('graph.js', r'''
+state.run = {findings: Array.from({length: 95}, (_, i) => ({finding_id: 'F' + (i + 1), status: 'verified', cited_facts: [{id: i}]}))};
+api.probe.prepare(); api.probe.build();
+assert.equal(state.steps, 95);                      // the slider spans the whole case
+assert.equal(state.step, 95);                       // and starts with everything shown
+assert.equal(state.page, 0); assert.equal(api.probe.local(), 40);
+api.probe.seek(41);                                 // the first finding of the second page
+assert.equal(state.page, 1); assert.equal(api.probe.local(), 1);
+api.probe.seek(40); assert.equal(state.page, 0); assert.equal(api.probe.local(), 40);
+api.probe.seek(95); assert.equal(state.page, 2); assert.equal(api.probe.local(), 15);
+assert.equal(state.model.shown[api.probe.local() - 1].id, 'F95');
+api.probe.seek(0); assert.equal(state.page, 0); assert.equal(api.probe.local(), 0);
+api.probe.seek(500); assert.equal(state.step, 95);  // never past the end
 ''')
 
     def test_snapshot_scope_and_conflicting_rows_within_one_finding(self):

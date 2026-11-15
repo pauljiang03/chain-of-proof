@@ -6,7 +6,7 @@
   const $ = (id) => document.getElementById(id);
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
-    tab: "graph", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
+    tab: "summary", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
     needsLimit: 40, loading: false, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
@@ -200,6 +200,10 @@
     const revision = JSON.stringify([payload.run, payload.events]);
     if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name, revision);
     if (CONAN.report) CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)), revision);
+    // The summary and the timeline draw the same records in plain words; they add no finding.
+    const story = CONAN.story ? CONAN.story.open(payload.run, payload.name, revision) : null;
+    if (CONAN.timeline) CONAN.timeline.render(story, payload.name);
+    if (CONAN.overview) CONAN.overview.render(story, payload.run);
     renderFindings();
     renderNeeds();
     renderActivity();
@@ -530,7 +534,7 @@
   }
   function clearInspector() {
     state.selectedFinding = null;
-    inspect("Inspector", [element("p", "inspector-empty", "Select a node in the graph or a row in a table to see its records, source and proof.")], [], null);
+    inspect("Inspector", [element("p", "inspector-empty", "Select something on the timeline, in the graph or in a table to see its records, source and proof.")], [], null);
   }
   // A finding can be marked for the examiner's report from the table or the inspector.
   function markCell(finding) {
@@ -621,8 +625,10 @@
       $("panel-" + button.dataset.tab).hidden = !active;
       if (focus && active) button.focus();
     });
-    $("shell").dataset.tab = name;   // the Report tab takes the inspector's room, and prints alone
+    $("shell").dataset.tab = name;   // the Summary and Report tabs take the inspector's room; the Report prints alone
     if (name === "graph" && CONAN.graph) CONAN.graph.resize();
+    if (name === "timeline" && CONAN.timeline) CONAN.timeline.activate();
+    if (name === "summary" && CONAN.overview) CONAN.overview.activate();
     if (CONAN.report) { if (name === "report") CONAN.report.activate(); else CONAN.report.deactivate(); }
   }
   function switchDetail(name, focus = false) {
@@ -754,7 +760,7 @@
   }));
   document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   document.querySelectorAll("[data-detail-tab]").forEach((button) => button.addEventListener("click", () => switchDetail(button.dataset.detailTab)));
-  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["graph", "findings", "needs", "activity", "coverage", "report"], state.tab, switchTab));
+  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "needs", "activity", "coverage", "report"], state.tab, switchTab));
   $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });

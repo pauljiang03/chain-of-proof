@@ -97,8 +97,15 @@ The window is the operating system's own web view, so no browser engine is bundl
 The front end is plain HTML, CSS and JavaScript with no framework and no graph library.
 `--make-app` writes a small launcher for this checkout; it is not a redistributable installer.
 
-The workbench has six views of a case:
+The workbench opens on two everyday views, with the detail views beside them:
 
+- **Summary** is the case at a glance: how many findings passed the checker, how many were refused,
+  when the recorded activity happened, what kind it was, which devices it came from, and the key
+  events of each day. It counts and draws the stored run; it adds no finding of its own.
+- **Timeline** places every dated evidence record that an accepted finding cites on a time axis (UTC),
+  one row per kind of activity. Drag to move, scroll to zoom, click a mark for the record, its source
+  and the findings that use it. Key events are picked by record type — a device connection, an e-mail,
+  a deletion — never by a model's judgment.
 - **Proof graph** draws each finding back to its source, left to right: disk image, source artifact,
   extracted record, finding checked by Lean, and any interpretation that is not certified.
   Select a node to trace its lineage; double-click a finding to see the findings that share its records.
