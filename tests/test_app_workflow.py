@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import http.client
+import contextlib
+import io
 import json
 import os
 from pathlib import Path
@@ -11,6 +13,7 @@ import tempfile
 import threading
 import time
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
@@ -166,6 +169,26 @@ class AppWorkflow(unittest.TestCase):
         self.assertEqual(snapshot["status"], "cancelled")
         self.assertEqual(snapshot["run"]["case"]["ended"], "cancelled")
         self.assert_report("cancelled", snapshot)
+
+    def test_cli_investigate_saves_html_markdown_and_json_from_actual_pipeline(self):
+        from app import cli
+
+        output = io.StringIO()
+        with patch("app.cli._job_manager", return_value=self.manager), \
+             patch("app.cli.POLL_SECONDS", 0.01), contextlib.redirect_stdout(output):
+            code = cli.main(["investigate", "--name", "terminal", "--facts",
+                             str(ROOT / "fixtures/sample_facts.json"),
+                             "--backend", "deepagents", "--minutes", "1",
+                             "--title", "Synthetic terminal workflow", "--question",
+                             "Which search is recorded?"], root=self.root)
+        self.assertEqual(code, 0, output.getvalue())
+        directory = self.root / "runs/terminal"
+        data = json.loads((directory / "run.json").read_text())
+        self.assertEqual(data["stats"]["verified"], 1)
+        self.assertTrue(data["audit"]["passed"])
+        self.assertTrue((directory / "report.md").is_file())
+        self.assertIn("<!doctype html>", (directory / "report.html").read_text().lower())
+        self.assertIn(str(directory / "report.html"), output.getvalue())
 
 
 if __name__ == "__main__":
