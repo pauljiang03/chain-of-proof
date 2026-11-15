@@ -4,6 +4,9 @@ This is a small, explicitly bounded development pilot. It is separate from the
 unfinished full A/B/C/D protocol in `comparison/abcd/` and changes no production
 checker, reference, or answer adapter.
 
+The first completed Sol 6.1 pair is documented in
+[the 2026-11-15 pilot result](PILOT_SOL61_20261115.md).
+
 Two fresh GPT-6.1 Sol subagents receive the same public case, extracted facts,
 question contract, read tools, and wall-time cap. A records every submitted claim
 and returns only an unverified receipt. C receives the existing Lean checker's
