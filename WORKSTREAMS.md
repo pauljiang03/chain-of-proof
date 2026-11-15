@@ -8,12 +8,18 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 
 | Owner | Current state |
 |---|---|
-| Root Codex | Integrated the tested batch. Owns main, central roles/Lean/SQL, archives and pushes. Next source worktree: `/private/tmp/cop-system-evidence-coverage`, for system/account/network fields and Search records. Previous source worktree remains intact. |
-| Answer terminal (`01a1dc3d`) | Completed the current public/runtime batch. Owns next public mappings, completion diagnostics, catalog scaling and opt-in versioned evaluation normalizers. Owns eventual experiment dispatch after readiness. No model call or freeze has started. |
-| Third terminal (`01a1dd77`) | Completed Yahoo/VSS/Sticky Notes and prior UI work. Next worktree `/private/tmp/conan-evidence-coverage-next` owns cloud records, document formats, mail/WAL and historical-source inventory. Root owns central roles and shared reader hooks. |
-| Root helpers | Timezone, file-set collector and formal aggregate are complete. Archive helper retains the current validation. A separate fresh reference-only agent audits compatibility; builders do not receive expected answer values. |
+| Root Codex | Owns integration, shared reader hooks, combined tests, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. New cloud, document, mail/WAL, historical-source and answer commits are integrated here; they are not yet the validated main release. |
+| Answer terminal (`01a1dc3d`) | Owns public mappings, completion diagnostics, catalog pagination, explicit conditions and opt-in versioned evaluation normalizers. Owns eventual experiment dispatch after readiness. No model call or freeze has started. |
+| Third terminal (`01a1dd77`) | Worktree `/private/tmp/conan-evidence-coverage-next` owns cloud records, document formats, mail/WAL, parser recovery and historical-source inventory. Completed reader commits are handed to root. A historical index-cycle fix and optional PFF recovery remain in progress. |
+| Root helper: formal types and events | Signed source integers and reviewed roles are committed. The same worker now owns typed event records and source-field validation. |
+| Root helper: host fields and review | SAM RID, DHCP configuration, signed biases and source-backed timezone labels are committed and source-tested. The worker now independently reviews normalization for false equivalence. |
+| Root helper: structured sources | Owns partition records, current Search configuration, snapshot exclusion patterns and exact Search-index fields. Focused tests pass; source checks and affected regressions are in progress. |
+| Independent reference reviewer | The prior audit remains held. This reviewer alone inspects private reference compatibility; builders do not receive expected answer values. |
 
-All source and answer commits are integrated. Use isolated worktrees for new work.
+The previous validated batch is on main. The new batch is still in integration.
+Use isolated worktrees for new work. Reassign completed workers to independent
+review or a remaining implementation task, rather than leave them idle. Root
+serializes commits in the shared source worktree to prevent index conflicts.
 Do not edit another terminal's files without agreeing on ownership. Do not control
 Terminal or Claude with computer-use tools. No direct Claude acknowledgement is
 known; do not claim one.

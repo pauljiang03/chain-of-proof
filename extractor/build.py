@@ -32,13 +32,13 @@ def extract_pc(*args, **kwargs):
     from extractor.windows import extract_pc as reader
     return reader(*args, **kwargs)
 
-READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content", "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "image_integrity", "antivirus"),
+READERS = {"pc": ("system", "structured_system", "webcloud", "cloud_attributes", "filetraces", "inventory", "content", "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "image_integrity", "antivirus"),
            "removable": ("content", "image_integrity"), "optical": ("optical", "content", "image_integrity")}
-OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory", "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "antivirus")
+OPEN_TARGET = ("system", "structured_system", "webcloud", "cloud_attributes", "filetraces", "inventory", "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "antivirus")
 READER_ROLES = {"windows": ("pc",), "media": ("removable",),
                 **{reader: tuple(role for role, readers in READERS.items() if reader in readers)
                    for reader in sorted({r for readers in READERS.values() for r in readers})}}
-READER_ORDER = ("windows", "media", "system", "webcloud", "filetraces", "inventory", "optical", "content",
+READER_ORDER = ("windows", "media", "system", "structured_system", "webcloud", "cloud_attributes", "filetraces", "inventory", "optical", "content",
                 "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "image_integrity", "antivirus")
 # These expensive readers need an explicit selection. Scanning also needs a local
 # scanner and signature database; never start an update or service implicitly.
