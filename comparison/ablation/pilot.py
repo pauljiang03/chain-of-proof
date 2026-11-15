@@ -20,6 +20,8 @@ from eval.benchmark import validate_reference
 ROOT = Path(__file__).resolve().parents[2]
 INPUTS = ("facts", "case_profile", "questions", "reference")
 MODEL = "gpt-6.1-sol"
+FOCUSED_PROTOCOL = "sol-focused-C-development"
+FOCUSED_MAX_SECONDS = 300
 
 
 def fingerprint(path):
@@ -78,12 +80,17 @@ def _software():
             "python": platform.python_version(), "platform": platform.platform()}
 
 
-def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protocol="literal-v1", seconds=900):
+def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protocol="literal-v1", seconds=900,
+                 study="matched-A-C"):
     """Write one immutable-by-convention plan; return its contents and file hash."""
     if type(seconds) is not int or seconds <= 0:
         raise ValueError("The per-arm wall-time cap must be a positive integer")
     if protocol not in ("literal-v1", "claim-bindings-v2", "claim-bindings-v3"):
         raise ValueError("Unsupported pilot runtime protocol")
+    if study not in ("matched-A-C", "focused-C"):
+        raise ValueError("Unsupported pilot study")
+    if study == "focused-C" and (protocol != "claim-bindings-v3" or seconds > FOCUSED_MAX_SECONDS):
+        raise ValueError("focused-C requires claim-bindings-v3 and a wall-time cap of at most 300 seconds")
     if reference is None and protocol == "literal-v1":
         raise ValueError("literal-v1 requires a private reference")
     out = Path(out)
@@ -180,6 +187,19 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
             "atomic receipt binds document, authoring time and candidate prefix; final prose cannot replace it. "
             "Absent hashes resolve from exact saved claims only; strict public claim requirements apply. "
             "Missing checkpoint is unavailable, including after timeout.")
+    if study == "focused-C":
+        manifest.update(study=study, protocol=FOCUSED_PROTOCOL, order=["C"],
+                        arms={"C": manifest["arms"]["C"]})
+        manifest["case"]["question_ids"] = [q["id"] for q in public["questions"]]
+        manifest["budget"].pop("B_model_calls")
+        manifest["budget"]["max_live_model_calls"] = 1
+        manifest["budget"]["model_call_unit"] = "fresh investigator dispatch; internal inference rounds are not counted or independently observed"
+        manifest["measurements"].pop("claim_filtering")
+        manifest["measurements"].update(
+            shared_claim_faithful_projector="C's frozen claim-field projection only; no comparison arms",
+            comparison="not_performed",
+            claims_allowed="focused development smoke only; no causal comparison, statistical significance, universal precision or general accuracy claim")
+        manifest["preparation"]["facts"] = "one supplied frozen per-case snapshot for C; no comparison arm"
     # Refuse input changes observed while the contracts were inspected.
     if any(fingerprint(path) != bindings[name] for name, path in paths.items()):
         raise ValueError("An input changed during pilot preparation")
@@ -205,12 +225,46 @@ def validate_frozen(path, *, expected_sha256):
             or (unavailable and (manifest["case"].get("provisionally_scorable") is not None
                                 or manifest["case"].get("unevaluable_ids") is not None))):
         raise ValueError("Unsupported frozen pilot manifest")
+    study = manifest.get("study", "matched-A-C")
+    if study not in ("matched-A-C", "focused-C"):
+        raise ValueError("Unsupported frozen pilot study")
     for binding in manifest["inputs"].values():
         if fingerprint(binding["path"]) != binding:
             raise ValueError("A frozen pilot input changed")
+    if study == "focused-C" or manifest.get("protocol") == FOCUSED_PROTOCOL:
+        _validate_focused(manifest)
     if manifest["software"]["source_sha256"] != _software()["source_sha256"]:
         raise ValueError("Frozen implementation changed")
     return manifest
+
+
+def _validate_focused(manifest):
+    """Check the explicitly bounded C-only design as well as its input hashes."""
+    budget = manifest.get("budget", {})
+    case = manifest.get("case", {})
+    measurements = manifest.get("measurements", {})
+    arms, model = manifest.get("arms"), manifest.get("model")
+    if not all(isinstance(value, dict) for value in (budget, case, measurements, arms, model)):
+        raise ValueError("Invalid focused-C metadata shape")
+    if (manifest.get("study") != "focused-C" or manifest.get("protocol") != FOCUSED_PROTOCOL
+            or manifest.get("runtime_protocol") != "claim-bindings-v3"
+            or manifest.get("order") != ["C"] or set(arms) != {"C"}
+            or not isinstance(arms["C"], str) or not arms["C"].strip()
+            or type(budget.get("wall_seconds_per_live_arm")) is not int
+            or not 1 <= budget["wall_seconds_per_live_arm"] <= FOCUSED_MAX_SECONDS
+            or type(budget.get("max_live_model_calls")) is not int or budget["max_live_model_calls"] != 1
+            or budget.get("model_call_unit") != "fresh investigator dispatch; internal inference rounds are not counted or independently observed"
+            or "B_model_calls" in budget or budget.get("extra_budget_after_failure") is not False
+            or model.get("requested_override") != MODEL or model.get("fresh_context") != "fork_turns=none"
+            or type(manifest.get("replicates")) is not int or manifest["replicates"] != 1
+            or measurements.get("comparison") != "not_performed"
+            or measurements.get("claims_allowed") != "focused development smoke only; no causal comparison, statistical significance, universal precision or general accuracy claim"):
+        raise ValueError("Invalid focused-C design or budget")
+    public = read_question_profile(manifest["inputs"]["questions"]["path"])
+    if (case.get("case_id") != public["case_id"]
+            or case.get("question_ids") != [q["id"] for q in public["questions"]]
+            or type(case.get("questions")) is not int or case["questions"] != len(public["questions"])):
+        raise ValueError("Focused-C case/question selection differs from frozen public input")
 
 
 def main(argv=None):
@@ -220,12 +274,14 @@ def main(argv=None):
     parser.add_argument("--questions", required=True)
     parser.add_argument("--reference", help="coordinator-only private scoring contract")
     parser.add_argument("--protocol", choices=("literal-v1", "claim-bindings-v2", "claim-bindings-v3"), default="literal-v1")
+    parser.add_argument("--study", choices=("matched-A-C", "focused-C"), default="matched-A-C")
     parser.add_argument("--out", required=True)
     parser.add_argument("--seconds", type=int, default=900)
     args = parser.parse_args(argv)
     try:
         result = freeze_pilot(facts=args.facts, case_profile=args.case_profile, questions=args.questions,
-                              reference=args.reference, out=args.out, protocol=args.protocol, seconds=args.seconds)
+                              reference=args.reference, out=args.out, protocol=args.protocol, seconds=args.seconds,
+                              study=args.study)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.error(str(error))
     print(json.dumps({"manifest_sha256": result["manifest_sha256"], "output": str(Path(args.out).resolve())}))
