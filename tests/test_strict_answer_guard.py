@@ -182,5 +182,7 @@ class StrictGuard(unittest.TestCase):
                 for stronger in ('same_device_mounted_volume', 'actual_mount_event'):
                     self.assertEqual(run('same_device_mounted_volume', stronger)
                                      ['submission']['answers'][0]['status'], 'unknown')
-                self.assertIs(run('same_device_mounted_volume', 'same_recorded_device_volume_mapping')
-                              ['submission']['answers'][0]['answer'], True)
+                self.assertEqual(run('matching_recorded_device_identifiers', 'same_recorded_device_volume_mapping')
+                                 ['submission']['answers'][0]['status'], 'unknown')
+            self.assertIs(run('matching_recorded_device_identifiers', 'matching_recorded_device_identifiers')
+                          ['submission']['answers'][0]['answer'], True)

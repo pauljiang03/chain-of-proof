@@ -42,7 +42,7 @@ FORMS = {
     'imageDigestsAgree': ('[logical subject, role, value, acquisition subject, role, value, "md5"|"sha1"]',
                          'Recomputed logical-image digest equals the retained acquisition digest for the same subject and algorithm. Missing/mismatching values do not certify; equality does not authenticate acquisition.'),
     "usbConnected":       ("[usbInsert]", "A USB device record names S and its retained timestamp; connection onset is not established."),
-    "deviceHolds":        ("[usbInsert, volumeOnDevice]", "A USB device record names S, joined to a device-volume record for V by the same device serial."),
+    "deviceHolds":        ("[usbInsert, volumeOnDevice]", "A USB source record and an examined-device volume record carry equal device identifier values. This does not establish unique physical-device identity or that both records describe the same physical device."),
     "opened":             ("[lnkTarget]", "A shortcut target record names path P and volume/share X at its recorded timestamp."),
     "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "The shortcut target record and examined-device volume record carry equal volume serial values. This does not identify the same volume or physical device, or establish actual file opening."),
     "openedFromRecorded": ("[lnkTarget, volumeSeen]", "The shortcut target record and labeled PC volume record carry equal volume serial values. This does not identify the same volume or establish actual file opening."),
@@ -66,7 +66,7 @@ FORMS = {
     "journalPathForFile": ("[journalName, journalPath]", "The direct journal name and bounded path observation share the same scoped NTFS file identity. Each retains its own timestamp."),
     "emailed":            ("[emailSent]", 'A retained message record names subject "S", address text and its recorded timestamp; transmission, delivery and authorship are not established.'),
     "burnTrace":          ("[cdBurn]", "HEURISTIC. Optical-disc activity record (time). A lock or settings change does not establish a write, completion, contents, or physical-disc identity."),
-    "deviceExamined":     ("[usbInsert, unallocatedOnDevice]", "A USB device record names S, joined by device serial to a record of unallocated directory entries."),
+    "deviceExamined":     ("[usbInsert, unallocatedOnDevice]", "A USB source record and a record of examined unallocated entries carry equal device identifier values. This does not establish that they describe the same physical device."),
     "recoveredOnDevice":  ("[fileCreated, unallocatedOnDevice]", "A directory entry for P, created (time), was recovered from device S. It may be an earlier state of the same file system; it does not establish a reformat. Needs the same area id in both aux fields."),
     "settingRecorded":    ("[systemSetting]", 'The system setting "N" is recorded as "V" (record time).'),
     "accountRecorded":    ("[accountSeen]", "An account named A is recorded (what it is an account of; record time)."),
@@ -91,7 +91,7 @@ FORMS = {
     "deletedAfter":       ("[fileDeleted, any record]", "A deletion record for P has a timestamp later than the other record beyond their uncertainty; event order is not established."),
     "before":             ("[any record, any record]", "The first recorded timestamp precedes the second by more than their combined uncertainty; event order is not established."),
     "tagged":             ('[record, "obj" or "aux", tag record, tag record\'s aux_id]', "The entity in that slot of the record carries this tag. Take aux_id from `fact <tag id>`."),
-    "usbMountedAs":       ("[usbInsert, volumeMount]", "A USB device record and a device-volume mapping share device serial S and associate it with volume V; an actual mount event is not established."),
+    "usbMountedAs":       ("[usbInsert, volumeMount]", "A USB source record and a device-volume mapping carry equal device identifier values. This does not establish unique physical-device identity, an actual mount event or its time."),
     "openedFromMount":    ("[lnkTarget, volumeMount]", "The shortcut target record and device-volume mapping carry equal volume serial values. This does not identify the same volume or physical device, or establish actual file opening or mounting."),
 }
 
