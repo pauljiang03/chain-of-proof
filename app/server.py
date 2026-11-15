@@ -20,6 +20,7 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/static/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
           "/static/report.js": ("report.js", "text/javascript; charset=utf-8"),
           "/static/timeline.js": ("timeline.js", "text/javascript; charset=utf-8"),
+          "/static/evidence.js": ("evidence.js", "text/javascript; charset=utf-8"),
           "/static/overview.js": ("overview.js", "text/javascript; charset=utf-8"),
           "/static/icon.svg": ("icon.svg", "image/svg+xml; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}

@@ -16,7 +16,7 @@
   const COLUMNS = [
     { key: "exhibit", title: "DISK IMAGE", width: 112, height: 38, pitch: 50 },
     { key: "artifact", title: "SOURCE ARTIFACT", width: 196, height: 26, pitch: 32 },
-    { key: "record", title: "EXTRACTED RECORD", width: 276, height: 24, pitch: 30 },
+    { key: "record", title: "EXTRACTED RECORD", width: 276, height: 40, pitch: 48 },
     { key: "finding", title: "FINDING · CHECKED BY LEAN", width: 304, height: 40, pitch: 54 },
     { key: "judgment", title: "INTERPRETATION · NOT CERTIFIED", width: 264, height: 40, pitch: 52 },
   ];
@@ -276,8 +276,8 @@
     } else if (item.column === "record") {
       box();
       const row = item.row;
-      group.append(svg("text", { class: "id", x: 8, y: 16 }, clip("#" + text(row.id) + " " + text(row.kind || "record"), 20)),
-        svg("text", { class: "sub", x: item.w - 8, y: 16, "text-anchor": "end" }, when(row)));
+      group.append(svg("text", { class: "id", x: 8, y: 16 }, clip(CONAN.evidence ? CONAN.evidence.entity(row).title : (row.obj_text || row.kind), 37)),
+        svg("text", { class: "sub", x: 8, y: 31 }, clip("#" + text(row.id) + " · " + (CONAN.evidence ? (CONAN.evidence.types[row.kind] || ["", row.kind])[1] : row.kind) + " · " + when(row), 48)));
       tip([row.kind, row.obj_text, row.aux_text && row.aux_text !== "(none)" ? row.aux_text : "", object(row.prov).artifact].filter(Boolean).join(" · "));
     } else if (item.column === "finding") {
       const data = item.item.data, refused = item.item.refused;
@@ -285,7 +285,7 @@
       group.append(svg("rect", { class: "stripe", width: 4, height: item.h, rx: 2 }),
         svg("text", { class: "id", x: 12, y: 16 }, clip(item.item.id, 16)),
         svg("text", { class: "tag", x: item.w - 9, y: 16, "text-anchor": "end" }, refused ? "REFUSED" : item.cls === "heuristic" ? "CERTIFIED · HEURISTIC" : "CERTIFIED"),
-        svg("text", { class: "sub", x: 12, y: 31 }, clip(refused ? (object(data.proof_gap).summary || data.reason || "Refused by the checker") : data.english, 51)));
+        svg("text", { class: "sub", x: 12, y: 31 }, clip(refused ? (object(data.proof_gap).summary || data.reason || "Refused by the checker") : (CONAN.evidence ? CONAN.evidence.title(data) : data.english), 51)));
       tip(refused ? text(data.reason) : text(data.english));
     } else {
       const conclusion = object(item.conclusion);
@@ -434,6 +434,8 @@
     const slider = $("graph-step");
     slider.max = String(state.steps);
     slider.value = String(state.step);
+    slider.setAttribute("aria-valuetext", state.step + " of " + state.steps + " checked claims");
+    controls();
     const last = at > 0 ? model.shown[at - 1] : null;
     $("graph-step-label").textContent = state.steps
       ? state.step + " / " + state.steps + (state.step >= state.steps && (state.page + 1) * PAGE < state.steps ? "  all shown"
@@ -451,6 +453,8 @@
     $("graph-focus").title = focused ? "Showing " + focused.id + " and the findings that cite any of the same records" : "";
     $("graph-play").textContent = state.timer ? "❚❚ Pause" : "▶ Replay";
     $("graph-play").disabled = !state.steps;
+    $("graph-start").disabled = !state.steps || state.step === 0;
+    $("graph-end").disabled = !state.steps || (state.step === state.steps && state.page === Math.max(0, Math.ceil(state.steps / PAGE) - 1));
   }
   function scopes() {
     const select = $("graph-scope"), counts = new Map();
@@ -478,23 +482,30 @@
   // ---- replay -------------------------------------------------------------
   function stop() { if (state.timer) { clearInterval(state.timer); state.timer = null; controls(); } }
   // Scroll so the finding the replay has just reached is on screen, whether it is playing or being dragged.
+  function followTarget(item, host, inset, view) {
+    const target = { ...view }, left = item.x * view.k + view.x, right = (item.x + item.w) * view.k + view.x;
+    const top = (item.y - item.h / 2) * view.k + view.y, bottom = (item.y + item.h / 2) * view.k + view.y;
+    const visibleTop = inset.top + 12, visibleBottom = host.height - inset.bottom - 12;
+    if (left < 20) target.x = 20 - item.x * view.k;
+    else if (right > host.width - 20) target.x = host.width - 20 - (item.x + item.w) * view.k;
+    if (top < visibleTop || bottom > visibleBottom) target.y = (visibleTop + visibleBottom) / 2 - item.y * view.k;
+    return target;
+  }
   function follow(animate) {
     const at = local(), host = $("graph-host").getBoundingClientRect();
-    let newest = null;
-    if (at > 0) state.model.nodes.forEach((item) => { if (item.column === "finding" && item.birth === at) newest = item; });
-    if (!newest || !host.height) return;
-    const inset = insets(), screenY = newest.y * state.view.k + state.view.y;
-    if (screenY >= inset.top + 30 && screenY <= host.height - inset.bottom - (animate ? 120 : 40)) return;   // scroll early while playing
-    const target = { ...state.view, y: host.height * 0.55 - newest.y * state.view.k };
-    // While it plays, each step retargets a scroll already under way: keep its speed, or the view never catches up.
-    if (animate) settle(target, motion.frame ? { x: motion.velocity.x, y: motion.velocity.y } : null, 1, 0.26);
-    else { interrupt(); state.view = target; applyView(); }
+    const newest = [...state.model.nodes.values()].find(item => item.column === "finding" && item.birth === at);
+    if (!newest || !host.height || !host.width) return;
+    const target = followTarget(newest, host, insets(), state.view);
+    if (animate) {
+      if (target.x === state.view.x && target.y === state.view.y) return;
+      settle(target, motion.frame ? { x: motion.velocity.x, y: motion.velocity.y } : null, 1, 0.20);
+    } else { interrupt(); state.view = target; applyView(); }
   }
   // Move the replay to a position, turning to the page that holds it.
   function seek(step, pulse) {
-    state.step = Math.max(0, Math.min(state.steps, step));
+    state.step = Math.max(0, Math.min(state.steps, Math.round(Number(step) || 0)));
     const page = Math.max(0, Math.floor((state.step - 1) / PAGE));
-    if (page === state.page) { applyStep(pulse); return follow(Boolean(pulse)); }
+    if (page === state.page) { applyStep(pulse); return follow(Boolean(pulse) && state.step < state.steps); }
     state.page = page;
     interrupt();
     build();
@@ -638,7 +649,14 @@
     $("graph-zoom-out").addEventListener("click", () => zoom(0.8, undefined, undefined, true));
     $("graph-fit").addEventListener("click", () => fit(true));
     $("graph-play").addEventListener("click", play);
-    $("graph-step").addEventListener("input", (event) => { stop(); seek(Number(event.target.value)); });
+    const slider = $("graph-step");
+    slider.addEventListener("pointerdown", stop);
+    for (const name of ["input", "change"]) slider.addEventListener(name, event => { stop(); seek(event.target.value); });
+    slider.addEventListener("keydown", event => {
+      if (event.key === "Home" || event.key === "End") { event.preventDefault(); stop(); seek(event.key === "End" ? state.steps : 0); }
+    });
+    $("graph-start").addEventListener("click", () => { stop(); seek(0); controls(); });
+    $("graph-end").addEventListener("click", () => { stop(); seek(state.steps); controls(); });
     $("graph-scope").addEventListener("change", (event) => { state.scope = event.target.value; state.focus = null; state.page = 0; state.step = Infinity; rebuild(true); });
     $("graph-search").addEventListener("input", (event) => {
       state.query = event.target.value.trim().toLowerCase(); state.focus = null; state.page = 0; state.step = Infinity;

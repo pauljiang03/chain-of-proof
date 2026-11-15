@@ -1,48 +1,758 @@
 {
-  "_note": "Synthetic sample rows shaped like the NIST Data Leakage Case, for tests and the golden path. They were written by hand, not extracted from the images.",
+  "_note": "Entirely synthetic Harbor case. All people, devices, messages and artifacts are fictional. No image exists.",
   "strings": {
     "0": "(none)",
-    "50": "confidential",
-    "51": "unauthorized-device",
-    "52": "leakage-related",
-    "88": "SAMPLE-VOL-RM2",
-    "89": "SAMPLE-VOL-RM1",
-    "101": "SAMPLE-SERIAL-RM2",
-    "102": "SAMPLE-SERIAL-RM1",
-    "700": "sample data leakage methods",
-    "913": "E:\\sample\\design_concept.ppt",
-    "914": "E:\\sample\\pricing.xlsx"
+    "1": "computer name",
+    "2": "HARBOR-LAPTOP",
+    "3": "operating system",
+    "4": "Windows 11 Pro",
+    "5": "registered owner",
+    "6": "Maya Chen",
+    "7": "image sha256",
+    "8": "980733a4c7ca4200b89b7acc06349beda68606d9f284b7b0e0553042f28689ab",
+    "9": "35182a2210dc69efee0e512e1ea3fcc7db0b96edb260aa6fee92c4d380e0c60f",
+    "10": "db1aed0cdf6b3bb37db0d946091c1bd0a66e21e7e1096059453848d7afd93dcf",
+    "11": "maya",
+    "12": "local account",
+    "13": "interactive logon",
+    "14": "DEMO-PROJECT-042",
+    "15": "DEMO-BACKUP-007",
+    "16": "DEMO-VOL-PROJECT",
+    "17": "DEMO-VOL-BACKUP",
+    "18": "E:\\Harbor\\launch-plan.pptx",
+    "19": "E:\\Harbor\\budget.xlsx",
+    "20": "E:\\Harbor\\brand-guide.pdf",
+    "21": "C:\\Users\\maya\\Desktop\\Harbor-draft.zip",
+    "22": "C:\\Users\\maya\\Desktop\\Harbor-review.zip",
+    "23": "C:\\Users\\maya\\Downloads\\old-mockup.png",
+    "24": "DEMO-SYSTEM-VOL",
+    "25": "F:\\Backup\\budget.xlsx",
+    "26": "F:\\Backup\\readme.txt",
+    "27": "how to encrypt a USB drive",
+    "28": "Chrome",
+    "29": "Harbor project presentation template",
+    "30": "https://docs.example.test/harbor/brief",
+    "31": "https://docs.example.test/harbor/assets",
+    "32": "C:\\Users\\maya\\Downloads\\harbor-template.pptx",
+    "33": "https://templates.example.test/harbor-template.pptx",
+    "34": "Harbor review \u2014 draft attached",
+    "35": "from maya to dana",
+    "36": "Harbor/launch-plan.pptx",
+    "37": "sync completed",
+    "38": "POWERPNT.EXE",
+    "39": "C:\\Program Files\\POWERPNT.EXE",
+    "40": "7ZFM.EXE",
+    "41": "C:\\Program Files\\7ZFM.EXE",
+    "42": "7-Zip",
+    "43": "24.09",
+    "44": "optical drive lock",
+    "45": "DVD RW Drive",
+    "46": "C:\\Users\\maya\\Desktop\\review-note.txt",
+    "47": "Bring the Harbor deck and budget to the design review."
   },
   "facts": [
-    {"id": 3100, "kind": "webSearch",    "t": 1427119000000000, "res": 1,       "obj": 700, "aux": 0,
-     "prov": {"image": "sample", "artifact": "Chrome History", "tool": "hand-written"}},
-    {"id": 4510, "kind": "usbInsert",    "t": 1427115600000000, "res": 1,       "obj": 102, "aux": 0,
-     "prov": {"image": "sample", "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR", "tool": "hand-written"}},
-    {"id": 4511, "kind": "volumeMount",  "t": 1427115601000000, "res": 1,       "obj": 102, "aux": 89,
-     "prov": {"image": "sample", "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt", "tool": "hand-written"}},
-    {"id": 4512, "kind": "usbInsert",    "t": 1427119200000000, "res": 1,       "obj": 101, "aux": 0,
-     "prov": {"image": "sample", "artifact": "SYSTEM\\ControlSet001\\Enum\\USBSTOR", "tool": "hand-written"}},
-    {"id": 4513, "kind": "volumeMount",  "t": 1427119201000000, "res": 1,       "obj": 101, "aux": 88,
-     "prov": {"image": "sample", "artifact": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt", "tool": "hand-written"}},
-    {"id": 4600, "kind": "lnkTarget",    "t": 1427120900000000, "res": 1,       "obj": 913, "aux": 88,
-     "prov": {"image": "sample", "artifact": "Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk", "tool": "hand-written"}},
-    {"id": 4700, "kind": "fileModified", "t": 1427030000000000, "res": 2000000, "obj": 914, "aux": 88,
-     "prov": {"image": "sample", "artifact": "FAT32 directory entry", "tool": "hand-written"}},
-    {"id": 4701, "kind": "fileCreated",  "t": 1427120000000000, "res": 10000,   "obj": 914, "aux": 88,
-     "prov": {"image": "sample", "artifact": "FAT32 directory entry", "tool": "hand-written"}},
-    {"id": 4702, "kind": "fileModified", "t": 1427119999000000, "res": 2000000, "obj": 913, "aux": 88,
-     "prov": {"image": "sample", "artifact": "FAT32 directory entry", "tool": "hand-written"}},
-    {"id": 4703, "kind": "fileCreated",  "t": 1427120000000000, "res": 10000,   "obj": 913, "aux": 88,
-     "prov": {"image": "sample", "artifact": "FAT32 directory entry", "tool": "hand-written"}},
-    {"id": 4704, "kind": "fileModified", "t": 1427030000000000, "res": 1,       "obj": 914, "aux": 89,
-     "prov": {"image": "sample", "artifact": "exFAT directory entry", "tool": "hand-written"}},
-    {"id": 4800, "kind": "fileDeleted",  "t": 1427125000000000, "res": 1,       "obj": 914, "aux": 88,
-     "prov": {"image": "sample", "artifact": "$Recycle.Bin $I record", "tool": "hand-written"}},
-    {"id": 9001, "kind": "tag",          "t": 1794636000000000, "res": 1, "obj": 913, "aux": 50,
-     "prov": {"source": "deterministic", "rule": "path is under a folder the case brief lists as confidential"}},
-    {"id": 9002, "kind": "tag",          "t": 1794636000000000, "res": 1, "obj": 101, "aux": 51,
-     "prov": {"source": "deterministic", "rule": "device serial is not on the case brief's authorized list"}},
-    {"id": 9003, "kind": "tag",          "t": 1794636000000000, "res": 1, "obj": 700, "aux": 52,
-     "prov": {"source": "llm", "model": "sample"}}
+    {
+      "id": 1,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 1,
+      "aux": 2,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "registry key last-write time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true
+      }
+    },
+    {
+      "id": 2,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 3,
+      "aux": 4,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "registry key last-write time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true
+      }
+    },
+    {
+      "id": 3,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 5,
+      "aux": 6,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "registry key last-write time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true
+      }
+    },
+    {
+      "id": 4,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 7,
+      "aux": 8,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "stored_by": "synthetic placeholder; no disk image exists"
+      }
+    },
+    {
+      "id": 5,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 7,
+      "aux": 9,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "stored_by": "synthetic placeholder; no disk image exists"
+      }
+    },
+    {
+      "id": 6,
+      "kind": "systemSetting",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 7,
+      "aux": 10,
+      "prov": {
+        "image": "demo-backup-usb.E01",
+        "exhibit": "Backup USB",
+        "artifact": "Synthetic fixture",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "stored_by": "synthetic placeholder; no disk image exists"
+      }
+    },
+    {
+      "id": 7,
+      "kind": "accountSeen",
+      "t": 1781009100000000,
+      "res": 1000,
+      "obj": 11,
+      "aux": 12,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "SAM account record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "account registry key last-write time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "profile_path": "C:\\Users\\maya",
+        "groups": [
+          "Design team"
+        ],
+        "sid": "S-1-5-21-101-202-303-1001",
+        "logon_count": 8,
+        "last_logon": "2026-06-09T12:55:00Z"
+      }
+    },
+    {
+      "id": 8,
+      "kind": "sessionEvent",
+      "t": 1781009700000000,
+      "res": 1000,
+      "obj": 13,
+      "aux": 11,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Security event 4624",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "time the sign-in event was logged",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "event_id": 4624
+      }
+    },
+    {
+      "id": 9,
+      "kind": "usbInsert",
+      "t": 1781010600000000,
+      "res": 1000,
+      "obj": 14,
+      "aux": 0,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "SetupAPI device install log",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "device": "Disk&Ven_Atlas&Prod_Pocket_Drive&Rev_1.0"
+      }
+    },
+    {
+      "id": 10,
+      "kind": "usbInsert",
+      "t": 1781009880000000,
+      "res": 1000,
+      "obj": 15,
+      "aux": 0,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "SetupAPI device install log",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "device install section start (first connection)",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "device": "Disk&Ven_Atlas&Prod_Archive_Drive&Rev_1.0"
+      }
+    },
+    {
+      "id": 11,
+      "kind": "volumeMount",
+      "t": 1781010601000000,
+      "res": 1000,
+      "obj": 14,
+      "aux": 16,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Volume mount record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "recorded mount time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "volume_label": "HARBOR PROJECT",
+        "drive_letter": "E:"
+      }
+    },
+    {
+      "id": 12,
+      "kind": "volumeMount",
+      "t": 1781009881000000,
+      "res": 1000,
+      "obj": 15,
+      "aux": 17,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Volume mount record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "recorded mount time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "volume_label": "TEAM BACKUP",
+        "drive_letter": "F:"
+      }
+    },
+    {
+      "id": 13,
+      "kind": "volumeOnDevice",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 14,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "Volume boot record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "volume_label": "HARBOR PROJECT",
+        "filesystem": "exFAT"
+      }
+    },
+    {
+      "id": 14,
+      "kind": "volumeOnDevice",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 15,
+      "aux": 17,
+      "prov": {
+        "image": "demo-backup-usb.E01",
+        "exhibit": "Backup USB",
+        "artifact": "Volume boot record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "volume_label": "TEAM BACKUP",
+        "filesystem": "exFAT"
+      }
+    },
+    {
+      "id": 15,
+      "kind": "lnkTarget",
+      "t": 1781011080000000,
+      "res": 1000,
+      "obj": 18,
+      "aux": 16,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Recent Items / launch-plan.lnk",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "shortcut file last-modified time (last open via the shell)",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "drive_letter": "E:",
+        "volume_label": "HARBOR PROJECT"
+      }
+    },
+    {
+      "id": 16,
+      "kind": "fileModified",
+      "t": 1781007000000000,
+      "res": 1000,
+      "obj": 18,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem last-modified time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 5242880
+      }
+    },
+    {
+      "id": 17,
+      "kind": "fileCreated",
+      "t": 1781010720000000,
+      "res": 1000,
+      "obj": 18,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem creation time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 5242880
+      }
+    },
+    {
+      "id": 18,
+      "kind": "fileModified",
+      "t": 1781007000000000,
+      "res": 1000,
+      "obj": 19,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem last-modified time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 98304
+      }
+    },
+    {
+      "id": 19,
+      "kind": "fileCreated",
+      "t": 1781010840000000,
+      "res": 1000,
+      "obj": 19,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem creation time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 98304
+      }
+    },
+    {
+      "id": 20,
+      "kind": "fileModified",
+      "t": 1781007000000000,
+      "res": 1000,
+      "obj": 20,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem last-modified time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 2097152
+      }
+    },
+    {
+      "id": 21,
+      "kind": "fileCreated",
+      "t": 1781010960000000,
+      "res": 1000,
+      "obj": 20,
+      "aux": 16,
+      "prov": {
+        "image": "demo-project-usb.E01",
+        "exhibit": "Project USB",
+        "artifact": "exFAT directory entry",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "filesystem creation time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 2097152
+      }
+    },
+    {
+      "id": 22,
+      "kind": "fileRenamed",
+      "t": 1781012100000000,
+      "res": 1000,
+      "obj": 21,
+      "aux": 22,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "NTFS change journal",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "time of the new-name journal record",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "old_name": "Harbor-draft.zip",
+        "new_name": "Harbor-review.zip"
+      }
+    },
+    {
+      "id": 23,
+      "kind": "fileDeleted",
+      "t": 1781013900000000,
+      "res": 1000,
+      "obj": 23,
+      "aux": 24,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Recycle Bin $I record",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "deletion time stored in the Recycle Bin record",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "size": 204800,
+        "user": "maya"
+      }
+    },
+    {
+      "id": 24,
+      "kind": "fileSeen",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 25,
+      "aux": 17,
+      "prov": {
+        "image": "demo-backup-usb.E01",
+        "exhibit": "Backup USB",
+        "artifact": "File inventory",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "size": 4096
+      }
+    },
+    {
+      "id": 25,
+      "kind": "fileSeen",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 26,
+      "aux": 17,
+      "prov": {
+        "image": "demo-backup-usb.E01",
+        "exhibit": "Backup USB",
+        "artifact": "File inventory",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "size": 4096
+      }
+    },
+    {
+      "id": 26,
+      "kind": "webSearch",
+      "t": 1781010120000000,
+      "res": 1000,
+      "obj": 27,
+      "aux": 28,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Chrome History",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "browser history visit time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "url": "https://search.example.test/?q=how+to+encrypt+a+USB+drive"
+      }
+    },
+    {
+      "id": 27,
+      "kind": "webSearch",
+      "t": 1781010240000000,
+      "res": 1000,
+      "obj": 29,
+      "aux": 28,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Chrome History",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "browser history visit time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "url": "https://search.example.test/?q=Harbor+project+presentation+template"
+      }
+    },
+    {
+      "id": 28,
+      "kind": "webVisit",
+      "t": 1781010360000000,
+      "res": 1000,
+      "obj": 30,
+      "aux": 28,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Chrome History",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "browser history visit time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya"
+      }
+    },
+    {
+      "id": 29,
+      "kind": "webVisit",
+      "t": 1781010420000000,
+      "res": 1000,
+      "obj": 31,
+      "aux": 28,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Chrome History",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "browser history visit time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya"
+      }
+    },
+    {
+      "id": 30,
+      "kind": "fileDownloaded",
+      "t": 1781010480000000,
+      "res": 1000,
+      "obj": 32,
+      "aux": 33,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Chrome downloads",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "download start time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "size": 1048576
+      }
+    },
+    {
+      "id": 31,
+      "kind": "emailSent",
+      "t": 1781012400000000,
+      "res": 1000,
+      "obj": 34,
+      "aux": 35,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Outlook Sent Items",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "client submit time stored in the message",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "sender_address": "maya@example.test",
+        "recipient_address": "dana@example.test",
+        "attachments": 1,
+        "attachment_names": [
+          "launch-plan.pptx"
+        ],
+        "mailbox_user": "maya",
+        "message_id": "<demo-harbor-1@example.test>"
+      }
+    },
+    {
+      "id": 32,
+      "kind": "cloudFile",
+      "t": 1781012520000000,
+      "res": 1000,
+      "obj": 36,
+      "aux": 37,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic cloud client log",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "time written in the sync log",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "user": "maya",
+        "service": "Demo Drive"
+      }
+    },
+    {
+      "id": 33,
+      "kind": "programRun",
+      "t": 1781011020000000,
+      "res": 1000,
+      "obj": 38,
+      "aux": 39,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Prefetch / POWERPNT.EXE.pf",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "last run time in the prefetch header",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "source": "prefetch",
+        "run_count": 3,
+        "user": "maya"
+      }
+    },
+    {
+      "id": 34,
+      "kind": "programRun",
+      "t": 1781011800000000,
+      "res": 1000,
+      "obj": 40,
+      "aux": 41,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Prefetch / 7ZFM.EXE.pf",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "last run time in the prefetch header",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "source": "prefetch",
+        "run_count": 1,
+        "user": "maya"
+      }
+    },
+    {
+      "id": 35,
+      "kind": "programInstalled",
+      "t": 1781008200000000,
+      "res": 1000,
+      "obj": 42,
+      "aux": 43,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Uninstall registry key",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "registry key last-write time",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "publisher": "Igor Pavlov"
+      }
+    },
+    {
+      "id": 36,
+      "kind": "cdBurn",
+      "t": 1781013600000000,
+      "res": 1000,
+      "obj": 44,
+      "aux": 45,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "Synthetic optical service event",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "time the optical event was logged",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "event_id": 1001
+      }
+    },
+    {
+      "id": 37,
+      "kind": "noteText",
+      "t": 1781010000000000,
+      "res": 1000,
+      "obj": 46,
+      "aux": 47,
+      "prov": {
+        "image": "demo-laptop.E01",
+        "exhibit": "Laptop",
+        "artifact": "UTF-8 text file",
+        "tool": "Synthetic demo generator v1",
+        "time_meaning": "when the image was examined, not source activity",
+        "time_zone": "local time, converted from America/New_York",
+        "synthetic": true,
+        "timestamp_semantics": "examination_observation",
+        "user": "maya"
+      }
+    }
   ]
 }

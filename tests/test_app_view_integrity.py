@@ -21,7 +21,7 @@ class AppViewIntegrity(unittest.TestCase):
         if asset == 'graph.js':
             probe = ('  scopes = () => {}; rebuild = () => build();\n'
                      '  draw = () => {}; fit = () => true; interrupt = () => {}; applyStep = () => {}; follow = () => {};\n'
-                     '  CONAN.probe = {state, prepare, build, selection, seek, local};\n})();')
+                     '  CONAN.probe = {state, prepare, build, selection, seek, local, followTarget};\n})();')
         elif asset == 'timeline.js':
             probe = '  CONAN.probe = {view, hit, nearest};\n})();'
         else:
@@ -205,6 +205,22 @@ api.probe.seek(95); assert.equal(state.page, 2); assert.equal(api.probe.local(),
 assert.equal(state.model.shown[api.probe.local() - 1].id, 'F95');
 api.probe.seek(0); assert.equal(state.page, 0); assert.equal(api.probe.local(), 0);
 api.probe.seek(500); assert.equal(state.step, 95);  // never past the end
+''')
+
+    def test_replay_last_page_and_full_finding_fit_in_both_dimensions(self):
+        self.run_js('graph.js', r'''
+state.run = {findings: Array.from({length: 473}, (_, i) => ({finding_id: 'F' + (i + 1), status: 'verified', cited_facts: [{id: i}]}))};
+api.probe.prepare(); api.probe.build();
+api.probe.seek(472); assert.equal(state.page, 11);
+api.probe.seek(473); assert.equal(state.step, 473); assert.equal(api.probe.local(), 33);
+assert.equal(state.model.shown[api.probe.local() - 1].id, 'F473');
+const item = {x: 1000, y: 6000, w: 304, h: 40};
+const host = {width: 720, height: 500}, inset = {top: 70, bottom: 40};
+const view = api.probe.followTarget(item, host, inset, {x: 20, y: 50, k: .72});
+assert.ok(item.x * view.k + view.x >= 20);
+assert.ok((item.x + item.w) * view.k + view.x <= host.width - 20);
+assert.ok((item.y - item.h / 2) * view.k + view.y >= inset.top + 12);
+assert.ok((item.y + item.h / 2) * view.k + view.y <= host.height - inset.bottom - 12);
 ''')
 
     def test_snapshot_scope_and_conflicting_rows_within_one_finding(self):

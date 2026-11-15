@@ -10,6 +10,7 @@
   <script src="/static/graph.js" defer></script>
   <script src="/static/report.js" defer></script>
   <script src="/static/timeline.js" defer></script>
+  <script src="/static/evidence.js" defer></script>
   <script src="/static/overview.js" defer></script>
   <script src="/static/app.js" defer></script>
 </head>
@@ -25,6 +26,7 @@
           <button class="button" id="open-report" type="button">Report</button>
           <details class="download-menu"><summary class="button">Export ▾</summary><div class="download-options"><a id="download-html">Complete report <span>.html</span></a><a id="download-md">Complete report <span>.md</span></a><a id="download-json">Run bundle <span>.json</span></a></div></details>
         </div>
+        <button class="button" id="open-demo" type="button">Explore demo</button>
         <button class="button primary" id="new-investigation">New investigation</button>
       </div>
     </header>
@@ -96,7 +98,7 @@
           </div>
           <div class="graph-host" id="graph-host"><svg id="graph" class="graph" role="img" aria-label="Proof graph: from disk image to interpretation"></svg><div class="graph-empty" id="graph-empty" hidden></div></div>
           <div class="graph-legend">
-            <span class="replay"><button class="button" id="graph-play" aria-label="Replay how the graph was built">▶ Replay</button><input id="graph-step" type="range" min="0" max="0" value="0" aria-label="Replay position"><span id="graph-step-label" class="mono"></span></span>
+            <span class="replay"><button class="button" id="graph-play" aria-label="Replay how the graph was built">▶ Replay</button><button class="icon-button" id="graph-start" type="button" aria-label="Go to replay start" title="Go to start">↤</button><input id="graph-step" type="range" min="0" max="0" step="1" value="0" aria-label="Replay position"><button class="icon-button" id="graph-end" type="button" aria-label="Go to final finding" title="Go to final finding">↦</button><span id="graph-step-label" class="mono"></span></span>
             <span class="spacer"></span>
             <span class="legend" title="Drag to pan. Pinch or Ctrl-scroll to zoom. Double-click a finding to focus on it.">
               <span><i class="swatch strong"></i>Certified</span>
@@ -108,7 +110,9 @@
         </section>
 
         <section class="tab-panel" id="panel-findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
-          <div class="section-toolbar"><p>Fixed sentences from claims the checker accepted. Select a row to inspect its records and proof.</p><label class="search-field"><input id="finding-search" type="search" placeholder="Search ID, question, text, rule…" autocomplete="off" aria-label="Search findings"></label></div>
+          <div class="section-toolbar findings-toolbar"><div><h2>Explore findings</h2><p>Browse recorded properties, then open the exact statements and source evidence.</p></div><label class="search-field"><input id="finding-search" type="search" placeholder="Search file, user, serial, site, ID…" autocomplete="off" aria-label="Search findings and properties"></label></div>
+          <div class="findings-controls"><div class="segmented" role="group" aria-label="Findings view"><button type="button" id="findings-overview" aria-pressed="true">Evidence overview</button><button type="button" id="findings-exact" aria-pressed="false">Exact statements</button></div><span id="findings-view-count" class="small-mono"></span></div>
+          <div id="evidence-topics" class="evidence-topics" role="group" aria-label="Evidence topics"></div>
           <div id="finding-list" class="finding-list"></div><div id="finding-pagination" class="pagination"></div><div id="unverified-findings"></div><div id="conclusions"></div>
         </section>
         <section class="tab-panel" id="panel-needs" role="tabpanel" aria-labelledby="tab-needs" hidden><div class="section-toolbar"><p>Proposals the checker refused, with the unmet conditions. A refusal does not mean a claim is false.</p></div><div id="needs-list" class="finding-list"></div></section>
@@ -120,7 +124,7 @@
             <fieldset><legend>Findings</legend>
               <label><input type="radio" name="report-scope" value="all" checked><span>All certified findings <span id="report-count-all" class="mono"></span></span></label>
               <label><input type="radio" name="report-scope" value="marked" id="report-scope-marked" disabled><span>Marked findings only <span id="report-count-marked" class="mono"></span></span></label>
-              <p class="field-help">Mark a finding with its checkbox in the Findings table, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
+              <p class="field-help">Mark a finding with its checkbox in Findings → Exact statements, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
             </fieldset>
             <fieldset><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
             <fieldset><legend>Cover details</legend>

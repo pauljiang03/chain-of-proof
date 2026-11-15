@@ -61,7 +61,7 @@ class AppServer(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.assets = self.root / "assets"
         self.assets.mkdir()
-        for name in ("index.html", "app.js", "graph.js", "report.js", "timeline.js", "overview.js", "style.css", "icon.svg"):
+        for name in ("index.html", "app.js", "graph.js", "report.js", "timeline.js", "overview.js", "evidence.js", "style.css", "icon.svg"):
             (self.assets / name).write_text("synthetic " + name)
         assets_patch = patch("app.server.STATIC_ROOT", self.assets)
         assets_patch.start()
@@ -229,7 +229,7 @@ class AppServer(unittest.TestCase):
         for route, mime in (("/", "text/html"), ("/index.html", "text/html"), ("/app.js", "text/javascript"),
                             ("/style.css", "text/css"), ("/static/app.js", "text/javascript"),
                             ("/static/graph.js", "text/javascript"), ("/static/report.js", "text/javascript"),
-                            ("/static/timeline.js", "text/javascript"), ("/static/overview.js", "text/javascript"),
+                            ("/static/timeline.js", "text/javascript"), ("/static/overview.js", "text/javascript"), ("/static/evidence.js", "text/javascript"),
                             ("/static/icon.svg", "image/svg+xml"),
                             ("/static/style.css", "text/css")):
             status, headers, body = self.request(route)
