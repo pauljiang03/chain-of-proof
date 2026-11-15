@@ -44,8 +44,8 @@ FORMS = {
     "usbConnected":       ("[usbInsert]", "A USB device record names S and its retained timestamp; connection onset is not established."),
     "deviceHolds":        ("[usbInsert, volumeOnDevice]", "A USB device record names S, joined to a device-volume record for V by the same device serial."),
     "opened":             ("[lnkTarget]", "A shortcut target record names path P and volume/share X at its recorded timestamp."),
-    "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "A shortcut target record names P on volume V, joined to a device-volume record for S by the same volume serial."),
-    "openedFromRecorded": ("[lnkTarget, volumeSeen]", "A shortcut target record names P on volume V, joined to a recorded volume label L by the same volume serial."),
+    "openedFromDevice":   ("[lnkTarget, volumeOnDevice]", "The shortcut target record and examined-device volume record carry equal volume serial values. This does not identify the same volume or physical device, or establish actual file opening."),
+    "openedFromRecorded": ("[lnkTarget, volumeSeen]", "The shortcut target record and labeled PC volume record carry equal volume serial values. This does not identify the same volume or establish actual file opening."),
     "recordedOnDevice":   ("[volumeSeen, volumeOnDevice]", "The PC volume record and examined-device volume record carry equal volume serial values. This does not identify the same volume or physical device; cloned or different volumes can share a serial."),
     "sameLabel":          ("[volumeSeen, volumeSeen]", "Two volumes were recorded under the same label. This does not identify one physical device. Needs the same label, two different records."),
     "searched":           ("[webSearch]", 'A web search for "Q" was made in browser B (time).'),
@@ -92,7 +92,7 @@ FORMS = {
     "before":             ("[any record, any record]", "The first recorded timestamp precedes the second by more than their combined uncertainty; event order is not established."),
     "tagged":             ('[record, "obj" or "aux", tag record, tag record\'s aux_id]', "The entity in that slot of the record carries this tag. Take aux_id from `fact <tag id>`."),
     "usbMountedAs":       ("[usbInsert, volumeMount]", "A USB device record and a device-volume mapping share device serial S and associate it with volume V; an actual mount event is not established."),
-    "openedFromMount":    ("[lnkTarget, volumeMount]", "A shortcut target record names P on the same volume named by a device-volume mapping; actual file opening is not established."),
+    "openedFromMount":    ("[lnkTarget, volumeMount]", "The shortcut target record and device-volume mapping carry equal volume serial values. This does not identify the same volume or physical device, or establish actual file opening or mounting."),
 }
 
 
