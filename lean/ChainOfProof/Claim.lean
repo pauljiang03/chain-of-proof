@@ -14,7 +14,7 @@ inductive Claim where
   | is     (f : Nat) (k : Kind)                        -- fact f has kind k
   | val    (f : Nat) (s : Slot) (v : Nat)              -- a stud of f equals a constant
   | link   (a : Nat) (sa : Slot) (b : Nat) (sb : Slot) -- same entity in two studs
-  | before (a b : Nat)                                 -- a happened before b, beyond uncertainty
+  | before (a b : Nat)                                 -- recorded timestamp order, beyond uncertainty
   | both   (c d : Claim)                               -- snap two claims together
   deriving Repr
 

@@ -150,7 +150,34 @@ theorem holds_append (fs extra : List Fact) (c : Claim)
 
 /-! ### What a set gives you -/
 
-/-- A certified `usbMountedAs u m` really does cite a USB insert and a volume mapping
+/-- A USBSTOR or installation-log observation names a device. The core does not
+    reinterpret a registry key last-write as exact connection onset. -/
+theorem usbConnected_record_iff (fs : List Fact) (a : Nat) :
+    holds fs (Sets.usbConnected a) = true ↔
+      ∃ x, lookup fs a = some x ∧ x.kind = .usbInsert := by
+  exact holds_is_iff fs a .usbInsert
+
+/-- Despite its historical name, `opened` establishes exactly a retained shortcut
+    record of the cited kind. Neither opening nor an actor is a core predicate. -/
+theorem opened_record_iff (fs : List Fact) (a : Nat) :
+    holds fs (Sets.opened a) = true ↔
+      ∃ x, lookup fs a = some x ∧ x.kind = .lnkTarget := by
+  exact holds_is_iff fs a .lnkTarget
+
+/-- `emailed` establishes retained message metadata, not transport or delivery. -/
+theorem emailed_record_iff (fs : List Fact) (a : Nat) :
+    holds fs (Sets.emailed a) = true ↔
+      ∃ x, lookup fs a = some x ∧ x.kind = .emailSent := by
+  exact holds_is_iff fs a .emailSent
+
+/-- `programInstalledAt` establishes a registration/installer record. The record's
+    timestamp semantics are source metadata, not an installation-time axiom. -/
+theorem programInstalledAt_record_iff (fs : List Fact) (a : Nat) :
+    holds fs (Sets.programInstalledAt a) = true ↔
+      ∃ x, lookup fs a = some x ∧ x.kind = .programInstalled := by
+  exact holds_is_iff fs a .programInstalled
+
+/-- A certified `usbMountedAs u m` cites a USB source record and a volume mapping
     that name the same device. -/
 theorem usbMountedAs_sound (fs : List Fact) (u m : Nat)
     (h : holds fs (Sets.usbMountedAs u m) = true) :

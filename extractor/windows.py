@@ -121,7 +121,7 @@ def _lnk_files(ev, t, common):
                         n += _lnk_fact(
                             ev, lnk, us_from_unix(st.st_mtime), common,
                             artifact=str(p).replace("/", "\\"), user=user.name,
-                            time_meaning="shortcut file last-modified time (last open via the shell)",
+                            time_meaning="shortcut file last-modified time",
                             shortcut_created=us_from_unix(st.st_birthtime))
                 except Exception as e:
                     ev.problem(str(p), e)
@@ -325,14 +325,19 @@ def _volumes_in_shortcuts(ev, common):
         if kind != "lnkTarget":
             continue
         pv = _json.loads(prov)
+        if any(pv.get(key) != common.get(key) for key in ("image", "exhibit")):
+            continue
         label = pv.get("volume_label")
         if label and (label, aux) not in first:      # rows() is sorted by time within a kind
-            first[(label, aux)] = (t_us, pv)
-    for (label, serial), (t_us, pv) in sorted(first.items()):
-        ev.add("volumeSeen", t_us, 1, label, serial,
+            first[(label, aux)] = (t_us, _res, pv)
+    for (label, serial), (t_us, resolution, pv) in sorted(first.items()):
+        ev.add("volumeSeen", t_us, resolution, label, serial,
                artifact=f"volume block of shortcut: {pv.get('artifact', '')}",
                drive_type=DRIVE_TYPES.get(pv.get("drive_type"), str(pv.get("drive_type"))),
-               time_meaning="when the shortcut's target was opened", **common)
+               time_meaning=pv.get("time_meaning") or "unspecified originating shortcut record timestamp",
+               timestamp_semantics=pv.get("timestamp_semantics", "shortcut_record_observation"),
+               limitation="retained shortcut volume metadata; not proof of target opening or mount time",
+               **common)
     return len(first)
 
 

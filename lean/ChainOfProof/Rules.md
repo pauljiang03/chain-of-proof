@@ -6,23 +6,23 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 
 | Rule | Assumption | Strength | What it does not establish |
 |---|---|---|---|
-| R1 | A USBSTOR / setupapi record means a device with this serial was connected to this machine | Strong | Who connected it |
+| R1 | A USBSTOR / setupapi source record names a device serial and has the timestamp meaning stated in provenance | Strong, about the record | Exact connection onset from a USBSTOR key last-write time, or who connected the device |
 | R2 | A registry mapping links a device serial to a volume serial | Strong | That the volume was not reformatted later (a format assigns a new volume serial) |
-| R3 | An LNK or jump-list entry means its target path, on the volume it records, was opened on this machine | Strong | Which person was at the keyboard; only the profile that owns the LNK |
+| R3 | An LNK or jump-list entry retains a target path and any recorded volume/share identity. Its timestamp has the meaning stated by the source | Strong, about the record | Actual opening at that time, target existence, or the person responsible. A shortcut modification time and a DestList update time are not interchangeable with a file-open event |
 | R4 | Windows keeps the modified time on copy and sets a new created time, so created after modified means the file was copied here | **Heuristic** | Archive extraction and some downloads leave the same signature |
 | R5 | A Recycle Bin `$I` record gives the original path and the deletion time | Strong | That the content is unrecoverable |
-| R6 | A ReadyBoost (`EMDMgmt`) registry key, or the volume block inside a shortcut, means this PC saw a volume with this label and serial; its time is the key's last write, or when the shortcut's target was opened | Strong | Which physical device carried the volume |
+| R6 | A ReadyBoost (`EMDMgmt`) registry key or the volume block inside a shortcut records a volume label and serial; its time is the source record's key last-write or shortcut timestamp | Strong, about the record | Which physical device carried the volume or whether a target was opened at that time |
 | R7 | The volume serial read from a seized image identifies the volume in that image. A hardware device serial comes only from supported removable-device E01 acquisition metadata or an explicit shared acquisition manifest; otherwise the device identity is scoped to the image and exhibit | Strong | What volume the device held earlier; a USB identity for an image-scoped unknown device; an optical drive serial does not identify its disc |
 | R8 | Two volume records share a user-chosen label; this is a candidate association only | **Heuristic** | Physical-device identity or reformatting: labels are not unique |
 | R9 | A browser history row means this search URL was visited in this profile at this time | Strong | Who typed it, and that it was typed and not followed as a link |
 | R10 | A file system timestamp is what the file system recorded | Strong | That the clock was right, or that the timestamp was not set by a tool |
-| R11 | A message stored in the user's mailbox file was sent with this subject, at this submit time, between these display names | Strong | That the named people wrote or read it; for received mail the time comes from the sender's side, not this PC's clock |
+| R11 | A retained mailbox message records this subject, sender/recipient text and source timestamp (normally client submit time) | Strong, about retained metadata | Successful transmission, delivery, reading or authorship. Client submit time is not delivery confirmation or necessarily this PC's clock |
 | R12 | Optical-disc activity may leave temporary files, exclusive-access locks (`cdrom` event 133 in this image), or CD Burning configuration changes. Each record states only that observation | **Heuristic** | Whether a write occurred or finished, its contents, its physical disc, or use of a particular burning application |
 | R13 | A recovered directory entry records a name and timestamps on the examined device. FAT unallocated entries and older UDF allocation-table states are different recovery sources | Strong | A previous filesystem or reformat, the original volume serial, or survival of content; UDF can retain earlier states of the same filesystem |
 | R14 | A system setting is what the registry or the image's own structures record (name, value, key last-write time) | Strong | That the value was true at any other time, or who set it |
 | R15 | An account record is what the account database or a client's configuration holds | Strong | Who used the account |
 | R16 | A logon, logoff, startup or shutdown record is what the account database or an event log recorded | Strong | That every such event was logged; logs roll over and can be cleared |
-| R17 | An installed-program record is what the system's uninstall list holds | Strong | That the program was ever run, or is still present |
+| R17 | A software-registration or installer record names a program/version and retains its source timestamp meaning: key last-write, InstallDate, or installer-event time | Strong, about the record | Actual installation at a registry key's last-write time, execution, or continued program presence |
 | R18 | An application artifact names an executable/path and attaches a timestamp with its declared meaning. Only explicit prefetch, UserAssist or process-creation run-time provenance is rendered as execution time | Strong, about the artifact | Compatibility-cache file modification, cache modification, registry last-write or task configuration records do not establish execution at that time. An execution flag cannot turn file mtime into run time. Missing/unknown provenance remains an application observation; no attribution to a user or inference of behavior |
 | R19 | A browser history row means this URL was loaded in this browser profile at this time | Strong | Who was at the keyboard, and that the page was read |
 | R20 | A download record gives the source URL, the saved path and the start time as the browser stored them | Strong | That the file was opened, or still exists |
@@ -48,28 +48,36 @@ A set is a named composition of primitive bricks (`Sets.lean`) with an English t
 (`checker/claims.py`). Lean guarantees the composition is checked as written. A human
 approves the template, because that is where the meaning lives.
 
+Historical form names `opened`, `openedFrom*`, `emailed`, `usbConnected`,
+`usbMountedAs`, and `programInstalledAt` are retained for claim compatibility.
+They certify source observations and exact joins, not opening, delivery,
+exact connection onset, or installation-time predicates.
+Their strong label applies to the stated record observation. English templates
+are versioned: certificates issued under older wording need their retained runtime
+for exact historical replay, or reissuance under the current templates.
+
 | Set | Rules | Strength | English template |
 |---|---|---|---|
-| `usbMountedAs u m` | R1, R2 | Strong | USB device {serial} was connected ({time}) and mounted as volume {vol}. |
-| `openedFromMount l m` | R2, R3 | Strong | {path} was opened ({time}) from volume {vol}. |
+| `usbMountedAs u m` | R1, R2 | Strong | The USB source record names {serial}; it matches the device serial in the mapping for volume {vol}. Its timestamp meaning is stated; exact connection onset is not established. |
+| `openedFromMount l m` | R2, R3 | Strong | The shortcut target record names {path}; its volume serial matches the device-volume mapping. Source artifact and timestamp meaning are stated; opening is not established. |
 | `copiedHere c m` | R4 | Heuristic | {path} was likely copied onto volume {vol}: it was created there ({time}) after its last modification ({time}). This rests on heuristic rule R4. |
-| `deletedAfter d x` | R5 | Strong | {path} was deleted ({time}) after {event}. |
-| `deviceHolds u d` | R1, R7 | Strong | USB device {serial} was connected to this PC ({time}). The seized device with that serial holds volume {vol}. |
-| `openedFromDevice l d` | R3, R7 | Strong | {path} was opened ({time}) from volume {vol}, the volume on seized device {serial}. |
-| `openedFromRecorded l s` | R3, R6 | Strong | {path} was opened ({time}) from volume {vol}, which this PC recorded under the label "{label}" ({time}). |
+| `deletedAfter d x` | R5 | Strong | The Recycle Bin timestamp for {path} is later than the cited record's timestamp. This orders recorded timestamps. |
+| `deviceHolds u d` | R1, R7 | Strong | The USB source record's device serial matches the examined-device record for volume {vol}. Its timestamp meaning is stated; exact connection onset is not established. |
+| `openedFromDevice l d` | R3, R7 | Strong | The shortcut target record names {path}; its volume serial matches the volume read from examined device {serial}. Opening is not established. |
+| `openedFromRecorded l s` | R3, R6 | Strong | The shortcut target record names {path}; its volume serial matches the volume record labeled {label}. Each source timestamp retains its meaning. Opening is not established. |
 | `recordedOnDevice s d` | R6, R7 | Strong | Volume {vol}, which this PC recorded under the label "{label}" ({time}), is the volume on seized device {serial}. |
 | `sameLabel a b` | R6, R8 | Heuristic | This PC recorded volume {vol} ({time}) and volume {vol} ({time}) under the same label "{label}". A shared label does not identify a physical device; different devices can share it (heuristic rule R8). |
-| `usbConnected u` | R1 | Strong | USB device {serial} was connected to this PC ({time}). |
-| `opened l` | R3 | Strong | {path} on {volume or network share} was opened ({time}). |
+| `usbConnected u` | R1 | Strong | The USB source record names {serial}, with source artifact and timestamp meaning. Exact connection onset and the responsible person are not established. |
+| `opened l` | R3 | Strong | The shortcut target record names {path} and any recorded volume/share, with source artifact and timestamp meaning. This does not establish opening at that time or by a person. |
 | `searched w` | R9 | Strong | A web search for "{term}" was made in {browser} ({time}). |
 | `fileCreatedAt c`, `fileModifiedAt m` | R10 | Strong | {path} was created / last modified on volume {vol} ({time}). |
 | `fileDeletedAt d` | R5 | Strong | {path} on volume {vol} was sent to the Recycle Bin ({time}). |
-| `emailed e` | R11 | Strong | An e-mail with the subject "{subject}" was sent {from A to B} ({time}). |
+| `emailed e` | R11 | Strong | The retained message records subject {subject}, address text, source artifact and timestamp meaning. Transmission, delivery, reading and authorship are not established. |
 | `burnTrace b` | R12 | Heuristic | Optical-disc-related record in the {source}: {trace} ({time}). A record alone does not establish a write, completion, contents or physical disc. Event 133 means an exclusive-access lock; a registry last-write means a configuration change. |
-| `deviceExamined u d` | R1, R13 | Strong | USB device {serial} was connected to this PC ({time}). The seized device with that serial has directory entries left in unallocated space. |
+| `deviceExamined u d` | R1, R13 | Strong | The USB source record's device serial matches the examined-device record for recovered directory entries. Exact connection onset is not established. |
 | `recoveredOnDevice c d` | R10, R13 | Strong | A directory entry for {path}, created ({time}), was recovered from the recovery area on seized device {serial}. Recovery alone does not establish a reformat; an optical disc may retain older states of the same filesystem. |
 | `tagged f s g T` | T | Strong, or judgment for an LLM tag | {entity} is tagged "{tag}" ({rule that computed it, or "an LLM judgment"}). |
-| `before a b` | none | Strong | {event a} happened before {event b}: the gap of {Δ} exceeds the combined timestamp uncertainty of {r}. |
+| `before a b` | none | Strong | The timestamp of {record a} precedes that of {record b}: the gap of {Δ} exceeds combined uncertainty {r}. This need not order the underlying actions. |
 | `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves the artifact's timestamp meaning and states execution time only for explicit run-time sources. |
 | `sameContent a b` | R28 | Strong | {path a} and {path b} have identical content: both read as {hash}. |
 | `fileRemovedAt r` | R29 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a removal flag ({time}). This is the record timestamp, not necessarily deletion onset; it does not establish wiping or Recycle Bin use. |
