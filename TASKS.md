@@ -29,7 +29,7 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 
 ## Next
 
-1. Finish and retain the separate Hacking Case model test. Use its frozen inputs, incremental answer checkpoints, and final-output reserve. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
+1. Hold new model experiments until the source-semantics, strict answer-policy and durable checkpoint fixes pass deterministic regressions. The Hacking pilot is prepared but has never launched. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
 2. Improve answer selection and interpretation. Product names, full paths and anti-forensics sequences need appropriate source fields and relationships; a verified record alone is insufficient.
 3. Add bounded mail-body and document-metadata support, and preserve large inventories in final answers. Do not infer source absence from missing output.
 4. Give investigators a public-only binding preview before they finish. A future matched trial must give both arms the same export feedback and freeze new code. No new accuracy score is claimed for the schema fix.

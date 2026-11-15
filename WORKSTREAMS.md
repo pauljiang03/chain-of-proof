@@ -7,16 +7,25 @@ The project is CONAN-F. The desktop app is Conan; `conan` opens it. The `cop` co
 
 | Owner | State |
 |---|---|
-| Root Codex | Integrates tested changes and pushes main. Owns README, TASKS and this handoff. Hacking extraction is frozen at `/private/tmp/cop-nist-hacking` (`6cff4fe`). |
-| Other Codex terminal | Owns frozen Data Leakage repeat results, the separate role diagnostic, and the upcoming Hacking C-only test. No production-file ownership; do not duplicate these runs. |
+| Root Codex | Integrates tested changes and pushes main. Owns readers, checker/Lean source semantics, docs/UI and final integration. Active fixes: `/private/tmp/cop-evidence-meaning`, branch `fix/evidence-meaning`. |
+| Other Codex terminal | Owns strict answer projection/requirements, product answer storage and tools, durable ablation checkpoints, public preflight and a separate strict public contract. Active fixes: `/private/tmp/cop-durable-bindings`, branch `fix/durable-ablation-bindings`. |
 | Claude | Independent checker, rename, desktop, proof graph, report builder, Summary and Timeline are integrated. Check for new work before assigning UI tasks. |
-| Root helpers | Hacking reader, proof-role, private-reference and final mechanical archive work is complete. The UI review and its examination-time classification fix are complete. |
+| Root helpers | `optical_timestamps`: application binary metadata reader. `journal_gaps`: safe historical path resolution and diagnostics. `lean_gap_types`: exact source-observation sentences, typed roles and kernel tests. |
 
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
 App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
 
 ## Latest implementation
+
+New model experiments are held until the correctness fixes pass deterministic checks.
+The Hacking C-only pilot was prepared but never dispatched. Its frozen runtime and
+manifest are preparation artifacts, not a completed or running test.
+
+Ownership above is final; it supersedes earlier crossed terminal proposals. Root
+does not edit `agent/answer_*`, the other terminal's public contract, or the ablation
+protocol. The other terminal does not edit readers, checker roles/sentences or Lean.
+Helpers use their owner's isolated worktree and do not modify frozen evidence or runs.
 
 The three incorrect answers were traced to narrow verified observations used as stronger answers. Optional public claim-role requirements, early evidence-need diagnostics and a separate unscored diagnostic profile are integrated. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md). Original benchmark inputs, frozen results and unannotated contract behavior are unchanged. This is declared-role compatibility, not Lean proof of question entailment.
 
