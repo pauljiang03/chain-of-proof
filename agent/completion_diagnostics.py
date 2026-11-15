@@ -40,9 +40,14 @@ def _question_id(row):
     return value if isinstance(value, str) else None
 
 
-def completion_diagnostics(public, document, projection, candidates, inventory=None, *, checkpoint=None):
+def completion_diagnostics(public, document, projection, candidates, inventory=None, *, checkpoint=None, work_state=None):
     """Summarize existing literal outputs without exposing answer values."""
     plan = dict(public, facts_sha256=(projection.get('projection', {}).get('evidence_facts_sha256')))
+    if isinstance(work_state, dict) and work_state.get('case_id') == public.get('case_id'):
+        notes = {q['id']: q for q in work_state.get('questions', []) if isinstance(q, dict) and isinstance(q.get('id'), str)}
+        plan['questions'] = [dict(q, **{key: notes[q['id']][key] for key in
+            ('work_status', 'searched', 'unresolved', 'next_actions') if key in notes.get(q['id'], {})})
+            for q in public['questions']]
     coverage = coverage_pass(plan, answers=projection['submission'], inventory_progress=inventory)
     authored = Counter(_question_id(row) for row in document['bindings'] if isinstance(row, dict))
     surviving = Counter(row['question_id'] for row in projection.get('leaves', []))
@@ -71,11 +76,19 @@ def completion_diagnostics(public, document, projection, candidates, inventory=N
             if type(count) is int and count >= 0:
                 returned[traversal['question_id']] += count
     questions = []
+    def has_array(schema, depth=0):
+        if not isinstance(schema, dict) or depth > 16:
+            return False
+        return (schema.get('type') == 'array' or 'items' in schema
+                or any(has_array(value, depth+1) for value in schema.get('properties', {}).values())
+                or any(has_array(value, depth+1) for key in ('anyOf', 'oneOf', 'allOf') for value in schema.get(key, [])))
+    schemas = {q['id']: q.get('answer_schema', {}) for q in public['questions']}
     for row in coverage['questions']:
         qid = row['question_id']
         inventory_recording = ('recorded_inventory' if traversals[qid] else 'no_recorded_inventory') if inventory_state == 'recorded' else {
             'invalid': 'inventory_progress_invalid', 'unavailable': 'inventory_progress_unavailable',
             'not_supplied': 'inventory_progress_not_supplied'}.get(inventory_state, 'inventory_progress_unavailable')
+        population_unknown = has_array(schemas[qid]) and not traversals[qid]
         questions.append({'question_id': qid, 'authored_bindings': authored[qid],
             'authored_binding_status': 'authored_bindings_present' if authored[qid] else 'no_authored_bindings',
             'authored_refused_bindings': refused[qid], 'binding_conflicts': conflicts[qid],
@@ -86,7 +99,10 @@ def completion_diagnostics(public, document, projection, candidates, inventory=N
             'surviving_leaves': surviving[qid], 'answer_status': row['answer_status'],
             'missing_required_fields': row['missing_required_fields'][:8],
             'missing_required_fields_truncated': len(row['missing_required_fields']) > 8,
-            'diagnostics': [kind for kind in row['diagnostics'] if kind not in ('no_recorded_searches', 'not_started')],
+            'diagnostics': [kind for kind in row['diagnostics'] if kind not in ('no_recorded_searches', 'not_started')]
+                + (['array_inventory_coverage_unknown'] if population_unknown else []),
+            'inventory_population_coverage': 'unknown' if population_unknown else 'not_established',
+            'actions': row['actions'][:8] + (['Enumerate and review the requested list; no inventory traversal is recorded. One bound row does not establish population coverage.'] if population_unknown else []),
             'pending_inventory': len(row['pending_inventory']),
             'inventory_rows_returned': returned[qid],
             'returned_rows_with_zero_authored_bindings': returned[qid] if not authored[qid] else 0,

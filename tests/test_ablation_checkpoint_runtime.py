@@ -277,6 +277,18 @@ class Checkpoints(unittest.TestCase):
         self.assertTrue(projection['unsupported'])
         self.assertEqual(json.loads((run/'binding-resolution.json').read_text()), [])
 
+    def test_compact_workflow_retains_saved_unresolved_notes_in_completion(self):
+        run = self.init()
+        runtime.call_tool(run, 'checkpoint', {'document': self.document()})
+        updated = runtime.call_tool(run, 'update_question', {'question_id': 'Q1',
+            'unresolved': ['Remaining source rows need review'], 'status': 'in_progress'})
+        self.assertNotIn('answer_schema', updated['questions'][0])
+        self.assertEqual(updated['questions'][0]['unresolved'], ['Remaining source rows need review'])
+        self.assertIn('unresolved_work', updated['completion']['questions'][0]['diagnostics'])
+        preview = runtime.call_tool(run, 'preview', {'document': self.document()})
+        self.assertIn('unresolved_work', preview['completion']['questions'][0]['diagnostics'])
+        self.assertIn('answer_schema', json.loads((run/'questions.json').read_text())['questions'][0])
+
     def test_candidate_prefix_tamper_fails_closed(self):
         run = self.init()
         cid = runtime.call_tool(run, 'check', {'question': 'Q1', 'claim': {'usbConnected': [1]}})['candidate_id']
