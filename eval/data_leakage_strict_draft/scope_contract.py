@@ -8,8 +8,11 @@ def unavailable(meaning):
     return {'mode': 'unavailable', 'meaning': meaning}
 
 
-def records(origins):
-    return parse_scope({'mode': 'source_records', 'origins': deepcopy(origins)})
+def records(origins, *, same_origin=False):
+    policy = {'mode': 'source_records', 'origins': deepcopy(origins)}
+    if same_origin:
+        policy['same_origin'] = True
+    return parse_scope(policy)
 
 
 def nodes_at(schema, tokens):
@@ -69,17 +72,27 @@ def apply_data_leakage_scopes(questions, plan):
                                 'reason': plan['compilation_review']['digest_comparison']})
         else:
             for selection in mapped[qid]['policies']:
-                profile = profiles.get(selection.get('source_profile'), {})
-                origin = profile.get('origin')
-                if origin and all(value is not None for value in origin.values()):
-                    policy = records([origin])
+                if qid == 'Q51' and 'source_profiles' in selection:
+                    if (selection['object_path'] != '/records/*'
+                            or selection['source_profiles'] != ['pc_primary', 'pc_unallocated_recovery']
+                            or selection.get('same_origin') is not True):
+                        raise ValueError('Q51 requires the reviewed per-row exact-origin alternatives')
+                    policy = records([profiles[name]['origin'] for name in selection['source_profiles']],
+                                     same_origin=True)
                 else:
-                    policy = unavailable(selection.get('known_unavailable') or profile.get('meaning')
-                                         or selection.get('reason') or 'Exact source selection is unavailable.')
+                    profile = profiles.get(selection.get('source_profile'), {})
+                    origin = profile.get('origin')
+                    if origin and all(value is not None for value in origin.values()):
+                        policy = records([origin])
+                    else:
+                        policy = unavailable(selection.get('known_unavailable') or profile.get('meaning')
+                                             or selection.get('reason') or 'Exact source selection is unavailable.')
                 for path in selection['object_path'].split('|'):
                     declare(schema, path, policy)
                     resolutions.append({'question_id': qid, 'path': path, 'mode': policy['mode'],
-                                        'reason': selection['reason']})
+                                        'reason': selection['reason'],
+                                        **({'same_origin': True, 'origins': deepcopy(policy['origins'])}
+                                           if qid == 'Q51' and policy.get('same_origin') else {})})
         mark_unselected_leaves(schema)
     return resolutions
 

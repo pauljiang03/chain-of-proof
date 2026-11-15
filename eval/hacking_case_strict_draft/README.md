@@ -1,35 +1,37 @@
-# Hacking Case public row and scope review
+# Hacking Case public field, row and source review
 
-This separate 31-question derivative is held. It does not change the original
-public contract, private reference or prepared experiment. No model run or scoring
-was performed.
+This separate 31-question derivative remains held. It preserves original public
+prompts, answer shapes and matching rules. No model run or scoring was performed.
+Its 38 leaf requirements comprise 16 catalog-supported fields and 22 unsupported
+meanings; these counts describe declared compatibility, not evidence presence or
+answer accuracy. The 26 same-part objects and six independent collection wrappers
+remain unchanged.
 
-The draft preserves question text, answer shapes and matching rules. Its 38 leaf
-requirements comprise 13 compatible catalog roles and 25 explicitly unsupported
-meanings. It declares 26 same-atomic-part object policies and six independent
-scalar-list wrappers. These counts describe catalog compatibility, not case
-accuracy or available evidence.
+Q4 uses the dedicated effective-time-zone role and its reviewed registry
+bias-agreement display convention. It does not establish physical clock accuracy
+or actual daylight-saving state. Q27 requires a validated Yahoo Mail message URL
+and matching cached message HTML, never a generic cache filename or host alone.
 
-Already supported typed fields also accept bounded `attributeTuple` values.
-The tuple establishes one source subject for its distinct typed attributes;
-it does not add actor, application, cross-question or completeness meanings.
-The compatible/unsupported counts therefore remain 13/25.
+Q28 and Q29 use one atomic `filesystemSetDeleted` claim for the exact bounded
+Recycle Bin executable extraction definition recorded in both leaf requirements.
+The count and all-members-deleted Boolean cover that declared set only. Q29 also
+requires the unique Q28 count binding from the same candidate and atomic part.
+Missing, duplicated, conflicted or unrelated targets freeze the dependent answer
+out before admission filtering; later filtering cannot select another target.
+Neither result establishes secure erasure, recoverability or all disk executables.
 
-`review.json` records the exact public input hash, changed requirement pointers,
-source-scope assumptions and peer-review resolutions. `peer_review.json` records
-the independent review before those resolutions. In particular, a configured
-logon name cannot establish the last successful logon. The antivirus Boolean is
-only the declared scanner result: a positive signature can be retained after an
-incomplete examination; a negative requires the reader's completed declared scope.
-Neither value establishes global malware absence or historical infection.
+Supported typed attributes accept `attributeRecorded.value` or bounded
+`attributeTuple.value_0` through `value_7`. Each value retains its exact role and
+native type. Every supporting record remains subject to the original hash-bound
+image, exhibit, snapshot and artifact-variant checks. The antivirus scope also
+binds its exact scan input. These are contract checks, not source-authenticity or
+question-entailment theorems.
 
-All 31 questions now declare exact source origins checked against every
-supporting record in hash-bound evidence. Primary base-volume artifacts exclude
-registry backups and noncurrent control sets. Q1 permits the two typed
-same-image digest components; Q31 additionally requires the exact antivirus
-scan-input origin. These are reviewed contract checks, not new Lean theorems
-of source authenticity or question entailment.
+The review retains unsupported actor, online-session, source-affiliation and
+last/predominant-user meanings. A configured user name or stored mIRC setting
+does not supply those relationships. Antivirus results describe the declared
+scanner examination, with completed scope required for a negative result.
 
-The same-part row guard establishes field coherence only. Missing meanings,
-unproved completeness and unsupported source relationships remain blockers.
-A new run requires their review and an explicitly frozen comparison contract.
+`review.json` records current field resolutions and the held status. Earlier
+peer notes describe prior revisions. A run requires the remaining gap review,
+completed deterministic validation and an explicitly frozen comparison contract.

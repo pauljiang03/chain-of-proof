@@ -2889,58 +2889,192 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "recorded_timestamp_not_action_or_execution_guarantee_us"
+                      "recorded_attribute_browser_search_recorded_time_string"
                     ],
                     "selectors": [
                       {
-                        "form": "searched",
-                        "field": "recorded_time_us"
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Retained browser-history visit timestamp of this search observation; not personal attribution.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
+                    "meaning": "timestamp retained by that same search history occurrence; not independently verified human activity time",
+                    "evidence_needed": "The same browser-history search occurrence must supply the full untruncated literal URL, query parsed under the reviewed provider grammar, browser association and retained timestamp; preserve artifact-time meaning. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "keyword": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "query"
+                      "recorded_attribute_browser_search_query_string"
                     ],
                     "selectors": [
                       {
-                        "form": "searched",
-                        "field": "query"
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Query text parsed from the browser-history URL for this webSearch observation.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
+                    "meaning": "query text parsed from that same recorded search URL under the reviewed search-provider grammar",
+                    "evidence_needed": "The same browser-history search occurrence must supply the full untruncated literal URL, query parsed under the reviewed provider grammar, browser association and retained timestamp; preserve artifact-time meaning. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "url": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_complete_browser_search_inventory_url"
+                      "recorded_attribute_browser_search_url_string"
                     ],
-                    "meaning": "The specified field in all browser searches, with keyword, URL and browser joined to the same search. Requested leaf: url.",
-                    "evidence_needed": "searched gives retained keyword/browser/time but no URL field, complete enumeration or reviewed same-search URL join."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "literal URL in the exact browser history occurrence that records the search",
+                    "evidence_needed": "The same browser-history search occurrence must supply the full untruncated literal URL, query parsed under the reviewed provider grammar, browser association and retained timestamp; preserve artifact-time meaning. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "browser": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "browser"
+                      "recorded_attribute_browser_search_browser_string"
                     ],
                     "selectors": [
                       {
-                        "form": "searched",
-                        "field": "browser"
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Browser recorded for this same webSearch observation.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
+                    "meaning": "browser association of that same search history source; not physical user attribution",
+                    "evidence_needed": "The same browser-history search occurrence must supply the full untruncated literal URL, query parsed under the reviewed provider grammar, browser association and retained timestamp; preserve artifact-time meaning. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 }
               },
@@ -5373,20 +5507,96 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_sticky_note_file_timestamp_file_modified"
+                      "recorded_attribute_sticky_notes_container_modified_at_string"
                     ],
-                    "meaning": "Q41 answer value at /properties/notes/items/properties/file_modified: file modified under the full public question meaning.",
-                    "evidence_needed": "The note reader emits both container-file and note-storage modification timestamps through the same field. A rule distinguishing the requested file timestamp is missing."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "UTC filesystem modification timestamp of the actual Sticky Notes container; not a note entry timestamp, SQLite UpdatedAt or independently verified editing time",
+                    "evidence_needed": "Literal retained Unicode text from a validated Sticky Notes container. file_modified is the actual container filesystem mtime, never an OLE note-stream timestamp or SQLite UpdatedAt. Text and file mtime must identify the same actual container/note source occurrence. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "content": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_sticky_note_application_scoped_text"
+                      "recorded_attribute_sticky_notes_note_text_string"
                     ],
-                    "meaning": "Identify notes stored in the Sticky Note file.",
-                    "evidence_needed": "Literal text must be bound to the Sticky Notes application and target file. noteFound.text alone accepts generic note text without constraining the application or artifact; a conjunctive source-membership rule is missing."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "literal retained Unicode note text from validated OLE stream 3 (strict UTF-16LE) or SQLite Note.Text; not authorship, reading or physical action",
+                    "evidence_needed": "Literal retained Unicode text from a validated Sticky Notes container. file_modified is the actual container filesystem mtime, never an OLE note-stream timestamp or SQLite UpdatedAt. Text and file mtime must identify the same actual container/note source occurrence. PC/base-volume/primary only. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 }
               },
@@ -5988,10 +6198,48 @@
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_shadow_copy_metadata_storage_path"
+                      "recorded_attribute_vss_storage_path_string"
                     ],
-                    "meaning": "Q47 answer value at /properties/copies/items/properties/storage_path: storage path under the full public question meaning.",
-                    "evidence_needed": "The shadow-copy reader retains storage artifact and set identifier in provenance, not projectable fields; size has no exact projectable source role. Volume is not storage path and copy identifier is not set identifier."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "retained VSS store-file path resolved through its base-volume metadata reference; not a UUID-only constructed path or examination of snapshot contents",
+                    "evidence_needed": "PC base-volume VSS catalog/store metadata only, not contents from vss:<id>. Storage path must be resolved from the retained base-volume store-file reference, not constructed from a UUID. The copied/set identities and timestamp must describe the same catalog entry. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "created_at": {
@@ -5999,16 +6247,48 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "recorded_timestamp_not_action_or_execution_guarantee_us"
+                      "recorded_attribute_vss_created_at_string"
                     ],
                     "selectors": [
                       {
-                        "form": "shadowCopyMade",
-                        "field": "recorded_time_us"
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Creation timestamp recorded by the shadow-copy catalog for this same shadowCopy source record.",
-                    "evidence_needed": "Exact shadowCopyMade.recorded_time_us, guarded with the copy ID and other present fields by same_claim_part. This preserves catalog creation time, not inferred user action. A selected-PC-exhibit runtime gate remains necessary; collection completeness is unproved."
+                    "meaning": "creation timestamp retained in a base-volume VSS catalog entry; not independently verified physical action time or examination of snapshot contents",
+                    "evidence_needed": "PC base-volume VSS catalog/store metadata only, not contents from vss:<id>. Storage path must be resolved from the retained base-volume store-file reference, not constructed from a UUID. The copied/set identities and timestamp must describe the same catalog entry. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "size_bytes": {
@@ -6018,33 +6298,103 @@
                       "needs_shadow_copy_metadata_size_bytes"
                     ],
                     "meaning": "Q47 answer value at /properties/copies/items/properties/size_bytes: size bytes under the full public question meaning.",
-                    "evidence_needed": "The shadow-copy reader retains storage artifact and set identifier in provenance, not projectable fields; size has no exact projectable source role. Volume is not storage path and copy identifier is not set identifier."
+                    "evidence_needed": "No exact reviewed role exposes the requested VSS store size. Do not substitute source volume capacity, declared image size, allocation extents or a computed display value. Other newly typed catalog/store fields do not establish this size."
                   }
                 },
                 "shadow_copy_id": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "shadow_copy"
+                      "recorded_attribute_vss_copy_id_string"
                     ],
                     "selectors": [
                       {
-                        "form": "shadowCopyMade",
-                        "field": "shadow_copy"
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Copy identifier recorded by the shadow-copy catalog; not the store or copy-set identifier.",
-                    "evidence_needed": "Identify the exact source record and requested artifact scope. The declared selector preserves only this source field; completeness and relevance remain separate review obligations."
+                    "meaning": "copy identifier observed in a base-volume VSS catalog entry; not examination of the snapshot contents",
+                    "evidence_needed": "PC base-volume VSS catalog/store metadata only, not contents from vss:<id>. Storage path must be resolved from the retained base-volume store-file reference, not constructed from a UUID. The copied/set identities and timestamp must describe the same catalog entry. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 },
                 "shadow_copy_set_id": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_shadow_copy_metadata_shadow_copy_set_id"
+                      "recorded_attribute_vss_set_id_string"
                     ],
-                    "meaning": "Q47 answer value at /properties/copies/items/properties/shadow_copy_set_id: shadow copy set id under the full public question meaning.",
-                    "evidence_needed": "The shadow-copy reader retains storage artifact and set identifier in provenance, not projectable fields; size has no exact projectable source role. Volume is not storage path and copy identifier is not set identifier."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "set identifier observed in a base-volume VSS catalog entry; not examination of the snapshot contents",
+                    "evidence_needed": "PC base-volume VSS catalog/store metadata only, not contents from vss:<id>. Storage path must be resolved from the retained base-volume store-file reference, not constructed from a UUID. The copied/set identities and timestamp must describe the same catalog entry. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established."
                   }
                 }
               },
@@ -6792,10 +7142,49 @@
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_recycle_index_source_field_i_filename"
+                      "recorded_attribute_recycle_index_file_name_string"
                     ],
-                    "meaning": "Q51 answer value at /properties/records/items/properties/i_filename: i filename under the full public question meaning.",
-                    "evidence_needed": "The PC reader keeps the $I filename in artifact provenance and strips the drive from its core path. A distinct complete original-path or index-filename field is needed; arbitrary artifact text cannot substitute."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "literal filename of the examined Recycle Bin index entry",
+                    "evidence_needed": "Every binding, including a partial original-path-only answer, requires exactly one typed recycle.index_file_name, recycle.original_path, recycle.index_deleted_at in the SAME atomic tuple part. Standalone attributeRecorded, another both part or duplicated source-role fields cannot authorize membership. Validated PC Recycle Bin $I index occurrence only. Keep the full original path including drive. The timestamp is retained moved-to-Recycle-Bin time, not MFT deallocation or secure erasure. Allocated-primary and deleted/unallocated-recovery records need explicitly reviewed per-row source selections; do not silently accept either by a global origin relaxation. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established.",
+                    "required_attribute_roles": [
+                      "recycle.index_file_name",
+                      "recycle.original_path",
+                      "recycle.index_deleted_at"
+                    ]
                   }
                 },
                 "deleted_at": {
@@ -6803,26 +7192,98 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "recorded_timestamp_not_action_or_execution_guarantee_us"
+                      "recorded_attribute_recycle_index_deleted_at_string"
                     ],
                     "selectors": [
                       {
-                        "form": "fileDeletedAt",
-                        "field": "recorded_time_us"
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
                       }
                     ],
-                    "meaning": "Deletion time stored in a Recycle Bin index record; not independent attribution of deletion to a person.",
-                    "evidence_needed": "Identify the exact source record and requested artifact scope. The declared selector preserves only this source field; completeness and relevance remain separate review obligations. Selected-PC exhibit membership is a runtime gap; catalog availability does not establish actual-case availability. No other row field may be assumed to share this record absent an enforced row-subject constraint."
+                    "meaning": "moved-to-Recycle-Bin timestamp retained in that same index entry; not filesystem deallocation or secure erasure",
+                    "evidence_needed": "Every binding, including a partial original-path-only answer, requires exactly one typed recycle.index_file_name, recycle.original_path, recycle.index_deleted_at in the SAME atomic tuple part. Standalone attributeRecorded, another both part or duplicated source-role fields cannot authorize membership. Validated PC Recycle Bin $I index occurrence only. Keep the full original path including drive. The timestamp is retained moved-to-Recycle-Bin time, not MFT deallocation or secure erasure. Allocated-primary and deleted/unallocated-recovery records need explicitly reviewed per-row source selections; do not silently accept either by a global origin relaxation. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established.",
+                    "required_attribute_roles": [
+                      "recycle.index_file_name",
+                      "recycle.original_path",
+                      "recycle.index_deleted_at"
+                    ]
                   }
                 },
                 "original_path": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_recycle_index_source_field_original_path"
+                      "recorded_attribute_recycle_original_path_string"
                     ],
-                    "meaning": "Q51 answer value at /properties/records/items/properties/original_path: original path under the full public question meaning.",
-                    "evidence_needed": "The PC reader keeps the $I filename in artifact provenance and strips the drive from its core path. A distinct complete original-path or index-filename field is needed; arbitrary artifact text cannot substitute."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "original path retained in a Recycle Bin record",
+                    "evidence_needed": "Every binding, including a partial original-path-only answer, requires exactly one typed recycle.index_file_name, recycle.original_path, recycle.index_deleted_at in the SAME atomic tuple part. Standalone attributeRecorded, another both part or duplicated source-role fields cannot authorize membership. Validated PC Recycle Bin $I index occurrence only. Keep the full original path including drive. The timestamp is retained moved-to-Recycle-Bin time, not MFT deallocation or secure erasure. Allocated-primary and deleted/unallocated-recovery records need explicitly reviewed per-row source selections; do not silently accept either by a global origin relaxation. Exact native typed value only; all present row fields must bind to one atomic same-subject attributeTuple when multiple roles are supplied. Enforce same_claim_part and exact source-origin admission on every supporting record. No examination timestamp or generic source text substitution; collection completeness is not established.",
+                    "required_attribute_roles": [
+                      "recycle.index_file_name",
+                      "recycle.original_path",
+                      "recycle.index_deleted_at"
+                    ]
                   }
                 }
               },
@@ -6834,6 +7295,24 @@
               "additionalProperties": false,
               "x-claim-row": {
                 "mode": "same_claim_part"
+              },
+              "x-claim-scope": {
+                "mode": "source_records",
+                "origins": [
+                  {
+                    "image": "pc.E01",
+                    "exhibit": "PC",
+                    "source_snapshot": "base-volume",
+                    "source_variant": "primary"
+                  },
+                  {
+                    "image": "pc.E01",
+                    "exhibit": "PC",
+                    "source_snapshot": "base-volume",
+                    "source_variant": "unallocated-recovery"
+                  }
+                ],
+                "same_origin": true
               }
             }
           }
@@ -6841,18 +7320,7 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false,
-        "x-claim-scope": {
-          "mode": "source_records",
-          "origins": [
-            {
-              "image": "pc.E01",
-              "exhibit": "PC",
-              "source_snapshot": "base-volume",
-              "source_variant": "primary"
-            }
-          ]
-        }
+        "additionalProperties": false
       },
       "match": {
         "strings": "casefold_whitespace",

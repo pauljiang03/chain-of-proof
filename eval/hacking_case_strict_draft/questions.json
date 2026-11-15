@@ -344,10 +344,48 @@
             "description": "Effective recorded time-zone label with its UTC offset. Keep registry key identifiers and conversion reasoning outside answer.",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_effective_timezone_label_and_offset_time_zone_setting"
+                "recorded_attribute_os_effective_time_zone_string"
               ],
-              "meaning": "Q4 requested answer value /properties/time_zone_setting under the full public prompt and schema description.",
-              "evidence_needed": "The schema requests an effective label with UTC offset. host_attributes emits only TimeZoneKeyName or StandardName as the typed value; Bias/DaylightBias remain provenance. A reviewed effective-offset/display convention rule and exact composite role are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Recorded time-zone name with its UTC offset selected by unambiguous registry bias agreement.",
+              "evidence_needed": "Use only os.effective_time_zone from the reviewed current-control-set interpretation. Raw TimeZoneKeyName/StandardName, an assumed Bias or tuple examination timestamp cannot supply this field. This records the configuration convention, not physical clock accuracy, actual daylight-saving state or transition correctness. All backing records retain the declared exact evidence source scope; tuple values retain their own role and native type."
             }
           }
         },
@@ -1596,10 +1634,48 @@
             "description": "Cached filename or documented filename pattern; preserve the distinction in the evidence appendix.",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_yahoo_mail_cache_filename_identity_file_name"
+                "recorded_attribute_browser_yahoo_mail_cache_file_name_string"
               ],
-              "meaning": "Q27 requested answer value /properties/file_name under the full public prompt and schema description.",
-              "evidence_needed": "Generic browser-cache filenames are not Yahoo mail message copies or documented mail filename patterns. Need service/content classification tied to the filename source; generic cache-file presence cannot establish it. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Retained IE cache filename linked to a validated Yahoo Mail message URL and matching message HTML.",
+              "evidence_needed": "Use only browser.yahoo_mail_cache_file_name. The allocated index.dat record must link the retained cache filename to a validated Yahoo Mail message URL, with matching message headers/body in the examined cache content. Generic browser.cache_file_name, a Yahoo hostname alone or a guessed filename pattern is insufficient. This does not establish authenticity, ownership or user activity. All backing records retain the declared exact evidence source scope; tuple values retain their own role and native type."
             }
           }
         },
@@ -1638,46 +1714,23 @@
             "minimum": 0,
             "x-claim-requirement": {
               "semantic_types": [
-                "recorded_attribute_recycle_executable_count_integer"
+                "asserted_declared_filesystem_set_count"
               ],
-              "meaning": "reader-reported executable count in its stated Recycle Bin scope",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
-                  "form": "attributeRecorded",
-                  "field": "value"
-                },
+                  "form": "filesystemSetDeleted",
+                  "field": "count"
+                }
+              ],
+              "meaning": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set.",
+              "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
+              "field_conditions": [
                 {
-                  "form": "attributeTuple",
-                  "field": "value_0"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_1"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_2"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_3"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_4"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_5"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_6"
-                },
-                {
-                  "form": "attributeTuple",
-                  "field": "value_7"
+                  "field": "definition",
+                  "semantic_type": "declared_filesystem_set_extraction_definition",
+                  "values": [
+                    "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
+                  ]
                 }
               ]
             }
@@ -1718,10 +1771,32 @@
             "description": "Whether filesystem metadata marks the referenced recycle-bin entries deleted; not recoverability, secure erasure or a claim that no copy exists.",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_referenced_recycle_executable_set_deleted_state_deleted_from_file_system"
+                "asserted_all_members_deleted_in_declared_filesystem_set"
               ],
-              "meaning": "Q29 requested answer value /properties/deleted_from_file_system under the full public prompt and schema description.",
-              "evidence_needed": "filesystem.deleted_flag is per named MFT entry or INFO2-associated retained file. The Boolean asks about the referenced executable set; a set-membership/aggregation rule linking Q28 files and their actual in-use flags is absent. One unrelated flag is insufficient; recoverability remains a different question. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
+              "selectors": [
+                {
+                  "form": "filesystemSetDeleted",
+                  "field": "all_deleted"
+                }
+              ],
+              "meaning": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata.",
+              "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
+              "field_conditions": [
+                {
+                  "field": "definition",
+                  "semantic_type": "declared_filesystem_set_extraction_definition",
+                  "values": [
+                    "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
+                  ]
+                }
+              ]
+            },
+            "x-claim-reference": {
+              "mode": "same_claim_part",
+              "question_id": "Q28",
+              "path": [
+                "executable_file_count"
+              ]
             }
           }
         },
