@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 ORIGINAL = ROOT / 'eval/benchmark_nist_questions.json'
 PARTS = ('q01_20.json', 'q21_40.json', 'q41_60.json')
-CASE_ID = 'nist-cfreds-data-leakage-strict-review-v2'
+CASE_ID = 'nist-cfreds-data-leakage-strict-review-v3'
 
 
 def encoded(value):
@@ -54,7 +54,7 @@ def build():
     scope_resolutions = apply_data_leakage_scopes(questions, json.loads((HERE / 'scope_plan.json').read_text()))
 
     public = deepcopy(original)
-    public.update(case_id=CASE_ID, contract_revision='strict-public-review-v2-draft',
+    public.update(case_id=CASE_ID, contract_revision='strict-public-review-v3-draft',
                   title='Data Leakage: strict public meaning review (not approved for a model run)',
                   questions=questions)
     public['instructions'] += [
@@ -64,6 +64,7 @@ def build():
         'Reviewed row policies require the same atomic claim part where fields describe one record or relation. Independent policies apply only to explicitly separate sections.',
         'Source scope is checked against every supporting record in the bound evidence. Explicit unavailable selections always refuse bindings. Missing stronger meanings and exact source selections remain launch blockers in review.json.',
         'Keep narrower observations in a separate evidence report. Do not place them in stronger answer fields or change their labels to obtain support.',
+        'Prospective Q44 interpretation: this revised endpoint requests only native ItemUrl and DateModified values from Windows Search rows whose native store is exactly iehistory. It does not establish browser visits, an actor, or a complete history. Include both America/New_York local days March 22 and March 23, 2015, using the fixed UTC interval [2015-03-22T04:00:00Z, 2015-03-24T04:00:00Z). This explicit interpretation changes the comparison endpoint; original frozen questions, references and scores remain unchanged.',
     ]
     forms = catalog()['forms']
     field_rows, row_policies, scope_policies, counts, per_question = [], [], [], Counter(), []

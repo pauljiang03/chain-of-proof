@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "case_id": "nist-cfreds-data-leakage-strict-review-v2",
+  "case_id": "nist-cfreds-data-leakage-strict-review-v3",
   "title": "Data Leakage: strict public meaning review (not approved for a model run)",
   "time_zone": "America/New_York",
   "instructions": [
@@ -19,7 +19,8 @@
     "Supported individual fields remain partial observations. Complete lists, attribution and relationships between separately bound fields are not established.",
     "Reviewed row policies require the same atomic claim part where fields describe one record or relation. Independent policies apply only to explicitly separate sections.",
     "Source scope is checked against every supporting record in the bound evidence. Explicit unavailable selections always refuse bindings. Missing stronger meanings and exact source selections remain launch blockers in review.json.",
-    "Keep narrower observations in a separate evidence report. Do not place them in stronger answer fields or change their labels to obtain support."
+    "Keep narrower observations in a separate evidence report. Do not place them in stronger answer fields or change their labels to obtain support.",
+    "Prospective Q44 interpretation: this revised endpoint requests only native ItemUrl and DateModified values from Windows Search rows whose native store is exactly iehistory. It does not establish browser visits, an actor, or a complete history. Include both America/New_York local days March 22 and March 23, 2015, using the fixed UTC interval [2015-03-22T04:00:00Z, 2015-03-24T04:00:00Z). This explicit interpretation changes the comparison endpoint; original frozen questions, references and scores remain unchanged."
   ],
   "questions": [
     {
@@ -6385,20 +6386,136 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_search_ie_source_field_date_modified"
+                      "recorded_attribute_search_index_date_modified_string"
                     ],
-                    "meaning": "Q44 answer value at /properties/records/items/properties/date_modified: date modified under the full public question meaning.",
-                    "evidence_needed": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Exact native System_DateModified retained in an IE-history Windows Search index row within the reviewed local-day interval; not browser visit time or independently established filesystem modification.",
+                    "evidence_needed": "Prospective DRAFT pending independent activation review. Require all six named roles exactly once in one atomic source-subject tuple, native store exactly iehistory and PC base-volume primary origin. The source subject binds container path/digest/table/DocID/ordinal. The reviewed public policy includes both America/New_York local days 2015-03-22 and 2015-03-23, expressed as UTC [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Python checks exact recorded-instant eligibility; Lean checks typed retained records, not source authenticity, browsing or actor behavior. Preserve the full native URL and timestamp including 100ns digits.",
+                    "required_attribute_roles": [
+                      "search.index.item_url",
+                      "search.index.date_modified",
+                      "search.index.store",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_conditions": [
+                      {
+                        "role": "search.index.store",
+                        "values": [
+                          "iehistory"
+                        ]
+                      }
+                    ],
+                    "attribute_timestamp_conditions": [
+                      {
+                        "mode": "recorded_instant_half_open_v1",
+                        "role": "search.index.date_modified",
+                        "start": "2015-03-22T04:00:00Z",
+                        "stop": "2015-03-24T04:00:00Z"
+                      }
+                    ]
                   }
                 },
                 "url": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_search_ie_source_field_url"
+                      "recorded_attribute_search_index_item_url_string"
                     ],
-                    "meaning": "Q44 answer value at /properties/records/items/properties/url: url under the full public question meaning.",
-                    "evidence_needed": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Exact native ItemUrl retained in an IE-history Windows Search index row; not a visit, actor attribution or complete inventory.",
+                    "evidence_needed": "Prospective DRAFT pending independent activation review. Require all six named roles exactly once in one atomic source-subject tuple, native store exactly iehistory and PC base-volume primary origin. The source subject binds container path/digest/table/DocID/ordinal. The reviewed public policy includes both America/New_York local days 2015-03-22 and 2015-03-23, expressed as UTC [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Python checks exact recorded-instant eligibility; Lean checks typed retained records, not source authenticity, browsing or actor behavior. Preserve the full native URL and timestamp including 100ns digits.",
+                    "required_attribute_roles": [
+                      "search.index.item_url",
+                      "search.index.date_modified",
+                      "search.index.store",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_conditions": [
+                      {
+                        "role": "search.index.store",
+                        "values": [
+                          "iehistory"
+                        ]
+                      }
+                    ],
+                    "attribute_timestamp_conditions": [
+                      {
+                        "mode": "recorded_instant_half_open_v1",
+                        "role": "search.index.date_modified",
+                        "start": "2015-03-22T04:00:00Z",
+                        "stop": "2015-03-24T04:00:00Z"
+                      }
+                    ]
                   }
                 }
               },
@@ -9808,5 +9925,5 @@
       }
     }
   ],
-  "contract_revision": "strict-public-review-v2-draft"
+  "contract_revision": "strict-public-review-v3-draft"
 }

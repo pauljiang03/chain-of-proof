@@ -50,8 +50,8 @@ class StrictPublicDraft(unittest.TestCase):
         self.assertFalse(report['model_run_ready'])
         self.assertEqual(len(report['launch_blockers']), 4)
         self.assertEqual(report['counts']['leaf_occurrences_including_anyof_branches'], 358)
-        self.assertEqual(report['counts']['catalog_supported'], 67)
-        self.assertEqual(report['counts']['explicitly_unsupported'], 291)
+        self.assertEqual(report['counts']['catalog_supported'], 69)
+        self.assertEqual(report['counts']['explicitly_unsupported'], 289)
         self.assertEqual(report['counts']['row_policies'], 93)
 
     def test_every_declared_leaf_has_valid_explicit_support_or_gap(self):
@@ -70,7 +70,7 @@ class StrictPublicDraft(unittest.TestCase):
                     self.assertTrue(row['available_fields'])
                 else:
                     self.assertTrue(all(name.startswith('needs_') for name in requirement['semantic_types']))
-        self.assertEqual(counts, {'catalog_support': 67, 'no_catalog_support': 291})
+        self.assertEqual(counts, {'catalog_support': 69, 'no_catalog_support': 289})
 
     def test_search_directory_condition_is_visible_in_public_review(self):
         report = assembly.build()['review.json']

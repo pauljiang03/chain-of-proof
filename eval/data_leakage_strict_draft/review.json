@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "case_id": "nist-cfreds-data-leakage-strict-review-v2",
+  "case_id": "nist-cfreds-data-leakage-strict-review-v3",
   "status": "reviewed_draft_with_launch_blockers",
   "model_run_ready": false,
   "scope": "Public prompts, schema, catalog and source meanings only. No case answers, private reference, score or model experiment.",
@@ -78,8 +78,8 @@
     },
     {
       "path": "eval/data_leakage_strict_draft/parts/q41_60.json",
-      "sha256": "0fa6d6f922a215c525170c1fa510044e9cd427755971cbd8aff945c864a6a7e5",
-      "bytes": 302659
+      "sha256": "d7881afa45dc3003f5fa618a6edf1cc7cd290f3e7dd059a6d12e546c24410c42",
+      "bytes": 308800
     },
     {
       "path": "eval/data_leakage_strict_draft/parts/peer_q01_20.json",
@@ -100,16 +100,16 @@
   "counts": {
     "questions": 60,
     "leaf_occurrences_including_anyof_branches": 358,
-    "catalog_supported": 67,
-    "explicitly_unsupported": 291,
+    "catalog_supported": 69,
+    "explicitly_unsupported": 289,
     "missing_or_invalid": 0,
     "row_policies": 93,
     "scope_policies": 72,
-    "conditioned_leaf_occurrences": 36,
+    "conditioned_leaf_occurrences": 38,
     "unavailable_scope_policies": 17,
     "same_claim_part_policies": 83,
     "independent_section_policies": 10,
-    "questions_with_any_catalog_supported_leaf": 20
+    "questions_with_any_catalog_supported_leaf": 21
   },
   "count_meaning": "Catalog compatibility counts, not available case evidence, certified answers, accuracy or complete questions.",
   "launch_blockers": [
@@ -393,8 +393,8 @@
     {
       "question_id": "Q44",
       "leaf_occurrences": 2,
-      "catalog_supported": 0,
-      "explicitly_unsupported": 2
+      "catalog_supported": 2,
+      "explicitly_unsupported": 0
     },
     {
       "question_id": "Q45",
@@ -6238,14 +6238,76 @@
         "date_modified"
       ],
       "branches": [],
-      "status": "no_catalog_support",
-      "available_fields": [],
-      "attribute_conditions": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_search_index_date_modified_string"
+        }
+      ],
+      "attribute_conditions": [
+        {
+          "role": "search.index.store",
+          "values": [
+            "iehistory"
+          ]
+        }
+      ],
       "attribute_path_conditions": [],
-      "attribute_timestamp_conditions": [],
+      "attribute_timestamp_conditions": [
+        {
+          "mode": "recorded_instant_half_open_v1",
+          "role": "search.index.date_modified",
+          "start": "2015-03-22T04:00:00Z",
+          "stop": "2015-03-24T04:00:00Z"
+        }
+      ],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+      "required_attribute_roles": [
+        "search.index.item_url",
+        "search.index.date_modified",
+        "search.index.store",
+        "search.index.container_path",
+        "search.index.table",
+        "search.index.document_id"
+      ],
+      "evidence_needed": "Prospective DRAFT pending independent activation review. Require all six named roles exactly once in one atomic source-subject tuple, native store exactly iehistory and PC base-volume primary origin. The source subject binds container path/digest/table/DocID/ordinal. The reviewed public policy includes both America/New_York local days 2015-03-22 and 2015-03-23, expressed as UTC [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Python checks exact recorded-instant eligibility; Lean checks typed retained records, not source authenticity, browsing or actor behavior. Preserve the full native URL and timestamp including 100ns digits."
     },
     {
       "question_id": "Q44",
@@ -6255,14 +6317,76 @@
         "url"
       ],
       "branches": [],
-      "status": "no_catalog_support",
-      "available_fields": [],
-      "attribute_conditions": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_search_index_item_url_string"
+        }
+      ],
+      "attribute_conditions": [
+        {
+          "role": "search.index.store",
+          "values": [
+            "iehistory"
+          ]
+        }
+      ],
       "attribute_path_conditions": [],
-      "attribute_timestamp_conditions": [],
+      "attribute_timestamp_conditions": [
+        {
+          "mode": "recorded_instant_half_open_v1",
+          "role": "search.index.date_modified",
+          "start": "2015-03-22T04:00:00Z",
+          "stop": "2015-03-24T04:00:00Z"
+        }
+      ],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+      "required_attribute_roles": [
+        "search.index.item_url",
+        "search.index.date_modified",
+        "search.index.store",
+        "search.index.container_path",
+        "search.index.table",
+        "search.index.document_id"
+      ],
+      "evidence_needed": "Prospective DRAFT pending independent activation review. Require all six named roles exactly once in one atomic source-subject tuple, native store exactly iehistory and PC base-volume primary origin. The source subject binds container path/digest/table/DocID/ordinal. The reviewed public policy includes both America/New_York local days 2015-03-22 and 2015-03-23, expressed as UTC [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Python checks exact recorded-instant eligibility; Lean checks typed retained records, not source authenticity, browsing or actor behavior. Preserve the full native URL and timestamp including 100ns digits."
     },
     {
       "question_id": "Q45",
@@ -14361,13 +14485,13 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/records/items/properties/date_modified",
-          "status": "no_catalog_support",
-          "rationale": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+          "status": "catalog_support",
+          "rationale": "Prospective DRAFT mapping requiring independent activation review. Native ItemUrl and System_DateModified only from one six-role Search row tuple with exact iehistory store. Require unique item_url/date_modified/store/container_path/table/document_id roles, same_claim_part and PC base-volume primary source. Reviewed public policy includes both New York local days March 22 and 23: UTC half-open [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Exact 100ns membership is a Python public eligibility check; typed Lean proof does not establish browser visit time, actor, source authenticity or complete inventory."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/properties/url",
-          "status": "no_catalog_support",
-          "rationale": "The Search reader stores ItemPathDisplay or ItemUrl as path and multiple date columns as one timestamp role. Exact URL and DateModified selection with the requested date scope need distinct source-field roles."
+          "status": "catalog_support",
+          "rationale": "Prospective DRAFT mapping requiring independent activation review. Native ItemUrl and System_DateModified only from one six-role Search row tuple with exact iehistory store. Require unique item_url/date_modified/store/container_path/table/document_id roles, same_claim_part and PC base-volume primary source. Reviewed public policy includes both New York local days March 22 and 23: UTC half-open [2015-03-22T04:00:00Z,2015-03-24T04:00:00Z). Exact 100ns membership is a Python public eligibility check; typed Lean proof does not establish browser visit time, actor, source authenticity or complete inventory."
         }
       ],
       "narrow_observations": [
