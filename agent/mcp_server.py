@@ -52,10 +52,14 @@ CONCLUDE_TOOL = {
                     "required": ["text", "finding_ids"]}}
 
 WORKFLOW_TOOLS = [
-    {"name": "answer", "description": "Bind supported fields of current certified claims to a public question. Omit bindings to see the semantic field catalog. Fields need finding_id, part (default 0), field, path (object keys / array indices), and optional format. Values come only from the named claim; relevance and completeness are not proved. Append by default; replace=true replaces this question's bindings.",
+    {"name": "answer", "description": "Bind supported fields of current certified claims to a public question. Omit bindings for bounded read-only inspection pages. Choose section bindings/leaves/unsupported/conflicts/field_requirements/field_catalog/answers; continue with next_offset and state_token. Paging parameters cannot accompany mutations or previews. preview=true validates proposed bindings without persisting them. Fields need finding_id, part (default 0), field, path (object keys / array indices), and optional format. Values come only from the named claim; relevance and completeness are not proved. Append by default; replace=true replaces this question's bindings.",
      "inputSchema": {"type": "object", "properties": {
          "question_id": {"type": "string"}, "bindings": {"type": "array", "items": {"type": "object"}},
-         "replace": {"type": "boolean"}}, "required": ["question_id"]}},
+         "replace": {"type": "boolean"}, "preview": {"type": "boolean"},
+         "section": {"type": "string", "enum": ["bindings", "leaves", "unsupported", "conflicts", "field_requirements", "field_catalog", "answers"]},
+         "offset": {"type": "integer", "minimum": 0},
+         "page_size": {"type": "integer", "minimum": 1, "maximum": 100},
+         "state_token": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "required": ["question_id"], "additionalProperties": False}},
     {"name": "inventory_page", "description": "Read an ID-ordered page of records and save progress for a public question. Continue with the returned cursor and identical filters. Exhaustion applies only to this predicate in this extracted snapshot, not all real-world events.",
      "inputSchema": {"type": "object", "properties": {
          "question_id": {"type": "string"},
@@ -90,7 +94,7 @@ def tools_for(names) -> list:
 
 def call(bench: Workbench, name: str, args: dict) -> str:
     if name in {"answer", "inventory_page"}:
-        allowed = ({"question_id", "bindings", "replace"} if name == "answer" else
+        allowed = ({"question_id", "bindings", "replace", "preview", "section", "offset", "page_size", "state_token"} if name == "answer" else
                    {"question_id", "kinds", "exhibits", "page_size", "cursor"})
         if set(args) - allowed:
             raise ValueError("Unknown " + name + " field")

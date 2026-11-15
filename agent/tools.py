@@ -399,10 +399,14 @@ class Workbench:
         return brick
 
     @audited
-    def answer(self, question_id: str, bindings=None, replace=False, preview=False) -> dict:
+    def answer(self, question_id: str, bindings=None, replace=False, preview=False, *,
+               section=None, offset=None, page_size=None, state_token=None) -> dict:
         """Save explicit claim-field bindings, or show the supported field catalog."""
         from agent.answer_store import answer
+        from agent.answer_views import validate_request, inspection, mutation_view
         from agent.run_manifest import file_binding
+        validate_request(bindings, replace, preview, section=section, offset=offset,
+                         page_size=page_size, state_token=state_token)
         with self._lock:
             if self._inventory_stat() != self._inventory_initial_stat:
                 raise ValueError('evidence changed since this workbench was opened')
@@ -410,6 +414,15 @@ class Workbench:
                 self._inventory_evidence_sha256 = file_binding(self._inventory_facts_path)['sha256']
                 if self._inventory_stat() != self._inventory_initial_stat:
                     raise ValueError('evidence changed during answer source binding')
-            return answer(self.run_dir, question_id, bindings, replace=replace, preview=preview,
-                          _evidence_source=self.source,
-                          _evidence_facts_sha256=self._inventory_evidence_sha256)
+            if bindings is None and not replace and not preview:
+                result = inspection(self.run_dir, question_id, section=section, offset=offset,
+                                    page_size=page_size, state_token=state_token,
+                                    _evidence_source=self.source,
+                                    _evidence_facts_sha256=self._inventory_evidence_sha256)
+                if self._inventory_stat() != self._inventory_initial_stat:
+                    raise ValueError('evidence changed during answer inspection')
+                return result
+            result = answer(self.run_dir, question_id, bindings, replace=replace, preview=preview,
+                            _evidence_source=self.source,
+                            _evidence_facts_sha256=self._inventory_evidence_sha256)
+            return mutation_view(result, question_id)

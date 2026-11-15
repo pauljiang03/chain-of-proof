@@ -139,15 +139,17 @@ class AnswerStore(unittest.TestCase):
             bench.answer('DEVICES', [self.binding], preview=True)
             self.assertEqual(measured.call_count, 1)
         self.assertEqual(result['submission']['answers'][0]['answer'], {'serial': 'SAMPLE-SERIAL-RM2'})
-        self.assertEqual(read_projection(directory), result)
+        stored = read_projection(directory)
+        self.assertEqual(result['projection']['projection_sha256'], stored['projection']['projection_sha256'])
+        self.assertEqual(result['projection']['evidence_facts_sha256'], digest)
         run = export.bundle(directory, 'Scoped synthetic case')
-        self.assertEqual(project_bundle(run, contract), result)
+        self.assertEqual(project_bundle(run, contract), stored)
         with self.assertRaisesRegex(ValueError, 'actual verified'):
             project_bundle(run, contract, authority='independently_replayed')
         with self.assertRaisesRegex(ValueError, 'differs'):
             project_bundle(run, contract, authority='independently_replayed', evidence_facts_sha256='0' * 64)
         replayed = project_bundle(run, contract, authority='independently_replayed', evidence_facts_sha256=digest)
-        self.assertEqual(replayed['submission'], result['submission'])
+        self.assertEqual(replayed['submission'], stored['submission'])
         run['run_manifest']['inputs']['facts']['sha256'] = '0' * 64
         with self.assertRaisesRegex(ValueError, 'differs'):
             project_bundle(run, contract)
@@ -370,7 +372,11 @@ class AnswerStore(unittest.TestCase):
     def test_actual_tool_is_audited_and_exported_without_claiming_completeness(self):
         bench = Workbench(FACTS, self.path)
         projected = bench.answer('DEVICES', [self.binding])
-        self.assertEqual(read_projection(self.path), projected)
+        stored = read_projection(self.path)
+        self.assertEqual(projected['view'], 'bounded_answer_update')
+        self.assertEqual(projected['submission']['answers'], [stored['submission']['answers'][0]])
+        self.assertEqual(projected['projection']['projection_sha256'], stored['projection']['projection_sha256'])
+        self.assertEqual(len(stored['submission']['answers']), 2)
         self.assertIsNone(projected['projection']['evidence_facts_sha256'])
         run = self.bundle()
         self.assertEqual(run['audit']['status'], 'valid')
