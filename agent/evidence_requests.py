@@ -14,6 +14,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from extractor.intake import extend, load_config, sha256_file
+from checker.catalog import ROLES
 
 _LOCK = threading.RLock()
 NOTE = ("Diagnostic only. A reader may find no relevant artifact; collecting more records "
@@ -30,6 +31,15 @@ KINDS = {
     "inventory": {"fileSeen", "fileContent"}, "content": {"fileContent"},
     "optical": {"systemSetting", "volumeOnDevice", "fileCreated", "fileModified", "volumeRecorded", "unallocatedOnDevice"},
 }
+# Explicit reviewed USB source observations only. These registry/log strings do
+# not establish hardware serials, physical-device identity or device counts.
+_USB_SOURCE_ROLES = (
+    'usb.device_instance_id', 'usb.device_id', 'usb.instance_id',
+    'usb.recorded_time', 'usb.record_time_meaning', 'usb.source_type',
+)
+KINDS['windows'].update({'attributeSubject', 'attributeTextValue',
+                         *(ROLES[role].kind for role in _USB_SOURCE_ROLES)})
+
 # These identify existing reader families, not evidence guarantees or new rules.
 RULE_READERS = {
     "R1": {"windows"}, "R3": {"windows"},
