@@ -13,8 +13,8 @@
   };
   const array = (value) => (Array.isArray(value) ? value : []);
   const clip = (value, max) => (value.length > max ? value.slice(0, max - 1) + "…" : value);
-  const DEVICE = [["record", "Record"], ["item", "Source"], ["device", "Recorded name"], ["serial", "USB identifier"],
-    ["volume", "Volume serial"], ["recorded_time", "Record timestamp"]];
+  const DEVICE = [["item", "Item"], ["device", "Device"], ["serial", "Serial number"], ["label", "Volume label"],
+    ["first", "First connection"], ["last", "Last connection"]];
   const state = { model: null, run: null, brief: null, narrative: null, painted: false };
   const go = (tab) => () => { if (CONAN.app) CONAN.app.switchTab(tab, true); };
 
@@ -33,11 +33,11 @@
     const exhibits = items.length ? items.map((item) => String(item.label))
       : [...new Set(model.records.map((record) => record.exhibit).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
     row.append(
-      tile("Recorded accepted findings", n.format(findings.length), n.format(direct) + " without heuristics · " + n.format(heuristic) + " with heuristics"
+      tile("Findings that passed", n.format(findings.length), n.format(direct) + " without heuristics · " + n.format(heuristic) + " with heuristics"
         + (other ? " · " + n.format(other) + " not specified" : ""), go("findings")),
-      tile("Recorded refusals", refusalsSupplied ? n.format(refused) : "Not supplied", refused ? "Not shown as findings" : "No refusal entries supplied"),
-      tile("Distinct cited records", n.format(model.records.length), n.format(model.events.length) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
-      tile("Recorded exhibit labels", n.format(exhibits.length), exhibits.length ? S.clip(exhibits.join(", "), 44) : "No exhibit named in the records"));
+      tile("Refused by the checker", refusalsSupplied ? n.format(refused) : "Not supplied", !refusalsSupplied ? "" : refused ? "Not shown as findings" : "Nothing was refused in this run"),
+      tile("Evidence records used", n.format(model.records.length), n.format(model.events.length) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
+      tile("Evidence exhibits", n.format(exhibits.length), exhibits.length ? S.clip(exhibits.join(", "), 44) : "No exhibit named in the records"));
     if (model.main) {
       const days = Math.floor(S.wall(model.main.to) / S.DAY) - Math.floor(S.wall(model.main.from) / S.DAY) + 1, same = days === 1;
       const first = new Date(S.wall(model.main.from)), last = new Date(S.wall(model.main.to));
@@ -145,9 +145,10 @@
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
-    hero.append(el("h2", "", "Key findings"));
+    hero.append(el("h2", "", "Summary"));
     const lead = array(story.lead).map(String).join(" ");
     if (lead) hero.append(el("p", "ov-lead", lead));
+    if (lead && story.lead_by === "investigator") hero.append(el("p", "ov-byline", "Written by the AI investigator"));
     points.forEach((point) => {
       const row = el("div", "key-row"), body = el("div", "key-body");
       body.append(el("p", "", array(point.sentences).map(String).join(" ")));

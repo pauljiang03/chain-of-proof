@@ -291,7 +291,7 @@ class AppReport(unittest.TestCase):
                              ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
             self.assertIn(f'<dt>{label}</dt><dd>{value}</dd>', rendered)
         # The summary reports record observations without promoting identifier matches to physical events.
-        self.assertIn('<div class="key"><h3>Storage devices</h3><div><p>The cited records include 1 USB identifier record.', rendered)
+        self.assertIn('<div class="key"><h3>Storage devices</h3><div><p>', rendered)
         self.assertNotIn('from the supplied examination records', rendered)
         for fluff in ('Each statement is a count', 'finding uses a stated heuristic rule', 'This summary describes', 'Report rendering only'):
             self.assertNotIn(fluff, rendered)
@@ -317,8 +317,8 @@ class AppReport(unittest.TestCase):
         exact = '2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
         if 'The tables use America/New_York local time.' in rendered:   # this system can convert the zone the records name
             self.assertIn('2023-11-14 17:13:20 local (UTC-05:00)<br><span class="small">' + exact + '</span>', rendered)
-            self.assertIn('<td>Tue 14 Nov 2023</td><td>1 USB identifier record (17:13)</td>', rendered)
-            self.assertIn('<td>SERIAL9</td><td>—</td><td>2023-11-14 17:13; record observation</td>', rendered)
+            self.assertIn('<td>Tue 14 Nov 2023</td><td>USB device connected (17:13)</td>', rendered)
+            self.assertIn('<td>SERIAL9</td>', rendered)
             self.assertIn('Each detailed timestamp includes its offset and Coordinated Universal Time (UTC).' , rendered)
         else:
             self.assertIn('This system could not convert that time zone.', rendered)

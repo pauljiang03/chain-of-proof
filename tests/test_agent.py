@@ -66,5 +66,17 @@ class Tools(unittest.TestCase):
             mcp_server.call(self.bench, "record", {})
 
 
+class CaseSummary(unittest.TestCase):
+    def test_summary_paragraph_is_taken_from_the_closing_reply(self):
+        from agent.run import SUMMARY_LIMIT, case_summary
+        reply = "SUMMARY: The USB device 4C53 was connected.\nIt was connected on 2015-03-24.\n\nQ1: F001, F002."
+        self.assertEqual(case_summary(reply), "The USB device 4C53 was connected. It was connected on 2015-03-24.")
+        self.assertEqual(case_summary("**SUMMARY:** One fact."), "One fact.")
+        self.assertEqual(case_summary("Intro line.\n\nSUMMARY: Late but found."), "Late but found.")
+        for reply in ("No summary paragraph here.", "", None, 7, "Investigation time limit reached."):
+            self.assertEqual(case_summary(reply), "")
+        self.assertEqual(len(case_summary("SUMMARY: " + "word " * 1000)), SUMMARY_LIMIT)
+
+
 if __name__ == "__main__":
     unittest.main()

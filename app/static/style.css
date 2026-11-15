@@ -701,3 +701,4 @@ body.resizing-rows * { cursor: row-resize !important; }
 
 /* The prose summary at the top of Key findings. */
 .ov-hero .ov-lead { color: var(--text); font-size: 1rem; line-height: 1.55; max-width: 78ch; margin-top: 8px; }
+.ov-hero .ov-byline { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
