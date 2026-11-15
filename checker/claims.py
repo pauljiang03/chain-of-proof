@@ -506,8 +506,9 @@ def _en_cloud(args, facts, src):
 
 def _en_note(args, facts, src):
     f = facts[args[0]]
-    return (f'A {src.string(f.aux)} note reads "{src.string(f.obj)}" (last modified '
-            f"{_utc(f.t)}).")
+    return (f'The retained {src.string(f.aux)} record contains note text "{src.string(f.obj)}" '
+            f'({_record_details(f)}). This establishes retained text and its source-record '
+            f'timestamp, not a note-editing action, its time, or its author.')
 
 
 def _en_folder(args, facts, src):
@@ -559,9 +560,12 @@ def _en_content(args, facts, src):
 
 def _en_same_content(args, facts, src):
     a, b = facts[args[0]], facts[args[1]]
+    qualifications = ''.join(
+        f" For content record {f.id} ({src.string(f.obj)}{_on(f)}):{details}"
+        for f in (a, b) if (details := _read_how(f)))
     return (f"{src.string(a.obj)}{_on(a)} and {src.string(b.obj)}{_on(b)} have the same "
             f"recorded content hash {src.string(a.aux)}. This equality does not independently "
-            f"prove byte-for-byte identity or source authenticity.")
+            f"prove byte-for-byte identity or source authenticity.{qualifications}")
 
 
 # ---- Census: statements about all the records of one kind ----------------------------

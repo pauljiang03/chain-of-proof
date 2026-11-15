@@ -28,7 +28,7 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 | R20 | A download record gives the source URL, the saved path and the start time as the browser stored them | Strong | That the file was opened, or still exists |
 | R21 | Text kept by the operating system's search box was typed there | Strong | When, beyond the time the artifact attaches |
 | R22 | A cloud client's log or database row records this event for this file | Strong | That the file's content reached or left the cloud; that needs the provider's records |
-| R23 | A note's text is what the note application stored | Strong | Who wrote it |
+| R23 | Retained note text and the recorded timestamp with its literal source meaning, such as container-file or internal note-storage modification | Strong | A note-editing action, its time, or who wrote it; a generic noteText timestamp is not a note-edit time |
 | R24 | A shell-bag or similar record means the folder was displayed in the file browser under this user profile | Strong | When, beyond the time the artifact attaches; what was done in the folder |
 | R25 | A change-journal rename record gives the old name, the new name and the time | Strong | Who renamed it, or why |
 | R26 | A secondary artifact (search index, thumbnail cache, shadow copy, recent list) holds a record of this path | Strong | That the file still exists, or what it contained |
@@ -83,7 +83,7 @@ they do not silently add source, partition, volume or physical-device identity.
 | `tagged f s g T` | T | Strong, or judgment for an LLM tag | {entity} is tagged "{tag}" ({rule that computed it, or "an LLM judgment"}). |
 | `before a b` | none | Strong | The timestamp of {record a} precedes that of {record b}: the gap of {Δ} exceeds combined uncertainty {r}. This need not order the underlying actions. |
 | `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves provenance literally and always states an application observation, never an execution predicate. |
-| `sameContent a b` | R28 | Strong | {path a} and {path b} have the same recorded content hash {hash}. This equality does not independently prove byte-for-byte identity or source authenticity. |
+| `sameContent a b` | R28 | Strong | {path a} and {path b} have the same recorded content hash {hash}. This equality does not independently prove byte-for-byte identity or source authenticity. Each record's read procedure and recovery/layout qualifications remain attached to that record. |
 | `fileRemovedAt r` | R29 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a removal flag ({time}). This is the record timestamp, not necessarily deletion onset; it does not establish wiping or Recycle Bin use. |
 | `fileCreationRecordedAt r` | R31 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a creation flag ({time}). This is not a filesystem creation timestamp and cannot be used by `copiedHere`. |
 | `volumeRecordedAt v` | R30 | Strong | The UDF file-set descriptor on {disc}, volume {volume}, records its timestamp as {time}. This is descriptor recording time, not examination time or proof of completed formatting/writing. |
