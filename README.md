@@ -32,7 +32,3 @@ expected answers. It does not use an AI judge.
 4. **Verify.** A second checker, con-leche, checks the proofs again.
 
 A proof does not show that a reader read the disk image correctly, or who used a device.
-
-## Data
-
-The disk images are public, staged cases from the NIST Computer Forensic Reference Data Sets.
