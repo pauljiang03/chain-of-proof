@@ -453,7 +453,8 @@
     $("graph-focus-label").textContent = focused ? focused.id + " and related" : "";
     $("graph-focus").title = focused ? "Showing " + focused.id + " and the findings that cite any of the same records" : "";
     const action = state.timer ? "Pause" : !state.browsing && state.step > 0 && state.step < state.steps ? "Resume" : "Replay";
-    $("graph-play").textContent = (state.timer ? "❚❚ " : "▶ ") + action;
+    $("graph-play").textContent = action;
+    $("graph-play").setAttribute("data-icon", state.timer ? "pause" : "play");   // the icon is drawn by the style sheet
     $("graph-play").setAttribute("aria-label", action + " the graph");
     $("graph-play").disabled = !state.steps;
     $("graph-lock").setAttribute("aria-pressed", String(state.locked));

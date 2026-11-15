@@ -426,7 +426,7 @@
     const button = element("button", "text-button mark-button");
     button.type = "button";
     button.dataset.markButton = String(finding.finding_id);
-    const label = () => { const on = !!CONAN.report && CONAN.report.has(finding.finding_id); button.textContent = on ? "✓ In report — remove" : "Add to report"; button.setAttribute("aria-pressed", String(on)); };
+    const label = () => { const on = !!CONAN.report && CONAN.report.has(finding.finding_id); button.textContent = on ? "In report — remove" : "Add to report"; button.setAttribute("aria-pressed", String(on)); };
     button.addEventListener("click", () => { if (CONAN.report) CONAN.report.toggle(finding.finding_id); });
     button.refresh = label;
     label();

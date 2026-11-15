@@ -118,6 +118,8 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .key th, .key td { padding:4px 8px; white-space:nowrap; overflow-wrap:normal; }
 .devices td:nth-child(4) { white-space:normal; overflow-wrap:anywhere; }
 @media(max-width:700px) { .key { grid-template-columns:1fr; } }
+#summary { container-type:inline-size; }   /* the preview pane is narrower than its window */
+@container (max-width:700px) { .key { grid-template-columns:minmax(0,1fr); } .key th,.key td { white-space:normal; } }
 .mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
 .days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .exhibits td:last-child { white-space:nowrap; overflow-wrap:normal; }

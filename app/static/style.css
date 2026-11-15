@@ -635,3 +635,50 @@ dialog { width: min(560px, 92vw); border-radius: 12px; }
 
 /* Lock view: a pressed toggle in the replay controls. */
 #graph-lock[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 500; }
+
+/* Polish pass. Icons are one drawn set (16px grid, 1.5px round stroke) painted in the text colour,
+   in place of symbol characters, which differ from font to font. */
+.ico::before, .ico-after::after { content: ""; display: inline-block; flex: none; width: 16px; height: 16px; vertical-align: -3px;
+  background: currentColor; --none: linear-gradient(transparent, transparent);   /* no icon named: draw nothing */
+  -webkit-mask: var(--icon, var(--none)) center / 16px 16px no-repeat; mask: var(--icon, var(--none)) center / 16px 16px no-repeat; }
+.icon-button.ico { display: inline-grid; place-items: center; padding: 0; }
+.ico-lead::before { margin-right: 5px; }
+.ico-after::after { margin-left: 3px; width: 12px; -webkit-mask-size: 12px 12px; mask-size: 12px 12px; }
+.ico-menu { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2.5 4.5h11M2.5 8h11M2.5 11.5h11'/%3E%3C/svg%3E"); }
+.ico-refresh { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M13 8a5 5 0 1 1-1.5-3.6M13 2.5v3h-3'/%3E%3C/svg%3E"); }
+.ico-down { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 6.5l4 4 4-4'/%3E%3C/svg%3E"); }
+.ico-left { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M10 4L6 8l4 4'/%3E%3C/svg%3E"); }
+.ico-right { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M6 4l4 4-4 4'/%3E%3C/svg%3E"); }
+.ico-close { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 4l8 8M12 4l-8 8'/%3E%3C/svg%3E"); }
+.ico-minus { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8h9'/%3E%3C/svg%3E"); }
+.ico-plus { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8h9M8 3.5v9'/%3E%3C/svg%3E"); }
+.ico-play { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' stroke='black' stroke-width='1.5' stroke-linejoin='round' d='M5.25 3.75v8.5L12 8z'/%3E%3C/svg%3E"); }
+.ico-pause { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linecap='round' d='M5.5 4v8M10.5 4v8'/%3E%3C/svg%3E"); }
+.ico-first { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M4 3.5v9'/%3E%3Cpath fill='black' stroke='black' stroke-width='1.5' stroke-linejoin='round' d='M12 4.25v7.5L7 8z'/%3E%3C/svg%3E"); }
+.ico-last { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M12 3.5v9'/%3E%3Cpath fill='black' stroke='black' stroke-width='1.5' stroke-linejoin='round' d='M4 4.25v7.5L9 8z'/%3E%3C/svg%3E"); }
+.ico-check { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E"); }
+#graph-play[data-icon="pause"] { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linecap='round' d='M5.5 4v8M10.5 4v8'/%3E%3C/svg%3E"); }
+@media (forced-colors: active) { .ico::before, .ico-after::after { background: ButtonText; } }
+
+/* The parts of the page the browser draws: follow the theme and the palette. */
+:root { color-scheme: light dark; accent-color: var(--accent); scrollbar-color: var(--control) transparent; }
+::selection { background: color-mix(in srgb, var(--accent) 26%, transparent); }
+input, textarea { caret-color: var(--accent); }
+a { text-underline-offset: 2px; }
+table { font-variant-numeric: tabular-nums; }
+
+/* Counts and hints are prose with numbers in them: the text face, with even-width numerals. */
+.small-mono, #graph-step-label { font-family: var(--sans); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+.small-mono { font-size: 0.75rem; }
+.badge-key { font-size: 0.625rem; }
+
+/* Replay: the position and the lock share the second row instead of taking a row each. */
+#graph-lock { grid-column: 1; grid-row: 2; padding: 0 6px; }
+#graph-step-label { grid-column: 2 / -1; grid-row: 2; align-self: center; font-size: 0.75rem; color: var(--muted); }
+
+/* Summary sentences: a readable line length. The device table keeps the full width. */
+.key-body p { max-width: 78ch; }
+.advanced > summary { padding: 4px 0; }
+/* Settings row: the three fields share one baseline even when a label is long. */
+.advanced .form-row { grid-template-columns: 1.1fr 1.3fr minmax(112px, .7fr); align-items: end; }
+.advanced .form-row label { white-space: nowrap; }
