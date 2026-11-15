@@ -27,7 +27,7 @@ def native_value(name, value, kind=4): return NS(name=name, value=value, type=ki
 
 
 class SearchServicePublicFields(unittest.TestCase):
-    def native(self, *, current=2, existing=(1, 2), service='WSearch', service_set=2, code=2, kind=4, origin=None):
+    def native(self, *, current=2, current_kind=4, existing=(1, 2), service='WSearch', service_set=2, code=2, kind=4, origin=None):
         origin = origin or ORIGIN
         root = NS(path='', subkeys=lambda: [NS(name='ControlSet%03d' % i) for i in existing])
         hive = system.Hive('SYSTEM', NS(root=lambda: root), r'C:\Windows\System32\config\SYSTEM', False, None, None)
@@ -35,7 +35,7 @@ class SearchServicePublicFields(unittest.TestCase):
         def open_key(ev, h, path):
             opened.append(path)
             if path == 'Select':
-                return NS(path=path, values=lambda: [] if current is None else [native_value('Current', current)])
+                return NS(path=path, values=lambda: [] if current is None else [native_value('Current', current, current_kind)])
             if path == 'ControlSet%03d\\Services\\%s' % (service_set, service):
                 return NS(path=path, values=lambda: [native_value('Start', code, kind)])
             return None
@@ -93,6 +93,30 @@ class SearchServicePublicFields(unittest.TestCase):
             with self.subTest(options=options):
                 evidence, _ = self.native(**options)
                 self.assertFalse(any(kind.startswith('attribute') for kind, *_ in evidence.rows()))
+
+    def test_select_current_requires_native_little_endian_dword(self):
+        # An integer payload alone is insufficient: Select/Current's native
+        # registry type must establish the little-endian DWORD interpretation.
+        for current_kind in (11, 5, 1):  # REG_QWORD, REG_DWORD_BIG_ENDIAN, REG_SZ
+            with self.subTest(current_kind=current_kind):
+                evidence, opened = self.native(current=2, current_kind=current_kind)
+                self.assertFalse(any(kind.startswith('attribute') for kind, *_ in evidence.rows()))
+                self.assertFalse(any('Services' in path for path in opened))
+        evidence, opened = self.native(current=2, current_kind=4)
+        self.assertTrue(any(kind.startswith('attribute') for kind, *_ in evidence.rows()))
+        self.assertIn(r'ControlSet002\Services\WSearch', opened)
+
+    def test_native_integer_wrapper_current_preserves_selected_service(self):
+        class NativeUInt32(int):
+            pass
+        evidence, opened = self.native(current=NativeUInt32(2), current_kind=4)
+        self.assertTrue(any(kind.startswith('attribute') for kind, *_ in evidence.rows()))
+        self.assertIn(r'ControlSet002\Services\WSearch', opened)
+        self.assertNotIn(r'ControlSet001\Services\WSearch', opened)
+        labels = [json.loads(value) for kind, _, _, _, value, raw in evidence.rows()
+                  if kind == 'attributeTextValue'
+                  and json.loads(raw).get('attribute_role') == 'search.service.start_type']
+        self.assertEqual(labels, ['SERVICE_AUTO_START'])
 
     def test_foreign_scope_and_missing_role_cannot_supply_partial_key(self):
         for options, variant in [(dict(origin=dict(ORIGIN, source_variant='registry-backup:fixture')), 'valid'),
