@@ -21,7 +21,7 @@ NOTE = ("Diagnostic only. A reader may find no relevant artifact; collecting mor
         "does not establish the proposed claim or resolve contradictory evidence. "
         "New snapshots require new queries and proofs; existing fact IDs cannot be reused.")
 KINDS = {
-    "windows": {"usbInsert", "volumeSeen", "lnkTarget", "webSearch", "fileCreated",
+    "windows": {"volumeSeen", "lnkTarget", "webSearch", "fileCreated",
                 "fileModified", "fileDeleted", "emailSent", "cdBurn"},
     "media": {"volumeOnDevice", "fileCreated", "fileModified", "unallocatedOnDevice"},
     "system": {"systemSetting", "accountSeen", "sessionEvent", "programInstalled", "programRun"},
@@ -42,7 +42,7 @@ KINDS['windows'].update({'attributeSubject', 'attributeTextValue',
 
 # These identify existing reader families, not evidence guarantees or new rules.
 RULE_READERS = {
-    "R1": {"windows"}, "R3": {"windows"},
+    "R3": {"windows"},
     "R4": {"windows", "media", "optical"}, "R5": {"windows"}, "R6": {"windows"},
     "R7": {"media", "optical"}, "R8": {"windows"}, "R9": {"windows"},
     "R10": {"windows", "media", "optical"}, "R11": {"windows"}, "R12": {"windows"},
@@ -159,13 +159,22 @@ def recommendations(run_dir, proof_gap=None):
             kind = required.get("kind")
             if isinstance(kind, str):
                 readers.update(reader for reader, kinds in KINDS.items() if kind in kinds)
-            for rule in required.get("rules", []) if isinstance(required.get("rules", []), list) else []:
-                if isinstance(rule, str):
-                    readers.update(RULE_READERS.get(rule, ()))
+            else:
+                # A compound rule can mention other source families. It must
+                # not override an explicit unavailable kind with those readers.
+                for rule in required.get("rules", []) if isinstance(required.get("rules", []), list) else []:
+                    if isinstance(rule, str):
+                        readers.update(RULE_READERS.get(rule, ()))
         wanted.update(readers)
-        needs.append({"category": category, "reason": item.get("reason"),
-                      "action": item.get("action"), "candidate_readers": sorted(readers),
-                      "requires_review": category not in ("missing_record", "wrong_record_type")})
+        need = {"category": category, "reason": item.get("reason"),
+                "action": item.get("action"), "candidate_readers": sorted(readers),
+                "requires_review": category not in ("missing_record", "wrong_record_type")}
+        if category in ("missing_record", "wrong_record_type") and isinstance(required.get("kind"), str):
+            need['collection_capability'] = ('reader_family_declared' if readers else
+                                             'not_advertised_by_approved_readers')
+            # This table describes collection capabilities, not a source query.
+            need['source_presence'] = 'not_determined'
+        needs.append(need)
     suggested = [row for row in available if row["reader"] in wanted and not row["already_collected"]]
     return {"status": "diagnostic", "catalog": available, "recommendations": suggested,
             "evidence_needs": needs, "note": NOTE}
