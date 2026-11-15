@@ -6,17 +6,25 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 
 ## Ownership
 
+**Current release blocker:** the first eight soundness fixes are integrated and
+pass independent regression checks with valid-case controls. Later optical-reader
+findings remain under repair. No experiment or freeze may start yet. Third owns
+virtual-block mapping and version-specific caching. The answer terminal owns
+current demo regeneration and evidence-request routing. Root owns final combined
+tests, fresh evidence review, archive completion and integration.
+
 | Owner | Current state |
 |---|---|
-| Root Codex | Owns integration, shared reader hooks, combined tests, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. New cloud, document, mail/WAL, historical-source and answer commits are integrated here; they are not yet the validated main release. |
-| Answer terminal (`01a1dc3d`) | Owns public mappings, completion diagnostics, catalog pagination, explicit conditions and opt-in versioned evaluation normalizers. Owns eventual experiment dispatch after readiness. No model call or freeze has started. |
-| Third terminal (`01a1dd77`) | Worktree `/private/tmp/conan-evidence-coverage-next` owns cloud records, document formats, mail/WAL, parser recovery and historical-source inventory. Completed reader commits are handed to root. A historical index-cycle fix and optional PFF recovery remain in progress. |
-| Root helper: formal types and events | Signed source integers and reviewed roles are committed. The same worker now owns typed event records and source-field validation. |
-| Root helper: host fields and review | SAM RID, DHCP configuration, signed biases and source-backed timezone labels are committed and source-tested. The worker now independently reviews normalization for false equivalence. |
-| Root helper: structured sources | Owns partition records, current Search configuration, snapshot exclusion patterns and exact Search-index fields. Focused tests pass; source checks and affected regressions are in progress. |
-| Independent reference reviewer | The prior audit remains held. This reviewer alone inspects private reference compatibility; builders do not receive expected answer values. |
+| Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Source-support suite passed; final soundness suite pending. |
+| Answer terminal (`01a1dc3d`) | Answer-reference fix integrated. Refreshes current demos and capability routing. Owns eventual experiment dispatch after root readiness. No model call or freeze has started. |
+| Third terminal (`01a1dd77`) | Source batch, USB and media identity fixes integrated. Independent eight-case regression and two actual-media positive proofs passed. Repairs later UDF mapping/cache findings. |
+| Root helper: formal types and events | Formal identity checks and qualified claim sentences integrated. Refreshes selected proofs and public projections against the complete corrected Hacking snapshot. |
+| Root helper: host fields and review | Source-tested host fields and independent normalization review complete. Standalone second-checker review passed, including a file-swap control and valid JSON/DuckDB certificates. Normalization remains disabled. |
+| Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Now prepares and verifies the new local archive, preserving intermediate failures. |
+| Independent reference reviewer | Prepared the held metadata-only compatibility bundle. Original scoring content is unchanged. Builders do not receive expected answer values. |
 
-The previous validated batch is on main. The new batch is still in integration.
+The source-support batch passed its suite. The new soundness repair batch and
+complete experiment inputs remain under review.
 Use isolated worktrees for new work. Reassign completed workers to independent
 review or a remaining implementation task, rather than leave them idle. Root
 serializes commits in the shared source worktree to prevent index conflicts.
@@ -26,25 +34,28 @@ known; do not claim one.
 
 ## Latest validation
 
-The source/runtime tree at `5cf4d43` passed 1,261 tests: 1,260 passed and one
-platform test skipped. Main merge `4a9c779` has identical code, tests and public
-contracts. The earlier source-only suite had one missing agent form declaration;
-the integrated runtime supplied it. Both logs are retained.
+The source/runtime tree at `2f9a3b0` passed 1,528 tests: 1,526 passed and two
+were skipped. The native PFF test passed separately in the source-reader
+environment; the other skip applies only to other operating systems. The public
+assembler check passed. The preceding 1,525-test run is also retained.
 
-Seven selected real-source certificates independently replayed. Five also passed
-ConLeche. Public projection retained 17 supported fields across both NIST cases;
-four invalid binding controls were refused. Separate proof controls refused wrong
-roles, wrong aggregate results and mixed source subjects.
+Real-source tuple checks passed Lean and independent replay, with selected
+ConLeche checks and mixed-subject controls. Full extraction exposed a native
+filename subtype problem that the fixture tests missed. The narrow reader fix
+preserves the strict value emitter. Fresh snapshots at `1ae4082` contain 409,971
+Data Leakage records and 14,468 Hacking records, with no failed reader and 17/18
+explicit limitations. They predate the later UDF repair and remain held. Original
+attempts remain diagnostic artifacts, not final inputs.
 
-The [latest implementation](docs/FIELD_RELATIONS.md) adds 14 roles, an exact
-file-set aggregate, source readers, cross-question references and durable answer
-feedback. The local archive is `runs/dev/field-relations-20261115T0730Z/`.
-Selected-reader outputs are mechanical checks, not full experiment facts or scores.
+The [latest implementation](docs/SYSTEM_EVIDENCE_COVERAGE.md) adds 94 roles and
+signed source values, for 199 roles and 243 fact kinds. The local archive is
+`runs/dev/system-evidence-20261115T0805Z/`, currently unsealed. Previous sealed
+archives remain unchanged. Implementation checks are not accuracy scores.
 
 ## Readiness and dispatch
 
 Both strict public derivatives remain held. Current schema compatibility is
-48 supported / 310 unsupported Data Leakage leaf occurrences and 16 / 22 Hacking
+55 supported / 303 unsupported Data Leakage leaf occurrences and 14 / 24 Hacking
 leaves. Repeated alternatives count separately. These are not question-accuracy
 percentages. The [public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md) separates
 completed work, candidate capabilities and unresolved meanings/source selections.
@@ -59,6 +70,13 @@ A compatible scoring derivative must be frozen before investigation. Original
 expected values, match rules, question denominators and measured submissions must
 not be silently changed. The independent reference review is separate from
 builders and investigators. It is not an LLM judge of experiment answers.
+
+The prepared local bundle is `/private/tmp/cop-legacy-agreement-release-20261115/`.
+It supports an explicitly labeled development comparison under original matching
+rules. It does not assert semantic equivalence. All 60/31 questions and original
+46/31 scorable statuses remain; Data Leakage's other 14 questions remain visible.
+Hacking Q28/Q29 original-population bindings are unsupported. Normalization is off.
+The bundle remains held until final evidence, validation and protocol are accepted.
 
 After readiness passes, create complete fresh snapshots and freeze the code,
 public contract, compatible private reference, facts, model and budget. A and C

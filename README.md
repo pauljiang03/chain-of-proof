@@ -68,6 +68,12 @@ remains held until the integrated code, fresh evidence and compatible reference
 bundle pass review. Reader checks and proof checks are not new accuracy results.
 The [work log](WORKSTREAMS.md) records current ownership and validation.
 
+A soundness audit confirmed gaps in identity joins, time meanings, answer
+references and the standalone second checker. The first eight counterexamples
+now pass independent regression checks, including valid-case controls. Later
+optical-reader findings remain under repair. The release and new experiments
+remain held until the final source, proof and integration checks pass.
+
 ## Try it in 60 seconds
 
 ```sh
@@ -369,11 +375,13 @@ Verify the saved certificates, then recheck with the second proof checker:
 ```sh
 .venv/bin/python -m verifier.verify \
   --run runs/dev/my-case/run.json --facts /path/facts.json
-.venv/bin/python -m verifier.conleche --run runs/dev/my-case/run.json
+.venv/bin/python -m verifier.conleche \
+  --run runs/dev/my-case/run.json --facts /path/facts.json
 ```
 
-con-leche is written separately from Lean's own kernel. Its result concerns the saved
-proofs. It does not check whether the readers parsed the images correctly.
+con-leche is written separately from Lean's own kernel. The run command binds each
+saved proof to its claim and supplied facts through replay and exact regeneration.
+A missing proof fails the run. It does not check whether readers parsed images correctly.
 
 ### Rebuilding facts from the disk images
 

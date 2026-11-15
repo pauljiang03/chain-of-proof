@@ -6,17 +6,27 @@ checks and professional reports are integrated. Both stricter public contracts
 remain held. No new model experiment has run after these fixes. Native provider
 validation and full reference review remain incomplete.
 
-The latest [source and exact-set batch](docs/FIELD_RELATIONS.md) is integrated at
-`4a9c779`, with code identical to tested `5cf4d43`: 1,260 tests passed and one
-platform test skipped. Seven real-source certificates replayed; 17 public answer
-fields were retained. Durable completion diagnostics and paged native answer
-inspection are implemented. These are implementation checks, not accuracy scores.
+**Release remains held for soundness validation.** The first eight reported
+counterexamples pass independent regression checks on the integrated fixes.
+Valid-case controls also pass. Later optical-reader findings about virtual-block
+mapping and version-specific caching remain under repair. Current demos, affected
+source records and the final combined suite must pass before release. See current
+ownership in [WORKSTREAMS.md](WORKSTREAMS.md). Do not freeze or dispatch yet.
+
+The latest [source support batch](docs/SYSTEM_EVIDENCE_COVERAGE.md) passed at
+`2f9a3b0`: 1,526 tests passed and two were skipped. The native PFF test passed
+separately in its supported environment. Complete fresh snapshots are under
+review after a real-source filename subtype fix. Selected source certificates
+and public projection checks passed. These are implementation checks, not scores.
 
 The independent [reference compatibility audit](eval/REFERENCE_COMPATIBILITY.json)
 keeps both cases held. It preserved all original prompts, schemas, expected values
 and match rules. Remaining issues include display/identifier/path equivalence,
 the executable population for Hacking Q28/Q29, and the 14 unresolved Data Leakage
-references. No compatible scoring derivative was approved. Do not launch an
+references. A metadata-only compatibility bundle is now prepared locally at
+`/private/tmp/cop-legacy-agreement-release-20261115/`, still held for final facts,
+validation and protocol freeze. It preserves original scoring content. Its
+endpoint is original-reference agreement, not semantic equivalence. Do not launch an
 unscored smoke run as a replacement for the requested matched accuracy experiment.
 
 | Priority | Delivered | Remaining limit |
