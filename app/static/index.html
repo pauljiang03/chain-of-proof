@@ -77,6 +77,7 @@
               <span><i class="dot-key"></i>key event</span><span><i class="badge-key">3</i>several key events</span>
             </span>
           </div>
+          <div class="row-resizer" id="resize-timeline" role="separator" aria-orientation="horizontal" tabindex="0" aria-controls="timeline-list" aria-label="Resize the chart and the list" title="Drag to resize · double-click to reset"></div>
           <div class="timeline-list-head"><strong id="timeline-list-title">Key events in view</strong><span id="timeline-list-count" class="small-mono"></span><span class="spacer"></span><label class="check"><input type="checkbox" id="timeline-key-only" checked> Key events only</label></div>
           <div class="timeline-list" id="timeline-list"></div>
         </section>
@@ -112,12 +113,16 @@
 
         <section class="tab-panel report-panel" id="panel-report" role="tabpanel" aria-labelledby="tab-report" hidden>
           <form class="report-options" id="report-form" aria-label="Report contents">
+            <fieldset><legend>Length</legend>
+              <label><input type="radio" name="report-length" value="short" checked><span>Short report<small>Summary, evidence, limits and sign-off. 1–2 pages.</small></span></label>
+              <label><input type="radio" name="report-length" value="full"><span>Full report<small>Adds every finding with its source records.</small></span></label>
+            </fieldset>
             <fieldset><legend>Findings</legend>
               <label><input type="radio" name="report-scope" value="all" checked><span>All certified findings <span id="report-count-all" class="mono"></span></span></label>
               <label><input type="radio" name="report-scope" value="marked" id="report-scope-marked" disabled><span>Marked findings only <span id="report-count-marked" class="mono"></span></span></label>
               <p class="field-help">Mark a finding with its checkbox in Findings → Exact statements, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
             </fieldset>
-            <fieldset><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
+            <fieldset id="report-extras" hidden><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
             <fieldset><legend>Report details</legend>
             <label class="stacked" for="report-reference">Case reference</label><input id="report-reference" maxlength="200" autocomplete="off" placeholder="Your case identifier">
             <label class="stacked" for="report-report_id">Report number</label><input id="report-report_id" maxlength="200" autocomplete="off" placeholder="Report identifier">
@@ -185,8 +190,9 @@
     <div class="dialog-heading"><h2 id="new-dialog-title">New investigation</h2><button class="icon-button close-dialog ico ico-close" type="button" data-close="new-dialog" aria-label="Close"></button></div>
     <form id="investigation-form">
       <div class="field"><label for="investigation-title">Case name</label><input id="investigation-title" name="title" required maxlength="200" autocomplete="off"></div>
-      <div class="field"><label for="facts-path">Evidence records file</label>
-        <div class="file-field"><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><button class="button" id="facts-choose" type="button" hidden>Choose…</button></div></div>
+      <div class="field drop-zone" id="facts-drop"><label for="facts-path">Evidence records file</label>
+        <div class="file-field"><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><button class="button" id="facts-choose" type="button" hidden>Choose…</button></div>
+        <p class="field-note" id="facts-note" role="status" hidden></p></div>
       <div class="field"><label for="investigation-brief">What to establish <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="2"></textarea></div>
       <div class="field"><label for="investigation-questions">Questions <span class="optional-label">optional, one per line</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from them?"></textarea></div>
       <div class="field" id="api-key-field" hidden><label for="api-key">Anthropic API key</label>
@@ -194,6 +200,7 @@
         <p class="field-note">Kept on this computer, for your user account only.</p></div>
       <details class="advanced" id="investigation-advanced"><summary>Settings <span id="investigation-settings"></span></summary>
         <div class="form-row"><div><label for="investigation-backend">AI service</label><select id="investigation-backend" name="backend" required></select></div><div><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="default" autocomplete="off" spellcheck="false"></div><div><label for="investigation-minutes">Time limit (min)</label><input id="investigation-minutes" name="minutes" type="number" min="1" max="600" value="45" required></div></div>
+        <p class="field-note" id="api-install-note" hidden>To use the Anthropic API, run <code>pip install -e '.[agent]'</code> in the project folder, then open the app again. It asks for your API key here.</p>
         <p class="field-note" id="api-key-status" hidden><span id="api-key-source"></span> <button class="text-button" id="api-key-remove" type="button">Remove key</button></p>
       </details>
       <div class="notice error" id="form-error" role="alert" hidden></div>

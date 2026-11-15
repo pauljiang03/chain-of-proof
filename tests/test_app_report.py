@@ -336,6 +336,43 @@ class AppReport(unittest.TestCase):
                 self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
                 self.assertEqual(len(parsed.sentences), 2)
 
+    def test_short_report_holds_the_summary_and_not_the_findings(self):
+        data = bundle(finding(), finding(finding_id='F2'))
+        data['conclusions'] = [{'conclusion_id': 'C1', 'text': 'An unverified judgment.', 'finding_ids': ['F1']}]
+        data['rejections'] = [{'finding_id': 'F9', 'reason': 'not supported'}]
+        full = render_html(data, report_options(sections=[]))
+        short = render_html(data, report_options(sections=[], brief=True, examiner='A. Examiner <x>'))
+        parsed = Markup(short)
+        self.assertEqual([name for name in parsed.ids if not name.startswith('finding')],
+                         ['summary', 'exhibits', 'method', 'signoff'])
+        self.assertEqual(parsed.sentences, [])                  # no finding is written out
+        for absent in ('id="findings"', '<article', '<nav', 'id="glossary"', 'id="disposition"', 'id="request"',
+                       'Left out of this report', 'An unverified judgment', 'not supported'):
+            self.assertNotIn(absent, short)
+        for present in ('They do not identify the person who used a device or an account, or the reason.',
+                        'It does not check that the tools read the disk images correctly.',
+                        'This report is a summary.', 'It does not run the proof checker again.',
+                        'A. Examiner &lt;x&gt;', '<main class="brief">'):
+            self.assertIn(present, short)
+        self.assertLess(len(short) - short.index('</style>'), len(full) - full.index('</style>'))
+        # A selection still says that it is one, and details the author gave are printed.
+        chosen = render_html(data, report_options(ids=['F2'], sections=[], brief=True, requested_by='Det. X',
+                                                  disposition='Returned to the owner.'))
+        self.assertIn('Selected findings only', chosen)
+        self.assertIn('This report shows 1 of the 2 entries', chosen)
+        self.assertEqual([name for name in Markup(chosen).ids], ['summary', 'request', 'exhibits', 'method', 'disposition', 'signoff'])
+        # Optional parts can still be added; a link into the findings they refer to becomes plain text.
+        longer = Markup(render_html(data, report_options(sections=['judgments', 'needs', 'proofs'], brief=True)))
+        self.assertEqual([name for name in ('judgments', 'needs', 'proofs') if name in longer.ids], ['judgments', 'needs', 'proofs'])
+        self.assertEqual([link for link in longer.links if link.startswith('#') and link[1:] not in longer.ids], [])
+        self.assertIn('#judgments', longer.links)
+        empty = render_html(bundle(), report_options(sections=[], brief=True))
+        self.assertIn('No entries marked verified were supplied.', empty)
+        for bad in ('yes', 1, None):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                report_options(brief=bad)
+        self.assertEqual((report_options()['brief'], report_options(brief=True)['brief']), (False, True))
+
     def test_report_without_options_is_complete_and_options_are_validated(self):
         data = bundle(finding(), finding(finding_id='F2'))
         complete = render_html(data)

@@ -19,27 +19,28 @@
   const today = () => { const now = new Date(); return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); };
   const PREVIEW_LIMIT = 6 * 1024 * 1024;   // characters; larger reports are exported, not previewed
   const state = {
-    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", sections: new Set(), cover: {}, empty: new Set(),
+    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", length: "short", sections: new Set(), cover: {}, empty: new Set(),
     shadow: null, stale: true, active: false, request: 0, timer: 0, built: false,
   };
 
   // Remembered per case in this browser only: a convenience, never the record of anything.
   const storageKey = () => "conan-f.report." + state.name;
   function load() {
-    state.marked = new Set(); state.scope = "all"; state.cover = { report_date: today(), report_version: "1" };   // a report is dated the day it is made
+    state.marked = new Set(); state.scope = "all"; state.length = "short"; state.cover = { report_date: today(), report_version: "1" };   // a report is dated the day it is made
     state.sections = new Set(SECTIONS.filter((section) => section[3]).map((section) => section[0]));
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey()) || "null");
       if (!saved || typeof saved !== "object") return;
       if (Array.isArray(saved.marked)) state.marked = new Set(saved.marked.filter((id) => typeof id === "string"));
       if (saved.scope === "marked") state.scope = "marked";
+      if (saved.length === "full") state.length = "full";
       if (Array.isArray(saved.sections)) state.sections = new Set(saved.sections.filter((key) => SECTIONS.some((section) => section[0] === key)));
       for (const key of COVER) if (key !== "report_date" && saved.cover && typeof saved.cover[key] === "string") state.cover[key] = saved.cover[key].slice(0, limit(key));
     } catch (_) { /* private windows and blocked storage: carry on without it */ }
   }
   function save() {
     try {
-      localStorage.setItem(storageKey(), JSON.stringify({ marked: [...state.marked], scope: state.scope, sections: [...state.sections], cover: state.cover }));
+      localStorage.setItem(storageKey(), JSON.stringify({ marked: [...state.marked], scope: state.scope, length: state.length, sections: [...state.sections], cover: state.cover }));
     } catch (_) { /* see load() */ }
   }
 
@@ -48,8 +49,10 @@
   function query(download) {
     const params = new URLSearchParams({ name: state.name, format: "html" });
     if (download) params.set("download", "1");
+    // The short report is the summary, the evidence, the limits and the sign-off: one or two printed pages.
+    if (state.length === "short") params.set("brief", "1");
     // Do not add empty optional sections to the examiner's report.
-    const included = (section) => !state.empty.has(section[0]) && state.sections.has(section[0]);
+    const included = (section) => state.length === "full" && !state.empty.has(section[0]) && state.sections.has(section[0]);
     params.set("sections", SECTIONS.filter((section) => included(section) && !(section[0] === "workflow" && state.scope === "marked")).map((section) => section[0]).join(","));
     if (state.scope === "marked") params.set("ids", marked().join(","));
     for (const key of COVER) if (state.cover[key]) params.set(key, state.cover[key]);
@@ -81,6 +84,8 @@
   }
   function form() {
     document.querySelectorAll('#report-form input[name="report-scope"]').forEach((input) => { input.checked = input.value === state.scope; });
+    document.querySelectorAll('#report-form input[name="report-length"]').forEach((input) => { input.checked = input.value === state.length; });
+    $("report-extras").hidden = state.length !== "full";   // the parts that add pages belong to the full report
     // A part of the report with nothing in it for this case is not offered.
     document.querySelectorAll("#report-sections input").forEach((input) => { input.checked = state.sections.has(input.value); input.closest("label").hidden = state.empty.has(input.value); });
     for (const key of COVER) $("report-" + key).value = state.cover[key] || "";
@@ -178,6 +183,7 @@
     $("report-form").addEventListener("change", (event) => {
       const input = event.target;
       if (input.name === "report-scope" && input.checked) state.scope = input.value;
+      else if (input.name === "report-length" && input.checked) { state.length = input.value; $("report-extras").hidden = state.length !== "full"; }
       else if (input.closest("#report-sections")) { if (input.checked) state.sections.add(input.value); else state.sections.delete(input.value); }
       else return;
       changed();

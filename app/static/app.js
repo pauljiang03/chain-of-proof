@@ -540,6 +540,7 @@
     $("api-key-source").textContent = source === "saved" ? "An API key is saved on this computer." + (state.keyNote ? " " + state.keyNote : "")
       : source ? "Uses the key in the ANTHROPIC_API_KEY setting of this computer." : "";
     $("api-key-remove").hidden = source !== "saved";
+    $("api-install-note").hidden = !array(state.config && state.config.backends).some((item) => item.id === "deepagents" && item.needs === "packages");
     let help;
     if (state.activeName) help = "Another investigation is running. Stop it or wait for it to finish.";
     else if (lacks === "key") help = backend.can_save_key === true ? "Add your Anthropic API key to start." : "Set ANTHROPIC_API_KEY on this computer, then start again.";
@@ -603,13 +604,31 @@
     state.activeName = config.active_run || null;
     const defaults = object(config.defaults);
     fillBackends(null);
-    $("facts-path").value = defaults.facts || "";
     $("investigation-model").value = "";   // empty means the service's standard model, shown as the placeholder
     if (typeof defaults.minutes === "number" && defaults.minutes >= 1) $("investigation-minutes").value = defaults.minutes;
     updateStartButton();
   }
+  // A page learns only the name of a dropped file. The desktop window knows where the file is and
+  // the page asks for that by name; in a browser the path has to be typed.
+  const droppable = () => Boolean(state.config && state.config.drop === true);
+  const carriesFile = (event) => Boolean(event.dataTransfer) && Array.from(event.dataTransfer.types || []).includes("Files");
+  async function dropEvidence(file) {
+    const note = $("facts-note");
+    let path = "";
+    if (droppable()) {
+      try { const reply = await api("/api/dropped", { name: file.name }); if (reply && typeof reply.path === "string") path = reply.path; } catch { /* say so below */ }
+    }
+    note.hidden = Boolean(path);
+    if (path) {
+      $("facts-path").value = path;
+      $("facts-path").dispatchEvent(new Event("input", { bubbles: true }));
+    } else note.textContent = droppable() ? "The location of that file could not be read. Choose the file, or type its path."
+      : "A browser does not tell this page where a dropped file is. Type its path, or use the desktop app.";
+  }
   function openNew() {
     $("form-error").hidden = true;
+    $("facts-note").hidden = true;
+    $("facts-path").placeholder = droppable() ? "Drop the file here, or choose it" : "/path/to/case_facts.json";
     $("facts-choose").hidden = !chooser();
     $("investigation-advanced").open = false;
     updateStartButton();
@@ -706,6 +725,22 @@
   $("refresh-runs").addEventListener("click", refreshAll);
   $("investigation-form").addEventListener("submit", startInvestigation);
   $("facts-choose").addEventListener("click", chooseEvidence);
+  // A file dropped anywhere on the window is the evidence for a new investigation. Without this
+  // the window would open the dropped file in place of the app.
+  let dragDepth = 0;
+  const dragging = (on) => { dragDepth = on ? dragDepth : 0; $("facts-drop").classList.toggle("dropping", on); };
+  window.addEventListener("dragenter", (event) => { if (carriesFile(event)) { dragDepth += 1; dragging(true); } });
+  window.addEventListener("dragleave", (event) => { if (carriesFile(event) && (dragDepth -= 1) <= 0) dragging(false); });
+  window.addEventListener("dragover", (event) => { if (carriesFile(event)) { event.preventDefault(); event.dataTransfer.dropEffect = "copy"; } });
+  window.addEventListener("drop", (event) => {
+    if (!carriesFile(event)) return;
+    event.preventDefault();
+    dragging(false);
+    const file = event.dataTransfer.files && event.dataTransfer.files[0];
+    if (!file) return;
+    if (!$("new-dialog").open) openNew();
+    dropEvidence(file);
+  });
   for (const id of ["investigation-model", "investigation-minutes"]) $(id).addEventListener("input", updateStartButton);
   $("investigation-backend").addEventListener("change", () => {
     $("investigation-model").value = "";   // a model name belongs to one service
