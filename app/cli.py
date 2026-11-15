@@ -235,7 +235,7 @@ def _parser():
     inputs.add_argument("--facts", help="extracted JSON or DuckDB fact store")
     inputs.add_argument("--images", help="directory containing supported evidence images")
     investigate.add_argument("--exhibits", help="explicit image-role/exhibit manifest for --images")
-    investigate.add_argument("--readers", help="comma-separated initial reader IDs; default all applicable readers")
+    investigate.add_argument("--readers", help="comma-separated reader IDs; image_integrity and antivirus require explicit selection")
     investigate.add_argument("--evidence-out", help="new extraction snapshot directory")
     investigate.add_argument("--intake-config", help="trusted intake config matching --facts, for approved follow-up readers")
     investigate.add_argument("--follow-up-stages", type=int, default=0,

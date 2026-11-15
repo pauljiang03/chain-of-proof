@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 from checker import claims
 from checker.facts import KINDS
+from checker.catalog import ROLES, DIGEST_ALGORITHMS, decode_value, roles_catalog
 from agent import answer_requirements
 
 VERSION = 1
@@ -144,10 +145,41 @@ for _form in claims.CENSUS:
     if _form == 'exactlyWith':
         _FIELDS[_form]['value'] = _argument(2, 'asserted_count_selector', True)
 
+_FIELDS['attributeRecorded'] = {
+    'subject': _record(0, 'aux', 'scoped_source_subject'),
+    'role': _argument(3, 'asserted_attribute_role'),
+    'algorithm': dict(_argument(3, 'asserted_digest_algorithm'), role_digest_algorithm=True,
+                      allowed_roles=[name for name, role in ROLES.items() if role.digest_algorithm]),
+    'value': dict(_record(2, 'aux', 'recorded_typed_attribute_value'), value_role_argument=3),
+    'examined_at_us': _record(0, 't', 'examination_timestamp_not_event_time_us'),
+}
+for _form in ('attributesSameSubject', 'attributeValuesAgree'):
+    _FIELDS[_form] = {
+        'subject': _record(0, 'aux', 'scoped_source_subject'),
+        'first_role': _argument(3, 'asserted_attribute_role'),
+        'second_role': _argument(7, 'asserted_attribute_role'),
+        'first_value': dict(_record(2, 'aux', 'recorded_typed_attribute_value'), value_role_argument=3),
+        'second_value': dict(_record(6, 'aux', 'recorded_typed_attribute_value'), value_role_argument=7),
+        'same_source_subject': _assertion('same_scoped_source_subject_not_personal_identity'),
+    }
+_FIELDS['attributeValuesAgree']['values_agree'] = _assertion('same_typed_recorded_values')
+_FIELDS['imageDigestsAgree'] = {
+    'subject': _record(0, 'aux', 'scoped_logical_image_subject'),
+    'algorithm': _argument(6, 'asserted_digest_algorithm'),
+    'logical_digest': dict(_record(2, 'aux', 'recomputed_logical_image_digest'), value_type='string'),
+    'acquisition_digest': dict(_record(5, 'aux', 'retained_acquisition_digest'), value_type='string'),
+    'digests_match': _assertion('same_algorithm_same_subject_digest_equality_not_authenticity'),
+}
+for _fields in _FIELDS.values():
+    for _selector in _fields.values():
+        if 'value_role_argument' in _selector:
+            _selector['allowed_semantic_types'] = [role.semantic_type for role in ROLES.values()]
+
 
 def catalog():
     """Public field schema only: no evidence queries, private reference or grading."""
     return {'schema_version': VERSION, 'forms': deepcopy(_FIELDS), 'formats': sorted(FORMATS),
+            'attribute_roles': roles_catalog(),
             'part': 'zero-based index into flattened claim parts; a whole conjunction is one filter dependency',
             'example': {'candidate_id': 'A001', 'claim_sha256': '<hash of exact claim>', 'question_id': 'Q1',
                         'path': ['devices', 0, 'serial'], 'part': 0, 'field': 'device_serial'},
@@ -183,6 +215,8 @@ def _literal_parts(claim):
         for param, value in zip(params, args):
             valid = (isinstance(value, str) and value in ('obj', 'aux') if param == 'slot' else
                      isinstance(value, str) and value in KINDS if param == 'kind' else
+                     isinstance(value, str) and value in ROLES if param == 'role' else
+                     isinstance(value, str) and value in DIGEST_ALGORITHMS if param == 'algorithm' else
                      type(value) is int and value >= 0)
             if not valid:
                 raise ValueError('claim_argument_type_mismatch')
@@ -212,6 +246,10 @@ def claim_fields(claim, source):
                     value = args[selector['literal_argument']]
                     if selector.get('decode_entity'):
                         value = source.string(value)
+                    if selector.get('role_digest_algorithm'):
+                        value = ROLES[value].digest_algorithm
+                        if value is None:
+                            raise ValueError('declared_role_has_no_digest_algorithm')
                 else:
                     fid = args[selector['argument']]
                     fact = found.get(fid)
@@ -222,9 +260,16 @@ def claim_fields(claim, source):
                     value = getattr(fact, slot)
                     if slot in ('obj', 'aux'):
                         value = source.string(value)
+                semantic_type = selector['semantic_type']
+                if 'value_role_argument' in selector:
+                    spec = ROLES[args[selector['value_role_argument']]]
+                    value = decode_value(value, spec.value_type)
+                    semantic_type = spec.semantic_type
+                elif 'value_type' in selector:
+                    value = decode_value(value, selector['value_type'])
                 _finite(value)
                 row['fields'][name] = {'value': value, 'selector': deepcopy(selector),
-                    'semantic_type': selector['semantic_type'], 'record_ids': claims.fact_ids(part),
+                    'semantic_type': semantic_type, 'record_ids': claims.fact_ids(part),
                     'value_record_ids': value_ids}
             except (ValueError, KeyError, IndexError, AttributeError) as error:
                 row['unsupported'].append({'field': name, 'reason': str(error)})
@@ -343,6 +388,9 @@ def _format(value, format_name, zone, semantic_type):
         raise ValueError('unsupported_format')
     if format_name == 'identity':
         return value
+    if semantic_type.startswith('recorded_attribute_') and not (
+            format_name == 'integer' and semantic_type.endswith('_integer') and type(value) is int):
+        raise ValueError('typed_attribute_format_cannot_change_its_declared_native_type')
     if format_name == 'integer':
         if type(value) is int:
             return value

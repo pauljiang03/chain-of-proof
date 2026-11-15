@@ -89,6 +89,43 @@ A census is checked by `counts` in `Census.lean`, not by `holds`: it is about ev
 record of a kind, so adding a record can make it false, and it cannot be joined to
 other claims with `both`.
 
+## R34: typed source attributes
+
+An attribute has three rows with exactly the same `obj` observation identity:
+`attributeSubject.aux` names the scoped source/object, a fixed `role*` kind states
+the reviewed meaning, and `attributeTextValue`, `attributeIntegerValue` or
+`attributeBooleanValue` carries the canonical JSON value in `aux`. The role catalog
+is `checker/catalog.py`. Role kinds are fixed Lean constructors; a claim cannot
+turn an OS product name into an owner, or a configuration value into execution,
+by supplying a different role string. The extractor rejects native type coercions,
+and the checker rejects malformed value encodings before constructing a proof.
+Text encoding preserves empty strings and Unicode without using an absent-value
+sentinel. These rows' timestamps describe the examination context, not installation,
+shutdown, browsing, scan completion or another historical event.
+
+| Form | Checked relation | Boundary |
+|---|---|---|
+| `attributeRecorded s r v role` | Subject kind, exact catalog role kind, exact declared value kind, and one common observation identity | Certifies the recorded field; reader interpretation remains an extraction premise |
+| `attributesSameSubject s r v role s2 r2 v2 role2` | Both complete attributes plus exact scoped subject equality | Source co-occurrence does not prove personal identity, ownership, simultaneous activity or habitual use |
+| `attributeValuesAgree` (same arguments) | Both complete attributes, one native value type, same subject and exact encoded value equality | Does not infer causation or authenticity |
+| `imageDigestsAgree s r v s2 r2 v2 algorithm` | Fixed logical/acquisition roles for MD5 or SHA-1, same image subject and equal digests | Missing checksums and mismatches do not certify; equality does not authenticate original acquisition |
+
+`recordedAttribute_sound`, role/type uniqueness, `attributesSameSubject_sound` and
+`attributeValuesAgree_sound` prove these obligations for arbitrary fact lists.
+Recorded counters remain scoped reader observations: this rule does not prove the
+reader enumerated every account, deleted entry or Recycle Bin file. Census forms
+separately prove counts of extracted records. A scanner match may be a false
+positive and does not establish execution or historical infection; a false
+`scanner.detections_found` requires a completed declared scope and still does not
+prove global malware absence. Configuration names and User-Agent text do not
+establish a human identity or actual device model.
+
+Answer projection decodes only the declared typed value, preserves the precise
+role semantic type, and applies public role requirements. Image algorithm names
+come only from the claimed fixed digest role, so a computed hash can be exported
+without inventing acquisition agreement. Placement, relevance, source completeness
+and full-answer correctness remain outside these certificates.
+
 ## Deterministic tags
 
 Tags are computed by plain code in `extractor/tags.py`; each tag fact carries its rule.

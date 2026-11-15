@@ -137,4 +137,21 @@ def sameContent (a b : Nat) : Claim :=
 def tagged (f : Nat) (s : Slot) (g tagId : Nat) : Claim :=
   .both (.is g .tag) (.both (.val g .aux tagId) (.link g .obj f s))
 
+/-- R34: three typed source rows share one attribute identity. Role/value kinds
+    are fixed by the reviewed compiler catalog, never inferred from value text. -/
+def recordedAttribute (s r v : Nat) (roleKind valueKind : Kind) : Claim :=
+  .both (.is s .attributeSubject) (.both (.is r roleKind) (.both (.is v valueKind)
+    (.both (.link s .obj r .obj) (.link s .obj v .obj))))
+
+/-- R34: two complete attributes are recorded for the exact same scoped subject.
+    This does not identify a human or turn configuration into observed use. -/
+def attributesSameSubject (s r v s' r' v' : Nat) (rk vk rk' vk' : Kind) : Claim :=
+  .both (recordedAttribute s r v rk vk)
+    (.both (recordedAttribute s' r' v' rk' vk') (.link s .aux s' .aux))
+
+/-- R34: same-subject attributes of one declared value type contain equal encoded
+    values. For image checks the compiler fixes logical/acquisition roles and algorithm. -/
+def attributeValuesAgree (s r v s' r' v' : Nat) (rk rk' vk : Kind) : Claim :=
+  .both (attributesSameSubject s r v s' r' v' rk vk rk' vk) (.link v .aux v' .aux)
+
 end ChainOfProof.Sets

@@ -31,18 +31,22 @@ def extract_pc(*args, **kwargs):
     from extractor.windows import extract_pc as reader
     return reader(*args, **kwargs)
 
-READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content"),
-           "removable": ("content",), "optical": ("optical", "content")}
-OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory")
+READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content", "hacking", "host_attributes", "image_integrity", "antivirus"),
+           "removable": ("content", "image_integrity"), "optical": ("optical", "content", "image_integrity")}
+OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory", "hacking", "host_attributes", "antivirus")
 READER_ROLES = {"windows": ("pc",), "media": ("removable",),
                 **{reader: tuple(role for role, readers in READERS.items() if reader in readers)
                    for reader in sorted({r for readers in READERS.values() for r in readers})}}
-READER_ORDER = ("windows", "media", "system", "webcloud", "filetraces", "inventory", "optical", "content")
+READER_ORDER = ("windows", "media", "system", "webcloud", "filetraces", "inventory", "optical", "content",
+                "hacking", "host_attributes", "image_integrity", "antivirus")
+# These expensive readers need an explicit selection. Scanning also needs a local
+# scanner and signature database; never start an update or service implicitly.
+DEFAULT_READERS = tuple(reader for reader in READER_ORDER if reader not in ("image_integrity", "antivirus"))
 
 
 def selection(exhibits, readers=None):
     """Expand a caller-approved reader allowlist into explicit exhibit pairs."""
-    chosen = list(READER_ORDER) if readers is None else list(readers)
+    chosen = list(DEFAULT_READERS) if readers is None else list(readers)
     if not chosen or any(not isinstance(r, str) or r not in READER_ROLES for r in chosen):
         raise ValueError("readers must be a nonempty list of supported reader IDs")
     if len(chosen) != len(set(chosen)):

@@ -54,6 +54,12 @@ The mechanical workflow retained 12 independently verified certificates, reports
 
 ## Measurement and integration rules
 
+New workstream: official NIST CFReDS Hacking Case, isolated at `/private/tmp/cop-nist-hacking` on `feature/nist-hacking-case`. Root owns integration, image/scan readers, host attributes and generic subset scoring. `optical_timestamps` delivered the legacy app/browser/traffic/recycle readers and EVT reader. `lean_gap_types` delivered fixed-role typed attributes, joins, digest comparison and kernel tests. `journal_gaps` authored the separate 31-question reference and source audit. Only that reference author read the published answer key.
+
+The first Data Leakage repeat continues in the other terminal on frozen `96cd518`: A then C, 900 seconds each, followed by exact B and the separate 240-second role diagnostic. The new Hacking code must not enter that runtime or mutate its environment. Root integrates public documentation after the coordinator retains the results.
+
+The Hacking intake has been exercised on the official E01 image. All 31 questions have deterministic contracts. Three stronger meanings lack a proof rule; current DBX subscription state lacks a reader. All remain visible. Supporting a dataset does not establish complete answers or zero false positives.
+
 Do not use an LLM judge. Do not give investigators the private reference, review notes, scored reports or another arm's outputs. Preserve failures and unknowns. Freeze new code and inputs for any new experiment; do not overwrite saved evidence or repair a measured submission.
 
 Lean proves the declared formal statement relative to extracted records and rules. It does not prove parser correctness, relevance, complete lists, source authenticity or universal zero false positives. The shared exporter preserves claim values and reports unsupported fields. Question placement remains the investigator's responsibility.

@@ -51,6 +51,17 @@ def check(raw, form, field, semantic_type):
             'scope': SCOPE}
 
 
+def _semantic_types(spec):
+    """Expand a reviewed selector's fixed role variants; never infer source meaning."""
+    variants = spec.get('allowed_semantic_types')
+    if variants is None:
+        return [spec['semantic_type']]
+    if (not isinstance(variants, list) or not 1 <= len(variants) <= 128
+            or any(not _name(value) for value in variants) or len(set(variants)) != len(variants)):
+        raise ValueError('invalid_catalog_semantic_type_variants')
+    return variants
+
+
 def inspect(schema, forms):
     """Bounded preflight of public annotations; available roles are not evidence.
 
@@ -74,9 +85,10 @@ def inspect(schema, forms):
             row = {'path': path, 'branches': branches}
             try:
                 requirement = parse(node[KEY])
-                available = [{'form': form, 'field': field, 'semantic_type': spec['semantic_type']}
+                available = [{'form': form, 'field': field, 'semantic_type': semantic_type}
                              for form, fields in forms.items() for field, spec in fields.items()
-                             if compatible(requirement, form, field, spec['semantic_type'])]
+                             for semantic_type in _semantic_types(spec)
+                             if compatible(requirement, form, field, semantic_type)]
                 row.update(requirement=requirement, available_fields=available,
                            status='catalog_support' if available else 'no_catalog_support')
             except ValueError as error:

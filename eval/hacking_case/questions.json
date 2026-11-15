@@ -1,0 +1,1063 @@
+{
+  "schema_version": 2,
+  "case_id": "nist-cfreds-hacking",
+  "title": "NIST CFReDS Hacking Case: all 31 official questions",
+  "time_zone": null,
+  "contract_revision": "hacking-v1",
+  "instructions": [
+    "Answer all 31 official questions using only supplied evidence and the public case context. Do not read private references, published answers, saved scores or other systems' answers.",
+    "Return {schema_version:2, case_id, answers:[{question_id,status,answer}]}. Status is answered, unknown or unanswered. False and zero are claims, not synonyms for unknown.",
+    "Public schemas define typed answer roles. Required fields describe a complete response; omit unsupported fields and explain limitations outside answer. Never guess to fill a field.",
+    "Keep supporting observations, evidence paths, tools, reasoning, and qualifications in top-level submission appendices or the report, outside answer. Extras inside answer are extra assertions under the deterministic rubric.",
+    "Lists are unordered multisets. Preserve distinct observations and meaningful duplicates. Submit only requested items; do not pad with alternatives. An unresolved reference is reported separately, not silently counted wrong.",
+    "String matching ignores case and repeated whitespace only unless a question publishes another rule. Preserve filenames, full paths, account identities and unusual characters. Use single Windows path separators; do not invent a drive prefix.",
+    "Timestamps require an explicit source-supported UTC offset. Do not infer local display timezone from this profile or shift timestamps to match another source. Printed precision and event meaning must remain explicit in the evidence appendix.",
+    "An answer score is deterministic agreement with a versioned reference. It is separate from proof verification, extraction completeness, attribution, and investigation completeness.",
+    "The public source obscures a suspect name with equals signs to avoid indexing; the official scenario says those signs do not occur in the evidence. The wording is preserved in the prompts.",
+    "Where a public list_rules subset count is declared, submit exactly that many distinct supported examples. The accepted pool is private; extra or repeated submissions are not a shortcut to full credit.",
+    "For Q3 and Q8, this contract interprets the published local-time display in the contemporaneous time zone addressed by Q4. Submit a source-supported explicit offset; the public profile does not disclose that offset. This is a declared comparison convention, not proof of the original display configuration.",
+    "For Q31, report the antivirus result as a Boolean and document the actual scanner, version/signature date, scope, detections and failures outside answer. Boolean agreement does not verify that the examination occurred or that every infection was found.",
+    "Every scored answer leaf declares x-claim-requirement. This checks compatibility with specific reviewed claim roles, not English entailment or answer completeness. A currently unsupported stronger role remains unsupported; do not replace it with a generic string-valued observation."
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "What is the image hash? Does the acquisition and verification hash match?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "image_hash": {
+            "type": "object",
+            "properties": {
+              "algorithm": {
+                "type": "string",
+                "description": "Hash algorithm name.",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "asserted_digest_algorithm"
+                  ],
+                  "meaning": "Algorithm of a reviewed logical/acquisition image-digest role; a comparison result requires the separate equality relation.",
+                  "evidence_needed": "A fixed reviewed image-digest role or a same-algorithm digest comparison over the bound logical-image subject. Keep algorithm/digest source association explicit.",
+                  "selectors": [
+                    {
+                      "form": "imageDigestsAgree",
+                      "field": "algorithm"
+                    },
+                    {
+                      "form": "attributeRecorded",
+                      "field": "algorithm"
+                    }
+                  ]
+                }
+              },
+              "digest": {
+                "type": "string",
+                "description": "Hexadecimal digest of the reconstructed acquired media, not the compressed container or an individual segment.",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "recomputed_logical_image_digest",
+                    "recorded_attribute_image_logical_md5_string",
+                    "recorded_attribute_image_logical_sha1_string",
+                    "recorded_attribute_image_logical_sha256_string"
+                  ],
+                  "meaning": "Digest recomputed over logical media bytes, not container or segment bytes.",
+                  "evidence_needed": "A completed logical-media hash calculation tied to the examined image subject. A retained acquisition checksum is not required merely to report a computed digest; it is required for the separate comparison assertion.",
+                  "selectors": [
+                    {
+                      "form": "imageDigestsAgree",
+                      "field": "logical_digest"
+                    },
+                    {
+                      "form": "attributeRecorded",
+                      "field": "value"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "algorithm",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "acquisition_verification_match": {
+            "type": "boolean",
+            "description": "Agreement of acquisition and verification media digests; identify their observations separately in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "same_algorithm_same_subject_digest_equality_not_authenticity"
+              ],
+              "meaning": "Equality of acquisition and recomputed logical-image digests for the same algorithm and subject; not original authenticity.",
+              "evidence_needed": "Both bound digests and the approved equality relation.",
+              "selectors": [
+                {
+                  "form": "imageDigestsAgree",
+                  "field": "digests_match"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "image_hash",
+          "acquisition_verification_match"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q2",
+      "prompt": "What operating system was used on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "operating_system": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_product_name_string"
+              ],
+              "meaning": "operating-system product name recorded in configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "operating_system"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q3",
+      "prompt": "When was the install date?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "installed_at": {
+            "type": "string",
+            "description": "Recorded OS installation timestamp in ISO 8601 with explicit offset.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_install_time_string"
+              ],
+              "meaning": "installation timestamp recorded by the operating system",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "installed_at"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "prompt": "What is the timezone settings?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "time_zone_setting": {
+            "type": "string",
+            "description": "Effective recorded time-zone label with its UTC offset. Keep registry key identifiers and conversion reasoning outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_time_zone_setting_string"
+              ],
+              "meaning": "recorded time-zone configuration, not proof of clock accuracy",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "time_zone_setting"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q5",
+      "prompt": "Who is the registered owner?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "registered_owner": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_registered_owner_string"
+              ],
+              "meaning": "registered-owner text, not proof of ownership or user identity",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "registered_owner"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q6",
+      "prompt": "What is the computer account name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_account_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_account_name_string"
+              ],
+              "meaning": "configured computer account name",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "computer_account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q7",
+      "prompt": "What is the primary domain name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "primary_domain_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_primary_domain_string"
+              ],
+              "meaning": "configured primary-domain name",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "primary_domain_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q8",
+      "prompt": "When was the last recorded computer shutdown date/time?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "shutdown_at": {
+            "type": "string",
+            "description": "Last recorded shutdown timestamp in ISO 8601 with explicit offset.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_last_shutdown_string"
+              ],
+              "meaning": "shutdown timestamp retained by the source",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "shutdown_at"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/shutdown_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "prompt": "How many accounts are recorded (total number)?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total recorded local operating-system accounts, including built-in accounts.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_account_count_integer"
+              ],
+              "meaning": "reader-reported account count under its stated enumeration scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "account_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q10",
+      "prompt": "What is the account name of the user who mostly uses the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Account identified as predominantly used, with the selection basis outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "predominant_account_identity"
+              ],
+              "meaning": "Account identified as predominantly used under an explicit justified usage criterion; not merely a recorded account name or a high isolated counter.",
+              "evidence_needed": "A reviewed comparison across relevant accounts and usage evidence, with the population, metric, interval and limitations stated. No existing generic account-name role implies this relation."
+            }
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q11",
+      "prompt": "Who was the last user to logon to the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Last recorded logon identity; distinguish a recorded setting from a successful event in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_account_last_logon_name_string"
+              ],
+              "meaning": "last-logon account name retained by configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q12",
+      "prompt": "A search for the name of “G=r=e=g S=c=h=a=r=d=t” reveals multiple hits. One of these proves that G=r=e=g S=c=h=a=r=d=t is Mr. Evil and is also the administrator of this computer. What file is it? What software program does this file relate to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full evidence path identifying the file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_source_path_string"
+              ],
+              "meaning": "exact path of the examined source artifact",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          },
+          "program": {
+            "type": "string",
+            "description": "Software associated with that file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_name_string"
+              ],
+              "meaning": "application named by the source, not proof of installation or execution",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "file_path",
+          "program"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q13",
+      "prompt": "List the network cards used by this computer",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_cards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Vendor and model as recorded; preserve distinct interfaces.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "recorded_attribute_network_description_string"
+                ],
+                "meaning": "network-interface description recorded by the source",
+                "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+              }
+            }
+          }
+        },
+        "required": [
+          "network_cards"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q14",
+      "prompt": "This same file reports the IP address and MAC address of the computer. What are they?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "Dotted-decimal IPv4 address reported in the referenced file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_network_ip_address_string"
+              ],
+              "meaning": "IP address recorded by the source, not current assignment",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          },
+          "mac_address": {
+            "type": "string",
+            "description": "Six hexadecimal octets separated by colons.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_network_mac_address_string"
+              ],
+              "meaning": "MAC address recorded by the source, not physical-user attribution",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "ip_address",
+          "mac_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q15",
+      "prompt": "An internet search for vendor name/model of NIC cards by MAC address can be used to find out which network interface was used. In the above answer, the first 3 hex characters of the MAC address report the vendor of the card. Which NIC card was used during the installation and set-up for LOOK@LAN?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_card": {
+            "type": "string",
+            "description": "Network-interface vendor identity at the precision of the reference answer. Put the supported model and prefix-association evidence outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "setup_interface_identity"
+              ],
+              "meaning": "Network interface identified as used during the referenced installation/setup; not merely a matching vendor or a configured interface.",
+              "evidence_needed": "Source-scoped setup observations and a justified link from their network identity to the identified interface. Vendor-prefix lookup alone does not establish use during setup."
+            }
+          }
+        },
+        "required": [
+          "network_card"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q16",
+      "prompt": "Find 6 installed programs that may be used for hacking.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Program product name without version or capability descriptions; put those details and evidence of actual use outside answer.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "program"
+                ],
+                "meaning": "Program recorded as installed, not merely mentioned by an application artifact.",
+                "evidence_needed": "An installation record plus separately inspectable justification for the requested capability. The installation claim alone does not prove hacking, intent or execution.",
+                "selectors": [
+                  {
+                    "form": "programInstalledAt",
+                    "field": "program"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/programs": {
+            "mode": "subset",
+            "count": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "prompt": "What is the SMTP email address for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_email_string"
+              ],
+              "meaning": "email-address field in application configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q18",
+      "prompt": "What are the NNTP (news server) settings for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "nntp_server": {
+            "type": "string",
+            "description": "Recorded NNTP server hostname; document other connection settings outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_nntp_server_string"
+              ],
+              "meaning": "configured NNTP server",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "nntp_server"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q19",
+      "prompt": "What two installed programs show this information?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Product name. Expand a leading MS abbreviation to Microsoft; do not infer a different product or edition.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "recorded_attribute_app_name_string",
+                  "program"
+                ],
+                "meaning": "Application named by a source or recorded as installed; relevance to the requested settings remains source-context evidence.",
+                "evidence_needed": "The relevant settings source and application association must be retained separately; matching product text alone does not establish that it contains the requested settings."
+              }
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q20",
+      "prompt": "List 5 newsgroups that Mr. Evil has subscribed to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "newsgroups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "recorded_attribute_app_config_newsgroup_string"
+                ],
+                "meaning": "newsgroup subscription recorded by application configuration",
+                "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+              }
+            }
+          }
+        },
+        "required": [
+          "newsgroups"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/newsgroups": {
+            "mode": "subset",
+            "count": 5
+          }
+        }
+      }
+    },
+    {
+      "id": "Q21",
+      "prompt": "A popular IRC (Internet Relay Chat) program called MIRC was installed. What are the user settings that was shown when the user was online and in a chat channel?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "real_name": {
+            "type": "string",
+            "description": "Recorded mIRC user setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_real_name_string"
+              ],
+              "meaning": "real-name field in application configuration, not verified identity",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Recorded mIRC email setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_email_string"
+              ],
+              "meaning": "email-address field in application configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          },
+          "nickname": {
+            "type": "string",
+            "description": "Recorded mIRC nick setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_nickname_string"
+              ],
+              "meaning": "nickname field in application configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          },
+          "alternate_nickname": {
+            "type": "string",
+            "description": "Recorded mIRC anick setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_app_config_alternate_nickname_string"
+              ],
+              "meaning": "alternate nickname recorded in application configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "real_name",
+          "email_address",
+          "nickname",
+          "alternate_nickname"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q22",
+      "prompt": "This IRC program has the capability to log chat sessions. List 3 IRC channels that the user of this computer accessed.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Use recorded channel-log basenames, including their network and .log suffix, as this reference contract’s channel identifiers. Put separately recovered channel sigils/names and evidence paths outside answer; do not invent them from a filename.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "recorded_attribute_app_config_irc_log_file_name_string"
+                ],
+                "meaning": "retained IRC log basename whose Session Ident records a channel; not attributed to a person",
+                "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+              }
+            }
+          }
+        },
+        "required": [
+          "channels"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/channels": {
+            "mode": "subset",
+            "count": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "Q23",
+      "prompt": "Ethereal, a popular “sniffing” program that can be used to intercept wired and wireless internet packets was also found to be installed. When TCP packets are collected and re-assembled, the default save directory is that users \\My Documents directory. What is the name of the file that contains the intercepted data?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Filename of the captured/intercepted data; provide the evidence path separately.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_traffic_file_name_string"
+              ],
+              "meaning": "name of the source containing captured traffic observations",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q24",
+      "prompt": "Viewing the file in a text format reveals much information about who and what was intercepted. What type of wireless computer was the victim (person who had his internet surfing recorded) using?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_type": {
+            "type": "string",
+            "description": "Device/platform type supported by the captured data; no stronger identification from an agent string alone.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "captured_device_type"
+              ],
+              "meaning": "Device/platform type supported by captured traffic under an explicit interpretation; not physical-device identity from an unverified User-Agent string.",
+              "evidence_needed": "A reviewed interpretation of captured protocol/client evidence with spoofability and scope stated. Raw User-Agent text alone is not this stronger semantic role."
+            }
+          }
+        },
+        "required": [
+          "computer_type"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q25",
+      "prompt": "What websites was the victim accessing?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "websites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Website host/domain (without scheme/path) or explicitly named web-service product. For a service, use its product name and keep provider qualifiers, URLs and reconstruction evidence outside answer.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "recorded_attribute_traffic_http_host_string",
+                  "recorded_attribute_traffic_url_string"
+                ],
+                "meaning": "Host or URL observed in captured HTTP traffic; not personal attribution or proof of successful browsing.",
+                "evidence_needed": "Traffic from the referenced capture source must support the requested website/service identification. Context and any service-name interpretation stay separately inspectable; arbitrary browser history is insufficient."
+              }
+            }
+          }
+        },
+        "required": [
+          "websites"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q26",
+      "prompt": "Search for the main users web based email address. What is it?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_browser_email_address_string"
+              ],
+              "meaning": "email-address text observed in a browser artifact, not ownership",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q27",
+      "prompt": "Yahoo mail, a popular web based email service, saves copies of the email under what file name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Cached filename or documented filename pattern; preserve the distinction in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_browser_cache_file_name_string"
+              ],
+              "meaning": "browser-cache source filename",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q28",
+      "prompt": "How many executable files are in the recycle bin?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "executable_file_count": {
+            "type": "integer",
+            "minimum": 0,
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_recycle_executable_count_integer"
+              ],
+              "meaning": "reader-reported executable count in its stated Recycle Bin scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "executable_file_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q29",
+      "prompt": "Are these files really deleted?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_from_file_system": {
+            "type": "boolean",
+            "description": "Whether filesystem metadata marks the referenced recycle-bin entries deleted; not recoverability, secure erasure or a claim that no copy exists.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_filesystem_deleted_flag_boolean"
+              ],
+              "meaning": "deleted-entry flag reported by filesystem metadata, not secure erasure or unrecoverability",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "deleted_from_file_system"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q30",
+      "prompt": "How many files are actually reported to be deleted by the file system?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_file_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Files reported deleted by filesystem metadata; do not substitute recycle-bin membership.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_filesystem_deleted_count_integer"
+              ],
+              "meaning": "reader-reported deleted-entry count in its stated filesystem scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "deleted_file_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q31",
+      "prompt": "Perform a Anti-Virus check. Are there any viruses on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "viruses_found": {
+            "type": "boolean",
+            "description": "Result of the declared antivirus examination; absence requires stated tool, signatures, coverage and failures.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_scanner_detections_found_boolean"
+              ],
+              "meaning": "whether this completed scoped examination reported at least one signature match; not global virus absence or historical infection",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field."
+            }
+          }
+        },
+        "required": [
+          "viruses_found"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    }
+  ]
+}

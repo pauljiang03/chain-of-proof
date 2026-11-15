@@ -13,6 +13,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Iterable, List
 
+from .catalog import ATTRIBUTE_KINDS
+
 KINDS = (
     "usbInsert", "volumeMount", "lnkTarget",
     "fileCreated", "fileModified", "fileDeleted",
@@ -33,7 +35,7 @@ KINDS = (
     "fileCreationRecorded",
     "journalName", "journalParent", "journalRemoval",
     "journalPath",
-)
+) + ATTRIBUTE_KINDS
 
 
 @dataclass(frozen=True)

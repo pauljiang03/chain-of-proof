@@ -1,0 +1,1758 @@
+{
+  "schema_version": 2,
+  "case_id": "nist-cfreds-hacking",
+  "title": "NIST CFReDS Hacking Case: source-grounded 31-question development reference",
+  "contract_revision": "hacking-v1",
+  "review_status": "provisional_source_derived_contract",
+  "evaluation_use": "development_not_blind",
+  "time_zone": null,
+  "transcription": {
+    "author": "AI-assisted source transcription",
+    "all_pdf_pages_visually_checked": true,
+    "independent_review_completed": false,
+    "application_facts_or_answers_consulted": false,
+    "source_binding_is_semantic_validation": false
+  },
+  "source_document": {
+    "path": "eval/hacking_case/sources/TestAnswers.txt",
+    "sha256": "204046b0dfa27fb476bb242846845e736091d72f671e60c3c43b6abdf6abe380",
+    "pdf_path": "eval/hacking_case/sources/TestAnswers.pdf",
+    "pdf_sha256": "ee1795a7efe150ae3ecddaea2a1ee4ab2431a2c28ed3df009e759628bfda87f8",
+    "url": "https://cfreds-archive.nist.gov/images/TestAnswers.pdf"
+  },
+  "public_source": {
+    "url": "https://cfreds-archive.nist.gov/Hacking_Case.html",
+    "html_path": "eval/hacking_case/sources/Hacking_Case.html",
+    "html_sha256": "eb024d9fda7cf6d432d4ed61ad09235516ddc93ba88420d090d9edc57b27c9b6",
+    "questions_path": "eval/hacking_case/sources/questions.txt",
+    "questions_sha256": "393ee705932247c7a40f79a7a43605a9b528873a9f26dd36484b9205a6029cff"
+  },
+  "additional_sources": [
+    {
+      "id": "acquisition_notes",
+      "path": "eval/hacking_case/sources/SCHARDT.LOG",
+      "sha256": "a516724003f8ee6ace46480d96bb46d8163cdbb2a56a0cc9d5831696f024c8ee",
+      "url": "https://cfreds-archive.nist.gov/images/hacking-dd/SCHARDT.LOG"
+    }
+  ],
+  "contract_notes": [
+    "All 31 original public prompts are retained without replacement. Every expected answer is source-bound or has an explicit reproducible representation transformation.",
+    "This is a new typed development rubric using the neutral deterministic scorer, not a historical Mulder prose grading or a Lean proof of the answer key.",
+    "All questions are scorable at the published answer precision under these explicit conventions. Investigative procedures, attribution, completeness and observation authenticity remain outside scalar agreement.",
+    "Versions/capabilities, scanner details, supporting paths, reasoning and other evidence go outside the scored answer unless the public schema requests them.",
+    "Source snapshots and derivation tests establish transcription integrity and reproducibility, not independent semantic correctness. No source answer was changed to fit application facts or model outputs."
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "What is the image hash? Does the acquisition and verification hash match?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "image_hash": {
+          "algorithm": "MD5",
+          "digest": "AEE4FCD9301C03B3B054623CA261959A"
+        },
+        "acquisition_verification_match": true
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 14,
+        "end_line": 16,
+        "sha256": "fcb7dbc683e29d481e289b6316c60b87d92023e8a9a9ae614b927d19aa72af4b",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 1,
+        "end_line": 1,
+        "sha256": "72cd697053802b049587c844d1ac315249de23db28e3589d1239eca5f1c3177a"
+      },
+      "field_sources": [
+        {
+          "pointer": "/image_hash/digest",
+          "literal": "AEE4FCD9301C03B3B054623CA261959A",
+          "start_line": 15,
+          "end_line": 15
+        }
+      ],
+      "transformations": [
+        {
+          "pointer": "/image_hash/algorithm",
+          "operation": "external_literal",
+          "source_file": "SCHARDT.LOG",
+          "literal": "MD5",
+          "start_line": 20,
+          "end_line": 20,
+          "note": "The acquisition log declares MD5 verification; the source answer digest is kept unchanged."
+        },
+        {
+          "pointer": "/acquisition_verification_match",
+          "operation": "yes_no",
+          "literal": "Yes",
+          "start_line": 16,
+          "end_line": 16
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Media digest scope is distinct from a compressed E01 container or DD-segment digest. The official acquisition notes establish the MD5 algorithm; the answer key supplies the unchanged complete-image digest and agreement Boolean."
+      ]
+    },
+    {
+      "id": "Q2",
+      "prompt": "What operating system was used on the computer?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "operating_system": "Windows XP"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 17,
+        "end_line": 18,
+        "sha256": "8c4d98889f805f927c9da4d64a1c2926245dc41af45c86cb61c90eb3b02513a5",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 2,
+        "end_line": 2,
+        "sha256": "e4efed337da8ae249b80f353df42aee4d62fed360eb5079e98351a8dbc3837e3"
+      },
+      "field_sources": [
+        {
+          "pointer": "/operating_system",
+          "literal": "Windows XP",
+          "start_line": 18,
+          "end_line": 18
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q3",
+      "prompt": "When was the install date?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      },
+      "expected": {
+        "installed_at": "2004-08-19T17:48:27-05:00"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 19,
+        "end_line": 20,
+        "sha256": "78781d9d508176f8e5d8d5f401e03467531171a96ff130b886c0d009a97eaafa",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 3,
+        "end_line": 3,
+        "sha256": "8eda9089cb6df3f30170a4ce1381919e0f6bf5c165e680b1ce02ee37f790b5a0"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/installed_at",
+          "operation": "local_display_timestamp",
+          "literal": "08/19/04 05:48:27PM",
+          "start_line": 20,
+          "end_line": 20,
+          "offset_literal": "Central Daylight Time (-05hrs GMT)",
+          "offset_start_line": 22,
+          "offset_end_line": 22,
+          "note": "Explicit convention applying Q4 contemporaneous display offset; not an independent proof of the original display configuration."
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Time conversion uses the declared Q4 display-offset convention. Original printed text is retained. No extra tolerance or source-time correction is applied."
+      ]
+    },
+    {
+      "id": "Q4",
+      "prompt": "What is the timezone settings?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "time_zone_setting": "Central Daylight Time (-05hrs GMT)"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 21,
+        "end_line": 22,
+        "sha256": "2815ef6e0b832626375cd473e8205eaac5c5b022bf44747f0c743887e123a4e1",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 4,
+        "end_line": 4,
+        "sha256": "3784572d48dbf9e8adfaccdf9873a6dba9c0a4d28311ef10ed821142f3d31f79"
+      },
+      "field_sources": [
+        {
+          "pointer": "/time_zone_setting",
+          "literal": "Central Daylight Time (-05hrs GMT)",
+          "start_line": 22,
+          "end_line": 22
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q5",
+      "prompt": "Who is the registered owner?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "registered_owner": "Greg Schardt"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 23,
+        "end_line": 24,
+        "sha256": "8217539438968ff68f35abf21da5a37483624af9858167db66d1261bdffc7a1f",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 5,
+        "end_line": 5,
+        "sha256": "45ad591f7f4e35ff305a338dd187a32cd3224a318cda8673da6fb47cf8aee836"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/registered_owner",
+          "operation": "remove_equals",
+          "literal": "G=r=e=g S=c=h=a=r=d=t",
+          "start_line": 24,
+          "end_line": 24,
+          "context_start_line": 5,
+          "context_end_line": 6,
+          "note": "The public scenario and answer source explicitly state the equals signs are absent from the evidence."
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q6",
+      "prompt": "What is the computer account name?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "computer_account_name": "N-1A9ODN6ZXK4LQ"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 25,
+        "end_line": 26,
+        "sha256": "6f10aaca8079817e04e7735d1536675d2a24d6629dded9d8e1dfb6a7ba77873f",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 6,
+        "end_line": 6,
+        "sha256": "765ee4809a3da7c6134c2ac83f85dd2e83836a16bc79d2e6b786f7af8f882f76"
+      },
+      "field_sources": [
+        {
+          "pointer": "/computer_account_name",
+          "literal": "N-1A9ODN6ZXK4LQ",
+          "start_line": 26,
+          "end_line": 26
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q7",
+      "prompt": "What is the primary domain name?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "primary_domain_name": "Evil"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 27,
+        "end_line": 28,
+        "sha256": "28c75816fce206590d036dd84b18e0ac36450e5e83d420d134b3ec4a5100709e",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 7,
+        "end_line": 7,
+        "sha256": "b56bc6914dc0ab2a30f8fdf83ae2757d23f0672ad4839a3d7d6252c60269a0bb"
+      },
+      "field_sources": [
+        {
+          "pointer": "/primary_domain_name",
+          "literal": "Evil",
+          "start_line": 28,
+          "end_line": 28
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q8",
+      "prompt": "When was the last recorded computer shutdown date/time?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/shutdown_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      },
+      "expected": {
+        "shutdown_at": "2004-08-27T10:46:33-05:00"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 29,
+        "end_line": 30,
+        "sha256": "c7539ef97ed4b10f600d7bf765751a7505d2ad1c92935d0819653bc49b73a988",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 8,
+        "end_line": 8,
+        "sha256": "155cb120778692a13b125413a2b7d087870a1cd9bd190f1be60636b6572a2516"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/shutdown_at",
+          "operation": "local_display_timestamp",
+          "literal": "08/27/04 10:46:33AM",
+          "start_line": 30,
+          "end_line": 30,
+          "offset_literal": "Central Daylight Time (-05hrs GMT)",
+          "offset_start_line": 22,
+          "offset_end_line": 22,
+          "note": "Same explicit Q4 display-offset convention as Q3; zero comparison tolerance."
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Time conversion uses the declared Q4 display-offset convention. Original printed text is retained. No extra tolerance or source-time correction is applied."
+      ]
+    },
+    {
+      "id": "Q9",
+      "prompt": "How many accounts are recorded (total number)?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "account_count": 5
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 31,
+        "end_line": 32,
+        "sha256": "06312f1dc4e7c72d564b3548e7a3234932832f7c6aec2634ce236fcd8e35cb34",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 9,
+        "end_line": 9,
+        "sha256": "254ce6adac876dc34e125d2c18d2f8f15698ea2fdf49b9f46ff4ff91a3938d73"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/account_count",
+          "operation": "decimal_integer",
+          "literal": "5",
+          "start_line": 32,
+          "end_line": 32
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q10",
+      "prompt": "What is the account name of the user who mostly uses the computer?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "account_name": "Mr. Evil"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 33,
+        "end_line": 34,
+        "sha256": "c3857d350e3192d143cef2c0959c6177ee108541df07602d45bc9ccc15d3ee1e",
+        "pages": [
+          1
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 10,
+        "end_line": 10,
+        "sha256": "6113023c1503cfe32fe52abaf971db18ee8c7d7b9ba407757acf8ea610a22be5"
+      },
+      "field_sources": [
+        {
+          "pointer": "/account_name",
+          "literal": "Mr. Evil",
+          "start_line": 34,
+          "end_line": 34
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q11",
+      "prompt": "Who was the last user to logon to the computer?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "account_name": "Mr. Evil"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 37,
+        "end_line": 38,
+        "sha256": "603e35ef9f6b0996a6b45717146f9db697ecc65dd5dc11cebcbbd5735de24663",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 11,
+        "end_line": 11,
+        "sha256": "b90e3a5d019c466e26fab832aab6a95c726d91936266c18f81c7b79b849db5b7"
+      },
+      "field_sources": [
+        {
+          "pointer": "/account_name",
+          "literal": "Mr. Evil",
+          "start_line": 38,
+          "end_line": 38
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q12",
+      "prompt": "A search for the name of “G=r=e=g S=c=h=a=r=d=t” reveals multiple hits. One of these proves that G=r=e=g S=c=h=a=r=d=t is Mr. Evil and is also the administrator of this computer. What file is it? What software program does this file relate to?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "file_path": "C:\\Program Files\\Look@LAN\\irunin.ini",
+        "program": "Look@LAN"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 39,
+        "end_line": 45,
+        "sha256": "e6c8b0dfb819fd08ee9a3e60c676e09108c429ee14005f3c205971851e1038ed",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 12,
+        "end_line": 12,
+        "sha256": "26f471da5ada4f517ef55de050a2fc9d25a47cc4a5fa5e8d7a29c7d70c6c0057"
+      },
+      "field_sources": [
+        {
+          "pointer": "/program",
+          "literal": "Look@LAN",
+          "start_line": 44,
+          "end_line": 44
+        }
+      ],
+      "transformations": [
+        {
+          "pointer": "/file_path",
+          "operation": "join_literals",
+          "parts": [
+            {
+              "literal": "C:\\Program Files\\Look@LAN",
+              "start_line": 44,
+              "end_line": 44
+            },
+            {
+              "literal": "\\irunin.ini",
+              "start_line": 45,
+              "end_line": 45
+            }
+          ],
+          "note": "Two-line path in the PDF; the adjacent program column is kept separate."
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Full path and related program are requested. The source sentence’s stronger attribution claim is not independently certified by merely matching these two fields."
+      ]
+    },
+    {
+      "id": "Q13",
+      "prompt": "List the network cards used by this computer",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "network_cards": [
+          "Xircom CardBus Ethernet 100 + Modem 56 (Ethernet Interface)",
+          "Compaq WL110 Wireless LAN PC Card"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 46,
+        "end_line": 48,
+        "sha256": "64d8da762b96cfa57a965dfe21d2265a4e067237daaf89ad4ed10fd4aabcfc74",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 13,
+        "end_line": 13,
+        "sha256": "0386fddd53afd51fb70432852f545b3b02766d6d0c8c53a71d4fb9839c67d1e8"
+      },
+      "field_sources": [
+        {
+          "pointer": "/network_cards/0",
+          "literal": "Xircom CardBus Ethernet 100 + Modem 56 (Ethernet Interface)",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "pointer": "/network_cards/1",
+          "literal": "Compaq WL110 Wireless LAN PC Card",
+          "start_line": 48,
+          "end_line": 48
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q14",
+      "prompt": "This same file reports the IP address and MAC address of the computer. What are they?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "ip_address": "192.168.1.111",
+        "mac_address": "00:10:a4:93:3e:09"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 49,
+        "end_line": 52,
+        "sha256": "bfde2fe36659cf293e793868d1209d5896a8d752f5d6e544571b04325409d1e9",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 14,
+        "end_line": 14,
+        "sha256": "4b3a4594a3f3812192a5098939e268d816baecbb1801ab62ee77fc89e7c4a408"
+      },
+      "field_sources": [
+        {
+          "pointer": "/ip_address",
+          "literal": "192.168.1.111",
+          "start_line": 51,
+          "end_line": 51
+        }
+      ],
+      "transformations": [
+        {
+          "pointer": "/mac_address",
+          "operation": "mac_colons",
+          "literal": "0010a4933e09",
+          "start_line": 52,
+          "end_line": 52
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q15",
+      "prompt": "An internet search for vendor name/model of NIC cards by MAC address can be used to find out which network interface was used. In the above answer, the first 3 hex characters of the MAC address report the vendor of the card. Which NIC card was used during the installation and set-up for LOOK@LAN?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "network_card": "Xircom"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 53,
+        "end_line": 57,
+        "sha256": "d3febb5908df25c9b9cc6d93f2e33d81b0357173961b5ebcc3f0438b5cc0bd8b",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 15,
+        "end_line": 15,
+        "sha256": "4df90e1dbb0c428946370d4d5b625ccc79d40f74b968c852e8827f9318e114a7"
+      },
+      "field_sources": [
+        {
+          "pointer": "/network_card",
+          "literal": "Xircom",
+          "start_line": 57,
+          "end_line": 57
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Reference precision is vendor identity. The public schema places a more specific model in the evidence appendix; no missing model is invented."
+      ]
+    },
+    {
+      "id": "Q16",
+      "prompt": "Find 6 installed programs that may be used for hacking.",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/programs": {
+            "mode": "subset",
+            "count": 6
+          }
+        }
+      },
+      "expected": {
+        "programs": [
+          "Cain & Abel",
+          "Ethereal",
+          "123 Write All Stored Passwords",
+          "Anonymizer",
+          "CuteFTP",
+          "Look@LAN",
+          "NetStumbler"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 58,
+        "end_line": 65,
+        "sha256": "51a339dde43f23484d2dcb2be81987f3ea98f15db67659322ceb8b57f87c6993",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 16,
+        "end_line": 16,
+        "sha256": "8ab8da994c5d04e86bc238919efe149cb9b21d92fae6a18fcc0025b2a3cb4d65"
+      },
+      "field_sources": [
+        {
+          "pointer": "/programs/1",
+          "literal": "Ethereal",
+          "start_line": 60,
+          "end_line": 60
+        },
+        {
+          "pointer": "/programs/2",
+          "literal": "123 Write All Stored Passwords",
+          "start_line": 61,
+          "end_line": 61
+        },
+        {
+          "pointer": "/programs/3",
+          "literal": "Anonymizer",
+          "start_line": 62,
+          "end_line": 62
+        },
+        {
+          "pointer": "/programs/4",
+          "literal": "CuteFTP",
+          "start_line": 63,
+          "end_line": 63
+        },
+        {
+          "pointer": "/programs/6",
+          "literal": "NetStumbler",
+          "start_line": 65,
+          "end_line": 65
+        }
+      ],
+      "transformations": [
+        {
+          "pointer": "/programs/0",
+          "operation": "program_product_name",
+          "literal": "Cain & Abel v2.5 beta45 (password sniffer & cracker)",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "pointer": "/programs/5",
+          "operation": "cross_question_literal",
+          "literal": "Look@LAN",
+          "start_line": 45,
+          "end_line": 45,
+          "raw_label": "Look&LAN_1.0 (network discovery tool)",
+          "raw_start_line": 64,
+          "raw_end_line": 64,
+          "note": "Q12 and Q15 name the same program referenced by this differently styled Q16 display label. The source label remains preserved; this is an explicit cross-context product-name convention, not a correction based on extracted facts."
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Any six distinct accepted product names satisfy the bounded list. Source versions and capability descriptions remain available in the source snapshot, outside the requested product-name answer. A cross-question product-display convention is documented explicitly."
+      ]
+    },
+    {
+      "id": "Q17",
+      "prompt": "What is the SMTP email address for Mr. Evil?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "email_address": "whoknowsme@sbcglobal.net"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 66,
+        "end_line": 67,
+        "sha256": "eabb1468b314b815c763d44d74623d4d60ba9901879c31cb037dda895f4cf530",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 17,
+        "end_line": 17,
+        "sha256": "9b0fda7cc905bdc6e646057e2d4f53386d74f6449b662a12e96ff6902e061bda"
+      },
+      "field_sources": [
+        {
+          "pointer": "/email_address",
+          "literal": "whoknowsme@sbcglobal.net",
+          "start_line": 67,
+          "end_line": 67
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q18",
+      "prompt": "What are the NNTP (news server) settings for Mr. Evil?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "nntp_server": "News.dallas.sbcglobal.net"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 68,
+        "end_line": 69,
+        "sha256": "47fc492be469d45538f10ff9f5391508f712b01f799ed8bb8ca7303d8a561225",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 18,
+        "end_line": 18,
+        "sha256": "41f639c24bb4f2a8e7aca1a28c2508c2607e18f7e7c89695d46cf8122ffe2c72"
+      },
+      "field_sources": [
+        {
+          "pointer": "/nntp_server",
+          "literal": "News.dallas.sbcglobal.net",
+          "start_line": 69,
+          "end_line": 69
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "The source identifies the NNTP server hostname. The semantic field nntp_server requests that value; missing port or authentication settings are not invented."
+      ]
+    },
+    {
+      "id": "Q19",
+      "prompt": "What two installed programs show this information?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "programs": [
+          "Microsoft Outlook Express",
+          "Forte Agent"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 70,
+        "end_line": 72,
+        "sha256": "0062a5c4226987a76116516bd483ed85e80975aa6f43117b1d56e67743f9645f",
+        "pages": [
+          2
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 19,
+        "end_line": 19,
+        "sha256": "6a6162286493de6a04bbecabc38f2204916bfc706e0c0af586b55ad600c2608f"
+      },
+      "field_sources": [
+        {
+          "pointer": "/programs/1",
+          "literal": "Forte Agent",
+          "start_line": 72,
+          "end_line": 72
+        }
+      ],
+      "transformations": [
+        {
+          "pointer": "/programs/0",
+          "operation": "expand_ms_prefix",
+          "literal": "MS Outlook Express",
+          "start_line": 71,
+          "end_line": 71
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q20",
+      "prompt": "List 5 newsgroups that Mr. Evil has subscribed to?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/newsgroups": {
+            "mode": "subset",
+            "count": 5
+          }
+        }
+      },
+      "expected": {
+        "newsgroups": [
+          "Alt.2600.phreakz",
+          "Alt.2600",
+          "Alt.2600.cardz",
+          "Alt.2600codez",
+          "Alt.2600.crackz",
+          "Alt.2600.moderated",
+          "Alt.binaries.hacking.utilities",
+          "Alt.stupidity.hackers.malicious",
+          "Free.binaries.hackers.malicious",
+          "Free.binaries.hacking.talentless.troll_haven",
+          "Free.binaries.hacking.talentless.troll-haven",
+          "alt.nl.binaries.hack",
+          "free.binaries.hacking.beginner",
+          "free.binaries.hacking.computers",
+          "free.binaries.hacking.utilities",
+          "free.binaries.hacking.websites",
+          "alt.binaries.hacking.computers",
+          "alt.binaries.hacking.websites",
+          "alt.dss.hack",
+          "alt.binaries.hacking.beginner",
+          "alt.hacking",
+          "alt.2600.programz",
+          "alt.2600.hackerz"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 73,
+        "end_line": 98,
+        "sha256": "31296799b8e07083923bed571aa5c72bf08e9988db6099da3d110db746e2c60f",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 20,
+        "end_line": 20,
+        "sha256": "fece06d92fef08de76beefd98a46b2d344000be365cb26bc7c37c003bd2cf3e5"
+      },
+      "field_sources": [
+        {
+          "pointer": "/newsgroups/0",
+          "literal": "Alt.2600.phreakz",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "pointer": "/newsgroups/1",
+          "literal": "Alt.2600",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "pointer": "/newsgroups/2",
+          "literal": "Alt.2600.cardz",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "pointer": "/newsgroups/3",
+          "literal": "Alt.2600codez",
+          "start_line": 79,
+          "end_line": 79
+        },
+        {
+          "pointer": "/newsgroups/4",
+          "literal": "Alt.2600.crackz",
+          "start_line": 80,
+          "end_line": 80
+        },
+        {
+          "pointer": "/newsgroups/5",
+          "literal": "Alt.2600.moderated",
+          "start_line": 81,
+          "end_line": 81
+        },
+        {
+          "pointer": "/newsgroups/6",
+          "literal": "Alt.binaries.hacking.utilities",
+          "start_line": 82,
+          "end_line": 82
+        },
+        {
+          "pointer": "/newsgroups/7",
+          "literal": "Alt.stupidity.hackers.malicious",
+          "start_line": 83,
+          "end_line": 83
+        },
+        {
+          "pointer": "/newsgroups/8",
+          "literal": "Free.binaries.hackers.malicious",
+          "start_line": 84,
+          "end_line": 84
+        },
+        {
+          "pointer": "/newsgroups/9",
+          "literal": "Free.binaries.hacking.talentless.troll_haven",
+          "start_line": 85,
+          "end_line": 85
+        },
+        {
+          "pointer": "/newsgroups/10",
+          "literal": "Free.binaries.hacking.talentless.troll-haven",
+          "start_line": 86,
+          "end_line": 86
+        },
+        {
+          "pointer": "/newsgroups/11",
+          "literal": "alt.nl.binaries.hack",
+          "start_line": 87,
+          "end_line": 87
+        },
+        {
+          "pointer": "/newsgroups/12",
+          "literal": "free.binaries.hacking.beginner",
+          "start_line": 88,
+          "end_line": 88
+        },
+        {
+          "pointer": "/newsgroups/13",
+          "literal": "free.binaries.hacking.computers",
+          "start_line": 89,
+          "end_line": 89
+        },
+        {
+          "pointer": "/newsgroups/14",
+          "literal": "free.binaries.hacking.utilities",
+          "start_line": 90,
+          "end_line": 90
+        },
+        {
+          "pointer": "/newsgroups/15",
+          "literal": "free.binaries.hacking.websites",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "pointer": "/newsgroups/16",
+          "literal": "alt.binaries.hacking.computers",
+          "start_line": 92,
+          "end_line": 92
+        },
+        {
+          "pointer": "/newsgroups/17",
+          "literal": "alt.binaries.hacking.websites",
+          "start_line": 93,
+          "end_line": 93
+        },
+        {
+          "pointer": "/newsgroups/18",
+          "literal": "alt.dss.hack",
+          "start_line": 94,
+          "end_line": 94
+        },
+        {
+          "pointer": "/newsgroups/19",
+          "literal": "alt.binaries.hacking.beginner",
+          "start_line": 95,
+          "end_line": 95
+        },
+        {
+          "pointer": "/newsgroups/20",
+          "literal": "alt.hacking",
+          "start_line": 96,
+          "end_line": 96
+        },
+        {
+          "pointer": "/newsgroups/21",
+          "literal": "alt.2600.programz",
+          "start_line": 97,
+          "end_line": 97
+        },
+        {
+          "pointer": "/newsgroups/22",
+          "literal": "alt.2600.hackerz",
+          "start_line": 98,
+          "end_line": 98
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Any five distinct source-listed subscriptions satisfy the bounded list. Distinct spellings in the published pool remain distinct; no punctuation repair is inferred."
+      ]
+    },
+    {
+      "id": "Q21",
+      "prompt": "A popular IRC (Internet Relay Chat) program called MIRC was installed. What are the user settings that was shown when the user was online and in a chat channel?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "real_name": "Mini Me",
+        "email_address": "none@of.ya",
+        "nickname": "Mr",
+        "alternate_nickname": "mrevilrulez"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 99,
+        "end_line": 104,
+        "sha256": "fc995f0d29309a6f4439923abd5eee1330b693390d7892bf5ab70bf2dbd78de6",
+        "pages": [
+          3
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 21,
+        "end_line": 21,
+        "sha256": "16d78a51ef33fab8c7962332e5a00a503d074f56d263bc526f7ea617f55ebe2e"
+      },
+      "field_sources": [
+        {
+          "pointer": "/real_name",
+          "literal": "Mini Me",
+          "start_line": 101,
+          "end_line": 101
+        },
+        {
+          "pointer": "/email_address",
+          "literal": "none@of.ya",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "pointer": "/nickname",
+          "literal": "Mr",
+          "start_line": 103,
+          "end_line": 103
+        },
+        {
+          "pointer": "/alternate_nickname",
+          "literal": "mrevilrulez",
+          "start_line": 104,
+          "end_line": 104
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Literal mIRC field keys and values are preserved. Question placement does not prove successful IRC activity."
+      ],
+      "source_role_bindings": [
+        {
+          "pointer": "/real_name",
+          "source_key": "user",
+          "start_line": 101,
+          "end_line": 101
+        },
+        {
+          "pointer": "/email_address",
+          "source_key": "email",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "pointer": "/nickname",
+          "source_key": "nick",
+          "start_line": 103,
+          "end_line": 103
+        },
+        {
+          "pointer": "/alternate_nickname",
+          "source_key": "anick",
+          "start_line": 104,
+          "end_line": 104
+        }
+      ]
+    },
+    {
+      "id": "Q22",
+      "prompt": "This IRC program has the capability to log chat sessions. List 3 IRC channels that the user of this computer accessed.",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/channels": {
+            "mode": "subset",
+            "count": 3
+          }
+        }
+      },
+      "expected": {
+        "channels": [
+          "Ushells.undernet.log",
+          "Elite.hackers.undernet.log",
+          "Mp3xserv.undernet.log",
+          "Chataholics.undernet.log",
+          "Cybercafé.undernet.log",
+          "M5tar.undernet.log",
+          "Thedarktower.afternet.log",
+          "Funny.undernet.log",
+          "Luxshell.undernet.log",
+          "Evilfork.efnet.log",
+          "Iso-warez.efnet.log",
+          "Houston.undernet.log"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 105,
+        "end_line": 118,
+        "sha256": "40e9ae47e74219b0cd978ddca2e79d22da7ee841ab8da870e122ff4dabc690fe",
+        "pages": [
+          3
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 22,
+        "end_line": 22,
+        "sha256": "85621d0f62db4e3c592db7e9662db2be96d736ee71a7cb7b47b5bfb0411fbefd"
+      },
+      "field_sources": [
+        {
+          "pointer": "/channels/0",
+          "literal": "Ushells.undernet.log",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "pointer": "/channels/1",
+          "literal": "Elite.hackers.undernet.log",
+          "start_line": 108,
+          "end_line": 108
+        },
+        {
+          "pointer": "/channels/2",
+          "literal": "Mp3xserv.undernet.log",
+          "start_line": 109,
+          "end_line": 109
+        },
+        {
+          "pointer": "/channels/3",
+          "literal": "Chataholics.undernet.log",
+          "start_line": 110,
+          "end_line": 110
+        },
+        {
+          "pointer": "/channels/4",
+          "literal": "Cybercafé.undernet.log",
+          "start_line": 111,
+          "end_line": 111
+        },
+        {
+          "pointer": "/channels/5",
+          "literal": "M5tar.undernet.log",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "pointer": "/channels/6",
+          "literal": "Thedarktower.afternet.log",
+          "start_line": 113,
+          "end_line": 113
+        },
+        {
+          "pointer": "/channels/7",
+          "literal": "Funny.undernet.log",
+          "start_line": 114,
+          "end_line": 114
+        },
+        {
+          "pointer": "/channels/8",
+          "literal": "Luxshell.undernet.log",
+          "start_line": 115,
+          "end_line": 115
+        },
+        {
+          "pointer": "/channels/9",
+          "literal": "Evilfork.efnet.log",
+          "start_line": 116,
+          "end_line": 116
+        },
+        {
+          "pointer": "/channels/10",
+          "literal": "Iso-warez.efnet.log",
+          "start_line": 117,
+          "end_line": 117
+        },
+        {
+          "pointer": "/channels/11",
+          "literal": "Houston.undernet.log",
+          "start_line": 118,
+          "end_line": 118
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Any three distinct channel-log basenames satisfy the bounded list. The published key uses filenames; no channel sigil, network membership or chat-content claim is invented."
+      ]
+    },
+    {
+      "id": "Q23",
+      "prompt": "Ethereal, a popular “sniffing” program that can be used to intercept wired and wireless internet packets was also found to be installed. When TCP packets are collected and re-assembled, the default save directory is that users \\My Documents directory. What is the name of the file that contains the intercepted data?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "file_name": "Interception"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 119,
+        "end_line": 125,
+        "sha256": "3135428c8812db1b9f67a548f086223d7fbba7d61ea8ea1cdc253c45fe5243a9",
+        "pages": [
+          3,
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 23,
+        "end_line": 23,
+        "sha256": "7e8fdeb140cbe74a9f99fe821508221ddcee90a39ba62d3ea42aa8654d7d2005"
+      },
+      "field_sources": [
+        {
+          "pointer": "/file_name",
+          "literal": "Interception",
+          "start_line": 125,
+          "end_line": 125
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q24",
+      "prompt": "Viewing the file in a text format reveals much information about who and what was intercepted. What type of wireless computer was the victim (person who had his internet surfing recorded) using?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "computer_type": "Windows CE (Pocket PC)"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 126,
+        "end_line": 129,
+        "sha256": "4a692ac7a2aaeab0925c13e28f89ac58f72de8440838bec7869a962db800d09d",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 24,
+        "end_line": 24,
+        "sha256": "68bdf3053c8e72127c4486e10b77c49cc99e442f63eecc671cd78953112c9628"
+      },
+      "field_sources": [
+        {
+          "pointer": "/computer_type",
+          "literal": "Windows CE (Pocket PC)",
+          "start_line": 129,
+          "end_line": 129
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "Device/platform description is compared at source precision; a matched user-agent-derived description does not uniquely identify a physical computer."
+      ]
+    },
+    {
+      "id": "Q25",
+      "prompt": "What websites was the victim accessing?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "websites": [
+          "Mobile.msn.com",
+          "Hotmail"
+        ]
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 130,
+        "end_line": 132,
+        "sha256": "6f3439ba4958440d5b0bf7c224a33e242c9136bc9eb7c3e6aa76cecb46997884",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 25,
+        "end_line": 25,
+        "sha256": "49ced4cf415020c1797dd0a8838f83e90572743c36c933a269e29fc9201a8a2b"
+      },
+      "field_sources": [
+        {
+          "pointer": "/websites/0",
+          "literal": "Mobile.msn.com",
+          "start_line": 131,
+          "end_line": 131
+        },
+        {
+          "pointer": "/websites/1",
+          "literal": "Hotmail",
+          "start_line": 132,
+          "end_line": 132
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "The source names one host and one webmail product. The expected service identifier is the explicit product name; the provider qualifier remains in the source snapshot. No unprinted DNS hostname is invented."
+      ]
+    },
+    {
+      "id": "Q26",
+      "prompt": "Search for the main users web based email address. What is it?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "email_address": "mrevilrulez@yahoo.com"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 133,
+        "end_line": 134,
+        "sha256": "91a6c0843ffe99dac5b4017686dc3feec4176cec028be5c2b639bb5f996cdbca",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 26,
+        "end_line": 26,
+        "sha256": "16d491c04c08e8c58ac58dffb0557855b27da42c06174d75fd85e5533eae26cf"
+      },
+      "field_sources": [
+        {
+          "pointer": "/email_address",
+          "literal": "mrevilrulez@yahoo.com",
+          "start_line": 134,
+          "end_line": 134
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q27",
+      "prompt": "Yahoo mail, a popular web based email service, saves copies of the email under what file name?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "file_name": "Showletter[1].htm"
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 135,
+        "end_line": 137,
+        "sha256": "fae861476eec40189fcf7abce3ab0651f957d0882a40c7ba6010214c6dd63608",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 27,
+        "end_line": 27,
+        "sha256": "d0a64245115d2c8c5f6dfc90a115c99ad8d15c35b70ed4f8095ed53a77ea2a6f"
+      },
+      "field_sources": [
+        {
+          "pointer": "/file_name",
+          "literal": "Showletter[1].htm",
+          "start_line": 137,
+          "end_line": 137
+        }
+      ],
+      "transformations": [],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q28",
+      "prompt": "How many executable files are in the recycle bin?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "executable_file_count": 4
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 138,
+        "end_line": 139,
+        "sha256": "8d17c6af8558b29e5b3560ce4363ce7b8ab67f48ea0e7f50ed8a6fe0afc85fb8",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 28,
+        "end_line": 28,
+        "sha256": "5b14fb752db6033ff9535d8a22e664f8cf4282385e97b6e0f8e2c117eab673a8"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/executable_file_count",
+          "operation": "decimal_integer",
+          "literal": "4",
+          "start_line": 139,
+          "end_line": 139
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q29",
+      "prompt": "Are these files really deleted?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "deleted_from_file_system": false
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 140,
+        "end_line": 141,
+        "sha256": "23f605094e84e46124158305402c688e98fbf79dc43490ad8d99137d80a3a2f2",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 29,
+        "end_line": 29,
+        "sha256": "db162aa6cd07237134cdd2bb9d4dcae2dd7c744f9bb48207766aa80b95e76f94"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/deleted_from_file_system",
+          "operation": "yes_no",
+          "literal": "No",
+          "start_line": 141,
+          "end_line": 141
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "No is transcribed as false under the public filesystem-deletion-status meaning. It does not establish secure erasure, unrecoverability or absence of other copies."
+      ]
+    },
+    {
+      "id": "Q30",
+      "prompt": "How many files are actually reported to be deleted by the file system?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "deleted_file_count": 3
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 142,
+        "end_line": 143,
+        "sha256": "4accb25bd7a2d051924a287e7f48590a37ee99f2af9ff2e327aef6103ef8f176",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 30,
+        "end_line": 30,
+        "sha256": "d1ba6ee0912a36e604ca93dd5956be64c442a0a72ef58ee74089abb171ffdae5"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/deleted_file_count",
+          "operation": "decimal_integer",
+          "literal": "3",
+          "start_line": 143,
+          "end_line": 143
+        }
+      ],
+      "review_status": "provisional_source_derived_contract"
+    },
+    {
+      "id": "Q31",
+      "prompt": "Perform a Anti-Virus check. Are there any viruses on the computer?",
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      },
+      "expected": {
+        "viruses_found": true
+      },
+      "evaluation": {
+        "status": "scorable",
+        "scope": "Agreement with the published typed reference under the declared comparison conventions; not verification of investigative procedure or attribution."
+      },
+      "source": {
+        "start_line": 144,
+        "end_line": 145,
+        "sha256": "ff623e6a10799cbbdabc6fe432ad0d2b9332f21158fffa014d05ec8979da51f1",
+        "pages": [
+          4
+        ]
+      },
+      "public_source": {
+        "path": "eval/hacking_case/sources/questions.txt",
+        "start_line": 31,
+        "end_line": 31,
+        "sha256": "0d77453b1efcef43988b8aded4c3d4241181ad95d2830356b9db7a98125ae7b6"
+      },
+      "field_sources": [],
+      "transformations": [
+        {
+          "pointer": "/viruses_found",
+          "operation": "yes_no",
+          "literal": "Yes",
+          "start_line": 145,
+          "end_line": 145
+        }
+      ],
+      "review_status": "provisional_source_derived_contract",
+      "contract_notes": [
+        "The published Yes supports a reported-positive Boolean comparison only. Scanner, signatures, detections and coverage are unreported by the key. Actual examination evidence must be recorded separately; no deterministic full-scan replication or completeness claim is made."
+      ]
+    }
+  ]
+}

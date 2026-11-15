@@ -8,8 +8,15 @@ An optional miner supplies a baseline with preset search rules.
 The Lean kernel verifies the formal claim against extracted records.
 The report uses fixed sentences from accepted claims.
 
-The project uses the [NIST CFReDS Data Leakage Case](https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html).
-The case has [60 questions](eval/QUESTIONS.md), one PC image, and three removable media images.
+The project includes two official NIST cases:
+
+| Case | Public questions | Evidence |
+|---|---:|---|
+| [Data Leakage](https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html) | [60](eval/QUESTIONS.md) | One PC and three removable media images |
+| [Hacking Case](https://cfreds-archive.nist.gov/Hacking_Case.html) | [31](eval/hacking_case/questions.json) | One Windows XP PC image in two E01 segments |
+
+The [Hacking Case guide](docs/HACKING_CASE.md) gives the commands, scope, and limits.
+Its public questions and private reference stay separate. Its score is not combined with Data Leakage.
 The code also accepts other cases through explicit case profiles and evidence manifests.
 
 ## Current state
@@ -18,6 +25,10 @@ The [latest development comparison](comparison/ablation/RESULTS_SOL61_20261115.m
 Both investigators received the same 335,509 extracted records and all 60 public questions.
 They used the requested Sol 6.1 model, with one run per mode and a 15-minute limit each.
 The scorer uses fixed rules. It does not use an LLM judge.
+
+The new Hacking Case pipeline has its own readers and a deterministic reference for all 31 questions.
+Dataset support does not mean that all answers are correct or all conclusions can be proved.
+The public readiness check lists unsupported meanings and roles with no observed records.
 
 | Mode | Complete answers | Partial | Unanswered | Incorrect |
 |---|---:|---:|---:|---:|
@@ -426,6 +437,7 @@ It does not check that the cited records match the evidence, or that the readers
 The image files remain outside Git.
 Use [fetch_data.sh](scripts/fetch_data.sh) to download the NIST images.
 The `--pc` option includes the PC image.
+Use [fetch_hacking_case.py](scripts/fetch_hacking_case.py) for the separate Hacking Case images.
 
 Install the optional readers before you rebuild facts:
 

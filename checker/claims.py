@@ -33,6 +33,7 @@ import re
 from typing import Callable, Dict, List, Tuple
 
 from .facts import KINDS, Fact, FactSource
+from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, decode_value
 
 MAX_PARTS = 64
 # Every row remains cited and independently checked for source completeness.
@@ -125,6 +126,9 @@ _EVENT = {
 
 
 def _event(f: Fact, src: FactSource) -> str:
+    if f.kind in ATTRIBUTE_KINDS:
+        return (f'the source-attribute examination record {src.string(f.obj)} '
+                f'({f.kind}, value {src.string(f.aux)!r}, examined {_utc(f.t)})')
     if f.kind == "programRun":
         return _program_record(f, src)
     aux = src.string(f.aux)
@@ -560,6 +564,8 @@ _NOUN = {
 CENSUS_NOTE = ("This counts records in the evidence file. An event that left no record, or "
                "a record the extractor does not read, is not counted.")
 LIST_UP_TO = 40
+_NOUN.update({kind: (kind, 'attribute observation identity', 'recorded attribute field')
+              for kind in ATTRIBUTE_KINDS})
 
 
 def _records(n: int, kind: str) -> str:
@@ -625,6 +631,33 @@ def _is_judgment(tag_fact: Fact) -> bool:
     return tag_fact.prov.get("source") == "llm"
 
 
+def _en_attribute(args, facts, src):
+    subject, _, value, role = args
+    spec = ROLES[role]
+    text = decode_value(src.string(facts[value].aux), spec.value_type)
+    return (f'For source subject {src.string(facts[subject].aux)}, the record contains '
+            f'{spec.meaning}: {text!r} (role {role}; examined {_utc(facts[subject].t)}). '
+            'This certifies the recorded attribute, not personal attribution, habitual use, '
+            'intent or completeness of the source.')
+
+
+def _en_attributes_same(args, facts, src):
+    return (_en_attribute(args[:4], facts, src) + ' ' + _en_attribute(args[4:], facts, src)
+            + ' Both observations have exactly the same scoped source subject.')
+
+
+def _en_attributes_agree(args, facts, src):
+    return _en_attributes_same(args, facts, src) + ' Their typed recorded values agree exactly.'
+
+
+def _en_image_digests(args, facts, src):
+    s, _, v, _, _, _, algorithm = args
+    return (f'The recomputed logical-image {algorithm.upper()} and retained acquisition '
+            f'{algorithm.upper()} for {src.string(facts[s].aux)} agree exactly: '
+            f'{decode_value(src.string(facts[v].aux), "string")}. This comparison does not authenticate the acquisition '
+            'or establish that the retained checksum was created contemporaneously.')
+
+
 # ---- The approved sets ------------------------------------------------------------
 
 @dataclass(frozen=True)
@@ -637,6 +670,14 @@ class SetDef:
 
 
 SETS: Dict[str, SetDef] = {
+    "attributeRecorded": SetDef(("fact", "fact", "fact", "role"), "Sets.recordedAttribute",
+                                  ("R34",), "strong", _en_attribute),
+    "attributesSameSubject": SetDef(("fact", "fact", "fact", "role", "fact", "fact", "fact", "role"),
+                                     "Sets.attributesSameSubject", ("R34",), "strong", _en_attributes_same),
+    "attributeValuesAgree": SetDef(("fact", "fact", "fact", "role", "fact", "fact", "fact", "role"),
+                                    "Sets.attributeValuesAgree", ("R34",), "strong", _en_attributes_agree),
+    "imageDigestsAgree": SetDef(("fact", "fact", "fact", "fact", "fact", "fact", "algorithm"),
+                                 "Sets.attributeValuesAgree", ("R34",), "strong", _en_image_digests),
     "before": SetDef(("fact", "fact"), ".before", (), "strong", _en_before),
     "usbMountedAs": SetDef(("fact", "fact"), "Sets.usbMountedAs", ("R1", "R2"), "strong", _en_usb),
     "openedFromMount": SetDef(("fact", "fact"), "Sets.openedFromMount", ("R2", "R3"), "strong",
@@ -751,12 +792,18 @@ def _parse(obj) -> Claim:
             ok, want = a in SLOTS, 'one of "obj", "aux"'
         elif kind == "kind":
             ok, want = isinstance(a, str) and a in KINDS, f"a record kind, one of {list(KINDS)}"
+        elif kind == "role":
+            ok, want = isinstance(a, str) and a in ROLES, "an approved attribute role"
+        elif kind == "algorithm":
+            ok, want = isinstance(a, str) and a in DIGEST_ALGORITHMS, "a supported image digest algorithm"
         else:
             ok, want = _is_id(a), "a non-negative integer"
         if not ok:
             raise ClaimError(f'"{name}": expected {want}, got {a!r}')
     if name in ("sameLabel", "sameContent", "sameJournalFile") and args[0] == args[1]:
         raise ClaimError(f'"{name}" needs two different facts')
+    if name == "attributeValuesAgree" and ROLES[args[3]].value_type != ROLES[args[7]].value_type:
+        raise ClaimError('attributeValuesAgree requires the same declared value type')
     return (name, tuple(args))
 
 
@@ -804,6 +851,14 @@ def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
     missing = [i for i in ids if i not in found]
     if missing:
         raise ClaimError(f"fact ids not in the evidence DB: {missing}")
+    value_types = {'attributeTextValue': 'string', 'attributeIntegerValue': 'integer',
+                   'attributeBooleanValue': 'boolean'}
+    for fact in found.values():
+        if fact.kind in value_types:
+            try:
+                decode_value(src.string(fact.aux), value_types[fact.kind])
+            except ValueError as error:
+                raise ClaimError(f'fact {fact.id}: {error}') from error
     return ids, found
 
 
@@ -826,6 +881,22 @@ def to_lean(c: Claim) -> str:
     if c[0] == "both":
         return f".both ({to_lean(c[1])}) ({to_lean(c[2])})"
     name, args = c
+    if name == 'attributeRecorded':
+        s, r, v, role = args
+        spec = ROLES[role]
+        return f'Sets.recordedAttribute {s} {r} {v} .{spec.kind} .{spec.value_kind}'
+    if name in ('attributesSameSubject', 'attributeValuesAgree'):
+        s, r, v, role, s2, r2, v2, role2 = args
+        left, right = ROLES[role], ROLES[role2]
+        params = (f'.{left.kind} .{left.value_kind} .{right.kind} .{right.value_kind}'
+                  if name == 'attributesSameSubject' else
+                  f'.{left.kind} .{right.kind} .{left.value_kind}')
+        return f'Sets.{name} {s} {r} {v} {s2} {r2} {v2} {params}'
+    if name == 'imageDigestsAgree':
+        *ids, algorithm = args
+        left, right = ROLES[f'image.logical.{algorithm}'], ROLES[f'image.acquisition.{algorithm}']
+        return ('Sets.attributeValuesAgree ' + ' '.join(map(str, ids))
+                + f' .{left.kind} .{right.kind} .attributeTextValue')
     rendered = " ".join(f".{a}" if kind in ("slot", "kind") else str(a)
                         for kind, a in zip(SETS[name].params, args))
     return f"{SETS[name].lean} {rendered}"

@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "case_id": "nist-cfreds-hacking",
+  "passed": true,
+  "questions": [
+    {
+      "id": "Q1",
+      "source_bindings": 3,
+      "transformations": 2,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q2",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q3",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q4",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q5",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q6",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q7",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q8",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q9",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q10",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q11",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q12",
+      "source_bindings": 2,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q13",
+      "source_bindings": 2,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q14",
+      "source_bindings": 2,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q15",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q16",
+      "source_bindings": 7,
+      "transformations": 2,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q17",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q18",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q19",
+      "source_bindings": 2,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q20",
+      "source_bindings": 23,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q21",
+      "source_bindings": 4,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q22",
+      "source_bindings": 12,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q23",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q24",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q25",
+      "source_bindings": 2,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q26",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q27",
+      "source_bindings": 1,
+      "transformations": 0,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q28",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q29",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q30",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    },
+    {
+      "id": "Q31",
+      "source_bindings": 1,
+      "transformations": 1,
+      "evaluation_status": "scorable"
+    }
+  ],
+  "question_count": 31,
+  "annotated_answer_leaves": 38,
+  "canonical_reference_sha256": "556df87ef7f0b3d792d6a449e79c2e1b70bb3fbfef62a0d67dd6262fc7ce49e8",
+  "reference_file_sha256": "7d42e00d231e06e7887f46c5af5758d87b48d2f266630a1c59354750dc7772d7",
+  "public_profile_file_sha256": "a2fe37685b2aee4dd70ac244c51659428233a3070e5c5de06979f18b5fd054db",
+  "validator_sha256": "9eed765c5622638d71a70e05af9d8e77b7e8b00f1cfcf0f8b08fefaceb843abd",
+  "source_binding_passed": true,
+  "source_snapshot_files_checked": 6,
+  "no_expected_value_leak_check_passed": true,
+  "system_accuracy_measured": false,
+  "independent_semantic_review": false,
+  "scope": "Source-byte binding, declared transformations, public/private contract symmetry and leakage checks only. Not proof of English interpretation, procedure execution, source authenticity or key truth."
+}
