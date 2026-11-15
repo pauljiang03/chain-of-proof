@@ -37,11 +37,18 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                          artifact='synthetic mapping from other volume', **self.origins[1])
         evidence.add('volumeSeen', 60, 1, 'Different volume label', '12345678',
                      artifact='synthetic different serial PC record', **self.origins[0])
+        evidence.add('usbInsert', 70, 1, 'COLLIDING-DEVICE-ID', 'PC',
+                     artifact='synthetic USB source from physical device A', **self.origins[0])
+        for kind in ('volumeOnDevice', 'volumeMount', 'unallocatedOnDevice'):
+            for identifier in ('COLLIDING-DEVICE-ID', 'DIFFERENT-DEVICE-ID'):
+                evidence.add(kind, 80, 1, identifier, 'source-recorded-volume-or-area',
+                             artifact='synthetic observation of distinct physical device B', **self.origins[1])
         path = self.root / 'facts.json'
         evidence.write_json(path, {})
         self.source = JsonFacts(path)
         self.digest = hashlib.sha256(path.read_bytes()).hexdigest()
         self.ids = {self.source.string(row.obj): row.id for row in self.source.all()}
+        self.device_ids = {(row.kind, self.source.string(row.obj)): row.id for row in self.source.all()}
 
     def candidate(self, other='Distinct examined device'):
         return {'candidate_id': 'Comparison', 'claim': {'recordedOnDevice': [
@@ -138,6 +145,40 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                 certificate = check(wrong['claim'], wrong['candidate_id'], self.source, out_dir=self.root)
                 self.assertEqual(certificate['status'], 'rejected')
                 a = self.project(wrong)
+                self.assertIs(a['submission']['answers'][0]['answer'], True)
+                b = project_b(a, [dict(wrong, status='rejected', checker_status='rejected', verification=None)])
+                self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
+
+    def test_device_identifier_collisions_do_not_establish_physical_identity(self):
+        equality = 'matching_recorded_device_identifiers'
+        cases = [('deviceHolds', 'volumeOnDevice', 'same_device_holds_volume'),
+                 ('usbMountedAs', 'volumeMount', 'same_device_mounted_volume'),
+                 ('deviceExamined', 'unallocatedOnDevice', 'same_device_has_unallocated_entries')]
+        for form, kind, old_field in cases:
+            with self.subTest(form=form):
+                first = self.device_ids['usbInsert', 'COLLIDING-DEVICE-ID']
+                row = {'candidate_id': form, 'claim': {form: [first,
+                    self.device_ids[kind, 'COLLIDING-DEVICE-ID']]}}
+                certificate = check(row['claim'], form, self.source, out_dir=self.root)
+                self.assertEqual(certificate['status'], 'verified')
+                self.assertEqual(certificate['trust_tier'], 'kernel')
+                problems = verify(certificate, self.source)
+                self.assertEqual(problems, [])
+                a = self.project(row, selector=equality, semantic_type=equality)
+                self.assertIs(a['submission']['answers'][0]['answer'], True)
+                b = project_b(a, [dict(row, status='verified', checker_status='verified',
+                                      verification={'passed': not problems})])
+                self.assertEqual(a['submission'], b['submission'])
+                for selector, meaning in [(old_field, old_field), (old_field, equality),
+                                           (equality, old_field), (equality, 'unique_physical_device_identity'),
+                                           (equality, 'same_recorded_device_volume_mapping')]:
+                    refused = self.project(row, selector=selector, semantic_type=meaning)
+                    self.assertEqual(refused['submission']['answers'][0]['status'], 'unknown')
+                wrong = {'candidate_id': form+'Wrong', 'claim': {form: [first,
+                    self.device_ids[kind, 'DIFFERENT-DEVICE-ID']]}}
+                certificate = check(wrong['claim'], wrong['candidate_id'], self.source, out_dir=self.root)
+                self.assertEqual(certificate['status'], 'rejected')
+                a = self.project(wrong, selector=equality, semantic_type=equality)
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
                 b = project_b(a, [dict(wrong, status='rejected', checker_status='rejected', verification=None)])
                 self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')

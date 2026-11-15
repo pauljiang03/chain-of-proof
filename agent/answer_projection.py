@@ -119,8 +119,8 @@ def _joined(form, slots, relation):
 
 
 _joined('before', [('earlier_recorded_time_us', 0, 't'), ('later_recorded_time_us', 1, 't')], 'precedes_beyond_uncertainty')
-_joined('deviceHolds', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_holds_volume')
-_joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_mounted_volume')
+_joined('deviceHolds', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'matching_recorded_device_identifiers')
+_joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'matching_recorded_device_identifiers')
 _joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
 _joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
 _joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
@@ -154,15 +154,16 @@ _FIELDS['copiedHere']['likely_copied_heuristic']['meaning'] = (
     'filesystem-entry occurrence. Matching paths or volume serials alone do not establish '
     'the shared occurrence; the heuristic does not prove a copy action.')
 _joined('deletedAfter', [('path', 0, 'obj'), ('deletion_recorded_time_us', 0, 't'), ('earlier_recorded_time_us', 1, 't')], 'deletion_record_after_other_record')
-_joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'same_device_has_unallocated_entries')
+_joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'matching_recorded_device_identifiers')
 # USBSTOR key last-write timestamps do not establish connection onset.
 for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
     _FIELDS[_form]['connected_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
     _FIELDS[_form]['connected_time_us']['meaning'] = (
         'Timestamp retained by the USB record (including USBSTOR key last-write); does not establish connection onset.')
-_FIELDS['usbMountedAs']['same_device_mounted_volume']['semantic_type'] = 'same_recorded_device_volume_mapping'
-_FIELDS['usbMountedAs']['same_device_mounted_volume']['meaning'] = (
-    'USB record and volume mapping share the declared device serial; does not establish an actual mount event or time.')
+    _FIELDS[_form]['matching_recorded_device_identifiers']['meaning'] = (
+        'The USB source record and other cited record carry equal device identifier values; '
+        'this does not establish unique physical-device identity, connection onset, mounting '
+        'or that the USB record describes the examined physical device.')
 
 _joined('recoveredOnDevice', [('path', 0, 'obj'), ('device_serial', 1, 'obj'), ('creation_time_us', 0, 't')], 'entry_recovered_from_device')
 _joined('sameContent', [('first_path', 0, 'obj'), ('second_path', 1, 'obj'), ('sha256', 0, 'aux')], 'same_recorded_content_hash')

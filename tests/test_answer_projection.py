@@ -80,7 +80,7 @@ class AnswerProjection(unittest.TestCase):
         kind = candidate('KIND', {'usbConnected': [3]})
         bindings = [bind(joined, 'devices', ['devices', 0, 'serial'], 'device_serial'),
                     bind(joined, 'devices', ['devices', 0, 'volume'], 'volume'),
-                    bind(joined, 'devices', ['devices', 0, 'linked'], 'same_device_holds_volume'),
+                    bind(joined, 'devices', ['devices', 0, 'linked'], 'matching_recorded_device_identifiers'),
                     bind(kind, 'devices', ['devices', 1, 'serial'], 'device_serial')]
         result = project_answers(public(), [joined, kind], bindings, self.source)
         values = result['submission']['answers'][0]['answer']['devices']
