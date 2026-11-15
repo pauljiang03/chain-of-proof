@@ -1,8 +1,9 @@
-"""Bounded OOXML core-property observations from concrete Windows user files.
+"""Bounded document-property observations from concrete Windows user files.
 
 The reader checks package relationships, content types and XML roots. It does not
 execute documents, extract archives to disk, infer authorship, or turn document
-properties into filesystem times. Other formats remain unsupported.
+properties into filesystem times. OLE Office and PDF readers preserve their own
+field meanings rather than relabeling them as OOXML core properties.
 """
 from __future__ import annotations
 
@@ -15,6 +16,7 @@ from collections import deque
 from xml.etree import ElementTree as ET
 
 from .attributes import emit_attribute
+from .document_formats import OLE_SIGNATURE, parse_ole, parse_pdf
 from .inventory import _win
 from .profiles import user_profiles
 from .source_scope import merge_scope, subject_scope
@@ -28,7 +30,9 @@ MAX_FILES = 1024
 MAX_DIRECTORY_ENTRIES = 20000
 MAX_DEPTH = 16
 USER_FOLDERS = ('Desktop', 'Documents', 'My Documents', 'Downloads')
-EXTENSIONS = ('.docx', '.docm', '.xlsx', '.xlsm', '.pptx', '.pptm')
+LEGACY_ROOT_FOLDERS = ('My Documents',)
+EXTENSIONS = ('.docx', '.docm', '.xlsx', '.xlsm', '.pptx', '.pptm',
+              '.doc', '.dot', '.xls', '.xlt', '.xla', '.ppt', '.pot', '.pps', '.pdf')
 REL_NS = 'http://schemas.openxmlformats.org/package/2006/relationships'
 TYPE_NS = 'http://schemas.openxmlformats.org/package/2006/content-types'
 CORE_NS = 'http://schemas.openxmlformats.org/package/2006/metadata/core-properties'
@@ -179,6 +183,14 @@ def candidates(ev, target):
             path = profile.joinpath(folder)
             if path.exists():
                 queue.append((path, 0))
+    # Older Windows layouts can retain a shared/relocated drive-root document
+    # directory. Its path is an observation, never an inferred user association.
+    for drive in sorted({str(name).upper() for name in getattr(target.fs, 'mounts', {})
+                         if re.fullmatch(r'[A-Za-z]:', str(name))}):
+        for folder in LEGACY_ROOT_FOLDERS:
+            path = target.fs.path(drive + '/' + folder)
+            if path.exists():
+                queue.append((path, 0))
     entries = 0
     while queue:
         directory, depth = queue.popleft()
@@ -212,6 +224,15 @@ def candidates(ev, target):
                 return
 
 
+def parse_document(data):
+    """Dispatch on bytes; filenames are only enumeration candidates."""
+    if data.startswith(OLE_SIGNATURE):
+        return parse_ole(data)
+    if data.startswith(b'%PDF-'):
+        return parse_pdf(data)
+    return parse_ooxml(data)
+
+
 def extract(ev, target, ctx):
     total, seen = 0, set()
     for path in candidates(ev, target):
@@ -234,22 +255,29 @@ def extract(ev, target, ctx):
             total += len(data)
             if len(data) != recorded_size or len(data) > allowed:
                 raise ValueError('document size changed or exceeds byte limit')
-            parsed = parse_ooxml(data)
+            parsed = parse_document(data)
             sha256 = hashlib.sha256(data).hexdigest()
+            details = parsed.get('provenance')
+            if details is None:
+                details = {
+                    'validation': 'package relationships, declared content types and parsed XML roots',
+                    'main_part': parsed['main_part'], 'main_part_sha256': parsed['main_part_sha256'],
+                    'core_part': parsed['core_part'], 'core_part_sha256': parsed['core_part_sha256'],
+                    'limitation': 'literal package properties; not verified authorship or filesystem/event times',
+                }
             provenance = merge_scope(ctx['common'], {
                 'reader': 'document_metadata', 'artifact': source, 'source_path': source,
                 'container_sha256': sha256, 'container_bytes': len(data),
-                'validation': 'package relationships, declared content types and parsed XML roots',
-                'main_part': parsed['main_part'], 'main_part_sha256': parsed['main_part_sha256'],
-                'core_part': parsed['core_part'], 'core_part_sha256': parsed['core_part_sha256'],
-                'limitation': 'literal package properties; not verified authorship or filesystem/event times',
+                **details,
             })
             subject = json.dumps(subject_scope(provenance) + [source, sha256], separators=(',', ':'), ensure_ascii=True)
-            emit_attribute(ev, subject, 'document.container.path', source, ctx['examined_at'], **provenance)
-            emit_attribute(ev, subject, 'document.container.format', parsed['format'], ctx['examined_at'], **provenance)
+            prefix = 'document.source.' if 'provenance' in parsed else 'document.container.'
+            emit_attribute(ev, subject, prefix + 'path', source, ctx['examined_at'], **provenance)
+            emit_attribute(ev, subject, prefix + 'format', parsed['format'], ctx['examined_at'], **provenance)
             for role, value, tag in parsed['properties']:
+                locator = tag if isinstance(tag, dict) else {'xml_field': tag, 'property_part': parsed['core_part']}
                 emit_attribute(ev, subject, role, value, ctx['examined_at'],
-                               xml_field=tag, property_part=parsed['core_part'], **provenance)
+                               **dict(provenance, **locator))
         except Exception as error:
             ev.problem('document metadata ' + _win(path), error)
             if len(seen) >= MAX_FILES or total >= MAX_TOTAL_BYTES:
