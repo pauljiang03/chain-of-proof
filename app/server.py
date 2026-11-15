@@ -17,9 +17,12 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/style.css": ("style.css", "text/css; charset=utf-8"),
           "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
+          "/static/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
+          "/static/report.js": ("report.js", "text/javascript; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
+REPORT_OPTIONS = ("ids", "sections", "reference", "examiner", "organisation")
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
 
@@ -40,6 +43,20 @@ def _unique_object(pairs):
             raise ValueError("duplicate JSON field")
         result[key] = value
     return result
+
+
+def _report_options(query):
+    """What an examiner's report should hold; None asks for the complete report."""
+    if not any(key in query for key in REPORT_OPTIONS):
+        return None
+    from app.report import report_options
+    try:
+        return report_options(
+            ids=query["ids"].split(",") if "ids" in query else None,
+            sections=[part for part in query["sections"].split(",") if part] if "sections" in query else None,
+            **{key: query.get(key, "") for key in REPORT_OPTIONS[2:]})
+    except ValueError as error:
+        raise RequestError(400, str(error)) from None
 
 
 def _name(value, root):
@@ -217,12 +234,21 @@ class Handler(BaseHTTPRequestHandler):
             self._query(query, ("name",))
             return self._json(200, manager.get_run(_name(query.get("name"), self.server.root)))
         if path == "/api/report":
-            self._query(query, ("name", "format", "download"))
+            self._query(query, ("name", "format", "download") + REPORT_OPTIONS)
             name = _name(query.get("name"), self.server.root)
             fmt = query.get("format", "html")
             if fmt not in REPORT_TYPES or query.get("download", "1") != "1":
                 raise RequestError(400, "Choose an HTML, Markdown, or JSON report.")
-            body, content_type, filename = manager.report(name, fmt)
+            options = _report_options(query)
+            if options is None:
+                body, content_type, filename = manager.report(name, fmt)
+            elif fmt != "html":
+                raise RequestError(400, "Selections and sections apply to the HTML report.")
+            else:
+                try:
+                    body, content_type, filename = manager.report(name, fmt, options)
+                except ValueError as error:
+                    raise RequestError(400, str(error)) from None
             if not isinstance(body, bytes):
                 raise RuntimeError("report body must be bytes")
             filename = name.replace("/", "-") + "." + fmt if "download" in query else None

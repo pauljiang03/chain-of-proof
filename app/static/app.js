@@ -2,10 +2,11 @@
 
 // Buildless, same-origin client. Record contents are always inserted as text.
 (() => {
+  const CONAN = (window.CONAN = window.CONAN || {});
   const $ = (id) => document.getElementById(id);
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
-    tab: "findings", detailTab: "evidence", search: "", findingLimit: 40,
+    tab: "graph", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
     needsLimit: 40, loading: false, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
@@ -37,7 +38,7 @@
     return Number.isNaN(parsed.getTime()) ? String(value) : formatter.format(parsed);
   }
   function badge(text, kind = "") {
-    const allowed = new Set(["accepted", "completed", "success", "running", "needs", "partial", "cancelled", "rejected", "refused", "heuristic", "failed", "error", "invalid", "synthetic"]);
+    const allowed = new Set(["accepted", "completed", "success", "running", "needs", "partial", "cancelled", "rejected", "refused", "heuristic", "failed", "error", "invalid", "synthetic", "judgment"]);
     return element("span", "badge" + (allowed.has(kind) ? " " + kind : ""), text);
   }
   function statusLabel(status) {
@@ -126,8 +127,8 @@
     state.findingLimit = 40;
     state.needsLimit = 40;
     $("finding-search").value = "";
-    $("sidebar").classList.remove("open");
-    $("sidebar-toggle").setAttribute("aria-expanded", "false");
+    clearInspector();
+    if (CONAN.graph) CONAN.graph.clear();
     renderRuns();
     notice("");
     $("welcome").hidden = true;
@@ -138,7 +139,8 @@
     $("finding-list").replaceChildren(empty("Loading investigation", "Reading the saved report and available audit entries."));
     // Clear the previous case immediately; a failed load must not leave another case's details visible.
     for (const id of ["needs-list", "activity-list", "history-list", "coverage-content", "conclusions", "unverified-findings", "finding-pagination"]) $(id).replaceChildren();
-    for (const id of ["metric-accepted", "metric-refused", "metric-extracted", "metric-inspected"]) $(id).textContent = "—";
+    for (const id of ["metric-accepted", "metric-refused", "metric-judgments", "metric-extracted", "metric-inspected"]) $(id).textContent = "—";
+    $("evidence-hash").textContent = "";
     for (const id of ["count-findings", "count-needs", "count-activity"]) $(id).textContent = "";
     $("run-progress").hidden = true;
     $("sample-banner").hidden = !summary().sample;
@@ -179,18 +181,23 @@
     $("sample-banner").hidden = !(meta.sample || payload.name === "sample");
     $("report-actions").hidden = !payload.run;
     for (const format of ["html", "md", "json"]) $("download-" + format).href = reportURL(format, true);
-    $("print-report").href = reportURL("html");
     const findings = acceptedFindings(run), rejections = array(run.rejections);
     $("metric-accepted").textContent = payload.run ? count(findings.length, "—") : count(meta.verified, "—");
     $("metric-refused").textContent = payload.run ? count(rejections.length, "—") : count(meta.rejected, "—");
     $("metric-extracted").textContent = object(coverage.extraction).status === "measured" ? count(coverage.extraction.record_count, "—") : "—";
-    $("metric-extracted-note").textContent = object(coverage.extraction).status === "measured" ? "Supplied extraction count" : object(coverage.extraction).status === "invalid" ? "Invalid summary; see coverage" : "Measurement unavailable";
+    $("metric-extracted-note").textContent = object(coverage.extraction).status === "measured" ? "(supplied count)" : object(coverage.extraction).status === "invalid" ? "(invalid summary; see Coverage)" : "(not measured)";
+    $("metric-judgments").textContent = payload.run ? count(array(run.conclusions).length, "—") : "—";
+    const evidenceHash = object(run.case).facts_sha256;
+    $("evidence-hash").textContent = typeof evidenceHash === "string" && evidenceHash ? "evidence " + evidenceHash.slice(0, 16) + "…" : "";
+    $("evidence-hash").title = typeof evidenceHash === "string" && evidenceHash ? "SHA-256 of the evidence store: " + evidenceHash : "";
     $("metric-inspected").textContent = object(coverage.inspection).status === "measured" ? count(coverage.inspection.record_count, "—") : "—";
     $("count-findings").textContent = payload.run ? count(findings.length, "") : "";
     $("count-needs").textContent = payload.run ? count(rejections.length, "") : "";
     $("count-activity").textContent = array(payload.events).length ? count(payload.events.length, "") : "";
     $("activity-refresh-label").textContent = isRunning() ? "REFRESHES EVERY 2 SECONDS" : "RECORDED ACTIVITY";
     renderProgress();
+    if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name);
+    if (CONAN.report) CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)));
     renderFindings();
     renderNeeds();
     renderActivity();
@@ -234,30 +241,27 @@
         : isRunning() ? "The investigator is working. Accepted claims will appear when the server provides a report bundle."
         : "This report does not contain accepted findings. Activity and evidence requirements may still be available."));
     }
-    matches.slice(0, state.findingLimit).forEach((finding) => {
-      const card = element("article", "finding-card");
-      const body = element("div", "finding-body");
-      const top = element("div", "finding-topline");
-      const identity = element("div", "finding-identity");
-      identity.append(element("span", "finding-id", present(finding.finding_id)), badge("CHECKER ACCEPTED", "accepted"));
-      if (finding.strength === "heuristic") identity.append(badge("Heuristic rule", "heuristic"));
-      else if (finding.strength) identity.append(badge(present(finding.strength)));
-      top.append(identity, element("span", "finding-rules", array(finding.rules).join(" · ")));
-      body.append(top);
-      if (finding.question) body.append(element("p", "finding-question", finding.question));
-      body.append(element("p", "finding-sentence", present(finding.english, "No fixed sentence was included in this certificate.")));
-      const footer = element("div", "finding-footer");
-      const sources = element("span", "source-summary");
-      const rows = array(finding.cited_facts);
-      sources.append(element("span", "source-icon", "↳"), element("span", "source-label", rows.length ? count(rows.length) + (rows.length === 1 ? " cited evidence record" : " cited evidence records") : "No copied evidence records"));
-      const inspect = element("button", "text-button", "Inspect evidence →");
-      inspect.type = "button";
-      inspect.setAttribute("aria-label", "Inspect evidence for " + present(finding.finding_id, "finding"));
-      inspect.addEventListener("click", () => openFinding(finding));
-      footer.append(sources, inspect);
-      card.append(body, footer);
-      container.append(card);
-    });
+    if (matches.length) {
+      const table = element("table", "grid-table"), head = element("thead"), headRow = element("tr"), body = element("tbody");
+      ["Report", "ID", "Basis", "Statement", "Records", "Rules"].forEach((label) => { const th = element("th", "", label); th.scope = "col"; headRow.append(th); });
+      head.append(headRow);
+      matches.slice(0, state.findingLimit).forEach((finding) => {
+        const row = element("tr", String(finding.finding_id) === String(state.selectedFinding) ? "selected" : "");
+        row.tabIndex = 0;
+        row.dataset.finding = present(finding.finding_id, "");
+        const basis = element("td"), statement = element("td");
+        basis.append(badge(finding.strength === "heuristic" ? "Heuristic" : present(finding.strength, "Certified"), finding.strength === "heuristic" ? "heuristic" : "accepted"));
+        if (finding.question) statement.append(element("div", "question", finding.question));
+        statement.append(element("div", "", present(finding.english, "No fixed sentence was included in this certificate.")));
+        row.append(markCell(finding), element("td", "id", present(finding.finding_id)), basis, statement,
+          element("td", "num", count(array(finding.cited_facts).length, "—")), element("td", "id", array(finding.rules).join(" ")));
+        row.addEventListener("click", () => openFinding(finding));
+        row.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openFinding(finding); } });
+        body.append(row);
+      });
+      table.append(head, body);
+      container.append(table);
+    }
     const pagination = $("finding-pagination");
     pagination.replaceChildren();
     if (matches.length > state.findingLimit) {
@@ -488,61 +492,122 @@
     const time = new Date(row.t / 1000);
     return (Number.isNaN(time.getTime()) ? "Outside the browser’s date range" : time.toISOString()) + "\n" + row.t + " microseconds since the Unix epoch";
   }
+  const RECORD_PAGE = 40;
+  function recordCard(row, conflict = false) {
+    const record = element("article", "evidence-record"), heading = element("h3", "", "Record #" + present(row.id));
+    heading.append(badge(present(row.kind, "Kind unavailable")));
+    record.append(heading);
+    if (conflict) record.append(element("div", "notice error", "Conflicting copied rows share this fact ID. This viewer keeps them separate and does not resolve the conflict."));
+    const fields = element("dl", "evidence-fields"), provenance = object(row.prov);
+    detailField(fields, "Object", row.obj_text === undefined ? row.obj : row.obj_text);
+    detailField(fields, "Related value", row.aux_text === undefined ? row.aux : row.aux_text);
+    detailField(fields, "Image / exhibit", [provenance.image, provenance.exhibit].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
+    detailField(fields, "Artifact", provenance.artifact, true);
+    detailField(fields, "Recorded time", factTime(row), true);
+    detailField(fields, "Time meaning", provenance.time_meaning || provenance.timestamp_semantics);
+    detailField(fields, "Uncertainty", row.res === undefined || row.res === null ? undefined : present(row.res) + " microseconds");
+    detailField(fields, "Parser / tool", [provenance.parser, provenance.tool].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
+    detailField(fields, "Row SHA-256", row.row_sha256, true);
+    record.append(fields);
+    // The full copied row is rendered only when it is opened.
+    const copied = element("details", "provenance");
+    copied.append(element("summary", "", "Full copied record and provenance"));
+    copied.addEventListener("toggle", () => { if (copied.open && copied.childElementCount === 1) copied.append(code(row)); });
+    record.append(copied);
+    return record;
+  }
+  function inspect(title, summary, evidence, proof) {
+    $("detail-title").textContent = title;
+    $("detail-summary").replaceChildren(...summary);
+    $("detail-evidence").replaceChildren(...evidence);
+    $("detail-proof").replaceChildren(...(proof || []));
+    document.querySelector(".detail-tabs").hidden = !proof;
+    switchDetail("evidence");
+    $("detail-evidence").scrollTop = 0;
+    $("detail-summary").scrollTop = 0;
+  }
+  function clearInspector() {
+    state.selectedFinding = null;
+    inspect("Inspector", [element("p", "inspector-empty", "Select a node in the graph or a row in a table to see its records, source and proof.")], [], null);
+  }
+  // A finding can be marked for the examiner's report from the table or the inspector.
+  function markCell(finding) {
+    const cell = element("td", "mark"), box = element("input");
+    box.type = "checkbox";
+    box.dataset.mark = String(finding.finding_id);
+    box.checked = !!CONAN.report && CONAN.report.has(finding.finding_id);
+    box.setAttribute("aria-label", "Include " + present(finding.finding_id) + " in the report");
+    box.addEventListener("change", () => { if (CONAN.report) CONAN.report.toggle(finding.finding_id, box.checked); });
+    cell.addEventListener("click", (event) => event.stopPropagation());   // ticking a box does not open the row
+    cell.addEventListener("keydown", (event) => event.stopPropagation());
+    cell.append(box);
+    return cell;
+  }
+  function markButton(finding) {
+    const button = element("button", "text-button mark-button");
+    button.type = "button";
+    button.dataset.markButton = String(finding.finding_id);
+    const label = () => { const on = !!CONAN.report && CONAN.report.has(finding.finding_id); button.textContent = on ? "✓ In report — remove" : "Add to report"; button.setAttribute("aria-pressed", String(on)); };
+    button.addEventListener("click", () => { if (CONAN.report) CONAN.report.toggle(finding.finding_id); });
+    button.refresh = label;
+    label();
+    return button;
+  }
+  document.addEventListener("conan:marks", () => {
+    document.querySelectorAll("input[data-mark]").forEach((box) => { box.checked = CONAN.report.has(box.dataset.mark); });
+    document.querySelectorAll("button[data-mark-button]").forEach((button) => button.refresh && button.refresh());
+  });
   function openFinding(finding) {
     if (!isAccepted(finding)) {
       notice("This row is not an accepted finding. Inspect its supplied contents in the unverified rows disclosure.", true);
       return;
     }
-    $("detail-title").textContent = "Finding " + present(finding.finding_id);
-    const intro = $("detail-summary");
-    intro.replaceChildren();
+    state.selectedFinding = finding.finding_id;
+    document.querySelectorAll("#finding-list tr[data-finding]").forEach((row) => row.classList.toggle("selected", row.dataset.finding === String(finding.finding_id)));
     const badges = element("div", "finding-identity");
     badges.append(badge("CHECKER ACCEPTED", "accepted"), badge(present(finding.strength, "Strength not recorded"), finding.strength === "heuristic" ? "heuristic" : ""));
-    intro.append(badges, element("p", "", present(finding.english)));
-    const evidence = $("detail-evidence"), rows = array(finding.cited_facts);
-    evidence.replaceChildren(element("p", "detail-intro", "Every copied citation for this finding is shown below. Provenance is bound metadata; it does not prove that the parser or its interpretation is correct. Locations appear only when the record supplies them."));
-    if (!rows.length) evidence.append(empty("No copied records", "This bundle does not include evidence records for this finding."));
+    const summary = [badges];
+    if (finding.question) summary.push(element("p", "finding-question", finding.question));
+    summary.push(element("p", "statement", present(finding.english)));
+    const show = element("button", "text-button", "Show in proof graph →");
+    show.type = "button";
+    show.addEventListener("click", () => { switchTab("graph"); if (CONAN.graph) CONAN.graph.focusFinding(String(finding.finding_id)); });
+    const actions = element("div", "detail-actions");
+    actions.append(show, markButton(finding));
+    summary.push(actions);
+    const rows = array(finding.cited_facts);
+    const evidence = [element("p", "detail-intro", rows.length + (rows.length === 1 ? " cited record." : " cited records.") + " Provenance is bound metadata; it does not prove that the parser or its interpretation is correct.")];
+    if (!rows.length) evidence.push(empty("No copied records", "This bundle does not include evidence records for this finding."));
     const ids = new Map();
     rows.forEach((row) => {
       const identity = JSON.stringify(row.id), serialized = JSON.stringify(row);
       if (!ids.has(identity)) ids.set(identity, new Set());
       ids.get(identity).add(serialized);
     });
-    rows.forEach((row, index) => {
-      const record = element("article", "evidence-record"), heading = element("h3", "", "Fact " + present(row.id));
-      heading.append(badge(present(row.kind, "Kind unavailable")));
-      record.append(heading);
-      if (ids.get(JSON.stringify(row.id)).size > 1) record.append(element("div", "notice error", "Conflicting copied rows share this fact ID. This viewer keeps them separate and does not resolve the conflict."));
-      const fields = element("dl", "evidence-fields"), provenance = object(row.prov);
-      detailField(fields, "Object", row.obj_text === undefined ? row.obj : row.obj_text);
-      detailField(fields, "Related value", row.aux_text === undefined ? row.aux : row.aux_text);
-      detailField(fields, "Image / exhibit", [provenance.image, provenance.exhibit].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
-      detailField(fields, "Artifact", provenance.artifact);
-      detailField(fields, "Recorded time", factTime(row), true);
-      detailField(fields, "Time meaning", provenance.time_meaning || provenance.timestamp_semantics);
-      detailField(fields, "Uncertainty", row.res === undefined || row.res === null ? undefined : present(row.res) + " microseconds");
-      detailField(fields, "Parser / tool", [provenance.parser, provenance.tool].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
-      detailField(fields, "Row SHA-256", row.row_sha256, true);
-      record.append(fields);
-      const copied = element("details", "provenance");
-      copied.append(element("summary", "", "Full copied record and provenance"), code(row));
-      record.append(copied);
-      record.dataset.recordOrdinal = String(index + 1);
-      evidence.append(record);
-    });
-    const proof = $("detail-proof");
-    proof.replaceChildren(element("p", "detail-caveat", "This is the saved claim and embedded Lean source. The viewer has not independently verified the certificate. Use cop verify with the original evidence store to replay verification."));
+    // Long citation lists are rendered a page at a time.
+    const cards = (from) => rows.slice(from, from + RECORD_PAGE).map((row) => recordCard(row, ids.get(JSON.stringify(row.id)).size > 1));
+    evidence.push(...cards(0));
+    if (rows.length > RECORD_PAGE) {
+      let shown = RECORD_PAGE;
+      const more = element("button", "button", "Show " + RECORD_PAGE + " more of " + count(rows.length));
+      more.type = "button";
+      more.addEventListener("click", () => {
+        more.before(...cards(shown));
+        shown += RECORD_PAGE;
+        if (shown >= rows.length) more.remove();
+      });
+      evidence.push(more);
+    }
+    const proof = [element("p", "detail-caveat", "This is the saved claim and embedded Lean source. The viewer has not independently verified the certificate. Use cop verify with the original evidence store to replay verification.")];
     const fields = element("dl", "evidence-fields");
     detailField(fields, "Trust tier", finding.trust_tier);
     detailField(fields, "Declared axioms", finding.axioms);
     detailField(fields, "Rules", array(finding.rules).length ? finding.rules.join(", ") : undefined);
-    proof.append(fields, element("h3", "proof-heading", "Declared claim"));
-    proof.append(finding.claim !== undefined ? code(finding.claim) : element("p", "detail-intro", "The claim was not included in this bundle."));
-    proof.append(element("h3", "proof-heading", "Embedded Lean source"));
-    proof.append(typeof finding.lean === "string" && finding.lean.trim() ? code(finding.lean) : element("p", "detail-intro", "Embedded Lean source was not included. No filesystem path is inferred."));
-    switchDetail("evidence");
-    $("detail-dialog").showModal();
-    $("detail-dialog").scrollTop = 0;
+    proof.push(fields, element("h3", "proof-heading", "Declared claim"));
+    proof.push(finding.claim !== undefined ? code(finding.claim) : element("p", "detail-intro", "The claim was not included in this bundle."));
+    proof.push(element("h3", "proof-heading", "Embedded Lean source"));
+    proof.push(typeof finding.lean === "string" && finding.lean.trim() ? code(finding.lean) : element("p", "detail-intro", "Embedded Lean source was not included. No filesystem path is inferred."));
+    inspect("Finding " + present(finding.finding_id), summary, evidence, proof);
   }
   function switchTab(name, focus = false) {
     state.tab = name;
@@ -554,6 +619,9 @@
       $("panel-" + button.dataset.tab).hidden = !active;
       if (focus && active) button.focus();
     });
+    $("shell").dataset.tab = name;   // the Report tab takes the inspector's room, and prints alone
+    if (name === "graph" && CONAN.graph) CONAN.graph.resize();
+    if (CONAN.report) { if (name === "report") CONAN.report.activate(); else CONAN.report.deactivate(); }
   }
   function switchDetail(name, focus = false) {
     state.detailTab = name;
@@ -577,7 +645,7 @@
     const backend = array(state.config && state.config.backends).find((item) => item.id === $("investigation-backend").value);
     const ready = state.config && state.config.token && backend && backend.available;
     $("start-investigation").disabled = !ready || Boolean(state.activeName) || state.submitting;
-    $("start-investigation").textContent = state.submitting ? "Starting…" : "Start investigation ↗";
+    $("start-investigation").textContent = state.submitting ? "Starting…" : "Start investigation";
     if (state.activeName) $("backend-help").textContent = "An investigation is already running. Stop it or wait for it to finish before starting another.";
     else if (!ready) $("backend-help").textContent = "No available backend is selected. Configure a supported provider locally and refresh the workspace.";
     else $("backend-help").textContent = "Detected locally. Provider authentication has not been checked. Starting a run may incur provider usage.";
@@ -684,7 +752,8 @@
   }));
   document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   document.querySelectorAll("[data-detail-tab]").forEach((button) => button.addEventListener("click", () => switchDetail(button.dataset.detailTab)));
-  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["findings", "needs", "activity", "coverage"], state.tab, switchTab));
+  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["graph", "findings", "needs", "activity", "coverage", "report"], state.tab, switchTab));
+  $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });
   $("new-investigation").addEventListener("click", openNew);
@@ -698,20 +767,16 @@
   });
   $("stop-investigation").addEventListener("click", stopInvestigation);
   $("sidebar-toggle").addEventListener("click", () => {
-    const open = $("sidebar").classList.toggle("open");
-    $("sidebar-toggle").setAttribute("aria-expanded", String(open));
+    const hidden = $("shell").classList.toggle("no-sidebar");
+    $("sidebar-toggle").setAttribute("aria-expanded", String(!hidden));
+    if (CONAN.graph) CONAN.graph.resize();
   });
   document.addEventListener("click", (event) => {
-    if (!event.target.closest("#sidebar") && !event.target.closest("#sidebar-toggle")) {
-      $("sidebar").classList.remove("open");
-      $("sidebar-toggle").setAttribute("aria-expanded", "false");
-    }
     if (!event.target.closest(".download-menu")) document.querySelector(".download-menu").open = false;
   });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") { $("sidebar").classList.remove("open"); $("sidebar-toggle").setAttribute("aria-expanded", "false"); }
-  });
   window.addEventListener("beforeunload", () => clearTimeout(state.timer));
+
+  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab };
 
   async function init() {
     const [config, runs] = await Promise.allSettled([api("/api/config"), api("/api/runs")]);

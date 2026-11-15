@@ -7,7 +7,7 @@ import re
 import unittest
 from unittest.mock import patch
 
-from app.report import render_html
+from app.report import SECTIONS, render_html, report_options
 
 
 def record(number=7, **updates):
@@ -198,6 +198,68 @@ class AppReport(unittest.TestCase):
             self.assertIn(text, rendered)
         self.assertIn('future format', rendered)
         self.assertTrue(all(link[1:] in Markup(rendered).ids for link in Markup(rendered).links))
+
+    def test_examiner_report_holds_only_the_selection_and_says_what_it_left_out(self):
+        data = bundle(finding(), finding(finding_id='F2', english='Second sentence.', cited_facts=[record(8)]),
+                      finding(finding_id='F3', english='Third sentence.'))
+        data['rejections'] = [{'finding_id': 'A9', 'reason': 'not established'}]
+        data['conclusions'] = [{'conclusion_id': 'C1', 'text': 'A judgment.', 'finding_ids': ['F2']}]
+        data['investigation'] = {'questions': []}
+        options = report_options(ids=['F2'], sections=['needs'], reference='REF-7 <i>', examiner='  A. Examiner ')
+        rendered = render_html(data, options)
+        parsed = Markup(rendered)
+        self.assertEqual(parsed.sentences, ['Second sentence.'])
+        self.assertIn('finding-f2', parsed.ids)             # keeps the bundle's own numbering
+        self.assertNotIn('finding-f1', parsed.ids)
+        self.assertIn('<strong>Selected findings only.</strong> This report shows 1 of the 3 entries', rendered)
+        self.assertIn('Entries left out are omitted, not refuted.', rendered)
+        self.assertIn('Left out of this report: question-by-question plan; investigator judgments; '
+                      'full evidence records; Lean proof records; audit, coverage and history.', rendered)
+        # cover details are text, labelled as the author's own
+        self.assertIn('<dt>Case reference</dt><dd>REF-7 &lt;i&gt;</dd>', rendered)
+        self.assertIn('<dt>Examiner</dt><dd>A. Examiner</dd>', rendered)
+        self.assertIn('not part of the stored run and were not checked', rendered)
+        self.assertNotIn('<dt>Organisation</dt>', rendered)
+        # sections: refusals kept; judgments, appendices and the plan gone, with no link left dangling
+        self.assertIn('id="needs"', rendered)
+        for gone in ('id="judgments"', 'id="evidence"', 'id="proofs"', 'id="activity"', 'id="investigation"'):
+            self.assertNotIn(gone, rendered)
+        self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
+        # without the appendix, the cited records sit beside the finding
+        self.assertIn('<table class="cited">', rendered)
+        self.assertIn('<td><strong>8</strong><br><span class="small">fileSeen</span></td>', rendered)
+        self.assertIn('Related value: VOL-A', rendered)
+        self.assertIn('2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
+                      '<br><span class="small">Meaning: record observation</span>', rendered)
+        self.assertIn('TEST · synthetic.E01 · test artifact', rendered)
+        self.assertIn('Certificate: trust tier kernel', rendered)
+        self.assertNotIn('example : True', rendered)
+
+    def test_report_without_options_is_complete_and_options_are_validated(self):
+        data = bundle(finding(), finding(finding_id='F2'))
+        complete = render_html(data)
+        self.assertEqual(complete, render_html(data, report_options()))
+        for section in ('needs', 'judgments', 'evidence', 'proofs', 'activity'):
+            self.assertIn(f'id="{section}"', complete)
+        self.assertNotIn('Selected findings only', complete)
+        self.assertNotIn('Left out of this report', complete)
+        everything = render_html(data, report_options(sections=SECTIONS))
+        self.assertEqual(complete, everything)
+        only_findings = render_html(data, report_options(sections=[]))
+        self.assertEqual(len(Markup(only_findings).sentences), 2)
+        self.assertNotIn('Selected findings only', only_findings)
+        for bad in ({'ids': []}, {'ids': ['F1', 'F1']}, {'ids': ['bad id']}, {'ids': ['x'] * 2001}, {'ids': [7]},
+                    {'sections': ['findings']}, {'sections': ['needs', 'needs']}, {'examiner': 'x' * 201},
+                    {'reference': 'line\nbreak'}, {'organisation': 5}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                report_options(**bad)
+        with self.assertRaises(ValueError):                 # not a verified finding in this bundle
+            render_html(data, report_options(ids=['F9']))
+        with self.assertRaises(ValueError):                 # an ID the bundle repeats cannot be chosen
+            render_html(bundle(finding(), finding()), report_options(ids=['F1']))
+        unverified = bundle(finding(status='proposed'))
+        with self.assertRaises(ValueError):
+            render_html(unverified, report_options(ids=['F1']))
 
     def test_empty_bundle_has_explicit_unknowns_and_rejects_non_object_input(self):
         rendered = render_html({})

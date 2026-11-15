@@ -575,16 +575,20 @@ class JobManager:
                            "sample": name == "sample"})
         return result
 
-    def report(self, name, fmt):
+    def report(self, name, fmt, options=None):
+        """Render a saved run. `options` (app.report.report_options) shapes the HTML report only."""
         if fmt not in ("html", "md", "json"):
             raise ValueError("Choose HTML, Markdown, or JSON report output.")
+        if options is not None and fmt != "html":
+            raise ValueError("Selections and sections apply to the HTML report.")
         snapshot = self.get_run(name)
         data = snapshot["run"]
         if data is None:
             raise FileNotFoundError("This investigation has no saved report yet.")
         if fmt == "html":
             from app.report import render_html
-            text, content_type = render_html(data), "text/html; charset=utf-8"
+            text = render_html(data) if options is None else render_html(data, options)
+            content_type = "text/html; charset=utf-8"
         elif fmt == "md":
             text, content_type = markdown_report.render(data), "text/markdown; charset=utf-8"
         else:

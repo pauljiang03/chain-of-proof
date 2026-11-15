@@ -44,8 +44,8 @@ class FakeManager:
             raise self.failure
         return {"name": name, "status": "cancelled"}
 
-    def report(self, name, fmt):
-        self.calls.append(("report", name, fmt))
+    def report(self, name, fmt, options=None):
+        self.calls.append(("report", name, fmt) if options is None else ("report", name, fmt, options))
         if self.failure:
             raise self.failure
         return b"saved report", "untrusted/mime", '../../secret\r\nX-Leak: yes.' + fmt
@@ -61,7 +61,7 @@ class AppServer(unittest.TestCase):
         self.root = Path(self.temporary.name)
         self.assets = self.root / "assets"
         self.assets.mkdir()
-        for name in ("index.html", "app.js", "style.css"):
+        for name in ("index.html", "app.js", "graph.js", "report.js", "style.css"):
             (self.assets / name).write_text("synthetic " + name)
         assets_patch = patch("app.server.STATIC_ROOT", self.assets)
         assets_patch.start()
@@ -227,7 +227,9 @@ class AppServer(unittest.TestCase):
 
     def test_static_allowlist_and_asset_symlinks(self):
         for route, mime in (("/", "text/html"), ("/index.html", "text/html"), ("/app.js", "text/javascript"),
-                            ("/style.css", "text/css"), ("/static/app.js", "text/javascript"), ("/static/style.css", "text/css")):
+                            ("/style.css", "text/css"), ("/static/app.js", "text/javascript"),
+                            ("/static/graph.js", "text/javascript"), ("/static/report.js", "text/javascript"),
+                            ("/static/style.css", "text/css")):
             status, headers, body = self.request(route)
             self.assertEqual(status, 200)
             self.assertTrue(headers["Content-Type"].startswith(mime))
@@ -249,6 +251,33 @@ class AppServer(unittest.TestCase):
             self.assertEqual(headers["Content-Disposition"], f'attachment; filename="saved-run1.2.{fmt}"')
             self.assertNotIn("X-Leak", headers)
         self.assertNotIn("Content-Disposition", self.request("/api/report?name=sample")[1])
+
+    def test_examiner_report_options_are_validated_and_passed_to_the_manager(self):
+        (self.root / "runs" / "saved").mkdir(parents=True, exist_ok=True)
+        status, headers, _ = self.request("/api/report?name=saved&format=html&download=1&ids=F1,F2"
+                                          "&sections=needs,proofs&reference=R-1&examiner=A%20B&organisation=Lab")
+        self.assertEqual(status, 200)
+        self.assertEqual(headers["Content-Disposition"], 'attachment; filename="saved.html"')
+        options = self.manager.calls[-1][3]
+        self.assertEqual(self.manager.calls[-1][:3], ("report", "saved", "html"))
+        self.assertEqual(options, {"ids": ["F1", "F2"], "sections": frozenset(("needs", "proofs")),
+                                   "reference": "R-1", "examiner": "A B", "organisation": "Lab"})
+        self.request("/api/report?name=saved&sections=")      # findings alone
+        self.assertEqual(self.manager.calls[-1][3]["sections"], frozenset())
+        self.assertIsNone(self.manager.calls[-1][3]["ids"])
+        self.request("/api/report?name=saved")                # no options: the complete report, as before
+        self.assertEqual(self.manager.calls[-1], ("report", "saved", "html"))
+        before = len(self.manager.calls)
+        for bad in ("ids=", "ids=F1,F1", "ids=a%20b", "sections=findings", "sections=needs,needs",
+                    "examiner=" + "x" * 201, "reference=a%0Ab", "format=md&ids=F1", "format=json&sections=needs",
+                    "ids=F1&unknown=1"):
+            with self.subTest(bad=bad):
+                self.assert_error(400, self.request("/api/report?name=saved&" + bad))
+        self.assertEqual(len(self.manager.calls), before)
+        self.manager.failure = ValueError("The selection names a finding that is not recorded exactly once as verified.")
+        status, _, body = self.request("/api/report?name=saved&ids=F9")
+        self.assertEqual(status, 400)
+        self.assertIn("selection names a finding", json.loads(body)["error"])
 
     def test_manager_failures_are_safe_json_and_preserve_status(self):
         for error, status in ((FileNotFoundError("provider-secret"), 404),

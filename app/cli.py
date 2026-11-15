@@ -271,6 +271,8 @@ def _parser():
     serve.add_argument("--port", type=_port, default=8765)
     serve.add_argument("--no-open", "--no-browser", dest="no_open", action="store_true",
                        help="start the server without opening a browser")
+    desktop = commands.add_parser("desktop", help="open the workbench in a native desktop window")
+    desktop.add_argument("--port", type=_port, help="loopback port; default: 8766, or any free port if it is taken")
     report = commands.add_parser("report", help="render an existing run; does not independently verify its claims")
     report.add_argument("--run", required=True, help="saved run JSON")
     report.add_argument("--format", choices=("html", "md", "json"), default="html")
@@ -312,6 +314,9 @@ def main(argv=None, *, root=ROOT):
             from app.server import serve
             serve(root=root, port=args.port, open_browser=not args.no_open)
             return 0
+        if args.command == "desktop":
+            from app.desktop import run
+            return run(root=root, port=args.port)
         return _report(args)
     except KeyboardInterrupt:
         return 130

@@ -19,6 +19,8 @@ extract = ["dissect>=3.20", "libpff-python>=20231205"]
 # needed only for the API-key backend of the AI investigator (agent/run.py --backend deepagents);
 # deepagents needs Python 3.11 or newer
 agent = ["deepagents>=0.7; python_version >= '3.11'", "langchain-anthropic>=1.7; python_version >= '3.11'"]
+# needed only for `cop desktop`: the workbench in a native window (the system's own web view)
+desktop = ["pywebview>=5.0"]
 
 [tool.setuptools.packages.find]
 include = ["agent*", "app*", "checker*", "eval*", "extractor*", "miner*", "verifier*"]

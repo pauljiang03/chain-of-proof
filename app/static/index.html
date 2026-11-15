@@ -3,101 +3,142 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#152b36">
-  <title>CONAN-F — Investigation workspace</title>
+  <meta name="color-scheme" content="light dark">
+  <title>CONAN-F — Forensic workbench</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/graph.js" defer></script>
+  <script src="/static/report.js" defer></script>
   <script src="/static/app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to investigation</a>
-  <div class="app-shell">
-    <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
-      <a class="brand" href="/" aria-label="CONAN-F home">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>CONAN-F<small>INVESTIGATION WORKSPACE</small></span>
-      </a>
-      <button class="button new-button" id="new-investigation"><span aria-hidden="true">＋</span> New investigation</button>
-      <div class="sidebar-section-label"><span>REPORTS</span><button class="icon-button" id="refresh-runs" title="Refresh reports" aria-label="Refresh reports">↻</button></div>
-      <nav id="run-list" class="run-list" aria-label="Saved investigations"><p class="sidebar-empty">Connecting to your workspace…</p></nav>
-      <div class="sidebar-bottom">
-        <div class="local-status"><span class="connection-dot" id="connection-dot"></span><span id="connection-label">Connecting</span></div>
-        <p>Your workspace runs locally.<br>Investigations use your configured AI provider.</p>
-        <span class="sidebar-footnote">EVIDENCE → CLAIM → PROOF</span>
+  <a class="skip-link" href="#main">Skip to the case</a>
+  <div class="shell" id="shell">
+    <header class="titlebar">
+      <button class="icon-button" id="sidebar-toggle" aria-label="Show or hide the case list" aria-controls="sidebar" aria-expanded="true">☰</button>
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><strong>CONAN-F</strong><span class="brand-sub">Forensic workbench</span></div>
+      <div class="case-heading"><h1 id="report-title">No case open</h1><div class="report-meta" id="report-meta"></div></div>
+      <div class="title-actions">
+        <div class="report-actions" id="report-actions" hidden>
+          <button class="button" id="open-report" type="button">Report</button>
+          <details class="download-menu"><summary class="button">Export ▾</summary><div class="download-options"><a id="download-html">Complete report <span>.html</span></a><a id="download-md">Complete report <span>.md</span></a><a id="download-json">Run bundle <span>.json</span></a></div></details>
+        </div>
+        <button class="button primary" id="new-investigation">New investigation</button>
       </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="Cases">
+      <div class="pane-title"><span>Cases</span><button class="icon-button" id="refresh-runs" title="Reload cases" aria-label="Reload cases">↻</button></div>
+      <nav id="run-list" class="run-list" aria-label="Saved investigations"><p class="sidebar-empty">Connecting…</p></nav>
+      <div class="sidebar-bottom"><span class="connection-dot" id="connection-dot"></span><span id="connection-label">Connecting</span></div>
     </aside>
 
     <main class="main" id="main">
-      <div class="topbar">
-        <div class="breadcrumb"><button class="icon-button mobile-menu" id="sidebar-toggle" aria-label="Toggle report navigation" aria-controls="sidebar" aria-expanded="false">☰</button><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Investigations</strong></div>
-        <span class="local-pill"><span aria-hidden="true">●</span> Local workspace</span>
-      </div>
-      <div class="page-content">
-        <header class="page-header">
-          <div class="heading-block"><p class="eyebrow">THE INVESTIGATION DESK</p><h1 id="report-title">Follow the evidence.</h1><div class="report-meta" id="report-meta"><span>Trace every accepted claim back to its records.</span></div></div>
-          <div class="report-actions" id="report-actions" hidden>
-            <a class="button secondary" id="print-report" target="_blank" rel="noopener">Print / save PDF <span aria-hidden="true">↗</span></a>
-            <details class="download-menu"><summary class="button primary">Export report <span aria-hidden="true">⌄</span></summary><div class="download-options"><a id="download-html">HTML report <span>.html</span></a><a id="download-md">Markdown <span>.md</span></a><a id="download-json">Run bundle <span>.json</span></a></div></details>
-          </div>
-        </header>
-        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
 
-        <section class="welcome" id="welcome" aria-labelledby="welcome-title" hidden>
-          <span class="welcome-symbol" aria-hidden="true">◎</span><p class="eyebrow">A RECORD YOU CAN INSPECT</p><h2 id="welcome-title">Start with the evidence.<br>Leave with a traceable report.</h2>
-          <p>Give the investigator an extracted facts file and your questions. It searches the records, proposes claims, and sends them through the proof checker.</p>
-          <button class="button primary" id="welcome-new">Create an investigation <span aria-hidden="true">↗</span></button>
-          <div class="welcome-steps"><div><span>01</span><strong>Ask</strong><p>Choose facts and a case brief.</p></div><div><span>02</span><strong>Investigate</strong><p>Watch actual tool activity.</p></div><div><span>03</span><strong>Inspect</strong><p>Review findings, records, and proofs.</p></div></div>
+      <section class="welcome" id="welcome" aria-labelledby="welcome-title" hidden>
+        <h2 id="welcome-title">No case open</h2>
+        <p>Start an investigation from an extracted facts file. The investigator searches the records and proposes claims; each claim is sent to the Lean proof checker before it is reported.</p>
+        <button class="button primary" id="welcome-new">New investigation</button>
+      </section>
+
+      <div id="workspace" class="workspace" hidden>
+        <section class="run-progress" id="run-progress" aria-live="polite" hidden><span class="progress-indicator" aria-hidden="true"></span><div><strong id="progress-title">Investigation in progress</strong><p id="progress-description">Waiting for the first completed tool call.</p></div><button class="button danger" id="stop-investigation" hidden>Stop investigation</button></section>
+        <div class="sample-banner" id="sample-banner" hidden><strong>Synthetic sample.</strong> These fixture records demonstrate the interface. They are not results from a real investigation.</div>
+
+        <div class="report-tabs" role="tablist" aria-label="Case views">
+          <button id="tab-graph" class="tab active" role="tab" aria-selected="true" aria-controls="panel-graph" data-tab="graph">Proof graph</button>
+          <button id="tab-findings" class="tab" role="tab" aria-selected="false" aria-controls="panel-findings" tabindex="-1" data-tab="findings">Findings <span id="count-findings"></span></button>
+          <button id="tab-needs" class="tab" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Not established <span id="count-needs"></span></button>
+          <button id="tab-activity" class="tab" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
+          <button id="tab-coverage" class="tab" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
+          <button id="tab-report" class="tab" role="tab" aria-selected="false" aria-controls="panel-report" tabindex="-1" data-tab="report">Report <span id="count-report"></span></button>
+        </div>
+
+        <section class="tab-panel graph-panel" id="panel-graph" role="tabpanel" aria-labelledby="tab-graph">
+          <div class="graph-toolbar">
+            <select id="graph-scope" aria-label="Limit the graph to one question"></select>
+            <label class="search-field"><input id="graph-search" type="search" placeholder="Filter: device, file, ID…" autocomplete="off" spellcheck="false" aria-label="Filter the graph"></label>
+            <span class="graph-page"><button class="icon-button" id="graph-prev" aria-label="Previous findings">‹</button><span id="graph-range"></span><button class="icon-button" id="graph-next" aria-label="Next findings">›</button></span>
+            <span class="graph-focus" id="graph-focus" hidden><span id="graph-focus-label"></span><button class="icon-button" id="graph-focus-clear" aria-label="Clear focus">×</button></span>
+            <span class="spacer"></span>
+            <span class="zoom"><button class="icon-button" id="graph-zoom-out" aria-label="Zoom out">−</button><button class="icon-button" id="graph-zoom-in" aria-label="Zoom in">+</button><button class="button" id="graph-fit">Fit</button></span>
+          </div>
+          <div class="graph-host" id="graph-host"><svg id="graph" class="graph" role="img" aria-label="Proof graph: from disk image to interpretation"></svg><div class="graph-empty" id="graph-empty" hidden></div></div>
+          <div class="graph-legend">
+            <span class="replay"><button class="button" id="graph-play" aria-label="Replay how the graph was built">▶ Replay</button><input id="graph-step" type="range" min="0" max="0" value="0" aria-label="Replay position"><span id="graph-step-label" class="mono"></span></span>
+            <span class="spacer"></span>
+            <span class="legend" title="Drag to pan. Pinch or Ctrl-scroll to zoom. Double-click a finding to focus on it.">
+              <span><i class="swatch strong"></i>Certified</span>
+              <span><i class="swatch heuristic"></i>Certified, heuristic rule</span>
+              <span><i class="swatch refused"></i>Refused</span>
+              <span><i class="swatch judgment"></i>Interpretation</span>
+            </span>
+          </div>
         </section>
 
-        <div id="workspace" hidden>
-          <section class="run-progress" id="run-progress" aria-live="polite" hidden><span class="progress-indicator" aria-hidden="true"></span><div><strong id="progress-title">Investigation in progress</strong><p id="progress-description">Waiting for the first completed tool call.</p></div><button class="button stop-button" id="stop-investigation" hidden>Stop investigation</button></section>
-          <div class="sample-banner" id="sample-banner" hidden><span aria-hidden="true">◈</span><span><strong>Synthetic sample.</strong> These fixture records demonstrate the interface. They are not results from a real investigation.</span></div>
-          <section class="metrics" aria-label="Recorded investigation counts">
-            <div class="metric accepted"><span class="metric-label">Accepted findings</span><strong id="metric-accepted">—</strong><span>Recorded checker results</span></div>
-            <div class="metric"><span class="metric-label">Refused proposals</span><strong id="metric-refused">—</strong><span>Not established by the checker</span></div>
-            <div class="metric"><span class="metric-label">Extracted records</span><strong id="metric-extracted">—</strong><span id="metric-extracted-note">Measurement unavailable</span></div>
-            <div class="metric"><span class="metric-label">Records inspected</span><strong id="metric-inspected">—</strong><span>Explicit fact-tool returns</span></div>
-          </section>
-          <p class="verification-note"><span aria-hidden="true">◇</span> This viewer displays stored checker outcomes. Independent certificate verification is a separate CLI step.</p>
-          <div class="report-tabs" role="tablist" aria-label="Investigation views">
-            <button id="tab-findings" class="tab active" role="tab" aria-selected="true" aria-controls="panel-findings" data-tab="findings">Findings <span id="count-findings"></span></button>
-            <button id="tab-needs" class="tab" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Evidence needed <span id="count-needs"></span></button>
-            <button id="tab-activity" class="tab" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
-            <button id="tab-coverage" class="tab" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
-          </div>
-          <section class="tab-panel" id="panel-findings" role="tabpanel" aria-labelledby="tab-findings">
-            <div class="section-toolbar"><div><h2>What the records establish</h2><p>Fixed sentences from accepted claims. Inspect the source behind each one.</p></div><label class="search-field"><span aria-hidden="true">⌕</span><input id="finding-search" type="search" placeholder="Search findings…" aria-label="Search findings"></label></div>
-            <div id="finding-list" class="finding-list"></div><div id="finding-pagination" class="pagination"></div><div id="unverified-findings"></div><div id="conclusions"></div>
-          </section>
-          <section class="tab-panel" id="panel-needs" role="tabpanel" aria-labelledby="tab-needs" hidden><div class="section-toolbar"><div><h2>What is not established</h2><p>Diagnostic evidence requirements. A refusal does not mean a claim is false.</p></div></div><div id="needs-list" class="finding-list"></div></section>
-          <section class="tab-panel" id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden><div class="section-toolbar"><div><h2>The recorded investigation</h2><p>Recent completed tool calls, newest first. Calls still running may not appear.</p></div><span class="subtle-label" id="activity-refresh-label">RECORDED ACTIVITY</span></div><div id="activity-list"></div><div id="history-list"></div></section>
-          <section class="tab-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" hidden><div class="section-toolbar"><div><h2>Scope, activity, and limits</h2><p>These measurements describe supplied records and logged activity. They are not accuracy scores.</p></div></div><div id="coverage-content"></div></section>
-          <footer class="report-footer"><span>CONAN-F</span><span>Extracted records are the starting point. Their interpretation remains inspectable.</span></footer>
-        </div>
+        <section class="tab-panel" id="panel-findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
+          <div class="section-toolbar"><p>Fixed sentences from claims the checker accepted. Select a row to inspect its records and proof.</p><label class="search-field"><input id="finding-search" type="search" placeholder="Search ID, question, text, rule…" autocomplete="off" aria-label="Search findings"></label></div>
+          <div id="finding-list" class="finding-list"></div><div id="finding-pagination" class="pagination"></div><div id="unverified-findings"></div><div id="conclusions"></div>
+        </section>
+        <section class="tab-panel" id="panel-needs" role="tabpanel" aria-labelledby="tab-needs" hidden><div class="section-toolbar"><p>Proposals the checker refused, with the unmet conditions. A refusal does not mean a claim is false.</p></div><div id="needs-list" class="finding-list"></div></section>
+        <section class="tab-panel" id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden><div class="section-toolbar"><p>Completed tool calls by the investigator, newest first. <span id="activity-refresh-label" class="small-mono">RECORDED ACTIVITY</span></p></div><div id="activity-list"></div><div id="history-list"></div></section>
+        <section class="tab-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" hidden><div class="section-toolbar"><p>What was supplied, what was inspected, and what is not measured. These are not measures of completeness.</p></div><div id="coverage-content"></div></section>
+
+        <section class="tab-panel report-panel" id="panel-report" role="tabpanel" aria-labelledby="tab-report" hidden>
+          <form class="report-options" id="report-form" aria-label="Report contents">
+            <fieldset><legend>Findings</legend>
+              <label><input type="radio" name="report-scope" value="all" checked><span>All certified findings <span id="report-count-all" class="mono"></span></span></label>
+              <label><input type="radio" name="report-scope" value="marked" id="report-scope-marked" disabled><span>Marked findings only <span id="report-count-marked" class="mono"></span></span></label>
+              <p class="field-help">Mark a finding with its checkbox in the Findings table, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
+            </fieldset>
+            <fieldset><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
+            <fieldset><legend>Cover details</legend>
+              <label class="stacked" for="report-reference">Case reference</label><input id="report-reference" maxlength="200" autocomplete="off" spellcheck="false">
+              <label class="stacked" for="report-examiner">Examiner</label><input id="report-examiner" maxlength="200" autocomplete="off" spellcheck="false">
+              <label class="stacked" for="report-organisation">Organisation</label><input id="report-organisation" maxlength="200" autocomplete="off" spellcheck="false">
+              <p class="field-help">Printed as entered and labelled as not part of the stored run.</p>
+            </fieldset>
+            <div class="report-buttons"><button class="button primary" id="report-print" type="button" disabled>Print / Save as PDF</button><a class="button" id="report-export" aria-disabled="true">Export HTML</a></div>
+            <p class="field-help" id="report-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="report-preview" id="report-preview"><div class="report-host" id="report-host" hidden></div><div class="empty-state" id="report-empty" hidden></div></div>
+        </section>
       </div>
     </main>
+
+    <aside class="inspector" id="inspector" aria-label="Inspector">
+      <div class="pane-title"><span id="detail-title">Inspector</span></div>
+      <div id="detail-summary" class="detail-summary"><p class="inspector-empty">Select a node in the graph or a row in a table to see its records, source and proof.</p></div>
+      <div class="detail-tabs" role="tablist" aria-label="Inspector views" hidden><button class="tab active" id="detail-tab-evidence" role="tab" aria-selected="true" aria-controls="detail-evidence" data-detail-tab="evidence">Evidence records</button><button class="tab" id="detail-tab-proof" role="tab" aria-selected="false" aria-controls="detail-proof" tabindex="-1" data-detail-tab="proof">Proof</button></div>
+      <section id="detail-evidence" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-evidence"></section><section id="detail-proof" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-proof" hidden></section>
+    </aside>
+
+    <footer class="statusbar" aria-label="Case counts">
+      <span class="stat ok"><b id="metric-accepted">—</b> certified</span>
+      <span class="stat bad"><b id="metric-refused">—</b> refused</span>
+      <span class="stat judgment"><b id="metric-judgments">—</b> interpretations, not certified</span>
+      <span class="stat"><b id="metric-extracted">—</b> extracted records <i id="metric-extracted-note"></i></span>
+      <span class="stat"><b id="metric-inspected">—</b> inspected</span>
+      <span class="spacer"></span>
+      <span class="stat mono" id="evidence-hash" title="SHA-256 of the evidence store"></span>
+      <span class="stat note">Stored checker outcomes. Replay independently with <code>cop verify</code>.</span>
+    </footer>
   </div>
 
   <dialog id="new-dialog" class="new-dialog" aria-labelledby="new-dialog-title">
-    <div class="dialog-heading"><div><p class="eyebrow">BEGIN AN INVESTIGATION</p><h2 id="new-dialog-title">Let the evidence lead.</h2></div><button class="icon-button close-dialog" type="button" data-close="new-dialog" aria-label="Close new investigation">×</button></div>
+    <div class="dialog-heading"><h2 id="new-dialog-title">New investigation</h2><button class="icon-button close-dialog" type="button" data-close="new-dialog" aria-label="Close">×</button></div>
     <form id="investigation-form">
-      <p class="form-intro">The AI searches your extracted records and proposes claims for the proof checker. Starting a run uses the selected provider.</p>
-      <label for="investigation-title">Investigation title</label><input id="investigation-title" name="title" placeholder="e.g. Removable media review" required maxlength="200" autocomplete="off">
-      <label for="facts-path">Extracted facts file <span class="required-label">REQUIRED</span></label><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><p class="field-help">A local JSON or DuckDB fact store from the extractor. Raw disk images must be extracted with the CLI first.</p>
-      <label for="investigation-brief">Case brief <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="3" placeholder="Describe the context and what you want to establish."></textarea>
-      <label for="investigation-questions">Investigation questions <span class="optional-label">optional</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from those devices?"></textarea><p class="field-help">One question per line. Include questions, not an answer key.</p>
-      <div class="form-row"><div><label for="investigation-backend">Backend</label><select id="investigation-backend" name="backend" required></select></div><div class="model-field"><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="Provider default" autocomplete="off" spellcheck="false"></div><div class="minutes-field"><label for="investigation-minutes">Minutes</label><input id="investigation-minutes" name="minutes" type="number" min="1" step="1" required value="6"></div></div>
+      <p class="form-intro">The investigator searches the extracted records and proposes claims for the proof checker. Starting a run uses the selected AI provider.</p>
+      <label for="investigation-title">Title</label><input id="investigation-title" name="title" placeholder="Removable media review" required maxlength="200" autocomplete="off">
+      <label for="facts-path">Extracted facts file <span class="required-label">required</span></label><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><p class="field-help">A local JSON or DuckDB fact store produced by the readers.</p>
+      <label for="investigation-brief">Case brief <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="3" placeholder="Context and what you want established."></textarea>
+      <label for="investigation-questions">Questions, one per line <span class="optional-label">optional</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from them?"></textarea>
+      <div class="form-row"><div><label for="investigation-backend">Backend</label><select id="investigation-backend" name="backend" required></select></div><div><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="default" autocomplete="off" spellcheck="false"></div><div><label for="investigation-minutes">Minutes</label><input id="investigation-minutes" name="minutes" type="number" min="1" max="600" value="45" required></div></div>
       <p class="field-help" id="backend-help">Checking local backend availability…</p>
       <div class="notice error" id="form-error" role="alert" hidden></div>
-      <div class="form-footer"><span>Existing reports are preserved.</span><div><button class="button secondary" type="button" data-close="new-dialog">Cancel</button><button class="button primary" id="start-investigation" type="submit" disabled>Start investigation <span aria-hidden="true">↗</span></button></div></div>
+      <div class="form-footer"><span>Existing cases are preserved.</span><div><button class="button" type="button" data-close="new-dialog">Cancel</button><button class="button primary" id="start-investigation" type="submit" disabled>Start investigation</button></div></div>
     </form>
-  </dialog>
-
-  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
-    <div class="dialog-heading"><div><p class="eyebrow">INSPECT THE RECORD</p><h2 id="detail-title">Finding detail</h2></div><button class="icon-button close-dialog" type="button" data-close="detail-dialog" aria-label="Close finding detail">×</button></div>
-    <div id="detail-summary" class="detail-summary"></div>
-    <div class="detail-tabs" role="tablist" aria-label="Finding detail"><button class="tab active" id="detail-tab-evidence" role="tab" aria-selected="true" aria-controls="detail-evidence" data-detail-tab="evidence">Evidence records</button><button class="tab" id="detail-tab-proof" role="tab" aria-selected="false" aria-controls="detail-proof" tabindex="-1" data-detail-tab="proof">Proof & claim</button></div>
-    <section id="detail-evidence" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-evidence"></section><section id="detail-proof" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-proof" hidden></section>
   </dialog>
 </body>
 </html>

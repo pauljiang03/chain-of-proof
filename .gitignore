@@ -25,4 +25,7 @@ runs/dev/
 # Event handbook (not ours to redistribute)
 F26 Onsite Hacker Packet.pdf
 
+# Launcher written by `python -m app.desktop --make-app` (holds local paths)
+*.app/
+
 .DS_Store

@@ -1,17 +1,52 @@
-"""Standalone HTML for supplied investigation bundles; never verifies or reads files."""
+"""Standalone HTML for supplied investigation bundles; never verifies or reads files.
+
+`render_html(run)` reproduces the whole bundle. `render_html(run, report_options(...))`
+builds an examiner's report: chosen findings, chosen sections and cover details. A
+report that leaves anything out says so on its first page.
+"""
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 from html import escape
 import json
+import re
+
+# Optional parts of a report. The certified findings themselves are always included.
+SECTIONS = ('workflow', 'needs', 'judgments', 'evidence', 'proofs', 'activity')
+SECTION_LABELS = {'workflow': 'question-by-question plan', 'needs': 'refused proposals',
+                  'judgments': 'investigator judgments', 'evidence': 'full evidence records',
+                  'proofs': 'Lean proof records', 'activity': 'audit, coverage and history'}
+COVER = (('reference', 'Case reference'), ('examiner', 'Examiner'), ('organisation', 'Organisation'))
+MAX_SELECTED = 2000
+_FINDING_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
+
+
+def report_options(ids=None, sections=None, reference='', examiner='', organisation=''):
+    """Validate what goes into a report. `None` for ids or sections means everything."""
+    if ids is not None:
+        ids = list(ids)
+        if (not 1 <= len(ids) <= MAX_SELECTED or len(set(ids)) != len(ids)
+                or not all(isinstance(item, str) and _FINDING_ID.fullmatch(item) for item in ids)):
+            raise ValueError(f'Select between 1 and {MAX_SELECTED} distinct finding IDs.')
+    if sections is not None:
+        sections = list(sections)
+        if len(set(sections)) != len(sections) or set(sections) - set(SECTIONS):
+            raise ValueError('Unknown report section.')
+        sections = frozenset(sections)
+    options = {'ids': ids, 'sections': sections}
+    for (key, _), value in zip(COVER, (reference, examiner, organisation)):
+        if not isinstance(value, str) or len(value) > 200 or any(ord(c) < 32 or ord(c) == 127 for c in value):
+            raise ValueError('Cover details must be plain text of at most 200 characters.')
+        options[key] = value.strip()
+    return options
 
 
 _CSS = """
-:root { color-scheme: light; --ink:#172c39; --muted:#536674; --line:#d8e1e5;
+:root, :host { color-scheme: light; --ink:#172c39; --muted:#536674; --line:#d8e1e5;
   --paper:#fff; --wash:#f3f6f7; --accent:#176b57; --warn:#865314; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--wash); color:var(--ink);
+.report { margin:0; background:var(--wash); color:var(--ink);
   font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
 main { max-width:1100px; margin:40px auto; padding:48px 56px; background:var(--paper);
   border:1px solid var(--line); border-radius:12px; }
@@ -49,13 +84,15 @@ th,td { text-align:left; padding:10px; border-bottom:1px solid var(--line); vert
   overflow-wrap:anywhere; }
 th { color:var(--muted); background:var(--wash); font-weight:650; }
 .table-wrap { overflow-x:auto; }
+.cited th:first-child, .cited td:first-child { white-space:nowrap; overflow-wrap:normal; }
+.cited th:nth-child(2) { width:34%; } .cited th:nth-child(3) { width:30%; }
 summary { cursor:pointer; color:var(--muted); font-size:13px; margin:12px 0; }
 footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; color:var(--muted); font-size:12px; }
 @media(max-width:700px) { main { margin:0; padding:24px 18px; border:0; border-radius:0; }
   h1 { font-size:28px; } article { padding:18px; } dl { grid-template-columns:1fr; gap:2px; }
   dd { margin-bottom:9px; } .metrics { grid-template-columns:1fr; } }
-@media print { @page { margin:18mm; } body,main { background:#fff; }
-  body { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
+@media print { @page { margin:18mm; } .report,main { background:#fff; }
+  .report { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
   nav { display:none; } h1 { font-size:26pt; } h2 { font-size:18pt; } h3 { font-size:13pt; }
   h1,h2,h3,h4 { break-after:avoid; } section { margin-top:24px; padding-top:18px; }
   article { padding:15px; border-radius:0; } pre { font-size:8pt; overflow:visible; }
@@ -103,8 +140,8 @@ def _details(label, value):
     return '<details><summary>' + _h(label) + '</summary>' + _pre(value) + '</details>'
 
 
-def _table(headings, rows):
-    return ('<div class="table-wrap"><table><thead><tr>'
+def _table(headings, rows, kind=''):
+    return ('<div class="table-wrap"><table' + (' class="' + kind + '"' if kind else '') + '><thead><tr>'
             + ''.join('<th scope="col">' + _h(h) + '</th>' for h in headings)
             + '</tr></thead><tbody>'
             + ''.join('<tr>' + ''.join('<td>' + cell + '</td>' for cell in row) + '</tr>' for row in rows)
@@ -120,6 +157,23 @@ def _time(row):
         return _h(date.isoformat().replace('+00:00', 'Z')) + f' ({stamp} microseconds since Unix epoch)'
     except (OverflowError, ValueError):
         return f'{stamp} microseconds since Unix epoch (outside displayable date range)'
+
+
+def _cited(rows):
+    """The cited records beside their finding, for reports without the full evidence appendix."""
+    if not rows:
+        return '<p>No copied evidence records supplied.</p>'
+    table = []
+    for raw in rows:
+        row = _object(raw)
+        prov = _object(row.get('prov'))
+        source = ' · '.join(_h(prov[key]) for key in ('exhibit', 'image', 'artifact') if prov.get(key) is not None)
+        related = '<br><span class="small">Related value: ' + _v(row, 'aux_text') + '</span>' if row.get('aux_text') is not None else ''
+        table.append(('<strong>' + _v(row, 'id') + '</strong><br><span class="small">' + _v(row, 'kind') + '</span>',
+                      _v(row, 'obj_text', '—') + related,
+                      _time(row) + '<br><span class="small">Meaning: ' + _v(prov, 'time_meaning', 'not stated') + '</span>',
+                      source or 'Unknown — not supplied'))
+    return _table(('Record', 'Object', 'Recorded timestamp', 'Source'), table, 'cited')
 
 
 def _activity(run):
@@ -345,13 +399,24 @@ def _workflow(run, findings):
     return ''.join(out)
 
 
-def render_html(run: dict) -> str:
+def render_html(run: dict, options: dict | None = None) -> str:
     """Render literal bundle contents without certifying them or loading linked files."""
     if not isinstance(run, dict):
         raise TypeError('run must be a bundle object')
+    options = options or {}
     case, stats = _object(run.get('case')), _object(run.get('stats'))
     findings = [(i, row) for i, row in enumerate(_rows(run.get('findings')), 1)
                 if isinstance(row, dict) and row.get('status') == 'verified']
+    recorded, chosen, sections = len(findings), options.get('ids'), options.get('sections')
+    if chosen is not None:
+        wanted = set(chosen)
+        findings = [(i, row) for i, row in findings if row.get('finding_id') in wanted]
+        if len(findings) != len(wanted):   # an unknown ID, or one the bundle repeats
+            raise ValueError('The selection names a finding that is not recorded exactly once as verified.')
+    # The plan cross-references every finding, so it only belongs in a report that has them all.
+    left_out = [name for name in SECTIONS if (sections is not None and name not in sections)
+                or (name == 'workflow' and chosen is not None)]
+    show = lambda name: name not in left_out
     unverified = [row for row in _rows(run.get('findings'))
                   if not isinstance(row, dict) or row.get('status') != 'verified']
     title = _v(case, 'name', 'Untitled investigation')
@@ -361,24 +426,38 @@ def render_html(run: dict) -> str:
            'img-src \'none\'; base-uri \'none\'; form-action \'none\'">',
            '<title>Investigation report — ' + title + '</title><style>' + _CSS + '</style></head><body><main>',
            '<header><div class="eyebrow">CONAN-F · Investigation report</div><h1>' + title + '</h1>',
-           _fields([('Generated', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))]),
-           '<div class="metrics">']
+           _fields([('Generated', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))])]
+    cover = [(label, _h(options[key])) for key, label in COVER if options.get(key)]
+    if cover:
+        out.append(_fields(cover) + '<p class="small">Entered by the person who produced this report. '
+                   'These details are not part of the stored run and were not checked.</p>')
+    out.append('<div class="metrics">')
     for key, label in (('verified', 'accepted proposals reported'), ('rejected', 'refused proposals reported'),
                        ('proposals', 'total proposals reported')):
         out.append('<div class="metric"><strong>' + _v(stats, key, 'Unknown') + '</strong><span>' + label + '</span></div>')
     navigation = [('findings', 'Findings'), ('needs', 'Not established'), ('judgments', 'Judgments'),
                   ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity')]
-    navigation = [(anchor, label) for key, anchor, label in (
-        ('collection', 'collection', 'New evidence'),
-        ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
-        ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
+    navigation = [(anchor, label) for anchor, label in navigation if anchor == 'findings' or show(anchor)]
+    if show('workflow'):
+        navigation = [(anchor, label) for key, anchor, label in (
+            ('collection', 'collection', 'New evidence'),
+            ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
+            ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
+    scope = []
+    if chosen is not None:
+        scope.append(f'<p class="notice warning"><strong>Selected findings only.</strong> This report shows {len(findings)} '
+                     f'of the {recorded} entries recorded as verified, chosen by the person who produced it. '
+                     'Entries left out are omitted, not refuted.</p>')
+    if left_out:
+        scope.append('<p class="small">Left out of this report: '
+                     + _h('; '.join(SECTION_LABELS[name] for name in left_out)) + '. The complete run bundle holds them.</p>')
     out += ['</div><p class="notice">This report renders supplied records and certificates. It does not independently '
             'verify them. Use the independent verifier with the original evidence store before relying on a proof.</p>',
             '<p class="small">Printable HTML: use your browser’s Print / Save as PDF. All report content is embedded; '
-            'no remote assets or scripts are loaded.</p></header>',
+            'no remote assets or scripts are loaded.</p>' + ''.join(scope) + '</header>',
             '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
                                                           for anchor, label in navigation) + '</nav>',
-            _workflow(run, findings),
+            _workflow(run, findings) if show('workflow') else '',
             '<section id="findings"><h2>Recorded certified findings</h2>',
             '<p class="muted">Sentences are reproduced verbatim. “Strong” describes what the records support; '
             '“heuristic” relies on a stated rule of thumb. These labels do not prove parser correctness or real-world completeness.</p>']
@@ -393,85 +472,103 @@ def render_html(run: dict) -> str:
         rows = _rows(finding.get('cited_facts'))
         links = [f'<a href="#evidence-f{number}-r{index}">Fact ' + _v(_object(row), 'id') + '</a>'
                  for index, row in enumerate(rows, 1)]
-        out.append('<p>' + (', '.join(links) if links else 'No copied evidence records supplied.')
-                   + f' · <a href="#proof-f{number}">Proof record</a></p></article>')
+        pointers = []
+        if show('evidence'):
+            pointers.append(', '.join(links) if links else 'No copied evidence records supplied.')
+        else:
+            out.append(_cited(rows))
+        if show('proofs'):
+            pointers.append(f'<a href="#proof-f{number}">Proof record</a>')
+        else:
+            out.append('<p class="small">Certificate: trust tier ' + _v(finding, 'trust_tier') + '; declared axioms '
+                       + _v(finding, 'axioms') + '. The Lean source is in the run bundle.</p>')
+        out.append(('<p>' + ' · '.join(pointers) + '</p>' if pointers else '') + '</article>')
     if unverified:
         out += ['<p class="notice warning">Some entries in the findings list are not marked verified. '
                 'They are not displayed as certified findings.</p>', _details('Unverified or malformed finding entries', unverified)]
-    out.append('</section><section id="needs"><h2>Not established / further evidence needed</h2>'
-               '<p class="muted">Refused proposals and their diagnostics are not certified findings. Refusal alone does not '
-               'prove a claim false. Suggested evidence may not exist or make the claim provable.</p>')
-    rejections = _rows(run.get('rejections'))
-    if not rejections:
-        out.append('<p>No refusal details were supplied. This is not a claim that all proposals succeeded.</p>')
-    for number, raw in enumerate(rejections, 1):
-        row = _object(raw)
-        out += [f'<article id="rejection-r{number}"><h3>' + _v(row, 'finding_id') + '</h3>',
-                '<span class="badge">Not certified</span><p>' + _v(row, 'reason') + '</p>']
-        gap = _object(row.get('proof_gap'))
-        if gap.get('status') == 'diagnostic':
-            out.append('<p>' + _v(gap, 'summary') + '</p>')
-            for requirement in map(_object, _rows(gap.get('requirements'))):
-                out += ['<h4>' + _v(requirement, 'category') + '</h4><p>' + _v(requirement, 'reason') + '</p>',
-                        '<p><strong>Further evidence or action:</strong> ' + _v(requirement, 'action') + '</p>',
-                        _fields([(label, _v(requirement, key)) for label, key in (
-                            ('Proposed fact IDs (not evidence links)', 'fact_ids'), ('Observed', 'observed'), ('Required condition', 'required'))])]
-            out.append('<p class="small">' + _v(gap, 'disclaimer') + '</p>')
-        else:
-            out.append('<p>Further-evidence requirements are unknown; no recognized diagnostic was supplied.</p>')
-        out.append(_details('Supplied rejected proposal', raw) + '</article>')
-    out.append('</section><section id="judgments"><h2>Investigator judgments — outside Lean</h2>'
-               '<p class="muted">These are unverified inferences. Citing certified findings does not certify a conclusion, '
-               'intent, causation or device attribution.</p>')
-    conclusions = _rows(run.get('conclusions'))
-    if not conclusions:
-        out.append('<p>No investigator judgments were supplied.</p>')
-    for raw in conclusions:
-        row = _object(raw)
-        out.append('<article><h3>' + _v(row, 'conclusion_id') + '</h3><span class="badge">Unverified judgment</span>'
-                   '<p class="sentence">' + _v(row, 'text') + '</p>'
-                   + _fields([('Stated supporting finding IDs', _v(row, 'finding_ids'))])
-                   + _details('Supplied judgment record', raw) + '</article>')
-    out.append('</section><section id="evidence"><h2>Evidence records</h2>'
-               '<p class="muted">Every copied citation is shown in its finding’s scope. Provenance is supplied metadata, '
-               'not proof that a parser or its interpretation is correct. Source locations appear only when supplied.</p>')
-    copies = {}
-    for _, finding in findings:
-        for row in _rows(finding.get('cited_facts')):
-            if isinstance(row, dict):
-                identity = json.dumps(row.get('id'), sort_keys=True)
-                copies.setdefault(identity, set()).add(json.dumps(row, sort_keys=True, ensure_ascii=False))
-    for number, finding in findings:
-        for index, raw in enumerate(_rows(finding.get('cited_facts')), 1):
+    out.append('</section>')
+    if show('needs'):
+        out.append('<section id="needs"><h2>Not established / further evidence needed</h2>'
+                   '<p class="muted">Refused proposals and their diagnostics are not certified findings. Refusal alone does not '
+                   'prove a claim false. Suggested evidence may not exist or make the claim provable.</p>')
+        rejections = _rows(run.get('rejections'))
+        if not rejections:
+            out.append('<p>No refusal details were supplied. This is not a claim that all proposals succeeded.</p>')
+        for number, raw in enumerate(rejections, 1):
             row = _object(raw)
-            prov = _object(row.get('prov'))
-            out.append(f'<article id="evidence-f{number}-r{index}"><h3>Fact ' + _v(row, 'id')
-                       + ' · finding ' + _v(finding, 'finding_id') + '</h3>')
-            if len(copies.get(json.dumps(row.get('id'), sort_keys=True), ())) > 1:
-                out.append('<p class="notice warning">Conflicting copied rows share this fact ID. '
-                           'They remain separate; this renderer does not resolve the conflict.</p>')
-            if not isinstance(raw, dict):
-                out.append('<p class="notice warning">Malformed copied record — no source binding established.</p>')
-            out.append(_fields([(label, _v(source, key)) for label, source, key in (
-                ('Kind', row, 'kind'), ('Image', prov, 'image'), ('Exhibit', prov, 'exhibit'),
-                ('Artifact', prov, 'artifact'), ('Object', row, 'obj_text'), ('Object entity ID', row, 'obj'),
-                ('Related value', row, 'aux_text'), ('Related entity ID', row, 'aux'),
-                ('Timestamp meaning', prov, 'time_meaning'), ('Uncertainty (microseconds)', row, 'res'),
-                ('Parser', prov, 'parser'), ('Tool', prov, 'tool'), ('Row SHA-256', row, 'row_sha256'))]
-                + [('Recorded timestamp', _time(row))]))
-            out += ['<h4>Full copied provenance</h4>', _pre(row['prov']) if 'prov' in row else '<p>Unknown — not supplied.</p>',
-                    _details('Complete copied record', raw), f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>']
-    out.append('</section><section id="proofs"><h2>Proof records</h2><p class="muted">Declared claims and embedded Lean '
-               'are copied from the bundle. Source code is displayed as text, never executed. No filesystem links are inferred.</p>')
-    for number, finding in findings:
-        out += [f'<article id="proof-f{number}"><h3>Proof for ' + _v(finding, 'finding_id') + '</h3>',
-                _fields([('Trust tier', _v(finding, 'trust_tier')), ('Declared axioms', _v(finding, 'axioms'))]),
-                '<h4>Declared claim</h4>', _pre(finding['claim']) if 'claim' in finding else '<p>Unknown — not supplied.</p>']
-        lean = finding.get('lean')
-        out.append('<h4>Embedded Lean source</h4>' + (_pre(lean, source=True) if isinstance(lean, str) and lean.strip()
-                   else '<p>Unknown — embedded Lean source was not included. No file is loaded by this renderer.</p>'))
-        out.append(f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>')
-    out += ['</section>', _activity(run), '<footer>CONAN-F · Report rendering only. '
+            out += [f'<article id="rejection-r{number}"><h3>' + _v(row, 'finding_id') + '</h3>',
+                    '<span class="badge">Not certified</span><p>' + _v(row, 'reason') + '</p>']
+            gap = _object(row.get('proof_gap'))
+            if gap.get('status') == 'diagnostic':
+                out.append('<p>' + _v(gap, 'summary') + '</p>')
+                for requirement in map(_object, _rows(gap.get('requirements'))):
+                    out += ['<h4>' + _v(requirement, 'category') + '</h4><p>' + _v(requirement, 'reason') + '</p>',
+                            '<p><strong>Further evidence or action:</strong> ' + _v(requirement, 'action') + '</p>',
+                            _fields([(label, _v(requirement, key)) for label, key in (
+                                ('Proposed fact IDs (not evidence links)', 'fact_ids'), ('Observed', 'observed'), ('Required condition', 'required'))])]
+                out.append('<p class="small">' + _v(gap, 'disclaimer') + '</p>')
+            else:
+                out.append('<p>Further-evidence requirements are unknown; no recognized diagnostic was supplied.</p>')
+            out.append(_details('Supplied rejected proposal', raw) + '</article>')
+        out.append('</section>')
+    if show('judgments'):
+        out.append('<section id="judgments"><h2>Investigator judgments — outside Lean</h2>'
+                   '<p class="muted">These are unverified inferences. Citing certified findings does not certify a conclusion, '
+                   'intent, causation or device attribution.</p>')
+        conclusions = _rows(run.get('conclusions'))
+        if not conclusions:
+            out.append('<p>No investigator judgments were supplied.</p>')
+        for raw in conclusions:
+            row = _object(raw)
+            out.append('<article><h3>' + _v(row, 'conclusion_id') + '</h3><span class="badge">Unverified judgment</span>'
+                       '<p class="sentence">' + _v(row, 'text') + '</p>'
+                       + _fields([('Stated supporting finding IDs', _v(row, 'finding_ids'))])
+                       + _details('Supplied judgment record', raw) + '</article>')
+        out.append('</section>')
+    if show('evidence'):
+        out.append('<section id="evidence"><h2>Evidence records</h2>'
+                   '<p class="muted">Every copied citation is shown in its finding’s scope. Provenance is supplied metadata, '
+                   'not proof that a parser or its interpretation is correct. Source locations appear only when supplied.</p>')
+        copies = {}
+        for _, finding in findings:
+            for row in _rows(finding.get('cited_facts')):
+                if isinstance(row, dict):
+                    identity = json.dumps(row.get('id'), sort_keys=True)
+                    copies.setdefault(identity, set()).add(json.dumps(row, sort_keys=True, ensure_ascii=False))
+        for number, finding in findings:
+            for index, raw in enumerate(_rows(finding.get('cited_facts')), 1):
+                row = _object(raw)
+                prov = _object(row.get('prov'))
+                out.append(f'<article id="evidence-f{number}-r{index}"><h3>Fact ' + _v(row, 'id')
+                           + ' · finding ' + _v(finding, 'finding_id') + '</h3>')
+                if len(copies.get(json.dumps(row.get('id'), sort_keys=True), ())) > 1:
+                    out.append('<p class="notice warning">Conflicting copied rows share this fact ID. '
+                               'They remain separate; this renderer does not resolve the conflict.</p>')
+                if not isinstance(raw, dict):
+                    out.append('<p class="notice warning">Malformed copied record — no source binding established.</p>')
+                out.append(_fields([(label, _v(source, key)) for label, source, key in (
+                    ('Kind', row, 'kind'), ('Image', prov, 'image'), ('Exhibit', prov, 'exhibit'),
+                    ('Artifact', prov, 'artifact'), ('Object', row, 'obj_text'), ('Object entity ID', row, 'obj'),
+                    ('Related value', row, 'aux_text'), ('Related entity ID', row, 'aux'),
+                    ('Timestamp meaning', prov, 'time_meaning'), ('Uncertainty (microseconds)', row, 'res'),
+                    ('Parser', prov, 'parser'), ('Tool', prov, 'tool'), ('Row SHA-256', row, 'row_sha256'))]
+                    + [('Recorded timestamp', _time(row))]))
+                out += ['<h4>Full copied provenance</h4>', _pre(row['prov']) if 'prov' in row else '<p>Unknown — not supplied.</p>',
+                        _details('Complete copied record', raw), f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>']
+        out.append('</section>')
+    if show('proofs'):
+        out.append('<section id="proofs"><h2>Proof records</h2><p class="muted">Declared claims and embedded Lean '
+                   'are copied from the bundle. Source code is displayed as text, never executed. No filesystem links are inferred.</p>')
+        for number, finding in findings:
+            out += [f'<article id="proof-f{number}"><h3>Proof for ' + _v(finding, 'finding_id') + '</h3>',
+                    _fields([('Trust tier', _v(finding, 'trust_tier')), ('Declared axioms', _v(finding, 'axioms'))]),
+                    '<h4>Declared claim</h4>', _pre(finding['claim']) if 'claim' in finding else '<p>Unknown — not supplied.</p>']
+            lean = finding.get('lean')
+            out.append('<h4>Embedded Lean source</h4>' + (_pre(lean, source=True) if isinstance(lean, str) and lean.strip()
+                       else '<p>Unknown — embedded Lean source was not included. No file is loaded by this renderer.</p>'))
+            out.append(f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>')
+        out.append('</section>')
+    out += [_activity(run) if show('activity') else '', '<footer>CONAN-F · Report rendering only. '
             'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks.</footer>',
             '</main></body></html>']
     return '\n'.join(out) + '\n'

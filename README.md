@@ -74,9 +74,36 @@ cop serve
 
 Use it to open saved reports, start an investigation, inspect completed tool calls, or stop a run.
 The browser interface includes a marked synthetic example. It is not a benchmark result.
-Use the report controls to download HTML, Markdown, or JSON.
-Open the HTML report in a browser to print it or save it as PDF.
-The app does not provide a separate PDF generator.
+
+The same workbench runs as a desktop application in its own window:
+
+```sh
+.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview
+cop desktop
+python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable CONAN-F.app
+```
+
+The window is the operating system's own web view, so no browser engine is bundled.
+The front end is plain HTML, CSS and JavaScript with no framework and no graph library.
+`--make-app` writes a small launcher for this checkout; it is not a redistributable installer.
+
+The workbench has six views of a case:
+
+- **Proof graph** draws each finding back to its source, left to right: disk image, source artifact,
+  extracted record, finding checked by Lean, and any interpretation that is not certified.
+  Select a node to trace its lineage; double-click a finding to see the findings that share its records.
+  Replay steps through the findings in the order the audit log recorded them, or bundle order without one.
+  The graph draws forty findings at a time; filter by device, file, path or ID.
+- **Findings**, **Not established**, **Activity** and **Coverage** list the same run as tables.
+- **Report** builds an examiner's report. Mark findings with their checkbox in the Findings table,
+  choose the sections and appendices, add a case reference and examiner, then print it or save it as PDF.
+  A report of marked findings states on its first page that it is a selection and what it leaves out.
+  Cover details are printed as entered and labelled as not part of the stored run.
+
+The inspector on the right shows the selected item's records, provenance and Lean proof.
+Marks and cover details are remembered in the window's own storage as a convenience; they are not case records.
+Export in the title bar downloads the complete report as HTML or Markdown, or the run bundle as JSON.
+The app prints through the system print panel; it does not include a separate PDF generator.
 
 The current release runs from an editable repository checkout with the Lean project installed.
 The CLI can extract supported images before it starts the investigator. The browser start form still takes extracted facts.
