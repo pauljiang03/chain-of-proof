@@ -82,6 +82,18 @@ inputs and selected proof checks for both cases are complete. The latest compari
 used a separate frozen runtime. Its saved answers, execution failures and scores
 remain unchanged in later product updates.
 
+## Open the app
+
+```sh
+git clone https://github.com/pauljiang03/conan && cd conan && ./install.sh
+```
+
+On a Mac this adds **Conan** to your Applications folder, with its icon, and opens it.
+After that, open it like any other app. On Linux it opens the same window; start it
+again with `.venv/bin/conan`. You need Python 3.9 or newer, and 3.11 or newer for the
+Anthropic API investigator. The app opens on the saved NIST cases, so you can look
+around before you run anything. Run `./install.sh` again after `git pull`.
+
 ## Try it in 60 seconds
 
 ```sh
@@ -314,7 +326,7 @@ graph library.
 ```sh
 .venv/bin/python -m pip install -e '.[desktop,agent]'   # once: the `conan` window and the Anthropic API service
 conan                                                   # the same as `cop desktop`
-python -m app.desktop --make-app ~/Applications         # macOS: a double-clickable Conan.app
+python -m app.desktop --make-app ~/Applications --replace   # macOS: Conan.app (./install.sh does this)
 ```
 
 **Running on your own Anthropic API key.** With the `agent` extra installed (Python 3.11 or
