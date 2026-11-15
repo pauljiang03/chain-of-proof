@@ -115,7 +115,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .table-wrap { overflow-x:auto; }
 .cited th:first-child, .cited td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .cited th:nth-child(2) { width:34%; } .cited th:nth-child(3) { width:30%; }
-.lead { font-size:17px; line-height:1.6; }
+.lead { font-size:16px; line-height:1.7; max-width:72ch; margin:12px 0; }
 .keys { margin:0 0 6px; }
 .key { display:grid; grid-template-columns:150px minmax(0,1fr); gap:2px 18px; padding:7px 0; border-bottom:1px solid var(--line); break-inside:avoid; }
 .key h3 { font-size:14px; margin:0; line-height:1.5; }
@@ -129,14 +129,15 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
   .key table { font-size:11px; } .key th,.key td { padding:4px 6px; overflow-wrap:anywhere; } }
 /* The short report reads as one or two pages on screen too: bold lead-ins, tight sections. */
 @media screen {
-  main.brief { padding:28px 34px; font-size:13px; line-height:1.5; } .brief table { font-size:12px; } .brief .small { font-size:12px; }
+  main.brief { padding:48px 64px; font-size:14px; line-height:1.6; } .brief table { font-size:12.5px; } .brief .small { font-size:12px; }
+  .brief .lead { font-size:14.5px; line-height:1.7; }
   .brief header { border-top-width:4px; padding-top:14px; } .brief h1 { font-size:24px; margin:6px 0 10px; }
-  .brief h2 { font-size:17px; margin-bottom:8px; } .brief section { margin-top:18px; padding-top:16px; }
-  .brief p { margin:6px 0; } .brief dl { gap:3px 16px; } .brief table { margin:8px 0; } .brief th, .brief td { padding:6px 8px; }
-  .brief .key { display:block; padding:5px 0; } .brief .key h3 { display:inline; font-size:inherit; line-height:inherit; }
+  .brief h2 { font-size:18px; margin-bottom:12px; } .brief section { margin-top:32px; padding-top:24px; }
+  .brief p { margin:10px 0; } .brief dl { gap:4px 16px; } .brief table { margin:12px 0; } .brief th, .brief td { padding:7px 10px; }
+  .brief .key { display:block; padding:9px 0; } .brief .key h3 { display:inline; font-size:inherit; line-height:inherit; }
   .brief .key h3::after { content:". "; } .brief .key > div, .brief .key p { display:inline; line-height:inherit; }
-  .brief #summary .timeline-block > h3 { font-size:15px; margin:14px 0 4px; }
-  .brief footer { margin-top:18px; padding-top:12px; }
+  .brief #summary .timeline-block > h3 { font-size:15px; margin:24px 0 8px; }
+  .brief footer { margin-top:32px; padding-top:16px; }
 }
 .mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
 .days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
@@ -155,7 +156,7 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
 @media(max-width:700px) { main { margin:0; padding:24px 18px; border:0; border-radius:0; }
   h1 { font-size:28px; } article { padding:18px; } dl { grid-template-columns:1fr; gap:2px; }
   dd { margin-bottom:9px; } }
-@media print { @page { margin:18mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
+@media print { @page { margin:20mm 22mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
     font:9pt system-ui,sans-serif; color:#536674; } }
   .report,main { background:#fff; }
   .report { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
@@ -166,7 +167,8 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
   details:not([open]) > :not(summary) { display:block !important; }
   .exact-statement > summary { display:block; font-weight:600; color:var(--ink); } a { color:inherit; } .notice { break-inside:avoid; }
   /* The summary is one printed page: small type and tight rows. */
-  #summary { font-size:9pt; padding-top:10px; } #summary h2 { font-size:15pt; margin-bottom:4px; }
+  #summary { font-size:9pt; padding-top:10px; } #summary h2 { font-size:15pt; margin-bottom:6px; }
+  #summary .lead { font-size:9.5pt; line-height:1.55; max-width:none; margin:0 0 6pt; }
   .key { display:block; padding:2px 0; line-height:1.4; } .key h3 { display:inline; font-size:9pt; line-height:inherit; }
   .key h3::after { content:". "; } .key > div, .key p { display:inline; line-height:inherit; }
   .key table { font-size:8pt; margin:3px 0 0; } .key th, .key td { padding:2px 6px; }
@@ -336,7 +338,12 @@ def _front(info, tz, case, findings, options, story, short=False):
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
     if story.get('lead'):
-        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story.get('lead_detail') or story['lead']) + '</p>'
+        parts, step = [[], [], []], 0
+        for sentence in story.get('lead_detail') or story['lead']:
+            dated = bool(re.match(r'^(On|From|By) \d{4}-\d{2}-\d{2}', sentence))
+            step = 1 if dated else (2 if step >= 1 else 0)
+            parts[step].append(sentence)
+        out.append(''.join('<p class="lead">' + ' '.join(_h(sentence) for sentence in part) + '</p>' for part in parts if part)
                    + ('<p class="small">Written by the AI investigator.</p>' if story.get('lead_by') == 'investigator' else ''))
     if story['points']:
         out.append('<div class="keys">')
