@@ -2,6 +2,9 @@
 
 This change fixes unsupported promotion at two boundaries: the sentence attached to a proof, and the use of a claim value as an answer. It also retains answers during an investigation. No new model experiment or accuracy score is included.
 
+The later [typed-field implementation](SUPPORTED_FIELDS.md) adds coherent tuples,
+readers and public conditions. The checkpoints below retain their original counts.
+
 ## What changed
 
 | Boundary | Current behavior |

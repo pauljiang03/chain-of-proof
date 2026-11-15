@@ -11,7 +11,7 @@ validation and full reference review remain incomplete.
 | 1. Claim-linked answers | Shared A/B/C projection, answer tool, source ledger, report fields and independent verification before scoring | Question relevance and complete answers are not proved |
 | 2. Coverage and large inventories | Saved pages, separate finding/note limits, missing-field review within the original budget | Predicate exhaustion does not prove a complete question answer |
 | 3. Larger verified counts | Census limit 2,048; unchanged Lean rules; 518/747 total and distinct proofs also passed con-leche | Large distinct counts can reach the time limit |
-| 4. Evidence support | General registry omissions fixed; mail-body and document-metadata gaps diagnosed from source | Those additional reader/semantic fields remain future work |
+| 4. Evidence support | Exact OS fields, typed execution metadata, validated container paths, bounded Unicode mail content and OOXML properties | Other formats, historical source gaps and stronger answer meanings remain unsupported |
 | 5. Reference and validation | All 14 reference issues reviewed; separate Q53 derivative; fresh evidence; mechanical and live second-case checks; frozen NIST A/B/C comparison | Original 14 stay unresolved; Mulder unrun; native Claude test blocked |
 
 The original handoff checkpoint included Claude's desktop/report work, citation
@@ -41,6 +41,10 @@ Local archives:
 The earlier frozen runtime remains `/private/tmp/cop-sol61-smoke-runtime`; the
 latest repeat uses `/private/tmp/cop-sol61-96cd518-runtime`. Main contains the
 current implementation. Do not confuse implementation checks with scored runs.
+
+The [typed-field implementation](docs/SUPPORTED_FIELDS.md) adds atomic multi-field
+proofs and strict source-family conditions. Its source-only checks do not replace
+either benchmark or establish a new accuracy score.
 
 The schema fix accepts only explicit common paths and compatible types across every `anyOf` branch. It retains missing and conflicting fields; it does not infer relevance, choose a branch, repair a claim, or certify arbitrary metadata. It has no new accuracy result.
 

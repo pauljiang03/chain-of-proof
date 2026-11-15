@@ -7,16 +7,30 @@ The project is CONAN-F. The desktop app is Conan; `conan` opens it. The `cop` co
 
 | Owner | State |
 |---|---|
-| Root Codex | Owns main integration, readers, checker/Lean source semantics, correctness docs and pushes. Source origins, answer rows and scope enforcement are integrated. Final combined validation passed at `f8ff658`. |
-| Other Codex terminal (`01a1dc3d`) | Completed answer-row and source-scope enforcement plus both public-contract reviews in `/private/tmp/cop-strict60-public`. All selected commits are integrated. Idle; both derivative contracts remain held. |
-| UI terminal (`01a1dd77`) | Evidence/property views, the synthetic frontend sample and professional examiner reports are integrated and pushed through `2c39d78`. Owns future UI/report edits. Its current work is complete. |
-| Root helpers | Reader and public-support audits are complete. The source-scope validation archive is sealed. All three helper tasks are complete. |
+| Root Codex | Owns main integration, readers, checker/Lean source semantics, correctness docs and pushes. The typed-field batch is integrated and passed full validation at `6c1031f`. Isolated source branch: `/private/tmp/cop-supported-answer-fields`. |
+| Other Codex terminal (`01a1dc3d`) | Completed tuple answer projection, strict literal choices, same-part conditions and public-contract updates in `/private/tmp/cop-typed-tuple-answers`. Integrated as `e0d6b37`; compact tool catalog is integrated as `db83036`. Idle; both derivative contracts remain held. |
+| UI terminal (`01a1dd77`) | Owns graph, evidence views and reports. Replay is integrated with the new logo as `2d57e19`; inspector polish is integrated as `571ce42`. Native drag and playback reached the final finding. Its worktree is clean and current work is complete. Do not edit its UI files in another lane. |
+| Root helpers | Tuple and reader work is complete. `optical_timestamps` retains the new validation archive; `lean_gap_types` and `journal_gaps` are idle. |
 
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
 App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
 
 ## Latest implementation
+
+The [typed-field batch](docs/SUPPORTED_FIELDS.md) adds 25 fixed roles, atomic
+same-subject tuples, bounded content readers and public source-family conditions.
+The final limited source snapshots contain 3,711 Data Leakage and 2,761 Hacking
+records. These are reader checks, not full benchmark rebuilds or answer scores.
+The stricter Data Leakage draft has 41 catalog-compatible and 317 unsupported
+leaf occurrences; Hacking has 13 compatible and 25 unsupported leaves. Both remain
+held. The full suite ran 1,100 tests: 1,099 passed and one platform test skipped.
+Thirteen selected real-source certificates independently replayed; 22 supported
+public bindings were retained. Two mixed-subject controls and one missing-family
+binding were refused. These checks do not establish a benchmark score.
+Later tool-catalog and UI changes passed 43 and 24 focused checks respectively.
+The unrun public draft passed eight tests and its assembler check after its code
+receipt was refreshed. Internal catalog and original benchmark artifacts are unchanged.
 
 Fresh readers retain explicit source origins (`715d437`). Answer-row checks
 (`2ddfc33`) and exact source enforcement (`2599d48`) are integrated. Public source
@@ -37,6 +51,10 @@ Ownership above is final; it supersedes earlier crossed terminal proposals. Root
 does not edit `agent/answer_*`, the other terminal's public contract, or the ablation
 protocol. The other terminal does not edit readers, checker roles/sentences or Lean.
 Helpers use their owner's isolated worktree and do not modify frozen evidence or runs.
+Other external commits may arrive on the remote. The new detective-logo commit
+`f8235c0` was preserved before the replay push. No direct Claude Code messaging
+channel is known in this thread; this handoff records ownership for that terminal
+too. Do not control Terminal or Claude through computer-use tools.
 
 The three incorrect answers were traced to narrow verified observations used as stronger answers. The product now requires explicit public field meanings, row relationships and source selections. The new v3 comparison protocol adds the same public preview for A/C and durable investigator-authored checkpoints. The original 60-question contract and all frozen results stay unchanged; v3 refuses that unannotated contract before a model starts. Both derivative contracts preserve unsupported meanings and remain held. Reviewed execution-artifact attributes are distinct from generic application sightings. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
 
