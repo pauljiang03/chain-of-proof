@@ -44,6 +44,8 @@ class Limits:
     max_io_bytes: int = 512 * 1024 * 1024
     max_read_calls: int = 100_000
     max_path_components: int = 128
+    max_index_nodes: int = 128
+    max_index_entries: int = 4096
     max_optical_entries: int = 100_000
 
     def __post_init__(self):
@@ -325,9 +327,74 @@ def _open_ntfs(stream):
     return NTFS(stream)
 
 
-def _record(ntfs, path):
+def _index_search(index, name, limits):
+    """Exact FILE_NAME search with bounds independent of parser I/O caches.
+
+    Dissect Index.search uppercases FILE_NAME keys, binary-searches a node, and
+    follows its selected child VCN unless the selected non-end key matches.
+    Its index_buffer is cached, so a cycle can otherwise loop without reads.
+    Retain those routing/equality semantics while bounding nodes and entries.
+    """
+    # NTFS COLLATION.FILE_NAME is 0x1. Other comparators cannot resolve a path.
+    if int(index.root.collation_rule) != 1:
+        raise UnsupportedSource("directory index does not use FILE_NAME collation")
+    search_value = name.upper()
+    node, visited, nodes = index.root, set(), 0
+
+    def filename(entry):
+        data = entry.buf
+        if len(data) < 66:
+            raise UnsupportedSource("truncated directory index FILE_NAME key")
+        end = 66 + data[64] * 2
+        if end == 66 or end > len(data) or end > int(entry.key_length):
+            raise UnsupportedSource("invalid directory index FILE_NAME key length")
+        return data[66:end].decode("utf-16-le").upper()
+
+    while True:
+        if nodes >= limits.max_index_nodes:
+            raise LimitExceeded("directory index node limit exhausted")
+        nodes += 1
+        entries = []
+        for entry in node.entries():
+            if len(entries) >= limits.max_index_entries:
+                raise LimitExceeded("directory index entry limit exhausted")
+            entries.append(entry)
+        if not entries or not entries[-1].is_end or any(entry.is_end for entry in entries[:-1]):
+            raise UnsupportedSource("directory index node is empty or has an invalid end entry")
+        keys = [filename(entry) for entry in entries[:-1]]
+        if any(left > right for left, right in zip(keys, keys[1:])):
+            raise UnsupportedSource("directory index FILE_NAME keys are not sorted")
+        # The last entry is the end sentinel, representing keys beyond the last
+        # named key. Match the primary parser's exact binary-search decisions.
+        low, high = 0, len(entries) - 1
+        while low != high:
+            middle = low + (high - low) // 2
+            key = keys[middle]
+            if search_value > key:
+                low = middle + 1
+            elif search_value == key:
+                return entries[middle]
+            else:
+                high = middle
+        entry = entries[low]
+        if not entry.is_end and keys[low] == search_value:
+            return entry
+        if not entry.is_node:
+            raise _PathAbsent("filename absent from directory index: " + name)
+        vcn = _uint(entry.node_vcn, "directory index child VCN")
+        if vcn in visited:
+            raise UnsupportedSource("cyclic directory index child VCN")
+        # Check before a possibly cached lookup, not only at the next loop head.
+        if nodes >= limits.max_index_nodes:
+            raise LimitExceeded("directory index node limit exhausted")
+        visited.add(vcn)
+        node = index.index_buffer(vcn)
+
+
+def _record(ntfs, path, limits=None):
     # Resolve the actual directory index references and verify sequence numbers.
     # Mft.get(path) follows junctions and does not itself check those sequences.
+    limits = limits or Limits()
     record = ntfs.mft.root
     for part in path[3:].split("\\"):
         if record.is_reparse_point():
@@ -337,8 +404,8 @@ def _record(ntfs, path):
         if not record.is_dir():
             raise UnsupportedSource("selected path has a non-directory ancestor")
         try:
-            entry = record.index("$I30").search(part)
-        except KeyError as error:
+            entry = _index_search(record.index("$I30"), part, limits)
+        except _PathAbsent as error:
             raise _PathAbsent(path) from error
         record = entry.dereference()
         ref = entry.header.FileReference
@@ -370,7 +437,7 @@ def _observe(ntfs, path, provenance, limits, content_budget):
     result = dict(path=path, provenance=dict(provenance, source_path=path, source_stream="::$DATA"))
     try:
         try:
-            record = _record(ntfs, path)
+            record = _record(ntfs, path, limits)
         except _PathAbsent:
             return dict(result, status="absent", detail="path not present in this selected filesystem namespace")
         stat = _stat(record)
@@ -495,6 +562,8 @@ def discover_optical(survey, common, *, limits=None):
     from .optical import parse_fsd, udf_serial32
     limits = limits or Limits()
     common = _common(common, "optical-image")
+    if common["source_variant"] != "primary":
+        raise ValueError("optical descriptor discovery requires a primary whole-image survey source variant")
     result = OpticalInventory([], limits)
     udf = survey.udf
     try:

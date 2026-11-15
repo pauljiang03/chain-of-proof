@@ -135,6 +135,17 @@ preflight detects cyclic links and nonempty entries hidden after an empty entry
 before invoking Dissect's eager catalog constructor. Normal empty linked padding
 is accepted. Bounds are configurable positive integers.
 
+Each directory component lookup additionally permits at most 128 index nodes
+and 4,096 entries per node (`max_index_nodes`, `max_index_entries`, also exposed
+as CLI flags). It tracks visited child VCNs before invoking Dissect's cached
+index-buffer lookup. A cached self-cycle or longer cycle therefore cannot bypass
+the bound by avoiding further I/O. Node materialization is bounded separately.
+The lookup preserves the primary parser's uppercase `FILE_NAME` comparison and
+exact-match/child-routing decisions; malformed keys, missing/end-entry errors,
+and unsorted names are refused instead of reporting absence. Cycles/malformed
+nodes are `unsupported`, exhausted caps are `limit_exceeded`, and only a completed
+exact no-match becomes `absent`. Unrelated parser `KeyError`s remain unreadable.
+
 Underlying read limits include lazy snapshot block-map/reconstruction work as
 well as file metadata. Short/failed underlying reads are charged by requested
 length. Logical content budget counts received bytes, including failed reads;
@@ -160,6 +171,10 @@ exactly that state; the returned `OpticalSource` holds `metadata` and `version`.
 Two VATs that reference the same FSD remain distinct states. No historical state
 is relabeled as the current primary state. Parser errors, inconsistent version
 links, missing descriptor bytes, or exceeded admission bounds prevent selection.
+The incoming whole-image survey must have `source_variant="primary"`; alternate,
+recovered, unknown, or already selected descriptor variants are rejected before
+provenance is assigned. This prevents distinct input variants from collapsing
+into the same VAT/FSD source identity.
 
 This API does not initiate `optical.survey`, whose `Udf.load` currently scans the
 disc to discover retained descriptors. Admission defaults to 64 states, 100,000
@@ -188,6 +203,9 @@ changes, absent/unreadable/unsupported distinctions, and byte/file/source limits
 CLI controls also cover required arguments, exact UUID selection, input mutation,
 exclusive output creation including a creation race, configuration digest and
 identity mismatches, and declared versus recomputed hash status.
+Directory-index regressions include the installed Dissect parser's cached
+self-cycle in a timeout-contained subprocess, multi-node cycles, node/entry
+caps, unsorted keys, and valid lookup parity with that primary implementation.
 
 Read-only smoke on the supplied `pc.E01` opened explicit copy
 `8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb` on NTFS serial `C8CA0C8DCA0C7A48`:

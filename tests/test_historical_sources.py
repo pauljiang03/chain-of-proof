@@ -1,10 +1,13 @@
 """Exact historical identity and byte-origin controls using parser fixtures."""
 import copy
 from contextlib import ExitStack, redirect_stderr, redirect_stdout
+from functools import lru_cache
 import hashlib
 import io
 import json
 import struct
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -65,7 +68,13 @@ class Record:
 
     def index(self, name):
         assert name == "$I30"
-        return NS(search=self.search)
+        entries = []
+        for name in sorted(self.children, key=str.upper):
+            entry = self.search(name)
+            entries.append(index_entry(name, record_entry=entry))
+        entries.append(index_entry())
+        return NS(root=NS(collation_rule=1, entries=lambda: iter(entries)),
+                  index_buffer=Mock(side_effect=AssertionError("leaf has no child nodes")))
 
     def search(self, name):
         record = self.children[name.casefold()]
@@ -101,6 +110,26 @@ def compare(base, snapshot, *, inv=None, paths=None):
     inv = inv or inventory()
     with patch.object(h, "_open_ntfs", side_effect=[base, snapshot]):
         return h.compare_versions(inv, COPY, paths or [PATH])
+
+
+def index_entry(name=None, *, child=None, record_entry=None):
+    data = bytearray(66)
+    if name is not None:
+        encoded = name.encode("utf-16-le")
+        data[64] = len(encoded) // 2
+        data.extend(encoded)
+    entry = NS(buf=bytes(data), key_length=len(data), is_end=name is None,
+               is_node=child is not None, node_vcn=child)
+    if record_entry is not None:
+        entry.dereference = record_entry.dereference
+        entry.header = record_entry.header
+    return entry
+
+
+def directory_index(entries, children=None):
+    children = children or {}
+    root = NS(collation_rule=1, entries=lambda: iter(entries))
+    return NS(root=root, index_buffer=Mock(side_effect=lambda vcn: children[vcn]))
 
 
 class SourceInventoryTests(unittest.TestCase):
@@ -354,6 +383,128 @@ class ResourceBoundTests(unittest.TestCase):
         self.assertEqual(parsed_catalog.catalog.stores, [])
 
 
+class DirectoryIndexTests(unittest.TestCase):
+    def test_real_dissect_cached_child_cycle_terminates_without_repeated_io(self):
+        try:
+            from dissect.ntfs.index import Index
+            from dissect.ntfs.c_ntfs import COLLATION
+        except ImportError:
+            self.skipTest("Dissect extraction dependency is not installed")
+        # This is the reviewer's native Index/cache reproduction. Native search
+        # loops on this cached child; our lookup rejects the repeated VCN first.
+        script = r'''
+import json
+from functools import lru_cache
+from types import SimpleNamespace as NS
+from unittest.mock import patch
+from dissect.ntfs.index import Index
+from dissect.ntfs.c_ntfs import COLLATION
+from extractor import historical_sources as h
+from tests.test_historical_sources import Record, index_entry
+index = object.__new__(Index)
+index.root = NS(collation_rule=COLLATION.FILE_NAME, entries=lambda: iter([index_entry(child=7)]))
+index.index_buffer = lru_cache(128)(lambda _vcn: index.root)
+record = Record(children={})
+with patch.object(record, "index", return_value=index):
+    try:
+        h._record(NS(mft=NS(root=record)), r"C:\loop.txt")
+    except h.UnsupportedSource as error:
+        assert "cyclic" in str(error)
+    else:
+        raise AssertionError("cyclic directory index was not refused")
+info = index.index_buffer.cache_info()
+print(json.dumps(dict(misses=info.misses, hits=info.hits)))
+'''
+        done = subprocess.run([sys.executable, "-c", script], cwd=Path(__file__).resolve().parents[1],
+                              capture_output=True, text=True, timeout=3)
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(json.loads(done.stdout), {"misses": 1, "hits": 0})
+
+    def test_multi_node_cycle_and_acyclic_depth_limit_are_distinct(self):
+        one = NS(entries=lambda: iter([index_entry(child=9)]))
+        two = NS(entries=lambda: iter([index_entry(child=7)]))
+        index = directory_index([index_entry(child=7)], {7: one, 9: two})
+        with self.assertRaisesRegex(h.UnsupportedSource, "cyclic"):
+            h._index_search(index, "absent", h.Limits())
+        self.assertEqual([call.args[0] for call in index.index_buffer.call_args_list], [7, 9])
+        index = directory_index([index_entry(child=7)], {7: one, 9: two})
+        with self.assertRaisesRegex(h.LimitExceeded, "node"):
+            h._index_search(index, "absent", h.Limits(max_index_nodes=2))
+        self.assertEqual([call.args[0] for call in index.index_buffer.call_args_list], [7])
+
+    def test_entry_materialization_is_bounded_even_without_more_io(self):
+        yielded = []
+
+        def endless_entries():
+            while True:
+                yielded.append(1)
+                yield index_entry("key")
+
+        index = NS(root=NS(collation_rule=1, entries=endless_entries))
+        with self.assertRaisesRegex(h.LimitExceeded, "entry"):
+            h._index_search(index, "key", h.Limits(max_index_entries=3))
+        self.assertEqual(len(yielded), 4)  # One look-ahead detects the exceeded cap.
+
+    def test_exact_and_child_routing_match_installed_primary_parser(self):
+        try:
+            from dissect.ntfs.index import Index
+            from dissect.ntfs.c_ntfs import COLLATION
+        except ImportError:
+            self.skipTest("Dissect extraction dependency is not installed")
+        for search in ("Alpha", "ALPHA", "lambda", "MIDDLE", "OMEGA", "zzz", "not-present"):
+            with self.subTest(search=search):
+                leaf = NS(entries=lambda: iter([index_entry("alpha"), index_entry("lambda"), index_entry()]))
+                high = NS(entries=lambda: iter([index_entry("omega"), index_entry()]))
+                entries = [index_entry("middle", child=7), index_entry(child=9)]
+                expected = object.__new__(Index)
+                expected.root = NS(collation_rule=COLLATION.FILE_NAME, entries=lambda: iter(entries))
+                expected.index_buffer = lru_cache(128)(lambda vcn: {7: leaf, 9: high}[vcn])
+                try:
+                    actual = expected.search(search)
+                except KeyError:
+                    with self.assertRaises(h._PathAbsent):
+                        h._index_search(expected, search, h.Limits())
+                else:
+                    self.assertEqual(h._index_search(expected, search, h.Limits()).buf, actual.buf)
+
+    def test_malformed_or_unsupported_nodes_never_become_absence(self):
+        for index in (directory_index([]), directory_index([index_entry("no-end")]),
+                      directory_index([index_entry(), index_entry()])):
+            with self.assertRaises(h.UnsupportedSource):
+                h._index_search(index, "x", h.Limits())
+        index = directory_index([index_entry()])
+        index.root.collation_rule = 16
+        with self.assertRaisesRegex(h.UnsupportedSource, "collation"):
+            h._index_search(index, "x", h.Limits())
+        index = directory_index([index_entry(child=7)])
+        index.index_buffer.side_effect = KeyError("malformed parser child lookup")
+        base = ntfs()
+        with patch.object(base.mft.root, "index", return_value=index):
+            item = compare(base, ntfs(Record()))["paths"][0]
+        self.assertEqual(item["base"]["status"], "unreadable")
+
+    def test_unsorted_names_cannot_turn_a_present_key_into_absence(self):
+        unsorted = [index_entry("b"), index_entry("a"), index_entry()]
+        for index in (directory_index(unsorted), directory_index([index_entry(child=7)],
+                      {7: NS(entries=lambda: iter(unsorted))})):
+            with self.assertRaisesRegex(h.UnsupportedSource, "not sorted"):
+                h._index_search(index, "b", h.Limits())
+        entries = [index_entry("a"), index_entry("B"), index_entry()]
+        self.assertEqual(h._index_search(directory_index(entries), "b", h.Limits()).buf, entries[1].buf)
+
+    def test_cycle_and_node_cap_statuses_survive_comparison_reporting(self):
+        for cap, expected in ((128, "unsupported"), (1, "limit_exceeded")):
+            base = ntfs()
+            index = directory_index([index_entry(child=7)])
+            index.index_buffer.side_effect = lambda _vcn: index.root
+            with patch.object(base.mft.root, "index", return_value=index):
+                item = compare(base, ntfs(Record()), inv=inventory(limits=h.Limits(max_index_nodes=cap)))["paths"][0]
+            self.assertEqual(item["base"]["status"], expected)
+            self.assertEqual(item["snapshot"]["status"], "present")
+            self.assertEqual(item["comparison"], "not_comparable")
+            self.assertNotIn("sha256", item["base"])
+
+
 class OpticalDescriptorTests(unittest.TestCase):
     def setUp(self):
         directory = tempfile.TemporaryDirectory()
@@ -395,6 +546,13 @@ class OpticalDescriptorTests(unittest.TestCase):
         self.assertFalse(inv.complete)
         with self.assertRaises(h.SourceSelectionError):
             h.select_optical(inv, "udf:vat=293:fsd=288")
+
+    def test_optical_whole_image_variant_cannot_be_silently_replaced(self):
+        primary = h.discover_optical(self.survey, self.common)
+        self.assertTrue(primary.complete)
+        for variant in ("alternate", "recovered", "udf:vat=293:fsd=288", "unknown"):
+            with self.subTest(variant=variant), self.assertRaises(ValueError):
+                h.discover_optical(self.survey, dict(self.common, source_variant=variant))
 
     def test_optical_source_and_entry_limits_are_explicit(self):
         for limits in (h.Limits(max_sources=1), h.Limits(max_optical_entries=1), h.Limits(max_metadata_bytes=10)):
