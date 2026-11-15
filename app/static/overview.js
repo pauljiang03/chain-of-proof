@@ -146,6 +146,8 @@
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
     hero.append(el("h2", "", "Key findings"));
+    const lead = array(story.lead).map(String).join(" ");
+    if (lead) hero.append(el("p", "ov-lead", lead));
     points.forEach((point) => {
       const row = el("div", "key-row"), body = el("div", "key-body");
       body.append(el("p", "", array(point.sentences).map(String).join(" ")));

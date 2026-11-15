@@ -371,6 +371,38 @@ def _notes(case):
     return _point('notes', 'Search box and notes', out, searches[:3] + notes)
 
 
+def _lead(case):
+    """A short paragraph in Simplified Technical English: one fact per sentence, counts and values only."""
+    if not case.records:
+        return []
+    out = []
+    items = sorted(_distinct([_s(_prov(entry).get('exhibit')) for entry in case.records if _s(_prov(entry).get('exhibit'))]),
+                   key=lambda name: (len(name), name))
+    where = f' from {_n(len(items), "evidence item", "evidence items")}: {_join(items, 6)}' if items else ''
+    out.append(f'The verified findings cite {_n(len(case.records), "record", "records")}{where}.')
+    names = _distinct([_aux(entry) for entry in case.of('systemSetting')
+                       if _obj(entry).lower() == 'computer name' and _aux(entry) and _aux(entry) != '(none)'])
+    if names and len({name.lower() for name in names}) == 1:
+        out.append(f'The computer name is {sorted(names, key=lambda name: name != name.upper())[0]}.')
+    serials = _distinct([_obj(entry) for entry in case.of('usbInsert') if _obj(entry)])
+    if serials:
+        out.append(f'The records identify {_n(len(serials), "USB storage device", "USB storage devices")}.')
+    counts = [(kind, one, many) for kind, one, many in (('emailSent', 'e-mail', 'e-mails'), ('webSearch', 'web search', 'web searches'),
+              ('fileDeleted', 'deleted file', 'deleted files'), ('cdBurn', 'disc-burning record', 'disc-burning records'))
+              if case.of(kind)]
+    if counts:
+        parts = [_n(len(case.of(kind)), one, many) for kind, one, many in counts]
+        out.append('The records include ' + (parts[0] if len(parts) == 1 else ', '.join(parts[:-1]) + ' and ' + parts[-1]) + '.')
+        # The dates of this activity only: older system and program records do not move the start.
+        stamps = case.times([entry for kind in ('usbInsert', 'emailSent', 'webSearch', 'fileDeleted', 'cdBurn', 'fileDownloaded')
+                             for entry in case.of(kind)])
+        first, last = (brief.moment(stamps[0], case.tz), brief.moment(stamps[-1], case.tz)) if stamps else (None, None)
+        if first is not None and last is not None:
+            out.append(f'This activity starts on {first:%Y-%m-%d} and stops on {last:%Y-%m-%d}.' if first.date() != last.date()
+                       else f'This activity is on {first:%Y-%m-%d}.')
+    return out
+
+
 def build(run, ids=None):
     """Plain sentences about what the cited records of verified findings show.
 
@@ -383,6 +415,6 @@ def build(run, ids=None):
     points = [devices_point, _folders(case), _merge('files', 'Files', _files(case), _recovered(case)), _disc(case), _mail(case),
               _web(case), _downloads(case), _cloud(case), _deleted(case), _notes(case),
               _merge('computer', 'Computer and accounts', _computer(case), _accounts(case))]
-    return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings),
+    return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings), 'lead': _lead(case),
             'points': [{name: value for name, value in point.items() if name != '_entries'} for point in points if point],
             'devices': devices}

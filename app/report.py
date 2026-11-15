@@ -335,6 +335,8 @@ def _front(info, tz, case, findings, options, story, short=False):
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
+    if story.get('lead'):
+        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story['lead']) + '</p>')
     if story['points']:
         out.append('<div class="keys">')
         for point in story['points']:

@@ -211,7 +211,7 @@ class Narrative(unittest.TestCase):
         self.assertEqual(narrative.build(data, ids=[])['points'], [])
 
     def test_empty_and_malformed_bundles_say_nothing(self):
-        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'points': [], 'devices': []}
+        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'lead': [], 'points': [], 'devices': []}
         for value in ({}, None, [], {'findings': 'x'}, {'findings': [None, 3, {'status': 'verified'}]}):
             story = narrative.build(value)
             self.assertEqual(story['points'], [])
