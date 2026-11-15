@@ -23,6 +23,23 @@ def iso_seconds(seconds):
     return datetime.fromtimestamp(seconds, timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def build_number(value):
+    """Decode only a canonical unsigned decimal/DWORD registry build value.
+
+    Preserve the original value in provenance. Versions, whitespace, leading
+    zeroes, signs and floating-point values are not silently repaired.
+    """
+    if isinstance(value, int) and not isinstance(value, bool):
+        number = int(value)
+    elif isinstance(value, str) and re.fullmatch(r"0|[1-9][0-9]{0,9}", value):
+        number = int(value)
+    else:
+        raise ValueError("CurrentBuildNumber is not a canonical unsigned decimal value")
+    if not 0 <= number <= 0xffffffff:
+        raise ValueError("CurrentBuildNumber is outside the unsigned DWORD range")
+    return number
+
+
 def extract(ev, target, ctx):
     hives = [h for h in system._hives(ev, target) if system._where(h)['source_variant'] == 'primary']
     subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:windows-system"
@@ -42,9 +59,20 @@ def extract(ev, target, ctx):
         if hive.name == "SOFTWARE":
             path = r"Microsoft\Windows NT\CurrentVersion"
             data = values(hive, path)
-            for field, role in (("ProductName", "os.product_name"), ("RegisteredOwner", "os.registered_owner")):
+            for field, role in (("ProductName", "os.product_name"),
+                                ("RegisteredOwner", "os.registered_owner"),
+                                ("CurrentVersion", "os.version"),
+                                ("SystemRoot", "os.system_root")):
                 if isinstance(data.get(field), str) and data[field]:
                     emit(hive, path, field, role, data[field])
+            if "CurrentBuildNumber" in data:
+                try:
+                    raw_build = data["CurrentBuildNumber"]
+                    emit(hive, path, "CurrentBuildNumber", "os.build_number", build_number(raw_build),
+                         registry_native_value=raw_build,
+                         value_conversion="canonical unsigned decimal or DWORD to integer")
+                except ValueError as error:
+                    ev.problem(system._art(hive, path, "CurrentBuildNumber"), error)
             if isinstance(data.get("InstallDate"), int) and not isinstance(data["InstallDate"], bool) and data["InstallDate"] > 0:
                 emit(hive, path, "InstallDate", "os.install_time", iso_seconds(data["InstallDate"]),
                      value_time_meaning="recorded installation time; Unix seconds UTC")

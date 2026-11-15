@@ -192,6 +192,16 @@ _FIELDS['imageDigestsAgree'] = {
     'acquisition_digest': dict(_record(5, 'aux', 'retained_acquisition_digest'), value_type='string'),
     'digests_match': _assertion('same_algorithm_same_subject_digest_equality_not_authenticity'),
 }
+_FIELDS['attributeTuple'] = {
+    'subject': dict(_record(0, 'aux', 'scoped_source_subject'), tuple_entry=0),
+    'same_source_subject': _assertion('same_scoped_source_subject_not_personal_identity'),
+}
+for _index in range(8):
+    _FIELDS['attributeTuple']['role_' + str(_index)] = dict(
+        _argument(3, 'asserted_attribute_role'), tuple_entry=_index)
+    _FIELDS['attributeTuple']['value_' + str(_index)] = dict(
+        _record(2, 'aux', 'recorded_typed_attribute_value'),
+        tuple_entry=_index, value_role_argument=3)
 for _fields in _FIELDS.values():
     for _selector in _fields.values():
         if 'value_role_argument' in _selector:
@@ -229,6 +239,19 @@ def _literal_parts(claim):
                 raise ValueError('both_requires_at_least_two_claims')
             pending.extend(reversed(args))
             continue
+        if form == 'attributeTuple':
+            if not isinstance(args, list) or not 2 <= len(args) <= 8:
+                raise ValueError('attribute_tuple_requires_two_to_eight_entries')
+            if any(not isinstance(entry, list) or len(entry) != 4
+                   or any(type(fid) is not int or fid < 0 for fid in entry[:3])
+                   or not isinstance(entry[3], str) or entry[3] not in ROLES
+                   for entry in args):
+                raise ValueError('attribute_tuple_entry_shape_mismatch')
+            # Kind, same-subject and unique-role conditions belong to the
+            # checker. A retains the exact semantics of invalid proposals so
+            # B can refuse them without repairing their frozen projection.
+            parts.append((form, tuple(tuple(entry) for entry in args)))
+            continue
         if form not in claims.SETS:
             raise ValueError('unrecognized_claim_form')
         params = claims.SETS[form].params
@@ -262,10 +285,13 @@ def claim_fields(claim, source):
         for name, selector in _FIELDS.get(form, {}).items():
             try:
                 value_ids = []
+                if 'tuple_entry' in selector and selector['tuple_entry'] >= len(args):
+                    raise ValueError('attribute_tuple_entry_missing')
+                field_args = args[selector['tuple_entry']] if 'tuple_entry' in selector else args
                 if 'literal' in selector:
                     value = selector['literal']
                 elif 'literal_argument' in selector:
-                    value = args[selector['literal_argument']]
+                    value = field_args[selector['literal_argument']]
                     if selector.get('decode_entity'):
                         value = source.string(value)
                     if selector.get('role_digest_algorithm'):
@@ -273,18 +299,18 @@ def claim_fields(claim, source):
                         if value is None:
                             raise ValueError('declared_role_has_no_digest_algorithm')
                 else:
-                    fid = args[selector['argument']]
+                    fid = field_args[selector['argument']]
                     fact = found.get(fid)
                     if fact is None:
                         raise ValueError('cited_record_missing')
                     value_ids.append(fid)
-                    slot = args[selector['slot_argument']] if 'slot_argument' in selector else selector['slot']
+                    slot = field_args[selector['slot_argument']] if 'slot_argument' in selector else selector['slot']
                     value = getattr(fact, slot)
                     if slot in ('obj', 'aux'):
                         value = source.string(value)
                 semantic_type = selector['semantic_type']
                 if 'value_role_argument' in selector:
-                    spec = ROLES[args[selector['value_role_argument']]]
+                    spec = ROLES[field_args[selector['value_role_argument']]]
                     value = decode_value(value, spec.value_type)
                     semantic_type = spec.semantic_type
                 elif 'value_type' in selector:
@@ -452,6 +478,18 @@ def _typed(value, schema):
         raise ValueError('value_type_does_not_match_public_schema')
 
 
+def _declared_choices(value, schema):
+    """Enforce exact public literal choices without changing a proposed value."""
+    if 'enum' in schema:
+        options = schema['enum']
+        if not isinstance(options, list) or not 1 <= len(options) <= 256:
+            raise ValueError('invalid_public_schema_enum')
+        if _encoded(value) not in [_encoded(option) for option in options]:
+            raise ValueError('value_not_in_public_schema_enum')
+    if 'const' in schema and _encoded(value) != _encoded(schema['const']):
+        raise ValueError('value_does_not_match_public_schema_const')
+
+
 def _format(value, format_name, zone, semantic_type):
     if format_name not in FORMATS:
         raise ValueError('unsupported_format')
@@ -599,12 +637,14 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                 raise ValueError('literal_value_mismatch_not_repaired')
             for schema in (_strict_schema if require_claim_requirements else _schema)(questions[qid]['answer_schema'], path):
                 _typed(value, schema)
+                if require_claim_requirements:
+                    _declared_choices(value, schema)
                 if answer_requirements.KEY in schema:
                     meaning = answer_requirements.check(schema[answer_requirements.KEY], part_row['form'],
-                                                        raw['field'], field['semantic_type'])
+                                                        raw['field'], field['semantic_type'], part_fields=part_row['fields'])
                     entry.setdefault('meaning_checks', []).append(meaning)
                     if meaning['status'] != 'compatible':
-                        raise ValueError('claim_role_does_not_meet_public_requirement')
+                        raise ValueError(meaning.get('reason', 'claim_role_does_not_meet_public_requirement'))
             entry.update(candidate_id=cid, claim_sha256=candidate['claim_sha256'], question_id=qid,
                          path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
                          semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],

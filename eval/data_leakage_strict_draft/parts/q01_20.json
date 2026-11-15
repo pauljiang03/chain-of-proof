@@ -34,7 +34,7 @@
                       "needs_same_image_algorithm_row_md5"
                     ],
                     "meaning": "The requested md5 belongs to the exact image and, where applicable, digest algorithm identified by this answer row.",
-                    "evidence_needed": "Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+                    "evidence_needed": "Row and source guards are implemented, but no approved atomic claim exposes both image-specific subject identity and both requested digest fields. A generic tuple subject is not an image-identity role; typed digest values alone do not authorize the full inventory row."
                   }
                 },
                 "sha1": {
@@ -44,7 +44,7 @@
                       "needs_same_image_algorithm_row_sha1"
                     ],
                     "meaning": "The requested sha1 belongs to the exact image and, where applicable, digest algorithm identified by this answer row.",
-                    "evidence_needed": "Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+                    "evidence_needed": "Row and source guards are implemented, but no approved atomic claim exposes both image-specific subject identity and both requested digest fields. A generic tuple subject is not an image-identity role; typed digest values alone do not authorize the full inventory row."
                   }
                 }
               },
@@ -77,7 +77,7 @@
                       }
                     ],
                     "meaning": "Scoped logical-image identity of this digest comparison.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "algorithm": {
@@ -93,7 +93,7 @@
                       }
                     ],
                     "meaning": "Algorithm of this same-subject acquisition/logical digest comparison.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "acquisition_hash": {
@@ -109,7 +109,7 @@
                       }
                     ],
                     "meaning": "Digest declared by the acquisition container for this comparison subject and algorithm.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "verification_hash": {
@@ -125,7 +125,7 @@
                       }
                     ],
                     "meaning": "Digest recomputed over logical image bytes for this comparison subject and algorithm.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "matches": {
@@ -141,7 +141,7 @@
                       }
                     ],
                     "meaning": "Same-algorithm same-subject equality of retained acquisition and recomputed logical digests; not authenticity.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 }
               },
@@ -278,7 +278,7 @@
     },
     {
       "id": "Q3",
-      "prompt": "Explain installed OS information in detail. (OS name, install date, registered owner\u2026)",
+      "prompt": "Explain installed OS information in detail. (OS name, install date, registered owner…)",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -292,30 +292,138 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ],
-              "meaning": "operating-system product name recorded in configuration",
-              "evidence_needed": "Exact current-hive typed os.product_name value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+              "meaning": "Operating-system product name recorded in current configuration.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "version": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_os_configuration_field_version"
+                "recorded_attribute_os_version_string"
               ],
-              "meaning": "The specified installed OS configuration field. Requested leaf: version.",
-              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal CurrentVersion value recorded in OS configuration; no inferred marketing version.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "build_number": {
             "type": "integer",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_os_configuration_field_build_number"
+                "recorded_attribute_os_build_number_integer"
               ],
-              "meaning": "The specified installed OS configuration field. Requested leaf: build_number.",
-              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Build number from the reviewed canonical decimal OS build field, emitted as an integer.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "registered_owner": {
@@ -328,20 +436,90 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ],
-              "meaning": "registered-owner text, not proof of ownership or user identity",
-              "evidence_needed": "Exact current-hive typed os.registered_owner value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+              "meaning": "Registered-owner configuration text, not physical ownership or user identity.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "system_root": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_os_configuration_field_system_root"
+                "recorded_attribute_os_system_root_string"
               ],
-              "meaning": "The specified installed OS configuration field. Requested leaf: system_root.",
-              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal SystemRoot value recorded in OS configuration.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "installed_at": {
@@ -355,10 +533,42 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ],
-              "meaning": "installation timestamp recorded by the operating system",
-              "evidence_needed": "Exact current-hive typed os.install_time value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+              "meaning": "Installation timestamp recorded by the operating system, as the native ISO timestamp value.",
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -456,10 +666,42 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ],
-              "meaning": "configured computer account name",
-              "evidence_needed": "Exact current-hive typed machine.account_name value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+              "meaning": "Configured computer account name.",
+              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -476,7 +718,7 @@
     },
     {
       "id": "Q6",
-      "prompt": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService. (Account name, login count, last logon date\u2026)",
+      "prompt": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService. (Account name, login count, last logon date…)",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -759,10 +1001,42 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ],
-              "meaning": "shutdown timestamp retained by the source",
-              "evidence_needed": "Exact current-hive typed machine.last_shutdown value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+              "meaning": "Shutdown timestamp retained in the reviewed current source field, not inferred from examination time.",
+              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -1086,10 +1360,53 @@
                       "format": "date-time",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                          "recorded_attribute_app_execution_recorded_time_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "path_or_application_id": {
@@ -1100,12 +1417,49 @@
                         ],
                         "selectors": [
                           {
-                            "form": "attributeRecorded",
-                            "field": "value"
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
                           }
                         ],
-                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
-                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                        "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "execution_count": {
@@ -1120,10 +1474,53 @@
                       "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                          "recorded_attribute_app_execution_run_count_integer"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "source": {
@@ -1136,10 +1533,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_source"
+                          "recorded_attribute_app_execution_source_type_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "time_meaning": {
@@ -1151,10 +1591,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                          "recorded_attribute_app_execution_time_meaning_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     }
                   },
@@ -1178,10 +1661,53 @@
                       "format": "date-time",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                          "recorded_attribute_app_execution_recorded_time_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "path_or_application_id": {
@@ -1192,22 +1718,102 @@
                         ],
                         "selectors": [
                           {
-                            "form": "attributeRecorded",
-                            "field": "value"
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
                           }
                         ],
-                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
-                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                        "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "execution_count": {
                       "type": "integer",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                          "recorded_attribute_app_execution_run_count_integer"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "source": {
@@ -1220,10 +1826,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_source"
+                          "recorded_attribute_app_execution_source_type_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "time_meaning": {
@@ -1235,10 +1884,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                          "recorded_attribute_app_execution_time_meaning_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     }
                   },
@@ -1269,10 +1961,53 @@
                       "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                          "recorded_attribute_app_execution_recorded_time_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "path_or_application_id": {
@@ -1283,12 +2018,49 @@
                         ],
                         "selectors": [
                           {
-                            "form": "attributeRecorded",
-                            "field": "value"
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
                           }
                         ],
-                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
-                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                        "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "execution_count": {
@@ -1303,10 +2075,53 @@
                       "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                          "recorded_attribute_app_execution_run_count_integer"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "source": {
@@ -1319,10 +2134,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_source"
+                          "recorded_attribute_app_execution_source_type_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "time_meaning": {
@@ -1334,10 +2192,53 @@
                       ],
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                          "recorded_attribute_app_execution_time_meaning_string"
                         ],
-                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
-                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "attribute_conditions": [
+                          {
+                            "role": "app.execution.source_type",
+                            "values": [
+                              "Prefetch",
+                              "UserAssist"
+                            ]
+                          }
+                        ]
                       }
                     }
                   },
@@ -1391,7 +2292,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_timestamp"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: timestamp.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: timestamp.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 },
@@ -1401,7 +2302,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_event_id"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: event_id.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: event_id.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 },
@@ -1411,7 +2312,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_description"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: description.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: description.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 }
@@ -1552,20 +2453,96 @@
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_browser_history_artifact_classification_browser"
+                      "recorded_attribute_browser_history_browser_string"
                     ],
-                    "meaning": "Browser identity and exact path of a browser-history artifact. Requested leaf: browser.",
-                    "evidence_needed": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Browser product profile established by validated history-container format/schema.",
+                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
                   }
                 },
                 "path": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_browser_history_artifact_classification_path"
+                      "recorded_attribute_browser_history_path_string"
                     ],
-                    "meaning": "Browser identity and exact path of a browser-history artifact. Requested leaf: path.",
-                    "evidence_needed": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+                    "selectors": [
+                      {
+                        "form": "attributeRecorded",
+                        "field": "value"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal artifact-container path whose validated format/schema matches the reviewed browser-history product profile; not merely a matching filename.",
+                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
                   }
                 }
               },
@@ -1692,7 +2669,7 @@
                       }
                     ],
                     "meaning": "Retained browser-history visit timestamp of this search observation; not personal attribution.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "keyword": {
@@ -1708,7 +2685,7 @@
                       }
                     ],
                     "meaning": "Query text parsed from the browser-history URL for this webSearch observation.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 },
                 "url": {
@@ -1734,7 +2711,7 @@
                       }
                     ],
                     "meaning": "Browser recorded for this same webSearch observation.",
-                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. Every supporting record must pass the implemented exact source-origin gate. Remaining unsupported meanings and source selections keep this draft held."
                   }
                 }
               },
@@ -1875,10 +2852,48 @@
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_email_store_path_identity_path_as_printed"
+                "recorded_attribute_mail_store_path_string"
               ],
-              "meaning": "Exact displayed location of the email file/store. Requested leaf: path_as_printed.",
-              "evidence_needed": "source.path identifies any examined source artifact, not necessarily the email store; emailSent exposes subject/address context but no reviewed store-path field or store identity join."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal path of a mail-store container established by validated format/schema and reviewed product profile.",
+              "evidence_needed": "Validated mail-store container, not arbitrary source.path, extension-only inference or proof of communication/account use. Validation does not establish exclusive producer authenticity. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -1935,37 +2950,37 @@
         {
           "schema_pointer": "/answer_schema/properties/images/items/properties/md5",
           "status": "unsupported_semantic_requirement",
-          "rationale": "Peer resolution: Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+          "rationale": "Peer resolution: Row and source guards are implemented, but no approved atomic claim exposes both image-specific subject identity and both requested digest fields. A generic tuple subject is not an image-identity role; typed digest values alone do not authorize the full inventory row."
         },
         {
           "schema_pointer": "/answer_schema/properties/images/items/properties/sha1",
           "status": "unsupported_semantic_requirement",
-          "rationale": "Peer resolution: Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+          "rationale": "Peer resolution: Row and source guards are implemented, but no approved atomic claim exposes both image-specific subject identity and both requested digest fields. A generic tuple subject is not an image-identity role; typed digest values alone do not authorize the full inventory row."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/image",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact imageDigestsAgree.subject supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.subject supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/algorithm",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact imageDigestsAgree.algorithm supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.algorithm supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/acquisition_hash",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact imageDigestsAgree.acquisition_digest supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.acquisition_digest supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/verification_hash",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact imageDigestsAgree.logical_digest supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.logical_digest supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/matches",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact imageDigestsAgree.digests_match supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.digests_match supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/acquisition_verification/items",
@@ -2060,32 +3075,32 @@
         {
           "schema_pointer": "/answer_schema/properties/os_name",
           "status": "supported_narrow_source_field",
-          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+          "rationale": "Approved typed-role/tuple resolution: Operating-system product name recorded in current configuration. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/version",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal CurrentVersion value recorded in OS configuration; no inferred marketing version. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/build_number",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Build number from the reviewed canonical decimal OS build field, emitted as an integer. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/registered_owner",
           "status": "supported_narrow_source_field",
-          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+          "rationale": "Approved typed-role/tuple resolution: Registered-owner configuration text, not physical ownership or user identity. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/system_root",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal SystemRoot value recorded in OS configuration. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/installed_at",
           "status": "supported_narrow_source_field",
-          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+          "rationale": "Approved typed-role/tuple resolution: Installation timestamp recorded by the operating system, as the native ISO timestamp value. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2093,14 +3108,14 @@
           "form": "attributeRecorded",
           "field": "subject",
           "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
-          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+          "does_not_establish": "Semantic source compatibility alone does not establish selected-PC membership. Compiled exact source admission and same_claim_part row enforcement are required; no personal attribution, authenticity or completeness follows."
         }
       ],
       "row_policies": [
         {
           "schema_pointer": "/answer_schema",
           "mode": "same_claim_part",
-          "rationale": "All fields describe one installed OS on one PC. Present fields must share one atomic claim part; without a compound same-subject attribute join, only one individual attribute role claim can populate this object. Selected-PC-subject gating remains missing."
+          "rationale": "All six fields describe one installed OS. Same_claim_part requires one approved bounded same-subject tuple for multi-role output, with exact role-specific value selectors and compiled selected-PC/base-volume/primary source admission."
         }
       ]
     },
@@ -2145,7 +3160,7 @@
         {
           "schema_pointer": "/answer_schema/properties/computer_name",
           "status": "supported_narrow_source_field",
-          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+          "rationale": "Approved typed-role/tuple resolution: Configured computer account name. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2153,7 +3168,7 @@
           "form": "attributeRecorded",
           "field": "subject",
           "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
-          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+          "does_not_establish": "Semantic source compatibility alone does not establish selected-PC membership. Compiled exact source admission and same_claim_part row enforcement are required; no personal attribution, authenticity or completeness follows."
         }
       ],
       "row_policies": []
@@ -2288,7 +3303,7 @@
         {
           "schema_pointer": "/answer_schema/properties/last_shutdown",
           "status": "supported_narrow_source_field",
-          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+          "rationale": "Approved typed-role/tuple resolution: Shutdown timestamp retained in the reviewed current source field, not inferred from examination time. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2296,7 +3311,7 @@
           "form": "attributeRecorded",
           "field": "subject",
           "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
-          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+          "does_not_establish": "Semantic source compatibility alone does not establish selected-PC membership. Compiled exact source admission and same_claim_part row enforcement are required; no personal attribution, authenticity or completeness follows."
         },
         {
           "form": "attributeRecorded",
@@ -2471,78 +3486,78 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/timestamp",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/path_or_application_id",
           "status": "supported_narrow_source_field",
-          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+          "rationale": "Approved typed-role/tuple resolution: Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/execution_count",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/source",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal reviewed execution-artifact source classification; preserve the public enum unchanged. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/time_meaning",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/timestamp",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/path_or_application_id",
           "status": "supported_narrow_source_field",
-          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+          "rationale": "Approved typed-role/tuple resolution: Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/execution_count",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/source",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal reviewed execution-artifact source classification; preserve the public enum unchanged. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/time_meaning",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/timestamp",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/path_or_application_id",
           "status": "supported_narrow_source_field",
-          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+          "rationale": "Approved typed-role/tuple resolution: Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/execution_count",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/source",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal reviewed execution-artifact source classification; preserve the public enum unchanged. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/time_meaning",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2563,25 +3578,39 @@
           "field": "value",
           "meaning": "recorded_attribute_app_execution_path_string: exact literal complete executable path from reviewed Security 4688 NewProcessName or validated UserAssist executable run path. Prefetch emits only program name, never an inferred path; Shimcache, MuiCache, shortcut and shell identifiers are not promoted.",
           "does_not_establish": "Verified actual code execution, authenticity, purpose, physical user, execution count or event time. Attribute timestamps are examination time. Selected-PC-exhibit gating and same-claim-part row enforcement remain required."
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_0..value_7",
+          "meaning": "Same-subject role-typed execution occurrence values: literal path, native historical artifact timestamp, interpreted run_count, source_type and source-field time_meaning.",
+          "does_not_establish": "Actual code execution, physical actor, complete execution history or source authenticity. Raw DWORD counters and examination timestamps do not substitute. Security process creation outside the public source enum must be refused."
         }
       ],
       "row_policies": [
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/0",
           "mode": "same_claim_part",
-          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+          "rationale": "One execution occurrence or validated history-container subject per object/branch. Present fields must share one candidate and atomic part; multi-role rows require one approved same-subject attributeTuple, plus exact selected-PC source admission. Preserve native types and unchanged enums."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/1",
           "mode": "same_claim_part",
-          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+          "rationale": "One execution occurrence or validated history-container subject per object/branch. Present fields must share one candidate and atomic part; multi-role rows require one approved same-subject attributeTuple, plus exact selected-PC source admission. Preserve native types and unchanged enums."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/anyOf/2",
           "mode": "same_claim_part",
-          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+          "rationale": "One execution occurrence or validated history-container subject per object/branch. Present fields must share one candidate and atomic part; multi-role rows require one approved same-subject attributeTuple, plus exact selected-PC source admission. Preserve native types and unchanged enums."
         }
-      ]
+      ],
+      "source_family_condition": {
+        "role": "app.execution.source_type",
+        "values": [
+          "Prefetch",
+          "UserAssist"
+        ],
+        "scope": "Same atomic claim part, independent of which columns are bound; never borrow the source family from another conjunction part or provenance. Duplicate matching role fields refuse the binding."
+      }
     },
     {
       "question_id": "Q12",
@@ -2663,13 +3692,13 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/artifacts/items/properties/browser",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Browser product profile established by validated history-container format/schema. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/artifacts/items/properties/path",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal artifact-container path whose validated format/schema matches the reviewed browser-history product profile; not merely a matching filename. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2678,13 +3707,19 @@
           "field": "value",
           "meaning": "exact path of the examined source artifact",
           "does_not_establish": "Browser-history classification"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_0..value_7",
+          "meaning": "Same validated browser-history container subject supplies product-profile browser identity and exact container path.",
+          "does_not_establish": "Exclusive producer identity, source authenticity, browser use or attribution to a person."
         }
       ],
       "row_policies": [
         {
           "schema_pointer": "/answer_schema/properties/artifacts/items",
           "mode": "same_claim_part",
-          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+          "rationale": "One execution occurrence or validated history-container subject per object/branch. Present fields must share one candidate and atomic part; multi-role rows require one approved same-subject attributeTuple, plus exact selected-PC source admission. Preserve native types and unchanged enums."
         }
       ]
     },
@@ -2735,12 +3770,12 @@
         {
           "schema_pointer": "/answer_schema/properties/searches/items/properties/timestamp",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact searched.recorded_time_us supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact searched.recorded_time_us supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/searches/items/properties/keyword",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact searched.query supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact searched.query supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/searches/items/properties/url",
@@ -2750,7 +3785,7 @@
         {
           "schema_pointer": "/answer_schema/properties/searches/items/properties/browser",
           "status": "supported_narrow_source_field",
-          "rationale": "Row-guard resolution: exact searched.browser supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+          "rationale": "Row-guard resolution: exact searched.browser supports this field when all present row fields share one candidate and atomic claim part. Production same_claim_part and exact source-origin checks enforce these constraints. Complete collection scope is unproved."
         },
         {
           "schema_pointer": "/answer_schema/properties/searches/items",
@@ -2840,8 +3875,8 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/path_as_printed",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "source.path identifies any examined source artifact, not necessarily the email store; emailSent exposes subject/address context but no reviewed store-path field or store identity join."
+          "status": "supported_narrow_source_field",
+          "rationale": "Approved typed-role/tuple resolution: Literal path of a mail-store container established by validated format/schema and reviewed product profile. Exact attributeRecorded.value or role-typed attributeTuple.value_0..value_7 only. Same-claim-part and compiled selected-PC source admission remain mandatory; no broader action, actor or complete-list meaning is inferred."
         }
       ],
       "narrow_observations": [
@@ -2850,6 +3885,12 @@
           "field": "value",
           "meaning": "exact path of the examined source artifact",
           "does_not_establish": "Identity of the email store"
+        },
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "Validated mail.store.path native string supplies exact mail-store container path.",
+          "does_not_establish": "Email communication, personal account use, exclusive producer identity or authenticity."
         }
       ],
       "row_policies": []

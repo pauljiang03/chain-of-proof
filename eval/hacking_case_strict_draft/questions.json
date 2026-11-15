@@ -41,7 +41,7 @@
                     "asserted_digest_algorithm"
                   ],
                   "meaning": "Algorithm of a reviewed logical/acquisition image-digest role; a comparison result requires the separate equality relation.",
-                  "evidence_needed": "A fixed reviewed image-digest role or a same-algorithm digest comparison over the bound logical-image subject. Keep algorithm/digest source association explicit. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+                  "evidence_needed": "A fixed reviewed image-digest role or a same-algorithm digest comparison over the bound logical-image subject. Keep algorithm/digest source association explicit. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
                   "selectors": [
                     {
                       "form": "imageDigestsAgree",
@@ -65,7 +65,7 @@
                     "recorded_attribute_image_logical_sha256_string"
                   ],
                   "meaning": "Digest recomputed over logical media bytes, not container or segment bytes.",
-                  "evidence_needed": "A completed logical-media hash calculation tied to the examined image subject. A retained acquisition checksum is not required merely to report a computed digest; it is required for the separate comparison assertion. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+                  "evidence_needed": "A completed logical-media hash calculation tied to the examined image subject. A retained acquisition checksum is not required merely to report a computed digest; it is required for the separate comparison assertion. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
                   "selectors": [
                     {
                       "form": "imageDigestsAgree",
@@ -74,6 +74,38 @@
                     {
                       "form": "attributeRecorded",
                       "field": "value"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_0"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_1"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_2"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_3"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_4"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_5"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_6"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_7"
                     }
                   ]
                 }
@@ -96,7 +128,7 @@
                 "same_algorithm_same_subject_digest_equality_not_authenticity"
               ],
               "meaning": "Equality of acquisition and recomputed logical-image digests for the same algorithm and subject; not original authenticity.",
-              "evidence_needed": "Both bound digests and the approved equality relation. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Both bound digests and the approved equality relation. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "imageDigestsAgree",
@@ -150,11 +182,43 @@
                 "recorded_attribute_os_product_name_string"
               ],
               "meaning": "operating-system product name recorded in configuration",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -198,11 +262,43 @@
                 "recorded_attribute_os_install_time_string"
               ],
               "meaning": "installation timestamp recorded by the operating system",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -251,7 +347,7 @@
                 "needs_effective_timezone_label_and_offset_time_zone_setting"
               ],
               "meaning": "Q4 requested answer value /properties/time_zone_setting under the full public prompt and schema description.",
-              "evidence_needed": "The schema requests an effective label with UTC offset. host_attributes emits only TimeZoneKeyName or StandardName as the typed value; Bias/DaylightBias remain provenance. A reviewed effective-offset/display convention rule and exact composite role are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "The schema requests an effective label with UTC offset. host_attributes emits only TimeZoneKeyName or StandardName as the typed value; Bias/DaylightBias remain provenance. A reviewed effective-offset/display convention rule and exact composite role are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -292,11 +388,43 @@
                 "recorded_attribute_os_registered_owner_string"
               ],
               "meaning": "registered-owner text, not proof of ownership or user identity",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -339,11 +467,43 @@
                 "recorded_attribute_machine_account_name_string"
               ],
               "meaning": "configured computer account name",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -386,11 +546,43 @@
                 "recorded_attribute_machine_primary_domain_string"
               ],
               "meaning": "configured primary-domain name",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -434,11 +626,43 @@
                 "recorded_attribute_machine_last_shutdown_string"
               ],
               "meaning": "shutdown timestamp retained by the source",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -488,11 +712,43 @@
                 "recorded_attribute_account_count_integer"
               ],
               "meaning": "reader-reported account count under its stated enumeration scope",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -536,7 +792,7 @@
                 "needs_predominant_account_identity_account_name"
               ],
               "meaning": "Q10 requested answer value /properties/account_name under the full public prompt and schema description.",
-              "evidence_needed": "A justified account population, usage metric, interval and comparison rule are missing. Account names and isolated logon counters do not establish predominant use. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "A justified account population, usage metric, interval and comparison rule are missing. Account names and isolated logon counters do not establish predominant use. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -620,7 +876,7 @@
                 "needs_person_alias_admin_file_identity_file_path"
               ],
               "meaning": "Q12 requested answer value /properties/file_path under the full public prompt and schema description.",
-              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           },
           "program": {
@@ -631,7 +887,7 @@
                 "needs_person_alias_admin_file_identity_program"
               ],
               "meaning": "Q12 requested answer value /properties/program under the full public prompt and schema description.",
-              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -676,7 +932,7 @@
                   "needs_network_card_actual_use_items"
                 ],
                 "meaning": "Q13 requested answer value /properties/network_cards/items under the full public prompt and schema description.",
-                "evidence_needed": "The NetworkCards description role records configured inventory. It does not establish that an interface was actually used by the computer. An interface-use rule and identity link are absent; this is not a completeness objection. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "The NetworkCards description role records configured inventory. It does not establish that an interface was actually used by the computer. An interface-use rule and identity link are absent; this is not a completeness objection. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -719,7 +975,7 @@
                 "needs_referenced_setup_file_network_identity_ip_address"
               ],
               "meaning": "Q14 requested answer value /properties/ip_address under the full public prompt and schema description.",
-              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           },
           "mac_address": {
@@ -730,7 +986,7 @@
                 "needs_referenced_setup_file_network_identity_mac_address"
               ],
               "meaning": "Q14 requested answer value /properties/mac_address under the full public prompt and schema description.",
-              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -773,7 +1029,7 @@
                 "needs_setup_interface_identity_network_card"
               ],
               "meaning": "Q15 requested answer value /properties/network_card under the full public prompt and schema description.",
-              "evidence_needed": "Vendor-prefix agreement or a configured interface does not establish which interface was used in LOOK@LAN setup. A source-scoped setup identity/use rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "Vendor-prefix agreement or a configured interface does not establish which interface was used in LOOK@LAN setup. A source-scoped setup identity/use rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -817,7 +1073,7 @@
                   "needs_installed_hacking_capability_program_items"
                 ],
                 "meaning": "Q16 requested answer value /properties/programs/items under the full public prompt and schema description.",
-                "evidence_needed": "programInstalledAt.program establishes a recorded installation name only. The requested hacking capability requires a reviewed capability classification rule; six-example completeness is not the reason for blocking individual names. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "programInstalledAt.program establishes a recorded installation name only. The requested hacking capability requires a reviewed capability classification rule; six-example completeness is not the reason for blocking individual names. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -865,7 +1121,7 @@
                 "needs_mr_evil_smtp_account_identity_email_address"
               ],
               "meaning": "Q17 requested answer value /properties/email_address under the full public prompt and schema description.",
-              "evidence_needed": "An app.config.email field may be NNTP, generic profile or mIRC email. It proves neither SMTP role nor attribution to Mr. Evil. An account/service/person association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "An app.config.email field may be NNTP, generic profile or mIRC email. It proves neither SMTP role nor attribution to Mr. Evil. An account/service/person association rule is absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -907,7 +1163,7 @@
                 "needs_mr_evil_nntp_settings_identity_nntp_server"
               ],
               "meaning": "Q18 requested answer value /properties/nntp_server under the full public prompt and schema description.",
-              "evidence_needed": "A configured NNTP hostname is narrow source text. Attribution of that setting to Mr. Evil and the requested account/source requires an explicit identity rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "A configured NNTP hostname is narrow source text. Attribution of that setting to Mr. Evil and the requested account/source requires an explicit identity rule. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -951,7 +1207,7 @@
                   "needs_installed_program_relevant_settings_identity_items"
                 ],
                 "meaning": "Q19 requested answer value /properties/programs/items under the full public prompt and schema description.",
-                "evidence_needed": "An app.name or installation name does not establish both installation and containment of the SMTP/NNTP settings referenced by prior questions. A reviewed installed-program/source/settings association and any product-name expansion rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "An app.name or installation name does not establish both installation and containment of the SMTP/NNTP settings referenced by prior questions. A reviewed installed-program/source/settings association and any product-name expansion rule are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -995,7 +1251,7 @@
                   "needs_mr_evil_newsgroup_subscription_identity_items"
                 ],
                 "meaning": "Q20 requested answer value /properties/newsgroups/items under the full public prompt and schema description.",
-                "evidence_needed": "A subscription configuration role, even when available, does not prove Mr. Evil account identity. A retained DBX mailbox name is not a subscription state. Need account-bound subscription evidence and an identity rule; individual valid examples need not prove a complete list. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "A subscription configuration role, even when available, does not prove Mr. Evil account identity. A retained DBX mailbox name is not a subscription state. Need account-bound subscription evidence and an identity rule; individual valid examples need not prove a complete list. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -1044,7 +1300,7 @@
                 "needs_mirc_online_settings_source_identity_real_name"
               ],
               "meaning": "Q21 requested answer value /properties/real_name under the full public prompt and schema description.",
-              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           },
           "email_address": {
@@ -1055,7 +1311,7 @@
                 "needs_mirc_online_settings_source_identity_email_address"
               ],
               "meaning": "Q21 requested answer value /properties/email_address under the full public prompt and schema description.",
-              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           },
           "nickname": {
@@ -1066,7 +1322,7 @@
                 "needs_mirc_online_settings_source_identity_nickname"
               ],
               "meaning": "Q21 requested answer value /properties/nickname under the full public prompt and schema description.",
-              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           },
           "alternate_nickname": {
@@ -1077,7 +1333,7 @@
                 "needs_mirc_online_settings_source_identity_alternate_nickname"
               ],
               "meaning": "Q21 requested answer value /properties/alternate_nickname under the full public prompt and schema description.",
-              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1124,7 +1380,7 @@
                   "needs_user_accessed_irc_channel_log_identity_items"
                 ],
                 "meaning": "Q22 requested answer value /properties/channels/items under the full public prompt and schema description.",
-                "evidence_needed": "The exact IRC log-basename role establishes a retained mIRC log with Session Ident channel metadata. It does not establish access by the user of this computer or a particular person. An actor/session access rule is absent; three-example completeness is separate. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "The exact IRC log-basename role establishes a retained mIRC log with Session Ident channel metadata. It does not establish access by the user of this computer or a particular person. An actor/session access rule is absent; three-example completeness is separate. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -1173,7 +1429,7 @@
                 "needs_referenced_intercept_capture_file_identity_file_name"
               ],
               "meaning": "Q23 requested answer value /properties/file_name under the full public prompt and schema description.",
-              "evidence_needed": "traffic.file_name establishes the basename of a decoded classic-PCAP source. It does not bind that source to the referenced Ethereal capture/user directory or interception scenario. Need a source-affiliation rule rather than assuming every traffic artifact is the requested file. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "traffic.file_name establishes the basename of a decoded classic-PCAP source. It does not bind that source to the referenced Ethereal capture/user directory or interception scenario. Need a source-affiliation rule rather than assuming every traffic artifact is the requested file. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1215,7 +1471,7 @@
                 "needs_captured_victim_device_type_computer_type"
               ],
               "meaning": "Q24 requested answer value /properties/computer_type under the full public prompt and schema description.",
-              "evidence_needed": "A User-Agent string may be spoofed. Victim association and physical/platform type require an explicit reviewed interpretation and capture/session identity rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "A User-Agent string may be spoofed. Victim association and physical/platform type require an explicit reviewed interpretation and capture/session identity rule. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1259,7 +1515,7 @@
                   "needs_victim_accessed_website_identity_items"
                 ],
                 "meaning": "Q25 requested answer value /properties/websites/items under the full public prompt and schema description.",
-                "evidence_needed": "Captured Host/URL fields do not establish victim attribution, actual browsing or affiliation with the referenced capture. A URL also is not the requested host-only/service-product value without a transformation rule. Need scoped access/identity and host/service extraction rules. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+                "evidence_needed": "Captured Host/URL fields do not establish victim attribution, actual browsing or affiliation with the referenced capture. A URL also is not the requested host-only/service-product value without a transformation rule. Need scoped access/identity and host/service extraction rules. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
               }
             }
           }
@@ -1301,7 +1557,7 @@
                 "needs_main_user_webmail_account_identity_email_address"
               ],
               "meaning": "Q26 requested answer value /properties/email_address under the full public prompt and schema description.",
-              "evidence_needed": "Email-address text in a browser artifact is not ownership or main-user identity and may identify another person or recipient. Need a webmail/account/main-user association rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "Email-address text in a browser artifact is not ownership or main-user identity and may identify another person or recipient. Need a webmail/account/main-user association rule. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1343,7 +1599,7 @@
                 "needs_yahoo_mail_cache_filename_identity_file_name"
               ],
               "meaning": "Q27 requested answer value /properties/file_name under the full public prompt and schema description.",
-              "evidence_needed": "Generic browser-cache filenames are not Yahoo mail message copies or documented mail filename patterns. Need service/content classification tied to the filename source; generic cache-file presence cannot establish it. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "Generic browser-cache filenames are not Yahoo mail message copies or documented mail filename patterns. Need service/content classification tied to the filename source; generic cache-file presence cannot establish it. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1385,11 +1641,43 @@
                 "recorded_attribute_recycle_executable_count_integer"
               ],
               "meaning": "reader-reported executable count in its stated Recycle Bin scope",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -1433,7 +1721,7 @@
                 "needs_referenced_recycle_executable_set_deleted_state_deleted_from_file_system"
               ],
               "meaning": "Q29 requested answer value /properties/deleted_from_file_system under the full public prompt and schema description.",
-              "evidence_needed": "filesystem.deleted_flag is per named MFT entry or INFO2-associated retained file. The Boolean asks about the referenced executable set; a set-membership/aggregation rule linking Q28 files and their actual in-use flags is absent. One unrelated flag is insufficient; recoverability remains a different question. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              "evidence_needed": "filesystem.deleted_flag is per named MFT entry or INFO2-associated retained file. The Boolean asks about the referenced executable set; a set-membership/aggregation rule linking Q28 files and their actual in-use flags is absent. One unrelated flag is insufficient; recoverability remains a different question. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
             }
           }
         },
@@ -1476,11 +1764,43 @@
                 "recorded_attribute_filesystem_deleted_count_integer"
               ],
               "meaning": "reader-reported deleted-entry count in its stated filesystem scope",
-              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability.",
               "selectors": [
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }
@@ -1529,6 +1849,38 @@
                 {
                   "form": "attributeRecorded",
                   "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
                 }
               ]
             }

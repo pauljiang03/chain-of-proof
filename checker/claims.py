@@ -16,6 +16,7 @@ Agents propose instances of approved sets, snapped together with "both":
     {"usbConnected": [usb]}  {"opened": [lnk]}  {"searched": [search]}
     {"fileCreatedAt": [created]}  {"fileModifiedAt": [modified]}
     {"sameContent": [content, content]}  {"contentOf": [created, content]}   R28
+    {"attributeTuple": [[subject, role_fact, value_fact, "approved.role"], ...]}  R34
     one-record forms for every other kind (settingRecorded, programRan, visited, ...)
     {"both":            [claim, claim, ...]}
     {"exactly": [kind, n]}  {"exactlyDistinct": [kind, slot, n]}
@@ -36,6 +37,7 @@ from .facts import KINDS, Fact, FactSource
 from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, decode_value
 
 MAX_PARTS = 64
+MAX_ATTRIBUTE_TUPLE = 8
 # Every row remains cited and independently checked for source completeness.
 # Distinct-value reduction is quadratic in the existing Lean definition, so keep
 # a finite ceiling even though chunked emission removes the giant-list limit.
@@ -676,6 +678,18 @@ def _en_attributes_agree(args, facts, src):
     return _en_attributes_same(args, facts, src) + ' Their typed recorded values agree exactly.'
 
 
+def _en_attribute_tuple(args, facts, src):
+    values = []
+    for subject, _, value, role in args:
+        spec = ROLES[role]
+        text = decode_value(src.string(facts[value].aux), spec.value_type)
+        values.append(f'{spec.meaning}: {text!r} (role {role}; examined {_utc(facts[subject].t)})')
+    return (f'For source subject {src.string(facts[args[0][0]].aux)}, these {len(args)} '
+            f'typed observations have exactly the same scoped source subject: '
+            + '; '.join(values) + '. This certifies source association, not personal attribution, '
+            'simultaneous activity, intent or completeness of the source.')
+
+
 def _en_image_digests(args, facts, src):
     s, _, v, _, _, _, algorithm = args
     return (f'The recomputed logical-image {algorithm.upper()} and retained acquisition '
@@ -696,6 +710,8 @@ class SetDef:
 
 
 SETS: Dict[str, SetDef] = {
+    "attributeTuple": SetDef(("attributes",), "Sets.attributeTuple", ("R34",), "strong",
+                             _en_attribute_tuple),
     "attributeRecorded": SetDef(("fact", "fact", "fact", "role"), "Sets.recordedAttribute",
                                   ("R34",), "strong", _en_attribute),
     "attributesSameSubject": SetDef(("fact", "fact", "fact", "role", "fact", "fact", "fact", "role"),
@@ -810,6 +826,14 @@ def _parse(obj) -> Claim:
         return claim
     if name not in SETS:
         raise ClaimError(f"unknown claim {name!r}; expected one of {sorted(SETS)} or 'both'")
+    if name == "attributeTuple":
+        if not isinstance(args, list) or not 2 <= len(args) <= MAX_ATTRIBUTE_TUPLE:
+            raise ClaimError(f'attributeTuple takes 2 to {MAX_ATTRIBUTE_TUPLE} typed attribute rows')
+        rows = tuple(_parse({"attributeRecorded": row})[1] for row in args)
+        roles = [row[3] for row in rows]
+        if len(set(roles)) != len(roles):
+            raise ClaimError('attributeTuple requires distinct approved roles')
+        return name, rows
     params = SETS[name].params
     if not isinstance(args, list) or len(args) != len(params):
         raise ClaimError(f'"{name}" takes {len(params)} arguments {list(params)}, got {args!r}')
@@ -842,6 +866,8 @@ def parts(c: Claim) -> List[Claim]:
 
 def _fact_args(part: Claim) -> List[int]:
     name, args = part
+    if name == "attributeTuple":
+        return [fact_id for row in args for fact_id in row[:3]]
     return [a for kind, a in zip(SETS[name].params, args) if kind == "fact"]
 
 
@@ -907,6 +933,12 @@ def to_lean(c: Claim) -> str:
     if c[0] == "both":
         return f".both ({to_lean(c[1])}) ({to_lean(c[2])})"
     name, args = c
+    if name == 'attributeTuple':
+        rows = []
+        for s, r, v, role in args:
+            spec = ROLES[role]
+            rows.append(f'⟨{s}, {r}, {v}, .{spec.kind}, .{spec.value_kind}⟩')
+        return f'Sets.attributeTuple {rows[0]} [{", ".join(rows[1:])}]'
     if name == 'attributeRecorded':
         s, r, v, role = args
         spec = ROLES[role]
@@ -931,6 +963,8 @@ def to_lean(c: Claim) -> str:
 def to_json(c: Claim):
     if c[0] == "both":
         return {"both": [to_json(p) for p in parts(c)]}
+    if c[0] == "attributeTuple":
+        return {c[0]: [list(row) for row in c[1]]}
     return {c[0]: list(c[1])}
 
 
