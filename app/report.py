@@ -183,7 +183,6 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
   .brief .small, .brief .mono, .brief code { font-size:8pt; }
   .brief footer { margin-top:12px; padding-top:8px; font-size:8pt; }
 }
-.exact-value { white-space:pre-wrap; overflow-wrap:anywhere; }
 """
 
 
@@ -338,21 +337,23 @@ def _front(info, tz, case, findings, options, story, short=False):
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
-    if not short and story.get('investigator_overview'):
-        out.append('<div class="investigator-overview"><h3>Investigator overview (unverified)</h3>'
-                   '<p class="exact-value">' + _h(story['investigator_overview']['text']) + '</p></div>')
     if story.get('lead'):
-        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story['lead']) + '</p>')
+        parts, step = [[], [], []], 0
+        for sentence in story.get('lead_detail') or story['lead']:
+            dated = bool(re.match(r'^(On|From|By) \d{4}-\d{2}-\d{2}', sentence))
+            step = 1 if dated else (2 if step >= 1 else 0)
+            parts[step].append(sentence)
+        out.append(''.join('<p class="lead">' + ' '.join(_h(sentence) for sentence in part) + '</p>' for part in parts if part))
     if story['points']:
         out.append('<div class="keys">')
         for point in story['points']:
             body = '<p>' + ' '.join(_h(sentence) for sentence in point['sentences']) + '</p>'
             if point['key'] == 'devices' and story['devices']:
-                body += _table(('Record', 'Source', 'Recorded name', 'USB identifier', 'Volume serial', 'Record timestamp'),
-                               [tuple(_h(row[key]) or '—' for key in ('record', 'item', 'device', 'serial', 'volume', 'recorded_time'))
+                body += _table(('Item', 'Device', 'Serial number', 'Volume label', 'First connection', 'Last connection'),
+                               [tuple(_h(row[key]) or '—' for key in ('item', 'device', 'serial', 'label', 'first', 'last'))
                                 for row in story['devices'][:6]], 'devices')
                 if len(story['devices']) > 6:
-                    body += '<p class="small">The table shows 6 of ' + f"{len(story['devices']):,}" + ' cited storage records.</p>'
+                    body += '<p class="small">The table shows 6 of ' + f"{len(story['devices']):,}" + ' devices.</p>'
             out.append('<div class="key"><h3>' + _h(point['title']) + '</h3><div>' + body + '</div></div>')
         out.append('</div>')
     else:
@@ -361,13 +362,12 @@ def _front(info, tz, case, findings, options, story, short=False):
     if days:
         rows = []
         for day in days:
-            events = ' · '.join(_h(f"{group['count']:,} " + _SUMMARY_LABELS.get(group.get('kind'), 'source')
-                                   + (' record' if group['count'] == 1 else ' records')
+            events = ' · '.join(_h((group['one'] if group['count'] == 1 else f"{group['count']:,} {group['many']}")
                                    + ' (' + _span(group['first'], group['last'], tz) + ')')
                               for group in _day_events(day['events'], most=5 if short else 3))
-            row = (_h(_day(day['date'])), events or 'No listed source records on this day.')
+            row = (_h(_day(day['date'])), events or 'No key events on this day.')
             rows.append((*row, f"{day['records']:,}") if short else row)
-        headings = ('Day', 'Cited records and source timestamps', 'Records') if short else ('Day', 'Cited records and source timestamps')
+        headings = ('Day', 'Recorded events and times', 'Records') if short else ('Day', 'Recorded events and times')
         out += ['<div class="timeline-block"><h3>Timeline <span class="small">(' + _h(clock_name) + ')</span></h3>',
                 _table(headings, rows, 'days'), '</div>']
     if short:

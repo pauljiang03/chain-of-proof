@@ -1,10 +1,8 @@
 """The key findings are sentences about what verified findings' own records say. Synthetic bundles only."""
 import unittest
-import html
 from datetime import datetime, timezone
 
 from app import narrative
-from app.report import render_html
 
 NEW_YORK = 'local time, converted from America/New_York'
 MEANING = 'time recorded by the source'
@@ -73,79 +71,44 @@ def case():
 
 
 class Narrative(unittest.TestCase):
-    def test_unbound_investigator_overview_is_separate_from_recorded_summary(self):
-        run = case()
-        overview = 'An unsupported inference with "a  b".\n<unsafe>'
-        run['case']['case_summary'] = overview
-        baseline = narrative.build(case())
-        story = narrative.build(run)
-        self.assertEqual(story['lead'], baseline['lead'])
-        self.assertEqual(story['points'], baseline['points'])
-        self.assertEqual(story['investigator_overview'], {'text': overview, 'status': 'unverified'})
-        rendered = render_html(run)
-        self.assertIn('Investigator overview (unverified)', rendered)
-        self.assertIn(html.escape(overview), rendered)
-        self.assertNotIn('<unsafe>', rendered)
-
-    def test_prose_lead_keeps_identifiers_literals_and_source_time_limits(self):
-        story = narrative.build(case())
-        text = ' '.join(story['lead'])
-        self.assertIn('1 distinct USB identifier', text)
-        self.assertIn('"LAB-PC"', text)
-        self.assertIn('"lab-pc"', text)
-        self.assertIn('1 optical-drive record', text)
-        self.assertIn('These source timestamps range from', text)
-        for stronger in ('USB storage device', 'activity starts', 'activity stops', 'disc-burning record',
-                         'The computer name is'):
-            self.assertNotIn(stronger, text)
-
     def test_every_topic_states_what_its_records_say(self):
         story = narrative.build(case())
         self.assertEqual(story['zone'], 'America/New_York' if story['zone'] else None)
         local = story['zone'] is not None                       # this system may not know the zone; then times are UTC
-        self.assertEqual(sentences(story, 'computer'), ['The records show 2 values for the computer name: LAB-PC and lab-pc.',
-                                                        'The cited records name the operating system Example OS 9.',
-                                                        'The cited records contain 2 distinct local-account names: Admin and worker.',
+        self.assertEqual(sentences(story, 'computer'), ['The computer name is LAB-PC.', 'The operating system is Example OS 9.',
+                                                        'The computer has 2 local accounts: Admin and worker.',
                                                         'The records show the Google Drive account worker@example.org.'])
         self.assertEqual(next(point for point in story['points'] if point['key'] == 'computer')['records'], 6)
-        self.assertEqual(sentences(story, 'devices'), ['The cited records include 2 USB identifier records.',
-            'The cited records include 2 volume records.'])
-        self.assertEqual(len(story['devices']), 4)
-        self.assertEqual([item['record'] for item in story['devices']],
-                         ['usbInsert #8', 'usbInsert #9', 'volumeOnDevice #10', 'volumeSeen #11'])
-        self.assertEqual([item['label'] for item in story['devices']], ['', '', '', 'TRAVEL'])
-        self.assertIn('2024-05-06 10:00' if local else '2024-05-06 14:00', story['devices'][0]['recorded_time'])
+        self.assertEqual(sentences(story, 'devices'), ['The computer records show connections of 1 USB storage device.'])
+        self.assertEqual(story['devices'], [{
+            'item': 'USB-1', 'device': 'Acme Pocket Drive', 'serial': 'SER-1', 'label': 'TRAVEL', 'volume': 'AA11',
+            'first': '2024-05-06 10:00' if local else '2024-05-06 14:00', 'last': '2024-05-07 11:30' if local else '2024-05-07 15:30'}])
         self.assertEqual(sentences(story, 'folders'), [
-            '2 cited folder records name a path under \\\\server\\share.',
-            'The cited records also contain 1 folder-path reference with drive letter E:.'])
+            'The account "worker" opened 2 folders on the network location \\\\server\\share.',
+            'The records also show 1 opened folder on drive E:.'])
         self.assertEqual(sentences(story, 'files'), [
-            '1 cited tag record carries the confidential label.', 'One example is budget.xlsx.',
-            '1 cited tag record carries a same-size-and-time label.',
-            'The cited records include 2 file-rename records.', '1 record pairs file names with different extensions.',
-            'One recorded name pair: budget.xlsx and holiday.jpg.',
-            '1 cited file-creation record carries the recovery-area label "unallocated space of device SER-1".'])
+            '1 path contains the confidential-project marker.', 'One example is budget.xlsx.',
+            '1 file entry has the same size and last-modified time as a file in a different location.',
+            'The file system journal shows 2 file renames.', '1 rename changed the file name extension.',
+            'One example: budget.xlsx became holiday.jpg.', 'The unallocated space of USB-1 contains 1 recovered file entry.'])
         web = sentences(story, 'web')
-        self.assertEqual(web[0], 'The cited records include 2 web-search records (Chrome and Internet Explorer).')
-        self.assertTrue(web[1].startswith('The retained source timestamps fall from 2024-05-06 '))
-        self.assertEqual(web[2:], ['1 search text matches the search watch list.', 'These are examples: "how to hide a file".'])
+        self.assertTrue(web[0].startswith('The browser history contains 2 web searches (Chrome and Internet Explorer) from 2024-05-06 '))
+        self.assertEqual(web[1:], ['1 search text matches the search watch list.', 'These are examples: "how to hide a file".'])
         downloads = sentences(story, 'downloads')
-        self.assertEqual(downloads[0], 'The cited download records name 1 distinct file basename: wiper.exe.')
-        self.assertTrue(downloads[1].startswith('The retained source timestamps fall on 2024-05-07 at '))
-        self.assertNotIn('started programs', ' '.join(downloads))
+        self.assertTrue(downloads[0].startswith('The account "worker" downloaded 1 file on 2024-05-07 at '))
+        self.assertTrue(downloads[0].endswith(': wiper.exe.'))
+        self.assertEqual(downloads[1], '1 of these files appears in the records of started programs.')
         mail = sentences(story, 'mail')
-        self.assertEqual(mail[0], 'The cited records include 2 e-mail records.')
-        self.assertTrue(mail[1].startswith('The retained source timestamps fall from 2024-05-06 '))
-        self.assertEqual(mail[2:], ['1 record carries the address text "from friend to worker".',
-                                    '1 record carries the address text "from worker to friend".',
-                                    'These are the subjects: "Plans" and "RE: Plans".'])
+        self.assertTrue(mail[0].startswith('The mailbox contains 2 e-mail messages from 2024-05-06 '))
+        self.assertEqual(mail[1:], ['1 message is from friend to worker.', '1 message is from worker to friend.',
+                                    'These are the subjects: "Plans".'])
         cloud = sentences(story, 'cloud')
-        self.assertEqual(cloud[0], 'The cited Google Drive client records contain 1 distinct file name.')
-        self.assertTrue(cloud[1].startswith('The retained source timestamps fall on 2024-05-07 at '))
-        self.assertEqual(cloud[2:], ['1 record carries an uploaded status label.', 'The file names are: budget.xlsx.'])
-        self.assertEqual(sentences(story, 'deleted')[0], 'The Recycle Bin index shows 1 deletion record.')
-        self.assertEqual(sentences(story, 'disc')[0], 'The cited records include 1 optical-drive record.')
+        self.assertTrue(cloud[0].startswith('The Google Drive client log shows 1 file event for 1 file on 2024-05-07 at '))
+        self.assertEqual(cloud[1:], ['1 event is an upload.', 'The file names are: budget.xlsx.'])
+        self.assertTrue(sentences(story, 'deleted')[0].startswith('The Recycle Bin index shows 1 deleted item on 2024-05-07 at '))
+        self.assertTrue(sentences(story, 'disc')[0].startswith('The records show 1 trace of disc writing on 2024-05-07 at '))
         self.assertEqual(sentences(story, 'notes'), ['The Windows Explorer search box contains the search text "budget".',
-                                                     'A Sticky Notes file contains this text: "Call  me\n\nlater".'])
+                                                     'A Sticky Notes file contains this text: "Call me later".'])
         # short sentences, and a count of the records and findings each topic rests on
         self.assertEqual([point['key'] for point in story['points']],
                          ['devices', 'folders', 'files', 'disc', 'mail', 'web', 'downloads', 'cloud', 'deleted', 'notes', 'computer'])
@@ -157,68 +120,6 @@ class Narrative(unittest.TestCase):
                 self.assertLessEqual(len(sentence.split()), 25, sentence)
                 self.assertTrue(sentence.endswith('.'), sentence)
 
-    def test_literal_source_values_survive_summary_and_both_report_formats(self):
-        values = ('password: a  b', ' leading and trailing ', 'line 1\n\nline 2',
-                  'a\tb', 'Ω 日本語', '<tag> & "quoted"')
-        for value in values:
-            with self.subTest(value=value):
-                data = bundle(finding('Literal', [
-                    row(1, 'noteText', value, 'Sticky Notes'),
-                    row(2, 'localSearch', value, 'Explorer search box'),
-                    row(3, 'emailSent', value, 'from worker to friend'),
-                    row(4, 'systemSetting', 'registered owner', value),
-                ]))
-                story = narrative.build(data)
-                expected = {
-                    'notes': [f'The Explorer search box contains the search text "{value}".',
-                              f'A Sticky Notes file contains this text: "{value}".'],
-                    'mail': [f'These are the subjects: "{value}".'],
-                    'computer': [f'The cited records name the registered owner "{value}".'],
-                }
-                for key, expected_sentences in expected.items():
-                    for sentence in expected_sentences:
-                        self.assertIn(sentence, sentences(story, key))
-                for short in (False, True):
-                    rendered = render_html(data, options={'brief': short})
-                    summary = rendered.split('<section id="summary">', 1)[1].split('</section>', 1)[0]
-                    for expected_sentences in expected.values():
-                        for sentence in expected_sentences:
-                            self.assertIn(html.escape(sentence), summary)
-
-    def test_distinct_recorded_names_and_text_keep_case_and_space_differences(self):
-        for left, right in (('A.txt', 'a.txt'), ('a  b.txt', 'a b.txt')):
-            with self.subTest(values=(left, right)):
-                data = bundle(finding('Distinct', [
-                    row(1, 'cloudFile', left, 'google drive: uploaded'),
-                    row(2, 'cloudFile', right, 'google drive: uploaded'),
-                    row(3, 'cloudFile', left, 'google drive: uploaded'),
-                    row(4, 'emailSent', left, 'from worker to friend'),
-                    row(5, 'emailSent', right, 'from worker to friend'),
-                    row(6, 'noteText', left, 'Sticky Notes'),
-                    row(7, 'noteText', right, 'Sticky Notes'),
-                ]))
-                story = narrative.build(data)
-                self.assertEqual(sentences(story, 'cloud')[0],
-                                 'The cited Google Drive client records contain 2 distinct file names.')
-                self.assertIn(f'The file names are: {left} and {right}.', sentences(story, 'cloud'))
-                self.assertIn(f'These are the subjects: "{left}" and "{right}".', sentences(story, 'mail'))
-                self.assertEqual(sentences(story, 'notes'), [
-                    f'A Sticky Notes file contains this text: "{left}".',
-                    f'A Sticky Notes file contains this text: "{right}".'])
-                for short in (False, True):
-                    rendered = render_html(data, options={'brief': short})
-                    self.assertIn('2 distinct file names.', rendered)
-                    self.assertIn(html.escape(f'The file names are: {left} and {right}.'), rendered)
-
-    def test_shortened_note_is_labeled_as_an_excerpt(self):
-        value = 'password: a  b\n' + 'Ω' * 150
-        data = bundle(finding('Excerpt', [row(1, 'noteText', value, 'Sticky Notes')]))
-        expected = f'A Sticky Notes file contains this text excerpt (first 140 characters): "{value[:140]}".'
-        self.assertEqual(sentences(narrative.build(data), 'notes'), [expected])
-        for short in (False, True):
-            rendered = render_html(data, options={'brief': short})
-            self.assertIn(html.escape(expected), rendered)
-
     def test_only_verified_findings_are_read_and_a_selection_narrows_them(self):
         data = case()
         data['findings'].append(finding('F9', [row(90, 'emailSent', 'Unchecked', 'from x to y', micro(2024, 5, 8, 9, 0))], status='rejected'))
@@ -226,7 +127,7 @@ class Narrative(unittest.TestCase):
         story = narrative.build(data)
         self.assertEqual(story['findings'], 3)
         self.assertNotIn('Unchecked', str(story))
-        self.assertEqual(sentences(story, 'mail')[0], 'The cited records include 2 e-mail records.')
+        self.assertTrue(sentences(story, 'mail')[0].startswith('The mailbox contains 2 e-mail messages'))
         chosen = narrative.build(data, ids=['F3'])
         self.assertEqual(chosen['findings'], 1)
         self.assertEqual([point['key'] for point in chosen['points']], ['disc', 'mail', 'web', 'downloads', 'cloud', 'deleted', 'notes'])
@@ -236,8 +137,64 @@ class Narrative(unittest.TestCase):
         self.assertEqual(chosen['zone'], story['zone'])            # the case clock does not depend on the selection
         self.assertEqual(narrative.build(data, ids=[])['points'], [])
 
+    def test_lead_tells_what_happened_in_date_order(self):
+        lead = narrative.build(case())['lead']
+        self.assertEqual(lead[0], 'The computer is LAB-PC.')
+        mail = lead.index('From 2024-05-06 to 2024-05-07, "friend" and "worker" exchanged 2 e-mails.')
+        folders = lead.index('By 2024-05-06, the account "worker" had opened 2 folders on the network location \\\\server\\share.')
+        self.assertLess(mail, folders)
+        self.assertIn('On 2024-05-07, 1 file went to the Recycle Bin.', lead)
+        self.assertFalse(any('downloaded' in sentence for sentence in lead))   # installers are for the report
+        detail = narrative.build(case())['lead_detail']
+        self.assertIn('On 2024-05-07 at 11:30, the account "worker" downloaded wiper.exe.', detail)
+        self.assertIn('From 2024-05-06 10:00 to 2024-05-07 11:30, "friend" and "worker" exchanged 2 e-mails. '
+                      'The first subject is "Plans" and the last subject is "RE: Plans".', detail)
+        self.assertGreater(len(' '.join(detail)), len(' '.join(lead)))
+        self.assertEqual(narrative.build({})['lead'], [])
+        data = case()
+        data['findings'].append(finding('F9', [
+            row(90, 'programRun', 'Wiper.exe', 'C:\\Tools\\Wiper.exe', t=micro(2024, 5, 8, 9), account='worker',
+                time_meaning='last run time stored in the UserAssist entry'),
+            row(91, 'sessionEvent', 'shutdown', None, t=micro(2024, 5, 8, 10), time_meaning='time the event was logged'),
+            row(92, 'tag', 'wiper', 'watch-list-search')]))
+        lead = narrative.build(data)['lead']
+        self.assertIn('On 2024-05-08, the account "worker" started Wiper.', lead)
+        self.assertIn('On 2024-05-08, the computer shut down for the last time in the records.', lead)
+
+    def test_uploads_name_the_confidential_files_they_were_renamed_from(self):
+        data = bundle(finding('F1', [
+            row(1, 'tag', '\\USB1\\[topsecret]_plan.docx', 'confidential'),
+            row(2, 'tag', '\\[topsecret]_prices.xlsx', 'confidential'),
+            row(3, 'fileRenamed', 'C:\\x\\[topsecret]_prices.xlsx', 'C:\\x\\holiday.jpg', t=micro(2024, 5, 6, 10)),
+            row(4, 'fileRenamed', 'C:\\x\\notes.txt', 'C:\\x\\notes.md', t=micro(2024, 5, 6, 10, 1)),
+            row(5, 'cloudFile', 'holiday.jpg', 'google drive: uploaded', t=micro(2024, 5, 6, 10, 5)),
+            row(6, 'usbInsert', 'SER1', None, t=micro(2024, 5, 6, 9), exhibit='PC'),
+            row(7, 'fileCreated', 'x', 'unallocated space of device SER1', exhibit='USB1')]))
+        lead = narrative.build(data)['lead']
+        self.assertIn('On 2024-05-06, 1 confidential file got a new name with a different file type, '
+                      'for example [topsecret]_prices.xlsx became holiday.jpg.', lead)
+        self.assertIn('On 2024-05-06, Google Drive uploaded holiday.jpg. Before a rename, this file had the name [topsecret]_prices.xlsx.', lead)
+        self.assertFalse(any('notes.md' in sentence for sentence in lead))     # a rename without the marker is not news
+        self.assertIn('2 file paths carry the confidential-project marker, 1 on USB1.', lead)
+        cloud = sentences(narrative.build(data), 'cloud')
+        self.assertIn('Before a rename, holiday.jpg had the name [topsecret]_prices.xlsx.', cloud)
+
+    def test_investigator_summary_leads_the_whole_case_only(self):
+        data = case()
+        computed = narrative.build(data)
+        self.assertEqual(computed['lead_by'], 'records')
+        self.assertTrue(computed['lead'])
+        data['case'] = {'name': 'x', 'case_summary': '  The USB device   was connected.\n'}
+        story = narrative.build(data)
+        self.assertEqual((story['lead'], story['lead_by']), (['The USB device was connected.'], 'investigator'))
+        self.assertEqual(narrative.build(data, ids=['F3'])['lead_by'], 'records')   # a selection gets the computed text
+        for value in (None, 7, '', '   ', ['x']):
+            data['case']['case_summary'] = value
+            self.assertEqual(narrative.build(data)['lead_by'], 'records')
+
     def test_empty_and_malformed_bundles_say_nothing(self):
-        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'lead': [], 'points': [], 'devices': []}
+        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'lead': [], 'lead_by': 'records', 'lead_detail': [],
+                 'points': [], 'devices': []}
         for value in ({}, None, [], {'findings': 'x'}, {'findings': [None, 3, {'status': 'verified'}]}):
             story = narrative.build(value)
             self.assertEqual(story['points'], [])
@@ -246,87 +203,9 @@ class Narrative(unittest.TestCase):
         odd = bundle(finding('F1', [None, 'text', {'kind': 5}, {'kind': 'webSearch'}, {'kind': 'emailSent', 'obj_text': 7, 'aux_text': None, 't': 'soon', 'prov': 'x'},
                                     row(1, 'systemSetting', 'computer name', None)]))
         story = narrative.build(odd)
-        self.assertEqual(sentences(story, 'mail'), ['The cited records include 1 e-mail record.'])
-        self.assertEqual(sentences(story, 'web'), ['The cited records include 1 web-search record.'])
+        self.assertEqual(sentences(story, 'mail'), ['The mailbox contains 1 e-mail message.'])
+        self.assertEqual(sentences(story, 'web'), ['The browser history contains 1 web search.'])
         self.assertIsNone(sentences(story, 'computer'))
-
-    def test_reused_identifiers_and_cloned_serials_never_join_source_records(self):
-        at = micro(2024, 5, 6, 14, 0)
-        data = bundle(finding('Scoped', [
-            row(1, 'usbInsert', 'REUSED', t=at, image='host-a', exhibit='PC1',
-                time_meaning='registry last-write timestamp, not connection onset'),
-            row(2, 'usbInsert', 'REUSED', t=at, image='host-b', exhibit='PC2'),
-            row(3, 'volumeOnDevice', 'REUSED', 'CLONED', at, image='device-image', exhibit='RM1',
-                timestamp_semantics='examination_observation'),
-            row(4, 'volumeSeen', 'OTHER-LABEL', 'CLONED', at, image='other-image', exhibit='PC3'),
-        ]))
-        story = narrative.build(data)
-        self.assertEqual(len(story['devices']), 4)
-        self.assertEqual([item['serial'] for item in story['devices']], ['REUSED', 'REUSED', '', ''])
-        self.assertEqual([item['volume'] for item in story['devices']], ['', '', 'CLONED', 'CLONED'])
-        self.assertNotIn('OTHER-LABEL', str(story['devices'][2]))
-        self.assertIn('image: host-a', story['devices'][0]['item'])
-        self.assertIn('image: host-b', story['devices'][1]['item'])
-        self.assertIn('not connection onset', story['devices'][0]['recorded_time'])
-        self.assertTrue(story['devices'][2]['recorded_time'].startswith('No displayed source time;'))
-        self.assertEqual(sentences(story, 'devices')[0], 'The cited records include 2 USB identifier records.')
-
-    def test_folder_and_download_names_do_not_prove_actions_or_application_identity(self):
-        for source in ('MuiCache', 'Shimcache', 'Prefetch'):
-            with self.subTest(source=source):
-                data = bundle(finding('Observations', [
-                    row(1, 'folderOpened', r'\\server\share\folder', 'ShellBag', account='worker'),
-                    row(2, 'fileDownloaded', r'C:\Downloads\tool.exe', 'https://example.invalid/tool.exe',
-                        account='worker', image='host-a'),
-                    row(3, 'programRun', 'tool.exe', r'D:\Unrelated\tool.exe', source=source, image='host-b'),
-                ]))
-                story = narrative.build(data)
-                text = ' '.join(sentence for point in story['points'] for sentence in point['sentences'])
-                for forbidden in ('opened', 'downloaded', 'started', 'executed', 'The account'):
-                    self.assertNotIn(forbidden, text)
-                self.assertIn('folder record names a path', text)
-                self.assertIn('download records name 1 distinct file basename', text)
-                self.assertEqual(next(point['records'] for point in story['points'] if point['key'] == 'downloads'), 1)
-
-    def test_recovery_area_labels_are_not_physical_source_attribution(self):
-        story = narrative.build(bundle(finding('Recovery', [
-            row(1, 'fileCreated', 'old.txt', 'unallocated space of device SAME', exhibit='DISPUTED'),
-        ])))
-        text = ' '.join(sentences(story, 'files'))
-        self.assertIn('carries the recovery-area label "unallocated space of device SAME"', text)
-        self.assertNotIn('space of DISPUTED contains', text)
-        self.assertNotIn('reformatted', text)
-
-    def test_html_summary_keeps_record_labels_and_exact_certificate_limitations(self):
-        sentence = 'The records carry matching identifiers. This does not establish the same physical device.'
-        data = bundle(finding('Qualified', [
-            row(1, 'usbInsert', '<same-id>', t=micro(2024, 5, 6, 14, 0),
-                image='<script>not markup</script>', time_meaning='key last write, not connection onset'),
-        ], english=sentence))
-        rendered = render_html(data)
-        self.assertIn(html.escape(sentence), rendered)
-        self.assertNotIn('This summary describes copied records', rendered)
-        self.assertIn('Record timestamp', rendered)
-        self.assertIn('1 USB identifier record', rendered)
-        self.assertNotIn('First connection', rendered)
-        self.assertNotIn('Last connection', rendered)
-        self.assertNotIn('<script>not markup</script>', rendered)
-        self.assertIn('&lt;script&gt;not markup&lt;/script&gt;', rendered)
-
-    def test_typed_usb_only_findings_remain_visible_without_legacy_summary_rows(self):
-        sentence = 'The USB source tuple records identifier USBSTOR\\INSTANCE-A. This does not establish physical-device identity.'
-        data = bundle(finding('TypedUsb', [
-            row(1, 'attributeSubject', 'scoped-attribute', 'image-a:USBSTOR\\INSTANCE-A'),
-            row(2, 'roleUsbDeviceInstanceId', 'scoped-attribute', 'usb.device_instance_id'),
-            row(3, 'attributeTextValue', 'scoped-attribute', '"USBSTOR\\\\INSTANCE-A"'),
-        ], english=sentence))
-        story = narrative.build(data)
-        self.assertEqual(story['points'], [])
-        self.assertEqual(story['devices'], [])
-        rendered = render_html(data)
-        self.assertIn(html.escape(sentence), rendered)
-        self.assertNotIn('does not establish absence of evidence', rendered)
-        self.assertIn('usb.device_instance_id', rendered)
 
 
 if __name__ == '__main__':

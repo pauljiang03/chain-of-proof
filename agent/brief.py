@@ -231,8 +231,12 @@ Do not clear unresolved notes just to make the plan look finished. Coverage diag
 and a reviewed work status do not establish answer accuracy or forensic completeness.
 Start your reply with one paragraph that begins with `SUMMARY:`. The app shows this
 paragraph at the top of the case summary. Write 3 to 6 sentences, as HOW TO WRITE says.
-Put the most important facts first: the devices, accounts, files, messages and times
-that the certified findings show. Use only facts that certified findings show.
+Tell a reader what happened on the evidence, not how you checked it. Put the most important
+facts first: which account used the computer, which programs it installed or ran and what
+they were set up to do, and which files, messages, network traffic and deletions the
+certified findings show, in time order when the findings give times. Do not write about
+image hashes, record counts or how complete the evidence copy is. Do not put finding ids
+in this paragraph. Use only facts that certified findings show.
 After that paragraph, leave one blank line. Then, for each question, give the ids of the
 certified findings and conclusions that answer it, and say plainly what could not be
 established and why. Quote only sentences the checker returned.
