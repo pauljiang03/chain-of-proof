@@ -76,6 +76,20 @@ the changed implementation; saved historical reports are not regenerated.
   exact without a reviewed source upcase table. Canonical identity retains origin
   and volume, not just a relative suffix.
 
+  Reserved DOS device basenames are refused in every component, including
+  directories, extensions and superscript COM/LPT digits. The parser also refuses
+  the console names CONIN$ and CONOUT$, and conservatively rejects spaces around
+  these reserved basenames before an extension. This applies to ordinary,
+  volume-rooted, UNC and extended spellings, irrespective of case mode. A literal
+  extended-namespace file with such a name is therefore unavailable to this
+  representation matcher; it is never equated with a Win32 device. Extended
+  paths containing forward slashes, including slash-spelled extended prefixes,
+  are refused before ordinary separator conversion. These rules follow the
+  [Microsoft file/namespace naming rules](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file)
+  and the documented
+  [DOS device-name API](https://learn.microsoft.com/en-us/windows/win32/devnotes/rtlisdosdevicename_u).
+  They change only the opt-in parser; legacy Windows-path matching is unchanged.
+
 Bounds are 64 source contexts, 32 roots per context, 256 field rules, pointer depth
 16, input strings of 32,768 code points and at most 256 KiB UTF-8. Unicode behavior
 is tied to the frozen Python runtime. Missing evidence is never manufactured by

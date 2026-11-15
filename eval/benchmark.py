@@ -283,6 +283,15 @@ class Matcher:
         matched_rules = set()
         matched_normalization = set()
         def lists(value, path=""):
+            # Compare dispatch checks rules before descending into containers.
+            # Preflight must visit the same nodes, not just flattened atoms: a
+            # wildcard scalar rule may otherwise silently match an array/object.
+            normalization = _rule(self.normalization, path)
+            if normalization is not None:
+                from eval.match_normalization import normalize
+                normalize(value, normalization, profile=self.normalization_profile)
+                matched_normalization.update(pattern for pattern in self.normalization
+                                             if _rule({pattern: True}, path))
             rule = _rule(self.config.get("list_rules", {}), path)
             if rule is not None:
                 matched_rules.update(pattern for pattern in self.config["list_rules"]
@@ -306,12 +315,6 @@ class Matcher:
         if matched_rules != set(self.config.get("list_rules", {})):
             raise ValueError("list rule does not address a reference pool")
         for path, value in _atoms(expected):
-            normalization = _rule(self.normalization, path)
-            if normalization is not None:
-                from eval.match_normalization import normalize
-                normalize(value, normalization, profile=self.normalization_profile)
-                matched_normalization.update(pattern for pattern in self.normalization
-                                             if _rule({pattern: True}, path))
             path_rule = _rule(self.config.get("paths", {}), path)
             if path_rule is not None and value is not None:
                 _windows_path(value, path_rule)

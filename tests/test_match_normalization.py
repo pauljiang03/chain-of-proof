@@ -236,6 +236,25 @@ class BenchmarkNormalizationIntegration(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'ambiguous'):
             matcher.validate_expected({'items': {'x': '1' * 32}})
 
+    def test_preflight_checks_container_dispatch_not_only_leaf_atoms(self):
+        from eval.benchmark import Matcher, validate_reference
+        from tests.test_benchmark import reference
+        rules = {'/*': {'kind': 'guid-v1'}, '/items/*': {'kind': 'guid-v1'}}
+        for container in (['2' * 32], {'child': '2' * 32}, [], {}):
+            expected = {'id': '1' * 32, 'items': container}
+            matcher = Matcher(self.config(rules))
+            with self.subTest(container=container), self.assertRaisesRegex(ValueError, 'invalid_matching_normalization_value'):
+                matcher.validate_expected(expected)
+            contract = reference(expected)
+            contract['questions'][0]['match'] = self.config(rules)
+            with self.assertRaisesRegex(ValueError, 'invalid_matching_normalization_value'):
+                validate_reference(contract)
+        # A scalar-only child declaration still works for nested containers.
+        matcher = Matcher(self.config({'/id': {'kind': 'guid-v1'}, '/items/*': {'kind': 'guid-v1'}}))
+        expected = {'id': '1' * 32, 'items': ['2' * 32]}
+        matcher.validate_expected(expected)
+        self.assertEqual({event['status'] for event in matcher.compare(expected, expected)}, {'match'})
+
     def test_score_extension_hash_only_with_opt_in_and_original_values_preserved(self):
         import hashlib
         from pathlib import Path

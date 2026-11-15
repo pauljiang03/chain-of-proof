@@ -156,10 +156,21 @@ def _zone(value, rule):
     return parsed[0]
 
 
+def _reserved_device_component(component):
+    # Microsoft reserves these names even with extensions, in every directory.
+    # Also refuse spaces around the basename conservatively: never collapse a
+    # potentially special Win32 name with a literal extended-namespace file.
+    basename = component.split('.', 1)[0].strip(' ')
+    basename = basename.translate(str.maketrans('abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
+    return re.fullmatch(r'(?:CON|PRN|AUX|NUL|CONIN\$|CONOUT\$|COM[1-9¹²³]|LPT[1-9¹²³])', basename) is not None
+
+
 def _path(value, rule, profile):
     context = profile['source_contexts'][rule['context']]
     roots = {_root(root) for root in context['absolute_roots']}
     path = value.replace('/', '\\')
+    if path.startswith('\\\\?\\') and (not value.startswith('\\\\?\\') or '/' in value):
+        _fail('invalid_extended_windows_path_representation')
     if path[:8].casefold() == '\\\\?\\unc\\':
         path = '\\\\' + path[8:]
     elif path.startswith('\\\\?\\'):
@@ -181,6 +192,8 @@ def _path(value, rule, profile):
     components = body.split('\\') if body else []
     if any(not component or component in ('.', '..') or component.endswith((' ', '.')) or ':' in component for component in components):
         _fail('invalid_windows_volume_path_component')
+    if any(_reserved_device_component(component) for component in components):
+        _fail('reserved_windows_device_component')
     if not rule['case_sensitive']:
         components = [component.translate(str.maketrans('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'))
                       for component in components]
