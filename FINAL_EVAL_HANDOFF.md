@@ -10,7 +10,7 @@ Updated: 2026-11-15 UTC. The five requested priorities have implementation and v
 | 4. Evidence support | General registry omissions fixed; mail-body and document-metadata gaps diagnosed from source | Those additional reader/semantic fields remain future work |
 | 5. Reference and validation | All 14 reference issues reviewed; separate Q53 derivative; fresh evidence; mechanical and live second-case checks; frozen NIST A/B/C comparison | Original 14 stay unresolved; Mulder unrun; native Claude test blocked |
 
-The final combined code includes Claude's desktop/report work, reviewed citation and stale-preview fixes, and common-field `anyOf` export support. Final regression suite: 763 tests run, 762 passed, one platform test skipped. No Lean source changed after the passing build.
+The final combined code includes Claude's desktop/report work, reviewed citation and stale-preview fixes, and common-field `anyOf` export support. Final regression suite: 775 tests run, 774 passed, one platform test skipped. No Lean source changed after the passing build.
 
 The measured comparison is frozen at clean `c2b9753`, before the UI and schema fixes. Do not change its outputs, add bindings, reproject its answers or revise its scores. A/B fully answered 8/46 questions; C fully answered 7/46. All 63 B and 96 C certificates independently verified. This single pair did not show an accuracy gain or a semantic-predicate refusal. See [the result](comparison/ablation/RESULTS_SOL61_20261115.md).
 
@@ -20,10 +20,12 @@ Local archives:
 - `runs/dev/sol61-smoke-20261115T0209Z/`: second-case live operational smoke; no accuracy key.
 - `runs/dev/case2-workflow-20261115T015403Z/`: mechanical product workflow, reports and portable package.
 
-The frozen runtime remains `/private/tmp/cop-sol61-smoke-runtime`. The implementation worktree is `/private/tmp/cop-final-eval`. Do not confuse their commits.
+The frozen runtime remains `/private/tmp/cop-sol61-smoke-runtime`. The latest implementation worktree is `/private/tmp/cop-answer-meaning`. Do not confuse their commits.
 
 The schema fix accepts only explicit common paths and compatible types across every `anyOf` branch. It retains missing and conflicting fields; it does not infer relevance, choose a branch, repair a claim, or certify arbitrary metadata. It has no new accuracy result.
 
 The local Claude login is available. Automatic approval review rejected the native test because selected forensic records would be sent to Claude.ai despite the user's Sol-only instruction. That call did not execute. Do not retry it through another route without destination approval. No credentials belong in chat or Git.
 
 Reports already exist in HTML, Markdown and JSON. Extend the shared writer. Coordinate with the other terminal before changing shared files, preserve all saved runs, and inspect main before the next merge.
+
+The follow-up incorrect-answer diagnosis and public role guards are in [docs/INCORRECT_ANSWER_DEBUG.md](docs/INCORRECT_ANSWER_DEBUG.md). The exact three source certificates reverified. The guard is opt-in through explicit public annotations; it retains supported observations and exposes unmet evidence needs. The separate diagnostic profile is not a replacement benchmark and has no accuracy result.

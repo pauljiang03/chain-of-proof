@@ -129,7 +129,11 @@ def answer(run_dir, question_id, bindings=None, *, replace=False):
         if bindings is None:
             if replace:
                 raise ValueError('replace requires a bindings list')
-            return {'question_id': question_id, 'field_catalog': catalog(),
+            from agent.answer_requirements import inspect
+            fields = catalog()
+            question = next(q for q in state['questions'] if q['id'] == question_id)
+            return {'question_id': question_id, 'field_catalog': fields,
+                    'field_requirements': inspect(question.get('answer_schema', {}), fields['forms']),
                     'bindings': [b for b in document['bindings'] if b.get('question_id') == question_id]}
         if not isinstance(bindings, list) or len(bindings) > MAX_BATCH:
             raise ValueError(f'bindings must be a list of at most {MAX_BATCH} entries')

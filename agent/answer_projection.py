@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 from checker import claims
 from checker.facts import KINDS
+from agent import answer_requirements
 
 VERSION = 1
 AUTHORITIES = frozenset({'unchecked', 'recorded_certificates', 'independently_replayed'})
@@ -277,6 +278,8 @@ def _schema(schema, path):
             raise ValueError('public_schema_traversal_limit')
         if not isinstance(schema, dict):
             raise ValueError('unsupported_public_schema_node')
+        if answer_requirements.KEY in schema and position != len(path):
+            raise ValueError('claim_requirement_must_annotate_exact_answer_value')
         if any(k in schema for k in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
             raise ValueError('unsupported_schema_reference_or_union')
         if 'anyOf' in schema:
@@ -405,6 +408,12 @@ def prepare_projection(public, candidates, bindings, source):
                 raise ValueError('literal_value_mismatch_not_repaired')
             for schema in _schema(questions[qid]['answer_schema'], path):
                 _typed(value, schema)
+                if answer_requirements.KEY in schema:
+                    meaning = answer_requirements.check(schema[answer_requirements.KEY], part_row['form'],
+                                                        raw['field'], field['semantic_type'])
+                    entry.setdefault('meaning_checks', []).append(meaning)
+                    if meaning['status'] != 'compatible':
+                        raise ValueError('claim_role_does_not_meet_public_requirement')
             entry.update(candidate_id=cid, claim_sha256=candidate['claim_sha256'], question_id=qid,
                          path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
                          semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],

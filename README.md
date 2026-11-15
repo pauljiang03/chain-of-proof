@@ -29,6 +29,10 @@ The other 14 questions require reference-review decisions. They remain visible a
 This pair showed no answer-accuracy gain from Lean feedback.
 All 63 B certificates and all 96 C certificates passed independent verification.
 Valid claims can still be placed in the wrong answer field or fail to answer the full question.
+[The three incorrect C answers were traced to this boundary](docs/INCORRECT_ANSWER_DEBUG.md).
+Their exact certificates passed a fresh independent check. Public field requirements can now reject
+incompatible claim roles and show the evidence needed; this is not proof of whole-answer meaning.
+The guard applies to annotated contracts and has no new AI accuracy result.
 The test did not demonstrate rejection of a semantically false claim: B accepted all proposals,
 and C's one refusal was a malformed claim.
 
@@ -140,6 +144,9 @@ The investigator saves work for each question in `investigation.json`.
 It records searches, finding links, unresolved fields, and next actions.
 `case-answers.json` groups exact certificate sentences by question for any case.
 The `answer` tool can also put specific claim fields into the public answer format.
+Its catalog view also shows explicit public field requirements and roles that are not yet supported.
+Use `x-claim-requirement` on an exact schema value to require a semantic role or form/field pair.
+A mismatch keeps the field unresolved and retains the narrower observations.
 It saves the claim, field, source record, and question path for each value.
 These values appear in `projected-answers.json` and the HTML and Markdown reports.
 A missing field does not remove other supported fields. Conflicting bindings are shown as unresolved.
@@ -217,7 +224,7 @@ flowchart TD
     L --> R
     R --> Z[Portable verification package]
     F --> Z
-    V --> A[Check claim-field answer bindings]
+    V --> A[Check bindings and optional public role requirements]
     Q --> A
     A --> J[Structured answers with source links]
     J --> T[Deterministic scorer]

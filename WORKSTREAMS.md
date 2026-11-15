@@ -7,7 +7,7 @@ The project is CONAN-F. The `cop` command and `ChainOfProof` Lean library retain
 
 | Owner | State |
 |---|---|
-| Root Codex | Integrates tested changes and pushes main. Worktree: `/private/tmp/cop-final-eval`, branch `finish/final-eval`. |
+| Root Codex | Integrates tested changes and pushes main. Latest worktree: `/private/tmp/cop-answer-meaning`, branch `fix/answer-meaning`. |
 | Other Codex terminal | Completed coverage, reader and comparison work. Frozen A/B/C results and audits are retained; no production-file ownership. |
 | Claude | Independent checker, rename, desktop, proof graph and report builder are integrated. Check for new work before assigning UI tasks. |
 | Root helpers | Shared projection, census, reference review, UI correctness review and common-field schema fix are complete. No active implementation ownership. |
@@ -15,6 +15,10 @@ The project is CONAN-F. The `cop` command and `ChainOfProof` Lean library retain
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
 App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
+
+## Latest implementation
+
+The three incorrect answers were traced to narrow verified observations used as stronger answers. Optional public claim-role requirements, early evidence-need diagnostics and a separate unscored diagnostic profile are integrated. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md). Original benchmark inputs, frozen results and unannotated contract behavior are unchanged. This is declared-role compatibility, not Lean proof of question entailment.
 
 ## Latest measured state
 
@@ -26,7 +30,7 @@ App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATU
 - B reverified 63/63 certificates; C reverified 96/96. There was no demonstrated semantic-predicate refusal.
 - The frozen exporter dropped A120/C96 fields at public `anyOf` schemas. A67/C43 concern scorable questions. A later common-field fix has no new accuracy score.
 - Code after the trial also contains Claude's UI and reviewed fixes for citation identities and stale previews.
-- Final combined regression suite: 763 tests run, 762 passed and one platform test skipped.
+- Final combined regression suite: 775 tests run, 774 passed and one platform test skipped.
 
 This pair showed no overall answer-accuracy advantage from Lean feedback. The older literal-answer pilot uses a different answer channel and is not a direct improvement comparison. Keep both frozen; never hand-write retrospective bindings.
 
