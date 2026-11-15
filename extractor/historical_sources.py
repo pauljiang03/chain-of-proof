@@ -565,3 +565,168 @@ def select_optical(inventory, descriptor_id):
     if len(matches) != 1:
         raise SourceSelectionError("optical descriptor identity is absent or ambiguous")
     return matches[0]
+
+
+def _file_identity(path):
+    """Filesystem identity only: deliberately does not hash an image/segment."""
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("input must be an existing regular file, not a symlink: " + str(path))
+    stat = path.stat()
+    if not stat.st_size:
+        raise ValueError("input file is empty: " + str(path))
+    return dict(name=path.name, path=str(path), bytes=stat.st_size, device=stat.st_dev,
+                inode=stat.st_ino, modified_ns=stat.st_mtime_ns, changed_ns=stat.st_ctime_ns)
+
+
+def _input_receipt(image, exhibit, config_path=None, *, config_limit=16 * 1024 * 1024):
+    """Bind names/stats; optionally retain checked but unrecomputed intake hashes."""
+    from pathlib import Path
+    from .intake import FORMATS, _digest, _segments
+    if image.suffix.lower() not in FORMATS:
+        raise ValueError("unsupported image extension: " + image.suffix)
+    parts = _segments(image.parent, image.name)
+    identity = dict(image=str(image), exhibit=exhibit, format=FORMATS[image.suffix.lower()],
+                    segments=[dict(_file_identity(part), content_sha256=None,
+                                   content_hash_status="not_recomputed") for part in parts],
+                    identity_scope="canonical paths and filesystem stats; full image/segment content not hashed by this command")
+    if config_path is None:
+        return identity
+    config_path = Path(config_path).absolute()
+    config_stat = _file_identity(config_path)
+    if config_stat["bytes"] > config_limit:
+        raise LimitExceeded("intake configuration exceeds metadata byte limit")
+    with config_path.open("rb") as stream:
+        raw = stream.read(config_limit + 1)
+    if len(raw) > config_limit or _file_identity(config_path) != config_stat:
+        raise ValueError("intake configuration changed while reading or exceeds its byte limit")
+    config = json.loads(raw)
+    if (not isinstance(config, dict) or config.get("schema_version") != 1
+            or config.get("config_sha256") != _digest({key: value for key, value in config.items() if key != "config_sha256"})):
+        raise ValueError("intake configuration schema or digest is invalid")
+    manifest = config.get("manifest", {})
+    if (config.get("images_root") != str(image.parent) or not isinstance(manifest, dict)
+            or not isinstance(manifest.get(image.name), dict)
+            or manifest[image.name].get("exhibit") != exhibit):
+        raise ValueError("intake configuration does not bind the explicit image path and exhibit")
+    bindings = config.get("images")
+    if not isinstance(bindings, list):
+        raise ValueError("intake configuration has no image bindings")
+    matches = [entry for entry in bindings if isinstance(entry, dict) and entry.get("image") == image.name]
+    if len(matches) != 1 or matches[0].get("exhibit") != exhibit:
+        raise ValueError("intake image binding is missing, ambiguous, or names another exhibit")
+    declared = matches[0].get("segments")
+    if (not isinstance(declared, list) or any(not isinstance(entry, dict) for entry in declared)
+            or [(entry.get("name"), entry.get("bytes")) for entry in declared]
+            != [(entry["name"], entry["bytes"]) for entry in identity["segments"]]):
+        raise ValueError("current image segment names/sizes differ from the intake declaration")
+    for observed, entry in zip(identity["segments"], declared):
+        digest = entry.get("sha256")
+        if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
+            raise ValueError("intake segment declaration lacks a valid SHA-256")
+        observed.update(content_sha256=digest.lower(), content_hash_status="declared_by_intake_not_recomputed")
+    identity["intake_config"] = dict(config_stat, file_sha256=hashlib.sha256(raw).hexdigest(),
+        file_hash_status="recomputed", config_sha256=config["config_sha256"],
+        snapshot_id=config.get("snapshot_id"),
+        validation_scope="configuration JSON digest and image/exhibit/segment names and sizes checked; segment content hashes not recomputed; facts not read")
+    return identity
+
+
+def _code_receipt():
+    from importlib.metadata import PackageNotFoundError, version
+    from pathlib import Path
+    path = Path(__file__).resolve()
+    dependencies = {}
+    for name in ("dissect.target", "dissect.ntfs", "dissect.volume"):
+        try:
+            dependencies[name] = version(name)
+        except PackageNotFoundError:
+            dependencies[name] = None
+    return dict(module="extractor.historical_sources", path=str(path),
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest(), hash_status="recomputed",
+                hash_scope="this module source file on disk only; dependency code excluded",
+                dependency_versions=dependencies)
+
+
+def _target_open(path):
+    from dissect.target import Target
+    return Target.open(path)
+
+
+def main(argv=None):
+    """Standalone explicit VSS discovery/comparison; writes only a new JSON report."""
+    import argparse
+    from pathlib import Path
+    parser = argparse.ArgumentParser(description="Observe explicit VSS sources or file versions; this does not produce a proof verdict.")
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    def copy_uuid(value):
+        try:
+            return str(UUID(value[4:] if value.startswith("vss:") else value))
+        except ValueError as error:
+            raise argparse.ArgumentTypeError("an explicit copy UUID is required; latest/time aliases are unsupported") from error
+
+    defaults = asdict(Limits())
+    exposed_limits = tuple(name for name in defaults if name != "max_optical_entries")
+    for command in ("discover", "compare"):
+        sub = commands.add_parser(command, help="inventory catalog metadata" if command == "discover" else "compare explicit paths in base and one copy")
+        sub.add_argument("--image", required=True, help="explicit raw image or first E01 segment")
+        sub.add_argument("--exhibit", required=True, help="explicit exhibit identity")
+        sub.add_argument("--out", required=True, help="new JSON report path; existing files are refused")
+        sub.add_argument("--intake-config", help="optional checked intake declaration; segment hashes are retained, not recomputed")
+        for name in exposed_limits:
+            sub.add_argument("--" + name.replace("_", "-"), type=int, default=defaults[name])
+        if command == "compare":
+            sub.add_argument("--copy-uuid", required=True, type=copy_uuid)
+            sub.add_argument("--path", required=True, action="append", help="one explicit drive-qualified file path; repeat for more files")
+            sub.add_argument("--volume-identity", help="exact inventory volume_identity if the copy UUID is ambiguous")
+    args = parser.parse_args(argv)
+    try:
+        limits = Limits(**{name: getattr(args, name) for name in exposed_limits})
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._#()-]{0,79}", args.exhibit):
+            raise ValueError("exhibit must be an explicit safe identifier of at most 80 characters")
+        output = Path(args.out).absolute()
+        if output.exists() or output.is_symlink():
+            raise FileExistsError("output already exists; choose a new report path: " + str(output))
+        if not output.parent.is_dir():
+            raise ValueError("output parent directory must already exist")
+        requested_image = Path(args.image).absolute()
+        _file_identity(requested_image)  # Refuse a symlink before canonicalizing.
+        image = requested_image.resolve(strict=True)
+        paths = _paths(args.path, limits) if args.command == "compare" else None
+        started = datetime.now(timezone.utc).isoformat()
+        source = _input_receipt(image, args.exhibit, args.intake_config, config_limit=limits.max_metadata_bytes)
+        code = _code_receipt()
+        target = _target_open(image)
+        inventory = discover_vss(target, dict(image=image.name, exhibit=args.exhibit,
+            source_snapshot="base-volume", source_variant="primary"), limits=limits)
+        if args.command == "compare":
+            result = compare_versions(inventory, args.copy_uuid, paths, volume_identity=args.volume_identity)
+            complete = all(row[side]["status"] in ("present", "absent")
+                           for row in result["paths"] for side in ("base", "snapshot"))
+        else:
+            result, complete = inventory.as_dict(), inventory.complete
+        if _input_receipt(image, args.exhibit, args.intake_config, config_limit=limits.max_metadata_bytes) != source:
+            raise ValueError("input segment identity or intake configuration changed during observation; report not published")
+        if _code_receipt() != code:
+            raise ValueError("module code or dependency version changed during observation; report not published")
+        source["stat_stability"] = "segment identities, sizes, modification/change times checked before and after; content immutability not established"
+        report = dict(schema_version=1, kind="historical_source_observation_receipt", command=args.command,
+            interpretation="Observation-only report; no proof verdict, actor attribution, transfer direction, deletion event or acquisition authenticity established",
+            started_at=started, completed_at=datetime.now(timezone.utc).isoformat(),
+            request=dict(image=str(requested_image), exhibit=args.exhibit,
+                         copy_uuid=getattr(args, "copy_uuid", None), paths=paths,
+                         volume_identity=getattr(args, "volume_identity", None)),
+            input=source, code=code, result=result)
+        encoded = json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + "\n"
+        # Exclusive create also protects against a file or symlink appearing
+        # after the preflight. No existing output or image is opened for writing.
+        with output.open("x", encoding="utf-8") as stream:
+            stream.write(encoded)
+        print(str(output))
+        return 0 if complete else 1
+    except Exception as error:
+        parser.exit(2, f"historical_sources: {type(error).__name__}: {error}\n")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -5,6 +5,54 @@ content without publishing facts, changing images, inferring actors, or issuing
 proof verdicts. It also selects exact UDF descriptor states from an existing
 optical survey. The caller supplies image/exhibit identity and owns target lifetime.
 
+## Standalone command
+
+The module CLI opens the explicit image and writes one new JSON observation
+receipt. It does not publish facts or run a proof checker:
+
+```sh
+python -m extractor.historical_sources discover \
+  --image /evidence/pc.E01 --exhibit PC --out ./vss-inventory.json
+
+python -m extractor.historical_sources compare \
+  --image /evidence/pc.E01 --exhibit PC \
+  --copy-uuid '<explicit copy UUID from the inventory>' \
+  --path 'C:\Windows\win.ini' --out ./vss-comparison.json
+```
+
+Repeat `--path` for additional exact paths. `--volume-identity` accepts the
+inventory's exact identity string if needed to disambiguate a copy UUID. Every
+VSS resource limit is available under its hyphenated name, such as
+`--max-files 8 --max-file-bytes 16777216 --max-total-bytes 33554432`. There is no
+implicit snapshot selector. Existing outputs, including symlinks and files
+created after the initial check, are refused through exclusive creation. The
+output directory must already exist. Image files are never opened for writing.
+
+The receipt records the exact request, observation start/completion times, the
+recomputed SHA-256 of this module's source file, parser package versions, canonical
+input paths, and each image/EWF segment's size, device/inode and modification/change
+timestamps. Segment identities are checked again after observation. This does
+not establish content immutability or acquisition authenticity. Code hashing
+covers this module on disk, not all dependency code. Input image/segment hashes
+are **not recomputed** by this command; the selected complete file streams are
+hashed by the comparison API.
+
+Optional `--intake-config /path/to/intake-config.json` checks the configuration's
+schema and JSON digest, its image path/exhibit mapping, and the current segment
+names/sizes. The configuration file's SHA-256 is recomputed and recorded.
+Segment SHA-256 values from that configuration are retained with the explicit
+status `declared_by_intake_not_recomputed`. Without a configuration, segment
+hashes remain null with status `not_recomputed`. Configuration-declared segment
+hashes are never presented as a new verification of the image, and prior facts
+are neither opened nor verified by this option.
+
+Exit code 0 means the requested observations completed, including legitimate
+absence. Exit code 1 means the new receipt contains incomplete, unsupported,
+unreadable or limited observations. Invalid arguments, unknown/ambiguous
+selectors, changed input identity, and setup/output errors exit 2. Source or
+selector validation failures do not publish a guessed comparison. The CLI is
+VSS-only; it does not start an optical scan or reconstruct optical sessions.
+
 ## VSS inventory and selection
 
 ```python
@@ -137,6 +185,9 @@ descriptor bytes, raw VSS catalog blocks, and NTFS parser-interface fixtures.
 Controls cover exact/ambiguous/unknown identifiers, mixed origins, catalog
 cycles, hidden entries, stale/deleted NTFS references, content versus time
 changes, absent/unreadable/unsupported distinctions, and byte/file/source limits.
+CLI controls also cover required arguments, exact UUID selection, input mutation,
+exclusive output creation including a creation race, configuration digest and
+identity mismatches, and declared versus recomputed hash status.
 
 Read-only smoke on the supplied `pc.E01` opened explicit copy
 `8f1a2a2d-ce6b-42a5-b92b-f13e65d9c2cb` on NTFS serial `C8CA0C8DCA0C7A48`:
@@ -148,3 +199,9 @@ sides. The catalog retained exact FILETIME `130717690472938055`
 `4Dell Latitude CPi.E01` reported no VSS header/catalog on its NTFS volume rather
 than a parser failure. These observations demonstrate source selection and do
 not claim a forensic answer or universal historical coverage.
+
+The standalone CLI was also exercised directly against `pc.E01` with its supplied
+intake configuration. Both `discover` and explicit-copy `compare` exited 0;
+`C:\Windows\win.ini` produced matching 478-byte hashes with distinct base/VSS
+origins. The receipt lists all four EWF segments with hashes labeled as intake
+declarations, plus newly recomputed configuration and module-source hashes.

@@ -1,5 +1,6 @@
 """Exact historical identity and byte-origin controls using parser fixtures."""
 import copy
+from contextlib import ExitStack, redirect_stderr, redirect_stdout
 import hashlib
 import io
 import json
@@ -408,6 +409,166 @@ class OpticalDescriptorTests(unittest.TestCase):
         self.assertEqual(inv.issues[0]["status"], "unreadable")
         with self.assertRaises(h.SourceSelectionError):
             h.select_optical(inv, "udf:vat=293:fsd=288")
+
+
+class CLITests(unittest.TestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.root = Path(directory.name)
+        self.image = self.root / "input.img"
+        self.image.write_bytes(b"synthetic source image")
+        self.output = self.root / "observation.json"
+        fs = filesystem()
+        self.target = NS(filesystems=[fs], fs=NS(mounts={"c:": fs}))
+
+    def invoke(self, command="discover", extra=(), *, open_effect=None):
+        args = [command, "--image", str(self.image), "--exhibit", "PC", "--out", str(self.output), *extra]
+        with ExitStack() as stack:
+            stack.enter_context(redirect_stdout(io.StringIO()))
+            stack.enter_context(redirect_stderr(io.StringIO()))
+            opened = stack.enter_context(patch.object(h, "_target_open", side_effect=open_effect,
+                                                       return_value=self.target))
+            stack.enter_context(patch.object(h, "_parse_vss", return_value=parsed([store()])))
+            stack.enter_context(patch.object(h, "_open_ntfs", side_effect=[ntfs(Record(b"base")), ntfs(Record(b"past"))]))
+            try:
+                status = h.main(args)
+            except SystemExit as error:
+                status = error.code
+        return status, opened
+
+    def config(self, *, exhibit="PC", size=None):
+        from extractor.intake import _digest
+        value = dict(schema_version=1, images_root=str(self.image.resolve().parent), snapshot_id="public-intake-fixture",
+            manifest={self.image.name: dict(exhibit=exhibit, role="pc")},
+            images=[dict(image=self.image.name, exhibit=exhibit,
+                segments=[dict(name=self.image.name, bytes=self.image.stat().st_size if size is None else size, sha256="0" * 64)])])
+        value["config_sha256"] = _digest(value)
+        path = self.root / "intake-config.json"
+        path.write_text(json.dumps(value))
+        return path
+
+    def test_discover_receipt_binds_code_and_stats_without_claiming_image_hash(self):
+        before = self.image.read_bytes()
+        status, _ = self.invoke()
+        self.assertEqual(status, 0)
+        report = json.loads(self.output.read_text())
+        self.assertEqual(report["command"], "discover")
+        self.assertIn("Observation-only", report["interpretation"])
+        self.assertEqual(report["code"]["sha256"], hashlib.sha256(Path(h.__file__).read_bytes()).hexdigest())
+        self.assertEqual(report["code"]["hash_status"], "recomputed")
+        self.assertEqual(report["input"]["segments"][0]["content_hash_status"], "not_recomputed")
+        self.assertIsNone(report["input"]["segments"][0]["content_sha256"])
+        self.assertEqual(report["result"]["sources"][0]["copy_uuid"], str(COPY))
+        self.assertEqual(self.image.read_bytes(), before)
+
+    def test_compare_requires_explicit_id_and_paths_before_opening_image(self):
+        for extra in ([], ["--copy-uuid", "latest", "--path", PATH], ["--copy-uuid", str(COPY)],
+                      ["--copy-uuid", str(COPY), "--path", r"C:relative.txt"]):
+            with self.subTest(extra=extra):
+                status, opened = self.invoke("compare", extra)
+                self.assertEqual(status, 2)
+                opened.assert_not_called()
+                self.assertFalse(self.output.exists())
+
+    def test_compare_receipt_keeps_both_origins_and_explicit_requested_id(self):
+        status, _ = self.invoke("compare", ["--copy-uuid", "{" + str(COPY).upper() + "}", "--path", PATH])
+        self.assertEqual(status, 0)
+        report = json.loads(self.output.read_text())
+        self.assertEqual(report["request"]["copy_uuid"], str(COPY))
+        row = report["result"]["paths"][0]
+        self.assertEqual(row["comparison"], "different_content")
+        self.assertEqual(row["base"]["provenance"]["source_snapshot"], "base-volume")
+        self.assertEqual(row["snapshot"]["provenance"]["source_snapshot"], "vss:" + str(COPY))
+
+    def test_unknown_id_does_not_publish_a_guessed_source(self):
+        status, _ = self.invoke("compare", ["--copy-uuid", str(UUID(int=999)), "--path", PATH])
+        self.assertEqual(status, 2)
+        self.assertFalse(self.output.exists())
+
+    def test_existing_output_and_creation_race_never_overwrite(self):
+        self.output.write_text("keep existing")
+        status, opened = self.invoke()
+        self.assertEqual(status, 2)
+        opened.assert_not_called()
+        self.assertEqual(self.output.read_text(), "keep existing")
+        self.output.unlink()
+
+        def race(_path):
+            self.output.write_text("created concurrently")
+            return self.target
+
+        status, _ = self.invoke(open_effect=race)
+        self.assertEqual(status, 2)
+        self.assertEqual(self.output.read_text(), "created concurrently")
+
+    def test_declared_intake_hash_is_never_called_recomputed(self):
+        config = self.config()
+        status, _ = self.invoke(extra=["--intake-config", str(config)])
+        self.assertEqual(status, 0)
+        report = json.loads(self.output.read_text())
+        declared = report["input"]["segments"][0]
+        self.assertEqual(declared["content_sha256"], "0" * 64)
+        self.assertEqual(declared["content_hash_status"], "declared_by_intake_not_recomputed")
+        config_receipt = report["input"]["intake_config"]
+        self.assertEqual(config_receipt["file_sha256"], hashlib.sha256(config.read_bytes()).hexdigest())
+        self.assertEqual(config_receipt["file_hash_status"], "recomputed")
+
+    def test_config_digest_exhibit_and_size_mismatch_are_refused(self):
+        for wrong in ("digest", "exhibit", "size"):
+            config = self.config(exhibit="OTHER" if wrong == "exhibit" else "PC", size=99 if wrong == "size" else None)
+            if wrong == "digest":
+                value = json.loads(config.read_text())
+                value["snapshot_id"] = "tampered"
+                config.write_text(json.dumps(value))
+            with self.subTest(wrong=wrong):
+                status, opened = self.invoke(extra=["--intake-config", str(config)])
+                self.assertEqual(status, 2)
+                opened.assert_not_called()
+                self.assertFalse(self.output.exists())
+
+    def test_input_mutation_during_observation_prevents_publication(self):
+        def mutate(_path):
+            self.image.write_bytes(b"changed while open")
+            return self.target
+
+        status, _ = self.invoke(open_effect=mutate)
+        self.assertEqual(status, 2)
+        self.assertFalse(self.output.exists())
+
+    def test_ewf_segment_names_sizes_are_recorded_without_full_hashing(self):
+        self.image = self.root / "image.E01"
+        self.image.write_bytes(optical.EWF_MAGIC[0] + b"first segment fixture")
+        second = self.root / "image.E02"
+        second.write_bytes(optical.EWF_MAGIC[0] + b"second segment fixture")
+        status, _ = self.invoke()
+        self.assertEqual(status, 0)
+        parts = json.loads(self.output.read_text())["input"]["segments"]
+        self.assertEqual([(part["name"], part["bytes"]) for part in parts],
+                         [(self.image.name, self.image.stat().st_size), (second.name, second.stat().st_size)])
+        self.assertTrue(all(part["content_hash_status"] == "not_recomputed" for part in parts))
+
+    def test_input_and_output_symlinks_are_refused(self):
+        self.output.symlink_to(self.root / "nonexistent-target.json")
+        status, opened = self.invoke()
+        self.assertEqual(status, 2)
+        opened.assert_not_called()
+        self.assertFalse(self.output.resolve().exists())
+        self.output.unlink()
+        linked = self.root / "linked.img"
+        linked.symlink_to(self.image)
+        self.image = linked
+        status, opened = self.invoke()
+        self.assertEqual(status, 2)
+        opened.assert_not_called()
+        self.assertFalse(self.output.exists())
+
+    def test_incomplete_observation_is_written_with_nonzero_status(self):
+        status, _ = self.invoke("compare", ["--copy-uuid", str(COPY), "--path", PATH, "--max-file-bytes", "1"])
+        self.assertEqual(status, 1)
+        report = json.loads(self.output.read_text())
+        self.assertEqual(report["result"]["paths"][0]["base"]["status"], "limit_exceeded")
+        self.assertEqual(report["result"]["paths"][0]["comparison"], "not_comparable")
 
 
 if __name__ == "__main__":
