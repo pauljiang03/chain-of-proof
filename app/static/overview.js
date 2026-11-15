@@ -145,7 +145,7 @@
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
-    hero.append(el("h2", "", "Summary"));
+    hero.append(el("h2", "", "Key findings"));
     const lead = array(story.lead).map(String).join(" ");
     if (lead) hero.append(el("p", "ov-lead", lead));
     if (lead && story.lead_by === "investigator") hero.append(el("p", "ov-byline", "Written by the AI investigator"));

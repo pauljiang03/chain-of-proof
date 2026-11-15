@@ -377,11 +377,12 @@ def _notes(case):
     return _point('notes', 'Search box and notes', out, searches[:3] + notes)
 
 
-def _story(case, devices):
+def _story(case, devices, detail=False):
     """What happened, at a high level: one sentence for each kind of key activity, in date order.
 
     Activities are chosen by record type and by the readers' rule-based tags, never by a model.
     Each date keeps its record's meaning: a folder list records the latest change ("by").
+    With `detail` (the report), sentences carry clock times, more names and a few more events.
     """
     events = []   # (first stamp, last stamp, 'on' | 'by', clause)
 
@@ -398,15 +399,19 @@ def _story(case, devices):
     if mail:
         pairs = {match.groups() for match in (re.match(r'^from (.+?) to (.+)$', _aux(entry)) for entry in mail) if match}
         both = next(((a, b) for a, b in sorted(pairs) if (b, a) in pairs), None)
-        add(mail, f'"{both[0]}" and "{both[1]}" exchanged {_n(len(mail), "e-mail", "e-mails")}' if both
-                  else f'the mailbox received {_n(len(mail), "e-mail", "e-mails")}')
+        ordered = sorted((entry for entry in mail if id(entry) in case.stamp), key=lambda entry: case.stamp[id(entry)])
+        more = (f'. The first subject is "{_obj(ordered[0])}" and the last subject is "{_obj(ordered[-1])}"'
+                if detail and len(ordered) > 1 else '')
+        add(mail, (f'"{both[0]}" and "{both[1]}" exchanged {_n(len(mail), "e-mail", "e-mails")}' if both
+                   else f'the mailbox received {_n(len(mail), "e-mail", "e-mails")}') + more)
 
     watched = {_obj(entry).lower() for entry in case.of('tag') if _aux(entry).lower() == 'watch-list-search'}
     searches = [entry for entry in case.of('webSearch') if _obj(entry).lower() in watched]
     if searches:
         terms = _distinct([_obj(entry) for entry in searches])
-        named = ', '.join(f'"{term}"' for term in terms[:2])
-        rest = f' and {len(terms) - 2} other watch-list terms' if len(terms) > 2 else ''
+        shown = 5 if detail else 2
+        named = ', '.join(f'"{term}"' for term in terms[:shown])
+        rest = f' and {len(terms) - shown} other watch-list terms' if len(terms) > shown else ''
         add(searches, f'{who(searches)} searched the web for {named}{rest}')
 
     first = {}
@@ -418,8 +423,9 @@ def _story(case, devices):
         names = []
         for serial in first:
             row = labels.get(serial, {})
+            where = ', '.join(part for part in (row.get('item', ''), f'serial {serial}' if detail else '') if part)
             names.append((f'"{row["label"]}"' if row.get('label') else row.get('device') or serial)
-                         + (f' ({row["item"]})' if row.get('item') else ''))
+                         + (f' ({where})' if where else ''))
         add(list(first.values()), f'the USB {"device" if len(names) == 1 else "devices"} {_join(names, 4)} '
                                   f'connected to the computer for the first time')
 
@@ -446,7 +452,13 @@ def _story(case, devices):
     uploads = [entry for entry in case.of('cloudFile') if _aux(entry).lower().endswith('uploaded')]
     if uploads:
         service = _SERVICES.get(_aux(uploads[0]).split(':')[0].strip().lower(), 'the cloud client')
-        add(uploads, f'{service} uploaded {_n(len(_distinct([_obj(entry) for entry in uploads])), "file", "files")}')
+        files = _distinct([_obj(entry) for entry in uploads])
+        add(uploads, f'{service} uploaded {_join(files, 4) if detail else _n(len(files), "file", "files")}')
+    if detail:
+        for entry in case.of('localSearch')[:1]:
+            add([entry], f'the {_aux(entry) or "local search history"} recorded the search text "{_obj(entry)}"')
+        for entry in [entry for entry in case.of('noteText') if 'note' in _s(_prov(entry).get('time_meaning'))][:1]:
+            add([entry], f'the Sticky Notes text "{_obj(entry)[:80]}" was saved')
 
     add(case.of('cdBurn'), 'the computer prepared files for disc writing')
     gone = case.of('fileDeleted')
@@ -484,10 +496,49 @@ def _story(case, devices):
         a, b = brief.moment(start, case.tz), brief.moment(end, case.tz)
         if a is None or b is None:
             continue
-        when = (f'By {b:%Y-%m-%d}' if how == 'by' else f'On {a:%Y-%m-%d}' if a.date() == b.date()
-                else f'From {a:%Y-%m-%d} to {b:%Y-%m-%d}')
+        if not detail:
+            when = (f'By {b:%Y-%m-%d}' if how == 'by' else f'On {a:%Y-%m-%d}' if a.date() == b.date()
+                    else f'From {a:%Y-%m-%d} to {b:%Y-%m-%d}')
+        elif how == 'by':
+            when = f'By {b:%Y-%m-%d %H:%M}'
+        elif f'{a:%Y-%m-%d %H:%M}' == f'{b:%Y-%m-%d %H:%M}':
+            when = f'On {a:%Y-%m-%d} at {a:%H:%M}'
+        elif a.date() == b.date():
+            when = f'On {a:%Y-%m-%d}, from {a:%H:%M} to {b:%H:%M}'
+        else:
+            when = f'From {a:%Y-%m-%d %H:%M} to {b:%Y-%m-%d %H:%M}'
         out.append(f'{when}, {clause}.')
-    return out
+    if not out:
+        return out
+    # Undated context: the computer and its accounts first; what the files and media hold last.
+    first, last = [], []
+    names = _distinct([_aux(entry) for entry in case.of('systemSetting')
+                       if _obj(entry).lower() == 'computer name' and _aux(entry) and _aux(entry) != '(none)'])
+    if names and len({name.lower() for name in names}) == 1:
+        first.append(f'The computer is {sorted(names, key=lambda name: name != name.upper())[0]}.')
+    services = {}
+    for entry in case.of('accountSeen'):
+        if _aux(entry).lower() != 'windows local account':
+            services.setdefault(_SERVICES.get(_aux(entry).lower(), _aux(entry)), []).append(_obj(entry))
+    parts = [f'the {label} account {_join(_distinct(sorted(found, key=str.lower)), 2)}' for label, found in sorted(services.items()) if label]
+    if parts:
+        first.append(f'The records show {_join(parts, 4)}.')
+    tags = case.of('tag')
+    marked = [entry for entry in tags if _aux(entry).lower() == 'confidential']
+    same = [entry for entry in tags if _aux(entry).lower().startswith(_SAME)]
+    if marked:
+        last.append(f'{_n(len(marked), "file path carries", "file paths carry")} the confidential-project marker.')
+    if same:
+        last.append(f'{_n(len(same), "file entry has", "file entries have")} the same size and last-modified time '
+                    f'as a file in a different location.')
+    found = Counter(_s(_prov(entry).get('exhibit')) for entry in case.of('fileCreated') if _aux(entry).lower().startswith(_UNALLOCATED))
+    found = [(item, count) for item, count in sorted(found.items()) if item]
+    if found:
+        last.append('The unallocated space of ' + _join([f'{item} contains {_n(count, "recovered file entry", "recovered file entries")}'
+                                                         for item, count in found], 4) + '.')
+    if detail:
+        first = _lead(case)[:1] + first
+    return first + out + last
 
 
 def _lead(case):
@@ -539,5 +590,6 @@ def build(run, ids=None):
     written = ' '.join(written.split())[:1500] if isinstance(written, str) and ids is None and case.findings else ''
     return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings),
             'lead': [written] if written else (_story(case, devices) or _lead(case)), 'lead_by': 'investigator' if written else 'records',
+            'lead_detail': [written] if written else (_story(case, devices, detail=True) or _lead(case)),
             'points': [{name: value for name, value in point.items() if name != '_entries'} for point in points if point],
             'devices': devices}

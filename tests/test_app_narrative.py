@@ -139,11 +139,16 @@ class Narrative(unittest.TestCase):
 
     def test_lead_tells_what_happened_in_date_order(self):
         lead = narrative.build(case())['lead']
-        self.assertEqual(lead[0], 'From 2024-05-06 to 2024-05-07, "friend" and "worker" exchanged 2 e-mails.')
-        self.assertEqual(lead[1], 'By 2024-05-06, the account "worker" had opened 2 folders on the network location \\\\server\\share.')
+        self.assertEqual(lead[0], 'The computer is LAB-PC.')
+        mail = lead.index('From 2024-05-06 to 2024-05-07, "friend" and "worker" exchanged 2 e-mails.')
+        folders = lead.index('By 2024-05-06, the account "worker" had opened 2 folders on the network location \\\\server\\share.')
+        self.assertLess(mail, folders)
         self.assertIn('On 2024-05-07, 1 file went to the Recycle Bin.', lead)
         self.assertIn('On 2024-05-07, the account "worker" downloaded wiper.exe.', lead)
-        self.assertEqual(len(lead), 8)
+        detail = narrative.build(case())['lead_detail']
+        self.assertIn('From 2024-05-06 10:00 to 2024-05-07 11:30, "friend" and "worker" exchanged 2 e-mails. '
+                      'The first subject is "Plans" and the last subject is "RE: Plans".', detail)
+        self.assertGreater(len(' '.join(detail)), len(' '.join(lead)))
         self.assertEqual(narrative.build({})['lead'], [])
         data = case()
         data['findings'].append(finding('F9', [
@@ -152,8 +157,8 @@ class Narrative(unittest.TestCase):
             row(91, 'sessionEvent', 'shutdown', None, t=micro(2024, 5, 8, 10), time_meaning='time the event was logged'),
             row(92, 'tag', 'wiper', 'watch-list-search')]))
         lead = narrative.build(data)['lead']
-        self.assertEqual(lead[-2:], ['On 2024-05-08, the account "worker" started Wiper.',
-                                     'On 2024-05-08, the computer shut down for the last time in the records.'])
+        self.assertIn('On 2024-05-08, the account "worker" started Wiper.', lead)
+        self.assertIn('On 2024-05-08, the computer shut down for the last time in the records.', lead)
 
     def test_investigator_summary_leads_the_whole_case_only(self):
         data = case()
@@ -169,7 +174,8 @@ class Narrative(unittest.TestCase):
             self.assertEqual(narrative.build(data)['lead_by'], 'records')
 
     def test_empty_and_malformed_bundles_say_nothing(self):
-        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'lead': [], 'lead_by': 'records', 'points': [], 'devices': []}
+        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'lead': [], 'lead_by': 'records', 'lead_detail': [],
+                 'points': [], 'devices': []}
         for value in ({}, None, [], {'findings': 'x'}, {'findings': [None, 3, {'status': 'verified'}]}):
             story = narrative.build(value)
             self.assertEqual(story['points'], [])

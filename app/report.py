@@ -336,7 +336,7 @@ def _front(info, tz, case, findings, options, story, short=False):
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
     if story.get('lead'):
-        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story['lead']) + '</p>'
+        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story.get('lead_detail') or story['lead']) + '</p>'
                    + ('<p class="small">Written by the AI investigator.</p>' if story.get('lead_by') == 'investigator' else ''))
     if story['points']:
         out.append('<div class="keys">')
