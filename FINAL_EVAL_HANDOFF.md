@@ -12,11 +12,17 @@ new output directories and a recorded input/code manifest.
 | 3. Larger verified counts | `optical_timestamps` | Census code in `checker/claims.py`, census emission in `checker/check.py`, Lean only if needed, and focused tests. Keep full source checks and kernel verification. |
 | 4. Missing evidence support | Other Codex terminal | Source-grounded gap audit and small general reader fixes with tests. No answer-key edits. |
 | 5. Reference and validation | Root / `journal_gaps` | Reference decision review, second-case readiness, integrated tests, and new bounded live validation when authentication is available. |
-| Independent checker | Claude, separate branch | `verifier/conleche.py`, `tests/test_conleche.py`, and its README section. Do not duplicate or overwrite this work. |
+| Independent checker and UI | Claude, separate branch | Independent checker and CONAN-F rename merged from `97c435a`. Claude then moved to `finish/desktop-ui`; avoid that UI work. |
 
 Root's worktree is `/private/tmp/cop-final-eval`, branch `finish/final-eval`.
 The other Codex terminal uses a separate worktree and reports commits for integration.
 Root integrates and pushes `main`. Agents do not merge or push `main`.
+
+The first four implementation lanes are integrated. The second-case mechanical
+smoke passed with 12 independently reverified certificates, reports and a portable
+package. New comparison runtime preparation is in the other Codex terminal.
+It must be frozen before the new model runs. The local product login is still absent.
+All 701 integrated regression tests and the Lean build passed at this checkpoint.
 
 The shared projection must preserve a proposed claim's meaning. It must not fix
 wrong values from the evidence, infer relevance from the answer key, or present

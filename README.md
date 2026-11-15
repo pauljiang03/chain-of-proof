@@ -109,9 +109,22 @@ The images are read locally. The investigator backend receives the public prompt
 The investigator saves work for each question in `investigation.json`.
 It records searches, finding links, unresolved fields, and next actions.
 `case-answers.json` groups exact certificate sentences by question for any case.
+The `answer` tool can also put specific claim fields into the public answer format.
+It saves the claim, field, source record, and question path for each value.
+These values appear in `projected-answers.json` and the HTML and Markdown reports.
+A missing field does not remove other supported fields. Conflicting bindings are shown as unresolved.
+Use `--adapter claims` with explicit public questions and a private reference to score this export.
+The evaluator checks the certificates again before it scores the answers.
 A question can have findings and still have missing answers.
 Work status does not establish answer accuracy or completeness.
 The benchmark submission remains a separate `answers.json` file.
+
+The `inventory_page` tool reads large record lists in pages and saves the next position.
+Its cursor is bound to the selected evidence and filters. Reaching the last page does not prove that the image has no other evidence.
+The question plan shows unfinished pages and missing required answer fields.
+The investigator is instructed to review these items before it finishes, within its existing time limit.
+Count claims can cite up to 2,048 records. The Lean kernel still checks the count.
+Large distinct-value counts can reach the time limit; a resource failure is not a false-count finding.
 
 ```sh
 cop plan --run runs/dev/new-case
@@ -163,7 +176,7 @@ flowchart TD
     K -->|No| X[Refusal and evidence requirements]
     X --> S
     K -->|Yes| B[Certificate and fixed sentence]
-    B --> QA[Answers with exact certificate sentences]
+    B --> QA[Certificate sentences and explicit answer fields]
     QA --> R
     F --> CR[Scoped conflict review]
     CR --> R
@@ -174,7 +187,7 @@ flowchart TD
     L --> R
     R --> Z[Portable verification package]
     F --> Z
-    V --> A[Answer adapter]
+    V --> A[Check claim-field answer bindings]
     Q --> A
     A --> J[Structured answers with source links]
     J --> T[Deterministic scorer]
@@ -204,8 +217,9 @@ Those judgments have no Lean certificate.
    It compares copied fields, source details, hashes, sentences, and rule labels.
    It also regenerates the proof and runs the Lean kernel again.
 7. The report contains the accepted sentences.
-   The answer adapter puts supported values into the public answer format.
+   Explicit claim-field bindings put supported values into the public answer format.
    Each value retains its source links.
+   Question relevance and complete answers are not proved by this step.
 8. The scorer compares these answers with the private reference.
    It applies declared rules for strings, lists, paths, and timestamps.
    It does not use an LLM judge.

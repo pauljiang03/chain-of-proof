@@ -9,13 +9,19 @@ Keep essential evidence access, Lean verification, explicit limits, and reproduc
 - The latest full NIST fact build is ready outside Git.
 - Both Mulder test packages are prepared and remain unrun.
 - The first Sol A/C pilot is complete; all 169 offline B certificates and 29 unique C certificates independently verify.
-- 627 tests pass with the optional API dependencies installed. The Lean project is unchanged from its passing build.
+- All 701 integrated tests pass with the optional API dependencies. The Lean build passes.
 - All 473 saved certificates verify. All 24 false probes are refused.
 - Tool audits, full evidence citations, proof-gap diagnostics, portable verification, coverage, and explicit claim history are integrated.
 - The second terminal's hardening changes are integrated. The API graph has offline integration tests.
 - The primary CLI produces HTML, Markdown, and JSON reports. Cancellation retains partial work.
 - Supported-image intake validates explicit manifests and creates hashed snapshots with extraction health.
 - Persistent question work and case-agnostic certificate-linked answers are available for every public case profile.
+- Shared claim-field projection is implemented for A, B, C and product reports. It retains partial fields and source links.
+- Inventory paging saves a snapshot-bound cursor. The plan reports unfinished pages and missing required fields.
+- Census proofs now support up to 2,048 records. The full-row source check and Lean kernel check remain in place.
+- General registry readers now include system root, timezone display, Search settings and shadow-copy exclusions.
+- The second-case mechanical smoke produced reports and a verification package; all 12 certificates reverified.
+- A separate Q53 metadata-recovery contract is prepared. It does not replace or rescore the frozen 60-question test.
 - Approved reader collection creates a new snapshot; optional bounded continuation uses a new run and new proofs.
 - Resume preserves old reports, carries work notes, and rechecks prior claims only for identical facts.
 - Conservative conflict diagnostics are shown separately from findings; a failed review does not erase checked work.
@@ -24,19 +30,17 @@ Keep essential evidence access, Lean verification, explicit limits, and reproduc
 
 ## Next
 
-1. Implement the shared claim-faithful answer projection for the full A/B/C comparison.
-   Receipt-only capture, exact A-to-B replay and literal A/C answer scoring are integrated.
-2. Finalize reference decisions, common model, inputs, and budgets. See `comparison/abcd/README.md`.
-3. Configure model access locally. The installed Claude CLI was signed out at the last check.
-4. After finalization and the user's instruction, run the planned investigations, independently verify certificates, and score structured answers.
-5. Review missing answers and source-supported errors. Keep unsupported inferences separate.
+1. Freeze and validate the new explicit-binding A/B/C runtime, then run the authorized bounded smoke and repeat.
+2. Configure native product model access locally. The installed Claude CLI was signed out at the last check.
+3. Complete unresolved full-case reference contracts and Mulder model/budget routing before the full A/B/C/D experiment.
+4. Use the new reports to separate missing source evidence, missing reader fields, unsupported claim forms and unbound answer fields.
 
 The first bounded Sol with/without-Lean pilot and its runtime are integrated.
 See `comparison/ablation/PILOT_SOL61_20261115.md` for results and limits.
 It used the older frozen source at `617dc29`, not the six new backend features.
-The app and six backend workflow additions are complete; the experiment runtime and comparable scoring remain separate work.
-Exactly 26 NIST questions still have no explicit answer-export mapping. Some also need reader, proof, or reference support.
-No live provider or benchmark run was used to validate this app checkpoint.
+The legacy NIST adapter still lacks mappings for 26 questions. New explicit claim bindings work across cases;
+they do not add missing evidence or certify fields outside the supported claim forms.
+Native provider validation still needs local authentication. Mechanical second-case results are not an accuracy score.
 
 The saved report still has 9 complete, 17 partial, and 20 unanswered questions.
 Another 14 questions require reference review.

@@ -34,8 +34,10 @@ The reported measurements are deliberately separate:
 - **C proof results:** checker attempt history and independently replayed
   certificates, separate from answer correctness.
 
-There is no B answer-accuracy score and no shared claim-to-answer projection in
-this pilot. Unresolved reference questions remain visible and unscored. Missing
+There is no B answer-accuracy score in the original frozen pilot. The new shared
+claim-field projector is available for future trials with explicit model-authored
+bindings. It does not add bindings or new scores to the saved pilot.
+Unresolved reference questions remain visible and unscored. Missing
 or malformed final answer blocks produce an unavailable measurement; they are
 not repaired or converted into invented abstentions. A single pair supplies no
 statistical significance or universal false-positive result.

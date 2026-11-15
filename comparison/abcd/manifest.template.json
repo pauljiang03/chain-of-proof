@@ -6,9 +6,9 @@
   "frozen": false,
   "execution_validator_implemented": false,
   "blockers": {
-    "neutral_A_recorder": "pending: current live submission always invokes the checker",
-    "exact_A_to_B_offline_filter": "pending: replay immutable A candidates without AI or repairs",
-    "blocked_projection": "pending: shared claim-faithful A/B/C projection; current certified-only adapter cannot be reused by changing status or substituting actual cited facts for the claim",
+    "neutral_A_recorder": "implemented: comparison.ablation.capture receipt-only candidate stream",
+    "exact_A_to_B_offline_filter": "implemented: comparison.ablation.replay preserves immutable A candidates without AI or repairs",
+    "blocked_projection": "engine implemented: agent.answer_projection and comparison.ablation.projection; new trial must freeze model-authored bindings and complete runtime integration before scoring",
     "matched_budget_accounting": "pending: aggregate tokens, utilities, retries, preparation and end-to-end deadline",
     "D_all_model_routes": "pending: pin every planner, executor, analyst and utility/repair invocation",
     "reference_review": "pending: independent review, list scope and visible unresolved-question treatment",

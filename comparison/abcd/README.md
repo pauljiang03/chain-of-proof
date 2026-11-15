@@ -31,15 +31,16 @@ The A/C prompt and tool interface differ only in the declared gate behavior and 
 versus semantic feedback. Neither arm gets silent assistance or extra tools. Treat
 uncertified conclusions identically and exclude them from certified-claim metrics.
 
-## Answer projection is a blocker
+## Shared answer projection
 
-**Whole-question A/B/C comparison is pending a shared, claim-faithful projector.** The
-current `eval.nist_answers` adapter accepts verified findings and derives answers from
+The shared projector is implemented in `agent/answer_projection.py`, with A/B/C
+entry points in `comparison/ablation/projection.py`. New trials must freeze explicit
+model-authored field bindings before scoring. The legacy `eval.nist_answers` adapter accepts verified findings and derives answers from
 the actual kinds and fields of their cited facts. Flipping A's status to `verified`,
 bypassing replay, or substituting those actual facts for A's asserted meaning would
 repair A offline and invalidate the experiment. Do none of these.
 
-Freeze one deterministic projection for A, B, and C before their answer comparison:
+Freeze the deterministic projection for A, B, and C before their answer comparison:
 same schema, normalization, duplicate/list policy, and candidate-to-answer-leaf mapping;
 no expected-value lookup. It must preserve what a candidate asserts, including a wrong
 relation or time meaning, and must not silently correct it using the cited record.
@@ -47,6 +48,9 @@ Every projected leaf retains its candidate dependencies. B removes leaves whose 
 candidates were refused, using a predefined structural rule; it cannot refill gaps from
 raw facts. Unprojectable claims remain visible in a separate denominator. C uses the
 same projection over its accepted claims. No mode fabricates proof status.
+Conflicting paths are omitted before filtering. B cannot reveal a value that A's
+conflict policy hid. Each output retains its candidate hash, field selector and source links.
+Question placement and relevance remain investigator choices, not Lean theorems.
 
 Paired **claim-level A/B** retention and error-removal analysis is useful independently
 of that projector. If answer projection does not express a rejected relationship, an
@@ -100,10 +104,10 @@ LLM judge, self-grading, or universal false-positive guarantee. A Python impleme
 of the exact same rules is a useful matched rules/checking-cost baseline; agreement does
 not show that Lean makes the forensic assumptions more accurate.
 
-Currently the live runner always gates submissions; A's neutral recorder and B's exact
-offline replay/export mode are missing. Shared claim-faithful projection, aggregate
-budget accounting, D's complete model routing, and execution-manifest validation are
-also pending. Existing checker/replay, public packaging, and deterministic scoring can
-be reused. `manifest.template.json` records these blockers; changing its flags alone
+The neutral A recorder, exact B replay, and shared claim-field projector are implemented.
+The original pilot predates this projector and must not receive retrospective bindings.
+Aggregate budget accounting, D's complete model routing, and full execution-manifest
+validation remain pending. Existing checker/replay, public packaging, and deterministic scoring can
+be reused. `manifest.template.json` is an unfinished preparation artifact; changing its flags alone
 does not implement them. At execution, no active required field may be unset, a model
 alias, or a placeholder. Hash and retain the frozen manifest with every trial.

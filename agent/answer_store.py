@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from agent.investigation import Investigation, _read_json, atomic_json, current_certificates
+from checker import claims
 from checker.facts import Fact, FactSource
 
 FILENAME = 'answer-bindings.json'
@@ -49,6 +50,20 @@ class CertificateSource(FactSource):
     def all(self):
         return [self.facts[i] for i in sorted(self.facts)]
 
+    def check_sentences(self, certificates):
+        """Check copied strings against the certificate's fixed English rendering.
+
+        This detects internal disagreement, not a coherent replacement of the
+        whole bundle. Only replay against the original source establishes that.
+        """
+        for certificate in certificates:
+            claim = claims.parse(certificate['claim'])
+            ids, found = claims.cited_facts(claim, self)
+            if ids != [row['id'] for row in certificate['cited_facts']]:
+                raise ValueError('certificate cited-row scope differs from its claim')
+            if claims.english(claim, found, self) != certificate.get('english'):
+                raise ValueError('certificate strings disagree with its recorded sentence')
+
 
 def public_profile(state):
     """Keep public question shapes only; never use a scoring reference."""
@@ -78,8 +93,10 @@ def _document(path, state):
 
 def _project(state, document, certificates):
     from agent.answer_projection import project_answers
+    source = CertificateSource(certificates.values())
+    source.check_sentences(certificates.values())
     return project_answers(public_profile(state), list(certificates.values()), document['bindings'],
-                           CertificateSource(certificates.values()),
+                           source,
                            admitted_ids=set(certificates), authority='recorded_certificates')
 
 
@@ -224,8 +241,10 @@ def project_bundle(run, public, *, authority='recorded_certificates'):
         certificates[fid] = cert
     if requested != set(certificates):
         raise ValueError('answer binding has no unique verified certificate in this bundle')
+    source = CertificateSource(certificates.values())
+    source.check_sentences(certificates.values())
     return project_answers(projection_public, list(certificates.values()), document['bindings'],
-                           CertificateSource(certificates.values()),
+                           source,
                            admitted_ids=set(certificates), authority=authority)
 
 

@@ -113,6 +113,13 @@ class AnswerStore(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'symlink'):
             read_projection(self.path)
 
+    def test_copied_strings_cannot_disagree_with_the_fixed_certificate_sentence(self):
+        answer(self.path, 'DEVICES', [self.binding])
+        run = self.bundle()
+        run['findings'][0]['cited_facts'][0]['obj_text'] = 'forged serial'
+        with self.assertRaisesRegex(ValueError, 'sentence'):
+            project_bundle(run, public())
+
     def test_actual_tool_is_audited_and_exported_without_claiming_completeness(self):
         bench = Workbench(FACTS, self.path)
         bench.answer('DEVICES', [self.binding])
