@@ -309,3 +309,9 @@ class Workbench:
         except (KeyError, IndexError):
             pass
         return brick
+
+    @audited
+    def answer(self, question_id: str, bindings=None, replace=False) -> dict:
+        """Save explicit claim-field bindings, or show the supported field catalog."""
+        from agent.answer_store import answer
+        return answer(self.run_dir, question_id, bindings, replace=replace)

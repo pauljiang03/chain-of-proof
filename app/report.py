@@ -301,6 +301,29 @@ def _workflow(run, findings):
                 out.append('<p class="small">' + _v(answers, 'disclaimer') + '</p>')
         out.append('</section>')
 
+    if 'answer_projection' in run:
+        from agent.answer_store import report_projection
+        projection, problem = report_projection(run)
+        out.append('<section id="structured-answers"><h2>Structured answers from claim fields</h2>'
+                   '<p>Values come from explicit fields of the recorded claims. Question placement, relevance and '
+                   'completeness are not proved. Independent certificate verification is separate.</p>')
+        if problem:
+            out.append('<p class="notice warning">The supplied structured answer view does not match its claim bindings: '
+                       + _h(problem) + '</p>' + _details('Unverified supplied answer view', run['answer_projection']))
+        else:
+            for answer in projection['submission']['answers']:
+                out.append('<article><h3>' + _v(answer, 'question_id') + '</h3>'
+                           + _details('Structured answer — ' + answer['status'], answer))
+                ids = list(dict.fromkeys(leaf['candidate_id'] for leaf in projection['leaves']
+                                         if leaf['question_id'] == answer['question_id']))
+                for fid in ids:
+                    if fid in eligible:
+                        out.append('<p>Claim ' + _h(fid) + ': <a href="#proof-f' + str(eligible[fid][0]) + '">proof record</a>.</p>')
+                out.append('</article>')
+            out.append(_details('Field links and omitted or conflicting bindings', {
+                key: projection[key] for key in ('leaves', 'unsupported', 'dropped', 'conflicts')}))
+        out.append('</section>')
+
     if 'conflicts' in run:
         review = _object(run['conflicts'])
         out.append('<section id="conflicts"><h2>Cross-record review — unverified diagnostics</h2>'
@@ -371,6 +394,7 @@ def render_html(run: dict) -> str:
     navigation = [(anchor, label) for key, anchor, label in (
         ('collection', 'collection', 'New evidence'),
         ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
+        ('answer_projection', 'structured-answers', 'Structured answers'),
         ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
     out += ['</div><p class="notice">This report renders supplied records and certificates. It does not independently '
             'verify them. Use the independent verifier with the original evidence store before relying on a proof.</p>',

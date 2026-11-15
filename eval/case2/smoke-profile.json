@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "case_id": "dfir-madness-case001-desktop-smoke",
+  "title": "DFIR Madness Case001: desktop-only workflow smoke",
+  "time_zone": null,
+  "instructions": [
+    "Only the explicitly configured desktop disk image is supplied. No server image, memory capture or network capture is supplied.",
+    "This is an operational smoke using a revised six-question scope. There is no frozen expected-answer reference and no question-accuracy score.",
+    "Use supplied records and certified findings; explicitly mark unknowns and keep judgments separate. Do not consult solution pages or reference files.",
+    "Preserve recorded timestamp meanings. Report clock uncertainty without silently shifting source timestamps to fit another timeline.",
+    "No broad absence, completeness, compromise, attribution, intent or exfiltration claim follows merely from a missing extracted record."
+  ],
+  "questions": [
+    {
+      "id": "SYSTEM",
+      "prompt": "Identify the recorded computer name, operating-system version and timezone configuration. Distinguish recorded settings from a corrected real-world clock.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_name": {
+            "type": "string"
+          },
+          "operating_system": {
+            "type": "string"
+          },
+          "recorded_time_zone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "ACCOUNTS",
+      "prompt": "Identify recorded accounts and supported logon/logoff activity. Do not infer that an account caused every associated event.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "activity": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "PROGRAMS",
+      "prompt": "Report supported application execution or registration observations, preserving each timestamp meaning and artifact source.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "WEB",
+      "prompt": "Report supported browser visits and downloads with source artifacts and recorded timestamps. State unavailable evidence explicitly.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "FILES",
+      "prompt": "Report supported file paths, hashes, or historical name observations. Distinguish identical content, rename identity and stronger intent conclusions.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "LIMITS",
+      "prompt": "Describe reader failures, unsupported artifacts, uninspected sources and unresolved questions for this desktop-only smoke.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  ]
+}

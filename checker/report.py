@@ -317,6 +317,29 @@ def _workflow_summary(run, findings):
             if answers.get("disclaimer"):
                 lines += [citations.text(answers["disclaimer"]), ""]
 
+    if "answer_projection" in run:
+        from agent.answer_store import report_projection
+        projection, problem = report_projection(run)
+        lines += ["## Structured answers from claim fields", "",
+                  "Values come from explicit fields of the recorded claims. Question placement, relevance and completeness "
+                  "are not proved. Independent certificate verification is separate.", ""]
+        if problem:
+            lines += ["The supplied structured answer view does not match its claim bindings: " + citations.text(problem), "",
+                      "Supplied values are unverified:", "", citations.fenced(citations.json_text(run['answer_projection']), "json"), ""]
+        else:
+            for answer in projection['submission']['answers']:
+                lines += ["### " + citations.text(answer['question_id']), "",
+                          citations.fenced(citations.json_text(answer), "json"), ""]
+                ids = list(dict.fromkeys(leaf['candidate_id'] for leaf in projection['leaves']
+                                         if leaf['question_id'] == answer['question_id']))
+                for fid in ids:
+                    if fid in eligible:
+                        lines += [f"- Claim {citations.text(fid)}: [proof record](#proof-f{eligible[fid][0]})."]
+                lines.append("")
+            for field in ('unsupported', 'dropped', 'conflicts'):
+                if projection[field]:
+                    lines += ["Projection " + field + ":", "", citations.fenced(citations.json_text(projection[field]), "json"), ""]
+
     if "conflicts" in run:
         review = _object(run["conflicts"])
         lines += ["## Cross-record review — unverified diagnostics", "",

@@ -35,7 +35,10 @@ from typing import Callable, Dict, List, Tuple
 from .facts import KINDS, Fact, FactSource
 
 MAX_PARTS = 64
-MAX_CENSUS = 500          # a census cites every fact of its kind
+# Every row remains cited and independently checked for source completeness.
+# Distinct-value reduction is quadratic in the existing Lean definition, so keep
+# a finite ceiling even though chunked emission removes the giant-list limit.
+MAX_CENSUS = 2048
 SLOTS = ("obj", "aux")
 STRENGTHS = ("strong", "heuristic", "judgment")   # weakest last
 
@@ -792,7 +795,10 @@ def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
         if len(rows) > MAX_CENSUS:
             raise ClaimError(f"the evidence holds {len(rows)} records of kind {census[1][0]}; "
                              f"a census can cover at most {MAX_CENSUS}")
-        return [f.id for f in rows], {f.id: f for f in rows}
+        found = {f.id: f for f in rows}
+        if len(found) != len(rows):
+            raise ClaimError("a census requires unique source fact IDs; duplicate records cannot be counted as separate evidence")
+        return [f.id for f in rows], found
     ids = fact_ids(c)
     found = src.get(ids)
     missing = [i for i in ids if i not in found]

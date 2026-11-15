@@ -1,7 +1,7 @@
-"""The investigator's four tools as a Model Context Protocol server over stdio.
+"""The investigator's restricted tools as a Model Context Protocol server over stdio.
 
 Hand-written JSON-RPC, standard library only. This is how the tools reach a headless
-Claude Code session: that session gets these four tools and no others (no shell, no
+Claude Code session: that session gets the selected tools and no others (no shell, no
 file access), so it cannot read the answer key or anything else on the machine.
 
 COP_FACTS names the evidence file, COP_RUN_DIR the directory proposals are logged in.
@@ -52,6 +52,17 @@ CONCLUDE_TOOL = {
                     "required": ["text", "finding_ids"]}}
 
 WORKFLOW_TOOLS = [
+    {"name": "answer", "description": "Bind supported fields of current certified claims to a public question. Omit bindings to see the semantic field catalog. Fields need finding_id, part (default 0), field, path (object keys / array indices), and optional format. Values come only from the named claim; relevance and completeness are not proved. Append by default; replace=true replaces this question's bindings.",
+     "inputSchema": {"type": "object", "properties": {
+         "question_id": {"type": "string"}, "bindings": {"type": "array", "items": {"type": "object"}},
+         "replace": {"type": "boolean"}}, "required": ["question_id"]}},
+    {"name": "inventory_page", "description": "Read an ID-ordered page of records and save progress for a public question. Continue with the returned cursor and identical filters. Exhaustion applies only to this predicate in this extracted snapshot, not all real-world events.",
+     "inputSchema": {"type": "object", "properties": {
+         "question_id": {"type": "string"},
+         "kinds": {"type": "array", "items": {"type": "string"}},
+         "exhibits": {"type": "array", "items": {"type": "string"}},
+         "page_size": {"type": "integer", "minimum": 1, "maximum": 250},
+         "cursor": {"type": "string"}}, "required": ["question_id"]}},
     {"name": "plan", "description": "Read persistent public questions, searches, supported findings and open work.",
      "inputSchema": {"type": "object", "properties": {}}},
     {"name": "update_question", "description": "Save agent-reported question progress. Refer only to verified finding IDs from this run. This does not prove completeness.",
@@ -78,6 +89,12 @@ def tools_for(names) -> list:
 
 
 def call(bench: Workbench, name: str, args: dict) -> str:
+    if name in {"answer", "inventory_page"}:
+        allowed = ({"question_id", "bindings", "replace"} if name == "answer" else
+                   {"question_id", "kinds", "exhibits", "page_size", "cursor"})
+        if set(args) - allowed:
+            raise ValueError("Unknown " + name + " field")
+        return json.dumps(getattr(bench, name)(**args), ensure_ascii=False)
     if name in {"plan", "review"}:
         return json.dumps(getattr(bench, name)(), ensure_ascii=False)
     if name == "update_question":
