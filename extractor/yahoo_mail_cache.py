@@ -271,6 +271,8 @@ def extract(ev, paths, ctx):
                     note='retained message-page cache observation; no ownership, visit, sender authenticity or completeness claim'))
                 subject = json.dumps(subject_scope(provenance) +
                                      [source, digest, record['byte_offset'], _path(path), content_digest], separators=(',', ':'))
-                emit_attribute(ev, subject, ROLE, path.name, ctx['examined_at'], **provenance)
+                # Dissect directory enumeration can retain a cstruct wchar str
+                # subclass. Preserve its literal text as the catalog's native str.
+                emit_attribute(ev, subject, ROLE, str(path.name), ctx['examined_at'], **provenance)
         except Exception as error:
             ev.problem(source, error)

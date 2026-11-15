@@ -234,6 +234,27 @@ class YahooCacheExtractionTests(unittest.TestCase):
         self.assertEqual({row[1] for row in rows}, {self.ctx['examined_at']})
         self.assertTrue(all(json.loads(row[-1])['timestamp_semantics'] == 'examination_observation' for row in rows))
 
+    def test_dissect_string_subclass_filename_keeps_literal_native_text(self):
+        class RetainedName(str):
+            pass
+
+        class EnumeratedPath:
+            def __init__(self, path):
+                self.path = path
+                self.name = RetainedName(path.name)
+
+            def __str__(self):
+                return str(self.path)
+
+            def __getattr__(self, name):
+                return getattr(self.path, name)
+
+        ev = Evidence()
+        yahoo.extract(ev, [self.index, EnumeratedPath(self.payload)], self.ctx)
+        values = [json.loads(row[4]) for row in ev.rows() if row[0] == 'attributeTextValue']
+        self.assertEqual(values, [self.payload.name])
+        self.assertEqual(ev.problems, [])
+
 
 if __name__ == '__main__':
     unittest.main()
