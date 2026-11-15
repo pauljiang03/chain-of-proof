@@ -70,11 +70,11 @@ def _join(items, most=6, quote=False):
 
 
 def _distinct(values):
-    """Values in first-seen order, compared without case."""
+    """Distinct literal values in first-seen order, without case normalization."""
     seen, out = set(), []
     for value in values:
-        if value and value.lower() not in seen:
-            seen.add(value.lower())
+        if value and value not in seen:
+            seen.add(value)
             out.append(value)
     return out
 
@@ -297,7 +297,7 @@ def _web(case):
     if watched:
         wanted = {_obj(entry).lower() for entry in watched}
         ordered = _distinct([_obj(entry) for entry in rows if _obj(entry).lower() in wanted])
-        ordered += [term for term in _distinct(sorted(_obj(entry) for entry in watched)) if term.lower() not in {t.lower() for t in ordered}]
+        ordered += [term for term in _distinct(sorted(_obj(entry) for entry in watched)) if term not in set(ordered)]
         out.append(f'{_n(len(ordered), "search text matches", "different search texts match")} the search watch list.')
         out.append(f'These are examples: {_join(ordered, 5, quote=True)}.')
         used += watched

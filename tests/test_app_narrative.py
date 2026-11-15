@@ -77,7 +77,7 @@ class Narrative(unittest.TestCase):
         story = narrative.build(case())
         self.assertEqual(story['zone'], 'America/New_York' if story['zone'] else None)
         local = story['zone'] is not None                       # this system may not know the zone; then times are UTC
-        self.assertEqual(sentences(story, 'computer'), ['The cited records give the computer name LAB-PC.',
+        self.assertEqual(sentences(story, 'computer'), ['The records show 2 values for the computer name: LAB-PC and lab-pc.',
                                                         'The cited records name the operating system Example OS 9.',
                                                         'The cited records contain 2 distinct local-account names: Admin and worker.',
                                                         'The records show the Google Drive account worker@example.org.'])
@@ -159,6 +159,31 @@ class Narrative(unittest.TestCase):
                     for expected_sentences in expected.values():
                         for sentence in expected_sentences:
                             self.assertIn(html.escape(sentence), summary)
+
+    def test_distinct_recorded_names_and_text_keep_case_and_space_differences(self):
+        for left, right in (('A.txt', 'a.txt'), ('a  b.txt', 'a b.txt')):
+            with self.subTest(values=(left, right)):
+                data = bundle(finding('Distinct', [
+                    row(1, 'cloudFile', left, 'google drive: uploaded'),
+                    row(2, 'cloudFile', right, 'google drive: uploaded'),
+                    row(3, 'cloudFile', left, 'google drive: uploaded'),
+                    row(4, 'emailSent', left, 'from worker to friend'),
+                    row(5, 'emailSent', right, 'from worker to friend'),
+                    row(6, 'noteText', left, 'Sticky Notes'),
+                    row(7, 'noteText', right, 'Sticky Notes'),
+                ]))
+                story = narrative.build(data)
+                self.assertEqual(sentences(story, 'cloud')[0],
+                                 'The cited Google Drive client records contain 2 distinct file names.')
+                self.assertIn(f'The file names are: {left} and {right}.', sentences(story, 'cloud'))
+                self.assertIn(f'These are the subjects: "{left}" and "{right}".', sentences(story, 'mail'))
+                self.assertEqual(sentences(story, 'notes'), [
+                    f'A Sticky Notes file contains this text: "{left}".',
+                    f'A Sticky Notes file contains this text: "{right}".'])
+                for short in (False, True):
+                    rendered = render_html(data, options={'brief': short})
+                    self.assertIn('2 distinct file names.', rendered)
+                    self.assertIn(html.escape(f'The file names are: {left} and {right}.'), rendered)
 
     def test_shortened_note_is_labeled_as_an_excerpt(self):
         value = 'password: a  b\n' + 'Ω' * 150
