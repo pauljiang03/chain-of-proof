@@ -148,9 +148,10 @@ def _integer(value):
     return int(value)
 
 
-def _sqlite(data, family, *, with_notes=False):
+def _sqlite(data, family, *, with_notes=False, view_provenance=None):
     # Use SQLite's own read-only parser and integrity check, not a signature-only
-    # classifier. The copied file is exactly the bytes covered by container_sha256.
+    # classifier. A WAL-derived copy has its own sqlite_view_sha256; the original
+    # container_sha256 continues to identify the captured base database bytes.
     with tempfile.TemporaryDirectory(prefix='cop-container-') as directory:
         path = Path(directory) / 'container.sqlite'
         path.write_bytes(data)
@@ -187,6 +188,7 @@ def _sqlite(data, family, *, with_notes=False):
             validation = {'parser': 'sqlite3', 'format': family + '_sqlite',
                           'validation': 'read-only SQLite quick_check, required table/column schema and first-row decoding',
                           'validated_tables': sorted(required), 'wal_policy': 'base database bytes only; WAL not replayed'}
+            validation.update(view_provenance or {})
             return (validation, _sticky_sqlite_rows(db)) if with_notes else validation
         finally:
             db.close()
@@ -388,7 +390,7 @@ def _sticky_ole(data, *, with_notes=False):
 
 
 @contextmanager
-def validated(data, family):
+def validated(data, family, *, sqlite_view=None):
     if family == 'outlook_mailbox':
         import pypff
         stream, box, opened = ParseBytes(data), pypff.file(), False
@@ -406,7 +408,7 @@ def validated(data, family):
             if opened:
                 box.close()
     elif family in ('chromium', 'firefox'):
-        yield _sqlite(data, family), None
+        yield _sqlite(data, family, view_provenance=sqlite_view), None
     elif family == 'ie_webcache':
         yield _ese(data), None
     elif family == 'ie_legacy_history':
@@ -414,7 +416,7 @@ def validated(data, family):
     elif family == 'thumbnail_cache':
         yield _thumbcache(data), None
     elif family == 'sticky_notes':
-        validation, notes = (_sqlite(data, family, with_notes=True) if data.startswith(b'SQLite format 3\0')
+        validation, notes = (_sqlite(data, family, with_notes=True, view_provenance=sqlite_view) if data.startswith(b'SQLite format 3\0')
                              else _sticky_ole(data, with_notes=True))
         yield validation, notes
     else:
@@ -455,6 +457,7 @@ def _unicode_property(message, property_id):
 
 def mail_fields(ev, box, container_subject, provenance, examined_at):
     """Bounded retained-message walk; never scans recoverable/orphan messages."""
+    from .mail_content import text_property
     pending, folders, messages, text_bytes = [(box.get_root_folder(), (), 0)], 0, 0, 0
     seen = set()
     while pending:
@@ -481,26 +484,23 @@ def mail_fields(ev, box, container_subject, provenance, examined_at):
                     message = folder.get_sub_message(index)
                     locator['pff_item_identifier'] = getattr(message, 'identifier', None)
                     subject = json.dumps([container_subject, 'retained-message', locator], sort_keys=True, separators=(',', ':'))
-                    for property_id, role in ((0x0037, 'mail.message.subject_unicode'), (0x1000, 'mail.message.body_unicode')):
+                    for property_id in (0x0037, 0x1000, 0x1013):
                         try:
-                            found = _unicode_property(message, property_id)
+                            found = text_property(message, property_id, folder=folder)
                         except Exception as error:
                             ev.problem(provenance['source_path'] + ' ' + json.dumps(locator, sort_keys=True)
                                        + f' MAPI 0x{property_id:04X}', error)
                             continue
                         if found is None:
                             continue
-                        value, set_index, entry_index, byte_count = found
+                        value, role, byte_count = found['value'], found['role'], found['byte_count']
                         text_bytes += byte_count
                         if text_bytes > MAX_MAIL_TEXT_BYTES:
                             raise ValueError('aggregate mail text budget exceeded')
                         emit_attribute(ev, subject, role, value, examined_at,
                                        **dict(provenance, container_subject=container_subject, message_locator=locator,
-                                              source_field=f'MAPI 0x{property_id:04X}/PT_UNICODE',
-                                              record_set=set_index, property_entry=entry_index,
-                                              property_byte_length=byte_count,
-                                              validation='strict UTF-16LE bytes of a retained PT_UNICODE MAPI property',
-                                              limitation='literal retained property; no sent/delivery/authorship claim; HTML and recovered/orphan items not converted'))
+                                              **found['provenance'],
+                                              limitation='literal retained property; no sent/delivery/authorship claim; recovered/orphan items not scanned'))
                 except Exception as error:
                     ev.problem(provenance['source_path'] + ' ' + json.dumps(locator, sort_keys=True), error)
                     if text_bytes > MAX_MAIL_TEXT_BYTES:
@@ -520,6 +520,31 @@ def _container_mtime(stat):
     stamp = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=seconds)
     fraction = ('.' + f'{nanos:09d}'.rstrip('0')) if nanos else ''
     return stamp.strftime('%Y-%m-%dT%H:%M:%S') + fraction + 'Z', int(value)
+
+
+def _sqlite_source_view(target, path, source, data, budget):
+    """Read an exact adjacent WAL in the same opened filesystem view, if present."""
+    from .sqlite_wal import committed_view
+    wal_path = target.fs.path(str(path) + '-wal')
+    if not wal_path.exists():
+        return data, None
+    if wal_path.is_symlink() or not wal_path.is_file():
+        raise ValueError('adjacent SQLite WAL is not a regular retained file')
+    wal_path = wal_path.resolve(strict=True)
+    wal_source = _windows_path(target, wal_path)
+    if wal_source.casefold() != (source + '-wal').casefold():
+        raise ValueError('resolved SQLite WAL is not adjacent to the selected container')
+    size = wal_path.lstat().st_size
+    if size == 0 and not isinstance(size, bool):
+        with wal_path.open('rb') as stream:
+            if stream.read(1):
+                raise ValueError('zero-length SQLite WAL has unexpected bytes')
+        wal = b''
+    else:
+        wal = _read(wal_path, size, budget)
+    view, details = committed_view(data, wal)
+    details['sqlite_wal_source_path'] = wal_source
+    return view, details
 
 
 def sticky_fields(ev, notes, container_subject, provenance, stat, examined_at):
@@ -575,7 +600,14 @@ def extract(ev, target, ctx):
                 data = _read(path, stat.st_size, budget)
                 digest = hashlib.sha256(data).hexdigest()
                 subject = json.dumps(['artifact-container', scope, source, 'sha256', digest], ensure_ascii=True, separators=(',', ':'))
-                with validated(data, family) as (validation, mailbox):
+                view, sqlite_view = data, None
+                if family in ('chromium', 'firefox', 'sticky_notes') and data.startswith(b'SQLite format 3\0'):
+                    view, sqlite_view = _sqlite_source_view(target, path, source, data, budget)
+                    if sqlite_view is not None:
+                        subject = json.dumps(['artifact-container', scope, source, 'sqlite-base-and-wal',
+                                              digest, sqlite_view['sqlite_wal_sha256'], sqlite_view['sqlite_view_sha256']],
+                                             ensure_ascii=True, separators=(',', ':'))
+                with validated(view, family, sqlite_view=sqlite_view) as (validation, mailbox):
                     provenance = dict(common, artifact=source, source_path=source,
                                       source_field='validated container path', container_sha256=digest,
                                       container_size=len(data), container_locator=source, hash_complete=True,

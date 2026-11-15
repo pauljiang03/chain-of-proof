@@ -17,7 +17,7 @@ conan = "app.cli:conan"
 [project.optional-dependencies]
 # needed only to rebuild evidence/case_facts.json from the disk images
 # (libpff-python reads the Outlook mailbox file; it compiles on install)
-extract = ["dissect>=3.20", "libpff-python>=20231205"]
+extract = ["dissect>=3.20", "libpff-python>=20231205", "pypdf>=6.21.4,<7"]
 # needed only for the API-key backend of the AI investigator (agent/run.py --backend deepagents);
 # deepagents needs Python 3.11 or newer
 agent = ["deepagents>=0.7; python_version >= '3.11'", "langchain-anthropic>=1.7; python_version >= '3.11'"]
