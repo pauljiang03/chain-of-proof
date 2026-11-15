@@ -14,6 +14,7 @@ import struct
 from pathlib import PureWindowsPath
 
 from .attributes import emit_attribute
+from .source_scope import merge_scope, subject_scope
 from .store import us_from_filetime
 
 MAX_FILE = 32 << 20
@@ -336,14 +337,14 @@ def _path(path):
     return str(path).replace('/', '\\')
 
 
-def _subject(ctx, path):
-    return json.dumps([ctx['common'].get('image'), ctx['common'].get('exhibit'), path], separators=(',', ':'))
+def _subject(ctx, path, provenance=None):
+    return json.dumps(subject_scope(provenance or merge_scope(ctx['common'])) + [path], separators=(',', ':'))
 
 
 def _emit(ev, ctx, path, role, value, **locator):
-    provenance = dict(ctx['common'], artifact=path, source_path=path,
-                      parser='extractor.hacking', **locator)
-    return emit_attribute(ev, _subject(ctx, path), role, value, ctx['examined_at'], **provenance)
+    provenance = merge_scope(ctx['common'], dict(locator, artifact=path, source_path=path,
+                                                parser='extractor.hacking'))
+    return emit_attribute(ev, _subject(ctx, path, provenance), role, value, ctx['examined_at'], **provenance)
 
 
 def _read(path):
@@ -360,8 +361,8 @@ def _read(path):
 def _content(ev, ctx, path, data, **extra):
     source = _path(path)
     ev.add('fileContent', ctx['examined_at'], 1, source, 'sha256:' + hashlib.sha256(data).hexdigest(),
-           **dict(ctx['common'], artifact=source, source_path=source, size=len(data), hash_complete=True,
-                  parser='extractor.hacking', time_meaning=OBSERVED, **extra))
+           **merge_scope(ctx['common'], dict(extra, artifact=source, source_path=source, size=len(data), hash_complete=True,
+                                            parser='extractor.hacking', time_meaning=OBSERVED)))
     _emit(ev, ctx, source, 'source.path', source, **extra)
 
 
@@ -400,7 +401,7 @@ def _mail_accounts(ev, target, ctx):
              'SMTP Display Name': 'app.config.real_name', 'NNTP Display Name': 'app.config.real_name',
              'NNTP User Name': 'app.config.username', 'POP3 User Name': 'app.config.username'}
     target.registry.load_user_hives()
-    from .system import _hives
+    from .system import _hives, _where
     for hive in _hives(ev, target):
         if not hive.path.lower().endswith('ntuser.dat'):
             continue
@@ -414,10 +415,11 @@ def _mail_accounts(ev, target, ctx):
             source = hive.path + ':' + account.path
             for value in account.values():
                 if value.name in roles and isinstance(value.value, str) and value.value:
-                    _emit(ev, ctx, source, roles[value.name], value.value, hive_path=hive.path,
-                          registry_key=account.path, registry_value=value.name,
-                          account=hive.account, account_sid=hive.sid,
-                          application_family='Microsoft Internet Account Manager / Outlook Express')
+                    _emit(ev, ctx, source, roles[value.name], value.value,
+                          **dict(_where(hive), hive_path=hive.path,
+                                 registry_key=account.path, registry_value=value.name,
+                                 account=hive.account, account_sid=hive.sid,
+                                 application_family='Microsoft Internet Account Manager / Outlook Express'))
 
 
 def _news(ev, paths, ctx):

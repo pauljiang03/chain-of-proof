@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT))
 from extractor.acquisition import resolve
 from extractor.store import Evidence, us
 from extractor.tags import add_tags, public_policy
+from extractor.source_scope import base_volume_scope
 
 
 def extract_media(*args, **kwargs):
@@ -115,7 +116,14 @@ def extract(images, exhibits, *, case, examined_at, selected=None, evidence=None
                     log.extend(extract_media(ev, images / name, exhibit, fat_tz, observation, tool,
                                              acquisition=acquisition[name]))
                 else:
-                    ctx = {"common": {"image": name, "exhibit": exhibit_id, "tool": tool},
+                    # These readers explicitly open the examined base filesystem.
+                    # Whole-image, optical-history and scanner readers declare
+                    # their more specific source origins at their read sites.
+                    origin = (base_volume_scope() if reader not in ("image_integrity", "optical", "antivirus")
+                              else {"source_snapshot": "unknown", "source_variant": "unknown"})
+                    if reader == "antivirus":
+                        origin = base_volume_scope()  # input view, not scanner-output origin
+                    ctx = {"common": {"image": name, "exhibit": exhibit_id, "tool": tool, **origin},
                            "examined_at": observation, "pc_time_zone": fat_tz,
                            "acquisition": acquisition[name]}
                     module = import_module(f"extractor.{reader}")

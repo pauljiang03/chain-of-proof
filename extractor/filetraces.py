@@ -23,6 +23,7 @@ from datetime import datetime, timedelta, timezone
 
 from .store import us, us_from_filetime, us_from_unix
 from .journal_paths import JournalRanges
+from .source_scope import merge_scope, vss_snapshot
 
 # --------------------------------------------------------------------------- pure helpers
 
@@ -963,6 +964,9 @@ def _journal_identity(common, serial, ref):
 
     Image/exhibit scope prevents joining unrelated evidence images that happen to
     carry the same serial. Shadow copies from that image retain the same scope.
+    Reference equality across historical views does not establish equal source
+    snapshots, continuous existence or authenticity. A selected-view answer must
+    separately check the source origin of every supporting record.
     """
     return "NTFS identity " + json.dumps(
         [common.get("image", ""), common.get("exhibit", ""), f"{serial:016X}", *ref],
@@ -978,6 +982,8 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
     close-only record cannot recover the exact earlier action time. Return the
     first USN for the caller's live/VSS overlap boundary.
     """
+    common = merge_scope(common, {key: source.pop(key) for key in
+                                 ('source_snapshot', 'source_variant') if key in source})
     journal = ntfs.usnjrnl
     if not journal:
         return None
@@ -1061,7 +1067,8 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
     serial = volume_serial or ("%08X" % (ntfs.serial & 0xFFFFFFFF))
     root_reference = None
     scope = {'image': common.get('image'), 'exhibit': common.get('exhibit'),
-             'ntfs_volume_serial': f'{ntfs.serial:016X}'}
+             'ntfs_volume_serial': f'{ntfs.serial:016X}',
+             'source_snapshot': common['source_snapshot'], 'source_variant': common['source_variant']}
     scope_complete = (all(isinstance(scope[key], str) and scope[key].strip()
                           for key in ('image', 'exhibit'))
                       and isinstance(ntfs.serial, int) and not isinstance(ntfs.serial, bool)
@@ -1381,6 +1388,7 @@ def _tree(ntfs):
 def _shadow_copies(ev, target, spool_dir, common):
     from dissect.ntfs import NTFS
     from dissect.volume.vss import VSS
+    common = merge_scope(common)
     for drive, serial, fs in _ntfs_volumes(target):
         try:
             live_first = _journal(ev, fs.ntfs, drive, spool_dir if spool_dir[:2].upper() == drive else "",
@@ -1410,9 +1418,13 @@ def _shadow_copies(ev, target, spool_dir, common):
                        time_meaning="creation time in the shadow copy catalog", **common)
                 snap = NTFS(store.open())
                 source = dict(shadow_copy=copy_id)
+                # The copy identifier above is an object named by base-volume
+                # catalog bytes. Only reads through this opened store have VSS
+                # byte origin; do not change or mutate the live/catalog scope.
+                snapshot_common = merge_scope(common, {'source_snapshot': vss_snapshot(store.copy_identifier)})
                 if live_first is not None:
                     _journal(ev, snap, drive, spool_dir if spool_dir[:2].upper() == drive else "",
-                             common, only_before=live_first, volume_serial=serial, shadow_copy=copy_id,
+                             snapshot_common, only_before=live_first, volume_serial=serial, shadow_copy=copy_id,
                              journal_source=f"journal as kept in shadow copy {copy_id}")
                 if live is None:
                     live, problems = _tree(fs.ntfs)
@@ -1429,11 +1441,17 @@ def _shadow_copies(ev, target, spool_dir, common):
                              "different on the live volume: " + ", ".join(
                                  w for w, differs in (("size", now[1] != size), ("modified time", now[2] != modified))
                                  if differs))
+                    directory = drive + "\\" + path.rsplit("\\", 1)[0]
                     prov = dict(artifact=f"shadow copy {copy_id} of {drive} ({artifact})", state=state,
+                                source_path=directory, source_stream='$I30',
+                                source_record_type='directory FILE_NAME index entry',
+                                shadow_copy_container=artifact,
                                 size=size, modified=iso(us_from_filetime(modified)),
                                 created=iso(us_from_filetime(born)), record_changed=iso(us_from_filetime(changed)),
                                 accessed=iso(us_from_filetime(accessed)), volume_serial=serial,
-                                **source, **common)
+                                live_comparison_source={key: common.get(key) for key in
+                                    ('image', 'exhibit', 'source_snapshot', 'source_variant')},
+                                **source, **snapshot_common)
                     if now is not None:
                         prov.update(live_size=now[1], live_modified=iso(us_from_filetime(now[2])))
                     m = re.match(r"^(?:Users|Documents and Settings)\\([^\\]+)\\", path)
@@ -1441,7 +1459,9 @@ def _shadow_copies(ev, target, spool_dir, common):
                         prov["account"] = m.group(1)
                     ev.add("fileSeen", created, 1, drive + "\\" + path, "shadow copy",
                            time_meaning="creation time of the shadow copy: the file existed "
-                                        "in this state then", **prov)
+                                        "in this state then",
+                           timestamp_source=dict(prov['live_comparison_source'], artifact=artifact,
+                                                 field='VSS catalog creation_time'), **prov)
                     times = {}                           # one row per distinct file time
                     for ft, meaning in ((born, "the file's creation time in the shadow copy"),
                                         (modified, "the file's last-modified time in the shadow copy")):
@@ -1449,7 +1469,10 @@ def _shadow_copies(ev, target, spool_dir, common):
                             times.setdefault(us_from_filetime(ft), []).append(meaning)
                     for t, meanings in sorted(times.items()):
                         ev.add("fileSeen", t, 1, drive + "\\" + path, "shadow copy",
-                               time_meaning="; ".join(meanings), **prov)
+                               time_meaning="; ".join(meanings),
+                               timestamp_source={key: prov.get(key) for key in
+                                   ('image', 'exhibit', 'source_snapshot', 'source_variant',
+                                    'source_path', 'source_stream', 'source_record_type')}, **prov)
             except Exception as e:
                 ev.problem(artifact, e)
 
@@ -1457,7 +1480,7 @@ def _shadow_copies(ev, target, spool_dir, common):
 # --------------------------------------------------------------------------- entry point
 
 def extract(ev, target, ctx):
-    common = dict(ctx["common"])
+    common = merge_scope(ctx["common"])
     try:
         tz = str(target.timezone)
     except Exception as e:

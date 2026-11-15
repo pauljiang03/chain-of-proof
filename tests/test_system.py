@@ -196,7 +196,7 @@ class Machine(unittest.TestCase):
         with self.assertRaises(ValueError):
             s.parse_mbr(bytes(512))
 
-    def test_backup_copies_add_only_what_differs(self):
+    def test_copy_dedup_within_same_unspecified_scope(self):
         class Ev:
             rows = []
 
@@ -208,7 +208,8 @@ class Machine(unittest.TestCase):
         self.assertFalse(out.add("sessionEvent", 5, 1, "shutdown", "", _copy=True, artifact="backup"))
         self.assertTrue(out.add("sessionEvent", 4, 1, "shutdown", "", _copy=True, artifact="backup"))
         self.assertEqual([r[4]["artifact"] for r in ev.rows], ["live", "backup"])
-        self.assertEqual(ev.rows[0][4], {"artifact": "live", "image": "x.E01"})    # empty values left out
+        self.assertEqual(ev.rows[0][4], {"artifact": "live", "image": "x.E01",
+                                        "source_snapshot": "unknown", "source_variant": "unknown"})
 
 
 if __name__ == "__main__":

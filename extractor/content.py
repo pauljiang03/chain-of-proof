@@ -187,11 +187,12 @@ def fat_in_use(fat: bytes, cluster: int) -> bool:
 
 def _row(ev, ctx, obj: str, digest: str, size: int, head: bytes, location: str, artifact: str,
          **extra) -> None:
+    from .source_scope import merge_scope
     signature, detail = signature_of(head)
     extension = extension_of(obj)
-    prov = dict(artifact=artifact, size=size, location=location, signature=signature,
+    prov = merge_scope(ctx['common'], dict(artifact=artifact, size=size, location=location, signature=signature,
                 extension=extension, leading_bytes=head[:8].hex(), time_meaning=OBSERVED,
-                **extra, **ctx["common"])
+                **extra))
     if detail:
         prov["signature_detail"] = detail
     if ctx.get("acquisition"):
@@ -338,7 +339,7 @@ def _recovered(ev, vol, fs, ctx, identity: dict) -> None:
                        f"which this folder's files do not overlap and the data area starts inside the volume")
         _row(ev, ctx, obj, digest, size, head, location,
              f"FAT directory entry in unallocated cluster {cluster}; content at volume byte offset {offset}",
-             recovered=True, first_cluster=e.first_cluster, clusters=count, cluster_size=size_here,
+             recovered=True, source_variant="unallocated-recovery", first_cluster=e.first_cluster, clusters=count, cluster_size=size_here,
              volume_offset=offset, layout="current" if older is None else "older, derived",
              read_as=read_as)
 
@@ -451,7 +452,9 @@ def _disc_rows(ev, path: Path, ctx, s, zone) -> None:
             continue
         seen.add((f.path, digest, location))
         placed = [r for r in runs if r[0] is not None]
-        extra = dict(extra, extents=len(runs), read_as="the extents its UDF file entry lists")
+        extra = dict(extra, extents=len(runs), read_as="the extents its UDF file entry lists",
+                     source_snapshot="optical-image",
+                     source_variant=("udf-recovered-entry:" + str(f.sector)) if extra.get('recovered') else "primary")
         if placed:
             extra["first_sector"] = placed[0][0]
         session = s.session(f.sector)
