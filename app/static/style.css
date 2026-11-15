@@ -621,12 +621,16 @@ dialog { width: min(560px, 92vw); border-radius: 12px; }
 .form-footer { margin-top: 0; gap: 12px; font-size: 0.8125rem; }
 
 /* Key findings: what the records show, one topic to a row. */
-.key-findings { padding-bottom: 8px; }
+.key-findings { padding-top: 6px; padding-bottom: 6px; }
+.key-row:first-child { border-top: 0; }
 .key-row { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 4px 20px; padding: 10px 0; border-top: 1px solid var(--line-2); }
-.key-row h4 { font-size: 0.875rem; line-height: 1.5; }
+.key-row h3 { margin: 0; font-size: 0.875rem; font-weight: 600; line-height: 1.5; }
 .key-body p { font-size: 0.9375rem; line-height: 1.55; max-width: 92ch; overflow-wrap: anywhere; }
 .key-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
 .key-table th { text-align: left; font-weight: 600; color: var(--muted); padding: 4px 12px 4px 0; border-bottom: 1px solid var(--line); }
 .key-table td { padding: 5px 12px 5px 0; border-bottom: 1px solid var(--line-2); overflow-wrap: anywhere; }
 .key-table tr:last-child td { border-bottom: 0; }
 @media (max-width: 760px) { .key-row { grid-template-columns: 1fr; } }
+
+/* Lock view: a pressed toggle in the replay controls. */
+#graph-lock[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 500; }

@@ -179,7 +179,12 @@
     if (generated) metadata.append(element("span", "", "Report saved " + date(generated)));
     $("sample-banner").hidden = !(meta.sample || payload.name === "sample");
     $("report-actions").hidden = !payload.run;
-    for (const format of ["html", "md", "json"]) $("download-" + format).href = reportURL(format, true);
+    for (const format of ["html", "md", "json"]) {
+      const link = $("download-" + format);
+      link.href = reportURL(format, true);
+      // Without a file name the desktop window opens the file in place of the app instead of saving it.
+      link.download = String(state.selected).replace(/\//g, "-") + "." + format;
+    }
     const findings = acceptedFindings(run), rejections = array(run.rejections);
     $("metric-accepted").textContent = payload.run ? count(findings.length, "—") : count(meta.verified, "—");
     $("metric-refused").textContent = payload.run ? count(rejections.length, "—") : count(meta.rejected, "—");
@@ -229,13 +234,13 @@
     if (status === "running") {
       $("progress-title").textContent = state.stopping ? "Stopping the investigation" : "Investigation in progress";
       $("progress-description").textContent = events.length
-        ? count(events.length) + " recent completed tool calls available. View Activity for the recorded work."
+        ? "The investigator is working. " + count(events.length) + " recent tool calls completed."
         : "Waiting for a completed tool call. A running call may not appear until it finishes.";
     } else {
       $("progress-title").textContent = ({ failed: "The investigation ended with an error", cancelled: "Investigation cancelled", partial: "This report contains partial work" })[status] || "";
       $("progress-description").textContent = state.payload.run
-        ? "The available report is retained. Review its findings, missing evidence, and recorded limits."
-        : "No report bundle is available yet. Recorded completed activity is shown below when available.";
+        ? "The findings verified before it ended are kept."
+        : "No findings were saved.";
     }
   }
   function searchable(finding) {
@@ -529,14 +534,19 @@
     else $("backend-help").textContent = "Runs on your " + label + " account.";   // a run spends that account's usage
   }
   // A page cannot learn a file's path from a browser file input. The desktop window can supply it
-  // from its own open panel; in a browser the button stays hidden and the path is typed.
-  const chooser = () => Boolean(window.pywebview && window.pywebview.api && typeof window.pywebview.api.choose_evidence === "function");
+  // from its own open panel, asked through the local server; in a browser the button stays hidden and the path is typed.
+  const chooser = () => Boolean(state.config && state.config.chooser === true);
   async function chooseEvidence() {
-    if (!chooser()) return;
+    if (!chooser() || state.choosing) return;
+    state.choosing = true;
     try {
-      const path = await window.pywebview.api.choose_evidence();
-      if (typeof path === "string" && path) $("facts-path").value = path;
+      const reply = await api("/api/choose", {});
+      if (reply && typeof reply.path === "string" && reply.path) {
+        $("facts-path").value = reply.path;
+        $("facts-path").dispatchEvent(new Event("input", { bubbles: true }));
+      }
     } catch { /* the path can still be typed */ }
+    finally { state.choosing = false; }
   }
   function applyConfig(config) {
     state.config = config;
@@ -645,7 +655,6 @@
   document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   document.querySelectorAll("[data-detail-tab]").forEach((button) => button.addEventListener("click", () => switchDetail(button.dataset.detailTab)));
   document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "report"], state.tab, switchTab));
-  $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });
   for (const [id, view] of [["findings-overview", "overview"], ["findings-exact", "exact"]]) $(id).addEventListener("click", () => {
@@ -656,7 +665,6 @@
   $("refresh-runs").addEventListener("click", refreshAll);
   $("investigation-form").addEventListener("submit", startInvestigation);
   $("facts-choose").addEventListener("click", chooseEvidence);
-  window.addEventListener("pywebviewready", () => { $("facts-choose").hidden = !chooser(); });
   for (const id of ["investigation-model", "investigation-minutes"]) $(id).addEventListener("input", updateStartButton);
   $("investigation-backend").addEventListener("change", () => {
     const defaults = object(state.config && state.config.defaults);

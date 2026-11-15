@@ -411,6 +411,7 @@ def _finding_title(finding):
 def _result_index(findings):
     """A source index, not a new claim or a model-written conclusion."""
     groups = {key: [] for key, _ in brief.LANES}
+    seen = {key: set() for key in groups}   # a record cited by many findings is listed once
     for number, finding in findings:
         for row in _rows(finding.get('cited_facts')):
             row = _object(row)
@@ -427,7 +428,8 @@ def _result_index(findings):
             if item:
                 value += ' <span class="small">(' + _h(item) + ')</span>'
             key = json.dumps(row, ensure_ascii=False, sort_keys=True)
-            if all(old[0] != key for old in groups[lane]):
+            if key not in seen[lane]:
+                seen[lane].add(key)
                 groups[lane].append((key, value, number, finding.get('finding_id', 'Finding')))
     rows = []
     for lane, label in brief.LANES:

@@ -27,7 +27,7 @@
   const state = {
     key: null, signature: null, run: null, events: [], items: [],
     scope: "", query: "", focus: null, page: 0, step: 0, steps: 0, total: 0, browsing: true,
-    selected: null, hover: null, view: { x: 24, y: 56, k: 1 }, fitted: false,
+    selected: null, hover: null, view: { x: 24, y: 56, k: 1 }, fitted: false, locked: false,
     model: { nodes: new Map(), edges: [], shown: [] }, timer: null, drag: null, columns: [], width: 0, examined: new Set(), rowKeys: new WeakMap(),
   };
 
@@ -456,6 +456,7 @@
     $("graph-play").textContent = (state.timer ? "❚❚ " : "▶ ") + action;
     $("graph-play").setAttribute("aria-label", action + " the graph");
     $("graph-play").disabled = !state.steps;
+    $("graph-lock").setAttribute("aria-pressed", String(state.locked));
     $("graph-start").disabled = !state.steps || state.step === 0;
     $("graph-end").disabled = !state.steps || (!state.browsing && state.step === state.steps && state.page === Math.max(0, Math.ceil(state.steps / PAGE) - 1));
   }
@@ -497,6 +498,7 @@
     return target;
   }
   function follow() {
+    if (state.locked) return;   // the viewer asked for the view to stay where it is
     const at = local(), host = $("graph-host").getBoundingClientRect();
     const newest = [...state.model.nodes.values()].find(item => item.column === "finding" && item.birth === at);
     if (!newest || !host.height || !host.width) return;
@@ -515,7 +517,7 @@
     interrupt();
     build();
     draw();
-    fit(false, true);
+    if (!state.locked) fit(false, true);
     follow();
   }
   function play() {
@@ -603,6 +605,14 @@
   // ---- events -------------------------------------------------------------
   function wire() {
     const root = $("graph");
+    // Lock view: the replay still moves through the findings, but the canvas stays where the viewer put it.
+    try { state.locked = localStorage.getItem("conan.graph.lock") === "1"; } catch (error) { /* starts unlocked */ }
+    $("graph-lock").addEventListener("click", () => {
+      state.locked = !state.locked;
+      try { localStorage.setItem("conan.graph.lock", state.locked ? "1" : "0"); } catch (error) { /* not remembered */ }
+      controls();
+      if (!state.locked && !state.browsing && state.step > 0) follow();   // unlocking catches up with the replay
+    });
     root.addEventListener("pointerdown", (event) => {
       if (event.target.closest(".node") || event.button !== 0) return;
       interrupt();   // grab the canvas mid-flight; it continues from where it is

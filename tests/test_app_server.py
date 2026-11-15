@@ -122,7 +122,8 @@ class AppServer(unittest.TestCase):
         status, headers, body = self.request("/api/config")
         self.assertEqual(status, 200)
         config = json.loads(body)
-        self.assertEqual(set(config), {"token", "defaults", "backends", "active_run"})
+        self.assertEqual(set(config), {"token", "chooser", "defaults", "backends", "active_run"})
+        self.assertIs(config["chooser"], False)                 # a plain browser has no file panel
         self.assertEqual(config["token"], self.server.token)
         self.assertGreaterEqual(len(config["token"]), 32)
         self.assertEqual(headers["Cache-Control"], "no-store")
@@ -141,6 +142,20 @@ class AppServer(unittest.TestCase):
         self.assertIsNone(result["run"])
         self.assertEqual(result["events"][0]["arguments"], {"fact_id": 1})
         self.assertEqual(self.manager.calls, [("get", "saved/run1.2")])
+
+    def test_file_chooser_exists_only_when_the_desktop_window_supplies_one(self):
+        self.assert_error(404, self.request("/api/choose", method="POST", payload={}))
+        asked = []
+        self.server.chooser = lambda: asked.append(1) or "/cases/one/facts.json"
+        self.assertIs(json.loads(self.request("/api/config")[2])["chooser"], True)
+        status, _, body = self.request("/api/choose", method="POST", payload={})
+        self.assertEqual((status, json.loads(body)), (200, {"path": "/cases/one/facts.json"}))
+        self.assert_error(404, self.request("/api/choose", method="POST", payload={"directory": "/"}))   # takes no options
+        self.assert_error(403, self.request("/api/choose", method="POST", payload={}, token=False))
+        self.assertEqual(len(asked), 1)
+        self.server.chooser = lambda: None                      # cancelled
+        self.assertEqual(json.loads(self.request("/api/choose", method="POST", payload={})[2]), {"path": ""})
+        self.assertEqual(self.manager.calls, [])                # choosing a file starts nothing
 
     def test_explicit_start_and_stop_only_forward_public_fields(self):
         payload = {"name": "user/run1.2", "facts": "/selected/facts.json", "title": "Case",

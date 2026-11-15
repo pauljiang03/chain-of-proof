@@ -125,6 +125,20 @@ get('graph-step').fire('pointerdown'); assert.equal(timers.size,0);
 input(473); currentFits();
 ''')
 
+    def test_a_locked_view_stays_put_while_the_replay_moves(self):
+        self.run_graph(r'''
+load(473); input(10); currentFits();
+const lock = get('graph-lock');
+lock.fire('click'); assert.equal(lock.attrs['aria-pressed'], 'true');
+const held = {...state.view};
+input(30); assert.deepEqual({...state.view}, held);                                   // same page
+input(200); assert.equal(state.page, 4); assert.deepEqual({...state.view}, held);     // another page
+get('graph-play').fire('click'); for (let i = 0; i < 5; i++) [...timers.values()][0]();
+get('graph-play').fire('click'); assert.equal(state.step, 205); assert.deepEqual({...state.view}, held);
+host.width = 500; api.graph.resize(); assert.deepEqual({...state.view}, held);
+lock.fire('click'); assert.equal(lock.attrs['aria-pressed'], 'false'); currentFits();   // unlocking catches up
+''')
+
     def test_empty_and_single_claim_replays(self):
         self.run_graph(r'''
 load(0); assert.equal(get('graph-step').disabled,true);

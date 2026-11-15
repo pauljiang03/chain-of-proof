@@ -71,8 +71,9 @@
     $("report-scope-marked").disabled = !count;
     $("report-print").disabled = !state.built || state.stale;
     const link = $("report-export");
-    if (none || !state.name) { link.removeAttribute("href"); link.setAttribute("aria-disabled", "true"); }
-    else { link.href = query(true); link.removeAttribute("aria-disabled"); }
+    if (none || !state.name) { link.removeAttribute("href"); link.removeAttribute("download"); link.setAttribute("aria-disabled", "true"); }
+    // The file name makes the desktop window save the report instead of opening it in place of the app.
+    else { link.href = query(true); link.download = String(state.name).replace(/\//g, "-") + ".html"; link.removeAttribute("aria-disabled"); }
     const workflow = document.querySelector('#report-sections input[value="workflow"]');
     if (workflow) workflow.disabled = state.scope === "marked";
     const badge = $("count-report");
@@ -103,11 +104,13 @@
       });
     }
     const style = document.createElement("style"), page = document.createElement("div");
-    // On screen the workbench already supplies the desk around the page.
+    // On screen the workbench already supplies the desk around the page. A long report holds hundreds of
+    // findings; laying out only the ones near the view keeps the tab quick. Print still lays out all of them.
     style.textContent = [...parsed.querySelectorAll("style")].map((sheet) => sheet.textContent).join("\n")
-      + "\n@media screen { .report { background: transparent; } main { margin: 0; max-width: none; border: 0; border-radius: 0; } }";
+      + "\n@media screen { .report { background: transparent; } main { margin: 0; max-width: none; border: 0; border-radius: 0; }"
+      + " article { content-visibility: auto; contain-intrinsic-size: auto 1500px; } }";
     page.className = "report";
-    page.append(...[...parsed.body.childNodes].map((node) => document.importNode(node, true)));
+    page.append(...[...parsed.body.childNodes].map((node) => document.adoptNode(node)));
     state.shadow.replaceChildren(style, page);
     host.hidden = false;
     $("report-empty").hidden = true;

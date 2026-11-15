@@ -20,6 +20,7 @@ import shlex
 import shutil
 import sys
 import threading
+from collections.abc import MutableMapping
 from pathlib import Path
 
 from app.server import ROOT, create_server
@@ -40,11 +41,13 @@ class Bridge:
 
     A page cannot learn a file's path from a browser file input, so the window's own open
     panel supplies it. Nothing is opened or read here; the path goes into a text box and
-    the server checks it like a typed one.
+    the server checks it like a typed one. The page asks through the local server
+    (POST /api/choose): the app's script policy forbids eval, which pywebview's own page
+    bridge needs, so that bridge never reaches the page.
     """
 
     def __init__(self, webview):
-        self._webview = webview   # underscore: pywebview offers an object's public names to the page
+        self._webview = webview
 
     def choose_evidence(self):
         windows = getattr(self._webview, "windows", None) or []
@@ -103,11 +106,12 @@ def run(root=ROOT, port=None, *, webview=None, manager=None) -> int:
     thread.start()
     try:
         settings = getattr(webview, "settings", None)
-        if isinstance(settings, dict):
+        if isinstance(settings, MutableMapping):    # pywebview's settings are a UserDict, not a dict
             settings["ALLOW_DOWNLOADS"] = True          # report exports
             settings["OPEN_EXTERNAL_LINKS_IN_BROWSER"] = True
         _name_the_application()
-        webview.create_window(TITLE, url, text_select=True, js_api=Bridge(webview), **WINDOW)
+        server.chooser = Bridge(webview).choose_evidence
+        webview.create_window(TITLE, url, text_select=True, **WINDOW)
         webview.start(private_mode=False)   # keep the window's own storage between starts
     finally:
         server.shutdown()

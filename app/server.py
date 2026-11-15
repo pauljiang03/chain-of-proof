@@ -111,6 +111,7 @@ class LocalServer(ThreadingHTTPServer):
     def __init__(self, root, port, manager):
         self.root, self.manager = Path(root).resolve(), manager
         self.token = secrets.token_urlsafe(32)
+        self.chooser = None   # set by the desktop window: opens its file panel and returns the chosen path
         self._manager_closed = False
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -232,8 +233,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/config":
             self._query(query, ())
             config = manager.config()
-            return self._json(200, {"token": self.server.token, **{key: config[key] for key in (
-                "defaults", "backends", "active_run")}})
+            return self._json(200, {"token": self.server.token, "chooser": callable(self.server.chooser),
+                                    **{key: config[key] for key in ("defaults", "backends", "active_run")}})
         if path == "/api/runs":
             self._query(query, ())
             return self._json(200, {"runs": manager.list_runs()})
@@ -268,9 +269,17 @@ class Handler(BaseHTTPRequestHandler):
 
     def _post(self, path, query):
         self._query(query, ())
-        if path not in ("/api/investigations", "/api/stop"):
+        if path not in ("/api/investigations", "/api/stop", "/api/choose"):
             raise RequestError(404, "Route not found.")
         payload = self._body()
+        if path == "/api/choose":
+            # Only the desktop window has a file panel. It gives back a path for the text box;
+            # nothing is opened or read here, and the path is checked later like a typed one.
+            chooser = self.server.chooser
+            if not callable(chooser) or payload != {}:
+                raise RequestError(404, "Route not found.")
+            chosen = chooser()
+            return self._json(200, {"path": chosen if isinstance(chosen, str) else ""})
         if path == "/api/investigations":
             result = self.server.manager.start(_start_payload(payload, self.server.root))
             return self._json(200, result)
