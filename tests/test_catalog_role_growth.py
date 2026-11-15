@@ -11,7 +11,7 @@ from checker.catalog import AttributeRole, ROLES
 class CatalogRoleGrowth(unittest.TestCase):
     def setUp(self):
         approved = dict(ROLES)
-        for i in range(max(160 - len(approved), 1)):
+        for i in range(max(180 - len(approved), 1)):
             name = 'growth.field_' + str(i).zfill(3)
             approved[name] = AttributeRole(name, 'roleSyntheticGrowth' + str(i), 'string',
                                           'Synthetic centrally approved role for deterministic catalog growth checks. '
@@ -19,7 +19,7 @@ class CatalogRoleGrowth(unittest.TestCase):
                                           'authenticity, action, complete coverage or personal attribution.')
         self.approved = approved
         self.variants = [role.semantic_type for role in approved.values()]
-        self.assertGreater(len(self.variants), 128)
+        self.assertGreaterEqual(len(self.variants), 180)
         fields = deepcopy(answer_projection._FIELDS)
         for form in fields.values():
             for selector in form.values():

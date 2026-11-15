@@ -46,13 +46,18 @@ def parse(raw):
             raise ValueError('invalid_public_claim_requirement_attribute_conditions')
         seen = set()
         for condition in conditions:
-            if not isinstance(condition, dict) or set(condition) != {'role', 'values'}:
+            if (not isinstance(condition, dict) or set(condition) not in (
+                    {'role', 'values'}, {'role', 'excluded_values', 'string_comparison'})):
                 raise ValueError('invalid_public_claim_requirement_attribute_conditions')
             role = condition['role']
             if not isinstance(role, str) or role not in ROLES or role in seen:
                 raise ValueError('invalid_public_claim_requirement_attribute_conditions')
             seen.add(role)
-            values = condition['values']
+            negative = 'excluded_values' in condition
+            if negative and (ROLES[role].value_type != 'string'
+                             or condition['string_comparison'] not in ('exact', 'casefold')):
+                raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+            values = condition['excluded_values'] if negative else condition['values']
             if not isinstance(values, list) or not 1 <= len(values) <= 32 or any(
                     not _native_literal(value, ROLES[role].value_type) for value in values):
                 raise ValueError('invalid_public_claim_requirement_attribute_conditions')
@@ -88,6 +93,7 @@ def _condition_literal(value):
 def _native_literal(value, kind):
     return (type(value) is str and len(value) <= 2000 if kind == 'string' else
             type(value) is int and value >= 0 if kind == 'integer' else
+            type(value) is int if kind == 'signed_integer' else
             type(value) is bool if kind == 'boolean' else False)
 
 
@@ -114,8 +120,13 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
         role = ROLES[condition['role']]
         matches = [(name, row) for name, row in fields.items()
                    if isinstance(row, dict) and row.get('semantic_type') == role.semantic_type]
-        diagnostic = {'role': condition['role'], 'values': deepcopy(condition['values']),
-                      'matching_fields': [name for name, _ in matches]}
+        negative = 'excluded_values' in condition
+        diagnostic = {'role': condition['role'], 'matching_fields': [name for name, _ in matches]}
+        if negative:
+            diagnostic.update(excluded_values=deepcopy(condition['excluded_values']),
+                              string_comparison=condition['string_comparison'])
+        else:
+            diagnostic['values'] = deepcopy(condition['values'])
         if not matches:
             diagnostic['status'] = 'missing'
         elif len(matches) != 1:
@@ -123,9 +134,18 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
         else:
             value = matches[0][1].get('value')
             diagnostic['offered_value'] = deepcopy(value)
-            diagnostic['status'] = ('compatible' if _native_literal(value, role.value_type)
-                                    and _literal_key(value) in [_literal_key(option) for option in condition['values']]
-                                    else 'incompatible')
+            native = _native_literal(value, role.value_type)
+            if negative:
+                # Validate the exact native type before comparing. Absence,
+                # ambiguity and non-string values never pass a negative test.
+                excluded = condition['excluded_values']
+                if native and condition['string_comparison'] == 'casefold':
+                    allowed = value.casefold() not in [option.casefold() for option in excluded]
+                else:
+                    allowed = native and value not in excluded
+            else:
+                allowed = native and _literal_key(value) in [_literal_key(option) for option in condition['values']]
+            diagnostic['status'] = 'compatible' if allowed else 'incompatible'
         result.setdefault('condition_checks', []).append(diagnostic)
         if diagnostic['status'] != 'compatible':
             result['status'] = 'incompatible'
