@@ -13,6 +13,7 @@ from __future__ import annotations
 import codecs
 import html
 import io
+import json
 import re
 import struct
 from collections import namedtuple
@@ -472,11 +473,16 @@ def _settings(out, ev, target, hives, zone, ctx):
         if h.backup:
             continue
         if h.name == "SOFTWARE":
+            _registry_settings(out, ev, h, "Microsoft\\Windows Search",
+                               ("DataDirectory", "DefaultDataDirectory", "SetupCompletedSuccessfully"), setting)
             path = "Microsoft\\Windows NT\\CurrentVersion"
             key = _open(ev, h, path)
             if key is None:
                 continue
             v, t, art = _vals(ev, h, key), us(key.timestamp), _art(h, path)
+            if _text(v.get("SystemRoot")):
+                out.add("systemSetting", t, 1, "system root", _text(v["SystemRoot"]),
+                        artifact=_art(h, path, "SystemRoot"), time_meaning=setting, **_where(h))
             product, sp = _text(v.get("ProductName")), _text(v.get("CSDVersion"))
             if product:
                 out.add("systemSetting", t, 1, "operating system", (product + " " + sp).strip(),
@@ -505,7 +511,30 @@ def _settings(out, ev, target, hives, zone, ctx):
     _partitions(out, ev, target, ctx)
 
 
+def _registry_settings(out, ev, h, path, names, setting):
+    """Preserve selected configuration values verbatim, without expanding paths."""
+    key = _open(ev, h, path)
+    if key is None:
+        return
+    values = _vals(ev, h, key)
+    for name in names:
+        value = values.get(name)
+        if not isinstance(value, (str, int, list)) or isinstance(value, bool):
+            continue
+        if isinstance(value, list) and not all(isinstance(v, str) for v in value):
+            continue
+        identifier = _art(h, path, name)
+        rendered = json.dumps(value, ensure_ascii=False, separators=(",", ":")) if isinstance(value, list) else str(value)
+        out.add("systemSetting", us(key.timestamp), 1, identifier, rendered,
+                artifact=identifier, registry_value=value, registry_path=_art(h, path),
+                registry_value_name=name, time_meaning=setting, **_where(h))
+
+
 def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting):
+    _registry_settings(out, ev, h, cs + "\\Services\\WSearch",
+                       ("Start", "DelayedAutoStart", "ImagePath"), setting)
+    _registry_settings(out, ev, h, cs + "\\Control\\BackupRestore\\FilesNotToSnapshot",
+                       ("OutlookOST",), setting)
     path = cs + "\\Control\\ComputerName\\ComputerName"
     key = _open(ev, h, path)
     if key is not None and _text(_vals(ev, h, key).get("ComputerName")):
@@ -523,6 +552,13 @@ def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting):
     if key is not None:
         v = _vals(ev, h, key)
         name = _text(v.get("TimeZoneKeyName")) or _text(v.get("StandardName"))
+
+        if _text(v.get("TimeZoneKeyName")):
+            for software in hives:
+                if software.name == "SOFTWARE" and not software.backup:
+                    _registry_settings(out, ev, software,
+                                       "Microsoft\\Windows NT\\CurrentVersion\\Time Zones\\" + name,
+                                       ("Display", "Std", "Dlt"), setting)
 
         def signed(x):
             return (x - (1 << 32) if x >= (1 << 31) else x) if isinstance(x, int) else None
