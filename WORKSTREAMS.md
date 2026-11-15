@@ -1,125 +1,93 @@
 # Workstreams and terminal handoff
 
-Updated: 2026-11-15 UTC. Read this before assigning more agents.
-The project is CONAN-F. The desktop app is Conan; `conan` opens it. The `cop` command and `ChainOfProof` Lean library retain their names for compatibility.
+Updated: 2026-11-15 UTC. Read before assigning work.
+The project is CONAN-F. The desktop app is Conan. The `cop` command and
+`ChainOfProof` Lean library retain their names for compatibility.
 
-## Current ownership
+## Ownership
 
-| Owner | State |
+| Owner | Current state |
 |---|---|
-| Root Codex | Owns main integration, readers, checker/Lean source semantics, correctness docs and pushes. The typed-field batch is integrated and passed full validation at `6c1031f`. Isolated source branch: `/private/tmp/cop-supported-answer-fields`. |
-| Other Codex terminal (`01a1dc3d`) | Completed tuple answer projection, strict literal choices, same-part conditions and public-contract updates in `/private/tmp/cop-typed-tuple-answers`. Integrated as `e0d6b37`; compact tool catalog is integrated as `db83036`. Idle; both derivative contracts remain held. |
-| UI terminal (`01a1dd77`) | Owns graph, evidence views and reports. Replay is integrated with the new logo as `2d57e19`; inspector polish is integrated as `571ce42`. Native drag and playback reached the final finding. Its worktree is clean and current work is complete. Do not edit its UI files in another lane. |
-| Root helpers | Tuple and reader work is complete. `optical_timestamps` retains the new validation archive; `lean_gap_types` and `journal_gaps` are idle. |
+| Root Codex | Integrated the tested batch. Owns main, central roles/Lean/SQL, archives and pushes. Next source worktree: `/private/tmp/cop-system-evidence-coverage`, for system/account/network fields and Search records. Previous source worktree remains intact. |
+| Answer terminal (`01a1dc3d`) | Completed the current public/runtime batch. Owns next public mappings, completion diagnostics, catalog scaling and opt-in versioned evaluation normalizers. Owns eventual experiment dispatch after readiness. No model call or freeze has started. |
+| Third terminal (`01a1dd77`) | Completed Yahoo/VSS/Sticky Notes and prior UI work. Next worktree `/private/tmp/conan-evidence-coverage-next` owns cloud records, document formats, mail/WAL and historical-source inventory. Root owns central roles and shared reader hooks. |
+| Root helpers | Timezone, file-set collector and formal aggregate are complete. Archive helper retains the current validation. A separate fresh reference-only agent audits compatibility; builders do not receive expected answer values. |
 
-See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
-The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).
-App and feature interfaces remain in [APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
+All source and answer commits are integrated. Use isolated worktrees for new work.
+Do not edit another terminal's files without agreeing on ownership. Do not control
+Terminal or Claude with computer-use tools. No direct Claude acknowledgement is
+known; do not claim one.
 
-## Latest implementation
+## Latest validation
 
-The [typed-field batch](docs/SUPPORTED_FIELDS.md) adds 25 fixed roles, atomic
-same-subject tuples, bounded content readers and public source-family conditions.
-The final limited source snapshots contain 3,711 Data Leakage and 2,761 Hacking
-records. These are reader checks, not full benchmark rebuilds or answer scores.
-The stricter Data Leakage draft has 41 catalog-compatible and 317 unsupported
-leaf occurrences; Hacking has 13 compatible and 25 unsupported leaves. Both remain
-held. The full suite ran 1,100 tests: 1,099 passed and one platform test skipped.
-Thirteen selected real-source certificates independently replayed; 22 supported
-public bindings were retained. Two mixed-subject controls and one missing-family
-binding were refused. These checks do not establish a benchmark score.
-Later tool-catalog and UI changes passed 43 and 24 focused checks respectively.
-The unrun public draft passed eight tests and its assembler check after its code
-receipt was refreshed. Internal catalog and original benchmark artifacts are unchanged.
+The source/runtime tree at `5cf4d43` passed 1,261 tests: 1,260 passed and one
+platform test skipped. Main merge `4a9c779` has identical code, tests and public
+contracts. The earlier source-only suite had one missing agent form declaration;
+the integrated runtime supplied it. Both logs are retained.
 
-Fresh readers retain explicit source origins (`715d437`). Answer-row checks
-(`2ddfc33`) and exact source enforcement (`2599d48`) are integrated. Public source
-declarations are integrated as `10392c7`. Four real-source claims independently
-replayed; four correct origin projections were retained and eight deliberate
-source/hash mismatches were refused. These checks do not measure answer accuracy.
-See [the retained validation and remaining gaps](docs/CORRECTNESS_FIXES.md).
-The combined suite at `f8ff658` ran 1,024 tests: 1,023 passed and one platform
-test was skipped. This includes the professional report and updated demo. Two
-stale negative controls were replaced with a separate temporal-proof fixture;
-the verifier was unchanged and the full demo certificate sweep remains enabled.
-New model experiments remain held while missing support and source selections
-in the public contracts are resolved.
-The Hacking C-only pilot was prepared but never dispatched. Its frozen runtime and
-manifest are preparation artifacts, not a completed or running test.
+Seven selected real-source certificates independently replayed. Five also passed
+ConLeche. Public projection retained 17 supported fields across both NIST cases;
+four invalid binding controls were refused. Separate proof controls refused wrong
+roles, wrong aggregate results and mixed source subjects.
 
-Ownership above is final; it supersedes earlier crossed terminal proposals. Root
-does not edit `agent/answer_*`, the other terminal's public contract, or the ablation
-protocol. The other terminal does not edit readers, checker roles/sentences or Lean.
-Helpers use their owner's isolated worktree and do not modify frozen evidence or runs.
-Other external commits may arrive on the remote. The new detective-logo commit
-`f8235c0` was preserved before the replay push. No direct Claude Code messaging
-channel is known in this thread; this handoff records ownership for that terminal
-too. Do not control Terminal or Claude through computer-use tools.
+The [latest implementation](docs/FIELD_RELATIONS.md) adds 14 roles, an exact
+file-set aggregate, source readers, cross-question references and durable answer
+feedback. The local archive is `runs/dev/field-relations-20261115T0730Z/`.
+Selected-reader outputs are mechanical checks, not full experiment facts or scores.
 
-The three incorrect answers were traced to narrow verified observations used as stronger answers. The product now requires explicit public field meanings, row relationships and source selections. The new v3 comparison protocol adds the same public preview for A/C and durable investigator-authored checkpoints. The original 60-question contract and all frozen results stay unchanged; v3 refuses that unannotated contract before a model starts. Both derivative contracts preserve unsupported meanings and remain held. Reviewed execution-artifact attributes are distinct from generic application sightings. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
+## Readiness and dispatch
+
+Both strict public derivatives remain held. Current schema compatibility is
+48 supported / 310 unsupported Data Leakage leaf occurrences and 16 / 22 Hacking
+leaves. Repeated alternatives count separately. These are not question-accuracy
+percentages. The [public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md) separates
+completed work, candidate capabilities and unresolved meanings/source selections.
+
+The user's matched Sol 6.1 experiment is authorized only after readiness. The
+answer terminal owns dispatch to avoid duplicate runs. Its prepared coordinator
+and notes are outside the repo:
+`/private/tmp/cop-v3-experiment-coordinator.py` and
+`/private/tmp/cop-v3-experiment-dispatch.md`. Preparation is not a launch.
+
+A compatible scoring derivative must be frozen before investigation. Original
+expected values, match rules, question denominators and measured submissions must
+not be silently changed. The independent reference review is separate from
+builders and investigators. It is not an LLM judge of experiment answers.
+
+After readiness passes, create complete fresh snapshots and freeze the code,
+public contract, compatible private reference, facts, model and budget. A and C
+use the same inputs/tools/time limit. B replays A exactly without another model
+call. Checkpoint-prefix projection must not include later candidates. Scoring
+starts only after both investigators stop. Do not replace the requested accuracy
+comparison with an unscored smoke run.
 
 ## Latest measured state
 
-The [latest Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
-is frozen at clean `96cd518` with requested Sol 6.1,
-A then C, each capped at 900 seconds. B replays A exactly without another model call.
+[Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md),
+frozen at `96cd518`: A/B seven complete, 22 partial, 16 unanswered and one incorrect
+question among 46 scorable questions; 14 reference questions remain unresolved.
+A/B matched 544 of 1,627 expected atoms. C retained 1,017 replayed certificates but
+no final answer bindings, so its answer accuracy is unavailable. The earlier
+completed comparison showed no overall accuracy gain from Lean feedback.
 
-- A/B: 7 complete, 22 partial, 16 unanswered and 1 incorrect question.
-- The reference still has 46 scorable and 14 unresolved questions out of 60.
-- A/B matched 544 of 1,627 scorable atoms, with 2,644 extra and 99 unequal assertions.
-- B verified 84 candidates and refused three malformed candidates; its answers are unchanged.
-- C stopped at its deadline without a final binding document. Accuracy is unavailable.
-- All 84 B and 1,017 C certificates passed independent replay. Claim count is not accuracy.
-- The separate 240-second, three-question meaning diagnostic passed its operational audit.
-  All 21 certificates reverified. It retained narrow observations and left stronger fields empty.
-  The agent made no incompatible bindings; no actual guard intervention was observed.
+The Hacking mechanical workflow has 11,939 records and 58 independently verified
+certificates. Its model pilot was prepared but never dispatched. The two Mulder
+packages remain prepared and unrun. No new accuracy result follows from this batch.
 
-The [earlier completed comparison](comparison/ablation/RESULTS_SOL61_20261115.md)
-remains frozen at `c2b9753`. It showed no overall answer-accuracy advantage from Lean
-feedback. The latest repeat cannot supply an A/C accuracy comparison because C has
-no final submission. Never hand-write retrospective bindings.
+Frozen Data Leakage facts:
+`/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json`,
+SHA256 `a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d`.
+These old facts do not contain the new roles and must not be used for a claim that
+the new readers improved accuracy. Original run archives remain unchanged.
 
-Hacking integration passed 834 regression tests (833 passed, one platform skip).
-The final real-image mechanical workflow has 11,939 records and 58 certificates;
-all passed independent replay, con-leche and portable-package verification.
-This is workflow validation, not model answer accuracy. The model/scorer runtime is
-frozen at `08c7ce1`; the later `3da5c93` only adds a package toolchain fingerprint.
+## Trust boundary
 
-## Inputs and retained outputs
+Lean proves the declared formal statement relative to extracted records and rules.
+Python readers, source authenticity, source completeness and public meaning
+choices remain trust boundaries. No universal zero-false-positive claim is justified.
+Unsupported meanings and unavailable evidence stay explicit. Never manufacture
+missing answer bindings or use a private key to steer an investigator.
 
-Latest NIST facts: `/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json`.
-SHA-256: `a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d`.
-There are 335,509 records, including 11 email records and 32 system settings. All 12 reader/exhibit attempts completed. Nine unsupported shell targets and the dirty Search database remain limitations. Extraction took 55.96 seconds; its clean `8a625fc` launch and input/source hashes are retained beside the facts.
-
-- Public case: `comparison/mulder/case-profile.json`.
-- Public prompts and schema: `eval/QUESTIONS.md`, `eval/benchmark_nist_questions.json`.
-- Private reference: `eval/benchmark_nist.json`, scorer only after investigation stops.
-- Latest repeat archive: `runs/dev/sol61-nist-postfix-20261115T0316Z/`.
-- Separate diagnostic archive: `runs/dev/sol61-meaning-diagnostic-20261115T0316Z/`.
-- Frozen repeat runtime: `/private/tmp/cop-sol61-96cd518-runtime` at `96cd518`.
-- Earlier completed comparison archive: `runs/dev/sol61-nist-v2-20261115T0217Z/`;
-  its runtime remains `/private/tmp/cop-sol61-smoke-runtime` at `c2b9753`.
-
-Separate DFIR Madness facts: `/private/tmp/cop-case2-final-20261115T015403Z/evidence/facts.json`.
-SHA-256: `0a4d2243adbe10b33eaff335fdc7bbd8be901e55cb3a1bd20f01089437361e61`.
-This is a desktop-only, 1,800-record snapshot with `windows,system` readers and four documented intake issues. It excludes server, memory and network captures.
-
-The mechanical workflow retained 12 independently verified certificates, reports and a portable package in `runs/dev/case2-workflow-20261115T015403Z/`. The live Sol smoke passed all 11 operational checks and retained 34/34 C and 10/10 B verified certificates in `runs/dev/sol61-smoke-20261115T0209Z/`. There is no second-case accuracy key.
-
-## Measurement and integration rules
-
-The official NIST CFReDS Hacking Case implementation is integrated. Root supplied image/scan readers, host attributes and generic subset scoring. `optical_timestamps` delivered the legacy app/browser/traffic/recycle readers and EVT reader. `lean_gap_types` delivered fixed-role typed attributes, joins, digest comparison and kernel tests. `journal_gaps` authored the separate 31-question reference and source audit. Only that reference author read the published answer key.
-
-The Data Leakage repeat and its separate role diagnostic have stopped and their results are retained. The Hacking C-only pilot was prepared but never dispatched. Its old frozen runtime is not the new v3 protocol. A future trial needs a new freeze after the current correctness work and public-contract review pass; no model experiment is running.
-
-The Hacking intake has been exercised on the official E01 image. All 31 questions have deterministic contracts. The stricter derivative review has 13 catalog-compatible and 25 unsupported leaf requirements. Current DBX subscription state still lacks a reader. Catalog compatibility does not establish available evidence or complete answers. Supporting a dataset does not establish zero false positives.
-
-Do not use an LLM judge. Do not give investigators the private reference, review notes, scored reports or another arm's outputs. Preserve failures and unknowns. Freeze new code and inputs for any new experiment; do not overwrite saved evidence or repair a measured submission.
-
-Lean proves the declared formal statement relative to extracted records and rules. It does not prove parser correctness, relevance, complete lists, source authenticity or universal zero false positives. The shared exporter preserves claim values and reports unsupported fields. Question placement remains the investigator's responsibility.
-
-The original 60-question reference remains unchanged. The separate Q53 metadata derivative is not a silent replacement. Both Mulder packages are prepared and unrun. The full A/B/C/D experiment remains incomplete.
-
-The local Claude login works. Automatic approval review blocked the proposed native Claude test under the user's Sol-only instruction before execution. Do not send selected evidence to Claude.ai without destination approval. The external Sol bridge is not validation of the native product backend. Never copy credentials into chat or Git.
-
-Use isolated worktrees and agree on ownership before editing shared files. Inspect main before merging because another terminal may advance it. Preserve completed work; resolve routine conflicts without resetting another agent's branch.
+The interface plans remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md),
+[APP_HANDOFF.md](APP_HANDOFF.md) and [FEATURE_HANDOFF.md](FEATURE_HANDOFF.md).
+The measured-run details remain in [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md).

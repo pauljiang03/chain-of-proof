@@ -6,6 +6,19 @@ checks and professional reports are integrated. Both stricter public contracts
 remain held. No new model experiment has run after these fixes. Native provider
 validation and full reference review remain incomplete.
 
+The latest [source and exact-set batch](docs/FIELD_RELATIONS.md) is integrated at
+`4a9c779`, with code identical to tested `5cf4d43`: 1,260 tests passed and one
+platform test skipped. Seven real-source certificates replayed; 17 public answer
+fields were retained. Durable completion diagnostics and paged native answer
+inspection are implemented. These are implementation checks, not accuracy scores.
+
+The independent [reference compatibility audit](eval/REFERENCE_COMPATIBILITY.json)
+keeps both cases held. It preserved all original prompts, schemas, expected values
+and match rules. Remaining issues include display/identifier/path equivalence,
+the executable population for Hacking Q28/Q29, and the 14 unresolved Data Leakage
+references. No compatible scoring derivative was approved. Do not launch an
+unscored smoke run as a replacement for the requested matched accuracy experiment.
+
 | Priority | Delivered | Remaining limit |
 |---|---|---|
 | 1. Claim-linked answers | Shared A/B/C projection, answer tool, source ledger, report fields and independent verification before scoring | Question relevance and complete answers are not proved |
