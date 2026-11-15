@@ -1,0 +1,213 @@
+"""Standalone report safety and fidelity, using synthetic bundles only."""
+import copy
+import html
+from html.parser import HTMLParser
+import json
+import re
+import unittest
+from unittest.mock import patch
+
+from app.report import render_html
+
+
+def record(number=7, **updates):
+    row = {'id': number, 'kind': 'fileSeen', 't': 1_700_000_000_123_456, 'res': 2_000_000,
+           'obj': 1, 'obj_text': r'C:\Files\report.txt', 'aux': 2, 'aux_text': 'VOL-A',
+           'row_sha256': 'a' * 64, 'prov': {'image': 'synthetic.E01', 'exhibit': 'TEST',
+           'artifact': 'test artifact', 'offset': 4096, 'time_meaning': 'record observation',
+           'parser': 'synthetic parser', 'tool': 'synthetic tool', 'nested': {'page': 4}}}
+    row.update(updates)
+    return row
+
+
+def finding(**updates):
+    row = {'finding_id': 'F1', 'status': 'verified', 'question': 'What was recorded?',
+           'english': 'A record names <example> & a path.\nNo copy is inferred.',
+           'strength': 'strong', 'rules': ['R1'], 'cited_facts': [record()],
+           'claim': {'fileRecorded': [7]}, 'trust_tier': 'kernel', 'axioms': [],
+           'lean': '-- synthetic rendering fixture\nexample : True := by trivial\n'}
+    row.update(updates)
+    return row
+
+
+def bundle(*findings):
+    return {'version': 1, 'case': {'name': 'Synthetic investigation', 'generated_at': '2026-11-14T12:00:00Z'},
+            'stats': {'verified': len(findings), 'rejected': 0, 'proposals': len(findings)},
+            'findings': list(findings), 'rejections': [], 'conclusions': []}
+
+
+class Markup(HTMLParser):
+    def __init__(self, source):
+        super().__init__(convert_charrefs=True)
+        self.tags, self.ids, self.links, self.sentences = [], [], [], []
+        self.current_sentence = None
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        self.tags.append((tag, attrs))
+        if 'id' in attrs:
+            self.ids.append(attrs['id'])
+        if 'href' in attrs:
+            self.links.append(attrs['href'])
+        if tag == 'p' and attrs.get('class') == 'sentence':
+            self.current_sentence = []
+
+    def handle_endtag(self, tag):
+        if tag == 'p' and self.current_sentence is not None:
+            self.sentences.append(''.join(self.current_sentence))
+            self.current_sentence = None
+
+    def handle_data(self, data):
+        if self.current_sentence is not None:
+            self.current_sentence.append(data)
+
+
+class AppReport(unittest.TestCase):
+    def test_standalone_literal_sentence_and_full_evidence_have_working_scoped_links(self):
+        row = finding(cited_facts=[record(i) for i in (7, 8, 9, 10)])
+        data = bundle(row)
+        original = copy.deepcopy(data)
+        rendered = render_html(data)
+        page = Markup(rendered)
+        self.assertEqual(page.sentences, [row['english']])
+        self.assertEqual(data, original)
+        self.assertTrue(rendered.startswith('<!doctype html>'))
+        self.assertIn('@media print', rendered)
+        self.assertIn('Save as PDF', rendered)
+        self.assertIn('does not independently verify', html.unescape(rendered))
+        self.assertIn('proof-f1', page.ids)
+        for index in range(1, 5):
+            self.assertIn(f'evidence-f1-r{index}', page.ids)
+        self.assertTrue(all(link.startswith('#') and link[1:] in page.ids for link in page.links))
+        self.assertEqual(len(page.ids), len(set(page.ids)))
+        plain = html.unescape(rendered)
+        for value in ('synthetic.E01', 'TEST', 'synthetic parser', 'synthetic tool', '4096', 'a' * 64,
+                      '1700000000123456 microseconds', '2000000'):
+            self.assertIn(value, plain)
+        self.assertIn(json.dumps(record()['prov'], sort_keys=True, ensure_ascii=False, indent=2), plain)
+        self.assertIn(row['lean'], plain)
+
+    def test_untrusted_text_never_creates_tags_scripts_remote_links_or_attributes(self):
+        attack = '</title><script>alert(1)</script><img src="https://evil.test/x" onerror="alert(2)">' \
+                 '<a href="javascript:alert(3)">click</a>&'
+        proof = '-- Lean is text\n</code></pre><script>alert(4)</script>\n'
+        data = bundle(finding(finding_id=attack, english=attack, question=attack, lean=proof,
+                              cited_facts=[record(id=attack, obj_text=attack, prov={'artifact': attack})]))
+        data['case']['name'] = attack
+        data['stats']['verified'] = attack
+        rendered = render_html(data)
+        page = Markup(rendered)
+        self.assertEqual(page.sentences, [attack])
+        self.assertFalse(any(tag in {'script', 'img', 'iframe', 'link', 'object', 'embed'} for tag, _ in page.tags))
+        self.assertFalse(any(key.startswith('on') or key == 'src' for _, attrs in page.tags for key in attrs))
+        self.assertTrue(all(link.startswith('#') for link in page.links))
+        self.assertTrue(all(re.fullmatch(r'[a-z]+(?:-[a-z]?\d+)*', anchor) for anchor in page.ids))
+        self.assertIn(proof, html.unescape(rendered))
+        self.assertIn('Content-Security-Policy', rendered)
+
+    def test_conflicting_copied_rows_are_preserved_and_duplicate_ids_never_collide(self):
+        data = bundle(finding(), finding(cited_facts=[record(obj_text='different', row_sha256='b' * 64)]))
+        rendered = render_html(data)
+        page = Markup(rendered)
+        self.assertEqual(rendered.count('Conflicting copied rows share this fact ID.'), 2)
+        self.assertIn('evidence-f1-r1', page.ids)
+        self.assertIn('evidence-f2-r1', page.ids)
+        self.assertIn('proof-f1', page.ids)
+        self.assertIn('proof-f2', page.ids)
+        self.assertIn('different', rendered)
+        self.assertEqual(len(page.ids), len(set(page.ids)))
+        self.assertNotIn('Conflicting copied rows', render_html(bundle(finding(), finding())))
+
+    def test_missing_fields_stay_unknown_and_no_file_is_opened_or_proof_executed(self):
+        row = finding(cited_facts=[{'id': 7, 'kind': 'fileSeen'}], lean=None, lean_file='../../secret.lean')
+        row.pop('axioms')
+        data = bundle(row)
+        data.pop('stats')
+        with patch('builtins.open', side_effect=AssertionError('renderer cannot read files')), \
+             patch('subprocess.run', side_effect=AssertionError('renderer cannot execute proofs')):
+            rendered = render_html(data)
+        plain = html.unescape(rendered)
+        for text in ('Unknown — no audit summary', 'Unknown — coverage summary', 'Unknown — claim history',
+                     'Unknown — embedded Lean source was not included', 'Unknown — not supplied'):
+            self.assertIn(text, plain)
+        self.assertNotIn('secret.lean', rendered)
+        self.assertNotIn('0 accepted', rendered)
+
+    def test_diagnostics_and_judgments_are_separate_and_do_not_invent_evidence_links(self):
+        data = bundle(finding())
+        data['rejections'] = [{'finding_id': 'R1', 'reason': 'Serials differ.',
+            'proof_gap': {'status': 'diagnostic', 'summary': 'Claim remains unproved.',
+                'requirements': [{'category': 'contradictory_identity_or_value', 'reason': 'A differs from B.',
+                    'action': 'Seek independent linkage; preserve both serials.', 'fact_ids': [7, 999],
+                    'observed': {'left': 'A', 'right': 'B'}, 'required': {'relation': 'same identity'}}],
+                'disclaimer': 'Not a certificate; evidence may not exist.'}}]
+        data['conclusions'] = [{'conclusion_id': 'J1', 'text': 'This is a synthetic inference.', 'finding_ids': ['F1']}]
+        rendered = render_html(data)
+        page = Markup(rendered)
+        self.assertEqual(page.sentences, [finding()['english'], 'This is a synthetic inference.'])
+        self.assertIn('Further evidence or action:', rendered)
+        self.assertIn('Seek independent linkage; preserve both serials.', rendered)
+        self.assertIn('Proposed fact IDs (not evidence links)', rendered)
+        self.assertIn('Unverified judgment', rendered)
+        self.assertFalse(any('999' in link for link in page.links))
+        self.assertLess(rendered.index('id="needs"'), rendered.index('Claim remains unproved.'))
+        self.assertLess(rendered.index('id="judgments"'), rendered.index('This is a synthetic inference.'))
+
+    def test_unverified_or_tampered_status_does_not_become_certified(self):
+        data = bundle(finding(status='rejected', english='This claim failed.'))
+        rendered = render_html(data)
+        self.assertEqual(Markup(rendered).sentences, [])
+        self.assertIn('not displayed as certified findings', rendered)
+        self.assertIn('This claim failed.', html.unescape(rendered))
+        self.assertNotIn('id="proof-f1"', rendered)
+        self.assertIn('does not independently verify', rendered)
+
+    def test_supplied_invalid_audit_and_history_are_diagnostic_coverage_is_not_accuracy(self):
+        data = bundle(finding())
+        data['audit'] = {'status': 'invalid', 'passed': False, 'count': 4, 'head': 'a' * 64,
+                         'problems': ['chain mismatch'], 'path': 'https://evil.test/log'}
+        data['coverage'] = {'schema_version': 1, 'extraction': {'status': 'measured', 'record_count': 3},
+            'inspection': {'status': 'invalid', 'record_count': 999},
+            'citations': {'status': 'unmeasured', 'record_count': 999},
+            'questions': {'status': 'measured', 'answered_count': 1, 'unknown_count': 2,
+                          'unknown_ids': ['Q2', 'Q3']},
+            'failures': {'extraction': {'issues': [{'message': 'Unsupported container'}]}}}
+        data['history'] = {'schema_version': 1, 'available': True, 'audit_integrity': {'status': 'failed'},
+            'attempts': [{'attempt_id': 'audit:2', 'finding_id': 'F1', 'status': 'duplicate',
+                          'duplicate_of': 'F1', 'revises': 'R1', 'revision_status': 'valid'}],
+            'unmatched_proposals': [{'attempt_id': 'proposal:3', 'status': 'unknown'}]}
+        rendered = render_html(data)
+        plain = html.unescape(rendered)
+        for text in ('Invalid audit reported', 'Invalid history audit', 'Unknown — unmeasured',
+                     'chain mismatch', 'Unsupported container', 'duplicate of F1 (no new proof)',
+                     'Proposals with unknown placement', 'answer presence do not establish completeness or accuracy'):
+            self.assertIn(text, plain)
+        self.assertIn('Q2', plain)
+        self.assertNotIn('https://evil.test/log', Markup(rendered).links)
+        self.assertNotIn('<td>999</td>', rendered)
+
+    def test_unknown_schema_and_malformed_optional_entries_remain_visible(self):
+        data = bundle(finding(cited_facts=[None]))
+        data['history'] = {'schema_version': 800, 'message': 'future format'}
+        data['coverage'] = {'schema_version': 800, 'message': 'future count'}
+        data['rejections'] = [None, {'finding_id': 'R1', 'proof_gap': {'status': 'verified', 'summary': 'not a diagnostic'}}]
+        rendered = render_html(data)
+        for text in ('Malformed copied record', 'Uninterpreted history summary', 'Uninterpreted coverage summary',
+                     'no recognized diagnostic was supplied'):
+            self.assertIn(text, rendered)
+        self.assertIn('future format', rendered)
+        self.assertTrue(all(link[1:] in Markup(rendered).ids for link in Markup(rendered).links))
+
+    def test_empty_bundle_has_explicit_unknowns_and_rejects_non_object_input(self):
+        rendered = render_html({})
+        self.assertIn('Untitled investigation', rendered)
+        self.assertIn('No entries marked verified were supplied', rendered)
+        self.assertIn('No refusal details were supplied', rendered)
+        self.assertIn('Unknown', rendered)
+        with self.assertRaises(TypeError):
+            render_html([])
+
+
+if __name__ == '__main__':
+    unittest.main()
