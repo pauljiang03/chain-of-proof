@@ -210,12 +210,12 @@
     });
     const byId = new Map();
     state.items.forEach((item) => byId.set(item.id, byId.has(item.id) ? null : item));
-    array(object(state.run).conclusions).forEach((conclusion) => {
+    array(object(state.run).conclusions).forEach((conclusion, at) => {
       // A label-only reference cannot select among duplicate claim occurrences.
       const cited = array(object(conclusion).finding_ids).map((id) => byId.get(text(id)))
         .filter((item) => item && !item.refused).map((item) => nodes.get(item.key)).filter(Boolean);
       if (!cited.length) return;
-      const judgment = node("J:" + text(conclusion.conclusion_id), "judgment", { conclusion });
+      const judgment = node("J:j" + (at + 1), "judgment", { conclusion });
       judgment.birth = Math.max(...cited.map((finding) => finding.birth));
       cited.forEach((finding) => edge(finding, judgment, "judgment", judgment.birth));
     });

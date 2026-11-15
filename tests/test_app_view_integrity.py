@@ -95,6 +95,24 @@ assert.equal([...state.model.nodes.values()].filter(n => n.column === 'record').
 assert.equal([...state.model.nodes.values()].filter(n => n.column === 'exhibit').length, 2);
 ''')
 
+    def test_duplicate_conclusion_labels_keep_their_own_text_and_edges(self):
+        self.run_js('graph.js', r'''
+state.run = {
+  findings: [1, 2].map(i => ({finding_id: 'F' + i, status: 'verified', cited_facts: [{id: i}]})),
+  conclusions: [1, 2].map(i => ({conclusion_id: 'DUP', text: 'Judgment ' + i, finding_ids: ['F' + i]})),
+};
+api.probe.prepare(); api.probe.build();
+const judgments = [...state.model.nodes.values()].filter(n => n.column === 'judgment');
+assert.equal(judgments.length, 2);
+assert.equal(new Set(judgments.map(n => n.id)).size, 2);
+judgments.forEach((node, i) => {
+  assert.equal(node.conclusion.conclusion_id, 'DUP');
+  assert.equal(node.conclusion.text, 'Judgment ' + (i + 1));
+  assert.equal(node.ins.size, 1);
+  assert.equal(state.model.nodes.get([...node.ins][0]).item.id, 'F' + (i + 1));
+});
+''')
+
     def test_refusal_does_not_borrow_a_conflicting_copied_record(self):
         self.run_js('graph.js', r'''
 state.run = {
