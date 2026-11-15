@@ -9,6 +9,7 @@ import re
 import json
 
 from checker.catalog import ROLES
+from agent.path_predicates import validate_condition as valid_path_condition, matches_directory
 
 KEY = 'x-claim-requirement'
 ROW_KEY = 'x-claim-row'
@@ -23,7 +24,7 @@ def _name(value):
 
 
 def parse(raw):
-    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions', 'field_conditions', 'required_attribute_roles'}
+    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions', 'field_conditions', 'required_attribute_roles', 'attribute_path_conditions'}
     if not isinstance(raw, dict) or set(raw) - allowed:
         raise ValueError('invalid_public_claim_requirement')
     types = raw.get('semantic_types')
@@ -61,6 +62,17 @@ def parse(raw):
             if not isinstance(values, list) or not 1 <= len(values) <= 32 or any(
                     not _native_literal(value, ROLES[role].value_type) for value in values):
                 raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+    if 'attribute_path_conditions' in raw:
+        conditions = raw['attribute_path_conditions']
+        if not isinstance(conditions, list) or not 1 <= len(conditions) <= 8:
+            raise ValueError('invalid_public_claim_requirement_attribute_path_conditions')
+        seen = set()
+        for condition in conditions:
+            if (not valid_path_condition(condition) or not isinstance(condition['role'], str)
+                    or condition['role'] not in ROLES or condition['role'] in seen
+                    or ROLES[condition['role']].value_type != 'string'):
+                raise ValueError('invalid_public_claim_requirement_attribute_path_conditions')
+            seen.add(condition['role'])
     if 'required_attribute_roles' in raw:
         roles = raw['required_attribute_roles']
         if (not isinstance(roles, list) or not 1 <= len(roles) <= 8
@@ -147,6 +159,23 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
                 allowed = native and _literal_key(value) in [_literal_key(option) for option in condition['values']]
             diagnostic['status'] = 'compatible' if allowed else 'incompatible'
         result.setdefault('condition_checks', []).append(diagnostic)
+        if diagnostic['status'] != 'compatible':
+            result['status'] = 'incompatible'
+            result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
+    for condition in requirement.get('attribute_path_conditions', []):
+        role = ROLES[condition['role']]
+        matches = [(name, row) for name, row in fields.items()
+                   if isinstance(row, dict) and row.get('semantic_type') == role.semantic_type]
+        diagnostic = dict(condition, matching_fields=[name for name, _ in matches])
+        if not matches:
+            diagnostic['status'] = 'missing'
+        elif len(matches) != 1:
+            diagnostic['status'] = 'ambiguous'
+        else:
+            value = matches[0][1].get('value')
+            diagnostic['offered_value'] = deepcopy(value)
+            diagnostic['status'] = 'compatible' if matches_directory(value, condition) else 'incompatible'
+        result.setdefault('attribute_path_condition_checks', []).append(diagnostic)
         if diagnostic['status'] != 'compatible':
             result['status'] = 'incompatible'
             result['reason'] = 'claim_attributes_do_not_meet_public_requirement'

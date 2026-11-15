@@ -20,6 +20,7 @@ from checker import claims
 from checker.facts import KINDS
 from checker.catalog import ROLES, DIGEST_ALGORITHMS, decode_value, roles_catalog
 from agent import answer_requirements, answer_references
+from agent.answer_representation import render_timestamp
 
 VERSION = 1
 AUTHORITIES = frozenset({'unchecked', 'recorded_certificates', 'independently_replayed'})
@@ -27,6 +28,13 @@ FORMATS = frozenset({'identity', 'utc_iso', 'local_minute', 'local_date', 'integ
 MAX_SCHEMA_NODES = 256
 MAX_SCHEMA_DEPTH = 32
 MAX_SCHEMA_ALTERNATIVES = 32
+# A public display annotation chooses representation, never temporal meaning.
+# Extend this reviewed capability list only after reviewing the source role's
+# instant semantics; ISO-shaped text and time-like role names are insufficient.
+REPORT_TIMESTAMP_SEMANTIC_TYPES = frozenset({
+    ROLES['os.install_time'].semantic_type,
+    ROLES['machine.last_shutdown'].semantic_type,
+})
 SCOPE = ('Projection preserves the proposed claim semantics; it does not check or repair them. '
          'Authority is supplied by the caller and is not a new certificate. Accepted semantic fields are '
          'relative to the cited facts and approved rules. Question placement, relevance, complete lists, '
@@ -557,6 +565,75 @@ def _typed(value, schema):
         raise ValueError('value_type_does_not_match_public_schema')
 
 
+def _display_policy(schema, path):
+    """Require the same explicit display policy in every applicable alternative.
+
+    Conjunctive siblings may supply type/format/policy, but an alternative cannot
+    supply a policy on behalf of another alternative. Existing unannotated
+    schemas bypass this new traversal entirely.
+    """
+    key = 'x-claim-display'
+    if b'"x-claim-display":' not in _encoded(schema):
+        return None
+    pending, policies, visited = [([schema], 0, 0)], [], 0
+    while pending:
+        nodes, position, depth = pending.pop()
+        visited += len(nodes)
+        if visited > MAX_SCHEMA_NODES or depth > MAX_SCHEMA_DEPTH:
+            raise ValueError('public_schema_traversal_limit')
+        expanded = False
+        for index, node in enumerate(nodes):
+            if not isinstance(node, dict):
+                raise ValueError('unsupported_public_schema_node')
+            if key in node and position != len(path):
+                raise ValueError('display_policy_must_annotate_exact_answer_value')
+            if any(k in node for k in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
+                raise ValueError('unsupported_schema_reference_or_union')
+            if 'anyOf' in node:
+                branches = node['anyOf']
+                if not isinstance(branches, list) or not 1 <= len(branches) <= MAX_SCHEMA_ALTERNATIVES:
+                    raise ValueError('unsupported_public_schema_anyof')
+                sibling = {k: v for k, v in node.items() if k != 'anyOf'}
+                for branch in branches:
+                    pending.append((nodes[:index] + [sibling, branch] + nodes[index + 1:], position, depth + 1))
+                expanded = True
+                break
+        if expanded:
+            continue
+        if position == len(path):
+            declared = [node[key] for node in nodes if key in node]
+            if not declared:
+                policies.append(None)
+                continue
+            expected = {'kind': 'report_timestamp_iso_v1', 'timezone': 'public_time_zone'}
+            if any(policy != expected for policy in declared):
+                raise ValueError('invalid_public_display_policy')
+            types = [node['type'] for node in nodes if 'type' in node]
+            formats = [node['format'] for node in nodes if 'format' in node]
+            if not types or any(kind != 'string' for kind in types) or not formats or any(fmt != 'date-time' for fmt in formats):
+                raise ValueError('timestamp_display_requires_string_date_time_field')
+            policies.append(expected)
+            continue
+        token, children = path[position], []
+        for node in nodes:
+            if type(token) is int:
+                child = node.get('items', {})
+            else:
+                properties = node.get('properties', {})
+                if not isinstance(properties, dict):
+                    raise ValueError('unsupported_public_schema_node')
+                child = properties.get(token, node.get('additionalProperties', {}))
+                if child is True:
+                    child = {}
+                elif child is False:
+                    raise ValueError('field_not_in_public_schema')
+            children.append(child)
+        pending.append((children, position + 1, depth + 1))
+    if any(policy != policies[0] for policy in policies[1:]):
+        raise ValueError('ambiguous_public_display_policy')
+    return policies[0]
+
+
 def _declared_choices(value, schema):
     """Enforce exact public literal choices without changing a proposed value."""
     if 'enum' in schema:
@@ -716,7 +793,21 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                     if scope.get('same_origin') and any(origin != origins[0] for origin in origins[1:]):
                         scope_check['status'] = 'incompatible'
                         raise ValueError('claim_supporting_records_have_mixed_origins')
-            value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
+            display_policy = _display_policy(questions[qid]['answer_schema'], path)
+            if display_policy is not None:
+                if field['semantic_type'] not in REPORT_TIMESTAMP_SEMANTIC_TYPES:
+                    raise ValueError('claim_role_has_no_reviewed_timestamp_display_capability')
+                if raw.get('format', 'identity') != 'identity':
+                    raise ValueError('display_policy_requires_identity_binding_format')
+                display = render_timestamp(field['value'], public.get('time_zone'))
+                value = display.display_timestamp
+                entry['source_value'] = deepcopy(field['value'])
+                entry['display'] = dict(display_policy, source_utc=display.source_utc,
+                                        report_timezone=display.report_timezone,
+                                        fraction_digits=display.fraction_digits,
+                                        interpretation=display.interpretation)
+            else:
+                value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
             if 'value' in raw and _encoded(raw['value']) != _encoded(value):
                 raise ValueError('literal_value_mismatch_not_repaired')
             for schema in (_strict_schema if require_claim_requirements else _schema)(questions[qid]['answer_schema'], path):

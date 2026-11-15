@@ -191,50 +191,255 @@
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_number"
+                      "recorded_attribute_partition_number_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: number.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal number observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "bootable": {
                   "type": "boolean",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_bootable"
+                      "recorded_attribute_partition_bootable_boolean"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: bootable.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal bootable observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "filesystem": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_filesystem"
+                      "recorded_attribute_partition_filesystem_string"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: filesystem.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal filesystem observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "start_sector": {
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_start_sector"
+                      "recorded_attribute_partition_start_sector_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: start_sector.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal start_sector observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "total_sectors": {
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_total_sectors"
+                      "recorded_attribute_partition_total_sectors_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: total_sectors.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal total_sectors observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "size_as_printed": {
@@ -245,7 +450,7 @@
                       "needs_partition_inventory_size_as_printed"
                     ],
                     "meaning": "Partition-table information for every partition in the PC image. Requested leaf: size_as_printed.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "evidence_needed": "Native partition roles support the recorded MBR tuple, but no reviewed rule establishes this displayed-size spelling or complete partition inventory."
                   }
                 }
               },
@@ -278,7 +483,7 @@
     },
     {
       "id": "Q3",
-      "prompt": "Explain installed OS information in detail. (OS name, install date, registered owner\u2026)",
+      "prompt": "Explain installed OS information in detail. (OS name, install date, registered owner…)",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -327,7 +532,7 @@
                 }
               ],
               "meaning": "Operating-system product name recorded in current configuration.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "version": {
@@ -375,7 +580,7 @@
                 }
               ],
               "meaning": "Literal CurrentVersion value recorded in OS configuration; no inferred marketing version.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "build_number": {
@@ -423,7 +628,7 @@
                 }
               ],
               "meaning": "Build number from the reviewed canonical decimal OS build field, emitted as an integer.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "registered_owner": {
@@ -471,7 +676,7 @@
                 }
               ],
               "meaning": "Registered-owner configuration text, not physical ownership or user identity.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "system_root": {
@@ -519,7 +724,7 @@
                 }
               ],
               "meaning": "Literal SystemRoot value recorded in OS configuration.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           },
           "installed_at": {
@@ -568,7 +773,7 @@
                 }
               ],
               "meaning": "Installation timestamp recorded by the operating system, as the native ISO timestamp value.",
-              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Reviewed current-hive OS field on the same scoped Windows-system subject; never use tuple/attribute examination time for installed_at. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -701,7 +906,7 @@
                 }
               ],
               "meaning": "Configured computer account name.",
-              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -718,7 +923,7 @@
     },
     {
       "id": "Q6",
-      "prompt": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService. (Account name, login count, last logon date\u2026)",
+      "prompt": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService. (Account name, login count, last logon date…)",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1036,7 +1241,7 @@
                 }
               ],
               "meaning": "Shutdown timestamp retained in the reviewed current source field, not inferred from examination time.",
-              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Exact reviewed source field for the selected PC. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -1397,7 +1602,7 @@
                           }
                         ],
                         "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1450,7 +1655,7 @@
                           }
                         ],
                         "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1511,7 +1716,7 @@
                           }
                         ],
                         "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1570,7 +1775,7 @@
                           }
                         ],
                         "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1628,7 +1833,7 @@
                           }
                         ],
                         "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1698,7 +1903,7 @@
                           }
                         ],
                         "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1751,7 +1956,7 @@
                           }
                         ],
                         "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1804,7 +2009,7 @@
                           }
                         ],
                         "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1863,7 +2068,7 @@
                           }
                         ],
                         "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1921,7 +2126,7 @@
                           }
                         ],
                         "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -1998,7 +2203,7 @@
                           }
                         ],
                         "meaning": "Native ISO timestamp taken from the reviewed historical execution-artifact field; artifact observation, not independently verified actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -2051,7 +2256,7 @@
                           }
                         ],
                         "meaning": "Literal complete executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut or shell identifier.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -2112,7 +2317,7 @@
                           }
                         ],
                         "meaning": "Reviewed interpreted source-reported run counter for this execution artifact occurrence; not the raw DWORD or a complete execution census.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -2171,7 +2376,7 @@
                           }
                         ],
                         "meaning": "Literal reviewed execution-artifact source classification; preserve the public enum unchanged.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -2229,7 +2434,7 @@
                           }
                         ],
                         "meaning": "Reviewed source-field classification execution; describes the historical artifact field, not proof of actual code execution.",
-                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
+                        "evidence_needed": "All role values must describe one scoped execution-source occurrence. Legacy programRan fields and raw_run_count are disallowed. Preserve enum/const checks: Security process creation is outside the public source enum and must be refused rather than renamed. Attribute/tuple timestamps are examination time, never this answer timestamp. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text. Every retained field requires the same atomic tuple to contain exactly one source_type value of Prefetch or UserAssist, even when the source output column is omitted. Security process-creation rows are outside this public source-family enumeration.",
                         "attribute_conditions": [
                           {
                             "role": "app.execution.source_type",
@@ -2292,7 +2497,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_timestamp"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: timestamp.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: timestamp.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 },
@@ -2302,7 +2507,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_event_id"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: event_id.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: event_id.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 },
@@ -2312,7 +2517,7 @@
                     "semantic_types": [
                       "needs_complete_local_window_session_trace_description"
                     ],
-                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: description.",
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00–18:00 in the Q4 timezone. Requested leaf: description.",
                     "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
                   }
                 }
@@ -2494,7 +2699,7 @@
                       }
                     ],
                     "meaning": "Browser product profile established by validated history-container format/schema.",
-                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
                   }
                 },
                 "path": {
@@ -2542,7 +2747,7 @@
                       }
                     ],
                     "meaning": "Literal artifact-container path whose validated format/schema matches the reviewed browser-history product profile; not merely a matching filename.",
-                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+                    "evidence_needed": "Validated history-container observation. Browser and path must share the exact container subject; validation identifies a product profile, not exclusive producer authenticity or actual use. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
                   }
                 }
               },
@@ -3027,7 +3232,7 @@
                 }
               ],
               "meaning": "Literal path of a mail-store container established by validated format/schema and reviewed product profile.",
-              "evidence_needed": "Validated mail-store container, not arbitrary source.path, extension-only inference or proof of communication/account use. Validation does not establish exclusive producer authenticity. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2\u20138-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
+              "evidence_needed": "Validated mail-store container, not arbitrary source.path, extension-only inference or proof of communication/account use. Validation does not establish exclusive producer authenticity. Use the exact native typed value. All present fields in a same_claim_part object must come from one atomic claim part; multi-role records therefore require an approved 2–8-entry same-subject attributeTuple. Enforce selected PC/base-volume/primary source admission. No invented null or fallback to generic record text."
             }
           }
         },
@@ -3165,33 +3370,33 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/number",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "status": "catalog_support",
+          "rationale": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness."
         },
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/bootable",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "status": "catalog_support",
+          "rationale": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness."
         },
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/filesystem",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "status": "catalog_support",
+          "rationale": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness."
         },
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/start_sector",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "status": "catalog_support",
+          "rationale": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness."
         },
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/total_sectors",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "status": "catalog_support",
+          "rationale": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness."
         },
         {
           "schema_pointer": "/answer_schema/properties/partitions/items/properties/size_as_printed",
           "status": "unsupported_semantic_requirement",
-          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+          "rationale": "Native partition roles support the recorded MBR tuple, but no reviewed rule establishes this displayed-size spelling or complete partition inventory."
         }
       ],
       "narrow_observations": [],

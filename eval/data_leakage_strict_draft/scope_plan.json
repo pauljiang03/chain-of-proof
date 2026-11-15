@@ -318,8 +318,8 @@
       "policies": [
         {
           "object_path": "",
-          "source_profile": "pc_primary",
-          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+          "source_profile": "pc_logical_image",
+          "reason": "extractor.structured_system.partitions reads raw primary MBR entries from the examined logical disk and emits evidence-image/logical-image provenance. Filesystem recognition requires a unique volume on that same disk with exact byte offset and size. Select only the PC logical-image origin; base-volume records, acquisition containers, other exhibits and historical snapshots cannot substitute. This does not establish complete partition enumeration or displayed size."
         }
       ],
       "notes": []
