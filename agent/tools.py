@@ -263,10 +263,23 @@ class Workbench:
                                    self.run_dir, proposer=self.proposer)
             if result.get("status") == "verified" and (self.run_dir / "investigation.json").is_file():
                 from agent.investigation import Investigation
-                planner = Investigation(self.run_dir)
-                matched = [q for q in planner.snapshot()["questions"] if question in (q["id"], q["prompt"])]
-                if len(matched) == 1:
-                    planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
+                try:
+                    planner = Investigation(self.run_dir)
+                    matched = [q for q in planner.snapshot()["questions"] if question in (q["id"], q["prompt"])]
+                    if len(matched) == 1:
+                        planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
+                except Exception as error:
+                    # The certificate is already saved. Work-note tracking must
+                    # not turn that accepted checker result into a failed call.
+                    response = self._brief(result)
+                    response["tracking_warning"] = {
+                        "status": "unverified", "stage": "investigation_update",
+                        "error_type": type(error).__name__,
+                        "message": "The finding was certified, but automatic investigation tracking failed. "
+                                   "Inspect the saved plan; it may not include this finding. "
+                                   "This warning is not part of the certificate.",
+                    }
+                    return response
             return self._brief(result)
 
     @audited
