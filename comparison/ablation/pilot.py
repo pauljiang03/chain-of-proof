@@ -62,7 +62,7 @@ def _json(path):
     return value
 
 
-def _software():
+def _software(*, focused=False):
     sources = {}
     for directory in ("agent", "checker", "verifier", "comparison/ablation"):
         for path in sorted((ROOT / directory).glob("*.py")):
@@ -72,12 +72,20 @@ def _software():
         sources[name] = fingerprint(ROOT / name)["sha256"]
     for path in sorted((ROOT / "lean/ChainOfProof").glob("*.lean")):
         sources[str(path.relative_to(ROOT))] = fingerprint(path)["sha256"]
+    if focused:
+        for directory in ("extractor", "app"):
+            for path in sorted((ROOT / directory).rglob("*")):
+                if path.is_file() and path.suffix in {".py", ".js", ".html", ".css"}:
+                    sources[str(path.relative_to(ROOT))] = fingerprint(path)["sha256"]
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
                             capture_output=True, text=True, check=True).stdout.strip()
     dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=ROOT,
                                capture_output=True, text=True, check=True).stdout.strip())
-    return {"commit": commit, "dirty": dirty, "source_sha256": sources,
-            "python": platform.python_version(), "platform": platform.platform()}
+    result = {"commit": commit, "dirty": dirty, "source_sha256": sources,
+              "python": platform.python_version(), "platform": platform.platform()}
+    if focused:
+        result["fingerprint_scope"] = "focused-source-report-v1"
+    return result
 
 
 def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protocol="literal-v1", seconds=900,
@@ -130,7 +138,7 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
         "schema_version": 1, "runtime_protocol": protocol, "protocol": "sol-subagent-A-C-answer-pilot-and-A-B-claim-filter",
         "created_at": datetime.now(timezone.utc).isoformat(), "frozen_before_trials": True,
         "evaluation_use": "development_not_blind", "replicates": 1, "order": ["A", "C", "B"],
-        "inputs": bindings, "software": _software(),
+        "inputs": bindings, "software": _software(focused=True) if study == "focused-C" else _software(),
         "case": {"case_id": public["case_id"], "questions": len(public["questions"]),
                  "provisionally_scorable": len(public["questions"]) - len(unresolved) if unresolved is not None else None,
                  "unevaluable_ids": unresolved, "reference_status": private.get("review_status", "unknown") if private is not None else "unavailable_no_key"},
@@ -188,6 +196,8 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
             "Absent hashes resolve from exact saved claims only; strict public claim requirements apply. "
             "Missing checkpoint is unavailable, including after timeout.")
     if study == "focused-C":
+        if manifest["software"]["dirty"]:
+            raise ValueError("focused-C requires a clean runtime checkout")
         manifest.update(study=study, protocol=FOCUSED_PROTOCOL, order=["C"],
                         arms={"C": manifest["arms"]["C"]})
         manifest["case"]["question_ids"] = [q["id"] for q in public["questions"]]
@@ -233,8 +243,12 @@ def validate_frozen(path, *, expected_sha256):
             raise ValueError("A frozen pilot input changed")
     if study == "focused-C" or manifest.get("protocol") == FOCUSED_PROTOCOL:
         _validate_focused(manifest)
-    if manifest["software"]["source_sha256"] != _software()["source_sha256"]:
+    current_software = _software(focused=True) if study == "focused-C" else _software()
+    if manifest["software"]["source_sha256"] != current_software["source_sha256"]:
         raise ValueError("Frozen implementation changed")
+    if study == "focused-C" and (current_software["dirty"] or
+                                  manifest["software"]["commit"] != current_software["commit"]):
+        raise ValueError("Focused-C runtime checkout changed or is dirty")
     return manifest
 
 
@@ -243,8 +257,8 @@ def _validate_focused(manifest):
     budget = manifest.get("budget", {})
     case = manifest.get("case", {})
     measurements = manifest.get("measurements", {})
-    arms, model = manifest.get("arms"), manifest.get("model")
-    if not all(isinstance(value, dict) for value in (budget, case, measurements, arms, model)):
+    arms, model, software = manifest.get("arms"), manifest.get("model"), manifest.get("software")
+    if not all(isinstance(value, dict) for value in (budget, case, measurements, arms, model, software)):
         raise ValueError("Invalid focused-C metadata shape")
     if (manifest.get("study") != "focused-C" or manifest.get("protocol") != FOCUSED_PROTOCOL
             or manifest.get("runtime_protocol") != "claim-bindings-v3"
@@ -258,6 +272,7 @@ def _validate_focused(manifest):
             or model.get("requested_override") != MODEL or model.get("fresh_context") != "fork_turns=none"
             or type(manifest.get("replicates")) is not int or manifest["replicates"] != 1
             or measurements.get("comparison") != "not_performed"
+            or software.get("fingerprint_scope") != "focused-source-report-v1" or software.get("dirty") is not False
             or measurements.get("claims_allowed") != "focused development smoke only; no causal comparison, statistical significance, universal precision or general accuracy claim"):
         raise ValueError("Invalid focused-C design or budget")
     public = read_question_profile(manifest["inputs"]["questions"]["path"])
