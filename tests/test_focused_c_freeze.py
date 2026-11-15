@@ -162,6 +162,40 @@ class FocusedCFreeze(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'checkout changed or is dirty'):
                     validate_frozen(path, expected_sha256=result['manifest_sha256'])
 
+    def test_single_C_900_keeps_all_declared_questions_and_truthful_metadata(self):
+        result = self.freeze(study='single-C', protocol='claim-bindings-v3', seconds=900)
+        manifest = result['manifest']
+        self.assertEqual(manifest['study'], 'single-C')
+        self.assertEqual(manifest['protocol'], 'sol-single-C-development')
+        self.assertEqual(manifest['order'], ['C'])
+        self.assertEqual(set(manifest['arms']), {'C'})
+        self.assertEqual(manifest['case']['question_ids'], ['Q1', 'Q2'])
+        self.assertEqual(manifest['budget']['wall_seconds_per_live_arm'], 900)
+        self.assertIn('development benchmark', manifest['measurements']['claims_allowed'])
+        self.assertNotIn('smoke', manifest['measurements']['claims_allowed'])
+        self.assertIn('app/narrative.py', manifest['software']['source_sha256'])
+        validate_frozen(self.root/'pilot/frozen-manifest.json', expected_sha256=result['manifest_sha256'])
+
+    def test_single_C_cap_and_protocol_do_not_relax_focused_C_or_legacy(self):
+        for study, protocol, seconds in [('single-C', 'claim-bindings-v3', 901),
+                                        ('single-C', 'claim-bindings-v2', 900),
+                                        ('single-C', 'claim-bindings-v3', True),
+                                        ('focused-C', 'claim-bindings-v3', 900)]:
+            with self.subTest(study=study, seconds=seconds), self.assertRaises(ValueError):
+                self.freeze(study=study, protocol=protocol, seconds=seconds)
+            self.assertFalse((self.root/'pilot').exists())
+        self.assertEqual(self.freeze()['manifest']['order'], ['A', 'C', 'B'])
+
+    def test_single_C_rehashed_extra_budget_or_focused_protocol_refuses(self):
+        result = self.freeze(study='single-C', protocol='claim-bindings-v3', seconds=900)
+        path = self.root/'pilot/frozen-manifest.json'
+        for key, value in [('budget', dict(result['manifest']['budget'], wall_seconds_per_live_arm=901)),
+                           ('protocol', 'sol-focused-C-development'), ('order', ['A', 'C'])]:
+            manifest = deepcopy(result['manifest']); manifest[key] = value
+            path.write_text(json.dumps(manifest))
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'single-C'):
+                validate_frozen(path, expected_sha256=fingerprint(path)['sha256'])
+
 
 if __name__ == '__main__':
     unittest.main()
