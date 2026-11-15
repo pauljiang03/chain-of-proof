@@ -121,21 +121,20 @@ def _joined(form, slots, relation):
 _joined('before', [('earlier_recorded_time_us', 0, 't'), ('later_recorded_time_us', 1, 't')], 'precedes_beyond_uncertainty')
 _joined('deviceHolds', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_holds_volume')
 _joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('connected_time_us', 0, 't')], 'same_device_mounted_volume')
-_joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'opened_from_mounted_volume')
-_joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'opened_from_device_volume')
-_joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'same_recorded_volume')
-# Legacy field keys remain stable, but their public roles describe only the
-# shortcut/DestList target association established by these joins.
-for _form, _relation, _meaning in (
-        ('openedFromMount', 'opened_from_mounted_volume', 'shortcut_target_associated_with_mounted_volume'),
-        ('openedFromDevice', 'opened_from_device_volume', 'shortcut_target_associated_with_device_volume'),
-        ('openedFromRecorded', 'same_recorded_volume', 'shortcut_target_associated_with_recorded_volume')):
+_joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
+_joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
+_joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
+# Serial joins do not associate a shortcut with a unique volume/device. Remove
+# the stronger legacy Boolean selectors instead of retaining misleading aliases.
+for _form in ('openedFromMount', 'openedFromDevice', 'openedFromRecorded'):
     _FIELDS[_form]['opened_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
     _FIELDS[_form]['opened_time_us']['meaning'] = (
         'Timestamp retained by the shortcut/DestList target record; does not establish actual file opening or its time.')
-    _FIELDS[_form][_relation]['semantic_type'] = _meaning
-    _FIELDS[_form][_relation]['meaning'] = (
-        'Shortcut/DestList target and volume association through the declared join; does not establish actual file opening.')
+    _FIELDS[_form]['matching_recorded_volume_serials'] = {
+        **_assertion('matching_recorded_volume_serials'),
+        'meaning': 'The shortcut/DestList target record and the other cited record carry equal '
+                   'volume serial values; this does not establish a common volume, physical '
+                   'device, actual file opening or opening time.'}
 
 # This predicate proves equality of two recorded serial values. A cloned or
 # colliding serial is not a volume or physical-device identity proof. Do not

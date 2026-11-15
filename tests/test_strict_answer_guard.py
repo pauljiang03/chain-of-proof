@@ -94,11 +94,12 @@ class StrictGuard(unittest.TestCase):
         source.rows[6] = Fact(6, 'lnkTarget', 128000000, 1, 2, 6)
         source.rows[7] = Fact(7, 'volumeOnDevice', 128000000, 1, 7, 6)
         source.rows[8] = Fact(8, 'volumeRecorded', 128000000, 1, 8, 6)
-        for form, args, field, narrow in [
+        for form, args, old_field, old_meaning in [
                 ('openedFromMount', [6, 7], 'opened_from_mounted_volume', 'shortcut_target_associated_with_mounted_volume'),
                 ('openedFromDevice', [6, 7], 'opened_from_device_volume', 'shortcut_target_associated_with_device_volume'),
                 ('openedFromRecorded', [6, 8], 'same_recorded_volume', 'shortcut_target_associated_with_recorded_volume')]:
             candidate = {'candidate_id': 'C', 'claim': {form: args}}
+            field, narrow = 'matching_recorded_volume_serials', 'matching_recorded_volume_serials'
             def run(field_name, meaning):
                 contract = {'schema_version': 2, 'case_id': 'case', 'questions': [
                     {'id': 'Q', 'prompt': 'Actual opening?', 'answer_schema': {KEY: need(meaning)}}]}
@@ -109,13 +110,14 @@ class StrictGuard(unittest.TestCase):
                 result = run('opened_time_us', stronger)
                 self.assertEqual(result['submission']['answers'][0]['status'], 'unknown', form)
                 self.assertEqual(result['unsupported'][0]['reason'], 'claim_role_does_not_meet_public_requirement')
-            for stronger in ('actual_file_opened', field):
+            for stronger in ('actual_file_opened', old_field, old_meaning):
                 result = run(field, stronger)
                 self.assertEqual(result['submission']['answers'][0]['status'], 'unknown', form)
+            self.assertEqual(run(old_field, narrow)['submission']['answers'][0]['status'], 'unknown', form)
             self.assertIs(run(field, narrow)['submission']['answers'][0]['answer'], True)
             self.assertEqual(run('opened_time_us', 'recorded_timestamp_not_action_or_execution_guarantee_us')
                              ['submission']['answers'][0]['answer'], 128000000)
-            self.assertIn('does not establish actual file opening', catalog()['forms'][form][field]['meaning'])
+            self.assertIn('actual file opening', catalog()['forms'][form][field]['meaning'])
 
     def test_anyof_cannot_relax_additional_properties_or_item_requirements(self):
         schema = {'type': 'object', 'additionalProperties': False, 'anyOf': [
