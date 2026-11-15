@@ -83,8 +83,7 @@ class Narrative(unittest.TestCase):
                                                         'The records show the Google Drive account worker@example.org.'])
         self.assertEqual(next(point for point in story['points'] if point['key'] == 'computer')['records'], 6)
         self.assertEqual(sentences(story, 'devices'), ['The cited records include 2 USB identifier records.',
-            'The cited records include 2 volume records.',
-            'Matching identifiers do not establish physical-device identity or connection times.'])
+            'The cited records include 2 volume records.'])
         self.assertEqual(len(story['devices']), 4)
         self.assertEqual([item['record'] for item in story['devices']],
                          ['usbInsert #8', 'usbInsert #9', 'volumeOnDevice #10', 'volumeSeen #11'])
@@ -212,8 +211,7 @@ class Narrative(unittest.TestCase):
         self.assertEqual(narrative.build(data, ids=[])['points'], [])
 
     def test_empty_and_malformed_bundles_say_nothing(self):
-        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'points': [], 'devices': [],
-                 'disclaimer': narrative.DISCLAIMER}
+        empty = {'schema_version': 1, 'zone': None, 'findings': 0, 'points': [], 'devices': []}
         for value in ({}, None, [], {'findings': 'x'}, {'findings': [None, 3, {'status': 'verified'}]}):
             story = narrative.build(value)
             self.assertEqual(story['points'], [])
@@ -281,7 +279,7 @@ class Narrative(unittest.TestCase):
         ], english=sentence))
         rendered = render_html(data)
         self.assertIn(html.escape(sentence), rendered)
-        self.assertIn(html.escape(narrative.DISCLAIMER), rendered)
+        self.assertNotIn('This summary describes copied records', rendered)
         self.assertIn('Record timestamp', rendered)
         self.assertIn('1 USB identifier record', rendered)
         self.assertNotIn('First connection', rendered)
@@ -301,7 +299,7 @@ class Narrative(unittest.TestCase):
         self.assertEqual(story['devices'], [])
         rendered = render_html(data)
         self.assertIn(html.escape(sentence), rendered)
-        self.assertIn('This does not establish absence of evidence.', rendered)
+        self.assertNotIn('does not establish absence of evidence', rendered)
         self.assertIn('usb.device_instance_id', rendered)
 
 

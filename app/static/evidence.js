@@ -238,7 +238,7 @@
   }
   function highlights(model) {
     const section = el("section", "evidence-highlights");
-    const heading = el("div", "card-head"); heading.append(el("h3", "", "Explore the evidence"), el("p", "", "Recorded properties, grouped by topic. Select a value to inspect its source."));
+    const heading = el("div", "card-head"); heading.append(el("h3", "", "Explore the evidence"));
     section.append(heading);
     const grid = el("div", "highlight-grid");
     categories.forEach(category => {

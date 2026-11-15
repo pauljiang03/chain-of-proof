@@ -100,8 +100,7 @@
       box.append(row);
     });
     const loose = Number(brief.unlabelled) || 0;
-    box.append(el("p", "card-foot", "Listed from the records that findings cite, not from an intake list. Full hash values are in the report."
-      + (loose ? " " + n.format(loose) + (loose === 1 ? " record names" : " records name") + " no item." : "")));
+    if (loose) box.append(el("p", "card-foot", n.format(loose) + (loose === 1 ? " record names" : " records name") + " no item."));
     return box;
   }
 
@@ -139,15 +138,14 @@
     if (!found || !points.length) {
       const empty = el("div", "empty-state");
       empty.append(el("h3", "", found ? "No supported summary for these record types" : "No findings have passed the checker yet"),
-        el("p", "", found ? "Open Findings to read the exact statements and cited records. This limited view does not establish absence of evidence." : "This page fills in as findings are accepted."));
+        el("p", "", found ? "Open Findings to read the exact statements and cited records." : "This page fills in as findings are accepted."));
       host.append(empty);
       if (model) host.append(tiles(model));
       if (found) host.append(statistics(model));
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
-    hero.append(el("h2", "", "Cited record summary"));
-    if (story.disclaimer) hero.append(el("p", "", String(story.disclaimer)));
+    hero.append(el("h2", "", "Key findings"));
     points.forEach((point) => {
       const row = el("div", "key-row"), body = el("div", "key-body");
       body.append(el("p", "", array(point.sentences).map(String).join(" ")));

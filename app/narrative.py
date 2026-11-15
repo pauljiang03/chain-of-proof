@@ -20,9 +20,6 @@ _BROWSERS = {'chrome': 'Chrome', 'iexplore': 'Internet Explorer', 'firefox': 'Fi
 _SERVICES = {'google drive': 'Google Drive', 'outlook e-mail': 'Outlook e-mail', 'icloud': 'iCloud', 'dropbox': 'Dropbox', 'onedrive': 'OneDrive'}
 _UNALLOCATED = 'unallocated space of device'
 _SAME = 'same size and last-modified time as a file elsewhere'
-DISCLAIMER = ('This summary describes copied records in findings stored as verified. '
-              'It adds no certified conclusions or independent verification. '
-              'Read each exact certificate statement and its limitations in Findings.')
 
 
 def _s(value):
@@ -209,9 +206,7 @@ def _devices(case):
         out.append(f'The cited records include {_n(len(inserts), "USB identifier record", "USB identifier records")}.')
     if volumes or seen:
         out.append(f'The cited records include {_n(len(volumes) + len(seen), "volume record", "volume records")}.')
-    if rows:
-        out.append('Matching identifiers do not establish physical-device identity or connection times.')
-    return _point('devices', 'Storage records', out, inserts + volumes + seen), rows
+    return _point('devices', 'Storage devices', out, inserts + volumes + seen), rows
 
 
 def _disc(case):
@@ -388,6 +383,6 @@ def build(run, ids=None):
     points = [devices_point, _folders(case), _merge('files', 'Files', _files(case), _recovered(case)), _disc(case), _mail(case),
               _web(case), _downloads(case), _cloud(case), _deleted(case), _notes(case),
               _merge('computer', 'Computer and accounts', _computer(case), _accounts(case))]
-    return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings), 'disclaimer': DISCLAIMER,
+    return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings),
             'points': [{name: value for name, value in point.items() if name != '_entries'} for point in points if point],
             'devices': devices}

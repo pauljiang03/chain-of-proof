@@ -553,7 +553,7 @@
       badges.append(app.badge("REFUSED BY THE CHECKER", "refused"));
       summary.push(badges);
       if (data.question) summary.push(el("p", "finding-question", data.question));
-      summary.push(el("p", "statement", gap.summary || data.reason || "The checker refused this proposal."), el("p", "detail-intro", "A refusal means the cited records do not establish the claim. It does not mean the claim is false."));
+      summary.push(el("p", "statement", gap.summary || data.reason || "The checker refused this proposal."));
       item.item.rows.forEach((row) => evidence.push(app.recordCard(row)));
       if (!item.item.rows.length) evidence.push(el("p", "detail-intro", "The diagnostics did not name records."));
       proof = [el("p", "proof-heading", "Checker conditions")];
@@ -578,7 +578,6 @@
     } else if (item.column === "exhibit") {
       title = "Exhibit " + item.label;
       summary.push(el("p", "statement", item.image ? "Disk image " + item.image : "Image name not recorded"), links("Artifacts read from it, in view", [...item.outs]));
-      evidence.push(el("p", "detail-intro", "Records are extracted from this image by deterministic readers. The proof checks claims against those records; it does not check the readers."));
     } else {
       const conclusion = object(item.conclusion);
       title = "Interpretation " + text(conclusion.conclusion_id);
@@ -586,7 +585,7 @@
       badges.append(app.badge("NOT CERTIFIED", "judgment"));
       if (conclusion.rests_on_heuristic) badges.append(app.badge("Rests on a heuristic finding", "heuristic"));
       summary.push(badges, el("p", "statement", text(conclusion.text)), links("Cites certified findings", [...item.ins]));
-      evidence.push(el("p", "detail-caveat", conclusion.note || "The investigator's judgment. Citing certified findings does not certify the interpretation."));
+      if (conclusion.note) evidence.push(el("p", "detail-caveat", conclusion.note));
       if (conclusion.author) evidence.push(el("p", "detail-intro", "Author: " + conclusion.author));
     }
     app.inspect(title, summary, evidence, proof);
