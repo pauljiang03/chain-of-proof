@@ -18,21 +18,19 @@
   <a class="skip-link" href="#main">Skip to the case</a>
   <div class="shell" id="shell" data-tab="summary">
     <header class="titlebar">
-      <button class="icon-button" id="sidebar-toggle" aria-label="Show or hide the case list" aria-controls="sidebar" aria-expanded="true">☰</button>
+      <button class="icon-button ico ico-menu" id="sidebar-toggle" aria-label="Show or hide the case list" aria-controls="sidebar" aria-expanded="true"></button>
       <div class="brand"><img class="brand-mark" src="/static/icon.svg" alt="" width="20" height="20"><strong>CONAN-F</strong></div>
       <div class="case-heading"><h1 id="report-title">No case open</h1><div class="report-meta" id="report-meta"></div></div>
       <div class="title-actions">
         <div class="report-actions" id="report-actions" hidden>
-          <button class="button" id="open-report" type="button">Report</button>
-          <details class="download-menu"><summary class="button">Export ▾</summary><div class="download-options"><a id="download-html">Complete report <span>.html</span></a><a id="download-md">Complete report <span>.md</span></a><a id="download-json">Run bundle <span>.json</span></a></div></details>
+          <details class="download-menu"><summary class="button ico-after ico-down">Export</summary><div class="download-options"><a id="download-html">Complete report <span>.html</span></a><a id="download-md">Complete report <span>.md</span></a><a id="download-json">Run bundle <span>.json</span></a></div></details>
         </div>
-        <button class="button" id="open-demo" type="button">Explore demo</button>
         <button class="button primary" id="new-investigation">New investigation</button>
       </div>
     </header>
 
     <aside class="sidebar" id="sidebar" aria-label="Cases">
-      <div class="pane-title"><span>Cases</span><button class="icon-button" id="refresh-runs" title="Reload cases" aria-label="Reload cases">↻</button></div>
+      <div class="pane-title"><span>Cases</span><button class="icon-button ico ico-refresh" id="refresh-runs" title="Reload cases" aria-label="Reload cases"></button></div>
       <nav id="run-list" class="run-list" aria-label="Saved investigations"><p class="sidebar-empty">Connecting…</p></nav>
       <div class="sidebar-bottom"><span class="connection-dot" id="connection-dot"></span><span id="connection-label">Connecting</span></div>
     </aside>
@@ -55,11 +53,7 @@
           <button id="tab-timeline" class="tab" role="tab" aria-selected="false" aria-controls="panel-timeline" tabindex="-1" data-tab="timeline">Timeline</button>
           <button id="tab-graph" class="tab" role="tab" aria-selected="false" aria-controls="panel-graph" tabindex="-1" data-tab="graph">Proof graph</button>
           <button id="tab-findings" class="tab" role="tab" aria-selected="false" aria-controls="panel-findings" tabindex="-1" data-tab="findings">Findings <span id="count-findings"></span></button>
-          <span class="tab-gap" id="tab-gap" aria-hidden="true">Detail</span>
-          <button id="tab-needs" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Not established <span id="count-needs"></span></button>
-          <button id="tab-activity" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
-          <button id="tab-coverage" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
-          <button id="tab-report" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-report" tabindex="-1" data-tab="report">Report <span id="count-report"></span></button>
+          <button id="tab-report" class="tab" role="tab" aria-selected="false" aria-controls="panel-report" tabindex="-1" data-tab="report">Report <span id="count-report"></span></button>
         </div>
 
         <section class="tab-panel overview-panel" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary"><div class="overview" id="overview"></div></section>
@@ -69,7 +63,7 @@
             <div class="chips" id="timeline-lanes" role="group" aria-label="Show or hide kinds of activity"></div>
             <span class="spacer"></span>
             <label class="search-field"><input id="timeline-search" type="search" placeholder="Filter: file, device, site…" autocomplete="off" spellcheck="false" aria-label="Filter the timeline"></label>
-            <span class="zoom"><button class="button" id="timeline-main" title="The stretch of time that holds the most records">Busiest period</button><button class="button" id="timeline-all">All dates</button><button class="icon-button" id="timeline-zoom-out" aria-label="Zoom out">−</button><button class="icon-button" id="timeline-zoom-in" aria-label="Zoom in">+</button></span>
+            <span class="zoom"><button class="button" id="timeline-main" title="The stretch of time that holds the most records">Busiest period</button><button class="button" id="timeline-all">All dates</button><button class="icon-button ico ico-minus" id="timeline-zoom-out" aria-label="Zoom out" title="Zoom out"></button><button class="icon-button ico ico-plus" id="timeline-zoom-in" aria-label="Zoom in" title="Zoom in"></button></span>
           </div>
           <div class="timeline-host" id="timeline-host" tabindex="0" role="group" aria-label="Timeline. Drag or use the arrow keys to move through time; scroll or press plus and minus to zoom.">
             <svg id="timeline" class="timeline" role="img" aria-label="Evidence records over time, one row per kind of activity"></svg>
@@ -91,14 +85,14 @@
           <div class="graph-toolbar">
             <select id="graph-scope" aria-label="Limit the graph to one question"></select>
             <label class="search-field"><input id="graph-search" type="search" placeholder="Filter: device, file, ID…" autocomplete="off" spellcheck="false" aria-label="Filter the graph"></label>
-            <span class="graph-page"><button class="icon-button" id="graph-prev" aria-label="Previous findings">‹</button><span id="graph-range"></span><button class="icon-button" id="graph-next" aria-label="Next findings">›</button></span>
-            <span class="graph-focus" id="graph-focus" hidden><span id="graph-focus-label"></span><button class="icon-button" id="graph-focus-clear" aria-label="Clear focus">×</button></span>
+            <span class="graph-page"><button class="icon-button ico ico-left" id="graph-prev" aria-label="Previous findings" title="Previous findings"></button><span id="graph-range"></span><button class="icon-button ico ico-right" id="graph-next" aria-label="Next findings" title="Next findings"></button></span>
+            <span class="graph-focus" id="graph-focus" hidden><span id="graph-focus-label"></span><button class="icon-button ico ico-close" id="graph-focus-clear" aria-label="Clear focus" title="Clear focus"></button></span>
             <span class="spacer"></span>
-            <span class="zoom"><button class="icon-button" id="graph-zoom-out" aria-label="Zoom out">−</button><button class="icon-button" id="graph-zoom-in" aria-label="Zoom in">+</button><button class="button" id="graph-fit">Fit</button></span>
+            <span class="zoom"><button class="icon-button ico ico-minus" id="graph-zoom-out" aria-label="Zoom out" title="Zoom out"></button><button class="icon-button ico ico-plus" id="graph-zoom-in" aria-label="Zoom in" title="Zoom in"></button><button class="button" id="graph-fit">Fit</button></span>
           </div>
           <div class="graph-host" id="graph-host"><svg id="graph" class="graph" role="img" aria-label="Proof graph: from disk image to interpretation"></svg><div class="graph-empty" id="graph-empty" hidden></div></div>
           <div class="graph-legend">
-            <span class="replay"><button class="button" id="graph-play" aria-label="Replay how the graph was built">▶ Replay</button><button class="icon-button" id="graph-start" type="button" aria-label="Go to replay start" title="Go to start">↤</button><input id="graph-step" type="range" min="0" max="0" step="1" value="0" aria-label="Replay position" aria-controls="graph"><button class="icon-button" id="graph-end" type="button" aria-label="Go to final finding" title="Go to final finding">↦</button><span id="graph-step-label" class="mono"></span></span>
+            <span class="replay"><button class="button ico ico-lead ico-play" id="graph-play" data-icon="play" aria-label="Replay how the graph was built">Replay</button><button class="icon-button ico ico-first" id="graph-start" type="button" aria-label="Go to replay start" title="Go to start"></button><input id="graph-step" type="range" min="0" max="0" step="1" value="0" aria-label="Replay position" aria-controls="graph"><button class="icon-button ico ico-last" id="graph-end" type="button" aria-label="Go to final finding" title="Go to final finding"></button><span id="graph-step-label" class="mono"></span><button class="button" id="graph-lock" type="button" aria-pressed="false" title="Keep this view while the replay moves">Lock view</button></span>
             <span class="spacer"></span>
             <span class="legend" title="Drag to pan. Pinch or Ctrl-scroll to zoom. Double-click a finding to focus on it.">
               <span><i class="swatch strong"></i>Certified</span>
@@ -110,14 +104,11 @@
         </section>
 
         <section class="tab-panel" id="panel-findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
-          <div class="section-toolbar findings-toolbar"><div><h2>Explore findings</h2><p>Browse recorded properties, then open the exact statements and source evidence.</p></div><label class="search-field"><input id="finding-search" type="search" placeholder="Search file, user, serial, site, ID…" autocomplete="off" aria-label="Search findings and properties"></label></div>
+          <div class="section-toolbar findings-toolbar"><div><h2>Findings</h2></div><label class="search-field"><input id="finding-search" type="search" placeholder="Search file, user, serial, site, ID…" autocomplete="off" aria-label="Search findings and properties"></label></div>
           <div class="findings-controls"><div class="segmented" role="group" aria-label="Findings view"><button type="button" id="findings-overview" aria-pressed="true">Evidence overview</button><button type="button" id="findings-exact" aria-pressed="false">Exact statements</button></div><span id="findings-view-count" class="small-mono"></span></div>
           <div id="evidence-topics" class="evidence-topics" role="group" aria-label="Evidence topics"></div>
           <div id="finding-list" class="finding-list"></div><div id="finding-pagination" class="pagination"></div><div id="unverified-findings"></div><div id="conclusions"></div>
         </section>
-        <section class="tab-panel" id="panel-needs" role="tabpanel" aria-labelledby="tab-needs" hidden><div class="section-toolbar"><p>Proposals the checker refused, with the unmet conditions. A refusal does not mean a claim is false.</p></div><div id="needs-list" class="finding-list"></div></section>
-        <section class="tab-panel" id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden><div class="section-toolbar"><p>Completed tool calls by the investigator, newest first. <span id="activity-refresh-label" class="small-mono">RECORDED ACTIVITY</span></p></div><div id="activity-list"></div><div id="history-list"></div></section>
-        <section class="tab-panel" id="panel-coverage" role="tabpanel" aria-labelledby="tab-coverage" hidden><div class="section-toolbar"><p>What was supplied, what was inspected, and what is not measured. These are not measures of completeness.</p></div><div id="coverage-content"></div></section>
 
         <section class="tab-panel report-panel" id="panel-report" role="tabpanel" aria-labelledby="tab-report" hidden>
           <form class="report-options" id="report-form" aria-label="Report contents">
@@ -163,11 +154,14 @@
             <div class="report-buttons"><button class="button primary" id="report-print" type="button" disabled>Print / Save as PDF</button><a class="button" id="report-export" aria-disabled="true">Export HTML</a></div>
             <p class="field-help" id="report-status" role="status" aria-live="polite"></p>
           </form>
+          <div class="resizer" id="resize-report" role="separator" aria-orientation="vertical" tabindex="0" aria-controls="report-form" aria-label="Resize the report options" title="Drag to resize · double-click to reset"></div>
           <div class="report-preview" id="report-preview"><div class="report-host" id="report-host" hidden></div><div class="empty-state" id="report-empty" hidden></div></div>
         </section>
       </div>
     </main>
 
+    <div class="resizer" id="resize-side" role="separator" aria-orientation="vertical" tabindex="0" aria-controls="sidebar" aria-label="Resize the case list" title="Drag to resize · double-click to reset"></div>
+    <div class="resizer" id="resize-insp" role="separator" aria-orientation="vertical" tabindex="0" aria-controls="inspector" aria-label="Resize the inspector" title="Drag to resize · double-click to reset"></div>
     <aside class="inspector" id="inspector" aria-label="Inspector">
       <div class="pane-title"><span id="detail-title">Inspector</span></div>
       <div id="detail-summary" class="detail-summary"><p class="inspector-empty">Select something on the timeline, in the graph or in a table to see its records, source and proof.</p></div>
@@ -188,17 +182,22 @@
   </div>
 
   <dialog id="new-dialog" class="new-dialog" aria-labelledby="new-dialog-title">
-    <div class="dialog-heading"><h2 id="new-dialog-title">New investigation</h2><button class="icon-button close-dialog" type="button" data-close="new-dialog" aria-label="Close">×</button></div>
+    <div class="dialog-heading"><h2 id="new-dialog-title">New investigation</h2><button class="icon-button close-dialog ico ico-close" type="button" data-close="new-dialog" aria-label="Close"></button></div>
     <form id="investigation-form">
-      <p class="form-intro">The investigator searches the extracted records and proposes claims for the proof checker. Starting a run uses the selected AI provider.</p>
-      <label for="investigation-title">Title</label><input id="investigation-title" name="title" placeholder="Removable media review" required maxlength="200" autocomplete="off">
-      <label for="facts-path">Extracted facts file <span class="required-label">required</span></label><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><p class="field-help">A local JSON or DuckDB fact store produced by the readers.</p>
-      <label for="investigation-brief">Case brief <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="3" placeholder="Context and what you want established."></textarea>
-      <label for="investigation-questions">Questions, one per line <span class="optional-label">optional</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from them?"></textarea>
-      <div class="form-row"><div><label for="investigation-backend">Backend</label><select id="investigation-backend" name="backend" required></select></div><div><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="default" autocomplete="off" spellcheck="false"></div><div><label for="investigation-minutes">Minutes</label><input id="investigation-minutes" name="minutes" type="number" min="1" max="600" value="45" required></div></div>
-      <p class="field-help" id="backend-help">Checking local backend availability…</p>
+      <div class="field"><label for="investigation-title">Case name</label><input id="investigation-title" name="title" required maxlength="200" autocomplete="off"></div>
+      <div class="field"><label for="facts-path">Evidence records file</label>
+        <div class="file-field"><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><button class="button" id="facts-choose" type="button" hidden>Choose…</button></div></div>
+      <div class="field"><label for="investigation-brief">What to establish <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="2"></textarea></div>
+      <div class="field"><label for="investigation-questions">Questions <span class="optional-label">optional, one per line</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from them?"></textarea></div>
+      <div class="field" id="api-key-field" hidden><label for="api-key">Anthropic API key</label>
+        <div class="file-field"><input id="api-key" type="password" placeholder="sk-ant-…" spellcheck="false" autocomplete="off"><button class="button" id="api-key-save" type="button">Save key</button></div>
+        <p class="field-note">Kept on this computer, for your user account only.</p></div>
+      <details class="advanced" id="investigation-advanced"><summary>Settings <span id="investigation-settings"></span></summary>
+        <div class="form-row"><div><label for="investigation-backend">AI service</label><select id="investigation-backend" name="backend" required></select></div><div><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="default" autocomplete="off" spellcheck="false"></div><div><label for="investigation-minutes">Time limit (min)</label><input id="investigation-minutes" name="minutes" type="number" min="1" max="600" value="45" required></div></div>
+        <p class="field-note" id="api-key-status" hidden><span id="api-key-source"></span> <button class="text-button" id="api-key-remove" type="button">Remove key</button></p>
+      </details>
       <div class="notice error" id="form-error" role="alert" hidden></div>
-      <div class="form-footer"><span>Existing cases are preserved.</span><div><button class="button" type="button" data-close="new-dialog">Cancel</button><button class="button primary" id="start-investigation" type="submit" disabled>Start investigation</button></div></div>
+      <div class="form-footer"><span id="backend-help" role="status"></span><div><button class="button" type="button" data-close="new-dialog">Cancel</button><button class="button primary" id="start-investigation" type="submit" disabled>Start investigation</button></div></div>
     </form>
   </dialog>
 </body>

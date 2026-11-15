@@ -28,6 +28,8 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
 REPORT_OPTIONS = ("ids", "sections", *(key for key, _ in REPORT_COVER))
+# The longest query the app sends is a report request with every cover detail filled in.
+MAX_FIELDS = len(("name", "format", "download") + REPORT_OPTIONS)
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
 
@@ -109,6 +111,7 @@ class LocalServer(ThreadingHTTPServer):
     def __init__(self, root, port, manager):
         self.root, self.manager = Path(root).resolve(), manager
         self.token = secrets.token_urlsafe(32)
+        self.chooser = None   # set by the desktop window: opens its file panel and returns the chosen path
         self._manager_closed = False
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -183,7 +186,7 @@ class Handler(BaseHTTPRequestHandler):
                     or any(p in (".", "..") for p in parsed.path.split("/"))):
                 raise ValueError("invalid path")
             # Before Python 3.11, strict parsing rejects an empty query string.
-            query = (parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+            query = (parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=MAX_FIELDS)
                      if parsed.query else {})
         except ValueError:
             raise RequestError(400, "Invalid request path or query.") from None
@@ -230,8 +233,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/config":
             self._query(query, ())
             config = manager.config()
-            return self._json(200, {"token": self.server.token, **{key: config[key] for key in (
-                "defaults", "backends", "active_run")}})
+            return self._json(200, {"token": self.server.token, "chooser": callable(self.server.chooser),
+                                    **{key: config[key] for key in ("defaults", "backends", "active_run")}})
         if path == "/api/runs":
             self._query(query, ())
             return self._json(200, {"runs": manager.list_runs()})
@@ -239,8 +242,8 @@ class Handler(BaseHTTPRequestHandler):
             self._query(query, ("name",))
             snapshot = manager.get_run(_name(query.get("name"), self.server.root))
             if isinstance(snapshot, dict) and isinstance(snapshot.get("run"), dict):
-                from app import brief   # evidence items, tools and limits, counted from the run's own records
-                snapshot = {**snapshot, "brief": brief.build(snapshot["run"])}
+                from app import brief, narrative   # counted and worded from the run's own verified records
+                snapshot = {**snapshot, "brief": brief.build(snapshot["run"]), "narrative": narrative.build(snapshot["run"])}
             return self._json(200, snapshot)
         if path == "/api/report":
             self._query(query, ("name", "format", "download") + REPORT_OPTIONS)
@@ -266,9 +269,28 @@ class Handler(BaseHTTPRequestHandler):
 
     def _post(self, path, query):
         self._query(query, ())
-        if path not in ("/api/investigations", "/api/stop"):
+        if path not in ("/api/investigations", "/api/stop", "/api/choose", "/api/credentials"):
             raise RequestError(404, "Route not found.")
         payload = self._body()
+        if path == "/api/choose":
+            # Only the desktop window has a file panel. It gives back a path for the text box;
+            # nothing is opened or read here, and the path is checked later like a typed one.
+            chooser = self.server.chooser
+            if not callable(chooser) or payload != {}:
+                raise RequestError(404, "Route not found.")
+            chosen = chooser()
+            return self._json(200, {"path": chosen if isinstance(chosen, str) else ""})
+        if path == "/api/credentials":
+            # The user's own Anthropic API key, typed into the page. An empty value removes it.
+            # No reply and no error message carries the key back.
+            if not isinstance(payload, dict) or set(payload) != {"anthropic_api_key"} \
+                    or not isinstance(payload["anthropic_api_key"], str):
+                raise RequestError(400, "Send only the API key.")
+            try:
+                result = self.server.manager.set_api_key(payload["anthropic_api_key"])
+            except ValueError as error:
+                raise RequestError(400, str(error)) from None
+            return self._json(200, {"key": result.get("key"), "check": result.get("check")})
         if path == "/api/investigations":
             result = self.server.manager.start(_start_payload(payload, self.server.root))
             return self._json(200, result)
@@ -312,7 +334,8 @@ def create_server(root=ROOT, port=8765, *, manager=None):
         raise ValueError("port must be an integer from 0 to 65535")
     if manager is None:
         from app.jobs import JobManager
-        manager = JobManager(root=root)
+        from app import credentials
+        manager = JobManager(root=root, secrets=credentials.folder())
     return LocalServer(root, port, manager)
 
 

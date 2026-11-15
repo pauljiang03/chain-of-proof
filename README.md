@@ -303,10 +303,20 @@ browser engine is bundled; the front end is plain HTML/CSS/JS with no framework 
 graph library.
 
 ```sh
-.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview and the `conan` command
-conan                                              # the same as `cop desktop`
-python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable Conan.app
+.venv/bin/python -m pip install -e '.[desktop,agent]'   # once: the `conan` window and the Anthropic API service
+conan                                                   # the same as `cop desktop`
+python -m app.desktop --make-app ~/Applications         # macOS: a double-clickable Conan.app
 ```
+
+**Running on your own Anthropic API key.** With the `agent` extra installed (Python 3.11 or
+newer), New investigation offers *Anthropic API* and asks for a key the first time. The key
+is checked with Anthropic and then kept in `~/.config/conan-f/anthropic-api-key`
+(`%APPDATA%\conan-f` on Windows), readable by your user only. It is outside the project,
+and it is never written to a run folder, a log, or a reply to the page. `ANTHROPIC_API_KEY`
+in the environment takes precedence. Once a key is present, the API is the default service;
+without one the app uses a local Claude Code login if there is one. A run is billed to that
+key, and the records the investigator reads go to Anthropic. This path has been run end to
+end against a local stand-in for the API, and not yet against the live service.
 
 The desktop application is called Conan. Its mark is original artwork in
 `app/static/icon.svg`; `python scripts/make_icon.py` rebuilds the macOS icon from it.

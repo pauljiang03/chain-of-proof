@@ -1,4 +1,6 @@
 """The desktop window wraps the same loopback server and stops it on close."""
+import json
+from collections import UserDict
 import plistlib
 import socket
 import sys
@@ -18,12 +20,16 @@ class FakeManager:
     def close(self):
         self.closed = True
 
+    def config(self):
+        return {"defaults": {}, "backends": [], "active_run": None}
+
 
 class FakeWebview:
     """Stands in for pywebview: `start` blocks while the window is open."""
 
     def __init__(self):
-        self.settings, self.windows, self.seen, self.started = {}, [], None, None
+        # the real library keeps its settings in a UserDict, which is not a dict
+        self.settings, self.windows, self.seen, self.started = UserDict(), [], None, None
 
     def create_window(self, title, url, **options):
         self.windows.append((title, url, options))
@@ -33,9 +39,32 @@ class FakeWebview:
         _, url, _ = self.windows[0]
         with urllib.request.urlopen(url, timeout=5) as response:
             self.seen = (response.status, response.read())
+        with urllib.request.urlopen(url + "api/config", timeout=5) as response:
+            self.config = json.loads(response.read())
+
+
+class FakeWindow:
+    def create_file_dialog(self, kind, **options):
+        self.asked = (kind, options)
+        return self.answer
 
 
 class Desktop(unittest.TestCase):
+    def test_the_page_can_ask_the_window_only_for_a_file_chooser(self):
+        fake, window = FakeWebview(), FakeWindow()
+        fake.FileDialog = type("FileDialog", (), {"OPEN": 10})
+        bridge = desktop.Bridge(fake)
+        self.assertEqual(bridge.choose_evidence(), "")              # no window yet
+        fake.windows.append(window)
+        window.answer = ("/cases/one/facts.json",)
+        self.assertEqual(bridge.choose_evidence(), "/cases/one/facts.json")
+        self.assertEqual(window.asked[0], 10)
+        self.assertFalse(window.asked[1]["allow_multiple"])
+        window.answer = None                                        # cancelled
+        self.assertEqual(bridge.choose_evidence(), "")
+        window.answer = ("/a", "/b")                                # only ever one path
+        self.assertEqual(bridge.choose_evidence(), "/a")
+
     def setUp(self):
         scratch = tempfile.TemporaryDirectory()
         self.addCleanup(scratch.cleanup)
@@ -47,7 +76,9 @@ class Desktop(unittest.TestCase):
         title, url, options = fake.windows[0]
         self.assertEqual(title, "Conan")
         self.assertTrue(url.startswith("http://127.0.0.1:"))
-        self.assertEqual(options["min_size"], (1120, 700))
+        self.assertEqual(options["min_size"], (900, 600))
+        self.assertNotIn("js_api", options)                # the page asks through the server instead
+        self.assertIs(fake.config["chooser"], True)
         self.assertEqual(fake.seen[0], 200)
         self.assertIn(b"CONAN-F", fake.seen[1])
         self.assertTrue(fake.settings["ALLOW_DOWNLOADS"])

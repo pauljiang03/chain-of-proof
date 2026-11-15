@@ -311,5 +311,23 @@ assert.equal(nodes.get('report-print').disabled, true);
 ''')
 
 
+    def test_every_edge_between_panes_has_a_working_resize_handle(self):
+        import re
+        page, script, style = ((ASSETS / name).read_text() for name in ('index.html', 'app.js', 'style.css'))
+        handles = dict(re.findall(r'<div class="resizer" id="([\w-]+)" role="separator" aria-orientation="vertical" tabindex="0" aria-controls="([\w-]+)"', page))
+        self.assertEqual(handles, {'resize-side': 'sidebar', 'resize-insp': 'inspector', 'resize-report': 'report-form'})
+        panes = re.findall(r'\{ handle: "([\w-]+)", pane: "([\w-]+)", name: "(--[\w-]+)", base: (\d+), min: (\d+), max: (\d+), sign: (-?1) \}', script)
+        self.assertEqual({handle: pane for handle, pane, *_ in panes}, handles)
+        for handle, pane, name, base, low, high, _ in panes:
+            self.assertEqual(page.count('id="%s"' % pane), 1)            # the pane it resizes exists
+            self.assertIn('var(%s, %spx)' % (name, base), style)         # the stylesheet reads the width, default first
+            self.assertIn('#%s {' % handle, style)                       # and places the handle
+            self.assertTrue(int(low) < int(base) < int(high))
+        self.assertEqual(script.count('resizablePanes();'), 1)
+        # A saved width is clamped by the stylesheet, so no pane can crowd out the middle of a small window.
+        for clamp in ('min(var(--side-w, 208px), 30vw)', 'min(var(--insp-w, 380px), 45vw)', 'min(var(--report-w, 264px), 60%)'):
+            self.assertIn(clamp, style)
+
+
 if __name__ == '__main__':
     unittest.main()

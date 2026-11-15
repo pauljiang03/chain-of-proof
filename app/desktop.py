@@ -20,6 +20,7 @@ import shlex
 import shutil
 import sys
 import threading
+from collections.abc import MutableMapping
 from pathlib import Path
 
 from app.server import ROOT, create_server
@@ -28,11 +29,36 @@ TITLE = "Conan"   # the application's name: window, menu bar and launcher; the w
 ICON = Path(__file__).resolve().parent / "assets" / "Conan.icns"   # built by scripts/make_icon.py
 PORT = 8766   # next to `cop serve` on 8765; any free port is used when this one is taken
 BUNDLE_ID = "dev.conan-f.workbench"
-WINDOW = {"width": 1600, "height": 1000, "min_size": (1120, 700)}
+WINDOW = {"width": 1600, "height": 1000, "min_size": (900, 600)}
 
 
 class DesktopUnavailable(RuntimeError):
     """The native window library is not installed."""
+
+
+class Bridge:
+    """The one thing the page may ask the native window for: a file chooser.
+
+    A page cannot learn a file's path from a browser file input, so the window's own open
+    panel supplies it. Nothing is opened or read here; the path goes into a text box and
+    the server checks it like a typed one. The page asks through the local server
+    (POST /api/choose): the app's script policy forbids eval, which pywebview's own page
+    bridge needs, so that bridge never reaches the page.
+    """
+
+    def __init__(self, webview):
+        self._webview = webview
+
+    def choose_evidence(self):
+        windows = getattr(self._webview, "windows", None) or []
+        if not windows:
+            return ""
+        kind = getattr(getattr(self._webview, "FileDialog", None), "OPEN", None)
+        if kind is None:
+            kind = getattr(self._webview, "OPEN_DIALOG", 10)
+        chosen = windows[0].create_file_dialog(
+            kind, allow_multiple=False, file_types=("Evidence records (*.json;*.duckdb)", "All files (*.*)"))
+        return str(chosen[0]) if chosen else ""
 
 
 def _webview():
@@ -80,10 +106,11 @@ def run(root=ROOT, port=None, *, webview=None, manager=None) -> int:
     thread.start()
     try:
         settings = getattr(webview, "settings", None)
-        if isinstance(settings, dict):
+        if isinstance(settings, MutableMapping):    # pywebview's settings are a UserDict, not a dict
             settings["ALLOW_DOWNLOADS"] = True          # report exports
             settings["OPEN_EXTERNAL_LINKS_IN_BROWSER"] = True
         _name_the_application()
+        server.chooser = Bridge(webview).choose_evidence
         webview.create_window(TITLE, url, text_select=True, **WINDOW)
         webview.start(private_mode=False)   # keep the window's own storage between starts
     finally:

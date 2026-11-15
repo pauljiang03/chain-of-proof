@@ -15,7 +15,7 @@ from html import escape
 import json
 import re
 
-from . import brief
+from . import brief, narrative
 
 # Optional parts of a report. The certified findings themselves are always included.
 SECTIONS = ('workflow', 'needs', 'judgments', 'evidence', 'proofs', 'activity')
@@ -110,9 +110,19 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .cited th:first-child, .cited td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .cited th:nth-child(2) { width:34%; } .cited th:nth-child(3) { width:30%; }
 .lead { font-size:17px; line-height:1.6; }
+.keys { margin:0 0 6px; }
+.key { display:grid; grid-template-columns:150px minmax(0,1fr); gap:2px 18px; padding:7px 0; border-bottom:1px solid var(--line); break-inside:avoid; }
+.key h3 { font-size:14px; margin:0; line-height:1.5; }
+.key p { margin:0; line-height:1.5; }
+.key table { margin:6px 0 2px; font-size:12px; }
+.key th, .key td { padding:4px 8px; white-space:nowrap; overflow-wrap:normal; }
+.devices td:nth-child(4) { white-space:normal; overflow-wrap:anywhere; }
+@media(max-width:700px) { .key { grid-template-columns:1fr; } }
+#summary { container-type:inline-size; }   /* the preview pane is narrower than its window */
+@container (max-width:700px) { .key { grid-template-columns:minmax(0,1fr); } .key th,.key td { white-space:normal; } }
 .mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
 .days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
-.days td:last-child, .exhibits td:last-child { white-space:nowrap; overflow-wrap:normal; }
+.exhibits td:last-child { white-space:nowrap; overflow-wrap:normal; }
 .exhibits th, .days th { white-space:normal; overflow-wrap:normal; }
 .exhibits { table-layout:fixed; }
 .exhibits th:first-child { width:24%; }
@@ -140,6 +150,13 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
   .sentence { font-size:12pt; } .table-wrap { overflow:visible; } tr { break-inside:avoid; }
   details:not([open]) > :not(summary) { display:block !important; }
   .exact-statement > summary { display:block; font-weight:600; color:var(--ink); } a { color:inherit; } .notice { break-inside:avoid; }
+  /* The summary is one printed page: small type and tight rows. */
+  #summary { font-size:9pt; padding-top:10px; } #summary h2 { font-size:15pt; margin-bottom:4px; }
+  .key { display:block; padding:2px 0; line-height:1.4; } .key h3 { display:inline; font-size:9pt; line-height:inherit; }
+  .key h3::after { content:". "; } .key > div, .key p { display:inline; line-height:inherit; }
+  .key table { font-size:8pt; margin:3px 0 0; } .key th, .key td { padding:2px 6px; }
+  #summary > h3 { font-size:11pt; margin:6px 0 2px; } #summary .days { font-size:8.5pt; line-height:1.4; margin:2px 0; }
+  #summary .days th, #summary .days td { padding:2px 8px; } #summary > .small { font-size:8pt; line-height:1.35; margin:4px 0 0; }
 }
 """
 
@@ -226,39 +243,52 @@ def _span(first, last, tz):
     return f'{start:%H:%M}' if (last - first) < 60 * 1000000 else f'{start:%H:%M}–{end:%H:%M}'
 
 
-def _front(info, tz, case, findings, options):
-    """Summary, evidence examined and method before the detailed findings."""
+# Which event groups a summary day names first. The order is by record type and is the same for every case.
+_SUMMARY_ORDER = ('usbInsert', 'cdBurn', 'fileDeleted', 'emailSent', 'fileDownloaded', 'cloudFile', 'webSearch', 'fileRenamed',
+                  'localSearch', 'noteText', 'volumeSeen', 'shadowCopy', 'programInstalled', 'lnkTarget')
+
+
+def _day_events(groups, most=3):
+    """The groups one summary row names: picked by record type in a fixed order, shown in time order."""
+    rank = {kind: place for place, kind in enumerate(_SUMMARY_ORDER)}
+    chosen = sorted(groups, key=lambda group: rank.get(group.get('kind'), len(rank)))[:most]
+    return sorted(chosen, key=lambda group: group['first'])
+
+
+def _front(info, tz, case, findings, options, story):
+    """What the records show, the days it happened on, then evidence examined and method."""
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
-    lead = ('This report contains <strong>' + _plural(counts['findings'], 'finding', 'findings')
-            + '</strong> from the supplied examination records. '
-            + 'The findings refer to ' + _plural(counts['records'], 'evidence record', 'evidence records') + '.')
-    out = ['<section id="summary"><h2>Executive summary</h2><p class="lead">' + lead + '</p>',
-           _result_index(findings)]
-    if counts['likely']:
-        out.append('<p>' + _plural(counts['likely'], 'finding uses', 'findings use')
-                   + ' a stated heuristic rule. The finding identifies this rule.</p>')
-    if counts['findings'] != counts['recorded']:
-        out.append(f"<p>This report contains {counts['findings']:,} of the {counts['recorded']:,} findings in the stored run.</p>")
-    if info['range']:
-        first, last = brief.moment(info['range']['from'], tz), brief.moment(info['range']['to'], tz)
-        busy = info['busiest']
-        start, end = brief.moment(busy['from'], tz), brief.moment(busy['to'], tz)
-        if None not in (first, last, start, end):
-            out.append(f"<p>{counts['dated']:,} of the cited records have source timestamps, from {first:%Y-%m-%d} to "
-                       f"{last:%Y-%m-%d}. The busiest period runs from {start:%Y-%m-%d} to {end:%Y-%m-%d} and holds "
-                       f"{busy['records']:,} of them. Times are in {_h(clock_name)}.</p>")
-    if info['days']:
+    out = ['<section id="summary"><h2>Executive summary</h2>']
+    if story['points']:
+        out.append('<div class="keys">')
+        for point in story['points']:
+            body = '<p>' + ' '.join(_h(sentence) for sentence in point['sentences']) + '</p>'
+            if point['key'] == 'devices' and story['devices']:
+                body += _table(('Item', 'Device', 'Serial number', 'Volume label', 'First connection', 'Last connection'),
+                               [tuple(_h(row[key]) or '—' for key in ('item', 'device', 'serial', 'label', 'first', 'last'))
+                                for row in story['devices'][:6]], 'devices')
+                if len(story['devices']) > 6:
+                    body += '<p class="small">The table shows 6 of ' + f"{len(story['devices']):,}" + ' devices.</p>'
+            out.append('<div class="key"><h3>' + _h(point['title']) + '</h3><div>' + body + '</div></div>')
+        out.append('</div>')
+    else:
+        out.append('<p>The findings in this report cite no record of a type that the summary describes.</p>')
+    days = info['days'][:7]
+    if days:
         rows = []
-        for day in info['days']:
+        for day in days:
             events = ' · '.join(_h((group['one'] if group['count'] == 1 else f"{group['count']:,} {group['many']}")
-                                   + ' (' + _span(group['first'], group['last'], tz) + ')') for group in day['events'])
-            rows.append((_h(_day(day['date'])), events or 'No key events on this day.', f"{day['records']:,}"))
-        shown = ('the ' + str(len(info['days'])) + ' busiest of ' + str(info['days_total']) + ' days'
-                 if info['days_total'] > len(info['days']) else 'each day') + ' of the busiest period'
-        out += ['<h3>Recorded timeline</h3>', _table(('Day', 'Record types and times', 'Dated records'), rows, 'days'),
-                '<p class="small">The table shows ' + shown + '. Counts refer to records. '
-                'Several records can describe the same event. The findings below identify the supporting records.</p>']
+                                   + ' (' + _span(group['first'], group['last'], tz) + ')') for group in _day_events(day['events']))
+            rows.append((_h(_day(day['date'])), events or 'No key events on this day.'))
+        out += ['<h3>Timeline</h3>', _table(('Day', 'Recorded events and times'), rows, 'days')]
+    notes = ['Each statement is a count or a value from the evidence records that the '
+             + _plural(counts['findings'], 'finding cites', 'findings cite') + '.', 'Times are in ' + _h(clock_name) + '.']
+    if counts['likely']:
+        notes.append(_plural(counts['likely'], 'finding uses', 'findings use') + ' a stated heuristic rule. The finding identifies this rule.')
+    if counts['findings'] != counts['recorded']:
+        notes.append(f"This report contains {counts['findings']:,} of the {counts['recorded']:,} findings in the stored run.")
+    out.append('<p class="small">' + ' '.join(notes) + '</p>')
     out.append('</section><section id="request"><h2>Request and scope</h2>')
     request = _option_fields(options, _REQUEST_KEYS)
     out.append(request or '<p>The report contains no request details from the author.</p>')
@@ -383,6 +413,7 @@ def _finding_title(finding):
 def _result_index(findings):
     """A source index, not a new claim or a model-written conclusion."""
     groups = {key: [] for key, _ in brief.LANES}
+    seen = {key: set() for key in groups}   # a record cited by many findings is listed once
     for number, finding in findings:
         for row in _rows(finding.get('cited_facts')):
             row = _object(row)
@@ -399,7 +430,8 @@ def _result_index(findings):
             if item:
                 value += ' <span class="small">(' + _h(item) + ')</span>'
             key = json.dumps(row, ensure_ascii=False, sort_keys=True)
-            if all(old[0] != key for old in groups[lane]):
+            if key not in seen[lane]:
+                seen[lane].add(key)
                 groups[lane].append((key, value, number, finding.get('finding_id', 'Finding')))
     rows = []
     for lane, label in brief.LANES:
@@ -739,10 +771,10 @@ def render_html(run: dict, options: dict | None = None) -> str:
     out += [''.join(scope) + '</header>',
             '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
                                                           for anchor, label in navigation) + '</nav>',
-            *_front(info, tz, case, findings, options),
+            *_front(info, tz, case, findings, options, narrative.build(run, ids=chosen)),
             '<section id="findings"><h2>Examination findings</h2>',
             '<p>Each finding identifies its source records. Open the exact statement to read the original certificate text. '
-            'The report keeps that text unchanged.</p>']
+            'The report keeps that text unchanged.</p>', _result_index(findings)]
     if not findings:
         out.append('<p>No entries marked verified were supplied. This does not establish that no relevant evidence exists.</p>')
     for number, finding in findings:
