@@ -235,6 +235,57 @@ class AppReport(unittest.TestCase):
         self.assertIn('Certificate: trust tier kernel', rendered)
         self.assertNotIn('example : True', rendered)
 
+    def test_report_opens_with_summary_evidence_method_and_limits_and_ends_with_a_sign_off(self):
+        zone = 'local time, converted from America/New_York'
+        digest = record(9, kind='systemSetting', obj_text='image md5', aux_text='ab' * 16, t=0)
+        digest['prov'] = {'exhibit': 'USB <b>1</b>', 'image': 'usb.E01', 'tool': 'reader <i>1.0</i>',
+                          'stored_by': 'the imaging tool at acquisition; not recomputed here', 'acquired_with': 'imager 7'}
+        timed = record(8, kind='usbInsert', obj_text='SERIAL9')
+        timed['prov'] = dict(timed['prov'], time_zone=zone)
+        data = bundle(finding(cited_facts=[timed, digest]), finding(finding_id='F2', strength='heuristic'))
+        options = report_options(sections=['evidence'], requested_by='Det. <X>', authority='Warrant 7', purpose='p' * 600,
+                                 received='2026-11-01', examiner='A. Examiner', report_date='2026-11-14')
+        rendered = render_html(data, options)
+        parsed = Markup(rendered)
+        order = [rendered.index(f'<section id="{name}">') for name in (
+            'summary', 'exhibits', 'method', 'limits', 'findings', 'glossary', 'signoff', 'evidence')]
+        self.assertEqual(order, sorted(order))               # the sign-off closes the report; appendices follow it
+        self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
+        for label, value in (('Requested by', 'Det. &lt;X&gt;'), ('Authority for the request', 'Warrant 7'),
+                             ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
+            self.assertIn(f'<dt>{label}</dt><dd>{value}</dd>', rendered)
+        self.assertIn('<strong>2 findings</strong> in this report passed the proof checker: 1 follow from the records '
+                      'alone and 1 rest on a stated rule of thumb. They cite 3 evidence records from 2 exhibits.', rendered)
+        # evidence items, their stored hash values and the tools are the records' own words, escaped
+        self.assertIn('<strong>USB &lt;b&gt;1&lt;/b&gt;</strong>', rendered)
+        self.assertIn('<span class="mono">MD5 ' + 'ab' * 16 + '</span> <span class="small">(record 9)</span>', rendered)
+        self.assertIn('Imaging tool as recorded: imager 7', rendered)
+        self.assertIn('<td>reader &lt;i&gt;1.0&lt;/i&gt;</td><td>Tool</td><td>1</td>', rendered)
+        self.assertIn('<td>synthetic parser</td><td>Record reader</td><td>2</td>', rendered)
+        self.assertNotIn('<b>1</b>', rendered)
+        self.assertNotIn('<i>1.0</i>', rendered)
+        self.assertIn('It is not a list of everything submitted', rendered)
+        self.assertIn('It does not check that the tools read the disk images correctly.', rendered)
+        self.assertIn('<div><span>Examiner</span><strong>A. Examiner</strong></div>', rendered)
+        self.assertIn('<div><span>Date of report</span><strong>2026-11-14</strong></div>', rendered)
+        self.assertIn('this report does not supply one', rendered)
+        exact = '2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
+        if '1 cited record names America/New_York' in rendered:   # this system can convert the zone the records name
+            self.assertIn('2023-11-14 17:13:20 local (UTC-05:00)<br><span class="small">' + exact + '</span>', rendered)
+            self.assertIn('<td>Tue 14 Nov 2023</td><td>USB device connected (17:13)</td><td>2</td>', rendered)
+            self.assertIn('give that local time first, with its offset, and then UTC', rendered)
+        else:
+            self.assertIn('which this system could not convert', rendered)
+        plain = render_html(bundle(finding()))
+        self.assertIn('All times in this report are in UTC: the cited records do not name the time zone', plain)
+        self.assertIn(exact + '<br><span class="small">Meaning: record observation</span>',
+                      render_html(bundle(finding()), report_options(sections=[])))
+        self.assertIn('No image hash value is among the cited records', plain)
+        self.assertIn('<div><span>Examiner</span><strong></strong></div>', plain)
+        for bad in ({'purpose': 'p' * 601}, {'requested_by': 'x' * 201}, {'authority': 'a\tb'}, {'colour': 'red'}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                report_options(**bad)
+
     def test_links_into_sections_left_out_become_plain_text(self):
         data = bundle(finding(), finding(finding_id='F2'))
         data['case_answers'] = {'questions': [{'question_id': 'Q1', 'certified_findings': [{'finding_id': 'F1'}]}]}

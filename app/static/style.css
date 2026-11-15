@@ -395,6 +395,17 @@ button.bar-row:hover { background: var(--panel-2); }
 .day-what strong { font-weight: 500; }
 .day-what small { color: var(--muted); font-size: 0.6875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .day-time { font-family: var(--mono); font-size: 0.6875rem; color: var(--muted); padding-top: 2px; white-space: nowrap; }
+.ov-item { display: grid; gap: 4px; padding: 9px 0; border-top: 1px solid var(--line-2); }
+.card-head + .ov-item { border-top: 0; padding-top: 2px; }
+.ov-item .item-head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.ov-item .item-head strong { font-size: 0.875rem; white-space: nowrap; }
+.ov-item .item-image { color: var(--muted); font: 0.71875rem var(--mono); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ov-item .item-count { margin-left: auto; color: var(--muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ov-item .bar-track { height: 6px; }
+.ov-item .item-facts, .ov-item .item-hash { color: var(--muted); font-size: 0.75rem; line-height: 1.45; overflow-wrap: anywhere; }
+.ov-item .item-hash { font: 0.6875rem/1.5 var(--mono); }
+.limits { margin: 0; padding-left: 18px; display: grid; gap: 5px; color: var(--muted); font-size: 0.78125rem; line-height: 1.45; max-width: 92ch; }
+.limits li::marker { color: var(--faint); }
 .how { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; color: var(--muted); font-size: 0.75rem; padding: 2px 2px 0; }
 .how b { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.6875rem; margin-right: 6px; }
 .how-arrow { color: var(--faint); }

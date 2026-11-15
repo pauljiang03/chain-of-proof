@@ -28,7 +28,7 @@ class FakeManager:
         self.calls.append(("get", name))
         if self.failure:
             raise self.failure
-        return {"name": name, "status": "running", "run": None, "events": [
+        return {"name": name, "status": "running", "run": getattr(self, "run", None), "events": [
             {"sequence": 1, "tool": "fact", "outcome": "success", "completed_at": "2026-11-14T00:00:00Z",
              "finding_id": None, "arguments": {"fact_id": 1}}], "error": None}
 
@@ -254,6 +254,18 @@ class AppServer(unittest.TestCase):
             self.assertNotIn("X-Leak", headers)
         self.assertNotIn("Content-Disposition", self.request("/api/report?name=sample")[1])
 
+    def test_a_run_arrives_with_a_brief_counted_from_its_own_records(self):
+        status, _, body = self.request("/api/run?name=saved")
+        self.assertEqual(status, 200)
+        self.assertNotIn("brief", json.loads(body))          # nothing saved yet: nothing to count
+        self.manager.run = {"findings": [{"finding_id": "F1", "status": "verified", "cited_facts": [
+            {"id": 1, "kind": "usbInsert", "t": 1427135470000000, "obj_text": "S1", "prov": {"exhibit": "PC", "image": "pc.E01"}}]}]}
+        payload = json.loads(self.request("/api/run?name=saved")[2])
+        self.assertEqual(payload["run"], self.manager.run)   # the run itself is untouched
+        self.assertEqual(payload["brief"]["counts"]["findings"], 1)
+        self.assertEqual([(item["label"], item["images"], item["records"]) for item in payload["brief"]["exhibits"]],
+                         [("PC", ["pc.E01"], 1)])
+
     def test_examiner_report_options_are_validated_and_passed_to_the_manager(self):
         (self.root / "runs" / "saved").mkdir(parents=True, exist_ok=True)
         status, headers, _ = self.request("/api/report?name=saved&format=html&download=1&ids=F1,F2"
@@ -263,7 +275,13 @@ class AppServer(unittest.TestCase):
         options = self.manager.calls[-1][3]
         self.assertEqual(self.manager.calls[-1][:3], ("report", "saved", "html"))
         self.assertEqual(options, {"ids": ["F1", "F2"], "sections": frozenset(("needs", "proofs")),
-                                   "reference": "R-1", "examiner": "A B", "organisation": "Lab"})
+                                   "reference": "R-1", "examiner": "A B", "organisation": "Lab", "requested_by": "",
+                                   "authority": "", "purpose": "", "received": "", "report_date": ""})
+        self.request("/api/report?name=saved&requested_by=Det.%20X&authority=Warrant%207&purpose=" + "p" * 600
+                     + "&received=2026-11-01&report_date=2026-11-14")
+        self.assertEqual({key: self.manager.calls[-1][3][key] for key in ("requested_by", "authority", "received", "report_date")},
+                         {"requested_by": "Det. X", "authority": "Warrant 7", "received": "2026-11-01", "report_date": "2026-11-14"})
+        self.assertEqual(len(self.manager.calls[-1][3]["purpose"]), 600)
         self.request("/api/report?name=saved&sections=")      # findings alone
         self.assertEqual(self.manager.calls[-1][3]["sections"], frozenset())
         self.assertIsNone(self.manager.calls[-1][3]["ids"])
@@ -271,7 +289,7 @@ class AppServer(unittest.TestCase):
         self.assertEqual(self.manager.calls[-1], ("report", "saved", "html"))
         before = len(self.manager.calls)
         for bad in ("ids=", "ids=F1,F1", "ids=a%20b", "sections=findings", "sections=needs,needs",
-                    "examiner=" + "x" * 201, "reference=a%0Ab", "format=md&ids=F1", "format=json&sections=needs",
+                    "examiner=" + "x" * 201, "purpose=" + "x" * 601, "reference=a%0Ab", "format=md&ids=F1", "format=json&sections=needs",
                     "ids=F1&unknown=1"):
             with self.subTest(bad=bad):
                 self.assert_error(400, self.request("/api/report?name=saved&" + bad))

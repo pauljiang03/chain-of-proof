@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>CONAN-F — Forensic workbench</title>
+  <title>CONAN-F</title>
   <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/style.css">
   <script src="/static/graph.js" defer></script>
@@ -18,7 +18,7 @@
   <div class="shell" id="shell" data-tab="summary">
     <header class="titlebar">
       <button class="icon-button" id="sidebar-toggle" aria-label="Show or hide the case list" aria-controls="sidebar" aria-expanded="true">☰</button>
-      <div class="brand"><img class="brand-mark" src="/static/icon.svg" alt="" width="20" height="20"><strong>CONAN-F</strong><span class="brand-sub">Forensic workbench</span></div>
+      <div class="brand"><img class="brand-mark" src="/static/icon.svg" alt="" width="20" height="20"><strong>CONAN-F</strong></div>
       <div class="case-heading"><h1 id="report-title">No case open</h1><div class="report-meta" id="report-meta"></div></div>
       <div class="title-actions">
         <div class="report-actions" id="report-actions" hidden>
@@ -53,7 +53,7 @@
           <button id="tab-timeline" class="tab" role="tab" aria-selected="false" aria-controls="panel-timeline" tabindex="-1" data-tab="timeline">Timeline</button>
           <button id="tab-graph" class="tab" role="tab" aria-selected="false" aria-controls="panel-graph" tabindex="-1" data-tab="graph">Proof graph</button>
           <button id="tab-findings" class="tab" role="tab" aria-selected="false" aria-controls="panel-findings" tabindex="-1" data-tab="findings">Findings <span id="count-findings"></span></button>
-          <span class="tab-gap" aria-hidden="true">Detail</span>
+          <span class="tab-gap" id="tab-gap" aria-hidden="true">Detail</span>
           <button id="tab-needs" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Not established <span id="count-needs"></span></button>
           <button id="tab-activity" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
           <button id="tab-coverage" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
@@ -125,9 +125,14 @@
             <fieldset><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
             <fieldset><legend>Cover details</legend>
               <label class="stacked" for="report-reference">Case reference</label><input id="report-reference" maxlength="200" autocomplete="off" spellcheck="false">
+              <label class="stacked" for="report-requested_by">Requested by</label><input id="report-requested_by" maxlength="200" autocomplete="off" spellcheck="false">
+              <label class="stacked" for="report-authority">Authority for the request</label><input id="report-authority" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Warrant, consent, contract…">
+              <label class="stacked" for="report-purpose">Purpose and scope</label><input id="report-purpose" maxlength="600" autocomplete="off" placeholder="What the examination was asked to establish">
+              <label class="stacked" for="report-received">Evidence received</label><input id="report-received" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Date and from whom">
               <label class="stacked" for="report-examiner">Examiner</label><input id="report-examiner" maxlength="200" autocomplete="off" spellcheck="false">
               <label class="stacked" for="report-organisation">Organisation</label><input id="report-organisation" maxlength="200" autocomplete="off" spellcheck="false">
-              <p class="field-help">Printed as entered and labelled as not part of the stored run.</p>
+              <label class="stacked" for="report-report_date">Date of report</label><input id="report-report_date" maxlength="200" autocomplete="off" spellcheck="false">
+              <p class="field-help">Printed as entered and labelled as not part of the stored run. The date starts as today's.</p>
             </fieldset>
             <div class="report-buttons"><button class="button primary" id="report-print" type="button" disabled>Print / Save as PDF</button><a class="button" id="report-export" aria-disabled="true">Export HTML</a></div>
             <p class="field-help" id="report-status" role="status" aria-live="polite"></p>

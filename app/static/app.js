@@ -195,15 +195,35 @@
     $("count-needs").textContent = payload.run ? count(rejections.length, "") : "";
     $("count-activity").textContent = array(payload.events).length ? count(payload.events.length, "") : "";
     $("activity-refresh-label").textContent = isRunning() ? "REFRESHES EVERY 2 SECONDS" : "RECORDED ACTIVITY";
+    // A view with nothing in it is not offered: no refusals, no recorded activity, no coverage measurements.
+    const filled = {
+      needs: rejections.length > 0,
+      activity: array(payload.events).length > 0 || isRunning() || object(run.history).schema_version === 1,
+      coverage: coverage.schema_version === 1,
+    };
+    for (const name of Object.keys(filled)) $("tab-" + name).hidden = !filled[name];
+    $("tab-gap").hidden = !Object.values(filled).some(Boolean);
+    if (filled[state.tab] === false) switchTab("summary");
+    $("metric-extracted").parentElement.hidden = object(coverage.extraction).status !== "measured" && object(coverage.extraction).status !== "invalid";
+    $("metric-inspected").parentElement.hidden = object(coverage.inspection).status !== "measured";
+    $("metric-judgments").parentElement.hidden = !array(run.conclusions).length;
     renderProgress();
     // Share one exact revision across both views; equal counts do not mean equal records.
     const revision = JSON.stringify([payload.run, payload.events]);
     if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name, revision);
-    if (CONAN.report) CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)), revision);
+    if (CONAN.report) {
+      const has = (key) => Object.prototype.hasOwnProperty.call(run, key);
+      const nothing = [];   // parts of a report this case has nothing for
+      if (!array(run.rejections).length) nothing.push("needs");
+      if (!array(run.conclusions).length) nothing.push("judgments");
+      if (!["collection", "investigation", "case_answers", "answer_projection", "conflicts"].some(has)) nothing.push("workflow");
+      if (!Object.keys(object(run.audit)).length && object(run.coverage).schema_version !== 1 && object(run.history).schema_version !== 1) nothing.push("activity");
+      CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)), revision, nothing);
+    }
     // The summary and the timeline draw the same records in plain words; they add no finding.
     const story = CONAN.story ? CONAN.story.open(payload.run, payload.name, revision) : null;
     if (CONAN.timeline) CONAN.timeline.render(story, payload.name);
-    if (CONAN.overview) CONAN.overview.render(story, payload.run);
+    if (CONAN.overview) CONAN.overview.render(story, payload.run, payload.brief);
     renderFindings();
     renderNeeds();
     renderActivity();
@@ -703,6 +723,7 @@
       const result = await api("/api/investigations", body);
       state.activeName = result.name;
       $("new-dialog").close();
+      $("tab-activity").hidden = false;
       switchTab("activity");
       await refreshRuns();
       await selectRun(result.name);
@@ -760,7 +781,7 @@
   }));
   document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   document.querySelectorAll("[data-detail-tab]").forEach((button) => button.addEventListener("click", () => switchDetail(button.dataset.detailTab)));
-  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "needs", "activity", "coverage", "report"], state.tab, switchTab));
+  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "needs", "activity", "coverage", "report"].filter((name) => !$("tab-" + name).hidden), state.tab, switchTab));
   $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });
