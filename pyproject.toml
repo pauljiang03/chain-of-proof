@@ -11,6 +11,8 @@ dependencies = ["duckdb>=1.0"]
 
 [project.scripts]
 cop = "app.cli:main"
+# the same commands under the tool's own name; with no arguments it opens the desktop window
+conan = "app.cli:conan"
 
 [project.optional-dependencies]
 # needed only to rebuild evidence/case_facts.json from the disk images
@@ -27,4 +29,4 @@ include = ["agent*", "app*", "checker*", "eval*", "extractor*", "miner*", "verif
 namespaces = false
 
 [tool.setuptools.package-data]
-app = ["static/*.html", "static/*.css", "static/*.js", "sample/*.json", "sample/*.jsonl"]
+app = ["static/*.html", "static/*.css", "static/*.js", "static/*.svg", "assets/*.icns", "sample/*.json", "sample/*.jsonl"]

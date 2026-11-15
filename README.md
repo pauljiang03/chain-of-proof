@@ -283,17 +283,28 @@ browser engine is bundled; the front end is plain HTML/CSS/JS with no framework 
 graph library.
 
 ```sh
-.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview
-cop desktop
-python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable CONAN-F.app
+.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview and the `conan` command
+conan                                              # the same as `cop desktop`
+python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable Conan.app
 ```
 
-Six views of a case:
+The desktop application is called Conan. Its mark is original artwork in
+`app/static/icon.svg`; `python scripts/make_icon.py` rebuilds the macOS icon from it.
 
+It opens on two everyday views, with the detail views beside them:
+
+- **Summary** — the case at a glance: findings that passed and were refused, when the
+  recorded activity happened, what kind it was, which devices it came from, and the key
+  events of each day. It counts and draws the stored run; it adds no finding of its own.
+- **Timeline** — every dated evidence record that an accepted finding cites, on a UTC
+  axis with one row per kind of activity. Drag to move, scroll to zoom, click a mark for
+  the record, its source and the findings that use it. Key events are picked by record
+  type (a device connection, an e-mail, a deletion), never by a model's judgment.
 - **Proof graph** — draws each finding back to its source (disk image → artifact →
   record → Lean-checked finding → any uncertified interpretation). Select a node to
   trace lineage, double-click a finding to see those sharing its records, and replay in
-  audit-log order. Draws 40 findings at a time; filter by device, file, path, or ID.
+  audit-log order through every finding. Draws 40 findings at a time; filter by device,
+  file, path, or ID.
 - **Findings**, **Not established**, **Activity**, **Coverage** — the same run as tables.
 - **Report** — mark findings, choose sections/appendices, add a case reference and
   examiner, then print or save as PDF. A marked-findings report states on page one that

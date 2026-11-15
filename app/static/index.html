@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>CONAN-F — Forensic workbench</title>
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/style.css">
   <script src="/static/graph.js" defer></script>
   <script src="/static/report.js" defer></script>
+  <script src="/static/timeline.js" defer></script>
+  <script src="/static/overview.js" defer></script>
   <script src="/static/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to the case</a>
-  <div class="shell" id="shell">
+  <div class="shell" id="shell" data-tab="summary">
     <header class="titlebar">
       <button class="icon-button" id="sidebar-toggle" aria-label="Show or hide the case list" aria-controls="sidebar" aria-expanded="true">☰</button>
-      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><strong>CONAN-F</strong><span class="brand-sub">Forensic workbench</span></div>
+      <div class="brand"><img class="brand-mark" src="/static/icon.svg" alt="" width="20" height="20"><strong>CONAN-F</strong><span class="brand-sub">Forensic workbench</span></div>
       <div class="case-heading"><h1 id="report-title">No case open</h1><div class="report-meta" id="report-meta"></div></div>
       <div class="title-actions">
         <div class="report-actions" id="report-actions" hidden>
@@ -47,15 +49,43 @@
         <div class="sample-banner" id="sample-banner" hidden><strong>Synthetic sample.</strong> These fixture records demonstrate the interface. They are not results from a real investigation.</div>
 
         <div class="report-tabs" role="tablist" aria-label="Case views">
-          <button id="tab-graph" class="tab active" role="tab" aria-selected="true" aria-controls="panel-graph" data-tab="graph">Proof graph</button>
+          <button id="tab-summary" class="tab active" role="tab" aria-selected="true" aria-controls="panel-summary" data-tab="summary">Summary</button>
+          <button id="tab-timeline" class="tab" role="tab" aria-selected="false" aria-controls="panel-timeline" tabindex="-1" data-tab="timeline">Timeline</button>
+          <button id="tab-graph" class="tab" role="tab" aria-selected="false" aria-controls="panel-graph" tabindex="-1" data-tab="graph">Proof graph</button>
           <button id="tab-findings" class="tab" role="tab" aria-selected="false" aria-controls="panel-findings" tabindex="-1" data-tab="findings">Findings <span id="count-findings"></span></button>
-          <button id="tab-needs" class="tab" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Not established <span id="count-needs"></span></button>
-          <button id="tab-activity" class="tab" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
-          <button id="tab-coverage" class="tab" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
-          <button id="tab-report" class="tab" role="tab" aria-selected="false" aria-controls="panel-report" tabindex="-1" data-tab="report">Report <span id="count-report"></span></button>
+          <span class="tab-gap" aria-hidden="true">Detail</span>
+          <button id="tab-needs" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-needs" tabindex="-1" data-tab="needs">Not established <span id="count-needs"></span></button>
+          <button id="tab-activity" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-activity" tabindex="-1" data-tab="activity">Activity <span id="count-activity"></span></button>
+          <button id="tab-coverage" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-coverage" tabindex="-1" data-tab="coverage">Coverage</button>
+          <button id="tab-report" class="tab quiet" role="tab" aria-selected="false" aria-controls="panel-report" tabindex="-1" data-tab="report">Report <span id="count-report"></span></button>
         </div>
 
-        <section class="tab-panel graph-panel" id="panel-graph" role="tabpanel" aria-labelledby="tab-graph">
+        <section class="tab-panel overview-panel" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary"><div class="overview" id="overview"></div></section>
+
+        <section class="tab-panel timeline-panel" id="panel-timeline" role="tabpanel" aria-labelledby="tab-timeline" hidden>
+          <div class="section-toolbar timeline-toolbar">
+            <div class="chips" id="timeline-lanes" role="group" aria-label="Show or hide kinds of activity"></div>
+            <span class="spacer"></span>
+            <label class="search-field"><input id="timeline-search" type="search" placeholder="Filter: file, device, site…" autocomplete="off" spellcheck="false" aria-label="Filter the timeline"></label>
+            <span class="zoom"><button class="button" id="timeline-main" title="The stretch of time that holds the most records">Busiest period</button><button class="button" id="timeline-all">All dates</button><button class="icon-button" id="timeline-zoom-out" aria-label="Zoom out">−</button><button class="icon-button" id="timeline-zoom-in" aria-label="Zoom in">+</button></span>
+          </div>
+          <div class="timeline-host" id="timeline-host" tabindex="0" role="group" aria-label="Timeline. Drag or use the arrow keys to move through time; scroll or press plus and minus to zoom.">
+            <svg id="timeline" class="timeline" role="img" aria-label="Evidence records over time, one row per kind of activity"></svg>
+            <div class="chart-tip" id="timeline-tip" hidden></div>
+            <div class="graph-empty" id="timeline-empty" hidden></div>
+          </div>
+          <div class="timeline-caption">
+            <span id="timeline-range"></span><span class="spacer"></span>
+            <span class="legend" title="Each line is an evidence record at its own recorded time. Key events are picked by record type, not by AI judgment.">
+              <span><i class="tick-key one"></i>one record</span><span><i class="tick-key some"></i>a few</span><span><i class="tick-key many"></i>many at once</span>
+              <span><i class="dot-key"></i>key event</span><span><i class="badge-key">3</i>several key events</span>
+            </span>
+          </div>
+          <div class="timeline-list-head"><strong id="timeline-list-title">Key events in view</strong><span id="timeline-list-count" class="small-mono"></span><span class="spacer"></span><label class="check"><input type="checkbox" id="timeline-key-only" checked> Key events only</label></div>
+          <div class="timeline-list" id="timeline-list"></div>
+        </section>
+
+        <section class="tab-panel graph-panel" id="panel-graph" role="tabpanel" aria-labelledby="tab-graph" hidden>
           <div class="graph-toolbar">
             <select id="graph-scope" aria-label="Limit the graph to one question"></select>
             <label class="search-field"><input id="graph-search" type="search" placeholder="Filter: device, file, ID…" autocomplete="off" spellcheck="false" aria-label="Filter the graph"></label>
@@ -109,7 +139,7 @@
 
     <aside class="inspector" id="inspector" aria-label="Inspector">
       <div class="pane-title"><span id="detail-title">Inspector</span></div>
-      <div id="detail-summary" class="detail-summary"><p class="inspector-empty">Select a node in the graph or a row in a table to see its records, source and proof.</p></div>
+      <div id="detail-summary" class="detail-summary"><p class="inspector-empty">Select something on the timeline, in the graph or in a table to see its records, source and proof.</p></div>
       <div class="detail-tabs" role="tablist" aria-label="Inspector views" hidden><button class="tab active" id="detail-tab-evidence" role="tab" aria-selected="true" aria-controls="detail-evidence" data-detail-tab="evidence">Evidence records</button><button class="tab" id="detail-tab-proof" role="tab" aria-selected="false" aria-controls="detail-proof" tabindex="-1" data-detail-tab="proof">Proof</button></div>
       <section id="detail-evidence" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-evidence"></section><section id="detail-proof" class="detail-panel" role="tabpanel" aria-labelledby="detail-tab-proof" hidden></section>
     </aside>

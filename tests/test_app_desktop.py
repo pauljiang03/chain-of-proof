@@ -45,7 +45,7 @@ class Desktop(unittest.TestCase):
         fake, manager = FakeWebview(), FakeManager()
         self.assertEqual(desktop.run(self.root, 0, webview=fake, manager=manager), 0)
         title, url, options = fake.windows[0]
-        self.assertEqual(title, "CONAN-F")
+        self.assertEqual(title, "Conan")
         self.assertTrue(url.startswith("http://127.0.0.1:"))
         self.assertEqual(options["min_size"], (1120, 700))
         self.assertEqual(fake.seen[0], 200)
@@ -90,11 +90,16 @@ class Desktop(unittest.TestCase):
     @unittest.skipUnless(sys.platform == "darwin", "application bundles are a macOS format")
     def test_make_app_writes_a_launcher_and_never_overwrites(self):
         bundle = desktop.make_app(self.root / "Applications", root=self.root, executable="/opt/py thon/bin/python")
-        self.assertEqual(bundle.name, "CONAN-F.app")
+        self.assertEqual(bundle.name, "Conan.app")
         with (bundle / "Contents" / "Info.plist").open("rb") as stream:
             info = plistlib.load(stream)
-        self.assertEqual(info["CFBundleExecutable"], "CONAN-F")
-        launcher = bundle / "Contents" / "MacOS" / "CONAN-F"
+        self.assertEqual(info["CFBundleExecutable"], "Conan")
+        self.assertEqual(info["CFBundleName"], "Conan")
+        self.assertEqual(info["CFBundleIconFile"], "Conan")
+        icon = bundle / "Contents" / "Resources" / "Conan.icns"
+        self.assertEqual(icon.read_bytes(), desktop.ICON.read_bytes())
+        self.assertEqual(icon.read_bytes()[:4], b"icns")
+        launcher = bundle / "Contents" / "MacOS" / "Conan"
         self.assertTrue(launcher.stat().st_mode & 0o111)
         script = launcher.read_text()
         self.assertIn("exec '/opt/py thon/bin/python' -m app.desktop", script)
@@ -102,6 +107,21 @@ class Desktop(unittest.TestCase):
         self.assertIn("export PATH=", script)
         with self.assertRaises(ValueError):
             desktop.make_app(self.root / "Applications", root=self.root)
+
+    def test_conan_command_opens_the_window_and_keeps_every_cop_subcommand(self):
+        from app import cli
+        with patch("app.desktop.run", return_value=0) as window:
+            self.assertEqual(cli.conan([], root=self.root), 0)
+            window.assert_called_once_with(root=self.root, port=None)
+            self.assertEqual(cli.conan(["desktop", "--port", "9123"], root=self.root), 0)
+            window.assert_called_with(root=self.root, port=9123)
+        with patch("app.server.serve") as serve:
+            self.assertEqual(cli.conan(["serve", "--no-open"], root=self.root), 0)
+            serve.assert_called_once()
+        with patch("sys.stdout"), self.assertRaises(SystemExit) as stopped:
+            cli.conan(["--help"])
+        self.assertEqual(stopped.exception.code, 0)
+        self.assertEqual(cli._parser("conan").prog, "conan")
 
     @unittest.skipIf(sys.platform == "darwin", "only other systems refuse")
     def test_make_app_is_refused_off_macos(self):

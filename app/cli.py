@@ -226,8 +226,8 @@ def _report(args):
     return 0
 
 
-def _parser():
-    parser = argparse.ArgumentParser(prog="cop", description="Local AI investigation of supported evidence images and extracted records.")
+def _parser(prog="cop"):
+    parser = argparse.ArgumentParser(prog=prog, description="Local AI investigation of supported evidence images and extracted records.")
     commands = parser.add_subparsers(dest="command", required=True)
     investigate = commands.add_parser("investigate", help="investigate images or extracted facts and save a report")
     investigate.add_argument("--name", required=True, help="new run name; existing runs are preserved")
@@ -282,7 +282,13 @@ def _parser():
     return parser
 
 
-def main(argv=None, *, root=ROOT):
+def conan(argv=None, *, root=ROOT):
+    """The `conan` command: every `cop` subcommand, and the desktop window when given none."""
+    argv = list(sys.argv[1:] if argv is None else argv)
+    return main(argv or ["desktop"], root=root, prog="conan")
+
+
+def main(argv=None, *, root=ROOT, prog="cop"):
     argv = list(sys.argv[1:] if argv is None else argv)
     # Keep the existing verifier/package argument contracts and exit statuses.
     if argv and argv[0] == "verify":
@@ -291,7 +297,7 @@ def main(argv=None, *, root=ROOT):
     if argv and argv[0] == "package":
         from verifier.package import main as package_main
         return package_main(argv[1:])
-    parser = _parser()
+    parser = _parser(prog)
     args = parser.parse_args(argv)
     try:
         if hasattr(args, "follow_up_stages") and not 0 <= args.follow_up_stages <= 3:
