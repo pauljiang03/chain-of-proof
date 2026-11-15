@@ -326,8 +326,7 @@ def _short_back(info, options):
     request = _option_fields(options, _REQUEST_KEYS)
     if request:
         out.append('<section id="request"><h2>Request and scope</h2>' + request + '</section>')
-    out += ['<section id="exhibits"><h2>Evidence examined</h2>', _option_fields(options, _INTAKE_KEYS), _exhibits(info, True),
-            '<p class="small">The table lists the evidence items that the findings cite.</p></section>']
+    out += ['<section id="exhibits"><h2>Evidence examined</h2>', _option_fields(options, _INTAKE_KEYS), _exhibits(info, True), '</section>']
     return out
 
 
@@ -335,11 +334,9 @@ def _front(info, tz, case, findings, options, story, short=False):
     """Cited record values and source timestamps, then evidence examined and method."""
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
-    destination = 'the full report or stored run' if short else 'Findings'
-    disclaimer = ('This summary describes copied records in findings stored as verified. '
-                  'It adds no certified conclusions or independent verification. '
-                  f'Read each exact certificate statement and its limitations in {destination}.')
-    out = ['<section id="summary"><h2>Executive summary</h2><p class="small">' + _h(disclaimer) + '</p>']
+    out = ['<section id="summary"><h2>Executive summary</h2>']
+    if story.get('lead'):
+        out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story['lead']) + '</p>')
     if story['points']:
         out.append('<div class="keys">')
         for point in story['points']:
@@ -353,9 +350,7 @@ def _front(info, tz, case, findings, options, story, short=False):
             out.append('<div class="key"><h3>' + _h(point['title']) + '</h3><div>' + body + '</div></div>')
         out.append('</div>')
     else:
-        out.append('<p>The findings in this report cite no record of a type that this limited summary describes. '
-                   'This does not establish absence of evidence. Read the exact statements and cited records in '
-                   + _h(destination) + '.</p>')
+        out.append('<p>The findings in this report cite no record of a type that this summary describes.</p>')
     days = info['days'][:7]
     if days:
         rows = []
@@ -367,17 +362,8 @@ def _front(info, tz, case, findings, options, story, short=False):
             row = (_h(_day(day['date'])), events or 'No listed source records on this day.')
             rows.append((*row, f"{day['records']:,}") if short else row)
         headings = ('Day', 'Cited records and source timestamps', 'Records') if short else ('Day', 'Cited records and source timestamps')
-        out += ['<div class="timeline-block"><h3>Source-record timeline</h3>', _table(headings, rows, 'days'), '</div>']
-    notes = ['Each statement is a count or a value from the evidence records that the '
-             + _plural(counts['findings'], 'finding cites', 'findings cite') + '.', 'Times are in ' + _h(clock_name) + '.']
-    if short and days:
-        notes.append('The timeline shows ' + (f"{len(days)} of {info['days_total']} days" if info['days_total'] > len(days) else 'the days')
-                     + ' in the busiest period. Daily totals count all dated records, including event types not listed.')
-    if counts['likely']:
-        notes.append(_plural(counts['likely'], 'finding uses', 'findings use') + ' a stated heuristic rule. The finding identifies this rule.')
-    if counts['findings'] != counts['recorded']:
-        notes.append(f"This summary uses {counts['findings']:,} of the {counts['recorded']:,} findings in the stored run.")
-    out.append('<p class="small">' + ' '.join(notes) + '</p>')
+        out += ['<div class="timeline-block"><h3>Timeline <span class="small">(' + _h(clock_name) + ')</span></h3>',
+                _table(headings, rows, 'days'), '</div>']
     if short:
         return out + ['</section>'] + _short_back(info, options)
     out.append('</section><section id="request"><h2>Request and scope</h2>')
@@ -388,11 +374,8 @@ def _front(info, tz, case, findings, options, story, short=False):
     if intake:
         out.append(intake)
     out.append(_exhibits(info))
-    out.append('<p class="small">The table lists evidence items that the findings cite. '
-               'It includes the identifiers and stored hash values in the records. '
-               'The Other submitted items field lists any additional items that the report author supplies.'
-               + (' ' + _plural(info['unlabelled'], 'record has', 'records have') + ' no evidence item label.'
-                  if info['unlabelled'] else '') + '</p></section>')
+    out.append(('<p class="small">' + _plural(info['unlabelled'], 'record has', 'records have') + ' no evidence item label.</p>'
+                if info['unlabelled'] else '') + '</section>')
     checker = info['checker']
     tally = lambda rows: _h(', '.join(f"{row['name']} ({row['count']:,})" for row in rows)) or 'Not supplied'
     out += ['<section id="method"><h2>Examination methods</h2>',
@@ -407,7 +390,6 @@ def _front(info, tz, case, findings, options, story, short=False):
         out.append(_table(('Tool or reader as recorded', 'Function', 'Cited records'), named))
     else:
         out.append('<p>The cited records contain no tool names.</p>')
-    out.append('<p class="small">Tool names include versions only when the source records supply them.</p>')
     out.append('<h3>Time reference</h3>')
     if tz is not None:
         out.append('<p>The tables use ' + _h(where['name']) + ' local time. '
@@ -542,8 +524,6 @@ def _cited(rows, tz=None):
 
 def _activity(run):
     out = ['<section id="activity"><h2>Audit, coverage and claim history</h2>',
-           '<p class="muted">These are supplied summaries, not independent checks. Missing measurements are unknown, '
-           'not zero. Recorded activity and answer presence do not establish completeness or accuracy.</p>',
            '<h3>Audit integrity</h3>']
     audit = _object(run.get('audit'))
     if not audit:
@@ -559,8 +539,7 @@ def _activity(run):
             ('Declared status', 'status'), ('Recorded events', 'count'), ('File SHA-256', 'sha256'),
             ('Chain head', 'head'), ('External expected head', 'expected_head'))]))
         out.append(_details('Complete supplied audit summary', audit))
-    out.append('<p class="small">Audit integrity does not establish authorship or complete history. '
-               'Detecting a complete rewrite requires an independently retained checkpoint.</p><h3>Recorded coverage</h3>')
+    out.append('<h3>Recorded coverage</h3>')
     coverage = _object(run.get('coverage'))
     if coverage.get('schema_version') == 1:
         rows = []
@@ -579,8 +558,6 @@ def _activity(run):
                              else 'Unknown — not established') for label, key in (
             ('Answered', 'answered_count'), ('Unknown answers', 'unknown_count'),
             ('Unanswered', 'unanswered_count'), ('Missing responses', 'missing_count'))]))
-        out.append('<p class="small">Inspection does not include SQL aggregates or prove that a model understood '
-                   'a record. Accepted counts use recorded status, not certificate replay.</p>')
         out.append(_details('Complete supplied coverage, failures and limitations', coverage))
     else:
         out.append('<p>Unknown — coverage summary is absent or its schema is unsupported.</p>')
@@ -850,11 +827,9 @@ def render_html(run: dict, options: dict | None = None) -> str:
                                                           for anchor, label in navigation) + '</nav>' if navigation else '',
             *_front(info, tz, case, findings, options, narrative.build(run, ids=chosen), short)]
     if not short:
-        out += ['<section id="findings"><h2>Examination findings</h2>',
-                '<p>Each finding identifies its source records. Open the exact statement to read the original certificate text. '
-                'The report keeps that text unchanged.</p>', _result_index(findings)]
+        out += ['<section id="findings"><h2>Examination findings</h2>', _result_index(findings)]
     if not findings:
-        out.append('<p>No entries marked verified were supplied. This does not establish that no relevant evidence exists.</p>')
+        out.append('<p>No entries marked verified were supplied.</p>')
     for number, finding in ([] if short else findings):
         out += [f'<article id="finding-f{number}"><h3>' + _v(finding, 'finding_id') + ' · ' + _h(_finding_title(finding)) + '</h3>',
                 '<span class="badge">' + _v(finding, 'strength') + '</span><span class="badge">Recorded as verified</span>',
@@ -881,12 +856,10 @@ def render_html(run: dict, options: dict | None = None) -> str:
         out.append('</section>')
     refusal_start = len(out)
     if show('needs'):
-        out.append('<section id="needs"><h2>Not established / further evidence needed</h2>'
-                   '<p class="muted">Refused proposals and their diagnostics are not certified findings. Refusal alone does not '
-                   'prove a claim false. Suggested evidence may not exist or make the claim provable.</p>')
+        out.append('<section id="needs"><h2>Not established / further evidence needed</h2>')
         rejections = _rows(run.get('rejections'))
         if not rejections:
-            out.append('<p>No refusal details were supplied. This is not a claim that all proposals succeeded.</p>')
+            out.append('<p>No refusal details were supplied.</p>')
         for number, raw in enumerate(rejections, 1):
             row = _object(raw)
             out += [f'<article id="rejection-r{number}"><h3>' + _v(row, 'finding_id') + '</h3>',
@@ -907,9 +880,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
     refusals = out[refusal_start:]
     del out[refusal_start:]
     if show('judgments'):
-        out.append('<section id="judgments"><h2>Analysis and conclusions</h2>'
-                   '<p class="muted">These are unverified inferences. Citing certified findings does not certify a conclusion, '
-                   'intent, causation or device attribution.</p>')
+        out.append('<section id="judgments"><h2>Analysis and conclusions</h2>')
         conclusions = _rows(run.get('conclusions'))
         if not conclusions:
             out.append('<p>No investigator judgments were supplied.</p>')
@@ -932,9 +903,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
     if show('workflow'):
         out.append(_workflow(run, findings))
     if show('evidence'):
-        out.append('<section id="evidence"><h2>Evidence records</h2>'
-                   '<p class="muted">Every copied citation is shown in its finding’s scope. Provenance is supplied metadata, '
-                   'not proof that a parser or its interpretation is correct. Source locations appear only when supplied.</p>')
+        out.append('<section id="evidence"><h2>Evidence records</h2>')
         copies = {}
         for _, finding in findings:
             for row in _rows(finding.get('cited_facts')):
@@ -963,8 +932,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
                         _details('Complete copied record', raw), f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>']
         out.append('</section>')
     if show('proofs'):
-        out.append('<section id="proofs"><h2>Proof records</h2><p class="muted">Declared claims and embedded Lean '
-                   'are copied from the bundle. Source code is displayed as text, never executed. No filesystem links are inferred.</p>')
+        out.append('<section id="proofs"><h2>Proof records</h2>')
         for number, finding in findings:
             out += [f'<article id="proof-f{number}"><h3>Proof for ' + _v(finding, 'finding_id') + '</h3>',
                     _fields([('Trust tier', _v(finding, 'trust_tier')), ('Declared axioms', _v(finding, 'axioms'))]),
@@ -975,10 +943,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
             out.append(f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>')
         out.append('</section>')
     out += [_activity(run) if show('activity') else '',
-            '<footer>CONAN-F · ' + ('' if short else 'Report rendering only. '
-            'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks. ')
-            + 'To print, use Print / Save as PDF in the browser.' + ('' if short else ' The report contains all displayed content.')
-            + '</footer></div>', '</main></body></html>']
+            '<footer>CONAN-F</footer></div>', '</main></body></html>']
     main_number, appendix_number, in_appendix = 0, 0, False
     for i, block in enumerate(out):
         if block == '<div class="appendices">':

@@ -111,8 +111,7 @@ class AppReport(unittest.TestCase):
         self.assertEqual(data, original)
         self.assertTrue(rendered.startswith('<!doctype html>'))
         self.assertIn('@media print', rendered)
-        self.assertIn('Save as PDF', rendered)
-        self.assertIn('Report rendering only.', html.unescape(rendered))
+        self.assertIn('<footer>CONAN-F</footer>', rendered)
         self.assertIn('proof-f1', page.ids)
         for index in range(1, 5):
             self.assertIn(f'evidence-f1-r{index}', page.ids)
@@ -198,7 +197,7 @@ class AppReport(unittest.TestCase):
         self.assertIn('not displayed as certified findings', rendered)
         self.assertIn('This claim failed.', html.unescape(rendered))
         self.assertNotIn('id="proof-f1"', rendered)
-        self.assertIn('Report rendering only.', rendered)
+        self.assertIn('<footer>CONAN-F</footer>', rendered)
 
     def test_supplied_invalid_audit_and_history_are_diagnostic_coverage_is_not_accuracy(self):
         data = bundle(finding())
@@ -218,7 +217,7 @@ class AppReport(unittest.TestCase):
         plain = html.unescape(rendered)
         for text in ('Invalid audit reported', 'Invalid history audit', 'Unknown — unmeasured',
                      'chain mismatch', 'Unsupported container', 'duplicate of F1 (no new proof)',
-                     'Proposals with unknown placement', 'answer presence do not establish completeness or accuracy'):
+                     'Proposals with unknown placement'):
             self.assertIn(text, plain)
         self.assertIn('Q2', plain)
         self.assertNotIn('https://evil.test/log', Markup(rendered).links)
@@ -292,11 +291,10 @@ class AppReport(unittest.TestCase):
                              ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
             self.assertIn(f'<dt>{label}</dt><dd>{value}</dd>', rendered)
         # The summary reports record observations without promoting identifier matches to physical events.
-        self.assertIn('<div class="key"><h3>Storage records</h3><div><p>The cited records include 1 USB identifier record.', rendered)
-        self.assertIn('Matching identifiers do not establish physical-device identity or connection times.', rendered)
+        self.assertIn('<div class="key"><h3>Storage devices</h3><div><p>The cited records include 1 USB identifier record.', rendered)
         self.assertNotIn('from the supplied examination records', rendered)
-        self.assertIn('Each statement is a count or a value from the evidence records that the 2 findings cite.', rendered)
-        self.assertIn('1 finding uses a stated heuristic rule.', rendered)
+        for fluff in ('Each statement is a count', 'finding uses a stated heuristic rule', 'This summary describes', 'Report rendering only'):
+            self.assertNotIn(fluff, rendered)
         # evidence items, their stored hash values and the tools are the records' own words, escaped
         self.assertIn('<strong>USB &lt;b&gt;1&lt;/b&gt;</strong>', rendered)
         self.assertIn('<span class="mono">MD5 ' + 'ab' * 16 + '</span> <span class="small">(record 9)</span>', rendered)
@@ -305,13 +303,12 @@ class AppReport(unittest.TestCase):
         self.assertIn('Imaging tool: imager 7', short)
         self.assertIn('(record 9)', short)
         self.assertIn('<th scope="col">Records</th>', short)
-        self.assertIn('Daily totals count all dated records', short)
+        self.assertNotIn('Daily totals count all dated records', short)
         self.assertNotIn('id="method"', short)
         self.assertIn('<td>reader &lt;i&gt;1.0&lt;/i&gt;</td><td>Tool</td><td>1</td>', rendered)
         self.assertIn('<td>synthetic parser</td><td>Record reader</td><td>2</td>', rendered)
         self.assertNotIn('<b>1</b>', rendered)
         self.assertNotIn('<i>1.0</i>', rendered)
-        self.assertIn('The table lists evidence items that the findings cite.', rendered)
         self.assertIn('<dt>Examiner</dt><dd>A. Examiner</dd>', rendered)
         self.assertIn('<dt>Date of report</dt><dd>2026-11-14</dd>', rendered)
         self.assertNotIn('The signature records authorization of this report.', rendered)
@@ -361,9 +358,7 @@ class AppReport(unittest.TestCase):
                        'The report author supplies the administrative details and examination notes.',
                        'The signature records authorization of this report.'):
             self.assertNotIn(absent, short)
-        for present in ('Read each exact certificate statement and its limitations in the full report or stored run.',
-                        'Read the exact statements and cited records in the full report or stored run.',
-                        'A. Examiner &lt;x&gt;', '<main class="brief">', 'Evidence examined'):
+        for present in ('A. Examiner &lt;x&gt;', '<main class="brief">', 'Evidence examined'):
             self.assertIn(present, short)
         self.assertNotIn('limitations in Findings.', short)
         self.assertNotIn('cited records in Findings.', short)

@@ -42,7 +42,7 @@ const metadata = {exhibits: [{label: 'PC', images: ['disk  A.E01'], records: 1, 
  devices: ['PC-1234', 'pc', 'PC'], volumes: [], system: [], digests: []}], unlabelled: 0};
 view.render(model, {}, metadata, null, {points: [], devices: []});
 assert.ok(host.textContent.includes('No supported summary for these record types'));
-assert.ok(host.textContent.includes('does not establish absence of evidence'));
+assert.ok(!host.textContent.includes('does not establish absence of evidence'));
 assert.ok(host.textContent.includes('Recorded accepted findings 1'));
 assert.ok(host.textContent.includes('Recorded refusals Not supplied'));
 assert.ok(!host.textContent.includes('Nothing was refused'));

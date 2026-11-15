@@ -698,3 +698,6 @@ body.resizing-rows * { cursor: row-resize !important; }
 .drop-zone { border-radius: 8px; outline: 1.5px dashed transparent; outline-offset: 5px; transition: outline-color 120ms ease-out, background-color 120ms ease-out; }
 .drop-zone.dropping { outline-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
 @media (prefers-reduced-motion: reduce) { .drop-zone { transition: none; } }
+
+/* The prose summary at the top of Key findings. */
+.ov-hero .ov-lead { color: var(--text); font-size: 1rem; line-height: 1.55; max-width: 78ch; margin-top: 8px; }

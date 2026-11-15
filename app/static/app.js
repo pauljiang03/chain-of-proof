@@ -352,7 +352,7 @@
     if (!conclusions.length || state.search) return;
     const details = element("details", "interpretations");
     details.open = Boolean(wasOpen);
-    details.append(element("summary", "", count(conclusions.length) + " investigator interpretations · not certified"), element("p", "", "These are the investigator’s judgments, outside Lean. Citing accepted findings does not certify an interpretation or a causal claim."));
+    details.append(element("summary", "", count(conclusions.length) + " investigator interpretations · not certified"));
     conclusions.forEach((item) => {
       const entry = element("div", "interpretation-item");
       entry.append(element("span", "small-mono", present(item.conclusion_id)), element("p", "", present(item.text)), element("span", "small-mono", "Cites findings: " + (array(item.finding_ids).join(", ") || "not recorded")));
@@ -455,7 +455,7 @@
     actions.append(show, markButton(finding));
     summary.push(actions);
     const rows = array(finding.cited_facts);
-    const evidence = [element("p", "detail-intro", rows.length + (rows.length === 1 ? " cited record." : " cited records.") + " Provenance is bound metadata; it does not prove that the parser or its interpretation is correct.")];
+    const evidence = [element("p", "detail-intro", rows.length + (rows.length === 1 ? " cited record." : " cited records."))];
     if (!rows.length) evidence.push(empty("No copied records", "This bundle does not include evidence records for this finding."));
     const ids = new Map();
     rows.forEach((row) => {
@@ -477,7 +477,7 @@
       });
       evidence.push(more);
     }
-    const proof = [element("p", "detail-caveat", "This is the saved claim and embedded Lean source. The viewer has not independently verified the certificate. Use cop verify with the original evidence store to replay verification.")];
+    const proof = [];
     const fields = element("dl", "evidence-fields");
     detailField(fields, "Trust tier", finding.trust_tier);
     detailField(fields, "Declared axioms", finding.axioms);

@@ -72,7 +72,7 @@
           </div>
           <div class="timeline-caption">
             <span id="timeline-range"></span><span class="spacer"></span>
-            <span class="legend" title="Each line is an evidence record at its own recorded time. Key events are picked by record type, not by AI judgment.">
+            <span class="legend">
               <span><i class="tick-key one"></i>one record</span><span><i class="tick-key some"></i>a few</span><span><i class="tick-key many"></i>many at once</span>
               <span><i class="dot-key"></i>key event</span><span><i class="badge-key">3</i>several key events</span>
             </span>
@@ -120,7 +120,7 @@
             <fieldset><legend>Findings</legend>
               <label><input type="radio" name="report-scope" value="all" checked><span>All certified findings <span id="report-count-all" class="mono"></span></span></label>
               <label><input type="radio" name="report-scope" value="marked" id="report-scope-marked" disabled><span>Marked findings only <span id="report-count-marked" class="mono"></span></span></label>
-              <p class="field-help">Mark a finding with its checkbox in Findings → Exact statements, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
+              <p class="field-help">Mark a finding with its checkbox in Findings → Exact statements, or with Add to report in the inspector.</p>
             </fieldset>
             <fieldset id="report-extras" hidden><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
             <fieldset><legend>Report details</legend>
@@ -154,7 +154,6 @@
             <label class="stacked" for="report-response">Response and recovery</label><input id="report-response" maxlength="600" autocomplete="off" placeholder="Actions, results, owners, and dates">
             <label class="stacked" for="report-recommendations">Recommended actions</label><input id="report-recommendations" maxlength="600" autocomplete="off" placeholder="Action, owner, due date, and supporting finding IDs">
             </details>
-            <p class="field-help">The report uses these details as entered. Add source references to examination notes and conclusions. The date starts as today’s.</p>
             <div class="report-buttons"><button class="button primary" id="report-print" type="button" disabled>Print / Save as PDF</button><a class="button" id="report-export" aria-disabled="true">Export HTML</a></div>
             <p class="field-help" id="report-status" role="status" aria-live="polite"></p>
           </form>
@@ -181,7 +180,6 @@
       <span class="stat"><b id="metric-inspected">—</b> inspected</span>
       <span class="spacer"></span>
       <span class="stat mono" id="evidence-hash" title="SHA-256 of the evidence store"></span>
-      <span class="stat note">Stored checker outcomes. Replay independently with <code>cop verify</code>.</span>
     </footer>
   </div>
 
