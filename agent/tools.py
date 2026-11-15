@@ -100,6 +100,9 @@ class Workbench:
         # API tools can run in worker threads. Share one evidence store, while
         # serializing its cursors, query budget, and run-log ID allocation.
         self._lock = threading.RLock()
+        self._inventory_facts_path = Path(facts_path)
+        self._inventory_initial_stat = self._inventory_stat()
+        self._inventory_evidence_sha256 = None
         self.source = open_source(facts_path)
         self.run_dir = Path(run_dir)
         self.proposer = proposer
@@ -155,11 +158,36 @@ class Workbench:
             finally:
                 if cur is not None:
                     cur.close()
-        clip = lambda v: v[:CELL_LIMIT] + "…" if isinstance(v, str) and len(v) > CELL_LIMIT else v
-        out = {"columns": cols, "rows": [[clip(v) for v in r] for r in rows[:ROW_LIMIT]]}
+        from agent.inventory_pages import render_rows
+        out = render_rows(cols, rows[:ROW_LIMIT], CELL_LIMIT)
         if len(rows) > ROW_LIMIT:
             out["truncated"] = f"more than {ROW_LIMIT} rows; narrow the query"
         return out
+
+    def _inventory_stat(self):
+        stat = self._inventory_facts_path.stat()
+        return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+
+    @audited
+    def inventory_page(self, question_id: str, kinds=None, exhibits=None, page_size=100, cursor=None):
+        """Traverse exact kind/exhibit filters in ID order; exhaustion is snapshot scoped."""
+        from agent.inventory_pages import page
+        from agent.investigation import Investigation
+        from agent.run_manifest import file_binding
+        with self._lock:
+            state = Investigation(self.run_dir).snapshot()
+            if question_id not in {row['id'] for row in state.get('questions', [])}:
+                raise ValueError('question_id must name a public question in this run')
+            if self._inventory_stat() != self._inventory_initial_stat:
+                raise ValueError('evidence changed since this workbench was opened')
+            if self._inventory_evidence_sha256 is None:
+                binding = file_binding(self._inventory_facts_path)
+                if self._inventory_stat() != self._inventory_initial_stat:
+                    raise ValueError('evidence changed during inventory binding')
+                self._inventory_evidence_sha256 = binding['sha256']
+            self._steps['n'] = 0
+            return page(self._db, self.run_dir, self._inventory_evidence_sha256,
+                        question_id, kinds, exhibits, page_size, cursor, CELL_LIMIT)
 
     @audited
     def fact(self, fact_id: int) -> dict:
