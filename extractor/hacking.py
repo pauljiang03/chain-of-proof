@@ -337,6 +337,14 @@ def _path(path):
     return str(path).replace('/', '\\')
 
 
+def _file_name(path):
+    """Keep literal filesystem text while adapting Dissect wchar subclasses."""
+    value = path.name
+    if not isinstance(value, str):
+        raise ValueError('filesystem filename must be decoded text')
+    return str.__str__(value)
+
+
 def _subject(ctx, path, provenance=None):
     return json.dumps(subject_scope(provenance or merge_scope(ctx['common'])) + [path], separators=(',', ':'))
 
@@ -388,7 +396,7 @@ def _logs(ev, paths, ctx):
             _content(ev, ctx, path, data)
             for channel, locator in irc_channels(data):
                 _emit(ev, ctx, _path(path), 'app.config.irc_channel', channel, **locator)
-                _emit(ev, ctx, _path(path), 'app.config.irc_log_file_name', path.name,
+                _emit(ev, ctx, _path(path), 'app.config.irc_log_file_name', _file_name(path),
                       channel_from_session_ident=channel, **locator)
         except Exception as error:
             ev.problem(_path(path), error)
@@ -455,7 +463,7 @@ def _traffic(ev, paths, ctx):
             data = _read(path)
             requests = list(http_requests(data))  # reject ambiguity before emitting any fields
             _content(ev, ctx, path, data, content_format='classic PCAP')
-            _emit(ev, ctx, _path(path), 'traffic.file_name', path.name, content_format='classic PCAP')
+            _emit(ev, ctx, _path(path), 'traffic.file_name', _file_name(path), content_format='classic PCAP')
             for request in requests:
                 locator = {key: value for key, value in request.items() if key != 'headers'}
                 locator['parser_scope'] = ('complete HTTP/1 request headers in contiguous, nonconflicting '
@@ -484,7 +492,7 @@ def _browser(ev, paths, ctx):
         try:
             data = _read(path)
             _content(ev, ctx, path, data, inventory_category='legacy_browser_cache')
-            _emit(ev, ctx, source, 'browser.cache_file_name', path.name,
+            _emit(ev, ctx, source, 'browser.cache_file_name', _file_name(path),
                   note='observed cache filename, not a declaration of message ownership')
             for match in EMAIL.finditer(data):
                 _emit(ev, ctx, source, 'browser.email_address', match[0].decode('ascii'),
