@@ -1,12 +1,6 @@
-"""Directory-name inference bounded by intact retained USN-v2 byte intervals.
+"""Directory names from intact USN v2 journal runs; a later OLD_NAME counts only inside one.
 
-A later OLD_NAME is not historical evidence by itself. It can constrain an earlier
-name only inside a byte-contiguous record interval containing no intervening rename,
-creation, removal or hard-link transition for that directory identity. Unknown record
-versions, missing bytes and unexplained padding break the interval. This describes
-recorded journal state, not filesystem creation onset or secure deletion.
-
-USN semantics: https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ns-winioctl-usn_record_v2
+Record format: https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ns-winioctl-usn_record_v2
 """
 from __future__ import annotations
 
@@ -56,7 +50,7 @@ def parse_record(raw, offset):
 
 
 class JournalRanges:
-    """Audit bytes visited by a parser. Never bridge an unexplained skipped region."""
+    """Byte ranges a parser visited; an unexplained gap breaks the range."""
     def __init__(self):
         self.blocks = []
         self.membership = {}
@@ -81,8 +75,7 @@ class JournalRanges:
             padding = b''
             if previous is not None and previous['end'] != offset:
                 gap = offset - previous['end']
-                # The only permitted skipped bytes are zero tail padding to the
-                # immediately following page boundary, never a missing whole page.
+                # Only zero padding up to the next page boundary may be skipped.
                 if not (0 < gap < PAGE and offset % PAGE == 0
                         and previous['end'] // PAGE == (offset - 1) // PAGE):
                     previous = None
@@ -127,12 +120,7 @@ class JournalRanges:
                 'record_count': block['records'], 'sha256': block['hash'].hexdigest()}
 
     def _directory_state(self, ref, usn):
-        """Return a supported observation or a precise reason for abstaining.
-
-        An OLD_NAME records the pre-rename name. It cannot establish which name
-        applies to a child record interleaved before the corresponding NEW_NAME.
-        https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ns-winioctl-usn_record_v2
-        """
+        """(observation, None) or (None, reason); OLD_NAME cannot name children before NEW_NAME."""
         if usn not in self.membership:
             return None, 'child_record_outside_validated_interval'
         if ref in self.non_directory_refs:
@@ -147,8 +135,7 @@ class JournalRanges:
                 if previous.reason & (DELETE | HARD_LINK):
                     return None, 'prior_removal_or_hard_link_transition'
                 return (previous, 'preceding directory observation'), None
-        # A child observation already names this parent identity. Within the
-        # intact range, require consistent directory state until the OLD/NEW pair.
+        # Within the intact range, the directory state must stay consistent until the OLD/NEW pair.
         waiting = []
         for position in range(index, len(entries)):
             entry = entries[position]
@@ -178,12 +165,7 @@ class JournalRanges:
         return self._directory_state(ref, usn)[0]
 
     def resolve_folder(self, ref, usn, root_reference, seen=()):
-        """Resolve within this stream and retain a diagnostic for any missing prefix.
-
-        Identities here are local (record, sequence) pairs. The caller must bind
-        this result to its image/exhibit/full-volume scope before emitting facts.
-        No current MFT names, timestamps or unbounded future names are consulted.
-        """
+        """Folder path from this journal with diagnostics; identities are local (record, sequence) pairs."""
         chain, visited = [], set(seen)
         current = ref
         valid_child = usn in self.membership
@@ -247,11 +229,7 @@ class JournalRanges:
         return result
 
     def folder(self, ref, usn, root_reference, seen=()):
-        """Resolve a full path or an explicitly incomplete ancestor suffix.
-
-        Each inferred component comes from an exact parent identity. A missing
-        higher ancestor never supplies a guessed current-MFT prefix.
-        """
+        """A full path, or a suffix marked incomplete; a missing ancestor is never guessed."""
         resolved = self.resolve_folder(ref, usn, root_reference, seen)
         if not resolved['components'] and not resolved['path_complete']:
             return None

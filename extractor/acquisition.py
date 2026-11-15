@@ -1,10 +1,4 @@
-"""Resolve a captured device identity without consulting an answer key.
-
-An E01 ``sn`` is acquisition metadata, not a filesystem volume serial. It is
-usable here only for a declared removable-device capture whose bytes are not an
-optical image. Optical-drive serials never identify the disc in the drive.
-Explicit public acquisition manifests may supply the same mapping to all tools.
-"""
+"""Device identity of an image; an E01 `sn` counts only for removable, non-optical captures."""
 from __future__ import annotations
 
 import json
@@ -14,7 +8,7 @@ from . import optical
 
 
 def scoped_identity(image: str, exhibit: str) -> str:
-    """A name inside this evidence set; deliberately not a hardware serial."""
+    """An identity scoped to this evidence set, never a hardware serial."""
     return "image-scoped device " + json.dumps([str(image), str(exhibit)], separators=(",", ":"))
 
 
@@ -33,11 +27,7 @@ def _serial(value) -> str:
 
 
 def resolve(path, exhibit: dict, manifest_source: str = "explicit acquisition manifest") -> dict:
-    """Resolve once; pass this context unchanged to media and content readers.
-
-    Conflicting manifest/header serials fail closed. A missing serial still permits
-    file recovery using a shared image-scoped area identifier, without USB joins.
-    """
+    """Device identity for one image; conflicting serials withhold the hardware identity."""
     path = Path(path)
     result = fallback(path.name, exhibit.get("exhibit", path.name))
     header, notes = {}, []
@@ -47,7 +37,7 @@ def resolve(path, exhibit: dict, manifest_source: str = "explicit acquisition ma
                 header = optical.ewf_header(fh)
     except Exception as err:
         notes.append(f"acquisition header unavailable: {type(err).__name__}: {err}")
-    # Preserve the typed header fields as provenance, not inferred identities.
+    # Keep the raw header fields as provenance only.
     result["acquisition_header"] = {k: header[k] for k in ("_section", "md", "sn", "l") if k in header}
     try:
         result["is_optical"] = optical.is_optical(path)

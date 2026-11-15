@@ -1,9 +1,4 @@
-"""Typed EVTX record fields; source descriptions do not certify physical actions.
-
-The reviewed Dissect adapter maps TimeCreated_SystemTime to ``ts`` and exposes
-EventRecordID as text. That one adapter may decode canonical decimal record IDs;
-this is a representation conversion, not authentication of the event or its claims.
-"""
+"""Typed fields from selected EVTX records; Dissect's `ts` is TimeCreated."""
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -13,7 +8,7 @@ import re
 from .attributes import emit_attribute
 from .source_scope import merge_scope, subject_scope
 
-# Provider/channel membership is explicit; EventID alone is never sufficient.
+# An event is matched by provider and channel, never by EventID alone.
 CHANNELS = {
     'microsoft-windows-security-auditing': 'security',
     'microsoft-windows-eventlog': 'security',
@@ -66,7 +61,7 @@ def _source_path(value):
 
 
 def emit_event_attributes(out, ev, record, *, parser_record_id_text=False, parser_row_ordinal=None):
-    """Return whether a reviewed event emitted typed fields; never revise legacy rows."""
+    """Emit typed fields for a selected event; return whether any were emitted."""
     from .system import SESSION_EVENTS, PERFORMANCE
     if not isinstance(record, dict):
         return False
@@ -76,7 +71,6 @@ def emit_event_attributes(out, ev, record, *, parser_record_id_text=False, parse
     low = provider.casefold()
     if CHANNELS.get(low) != channel.casefold():
         return False
-    # Establish the native event-ID type before selecting its description.
     raw_eid = record.get('EventID')
     if not isinstance(raw_eid, int) or isinstance(raw_eid, bool):
         ev.problem('typed event source', ValueError('EventID must be a native integer'))
@@ -152,9 +146,7 @@ def emit_event_attributes(out, ev, record, *, parser_record_id_text=False, parse
                     ev.problem(base['artifact'] + ' ' + field, error)
         selected_digest = hashlib.sha256(json.dumps(values, ensure_ascii=True, sort_keys=True,
                                                     separators=(',', ':'), allow_nan=False).encode()).hexdigest()
-        # Record IDs and timestamps can repeat in malformed or repeated records.
-        # Retain iterator occurrence and bind every selected literal field so two
-        # conflicting records cannot contribute attributes to one source tuple.
+        # Record IDs and times can repeat, so the subject also includes position and fields.
         subject = json.dumps(scope + [source, record_id, provider, channel, event_id, recorded_time,
                                       parser_row_ordinal, selected_digest],
                              ensure_ascii=True, separators=(',', ':'))

@@ -1,15 +1,4 @@
-"""Bounded observations of retained legacy Yahoo Mail message-cache files.
-
-An allocated IE URL record must select one exact cache-directory entry and file.
-The retained HTML must independently contain a Yahoo message form with the same
-message ID, message headers and a nonempty, closed message body. A URL,
-filename or email address alone is insufficient. This does not establish who
-read, sent or owned a message, or whether the cache inventory is complete.
-
-Format sources:
-https://github.com/libyal/libmsiecf/blob/main/documentation/MSIE%20Cache%20File%20(index.dat)%20format.asciidoc
-https://bugzilla.mozilla.org/show_bug.cgi?id=218110 (contemporaneous page source)
-"""
+"""Yahoo Mail pages in the legacy IE cache, matched through index.dat URL records."""
 from __future__ import annotations
 
 import hashlib
@@ -79,7 +68,7 @@ class _HTML(HTMLParser):
     def handle_starttag(self, tag, attributes):
         if len(self.nodes) >= MAX_NODES or len(self.stack) >= 256:
             raise ValueError('Yahoo message HTML structure bound exceeded')
-        # HTML permits omitted cell/row closing tags. Close only in this table.
+        # HTML may omit row and cell end tags; close them only within this table.
         if tag in ('tr', 'td', 'th'):
             for index in range(len(self.stack) - 1, 0, -1):
                 prior = self.stack[index]['tag']
@@ -174,8 +163,7 @@ def message_content(data, source_url):
         if len(cells) < 2:
             continue
         label = ' '.join(_text(cells[0]).split()).lower()
-        # An empty retained From cell still identifies the message-header layout.
-        # It supplies no sender value, and this observation does not attribute one.
+        # An empty From cell still marks the header layout, but gives no sender.
         if label in ('from:', 'subject:', 'date:') and (label == 'from:' or _text(cells[1]).strip()):
             items = header_tables.setdefault(node['table'], {})
             if label[:-1] in items:
@@ -233,7 +221,7 @@ def cache_records(data):
 
 
 def extract(ev, paths, ctx):
-    """Hook for hacking.extract after its bounded, source-scoped file inventory."""
+    """Called by hacking.extract with its file inventory."""
     from .hacking import _path, _read
     by_path = {}
     for path in paths:
@@ -271,8 +259,7 @@ def extract(ev, paths, ctx):
                     note='retained message-page cache observation; no ownership, visit, sender authenticity or completeness claim'))
                 subject = json.dumps(subject_scope(provenance) +
                                      [source, digest, record['byte_offset'], _path(path), content_digest], separators=(',', ':'))
-                # Dissect directory enumeration can retain a cstruct wchar str
-                # subclass. Preserve its literal text as the catalog's native str.
+                # Dissect may return a wchar str subclass; store a plain str.
                 emit_attribute(ev, subject, ROLE, str(path.name), ctx['examined_at'], **provenance)
         except Exception as error:
             ev.problem(source, error)

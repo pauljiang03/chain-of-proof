@@ -1,6 +1,4 @@
-"""The Windows PC image: USB devices, volumes the registry recorded, shortcuts,
-jump lists, web searches, the user's files, Recycle Bin records, CD-burn traces and
-the user's mailbox."""
+"""The Windows PC: USB devices, volumes, shortcuts, jump lists, searches, files, Recycle Bin, mail."""
 from __future__ import annotations
 
 import io
@@ -30,15 +28,10 @@ MAX_SETUPAPI_BYTES = 64 * 1024 * 1024
 
 
 def _usb_component(value):
-    """Retain native text, including every ampersand; never derive a serial.
-
-    Windows instance IDs can encode location information instead of a hardware
-    serial. Their shape does not establish which interpretation applies:
-    https://learn.microsoft.com/en-us/windows-hardware/drivers/install/instance-ids
-    """
+    """Keep the instance ID text as is; it may encode a port location, not a hardware serial."""
     if not isinstance(value, str):
         raise ValueError('USB instance components must be source text')
-    value = str.__str__(value)  # Dissect text subclasses, without coercing objects.
+    value = str.__str__(value)  # plain str from Dissect's str subclasses
     if (not value or len(value) > 16384 or '\\' in value
             or any(ord(char) < 32 or ord(char) == 127 for char in value)):
         raise ValueError('USB instance component is empty, oversized or malformed')
@@ -84,7 +77,7 @@ def _usb(ev, t, common, *, examined_at=None):
     common = _usb_context(ev, common, examined_at, 'USB registry instances')
     if common is None:
         return 0
-    # The virtual registry API does not identify the selected physical hive copy.
+    # The registry view does not say which hive file a key came from.
     common = merge_scope(common, {'source_variant': 'unknown'})
     path = "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR"
     from dissect.target.exceptions import RegistryKeyNotFoundError
@@ -131,12 +124,7 @@ def _usb(ev, t, common, *, examined_at=None):
 
 
 def _setupapi(ev, t, common, tz=None, *, examined_at=None):
-    """Retain USBSTOR install-section IDs and local timestamp text.
-
-    The optional legacy ``tz`` argument is deliberately unused: a current zone
-    setting does not establish the zone in force when this log record was made.
-    A section start is neither a proven insertion nor a first-ever connection.
-    """
+    """USBSTOR install sections and their local time text; `tz` is unused (today's zone may differ)."""
     common = _usb_context(ev, common, examined_at, 'SetupAPI USB instances')
     if common is None:
         return 0
@@ -148,10 +136,8 @@ def _setupapi(ev, t, common, tz=None, *, examined_at=None):
         raw = handle.read(MAX_SETUPAPI_BYTES + 1)
     if len(raw) > MAX_SETUPAPI_BYTES:
         raise ValueError('SetupAPI log exceeds the 64 MiB parsing limit')
-    # SetupAPI specifies ANSI text, not UTF-8. A byte-preserving latin-1 view
-    # lets us locate ASCII structure without guessing the source code page.
-    # Non-ASCII identifiers in a BOM-less log are reported, never decoded by
-    # guessing or replacement. Unrelated ANSI text cannot erase valid IDs.
+    # SetupAPI logs are ANSI: latin-1 finds the ASCII structure without guessing a code page.
+    # Non-ASCII identifiers are reported, never guessed.
     # https://learn.microsoft.com/en-us/windows-hardware/drivers/install/setupapi-text-logs
     encoding, prefix = 'latin-1', 0
     for bom, candidate in ((b'\xef\xbb\xbf', 'utf-8'), (b'\xff\xfe', 'utf-16-le'),
@@ -159,9 +145,7 @@ def _setupapi(ev, t, common, tz=None, *, examined_at=None):
         if raw.startswith(bom):
             encoding, prefix = candidate, len(bom)
             break
-    # A Unicode BOM explicitly identifies its decoder; decoding stays strict.
-    # Only actual CR/LF delimit lines. ANSI bytes such as 0x85 must not become
-    # Unicode line separators and fabricate an apparent section boundary.
+    # Split only on CR/LF: an ANSI byte like 0x85 must not become a line break.
     lines = [line for line in re.findall(r'[^\r\n]*(?:\r\n|\r|\n|\Z)', raw[prefix:].decode(encoding)) if line]
     offsets, offset = [], prefix
     for line in lines:
@@ -230,8 +214,7 @@ def _volumes_seen(ev, t, common):
 
 
 def _lnk_fact(ev, lnk: Lnk, t_us: int, common: dict, **prov) -> bool:
-    """One lnkTarget fact from a parsed shortcut. obj = path without the drive letter,
-    aux = the volume serial for a local target, or the share for a network target."""
+    """One lnkTarget: obj = path without drive, aux = volume serial or network share."""
     info = getattr(lnk, "linkinfo", None)
     if info is None or getattr(info, "flags", None) is None:
         return False            # a shortcut with no LinkInfo block names no volume
@@ -291,12 +274,7 @@ class _EmptyOLEChain:
 
 
 class _JumpListOLE(OLE):
-    """Dissect OLE 3.12 treats an absent MiniFAT's ENDOFCHAIN as a sector number.
-
-    MS-CFB 2.4 permits no MiniFAT/mini stream. Handle only explicitly empty
-    chains; inconsistent nonzero sizes/counts still fail. No input bytes change.
-    https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/c5d235f7-b73c-4ec5-bf8d-5c08306cd023
-    """
+    """Handles an absent MiniFAT (MS-CFB 2.4), whose ENDOFCHAIN Dissect OLE 3.12 reads as a sector."""
     def chain(self, sect, size=None):
         if sect == 0xFFFFFFFE:
             if self.header._sectDirStart == sect:
@@ -318,11 +296,7 @@ class _JumpListOLE(OLE):
 def _destlist(data: bytes) -> dict:
     """DestList v1-v4: numbered LNK stream -> (entry-update FILETIME, raw path).
 
-    Layout: libyal/dtformats Jump lists format, DestList entry v1 and v2+;
-    the v2+ trailer is a property-store byte count, not unconditional padding.
-    https://github.com/libyal/dtformats/blob/main/documentation/Jump%20lists%20format.asciidoc
-    https://github.com/EricZimmerman/JumpList/blob/master/JumpList/Automatic/DestList.cs
-    Truncated/unsupported layouts are reported, never silently treated as empty.
+    The v2+ trailer is a property-store byte count. Format: https://github.com/libyal/dtformats/blob/main/documentation/Jump%20lists%20format.asciidoc
     """
     if not data:                         # an empty DestList stream is valid
         return {}
@@ -405,8 +379,7 @@ def _jumplists(ev, t, common):
                             if _lnk_fact(ev, lnk, t_us, common, **prov):
                                 n += 1
                             elif re.match(r"^[A-Za-z]:\\", dest_path):
-                                # The entry stores a path but no volume serial. Never
-                                # infer the volume from a drive letter.
+                                # No volume serial is stored; none is inferred from the drive letter.
                                 ev.add("lnkTarget", t_us, 1, dest_path[2:].rstrip("\\") or "\\", "",
                                        drive_letter=dest_path[:2],
                                        volume="not recorded by this jump list entry", **prov, **common)
@@ -423,11 +396,7 @@ def _jumplists(ev, t, common):
 
 
 def search_query(url):
-    """One form-decoding pass, on a supported search provider's exact host suffix.
-
-    This identifies a URL's retained query text, not who entered it. Unsupported
-    regional domains remain unsupported; substring lookalikes are never accepted.
-    """
+    """Search text from a URL of a supported search provider (exact host match), decoded once."""
     if not isinstance(url, str) or len(url) > MAX_SEARCH_URL:
         raise ValueError("search URL is not bounded text")
     if any(ord(char) < 32 or ord(char) == 127 for char in url):
@@ -447,7 +416,7 @@ def search_query(url):
     allowed_paths = ('/', '/search', '/webhp') if domain.startswith('google.') else ('/', '/search')
     if prefix not in allowed_prefixes or (parts.path or '/') not in allowed_paths:
         return None  # A redirect/login/mail endpoint's q/p parameter is not a search.
-    # Only Google's reviewed fragment convention overrides its query string.
+    # Only for Google, the fragment overrides the query string.
     locations = [("query", parts.query)]
     if domain.startswith('google.'):
         locations.insert(0, ("fragment", parts.fragment))
@@ -475,7 +444,7 @@ def _searches(ev, t, common, *, examined_at=None):
     if not typed_time:
         ev.problem('search attributes', ValueError('explicit positive examination time required; typed fields omitted'))
     if hasattr(t, "has_function") and not t.has_function("browser.history"):
-        return n  # Legacy IE history is read separately; no fabricated modern store.
+        return n  # legacy IE history is read elsewhere
     for r in t.browser.history():
         source = str(r.source or '').replace('/', '\\')
         try:
@@ -501,8 +470,7 @@ def _searches(ev, t, common, *, examined_at=None):
                 recorded_time_meaning=('WebCache history AccessedTime' if browser == 'iexplore'
                                        else 'browser history visit timestamp'),
                 limitation='retained search URL and source timestamp; not physical user attribution')
-            # Include retained values as well as the plugin locator: some ESE
-            # containers reuse EntryId values. Never combine different records.
+            # Some ESE containers reuse EntryId values, so the values are part of the subject.
             subject = json.dumps(subject_scope(provenance) + [source, browser, str(record_id),
                 recorded_us, url], ensure_ascii=True, separators=(',', ':'))
             stamp = r.ts.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
@@ -544,8 +512,7 @@ DRIVE_TYPES = {2: "removable", 3: "fixed", 4: "network", 5: "CD-ROM"}
 
 
 def _volumes_in_shortcuts(ev, common):
-    """A shortcut stores the label and serial of the volume its target was on. Emit one
-    volumeSeen row per (label, serial): the earliest shortcut that recorded it."""
+    """One volumeSeen row per (label, serial) recorded by shortcuts, from the earliest one."""
     import json as _json
     first = {}
     for kind, t_us, _res, _obj, aux, prov in ev.rows():
@@ -575,11 +542,7 @@ MAX_RECYCLE_INDEX = 28 + 2 * 32768
 
 
 def parse_recycle_index(data):
-    """Validated $I v1/v2 fields, with byte locators and full path preserved.
-
-    The timestamp is the value recorded by the index. It does not prove the
-    original file is now unallocated or identify the person who moved it.
-    """
+    """Validated $I v1/v2 fields with byte locators and the full original path."""
     if len(data) < 26 or len(data) > MAX_RECYCLE_INDEX:
         raise ValueError('truncated or oversized Recycle Bin index')
     version, size, filetime = struct.unpack_from('<QQQ', data)
@@ -617,11 +580,7 @@ def parse_recycle_index(data):
 
 
 def _recycle_bin(ev, t, common, *, examined_at=None):
-    """Recycle Bin index records ($I files), read from the file table itself.
-
-    Emptying the Recycle Bin deletes the $I files, but each is small enough to live
-    inside its file-table record, so the original path and the deletion time stay
-    readable until that record is reused."""
+    """Recycle Bin $I records from the file table; resident, they survive emptying until reused."""
     typed_time = type(examined_at) is int and examined_at > 0
     if not typed_time:
         ev.problem('Recycle Bin attributes', ValueError('explicit positive examination time required; typed fields omitted'))
@@ -680,11 +639,7 @@ BURN_KEY = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CD Bur
 
 
 def _burn_traces(ev, t, common):
-    """Optical-disc-related records, not proof of a completed write (Rules.md, R12).
-
-    Three independent sources: temporary files in the change journal, the cdrom
-    driver's exclusive-access event 133, and the user's CD Burning settings key.
-    None identifies the physical disc. A registry last-write is not a burn time."""
+    """CD-burn traces: journal temp files, cdrom event 133, CD Burning key; none proves a write."""
     n = 0
     # 1. change journal: the first creation of each DAT/FIL/POST#####.tmp file
     first = {}
@@ -754,10 +709,7 @@ MAPI_DISPLAY_TO, MAPI_SENDER_SMTP, MAPI_MESSAGE_ID = 0x0E04, 0x5D01, 0x1035
 
 
 def _mapi_text_property(message, wanted: int):
-    """Return a string and availability state without conflating absence with empty.
-
-    Availability describes this property, not whether a sender or message exists.
-    """
+    """(text, availability) of one property; absent and empty are different."""
     for record_set in message.record_sets:
         for entry in record_set.entries:
             if entry.entry_type == wanted:
@@ -776,10 +728,7 @@ def _mapi_text(message, wanted: int) -> str:
 
 
 def _email(ev, t, common):
-    """Messages in the user's Outlook mailbox file (OST/PST), read with libpff.
-
-    Only messages the mailbox still lists are read. Messages purged from the mailbox
-    (libpff calls them recoverable items) are not: the Python binding does not expose them."""
+    """Messages the user's OST/PST still lists, via libpff (recoverable items are not exposed)."""
     files = []
     for user in user_profiles(t):
         for layout in ("AppData/Local/Microsoft/Outlook", "Local Settings/Application Data/Microsoft/Outlook"):
@@ -834,8 +783,7 @@ def _email(ev, t, common):
 
 
 def _step(ev: Evidence, name: str, fn, default=0):
-    """Run one part of the reader. An image that lacks the artifact (a PC no USB stick
-    was ever plugged into has no USBSTOR key) is reported, and the reader goes on."""
+    """Run one part of the reader; a missing artifact is reported and the rest continues."""
     try:
         return fn()
     except Exception as e:

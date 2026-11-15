@@ -1,15 +1,4 @@
-"""Typed, bounded observations from retained Google Drive client containers.
-
-Log grammar and snapshot schema references:
-https://github.com/log2timeline/plaso/blob/main/plaso/parsers/text_plugins/gdrive_synclog.py
-https://github.com/log2timeline/plaso/blob/main/plaso/parsers/sqlite_plugins/gdrive.py
-
-Client log statements are source observations, not successful remote operations,
-authentication or personal attribution. Document joins never cross a container
-hash, source origin or document ID. Conflicting filenames block the deletion join;
-there is no filename fallback, inferred rename or latest-version selection.
-The deletion relation requires one unchanged literal name and modified value.
-"""
+"""Google Drive client logs and snapshot databases; formats follow plaso's gdrive parsers."""
 from __future__ import annotations
 
 import ast
@@ -51,7 +40,7 @@ SNAPSHOT_SCHEMA = {
 
 
 def candidate_kind(prefix):
-    """Select possible formats from a bounded prefix, without naming a service."""
+    """Possible container formats from the leading bytes only."""
     if prefix.startswith(b'SQLite format 3\0'):
         return 'sqlite'
     if re.search(rb'(?m)^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d[,.]\d{3} [+-]\d{4} '
@@ -147,10 +136,10 @@ def _worker_fields(body):
 
 
 def parse_drive_log_bytes(data):
-    """Return (records, diagnostics); every locator addresses the original UTF-8 bytes."""
+    """Return (records, diagnostics); locators are byte offsets into the original log."""
     if not data or len(data) > MAX_BYTES:
         raise ValueError('Google Drive log byte bound exceeded or empty file')
-    data.decode('utf-8', errors='strict')  # Reject replacement-decoded identities.
+    data.decode('utf-8', errors='strict')
     records, problems, modules, offset = [], [], set(), 0
     for number, raw in enumerate(data.splitlines(keepends=True), 1):
         if number > MAX_LINES or len(raw) > MAX_LINE_BYTES:
@@ -232,8 +221,7 @@ def parse_drive_log_bytes(data):
                 problems.append(f'line {number}: {error}; worker fields withheld')
         if len(records) > MAX_RECORDS:
             raise ValueError('Google Drive record bound exceeded')
-    # The directory layout merely selects candidates. Require the client-specific
-    # record syntax and separate client module names before classifying a log.
+    # Classify a log by its record syntax and client module names, not by its folder.
     recognized = {'common.sync_app', 'common.service.user', 'common.cloud.cloud_watcher', 'common.workers'}
     if not records or len(modules & recognized) < 2:
         raise ValueError('Google Drive client log structure not established')
@@ -242,7 +230,7 @@ def parse_drive_log_bytes(data):
 
 
 def deletion_relations(records):
-    """Join only one unchanged prior name/version for an exact document ID."""
+    """Link a deletion to the single unchanged earlier name and version of the same document ID."""
     entries, joined, issues = defaultdict(list), [], []
     for record in records:
         if record['kind'] == 'cloud_entry':
@@ -312,7 +300,7 @@ def _read(path):
 
 
 def _allocation(target, source):
-    """Read the exact container's NTFS flag; pathname presence is insufficient."""
+    """Allocation state from the container's NTFS record, not from its path existing."""
     if target is None or not re.match(r'^[A-Za-z]:\\', source):
         return None
     mounts = {str(name).lower(): fs for name, fs in target.fs.mounts.items()}
@@ -331,7 +319,7 @@ def _allocation(target, source):
 
 
 def extract_paths(ev, paths, ctx, *, target=None):
-    """Validate and emit independent container/record/related-document subjects."""
+    """Validate each container and emit container, record and document observations."""
     from .artifact_containers import _windows_path
     total, seen = 0, set()
     for number, path in enumerate(paths, 1):
@@ -406,7 +394,7 @@ def extract_paths(ev, paths, ctx, *, target=None):
 
 
 def extract(ev, target, ctx):
-    """Inspect bounded client profile folders; layout selects, content classifies."""
+    """Google Drive client folders in each profile; content, not layout, decides the format."""
     from .webcloud import _users
     paths, folders = [], 0
     counts = dict(scanned_files=0, selected_files=0, unrecognized_files=0, skipped_sidecars=0,

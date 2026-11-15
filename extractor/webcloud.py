@@ -1,17 +1,4 @@
-"""Browsers, downloads, cloud-storage clients, e-mail accounts, the operating system's
-search boxes and its note application, for every user profile of the Windows PC.
-
-    extract(ev, target, ctx)     target is an open dissect Target
-
-Kinds emitted: webVisit, fileDownloaded, localSearch, cloudFile, accountSeen, noteText.
-
-Every row is one record of one artifact. Where an artifact holds two times for the same
-thing (a history entry's accessed and modified time, a sync worker's start and finish),
-each time is its own row and prov["time_meaning"] says which one it is.
-
-dissect is imported inside the functions that need it, so the parsing helpers in the
-first half of this file can be imported and tested with the standard library alone.
-"""
+"""Browser, download, cloud, mail account, search and Sticky Notes records for each user profile."""
 from __future__ import annotations
 
 import ast
@@ -25,8 +12,6 @@ FILETIME_EPOCH_US = 11_644_473_600_000_000        # 1601-01-01 to 1970-01-01, mi
 UUID_EPOCH_US = 12_219_292_800_000_000            # 1582-10-15 to 1970-01-01, microseconds
 SANE_FROM, SANE_TO = 631_152_000_000_000, 4_102_444_800_000_000     # 1990 .. 2100
 
-
-# --------------------------------------------------------------------------- times
 
 def us(dt: datetime) -> int:
     """Aware datetime -> UTC microseconds, exactly."""
@@ -51,7 +36,7 @@ def local_filetime_us(ft: int, zone: str) -> int:
 
 
 def uuid1_us(text: str):
-    """Creation time stored inside a version-1 GUID, as UTC microseconds; None for other versions."""
+    """Creation time inside a version-1 GUID in UTC microseconds; None for other versions."""
     try:
         u = uuid.UUID(text.strip().strip("{}"))
     except ValueError:
@@ -70,14 +55,11 @@ def sane(t) -> bool:
     return isinstance(t, int) and SANE_FROM < t < SANE_TO
 
 
-# ------------------------------------------------------- Internet Explorer history
-
 MSHIST = re.compile(r"^MSHist01(\d{8})(\d{8})$")
 
 
 def split_history_url(raw: str):
-    """'Visited: user@http://x' or ':2015032320150324: user@http://x' -> (prefix, user, url).
-    Returns None for a value that is not in that form."""
+    """'Visited: user@http://x' or ':2015032320150324: user@http://x' -> (prefix, user, url), else None."""
     raw = raw.rstrip("\x00")
     head, sep, url = raw.partition("@")
     if not sep or ": " not in head:
@@ -99,8 +81,7 @@ def mshist_days(name: str):
 
 
 def parse_iedownload(blob: bytes) -> dict:
-    """The strings at the end of an IE download record: where the file came from and where
-    it was saved. Raises ValueError when they are not there."""
+    """Source URL and saved path from the end of an IE download record; ValueError if missing."""
     parts = blob.decode("utf-16-le", "ignore").split("\x00")
     if len(parts) < 3:
         raise ValueError("no strings in download record")
@@ -117,8 +98,6 @@ def parse_iedownload(blob: bytes) -> dict:
             out["temporary_file"] = parts[-4]
     return out
 
-
-# ------------------------------------------------------------------ protocol buffers
 
 def _varint(buf: bytes, pos: int):
     value = shift = 0
@@ -156,8 +135,7 @@ def pb_fields(buf: bytes):
 
 
 def parse_history_provider_cache(buf: bytes):
-    """Chrome's 'History Provider Cache' (InMemoryURLIndexCacheItem): the URL rows it
-    cached, each with its recent visit times. Yields dicts."""
+    """Yield cached URL rows and visit times from Chrome's 'History Provider Cache'."""
     for number, wire, value in pb_fields(buf):
         if number != 8 or wire != 2:                    # history_info_map
             continue
@@ -185,8 +163,6 @@ def parse_history_provider_cache(buf: bytes):
             if "url" in row:
                 yield row
 
-
-# ------------------------------------------------------------- Google Drive sync log
 
 LOG_HEAD = re.compile(r"^(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d),(\d{3}) ([+-])(\d\d)(\d\d) "
                       r"(\w+) pid=(\d+) (\d+):(\S+)\s+(\S+?):(\d+) (.*)$")
@@ -226,12 +202,7 @@ def _in_folder(path: str, root: str) -> str:
 
 
 def parse_drive_log(text: str):
-    """Google Drive's sync_log.log -> (events, problems).
-
-    An event is a dict: kind ('cloudFile' or 'accountSeen'), t, res, obj, event, line
-    (1-based), meaning, and extra provenance. The log prints its own UTC offset on every
-    line, so no time zone has to be assumed. An object the client logs several times
-    (the same file-system event, the same cloud entry) gives one event, at its first line."""
+    """Google Drive's sync_log.log -> (events, problems); each line has its own UTC offset."""
     events, problems, seen = [], [], set()
     names = {}                                   # cloud document id -> file name, as logged
     root = ""
@@ -324,8 +295,6 @@ def parse_drive_log(text: str):
     return events, problems
 
 
-# ------------------------------------------------------------------- small decoders
-
 def reg_text(value) -> str:
     """A registry value as text. Office stores many strings as UTF-16 in binary values."""
     if isinstance(value, bytes):
@@ -362,8 +331,6 @@ def parse_oeaccount(raw: bytes) -> dict:
     return {name: value for name, _type, value in OEACCOUNT_FIELD.findall(text)}
 
 
-# ============================================================ the image (uses dissect)
-
 def _win(path) -> str:
     return str(path).replace("/", "\\")
 
@@ -394,8 +361,6 @@ def _keys(target, path):
     except Exception:
         return []
 
-
-# ------------------------------------------------------------------ Internet Explorer
 
 def _ie_webcache(ev, target, common, zone):
     from dissect.database.ese import ESE
@@ -522,8 +487,6 @@ def _ie_typed_urls(ev, target, common):
                 ev.problem(f"{hive} {base}TypedURLs {v.name}", e)
 
 
-# -------------------------------------------------------------------------- Chrome
-
 VISIT_SOURCES = {0: "synced", 1: "browsed", 2: "extension", 3: "imported from Firefox",
                  4: "imported from Internet Explorer", 5: "imported from Safari"}
 
@@ -624,8 +587,6 @@ def _chrome_history(ev, db, source, user, common):
                    time_meaning="start time of the download", **common)
 
 
-# ----------------------------------------------------------------- cloud storage
-
 def _google_drive(ev, target, common):
     for user, home in _users(target):
         top = home.joinpath("AppData/Local/Google/Drive")
@@ -675,8 +636,6 @@ def _icloud(ev, target, common):
         except Exception as e:
             ev.problem(_win(path), e)
 
-
-# --------------------------------------------------------------- e-mail accounts
 
 ACCOUNTS_KEY = "9375CFF0413111d3B88A00104B2A6676"
 MAIL_VALUES = ("Email", "POP3 Server", "IMAP Server", "SMTP Server", "HTTP Server URL")
@@ -763,8 +722,6 @@ def _mail_files(ev, target, common):
                     ev.problem(_win(p), e)
 
 
-# ------------------------------------------------------------ searches and notes
-
 def _local_search(ev, target, common):
     path = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery"
     for key in _keys(target, path):
@@ -817,8 +774,6 @@ def _sticky_notes(ev, target, common):
         except Exception as e:
             ev.problem(source, e)
 
-
-# ----------------------------------------------------------------------- entry point
 
 def extract(ev, target, ctx):
     common = ctx["common"]

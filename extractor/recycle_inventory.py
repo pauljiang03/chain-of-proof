@@ -1,10 +1,4 @@
-"""Exact bounded Recycle Bin namespace members and their actual NTFS flags.
-
-The declaration means the described examination procedure completed, not that all
-executables on disk were found. Namespace names and MZ bytes select members; only
-matching NTFS file-reference sequences can supply allocation flags. INFO2 records
-are separate historical observations and never replace those flags.
-"""
+"""Recycle Bin members and their NTFS allocation flags; INFO2 records are separate observations."""
 from __future__ import annotations
 
 import hashlib
@@ -43,9 +37,8 @@ def _record_identity(record):
 
 
 def _dereference(entry):
-    # Dissect's IndexEntry.dereference() resolves the record number, but does
-    # not enforce its sequence. Microsoft's FILE_RECORD_SEGMENT_HEADER contract
-    # requires the sequence match: https://learn.microsoft.com/en-us/windows/win32/devnotes/file-record-segment-header
+    # Dissect's dereference() ignores the sequence number, so check it here:
+    # https://learn.microsoft.com/en-us/windows/win32/devnotes/file-record-segment-header
     reference = entry.header.FileReference
     expected = (_integer(reference.SegmentNumberLowPart, 0xffffffff)
                 | _integer(reference.SegmentNumberHighPart, 0xffff) << 32,
@@ -73,7 +66,7 @@ def _volumes(target):
 
 
 def collect(ev, target, ctx):
-    """Return reader observations; never compute an aggregate deletion Boolean."""
+    """Collect Recycle Bin members and their flags; no overall deleted/not-deleted verdict."""
     common = merge_scope(ctx['common'])
     scope = subject_scope(common)
     result = {'common': common, 'scope': scope, 'definition': DEFINITION, 'members': {},
@@ -145,7 +138,7 @@ def collect(ev, target, ctx):
         drive = descriptor['drive']
         if ntfs is None:
             issue(drive, ValueError('non-NTFS volume cannot supply required MFT allocation flags'))
-            # Keep confidently identified members as unknown; never make them false.
+            # Without NTFS, members are listed with an unknown flag, never false.
             pending = [(target.fs.path(drive + '/' + root), 0)
                        for root in ('RECYCLER', 'Recycled', '$Recycle.Bin')]
             while pending:
@@ -188,7 +181,7 @@ def collect(ev, target, ctx):
             if identity in ancestors:
                 raise ValueError('cycle in Recycle Bin directory identities')
             if identity in visited:
-                return  # Another namespace alias for an already examined directory.
+                return  # already examined under another alias
             if depth > MAX_DEPTH:
                 raise ValueError('Recycle Bin directory depth bound exceeded')
             if record.is_reparse_point():
@@ -196,8 +189,7 @@ def collect(ev, target, ctx):
             if not _integer(record.header.Flags, 0xffff) & 2:
                 raise ValueError('Recycle Bin root/child directory has no directory flag')
             visited.add(identity)
-            # Include DOS aliases too; identity deduplication, not filename
-            # filtering, determines the cardinality of the selected file set.
+            # Include DOS 8.3 names; duplicates are removed by file identity, not by name.
             for entry in record.iterdir():
                 tick()
                 path = source
@@ -252,7 +244,7 @@ def collect(ev, target, ctx):
 
 
 def emit(ev, inventory, ctx):
-    """Emit complete-set declaration plus exact member facts; no reader Boolean."""
+    """Emit the set declaration and one record per member."""
     if 'set_subject' not in inventory:
         return
     common, subject = inventory['common'], inventory['set_subject']

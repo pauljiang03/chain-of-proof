@@ -1,8 +1,4 @@
-"""Collect rows, then assign ids deterministically.
-
-Rows are sorted before ids are assigned, so the same images always give the same
-fact ids and the same file, whatever order the parsers ran in.
-"""
+"""Collect rows and assign ids in sorted order, so the same images always give the same ids."""
 from __future__ import annotations
 
 import json

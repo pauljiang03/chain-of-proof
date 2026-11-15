@@ -1,8 +1,4 @@
-"""Opt-in, bounded libpff recovered-item observations from a captured PFF file.
-
-The native scan runs in a separate process with its own read-only file handle.
-Recovery is a parser operation, not proof of deletion, purging, or allocation.
-"""
+"""Recover items from a captured PST/OST file with libpff, in a separate read-only process."""
 from __future__ import annotations
 
 import argparse
@@ -24,7 +20,7 @@ from .attributes import emit_attribute
 from .source_scope import merge_scope, subject_scope
 from .store import Evidence, us
 
-# Reviewed installed binary and public C API. A different build needs an ABI review.
+# The libpff build whose C API this module was checked against.
 LIBRARY_VERSION = '20261030'
 LIBRARY_SHA256 = '9d8f26e1e116d9aa727889aa8d2604a4a49fe1332e2ef73b404baea7a9fea266'
 RECOVERY_FLAGS = 0
@@ -35,7 +31,7 @@ FORMAT = 'conan-pff-recovery-v1'
 
 
 class RecoveryError(ValueError):
-    """No observations may be emitted from this failed scan."""
+    """The scan failed; no observations are emitted."""
 
 
 class ItemRejected(RecoveryError):
@@ -94,7 +90,7 @@ def _unicode(raw):
         value = raw.decode('utf-16-le', errors='strict')
     except UnicodeError as error:
         raise ItemRejected('PT_UNICODE has invalid UTF-16LE') from error
-    # Preserve literal whitespace and empty values; remove only one storage NUL.
+    # Strip one terminating NUL only; keep whitespace and empty values.
     if value.endswith('\0'):
         value = value[:-1]
     if '\0' in value:
@@ -114,7 +110,7 @@ def library_identity():
 
 
 class Native:
-    """Explicit ABI for owned opaque C handles, never Python object addresses."""
+    """ctypes bindings for libpff; handles are opaque C pointers."""
 
     def __init__(self, identity):
         if (identity.get('version') != LIBRARY_VERSION or identity.get('sha256') != LIBRARY_SHA256
@@ -343,7 +339,7 @@ def _run_worker(request_path, output_dir, limits):
 
 
 def _validate_response(data, request, limits):
-    """Verify the process boundary before creating any typed observations."""
+    """Check the worker's output before creating any observations."""
     if len(data) > limits.output_bytes // 2:
         raise RecoveryError('worker response is too large')
     def unique(pairs):
@@ -477,12 +473,7 @@ def _evidence(response, common, source_path, source_hash, examined_at):
 
 
 def recover_file(source, output_dir, common, examined_at, *, limits=None):
-    """Read an explicitly selected captured PFF; create a new output directory.
-
-    Returns a receipt. On any process/source/protocol failure, writes a failed
-    receipt and raises RecoveryError; no facts file is written. Caller provenance
-    must include image/exhibit and the original artifact path when known.
-    """
+    """Recover one PST/OST into a new output directory; return a receipt or raise RecoveryError."""
     limits = limits or Limits()
     if type(examined_at) is not int or examined_at <= 0:
         raise ValueError('examination time must be positive UTC microseconds')
@@ -535,7 +526,7 @@ def recover_file(source, output_dir, common, examined_at, *, limits=None):
         (output_dir / 'receipt.json').write_bytes(_json(receipt))
         return receipt
     except Exception as error:
-        # Do not retain unvalidated worker text after a failed native operation.
+        # Delete unvalidated worker output after a failure.
         for name in ('worker.json', 'worker.stderr', 'facts.json'):
             (output_dir / name).unlink(missing_ok=True)
         receipt.pop('facts_sha256', None)

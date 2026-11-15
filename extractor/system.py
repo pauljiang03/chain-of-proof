@@ -1,13 +1,4 @@
-"""The Windows PC image: the machine, its accounts, and what ran on it.
-
-Emits systemSetting, accountSeen, sessionEvent, programInstalled and programRun rows.
-Every row is one record of one artifact; nothing is joined up or inferred. dissect is
-imported inside functions, so the decoders in the first half of this file can be tested
-with plain Python 3.9.
-
-Copies of the same artifact (RegBack hives, non-current control sets) are read too.
-Their source variants stay separate, even when the recorded values are equal.
-"""
+"""The Windows PC: settings, accounts, sessions, installed programs and programs run."""
 from __future__ import annotations
 
 import codecs
@@ -25,8 +16,6 @@ from .store import EPOCH, us, us_from_filetime, us_from_unix
 DAY_US = 86_400_000_000
 NEVER = 0x7FFFFFFFFFFFFFFF
 LOCAL_ACCOUNT = "windows local account"
-
-# ---------------------------------------------------------------- pure decoders
 
 
 def filetime_us(ft):
@@ -214,10 +203,7 @@ def parse_prefetch(data):
 
 
 def prefetch_path(pf):
-    """The executable's own path from the prefetch file's file list.
-
-    Returns (path, how). A candidate whose path hash equals the hash in the header is
-    certain; a single name match is taken; anything else is left empty, not guessed."""
+    """Executable path from the prefetch file list -> (path, how): hash match, single name match, or empty."""
     name = pf["name"].upper()
     cands = []
     for f in pf["files"]:
@@ -344,8 +330,6 @@ def utf16z(data):
     return data[:end].decode("utf-16-le", "replace")
 
 
-# ---------------------------------------------------------------- plumbing
-
 Hive = namedtuple("Hive", "name hive path backup account sid")
 ROOTS = {"SYSTEM": "HKLM\\SYSTEM", "SOFTWARE": "HKLM\\SOFTWARE", "SAM": "HKLM\\SAM",
          "SECURITY": "HKLM\\SECURITY", "DEFAULT": "HKU\\.DEFAULT"}
@@ -353,10 +337,7 @@ WELL_KNOWN = {"S-1-5-18": "SYSTEM", "S-1-5-19": "LOCAL SERVICE", "S-1-5-20": "NE
 
 
 class _Out:
-    """Merge provenance and deduplicate only within the same source scope.
-
-    Equal-valued observations from a backup or another snapshot remain visible.
-    """
+    """Collects rows; deduplicates only within one source scope, so backup copies stay visible."""
 
     def __init__(self, ev, common, examined_at=None):
         self.ev, self.common, self.seen = ev, common, set()
@@ -375,13 +356,7 @@ class _Out:
 
 
 def _execution_attributes(out, program, path, recorded_at, source_kind, artifact, entry, **details):
-    """Reviewed-source opt-in only; broad programRun rows are never promoted.
-
-    Each source occurrence has a separate identity. The attribute timestamp is
-    examination time; the source's historical timestamp has its own typed value
-    and retained source/precision provenance.
-    Older callers without an explicit examination time retain their old rows.
-    """
+    """Typed execution attributes; `t` is the examination time, the source time a separate value."""
     from .source_scope import merge_scope, subject_scope
     provenance = merge_scope(out.common, dict(details, artifact=artifact, parser='extractor.system',
                       execution_source=source_kind, source_entry=entry, recorded_time_us=recorded_at,
@@ -393,8 +368,7 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
             or type(recorded_at) is not int or recorded_at < 0):
         return
     try:
-        # ISO text carries the source timestamp, not the examination observation.
-        # Keep retained resolution and raw FILETIME conversion separately below.
+        # The source's own time, not the examination time.
         recorded_iso = (EPOCH + timedelta(microseconds=recorded_at)).isoformat(timespec='microseconds').replace('+00:00', 'Z')
     except (OverflowError, ValueError) as error:
         out.ev.problem(artifact + ' source timestamp', error)
@@ -409,8 +383,7 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
                     'Security process-creation event': 'Security process creation'}.get(source_kind)
     if source_label is None or not any(isinstance(v, str) and v for v in (program, path)):
         return
-    # These labels classify retained source fields; they do not certify that an
-    # event happened. In particular Security is not relabelled to a Q11 source.
+    # Labels describe source fields; they do not certify that an event happened.
     metadata = [
         ('recorded_time', recorded_iso, dict(details.get('recorded_time_locator') or {},
                                             field='recorded source timestamp',
@@ -434,8 +407,7 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
             out.ev.problem(artifact + ' run counter', ValueError(
                 'UserAssist version 3 raw counter is below 5; interpreted count was not emitted'))
     for name, value, locator in metadata:
-        # Keep the identity locator inspectable without presenting its name-byte
-        # offset as the location of a timestamp, count, or interpretation label.
+        # Keep the identity locator apart; its byte offset is not this field's location.
         field_prov = dict(provenance)
         identity_fields = ('source_field', 'source_value', 'byte_offset', 'byte_length', 'raw_value_hex', 'encoding')
         identity = {key: field_prov.pop(key) for key in identity_fields if key in field_prov}
@@ -462,12 +434,9 @@ def _explicit_execution_path(value, allow_device=False):
 
 
 def _userassist_execution_path(decoded, version, list_id, raw_length):
-    # Dissect's UserAssist decoder requires Version 3/16 bytes or 5/72 bytes.
-    # The executable and shortcut lists are distinct; an .exe-looking value in
-    # the shortcut list is not promoted. Source profile:
-    # https://www.magnetforensics.com/blog/artifact-profile-userassist/
-    # dissect.regf REG_DWORD values are cstruct uint32 instances (int subclasses).
-    # Accept integer representations without coercing strings/floats or booleans.
+    # Executable lists only: version 3 with 16-byte records or version 5 with 72-byte records.
+    # Format: https://www.magnetforensics.com/blog/artifact-profile-userassist/
+    # dissect.regf returns REG_DWORD values as int subclasses; bools are rejected.
     if not isinstance(version, int) or isinstance(version, bool):
         return None
     if (version == 3 and raw_length == 16
@@ -482,7 +451,7 @@ def _userassist_execution_path(decoded, version, list_id, raw_length):
 
 
 def _prefetch_execution_name(data):
-    """Strict literal header decoding; no inferred file-list path is returned."""
+    """Executable name from the prefetch header only, never from the file list."""
     raw = data[16:76]
     end = next((i for i in range(0, len(raw), 2) if raw[i:i + 2] == b'\0\0'), len(raw))
     try:
@@ -531,13 +500,7 @@ def _art(h, key_path, value=None):
 
 
 def _where(h, control_set=None, current_control_set=None):
-    """Keep a registry copy's variant distinct from its filesystem snapshot.
-
-    A RegBack file on the base volume is still a backup. A control set is only
-    primary when Select\\Current identifies it; an unselected fallback has
-    unknown currentness. Backup identity takes precedence, while the selected
-    and observed control-set identifiers remain separately inspectable.
-    """
+    """Variant of a registry copy: RegBack is a backup; only the Select/Current control set is primary."""
     path = str(h.path) if h.path is not None else ""
     backup = getattr(h, "backup", False) or "\\regback\\" in path.replace("/", "\\").casefold()
     prov = {"hive": path, "source_variant": "primary" if path.strip() else "unknown"}
@@ -626,9 +589,6 @@ def _zone(ev, target):
     except Exception as e:
         ev.problem("time zone named by the registry (local-time artifacts were skipped)", e)
         return None
-
-
-# ---------------------------------------------------------------- system settings
 
 
 def _settings(out, ev, target, hives, zone, ctx):
@@ -821,9 +781,6 @@ def _partitions(out, ev, target, ctx):
             ev.problem("partition table of disk %d" % index, e)
 
 
-# ---------------------------------------------------------------- accounts
-
-
 def _accounts(out, ev, hives, sids):
     profiles = {}
     for h in hives:
@@ -898,9 +855,6 @@ def _accounts(out, ev, hives, sids):
                         time_meaning="last logon time stored in the account's SAM record", **_where(h))
 
 
-# ---------------------------------------------------------------- registry: sessions
-
-
 def _registry_sessions(out, ev, hives):
     for h in hives:
         if h.name != "SYSTEM":
@@ -918,8 +872,6 @@ def _registry_sessions(out, ev, hives):
                         artifact=_art(h, path, "ShutdownTime"), source="registry",
                         time_meaning="ShutdownTime value of this control set", **_where(h, cs, current))
 
-
-# ---------------------------------------------------------------- event logs
 
 A, K, P = "microsoft-windows-security-auditing", "microsoft-windows-kernel-general", "microsoft-windows-kernel-power"
 # (provider, event id) -> (what, where the account is, what the event says)
@@ -994,8 +946,7 @@ def _events(out, ev, target, sids):
 
 
 def _event(out, ev, d, where, sids, *, _parser_record_id_text=False, _parser_row_ordinal=None):
-    # This adapter's ts is EVTX TimeCreated; its EventRecordID is a string field.
-    # The typed reader keeps literal source fields apart from legacy summaries.
+    # Dissect's ts is EVTX TimeCreated; EventRecordID is a string.
     from .event_attributes import emit_event_attributes
     emit_event_attributes(out, ev, d, parser_record_id_text=_parser_record_id_text,
                           parser_row_ordinal=_parser_row_ordinal)
@@ -1064,8 +1015,6 @@ def _event(out, ev, d, where, sids, *, _parser_record_id_text=False, _parser_row
                 time_meaning="time the Windows Installer logged the completed installation", **base)
 
 
-# ---------------------------------------------------------------- installed programs
-
 UNINSTALL = (("Microsoft\\Windows\\CurrentVersion\\Uninstall", "native"),
              ("Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall", "32-bit (Wow6432Node)"))
 
@@ -1117,9 +1066,6 @@ def _program(out, ev, h, key, zone, view, scope, what, **extra):
                 time_meaning="InstallDate value: a date with no time of day",
                 time_zone="local date, converted from %s" % zone, **prov)
     return name, version
-
-
-# ---------------------------------------------------------------- programs run
 
 
 def _prefetch(out, ev, target):
@@ -1320,8 +1266,7 @@ DIALOG_MRU = ("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ComDlg32\
 
 
 def _user_lists(out, ev, hives):
-    """Per-user lists of programs that keep no time per program: the key's last-write
-    time is the only time the artifact attaches, and the row says so."""
+    """Per-user program lists with no time per program; rows use the key's last-write time."""
     for h in hives:
         if not h.sid:
             continue
@@ -1380,8 +1325,7 @@ def _jobs(out, ev, target, zone):
 
 
 def _task_cache(out, ev, target, hives):
-    """Task Scheduler 2.0: the registry keeps each task's last run time, the task file
-    (named by the registry's Path value) names the program the task runs."""
+    """Task Scheduler 2.0: last run from the registry, program from the task file at its Path."""
     for h in hives:
         if h.name != "SOFTWARE":
             continue
@@ -1406,9 +1350,6 @@ def _task_cache(out, ev, target, hives):
                             **_where(h))
             except Exception as e:
                 ev.problem("%s (%s)" % (art, name), e)
-
-
-# ---------------------------------------------------------------- entry point
 
 
 def extract(ev, target, ctx):

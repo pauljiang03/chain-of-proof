@@ -1,15 +1,4 @@
-"""Inventory concrete Windows artifact containers without interpreting their contents.
-
-Standard per-profile layouts and registered home directories are searched on every
-mounted drive. Only existing regular files are emitted; patterns select directory
-entries and are never emitted as observed paths. This is a bounded inventory, not
-an absence claim or an assertion that an application executed. Files outside the
-listed layouts, redirected application data, and alternate streams are not covered.
-
-A complete readable file yields fileContent; skipped/failed hashes yield fileSeen.
-Both are examination observations. Filesystem birth/modified times remain distinct
-provenance fields and are never substituted for examination time or application use.
-"""
+"""Inventory and hash Windows artifact files in standard profile layouts."""
 from __future__ import annotations
 
 import hashlib
@@ -26,7 +15,6 @@ MAX_FILES = 4096
 MAX_DIRECTORY_ENTRIES = 20000
 CHUNK_BYTES = 1024 * 1024
 
-# Folder layouts, not case-specific users, names, or expected benchmark answers.
 USER_LAYOUTS = (
     ("AppData/Local/Microsoft/Outlook", "outlook_mailbox", (".pst", ".ost")),
     ("Local Settings/Application Data/Microsoft/Outlook", "outlook_mailbox", (".pst", ".ost")),
@@ -50,7 +38,7 @@ def _win(path):
 
 
 def _children(ev, directory):
-    """Bound directory listing and log read failures without stopping other paths."""
+    """List a directory within limits; a failure is logged and other paths continue."""
     try:
         if not directory.exists() or directory.is_symlink() or not directory.is_dir():
             return []
@@ -200,8 +188,7 @@ def extract(ev, target, ctx):
         try:
             if path.is_symlink() or not path.is_file():
                 continue
-            # Resolve ancestor junctions such as Local Settings -> AppData/Local,
-            # so one physical file is not reported again under a compatibility alias.
+            # Resolve junctions (Local Settings -> AppData/Local) so a file is not listed twice.
             path = path.resolve(strict=True)
             source = _win(path)
             key = source.casefold()

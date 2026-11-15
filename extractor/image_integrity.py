@@ -1,10 +1,4 @@
-"""Hash logical image bytes and retain acquisition digests as separate evidence.
-
-Container-segment hashes bind downloads; they are not hashes of the acquired disk.
-This reader streams the complete logical image and emits no digest for an incomplete
-read. A matching pair establishes equality of two recorded digests, not authenticity
-of the original acquisition or collision resistance of MD5.
-"""
+"""Hash the full logical image and keep the EWF acquisition digests as separate evidence."""
 from __future__ import annotations
 
 import hashlib
@@ -19,7 +13,7 @@ BLOCK = 4 * 1024 * 1024
 
 
 def hash_stream(stream, size):
-    """Require exactly the advertised logical size, including a check for surplus bytes."""
+    """Hash a stream that must be exactly the advertised size, with no extra bytes."""
     if type(size) is not int or size < 0:
         raise ValueError("logical image size must be a nonnegative integer")
     hashes = {algorithm: hashlib.new(algorithm) for algorithm in ALGORITHMS}
@@ -65,7 +59,7 @@ def inspect(path):
                         recorded.append({"algorithm": algorithm, "digest": value,
                                          "segment": segment.name, "section": section,
                                          "offset": offset})
-        # Contradictory declarations are retained, never collapsed to a favorable one.
+        # Keep every declaration, even contradictory ones.
         comparisons = [{**entry, "recomputed": actual[entry["algorithm"]],
                         "matches": entry["digest"] == actual[entry["algorithm"]]}
                        for entry in recorded]

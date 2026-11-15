@@ -1,8 +1,4 @@
-"""Reusable extraction dispatch over an explicitly supplied exhibit manifest.
-
-The legacy --out command and versioned intake share ``extract``. No case-specific
-image names, identities, policies, timezone or observation date are selected here.
-"""
+"""Run the selected readers over the images named in an exhibit manifest."""
 from __future__ import annotations
 
 import argparse
@@ -40,13 +36,12 @@ READER_ROLES = {"windows": ("pc",), "media": ("removable",),
                    for reader in sorted({r for readers in READERS.values() for r in readers})}}
 READER_ORDER = ("windows", "media", "system", "structured_system", "webcloud", "cloud_attributes", "filetraces", "inventory", "optical", "content",
                 "hacking", "host_attributes", "application_identity", "artifact_containers", "document_metadata", "image_integrity", "antivirus")
-# These expensive readers need an explicit selection. Scanning also needs a local
-# scanner and signature database; never start an update or service implicitly.
+# These slow readers run only when selected explicitly.
 DEFAULT_READERS = tuple(reader for reader in READER_ORDER if reader not in ("image_integrity", "antivirus"))
 
 
 def selection(exhibits, readers=None):
-    """Expand a caller-approved reader allowlist into explicit exhibit pairs."""
+    """Pair each chosen reader with every exhibit whose role it supports."""
     chosen = list(DEFAULT_READERS) if readers is None else list(readers)
     if not chosen or any(not isinstance(r, str) or r not in READER_ROLES for r in chosen):
         raise ValueError("readers must be a nonempty list of supported reader IDs")
@@ -59,12 +54,7 @@ def selection(exhibits, readers=None):
 
 def extract(images, exhibits, *, case, examined_at, selected=None, evidence=None,
             previous_meta=None, manifest_source="explicit acquisition manifest"):
-    """Run approved reader/exhibit pairs into a new or caller-owned Evidence object.
-
-    Individual reader failures remain visible in health and do not erase partial
-    records. A missing FAT timezone is a failure, never an invented UTC setting.
-    This function does not write files or modify a previous snapshot.
-    """
+    """Run the selected reader/exhibit pairs; failures are logged and partial records kept."""
     images = Path(images)
     ev = evidence if evidence is not None else Evidence()
     previous_meta = previous_meta or {}
@@ -116,13 +106,11 @@ def extract(images, exhibits, *, case, examined_at, selected=None, evidence=None
                     log.extend(extract_media(ev, images / name, exhibit, fat_tz, observation, tool,
                                              acquisition=acquisition[name]))
                 else:
-                    # These readers explicitly open the examined base filesystem.
-                    # Whole-image, optical-history and scanner readers declare
-                    # their more specific source origins at their read sites.
+                    # Whole-image, optical and scanner readers set their own source origin.
                     origin = (base_volume_scope() if reader not in ("image_integrity", "optical", "antivirus")
                               else {"source_snapshot": "unknown", "source_variant": "unknown"})
                     if reader == "antivirus":
-                        origin = base_volume_scope()  # input view, not scanner-output origin
+                        origin = base_volume_scope()  # the scanned input, not the scanner output
                     ctx = {"common": {"image": name, "exhibit": exhibit_id, "tool": tool, **origin},
                            "examined_at": observation, "pc_time_zone": fat_tz,
                            "acquisition": acquisition[name]}
@@ -174,7 +162,7 @@ def main(argv=None):
     ev, metadata, log = extract(images, exhibits, case=args.case,
                                 examined_at=observation_time(args.examined_at), selected=selected,
                                 manifest_source=f"acquisition manifest {Path(args.exhibits).name}")
-    # Reserve the destinations before the legacy writers, which otherwise overwrite.
+    # Create the files exclusively first; the writers would overwrite them.
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     with Path(args.out).open("x"):
         pass

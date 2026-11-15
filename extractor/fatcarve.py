@@ -1,11 +1,4 @@
-"""FAT directory entries left in clusters that no current file owns.
-
-A quick format rewrites the boot sector, the allocation table and the root directory.
-It does not touch the old subdirectory clusters, and each of those still begins with
-its "." and ".." entries. That signature is how they are found here. Nothing is
-guessed: an entry's name, size and times are read from the entry, and a folder whose
-own name sat in the overwritten root is called "[lost folder N]" (N = its first cluster).
-"""
+"""Recover FAT subfolders a quick format left behind; each starts with "." and ".." entries."""
 from __future__ import annotations
 
 import struct
@@ -144,10 +137,7 @@ def carve_fat32(vol, bytes_per_sector: int, sectors_per_cluster: int, reserved_s
 
 
 def folder_paths(found: Dict[int, Directory]) -> Dict[int, str]:
-    """A path for each recovered folder, from the folders that list it.
-
-    A folder is only trusted to name its children when its own "." entry agrees with
-    where it was found; otherwise it comes from an older layout of the device."""
+    """Paths of recovered folders; a folder names children only if its "." entry matches its place."""
     names: Dict[int, str] = {}
     for cluster, d in found.items():
         if d.own != cluster:
@@ -168,13 +158,7 @@ def folder_paths(found: Dict[int, Directory]) -> Dict[int, str]:
 
 
 def fat_times_utc(created: datetime, modified: datetime, tz: ZoneInfo):
-    """FAT stores local wall-clock time with no zone -> (created µs, modified µs, note).
-
-    Windows converts with the UTC offset in force at the moment it writes the stamp,
-    not the offset that applied on the stamp's own date. A copy writes the entry once
-    and keeps the source's modified time, so a modified time older than the created
-    time was written at creation and takes that moment's offset. (On this case the
-    rule reproduces, to the second, the UTC times exFAT recorded for the same files.)"""
+    """FAT local times -> UTC µs, using the offset in force when Windows wrote each stamp."""
     made = created.replace(tzinfo=tz)
     offset = made.utcoffset()
     created_us = us(made.astimezone(timezone.utc))

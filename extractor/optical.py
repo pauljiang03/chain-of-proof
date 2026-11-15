@@ -1,21 +1,4 @@
-"""An optical disc image holding a UDF file system (ECMA-167 with the OSTA UDF rules).
-
-What is read, and from where:
-
-* the volume serial, the way the Windows UDF driver derives it: four byte-wise sums
-  over the 512-byte File Set Descriptor;
-* the recording timestamp stored in each distinct File Set Descriptor. This is a
-  descriptor timestamp, not proof of a format action or a completed write;
-* the files the disc lists now;
-* files the disc no longer lists. A write-once disc written in packets never loses
-  anything: every change appends new file entries and a new allocation table (the
-  VAT), and each older table still describes the disc as it was. Files named only by
-  an older table, or by a directory entry flagged "deleted", are emitted as recovered;
-* the digests stored in the E01 container.
-
-Everything below `open_image` is plain parsing of bytes and needs only the standard
-library; dissect is imported inside the functions that open an image.
-"""
+"""UDF optical disc images: volume serial, descriptor times, listed files and older VAT states."""
 from __future__ import annotations
 
 import calendar
@@ -30,7 +13,6 @@ SECTOR = 2048
 PARSER = "extractor/optical.py (ECMA-167 / OSTA UDF structures, read directly)"
 OBSERVED = "when the image was examined, not an event on the device"
 
-# ---------------------------------------------------------------- E01 container
 
 EWF_MAGIC = (b"EVF\x09\x0d\x0a\xff\x00", b"LVF\x09\x0d\x0a\xff\x00")
 
@@ -165,8 +147,6 @@ def emit_image_digests(ev, path, ctx) -> int:
     return n
 
 
-# ---------------------------------------------------------------- UDF: small pieces
-
 TAG_PVD, TAG_AVDP, TAG_VDP, TAG_PD, TAG_LVD, TAG_TD = 1, 2, 3, 5, 6, 8
 TAG_FSD, TAG_FID, TAG_AED, TAG_FE, TAG_EFE = 256, 257, 258, 261, 266
 KNOWN_TAGS = frozenset(list(range(1, 10)) + list(range(256, 267)))
@@ -213,8 +193,7 @@ def parse_tag(buf: bytes, check_crc: bool = True) -> Optional[Tag]:
 
 
 def cs0(data: bytes) -> str:
-    """OSTA compressed unicode: first byte 8 = one byte per character, 16 = two.
-    254 and 255 are the same two encodings, used for the name of a deleted entry (UDF 2.1.1)."""
+    """OSTA compressed unicode: 8 = one byte per char, 16 = two; 254/255 for deleted names (UDF 2.1.1)."""
     if not data:
         return ""
     if data[0] in (8, 254):
@@ -285,9 +264,7 @@ def iso(us: int) -> str:
 
 
 def udf_serial32(fsd: bytes) -> int:
-    """Volume serial as Windows shows it for a UDF volume: four independent byte sums
-    over the File Set Descriptor (byte i goes to sum i mod 4), read as one
-    little-endian 32-bit number."""
+    """Windows' UDF serial: four byte sums over the FSD (byte i to sum i mod 4), little-endian."""
     sums = [0, 0, 0, 0]
     for i, b in enumerate(fsd):
         sums[i & 3] = (sums[i & 3] + b) & 0xFF
@@ -515,8 +492,6 @@ def parse_fsd(buf: bytes) -> Fsd:
     return Fsd(bytes(buf[16:28]), dstring(buf[112:240]), dstring(buf[304:336]), parse_long_ad(buf, 400)[0])
 
 
-# ---------------------------------------------------------------- UDF: the volume
-
 @dataclass
 class Listed:
     """One file as one state of the disc names it."""
@@ -556,7 +531,6 @@ class Udf:
         self.lvd: Optional[Lvd] = None
         self.volume_set = ""
 
-    # -- volume structures
     def _anchor(self) -> Tuple[int, Tuple[int, int, int, int]]:
         spots = [s + 256 for s in reversed(self.session_starts)] + [256, self.sectors - 1,
                                                                     self.sectors - 257, 512]
@@ -636,7 +610,6 @@ class Udf:
                     except Exception as e:
                         self.problems.append((f"file entry at sector {sector}", e))
 
-    # -- addressing
     def physical(self, block: int, partition: int, vat: Optional[Vat]) -> int:
         if self.lvd is None or self.lvd.block_size != SECTOR:
             raise ValueError("a supported logical block size is required for addressing")
@@ -688,11 +661,7 @@ class Udf:
         out.append((sector, length))
 
     def _mapped_runs(self, block, length, partition, vat):
-        """Resolve each logical block before forming physical byte ranges.
-
-        Consecutive virtual blocks need not be physically adjacent. This applies
-        to file data, directory data and allocation-descriptor continuations.
-        """
+        """Map each block separately; consecutive virtual blocks need not be physically adjacent."""
         if type(length) is not int or length < 0:
             raise ValueError("invalid extent byte length")
         out = []
@@ -772,7 +741,6 @@ class Udf:
                 yield data
                 done += want
 
-    # -- states of the disc
     def _is_vat(self, e: FileEntry) -> bool:
         if e.file_type == FT_VAT:
             return True
@@ -854,10 +822,8 @@ class Udf:
             except Exception as err:
                 self.problems.append((f"{child} in the directory at sector {sector}", err))
 
-    # -- what no state of the disc reaches
     def unreferenced(self) -> Tuple[List[int], List[Listed]]:
-        """File entries no allocation table leads to -> (sectors of superseded copies of
-        files that are listed somewhere, entries of files listed nowhere)."""
+        """Entries no allocation table reaches -> (superseded copies' sectors, entries listed nowhere)."""
         known = {}
         for v in self.versions:
             for f in v.files:
@@ -915,8 +881,6 @@ class Udf:
                     out.append((s, 1))
         return out
 
-
-# ---------------------------------------------------------------- the image, and rows
 
 VRS_IDS = (b"CD001", b"BEA01", b"NSR02", b"NSR03", b"TEA01", b"BOOT2", b"CDW02")
 
@@ -1062,8 +1026,8 @@ def extract(ev, path, ctx) -> None:
         ev.problem(f"{path.name}: {where}", err)
     common = dict(common, parser=PARSER)
 
-    # Read each descriptor itself, including descriptors no surviving VAT references.
-    # A serial is only a 32-bit sum, so do not use it alone to deduplicate timestamps.
+    # Read every descriptor copy, even ones no surviving VAT references.
+    # A serial is only a 32-bit sum, so it cannot deduplicate timestamps alone.
     recordings = {}
     recorded_groups = {}
     for sector, raw in sorted(udf.fsd_copies.items()):
@@ -1111,8 +1075,7 @@ def extract(ev, path, ctx) -> None:
             prov["file_set_recorded_utc"] = iso(recordings[fsd_sector][0])
         ev.add("volumeOnDevice", examined, 1, disc, "%08X" % serial, **prov)
 
-    # One event per disc/serial/recording-time; repeat FSD copies are provenance,
-    # not extra events. Keep the examination observation above at examined_at.
+    # One event per disc, serial and recording time; extra FSD copies are only provenance.
     for (serial, timestamp), sectors_ in sorted(recorded_groups.items()):
         sector = sectors_[-1]
         _timestamp, conversion, fsd = recordings[sector]
