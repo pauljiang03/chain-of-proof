@@ -33,27 +33,10 @@ The [60-question package](comparison/mulder/README.md) and [original 20-item pac
 We will run it after implementation and reference review are complete, with the user's instruction.
 Old reports and old scoring methods are available in Git history.
 
-## Investigation app
+## Investigation CLI and reports
 
-Use the local browser app to open a saved report or start an investigation.
+The CLI is the primary interface. It uses an extracted facts file, public case context, and your questions.
 Install this checkout with `pip install -e .`, then run:
-
-```sh
-cop serve
-```
-
-The app uses an extracted facts file, public case context, and your questions.
-Select the model backend and time limit, then start the investigation.
-The activity view shows completed tool calls. You can stop the run and retain its partial work.
-Each finding links to its records and proof. Refused claims show the unmet conditions when known.
-AI judgments remain separate from checked findings.
-
-The app includes a marked synthetic example. It is not a benchmark result.
-Use the report controls to download HTML, Markdown, or JSON.
-Open the HTML report in a browser to print it or save it as PDF.
-The app does not provide a separate PDF generator.
-
-The same workflow is available from the terminal:
 
 ```sh
 cop investigate --name dev/my-case --facts /path/facts.json \
@@ -69,6 +52,22 @@ cop verify --run runs/dev/my-case/run.json --facts /path/facts.json
 Use `python -m app.cli` in place of `cop` when the console command is unavailable.
 New app investigations save `report.html`, `report.md`, and `run.json` in their run directory.
 The `report` command writes a new copy and refuses to overwrite an existing file.
+Press Ctrl+C to stop an investigation and retain its partial work.
+Each finding links to its records and proof. Refused claims show the unmet conditions when known.
+AI judgments remain separate from checked findings.
+
+An optional local browser interface uses the same runner:
+
+```sh
+cop serve
+```
+
+Use it to open saved reports, start an investigation, inspect completed tool calls, or stop a run.
+The browser interface includes a marked synthetic example. It is not a benchmark result.
+Use the report controls to download HTML, Markdown, or JSON.
+Open the HTML report in a browser to print it or save it as PDF.
+The app does not provide a separate PDF generator.
+
 The current release runs from an editable repository checkout with the Lean project installed.
 Raw disk images require the extraction step described below.
 The local app does not assign benchmark scores. Model access uses the local CLI login or API environment.

@@ -4,6 +4,8 @@ The user requested a front end and CLI with a report as output, described as an 
 
 Base: main `9f67dfd`. Root integrates and pushes. Use the existing investigator, restricted tools, audit, certificates, and report. No new agent framework or proof rules.
 
+The user clarified that the CLI is the primary interface. Finish the CLI-to-report path first; keep the browser layer optional and small.
+
 ## Ownership
 
 | Lane | Owner | Files |
