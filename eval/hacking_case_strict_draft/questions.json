@@ -1,0 +1,1214 @@
+{
+  "schema_version": 2,
+  "case_id": "nist-cfreds-hacking-strict-review-v1",
+  "title": "NIST CFReDS Hacking Case: all 31 official questions",
+  "time_zone": null,
+  "contract_revision": "hacking-strict-public-review-draft-v1",
+  "instructions": [
+    "Answer all 31 official questions using only supplied evidence and the public case context. Do not read private references, published answers, saved scores or other systems' answers.",
+    "Return {schema_version:2, case_id, answers:[{question_id,status,answer}]}. Status is answered, unknown or unanswered. False and zero are claims, not synonyms for unknown.",
+    "Public schemas define typed answer roles. Required fields describe a complete response; omit unsupported fields and explain limitations outside answer. Never guess to fill a field.",
+    "Keep supporting observations, evidence paths, tools, reasoning, and qualifications in top-level submission appendices or the report, outside answer. Extras inside answer are extra assertions under the deterministic rubric.",
+    "Lists are unordered multisets. Preserve distinct observations and meaningful duplicates. Submit only requested items; do not pad with alternatives. An unresolved reference is reported separately, not silently counted wrong.",
+    "String matching ignores case and repeated whitespace only unless a question publishes another rule. Preserve filenames, full paths, account identities and unusual characters. Use single Windows path separators; do not invent a drive prefix.",
+    "Timestamps require an explicit source-supported UTC offset. Do not infer local display timezone from this profile or shift timestamps to match another source. Printed precision and event meaning must remain explicit in the evidence appendix.",
+    "An answer score is deterministic agreement with a versioned reference. It is separate from proof verification, extraction completeness, attribution, and investigation completeness.",
+    "The public source obscures a suspect name with equals signs to avoid indexing; the official scenario says those signs do not occur in the evidence. The wording is preserved in the prompts.",
+    "Where a public list_rules subset count is declared, submit exactly that many distinct supported examples. The accepted pool is private; extra or repeated submissions are not a shortcut to full credit.",
+    "For Q3 and Q8, this contract interprets the published local-time display in the contemporaneous time zone addressed by Q4. Submit a source-supported explicit offset; the public profile does not disclose that offset. This is a declared comparison convention, not proof of the original display configuration.",
+    "For Q31, report the antivirus result as a Boolean and document the actual scanner, version/signature date, scope, detections and failures outside answer. Boolean agreement does not verify that the examination occurred or that every infection was found.",
+    "Every scored answer leaf declares x-claim-requirement. This checks compatibility with specific reviewed claim roles, not English entailment or answer completeness. A currently unsupported stronger role remains unsupported; do not replace it with a generic string-valued observation.",
+    "HELD PUBLIC REVIEW DRAFT: model_run_ready is false. Do not launch model experiments or scoring from this contract.",
+    "x-claim-row same_claim_part requires all retained fields of that object to originate in the same candidate and flattened claim part. It does not itself enforce case/exhibit membership, personal identity, cross-question linkage or list completeness.",
+    "Selected-case exhibit/source membership must be enforced at runtime before any model run. Exact recorded host/configuration and scoped inventory roles below remain narrow interpretations, not proof of actual use or global completeness. Unsupported stronger meanings remain empty."
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "What is the image hash? Does the acquisition and verification hash match?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "image_hash": {
+            "type": "object",
+            "properties": {
+              "algorithm": {
+                "type": "string",
+                "description": "Hash algorithm name.",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "asserted_digest_algorithm"
+                  ],
+                  "meaning": "Algorithm of a reviewed logical/acquisition image-digest role; a comparison result requires the separate equality relation.",
+                  "evidence_needed": "A fixed reviewed image-digest role or a same-algorithm digest comparison over the bound logical-image subject. Keep algorithm/digest source association explicit. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+                  "selectors": [
+                    {
+                      "form": "imageDigestsAgree",
+                      "field": "algorithm"
+                    },
+                    {
+                      "form": "attributeRecorded",
+                      "field": "algorithm"
+                    }
+                  ]
+                }
+              },
+              "digest": {
+                "type": "string",
+                "description": "Hexadecimal digest of the reconstructed acquired media, not the compressed container or an individual segment.",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "recomputed_logical_image_digest",
+                    "recorded_attribute_image_logical_md5_string",
+                    "recorded_attribute_image_logical_sha1_string",
+                    "recorded_attribute_image_logical_sha256_string"
+                  ],
+                  "meaning": "Digest recomputed over logical media bytes, not container or segment bytes.",
+                  "evidence_needed": "A completed logical-media hash calculation tied to the examined image subject. A retained acquisition checksum is not required merely to report a computed digest; it is required for the separate comparison assertion. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+                  "selectors": [
+                    {
+                      "form": "imageDigestsAgree",
+                      "field": "logical_digest"
+                    },
+                    {
+                      "form": "attributeRecorded",
+                      "field": "value"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "algorithm",
+              "digest"
+            ],
+            "additionalProperties": false,
+            "x-claim-row": {
+              "mode": "same_claim_part"
+            }
+          },
+          "acquisition_verification_match": {
+            "type": "boolean",
+            "description": "Agreement of acquisition and verification media digests; identify their observations separately in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "same_algorithm_same_subject_digest_equality_not_authenticity"
+              ],
+              "meaning": "Equality of acquisition and recomputed logical-image digests for the same algorithm and subject; not original authenticity.",
+              "evidence_needed": "Both bound digests and the approved equality relation. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "imageDigestsAgree",
+                  "field": "digests_match"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "image_hash",
+          "acquisition_verification_match"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q2",
+      "prompt": "What operating system was used on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "operating_system": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_product_name_string"
+              ],
+              "meaning": "operating-system product name recorded in configuration",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "operating_system"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q3",
+      "prompt": "When was the install date?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "installed_at": {
+            "type": "string",
+            "description": "Recorded OS installation timestamp in ISO 8601 with explicit offset.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_install_time_string"
+              ],
+              "meaning": "installation timestamp recorded by the operating system",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "installed_at"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "prompt": "What is the timezone settings?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "time_zone_setting": {
+            "type": "string",
+            "description": "Effective recorded time-zone label with its UTC offset. Keep registry key identifiers and conversion reasoning outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_effective_timezone_label_and_offset_time_zone_setting"
+              ],
+              "meaning": "Q4 requested answer value /properties/time_zone_setting under the full public prompt and schema description.",
+              "evidence_needed": "The schema requests an effective label with UTC offset. host_attributes emits only TimeZoneKeyName or StandardName as the typed value; Bias/DaylightBias remain provenance. A reviewed effective-offset/display convention rule and exact composite role are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "time_zone_setting"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q5",
+      "prompt": "Who is the registered owner?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "registered_owner": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_registered_owner_string"
+              ],
+              "meaning": "registered-owner text, not proof of ownership or user identity",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "registered_owner"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q6",
+      "prompt": "What is the computer account name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_account_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_account_name_string"
+              ],
+              "meaning": "configured computer account name",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "computer_account_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q7",
+      "prompt": "What is the primary domain name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "primary_domain_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_primary_domain_string"
+              ],
+              "meaning": "configured primary-domain name",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "primary_domain_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q8",
+      "prompt": "When was the last recorded computer shutdown date/time?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "shutdown_at": {
+            "type": "string",
+            "description": "Last recorded shutdown timestamp in ISO 8601 with explicit offset.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_last_shutdown_string"
+              ],
+              "meaning": "shutdown timestamp retained by the source",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "shutdown_at"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/shutdown_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "prompt": "How many accounts are recorded (total number)?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total recorded local operating-system accounts, including built-in accounts.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_account_count_integer"
+              ],
+              "meaning": "reader-reported account count under its stated enumeration scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "account_count"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q10",
+      "prompt": "What is the account name of the user who mostly uses the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Account identified as predominantly used, with the selection basis outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_predominant_account_identity_account_name"
+              ],
+              "meaning": "Q10 requested answer value /properties/account_name under the full public prompt and schema description.",
+              "evidence_needed": "A justified account population, usage metric, interval and comparison rule are missing. Account names and isolated logon counters do not establish predominant use. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q11",
+      "prompt": "Who was the last user to logon to the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Last recorded logon identity; distinguish a recorded setting from a successful event in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_last_successful_logon_identity"
+              ],
+              "meaning": "Identity of the last user to successfully log on to the selected computer, not a default/last-logon configuration name.",
+              "evidence_needed": "DefaultUserName is a retained configuration value. It does not establish the last successful logon or the identity of the user who performed it; a caveat in an appendix cannot enforce that distinction. Require source-supported successful-logon identity and a reviewed last-event ordering/coverage rule tied to the selected case source."
+            }
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q12",
+      "prompt": "A search for the name of “G=r=e=g S=c=h=a=r=d=t” reveals multiple hits. One of these proves that G=r=e=g S=c=h=a=r=d=t is Mr. Evil and is also the administrator of this computer. What file is it? What software program does this file relate to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full evidence path identifying the file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_person_alias_admin_file_identity_file_path"
+              ],
+              "meaning": "Q12 requested answer value /properties/file_path under the full public prompt and schema description.",
+              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          },
+          "program": {
+            "type": "string",
+            "description": "Software associated with that file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_person_alias_admin_file_identity_program"
+              ],
+              "meaning": "Q12 requested answer value /properties/program under the full public prompt and schema description.",
+              "evidence_needed": "A generic source.path or app.name does not prove that this file connects the named person, Mr. Evil alias and administrator status. Same-source configuration fields remain assertions, not verified personal identity; a reviewed attribution and source/file association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "file_path",
+          "program"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q13",
+      "prompt": "List the network cards used by this computer",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_cards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Vendor and model as recorded; preserve distinct interfaces.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_network_card_actual_use_items"
+                ],
+                "meaning": "Q13 requested answer value /properties/network_cards/items under the full public prompt and schema description.",
+                "evidence_needed": "The NetworkCards description role records configured inventory. It does not establish that an interface was actually used by the computer. An interface-use rule and identity link are absent; this is not a completeness objection. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "network_cards"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q14",
+      "prompt": "This same file reports the IP address and MAC address of the computer. What are they?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "Dotted-decimal IPv4 address reported in the referenced file.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_referenced_setup_file_network_identity_ip_address"
+              ],
+              "meaning": "Q14 requested answer value /properties/ip_address under the full public prompt and schema description.",
+              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          },
+          "mac_address": {
+            "type": "string",
+            "description": "Six hexadecimal octets separated by colons.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_referenced_setup_file_network_identity_mac_address"
+              ],
+              "meaning": "Q14 requested answer value /properties/mac_address under the full public prompt and schema description.",
+              "evidence_needed": "Generic network IP/MAC roles can come from host configuration or setup files. Even same-claim-part coherence does not bind them to the same file referenced in Q12, or establish the computer/setup affiliation. A cross-question source-identity rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "ip_address",
+          "mac_address"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q15",
+      "prompt": "An internet search for vendor name/model of NIC cards by MAC address can be used to find out which network interface was used. In the above answer, the first 3 hex characters of the MAC address report the vendor of the card. Which NIC card was used during the installation and set-up for LOOK@LAN?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_card": {
+            "type": "string",
+            "description": "Network-interface vendor identity at the precision of the reference answer. Put the supported model and prefix-association evidence outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_setup_interface_identity_network_card"
+              ],
+              "meaning": "Q15 requested answer value /properties/network_card under the full public prompt and schema description.",
+              "evidence_needed": "Vendor-prefix agreement or a configured interface does not establish which interface was used in LOOK@LAN setup. A source-scoped setup identity/use rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "network_card"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q16",
+      "prompt": "Find 6 installed programs that may be used for hacking.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Program product name without version or capability descriptions; put those details and evidence of actual use outside answer.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_installed_hacking_capability_program_items"
+                ],
+                "meaning": "Q16 requested answer value /properties/programs/items under the full public prompt and schema description.",
+                "evidence_needed": "programInstalledAt.program establishes a recorded installation name only. The requested hacking capability requires a reviewed capability classification rule; six-example completeness is not the reason for blocking individual names. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/programs": {
+            "mode": "subset",
+            "count": 6
+          }
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "prompt": "What is the SMTP email address for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mr_evil_smtp_account_identity_email_address"
+              ],
+              "meaning": "Q17 requested answer value /properties/email_address under the full public prompt and schema description.",
+              "evidence_needed": "An app.config.email field may be NNTP, generic profile or mIRC email. It proves neither SMTP role nor attribution to Mr. Evil. An account/service/person association rule is absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q18",
+      "prompt": "What are the NNTP (news server) settings for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "nntp_server": {
+            "type": "string",
+            "description": "Recorded NNTP server hostname; document other connection settings outside answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mr_evil_nntp_settings_identity_nntp_server"
+              ],
+              "meaning": "Q18 requested answer value /properties/nntp_server under the full public prompt and schema description.",
+              "evidence_needed": "A configured NNTP hostname is narrow source text. Attribution of that setting to Mr. Evil and the requested account/source requires an explicit identity rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "nntp_server"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q19",
+      "prompt": "What two installed programs show this information?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Product name. Expand a leading MS abbreviation to Microsoft; do not infer a different product or edition.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_installed_program_relevant_settings_identity_items"
+                ],
+                "meaning": "Q19 requested answer value /properties/programs/items under the full public prompt and schema description.",
+                "evidence_needed": "An app.name or installation name does not establish both installation and containment of the SMTP/NNTP settings referenced by prior questions. A reviewed installed-program/source/settings association and any product-name expansion rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q20",
+      "prompt": "List 5 newsgroups that Mr. Evil has subscribed to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "newsgroups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_mr_evil_newsgroup_subscription_identity_items"
+                ],
+                "meaning": "Q20 requested answer value /properties/newsgroups/items under the full public prompt and schema description.",
+                "evidence_needed": "A subscription configuration role, even when available, does not prove Mr. Evil account identity. A retained DBX mailbox name is not a subscription state. Need account-bound subscription evidence and an identity rule; individual valid examples need not prove a complete list. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "newsgroups"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/newsgroups": {
+            "mode": "subset",
+            "count": 5
+          }
+        }
+      }
+    },
+    {
+      "id": "Q21",
+      "prompt": "A popular IRC (Internet Relay Chat) program called MIRC was installed. What are the user settings that was shown when the user was online and in a chat channel?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "real_name": {
+            "type": "string",
+            "description": "Recorded mIRC user setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mirc_online_settings_source_identity_real_name"
+              ],
+              "meaning": "Q21 requested answer value /properties/real_name under the full public prompt and schema description.",
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          },
+          "email_address": {
+            "type": "string",
+            "description": "Recorded mIRC email setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mirc_online_settings_source_identity_email_address"
+              ],
+              "meaning": "Q21 requested answer value /properties/email_address under the full public prompt and schema description.",
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          },
+          "nickname": {
+            "type": "string",
+            "description": "Recorded mIRC nick setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mirc_online_settings_source_identity_nickname"
+              ],
+              "meaning": "Q21 requested answer value /properties/nickname under the full public prompt and schema description.",
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          },
+          "alternate_nickname": {
+            "type": "string",
+            "description": "Recorded mIRC anick setting.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_mirc_online_settings_source_identity_alternate_nickname"
+              ],
+              "meaning": "Q21 requested answer value /properties/alternate_nickname under the full public prompt and schema description.",
+              "evidence_needed": "The exact app.config fields are reused across mIRC and other configuration sources; same_claim_part alone does not establish mIRC identity or that settings were displayed when this user was online in a channel. An application/session/source binding and interpretation rule are absent. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "real_name",
+          "email_address",
+          "nickname",
+          "alternate_nickname"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q22",
+      "prompt": "This IRC program has the capability to log chat sessions. List 3 IRC channels that the user of this computer accessed.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Use recorded channel-log basenames, including their network and .log suffix, as this reference contract’s channel identifiers. Put separately recovered channel sigils/names and evidence paths outside answer; do not invent them from a filename.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_user_accessed_irc_channel_log_identity_items"
+                ],
+                "meaning": "Q22 requested answer value /properties/channels/items under the full public prompt and schema description.",
+                "evidence_needed": "The exact IRC log-basename role establishes a retained mIRC log with Session Ident channel metadata. It does not establish access by the user of this computer or a particular person. An actor/session access rule is absent; three-example completeness is separate. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "channels"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "list_rules": {
+          "/channels": {
+            "mode": "subset",
+            "count": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "Q23",
+      "prompt": "Ethereal, a popular “sniffing” program that can be used to intercept wired and wireless internet packets was also found to be installed. When TCP packets are collected and re-assembled, the default save directory is that users \\My Documents directory. What is the name of the file that contains the intercepted data?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Filename of the captured/intercepted data; provide the evidence path separately.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_referenced_intercept_capture_file_identity_file_name"
+              ],
+              "meaning": "Q23 requested answer value /properties/file_name under the full public prompt and schema description.",
+              "evidence_needed": "traffic.file_name establishes the basename of a decoded classic-PCAP source. It does not bind that source to the referenced Ethereal capture/user directory or interception scenario. Need a source-affiliation rule rather than assuming every traffic artifact is the requested file. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q24",
+      "prompt": "Viewing the file in a text format reveals much information about who and what was intercepted. What type of wireless computer was the victim (person who had his internet surfing recorded) using?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_type": {
+            "type": "string",
+            "description": "Device/platform type supported by the captured data; no stronger identification from an agent string alone.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_captured_victim_device_type_computer_type"
+              ],
+              "meaning": "Q24 requested answer value /properties/computer_type under the full public prompt and schema description.",
+              "evidence_needed": "A User-Agent string may be spoofed. Victim association and physical/platform type require an explicit reviewed interpretation and capture/session identity rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "computer_type"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q25",
+      "prompt": "What websites was the victim accessing?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "websites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Website host/domain (without scheme/path) or explicitly named web-service product. For a service, use its product name and keep provider qualifiers, URLs and reconstruction evidence outside answer.",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "needs_victim_accessed_website_identity_items"
+                ],
+                "meaning": "Q25 requested answer value /properties/websites/items under the full public prompt and schema description.",
+                "evidence_needed": "Captured Host/URL fields do not establish victim attribution, actual browsing or affiliation with the referenced capture. A URL also is not the requested host-only/service-product value without a transformation rule. Need scoped access/identity and host/service extraction rules. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+              }
+            }
+          }
+        },
+        "required": [
+          "websites"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q26",
+      "prompt": "Search for the main users web based email address. What is it?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_main_user_webmail_account_identity_email_address"
+              ],
+              "meaning": "Q26 requested answer value /properties/email_address under the full public prompt and schema description.",
+              "evidence_needed": "Email-address text in a browser artifact is not ownership or main-user identity and may identify another person or recipient. Need a webmail/account/main-user association rule. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q27",
+      "prompt": "Yahoo mail, a popular web based email service, saves copies of the email under what file name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Cached filename or documented filename pattern; preserve the distinction in the evidence appendix.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_yahoo_mail_cache_filename_identity_file_name"
+              ],
+              "meaning": "Q27 requested answer value /properties/file_name under the full public prompt and schema description.",
+              "evidence_needed": "Generic browser-cache filenames are not Yahoo mail message copies or documented mail filename patterns. Need service/content classification tied to the filename source; generic cache-file presence cannot establish it. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q28",
+      "prompt": "How many executable files are in the recycle bin?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "executable_file_count": {
+            "type": "integer",
+            "minimum": 0,
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_recycle_executable_count_integer"
+              ],
+              "meaning": "reader-reported executable count in its stated Recycle Bin scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "executable_file_count"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q29",
+      "prompt": "Are these files really deleted?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_from_file_system": {
+            "type": "boolean",
+            "description": "Whether filesystem metadata marks the referenced recycle-bin entries deleted; not recoverability, secure erasure or a claim that no copy exists.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_referenced_recycle_executable_set_deleted_state_deleted_from_file_system"
+              ],
+              "meaning": "Q29 requested answer value /properties/deleted_from_file_system under the full public prompt and schema description.",
+              "evidence_needed": "filesystem.deleted_flag is per named MFT entry or INFO2-associated retained file. The Boolean asks about the referenced executable set; a set-membership/aggregation rule linking Q28 files and their actual in-use flags is absent. One unrelated flag is insufficient; recoverability remains a different question. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+            }
+          }
+        },
+        "required": [
+          "deleted_from_file_system"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q30",
+      "prompt": "How many files are actually reported to be deleted by the file system?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_file_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Files reported deleted by filesystem metadata; do not substitute recycle-bin membership.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_filesystem_deleted_count_integer"
+              ],
+              "meaning": "reader-reported deleted-entry count in its stated filesystem scope",
+              "evidence_needed": "Source observations must carry this exact reviewed role, native value type and bound source subject/exhibit. Question relevance and evidence scope remain separately inspectable; a differently typed fact or arbitrary annotation cannot supply this field. Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "deleted_file_count"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q31",
+      "prompt": "Perform a Anti-Virus check. Are there any viruses on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "viruses_found": {
+            "type": "boolean",
+            "description": "Result of the declared antivirus examination; absence requires stated tool, signatures, coverage and failures.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_scanner_detections_found_boolean"
+              ],
+              "meaning": "Result of the declared scanner examination: true records at least one signature match (possibly with incomplete scope); false requires completed declared scope. Matches may be false positives; neither value establishes global virus absence, historical infection or actual malware execution.",
+              "evidence_needed": "Use the exact scanner.detections_found Boolean for the declared source examination. TRUE requires at least one recorded signature match and can coexist with incomplete scan scope. FALSE requires completion of the declared scope according to the reader. Before launch, bind scanner tool/version/signatures, source receipt, examined input and exclusions, completion/failures and selected-case exhibit scope; current leaf/row compatibility does not enforce these source/scope constraints. This is the public schema narrow scanner-result interpretation, not a global virus-presence claim.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "viruses_found"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    }
+  ]
+}

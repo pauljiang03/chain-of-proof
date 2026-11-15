@@ -27,7 +27,7 @@ FACTS = ROOT / 'fixtures/sample_facts.json'
 def public():
     return {'schema_version': 2, 'case_id': 'portable-other-case', 'title': 'Other case', 'questions': [
         {'id': 'DEVICES', 'prompt': 'Which devices and labels?', 'answer_schema': {
-            'type': 'object', 'properties': {'serial': {'type': 'string', 'x-claim-requirement': {
+            'type': 'object', 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {'serial': {'type': 'string', 'x-claim-requirement': {
                 'semantic_types': ['device_serial'], 'selectors': [{'form': 'usbConnected', 'field': 'device_serial'}],
                 'meaning': 'Device serial recorded at connection', 'evidence_needed': 'A device connection record with its serial'}},
                 'label': {'type': 'string', 'x-claim-requirement': {
@@ -71,6 +71,40 @@ class AnswerStore(unittest.TestCase):
         self.assertIsNone(report_projection(run)[1])
         self.assertIn('Structured answers from claim fields', report.render(run))
         self.assertIn('href="#proof-f1"', render_html(run))
+
+    def test_saved_coherent_row_survives_mixed_certificate_preview_and_update(self):
+        contract = public()
+        schema = contract['questions'][0]['answer_schema']
+        schema['properties']['context'] = {
+            'type': 'string', 'x-claim-requirement': {
+                'semantic_types': ['connection_context'],
+                'meaning': 'Connection context for this device observation',
+                'evidence_needed': 'The context and serial from the same device connection claim'}}
+        state_path = self.path / 'investigation.json'
+        state = json.loads(state_path.read_text())
+        state['questions'][0]['answer_schema'] = deepcopy(schema)
+        state_path.write_text(json.dumps(state))
+        (self.path / 'questions.json').write_text(json.dumps(contract))
+        context = dict(self.binding, field='connection_context', path=['context'])
+        saved = answer(self.path, 'DEVICES', [self.binding, context])
+        self.assertEqual(len(saved['leaves']), 2)
+        certificate = check.check({'usbConnected': [4510]}, 'F2', open_source(FACTS),
+                                  question='DEVICES', out_dir=self.path)
+        self.assertEqual(certificate['status'], 'verified')
+        paths = [self.path / 'answer-bindings.json', self.path / 'projected-answers.json']
+        before = [path.read_bytes() for path in paths]
+        mixed = [self.binding, dict(context, finding_id='F2')]
+        preview = answer(self.path, 'DEVICES', mixed, replace=True, preview=True)
+        self.assertFalse(preview['valid'])
+        self.assertFalse(preview['persisted'])
+        self.assertIn('row_fields_require_same_claim_part',
+                      [row['reason'] for row in preview['projection']['conflicts']])
+        self.assertEqual([path.read_bytes() for path in paths], before)
+        rejected = answer(self.path, 'DEVICES', mixed, replace=True)
+        self.assertFalse(rejected['persisted'])
+        self.assertEqual([path.read_bytes() for path in paths], before)
+        self.assertEqual(read_projection(self.path), saved)
+        self.assertEqual(project_bundle(self.bundle(), contract), saved)
 
     def test_malformed_mixed_batch_is_rejected_atomically(self):
         for invalid in [dict(self.binding, path='serial'), dict(self.binding, part=True),

@@ -480,6 +480,28 @@ def _format(value, format_name, zone, semantic_type):
         raise ValueError('timestamp_or_public_timezone_is_not_displayable') from error
 
 
+def _row_paths(requirements, path):
+    """Instantiate object row paths without confusing different array rows."""
+    output = []
+    for row in requirements:
+        pattern = row['path']
+        if len(pattern) >= len(path):
+            continue
+        for expected, actual in zip(pattern, path):
+            if expected == '*' and type(actual) is int:
+                continue
+            if isinstance(expected, dict) and expected.get('additional_property') is True:
+                if type(actual) is str and actual not in expected.get('excluded_properties', []):
+                    continue
+            if expected != actual:
+                break
+        else:
+            concrete = path[:len(pattern)]
+            if concrete not in output:
+                output.append(concrete)
+    return output
+
+
 def prepare_projection(public, candidates, bindings, source, *, require_claim_requirements=False):
     """Freeze literal values once; no candidate is accepted/refused by this function."""
     if type(require_claim_requirements) is not bool:
@@ -500,6 +522,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             raise ValueError('candidate IDs must be unique and unambiguous')
         indexed[cid] = {'candidate_id': cid, 'claim': deepcopy(candidate['claim']),
                         **claim_fields(candidate['claim'], source)}
+    row_policies = {qid: answer_requirements.row_requirements(question['answer_schema'], require_claim_requirements=require_claim_requirements)
+                    for qid, question in questions.items()}
     prepared, unsupported = [], []
     for index, raw in enumerate(bindings):
         entry = {'binding_index': index, 'binding': deepcopy(raw)}
@@ -515,6 +539,11 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             if not isinstance(qid, str) or qid not in questions:
                 raise ValueError('question_not_in_public_contract')
             path = _path(raw.get('path'))
+            policies, policy_errors = row_policies[qid]
+            for error in policy_errors:
+                if error['reason'] != 'missing_public_claim_row_requirement' or _row_paths([error], path):
+                    raise ValueError(error['reason'])
+            row_paths = _row_paths([policy for policy in policies if policy['mode'] == 'same_claim_part'], path)
             part = raw.get('part', 0)
             if type(part) is not int or not 0 <= part < len(candidate['parts']):
                 raise ValueError('claim_part_unavailable')
@@ -537,6 +566,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                          path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
                          semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],
                          value_record_ids=field['value_record_ids'], selector=field['selector'])
+            if row_paths:
+                entry['row_paths'] = deepcopy(row_paths)
             prepared.append(entry)
         except (ValueError, TypeError, KeyError) as error:
             entry['reason'] = str(error)
@@ -553,6 +584,15 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
         grouped[entry['question_id']].append(entry)
     plan['frozen_conflicts'] = [dict(conflict, question_id=qid)
         for qid in plan['questions'] for conflict in _assemble(grouped[qid])[3]]
+    row_groups = defaultdict(list)
+    for entry in prepared:
+        for row_path in entry.get('row_paths', []):
+            row_groups[(entry['question_id'], tuple(row_path))].append(entry)
+    for (qid, row_path), entries in row_groups.items():
+        if len({(entry['candidate_id'], entry['part']) for entry in entries}) > 1:
+            plan['frozen_conflicts'].append({
+                'reason': 'row_fields_require_same_claim_part', 'question_id': qid,
+                'path': list(row_path), 'binding_indices': [entry['binding_index'] for entry in entries]})
     plan['conflict_policy'] = 'omit_all_conflicting_bindings_before_candidate_filtering'
     plan['projection_sha256'] = claim_digest(plan)
     return plan

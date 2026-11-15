@@ -6,8 +6,10 @@ Unannotated contracts retain their existing behavior.
 """
 from copy import deepcopy
 import re
+import json
 
 KEY = 'x-claim-requirement'
+ROW_KEY = 'x-claim-row'
 SCOPE = ('Checks compatibility with declared public claim roles only. The requirement itself '
          'needs review; compatibility does not prove question relevance, completeness or truth.')
 
@@ -60,6 +62,89 @@ def _semantic_types(spec):
             or any(not _name(value) for value in variants) or len(set(variants)) != len(variants)):
         raise ValueError('invalid_catalog_semantic_type_variants')
     return variants
+
+
+def row_requirements(schema, *, require_claim_requirements=False):
+    """Bounded, evidence-free validation of explicit object coherence policies."""
+    if type(require_claim_requirements) is not bool:
+        raise ValueError('require_claim_requirements must be a boolean')
+    # JSON token search only selects whether to apply the bounded row walker.
+    # Escaped text values cannot impersonate a key token. Legacy contracts
+    # without explicit row policy retain their existing per-path limits.
+    if not require_claim_requirements:
+        try:
+            if '"x-claim-row":' not in json.dumps(schema, separators=(',', ':')):
+                return [], []
+        except (ValueError, TypeError, RecursionError):
+            pass
+    objects = {}
+    pending, rows, errors, visited = [(schema, [], [], 0)], [], [], 0
+    while pending:
+        node, path, branches, depth = pending.pop()
+        visited += 1
+        if visited > 256 or depth > 32:
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'public_schema_traversal_limit'})
+            break
+        if not isinstance(node, dict):
+            continue
+        if ROW_KEY in node:
+            raw = node[ROW_KEY]
+            reason = None
+            if not isinstance(raw, dict) or set(raw) != {'mode'} or raw['mode'] not in ('same_claim_part', 'independent'):
+                reason = 'invalid_public_claim_row_requirement'
+            else:
+                kind = node.get('type')
+                object_type = kind == 'object' or (isinstance(kind, list) and 'object' in kind and all(item in ('object', 'null') for item in kind))
+                if not object_type and not (kind is None and isinstance(node.get('properties'), dict)):
+                    reason = 'claim_row_requirement_must_annotate_object'
+            row = {'path': path, 'branches': branches}
+            if reason:
+                errors.append(dict(row, status='invalid', reason=reason))
+            else:
+                rows.append(dict(row, status='valid', mode=raw['mode']))
+        alternatives = node.get('anyOf', [])
+        if 'anyOf' in node and (not isinstance(alternatives, list) or not 1 <= len(alternatives) <= 32):
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'unsupported_public_schema_anyof'})
+            continue
+        properties = node.get('properties', {})
+        path_key = json.dumps(path, sort_keys=True)
+        obj = objects.setdefault(path_key, {'path': path, 'nodes': []})
+        obj['nodes'].append((branches, set(properties) if isinstance(properties, dict) else set(),
+                             isinstance(node.get('additionalProperties'), dict)))
+        children = []
+        if isinstance(properties, dict):
+            children.extend((child, path + [name], branches, depth + 1) for name, child in properties.items())
+        if 'items' in node:
+            children.append((node['items'], path + ['*'], branches, depth + 1))
+        additional = node.get('additionalProperties')
+        if isinstance(additional, dict):
+            marker = {'additional_property': True, 'excluded_properties': list(properties) if isinstance(properties, dict) else []}
+            children.append((additional, path + [marker], branches, depth + 1))
+        children.extend((child, path, branches + [index], depth + 1) for index, child in enumerate(alternatives))
+        if visited + len(pending) + len(children) > 256:
+            errors.append({'path': path, 'status': 'invalid', 'reason': 'public_schema_traversal_limit'})
+            break
+        pending.extend(reversed(children))
+    if require_claim_requirements:
+        for key, obj in objects.items():
+            # Open alternatives can each permit keys declared by another
+            # alternative. The projector can therefore retain their union.
+            properties = set().union(*(names for _, names, _ in obj['nodes']))
+            additional = any(extra for _, _, extra in obj['nodes'])
+            if len(properties) <= 1 and not additional:
+                continue
+            contexts = [branch for branch, _, _ in obj['nodes']]
+            # A sibling declaration applies to every alternative below it;
+            # one alternative's declaration never licenses another alternative.
+            terminal_contexts = [branch for branch in contexts if not any(
+                len(other) > len(branch) and other[:len(branch)] == branch for other in contexts)]
+            declarations = [row['branches'] for row in rows
+                            if json.dumps(row['path'], sort_keys=True) == key]
+            for branch in terminal_contexts:
+                if not any(branch[:len(declaration)] == declaration for declaration in declarations):
+                    errors.append({'path': obj['path'], 'branches': branch, 'status': 'invalid',
+                                   'reason': 'missing_public_claim_row_requirement'})
+    return rows, errors
 
 
 def inspect(schema, forms, *, require_claim_requirements=False):
@@ -144,7 +229,10 @@ def inspect(schema, forms, *, require_claim_requirements=False):
                     pass
             filtered.append(row)
         rows = filtered
-    return {'requirements': rows, 'scope': SCOPE,
+    row_policies, row_errors = row_requirements(schema, require_claim_requirements=require_claim_requirements)
+    # A policy hidden beyond the scan budget cannot be treated as absent.
+    rows.extend(row_errors)
+    return {'requirements': rows, 'row_requirements': row_policies, 'scope': SCOPE,
             'unannotated_fields': ('Unannotated answer fields are blocked by strict claim-role policy.'
                                    if require_claim_requirements else
                                    'No declared claim-role requirement; question placement remains unchecked.')}

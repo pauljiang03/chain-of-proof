@@ -61,7 +61,7 @@ class Checkpoints(unittest.TestCase):
         from agent.answer_requirements import KEY
         requirement = {'semantic_types': ['device_serial'], 'meaning': 'Recorded device',
                        'evidence_needed': 'Device connection record'}
-        self.public['questions'][0]['answer_schema'] = {'type': 'object', 'properties': {
+        self.public['questions'][0]['answer_schema'] = {'type': 'object', 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {
             'serial': {'type': 'string', KEY: requirement},
             'unknown': {'type': 'string', KEY: requirement}}}
         self.questions.write_text(json.dumps(self.public))

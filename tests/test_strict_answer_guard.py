@@ -37,7 +37,7 @@ class StrictGuard(unittest.TestCase):
                          'missing_public_claim_requirement')
 
     def test_stronger_field_removed_while_observation_survives(self):
-        schema = {'type': 'object', 'properties': {
+        schema = {'type': 'object', 'x-claim-row': {'mode': 'same_claim_part'}, 'properties': {
             'product_version': {'type': 'string', KEY: need('email_application_product_with_version')},
             'executable': {'type': 'string', KEY: need('program')}}}
         result = self.run_projection(schema, require_claim_requirements=True)

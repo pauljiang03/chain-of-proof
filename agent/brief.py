@@ -140,8 +140,12 @@ question's requested time and scope filters; do not export every row indiscrimin
 Use answer(question_id) to inspect the supported binding catalog. Bind the known
 requested fields to their exact claim fields; retain source distinctions and uncertainty.
 Inspect its public field_requirements too. Use preview=True with proposed bindings to
-diagnose paths, roles, conflicts and literal mismatches before saving; preview does not
-change the answer store. Invalid replacements leave the last supported partial unchanged. Nonconflicting
+diagnose paths, roles, conflicts and literal mismatches before saving. Inspect
+row_requirements: a same_claim_part row must take all
+its fields from one atomic claim part. Unrelated parts of a both claim cannot be mixed.
+Use an approved compound join form when it proves the required relationship. Independent
+row policies describe separately interpreted observations, not a new relationship.
+Preview does not change the answer store. Invalid replacements leave the last supported partial unchanged. Nonconflicting
 partial appends retain supported fields and raw unsupported proposals; inspect persisted
 and update_outcome on a partial or rejected response. Unsupported proposals never supply values. Catalog support is not evidence availability.
 An executable name does not establish a product version; an incomplete path does not

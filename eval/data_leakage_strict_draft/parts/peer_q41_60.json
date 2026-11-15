@@ -1,0 +1,174 @@
+{
+  "reviewed_part": "q41_60.json",
+  "review_scope": "Public contract, projection/catalog and reader semantics only; no evidence values, private references, model experiments or scoring. Catalog availability is not case evidence or question entailment.",
+  "inspection_counts": {
+    "no_catalog_support": 167,
+    "catalog_support": 3
+  },
+  "findings": [
+    {
+      "id": "vss_row_coherence",
+      "severity": "limitation",
+      "question_id": "Q47",
+      "schema_pointers": [
+        "/answer_schema/properties/copies/items/properties/created_at",
+        "/answer_schema/properties/copies/items/properties/shadow_copy_id"
+      ],
+      "decision": "retain_supported_fields_with_explicit_row_coherence_limit",
+      "rationale": "extractor/filetraces.py:_shadow_copies emits shadowCopy.t from store.creation_time and shadowCopy.obj from store.copy_identifier on the same source row. These exactly support recorded creation time and copy ID, without inferring actual user action. The requirement/projector checks each binding independently, so time from one copy and ID from another can occupy one answer row. Requirement compatibility alone must not be described as proving this pair belongs together.",
+      "source_refs": [
+        "extractor/filetraces.py:_shadow_copies",
+        "agent/answer_projection.py:_SINGLE",
+        "agent/answer_projection.py:prepare_projection"
+      ],
+      "recommended_action": "Keep exact selectors. In review, explicitly state that row identity across the created_at and shadow_copy_id bindings is unproved; a same-record binding constraint would be needed to enforce coherence."
+    },
+    {
+      "id": "recycle_time_is_retained_index_time",
+      "severity": "informational",
+      "question_id": "Q51",
+      "schema_pointers": [
+        "/answer_schema/properties/records/items/properties/deleted_at"
+      ],
+      "decision": "retain_supported_field",
+      "rationale": "All current fileDeleted producers are Recycle Bin readers: Windows $I FILETIME and legacy INFO2 deleted_us. Both represent a retained move/deletion timestamp, not secure deletion, deallocation or personally attributed action. The exact selector is appropriate for a partial Recycle Bin observation. Its existing meaning should remain expressly recorded, and arbitrary file removal/journal timestamps must not be accepted.",
+      "source_refs": [
+        "extractor/windows.py:_recycle_bin",
+        "extractor/hacking.py:_recycle"
+      ],
+      "recommended_action": "Keep fileDeletedAt.recorded_time_us; add that the selected PC exhibit and common row identity are not enforced by this role."
+    },
+    {
+      "id": "recycle_original_path_existing_exact_role",
+      "severity": "potential_overrestriction",
+      "question_id": "Q51",
+      "schema_pointers": [
+        "/answer_schema/properties/records/items/properties/original_path"
+      ],
+      "decision": "recommend_allow_exact_typed_original_path_observation",
+      "rationale": "The assertion that a distinct complete original-path role is needed overlooks the existing recycle.original_path role, which is emitted from the exact full INFO2 original_path, including drive. This does not make the Windows $I stripped path adequate, and it does not make a source record exist in this case. It does allow a genuinely available typed original-path observation to satisfy the individual field without manufacturing a path or claiming complete results.",
+      "source_refs": [
+        "checker/catalog.py:_SPECS recycle.original_path",
+        "extractor/hacking.py:_recycle",
+        "extractor/windows.py:_recycle_bin"
+      ],
+      "recommended_requirement": {
+        "semantic_types": [
+          "recorded_attribute_recycle_original_path_string"
+        ],
+        "selectors": [
+          {
+            "form": "attributeRecorded",
+            "field": "value"
+          }
+        ],
+        "meaning": "Complete original path retained in a Recycle Bin source record, including its drive where present.",
+        "evidence_needed": "Exact typed recycle.original_path from the selected PC evidence. The current Windows $I reader does not emit this role, and its drive-stripped fileDeleted path must not substitute. Neither $I filename nor same-row identity with other bindings is established."
+      },
+      "recommended_action": "Permit the exact typed role as a partial field if the selected source supplies it; otherwise it remains unanswered. Preserve i_filename as unsupported. Explicitly retain cross-row/source identity limitations."
+    }
+  ],
+  "question_decisions": [
+    {
+      "question_id": "Q41",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Sticky Notes source membership and file-versus-storage modification semantics are absent from exact selectors."
+    },
+    {
+      "question_id": "Q42",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Search service enabled interpretation and exact registry field/path roles are absent."
+    },
+    {
+      "question_id": "Q43",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Search database classification and exclusions require a rule beyond generic path text."
+    },
+    {
+      "question_id": "Q44",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "DateModified column, IE/source membership and requested date scope are not fixed by generic recorded timestamps."
+    },
+    {
+      "question_id": "Q45",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Search-specific message fields and date scope cannot be supplied by generic emailSent subject/address text."
+    },
+    {
+      "question_id": "Q46",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Desktop/Search source scope and DateCreated column are not exposed by exact roles."
+    },
+    {
+      "question_id": "Q47",
+      "decision": "retain_except_specific_findings",
+      "rationale": "See exact supported-field and source/row identity findings. No other exact role was identified for the unsupported leaves."
+    },
+    {
+      "question_id": "Q48",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Current-versus-VSS configuration/database differences need versioned source identity and comparison semantics."
+    },
+    {
+      "question_id": "Q49",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Exact deleted SQLite cell/column values and VSS database identity cannot be projected from generic cloud paths/events."
+    },
+    {
+      "question_id": "Q50",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "OST exclusion pattern and interpretation need exact registry field roles and a rule."
+    },
+    {
+      "question_id": "Q51",
+      "decision": "retain_except_specific_findings",
+      "rationale": "See exact supported-field and source/row identity findings. No other exact role was identified for the unsupported leaves."
+    },
+    {
+      "question_id": "Q52",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Actual anti-forensics on the requested day, shift-delete/wiping, tool and parameters require interpretation beyond record timestamps."
+    },
+    {
+      "question_id": "Q53",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Recovery requires bytes and validation; a metadata entry recovered from a device does not establish recovered file contents."
+    },
+    {
+      "question_id": "Q54",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Anti-forensic action and purpose cannot follow solely from metadata/recovery observations."
+    },
+    {
+      "question_id": "Q55",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Actual PC-to-RM#2 copying requires direction and device identity; same hashes or shortcut target associations are insufficient."
+    },
+    {
+      "question_id": "Q56",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Hidden bytes, original pre-rename identity, format and viewability need explicit recovery and reconstruction rules."
+    },
+    {
+      "question_id": "Q57",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "CD anti-forensics action/method/purpose is stronger than journal or directory observations."
+    },
+    {
+      "question_id": "Q58",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Leakage-process timeline needs linked action/actor/entity and interval interpretation, beyond literal retained timestamps."
+    },
+    {
+      "question_id": "Q59",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Channel-specific suspect-attributed transfers, counts, byte survival and formatting/deletion lack the necessary rules."
+    },
+    {
+      "question_id": "Q60",
+      "decision": "retain_unsupported_requirements",
+      "rationale": "Diagram production, artifact format/content and evidence links have no corresponding existing claim roles."
+    }
+  ],
+  "overall_decision": "Retain the three narrow supported fields; explicitly disclose row-coherence and selected-exhibit limitations. Consider adding the existing exact typed recycle.original_path role as partial support; other unsupported requirements remain justified."
+}

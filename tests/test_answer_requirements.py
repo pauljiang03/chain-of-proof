@@ -100,7 +100,7 @@ class AnswerRequirements(unittest.TestCase):
 
     def test_supported_sibling_and_narrow_observation_are_preserved(self):
         contract = public()
-        contract['questions'][0]['answer_schema'] = {'type': 'object', 'properties': {
+        contract['questions'][0]['answer_schema'] = {'type': 'object', requirements.ROW_KEY: {'mode': 'same_claim_part'}, 'properties': {
             'product': {'type': 'string', requirements.KEY: need('email_application_product_with_version')},
             'observed_executable': {'type': 'string', requirements.KEY: need('program',
                 [{'form': 'programRan', 'field': 'program'}])}}}
@@ -173,7 +173,9 @@ class AnswerRequirements(unittest.TestCase):
     def test_preflight_includes_schema_valued_additional_properties_and_unsupported_references(self):
         contract = public()
         leaf = {'type': 'string', requirements.KEY: need('not_available')}
-        schema = {'type': 'object', 'additionalProperties': leaf}
+        # Arbitrary keys here are separate observations, without a relational row assertion.
+        schema = {'type': 'object', requirements.ROW_KEY: {'mode': 'independent'},
+                  'additionalProperties': leaf}
         contract['questions'][0]['answer_schema'] = schema
         view = requirements.inspect(schema, catalog()['forms'])
         self.assertEqual(view['requirements'][0]['path'], [{'additional_property': True}])

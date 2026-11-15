@@ -1,0 +1,2877 @@
+{
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "What are the hash values (MD5 & SHA-1) of all images? Does the acquisition and verification hash value match?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "scoped_logical_image_subject"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "subject"
+                      }
+                    ],
+                    "meaning": "Scoped logical-image identity, retained without relabeling as an invented display name.",
+                    "evidence_needed": "A digest comparison for this exact scoped image; complete image inventory is not established."
+                  }
+                },
+                "md5": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_same_image_algorithm_row_md5"
+                    ],
+                    "meaning": "The requested md5 belongs to the exact image and, where applicable, digest algorithm identified by this answer row.",
+                    "evidence_needed": "Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+                  }
+                },
+                "sha1": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_same_image_algorithm_row_sha1"
+                    ],
+                    "meaning": "The requested sha1 belongs to the exact image and, where applicable, digest algorithm identified by this answer row.",
+                    "evidence_needed": "Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+                  }
+                }
+              },
+              "required": [
+                "image",
+                "md5",
+                "sha1"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          },
+          "acquisition_verification": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "scoped_logical_image_subject"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "subject"
+                      }
+                    ],
+                    "meaning": "Scoped logical-image identity of this digest comparison.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "algorithm": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "asserted_digest_algorithm"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "algorithm"
+                      }
+                    ],
+                    "meaning": "Algorithm of this same-subject acquisition/logical digest comparison.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "acquisition_hash": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "retained_acquisition_digest"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "acquisition_digest"
+                      }
+                    ],
+                    "meaning": "Digest declared by the acquisition container for this comparison subject and algorithm.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "verification_hash": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "recomputed_logical_image_digest"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "logical_digest"
+                      }
+                    ],
+                    "meaning": "Digest recomputed over logical image bytes for this comparison subject and algorithm.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "matches": {
+                  "type": "boolean",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "same_algorithm_same_subject_digest_equality_not_authenticity"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "imageDigestsAgree",
+                        "field": "digests_match"
+                      }
+                    ],
+                    "meaning": "Same-algorithm same-subject equality of retained acquisition and recomputed logical digests; not authenticity.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                }
+              },
+              "required": [
+                "image",
+                "algorithm",
+                "acquisition_hash",
+                "verification_hash",
+                "matches"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            },
+            "description": "Compare independently recorded acquisition and verification digests for each supplied image. The reference may be incomplete; do not omit this part of the original question."
+          }
+        },
+        "required": [
+          "images",
+          "acquisition_verification"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q2",
+      "prompt": "Identify the partition information of PC image.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "partitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "type": "integer",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_number"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: number.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                },
+                "bootable": {
+                  "type": "boolean",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_bootable"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: bootable.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                },
+                "filesystem": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_filesystem"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: filesystem.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                },
+                "start_sector": {
+                  "type": "integer",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_start_sector"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: start_sector.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                },
+                "total_sectors": {
+                  "type": "integer",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_total_sectors"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: total_sectors.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                },
+                "size_as_printed": {
+                  "type": "string",
+                  "description": "Displayed size including unit; do not invent byte precision.",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_partition_inventory_size_as_printed"
+                    ],
+                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: size_as_printed.",
+                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                  }
+                }
+              },
+              "required": [
+                "number",
+                "bootable",
+                "filesystem",
+                "start_sector",
+                "total_sectors",
+                "size_as_printed"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "partitions"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q3",
+      "prompt": "Explain installed OS information in detail. (OS name, install date, registered owner\u2026)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "os_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_product_name_string"
+              ],
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ],
+              "meaning": "operating-system product name recorded in configuration",
+              "evidence_needed": "Exact current-hive typed os.product_name value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+            }
+          },
+          "version": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_os_configuration_field_version"
+              ],
+              "meaning": "The specified installed OS configuration field. Requested leaf: version.",
+              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+            }
+          },
+          "build_number": {
+            "type": "integer",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_os_configuration_field_build_number"
+              ],
+              "meaning": "The specified installed OS configuration field. Requested leaf: build_number.",
+              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+            }
+          },
+          "registered_owner": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_registered_owner_string"
+              ],
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ],
+              "meaning": "registered-owner text, not proof of ownership or user identity",
+              "evidence_needed": "Exact current-hive typed os.registered_owner value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+            }
+          },
+          "system_root": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_os_configuration_field_system_root"
+              ],
+              "meaning": "The specified installed OS configuration field. Requested leaf: system_root.",
+              "evidence_needed": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+            }
+          },
+          "installed_at": {
+            "type": "string",
+            "format": "date-time",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_os_install_time_string"
+              ],
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ],
+              "meaning": "installation timestamp recorded by the operating system",
+              "evidence_needed": "Exact current-hive typed os.install_time value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+            }
+          }
+        },
+        "required": [
+          "os_name",
+          "version",
+          "build_number",
+          "registered_owner",
+          "system_root",
+          "installed_at"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "prompt": "What is the timezone setting?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "time_zone": {
+            "type": "string",
+            "description": "The displayed Windows timezone label, excluding the separately supplied UTC offset. Do not substitute the registry TimeZoneKeyName or an IANA identifier.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_displayed_timezone_and_bias_conversion_time_zone"
+              ],
+              "meaning": "Displayed Windows timezone label or the requested signed bias in hours. Requested leaf: time_zone.",
+              "evidence_needed": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+            }
+          },
+          "standard_utc_offset_hours": {
+            "type": "integer",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_displayed_timezone_and_bias_conversion_standard_utc_offset_hours"
+              ],
+              "meaning": "Displayed Windows timezone label or the requested signed bias in hours. Requested leaf: standard_utc_offset_hours.",
+              "evidence_needed": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+            }
+          },
+          "daylight_time_bias_hours": {
+            "type": "integer",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_displayed_timezone_and_bias_conversion_daylight_time_bias_hours"
+              ],
+              "meaning": "Displayed Windows timezone label or the requested signed bias in hours. Requested leaf: daylight_time_bias_hours.",
+              "evidence_needed": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+            }
+          }
+        },
+        "required": [
+          "time_zone",
+          "standard_utc_offset_hours",
+          "daylight_time_bias_hours"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "same_claim_part"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q5",
+      "prompt": "What is the computer name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_name": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_account_name_string"
+              ],
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ],
+              "meaning": "configured computer account name",
+              "evidence_needed": "Exact current-hive typed machine.account_name value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+            }
+          }
+        },
+        "required": [
+          "computer_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q6",
+      "prompt": "List all accounts in OS except the system accounts: Administrator, Guest, systemprofile, LocalService, NetworkService. (Account name, login count, last logon date\u2026)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_account"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: account.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "rid_as_printed": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_rid_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: rid_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "nt_hash": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_nt_hash"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: nt_hash.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "login_count": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_login_count"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: login_count.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "created_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_created_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: created_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "last_login_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_last_login_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: last_login_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "login_failure_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_login_failure_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: login_failure_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_enabled"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: enabled.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    }
+                  },
+                  "required": [
+                    "account",
+                    "rid_as_printed",
+                    "nt_hash",
+                    "login_count",
+                    "created_local_as_printed",
+                    "last_login_local_as_printed",
+                    "login_failure_local_as_printed",
+                    "enabled"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "account": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_account"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: account.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "rid_as_printed": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_rid_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: rid_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "nt_hash": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_nt_hash"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: nt_hash.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "login_count": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_login_count"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: login_count.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "created_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_created_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: created_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "last_login_local_as_printed": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_last_login_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: last_login_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "login_failure_local_as_printed": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_login_failure_local_as_printed"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: login_failure_local_as_printed.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_filtered_account_inventory_enabled"
+                        ],
+                        "meaning": "The specified account field in the complete OS account list after excluding the five named system accounts. Requested leaf: enabled.",
+                        "evidence_needed": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+                      }
+                    }
+                  },
+                  "required": [
+                    "account",
+                    "rid_as_printed",
+                    "nt_hash",
+                    "login_count",
+                    "created_local_as_printed",
+                    "last_login_local_as_printed",
+                    "login_failure_local_as_printed",
+                    "enabled"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "accounts"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q7",
+      "prompt": "Who was the last user to logon into PC?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "last_logged_on_user": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_latest_successful_logon_identity_last_logged_on_user"
+              ],
+              "meaning": "Account of the chronologically last successful PC logon. Requested leaf: last_logged_on_user.",
+              "evidence_needed": "Winlogon DefaultUserName is configuration, not successful authentication. No rule compares all eligible logon events and joins the selected identity."
+            }
+          }
+        },
+        "required": [
+          "last_logged_on_user"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q8",
+      "prompt": "When was the last recorded shutdown date/time?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "last_shutdown": {
+            "type": "string",
+            "format": "date-time",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "recorded_attribute_machine_last_shutdown_string"
+              ],
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                }
+              ],
+              "meaning": "shutdown timestamp retained by the source",
+              "evidence_needed": "Exact current-hive typed machine.last_shutdown value; use its native value, not the attribute examination timestamp. Runtime gate still missing: constrain this typed attribute to the selected PC subject/exhibit. Catalog compatibility alone can accept another machine\u2019s attribute; this draft is not ready to run."
+            }
+          }
+        },
+        "required": [
+          "last_shutdown"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/last_shutdown": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "prompt": "Explain the information of network interface(s) with an IP address assigned by DHCP.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "interfaces": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "device_name": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_device_name"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: device_name.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "ip_address": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_ip_address"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: ip_address.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "subnet_mask": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_subnet_mask"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: subnet_mask.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "name_server": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_name_server"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: name_server.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "domain": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_domain"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: domain.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "default_gateway": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_default_gateway"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: default_gateway.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "dhcp_enabled": {
+                  "type": "boolean",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_dhcp_enabled"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: dhcp_enabled.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                },
+                "dhcp_server": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_dhcp_interface_join_dhcp_server"
+                    ],
+                    "meaning": "The specified field for each interface whose IP address was assigned by DHCP. Requested leaf: dhcp_server.",
+                    "evidence_needed": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+                  }
+                }
+              },
+              "required": [
+                "device_name",
+                "ip_address",
+                "subnet_mask",
+                "name_server",
+                "domain",
+                "default_gateway",
+                "dhcp_enabled",
+                "dhcp_server"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "interfaces"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q10",
+      "prompt": "What applications were installed by the suspect after installing OS?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "applications": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "installed_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_installed_local_as_printed"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: installed_local_as_printed.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_name"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: name.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "version": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_version"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: version.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "manufacturer": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_manufacturer"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: manufacturer.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "installation_path": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_installation_path"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: installation_path.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    }
+                  },
+                  "required": [
+                    "installed_local_as_printed",
+                    "name",
+                    "version",
+                    "manufacturer",
+                    "installation_path"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "installed_local_as_printed": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_installed_local_as_printed"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: installed_local_as_printed.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_name"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: name.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "version": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_version"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: version.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "manufacturer": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_manufacturer"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: manufacturer.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    },
+                    "installation_path": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_suspect_post_os_installation_installation_path"
+                        ],
+                        "meaning": "The specified field of an application installed by the suspect after OS installation. Requested leaf: installation_path.",
+                        "evidence_needed": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+                      }
+                    }
+                  },
+                  "required": [
+                    "installed_local_as_printed",
+                    "name",
+                    "version",
+                    "manufacturer",
+                    "installation_path"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "applications"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q11",
+      "prompt": "List application execution logs. (Executable path, execution time, execution count...)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "path_or_application_id": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "recorded_attribute_app_execution_path_string"
+                        ],
+                        "selectors": [
+                          {
+                            "form": "attributeRecorded",
+                            "field": "value"
+                          }
+                        ],
+                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
+                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                      }
+                    },
+                    "execution_count": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "source": {
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_source"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "time_meaning": {
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    }
+                  },
+                  "required": [
+                    "timestamp",
+                    "path_or_application_id",
+                    "execution_count",
+                    "source",
+                    "time_meaning"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "path_or_application_id": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "recorded_attribute_app_execution_path_string"
+                        ],
+                        "selectors": [
+                          {
+                            "form": "attributeRecorded",
+                            "field": "value"
+                          }
+                        ],
+                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
+                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                      }
+                    },
+                    "execution_count": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "source": {
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_source"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "time_meaning": {
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    }
+                  },
+                  "required": [
+                    "timestamp",
+                    "path_or_application_id",
+                    "execution_count",
+                    "source",
+                    "time_meaning"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_timestamp"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: timestamp.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "path_or_application_id": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "recorded_attribute_app_execution_path_string"
+                        ],
+                        "selectors": [
+                          {
+                            "form": "attributeRecorded",
+                            "field": "value"
+                          }
+                        ],
+                        "meaning": "literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user",
+                        "evidence_needed": "Exact typed app.execution.path from a reviewed Security process-creation NewProcessName or validated UserAssist executable-run-path entry, preserving its literal complete path. Row fields must share one candidate and atomic claim part. Selected-PC-exhibit/subject runtime gating remains required. Attribute examination time must not be presented as execution/event time; timestamp, source, execution_count and time_meaning answer leaves remain unsupported."
+                      }
+                    },
+                    "execution_count": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                      ],
+                      "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_execution_count"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: execution_count.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "source": {
+                      "type": "string",
+                      "enum": [
+                        "Prefetch",
+                        "UserAssist",
+                        "Shimcache",
+                        "MuiCache"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_source"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: source.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    },
+                    "time_meaning": {
+                      "type": "string",
+                      "enum": [
+                        "execution",
+                        "file modification",
+                        "unreported"
+                      ],
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "needs_complete_execution_log_with_source_meaning_time_meaning"
+                        ],
+                        "meaning": "The specified field of the requested complete application execution-log inventory, preserving source-specific time/count meaning. Requested leaf: time_meaning.",
+                        "evidence_needed": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+                      }
+                    }
+                  },
+                  "required": [
+                    "timestamp",
+                    "path_or_application_id",
+                    "execution_count",
+                    "source",
+                    "time_meaning"
+                  ],
+                  "additionalProperties": false,
+                  "x-claim-row": {
+                    "mode": "same_claim_part"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "records"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/records/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "prompt": "List all traces about the system on/off and the user logon/logoff. (It should be considered only during a time range between 09:00 and 18:00 in the timezone from Question 4.)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_local_window_session_trace_timestamp"
+                    ],
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: timestamp.",
+                    "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+                  }
+                },
+                "event_id": {
+                  "type": "integer",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_local_window_session_trace_event_id"
+                    ],
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: event_id.",
+                    "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_local_window_session_trace_description"
+                    ],
+                    "meaning": "The specified field of all on/off and logon/logoff traces within 09:00\u201318:00 in the Q4 timezone. Requested leaf: description.",
+                    "evidence_needed": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+                  }
+                }
+              },
+              "required": [
+                "timestamp",
+                "event_id",
+                "description"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "events"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/events/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "prompt": "What web browsers were used?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "browsers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_browser_use_version_and_upgrade_history_name"
+                    ],
+                    "meaning": "Browser use and version, or the specified historical Internet Explorer upgrade condition. Requested leaf: name.",
+                    "evidence_needed": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+                  }
+                },
+                "version": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_browser_use_version_and_upgrade_history_version"
+                    ],
+                    "meaning": "Browser use and version, or the specified historical Internet Explorer upgrade condition. Requested leaf: version.",
+                    "evidence_needed": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "version"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          },
+          "internet_explorer_upgraded_from_version_9_or_lower": {
+            "type": "boolean",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_browser_use_version_and_upgrade_history_internet_explorer_upgraded_from_version_9_or_lower"
+              ],
+              "meaning": "Browser use and version, or the specified historical Internet Explorer upgrade condition. Requested leaf: internet_explorer_upgraded_from_version_9_or_lower.",
+              "evidence_needed": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+            }
+          }
+        },
+        "required": [
+          "browsers",
+          "internet_explorer_upgraded_from_version_9_or_lower"
+        ],
+        "additionalProperties": false,
+        "x-claim-row": {
+          "mode": "independent"
+        }
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {},
+        "string_aliases": {
+          "/browsers/*/name": [
+            [
+              "Microsoft Internet Explorer",
+              "Internet Explorer",
+              "IE"
+            ],
+            [
+              "Google Chrome",
+              "Chrome"
+            ],
+            [
+              "Mozilla Firefox",
+              "Firefox"
+            ],
+            [
+              "Microsoft Edge",
+              "Edge"
+            ],
+            [
+              "Apple Safari",
+              "Safari"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "prompt": "Identify directory/file paths related to the web browser history.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "browser": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_browser_history_artifact_classification_browser"
+                    ],
+                    "meaning": "Browser identity and exact path of a browser-history artifact. Requested leaf: browser.",
+                    "evidence_needed": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+                  }
+                },
+                "path": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_browser_history_artifact_classification_path"
+                    ],
+                    "meaning": "Browser identity and exact path of a browser-history artifact. Requested leaf: path.",
+                    "evidence_needed": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+                  }
+                }
+              },
+              "required": [
+                "browser",
+                "path"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "artifacts"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q15",
+      "prompt": "What websites were the suspect accessing? (Timestamp, URL...)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "visits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_suspect_attributed_web_access_timestamp"
+                    ],
+                    "meaning": "The specified field of website access attributed to the suspect. Requested leaf: timestamp.",
+                    "evidence_needed": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+                  }
+                },
+                "url": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_suspect_attributed_web_access_url"
+                    ],
+                    "meaning": "The specified field of website access attributed to the suspect. Requested leaf: url.",
+                    "evidence_needed": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+                  }
+                },
+                "browser": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_suspect_attributed_web_access_browser"
+                    ],
+                    "meaning": "The specified field of website access attributed to the suspect. Requested leaf: browser.",
+                    "evidence_needed": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+                  }
+                }
+              },
+              "required": [
+                "timestamp",
+                "url",
+                "browser"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "visits"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/visits/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/visits/*/url": "exact",
+          "/visits/4/url": "prefix",
+          "/visits/15/url": "prefix"
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "prompt": "List all search keywords using web browsers. (Timestamp, URL, keyword...)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "searches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "recorded_timestamp_not_action_or_execution_guarantee_us"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "searched",
+                        "field": "recorded_time_us"
+                      }
+                    ],
+                    "meaning": "Retained browser-history visit timestamp of this search observation; not personal attribution.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "keyword": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "query"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "searched",
+                        "field": "query"
+                      }
+                    ],
+                    "meaning": "Query text parsed from the browser-history URL for this webSearch observation.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                },
+                "url": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_browser_search_inventory_url"
+                    ],
+                    "meaning": "The specified field in all browser searches, with keyword, URL and browser joined to the same search. Requested leaf: url.",
+                    "evidence_needed": "searched gives retained keyword/browser/time but no URL field, complete enumeration or reviewed same-search URL join."
+                  }
+                },
+                "browser": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "browser"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "searched",
+                        "field": "browser"
+                      }
+                    ],
+                    "meaning": "Browser recorded for this same webSearch observation.",
+                    "evidence_needed": "All present fields in this answer row must bind to the same candidate and atomic claim part under x-claim-row same_claim_part. Exact source field only. The selected-exhibit runtime gate remains a separate missing requirement; this draft is not ready to run without that gate."
+                  }
+                }
+              },
+              "required": [
+                "timestamp",
+                "keyword",
+                "url",
+                "browser"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "searches"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/searches/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/searches/*/url": "exact"
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "prompt": "List all user keywords at the search bar in Windows Explorer. (Timestamp, Keyword)",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "searches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "needs_complete_explorer_search_inventory_timestamp"
+                    ],
+                    "meaning": "The specified field in all user-entered Windows Explorer search-bar queries. Requested leaf: timestamp.",
+                    "evidence_needed": "typedInSearchBox records query text and registry-key time; no rule establishes all user query events or per-query entry time from key last-write."
+                  }
+                },
+                "keyword": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "text"
+                    ],
+                    "selectors": [
+                      {
+                        "form": "typedInSearchBox",
+                        "field": "text"
+                      }
+                    ],
+                    "meaning": "Query text retained in Explorer WordWheelQuery.",
+                    "evidence_needed": "Exact localSearch text from Explorer WordWheelQuery. Complete enumeration and per-query entry timestamps remain unproved."
+                  }
+                }
+              },
+              "required": [
+                "timestamp",
+                "keyword"
+              ],
+              "additionalProperties": false,
+              "x-claim-row": {
+                "mode": "same_claim_part"
+              }
+            }
+          }
+        },
+        "required": [
+          "searches"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/searches/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "prompt": "What application was used for e-mail communication?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "application": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_email_communication_application_use_application"
+              ],
+              "meaning": "Application actually used for email communication. Requested leaf: application.",
+              "evidence_needed": "Application name or literal PE ProductName/ProductVersion establishes neither email functionality use nor actual communication. No email-to-application execution/use rule exists."
+            }
+          }
+        },
+        "required": [
+          "application"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q19",
+      "prompt": "Where is the e-mail file located?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "path_as_printed": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_email_store_path_identity_path_as_printed"
+              ],
+              "meaning": "Exact displayed location of the email file/store. Requested leaf: path_as_printed.",
+              "evidence_needed": "source.path identifies any examined source artifact, not necessarily the email store; emailSent exposes subject/address context but no reviewed store-path field or store identity join."
+            }
+          }
+        },
+        "required": [
+          "path_as_printed"
+        ],
+        "additionalProperties": true,
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q20",
+      "prompt": "What was the e-mail account used by the suspect?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "needs_suspect_used_email_account_account"
+              ],
+              "meaning": "Email account actually used by the suspect. Requested leaf: account.",
+              "evidence_needed": "Configuration email text, browser email text and email address records do not prove account use or the suspect identity; no personal attribution rule exists."
+            }
+          }
+        },
+        "required": [
+          "account"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "question_id": "Q1",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/images/items/properties/image",
+          "status": "supported_narrow_source_field",
+          "rationale": "Peer resolution: retain only the individual scoped image identifier per image/comparison row."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/images/items/properties/md5",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Peer resolution: Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/images/items/properties/sha1",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Peer resolution: Existing digest and equality roles support individual scoped observations, but independent bindings can mix image subjects or algorithms within an answer row. A declared same-image, same-algorithm row identity constraint is missing; keep genuine digest roles as review-only observations."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/image",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.subject supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/algorithm",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.algorithm supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/acquisition_hash",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.acquisition_digest supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/verification_hash",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.logical_digest supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items/properties/matches",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact imageDigestsAgree.digests_match supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items",
+          "status": "row_guard_required",
+          "rationale": "Added x-claim-row same_claim_part: prevent mixing independently sourced answer fields across candidates or atomic parts. Guard implementation and selected-exhibit gating remain runtime prerequisites."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "imageDigestsAgree",
+          "field": "logical_digest",
+          "meaning": "Recomputed logical-image digest",
+          "does_not_establish": "Complete supplied-image inventory, source authenticity or selected-exhibit membership. The guarded acquisition_verification row requires one candidate and atomic part; unguarded image digest rows remain unsupported beyond scoped ID."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "digests_match",
+          "meaning": "Same-algorithm same-subject digest equality",
+          "does_not_establish": "Complete supplied-image inventory, source authenticity or selected-exhibit membership. The guarded acquisition_verification row requires one candidate and atomic part; unguarded image digest rows remain unsupported beyond scoped ID."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "subject",
+          "meaning": "Scoped logical-image identity; retained as image ID and within guarded acquisition/verification comparisons.",
+          "does_not_establish": "Complete supplied-image inventory, source authenticity or selected-exhibit membership. The guarded acquisition_verification row requires one candidate and atomic part; unguarded image digest rows remain unsupported beyond scoped ID."
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema",
+          "mode": "independent",
+          "rationale": "Separate logical image inventory and acquisition/verification comparison arrays; each element has its own same-claim-part policy."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/images/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/acquisition_verification/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q2",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/number",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/bootable",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/filesystem",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/start_sector",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/total_sectors",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items/properties/size_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+        }
+      ],
+      "narrow_observations": [],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/partitions/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q3",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/os_name",
+          "status": "supported_narrow_source_field",
+          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/version",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/build_number",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/registered_owner",
+          "status": "supported_narrow_source_field",
+          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/system_root",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Generic settingRecorded.value cannot distinguish the requested registry field; reviewed exact roles are absent for this field."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/installed_at",
+          "status": "supported_narrow_source_field",
+          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "subject",
+          "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
+          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema",
+          "mode": "same_claim_part",
+          "rationale": "All fields describe one installed OS on one PC. Present fields must share one atomic claim part; without a compound same-subject attribute join, only one individual attribute role claim can populate this object. Selected-PC-subject gating remains missing."
+        }
+      ]
+    },
+    {
+      "question_id": "Q4",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/time_zone",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/standard_utc_offset_hours",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/daylight_time_bias_hours",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "os.time_zone_setting emits TimeZoneKeyName preferentially, not the required displayed label. Bias and DaylightBias are provenance only; no typed conversion/sign rule exposes requested hours."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "recorded time-zone configuration, not proof of clock accuracy",
+          "does_not_establish": "Required displayed label or signed offsets in hours"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema",
+          "mode": "same_claim_part",
+          "rationale": "These fields describe one related entity, operation, configuration, comparison or artifact. All present fields must share one candidate and atomic claim part; missing compound support does not justify weakening the record to independent."
+        }
+      ]
+    },
+    {
+      "question_id": "Q5",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/computer_name",
+          "status": "supported_narrow_source_field",
+          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "subject",
+          "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
+          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+        }
+      ],
+      "row_policies": []
+    },
+    {
+      "question_id": "Q6",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/account",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/rid_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/nt_hash",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/login_count",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/created_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/last_login_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/login_failure_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0/properties/enabled",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/account",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/rid_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/nt_hash",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/login_count",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/created_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/last_login_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/login_failure_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1/properties/enabled",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "SAM account attributes are narrow observations. No contract role establishes complete filtered enumeration and row identity; RID-as-printed, NT hash, created/failure display fields and reported-null handling also lack exact roles."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "Typed account.name/logon_count/last_logon/enabled for a scoped SAM RID",
+          "does_not_establish": "Complete filtered list, printed fields, password hashes or cross-record identity without a join"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/0",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/accounts/items/anyOf/1",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q7",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/last_logged_on_user",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Winlogon DefaultUserName is configuration, not successful authentication. No rule compares all eligible logon events and joins the selected identity."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "last-logon account name retained by configuration",
+          "does_not_establish": "Successful or chronologically latest authentication"
+        }
+      ],
+      "row_policies": []
+    },
+    {
+      "question_id": "Q8",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/last_shutdown",
+          "status": "supported_narrow_source_field",
+          "rationale": "The fixed role matches the requested recorded configuration field; selector excludes generic setting text and literal claim arguments. Peer resolution: exact field support retained, but a selected-PC-subject runtime gate is still missing; the draft is not ready to run."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "subject",
+          "meaning": "Scoped source identity can identify the machine/system subject of the typed observation.",
+          "does_not_establish": "The requirement/projector does not enforce that this is the selected PC exhibit; a runtime subject gate is required before running this draft."
+        },
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "Exact typed image.logical.md5 or image.logical.sha1 is a recomputed digest for its scoped source subject.",
+          "does_not_establish": "Same-image identity with another independently bound answer-row field or complete image enumeration."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "algorithm",
+          "meaning": "Algorithm of the exact digest comparison.",
+          "does_not_establish": "Same-image/algorithm identity with independently bound answer-row fields; draft retains scoped identifier only."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "acquisition_digest",
+          "meaning": "Digest declared by acquisition container.",
+          "does_not_establish": "Same-image/algorithm identity with independently bound answer-row fields; draft retains scoped identifier only."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "logical_digest",
+          "meaning": "Digest recomputed over logical image bytes.",
+          "does_not_establish": "Same-image/algorithm identity with independently bound answer-row fields; draft retains scoped identifier only."
+        },
+        {
+          "form": "imageDigestsAgree",
+          "field": "digests_match",
+          "meaning": "Same-algorithm same-subject equality within this claim.",
+          "does_not_establish": "Same-image/algorithm identity with independently bound answer-row fields; draft retains scoped identifier only."
+        }
+      ],
+      "row_policies": []
+    },
+    {
+      "question_id": "Q9",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/device_name",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/ip_address",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/subnet_mask",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/name_server",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/domain",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/default_gateway",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/dhcp_enabled",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items/properties/dhcp_server",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Network-card descriptions and IP observations do not establish DHCP assignment, the cross-source interface identity join, all requested fields or complete eligible-interface scope."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "network.description or network.ip_address source observation",
+          "does_not_establish": "DHCP assignment or same-interface join"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/interfaces/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0/properties/installed_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0/properties/name",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0/properties/version",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0/properties/manufacturer",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0/properties/installation_path",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1/properties/installed_local_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1/properties/name",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1/properties/version",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1/properties/manufacturer",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1/properties/installation_path",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programInstalled observations lack personal attribution and an OS-install chronology rule; complete scope and requested field display/null semantics are not established."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "programInstalledAt",
+          "field": "program",
+          "meaning": "Application named in an installation record",
+          "does_not_establish": "Suspect installation or temporal order relative to OS install"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/0",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/applications/items/anyOf/1",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/path_or_application_id",
+          "status": "supported_narrow_source_field",
+          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/execution_count",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/source",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0/properties/time_meaning",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/path_or_application_id",
+          "status": "supported_narrow_source_field",
+          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/execution_count",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/source",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1/properties/time_meaning",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/path_or_application_id",
+          "status": "supported_narrow_source_field",
+          "rationale": "New reviewed app.execution.path role preserves a complete literal executable path from validated Security 4688 or UserAssist executable-list source entries. Generic programRan.path remains disallowed because broad programRun records mix nonexecution sources. Retain same_claim_part and selected-PC runtime gates; no time inference is authorized."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/execution_count",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/source",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2/properties/time_meaning",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "programRan mixes Prefetch, UserAssist, Shimcache and MuiCache observations. The projector exposes a retained timestamp and program/path, not execution guarantee, source enum, source time-meaning enum, execution count or source-reported null; complete scope is unproved."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "programRan",
+          "field": "recorded_time_us",
+          "meaning": "Retained source timestamp for a programRun record",
+          "does_not_establish": "Actual execution time, count or source classification"
+        },
+        {
+          "form": "programRan",
+          "field": "path",
+          "meaning": "Path text retained by a programRun record",
+          "does_not_establish": "Execution or complete log enumeration"
+        },
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "recorded_attribute_app_execution_path_string: exact literal complete executable path from reviewed Security 4688 NewProcessName or validated UserAssist executable run path. Prefetch emits only program name, never an inferred path; Shimcache, MuiCache, shortcut and shell identifiers are not promoted.",
+          "does_not_establish": "Verified actual code execution, authenticity, purpose, physical user, execution count or event time. Attribute timestamps are examination time. Selected-PC-exhibit gating and same-claim-part row enforcement remain required."
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/0",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/1",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/records/items/anyOf/2",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/events/items/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/events/items/properties/event_id",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/events/items/properties/description",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "sessionRecorded exposes event/account text and retained time, not integer event IDs or reviewed descriptions. No rule establishes event interpretation, timezone-window filtering and complete scope."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "sessionRecorded",
+          "field": "recorded_time_us",
+          "meaning": "Retained session-record timestamp",
+          "does_not_establish": "Complete scoped event list, local-window filtering or event ID"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/events/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q13",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/browsers/items/properties/name",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/browsers/items/properties/version",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/internet_explorer_upgraded_from_version_9_or_lower",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Installed application/binary version strings do not establish use or marketing version year. No use-to-version identity join or historical upgrade rule establishes the requested condition."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "literal ProductVersion in PE StringFileInfo for the examined registered application binary and resource language; not a derived version year, execution, use, or authenticity",
+          "does_not_establish": "Browser use, marketing year or upgrade history"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema",
+          "mode": "independent",
+          "rationale": "Browser inventory and historical upgrade condition are separate answer sections; browser records are guarded independently."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/browsers/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q14",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/artifacts/items/properties/browser",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/artifacts/items/properties/path",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "source.path is an arbitrary examined artifact path; no reviewed role classifies it as browser history and joins its browser identity."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "exact path of the examined source artifact",
+          "does_not_establish": "Browser-history classification"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/artifacts/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q15",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/visits/items/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/visits/items/properties/url",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/visits/items/properties/browser",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "visited/browser URL observations do not identify the actor or guarantee actual access; no suspect identity join exists."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "visited",
+          "field": "url",
+          "meaning": "URL in a webVisit record",
+          "does_not_establish": "Access by the suspect"
+        },
+        {
+          "form": "visited",
+          "field": "recorded_time_us",
+          "meaning": "Timestamp retained by a webVisit artifact",
+          "does_not_establish": "Actual access time or personal attribution"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/visits/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q16",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/timestamp",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact searched.recorded_time_us supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/keyword",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact searched.query supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/url",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "searched gives retained keyword/browser/time but no URL field, complete enumeration or reviewed same-search URL join."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/browser",
+          "status": "supported_narrow_source_field",
+          "rationale": "Row-guard resolution: exact searched.browser supports this field when all present row fields share one candidate and atomic claim part. Requires production same_claim_part enforcement; selected-exhibit gating remains missing. Complete collection scope is unproved."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items",
+          "status": "row_guard_required",
+          "rationale": "Added x-claim-row same_claim_part: prevent mixing independently sourced answer fields across candidates or atomic parts. Guard implementation and selected-exhibit gating remain runtime prerequisites."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "searched",
+          "field": "query",
+          "meaning": "Keyword text retained in a webSearch record",
+          "does_not_establish": "Complete keyword inventory, URL projection or selected-exhibit membership. Present query/time/browser bindings require one candidate and atomic claim part under the row guard."
+        },
+        {
+          "form": "searched",
+          "field": "browser",
+          "meaning": "Browser name retained in this search record.",
+          "does_not_establish": "Complete keyword inventory, URL projection or selected-exhibit membership. Present query/time/browser bindings require one candidate and atomic claim part under the row guard."
+        },
+        {
+          "form": "searched",
+          "field": "recorded_time_us",
+          "meaning": "Browser-history visit timestamp retained in this search record.",
+          "does_not_establish": "Complete keyword inventory, URL projection or selected-exhibit membership. Present query/time/browser bindings require one candidate and atomic claim part under the row guard."
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q17",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/timestamp",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "typedInSearchBox records query text and registry-key time; no rule establishes all user query events or per-query entry time from key last-write."
+        },
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items/properties/keyword",
+          "status": "supported_narrow_source_field",
+          "rationale": "Exact selector and reviewed role support this individual source field. Collection completeness is not established; other row fields need their own supported binding."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "typedInSearchBox",
+          "field": "text",
+          "meaning": "Explorer search-box query text",
+          "does_not_establish": "Complete query history or per-query input time"
+        }
+      ],
+      "row_policies": [
+        {
+          "schema_pointer": "/answer_schema/properties/searches/items",
+          "mode": "same_claim_part",
+          "rationale": "This object is one list record/entity/event (including this anyOf branch where applicable). All present fields must originate in one candidate and one atomic claim part; do not mix records, subjects or events."
+        }
+      ]
+    },
+    {
+      "question_id": "Q18",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/application",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Application name or literal PE ProductName/ProductVersion establishes neither email functionality use nor actual communication. No email-to-application execution/use rule exists."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "literal ProductName in PE StringFileInfo for the examined registered application binary and resource language; not execution, use, or authenticity",
+          "does_not_establish": "Actual email communication or a marketing version year"
+        }
+      ],
+      "row_policies": []
+    },
+    {
+      "question_id": "Q19",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/path_as_printed",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "source.path identifies any examined source artifact, not necessarily the email store; emailSent exposes subject/address context but no reviewed store-path field or store identity join."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "exact path of the examined source artifact",
+          "does_not_establish": "Identity of the email store"
+        }
+      ],
+      "row_policies": []
+    },
+    {
+      "question_id": "Q20",
+      "decisions": [
+        {
+          "schema_pointer": "/answer_schema/properties/account",
+          "status": "unsupported_semantic_requirement",
+          "rationale": "Configuration email text, browser email text and email address records do not prove account use or the suspect identity; no personal attribution rule exists."
+        }
+      ],
+      "narrow_observations": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "meaning": "email-address field in application configuration",
+          "does_not_establish": "Suspect account ownership or use"
+        }
+      ],
+      "row_policies": []
+    }
+  ]
+}
