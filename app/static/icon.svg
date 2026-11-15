@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- CONAN-F mark. Original artwork drawn for this project: a detective in profile and a
+       magnifying glass showing a check, for findings that have been checked. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7bea"/>
+      <stop offset="1" stop-color="#123a8c"/>
+    </linearGradient>
+    <clipPath id="tile"><rect width="1024" height="1024" rx="228"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="1024" height="1024" fill="url(#sky)"/>
+    <g transform="translate(-58 -30)">
+      <path fill="#f4f8ff" d="M 204 494
+        C 238 478, 272 450, 302 424
+        C 300 304, 372 222, 450 216
+        C 454 186, 506 186, 510 216
+        C 592 222, 660 300, 672 390
+        C 728 400, 780 430, 816 476
+        C 772 480, 716 476, 664 472
+        C 660 490, 664 506, 672 518
+        C 690 545, 720 572, 734 594
+        C 740 604, 728 614, 700 614
+        C 696 626, 700 640, 706 650
+        C 710 658, 700 663, 691 664
+        C 700 668, 706 678, 702 686
+        C 698 694, 690 698, 690 706
+        C 690 720, 702 732, 698 748
+        C 694 770, 676 784, 652 784
+        C 620 784, 592 778, 570 768
+        C 564 786, 560 800, 560 812
+        C 596 814, 640 824, 676 846
+        C 740 884, 810 960, 850 1060
+        L 190 1060
+        C 190 900, 204 740, 240 594
+        C 276 616, 312 620, 338 606
+        C 328 580, 322 550, 324 522
+        C 284 518, 242 508, 204 494 Z"/>
+      <path d="M 324 444 C 420 340, 560 340, 668 424" fill="none" stroke="#2362cc" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 286 664 C 400 722, 506 780, 566 826" fill="none" stroke="#2362cc" stroke-width="9" stroke-linecap="round"/>
+    </g>
+    <!-- magnifying glass showing a check -->
+    <path d="M 868 898 L 922 952" fill="none" stroke="#123a8c" stroke-width="78" stroke-linecap="round"/>
+    <circle cx="790" cy="820" r="136" fill="#123a8c"/>
+    <path d="M 868 898 L 922 952" fill="none" stroke="#f4f8ff" stroke-width="46" stroke-linecap="round"/>
+    <circle cx="790" cy="820" r="116" fill="#f4f8ff"/>
+    <circle cx="790" cy="820" r="90" fill="#2fbf71"/>
+    <path d="M 748 822 l 30 31 l 55 -64" fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

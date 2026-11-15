@@ -17,6 +17,7 @@ import argparse
 import os
 import plistlib
 import shlex
+import shutil
 import sys
 import threading
 from pathlib import Path
@@ -24,6 +25,7 @@ from pathlib import Path
 from app.server import ROOT, create_server
 
 TITLE = "Conan"   # the application's name: window, menu bar and launcher; the workbench inside is CONAN-F
+ICON = Path(__file__).resolve().parent / "assets" / "Conan.icns"   # built by scripts/make_icon.py
 PORT = 8766   # next to `cop serve` on 8765; any free port is used when this one is taken
 BUNDLE_ID = "dev.conan-f.workbench"
 WINDOW = {"width": 1600, "height": 1000, "min_size": (1120, 700)}
@@ -43,7 +45,7 @@ def _webview():
 
 
 def _name_the_application():
-    """On macOS the menu bar would otherwise read "Python"."""
+    """On macOS the menu bar would otherwise read "Python", under Python's own Dock icon."""
     if sys.platform != "darwin":
         return
     try:
@@ -51,6 +53,11 @@ def _name_the_application():
         info = NSBundle.mainBundle().localizedInfoDictionary() or NSBundle.mainBundle().infoDictionary()
         if info is not None:
             info["CFBundleName"] = TITLE
+        if ICON.is_file():
+            import AppKit
+            image = AppKit.NSImage.alloc().initWithContentsOfFile_(str(ICON))
+            if image is not None:
+                AppKit.NSApplication.sharedApplication().setApplicationIconImage_(image)
     except Exception:   # cosmetic only
         pass
 
@@ -100,12 +107,18 @@ def make_app(directory, root=ROOT, executable=None) -> Path:
         raise ValueError(f"refusing to overwrite existing application: {bundle}")
     launcher = bundle / "Contents" / "MacOS" / TITLE
     launcher.parent.mkdir(parents=True)
+    info = {
+        "CFBundleName": TITLE, "CFBundleDisplayName": TITLE, "CFBundleIdentifier": BUNDLE_ID,
+        "CFBundleExecutable": TITLE, "CFBundlePackageType": "APPL", "CFBundleShortVersionString": "0.1.0",
+        "CFBundleVersion": "1", "LSMinimumSystemVersion": "11.0", "NSHighResolutionCapable": True,
+    }
+    if ICON.is_file():
+        resources = bundle / "Contents" / "Resources"
+        resources.mkdir()
+        shutil.copyfile(ICON, resources / ICON.name)
+        info["CFBundleIconFile"] = ICON.stem
     with (bundle / "Contents" / "Info.plist").open("wb") as stream:
-        plistlib.dump({
-            "CFBundleName": TITLE, "CFBundleDisplayName": TITLE, "CFBundleIdentifier": BUNDLE_ID,
-            "CFBundleExecutable": TITLE, "CFBundlePackageType": "APPL", "CFBundleShortVersionString": "0.1.0",
-            "CFBundleVersion": "1", "LSMinimumSystemVersion": "11.0", "NSHighResolutionCapable": True,
-        }, stream)
+        plistlib.dump(info, stream)
     launcher.write_text("\n".join([
         "#!/bin/sh",
         "# Written by `python -m app.desktop --make-app`. Starts Conan (CONAN-F) from its checkout.",

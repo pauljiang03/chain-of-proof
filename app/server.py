@@ -19,6 +19,7 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/static/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
           "/static/report.js": ("report.js", "text/javascript; charset=utf-8"),
+          "/static/icon.svg": ("icon.svg", "image/svg+xml; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}

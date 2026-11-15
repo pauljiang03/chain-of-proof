@@ -84,6 +84,7 @@ python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable C
 ```
 
 The application is called Conan. `conan` accepts every `cop` subcommand; with none it opens the window.
+Its mark is original artwork in `app/static/icon.svg`; `python scripts/make_icon.py` rebuilds the macOS icon from it.
 
 The window is the operating system's own web view, so no browser engine is bundled.
 The front end is plain HTML, CSS and JavaScript with no framework and no graph library.

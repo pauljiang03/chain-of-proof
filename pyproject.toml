@@ -29,4 +29,4 @@ include = ["agent*", "app*", "checker*", "eval*", "extractor*", "miner*", "verif
 namespaces = false
 
 [tool.setuptools.package-data]
-app = ["static/*.html", "static/*.css", "static/*.js", "sample/*.json", "sample/*.jsonl"]
+app = ["static/*.html", "static/*.css", "static/*.js", "static/*.svg", "assets/*.icns", "sample/*.json", "sample/*.jsonl"]

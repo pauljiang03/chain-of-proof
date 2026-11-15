@@ -95,6 +95,10 @@ class Desktop(unittest.TestCase):
             info = plistlib.load(stream)
         self.assertEqual(info["CFBundleExecutable"], "Conan")
         self.assertEqual(info["CFBundleName"], "Conan")
+        self.assertEqual(info["CFBundleIconFile"], "Conan")
+        icon = bundle / "Contents" / "Resources" / "Conan.icns"
+        self.assertEqual(icon.read_bytes(), desktop.ICON.read_bytes())
+        self.assertEqual(icon.read_bytes()[:4], b"icns")
         launcher = bundle / "Contents" / "MacOS" / "Conan"
         self.assertTrue(launcher.stat().st_mode & 0o111)
         script = launcher.read_text()
