@@ -152,18 +152,31 @@ def prepare(public_path, policy_path, output_dir):
                 'questions_sha256': _sha(questions_bytes), 'question_ids': sorted(selections),
                 'separate_reference_alignment_required': True, 'private_reference_included': False,
                 'model_invoked': False, 'scoring_performed': False}
+    publish_prepared(destination, {'questions.json': questions_bytes, 'policy.json': policy_bytes,
+        'manifest.json': (json.dumps(manifest, indent=2) + '\n').encode()})
+    return manifest
+
+
+def publish_prepared(output_dir, files):
+    """Publish immutable file bytes exclusively; manifest.json is the completion marker."""
+    destination = Path(output_dir)
+    if (not isinstance(files, dict) or 'manifest.json' not in files or any(
+            not isinstance(name, str) or name in ('', '.', '..') or '/' in name or '\\' in name
+            or '\0' in name or type(data) is not bytes for name, data in files.items())):
+        raise ValueError('immutable basename files and manifest.json required')
+    if destination.exists() or destination.is_symlink():
+        raise ValueError('output must be fresh')
     # Validate and stage everything before exclusively claiming the output name.
     # Exclusive hard links publish complete files without replacing race winners.
     # The manifest is linked last and is the atomic completion marker.
     staging = Path(tempfile.mkdtemp(prefix='.representation-', dir=destination.parent))
     owned_directory, published = None, []
     try:
-        (staging / 'questions.json').write_bytes(questions_bytes)
-        (staging / 'policy.json').write_bytes(policy_bytes)
-        (staging / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+        for name, data in files.items():
+            (staging / name).write_bytes(data)
         destination.mkdir()  # Exclusive: never replace a concurrently created directory.
         owned_directory = destination.stat()
-        for name in ('questions.json', 'policy.json', 'manifest.json'):
+        for name in [name for name in files if name != 'manifest.json'] + ['manifest.json']:
             target = destination / name
             os.link(staging / name, target)  # Exclusive creation; no partial file visibility.
             published.append((target, (staging / name).stat()))
@@ -186,4 +199,3 @@ def prepare(public_path, policy_path, output_dir):
     finally:
         if staging.exists():
             shutil.rmtree(staging)
-    return manifest
