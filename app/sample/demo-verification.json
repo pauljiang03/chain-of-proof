@@ -1,5 +1,19 @@
 {
   "synthetic": true,
   "checked": 32,
-  "passed": true
+  "passed": true,
+  "facts_sha256": "8cd02b3590030aed92f06f1f692208b81a88729140ed74635ee2c3b78e86f5b0",
+  "run_sha256": "465b930a15cec2e82bdfeb38b053b9ffeb6900a9810913a2c1434b27c3b220cf",
+  "verification_sources_sha256": {
+    "checker/check.py": "c78551cf78123c92d19bd11db97ab1c359ffddee24a748b835377ae191eb06d4",
+    "checker/claims.py": "9ef9697b7235d4767a7bbc67047eb49f650953fce7665c59c7ced3ee1b30330d",
+    "verifier/verify.py": "70c16e8401f4dd263a04ea50d7b577850963c71aca6033ebab1e47f43b974f06",
+    "lean/ChainOfProof.lean": "e315e3cb878c1b9e7382ad98057e32529ffc8cd98353e8388fe329ae8b7f9b92",
+    "lean/ChainOfProof/Census.lean": "1ae525213e36fc43bbe073f75bb8000a496773e01f15caae3967feed5ddea5ff",
+    "lean/ChainOfProof/Check.lean": "70203a2dd306b8ac9578ca242a6340d12fd05121dde2088d109a3eeec304e67e",
+    "lean/ChainOfProof/Claim.lean": "99282a0f06cf95f80a9835fb2f05a68b19d1724b205b8cb270d25b05ebe36f43",
+    "lean/ChainOfProof/Facts.lean": "121feea28c12453df220df5c1bfa30019c81a2a9fcda5770f4047b4e8cc1603f",
+    "lean/ChainOfProof/Sets.lean": "9bd455fdc19e8df5fc7aa5a9a9f67ffa92aade31ab7ef2b5b608b5502626a13d",
+    "lean/ChainOfProof/Theorems.lean": "f5a69129951498f24a4dafee159564259f79b29511a75f5ad680330bdb85c0a6"
+  }
 }

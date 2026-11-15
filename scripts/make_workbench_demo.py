@@ -118,8 +118,9 @@ def build(output):
         clock='08:30:00', artifact='Uninstall registry key', meaning='registry key last-write time', publisher='Igor Pavlov'))
     claim('Which optical-disc trace is recorded?', 'burnTrace', row('cdBurn', 'optical drive lock', 'DVD RW Drive',
         clock='10:00:00', artifact='Synthetic optical service event', meaning='time the optical event was logged', event_id=1001))
-    claim('What note was found?', 'noteFound', row('noteText', r'C:\Users\maya\Desktop\review-note.txt',
-        'Bring the Harbor deck and budget to the design review.', artifact='UTF-8 text file',
+    claim('What note was found?', 'noteFound', row('noteText',
+        'Bring the Harbor deck and budget to the design review.', 'UTF-8 text file',
+        artifact=r'C:\Users\maya\Desktop\review-note.txt',
         meaning='when the image was examined, not source activity', timestamp_semantics='examination_observation', user='maya'))
     facts = {'_note': 'Entirely synthetic Harbor case. All people, devices, messages and artifacts are fictional. No image exists.', 'strings': strings, 'facts': rows}
     (output / 'facts.json').write_text(json.dumps(facts, indent=2) + '\n')
@@ -141,7 +142,15 @@ def build(output):
         if errors:
             raise RuntimeError(str(errors))
     (output / 'run.json').write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n')
-    (output / 'demo-verification.json').write_text(json.dumps({'synthetic': True, 'checked': len(data['findings']), 'passed': True}, indent=2) + '\n')
+    verification_sources = [ROOT / 'checker/check.py', ROOT / 'checker/claims.py',
+                            ROOT / 'verifier/verify.py', ROOT / 'lean/ChainOfProof.lean']
+    verification_sources += sorted((ROOT / 'lean/ChainOfProof').rglob('*.lean'))
+    receipt = {'synthetic': True, 'checked': len(data['findings']), 'passed': True,
+               'facts_sha256': hashlib.sha256((output / 'facts.json').read_bytes()).hexdigest(),
+               'run_sha256': hashlib.sha256((output / 'run.json').read_bytes()).hexdigest(),
+               'verification_sources_sha256': {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
+                                               for path in verification_sources}}
+    (output / 'demo-verification.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print('Verified demo:', len(rows), 'records;', len(data['findings']), 'findings;', len(data['rejections']), 'refusal(s).')
 
 if __name__ == '__main__':

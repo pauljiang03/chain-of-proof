@@ -47,8 +47,8 @@
     "43": "24.09",
     "44": "optical drive lock",
     "45": "DVD RW Drive",
-    "46": "C:\\Users\\maya\\Desktop\\review-note.txt",
-    "47": "Bring the Harbor deck and budget to the design review."
+    "46": "Bring the Harbor deck and budget to the design review.",
+    "47": "UTF-8 text file"
   },
   "facts": [
     {
@@ -745,7 +745,7 @@
       "prov": {
         "image": "demo-laptop.E01",
         "exhibit": "Laptop",
-        "artifact": "UTF-8 text file",
+        "artifact": "C:\\Users\\maya\\Desktop\\review-note.txt",
         "tool": "Synthetic demo generator v1",
         "time_meaning": "when the image was examined, not source activity",
         "time_zone": "local time, converted from America/New_York",

@@ -2,14 +2,14 @@
   "version": 1,
   "case": {
     "name": "Harbor design review — synthetic demo",
-    "generated_at": "2026-11-15T04:41:44Z",
+    "generated_at": "2026-11-15T08:45:20Z",
     "sample": true,
     "case_id": "synthetic-harbor-review",
     "backend": "offline-fixture",
     "model": "none",
     "ended": "success",
     "is_error": false,
-    "facts_sha256": "2aed0adf6ac376ccc45bcfd4de7375b4b40dc4227f9162f80ec175e9c4e04dc1",
+    "facts_sha256": "8cd02b3590030aed92f06f1f692208b81a88729140ed74635ee2c3b78e86f5b0",
     "note": "Fictional demonstration, generated through the real checker. No model, real disk images or benchmark score."
   },
   "stats": {
@@ -98,7 +98,7 @@
       "lean_file": "A001.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A001\n\ndef cited : List Fact := [\n  ⟨1, .systemSetting, 1781010000000000, 1000, 1, 2⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 1\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A001\n\n#print axioms Cert.A001.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A001\n\ndef cited : List Fact := [\n  ⟨1, .systemSetting, 1781010000000000, 1000, 1, 2, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 1\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A001\n\n#print axioms Cert.A001.verified\n"
     },
     {
       "finding_id": "A002",
@@ -154,7 +154,7 @@
       "lean_file": "A002.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A002\n\ndef cited : List Fact := [\n  ⟨2, .systemSetting, 1781010000000000, 1000, 3, 4⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 2\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A002\n\n#print axioms Cert.A002.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A002\n\ndef cited : List Fact := [\n  ⟨2, .systemSetting, 1781010000000000, 1000, 3, 4, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 2\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A002\n\n#print axioms Cert.A002.verified\n"
     },
     {
       "finding_id": "A003",
@@ -210,7 +210,7 @@
       "lean_file": "A003.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A003\n\ndef cited : List Fact := [\n  ⟨3, .systemSetting, 1781010000000000, 1000, 5, 6⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 3\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A003\n\n#print axioms Cert.A003.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A003\n\ndef cited : List Fact := [\n  ⟨3, .systemSetting, 1781010000000000, 1000, 5, 6, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 3\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A003\n\n#print axioms Cert.A003.verified\n"
     },
     {
       "finding_id": "A004",
@@ -268,7 +268,7 @@
       "lean_file": "A004.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A004\n\ndef cited : List Fact := [\n  ⟨4, .systemSetting, 1781010000000000, 1000, 7, 8⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 4\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A004\n\n#print axioms Cert.A004.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A004\n\ndef cited : List Fact := [\n  ⟨4, .systemSetting, 1781010000000000, 1000, 7, 8, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 4\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A004\n\n#print axioms Cert.A004.verified\n"
     },
     {
       "finding_id": "A005",
@@ -326,7 +326,7 @@
       "lean_file": "A005.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A005\n\ndef cited : List Fact := [\n  ⟨5, .systemSetting, 1781010000000000, 1000, 7, 9⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 5\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A005\n\n#print axioms Cert.A005.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A005\n\ndef cited : List Fact := [\n  ⟨5, .systemSetting, 1781010000000000, 1000, 7, 9, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 5\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A005\n\n#print axioms Cert.A005.verified\n"
     },
     {
       "finding_id": "A006",
@@ -384,7 +384,7 @@
       "lean_file": "A006.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A006\n\ndef cited : List Fact := [\n  ⟨6, .systemSetting, 1781010000000000, 1000, 7, 10⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 6\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A006\n\n#print axioms Cert.A006.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A006\n\ndef cited : List Fact := [\n  ⟨6, .systemSetting, 1781010000000000, 1000, 7, 10, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.settingRecorded 6\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A006\n\n#print axioms Cert.A006.verified\n"
     },
     {
       "finding_id": "A007",
@@ -448,7 +448,7 @@
       "lean_file": "A007.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A007\n\ndef cited : List Fact := [\n  ⟨7, .accountSeen, 1781009100000000, 1000, 11, 12⟩ ]\n\ndef claim : Claim := Sets.accountRecorded 7\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A007\n\n#print axioms Cert.A007.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A007\n\ndef cited : List Fact := [\n  ⟨7, .accountSeen, 1781009100000000, 1000, 11, 12, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.accountRecorded 7\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A007\n\n#print axioms Cert.A007.verified\n"
     },
     {
       "finding_id": "A008",
@@ -506,7 +506,7 @@
       "lean_file": "A008.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A008\n\ndef cited : List Fact := [\n  ⟨8, .sessionEvent, 1781009700000000, 1000, 13, 11⟩ ]\n\ndef claim : Claim := Sets.sessionRecorded 8\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A008\n\n#print axioms Cert.A008.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A008\n\ndef cited : List Fact := [\n  ⟨8, .sessionEvent, 1781009700000000, 1000, 13, 11, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.sessionRecorded 8\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A008\n\n#print axioms Cert.A008.verified\n"
     },
     {
       "finding_id": "A009",
@@ -519,7 +519,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 9,
@@ -573,7 +573,7 @@
               11
             ]
           },
-          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -589,7 +589,7 @@
       "lean_file": "A009.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A009\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0⟩,\n  ⟨11, .volumeMount, 1781010601000000, 1000, 14, 16⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 9 11\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A009\n\n#print axioms Cert.A009.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A009\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨11, .volumeMount, 1781010601000000, 1000, 14, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 9 11\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A009\n\n#print axioms Cert.A009.verified\n"
     },
     {
       "finding_id": "A010",
@@ -602,7 +602,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+      "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 10,
@@ -656,7 +656,7 @@
               12
             ]
           },
-          "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+          "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -672,7 +672,7 @@
       "lean_file": "A010.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A010\n\ndef cited : List Fact := [\n  ⟨10, .usbInsert, 1781009880000000, 1000, 15, 0⟩,\n  ⟨12, .volumeMount, 1781009881000000, 1000, 15, 17⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 10 12\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A010\n\n#print axioms Cert.A010.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A010\n\ndef cited : List Fact := [\n  ⟨10, .usbInsert, 1781009880000000, 1000, 15, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨12, .volumeMount, 1781009881000000, 1000, 15, 17, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 10 12\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A010\n\n#print axioms Cert.A010.verified\n"
     },
     {
       "finding_id": "A011",
@@ -685,7 +685,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 9,
@@ -740,7 +740,7 @@
               13
             ]
           },
-          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R7"
@@ -756,7 +756,7 @@
       "lean_file": "A011.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A011\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0⟩,\n  ⟨13, .volumeOnDevice, 1781010000000000, 1000, 14, 16⟩ ]\n\ndef claim : Claim := Sets.deviceHolds 9 13\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A011\n\n#print axioms Cert.A011.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A011\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨13, .volumeOnDevice, 1781010000000000, 1000, 14, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.deviceHolds 9 13\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A011\n\n#print axioms Cert.A011.verified\n"
     },
     {
       "finding_id": "A012",
@@ -769,7 +769,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+      "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 10,
@@ -824,7 +824,7 @@
               14
             ]
           },
-          "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+          "english": "The USB device record naming serial DEMO-BACKUP-007 (record time 2026-06-09 12:58:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the examined-device record for volume DEMO-VOL-BACKUP. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R7"
@@ -840,7 +840,7 @@
       "lean_file": "A012.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A012\n\ndef cited : List Fact := [\n  ⟨10, .usbInsert, 1781009880000000, 1000, 15, 0⟩,\n  ⟨14, .volumeOnDevice, 1781010000000000, 1000, 15, 17⟩ ]\n\ndef claim : Claim := Sets.deviceHolds 10 14\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A012\n\n#print axioms Cert.A012.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A012\n\ndef cited : List Fact := [\n  ⟨10, .usbInsert, 1781009880000000, 1000, 15, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨14, .volumeOnDevice, 1781010000000000, 1000, 15, 17, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.deviceHolds 10 14\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A012\n\n#print axioms Cert.A012.verified\n"
     },
     {
       "finding_id": "A013",
@@ -869,7 +869,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. The shortcut target record naming E:\\Harbor\\launch-plan.pptx on recorded volume DEMO-VOL-PROJECT (record time 2026-06-09 13:18:00 UTC; timestamp meaning in provenance: shortcut file last-modified time (last open via the shell); source artifact: Recent Items / launch-plan.lnk). Its recorded volume serial matches the volume mapping for device DEMO-PROJECT-042. This establishes a retained target reference, not that the target was opened at this time or by a particular person. The timestamp of the USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log) precedes the timestamp of the shortcut target record naming E:\\Harbor\\launch-plan.pptx on recorded volume DEMO-VOL-PROJECT (record time 2026-06-09 13:18:00 UTC; timestamp meaning in provenance: shortcut file last-modified time (last open via the shell); source artifact: Recent Items / launch-plan.lnk): the gap of 480 s exceeds the combined timestamp uncertainty of 2 ms. This orders recorded timestamps, not necessarily the underlying actions.",
+      "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity. The shortcut target record naming E:\\Harbor\\launch-plan.pptx on recorded volume DEMO-VOL-PROJECT (record time 2026-06-09 13:18:00 UTC; timestamp meaning in provenance: shortcut file last-modified time (last open via the shell); source artifact: Recent Items / launch-plan.lnk). Its recorded volume serial matches the volume mapping for device DEMO-PROJECT-042. This establishes a retained target reference, not that the target was opened at this time or by a particular person. The timestamp of the USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log) precedes the timestamp of the shortcut target record naming E:\\Harbor\\launch-plan.pptx on recorded volume DEMO-VOL-PROJECT (record time 2026-06-09 13:18:00 UTC; timestamp meaning in provenance: shortcut file last-modified time (last open via the shell); source artifact: Recent Items / launch-plan.lnk): the gap of 480 s exceeds the combined timestamp uncertainty of 2 ms. This orders recorded timestamps, not necessarily the underlying actions.",
       "cited_facts": [
         {
           "id": 9,
@@ -946,7 +946,7 @@
               11
             ]
           },
-          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device.",
+          "english": "The USB device record naming serial DEMO-PROJECT-042 (record time 2026-06-09 13:10:00 UTC; timestamp meaning in provenance: device install section start (first connection); source artifact: SetupAPI device install log). Its device serial matches the device-volume mapping for volume DEMO-VOL-PROJECT. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -988,7 +988,7 @@
       "lean_file": "A013.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A013\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0⟩,\n  ⟨11, .volumeMount, 1781010601000000, 1000, 14, 16⟩,\n  ⟨15, .lnkTarget, 1781011080000000, 1000, 18, 16⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 9 11) (.both (Sets.openedFromMount 15 11) (.before 9 15))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A013\n\n#print axioms Cert.A013.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A013\n\ndef cited : List Fact := [\n  ⟨9, .usbInsert, 1781010600000000, 1000, 14, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨11, .volumeMount, 1781010601000000, 1000, 14, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨15, .lnkTarget, 1781011080000000, 1000, 18, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 9 11) (.both (Sets.openedFromMount 15 11) (.before 9 15))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A013\n\n#print axioms Cert.A013.verified\n"
     },
     {
       "finding_id": "A015",
@@ -1087,7 +1087,7 @@
       "lean_file": "A015.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A015\n\ndef cited : List Fact := [\n  ⟨16, .fileModified, 1781007000000000, 1000, 18, 16⟩,\n  ⟨17, .fileCreated, 1781010720000000, 1000, 18, 16⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 16) (Sets.fileCreatedAt 17)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A015\n\n#print axioms Cert.A015.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A015\n\ndef cited : List Fact := [\n  ⟨16, .fileModified, 1781007000000000, 1000, 18, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨17, .fileCreated, 1781010720000000, 1000, 18, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 16) (Sets.fileCreatedAt 17)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A015\n\n#print axioms Cert.A015.verified\n"
     },
     {
       "finding_id": "A016",
@@ -1186,7 +1186,7 @@
       "lean_file": "A016.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A016\n\ndef cited : List Fact := [\n  ⟨18, .fileModified, 1781007000000000, 1000, 19, 16⟩,\n  ⟨19, .fileCreated, 1781010840000000, 1000, 19, 16⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 18) (Sets.fileCreatedAt 19)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A016\n\n#print axioms Cert.A016.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A016\n\ndef cited : List Fact := [\n  ⟨18, .fileModified, 1781007000000000, 1000, 19, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨19, .fileCreated, 1781010840000000, 1000, 19, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 18) (Sets.fileCreatedAt 19)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A016\n\n#print axioms Cert.A016.verified\n"
     },
     {
       "finding_id": "A017",
@@ -1285,7 +1285,7 @@
       "lean_file": "A017.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A017\n\ndef cited : List Fact := [\n  ⟨20, .fileModified, 1781007000000000, 1000, 20, 16⟩,\n  ⟨21, .fileCreated, 1781010960000000, 1000, 20, 16⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 20) (Sets.fileCreatedAt 21)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A017\n\n#print axioms Cert.A017.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A017\n\ndef cited : List Fact := [\n  ⟨20, .fileModified, 1781007000000000, 1000, 20, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨21, .fileCreated, 1781010960000000, 1000, 20, 16, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.fileModifiedAt 20) (Sets.fileCreatedAt 21)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A017\n\n#print axioms Cert.A017.verified\n"
     },
     {
       "finding_id": "A018",
@@ -1344,7 +1344,7 @@
       "lean_file": "A018.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A018\n\ndef cited : List Fact := [\n  ⟨22, .fileRenamed, 1781012100000000, 1000, 21, 22⟩ ]\n\ndef claim : Claim := Sets.renamed 22\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A018\n\n#print axioms Cert.A018.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A018\n\ndef cited : List Fact := [\n  ⟨22, .fileRenamed, 1781012100000000, 1000, 21, 22, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.renamed 22\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A018\n\n#print axioms Cert.A018.verified\n"
     },
     {
       "finding_id": "A019",
@@ -1402,7 +1402,7 @@
       "lean_file": "A019.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A019\n\ndef cited : List Fact := [\n  ⟨23, .fileDeleted, 1781013900000000, 1000, 23, 24⟩ ]\n\ndef claim : Claim := Sets.fileDeletedAt 23\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A019\n\n#print axioms Cert.A019.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A019\n\ndef cited : List Fact := [\n  ⟨23, .fileDeleted, 1781013900000000, 1000, 23, 24, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.fileDeletedAt 23\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A019\n\n#print axioms Cert.A019.verified\n"
     },
     {
       "finding_id": "A020",
@@ -1460,7 +1460,7 @@
       "lean_file": "A020.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A020\n\ndef cited : List Fact := [\n  ⟨24, .fileSeen, 1781010000000000, 1000, 25, 17⟩ ]\n\ndef claim : Claim := Sets.fileRecorded 24\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A020\n\n#print axioms Cert.A020.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A020\n\ndef cited : List Fact := [\n  ⟨24, .fileSeen, 1781010000000000, 1000, 25, 17, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.fileRecorded 24\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A020\n\n#print axioms Cert.A020.verified\n"
     },
     {
       "finding_id": "A021",
@@ -1518,7 +1518,7 @@
       "lean_file": "A021.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A021\n\ndef cited : List Fact := [\n  ⟨25, .fileSeen, 1781010000000000, 1000, 26, 17⟩ ]\n\ndef claim : Claim := Sets.fileRecorded 25\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A021\n\n#print axioms Cert.A021.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A021\n\ndef cited : List Fact := [\n  ⟨25, .fileSeen, 1781010000000000, 1000, 26, 17, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.fileRecorded 25\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A021\n\n#print axioms Cert.A021.verified\n"
     },
     {
       "finding_id": "A022",
@@ -1576,7 +1576,7 @@
       "lean_file": "A022.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A022\n\ndef cited : List Fact := [\n  ⟨26, .webSearch, 1781010120000000, 1000, 27, 28⟩ ]\n\ndef claim : Claim := Sets.searched 26\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A022\n\n#print axioms Cert.A022.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A022\n\ndef cited : List Fact := [\n  ⟨26, .webSearch, 1781010120000000, 1000, 27, 28, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.searched 26\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A022\n\n#print axioms Cert.A022.verified\n"
     },
     {
       "finding_id": "A023",
@@ -1634,7 +1634,7 @@
       "lean_file": "A023.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A023\n\ndef cited : List Fact := [\n  ⟨27, .webSearch, 1781010240000000, 1000, 29, 28⟩ ]\n\ndef claim : Claim := Sets.searched 27\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A023\n\n#print axioms Cert.A023.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A023\n\ndef cited : List Fact := [\n  ⟨27, .webSearch, 1781010240000000, 1000, 29, 28, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.searched 27\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A023\n\n#print axioms Cert.A023.verified\n"
     },
     {
       "finding_id": "A024",
@@ -1691,7 +1691,7 @@
       "lean_file": "A024.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A024\n\ndef cited : List Fact := [\n  ⟨28, .webVisit, 1781010360000000, 1000, 30, 28⟩ ]\n\ndef claim : Claim := Sets.visited 28\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A024\n\n#print axioms Cert.A024.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A024\n\ndef cited : List Fact := [\n  ⟨28, .webVisit, 1781010360000000, 1000, 30, 28, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.visited 28\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A024\n\n#print axioms Cert.A024.verified\n"
     },
     {
       "finding_id": "A025",
@@ -1748,7 +1748,7 @@
       "lean_file": "A025.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A025\n\ndef cited : List Fact := [\n  ⟨29, .webVisit, 1781010420000000, 1000, 31, 28⟩ ]\n\ndef claim : Claim := Sets.visited 29\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A025\n\n#print axioms Cert.A025.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A025\n\ndef cited : List Fact := [\n  ⟨29, .webVisit, 1781010420000000, 1000, 31, 28, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.visited 29\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A025\n\n#print axioms Cert.A025.verified\n"
     },
     {
       "finding_id": "A026",
@@ -1806,7 +1806,7 @@
       "lean_file": "A026.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A026\n\ndef cited : List Fact := [\n  ⟨30, .fileDownloaded, 1781010480000000, 1000, 32, 33⟩ ]\n\ndef claim : Claim := Sets.downloaded 30\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A026\n\n#print axioms Cert.A026.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A026\n\ndef cited : List Fact := [\n  ⟨30, .fileDownloaded, 1781010480000000, 1000, 32, 33, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.downloaded 30\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A026\n\n#print axioms Cert.A026.verified\n"
     },
     {
       "finding_id": "A027",
@@ -1870,7 +1870,7 @@
       "lean_file": "A027.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A027\n\ndef cited : List Fact := [\n  ⟨31, .emailSent, 1781012400000000, 1000, 34, 35⟩ ]\n\ndef claim : Claim := Sets.emailed 31\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A027\n\n#print axioms Cert.A027.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A027\n\ndef cited : List Fact := [\n  ⟨31, .emailSent, 1781012400000000, 1000, 34, 35, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.emailed 31\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A027\n\n#print axioms Cert.A027.verified\n"
     },
     {
       "finding_id": "A028",
@@ -1928,7 +1928,7 @@
       "lean_file": "A028.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A028\n\ndef cited : List Fact := [\n  ⟨32, .cloudFile, 1781012520000000, 1000, 36, 37⟩ ]\n\ndef claim : Claim := Sets.cloudEvent 32\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A028\n\n#print axioms Cert.A028.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A028\n\ndef cited : List Fact := [\n  ⟨32, .cloudFile, 1781012520000000, 1000, 36, 37, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.cloudEvent 32\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A028\n\n#print axioms Cert.A028.verified\n"
     },
     {
       "finding_id": "A029",
@@ -1987,7 +1987,7 @@
       "lean_file": "A029.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A029\n\ndef cited : List Fact := [\n  ⟨33, .programRun, 1781011020000000, 1000, 38, 39⟩ ]\n\ndef claim : Claim := Sets.programRan 33\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A029\n\n#print axioms Cert.A029.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A029\n\ndef cited : List Fact := [\n  ⟨33, .programRun, 1781011020000000, 1000, 38, 39, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.programRan 33\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A029\n\n#print axioms Cert.A029.verified\n"
     },
     {
       "finding_id": "A030",
@@ -2046,7 +2046,7 @@
       "lean_file": "A030.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A030\n\ndef cited : List Fact := [\n  ⟨34, .programRun, 1781011800000000, 1000, 40, 41⟩ ]\n\ndef claim : Claim := Sets.programRan 34\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A030\n\n#print axioms Cert.A030.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A030\n\ndef cited : List Fact := [\n  ⟨34, .programRun, 1781011800000000, 1000, 40, 41, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.programRan 34\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A030\n\n#print axioms Cert.A030.verified\n"
     },
     {
       "finding_id": "A031",
@@ -2103,7 +2103,7 @@
       "lean_file": "A031.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A031\n\ndef cited : List Fact := [\n  ⟨35, .programInstalled, 1781008200000000, 1000, 42, 43⟩ ]\n\ndef claim : Claim := Sets.programInstalledAt 35\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A031\n\n#print axioms Cert.A031.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A031\n\ndef cited : List Fact := [\n  ⟨35, .programInstalled, 1781008200000000, 1000, 42, 43, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.programInstalledAt 35\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A031\n\n#print axioms Cert.A031.verified\n"
     },
     {
       "finding_id": "A032",
@@ -2160,7 +2160,7 @@
       "lean_file": "A032.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A032\n\ndef cited : List Fact := [\n  ⟨36, .cdBurn, 1781013600000000, 1000, 44, 45⟩ ]\n\ndef claim : Claim := Sets.burnTrace 36\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A032\n\n#print axioms Cert.A032.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A032\n\ndef cited : List Fact := [\n  ⟨36, .cdBurn, 1781013600000000, 1000, 44, 45, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.burnTrace 36\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A032\n\n#print axioms Cert.A032.verified\n"
     },
     {
       "finding_id": "A033",
@@ -2172,7 +2172,7 @@
       },
       "status": "verified",
       "proposer": "synthetic demo script; no model",
-      "english": "A Bring the Harbor deck and budget to the design review. note reads \"C:\\Users\\maya\\Desktop\\review-note.txt\" (last modified 2026-06-09 13:00:00 UTC).",
+      "english": "The retained UTF-8 text file record contains note text \"Bring the Harbor deck and budget to the design review.\" (record time 2026-06-09 13:00:00 UTC; timestamp meaning in provenance: when the image was examined, not source activity; source artifact: C:\\Users\\maya\\Desktop\\review-note.txt). This establishes retained text and its source-record timestamp, not a note-editing action, its time, or its author.",
       "cited_facts": [
         {
           "id": 37,
@@ -2180,14 +2180,14 @@
           "t": 1781010000000000,
           "res": 1000,
           "obj": 46,
-          "obj_text": "C:\\Users\\maya\\Desktop\\review-note.txt",
+          "obj_text": "Bring the Harbor deck and budget to the design review.",
           "aux": 47,
-          "aux_text": "Bring the Harbor deck and budget to the design review.",
-          "row_sha256": "8b740b02cc1fddc5be720e9e808be4f75db3f116857fd7f3b601396c4e10f4ac",
+          "aux_text": "UTF-8 text file",
+          "row_sha256": "368467b2318ae4965ed0059318babaff3b7b5eeaeb894075c41691c753bdbaf6",
           "prov": {
             "image": "demo-laptop.E01",
             "exhibit": "Laptop",
-            "artifact": "UTF-8 text file",
+            "artifact": "C:\\Users\\maya\\Desktop\\review-note.txt",
             "tool": "Synthetic demo generator v1",
             "time_meaning": "when the image was examined, not source activity",
             "time_zone": "local time, converted from America/New_York",
@@ -2204,7 +2204,7 @@
               37
             ]
           },
-          "english": "A Bring the Harbor deck and budget to the design review. note reads \"C:\\Users\\maya\\Desktop\\review-note.txt\" (last modified 2026-06-09 13:00:00 UTC).",
+          "english": "The retained UTF-8 text file record contains note text \"Bring the Harbor deck and budget to the design review.\" (record time 2026-06-09 13:00:00 UTC; timestamp meaning in provenance: when the image was examined, not source activity; source artifact: C:\\Users\\maya\\Desktop\\review-note.txt). This establishes retained text and its source-record timestamp, not a note-editing action, its time, or its author.",
           "rules": [
             "R23"
           ],
@@ -2218,7 +2218,7 @@
       "lean_file": "A033.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A033\n\ndef cited : List Fact := [\n  ⟨37, .noteText, 1781010000000000, 1000, 46, 47⟩ ]\n\ndef claim : Claim := Sets.noteFound 37\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A033\n\n#print axioms Cert.A033.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.A033\n\ndef cited : List Fact := [\n  ⟨37, .noteText, 1781010000000000, 1000, 46, 47, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.noteFound 37\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.A033\n\n#print axioms Cert.A033.verified\n"
     }
   ],
   "rejections": [
@@ -2321,7 +2321,7 @@
         ],
         "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
       },
-      "checked_in_ms": 345
+      "checked_in_ms": 358
     }
   ],
   "conclusions": [],
@@ -2330,8 +2330,8 @@
     "path": "audit.jsonl",
     "passed": true,
     "count": 70,
-    "head": "67b38514df0c91d4b71e798cab9dea87e64dda465aed525a6ddc9d74a261d8c5",
-    "sha256": "512bc3d5abf36ba869e3078f5464e70996f23132bed75b9d4d682e358a247688",
+    "head": "77acaa35ddea6809fa2507752494acaf00552f0391d9da1350e0c56912c9ba75",
+    "sha256": "67a685184dff94f622eb453971f15b09671b480135ace734e14b161822ef2e13",
     "expected_head": null,
     "problems": [],
     "scope": "Integrity only, not identity or authenticity. Complete rewrites require an independently retained expected head to detect. Only completed calls are logged; interrupted calls may be absent."
@@ -2561,7 +2561,7 @@
         "source": "audit_log",
         "source_index": 38,
         "audit_sequence": 38,
-        "call_id": "call-62bb2ee749d74978b9e53a9754fbeb51",
+        "call_id": "call-5766ba74f9064348a3ca277c833815d7",
         "finding_id": "A001",
         "status": "accepted",
         "proof_status": "verified",
@@ -2572,9 +2572,9 @@
             1
           ]
         },
-        "started_at": "2026-11-15T04:41:37.415243Z",
-        "completed_at": "2026-11-15T04:41:38.976907Z",
-        "duration_ns": 1561653625,
+        "started_at": "2026-11-15T08:45:12.848582Z",
+        "completed_at": "2026-11-15T08:45:15.029934Z",
+        "duration_ns": 2181316125,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2589,7 +2589,7 @@
         "source": "audit_log",
         "source_index": 39,
         "audit_sequence": 39,
-        "call_id": "call-6392728d45204712821f0cde70bd5f7a",
+        "call_id": "call-a09e45ddb7cc42f18820f8dfab4d4ae1",
         "finding_id": "A002",
         "status": "accepted",
         "proof_status": "verified",
@@ -2600,9 +2600,9 @@
             2
           ]
         },
-        "started_at": "2026-11-15T04:41:38.977637Z",
-        "completed_at": "2026-11-15T04:41:39.149499Z",
-        "duration_ns": 171856583,
+        "started_at": "2026-11-15T08:45:15.031048Z",
+        "completed_at": "2026-11-15T08:45:15.207036Z",
+        "duration_ns": 175978541,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2617,7 +2617,7 @@
         "source": "audit_log",
         "source_index": 40,
         "audit_sequence": 40,
-        "call_id": "call-38a0535d6a0f4826aa611ec3f56305d2",
+        "call_id": "call-337d8de25457422c96ec0263122a2052",
         "finding_id": "A003",
         "status": "accepted",
         "proof_status": "verified",
@@ -2628,9 +2628,9 @@
             3
           ]
         },
-        "started_at": "2026-11-15T04:41:39.150211Z",
-        "completed_at": "2026-11-15T04:41:39.323779Z",
-        "duration_ns": 173562166,
+        "started_at": "2026-11-15T08:45:15.208145Z",
+        "completed_at": "2026-11-15T08:45:15.383313Z",
+        "duration_ns": 175158417,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2645,7 +2645,7 @@
         "source": "audit_log",
         "source_index": 41,
         "audit_sequence": 41,
-        "call_id": "call-1eb64030ba174e758d94d26fbbfe5b2c",
+        "call_id": "call-bbe36d218ec84f9eb1b1ec7c068a3976",
         "finding_id": "A004",
         "status": "accepted",
         "proof_status": "verified",
@@ -2656,9 +2656,9 @@
             4
           ]
         },
-        "started_at": "2026-11-15T04:41:39.324499Z",
-        "completed_at": "2026-11-15T04:41:39.496460Z",
-        "duration_ns": 171955833,
+        "started_at": "2026-11-15T08:45:15.384419Z",
+        "completed_at": "2026-11-15T08:45:15.553782Z",
+        "duration_ns": 169354417,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2673,7 +2673,7 @@
         "source": "audit_log",
         "source_index": 42,
         "audit_sequence": 42,
-        "call_id": "call-308accbbc26c43cea0a34b7abe091eea",
+        "call_id": "call-7445f2ed78134c528b7390bf376ea982",
         "finding_id": "A005",
         "status": "accepted",
         "proof_status": "verified",
@@ -2684,9 +2684,9 @@
             5
           ]
         },
-        "started_at": "2026-11-15T04:41:39.497169Z",
-        "completed_at": "2026-11-15T04:41:39.669268Z",
-        "duration_ns": 172094083,
+        "started_at": "2026-11-15T08:45:15.554908Z",
+        "completed_at": "2026-11-15T08:45:15.725846Z",
+        "duration_ns": 170929334,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2701,7 +2701,7 @@
         "source": "audit_log",
         "source_index": 43,
         "audit_sequence": 43,
-        "call_id": "call-f22ab3e567a24474978a4058670b1ec8",
+        "call_id": "call-532fb1bbcef74cb8a66962fc4d555493",
         "finding_id": "A006",
         "status": "accepted",
         "proof_status": "verified",
@@ -2712,9 +2712,9 @@
             6
           ]
         },
-        "started_at": "2026-11-15T04:41:39.669998Z",
-        "completed_at": "2026-11-15T04:41:39.841535Z",
-        "duration_ns": 171533042,
+        "started_at": "2026-11-15T08:45:15.726876Z",
+        "completed_at": "2026-11-15T08:45:15.896721Z",
+        "duration_ns": 169836541,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2729,7 +2729,7 @@
         "source": "audit_log",
         "source_index": 44,
         "audit_sequence": 44,
-        "call_id": "call-54b9314286fd4185ae98742f412325fe",
+        "call_id": "call-f406c39485c3418b9117331fed5d13a2",
         "finding_id": "A007",
         "status": "accepted",
         "proof_status": "verified",
@@ -2740,9 +2740,9 @@
             7
           ]
         },
-        "started_at": "2026-11-15T04:41:39.842273Z",
-        "completed_at": "2026-11-15T04:41:40.014165Z",
-        "duration_ns": 171887250,
+        "started_at": "2026-11-15T08:45:15.897866Z",
+        "completed_at": "2026-11-15T08:45:16.068877Z",
+        "duration_ns": 171001500,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2757,7 +2757,7 @@
         "source": "audit_log",
         "source_index": 45,
         "audit_sequence": 45,
-        "call_id": "call-ec86b06ac6974df6a1298697a3ac436a",
+        "call_id": "call-904916dc87de48ada28c30c5965efeac",
         "finding_id": "A008",
         "status": "accepted",
         "proof_status": "verified",
@@ -2768,9 +2768,9 @@
             8
           ]
         },
-        "started_at": "2026-11-15T04:41:40.014943Z",
-        "completed_at": "2026-11-15T04:41:40.187710Z",
-        "duration_ns": 172761958,
+        "started_at": "2026-11-15T08:45:16.070122Z",
+        "completed_at": "2026-11-15T08:45:16.240477Z",
+        "duration_ns": 170345250,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2785,7 +2785,7 @@
         "source": "audit_log",
         "source_index": 46,
         "audit_sequence": 46,
-        "call_id": "call-e69c0a105f9a4d1b8766dd044578ca71",
+        "call_id": "call-017172292ec24ae5a43ddb1215e49870",
         "finding_id": "A009",
         "status": "accepted",
         "proof_status": "verified",
@@ -2797,9 +2797,9 @@
             11
           ]
         },
-        "started_at": "2026-11-15T04:41:40.188464Z",
-        "completed_at": "2026-11-15T04:41:40.362076Z",
-        "duration_ns": 173606250,
+        "started_at": "2026-11-15T08:45:16.241548Z",
+        "completed_at": "2026-11-15T08:45:16.417569Z",
+        "duration_ns": 176012458,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2814,7 +2814,7 @@
         "source": "audit_log",
         "source_index": 47,
         "audit_sequence": 47,
-        "call_id": "call-bf25fcb4bf8444ea94b75edb59880724",
+        "call_id": "call-ab42e8667f1b4e1a9110c71c4eb1fd8e",
         "finding_id": "A010",
         "status": "accepted",
         "proof_status": "verified",
@@ -2826,9 +2826,9 @@
             12
           ]
         },
-        "started_at": "2026-11-15T04:41:40.362889Z",
-        "completed_at": "2026-11-15T04:41:40.535177Z",
-        "duration_ns": 172282250,
+        "started_at": "2026-11-15T08:45:16.418678Z",
+        "completed_at": "2026-11-15T08:45:16.597104Z",
+        "duration_ns": 178417625,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2843,7 +2843,7 @@
         "source": "audit_log",
         "source_index": 48,
         "audit_sequence": 48,
-        "call_id": "call-0f6b38be3b6349229230b65c78b5fc8f",
+        "call_id": "call-4488664ccf1e4ba688004641cf9cd043",
         "finding_id": "A011",
         "status": "accepted",
         "proof_status": "verified",
@@ -2855,9 +2855,9 @@
             13
           ]
         },
-        "started_at": "2026-11-15T04:41:40.535984Z",
-        "completed_at": "2026-11-15T04:41:40.710018Z",
-        "duration_ns": 174029042,
+        "started_at": "2026-11-15T08:45:16.598194Z",
+        "completed_at": "2026-11-15T08:45:16.773004Z",
+        "duration_ns": 174801666,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2872,7 +2872,7 @@
         "source": "audit_log",
         "source_index": 49,
         "audit_sequence": 49,
-        "call_id": "call-d8917527261b4de68cfd00ecbdb4e891",
+        "call_id": "call-024288cf875b4a62a0ecba8494863f8b",
         "finding_id": "A012",
         "status": "accepted",
         "proof_status": "verified",
@@ -2884,9 +2884,9 @@
             14
           ]
         },
-        "started_at": "2026-11-15T04:41:40.710875Z",
-        "completed_at": "2026-11-15T04:41:40.884566Z",
-        "duration_ns": 173682792,
+        "started_at": "2026-11-15T08:45:16.774247Z",
+        "completed_at": "2026-11-15T08:45:16.947499Z",
+        "duration_ns": 173243125,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2901,7 +2901,7 @@
         "source": "audit_log",
         "source_index": 50,
         "audit_sequence": 50,
-        "call_id": "call-3413e73ab08848c3b1ac4ac9adb3a66f",
+        "call_id": "call-756451f467a74a558ce7f4ef32038ed9",
         "finding_id": "A013",
         "status": "accepted",
         "proof_status": "verified",
@@ -2929,9 +2929,9 @@
             }
           ]
         },
-        "started_at": "2026-11-15T04:41:40.885413Z",
-        "completed_at": "2026-11-15T04:41:41.059612Z",
-        "duration_ns": 174192750,
+        "started_at": "2026-11-15T08:45:16.948740Z",
+        "completed_at": "2026-11-15T08:45:17.119279Z",
+        "duration_ns": 170529791,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2946,7 +2946,7 @@
         "source": "audit_log",
         "source_index": 51,
         "audit_sequence": 51,
-        "call_id": "call-f96315d8a53e40fd91923b227eb2ee4d",
+        "call_id": "call-f530be963e7941ecbb167994a992b32e",
         "finding_id": "A014",
         "status": "refused",
         "proof_status": "rejected",
@@ -2958,9 +2958,9 @@
             12
           ]
         },
-        "started_at": "2026-11-15T04:41:41.060478Z",
-        "completed_at": "2026-11-15T04:41:41.406210Z",
-        "duration_ns": 345726458,
+        "started_at": "2026-11-15T08:45:17.120463Z",
+        "completed_at": "2026-11-15T08:45:17.479061Z",
+        "duration_ns": 358584834,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -2975,7 +2975,7 @@
         "source": "audit_log",
         "source_index": 52,
         "audit_sequence": 52,
-        "call_id": "call-532a054007b04b18b03690dcd27a6559",
+        "call_id": "call-367bfc99deb141cdb12b2ea2423b624a",
         "finding_id": "A015",
         "status": "accepted",
         "proof_status": "verified",
@@ -2995,9 +2995,9 @@
             }
           ]
         },
-        "started_at": "2026-11-15T04:41:41.407147Z",
-        "completed_at": "2026-11-15T04:41:41.580419Z",
-        "duration_ns": 173267167,
+        "started_at": "2026-11-15T08:45:17.480499Z",
+        "completed_at": "2026-11-15T08:45:17.652582Z",
+        "duration_ns": 172071958,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3012,7 +3012,7 @@
         "source": "audit_log",
         "source_index": 53,
         "audit_sequence": 53,
-        "call_id": "call-0677071202af4aa9b63fc70074817795",
+        "call_id": "call-2141608dbf7945beae3cb18f0ad31be3",
         "finding_id": "A016",
         "status": "accepted",
         "proof_status": "verified",
@@ -3032,9 +3032,9 @@
             }
           ]
         },
-        "started_at": "2026-11-15T04:41:41.581326Z",
-        "completed_at": "2026-11-15T04:41:41.753926Z",
-        "duration_ns": 172594959,
+        "started_at": "2026-11-15T08:45:17.653913Z",
+        "completed_at": "2026-11-15T08:45:17.823367Z",
+        "duration_ns": 169445375,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3049,7 +3049,7 @@
         "source": "audit_log",
         "source_index": 54,
         "audit_sequence": 54,
-        "call_id": "call-6a7ad36910fe4dc49465c390ef7bce2b",
+        "call_id": "call-a07241c308764d649666f43932178b94",
         "finding_id": "A017",
         "status": "accepted",
         "proof_status": "verified",
@@ -3069,9 +3069,9 @@
             }
           ]
         },
-        "started_at": "2026-11-15T04:41:41.754844Z",
-        "completed_at": "2026-11-15T04:41:41.927411Z",
-        "duration_ns": 172561709,
+        "started_at": "2026-11-15T08:45:17.824658Z",
+        "completed_at": "2026-11-15T08:45:17.998191Z",
+        "duration_ns": 173525000,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3086,7 +3086,7 @@
         "source": "audit_log",
         "source_index": 55,
         "audit_sequence": 55,
-        "call_id": "call-036ee54e4d504d2c8a3cd22e66e40374",
+        "call_id": "call-bef1f245316b4b0c8be4b70872ca2f7b",
         "finding_id": "A018",
         "status": "accepted",
         "proof_status": "verified",
@@ -3097,9 +3097,9 @@
             22
           ]
         },
-        "started_at": "2026-11-15T04:41:41.928322Z",
-        "completed_at": "2026-11-15T04:41:42.101358Z",
-        "duration_ns": 173030084,
+        "started_at": "2026-11-15T08:45:17.999540Z",
+        "completed_at": "2026-11-15T08:45:18.180644Z",
+        "duration_ns": 181094625,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3114,7 +3114,7 @@
         "source": "audit_log",
         "source_index": 56,
         "audit_sequence": 56,
-        "call_id": "call-7024dec2847c49afb4d7f0bf3b48dc56",
+        "call_id": "call-fcc915afbfbc4435a04986b147debe2e",
         "finding_id": "A019",
         "status": "accepted",
         "proof_status": "verified",
@@ -3125,9 +3125,9 @@
             23
           ]
         },
-        "started_at": "2026-11-15T04:41:42.102273Z",
-        "completed_at": "2026-11-15T04:41:42.280910Z",
-        "duration_ns": 178632250,
+        "started_at": "2026-11-15T08:45:18.181943Z",
+        "completed_at": "2026-11-15T08:45:18.351600Z",
+        "duration_ns": 169649125,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3142,7 +3142,7 @@
         "source": "audit_log",
         "source_index": 57,
         "audit_sequence": 57,
-        "call_id": "call-03c5dc90d88d466d8644653d75bba323",
+        "call_id": "call-907d7faefb1b4b2fae1e26312a2c8782",
         "finding_id": "A020",
         "status": "accepted",
         "proof_status": "verified",
@@ -3153,9 +3153,9 @@
             24
           ]
         },
-        "started_at": "2026-11-15T04:41:42.281926Z",
-        "completed_at": "2026-11-15T04:41:42.459178Z",
-        "duration_ns": 177246375,
+        "started_at": "2026-11-15T08:45:18.352886Z",
+        "completed_at": "2026-11-15T08:45:18.530026Z",
+        "duration_ns": 177131167,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3170,7 +3170,7 @@
         "source": "audit_log",
         "source_index": 58,
         "audit_sequence": 58,
-        "call_id": "call-49296efa24e24501944b94b67032071f",
+        "call_id": "call-97a16dc0d37e416ab5beb10f861d80cd",
         "finding_id": "A021",
         "status": "accepted",
         "proof_status": "verified",
@@ -3181,9 +3181,9 @@
             25
           ]
         },
-        "started_at": "2026-11-15T04:41:42.460172Z",
-        "completed_at": "2026-11-15T04:41:42.631541Z",
-        "duration_ns": 171363291,
+        "started_at": "2026-11-15T08:45:18.531477Z",
+        "completed_at": "2026-11-15T08:45:18.704858Z",
+        "duration_ns": 173368375,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3198,7 +3198,7 @@
         "source": "audit_log",
         "source_index": 59,
         "audit_sequence": 59,
-        "call_id": "call-f935d72b1e7045b09850085fc40493d1",
+        "call_id": "call-8e8b8dbb2de6485e9385b0e94410b034",
         "finding_id": "A022",
         "status": "accepted",
         "proof_status": "verified",
@@ -3209,9 +3209,9 @@
             26
           ]
         },
-        "started_at": "2026-11-15T04:41:42.632544Z",
-        "completed_at": "2026-11-15T04:41:42.804665Z",
-        "duration_ns": 172116416,
+        "started_at": "2026-11-15T08:45:18.706266Z",
+        "completed_at": "2026-11-15T08:45:18.878699Z",
+        "duration_ns": 172424833,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3226,7 +3226,7 @@
         "source": "audit_log",
         "source_index": 60,
         "audit_sequence": 60,
-        "call_id": "call-c69215013b204a5a83c87c0b022ce108",
+        "call_id": "call-18e58f0b60f74132a411980adc5da5b7",
         "finding_id": "A023",
         "status": "accepted",
         "proof_status": "verified",
@@ -3237,9 +3237,9 @@
             27
           ]
         },
-        "started_at": "2026-11-15T04:41:42.805657Z",
-        "completed_at": "2026-11-15T04:41:42.978975Z",
-        "duration_ns": 173312708,
+        "started_at": "2026-11-15T08:45:18.880041Z",
+        "completed_at": "2026-11-15T08:45:19.054542Z",
+        "duration_ns": 174492000,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3254,7 +3254,7 @@
         "source": "audit_log",
         "source_index": 61,
         "audit_sequence": 61,
-        "call_id": "call-8e61762680c849caad8e30bc58701158",
+        "call_id": "call-72e2ba72307b4c758dd1d5247f2b7389",
         "finding_id": "A024",
         "status": "accepted",
         "proof_status": "verified",
@@ -3265,9 +3265,9 @@
             28
           ]
         },
-        "started_at": "2026-11-15T04:41:42.979963Z",
-        "completed_at": "2026-11-15T04:41:43.151705Z",
-        "duration_ns": 171737000,
+        "started_at": "2026-11-15T08:45:19.055887Z",
+        "completed_at": "2026-11-15T08:45:19.238458Z",
+        "duration_ns": 182561250,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3282,7 +3282,7 @@
         "source": "audit_log",
         "source_index": 62,
         "audit_sequence": 62,
-        "call_id": "call-1314e89680b541558619796addf7821b",
+        "call_id": "call-caa35ec590cc47f0932391f7c59b51c3",
         "finding_id": "A025",
         "status": "accepted",
         "proof_status": "verified",
@@ -3293,9 +3293,9 @@
             29
           ]
         },
-        "started_at": "2026-11-15T04:41:43.152712Z",
-        "completed_at": "2026-11-15T04:41:43.327409Z",
-        "duration_ns": 174692667,
+        "started_at": "2026-11-15T08:45:19.239836Z",
+        "completed_at": "2026-11-15T08:45:19.409818Z",
+        "duration_ns": 169973208,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3310,7 +3310,7 @@
         "source": "audit_log",
         "source_index": 63,
         "audit_sequence": 63,
-        "call_id": "call-9f4fcf27bf3f490ba718ca2c0be30a6c",
+        "call_id": "call-07a93ddfc9674e5fa1313004e51c223e",
         "finding_id": "A026",
         "status": "accepted",
         "proof_status": "verified",
@@ -3321,9 +3321,9 @@
             30
           ]
         },
-        "started_at": "2026-11-15T04:41:43.328481Z",
-        "completed_at": "2026-11-15T04:41:43.499516Z",
-        "duration_ns": 171030583,
+        "started_at": "2026-11-15T08:45:19.411206Z",
+        "completed_at": "2026-11-15T08:45:19.580814Z",
+        "duration_ns": 169599875,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3338,7 +3338,7 @@
         "source": "audit_log",
         "source_index": 64,
         "audit_sequence": 64,
-        "call_id": "call-e1d1dec5c222415fb7c5777f46ffee47",
+        "call_id": "call-274acb7353fd49fca441a4d17a7f4913",
         "finding_id": "A027",
         "status": "accepted",
         "proof_status": "verified",
@@ -3349,9 +3349,9 @@
             31
           ]
         },
-        "started_at": "2026-11-15T04:41:43.500530Z",
-        "completed_at": "2026-11-15T04:41:43.674054Z",
-        "duration_ns": 173518292,
+        "started_at": "2026-11-15T08:45:19.582361Z",
+        "completed_at": "2026-11-15T08:45:19.751697Z",
+        "duration_ns": 169326500,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3366,7 +3366,7 @@
         "source": "audit_log",
         "source_index": 65,
         "audit_sequence": 65,
-        "call_id": "call-2b3e189c3b22436e84de2f3b216157c3",
+        "call_id": "call-8604ce205b1843fdb7db992681f1ab45",
         "finding_id": "A028",
         "status": "accepted",
         "proof_status": "verified",
@@ -3377,9 +3377,9 @@
             32
           ]
         },
-        "started_at": "2026-11-15T04:41:43.675147Z",
-        "completed_at": "2026-11-15T04:41:43.850550Z",
-        "duration_ns": 175398375,
+        "started_at": "2026-11-15T08:45:19.753234Z",
+        "completed_at": "2026-11-15T08:45:19.923938Z",
+        "duration_ns": 170695666,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3394,7 +3394,7 @@
         "source": "audit_log",
         "source_index": 66,
         "audit_sequence": 66,
-        "call_id": "call-5aa012024c4a424c9fa7dea77ec9a79c",
+        "call_id": "call-8c40513d7dea4378a7ad58d6f0800cc4",
         "finding_id": "A029",
         "status": "accepted",
         "proof_status": "verified",
@@ -3405,9 +3405,9 @@
             33
           ]
         },
-        "started_at": "2026-11-15T04:41:43.851585Z",
-        "completed_at": "2026-11-15T04:41:44.023846Z",
-        "duration_ns": 172255833,
+        "started_at": "2026-11-15T08:45:19.925394Z",
+        "completed_at": "2026-11-15T08:45:20.100595Z",
+        "duration_ns": 175191875,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3422,7 +3422,7 @@
         "source": "audit_log",
         "source_index": 67,
         "audit_sequence": 67,
-        "call_id": "call-6a8129789d4d4109bd763fd6732dd501",
+        "call_id": "call-debb040632164084af76776dadf867b2",
         "finding_id": "A030",
         "status": "accepted",
         "proof_status": "verified",
@@ -3433,9 +3433,9 @@
             34
           ]
         },
-        "started_at": "2026-11-15T04:41:44.024927Z",
-        "completed_at": "2026-11-15T04:41:44.199027Z",
-        "duration_ns": 174092875,
+        "started_at": "2026-11-15T08:45:20.102095Z",
+        "completed_at": "2026-11-15T08:45:20.282834Z",
+        "duration_ns": 180729791,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3450,7 +3450,7 @@
         "source": "audit_log",
         "source_index": 68,
         "audit_sequence": 68,
-        "call_id": "call-d5e76aaaf6f6469685394f31ec516b0f",
+        "call_id": "call-147dc42708124c1c878ffa09b6fff241",
         "finding_id": "A031",
         "status": "accepted",
         "proof_status": "verified",
@@ -3461,9 +3461,9 @@
             35
           ]
         },
-        "started_at": "2026-11-15T04:41:44.200130Z",
-        "completed_at": "2026-11-15T04:41:44.375618Z",
-        "duration_ns": 175483625,
+        "started_at": "2026-11-15T08:45:20.284405Z",
+        "completed_at": "2026-11-15T08:45:20.452755Z",
+        "duration_ns": 168339917,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3478,7 +3478,7 @@
         "source": "audit_log",
         "source_index": 69,
         "audit_sequence": 69,
-        "call_id": "call-210aaa5c3f0e40e985917d5ced467ec6",
+        "call_id": "call-e6021aa43121446d92bf189015708996",
         "finding_id": "A032",
         "status": "accepted",
         "proof_status": "verified",
@@ -3489,9 +3489,9 @@
             36
           ]
         },
-        "started_at": "2026-11-15T04:41:44.376777Z",
-        "completed_at": "2026-11-15T04:41:44.554630Z",
-        "duration_ns": 177847916,
+        "started_at": "2026-11-15T08:45:20.454330Z",
+        "completed_at": "2026-11-15T08:45:20.647341Z",
+        "duration_ns": 193000958,
         "error": null,
         "revises": null,
         "revision_status": "none",
@@ -3506,7 +3506,7 @@
         "source": "audit_log",
         "source_index": 70,
         "audit_sequence": 70,
-        "call_id": "call-6ff8a8a5cffd4727bdfda2619656449f",
+        "call_id": "call-7f35ad6a5d1e458092add8865328e766",
         "finding_id": "A033",
         "status": "accepted",
         "proof_status": "verified",
@@ -3517,9 +3517,9 @@
             37
           ]
         },
-        "started_at": "2026-11-15T04:41:44.555700Z",
-        "completed_at": "2026-11-15T04:41:44.735967Z",
-        "duration_ns": 180261541,
+        "started_at": "2026-11-15T08:45:20.649049Z",
+        "completed_at": "2026-11-15T08:45:20.847779Z",
+        "duration_ns": 198718625,
         "error": null,
         "revises": null,
         "revision_status": "none",

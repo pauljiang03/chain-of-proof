@@ -2,22 +2,20 @@
   "version": 1,
   "case": {
     "name": "Sample run (synthetic facts)",
-    "generated_at": "2026-11-14T06:36:04Z"
+    "generated_at": "2026-11-15T08:45:30Z"
   },
   "stats": {
     "proposals": 11,
-    "verified": 7,
-    "rejected": 4,
+    "verified": 6,
+    "rejected": 5,
     "by_strength": {
       "strong": 5,
-      "heuristic": 1,
       "judgment": 1
     },
     "by_rule": {
       "R1": 4,
       "R2": 4,
       "R3": 2,
-      "R4": 1,
       "R5": 1,
       "T": 2
     }
@@ -33,7 +31,7 @@
         ]
       },
       "status": "verified",
-      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+      "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 4512,
@@ -76,7 +74,7 @@
               4513
             ]
           },
-          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -92,7 +90,7 @@
       "lean_file": "F1.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4512 4513\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F1\n\n#print axioms Cert.F1.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4512 4513\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F1\n\n#print axioms Cert.F1.verified\n"
     },
     {
       "finding_id": "F2",
@@ -104,7 +102,7 @@
         ]
       },
       "status": "verified",
-      "english": "USB device SAMPLE-SERIAL-RM1 was connected (2015-03-23 13:00:00 UTC) and mounted as volume SAMPLE-VOL-RM1.",
+      "english": "The USB device record naming serial SAMPLE-SERIAL-RM1 (record time 2015-03-23 13:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM1. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "cited_facts": [
         {
           "id": 4510,
@@ -147,7 +145,7 @@
               4511
             ]
           },
-          "english": "USB device SAMPLE-SERIAL-RM1 was connected (2015-03-23 13:00:00 UTC) and mounted as volume SAMPLE-VOL-RM1.",
+          "english": "The USB device record naming serial SAMPLE-SERIAL-RM1 (record time 2015-03-23 13:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM1. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -163,7 +161,7 @@
       "lean_file": "F2.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F2\n\ndef cited : List Fact := [\n  ⟨4510, .usbInsert, 1427115600000000, 1, 102, 0⟩,\n  ⟨4511, .volumeMount, 1427115601000000, 1, 102, 89⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4510 4511\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F2\n\n#print axioms Cert.F2.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F2\n\ndef cited : List Fact := [\n  ⟨4510, .usbInsert, 1427115600000000, 1, 102, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4511, .volumeMount, 1427115601000000, 1, 102, 89, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.usbMountedAs 4510 4511\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F2\n\n#print axioms Cert.F2.verified\n"
     },
     {
       "finding_id": "F3",
@@ -191,7 +189,7 @@
         ]
       },
       "status": "verified",
-      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. The connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC) happened before the opening of E:\\sample\\design_concept.ppt on volume SAMPLE-VOL-RM2 (2015-03-23 14:28:20 UTC): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity. The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person. The timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR) precedes the timestamp of the shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
       "cited_facts": [
         {
           "id": 4512,
@@ -250,7 +248,7 @@
               4513
             ]
           },
-          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -264,7 +262,7 @@
               4513
             ]
           },
-          "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+          "english": "The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person.",
           "rules": [
             "R2",
             "R3"
@@ -278,7 +276,7 @@
               4600
             ]
           },
-          "english": "The connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC) happened before the opening of E:\\sample\\design_concept.ppt on volume SAMPLE-VOL-RM2 (2015-03-23 14:28:20 UTC): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "english": "The timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR) precedes the timestamp of the shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk): the gap of 1700 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
           "rules": [],
           "strength": "strong"
         }
@@ -292,76 +290,7 @@
       "lean_file": "F3.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F3\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.before 4512 4600))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F3\n\n#print axioms Cert.F3.verified\n"
-    },
-    {
-      "finding_id": "F4",
-      "question": "Were files copied onto the unauthorized device?",
-      "claim": {
-        "copiedHere": [
-          4701,
-          4700
-        ]
-      },
-      "status": "verified",
-      "english": "E:\\sample\\pricing.xlsx was likely copied onto volume SAMPLE-VOL-RM2: it was created there (2015-03-23 14:13:20 UTC) after its last modification (2015-03-22 13:13:20 UTC). This rests on heuristic rule R4.",
-      "cited_facts": [
-        {
-          "id": 4701,
-          "kind": "fileCreated",
-          "t": 1427120000000000,
-          "res": 10000,
-          "obj": 914,
-          "obj_text": "E:\\sample\\pricing.xlsx",
-          "aux": 88,
-          "aux_text": "SAMPLE-VOL-RM2",
-          "row_sha256": "8abd14db036ea7b7fb750c4a697da8502dbfeada6e3aa731505fa501cf66e78d",
-          "prov": {
-            "image": "sample",
-            "artifact": "FAT32 directory entry",
-            "tool": "hand-written"
-          }
-        },
-        {
-          "id": 4700,
-          "kind": "fileModified",
-          "t": 1427030000000000,
-          "res": 2000000,
-          "obj": 914,
-          "obj_text": "E:\\sample\\pricing.xlsx",
-          "aux": 88,
-          "aux_text": "SAMPLE-VOL-RM2",
-          "row_sha256": "c9bb88588192a37af0d97cefce132bf64742c051a4f272f5349c9df22f55cd85",
-          "prov": {
-            "image": "sample",
-            "artifact": "FAT32 directory entry",
-            "tool": "hand-written"
-          }
-        }
-      ],
-      "parts": [
-        {
-          "part": {
-            "copiedHere": [
-              4701,
-              4700
-            ]
-          },
-          "english": "E:\\sample\\pricing.xlsx was likely copied onto volume SAMPLE-VOL-RM2: it was created there (2015-03-23 14:13:20 UTC) after its last modification (2015-03-22 13:13:20 UTC). This rests on heuristic rule R4.",
-          "rules": [
-            "R4"
-          ],
-          "strength": "heuristic"
-        }
-      ],
-      "rules": [
-        "R4"
-      ],
-      "strength": "heuristic",
-      "lean_file": "F4.lean",
-      "trust_tier": "kernel",
-      "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F4\n\ndef cited : List Fact := [\n  ⟨4701, .fileCreated, 1427120000000000, 10000, 914, 88⟩,\n  ⟨4700, .fileModified, 1427030000000000, 2000000, 914, 88⟩ ]\n\ndef claim : Claim := Sets.copiedHere 4701 4700\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F4\n\n#print axioms Cert.F4.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F3\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.before 4512 4600))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F3\n\n#print axioms Cert.F3.verified\n"
     },
     {
       "finding_id": "F5",
@@ -373,7 +302,7 @@
         ]
       },
       "status": "verified",
-      "english": "E:\\sample\\pricing.xlsx was deleted (2015-03-23 15:36:40 UTC) after the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC).",
+      "english": "The Recycle Bin record for E:\\sample\\pricing.xlsx has a timestamp (2015-03-23 15:36:40 UTC) later than the timestamp of the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC). This orders recorded timestamps.",
       "cited_facts": [
         {
           "id": 4800,
@@ -416,7 +345,7 @@
               4701
             ]
           },
-          "english": "E:\\sample\\pricing.xlsx was deleted (2015-03-23 15:36:40 UTC) after the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC).",
+          "english": "The Recycle Bin record for E:\\sample\\pricing.xlsx has a timestamp (2015-03-23 15:36:40 UTC) later than the timestamp of the creation of E:\\sample\\pricing.xlsx on volume SAMPLE-VOL-RM2 (2015-03-23 14:13:20 UTC). This orders recorded timestamps.",
           "rules": [
             "R5"
           ],
@@ -430,7 +359,7 @@
       "lean_file": "F5.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F5\n\ndef cited : List Fact := [\n  ⟨4800, .fileDeleted, 1427125000000000, 1, 914, 88⟩,\n  ⟨4701, .fileCreated, 1427120000000000, 10000, 914, 88⟩ ]\n\ndef claim : Claim := Sets.deletedAfter 4800 4701\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F5\n\n#print axioms Cert.F5.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.F5\n\ndef cited : List Fact := [\n  ⟨4800, .fileDeleted, 1427125000000000, 1, 914, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4701, .fileCreated, 1427120000000000, 10000, 914, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := Sets.deletedAfter 4800 4701\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.F5\n\n#print axioms Cert.F5.verified\n"
     },
     {
       "finding_id": "J1",
@@ -454,7 +383,7 @@
         ]
       },
       "status": "verified",
-      "english": "sample data leakage methods is tagged \"leakage-related\" (an LLM judgment, shown as an assumption and not as evidence). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "english": "sample data leakage methods is tagged \"leakage-related\" (an LLM judgment, shown as an assumption and not as evidence). The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
       "cited_facts": [
         {
           "id": 3100,
@@ -527,7 +456,7 @@
               4512
             ]
           },
-          "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "english": "The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
           "rules": [],
           "strength": "strong"
         }
@@ -539,7 +468,7 @@
       "lean_file": "J1.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.J1\n\ndef cited : List Fact := [\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0⟩,\n  ⟨9003, .tag, 1794636000000000, 1, 700, 52⟩,\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩ ]\n\ndef claim : Claim := .both (Sets.tagged 3100 .obj 9003 52) (.before 3100 4512)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.J1\n\n#print axioms Cert.J1.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.J1\n\ndef cited : List Fact := [\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨9003, .tag, 1794636000000000, 1, 700, 52, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.tagged 3100 .obj 9003 52) (.before 3100 4512)\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.J1\n\n#print axioms Cert.J1.verified\n"
     },
     {
       "finding_id": "N1",
@@ -583,7 +512,7 @@
         ]
       },
       "status": "verified",
-      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity. The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
       "cited_facts": [
         {
           "id": 4512,
@@ -688,7 +617,7 @@
               4513
             ]
           },
-          "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+          "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
           "rules": [
             "R1",
             "R2"
@@ -702,7 +631,7 @@
               4513
             ]
           },
-          "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+          "english": "The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person.",
           "rules": [
             "R2",
             "R3"
@@ -746,7 +675,7 @@
               4512
             ]
           },
-          "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+          "english": "The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
           "rules": [],
           "strength": "strong"
         }
@@ -761,7 +690,7 @@
       "lean_file": "N1.lean",
       "trust_tier": "kernel",
       "axioms": [],
-      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.N1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88⟩,\n  ⟨9001, .tag, 1794636000000000, 1, 913, 50⟩,\n  ⟨9002, .tag, 1794636000000000, 1, 101, 51⟩,\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.both (Sets.tagged 4600 .obj 9001 50) (.both (Sets.tagged 4512 .obj 9002 51) (.before 3100 4512))))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.N1\n\n#print axioms Cert.N1.verified\n"
+      "lean": "import ChainOfProof\nopen ChainOfProof\n\nnamespace Cert.N1\n\ndef cited : List Fact := [\n  ⟨4512, .usbInsert, 1427119200000000, 1, 101, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4513, .volumeMount, 1427119201000000, 1, 101, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨4600, .lnkTarget, 1427120900000000, 1, 913, 88, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨9001, .tag, 1794636000000000, 1, 913, 50, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨9002, .tag, 1794636000000000, 1, 101, 51, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩,\n  ⟨3100, .webSearch, 1427119000000000, 1, 700, 0, ⟨0, 0, 0, 0, 0, 0, 0, 0, 0, 0⟩⟩ ]\n\ndef claim : Claim := .both (Sets.usbMountedAs 4512 4513) (.both (Sets.openedFromMount 4600 4513) (.both (Sets.tagged 4600 .obj 9001 50) (.both (Sets.tagged 4512 .obj 9002 51) (.before 3100 4512))))\n\ntheorem verified : holds cited claim = true := by decide +kernel\n\nend Cert.N1\n\n#print axioms Cert.N1.verified\n"
     }
   ],
   "rejections": [
@@ -816,7 +745,186 @@
           ]
         }
       ],
-      "checked_in_ms": 344
+      "proof_gap": {
+        "status": "diagnostic",
+        "summary": "The whole claim remains unproved; 1 unmet condition(s) are described.",
+        "requirements": [
+          {
+            "category": "contradictory_identity_or_value",
+            "reason": "The existing rows conflict with the requested equality: record 4600.aux and record 4511.aux identify different encoded values.",
+            "action": "Review the cited artifacts and intended relationship. A different linkage requires independent source evidence connecting the intended entities. Preserve the conflicting serials, paths or other values; do not rewrite them to make this claim pass.",
+            "fact_ids": [
+              4600,
+              4511
+            ],
+            "observed": {
+              "records": [
+                {
+                  "id": 4600,
+                  "kind": "lnkTarget",
+                  "obj": {
+                    "id": 913,
+                    "text": "E:\\sample\\design_concept.ppt"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427120900000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                },
+                {
+                  "id": 4511,
+                  "kind": "volumeMount",
+                  "obj": {
+                    "id": 102,
+                    "text": "SAMPLE-SERIAL-RM1"
+                  },
+                  "aux": {
+                    "id": 89,
+                    "text": "SAMPLE-VOL-RM1"
+                  },
+                  "t_us": 1427115601000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                }
+              ]
+            },
+            "required": {
+              "claim_part": {
+                "openedFromMount": [
+                  4600,
+                  4511
+                ]
+              },
+              "rules": [
+                "R2",
+                "R3"
+              ],
+              "relation": "exact encoded identity equality",
+              "left": {
+                "fact_id": 4600,
+                "slot": "aux"
+              },
+              "right": {
+                "fact_id": 4511,
+                "slot": "aux"
+              }
+            }
+          }
+        ],
+        "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
+      },
+      "checked_in_ms": 442
+    },
+    {
+      "finding_id": "F4",
+      "question": "Were files copied onto the unauthorized device?",
+      "claim": {
+        "copiedHere": [
+          4701,
+          4700
+        ]
+      },
+      "status": "rejected",
+      "reason": "the cited facts do not support this claim",
+      "parts": [
+        {
+          "part": {
+            "copiedHere": [
+              4701,
+              4700
+            ]
+          },
+          "ok": false,
+          "bricks": [
+            "ok   is 4701 (fileCreated)",
+            "ok   is 4700 (fileModified)",
+            "FAIL sameFileOccurrence 4701 4700",
+            "ok   link 4701 (obj) 4700 (obj)",
+            "ok   link 4701 (aux) 4700 (aux)",
+            "ok   before 4700 4701"
+          ]
+        }
+      ],
+      "proof_gap": {
+        "status": "diagnostic",
+        "summary": "The whole claim remains unproved; 1 unmet condition(s) are described.",
+        "requirements": [
+          {
+            "category": "missing_record",
+            "reason": "At least one cited timestamp lacks complete valid source/native file-occurrence metadata.",
+            "action": "Retrieve source-bound creation and modification records carrying the same concrete image, partition, source view, and native entry identity. A reviewed reader may need to expose the NTFS record and sequence or absolute partition-relative directory/file-entry offset. Matching paths or volume serials do not supply this identity; leave the copy pattern unproved if that source metadata is unavailable.",
+            "fact_ids": [
+              4701,
+              4700
+            ],
+            "observed": {
+              "records": [
+                {
+                  "id": 4701,
+                  "kind": "fileCreated",
+                  "obj": {
+                    "id": 914,
+                    "text": "E:\\sample\\pricing.xlsx"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427120000000000,
+                  "uncertainty_us": 10000,
+                  "time_meaning": "not specified in provenance",
+                  "source_identity": {
+                    "image": "sample",
+                    "exhibit": null,
+                    "source_snapshot": null,
+                    "source_variant": null,
+                    "file_occurrence": null
+                  }
+                },
+                {
+                  "id": 4700,
+                  "kind": "fileModified",
+                  "obj": {
+                    "id": 914,
+                    "text": "E:\\sample\\pricing.xlsx"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427030000000000,
+                  "uncertainty_us": 2000000,
+                  "time_meaning": "not specified in provenance",
+                  "source_identity": {
+                    "image": "sample",
+                    "exhibit": null,
+                    "source_snapshot": null,
+                    "source_variant": null,
+                    "file_occurrence": null
+                  }
+                }
+              ]
+            },
+            "required": {
+              "claim_part": {
+                "copiedHere": [
+                  4701,
+                  4700
+                ]
+              },
+              "rules": [
+                "R4"
+              ],
+              "relation": "complete equal source image/exhibit/view, concrete disk/partition, and native file-entry identity for both timestamp rows"
+            }
+          }
+        ],
+        "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
+      },
+      "checked_in_ms": 346
     },
     {
       "finding_id": "X2",
@@ -841,13 +949,150 @@
           "bricks": [
             "ok   is 4703 (fileCreated)",
             "ok   is 4702 (fileModified)",
+            "FAIL sameFileOccurrence 4703 4702",
             "ok   link 4703 (obj) 4702 (obj)",
             "ok   link 4703 (aux) 4702 (aux)",
             "FAIL before 4702 4703"
           ]
         }
       ],
-      "checked_in_ms": 333
+      "proof_gap": {
+        "status": "diagnostic",
+        "summary": "The whole claim remains unproved; 2 unmet condition(s) are described.",
+        "requirements": [
+          {
+            "category": "missing_record",
+            "reason": "At least one cited timestamp lacks complete valid source/native file-occurrence metadata.",
+            "action": "Retrieve source-bound creation and modification records carrying the same concrete image, partition, source view, and native entry identity. A reviewed reader may need to expose the NTFS record and sequence or absolute partition-relative directory/file-entry offset. Matching paths or volume serials do not supply this identity; leave the copy pattern unproved if that source metadata is unavailable.",
+            "fact_ids": [
+              4703,
+              4702
+            ],
+            "observed": {
+              "records": [
+                {
+                  "id": 4703,
+                  "kind": "fileCreated",
+                  "obj": {
+                    "id": 913,
+                    "text": "E:\\sample\\design_concept.ppt"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427120000000000,
+                  "uncertainty_us": 10000,
+                  "time_meaning": "not specified in provenance",
+                  "source_identity": {
+                    "image": "sample",
+                    "exhibit": null,
+                    "source_snapshot": null,
+                    "source_variant": null,
+                    "file_occurrence": null
+                  }
+                },
+                {
+                  "id": 4702,
+                  "kind": "fileModified",
+                  "obj": {
+                    "id": 913,
+                    "text": "E:\\sample\\design_concept.ppt"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427119999000000,
+                  "uncertainty_us": 2000000,
+                  "time_meaning": "not specified in provenance",
+                  "source_identity": {
+                    "image": "sample",
+                    "exhibit": null,
+                    "source_snapshot": null,
+                    "source_variant": null,
+                    "file_occurrence": null
+                  }
+                }
+              ]
+            },
+            "required": {
+              "claim_part": {
+                "copiedHere": [
+                  4703,
+                  4702
+                ]
+              },
+              "rules": [
+                "R4"
+              ],
+              "relation": "complete equal source image/exhibit/view, concrete disk/partition, and native file-entry identity for both timestamp rows"
+            }
+          },
+          {
+            "category": "uncertain_or_wrong_time_order",
+            "reason": "The recorded times do not establish the requested order beyond their combined uncertainty.",
+            "action": "Seek an independent, more precise timestamp record for the same observations, if available, with documented clock/time semantics. Keep the existing uncertainty; do not narrow it without evidence. Otherwise leave the ordering unresolved.",
+            "fact_ids": [
+              4702,
+              4703
+            ],
+            "observed": {
+              "order_status": "overlapping_or_insufficiently_separated",
+              "records": [
+                {
+                  "id": 4702,
+                  "kind": "fileModified",
+                  "obj": {
+                    "id": 913,
+                    "text": "E:\\sample\\design_concept.ppt"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427119999000000,
+                  "uncertainty_us": 2000000,
+                  "time_meaning": "not specified in provenance"
+                },
+                {
+                  "id": 4703,
+                  "kind": "fileCreated",
+                  "obj": {
+                    "id": 913,
+                    "text": "E:\\sample\\design_concept.ppt"
+                  },
+                  "aux": {
+                    "id": 88,
+                    "text": "SAMPLE-VOL-RM2"
+                  },
+                  "t_us": 1427120000000000,
+                  "uncertainty_us": 10000,
+                  "time_meaning": "not specified in provenance"
+                }
+              ],
+              "gap_us": 1000000,
+              "combined_uncertainty_us": 2010000
+            },
+            "required": {
+              "claim_part": {
+                "copiedHere": [
+                  4703,
+                  4702
+                ]
+              },
+              "rules": [
+                "R4"
+              ],
+              "relation": "left.t_us + left.uncertainty_us + right.uncertainty_us < right.t_us",
+              "earlier_fact_id": 4702,
+              "later_fact_id": 4703
+            }
+          }
+        ],
+        "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
+      },
+      "checked_in_ms": 339
     },
     {
       "finding_id": "X3",
@@ -874,7 +1119,72 @@
           ]
         }
       ],
-      "checked_in_ms": 340
+      "proof_gap": {
+        "status": "diagnostic",
+        "summary": "The whole claim remains unproved; 1 unmet condition(s) are described.",
+        "requirements": [
+          {
+            "category": "uncertain_or_wrong_time_order",
+            "reason": "The cited timestamp intervals establish the reverse of the requested order.",
+            "action": "Review the proposed event order and artifact time meanings. Preserve the recorded times; additional precision alone cannot reverse these separated intervals. Any different timeline requires independent source support.",
+            "fact_ids": [
+              4512,
+              3100
+            ],
+            "observed": {
+              "order_status": "reverse_order_conflict",
+              "records": [
+                {
+                  "id": 4512,
+                  "kind": "usbInsert",
+                  "obj": {
+                    "id": 101,
+                    "text": "SAMPLE-SERIAL-RM2"
+                  },
+                  "aux": {
+                    "id": 0,
+                    "text": "(none)"
+                  },
+                  "t_us": 1427119200000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                },
+                {
+                  "id": 3100,
+                  "kind": "webSearch",
+                  "obj": {
+                    "id": 700,
+                    "text": "sample data leakage methods"
+                  },
+                  "aux": {
+                    "id": 0,
+                    "text": "(none)"
+                  },
+                  "t_us": 1427119000000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                }
+              ],
+              "gap_us": -200000000,
+              "combined_uncertainty_us": 2
+            },
+            "required": {
+              "claim_part": {
+                "before": [
+                  4512,
+                  3100
+                ]
+              },
+              "rules": [],
+              "relation": "left.t_us + left.uncertainty_us + right.uncertainty_us < right.t_us",
+              "earlier_fact_id": 4512,
+              "later_fact_id": 3100
+            }
+          }
+        ],
+        "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
+      },
+      "checked_in_ms": 339
     },
     {
       "finding_id": "X4",
@@ -907,7 +1217,621 @@
           ]
         }
       ],
-      "checked_in_ms": 333
+      "proof_gap": {
+        "status": "diagnostic",
+        "summary": "The whole claim remains unproved; 1 unmet condition(s) are described.",
+        "requirements": [
+          {
+            "category": "contradictory_identity_or_value",
+            "reason": "The existing rows conflict with the requested equality: record 9002.obj and record 4510.obj identify different encoded values.",
+            "action": "Review the cited artifacts and intended relationship. A different linkage requires independent source evidence connecting the intended entities. Preserve the conflicting serials, paths or other values; do not rewrite them to make this claim pass.",
+            "fact_ids": [
+              9002,
+              4510
+            ],
+            "observed": {
+              "records": [
+                {
+                  "id": 9002,
+                  "kind": "tag",
+                  "obj": {
+                    "id": 101,
+                    "text": "SAMPLE-SERIAL-RM2"
+                  },
+                  "aux": {
+                    "id": 51,
+                    "text": "unauthorized-device"
+                  },
+                  "t_us": 1794636000000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                },
+                {
+                  "id": 4510,
+                  "kind": "usbInsert",
+                  "obj": {
+                    "id": 102,
+                    "text": "SAMPLE-SERIAL-RM1"
+                  },
+                  "aux": {
+                    "id": 0,
+                    "text": "(none)"
+                  },
+                  "t_us": 1427115600000000,
+                  "uncertainty_us": 1,
+                  "time_meaning": "not specified in provenance"
+                }
+              ]
+            },
+            "required": {
+              "claim_part": {
+                "tagged": [
+                  4510,
+                  "obj",
+                  9002,
+                  51
+                ]
+              },
+              "rules": [
+                "T"
+              ],
+              "relation": "exact encoded identity equality",
+              "left": {
+                "fact_id": 9002,
+                "slot": "obj"
+              },
+              "right": {
+                "fact_id": 4510,
+                "slot": "obj"
+              }
+            }
+          }
+        ],
+        "disclaimer": "Diagnostic only: this is not a certificate, and refusal alone does not prove a claim false. Suggested evidence may not exist. Additional records do not by themselves prove intent or causation."
+      },
+      "checked_in_ms": 338
     }
-  ]
+  ],
+  "conclusions": [],
+  "audit": {
+    "status": "unavailable",
+    "path": null,
+    "passed": null,
+    "count": null,
+    "head": null,
+    "sha256": null,
+    "expected_head": null,
+    "problems": [],
+    "scope": "Integrity only, not identity or authenticity. Complete rewrites require an independently retained expected head to detect. Only completed calls are logged; interrupted calls may be absent."
+  },
+  "coverage": {
+    "schema_version": 1,
+    "extraction": {
+      "status": "unmeasured",
+      "record_count": null,
+      "by_kind": null,
+      "source": null,
+      "problems": []
+    },
+    "inspection": {
+      "status": "unmeasured",
+      "record_count": null,
+      "record_ids": null,
+      "completed_tool_calls": null,
+      "by_tool": null,
+      "audit_integrity": "unavailable",
+      "problems": [
+        "audit events were not supplied"
+      ]
+    },
+    "citations": {
+      "status": "measured",
+      "record_count": 11,
+      "record_ids": [
+        3100,
+        4510,
+        4511,
+        4512,
+        4513,
+        4600,
+        4701,
+        4800,
+        9001,
+        9002,
+        9003
+      ],
+      "problems": []
+    },
+    "certification": {
+      "status": "measured",
+      "finding_count": 6,
+      "finding_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F5",
+        "J1",
+        "N1"
+      ],
+      "verification": "not_performed",
+      "problems": []
+    },
+    "questions": {
+      "status": "unmeasured",
+      "total_count": null,
+      "answered_count": null,
+      "unknown_count": null,
+      "unanswered_count": null,
+      "missing_count": null,
+      "unknown_ids": null,
+      "unanswered_ids": null,
+      "missing_ids": null,
+      "unexpected_ids": null,
+      "problems": [
+        "public question contract was not supplied"
+      ]
+    },
+    "failures": {
+      "run": {
+        "status": "unmeasured",
+        "ended": null
+      },
+      "tools": {
+        "status": "unmeasured",
+        "error_count": null,
+        "rejected_count": null,
+        "errors": null,
+        "problems": []
+      },
+      "extraction": {
+        "status": "unmeasured",
+        "reader_failure_count": null,
+        "unsupported_source_count": null,
+        "warning_count": null,
+        "unclassified_issue_count": null,
+        "issues": null,
+        "source": null,
+        "health_report": "missing",
+        "problems": [
+          "no extraction issue report was supplied"
+        ]
+      }
+    },
+    "limitations": [
+      "Extracted records do not establish completeness of the original evidence.",
+      "Inspection counts successful fact-tool returns with matching record IDs; SQL results, including aggregates, are not counted as full-record inspection.",
+      "Completed audit events do not establish that a model understood a record; interrupted calls may be absent.",
+      "Audit integrity is separate from authorship and requires an externally retained checkpoint to detect a complete rewrite.",
+      "Certified finding counts use the supplied run's verified status; this helper does not independently verify certificates.",
+      "Answer presence is not answer accuracy or forensic truth; no private reference is used."
+    ]
+  },
+  "history": {
+    "schema_version": 1,
+    "available": true,
+    "ordering": "proposal_log_order",
+    "attempts": [
+      {
+        "attempt_id": "proposal:1",
+        "source": "proposal_log",
+        "source_index": 1,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "F1",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Which USB devices were connected, and as which volumes?",
+        "claim": {
+          "usbMountedAs": [
+            4512,
+            4513
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 1,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:2",
+        "source": "proposal_log",
+        "source_index": 2,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "F2",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Which USB devices were connected, and as which volumes?",
+        "claim": {
+          "usbMountedAs": [
+            4510,
+            4511
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 2,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:3",
+        "source": "proposal_log",
+        "source_index": 3,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "F3",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Was a confidential file opened from a removable device?",
+        "claim": {
+          "both": [
+            {
+              "usbMountedAs": [
+                4512,
+                4513
+              ]
+            },
+            {
+              "openedFromMount": [
+                4600,
+                4513
+              ]
+            },
+            {
+              "before": [
+                4512,
+                4600
+              ]
+            }
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 3,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:4",
+        "source": "proposal_log",
+        "source_index": 4,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "X1",
+        "status": "refused",
+        "proof_status": "rejected",
+        "new_proposal": true,
+        "question": "Was a confidential file opened from a removable device?",
+        "claim": {
+          "both": [
+            {
+              "usbMountedAs": [
+                4510,
+                4511
+              ]
+            },
+            {
+              "openedFromMount": [
+                4600,
+                4511
+              ]
+            }
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 4,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:5",
+        "source": "proposal_log",
+        "source_index": 5,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "N1",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Was a confidential file opened from an unauthorized USB device?",
+        "claim": {
+          "both": [
+            {
+              "usbMountedAs": [
+                4512,
+                4513
+              ]
+            },
+            {
+              "openedFromMount": [
+                4600,
+                4513
+              ]
+            },
+            {
+              "tagged": [
+                4600,
+                "obj",
+                9001,
+                50
+              ]
+            },
+            {
+              "tagged": [
+                4512,
+                "obj",
+                9002,
+                51
+              ]
+            },
+            {
+              "before": [
+                3100,
+                4512
+              ]
+            }
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 5,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:6",
+        "source": "proposal_log",
+        "source_index": 6,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "F4",
+        "status": "refused",
+        "proof_status": "rejected",
+        "new_proposal": true,
+        "question": "Were files copied onto the unauthorized device?",
+        "claim": {
+          "copiedHere": [
+            4701,
+            4700
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 6,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:7",
+        "source": "proposal_log",
+        "source_index": 7,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "X2",
+        "status": "refused",
+        "proof_status": "rejected",
+        "new_proposal": true,
+        "question": "Were files copied onto the unauthorized device?",
+        "claim": {
+          "copiedHere": [
+            4703,
+            4702
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 7,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:8",
+        "source": "proposal_log",
+        "source_index": 8,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "F5",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Was anything deleted afterwards?",
+        "claim": {
+          "deletedAfter": [
+            4800,
+            4701
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 8,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:9",
+        "source": "proposal_log",
+        "source_index": 9,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "X3",
+        "status": "refused",
+        "proof_status": "rejected",
+        "new_proposal": true,
+        "question": "Did the search come after the device was connected?",
+        "claim": {
+          "before": [
+            4512,
+            3100
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 9,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:10",
+        "source": "proposal_log",
+        "source_index": 10,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "J1",
+        "status": "accepted",
+        "proof_status": "verified",
+        "new_proposal": true,
+        "question": "Was the web search related to the leak?",
+        "claim": {
+          "both": [
+            {
+              "tagged": [
+                3100,
+                "obj",
+                9003,
+                52
+              ]
+            },
+            {
+              "before": [
+                3100,
+                4512
+              ]
+            }
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 10,
+        "problems": []
+      },
+      {
+        "attempt_id": "proposal:11",
+        "source": "proposal_log",
+        "source_index": 11,
+        "audit_sequence": null,
+        "call_id": null,
+        "finding_id": "X4",
+        "status": "refused",
+        "proof_status": "rejected",
+        "new_proposal": true,
+        "question": "Was the authorized device tagged unauthorized?",
+        "claim": {
+          "tagged": [
+            4510,
+            "obj",
+            9002,
+            51
+          ]
+        },
+        "started_at": null,
+        "completed_at": null,
+        "duration_ns": null,
+        "error": null,
+        "revises": null,
+        "revision_status": "none",
+        "revision_error": null,
+        "duplicate_of": null,
+        "proposal_index": 11,
+        "problems": []
+      }
+    ],
+    "unmatched_proposals": [],
+    "counts": {
+      "accepted": 6,
+      "refused": 5,
+      "duplicate": 0,
+      "failed": 0,
+      "unknown": 0,
+      "attempts": 11,
+      "explicit_revisions": 0,
+      "invalid_revisions": 0
+    },
+    "audit_integrity": {
+      "status": "unavailable"
+    },
+    "coverage": {
+      "completeness": "recorded_events_only",
+      "complete": false,
+      "proposal_log_available": true,
+      "audit_available": false,
+      "proposal_rows": 11,
+      "matched_proposal_rows": null,
+      "unmatched_proposal_rows": null,
+      "attempts_without_timestamps": 11,
+      "interrupted_calls": "unmeasured",
+      "unmatched_proposal_placement": "unknown relative to audit events"
+    },
+    "problems": [],
+    "disclaimer": "Recorded attempts and explicit revision assertions only. Statuses are recorded checker results, not independent certificate verification. Duplicate attempts do not create new proofs. No revision is inferred from similar claims. Interrupted calls may be absent; audit integrity does not establish complete history or authenticate an author."
+  },
+  "investigation": {
+    "schema_version": 1,
+    "status": "unavailable",
+    "questions": [],
+    "reason": "No public question profile or investigation plan was supplied."
+  },
+  "case_answers": {
+    "schema_version": 1,
+    "status": "unavailable",
+    "questions": [],
+    "reason": "No public questions were supplied; no answer coverage is inferred.",
+    "disclaimer": "Certified statements are copied verbatim from current-run records marked verified; this export does not independently replay proofs. Associating a finding with a question does not prove relevance, answer accuracy or completeness. Work notes and refusal diagnostics are unverified and separate. This file is not evaluation answers.json."
+  }
 }

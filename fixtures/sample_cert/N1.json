@@ -40,7 +40,8 @@
     ]
   },
   "status": "verified",
-  "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+  "proposer": "synthetic sample refresh; no model",
+  "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity. The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person. E:\\sample\\design_concept.ppt is tagged \"confidential\" (rule: path is under a folder the case brief lists as confidential). SAMPLE-SERIAL-RM2 is tagged \"unauthorized-device\" (rule: device serial is not on the case brief's authorized list). The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
   "cited_facts": [
     {
       "id": 4512,
@@ -145,7 +146,7 @@
           4513
         ]
       },
-      "english": "USB device SAMPLE-SERIAL-RM2 was connected (2015-03-23 14:00:00 UTC) and mounted as volume SAMPLE-VOL-RM2.",
+      "english": "The USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR). Its device serial matches the device-volume mapping for volume SAMPLE-VOL-RM2. The record timestamp does not by itself establish exact connection onset or who connected the device. Recorded identifiers are not guaranteed unique and do not by themselves establish physical-device identity.",
       "rules": [
         "R1",
         "R2"
@@ -159,7 +160,7 @@
           4513
         ]
       },
-      "english": "E:\\sample\\design_concept.ppt was opened (2015-03-23 14:28:20 UTC) from volume SAMPLE-VOL-RM2.",
+      "english": "The shortcut target record naming E:\\sample\\design_concept.ppt on recorded volume SAMPLE-VOL-RM2 (record time 2015-03-23 14:28:20 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: Users\\sample\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\design_concept.lnk). Its recorded volume serial matches the volume mapping for device SAMPLE-SERIAL-RM2. This establishes a retained target reference, not that the target was opened at this time or by a particular person.",
       "rules": [
         "R2",
         "R3"
@@ -203,7 +204,7 @@
           4512
         ]
       },
-      "english": "The web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) happened before the connection of USB device SAMPLE-SERIAL-RM2 (2015-03-23 14:00:00 UTC): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs.",
+      "english": "The timestamp of the web search \"sample data leakage methods\" (2015-03-23 13:56:40 UTC) precedes the timestamp of the USB device record naming serial SAMPLE-SERIAL-RM2 (record time 2015-03-23 14:00:00 UTC; timestamp meaning in provenance: unspecified record timestamp; source artifact: SYSTEM\\ControlSet001\\Enum\\USBSTOR): the gap of 200 s exceeds the combined timestamp uncertainty of 2 µs. This orders recorded timestamps, not necessarily the underlying actions.",
       "rules": [],
       "strength": "strong"
     }
