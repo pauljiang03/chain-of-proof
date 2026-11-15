@@ -235,7 +235,8 @@ def _record_call(run, bench, tool, arguments, protocol="literal-v1", session=Non
                     from comparison.ablation.checkpoints import completion_status
                     result["completion"] = completion_status(run, session, bench.source)
             else:
-                result = dispatch(bench, tool, arguments, protocol=protocol)
+                result = dispatch(bench, tool, arguments, protocol=protocol,
+                                  before_check=lambda: deadline(session))
         else:
             result = dispatch(bench, tool, arguments, protocol=protocol)
         return result

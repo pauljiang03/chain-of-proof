@@ -86,7 +86,7 @@ def make_workbench(arm, facts, run_dir, protocol="literal-v1"):
     raise ValueError("arm must be A or C")
 
 
-def dispatch(bench, tool: str, arguments: dict, protocol="literal-v1"):
+def dispatch(bench, tool: str, arguments: dict, protocol="literal-v1", *, before_check=None):
     if tool not in tools_for(protocol):
         raise ValueError("tool is unavailable in this ablation protocol")
     if not isinstance(arguments, dict):
@@ -125,9 +125,25 @@ def dispatch(bench, tool: str, arguments: dict, protocol="literal-v1"):
     if "claim" in arguments:
         if not isinstance(arguments["claim"], dict):
             raise ValueError("claim must be a JSON object")
+        if before_check is not None:
+            before_check()
         return bench.check(arguments["question"], arguments["claim"], **kwargs)
     if (not isinstance(arguments["claims"], list) or not arguments["claims"]
             or not all(isinstance(claim, dict) for claim in arguments["claims"])):
         raise ValueError("claims must be a nonempty array of objects")
-    return [bench.check(arguments["question"], claim, **kwargs)
-            for claim in arguments["claims"]]
+    from comparison.ablation.checkpoints import SessionDeadlineExceeded
+    results = []
+    for index, claim in enumerate(arguments["claims"]):
+        if before_check is not None:
+            try:
+                before_check()
+            except SessionDeadlineExceeded:
+                # Keep completed results and the original batch positions. The
+                # remaining rows are transport budget outcomes, not rejected
+                # proofs, and must never acquire candidate/finding identities.
+                results.extend({"status": "time_limit", "checked": False,
+                                "reason": "session_deadline_passed"}
+                               for _ in arguments["claims"][index:])
+                break
+        results.append(bench.check(arguments["question"], claim, **kwargs))
+    return results
