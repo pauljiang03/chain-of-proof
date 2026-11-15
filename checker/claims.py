@@ -33,11 +33,12 @@ from datetime import datetime, timedelta, timezone
 import re
 from typing import Callable, Dict, List, Tuple
 
-from .facts import KINDS, Fact, FactSource
+from .facts import KINDS, Fact, FactSource, FILESYSTEM_SET_KINDS
 from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, decode_value
 
 MAX_PARTS = 64
 MAX_ATTRIBUTE_TUPLE = 8
+MAX_FILESYSTEM_SET = 256
 # Every row remains cited and independently checked for source completeness.
 # Distinct-value reduction is quadratic in the existing Lean definition, so keep
 # a finite ceiling even though chunked emission removes the giant-list limit.
@@ -128,6 +129,9 @@ _EVENT = {
 
 
 def _event(f: Fact, src: FactSource) -> str:
+    if f.kind in FILESYSTEM_SET_KINDS:
+        return (f'the declared-filesystem-set examination record {src.string(f.obj)} '
+                f'({f.kind}, {src.string(f.aux)!r}, examined {_utc(f.t)})')
     if f.kind in ATTRIBUTE_KINDS:
         return (f'the source-attribute examination record {src.string(f.obj)} '
                 f'({f.kind}, value {src.string(f.aux)!r}, examined {_utc(f.t)})')
@@ -588,6 +592,10 @@ _NOUN = {
     "journalParent": ("journal-parent", "scoped child identity", "scoped parent identity"),
     "journalRemoval": ("journal-removal-identity", "observed name/path", "scoped NTFS file identity"),
     "journalPath": ("bounded-journal-path", "path or explicitly incomplete suffix", "scoped NTFS file identity"),
+    "filesystemSet": ("declared-filesystem-set", "scoped set identity", "declared extraction procedure"),
+    "filesystemMemberDeleted": ("deleted-flag set member", "scoped set identity", "scoped file identity"),
+    "filesystemMemberAllocated": ("allocated-flag set member", "scoped set identity", "scoped file identity"),
+    "filesystemMemberUnknown": ("unknown-flag set member", "scoped set identity", "scoped file identity"),
 }
 CENSUS_NOTE = ("This counts records in the evidence file. An event that left no record, or "
                "a record the extractor does not read, is not counted.")
@@ -643,6 +651,57 @@ def census_actual(part: Claim, facts: Dict[int, Fact]) -> int:
     if name == "exactlyDistinct":
         return len({getattr(f, args[1]) for f in rows})
     return sum(getattr(f, args[1]) == args[2] for f in rows)
+
+
+def filesystem_set_actual(part: Claim, facts: Dict[int, Fact]) -> dict:
+    """Diagnostic observations only; Lean independently decides the aggregate."""
+    declaration = facts.get(part[1][0])
+    if declaration is None:
+        return {"declaration_valid": False, "count": 0, "all_deleted": None}
+    rows = [f for f in facts.values() if f.obj == declaration.obj]
+    members = [f for f in rows if f.kind in FILESYSTEM_SET_KINDS[1:]]
+    identities = [f.aux for f in members]
+    unknown = [f.id for f in members if f.kind == "filesystemMemberUnknown"]
+    allocated = [f.id for f in members if f.kind == "filesystemMemberAllocated"]
+    return {
+        "declaration_valid": declaration.kind == "filesystemSet" and declaration.obj > 0 and declaration.aux > 0,
+        "declaration_count": sum(f.kind == "filesystemSet" for f in rows),
+        "count": len(members), "member_fact_ids": [f.id for f in members],
+        "unique_nonempty_identities": all(identities) and len(set(identities)) == len(identities),
+        "unknown_flag_ids": unknown, "allocated_flag_ids": allocated,
+        "all_deleted": not bool(allocated) if members and not unknown else None,
+    }
+
+
+def census_satisfied(part: Claim, facts: Dict[int, Fact]) -> bool:
+    if part[0] != "filesystemSetDeleted":
+        return census_actual(part, facts) == part[1][-1]
+    actual = filesystem_set_actual(part, facts)
+    _, count, answer = part[1]
+    return (actual["declaration_valid"] and actual.get("declaration_count") == 1
+            and 0 < count <= MAX_FILESYSTEM_SET and actual["count"] == count
+            and actual.get("unique_nonempty_identities", False)
+            and not actual.get("unknown_flag_ids") and actual["all_deleted"] is answer)
+
+
+def census_failure(part: Claim, facts: Dict[int, Fact]) -> str:
+    if part[0] != "filesystemSetDeleted":
+        return f"FAIL the evidence holds {census_actual(part, facts)}, not {part[1][-1]}"
+    return ("FAIL declared filesystem set needs one declaration, 1..256 distinct scoped members, "
+            "every allocation flag known, and the exact claimed count/result; observed "
+            + repr(filesystem_set_actual(part, facts)))
+
+
+def _en_filesystem_set(args, facts, src):
+    declaration, count, answer = args
+    row = facts[declaration]
+    result = ("every member's filesystem record carries a deleted-entry flag" if answer else
+              "at least one member's filesystem record carries an allocated-entry flag, so not all members are marked deleted")
+    return (f'The declared extracted file set {src.string(row.obj)} contains exactly {count} distinct '
+            f'source-scoped members, and {result}. Every member has a known allocation flag. '
+            f'Declared extraction procedure: {src.string(row.aux)}. '
+            'This describes the complete membership recorded for that declared extraction, not all files '
+            'that ever existed, physical erasure, recoverability, deletion onset or personal intent.')
 
 
 def _en_tagged(args, facts, src):
@@ -792,6 +851,8 @@ SETS: Dict[str, SetDef] = {
                               _en_distinct),
     "exactlyWith": SetDef(("kind", "slot", "const", "count"), ".totalWith", ("C1",), "strong",
                           _en_total_with),
+    "filesystemSetDeleted": SetDef(("fact", "count", "boolean"), ".filesystemSetDeleted",
+                                   ("C2",), "strong", _en_filesystem_set),
 }
 CENSUS = ("exactly", "exactlyDistinct", "exactlyWith")
 
@@ -817,7 +878,7 @@ def _parse(obj) -> Claim:
         if not isinstance(args, list) or len(args) < 2:
             raise ClaimError('"both" takes a list of two or more claims')
         items = [_parse(a) for a in args]
-        if any(i[0] in CENSUS for i in items):
+        if any(census_of(i) for i in items):
             raise ClaimError("a census statement (exactly...) stands alone; it cannot be "
                              'part of "both"')
         claim = items[-1]
@@ -846,6 +907,8 @@ def _parse(obj) -> Claim:
             ok, want = isinstance(a, str) and a in ROLES, "an approved attribute role"
         elif kind == "algorithm":
             ok, want = isinstance(a, str) and a in DIGEST_ALGORITHMS, "a supported image digest algorithm"
+        elif kind == "boolean":
+            ok, want = type(a) is bool, "a JSON boolean"
         else:
             ok, want = _is_id(a), "a non-negative integer"
         if not ok:
@@ -854,6 +917,8 @@ def _parse(obj) -> Claim:
         raise ClaimError(f'"{name}" needs two different facts')
     if name == "attributeValuesAgree" and ROLES[args[3]].value_type != ROLES[args[7]].value_type:
         raise ClaimError('attributeValuesAgree requires the same declared value type')
+    if name == "filesystemSetDeleted" and not 1 <= args[1] <= MAX_FILESYSTEM_SET:
+        raise ClaimError(f'filesystemSetDeleted requires a nonempty count of at most {MAX_FILESYSTEM_SET}')
     return (name, tuple(args))
 
 
@@ -882,7 +947,28 @@ def fact_ids(c: Claim) -> List[int]:
 
 def census_of(c: Claim):
     """The census part if the claim is one, else None. A census is always the whole claim."""
-    return c if c[0] in CENSUS else None
+    return c if c[0] in CENSUS or c[0] == "filesystemSetDeleted" else None
+
+
+def filesystem_set_support_rows(declaration_id: int, src: FactSource) -> List[Fact]:
+    """Resolve the declared source scope without testing the proposed count/result.
+
+    This is also safe for unchecked-answer projection: it does not certify a kind,
+    cardinality, flag or Boolean. It never substitutes a different declaration.
+    """
+    declaration = src.get([declaration_id]).get(declaration_id)
+    if declaration is None:
+        return []
+    rows = [f for f in src.all() if f.obj == declaration.obj and f.kind in FILESYSTEM_SET_KINDS]
+    if declaration_id not in {f.id for f in rows}:
+        rows.append(declaration)
+    return rows
+
+
+def filesystem_set_support_ids(declaration_id: int, src: FactSource) -> List[int]:
+    """All source support IDs, with a missing requested declaration still explicit."""
+    return list(dict.fromkeys([declaration_id] +
+                             [f.id for f in filesystem_set_support_rows(declaration_id, src)]))
 
 
 def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
@@ -890,7 +976,17 @@ def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
     census, every fact of its kind in the evidence. Raises if one is missing."""
     census = census_of(c)
     if census:
-        rows = [f for f in src.all() if f.kind == census[1][0]]
+        if c[0] == "filesystemSetDeleted":
+            declaration_id = c[1][0]
+            rows = filesystem_set_support_rows(declaration_id, src)
+            if not rows:
+                raise ClaimError(f"fact ids not in the evidence DB: {[declaration_id]}")
+            member_count = sum(f.kind in FILESYSTEM_SET_KINDS[1:] for f in rows)
+            if member_count > MAX_FILESYSTEM_SET:
+                raise ClaimError(f"the declared filesystem set holds {member_count} member records; "
+                                 f"a filesystem set can cover at most {MAX_FILESYSTEM_SET}; no partial set was used")
+        else:
+            rows = [f for f in src.all() if f.kind == census[1][0]]
         if len(rows) > MAX_CENSUS:
             raise ClaimError(f"the evidence holds {len(rows)} records of kind {census[1][0]}; "
                              f"a census can cover at most {MAX_CENSUS}")
@@ -957,6 +1053,8 @@ def to_lean(c: Claim) -> str:
                 + f' .{left.kind} .{right.kind} .attributeTextValue')
     rendered = " ".join(f".{a}" if kind in ("slot", "kind") else str(a)
                         for kind, a in zip(SETS[name].params, args))
+    if name == 'filesystemSetDeleted':
+        return f'.filesystemSetDeleted {args[0]} {args[1]} {str(args[2]).lower()}'
     return f"{SETS[name].lean} {rendered}"
 
 

@@ -8,6 +8,7 @@ execution, complete record recovery, or a claim that every container was found.
 from __future__ import annotations
 
 from contextlib import contextmanager
+from datetime import datetime, timedelta, timezone
 import hashlib
 import io
 import json
@@ -29,6 +30,7 @@ MAX_FOLDERS = 4096
 MAX_DEPTH = 32
 MAX_TEXT_BYTES = 2 * 1024 * 1024
 MAX_MAIL_TEXT_BYTES = 32 * 1024 * 1024
+MAX_NOTE_TEXT_BYTES = 32 * 1024 * 1024
 MAX_PARSE_READS = 200000
 CHUNK = 1024 * 1024
 
@@ -146,7 +148,7 @@ def _integer(value):
     return int(value)
 
 
-def _sqlite(data, family):
+def _sqlite(data, family, *, with_notes=False):
     # Use SQLite's own read-only parser and integrity check, not a signature-only
     # classifier. The copied file is exactly the bytes covered by container_sha256.
     with tempfile.TemporaryDirectory(prefix='cop-container-') as directory:
@@ -182,9 +184,10 @@ def _sqlite(data, family):
                 if not columns <= actual:
                     raise ValueError('required container columns are missing: ' + table)
                 db.execute('SELECT * FROM ' + quoted + ' LIMIT 1').fetchone()
-            return {'parser': 'sqlite3', 'format': family + '_sqlite',
-                    'validation': 'read-only SQLite quick_check, required table/column schema and first-row decoding',
-                    'validated_tables': sorted(required), 'wal_policy': 'base database bytes only; WAL not replayed'}
+            validation = {'parser': 'sqlite3', 'format': family + '_sqlite',
+                          'validation': 'read-only SQLite quick_check, required table/column schema and first-row decoding',
+                          'validated_tables': sorted(required), 'wal_policy': 'base database bytes only; WAL not replayed'}
+            return (validation, _sticky_sqlite_rows(db)) if with_notes else validation
         finally:
             db.close()
 
@@ -292,35 +295,96 @@ def _thumbcache(data):
                           'nonempty payload lengths checked; zero-hash empty-slot residual bytes not interpreted'}
 
 
-def _sticky_ole(data):
+def _sticky_sqlite_rows(db):
+    """Retained Note.Text values only; reject ambiguous IDs before any emission."""
+    db.setlimit(sqlite3.SQLITE_LIMIT_LENGTH, MAX_TEXT_BYTES + 4096)
+    columns = {row[1].casefold() for row in db.execute('PRAGMA table_info("Note")')}
+    if columns & {'rowid', '_rowid_', 'oid'}:
+        raise ValueError('Sticky Notes row identifier is shadowed by a declared column')
+    notes, seen, total = [], set(), 0
+    for rowid, note_id, text in db.execute('SELECT _rowid_, Id, Text FROM Note ORDER BY _rowid_'):
+        if len(notes) >= MAX_RECORDS:
+            raise ValueError('Sticky Notes record budget exceeded')
+        if not isinstance(note_id, str) or not note_id or len(note_id) > 1024 or '\0' in note_id:
+            raise ValueError('Sticky Notes row has no bounded text identity')
+        note_id.encode('utf-8', errors='strict')
+        if note_id.casefold() in seen:
+            raise ValueError('duplicate Sticky Notes Note.Id rows are ambiguous')
+        seen.add(note_id.casefold())
+        if not isinstance(text, str) or '\0' in text:
+            raise ValueError('Sticky Notes Note.Text is not a literal Unicode string')
+        size = len(text.encode('utf-8', errors='strict'))
+        total += size
+        if size > MAX_TEXT_BYTES or total > MAX_NOTE_TEXT_BYTES:
+            raise ValueError('Sticky Notes text budget exceeded')
+        notes.append(dict(text=text, note_locator={'table': 'Note', 'rowid': rowid, 'id': note_id},
+                          source_field='Note.Text', text_byte_length=size,
+                          text_encoding='SQLite Unicode text (UTF-8 byte length)'))
+    return notes
+
+
+def _ole_children(parent):
+    """Direct directory children only, with bounded sibling trees and unique names."""
+    pending = [parent.child] if parent.has_child else []
+    seen, names, entries = set(), set(), {}
+    while pending:
+        entry = pending.pop()
+        if entry.sid in seen or len(seen) >= MAX_RECORDS:
+            raise ValueError('OLE directory sibling cycle or entry budget exceeded')
+        seen.add(entry.sid)
+        if entry.name.casefold() in names:
+            raise ValueError('duplicate OLE directory names are ambiguous')
+        names.add(entry.name.casefold())
+        entries[entry.name] = entry
+        if entry.has_left_sibling:
+            pending.append(entry.left_sibling)
+        if entry.has_right_sibling:
+            pending.append(entry.right_sibling)
+    return entries
+
+
+def _sticky_ole(data, *, with_notes=False):
     from dissect.ole import OLE
     ole = OLE(ParseBytes(data))
-    entries = ole.root.listdir()
+    entries = _ole_children(ole.root)
     if len(entries) > MAX_RECORDS or not {'Version', 'Metafile'} <= set(entries):
         raise ValueError('Sticky Notes root stream layout is absent or too large')
+    if not all(entries[name].is_stream for name in ('Version', 'Metafile')):
+        raise ValueError('Sticky Notes root fields must be streams')
     version = entries['Version'].open().read(65)
     if not 1 <= len(version) <= 64:
         raise ValueError('Sticky Notes version stream is absent or too large')
-    notes = 0
+    notes, total = [], 0
     for name, entry in entries.items():
         if not entry.is_storage:
             continue
         if not re.fullmatch(r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F-]+', name):
             raise ValueError('unrecognized Sticky Notes storage identifier')
-        streams = entry.listdir()
-        if not {'0', '3'} <= set(streams):
+        streams = _ole_children(entry)
+        if not {'0', '3'} <= set(streams) or not all(streams[n].is_stream for n in ('0', '3')):
             raise ValueError('Sticky Notes storage lacks paired rich/Unicode text streams')
         rich = streams['0'].open().read(MAX_TEXT_BYTES + 1)
         text = streams['3'].open().read(MAX_TEXT_BYTES + 1)
         if (len(rich) > MAX_TEXT_BYTES or len(text) > MAX_TEXT_BYTES or len(text) % 2
                 or not re.match(rb'^\{\\rtf\d', rich) or not rich.rstrip(b'\0\r\n ').endswith(b'}')):
             raise ValueError('Sticky Notes text streams failed bounded format checks')
-        text.decode('utf-16-le', errors='strict')
-        notes += 1
+        value = text.decode('utf-16-le', errors='strict')
+        if value.endswith('\0'):
+            value = value[:-1]  # One terminator is framing; no trimming of note text.
+        if '\0' in value:
+            raise ValueError('Sticky Notes Unicode stream has an embedded NUL')
+        total += len(text)
+        if total > MAX_NOTE_TEXT_BYTES:
+            raise ValueError('Sticky Notes aggregate text budget exceeded')
+        notes.append(dict(text=value, note_locator={'storage': name, 'storage_sid': int(entry.sid),
+                                                   'stream': '3', 'stream_sid': int(streams['3'].sid)},
+                          source_field='OLE note storage Unicode stream 3', text_byte_length=len(text),
+                          text_encoding='UTF-16LE; at most one framing terminator removed'))
     if not notes:
         raise ValueError('empty OLE storage does not establish Sticky Notes subtype')
-    return {'parser': 'dissect.ole', 'format': 'sticky_notes_snt', 'records_validated': notes,
-            'validation': 'OLE directory/streams decoded; Version/Metafile and note storages with paired RTF/UTF-16 streams'}
+    validation = {'parser': 'dissect.ole', 'format': 'sticky_notes_snt', 'records_validated': len(notes),
+                  'validation': 'OLE directory/streams decoded; Version/Metafile and note storages with paired RTF/UTF-16 streams'}
+    return (validation, notes) if with_notes else validation
 
 
 @contextmanager
@@ -350,7 +414,9 @@ def validated(data, family):
     elif family == 'thumbnail_cache':
         yield _thumbcache(data), None
     elif family == 'sticky_notes':
-        yield (_sqlite(data, family) if data.startswith(b'SQLite format 3\0') else _sticky_ole(data)), None
+        validation, notes = (_sqlite(data, family, with_notes=True) if data.startswith(b'SQLite format 3\0')
+                             else _sticky_ole(data, with_notes=True))
+        yield validation, notes
     else:
         raise ValueError('unsupported artifact-container family')
 
@@ -445,6 +511,42 @@ def mail_fields(ev, box, container_subject, provenance, examined_at):
             ev.problem(provenance['source_path'] + ' folder ' + repr(route), error)
 
 
+def _container_mtime(stat):
+    """Exact filesystem modification time, with its original precision retained."""
+    value = getattr(stat, 'st_mtime_ns', None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise ValueError('Sticky Notes container has no integer filesystem st_mtime_ns')
+    seconds, nanos = divmod(int(value), 1_000_000_000)
+    stamp = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=seconds)
+    fraction = ('.' + f'{nanos:09d}'.rstrip('0')) if nanos else ''
+    return stamp.strftime('%Y-%m-%dT%H:%M:%S') + fraction + 'Z', int(value)
+
+
+def sticky_fields(ev, notes, container_subject, provenance, stat, examined_at):
+    """Keep each note's literal text, container path and container time together."""
+    modified = None
+    try:
+        modified, raw_time = _container_mtime(stat)
+    except Exception as error:
+        ev.problem(provenance['source_path'] + ': filesystem modification time', error)
+    for note in notes:
+        subject = json.dumps([container_subject, 'sticky-note', note['note_locator']],
+                             sort_keys=True, ensure_ascii=True, separators=(',', ':'))
+        details = dict(provenance, container_subject=container_subject,
+                       note_locator=note['note_locator'],
+                       limitation='literal retained note and container metadata; no authorship or user-action time')
+        emit_attribute(ev, subject, 'sticky_notes.container.path', provenance['source_path'], examined_at,
+                       **dict(details, source_field='validated container path'))
+        emit_attribute(ev, subject, 'sticky_notes.note.text', note['text'], examined_at,
+                       **dict(details, source_field=note['source_field'],
+                              text_byte_length=note['text_byte_length'], text_encoding=note['text_encoding']))
+        if modified is not None:
+            emit_attribute(ev, subject, 'sticky_notes.container.modified_at', modified, examined_at,
+                           **dict(details, source_field='filesystem lstat.st_mtime_ns',
+                                  filesystem_mtime_ns=raw_time,
+                                  timestamp_value_meaning='modification time of container file, not note-storage time'))
+
+
 def extract(ev, target, ctx):
     common = merge_scope(ctx['common'])
     scope = subject_scope(common)
@@ -469,7 +571,8 @@ def extract(ev, target, ctx):
                 if source.casefold() in seen:
                     continue
                 seen.add(source.casefold())
-                data = _read(path, path.lstat().st_size, budget)
+                stat = path.lstat()
+                data = _read(path, stat.st_size, budget)
                 digest = hashlib.sha256(data).hexdigest()
                 subject = json.dumps(['artifact-container', scope, source, 'sha256', digest], ensure_ascii=True, separators=(',', ':'))
                 with validated(data, family) as (validation, mailbox):
@@ -488,7 +591,10 @@ def extract(ev, target, ctx):
                         emit_attribute(ev, subject, 'browser.history.browser', browser, examined_at,
                                        **dict(provenance, source_field='validated history schema and product-specific profile layout',
                                               limitation='browser association from format and layout; not exclusive producer, installation, execution or user attribution'))
-                    if mailbox is not None:
+                    if family == 'sticky_notes':
+                        if mailbox:
+                            sticky_fields(ev, mailbox, subject, provenance, stat, examined_at)
+                    elif mailbox is not None:
                         mail_fields(ev, mailbox, subject, provenance, examined_at)
             except Exception as error:
                 ev.problem('validated artifact container ' + discovered, error)

@@ -22,8 +22,9 @@ import uuid
 from datetime import datetime, timedelta, timezone
 
 from .store import us, us_from_filetime, us_from_unix
+from .attributes import emit_attribute
 from .journal_paths import JournalRanges
-from .source_scope import merge_scope, vss_snapshot
+from .source_scope import merge_scope, subject_scope, vss_snapshot
 
 # --------------------------------------------------------------------------- pure helpers
 
@@ -1385,7 +1386,96 @@ def _tree(ntfs):
     return out, problems
 
 
-def _shadow_copies(ev, target, spool_dir, common):
+def _vss_storage_path(ntfs, store, drive, store_id):
+    """Resolve the catalog's exact NTFS reference before claiming a store path."""
+    raw_reference = store.desc3.metadata_reference
+    if not isinstance(raw_reference, int) or isinstance(raw_reference, bool) or not 0 < raw_reference < 2**64:
+        raise ValueError('VSS store metadata reference is not an unsigned NTFS reference')
+    reference = int(raw_reference)
+    segment, sequence = reference & 0xffffffffffff, reference >> 48
+    if not segment or not sequence:
+        raise ValueError('VSS store has no complete NTFS metadata reference')
+    record = ntfs.mft.get(segment)
+    if (record.segment != segment or int(record.header.SequenceNumber) != sequence
+            or not (int(record.header.Flags) & 1) or not record.is_file() or record.is_reparse_point()):
+        raise ValueError('VSS metadata reference does not resolve to the same allocated file')
+    expected = f'System Volume Information\\{{{store_id}}}{{3808876b-c176-4e48-b7ae-04046e6cc752}}'
+    matches = [path for path in record.full_paths() if isinstance(path, str)
+               and path.casefold() == expected.casefold()]
+    if len(set(matches)) != 1:
+        raise ValueError('VSS store pathname is absent or ambiguous in referenced NTFS record')
+    resolved = ntfs.mft.get(matches[0])
+    if resolved.segment != segment or int(resolved.header.SequenceNumber) != sequence:
+        raise ValueError('VSS store pathname resolves to a different NTFS file reference')
+    return drive + '\\' + matches[0], dict(metadata_file_reference=reference,
+                                          mft_segment=segment, mft_sequence=sequence)
+
+
+def _vss_catalog_attributes(ev, vss, store, drive, serial, common, examined_at, *, ntfs=None):
+    """Describe one catalog/store-header pair without opening snapshot content.
+
+    Dissect joins the type-2 and type-3 descriptors by store identifier. The
+    copy and set identifiers reside in the linked store-information header;
+    creation time resides in the type-2 catalog descriptor. These are all
+    observations of metadata on the examined volume, not reads inside a copy.
+    """
+    if examined_at is None:
+        return  # Historical direct callers have no examination timestamp.
+    if type(examined_at) is not int or examined_at <= 0:
+        raise ValueError('VSS attributes need a positive examination timestamp')
+    store_id = uuid.UUID(bytes_le=bytes(store.desc2.store_identifier))
+    if bytes(store.desc3.store_identifier) != store_id.bytes_le:
+        raise ValueError('VSS catalog descriptors refer to different stores')
+    copy_id = uuid.UUID(str(store.copy_identifier))
+    set_id = uuid.UUID(str(store.copy_set_identifier))
+    created_ft = store.desc2.creation_time
+    if not isinstance(created_ft, int) or isinstance(created_ft, bool) or created_ft < 0:
+        raise ValueError('VSS catalog creation time is not an unsigned FILETIME')
+    created_ft = int(created_ft)
+    created_at = iso(us_from_filetime(created_ft))
+    if created_ft % 10:
+        created_at = created_at[:-1] + str(created_ft % 10) + 'Z'  # Retain FILETIME's seventh decimal.
+    catalog_offset = vss.header.catalog_offset
+    header_offset = store.desc3.store_header_offset
+    if any(not isinstance(offset, int) or isinstance(offset, bool) or offset <= 0
+           for offset in (catalog_offset, header_offset)):
+        raise ValueError('VSS metadata offsets must identify retained volume bytes')
+    catalog_offset, header_offset = int(catalog_offset), int(header_offset)
+    catalog_artifact = f'{drive} VSS catalog at volume offset {catalog_offset}'
+    header_artifact = f'{drive} VSS store information at volume offset {header_offset}'
+    common = merge_scope(common)
+    subject = json.dumps(subject_scope(common) + [drive, serial, 'VSS catalog store',
+                         str(store_id), catalog_offset, header_offset, created_ft,
+                         str(copy_id), str(set_id)], separators=(',', ':'), ensure_ascii=True)
+    provenance = dict(common, artifact=catalog_artifact, source_path=drive,
+                      parser='extractor.filetraces.vss_catalog', volume_serial=serial,
+                      source_record_type='VSS catalog descriptors and linked store information',
+                      catalog_offset=catalog_offset, store_header_offset=header_offset,
+                      store_id='{' + str(store_id) + '}',
+                      catalog_creation_filetime=created_ft,
+                      metadata_scope='catalog and linked store header on examined volume; snapshot content not read')
+    fields = [
+        ('vss.copy_id', '{' + str(copy_id) + '}', 'store_information.copy_identifier', header_artifact),
+        ('vss.set_id', '{' + str(set_id) + '}', 'store_information.copy_set_identifier', header_artifact),
+        ('vss.created_at', created_at, 'catalog_entry_2.creation_time', catalog_artifact),
+    ]
+    path_locator = {}
+    if ntfs is not None:
+        try:
+            storage_path, path_locator = _vss_storage_path(ntfs, store, drive, store_id)
+            fields.insert(2, ('vss.storage_path', storage_path,
+                              'catalog_entry_3.metadata_reference and NTFS FILE_NAME', storage_path))
+        except Exception as error:
+            ev.problem(catalog_artifact + ': store path', error)
+    for role, value, field, artifact in fields:
+        details = dict(provenance, artifact=artifact, source_field=field)
+        if role == 'vss.storage_path':
+            details.update(path_locator, source_path=value,
+                           path_validation='catalog NTFS record and sequence, allocated file, matching store GUID filename')
+        emit_attribute(ev, subject, role, value, examined_at, **details)
+
+
+def _shadow_copies(ev, target, spool_dir, common, *, examined_at=None):
     from dissect.ntfs import NTFS
     from dissect.volume.vss import VSS
     common = merge_scope(common)
@@ -1404,10 +1494,11 @@ def _shadow_copies(ev, target, spool_dir, common):
             continue
         live = None
         for store in vss.catalog.stores:
-            copy_id = "{%s}" % store.copy_identifier
-            store_id = "{%s}" % uuid.UUID(bytes_le=bytes(store.desc2.store_identifier))
-            artifact = f"{drive}\\System Volume Information\\{store_id}{{3808876b-c176-4e48-b7ae-04046e6cc752}}"
+            artifact = f'{drive} VSS catalog entry'
             try:
+                copy_id = "{%s}" % store.copy_identifier
+                store_id = "{%s}" % uuid.UUID(bytes_le=bytes(store.desc2.store_identifier))
+                artifact = f"{drive}\\System Volume Information\\{store_id}{{3808876b-c176-4e48-b7ae-04046e6cc752}}"
                 created = us_from_filetime(int(store.creation_time))
                 ev.add("shadowCopy", created, 1, copy_id, drive, artifact=artifact,
                        volume_serial=serial, store_id=store_id,
@@ -1416,6 +1507,10 @@ def _shadow_copies(ev, target, spool_dir, common):
                        service_machine=str(store.information.service_machine),
                        attributes=str(store.information.attributes).split(".")[-1],
                        time_meaning="creation time in the shadow copy catalog", **common)
+                try:
+                    _vss_catalog_attributes(ev, vss, store, drive, serial, common, examined_at, ntfs=fs.ntfs)
+                except Exception as e:
+                    ev.problem(artifact + ': catalog attributes', e)
                 snap = NTFS(store.open())
                 source = dict(shadow_copy=copy_id)
                 # The copy identifier above is an object named by base-volume
@@ -1500,7 +1595,8 @@ def extract(ev, target, ctx):
     except Exception as e:
         ev.problem("thumbnail caches", e)
     spool_dir = _spool_dir(target)
-    for step, where in ((lambda: _shadow_copies(ev, target, spool_dir, common), "change journal and shadow copies"),
+    observation = {'examined_at': ctx['examined_at']} if 'examined_at' in ctx else {}
+    for step, where in ((lambda: _shadow_copies(ev, target, spool_dir, common, **observation), "change journal and shadow copies"),
                         (lambda: _spool_files(ev, target, spool_dir, common), spool_dir),
                         (lambda: _print_log(ev, target, common), "PrintService event logs")):
         try:

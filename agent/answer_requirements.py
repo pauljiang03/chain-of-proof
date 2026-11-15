@@ -14,7 +14,7 @@ KEY = 'x-claim-requirement'
 ROW_KEY = 'x-claim-row'
 SCOPE_KEY = 'x-claim-scope'
 ORIGIN_KEYS = ('image', 'exhibit', 'source_snapshot', 'source_variant')
-SCOPE = ('Checks compatibility with declared public claim roles and same-part attribute conditions. The requirement itself '
+SCOPE = ('Checks compatibility with declared public claim roles and same-part attribute and named field conditions. The requirement itself '
          'needs review; compatibility does not prove question relevance, completeness or truth.')
 
 
@@ -23,7 +23,7 @@ def _name(value):
 
 
 def parse(raw):
-    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions'}
+    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions', 'field_conditions', 'required_attribute_roles'}
     if not isinstance(raw, dict) or set(raw) - allowed:
         raise ValueError('invalid_public_claim_requirement')
     types = raw.get('semantic_types')
@@ -56,7 +56,33 @@ def parse(raw):
             if not isinstance(values, list) or not 1 <= len(values) <= 32 or any(
                     not _native_literal(value, ROLES[role].value_type) for value in values):
                 raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+    if 'required_attribute_roles' in raw:
+        roles = raw['required_attribute_roles']
+        if (not isinstance(roles, list) or not 1 <= len(roles) <= 8
+                or any(not isinstance(role, str) or role not in ROLES for role in roles)
+                or len(set(roles)) != len(roles)):
+            raise ValueError('invalid_public_claim_requirement_required_attribute_roles')
+    if 'field_conditions' in raw:
+        conditions = raw['field_conditions']
+        if not isinstance(conditions, list) or not 1 <= len(conditions) <= 8:
+            raise ValueError('invalid_public_claim_requirement_field_conditions')
+        seen = set()
+        for condition in conditions:
+            if (not isinstance(condition, dict) or set(condition) != {'field', 'semantic_type', 'values'}
+                    or not _name(condition.get('field')) or not _name(condition.get('semantic_type'))
+                    or condition['field'] in seen):
+                raise ValueError('invalid_public_claim_requirement_field_conditions')
+            seen.add(condition['field'])
+            values = condition['values']
+            if (not isinstance(values, list) or not 1 <= len(values) <= 32
+                    or any(not _condition_literal(value) for value in values)):
+                raise ValueError('invalid_public_claim_requirement_field_conditions')
     return deepcopy(raw)
+
+
+def _condition_literal(value):
+    return ((type(value) is str and len(value) <= 2000) or type(value) is bool
+            or (type(value) is int and value >= 0))
 
 
 def _native_literal(value, kind):
@@ -104,6 +130,34 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
         if diagnostic['status'] != 'compatible':
             result['status'] = 'incompatible'
             result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
+    for name in requirement.get('required_attribute_roles', []):
+        role = ROLES[name]
+        matches = [field_name for field_name, row in fields.items()
+                   if isinstance(row, dict) and row.get('semantic_type') == role.semantic_type]
+        diagnostic = {'role': name, 'matching_fields': matches,
+                      'status': 'compatible' if len(matches) == 1 else 'missing' if not matches else 'ambiguous'}
+        result.setdefault('required_attribute_role_checks', []).append(diagnostic)
+        if diagnostic['status'] != 'compatible':
+            result['status'] = 'incompatible'
+            result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
+    for condition in requirement.get('field_conditions', []):
+        offered = fields.get(condition['field'])
+        diagnostic = {'field': condition['field'], 'semantic_type': condition['semantic_type'],
+                      'values': deepcopy(condition['values'])}
+        if not isinstance(offered, dict) or 'value' not in offered:
+            diagnostic['status'] = 'missing'
+        elif offered.get('semantic_type') != condition['semantic_type']:
+            diagnostic['status'] = 'incompatible_semantic_type'
+        else:
+            value = offered['value']
+            diagnostic['offered_value'] = deepcopy(value)
+            diagnostic['status'] = ('compatible' if _condition_literal(value)
+                and _literal_key(value) in [_literal_key(option) for option in condition['values']]
+                else 'incompatible_value')
+        result.setdefault('field_condition_checks', []).append(diagnostic)
+        if diagnostic['status'] != 'compatible':
+            result['status'] = 'incompatible'
+            result['reason'] = 'claim_fields_do_not_meet_public_requirement'
     return result
 
 
@@ -125,7 +179,9 @@ def parse_scope(raw):
         if set(raw) != {'mode', 'meaning'} or not isinstance(raw['meaning'], str) or not 1 <= len(raw['meaning'].strip()) <= 2000:
             raise ValueError('invalid_public_claim_scope_requirement')
     elif raw.get('mode') == 'source_records':
-        if set(raw) - {'mode', 'origins', 'evidence_facts_sha256'}:
+        if set(raw) - {'mode', 'origins', 'evidence_facts_sha256', 'same_origin'}:
+            raise ValueError('invalid_public_claim_scope_requirement')
+        if 'same_origin' in raw and type(raw['same_origin']) is not bool:
             raise ValueError('invalid_public_claim_scope_requirement')
         origins = raw.get('origins')
         if not isinstance(origins, list) or not 1 <= len(origins) <= 64:
@@ -457,7 +513,11 @@ def inspect(schema, forms, *, require_claim_requirements=False, require_evidence
     rows.extend(row_errors)
     scope_policies, scope_errors = scope_requirements(schema, require_evidence_scope=require_evidence_scope)
     rows.extend(scope_errors)
-    return {'requirements': rows, 'row_requirements': row_policies, 'scope_requirements': scope_policies, 'scope': SCOPE,
+    from agent import answer_references
+    reference_policies, reference_errors = answer_references.inspect_schema(schema)
+    rows.extend(reference_errors)
+    return {'requirements': rows, 'row_requirements': row_policies, 'scope_requirements': scope_policies,
+            'reference_requirements': reference_policies, 'scope': SCOPE,
             'unannotated_fields': ('Unannotated answer fields are blocked by strict claim-role policy.'
                                    if require_claim_requirements else
                                    'No declared claim-role requirement; question placement remains unchecked.')}

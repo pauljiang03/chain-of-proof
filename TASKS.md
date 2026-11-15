@@ -1,50 +1,37 @@
-# Finish pass
+# Current status
 
-The AI investigator is the primary workflow. The miner is an optional baseline.
-Keep evidence access, Lean verification, explicit limits, and reproducible evaluation.
+The AI investigator is the primary workflow. The fixed miner is an optional baseline.
+Use [WORKSTREAMS.md](WORKSTREAMS.md) before assigning work to another terminal.
 
-## Ready
+## Implemented and tested
 
-- Combined validation at `6c1031f`: 1,100 tests ran, 1,099 passed and one platform test skipped. Thirteen selected real-source certificates passed independent replay; 22 supported public bindings were retained. These checks are not benchmark scores.
-- The agent-facing field catalog is 49.6% smaller, with the same fields and full internal verification catalog. Its focused checks and the final UI and public-draft checks pass.
-- Bounded same-subject tuples, three exact OS fields, five execution metadata roles, five validated artifact-location roles, Unicode mail subject/body fields and OOXML core metadata are implemented. Strict answer choices and same-part source conditions are integrated. See [the implementation and source limits](docs/SUPPORTED_FIELDS.md).
-- Earlier combined regression at `f8ff658`: 1,024 tests run, 1,023 passed and one platform skip. This includes the source guard, public derivatives, professional report and updated demo certificates.
-- Answer-row checks, explicit reader origins and exact source enforcement are integrated. Four selected real-source certificates passed independent replay; four correct source projections were retained and eight deliberate source/hash mismatches were refused. Both public contract derivatives remain held. See [the source checks and remaining gaps](docs/CORRECTNESS_FIXES.md).
-- Readable evidence cards, a 32-certificate synthetic frontend sample and professional examiner reports are merged and pushed. The report keeps administrative details, certified source statements and examiner judgments distinct.
-- The combined source, strict answer-policy and durable-checkpoint batch passed 913 tests: 912 passed and one platform skip. Application binary metadata now supplies literal product/version fields; historical journal paths retain explicit missing-ancestor diagnostics. See [the fixes and limitations](docs/CORRECTNESS_FIXES.md).
-- Fixed execution-artifact roles distinguish reviewed source records from generic application sightings. Fresh system-reader snapshots from both NIST images supplied six selected claims that passed independent replay; two wrong-role controls were refused. A real Dissect DWORD regression covers the UserAssist adapter fix. The integrated source/desktop suite ran 938 tests: 937 passed and one platform test was skipped. These are mechanical checks, not model accuracy.
+- Evidence intake, source records, agent tools, Lean certificates, independent replay and portable packages.
+- CLI, browser and desktop interfaces, source views, proof graph and examiner reports.
+- Atomic source tuples and exact answer-role, source-origin and row checks.
+- Effective recorded timezone, Yahoo message-cache identification, full browser-search tuples, Recycle Bin index tuples, VSS catalog fields and literal Sticky Notes content.
+- A Lean count/deletion result for one complete declared file set. Related answers must use that same set and reviewed definition.
+- Durable answer checkpoints, neutral completion diagnostics and bounded paged answer inspection. Full stored answers are retained.
+- Combined validation at `5cf4d43`: 1,261 tests ran; 1,260 passed and one platform test skipped. Seven real-source certificates replayed. Public projection retained 17 supported fields and refused four invalid bindings.
 
-- Official NIST Hacking Case package: all 31 public questions, a separate source-bound deterministic reference, real-image readers, fixed-role Lean attributes and digest comparison. See [scope and commands](docs/HACKING_CASE.md). This is distinct from the DFIR Madness operational test.
-- Windows XP profile and EVT support, exact application/traffic attributes, Recycle Bin allocation flags, image hashing and an optional bounded local antivirus scan are integrated. Stronger attribution and subscription gaps remain explicit.
-- Hacking integration regression: 834 tests run, 833 passed, one platform skip; Lean build passed. A later focused scan-timeout check is recorded with the final feature commit. The real-image mechanical workflow produced 58 certificates; all passed independent replay and con-leche. The portable package also passed verification. Its model pilot was prepared but never launched.
+See [the latest implementation and its limits](docs/FIELD_RELATIONS.md).
+These checks do not establish answer accuracy or zero false positives.
 
-- The three incorrect C answers are traced to exact claims and source records. All three certificates reverified. Optional public field requirements now reject incompatible claim roles and expose evidence needs; a separate unscored diagnostic profile preserves narrower observations. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
+## Remaining work
 
-- Claim-field answers, source links and supported partial answers are integrated in the tools, reports and deterministic evaluator.
-- Inventory paging saves evidence-bound cursors. Question plans show missing fields and unfinished pages.
-- Census proofs support up to 2,048 records without changing Lean semantics or independent source checks.
-- General registry readers include system root, timezone display, Search settings and snapshot exclusions.
-- Image intake, question work, bounded reader collection, continuation, conflict review, audits and portable verification are integrated.
-- The CLI writes HTML, Markdown and JSON reports. The browser and optional desktop window share the same runner.
-- Claude's desktop, proof graph and examiner report builder are merged. Reviewed fixes preserve distinct citations and invalidate stale previews.
-- The latest Summary, Timeline and Conan launcher changes are merged. Examination observations and unknown time meanings stay off the event axis; shortcut targets are not labelled as file opens. The focused app suite ran 32 tests: 31 passed and one platform test skipped. JavaScript syntax checks passed.
-- A post-measurement fix exports common fields through public `anyOf` alternatives. It does not choose branches or change claim values.
-- The earlier Data Leakage fix passed 775 tests (one platform skip). Its repeat remains frozen at `96cd518`; Hacking Case changes are isolated from that code and evidence.
-- The separate DFIR Madness mechanical workflow produced reports and a verified package. Its live Sol workflow smoke also passed; all 34 C and 10 B certificates reverified. It has no accuracy key.
-- The [latest Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md) has A/B: 7 complete, 22 partial, 16 unanswered and 1 incorrect, with 14 unresolved reference questions. C timed out without final answer bindings; its accuracy is unavailable. All 84 B and 1,017 C certificates reverified. Keep the earlier completed comparison unchanged.
-- The [separate three-question meaning diagnostic](comparison/ablation/RESULTS_MEANING_DIAGNOSTIC_20261115.md) passed its operational audit with 21 verified certificates. It retained narrow observations and left stronger fields empty. The agent made no incompatible bindings, so no live error catching was observed.
-- All 60 public prompts are readable in [eval/QUESTIONS.md](eval/QUESTIONS.md). The earlier completed result is in [the frozen comparison](comparison/ablation/RESULTS_SOL61_20261115.md).
-- Both Mulder packages and a separate Q53 metadata-recovery contract are prepared. They remain separate from the frozen test.
+1. Keep the next model experiment held until reference compatibility and public source/meaning requirements are resolved. The separate reference audit must not change original expected values or silently normalize mismatches.
+2. Extend the concrete capabilities in [the public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md). Candidate work includes partition/account/network tuples, cloud records and Search configuration/index fields. Completed rows are marked there.
+3. Resolve source selection and relationship requirements for snapshot, optical-media, copy-direction and actor-attribution questions. A larger union of sources is not a substitute for those relationships.
+4. Preserve all 60 Data Leakage questions, including the 14 unresolved reference questions. Current catalog support covers 48 of 358 public schema leaf occurrences; Hacking covers 16 of 38. These are schema-support counts, not test accuracy.
+5. After readiness passes, build complete fresh evidence snapshots, freeze code/contracts/model/budget, then run the matched A/C comparison and exact B replay. The other terminal owns dispatch. Selected-reader source fixtures are not full comparison inputs.
+6. Validate the native product backend with an approved destination. The prior Sol bridge tests do not validate native provider orchestration. No AWS work is required.
 
-## Next
+## Measured results
 
-1. Hold new model experiments while the stricter public contracts have unresolved source selections and required support. The row, source-scope, execution-source, strict field-policy and durable-checkpoint changes are integrated. The Hacking pilot is prepared but has never launched. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
-2. Review and implement remaining field meanings and relations. The latest batch adds support for 12 field shapes; Data Leakage still has 317 unsupported leaf occurrences and Hacking has 25 unsupported leaves. Historical evidence gaps and complete-list claims remain separate problems.
-3. Extend content support where required beyond Unicode PFF properties and bounded OOXML core metadata. Preserve large inventories in final answers. Do not infer source absence from missing output.
-4. Resolve the derivative contracts' unavailable source selections and unsupported joins. V3 gives A and C the same public binding preview and durable checkpoints. Freeze new code and inputs for any future matched trial. No new accuracy score is claimed for these changes.
-5. Complete the 14 unresolved reference contracts and the model/budget setup for a full A/B/C/D comparison. Do not use an LLM judge or silently alter the published source.
-6. Validate the native product backend with an approved destination. The Claude login works, but automatic approval review blocked that test under the user's Sol-only instruction. The Sol bridge does not validate native provider orchestration.
-7. Keep Hacking Case proof limits visible: predominant use, setup-interface attribution and actual device type need stronger relations. Retained DBX mailbox names do not prove current subscription. A scanner result does not prove global malware absence.
+The [latest frozen Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
+has A/B: seven complete, 22 partial, 16 unanswered and one incorrect question,
+with 14 unresolved reference questions. C saved certificates but no final answer
+bindings; its accuracy is unavailable. Do not repair that measured submission.
 
-The earlier completed pair showed no overall accuracy gain from Lean feedback. The latest pair has no C accuracy result. Neither establishes that the complete system has zero false positives. Proof validity and answer accuracy remain separate.
-Use [WORKSTREAMS.md](WORKSTREAMS.md) before assigning more agents.
+Hacking has a completed mechanical workflow, not a completed 31-question model
+accuracy result. Both Mulder packages remain prepared and unrun. Historical tests
+and failures remain in their linked reports and archives; they are not new scores.

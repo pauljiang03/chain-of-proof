@@ -15,6 +15,11 @@ from typing import Dict, Iterable, List
 
 from .catalog import ATTRIBUTE_KINDS
 
+FILESYSTEM_SET_KINDS = ("filesystemSet", "filesystemMemberDeleted",
+                        "filesystemMemberAllocated", "filesystemMemberUnknown")
+# Preserve these new non-attribute ordinals when future attribute roles are appended.
+_SET_KIND_BOUNDARY = ATTRIBUTE_KINDS.index("roleRecycleIndexDeletedAt") + 1
+
 KINDS = (
     "usbInsert", "volumeMount", "lnkTarget",
     "fileCreated", "fileModified", "fileDeleted",
@@ -35,7 +40,7 @@ KINDS = (
     "fileCreationRecorded",
     "journalName", "journalParent", "journalRemoval",
     "journalPath",
-) + ATTRIBUTE_KINDS
+) + ATTRIBUTE_KINDS[:_SET_KIND_BOUNDARY] + FILESYSTEM_SET_KINDS + ATTRIBUTE_KINDS[_SET_KIND_BOUNDARY:]
 
 
 @dataclass(frozen=True)

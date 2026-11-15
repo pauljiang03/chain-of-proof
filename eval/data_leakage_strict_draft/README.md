@@ -12,8 +12,8 @@ and peer-review records; peer reports describe the draft before their findings
 were resolved in the authoring files.
 
 The reviewed draft has 358 leaf occurrences, including repeated `anyOf` branches:
-41 have compatible catalog roles and 317 explicitly require missing support.
-There are no missing or invalid annotations. Thirteen questions have at least one
+48 have compatible catalog roles and 310 explicitly require missing support.
+There are no missing or invalid annotations. Fourteen questions have at least one
 compatible leaf. **These are catalog counts, not accuracy, evidence availability
 or complete-answer counts.** Exact exhibit, source snapshot and artifact variant
 checks now apply to every supporting record against hash-bound evidence. There
@@ -44,6 +44,12 @@ The main remaining issues are concrete:
 - Generic paths, text, record kinds and timestamps lack many requested artifact,
   actor, date-range, action, copy, recovery and intent meanings. Such leaves use
   `needs_*` requirements absent from the catalog; those names do not create rules.
+- Q16 retains full search URL, query, browser and recorded time on one occurrence.
+  Q41 distinguishes literal note text from the container's filesystem modification
+  time. Q47 retains validated VSS copy/set identifiers, resolved storage path and
+  catalog creation time; storage size remains unsupported. Q51 requires all three
+  exact `$I` index roles even for a partial answer. It accepts the reviewed current
+  or unallocated-recovery origin only when all supporting rows share one origin.
 - List completeness remains unproved. This alone does not disqualify a supported
   individual observation; field-specific scope and relationship gaps are separate.
 

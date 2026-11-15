@@ -71,6 +71,15 @@ multi-field proofs, exact OS fields, execution-artifact metadata, validated arti
 paths, Unicode mail content and OOXML metadata. Public answer conditions also apply
 when an agent submits only part of a row. Unsupported meanings stay explicit.
 
+The [source-field and file-set update](docs/FIELD_RELATIONS.md) adds effective
+timezone settings, Yahoo cache identification, full search records, Recycle Bin
+index fields, VSS catalog fields and Sticky Notes content. Lean checks the count
+and allocation flags for one declared file set. Related answers must use that
+same set. Paged answer tools and checkpoint diagnostics preserve partial work.
+The combined suite passed 1,260 tests, with one platform test skipped. Seven
+selected real-source certificates passed independent replay. This is validation
+of the implementation, not a new test-accuracy result.
+
 ## Try it in 60 seconds
 
 ```sh

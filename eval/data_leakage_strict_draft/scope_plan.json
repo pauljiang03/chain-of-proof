@@ -162,6 +162,16 @@
     "rm3_selected_recovery": {
       "status": "unavailable_exact_recovered_entry_or_descriptor_not_selected",
       "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+    },
+    "pc_unallocated_recovery": {
+      "origin": {
+        "image": "pc.E01",
+        "exhibit": "PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "unallocated-recovery"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Deleted/unallocated PC base-volume metadata recovered by the reviewed reader; Q51 only permits validated Recycle Bin $I occurrences under the same exact per-atomic-part origin gate. Recovery origin does not establish content recoverability, actual secure deletion or action attribution."
     }
   },
   "questions": [
@@ -823,7 +833,7 @@
             "vss_side": "pc_selected_vss",
             "current_side": "pc_primary"
           },
-          "reason": "Compare separately scoped historical VSS contents against acquired base-volume Q29–Q31 sources; both sides must be identified, never interchangeable."
+          "reason": "Compare separately scoped historical VSS contents against acquired base-volume Q29\u2013Q31 sources; both sides must be identified, never interchangeable."
         }
       ],
       "notes": [
@@ -859,12 +869,18 @@
       "question_id": "Q51",
       "policies": [
         {
-          "object_path": "",
-          "source_profile": "pc_primary",
-          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+          "object_path": "/records/*",
+          "source_profiles": [
+            "pc_primary",
+            "pc_unallocated_recovery"
+          ],
+          "same_origin": true,
+          "reason": "The public prompt asks for PC Recycle Bin data without excluding emptied/deleted index entries. Permit validated allocated $I observations or deleted/unallocated-recovery $I observations per row, while requiring every supporting record of the atomic claim part to share exactly one image/exhibit/snapshot/variant origin. No global origin union or cross-variant tuple is authorized."
         }
       ],
-      "notes": []
+      "notes": [
+        "No VSS, other exhibit, arbitrary deleted file or non-index artifact substitution. Exact role selectors establish index-field meaning; same_origin prevents mixing primary and recovered observations even when subjects are equal."
+      ]
     },
     {
       "question_id": "Q52",
@@ -872,7 +888,7 @@
         {
           "object_path": "",
           "source_profile": "pc_primary",
-          "reason": "PC base-volume artifacts support the specified day’s anti-forensics question. Timestamp/day filtering and action semantics require their own rules; VSS is not an interchangeable source."
+          "reason": "PC base-volume artifacts support the specified day\u2019s anti-forensics question. Timestamp/day filtering and action semantics require their own rules; VSS is not an interchangeable source."
         }
       ],
       "notes": []
@@ -1014,7 +1030,7 @@
             "pc_burn_activity": "pc_primary",
             "optical_bytes_or_deleted_entries": "rm3_primary"
           },
-          "reason": "CD leakage combines PC burning traces and RM#3 content; separate each component’s origin."
+          "reason": "CD leakage combines PC burning traces and RM#3 content; separate each component\u2019s origin."
         }
       ],
       "notes": []

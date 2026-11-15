@@ -125,6 +125,20 @@ _SPECS = (
     ('document.core.keywords', 'string', 'literal keywords text in the document core-properties XML'),
     ('document.core.created', 'string', 'literal created text in the document core-properties XML; not independently verified creation or filesystem time'),
     ('document.core.modified', 'string', 'literal modified text in the document core-properties XML; not independently verified modification or filesystem time'),
+    ('os.effective_time_zone', 'string', 'recorded time-zone name and UTC offset selected only by unambiguous registry bias agreement; not physical clock accuracy, actual daylight-saving state or transition correctness'),
+    ('browser.yahoo_mail_cache_file_name', 'string', 'retained IE cache filename linked by an allocated index.dat entry to a validated Yahoo Mail message URL and matching message HTML headers/body; not authenticity, account ownership or user activity'),
+    ('vss.copy_id', 'string', 'copy identifier observed in a base-volume VSS catalog entry; not examination of the snapshot contents'),
+    ('vss.set_id', 'string', 'set identifier observed in a base-volume VSS catalog entry; not examination of the snapshot contents'),
+    ('vss.storage_path', 'string', 'retained VSS store-file path resolved through its base-volume metadata reference; not a UUID-only constructed path or examination of snapshot contents'),
+    ('vss.created_at', 'string', 'creation timestamp retained in a base-volume VSS catalog entry; not independently verified physical action time or examination of snapshot contents'),
+    ('browser.search.url', 'string', 'literal URL in the exact browser history occurrence that records the search'),
+    ('browser.search.query', 'string', 'query text parsed from that same recorded search URL under the reviewed search-provider grammar'),
+    ('browser.search.browser', 'string', 'browser association of that same search history source; not physical user attribution'),
+    ('browser.search.recorded_time', 'string', 'timestamp retained by that same search history occurrence; not independently verified human activity time'),
+    ('recycle.index_file_name', 'string', 'literal filename of the examined Recycle Bin index entry'),
+    ('recycle.index_deleted_at', 'string', 'moved-to-Recycle-Bin timestamp retained in that same index entry; not filesystem deallocation or secure erasure'),
+    ('sticky_notes.note.text', 'string', 'literal retained Unicode note text from validated OLE stream 3 (strict UTF-16LE) or SQLite Note.Text; not authorship, reading or physical action'),
+    ('sticky_notes.container.modified_at', 'string', 'UTC filesystem modification timestamp of the actual Sticky Notes container; not a note entry timestamp, SQLite UpdatedAt or independently verified editing time'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)

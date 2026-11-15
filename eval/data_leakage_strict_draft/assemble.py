@@ -10,6 +10,7 @@ from pathlib import Path
 
 from agent.answer_projection import catalog
 from agent.answer_requirements import KEY, ROW_KEY, SCOPE_KEY, inspect
+from agent.answer_references import KEY as REFERENCE_KEY
 from agent.case import read_question_profile
 from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
 
@@ -31,7 +32,7 @@ def fingerprint(path):
 
 def without_annotations(value):
     if isinstance(value, dict):
-        return {key: without_annotations(child) for key, child in value.items() if key not in (KEY, ROW_KEY, SCOPE_KEY)}
+        return {key: without_annotations(child) for key, child in value.items() if key not in (KEY, ROW_KEY, SCOPE_KEY, REFERENCE_KEY)}
     if isinstance(value, list):
         return [without_annotations(child) for child in value]
     return value
@@ -85,10 +86,12 @@ def build():
                                'branches': row.get('branches', []), 'status': row['status'],
                                'available_fields': row.get('available_fields', []),
                                'attribute_conditions': row['requirement'].get('attribute_conditions', []),
+                               'field_conditions': row['requirement'].get('field_conditions', []),
+                               'required_attribute_roles': row['requirement'].get('required_attribute_roles', []),
                                'evidence_needed': row['requirement']['evidence_needed']})
     peers = [json.loads((HERE / 'parts' / ('peer_' + name)).read_text()) for name in PARTS]
     inputs = [ORIGINAL, ROOT / 'eval/QUESTIONS.md', ROOT / 'agent/answer_projection.py',
-              ROOT / 'agent/answer_requirements.py', ROOT / 'checker/catalog.py',
+              ROOT / 'agent/answer_requirements.py', ROOT / 'agent/answer_references.py', ROOT / 'checker/catalog.py',
               ROOT / 'extractor/exhibits.json', HERE / 'scope_plan.json', HERE / 'scope_contract.py',
               *(HERE / 'parts' / name for name in PARTS),
               *(HERE / 'parts' / ('peer_' + name) for name in PARTS)]
@@ -104,7 +107,7 @@ def build():
                    'missing_or_invalid': 0,
                    'row_policies': len(row_policies),
                    'scope_policies': len(scope_policies),
-                   'conditioned_leaf_occurrences': sum(bool(row['attribute_conditions']) for row in field_rows),
+                   'conditioned_leaf_occurrences': sum(bool(row['attribute_conditions'] or row['field_conditions'] or row['required_attribute_roles']) for row in field_rows),
                    'unavailable_scope_policies': sum(row['status'] == 'unavailable' for row in scope_policies),
                    'same_claim_part_policies': sum(row['mode'] == 'same_claim_part' for row in row_policies),
                    'independent_section_policies': sum(row['mode'] == 'independent' for row in row_policies),

@@ -111,8 +111,8 @@ YOUR TOOLS (these are all you have)
   plan()                     saved public questions and work so far
   update_question(question_id, finding_ids?, searched?, unresolved?, next_actions?, status?)
                              persist work; status is not proof of completeness
-  answer(question_id, bindings?, replace?, preview?)
-                             get the field-binding catalog, or bind supported answer fields
+  answer(question_id, bindings?, replace?, preview?, section?, offset?, page_size?, state_token?)
+                             inspect bounded pages, or bind/preview supported answer fields
   evidence_needs(proof_gap?)  available readers and diagnostic follow-up suggestions
   collect(reader, exhibit)   run an approved reader into a NEW evidence snapshot
   review()                   conservative conflict/ambiguity diagnostics
@@ -137,9 +137,16 @@ Both SQL and inventory pages flag clipped cells: fetch fact(id) before using a c
 value in an answer. Preserve source-specific timestamp meanings and apply the public
 question's requested time and scope filters; do not export every row indiscriminately.
 
-Use answer(question_id) to inspect the supported binding catalog. Bind the known
-requested fields to their exact claim fields; retain source distinctions and uncertainty.
-Inspect its public field_requirements too. Use preview=True with proposed bindings to
+Use answer(question_id) for a read-only page of authored bindings. Choose section="field_catalog"
+for the complete compact catalog in scoped pages, or section="field_requirements" for the
+public schema diagnostics; leaves, answers, unsupported and conflicts are also inspectable.
+Continue each section with offset=page.next_offset and its state_token; keep the question unchanged. A stale token refuses continuation: restart at offset 0. page_size is
+1–100 (default 25); byte bounds can return fewer items. Paging parameters are inspection-only:
+omit bindings, replace and preview. Mutations and previews return selected-question summaries
+and diagnostic samples, not the full projection. Check counts and omitted counts. Oversize
+entries are labeled length/hash/preview descriptors, never exact values or source-reported null.
+Full original bindings and projections remain on disk. Bind the known requested fields to their
+exact claim fields; retain source distinctions and uncertainty. Use preview=True with proposed bindings to
 diagnose paths, roles, conflicts and literal mismatches before saving. Inspect
 row_requirements: a same_claim_part row must take all
 its fields from one atomic claim part. Unrelated parts of a both claim cannot be mixed.
