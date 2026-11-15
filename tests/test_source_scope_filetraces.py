@@ -132,14 +132,20 @@ class FileTraceSourceScope(unittest.TestCase):
         common = dict(COMMON, source_snapshot='base-volume', source_variant='primary')
         before = dict(common)
         received = []
+        search_options = []
+        def search(*args, **kwargs):
+            received.append(dict(args[-1]))
+            search_options.append(kwargs)
+            return {}
         with ExitStack() as stack:
             for name in ('_registry', '_thumbnail_caches', '_shadow_copies', '_spool_files', '_print_log'):
                 stack.enter_context(patch.object(ft, name, side_effect=lambda *args: received.append(dict(args[-1]))))
-            stack.enter_context(patch.object(ft, '_search_index', side_effect=lambda *args: received.append(dict(args[-1])) or {}))
+            stack.enter_context(patch.object(ft, '_search_index', side_effect=search))
             stack.enter_context(patch.object(ft, '_spool_dir', return_value=''))
             ft.extract(Collector(), NS(timezone='UTC'), {'common': common})
         self.assertEqual(common, before)
         self.assertEqual(len(received), 6)
+        self.assertEqual(search_options, [{'examined_at': None}])
         self.assertTrue(all(prov['source_snapshot'] == 'base-volume' for prov in received))
         self.assertTrue(all(prov['source_variant'] == 'primary' for prov in received))
 

@@ -750,88 +750,233 @@ def _sid_names(target) -> dict:
     return out
 
 
-def _search_index(ev, target, common) -> dict:
-    """Rows for every item of the search index. Returns thumbnail cache id -> [(path, DocID)]."""
+MAX_SEARCH_DATABASE_BYTES = 512 * 1024 * 1024
+MAX_SEARCH_RECORDS = 100000
+MAX_SEARCH_TEXT = 65536
+SEARCH_TEXT_FIELDS = (
+    ('System_ItemUrl', 'search.index.item_url'),
+    ('System_ItemPathDisplay', 'search.index.item_path'),
+    ('System_Search_Store', 'search.index.store'),
+    ('System_ItemType', 'search.index.item_type'),
+)
+
+
+def _search_iso_filetime(filetime):
+    """Render all seven FILETIME fraction digits; no microsecond truncation."""
+    from .store import FILETIME_EPOCH_100NS
+    seconds, fraction = divmod(filetime - FILETIME_EPOCH_100NS, 10_000_000)
+    return (EPOCH + timedelta(seconds=seconds)).strftime('%Y-%m-%dT%H:%M:%S') + f'.{fraction:07d}Z'
+
+
+def _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal, source,
+                       digest, big_endian, common, examined_at, state):
+    """Typed fields from one immutable ESE row; no inferred use or path fallback."""
+    import hashlib
+
+    if not isinstance(examined_at, int) or isinstance(examined_at, bool) or examined_at <= 0:
+        return
+    scope = subject_scope(common)
+    if not all(isinstance(value, str) and value.strip() and value != 'unknown' for value in scope):
+        raise ValueError('typed Search fields require all four explicit source-origin axes')
+    if not isinstance(doc, int) or isinstance(doc, bool) or not 0 <= doc < 1 << 64:
+        raise ValueError('Search row has no supported native nonnegative DocID/WorkID')
+    doc = int(doc)
+    subject = json.dumps(scope + ['windows-search-row', source, digest, table.name, identifier, doc, ordinal],
+                         ensure_ascii=True, separators=(',', ':'))
+    base = merge_scope(common, dict(artifact=f'{source} table {table.name} {identifier} {doc}',
+        source_path=source, source_sha256=digest, parser='extractor.filetraces.search_index',
+        ese_table=table.name, ese_identifier_column=columns[identifier], ese_document_id=doc,
+        ese_record_ordinal=ordinal, ese_database_state=state, examination_time=examined_at,
+        source_record_limit=MAX_SEARCH_RECORDS,
+        limitation='literal retained index fields; no browsing, actor, actual filesystem event, latest-state or complete-enumeration claim'))
+    node = getattr(record, '_node', None)
+    if node is not None:
+        try:
+            tag = node.tag
+            base.update(ese_page_number=int(tag.page.num), ese_tag_number=int(tag.num),
+                        ese_tag_data_offset=int(tag.offset), ese_tag_data_size=int(tag.size),
+                        ese_node_sha256=hashlib.sha256(bytes(node.data)).hexdigest())
+        except (AttributeError, TypeError, ValueError):
+            pass  # Container/table/row identity remains explicit when optional node metadata is unavailable.
+    for role, value in (('search.index.container_path', source), ('search.index.table', str(table.name)),
+                        ('search.index.document_id', doc), ('search.index.identifier_column', columns[identifier])):
+        emit_attribute(ev, subject, role, value, examined_at, **base)
+    for column, role in SEARCH_TEXT_FIELDS:
+        raw = get(column)
+        if raw is None:
+            continue
+        try:
+            if not isinstance(raw, str) or len(raw) > MAX_SEARCH_TEXT or '\0' in raw:
+                raise ValueError('indexed field is not bounded native text')
+            emit_attribute(ev, subject, role, str(raw), examined_at,
+                           **dict(base, ese_column=columns[column], source_field=column))
+        except Exception as error:
+            ev.problem(base['artifact'] + ' ' + column, error)
+    for column, role in (('System_DateModified', 'search.index.date_modified'),
+                         ('System_DateCreated', 'search.index.date_created')):
+        raw = get(column)
+        if raw is None:
+            continue
+        try:
+            if not isinstance(raw, (bytes, bytearray)) or len(raw) != 8:
+                raise ValueError('indexed FILETIME is not an eight-byte value')
+            ft = search_filetime(raw, big_endian)
+            if ft is None:
+                continue  # Zero/one are unset, not an epoch or examination timestamp.
+            value = us_from_filetime(ft)
+            if value < 0:
+                raise ValueError('indexed FILETIME predates supported Unix epoch')
+            emit_attribute(ev, subject, role, _search_iso_filetime(ft), examined_at,
+                           **dict(base, ese_column=columns[column], source_field=column,
+                                  native_filetime_bytes=bytes(raw).hex(), byte_order='big' if big_endian else 'little',
+                                  value_precision='100ns',
+                                  value_time_meaning='exact timestamp stored in ' + column + '; not a user action time'))
+        except Exception as error:
+            ev.problem(base['artifact'] + ' ' + column, error)
+    raw = get('System_Kind')
+    if raw is not None:
+        try:
+            values = [raw] if isinstance(raw, str) else raw
+            if (not isinstance(values, list) or len(values) > 32
+                    or any(not isinstance(value, str) or len(value) > MAX_SEARCH_TEXT or '\0' in value for value in values)):
+                raise ValueError('System_Kind is not a bounded native string/string-list; no category inferred')
+            for index, value in enumerate(values):
+                emit_attribute(ev, subject, 'search.index.kind', str(value), examined_at,
+                               **dict(base, ese_column=columns['System_Kind'], source_field='System_Kind',
+                                      native_value_index=index, native_value_count=len(values)))
+        except Exception as error:
+            ev.problem(base['artifact'] + ' System_Kind', error)
+
+
+def _search_index(ev, target, common, examined_at=None) -> dict:
+    """Retained index observations; thumbnail map remains a separate legacy output."""
+    import hashlib
+    import tempfile
     thumbs = {}
     p = target.fs.path(SEARCH_DB)
     if not p.exists():
         return thumbs
     from dissect.database.ese import ESE
     source, sids = _win(p), _sid_names(target)
-    db = ESE(p.open("rb"))
-    try:
-        state = int(db.header.dbstate)
-        if state != 3:
-            ev.problem(source, RuntimeWarning(
-                f"database state {state}, not a clean shutdown: its transaction logs were not "
-                "replayed, so the newest index changes may be missing"))
-    except Exception:
-        pass
-    table = big_endian = None
-    for name, big in SEARCH_TABLES:
-        try:
-            table, big_endian = db.table(name), big
-            break
-        except Exception:
-            continue
-    if table is None:
-        ev.problem(source, ValueError("no property table found"))
+    size = p.stat().st_size
+    if (not isinstance(size, int) or isinstance(size, bool) or not 0 < size <= MAX_SEARCH_DATABASE_BYTES):
+        ev.problem(source, ValueError('Search database size is unavailable or exceeds the bounded reader limit'))
         return thumbs
-    cols = {c.split("-", 1)[-1]: c for c in table.column_names}
-    date_cols = [c for c in cols if "Date" in c or c.endswith("GatherTime")]
-    row_cols = {c for c, _ in SEARCH_TIMES}
-    for record in table.records():
-        def get(name, record=record):
-            return record.get(cols[name]) if name in cols else None
-        doc = get("DocID") if "DocID" in cols else get("WorkID")
-        where = f"{source} table {table.name} DocID {doc}"
-        try:
-            url = get("System_ItemUrl")
-            path = get("System_ItemPathDisplay") or url
-            if not isinstance(path, str) or not path:
+    # Freeze the exact parser bytes while hashing. Large containers spill to an
+    # automatically removed temporary file rather than consuming unbounded RAM.
+    with p.open('rb') as original, tempfile.SpooledTemporaryFile(max_size=8 * 1024 * 1024, mode='w+b') as frozen:
+        sha, copied = hashlib.sha256(), 0
+        while True:
+            block = original.read(min(1024 * 1024, size - copied + 1))
+            if not block:
+                break
+            copied += len(block)
+            if copied > size:
+                raise ValueError('Search container exceeds its advertised file size')
+            sha.update(block)
+            frozen.write(block)
+        if copied != size:
+            raise ValueError('Search container is truncated relative to its advertised file size')
+        digest = sha.hexdigest()
+        frozen.seek(0)
+        db = ESE(frozen)
+        state = db.header.dbstate
+        if not isinstance(state, int) or isinstance(state, bool):
+            raise ValueError('Search database state is not a native integer')
+        state = int(state)
+        if state != 3:
+            ev.problem(source, RuntimeWarning(f'database state {state}, not a clean shutdown: transaction logs were not replayed; newest index changes may be missing'))
+        found = False
+        for name, big_endian in SEARCH_TABLES:
+            try:
+                table = db.table(name)
+            except Exception:
                 continue
-            cache_id = get("System_ThumbnailCacheId")
-            if isinstance(cache_id, (bytes, bytearray)) and len(cache_id) == 8:
-                cid = "%016x" % int.from_bytes(cache_id, "big" if big_endian else "little")
-                thumbs.setdefault(cid, []).append((path, doc))
-            size = get("System_Size")
-            prov = dict(artifact=where, item_url=url, store=get("System_Search_Store"),
-                        item_type=get("System_ItemType"), **common)
-            if isinstance(size, (bytes, bytearray)) and len(size) == 8:
-                prov["size"] = int.from_bytes(size, "big" if big_endian else "little")
-            title = get("System_ItemNameDisplay")
-            if isinstance(title, str) and title and title != path:
-                prov["display_name"] = title[:200]
-            m = SID.search(url or "")
-            if m:
-                prov["sid"] = m.group(1)
-                if m.group(1) in sids:
-                    prov["account"] = sids[m.group(1)]
-            other = {}
-            for c in date_cols:
-                ft = search_filetime(get(c), big_endian)
-                if ft and c not in row_cols and us_from_filetime(ft) >= 0:
-                    other[c] = iso(us_from_filetime(ft))
-            if other:
-                prov["other_dates"] = other
-            times = {}                                   # one row per distinct stored time
-            for col, meaning in SEARCH_TIMES:
-                ft = search_filetime(get(col), big_endian)
-                if ft is None:
-                    continue
-                t = us_from_filetime(ft)
-                if t < 0:
-                    ev.problem(where, ValueError(f"{col} is before 1970 and was left out"))
-                    continue
-                times.setdefault(t, []).append((col, meaning))
-            for t, same in sorted(times.items()):
-                ev.add("fileSeen", t, 1, path, "windows search index",
-                       column=", ".join(c for c, _ in same),
-                       time_meaning="; ".join(m for _, m in same), **prov)
-        except Exception as e:
-            ev.problem(where, e)
+            found = True
+            try:
+                columns = {}
+                for full in table.column_names:
+                    if not isinstance(full, str):
+                        raise ValueError('Search table has a non-text column name')
+                    if '-' in full:
+                        prefix, column = full.split('-', 1)
+                        if not prefix.isascii() or not prefix.isdecimal():
+                            raise ValueError('Search property prefix is not a decimal column identifier')
+                    else:
+                        column = full
+                    if column in columns:
+                        raise ValueError('Search table has ambiguous normalized column names')
+                    columns[column] = full
+                identifier = next((key for key in ('DocID', 'WorkID', 'WorkId') if key in columns), None)
+                dates = [column for column in columns if 'Date' in column or column.endswith('GatherTime')]
+                row_columns = {column for column, _ in SEARCH_TIMES}
+                for ordinal, record in enumerate(table.records()):
+                    if ordinal >= MAX_SEARCH_RECORDS:
+                        raise ValueError('Search record bound reached; further rows were not examined')
+                    def get(column):
+                        return record.get(columns[column]) if column in columns else None
+                    doc = get(identifier) if identifier else None
+                    where = f'{source} table {table.name} {identifier or "missing identifier"} {doc}'
+                    try:
+                        _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal,
+                                           source, digest, big_endian, common, examined_at, state)
+                    except Exception as error:
+                        ev.problem(where, error)
+                    try:
+                        url, item_path = get('System_ItemUrl'), get('System_ItemPathDisplay')
+                        # Retain the legacy fileSeen/thumbnail observation without
+                        # promoting its display fallback to search.index.item_path.
+                        path = item_path if isinstance(item_path, str) and item_path else url
+                        if not isinstance(path, str) or not path:
+                            continue
+                        cache_id = get('System_ThumbnailCacheId')
+                        if isinstance(cache_id, (bytes, bytearray)) and len(cache_id) == 8:
+                            cid = '%016x' % int.from_bytes(cache_id, 'big' if big_endian else 'little')
+                            thumbs.setdefault(cid, []).append((path, doc))
+                        prov = merge_scope(common, dict(artifact=where, source_path=source, source_sha256=digest,
+                            item_url=url if isinstance(url, str) else None,
+                            store=get('System_Search_Store') if isinstance(get('System_Search_Store'), str) else None,
+                            item_type=get('System_ItemType') if isinstance(get('System_ItemType'), str) else None,
+                            ese_table=table.name, ese_record_ordinal=ordinal, ese_database_state=state))
+                        raw_size = get('System_Size')
+                        if isinstance(raw_size, (bytes, bytearray)) and len(raw_size) == 8:
+                            prov['size'] = int.from_bytes(raw_size, 'big' if big_endian else 'little')
+                        title = get('System_ItemNameDisplay')
+                        if isinstance(title, str) and title and title != path:
+                            prov['display_name'] = title[:200]
+                        match = SID.search(url) if isinstance(url, str) else None
+                        if match:
+                            prov['sid'] = match.group(1)
+                            if match.group(1) in sids:
+                                prov['account'] = sids[match.group(1)]
+                        other = {}
+                        for column in dates:
+                            ft = search_filetime(get(column), big_endian)
+                            if ft and column not in row_columns and us_from_filetime(ft) >= 0:
+                                other[column] = iso(us_from_filetime(ft))
+                        if other:
+                            prov['other_dates'] = other
+                        times = {}
+                        for column, meaning in SEARCH_TIMES:
+                            ft = search_filetime(get(column), big_endian)
+                            if ft is None:
+                                continue
+                            timestamp = us_from_filetime(ft)
+                            if timestamp < 0:
+                                ev.problem(where, ValueError(f'{column} is before 1970 and was left out'))
+                                continue
+                            times.setdefault(timestamp, []).append((column, meaning))
+                        for timestamp, same in sorted(times.items()):
+                            ev.add('fileSeen', timestamp, 1, path, 'windows search index',
+                                   column=', '.join(column for column, _ in same),
+                                   time_meaning='; '.join(meaning for _, meaning in same), **prov)
+                    except Exception as error:
+                        ev.problem(where, error)
+            except Exception as error:
+                ev.problem(source + ' table ' + name, error)
+        if not found:
+            ev.problem(source, ValueError('no supported property table found'))
     return thumbs
-
 
 # --------------------------------------------------------------------------- thumbnail caches
 
@@ -1587,7 +1732,7 @@ def extract(ev, target, ctx):
         ev.problem("user registry hives", e)
     thumbs = {}
     try:
-        thumbs = _search_index(ev, target, common)
+        thumbs = _search_index(ev, target, common, examined_at=ctx.get('examined_at'))
     except Exception as e:
         ev.problem(_win(SEARCH_DB), e)
     try:
