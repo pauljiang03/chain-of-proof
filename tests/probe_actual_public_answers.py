@@ -35,7 +35,9 @@ def main():
     args.output.mkdir(parents=True, exist_ok=False)
     digest = hashlib.sha256(args.facts.read_bytes()).hexdigest()
     source = JsonFacts(args.facts)
-    raw_check = json.loads(args.source_validation.read_text())
+    source_validation_bytes = args.source_validation.read_bytes()
+    source_validation_digest = hashlib.sha256(source_validation_bytes).hexdigest()
+    raw_check = json.loads(source_validation_bytes)
     assert raw_check['status'] == 'passed'
     public = build()['questions.json']
     public['questions'] = [q for q in public['questions'] if q['id'] in ('Q2', 'Q46', 'Q50')]
@@ -169,7 +171,7 @@ def main():
     assert hashlib.sha256(args.facts.read_bytes()).hexdigest() == digest
     receipt = {'status': 'passed', 'runtime': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
                'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-               'facts_sha256': digest, 'source_validation_sha256': hashlib.sha256(args.source_validation.read_bytes()).hexdigest(),
+               'facts_sha256': digest, 'source_validation_sha256': source_validation_digest,
                'controls': results, 'positive_certificates': 3, 'positive_projected_fields': len(run['answer_projection']['leaves']),
                'db_state': raw_check['ESE']['db_state'], 'logs_replayed': False, 'scope': 'selected source controls, no model run or accuracy score',
                'whole_image_rehashed': False}
