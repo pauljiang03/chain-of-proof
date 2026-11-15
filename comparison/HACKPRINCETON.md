@@ -5,7 +5,7 @@ Use [the experiment protocol](abcd/README.md) for execution requirements.
 
 ## Main message
 
-**Chain of Proof: AI investigates. Lean checks the claim. You can verify the result.**
+**CONAN-F: AI investigates. Lean checks the claim. You can verify the result.**
 
 An investigator needs to distinguish a supported finding from a plausible explanation.
 Our AI searches extracted records and proposes a formal claim.

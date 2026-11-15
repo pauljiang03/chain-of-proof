@@ -1,6 +1,8 @@
-# Chain of Proof
+# CONAN-F
 
-Chain of Proof produces forensic findings with Lean proofs.
+**CONsistent ANalysis in Forensics.** Formerly Chain of Proof.
+
+CONAN-F produces forensic findings with Lean proofs.
 The AI investigator searches records and proposes claims.
 An optional miner supplies a baseline with preset search rules.
 The Lean kernel verifies the formal claim against extracted records.
@@ -326,8 +328,12 @@ Create the Python environment:
 
 ```sh
 python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -e .
 ```
+
+The upgrade is required where Python ships an old pip, such as the macOS system Python 3.9.
+Older pip versions cannot install this project in editable mode.
 
 Build the Lean project from the `lean` directory:
 
@@ -352,6 +358,17 @@ Verify the saved certificates:
 .venv/bin/python -m verifier.verify \
   --run runs/current/run.json --facts evidence/case_facts.json
 ```
+
+Recheck the same proofs with con-leche, a second proof checker bundled with Lean 4.35:
+
+```sh
+.venv/bin/python -m verifier.conleche --run runs/current/run.json
+```
+
+con-leche is written separately from Lean's own kernel.
+All 473 saved certificates are accepted by both; the recheck takes about one minute.
+It is a second opinion on the proofs only.
+It does not check that the cited records match the evidence, or that the readers parsed the images correctly.
 
 ## Data and commands
 

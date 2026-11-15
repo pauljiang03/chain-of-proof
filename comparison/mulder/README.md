@@ -8,8 +8,8 @@ This package contains:
 | File | Purpose |
 |---|---|
 | `MULDER.md` | The shared public case brief, instructions, and all 60 question structures. |
-| `case-profile.json` | The same reviewed public case context used by Chain of Proof. No device serial mapping or expected answers. |
-| `questions.json` | The same public profile used by Chain of Proof. |
+| `case-profile.json` | The same reviewed public case context used by CONAN-F. No device serial mapping or expected answers. |
+| `questions.json` | The same public profile used by CONAN-F. |
 | `answers.template.json` | One unknown response for each question. It contains no expected values. |
 | `manifest.json` | Input hashes, evidence segment hashes, and unfinished comparison settings. |
 

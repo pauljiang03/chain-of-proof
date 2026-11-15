@@ -160,7 +160,9 @@ class Handler(BaseHTTPRequestHandler):
                     or "%" in parsed.path or "\\" in parsed.path
                     or any(p in (".", "..") for p in parsed.path.split("/"))):
                 raise ValueError("invalid path")
-            query = parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+            # Before Python 3.11, strict parsing rejects an empty query string.
+            query = (parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+                     if parsed.query else {})
         except ValueError:
             raise RequestError(400, "Invalid request path or query.") from None
         if any(len(values) != 1 for values in query.values()):
@@ -283,7 +285,7 @@ def serve(root=ROOT, port=8765, open_browser=True):
     """Serve the local app until interrupted, closing its owned jobs on exit."""
     with create_server(root, port) as server:
         url = f"http://127.0.0.1:{server.server_port}/"
-        print(f"Chain of Proof: {url}", flush=True)
+        print(f"CONAN-F: {url}", flush=True)
         if open_browser:
             webbrowser.open(url)
         try:

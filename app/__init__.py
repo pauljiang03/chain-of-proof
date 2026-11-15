@@ -1,1 +1,1 @@
-"""Local user interface for the Chain of Proof investigation workflow."""
+"""Local user interface for the CONAN-F investigation workflow."""
