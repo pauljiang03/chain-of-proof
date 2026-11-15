@@ -43,6 +43,19 @@ questions, and select the AI service: your Claude Code login, or your Anthropic 
 (Python 3.11 or newer). The app keeps the API key in `~/.config/conan-f`, readable only by
 your user, and never writes it to a run folder or a log.
 
+## Results
+
+Each investigation had a 15-minute budget. A fixed scorer compared the answers with the
+expected answers. It does not use an AI judge, and the investigator never sees the expected answers.
+
+| Case | Fully correct | Partial | Unanswered | Incorrect | Answer fields matched |
+|---|---:|---:|---:|---:|---:|
+| Hacking Case | 11/31 (35.5%) | 0 | 20 | 0 | 13/52 (25%) |
+| Data Leakage | 6/46 (13.0%) | 10 | 30 | 0 | 306/1,627 (18.8%) |
+
+No submitted answer was incorrect. Data Leakage has 60 questions; the expected answers can
+score 46 of them.
+
 ## How it works
 
 ```mermaid
@@ -106,8 +119,7 @@ cd lean && lake build && cd ..
 Disk images are not in Git. To get them, run `scripts/fetch_data.sh --pc` (Data Leakage) or
 `python scripts/fetch_hacking_case.py` (Hacking Case).
 
-To score answers, `python -m eval.baseline` compares them with an expected-answer file. The
-scorer uses fixed rules, not an AI judge. The investigator never sees the expected answers.
+To score answers, run `python -m eval.baseline`.
 
 ## Data
 
