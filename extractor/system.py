@@ -972,18 +972,23 @@ def _events(out, ev, target, sids):
         ev.problem("event logs", e)
         return
     try:
-        for r in records:
+        for ordinal, r in enumerate(records, 1):
             d = r._asdict()
             where = "%s record %s" % (str(d.get("source", "")).replace("/", "\\"), d.get("EventRecordID"))
             try:
-                _event(out, ev, d, where, sids)
+                _event(out, ev, d, where, sids, _parser_record_id_text=True, _parser_row_ordinal=ordinal)
             except Exception as e:
                 ev.problem(where, e)
     except Exception as e:
         ev.problem("event logs (reading stopped early)", e)
 
 
-def _event(out, ev, d, where, sids):
+def _event(out, ev, d, where, sids, *, _parser_record_id_text=False, _parser_row_ordinal=None):
+    # This adapter's ts is EVTX TimeCreated; its EventRecordID is a string field.
+    # The typed reader keeps literal source fields apart from legacy summaries.
+    from .event_attributes import emit_event_attributes
+    emit_event_attributes(out, ev, d, parser_record_id_text=_parser_record_id_text,
+                          parser_row_ordinal=_parser_row_ordinal)
     try:
         eid = int(d.get("EventID"))
     except (TypeError, ValueError):

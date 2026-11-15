@@ -223,7 +223,7 @@ _SPECS = (
     ('event.channel', 'string', 'literal Channel in the reviewed provider/channel/event-ID source event'),
     ('event.event_id', 'integer', 'native EventID in the reviewed provider/channel/event-ID source event; never supplied by a SAM or registry observation'),
     ('event.record_id', 'integer', 'native EventRecordID in the source event; not an inferred account or action identifier'),
-    ('event.recorded_time', 'string', 'source event TimeCreated expressed in UTC; not examination time or independently verified physical action time'),
+    ('event.recorded_time', 'string', 'reviewed parser TimeCreated value expressed in UTC at its retained precision; not original XML text, examination time or independently verified physical action time'),
     ('event.description', 'string', 'reviewed provider/channel/event-ID description of what the event record reports; not independent proof that the reported action occurred'),
     ('event.time_meaning', 'string', 'fixed meaning of the source timestamp field for this reviewed event, such as event TimeCreated; not actual physical action time'),
     ('event.account_name', 'string', 'literal account-name field within this source event; no SID-to-name guessing or physical-user attribution'),
