@@ -6,20 +6,19 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 
 ## Ownership
 
-**Current release blocker:** the first eight soundness fixes are integrated and
-pass independent regression checks with valid-case controls. Later optical-reader
-findings remain under repair. No experiment or freeze may start yet. Third owns
-virtual-block mapping and version-specific caching. The answer terminal owns
-current demo regeneration and evidence-request routing. Root owns final combined
-tests, fresh evidence review, archive completion and integration.
+**Implementation validation passed.** All ten reported soundness fixes are
+integrated and pass regression checks with valid-case controls. Both complete
+source snapshots and selected proof checks are complete. The answer terminal
+holds dispatch until root issues the separate readiness receipt. Root owns the
+archive, integration, push and release decision.
 
 | Owner | Current state |
 |---|---|
-| Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Source-support suite passed; final soundness suite pending. |
-| Answer terminal (`01a1dc3d`) | Answer-reference fix integrated. Refreshes current demos and capability routing. Owns eventual experiment dispatch after root readiness. No model call or freeze has started. |
-| Third terminal (`01a1dd77`) | Source batch, USB and media identity fixes integrated. Independent eight-case regression and two actual-media positive proofs passed. Repairs later UDF mapping/cache findings. |
-| Root helper: formal types and events | Formal identity checks and qualified claim sentences integrated. Refreshes selected proofs and public projections against the complete corrected Hacking snapshot. |
-| Root helper: host fields and review | Source-tested host fields and independent normalization review complete. Standalone second-checker review passed, including a file-swap control and valid JSON/DuckDB certificates. Normalization remains disabled. |
+| Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Combined suite and later UI tests passed. |
+| Answer terminal (`01a1dc3d`) | Answer-reference fix, generated reference tests, demo refresh and capability routing integrated. Owns dispatch after root readiness. No model call or freeze has started. |
+| Third terminal (`01a1dd77`) | Reader fixes, ten-case regression, actual-media controls and selected cloud proof/projection checks on the final full Leakage snapshot passed. |
+| Root helper: formal types and events | Formal checks, qualified claim sentences, selected full Hacking proofs and public compatibility recheck complete. No private evaluator was read during the recheck. |
+| Root helper: host fields and review | Host fields and independent checker review complete. Reviewed the newer desktop changes and fixed unsupported summary claims. Native provider calls remain untested. |
 | Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Now prepares and verifies the new local archive, preserving intermediate failures. |
 | Independent reference reviewer | Prepared the held metadata-only compatibility bundle. Original scoring content is unchanged. Builders do not receive expected answer values. |
 
@@ -34,23 +33,37 @@ known; do not claim one.
 
 ## Latest validation
 
-The source/runtime tree at `2f9a3b0` passed 1,528 tests: 1,526 passed and two
+The source/runtime tree at `445ef58` passed 1,638 tests: 1,636 passed and two
 were skipped. The native PFF test passed separately in the source-reader
-environment; the other skip applies only to other operating systems. The public
-assembler check passed. The preceding 1,525-test run is also retained.
+environment; the other skip applies only to other operating systems. The later
+UI merge at `8bf03a0` passed 127 app tests with one platform skip. No core source
+changed. All 95 source hashes from the ten-case audit still match. The public
+assembler check passed. Earlier suites and the repaired stale-wording failure
+remain in the archive.
 
 Real-source tuple checks passed Lean and independent replay, with selected
 ConLeche checks and mixed-subject controls. Full extraction exposed a native
 filename subtype problem that the fixture tests missed. The narrow reader fix
 preserves the strict value emitter. Fresh snapshots at `1ae4082` contain 409,971
 Data Leakage records and 14,468 Hacking records, with no failed reader and 17/18
-explicit limitations. They predate the later UDF repair and remain held. Original
-attempts remain diagnostic artifacts, not final inputs.
+explicit limitations. Both were rebuilt at `57c1c5f` after the UDF repair with the
+same counts. Original attempts remain diagnostic artifacts, not final inputs.
 
 The [latest implementation](docs/SYSTEM_EVIDENCE_COVERAGE.md) adds 94 roles and
 signed source values, for 199 roles and 243 fact kinds. The local archive is
-`runs/dev/system-evidence-20261115T0805Z/`, currently unsealed. Previous sealed
-archives remain unchanged. Implementation checks are not accuracy scores.
+`runs/dev/system-evidence-20261115T0805Z/`; its final manifest records the validation
+chain. Previous sealed archives remain unchanged. Implementation checks are not
+accuracy scores.
+
+The later literal-value fixes passed 142 app-related tests with one platform skip
+and three browser surface checks. The original invariant harness passes 17/18:
+one legacy positive fixture now lacks required file identity. A separately adapted
+valid fixture passes 18/18. A new supplement preserves both results and the fixes.
+These finite checks do not prove every reader or composition correct.
+
+The reviewed integration includes UI changes through `27ba010`. The main checkout
+also has another terminal's unfinished UI edits. Do not reset, stash or overwrite
+those files to update it. The experiment uses a separate, clean frozen checkout.
 
 ## Readiness and dispatch
 

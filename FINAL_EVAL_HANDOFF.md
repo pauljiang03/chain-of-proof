@@ -6,18 +6,20 @@ checks and professional reports are integrated. Both stricter public contracts
 remain held. No new model experiment has run after these fixes. Native provider
 validation and full reference review remain incomplete.
 
-**Release remains held for soundness validation.** The first eight reported
-counterexamples pass independent regression checks on the integrated fixes.
-Valid-case controls also pass. Later optical-reader findings about virtual-block
-mapping and version-specific caching remain under repair. Current demos, affected
-source records and the final combined suite must pass before release. See current
-ownership in [WORKSTREAMS.md](WORKSTREAMS.md). Do not freeze or dispatch yet.
+**Implementation validation passed; dispatch needs its separate readiness receipt.** All ten reported counterexamples
+pass checks on the integrated fixes, including valid-case controls. Both complete
+source snapshots were rebuilt after the UDF repairs. Current demos were refreshed
+and independently replayed. Report summaries preserve cited record meanings.
+Selected full-snapshot checks passed for both cases. The local archive records the
+validation chain. See ownership in [WORKSTREAMS.md](WORKSTREAMS.md). The answer
+terminal must receive the root readiness receipt before freeze or dispatch.
 
-The latest [source support batch](docs/SYSTEM_EVIDENCE_COVERAGE.md) passed at
-`2f9a3b0`: 1,526 tests passed and two were skipped. The native PFF test passed
-separately in its supported environment. Complete fresh snapshots are under
-review after a real-source filename subtype fix. Selected source certificates
-and public projection checks passed. These are implementation checks, not scores.
+The latest [combined batch](docs/SYSTEM_EVIDENCE_COVERAGE.md) passed at
+`445ef58`: 1,636 tests passed and two were skipped. The later UI merge at `8bf03a0`
+passed 127 app tests with one platform skip; it changed no core source. The native
+PFF test passed separately in its supported environment. Complete fresh snapshots
+are rebuilt. Selected source certificates and public projection checks passed.
+These are implementation checks, not scores.
 
 The independent [reference compatibility audit](eval/REFERENCE_COMPATIBILITY.json)
 keeps both cases held. It preserved all original prompts, schemas, expected values

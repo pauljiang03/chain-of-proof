@@ -13,6 +13,7 @@ and fresh experiment inputs remain under review.
 | Current timezone registry | Signed bias values and a retained resource-backed display name | Resource resolution uses bytes from the image and an explicit language. No host locale or code execution is used. Current bias is not proof of historical daylight-saving state. |
 | USB registry and SetupAPI | Full literal device and instance identifiers, source type and recorded time meaning | A generated instance identifier is not a hardware serial number. SetupAPI local times remain literal; an ambiguous clock time does not become one UTC instant. |
 | FAT and exFAT file times | Creation and modification records tied to one native directory entry and partition | A time comparison requires the same source and file occurrence. It proves a timestamp pattern, not that a person copied a file. |
+| UDF optical content | Each virtual block is mapped through the selected allocation state. Cached content uses resolved byte ranges. | Known-byte controls cover separated physical blocks and different historical mappings. The NIST disc check found no content-hash change from these two repairs. This is not an independent filesystem implementation. |
 | Primary MBR | Entry number, sector bounds, boot indicator and an exact filesystem join | The filesystem join needs the same disk and byte bounds. This is not a GPT or complete partition census. |
 | Current Search configuration | Registry values and the service start configuration | Service configuration does not prove that the service ran. A directory value does not prove a relation to a particular database. |
 | Windows Search ESE | Source row identity, literal paths, URLs, categories and stored times | The fields do not prove browsing, attribution or a filesystem action. No URL is substituted for a missing item path. |
@@ -59,10 +60,24 @@ are not rewritten. A formatting rule cannot supply missing evidence.
 
 ## Validation and release gate
 
-At `2f9a3b0`, the combined suite ran 1,528 tests: 1,526 passed and two were
+At `445ef58`, the combined suite ran 1,638 tests: 1,636 passed and two were
 skipped. One skip applies only to other operating systems. The other needs the
 reviewed native PFF library; that test passed separately in the source-reader
-environment. The public assembler check also passed.
+environment. The later UI merge at `8bf03a0` passed all 128 app tests: 127 passed
+and the platform test was skipped. No core source changed in that merge. The
+public assembler check also passed.
+
+Later literal-value changes passed 142 app-related tests with one platform skip.
+Browser checks covered the overview, full report and short report. Quoted spaces,
+tabs and line breaks remain intact. Excerpts have a label. Distinct source strings
+are not merged because they differ only by case or spaces.
+
+The unchanged independent invariant harness passes 17 of 18 checks. Its remaining
+test expects a copy-pattern certificate from a fixture with no native file
+identity. The current checker correctly refuses that fixture. A separate version
+with valid identity metadata and the current rule wording passes all 18 checks.
+Both original and adapted results remain in the archive. These are bounded tests;
+they do not establish the three invariants for every reader and claim form.
 
 Selected source tuples passed Lean and independent replay. The host, event,
 cloud and mail checks also include ConLeche validation. Document and recovered
@@ -76,17 +91,32 @@ diagnostics are retained. Complete snapshots at `1ae4082` contain 409,971 Data
 Leakage records and 14,468 Hacking records. No reader failed. They retain 17 and
 18 explicit limitations, respectively. These record counts are not test scores.
 
-The first eight reported soundness counterexamples now pass independent
-regression checks on the combined source and answer fixes. Positive controls
-include actual timestamp proofs from both removable drives and a valid array
-reference. Two later optical-reader reports, about virtual-block mapping and
-version-specific caching, remain under repair. The snapshots above predate those
-repairs and are not approved experiment inputs. The final combined suite and
-current demo refresh are still pending.
+All ten reported soundness counterexamples now pass checks on the integrated
+fixes. Positive controls include actual timestamp proofs from both removable
+drives and valid array references. Generated tests compare 810 answer-reference
+cases against an independent position calculation. UDF tests compare generated
+block layouts and historical mappings against known bytes.
+
+Both complete snapshots were rebuilt at `57c1c5f` after the UDF repair, with the
+same record counts and explicit limitations. The current demos were regenerated
+and independently replayed. Report summaries no longer infer physical identity
+or actions from matching labels, account names or file basenames. Exact finding
+statements and citations remain available. Selected full-snapshot checks passed:
+five actual Hacking certificates, plus three Leakage certificates for two distinct
+cloud observations and an atomic-row control. All passed Lean, replay and the
+claim-bound second checker. These are selected proof checks, not complete answers.
 
 The local validation archive is `runs/dev/system-evidence-20261115T0805Z/`.
-It remains unsealed while final snapshot checks are pending. The comparison is
-held. Its prepared compatibility bundle preserves all original answers, matching
+Its sealed manifest hash is
+`9682fb97bf82bfd3d58fb2d54655c56866979c3040beeef553d89472b8babc68`.
+A separate supplement at
+`runs/dev/system-evidence-literal-supplement-20261115T0913Z/` retains the later
+invariant audit and literal-value fixes. Its manifest hash is
+`f2f1aa760d56c4bcf0b875f5f8e065df0358dd66143090e8c1d0d9ed1edddac1`.
+The first seal remains unchanged. The manifests record source hashes, checks and
+retained limitations. The
+comparison requires a separate readiness receipt. The prepared compatibility
+bundle preserves all original answers, matching
 rules, statuses and 91 questions. The endpoint is a development comparison under
 original matching rules, not semantic equivalence. Normalization remains disabled.
 

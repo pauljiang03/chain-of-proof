@@ -69,10 +69,11 @@ bundle pass review. Reader checks and proof checks are not new accuracy results.
 The [work log](WORKSTREAMS.md) records current ownership and validation.
 
 A soundness audit confirmed gaps in identity joins, time meanings, answer
-references and the standalone second checker. The first eight counterexamples
-now pass independent regression checks, including valid-case controls. Later
-optical-reader findings remain under repair. The release and new experiments
-remain held until the final source, proof and integration checks pass.
+references and the standalone second checker. All ten reported counterexamples
+now pass regression checks, including valid-case controls. Optical content checks
+use known bytes, and report summaries retain the limits of cited records. Fresh
+inputs and selected proof checks for both cases are complete. The next comparison
+uses a separately frozen runtime and readiness receipt; it has no new score yet.
 
 ## Try it in 60 seconds
 
