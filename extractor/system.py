@@ -582,9 +582,18 @@ def _control_sets(ev, h):
     """(current, all control sets with the current one first) of a SYSTEM hive."""
     current, sel = None, _open(ev, h, "Select")
     if sel is not None:
-        cur = _vals(ev, h, sel).get("Current")
-        if isinstance(cur, int) and not isinstance(cur, bool) and 0 < cur <= 999:
+        try:
+            selectors = [v for v in sel.values()
+                         if isinstance(v.name, str) and v.name.casefold() == 'current']
+            if len(selectors) != 1:
+                raise ValueError('Select\\Current missing or ambiguous')
+            selector = selectors[0]
+            cur = selector.value
+            if selector.type != 4 or type(cur) is not int or not 0 < cur <= 999:
+                raise ValueError('Select\\Current must be a valid native REG_DWORD control-set number')
             current = "ControlSet%03d" % cur
+        except Exception as error:
+            ev.problem(_art(h, 'Select', 'Current'), error)
     names = [k.name for k in _subkeys(ev, h, h.hive.root()) if re.match(r"(?i)^ControlSet\d{3}$", k.name)]
     # Invalid/dangling Select values must not make a fallback look primary.
     current = next((name for name in names if current and name.casefold() == current.casefold()), None)

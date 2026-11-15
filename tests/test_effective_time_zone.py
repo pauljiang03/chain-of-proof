@@ -133,7 +133,8 @@ class TimeZoneReader(unittest.TestCase):
         hive = system.Hive('SYSTEM', SimpleNamespace(root=lambda: root), path, False, None, None)
         backup = hive._replace(path=r'C:\Windows\System32\config\RegBack\SYSTEM', backup=True)
         def node(fields):
-            return SimpleNamespace(values=lambda: [SimpleNamespace(name=name, value=value) for name, value in fields.items()])
+            return SimpleNamespace(values=lambda: [SimpleNamespace(name=name, value=value,
+                type=4 if type(value) is int else 1) for name, value in fields.items()])
         keys = {'Select': node({} if selector is None else {'Current': selector}),
                 r'ControlSet001\Control\TimeZoneInformation': node(zone(StandardName='Wrong control set')),
                 r'ControlSet002\Control\TimeZoneInformation': node(data)}
