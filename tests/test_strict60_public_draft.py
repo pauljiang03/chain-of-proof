@@ -36,10 +36,8 @@ class StrictPublicDraft(unittest.TestCase):
         for name, value in outputs.items():
             recorded = json.loads((DRAFT / name).read_text())
             if name == 'review.json':
-                # Source hashes identify the reviewed revision. Later unrelated
-                # code edits must not rewrite that historical receipt. Current
-                # catalog compatibility and every public authoring input still
-                # have to reproduce the recorded field decisions below.
+                # agent/ and checker/ source hashes are kept as recorded, so code
+                # edits do not break this; every other input must still reproduce.
                 old_inputs = {row['path']: row for row in recorded['original_inputs']}
                 for index, row in enumerate(value['original_inputs']):
                     if row['path'].startswith(('agent/', 'checker/')):

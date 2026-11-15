@@ -1,8 +1,4 @@
-"""Independent byte-to-report controls using the production cloud reader and Lean.
-
-The source is a tiny literal UTF-8 client log, not pre-emitted attribute facts.
-There is no model, private reference, mocked checker or new interpretation rule.
-"""
+"""Byte-to-report checks on a tiny UTF-8 client log, using the real cloud reader and Lean (no model)."""
 from copy import deepcopy
 import hashlib
 import html
