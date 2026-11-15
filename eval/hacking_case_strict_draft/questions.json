@@ -1714,25 +1714,10 @@
             "minimum": 0,
             "x-claim-requirement": {
               "semantic_types": [
-                "asserted_declared_filesystem_set_count"
+                "needs_requested_recycle_executable_population_count"
               ],
-              "selectors": [
-                {
-                  "form": "filesystemSetDeleted",
-                  "field": "count"
-                }
-              ],
-              "meaning": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set.",
-              "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
-              "field_conditions": [
-                {
-                  "field": "definition",
-                  "semantic_type": "declared_filesystem_set_extraction_definition",
-                  "values": [
-                    "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
-                  ]
-                }
-              ]
+              "meaning": "Count of the executable population requested by the original public question.",
+              "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
             }
           }
         },
@@ -1771,25 +1756,10 @@
             "description": "Whether filesystem metadata marks the referenced recycle-bin entries deleted; not recoverability, secure erasure or a claim that no copy exists.",
             "x-claim-requirement": {
               "semantic_types": [
-                "asserted_all_members_deleted_in_declared_filesystem_set"
+                "needs_requested_recycle_executable_population_all_deleted"
               ],
-              "selectors": [
-                {
-                  "form": "filesystemSetDeleted",
-                  "field": "all_deleted"
-                }
-              ],
-              "meaning": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata.",
-              "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
-              "field_conditions": [
-                {
-                  "field": "definition",
-                  "semantic_type": "declared_filesystem_set_extraction_definition",
-                  "values": [
-                    "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
-                  ]
-                }
-              ]
+              "meaning": "Filesystem deletion state of the same executable population requested by Q28.",
+              "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
             },
             "x-claim-reference": {
               "mode": "same_claim_part",

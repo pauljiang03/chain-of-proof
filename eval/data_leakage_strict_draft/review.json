@@ -23,8 +23,8 @@
     },
     {
       "path": "agent/answer_requirements.py",
-      "sha256": "81e232a68bfc62ebb4dde5ac73272e3cb1af1e3653b7a24d2857352ed99fa489",
-      "bytes": 29673
+      "sha256": "af5ed83c4889877e97199c6608ac3ec120ee6d1346a1ce7be3dd9dbd2a14f59d",
+      "bytes": 31026
     },
     {
       "path": "agent/answer_references.py",
@@ -33,8 +33,8 @@
     },
     {
       "path": "checker/catalog.py",
-      "sha256": "a4c6042d879dcec97594cbedf9e38f47c03265e04264fa029e3d0b5ebc24ba47",
-      "bytes": 15982
+      "sha256": "157a26dc4f552cab8810cd9933b1e0552260260fc599187b50de933f7162f829",
+      "bytes": 29266
     },
     {
       "path": "extractor/exhibits.json",
@@ -58,8 +58,8 @@
     },
     {
       "path": "eval/data_leakage_strict_draft/parts/q21_40.json",
-      "sha256": "43467bd4b32b90023b13227ca7981566300b7630a1622659502f302c5584a4fa",
-      "bytes": 183549
+      "sha256": "ad363b87e6d2b48f9e22e2e13b5b36d4614619561da0b3a0798f950230be271c",
+      "bytes": 197246
     },
     {
       "path": "eval/data_leakage_strict_draft/parts/q41_60.json",
@@ -85,16 +85,16 @@
   "counts": {
     "questions": 60,
     "leaf_occurrences_including_anyof_branches": 358,
-    "catalog_supported": 48,
-    "explicitly_unsupported": 310,
+    "catalog_supported": 55,
+    "explicitly_unsupported": 303,
     "missing_or_invalid": 0,
     "row_policies": 93,
     "scope_policies": 72,
-    "conditioned_leaf_occurrences": 18,
+    "conditioned_leaf_occurrences": 24,
     "unavailable_scope_policies": 17,
     "same_claim_part_policies": 83,
     "independent_section_policies": 10,
-    "questions_with_any_catalog_supported_leaf": 14
+    "questions_with_any_catalog_supported_leaf": 16
   },
   "count_meaning": "Catalog compatibility counts, not available case evidence, certified answers, accuracy or complete questions.",
   "launch_blockers": [
@@ -288,8 +288,8 @@
     {
       "question_id": "Q29",
       "leaf_occurrences": 8,
-      "catalog_supported": 0,
-      "explicitly_unsupported": 8
+      "catalog_supported": 6,
+      "explicitly_unsupported": 2
     },
     {
       "question_id": "Q30",
@@ -300,8 +300,8 @@
     {
       "question_id": "Q31",
       "leaf_occurrences": 2,
-      "catalog_supported": 0,
-      "explicitly_unsupported": 2
+      "catalog_supported": 1,
+      "explicitly_unsupported": 1
     },
     {
       "question_id": "Q32",
@@ -3975,12 +3975,57 @@
       "branches": [
         0
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -3992,12 +4037,57 @@
       "branches": [
         0
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -4009,12 +4099,57 @@
       "branches": [
         0
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -4043,12 +4178,57 @@
       "branches": [
         1
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_service_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -4060,12 +4240,57 @@
       "branches": [
         1
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_type_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -4077,12 +4302,57 @@
       "branches": [
         1
       ],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_container_path_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
-      "required_attribute_roles": [],
-      "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+      "required_attribute_roles": [
+        "cloud.container.service",
+        "cloud.container.type",
+        "cloud.container.path"
+      ],
+      "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation."
     },
     {
       "question_id": "Q29",
@@ -4114,7 +4384,7 @@
       "attribute_conditions": [],
       "field_conditions": [],
       "required_attribute_roles": [],
-      "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+      "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
     },
     {
       "question_id": "Q30",
@@ -4129,7 +4399,7 @@
       "attribute_conditions": [],
       "field_conditions": [],
       "required_attribute_roles": [],
-      "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+      "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
     },
     {
       "question_id": "Q30",
@@ -4144,7 +4414,7 @@
       "attribute_conditions": [],
       "field_conditions": [],
       "required_attribute_roles": [],
-      "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+      "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
     },
     {
       "question_id": "Q31",
@@ -4152,12 +4422,58 @@
         "account"
       ],
       "branches": [],
-      "status": "no_catalog_support",
-      "available_fields": [],
+      "status": "catalog_support",
+      "available_fields": [
+        {
+          "form": "attributeRecorded",
+          "field": "value",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_0",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_1",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_2",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_3",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_4",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_5",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_6",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_7",
+          "semantic_type": "recorded_attribute_cloud_google_drive_credentials_account_string"
+        }
+      ],
       "attribute_conditions": [],
       "field_conditions": [],
       "required_attribute_roles": [],
-      "evidence_needed": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+      "evidence_needed": "Require the approved cloud.google_drive.credentials_account value from the exact retained client-log source. Credential-use association is narrower than successful logon or proof that a person controlled or owned the account. Neither credentials_used_at nor the fact examination timestamp supplies logon_time."
     },
     {
       "question_id": "Q31",
@@ -4170,7 +4486,7 @@
       "attribute_conditions": [],
       "field_conditions": [],
       "required_attribute_roles": [],
-      "evidence_needed": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+      "evidence_needed": "Unsupported: cloud.google_drive.credentials_used_at records credential-use context, not an actual logon time. No reviewed logon event or successful-authentication timestamp rule exists. Preserve the credentials account as a partial value and leave logon_time unknown."
     },
     {
       "question_id": "Q32",
@@ -11953,43 +12269,43 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/0/properties/service",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.service role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/0/properties/type",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.type role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/0/properties/path",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.path role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/0/properties/deleted",
           "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record. Need deletion status for this same cloud artifact; unrelated deleted flags and null cannot substitute."
+          "rationale": "Unsupported: no approved filesystem deletion role is linked to this exact validated cloud container. A deletion flag from another file and null do not substitute. Service/type/path tuple observations remain useful partial values."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/1/properties/service",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.service role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/1/properties/type",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.type role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/1/properties/path",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "status": "supported_narrow_source_field",
+          "rationale": "Validated cloud.container.path role from one exact retained artifact. Tuple-only; every partial leaf requires cloud.container.service, cloud.container.type and cloud.container.path in that same atomic part. Existing same_claim_part row policy and exact source origins remain. No deletion status or completeness is inferred."
         },
         {
           "schema_pointer": "/answer_schema/properties/traces/items/anyOf/1/properties/deleted",
           "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record. Need deletion status for this same cloud artifact; unrelated deleted flags and null cannot substitute."
+          "rationale": "Unsupported: no approved filesystem deletion role is linked to this exact validated cloud container. A deletion flag from another file and null do not substitute. Service/type/path tuple observations remain useful partial values."
         }
       ],
       "narrow_observations": [
@@ -11997,19 +12313,25 @@
           "form": "cloudEvent",
           "field": "path",
           "meaning": "Cloud-client file/path text",
-          "does_not_establish": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "does_not_establish": "This generic form does not supply the validated cloud.container service/type/path triple required for Q29. It does not establish deletion of this exact container, complete trace enumeration, or user intent."
         },
         {
           "form": "cloudEvent",
           "field": "service_event",
           "meaning": "Combined service and event text",
-          "does_not_establish": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "does_not_establish": "This generic form does not supply the validated cloud.container service/type/path triple required for Q29. It does not establish deletion of this exact container, complete trace enumeration, or user intent."
         },
         {
           "form": "fileRecorded",
           "field": "path",
           "meaning": "Exact recorded file path or identifier",
-          "does_not_establish": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+          "does_not_establish": "This generic form does not supply the validated cloud.container service/type/path triple required for Q29. It does not establish deletion of this exact container, complete trace enumeration, or user intent."
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_0 through value_7",
+          "meaning": "Validated retained cloud container service/type/path from one exact source subject.",
+          "does_not_establish": "Deletion of that container, exhaustive cloud traces, user intent or cloud operation success."
         }
       ],
       "row_policies": [
@@ -12031,17 +12353,17 @@
         {
           "schema_pointer": "/answer_schema/properties/files/items/properties/filename",
           "status": "unsupported_semantic_requirement",
-          "rationale": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+          "rationale": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
         },
         {
           "schema_pointer": "/answer_schema/properties/files/items/properties/deleted_at",
           "status": "unsupported_semantic_requirement",
-          "rationale": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+          "rationale": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
         },
         {
           "schema_pointer": "/answer_schema/properties/files/items/properties/modified_at",
           "status": "unsupported_semantic_requirement",
-          "rationale": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+          "rationale": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
         }
       ],
       "narrow_observations": [
@@ -12056,6 +12378,12 @@
           "field": "recorded_time_us",
           "meaning": "Event-dependent recorded time; cloud-side deletion can retain server modification time",
           "does_not_establish": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+        },
+        {
+          "form": "attributeTuple",
+          "field": "value_0 through value_7",
+          "meaning": "Exact source-scoped single-version CLOUD_DELETE relation containing cloud.google_drive.document_id, cloud.google_drive.file_name and cloud.google_drive.deletion_record_server_modified_at.",
+          "does_not_establish": "Completed remote deletion, the original deleted-file membership meaning, actual deletion time, human attribution or a complete deletion inventory. Retain it separately in the evidence report; all original Q30 leaves remain unsupported."
         }
       ],
       "row_policies": [
@@ -12071,13 +12399,13 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/account",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+          "status": "supported_narrow_source_field",
+          "rationale": "Require the approved cloud.google_drive.credentials_account value from the exact retained client-log source. Credential-use association is narrower than successful logon or proof that a person controlled or owned the account. Neither credentials_used_at nor the fact examination timestamp supplies logon_time."
         },
         {
           "schema_pointer": "/answer_schema/properties/logon_time",
           "status": "unsupported_semantic_requirement",
-          "rationale": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+          "rationale": "Unsupported: cloud.google_drive.credentials_used_at records credential-use context, not an actual logon time. No reviewed logon event or successful-authentication timestamp rule exists. Preserve the credentials account as a partial value and leave logon_time unknown."
         }
       ],
       "narrow_observations": [
@@ -12085,13 +12413,19 @@
           "form": "accountRecorded",
           "field": "account",
           "meaning": "Account text in accountSeen",
-          "does_not_establish": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+          "does_not_establish": "Generic accountSeen text/time does not establish the reviewed Google Drive credential-use association. Use cloud.google_drive.credentials_account for that narrower observation; neither generic recorded time nor credentials_used_at establishes logon_time, successful authentication or ownership."
         },
         {
           "form": "accountRecorded",
           "field": "recorded_time_us",
           "meaning": "Time retained by the account record; sync credential use is not necessarily logon",
-          "does_not_establish": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+          "does_not_establish": "Generic accountSeen text/time does not establish the reviewed Google Drive credential-use association. Use cloud.google_drive.credentials_account for that narrower observation; neither generic recorded time nor credentials_used_at establishes logon_time, successful authentication or ownership."
+        },
+        {
+          "form": "attributeRecorded or attributeTuple",
+          "field": "value or value_0 through value_7",
+          "meaning": "Literal Google Drive credentials_account in retained credential-use context.",
+          "does_not_establish": "Logon time, successful authentication, ownership, suspect attribution or human control of the account."
         }
       ],
       "row_policies": [

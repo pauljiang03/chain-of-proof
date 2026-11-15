@@ -4168,30 +4168,147 @@
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_service"
+                          "recorded_attribute_cloud_container_service_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/0/properties/service: service in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container service for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "type": {
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_type"
+                          "recorded_attribute_cloud_container_type_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/0/properties/type: type in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container type for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "path": {
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_path"
+                          "recorded_attribute_cloud_container_path_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/0/properties/path: path in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container path for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "deleted": {
@@ -4231,30 +4348,147 @@
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_service"
+                          "recorded_attribute_cloud_container_service_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/1/properties/service: service in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container service for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "type": {
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_type"
+                          "recorded_attribute_cloud_container_type_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/1/properties/type: type in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container type for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "path": {
                       "type": "string",
                       "x-claim-requirement": {
                         "semantic_types": [
-                          "needs_cloud_trace_classification_path"
+                          "recorded_attribute_cloud_container_path_string"
                         ],
-                        "meaning": "Q29 exact answer leaf /answer_schema/properties/traces/items/anyOf/1/properties/path: path in the scope and sense required by the public prompt.",
-                        "evidence_needed": "A generic file path, source text, or cloud service_event string does not supply separately classified service and trace type, an artifact-to-cloud-service join, or its deletion status. Deleted flags require the same artifact identity, not an unrelated filesystem record."
+                        "selectors": [
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_0"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_1"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_2"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_3"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_4"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_5"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_6"
+                          },
+                          {
+                            "form": "attributeTuple",
+                            "field": "value_7"
+                          }
+                        ],
+                        "meaning": "Validated retained cloud-container path for this exact source-scoped artifact.",
+                        "evidence_needed": "Require service, type and path roles together in one attributeTuple atomic part and exact source subject. The reader must validate the retained cloud artifact before emitting these roles. This does not establish artifact deletion, list completeness, user intent or a physical cloud operation.",
+                        "required_attribute_roles": [
+                          "cloud.container.service",
+                          "cloud.container.type",
+                          "cloud.container.path"
+                        ]
                       }
                     },
                     "deleted": {
@@ -4324,7 +4558,7 @@
                       "needs_google_drive_deleted_file_identity_filename"
                     ],
                     "meaning": "Q30 exact answer leaf /answer_schema/properties/files/items/properties/filename: filename in the scope and sense required by the public prompt.",
-                    "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+                    "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
                   }
                 },
                 "deleted_at": {
@@ -4335,7 +4569,7 @@
                       "needs_google_drive_deleted_file_identity_deleted_at"
                     ],
                     "meaning": "Q30 exact answer leaf /answer_schema/properties/files/items/properties/deleted_at: deleted at in the scope and sense required by the public prompt.",
-                    "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+                    "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
                   }
                 },
                 "modified_at": {
@@ -4346,7 +4580,7 @@
                       "needs_google_drive_deleted_file_identity_modified_at"
                     ],
                     "meaning": "Q30 exact answer leaf /answer_schema/properties/files/items/properties/modified_at: modified at in the scope and sense required by the public prompt.",
-                    "evidence_needed": "Cloud event roles expose a path, combined service/event text and recorded time. They do not restrict the event to deletion or join deletion and modification records through the same Google Drive document identity; parsing filenames and assigning timestamp meanings needs a reviewed rule."
+                    "evidence_needed": "The reader now retains an exact source-scoped, single-version relation linking Google Drive document_id, file_name and deletion_record_server_modified_at from CLOUD_DELETE. This is a deletion-related source observation, not proof of completed remote deletion. The original prompt asks files actually deleted from Google Drive; no reviewed completed-remote-deletion meaning is established. The deletion-record server_mod_time is modification time, not actual deletion time. Keep all original Q30 answer leaves unsupported; report this narrower relation separately without relabeling it as a deleted-file answer."
                   }
                 }
               },
@@ -4404,10 +4638,48 @@
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_google_drive_sync_account_logon_account"
+                "recorded_attribute_cloud_google_drive_credentials_account_string"
               ],
-              "meaning": "Q31 exact answer leaf /answer_schema/properties/account: account in the scope and sense required by the public prompt.",
-              "evidence_needed": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal account text associated with credential use in the source-scoped Google Drive client log; not account ownership or logon.",
+              "evidence_needed": "Require the approved cloud.google_drive.credentials_account value from the exact retained client-log source. Credential-use association is narrower than successful logon or proof that a person controlled or owned the account. Neither credentials_used_at nor the fact examination timestamp supplies logon_time."
             }
           },
           "logon_time": {
@@ -4418,7 +4690,7 @@
                 "needs_google_drive_sync_account_logon_logon_time"
               ],
               "meaning": "Q31 exact answer leaf /answer_schema/properties/logon_time: logon time in the scope and sense required by the public prompt.",
-              "evidence_needed": "An accountSeen record can describe credentials first used in a sync log, not necessarily a logon. The account role lacks a Google Drive sync-context restriction; a reviewed service/account association and logon-time rule are absent."
+              "evidence_needed": "Unsupported: cloud.google_drive.credentials_used_at records credential-use context, not an actual logon time. No reviewed logon event or successful-authentication timestamp rule exists. Preserve the credentials account as a partial value and leave logon_time unknown."
             }
           }
         },

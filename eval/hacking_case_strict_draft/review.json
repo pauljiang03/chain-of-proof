@@ -7,12 +7,12 @@
     "questions": 31,
     "leaves": 38,
     "leaf_status": {
-      "catalog_support": 16,
-      "no_catalog_support": 22
+      "catalog_support": 14,
+      "no_catalog_support": 24
     },
     "row_policies": 32,
-    "requirement_replacements": 25,
-    "supported_selector_additions": 13,
+    "requirement_replacements": 26,
+    "supported_selector_additions": 11,
     "missing_or_invalid": 0,
     "independent_collection_wrappers": 6,
     "same_claim_part_objects": 26,
@@ -866,20 +866,35 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/executable_file_count",
-          "status": "catalog_support",
-          "rationale": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set. Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
+          "status": "no_catalog_support",
+          "rationale": "Count of the executable population requested by the original public question. Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted.",
           "scope_assumption": "Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
         }
       ],
-      "narrow_observations": []
+      "narrow_observations": [
+        {
+          "schema_pointer": "/answer_schema/properties/executable_file_count",
+          "semantic_types": [
+            "asserted_declared_filesystem_set_count"
+          ],
+          "selectors": [
+            {
+              "form": "filesystemSetDeleted",
+              "field": "count"
+            }
+          ],
+          "meaning": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set.",
+          "does_not_establish": "The aggregate remains valid for its explicit declared extraction set. Independent equivalence with the originally requested executable population is not established."
+        }
+      ]
     },
     {
       "question_id": "Q29",
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/deleted_from_file_system",
-          "status": "catalog_support",
-          "rationale": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata. Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
+          "status": "no_catalog_support",
+          "rationale": "Filesystem deletion state of the same executable population requested by Q28. Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted.",
           "scope_assumption": "Exact source-origin and row checks enforce the selected case evidence. Missing stronger meanings and evidence still keep this draft held; catalog compatibility is not actual-case availability."
         }
       ],
@@ -887,11 +902,16 @@
         {
           "schema_pointer": "/answer_schema/properties/deleted_from_file_system",
           "semantic_types": [
-            "recorded_attribute_filesystem_deleted_flag_boolean"
+            "asserted_all_members_deleted_in_declared_filesystem_set"
           ],
-          "selectors": [],
-          "meaning": "deleted-entry flag reported by filesystem metadata, not secure erasure or unrecoverability",
-          "does_not_establish": "filesystem.deleted_flag is per named MFT entry or INFO2-associated retained file. The Boolean asks about the referenced executable set; a set-membership/aggregation rule linking Q28 files and their actual in-use flags is absent. One unrelated flag is insufficient; recoverability remains a different question."
+          "selectors": [
+            {
+              "form": "filesystemSetDeleted",
+              "field": "all_deleted"
+            }
+          ],
+          "meaning": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata.",
+          "does_not_establish": "The aggregate remains valid for its explicit declared extraction set. Independent equivalence with the originally requested executable population is not established."
         }
       ]
     },
@@ -1431,25 +1451,10 @@
       },
       "replacement_requirement": {
         "semantic_types": [
-          "asserted_all_members_deleted_in_declared_filesystem_set"
+          "needs_requested_recycle_executable_population_all_deleted"
         ],
-        "selectors": [
-          {
-            "form": "filesystemSetDeleted",
-            "field": "all_deleted"
-          }
-        ],
-        "meaning": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata.",
-        "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
-        "field_conditions": [
-          {
-            "field": "definition",
-            "semantic_type": "declared_filesystem_set_extraction_definition",
-            "values": [
-              "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
-            ]
-          }
-        ]
+        "meaning": "Filesystem deletion state of the same executable population requested by Q28.",
+        "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
       }
     },
     {
@@ -1474,6 +1479,39 @@
         ],
         "meaning": "Identity of the last user to successfully log on to the selected computer, not a default/last-logon configuration name.",
         "evidence_needed": "DefaultUserName is a retained configuration value. It does not establish the last successful logon or the identity of the user who performed it; a caveat in an appendix cannot enforce that distinction. Require source-supported successful-logon identity and a reviewed last-event ordering/coverage rule tied to the selected case source."
+      }
+    },
+    {
+      "question_id": "Q28",
+      "schema_pointer": "/answer_schema/properties/executable_file_count",
+      "previous_requirement": {
+        "semantic_types": [
+          "asserted_declared_filesystem_set_count"
+        ],
+        "selectors": [
+          {
+            "form": "filesystemSetDeleted",
+            "field": "count"
+          }
+        ],
+        "meaning": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set.",
+        "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
+        "field_conditions": [
+          {
+            "field": "definition",
+            "semantic_type": "declared_filesystem_set_extraction_definition",
+            "values": [
+              "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
+            ]
+          }
+        ]
+      },
+      "replacement_requirement": {
+        "semantic_types": [
+          "needs_requested_recycle_executable_population_count"
+        ],
+        "meaning": "Count of the executable population requested by the original public question.",
+        "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
       }
     }
   ],
@@ -1773,16 +1811,6 @@
       ]
     },
     {
-      "question_id": "Q28",
-      "schema_pointer": "/answer_schema/properties/executable_file_count",
-      "selectors": [
-        {
-          "form": "filesystemSetDeleted",
-          "field": "count"
-        }
-      ]
-    },
-    {
       "question_id": "Q30",
       "schema_pointer": "/answer_schema/properties/deleted_file_count",
       "selectors": [
@@ -1949,22 +1977,12 @@
           "field": "value_7"
         }
       ]
-    },
-    {
-      "question_id": "Q29",
-      "schema_pointer": "/answer_schema/properties/deleted_from_file_system",
-      "selectors": [
-        {
-          "form": "filesystemSetDeleted",
-          "field": "all_deleted"
-        }
-      ]
     }
   ],
   "preservation": "All question IDs/prompts/schema shape/types/descriptions/matching rules are exact after stripping only leaf/row annotations. Top-level case_id, contract_revision and draft instructions deliberately changed. Existing supported requirements retain semantic types; their evidence_needed scope caveats and selectors are strengthened.",
   "remaining_gaps": [
-    "Twenty-two leaf meanings remain unsupported: actor/use attribution, online-session settings, source affiliations, predominantly used/last-successful-logon selection and related relationships still require reviewed rules.",
-    "The Q28/Q29 relation binds the exact same atomic filesystemSetDeleted claim across questions; its count/deletion assertion applies only to the reviewed bounded extraction set, not all disk executables, secure erasure or recoverability.",
+    "Twenty-four leaf meanings remain unsupported: actor/use attribution, online-session settings, source affiliations, predominantly used/last-successful-logon selection and related relationships still require reviewed rules.",
+    "Q28/Q29 original-population bindings are unsupported pending independent equivalence review. The generic exact declared-set aggregate and cross-question guard remain implemented, but cannot establish that its bounded extraction population is the original requested population.",
     "Q4 records the reviewed registry bias-agreement display convention; it does not verify clock accuracy, actual daylight-saving state or transition correctness.",
     "Q27 classifies a validated retained Yahoo Mail message cache entry; it does not identify the physical user or account owner.",
     "Exact evidence-origin, row, field-condition and cross-question-reference gates do not prove parser correctness, evidence presence, question entailment or complete lists.",
@@ -1976,7 +1994,7 @@
     "public_structure_preserved": true,
     "model_or_scoring_runs": 0,
     "private_inputs_read": false,
-    "final_field_validation": "Five focused deterministic tests passed: public structure preservation; strict preflight 16 supported/22 unsupported with no missing/invalid declarations; exact dedicated roles; exact declared-set field conditions and all-member support; frozen same-part Q28/Q29 references. Reader integration validation remains separate. No model or scoring run."
+    "final_field_validation": "Current focused checks preserve original public structure and context, report 14 supported/24 unsupported leaves with no invalid declarations, retain dedicated timezone/cache roles, and refuse original-population bindings while preserving generic declared-set fields/support IDs. Generic reference and aggregate regression tests remain separate. No model or scoring run."
   },
   "all_changed_requirement_pointers": [
     {
@@ -2152,7 +2170,7 @@
     {
       "question_id": "Q28",
       "schema_pointer": "/answer_schema/properties/executable_file_count",
-      "kind": "selector_or_scope_strengthening"
+      "kind": "semantic_replacement"
     },
     {
       "question_id": "Q29",
@@ -3167,7 +3185,7 @@
   ],
   "scope_gate_status": "Implemented: exact source tuples checked for every supporting record against hash-bound facts. Source metadata authenticity and complete question entailment are not proved by this contract check.",
   "remaining_source_selection": "Base-volume primary selected from approved case exhibit mapping; Q1 allows the two same-image digest component origins, Q31 binds antivirus examination to base-volume primary scan input. Historical/nonprimary sources require a separately reviewed selection.",
-  "review_history": "Peer reviews and requirement review notes describe the preceding row-only draft. scope_gate_status and scope_resolutions record the current source-bound implementation. Final field resolutions add exact effective-time-zone and validated Yahoo Mail cache roles, and replace Q28/Q29 with the same declared filesystem set plus frozen cross-question reference. Earlier peer notes remain historical.",
+  "review_history": "Peer reviews and requirement review notes describe the preceding row-only draft. scope_gate_status and scope_resolutions record the current source-bound implementation. Final field resolutions add exact effective-time-zone and validated Yahoo Mail cache roles, and replace Q28/Q29 with the same declared filesystem set plus frozen cross-question reference. Earlier peer notes remain historical. A later independent public-safe compatibility review found original executable-population equivalence unestablished; current Q28/Q29 requirements therefore fail closed as unsupported. Earlier aggregate compatibility records are historical source-capability checks, not approved original-question answers.",
   "tuple_selector_policy": {
     "status": "catalog_compatibility_checked_not_model_run_ready",
     "meaning": "Already supported typed attribute leaves also accept attributeTuple.value_0 through value_7. Every value retains the exact declared role and native type; the bounded tuple contains at most eight attributes sharing one source subject within one atomic claim part. Every backing record must pass the original strict evidence scope.",
@@ -3277,55 +3295,25 @@
     {
       "question_id": "Q28",
       "schema_pointer": "/answer_schema/properties/executable_file_count",
-      "status": "catalog_support",
+      "status": "no_catalog_support",
       "requirement": {
         "semantic_types": [
-          "asserted_declared_filesystem_set_count"
+          "needs_requested_recycle_executable_population_count"
         ],
-        "selectors": [
-          {
-            "form": "filesystemSetDeleted",
-            "field": "count"
-          }
-        ],
-        "meaning": "Number of distinct members in the exact reviewed Recycle Bin executable extraction set.",
-        "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
-        "field_conditions": [
-          {
-            "field": "definition",
-            "semantic_type": "declared_filesystem_set_extraction_definition",
-            "values": [
-              "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
-            ]
-          }
-        ]
+        "meaning": "Count of the executable population requested by the original public question.",
+        "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
       }
     },
     {
       "question_id": "Q29",
       "schema_pointer": "/answer_schema/properties/deleted_from_file_system",
-      "status": "catalog_support",
+      "status": "no_catalog_support",
       "requirement": {
         "semantic_types": [
-          "asserted_all_members_deleted_in_declared_filesystem_set"
+          "needs_requested_recycle_executable_population_all_deleted"
         ],
-        "selectors": [
-          {
-            "form": "filesystemSetDeleted",
-            "field": "all_deleted"
-          }
-        ],
-        "meaning": "Whether every member of that same declared Recycle Bin executable set is marked deleted by filesystem metadata.",
-        "evidence_needed": "Require the exact public extraction definition below and the approved aggregate over all of its declared membership/flag records. Never substitute a legacy executable count, an unrelated deleted-entry flag or a different set. This is not secure erasure, recoverability or all executables on disk. Every backing record must pass the original exact source scope.",
-        "field_conditions": [
-          {
-            "field": "definition",
-            "semantic_type": "declared_filesystem_set_extraction_definition",
-            "values": [
-              "Distinct file identities with an .exe namespace name and readable MZ prefix under RECYCLER, RECYCLED or $Recycle.Bin roots of every distinct drive-mounted filesystem in this source; NTFS index references must match record and sequence; aliases deduplicated; no reparse traversal; bounded to 100000 index/namespace entries, depth 32 and 256 members. This is not all disk executables, execution, secure deletion or recoverability."
-            ]
-          }
-        ]
+        "meaning": "Filesystem deletion state of the same executable population requested by Q28.",
+        "evidence_needed": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
       }
     }
   ],
@@ -3344,5 +3332,16 @@
         ]
       }
     }
-  ]
+  ],
+  "population_review_hold": {
+    "question_ids": [
+      "Q28",
+      "Q29"
+    ],
+    "status": "unsupported_pending_independent_population_equivalence",
+    "generic_aggregate_available": true,
+    "expected_values_changed": false,
+    "questions_or_statuses_excluded": false,
+    "reason": "Independent review must establish that the declared extracted set is equivalent to the original requested executable population, including executable membership, aliases, unreadable entries, reparse handling and traversal limits. The current exact-set aggregate proves only its declared population; matching a count or linking the same claim part does not establish population equivalence. No expected-count-driven exclusions or reader changes are permitted."
+  }
 }

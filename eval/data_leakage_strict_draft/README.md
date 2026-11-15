@@ -12,8 +12,8 @@ and peer-review records; peer reports describe the draft before their findings
 were resolved in the authoring files.
 
 The reviewed draft has 358 leaf occurrences, including repeated `anyOf` branches:
-48 have compatible catalog roles and 310 explicitly require missing support.
-There are no missing or invalid annotations. Fourteen questions have at least one
+55 have compatible catalog roles and 303 explicitly require missing support.
+There are no missing or invalid annotations. Sixteen questions have at least one
 compatible leaf. **These are catalog counts, not accuracy, evidence availability
 or complete-answer counts.** Exact exhibit, source snapshot and artifact variant
 checks now apply to every supporting record against hash-bound evidence. There
@@ -52,6 +52,11 @@ The main remaining issues are concrete:
   or unallocated-recovery origin only when all supporting rows share one origin.
 - List completeness remains unproved. This alone does not disqualify a supported
   individual observation; field-specific scope and relationship gaps are separate.
+- Q29 retains cloud service, container type and path only when all three roles
+  share one source-scoped tuple, including partial answers. Q31 retains the
+  Google Drive credential-use account; credential-use time is not logon time.
+  Q30 remains unsupported: its exact deletion-related record relation does not
+  establish completed remote deletion or an actual deletion timestamp.
 
 `validate_examples.py` uses only synthetic records. Three exact claims pass the
 Lean kernel and independent replay. A reconstructed superseded per-field policy

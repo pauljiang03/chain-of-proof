@@ -44,14 +44,14 @@ class HackingFinalFields(unittest.TestCase):
         self.assertEqual(without_annotations(self.public['questions']), without_annotations(original['questions']))
         review = json.loads((ROOT / 'eval/hacking_case_strict_draft/review.json').read_text())
         self.assertIs(review['model_run_ready'], False)
-        self.assertEqual(review['counts']['leaf_status'], {'catalog_support': 16, 'no_catalog_support': 22})
+        self.assertEqual(review['counts']['leaf_status'], {'catalog_support': 14, 'no_catalog_support': 24})
         statuses = []
         for question in self.public['questions']:
             view = inspect(question['answer_schema'], catalog()['forms'],
                            require_claim_requirements=True, require_evidence_scope=True)
             statuses.extend(row['status'] for row in view['requirements'])
-        self.assertEqual(statuses.count('catalog_support'), 16)
-        self.assertEqual(statuses.count('no_catalog_support'), 22)
+        self.assertEqual(statuses.count('catalog_support'), 14)
+        self.assertEqual(statuses.count('no_catalog_support'), 24)
         self.assertFalse(any(status in ('invalid', 'missing_annotation') for status in statuses))
 
     def test_new_roles_refuse_generic_timezone_or_cache_filename(self):
@@ -65,7 +65,7 @@ class HackingFinalFields(unittest.TestCase):
             self.assertEqual(check(requirement, 'attributeRecorded', 'value', 'recorded_attribute_' + old + '_string')['status'], 'incompatible')
 
     def aggregate(self, definition=None, q28=True, q29=True, second_candidate=False):
-        definition = definition if definition is not None else self.leaf('Q28')['x-claim-requirement']['field_conditions'][0]['values'][0]
+        definition = definition if definition is not None else 'Exact bounded declared extraction population'
         strings = {10: 'fixture-declared-set', 20: definition, 30: 'member-A', 31: 'member-B'}
         class MemorySource(FactSource):
             def all(self): return list(self.rows.values())
@@ -89,13 +89,16 @@ class HackingFinalFields(unittest.TestCase):
         return project_answers(public, candidates, bindings, source, require_claim_requirements=True,
                                require_evidence_scope=True, evidence_facts_sha256='a' * 64)
 
-    def test_exact_definition_same_aggregate_count_and_deletion_boolean(self):
+    def test_valid_declared_aggregate_cannot_answer_unestablished_original_population(self):
         result = self.aggregate()
-        self.assertEqual([row['answer'] for row in result['submission']['answers']],
-                         [{'executable_file_count': 2}, {'deleted_from_file_system': False}])
-        self.assertEqual(result['projection']['bindings'][0]['record_ids'], [1, 2, 3])
-        self.assertEqual(result['projection']['bindings'][1]['record_ids'], [1, 2, 3])
-        self.assertEqual(result['leaves'][1]['meaning_checks'][0]['field_condition_checks'][0]['status'], 'compatible')
+        self.assertEqual([row['status'] for row in result['submission']['answers']], ['unknown', 'unknown'])
+        self.assertEqual(result['leaves'], [])
+        fields = result['projection']['candidates']['C']['parts'][0]['fields']
+        self.assertEqual(fields['count']['value'], 2)
+        self.assertIs(fields['all_deleted']['value'], False)
+        self.assertEqual(fields['count']['record_ids'], [1, 2, 3])
+        self.assertEqual(fields['all_deleted']['record_ids'], [1, 2, 3])
+        self.assertEqual({row['reason'] for row in result['unsupported']}, {'claim_role_does_not_meet_public_requirement'})
 
     def test_wrong_set_definition_and_legacy_count_cannot_supply_these_fields(self):
         result = self.aggregate(definition='Only a filename extension or a different population')
@@ -104,9 +107,7 @@ class HackingFinalFields(unittest.TestCase):
             requirement = self.leaf(qid)['x-claim-requirement']
             self.assertEqual(check(requirement, 'attributeRecorded', 'value',
                 'recorded_attribute_recycle_executable_count_integer')['status'], 'incompatible')
-            self.assertEqual(requirement['selectors'][0]['form'], 'filesystemSetDeleted')
-        self.assertEqual(self.leaf('Q28')['x-claim-requirement']['field_conditions'],
-                         self.leaf('Q29')['x-claim-requirement']['field_conditions'])
+            self.assertTrue(all(role.startswith('needs_') for role in requirement['semantic_types']))
 
     def test_omitted_or_foreign_q28_count_freezes_q29_before_filtering(self):
         for kwargs in ({'q28': False}, {'second_candidate': True}):

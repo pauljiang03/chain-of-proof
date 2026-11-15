@@ -50,8 +50,8 @@ class StrictPublicDraft(unittest.TestCase):
         self.assertFalse(report['model_run_ready'])
         self.assertEqual(len(report['launch_blockers']), 4)
         self.assertEqual(report['counts']['leaf_occurrences_including_anyof_branches'], 358)
-        self.assertEqual(report['counts']['catalog_supported'], 48)
-        self.assertEqual(report['counts']['explicitly_unsupported'], 310)
+        self.assertEqual(report['counts']['catalog_supported'], 55)
+        self.assertEqual(report['counts']['explicitly_unsupported'], 303)
         self.assertEqual(report['counts']['row_policies'], 93)
 
     def test_every_declared_leaf_has_valid_explicit_support_or_gap(self):
@@ -70,7 +70,7 @@ class StrictPublicDraft(unittest.TestCase):
                     self.assertTrue(row['available_fields'])
                 else:
                     self.assertTrue(all(name.startswith('needs_') for name in requirement['semantic_types']))
-        self.assertEqual(counts, {'catalog_support': 48, 'no_catalog_support': 310})
+        self.assertEqual(counts, {'catalog_support': 55, 'no_catalog_support': 303})
 
     def test_reviewed_execution_path_supplies_partial_without_inventing_time(self):
         from checker.check import check
@@ -152,7 +152,7 @@ class StrictPublicDraft(unittest.TestCase):
             counts.update(row['status'] for row in preflight['requirements'])
             policies.extend(preflight['row_requirements'])
             self.assertTrue(all(row['status'] == 'valid' for row in preflight['scope_requirements']))
-        self.assertEqual(counts, {'catalog_support': 16, 'no_catalog_support': 22})
+        self.assertEqual(counts, {'catalog_support': 14, 'no_catalog_support': 24})
         self.assertEqual(len(policies), 32)
         self.assertFalse(report['model_run_ready'])
         # Reapplying the reviewed public plan must be idempotent, including the
