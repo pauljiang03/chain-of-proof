@@ -191,19 +191,25 @@ def parse_prefetch(data):
     path_hash = struct.unpack_from("<I", data, 76)[0]
     strings_off, strings_size = struct.unpack_from("<2I", data, 0x64)
     if version == 17:
-        times, count_at = [struct.unpack_from("<Q", data, 0x78)[0]], 0x90
+        times_at, count_at = 0x78, 0x90
+        times = [struct.unpack_from("<Q", data, times_at)[0]]
     elif version == 23:
-        times, count_at = [struct.unpack_from("<Q", data, 0x80)[0]], 0x98
+        times_at, count_at = 0x80, 0x98
+        times = [struct.unpack_from("<Q", data, times_at)[0]]
     elif version in (26, 30, 31):
-        times = list(struct.unpack_from("<8Q", data, 0x80))
+        times_at = 0x80
+        times = list(struct.unpack_from("<8Q", data, times_at))
         count_at = 0xC8 if struct.unpack_from("<I", data, 0x54)[0] == 0x128 else 0xD0
     else:
         raise ValueError("unknown prefetch version %d" % version)
     files = [s for s in data[strings_off: strings_off + strings_size]
              .decode("utf-16-le", "replace").split("\x00") if s]
+    time_entries = [{"time_us": t, "raw_filetime": raw, "slot": slot, "byte_offset": times_at + slot * 8}
+                    for slot, raw in enumerate(times) if (t := filetime_us(raw)) is not None]
     return {"version": version, "name": name, "hash": path_hash,
             "run_count": struct.unpack_from("<I", data, count_at)[0],
-            "run_times": [t for t in (filetime_us(x) for x in times) if t is not None],
+            "run_count_byte_offset": count_at,
+            "run_times": [entry['time_us'] for entry in time_entries], "run_time_entries": time_entries,
             "files": files}
 
 
@@ -372,7 +378,8 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
     """Reviewed-source opt-in only; broad programRun rows are never promoted.
 
     Each source occurrence has a separate identity. The attribute timestamp is
-    examination time; the source's historical timestamp remains provenance.
+    examination time; the source's historical timestamp has its own typed value
+    and retained source/precision provenance.
     Older callers without an explicit examination time retain their old rows.
     """
     from .source_scope import merge_scope, subject_scope
@@ -385,12 +392,56 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
             or not isinstance(artifact, str) or not artifact.strip() or not entry
             or type(recorded_at) is not int or recorded_at < 0):
         return
+    try:
+        # ISO text carries the source timestamp, not the examination observation.
+        # Keep retained resolution and raw FILETIME conversion separately below.
+        recorded_iso = (EPOCH + timedelta(microseconds=recorded_at)).isoformat(timespec='microseconds').replace('+00:00', 'Z')
+    except (OverflowError, ValueError) as error:
+        out.ev.problem(artifact + ' source timestamp', error)
+        return
     from .attributes import emit_attribute
     scope = subject_scope(provenance) + [source_kind, artifact, entry, recorded_at]
     subject = json.dumps(scope, sort_keys=True, ensure_ascii=True, separators=(',', ':'))
     for role, value in (('app.execution.program', program), ('app.execution.path', path)):
         if isinstance(value, str) and value:
             emit_attribute(out.ev, subject, role, value, out.examined_at, **provenance)
+    source_label = {'Prefetch header': 'Prefetch', 'UserAssist executable run path': 'UserAssist',
+                    'Security process-creation event': 'Security process creation'}.get(source_kind)
+    if source_label is None or not any(isinstance(v, str) and v for v in (program, path)):
+        return
+    # These labels classify retained source fields; they do not certify that an
+    # event happened. In particular Security is not relabelled to a Q11 source.
+    metadata = [
+        ('recorded_time', recorded_iso, dict(details.get('recorded_time_locator') or {},
+                                            field='recorded source timestamp',
+                                            retained_resolution_us=details.get('recorded_time_resolution_us'))),
+        ('source_type', source_label, {'field': 'reviewed artifact format', 'derivation': source_kind}),
+        ('time_meaning', 'execution', {'field': 'timestamp interpretation',
+                                     'derivation': details.get('recorded_time_meaning'),
+                                     'limitation': 'artifact timestamp classification; not independent proof of execution'}),
+    ]
+    raw_count = details.get('raw_run_count')
+    if source_label in ('Prefetch', 'UserAssist') and type(raw_count) is int and 0 <= raw_count <= 0xffffffff:
+        locator = dict(details.get('run_count_locator') or {}, field='literal source run-counter DWORD')
+        metadata.append(('raw_run_count', raw_count, locator))
+        offset = 5 if source_label == 'UserAssist' and details.get('userassist_version') == 3 else 0
+        if raw_count >= offset:
+            metadata.append(('run_count', raw_count - offset,
+                             dict(locator, field='format-interpreted source run counter',
+                                  derivation='raw counter minus 5' if offset else 'literal counter, no adjustment',
+                                  raw_value=raw_count, adjustment=offset)))
+        else:
+            out.ev.problem(artifact + ' run counter', ValueError(
+                'UserAssist version 3 raw counter is below 5; interpreted count was not emitted'))
+    for name, value, locator in metadata:
+        # Keep the identity locator inspectable without presenting its name-byte
+        # offset as the location of a timestamp, count, or interpretation label.
+        field_prov = dict(provenance)
+        identity_fields = ('source_field', 'source_value', 'byte_offset', 'byte_length', 'raw_value_hex', 'encoding')
+        identity = {key: field_prov.pop(key) for key in identity_fields if key in field_prov}
+        field_prov.update(execution_identity_locator=identity, attribute_value_source=locator,
+                          source_field=locator['field'])
+        emit_attribute(out.ev, subject, 'app.execution.' + name, value, out.examined_at, **field_prov)
 
 
 def _explicit_execution_path(value, allow_device=False):
@@ -985,6 +1036,9 @@ def _event(out, ev, d, where, sids):
                                   source_path=source_path, source_field='NewProcessName', source_value=literal,
                                   program_derivation='last path component of literal NewProcessName',
                                   recorded_time_meaning='event timestamp of Security process creation',
+                                  recorded_time_locator={'field': 'event TimeCreated (parser ts)',
+                                                         'raw_value': ts.isoformat(),
+                                                         'conversion': 'UTC datetime to integer microseconds'},
                                   recorded_time_resolution_us=res, account=str(d.get('SubjectUserName') or ''),
                                   event_id=eid, provider=provider, channel=channel)
     elif low == "msiinstaller" and eid == 1033 and str(d.get("Data_3")) == "0" and d.get("Data_0"):
@@ -1074,7 +1128,8 @@ def _prefetch(out, ev, target):
             path, how = prefetch_path(pf)
             if not pf["run_times"]:
                 raise ValueError("no run time in the prefetch header")
-            for n, t in enumerate(pf["run_times"]):
+            for n, time_entry in enumerate(pf['run_time_entries']):
+                t = time_entry['time_us']
                 out.add("programRun", t, 1, pf["name"], path, artifact=art, source="prefetch",
                         run_count=pf["run_count"], prefetch_hash="%08X" % pf["hash"],
                         format_version=pf["version"], path_source=how,
@@ -1092,6 +1147,18 @@ def _prefetch(out, ev, target):
                                           byte_offset_basis='decompressed Prefetch bytes' if compressed else 'source file bytes',
                                           encoding='utf-16-le', header_name_may_be_truncated=len(name) >= 29,
                                           format_version=pf['version'], run_count=pf['run_count'],
+                                          raw_run_count=pf['run_count'], run_count_adjustment=0,
+                                          run_count_interpretation='literal Prefetch counter; no adjustment',
+                                          run_count_locator={'field': 'Prefetch run-counter DWORD',
+                                                             'byte_offset': pf['run_count_byte_offset'], 'byte_length': 4,
+                                                             'byte_offset_basis': 'decompressed Prefetch bytes' if compressed else 'source file bytes',
+                                                             'encoding': 'little-endian uint32', 'raw_value': pf['run_count']},
+                                          recorded_time_locator={'field': 'Prefetch run-time FILETIME',
+                                                                 'byte_offset': time_entry['byte_offset'], 'byte_length': 8,
+                                                                 'byte_offset_basis': 'decompressed Prefetch bytes' if compressed else 'source file bytes',
+                                                                 'encoding': 'little-endian FILETIME',
+                                                                 'raw_value': time_entry['raw_filetime'], 'slot': time_entry['slot'],
+                                                                 'conversion': '(FILETIME - Unix epoch FILETIME) // 10; retained microseconds'},
                                           recorded_time_meaning='run timestamp stored in the Prefetch header',
                                           recorded_time_resolution_us=1, run_index=n)
         except Exception as e:
@@ -1123,15 +1190,22 @@ def _userassist(out, ev, hives):
                     continue
                 if rec["last_run"] is None:
                     continue                    # counted focus only: no run time recorded
+                raw_count = struct.unpack_from('<I', raw, 4)[0]
                 m = re.match(r"^\{([0-9A-Fa-f-]{36})\}", path)
                 out.add("programRun", rec["last_run"], 1, exe_name(path), path if "\\" in path else "",
                         _copy=h.backup, artifact=_art(h, count.path, name), source="UserAssist",
                         entry=decoded, run_count=rec["run_count"], focus_count=rec["focus_count"],
+                        raw_run_count=raw_count,
+                        run_count_interpretation='legacy display max(raw counter - 5, 0)' if len(raw) == 16
+                                                else 'literal counter; no adjustment',
                         focus_time_ms=rec["focus_time_ms"], userassist_list=guid.name,
                         known_folder=DESCRIPTIONS.get(m.group(1).lower()) if m else None,
                         time_meaning="last run time stored in the UserAssist entry", **_where(h))
                 literal_path = _userassist_execution_path(decoded, userassist_version, guid.name, len(raw))
                 if literal_path and isinstance(h.path, str) and h.path.strip():
+                    offset = 5 if userassist_version == 3 else 0
+                    count_valid = raw_count >= offset
+                    time_at = 8 if userassist_version == 3 else 60
                     _execution_attributes(out, literal_path.rsplit('\\', 1)[-1], literal_path,
                                           rec['last_run'], 'UserAssist executable run path',
                                           _art(h, count.path, name),
@@ -1140,7 +1214,21 @@ def _userassist(out, ev, hives):
                                           source_field='ROT13-encoded UserAssist value name', source_value=name,
                                           decoded_value_name=decoded, raw_value_hex=raw.hex(),
                                           program_derivation='last path component of the explicit executable run path',
-                                          run_count=rec['run_count'], userassist_list=guid.name,
+                                          run_count=raw_count - offset if count_valid else None,
+                                          raw_run_count=raw_count, run_count_adjustment=offset,
+                                          run_count_interpretation='raw counter minus 5' if offset else 'literal counter; no adjustment',
+                                          run_count_status='interpreted' if count_valid else 'raw counter below interpretation offset; interpreted count unavailable',
+                                          run_count_locator={'field': 'UserAssist run-counter DWORD',
+                                                             'byte_offset': 4, 'byte_length': 4,
+                                                             'byte_offset_basis': 'registry value bytes',
+                                                             'encoding': 'little-endian uint32', 'raw_value': raw_count},
+                                          recorded_time_locator={'field': 'UserAssist last-run FILETIME',
+                                                                 'byte_offset': time_at, 'byte_length': 8,
+                                                                 'byte_offset_basis': 'registry value bytes',
+                                                                 'encoding': 'little-endian FILETIME',
+                                                                 'raw_value': struct.unpack_from('<Q', raw, time_at)[0],
+                                                                 'conversion': '(FILETIME - Unix epoch FILETIME) // 10; retained microseconds'},
+                                          userassist_list=guid.name,
                                           userassist_version=userassist_version, userassist_record_bytes=len(raw),
                                           recorded_time_meaning='last run timestamp stored in the UserAssist entry',
                                           recorded_time_resolution_us=1, **_where(h))

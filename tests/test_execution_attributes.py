@@ -53,8 +53,11 @@ def userassist_value():
 
 
 def attrs(ev):
+    # This suite checks the original identity-role gates. All metadata roles and
+    # their omission on rejected/unavailable sources are checked separately.
     return [(json.loads(row[-1])['attribute_role'], decode_value(row[4], 'string'), json.loads(row[-1]))
-            for row in ev.rows() if row[0] == 'attributeTextValue']
+            for row in ev.rows() if row[0] == 'attributeTextValue'
+            and json.loads(row[-1])['attribute_role'] in ('app.execution.program', 'app.execution.path')]
 
 
 class ExecutionReaders(unittest.TestCase):
@@ -271,6 +274,7 @@ class ExecutionReaders(unittest.TestCase):
         self.assertTrue({'application compatibility cache', 'MUICache', 'open/save dialog history',
                          'scheduled task file (.job)'} <= sources)
         self.assertEqual(attrs(self.ev), [])
+        self.assertFalse(any(row[0].startswith('attribute') for row in self.ev.rows()))
 
     def test_sql_accepts_new_roles_without_changing_older_kind_contract(self):
         try:
