@@ -1,11 +1,11 @@
-"""Independent Lean gate regression probes; no answer-coverage metrics or answer key.
+"""Check that the Lean checker still refuses known false claims.
 
     python -m eval.gate --facts evidence/case_facts.json \
         --labeled-claims fixtures/nist_false_claims.json --case-id nist-cfreds-data-leakage \
         --out /path/new-gate.json
 
-Fixtures select records from evidence and propose labeled claims. They never enter
-an investigator prompt or the certified investigation report. No fixture is implicit.
+Fixtures select records and propose labeled claims. They never enter an
+investigator prompt or the investigation report.
 """
 from __future__ import annotations
 import argparse
@@ -22,7 +22,7 @@ from checker.facts import FactSource, KINDS, open_source
 
 def _us(utc: str) -> int:
     dt = datetime.fromisoformat(utc.replace("Z", "+00:00"))
-    if dt.tzinfo is None:                     # the field is explicitly named UTC
+    if dt.tzinfo is None:  # the field is named UTC
         dt = dt.replace(tzinfo=timezone.utc)
     return (dt - datetime(1970, 1, 1, tzinfo=timezone.utc)) // timedelta(microseconds=1)
 
@@ -33,7 +33,7 @@ EXPECT_KEYS = {"kind", "obj", "obj_endswith", "obj_contains", "aux", "aux_contai
 
 
 def supported_expect(expect) -> bool:
-    """This matcher compares positive structured records, never absence or free prose."""
+    """Selectors match positive structured records, never absence or free text."""
     return (isinstance(expect, dict) and isinstance(expect.get("kind"), str)
             and bool(expect["kind"]) and set(expect) <= EXPECT_KEYS)
 
@@ -44,7 +44,7 @@ def rows_of(source: FactSource) -> List[dict]:
 
 
 def same_entity(expect: dict, row: dict) -> bool:
-    """Kind and entity match; time is not looked at. Text is compared without case."""
+    """Match kind and entity, ignoring time and letter case."""
     if row["kind"] != expect["kind"]:
         return False
     obj, aux = row["obj_text"].lower(), row["aux_text"].lower()
@@ -64,10 +64,10 @@ def same_entity(expect: dict, row: dict) -> bool:
 
 
 def time_match(expect: dict, row: dict, tol_s: int, time_zone: Optional[str] = None) -> Optional[str]:
-    """How the row's time meets the expected one: "tolerance" (within tol_s seconds),
-    "row uncertainty" (further off, but within the uncertainty the row itself states, as
-    for a date stored without a time of day), "day" (the answer key gives a date only),
-    "untimed" (it gives no time), or None."""
+    """Return "tolerance", "row uncertainty", "day", "untimed", or None for no match.
+
+    "row uncertainty" means outside tol_s but within the row's own stated resolution.
+    """
     if "utc" in expect:
         if row.get("t") is None:
             return None

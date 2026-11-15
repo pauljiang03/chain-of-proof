@@ -1,7 +1,6 @@
-"""One explicit evaluation path: fresh certified run -> answers -> neutral benchmark.
+"""Turn a verified run into answers and score them against an explicit reference.
 
-This module does not choose an answer key, dataset adapter or case implicitly.
-External structured answers can use the same benchmark without claiming Lean proof.
+External structured answers can be scored the same way without any Lean proof.
 """
 from __future__ import annotations
 
@@ -72,7 +71,7 @@ def prepare(reference=None, questions=None, adapter=None, answers=None, case_id=
     submission = None
     if answers:
         submission, inputs["answers"] = _load(answers)
-        # Validate a supplied submission before starting any expensive run.
+        # Fail on a bad submission before any expensive run starts.
         benchmark.score(key, submission)
     reason = None if adapter or answers else "No compatible --adapter or structured --answers supplied"
     return Plan(selected_case, key, public, adapter, submission, inputs, reason)
@@ -87,7 +86,7 @@ def _write_new(path, value):
 
 def evaluate(plan, trusted_run, answers_output, results_output, gate_result=None,
              *, facts_path=None, verification_output=None):
-    """Reverify the bundle before adapting, then score its structured answers."""
+    """Reverify the run's certificates, then score its answers."""
     if not isinstance(trusted_run, dict) or not isinstance(trusted_run.get("case", {}), dict):
         raise ValueError("run must be an object with object-valued case metadata")
     run_case = trusted_run.get("case", {}).get("case_id")

@@ -1,8 +1,6 @@
-"""Public-only contract and evidence readiness, never an accuracy score.
+"""List answer fields the checker cannot support, and how many records fill each role.
 
-Use this before a new dataset run. It identifies unsupported answer meanings and
-catalog roles with no observed values. It cannot determine which evidence answers
-a question or certify completeness, and it never reads a private reference.
+Run it before a new case. It is not an accuracy score and never reads a reference.
 """
 from __future__ import annotations
 

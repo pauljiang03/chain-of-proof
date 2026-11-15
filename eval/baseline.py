@@ -1,12 +1,11 @@
-"""Mine certified findings, optionally verify/export/score neutral answers.
+"""Mine certified findings without a model, then optionally score their answers.
 
     python -m eval.baseline --facts evidence/case_facts.json \
         --certs runs/dev/miner/certs --run runs/dev/miner/run.json \
         --out runs/dev/miner/results.json --questions eval/benchmark_nist_questions.json \
         --reference eval/benchmark_nist.json --adapter nist
 
-No answer key or labeled claim helps select mined findings. Gate probes are optional,
-explicit and kept in a separate directory. Every output path must be new.
+The reference is never used to select findings. Every output path must be new.
 """
 from __future__ import annotations
 
@@ -71,7 +70,7 @@ def main(argv=None) -> int:
         print(f"bounded mode omits one-record statements for {skipped}; use --complete to include them")
         if set(skipped) & {"journalName", "journalParent", "journalRemoval", "journalPath"}:
             print("bounded mode also omits compound journal identity joins")
-    # Reserve the certificate directory, including empty runs, without replacing prior data.
+    # Create the directory even for an empty run; fail rather than reuse an old one.
     certs.mkdir(parents=True, exist_ok=False)
     mined = miner.mine(source, certs, complete=args.complete)
     print(f"miner: {len(mined)} candidates, {sum(r['status'] == 'verified' for r in mined)} certified")
