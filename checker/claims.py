@@ -30,7 +30,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-import re
 from typing import Callable, Dict, List, Tuple
 
 from .facts import KINDS, Fact, FactSource, FILESYSTEM_SET_KINDS

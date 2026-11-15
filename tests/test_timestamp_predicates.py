@@ -3,7 +3,7 @@ from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import unittest
 
-from agent.timestamp_predicates import instant_ticks, local_day_interval, parse_interval, recorded_in_interval
+from agent.timestamp_predicates import instant_ticks, parse_interval, recorded_in_interval
 
 
 ROLE = 'search.index.date_modified'
@@ -11,12 +11,11 @@ ROLE = 'search.index.date_modified'
 
 class TimestampPredicateTests(unittest.TestCase):
     def policy(self):
-        return local_day_interval(first_day='2015-03-22', stop_day_exclusive='2015-03-24',
-                                  zone_name='America/New_York', role=ROLE)
+        return {'mode': 'recorded_instant_half_open_v1', 'role': ROLE,
+                'start': '2015-03-22T04:00:00Z', 'stop': '2015-03-24T04:00:00Z'}
 
-    def test_public_local_days_have_explicit_UTC_bounds(self):
+    def test_interval_includes_start_and_excludes_stop(self):
         policy = self.policy()
-        self.assertEqual((policy['start'], policy['stop']), ('2015-03-22T04:00:00Z', '2015-03-24T04:00:00Z'))
         for stamp, included in [
                 ('2015-03-22T03:59:59.9999999Z', False),
                 ('2015-03-22T04:00:00.0000000Z', True),
@@ -46,12 +45,6 @@ class TimestampPredicateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             instant_ticks('2026-11-01T01:30:00')
 
-    def test_local_day_policy_handles_DST_day_lengths(self):
-        for start, stop, hours in [('2026-03-08', '2026-03-09', 23), ('2026-11-01', '2026-11-02', 25)]:
-            policy = local_day_interval(first_day=start, stop_day_exclusive=stop,
-                                       zone_name='America/New_York', role=ROLE)
-            self.assertEqual(instant_ticks(policy['stop']) - instant_ticks(policy['start']), hours * 3600 * 10_000_000)
-
     def test_invalid_or_unknown_timestamps_fail_closed(self):
         for stamp in [None, 0, True, '2026-01-01', '2026-01-01 00:00:00Z',
                       '2026-01-01T00:00:00', '2026-01-01T00:00:00-00:00',
@@ -62,7 +55,7 @@ class TimestampPredicateTests(unittest.TestCase):
             with self.subTest(stamp=stamp), self.assertRaises(ValueError):
                 recorded_in_interval(stamp, role=ROLE, policy=self.policy())
 
-    def test_wrong_role_bounds_policy_and_zone_fail_closed(self):
+    def test_wrong_role_and_bounds_policy_fail_closed(self):
         policy = self.policy()
         with self.assertRaisesRegex(ValueError, 'timestamp_role_mismatch'):
             recorded_in_interval(policy['start'], role='file.creation_time', policy=policy)
@@ -70,15 +63,6 @@ class TimestampPredicateTests(unittest.TestCase):
                     dict(policy, start=policy['stop']), dict(policy, extra=True), dict(policy, mode='inclusive')]:
             with self.assertRaises(ValueError):
                 parse_interval(bad)
-        for zone in [None, '', 'Not/A_Zone', '/etc/passwd', '../UTC']:
-            with self.assertRaises(ValueError):
-                local_day_interval(first_day='2015-03-22', stop_day_exclusive='2015-03-24', zone_name=zone, role=ROLE)
-
-    def test_ambiguous_or_nonexistent_midnight_is_refused(self):
-        for zone, first, stop in [('America/Havana', '2020-11-01', '2020-11-02'),
-                                   ('Pacific/Apia', '2011-12-30', '2011-12-31')]:
-            with self.assertRaisesRegex(ValueError, 'ambiguous_or_nonexistent'):
-                local_day_interval(first_day=first, stop_day_exclusive=stop, zone_name=zone, role=ROLE)
 
     def test_integer_parser_matches_independent_datetime_controls(self):
         # Whole-second controls use datetime's independent calendar conversion;

@@ -1,7 +1,6 @@
 """Exact interval tests for recorded timestamps, counted in 100 ns ticks."""
-from datetime import date, datetime, timezone
+from datetime import date
 import re
-from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 TICKS_PER_SECOND = 10_000_000
 TICKS_PER_DAY = 86400 * TICKS_PER_SECOND
@@ -9,7 +8,6 @@ EPOCH = date(1970, 1, 1).toordinal()
 SUPPORTED_ROLES = frozenset({'search.index.date_modified'})
 STAMP = re.compile(r'(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})'
                    r'(?:\.(\d{1,7}))?(Z|[+-]\d{2}:\d{2})', re.ASCII)
-DAY = re.compile(r'\d{4}-\d{2}-\d{2}', re.ASCII)
 
 
 def instant_ticks(value):
@@ -63,39 +61,3 @@ def recorded_in_interval(value, *, role, policy):
         raise ValueError('timestamp_role_mismatch')
     tick = instant_ticks(value)
     return instant_ticks(spec['start']) <= tick < instant_ticks(spec['stop'])
-
-
-def _local_midnight(day, zone):
-    if not isinstance(day, str) or not DAY.fullmatch(day):
-        raise ValueError('invalid_local_day')
-    try:
-        plain = datetime.combine(date.fromisoformat(day), datetime.min.time())
-        candidates = set()
-        for fold in (0, 1):
-            local = plain.replace(tzinfo=zone, fold=fold)
-            utc = local.astimezone(timezone.utc)
-            if utc.astimezone(zone).replace(tzinfo=None) == plain:
-                candidates.add(utc)
-    except (ValueError, OverflowError) as error:
-        raise ValueError('local_day_outside_supported_range') from error
-    if len(candidates) != 1:
-        raise ValueError('local_midnight_is_ambiguous_or_nonexistent')
-    return candidates.pop().isoformat().replace('+00:00', 'Z')
-
-
-def local_day_interval(*, first_day, stop_day_exclusive, zone_name, role):
-    """Compile an explicitly chosen local calendar policy to exact UTC bounds.
-
-    The caller must review the dates, exclusivity and named IANA zone as public
-    policy. A date range is not inferred from question prose or source values.
-    ZoneInfo uses the installed timezone database; freeze its version for runs.
-    """
-    if not isinstance(zone_name, str) or not zone_name or len(zone_name) > 128:
-        raise ValueError('explicit_IANA_zone_required')
-    try:
-        zone = ZoneInfo(zone_name)
-    except (ZoneInfoNotFoundError, ValueError) as error:
-        raise ValueError('unknown_IANA_zone') from error
-    return parse_interval({'mode': 'recorded_instant_half_open_v1', 'role': role,
-                           'start': _local_midnight(first_day, zone),
-                           'stop': _local_midnight(stop_day_exclusive, zone)})
