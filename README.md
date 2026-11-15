@@ -57,28 +57,16 @@ Dataset support does not mean that every answer is correct or every conclusion c
 Use the public readiness check to inspect unsupported meanings and missing role records.
 Other cases use explicit case profiles and evidence manifests.
 
-The latest [correctness fixes](docs/CORRECTNESS_FIXES.md) require declared meanings
-for typed answer fields, retain partial answers, and save answer checkpoints in the
-new test protocol. They also narrow shortcut, email, installation and USB statements
-to their source evidence. Fixed execution-artifact roles separate reviewed sources
-from generic application sightings. Related answer fields must refer to one atomic
-claim. Source checks require the selected image, exhibit, source view and artifact
-state. The two stricter public test contracts remain on hold where required support
-or source selections are missing. These changes have no new accuracy score.
+The [current source support](docs/SYSTEM_EVIDENCE_COVERAGE.md) adds scoped account,
+network, timezone, partition, event, Search, cloud, document and mail fields.
+Related answer fields must use one source subject and the required source view.
+Lean checks typed fields and exact declared file sets. A larger set of records
+does not prove a stronger conclusion. Unsupported meanings stay explicit.
 
-The latest [typed-field implementation](docs/SUPPORTED_FIELDS.md) adds coherent
-multi-field proofs, exact OS fields, execution-artifact metadata, validated artifact
-paths, Unicode mail content and OOXML metadata. Public answer conditions also apply
-when an agent submits only part of a row. Unsupported meanings stay explicit.
-
-The [source-field and file-set update](docs/FIELD_RELATIONS.md) adds effective
-timezone settings, Yahoo cache identification, full search records, Recycle Bin
-index fields, VSS catalog fields and Sticky Notes content. Lean checks the count
-and allocation flags for one declared file set. Related answers must use that
-same set. Paged answer tools and checkpoint diagnostics preserve partial work.
-The combined suite passed 1,260 tests, with one platform test skipped. Seven
-selected real-source certificates passed independent replay. This is validation
-of the implementation, not a new test-accuracy result.
+Paged tools and saved answer checkpoints retain partial work. The next comparison
+remains held until the integrated code, fresh evidence and compatible reference
+bundle pass review. Reader checks and proof checks are not new accuracy results.
+The [work log](WORKSTREAMS.md) records current ownership and validation.
 
 ## Try it in 60 seconds
 
