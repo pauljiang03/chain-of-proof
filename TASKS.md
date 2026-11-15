@@ -18,6 +18,7 @@ Use [WORKSTREAMS.md](WORKSTREAMS.md) before assigning work to another terminal.
 - Literal summary values retain spaces, line breaks and case. Excerpts are labeled. The final display fixes passed 142 app-related tests and browser checks for all three report surfaces.
 - Combined validation at `445ef58`: 1,638 tests ran; 1,636 passed and two were skipped. The later UI merge passed 127 app tests with one platform skip. The native PFF test passed separately in its supported environment. Selected source proofs and public projection checks also passed.
 - The approved frontend follow-up is integrated at `bffaac2`: restored evidence cards, short-report timeline counts, and exact exhibit/property values. Its app suite passed 143 tests with one skip; the final label change passed 22 focused checks and browser checks on three report surfaces. The separately adapted invariant harness passed 18/18.
+- Public coverage diagnostics and independent known-byte source-to-report controls are integrated. Their combined 18 tests pass; they do not establish a new answer score. See [the audit guide](docs/UNANSWERED_COVERAGE_AUDIT.md).
 
 See [the latest implementation and its limits](docs/SYSTEM_EVIDENCE_COVERAGE.md).
 These checks do not establish answer accuracy or zero false positives.

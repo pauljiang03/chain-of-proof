@@ -24,6 +24,26 @@ Later documentation and frontend work do not change the frozen runtime.
 | Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Sealed the implementation and experiment archives; all copied files and input bindings passed readback checks. |
 | Independent reference reviewer | Completed all six fixed scores with 69 input bindings checked and a separate mismatch diagnosis. Preserves the scores and private expected values; reviews prospective contract policy separately. |
 
+The current four-window split gives root soundness review, central roles/Lean,
+reference alignment and integration. The answer terminal owns prospective
+Q2/Q46/Q50/Q42 mappings and timestamp display. The third terminal owns the public
+coverage audit and a generic Q44 date-window proposal. The fourth terminal
+(`01a1de6a`) owns independent source-to-answer tests and selected real-source
+checks. Shared requirement files have one owner until handoff. Reject unsupported
+claims first, then increase answer coverage. Key-informed tests are development.
+
+The public coverage audit is integrated at `9029890`; its 32 targeted checks and
+CLI runs on both saved C submissions passed. It reports input lineage and binding
+outcomes without answer values or evidence-presence inference. All 34 Data Leakage
+and 20 Hacking unanswered C questions have no authored bindings in those saved
+submissions. That does not establish that the agent did no investigation.
+
+Independent tests at `1e54651` exercise synthetic known cloud-log bytes through
+the production reader, Lean/replay, public answers and reports. Six controls cover
+mixed containers, foreign snapshots, timestamp meanings and altered provenance.
+Root ran the integrated audit and source-to-report suites together: 18 tests
+passed. This is bounded validation, not a new benchmark score or a zero-FP proof.
+
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.
 Use isolated worktrees for new work. Reassign completed workers to independent
