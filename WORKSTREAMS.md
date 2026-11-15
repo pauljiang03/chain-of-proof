@@ -110,6 +110,22 @@ zero-tolerance counterexample confirms this. Its prospective fix and version
 review are required before the next run. Old scorers, submissions and scores stay
 frozen. No fresh model investigation has started.
 
+The precision fixes are now integrated. Native ShutdownTime preserves seven
+fractional digits and requires one REG_BINARY value. One actual Hacking source
+claim passed Lean/replay, exact projection and diagnostic UTC display; seven
+misleading alternatives were refused. Scorer 2.2 uses exact rational timestamps
+and tolerances, so distinct 100ns values no longer match under zero tolerance.
+Independent checks include 802 scorer assertions and 107 FILETIME roundtrips.
+Root's overlapping precision/host/UI suites passed 73 tests; builder/publisher
+checks passed 29. The focused Hacking public builder retains explicit reference,
+source and launch holds. Fresh complete snapshots for both cases are rebuilding
+from the corrected readers, with source hashes checked before and after.
+
+Remote UI commits `6e40997` and `03261a2` are merged. The short prose lead remains;
+it now counts recorded identifiers, retains case-distinct computer names and
+states source-timestamp ranges without inferring physical devices or activity
+boundaries. Existing examiner edits in the original main checkout remain intact.
+
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.
 Use isolated worktrees for new work. Reassign completed workers to independent
