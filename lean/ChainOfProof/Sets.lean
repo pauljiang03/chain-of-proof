@@ -76,6 +76,8 @@ def accountRecorded (x : Nat) : Claim := .is x .accountSeen
 def sessionRecorded (x : Nat) : Claim := .is x .sessionEvent
 /-- Registration/installer record; its timestamp retains the source's declared meaning. -/
 def programInstalledAt (x : Nat) : Claim := .is x .programInstalled
+/-- Legacy mixed-source application observation. Execution-artifact roles are
+    distinct typed attributes and cannot be supplied by this kind assertion. -/
 def programRan (x : Nat) : Claim := .is x .programRun
 def visited (x : Nat) : Claim := .is x .webVisit
 def downloaded (x : Nat) : Claim := .is x .fileDownloaded

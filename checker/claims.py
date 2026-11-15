@@ -447,31 +447,18 @@ def _installed_record(f: Fact, src: FactSource) -> str:
 
 
 def _program_record(f: Fact, src: FactSource) -> str:
-    """Legacy programRun includes sightings; only an explicit execution source has run time.
+    """The legacy kind proves an observation, regardless of free provenance text.
 
-    In particular, a Shimcache execution flag cannot turn the cached file's modification
-    time into an execution time. Missing provenance stays an application observation.
+    Execution-artifact meaning belongs to separately typed source roles. Lean does
+    not inspect source/time_meaning strings, so they cannot upgrade this claim.
     """
     path = src.string(f.aux)
     where = "" if _none(path) else f", path {path}"
     source = str(f.prov.get("source") or "unspecified application artifact")
-    meaning = str(f.prov.get("time_meaning") or "unspecified record timestamp")
-    source_key = source.casefold()
-    execution_time = (
-        (source_key == "prefetch" and (
-            meaning == "last run time in the prefetch header"
-            or re.fullmatch(r"earlier run time \d+ in the prefetch header", meaning)))
-        or (source_key == "userassist" and meaning == "last run time stored in the UserAssist entry")
-        or (source_key == "security event log: process creation"
-            and meaning == "time the process was created")
-    ) and ("executed_flag" not in f.prov or f.prov["executed_flag"] is True)
-    if execution_time:
-        return (f"the {source} artifact's recorded execution time for {src.string(f.obj)} "
-                f"({_utc(f.t)}{where}; timestamp meaning: {meaning})")
     flag = (f"; executed_flag={f.prov['executed_flag']}" if "executed_flag" in f.prov else "")
     return (f"the application-artifact record naming {src.string(f.obj)} "
-            f"(record time {_utc(f.t)}{where}; source: {source}; timestamp meaning: {meaning}{flag}); "
-            f"this record does not establish execution at that time")
+            f"({_record_details(f)}{where}; source: {source}{flag}); "
+            f"this claim certifies an application observation and does not establish execution at that time")
 
 
 def _en_ran(args, facts, src):

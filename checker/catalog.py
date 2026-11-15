@@ -98,6 +98,8 @@ _SPECS = (
     ('app.binary.product_version', 'string', 'literal ProductVersion in PE StringFileInfo for the examined registered application binary and resource language; not a derived version year, execution, use, or authenticity'),
     ('app.binary.file_description', 'string', 'literal FileDescription in PE StringFileInfo for the examined registered application binary and resource language; not execution, use, or authenticity'),
     ('app.binary.file_version', 'string', 'literal FileVersion in PE StringFileInfo for the examined registered application binary and resource language; not a derived version year, execution, use, or authenticity'),
+    ('app.execution.program', 'string', 'program name explicitly identified by a reviewed execution artifact; records the artifact observation, not verified actual code execution, authenticity, purpose, or the physical user'),
+    ('app.execution.path', 'string', 'literal executable path explicitly identified by a reviewed execution artifact; no inferred Prefetch path, shortcut target, shell identifier, verified actual code execution, authenticity, purpose, or physical user'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)

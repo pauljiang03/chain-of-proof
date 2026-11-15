@@ -23,7 +23,7 @@ certificate lists the rules it used, so a reader can see exactly what was assume
 | R15 | An account record is what the account database or a client's configuration holds | Strong | Who used the account |
 | R16 | A logon, logoff, startup or shutdown record is what the account database or an event log recorded | Strong | That every such event was logged; logs roll over and can be cleared |
 | R17 | A software-registration or installer record names a program/version and retains its source timestamp meaning: key last-write, InstallDate, or installer-event time | Strong, about the record | Actual installation at a registry key's last-write time, execution, or continued program presence |
-| R18 | An application artifact names an executable/path and attaches a timestamp with its declared meaning. Only explicit prefetch, UserAssist or process-creation run-time provenance is rendered as execution time | Strong, about the artifact | Compatibility-cache file modification, cache modification, registry last-write or task configuration records do not establish execution at that time. An execution flag cannot turn file mtime into run time. Missing/unknown provenance remains an application observation; no attribution to a user or inference of behavior |
+| R18 | The legacy `programRun` kind is an application observation naming a program/path with a source timestamp. Every `programRan` claim retains this scope even when provenance mentions execution | Strong, about the artifact | Provenance strings or an execution flag are not checked execution predicates. MuiCache, dialog/cache/file/registry/task observations do not establish execution. Stronger source roles require separately extracted fixed `app.execution.*` attribute kinds; no attribution, actual code execution, authenticity or purpose is inferred |
 | R19 | A browser history row means this URL was loaded in this browser profile at this time | Strong | Who was at the keyboard, and that the page was read |
 | R20 | A download record gives the source URL, the saved path and the start time as the browser stored them | Strong | That the file was opened, or still exists |
 | R21 | Text kept by the operating system's search box was typed there | Strong | When, beyond the time the artifact attaches |
@@ -78,7 +78,7 @@ for exact historical replay, or reissuance under the current templates.
 | `recoveredOnDevice c d` | R10, R13 | Strong | A directory entry for {path}, created ({time}), was recovered from the recovery area on seized device {serial}. Recovery alone does not establish a reformat; an optical disc may retain older states of the same filesystem. |
 | `tagged f s g T` | T | Strong, or judgment for an LLM tag | {entity} is tagged "{tag}" ({rule that computed it, or "an LLM judgment"}). |
 | `before a b` | none | Strong | The timestamp of {record a} precedes that of {record b}: the gap of {Δ} exceeds combined uncertainty {r}. This need not order the underlying actions. |
-| `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves the artifact's timestamp meaning and states execution time only for explicit run-time sources. |
+| `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves provenance literally and always states an application observation, never an execution predicate. |
 | `sameContent a b` | R28 | Strong | {path a} and {path b} have identical content: both read as {hash}. |
 | `fileRemovedAt r` | R29 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a removal flag ({time}). This is the record timestamp, not necessarily deletion onset; it does not establish wiping or Recycle Bin use. |
 | `fileCreationRecordedAt r` | R31 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a creation flag ({time}). This is not a filesystem creation timestamp and cannot be used by `copiedHere`. |
@@ -127,6 +127,17 @@ positive and does not establish execution or historical infection; a false
 `scanner.detections_found` requires a completed declared scope and still does not
 prove global malware absence. Configuration names and User-Agent text do not
 establish a human identity or actual device model.
+
+`app.execution.program` and `app.execution.path` are separate, fixed string roles
+for fields explicitly identified by reviewed execution artifacts. Initial readers
+use process-creation `NewProcessName`, a literal Prefetch header program name
+(never its inferred path), and explicit absolute executable `UEME_RUNPATH`
+UserAssist entries. MuiCache, dialog histories, Shimcache, shortcuts, shell IDs,
+control-panel items and task configuration do not supply these roles. The role
+records what the artifact says, not verified actual code execution, authenticity,
+purpose, or the physical user. Its core timestamp remains examination time; no
+execution timestamp role is implied. Legacy `programRun` facts cannot acquire
+these roles by changing their provenance or the role string in a claim.
 
 Answer projection decodes only the declared typed value, preserves the precise
 role semantic type, and applies public role requirements. Image algorithm names
