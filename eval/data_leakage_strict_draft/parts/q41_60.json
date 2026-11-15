@@ -138,7 +138,7 @@
     },
     {
       "id": "Q42",
-      "prompt": "Was the \u2018Windows Search and Indexing\u2019 function enabled? How can you identify it? If it was enabled, what is a file path of the \u2018Windows Search\u2019 index database?",
+      "prompt": "Was the ‘Windows Search and Indexing’ function enabled? How can you identify it? If it was enabled, what is a file path of the ‘Windows Search’ index database?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -582,20 +582,120 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_search_creation_timestamp_date_created"
+                      "recorded_attribute_search_index_date_created_string"
                     ],
-                    "meaning": "Q46 answer value at /properties/records/items/properties/date_created: date created under the full public question meaning.",
-                    "evidence_needed": "Search fileSeen timestamps combine creation, modification, access, gather and message dates. The requested DateCreated requires a distinct column-specific role."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "The exact DateCreated timestamp retained in this Windows Search index row; not independently established filesystem creation or a user action time.",
+                    "evidence_needed": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim.",
+                    "required_attribute_roles": [
+                      "search.index.item_path",
+                      "search.index.date_created",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_path_conditions": [
+                      {
+                        "role": "search.index.item_path",
+                        "policy": "windows-volume-relative-directory-v1",
+                        "directory": "\\Users\\informant\\Desktop",
+                        "include_directory": true,
+                        "case_sensitive": false
+                      }
+                    ]
                   }
                 },
                 "path": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_windows_search_desktop_scoped_path"
+                      "recorded_attribute_search_index_item_path_string"
                     ],
-                    "meaning": "List files and directories related to Windows Desktop stored in Windows Search database. (Windows Desktop directory: \\Users\\informant\\Desktop\\)",
-                    "evidence_needed": "A path must be shown to originate in Windows Search under the requested Desktop directory. fileRecorded.path alone does not constrain record_source, artifact or directory membership; a source/scope membership rule is missing."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Native path retained in a Windows Search index row, lexically within the public volume-relative Desktop directory; preserve its full root and spelling. No volume identity, actual current existence or complete inventory is inferred.",
+                    "evidence_needed": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim.",
+                    "required_attribute_roles": [
+                      "search.index.item_path",
+                      "search.index.date_created",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_path_conditions": [
+                      {
+                        "role": "search.index.item_path",
+                        "policy": "windows-volume-relative-directory-v1",
+                        "directory": "\\Users\\informant\\Desktop",
+                        "include_directory": true,
+                        "case_sensitive": false
+                      }
+                    ]
                   }
                 }
               },
@@ -1474,7 +1574,7 @@
     },
     {
       "id": "Q50",
-      "prompt": "Why can\u2019t we find Outlook\u2019s e-mail data in Volume Shadow Copy?",
+      "prompt": "Why can’t we find Outlook’s e-mail data in Volume Shadow Copy?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1485,37 +1585,178 @@
                 "needs_vsc_outlook_exclusion_explanation_ost_files_excluded"
               ],
               "meaning": "Q50 answer value at /properties/ost_files_excluded: ost files excluded under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "evidence_needed": "Native registry key, value name and pattern support the recorded exclusion configuration. They do not establish that Outlook bytes were excluded from a particular snapshot or explain missing mail."
             }
           },
           "registry_key": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_registry_key"
+                "recorded_attribute_snapshot_exclusion_registry_key_string"
               ],
-              "meaning": "Q50 answer value at /properties/registry_key: registry key under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal registry_key of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           },
           "value_name": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_value_name"
+                "recorded_attribute_snapshot_exclusion_value_name_string"
               ],
-              "meaning": "Q50 answer value at /properties/value_name: value name under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal value_name of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           },
           "pattern": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_pattern"
+                "recorded_attribute_snapshot_exclusion_pattern_string"
               ],
-              "meaning": "Q50 answer value at /properties/pattern: pattern under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal pattern of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           }
         },
@@ -1538,7 +1779,7 @@
     },
     {
       "id": "Q51",
-      "prompt": "Examine \u2018Recycle Bin\u2019 data in PC.",
+      "prompt": "Examine ‘Recycle Bin’ data in PC.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1726,7 +1967,7 @@
     },
     {
       "id": "Q52",
-      "prompt": "What actions were performed for anti-forensics on PC at the last day \u20182015-03-25\u2019?",
+      "prompt": "What actions were performed for anti-forensics on PC at the last day ‘2015-03-25’?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -2029,7 +2270,7 @@
     },
     {
       "id": "Q53",
-      "prompt": "Recover deleted files from USB drive \u2018RM#2\u2019.",
+      "prompt": "Recover deleted files from USB drive ‘RM#2’.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -2241,7 +2482,7 @@
     },
     {
       "id": "Q54",
-      "prompt": "What actions were performed for anti-forensics on USB drive \u2018RM#2\u2019? [Hint: this can be inferred from the results of Question 53.]",
+      "prompt": "What actions were performed for anti-forensics on USB drive ‘RM#2’? [Hint: this can be inferred from the results of Question 53.]",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -2283,7 +2524,7 @@
     },
     {
       "id": "Q55",
-      "prompt": "What files were copied from PC to USB drive \u2018RM#2\u2019?",
+      "prompt": "What files were copied from PC to USB drive ‘RM#2’?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -2428,7 +2669,7 @@
     },
     {
       "id": "Q56",
-      "prompt": "Recover hidden files from the CD-R \u2018RM#3\u2019. How to determine proper filenames of the original files prior to renaming tasks?",
+      "prompt": "Recover hidden files from the CD-R ‘RM#3’. How to determine proper filenames of the original files prior to renaming tasks?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -2597,7 +2838,7 @@
     },
     {
       "id": "Q57",
-      "prompt": "What actions were performed for anti-forensics on CD-R \u2018RM#3\u2019?",
+      "prompt": "What actions were performed for anti-forensics on CD-R ‘RM#3’?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -3536,13 +3777,13 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/records/items/properties/date_created",
-          "status": "no_catalog_support",
-          "rationale": "Search fileSeen timestamps combine creation, modification, access, gather and message dates. The requested DateCreated requires a distinct column-specific role."
+          "status": "catalog_support",
+          "rationale": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim."
         },
         {
           "schema_pointer": "/answer_schema/properties/records/items/properties/path",
-          "status": "no_catalog_support",
-          "rationale": "A path must be shown to originate in Windows Search under the requested Desktop directory. fileRecorded.path alone does not constrain record_source, artifact or directory membership; a source/scope membership rule is missing."
+          "status": "catalog_support",
+          "rationale": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim."
         }
       ],
       "narrow_observations": [
@@ -3892,22 +4133,22 @@
         {
           "schema_pointer": "/answer_schema/properties/ost_files_excluded",
           "status": "no_catalog_support",
-          "rationale": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+          "rationale": "Native registry key, value name and pattern support the recorded exclusion configuration. They do not establish that Outlook bytes were excluded from a particular snapshot or explain missing mail."
         },
         {
           "schema_pointer": "/answer_schema/properties/registry_key",
-          "status": "no_catalog_support",
-          "rationale": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+          "status": "catalog_support",
+          "rationale": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation."
         },
         {
           "schema_pointer": "/answer_schema/properties/value_name",
-          "status": "no_catalog_support",
-          "rationale": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+          "status": "catalog_support",
+          "rationale": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation."
         },
         {
           "schema_pointer": "/answer_schema/properties/pattern",
-          "status": "no_catalog_support",
-          "rationale": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+          "status": "catalog_support",
+          "rationale": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation."
         }
       ],
       "narrow_observations": [

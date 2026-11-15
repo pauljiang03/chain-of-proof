@@ -266,50 +266,255 @@
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_number"
+                      "recorded_attribute_partition_number_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: number.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal number observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "bootable": {
                   "type": "boolean",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_bootable"
+                      "recorded_attribute_partition_bootable_boolean"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: bootable.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal bootable observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "filesystem": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_filesystem"
+                      "recorded_attribute_partition_filesystem_string"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: filesystem.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal filesystem observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "start_sector": {
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_start_sector"
+                      "recorded_attribute_partition_start_sector_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: start_sector.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal start_sector observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "total_sectors": {
                   "type": "integer",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_partition_inventory_total_sectors"
+                      "recorded_attribute_partition_total_sectors_integer"
                     ],
-                    "meaning": "Partition-table information for every partition in the PC image. Requested leaf: total_sectors.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Literal total_sectors observed in one source-scoped MBR partition entry; not a complete partition census or displayed size.",
+                    "evidence_needed": "Require all five partition roles in one atomic tuple. The reader validates the raw MBR entry and resolves filesystem only by a unique same-disk byte-offset and size match. Preserve exact origin; do not infer displayed size or inventory completeness.",
+                    "required_attribute_roles": [
+                      "partition.number",
+                      "partition.bootable",
+                      "partition.filesystem",
+                      "partition.start_sector",
+                      "partition.total_sectors"
+                    ]
                   }
                 },
                 "size_as_printed": {
@@ -320,7 +525,7 @@
                       "needs_partition_inventory_size_as_printed"
                     ],
                     "meaning": "Partition-table information for every partition in the PC image. Requested leaf: size_as_printed.",
-                    "evidence_needed": "No reviewed partition-number, boot flag, filesystem, sector extent or displayed-size roles, or complete partition enumeration rule."
+                    "evidence_needed": "Native partition roles support the recorded MBR tuple, but no reviewed rule establishes this displayed-size spelling or complete partition inventory."
                   }
                 }
               },
@@ -350,8 +555,8 @@
             {
               "image": "pc.E01",
               "exhibit": "PC",
-              "source_snapshot": "base-volume",
-              "source_variant": "primary"
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
             }
           ]
         }
@@ -6400,20 +6605,120 @@
                   "format": "date-time",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_search_creation_timestamp_date_created"
+                      "recorded_attribute_search_index_date_created_string"
                     ],
-                    "meaning": "Q46 answer value at /properties/records/items/properties/date_created: date created under the full public question meaning.",
-                    "evidence_needed": "Search fileSeen timestamps combine creation, modification, access, gather and message dates. The requested DateCreated requires a distinct column-specific role."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "The exact DateCreated timestamp retained in this Windows Search index row; not independently established filesystem creation or a user action time.",
+                    "evidence_needed": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim.",
+                    "required_attribute_roles": [
+                      "search.index.item_path",
+                      "search.index.date_created",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_path_conditions": [
+                      {
+                        "role": "search.index.item_path",
+                        "policy": "windows-volume-relative-directory-v1",
+                        "directory": "\\Users\\informant\\Desktop",
+                        "include_directory": true,
+                        "case_sensitive": false
+                      }
+                    ]
                   }
                 },
                 "path": {
                   "type": "string",
                   "x-claim-requirement": {
                     "semantic_types": [
-                      "needs_windows_search_desktop_scoped_path"
+                      "recorded_attribute_search_index_item_path_string"
                     ],
-                    "meaning": "List files and directories related to Windows Desktop stored in Windows Search database. (Windows Desktop directory: \\Users\\informant\\Desktop\\)",
-                    "evidence_needed": "A path must be shown to originate in Windows Search under the requested Desktop directory. fileRecorded.path alone does not constrain record_source, artifact or directory membership; a source/scope membership rule is missing."
+                    "selectors": [
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_0"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_1"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_2"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_3"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_4"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_5"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_6"
+                      },
+                      {
+                        "form": "attributeTuple",
+                        "field": "value_7"
+                      }
+                    ],
+                    "meaning": "Native path retained in a Windows Search index row, lexically within the public volume-relative Desktop directory; preserve its full root and spelling. No volume identity, actual current existence or complete inventory is inferred.",
+                    "evidence_needed": "Require one atomic tuple containing exactly one native item_path, DateCreated, container_path, table and document_id role under the selected PC base-volume primary origin. The source subject includes container digest/table/DocID/ordinal. Python checks component membership using the declared lexical path policy; Lean checks typed source-record identity, not directory meaning. Drive-rooted paths retain their drive without inferring volume aliases. No DateModified substitution or complete inventory claim.",
+                    "required_attribute_roles": [
+                      "search.index.item_path",
+                      "search.index.date_created",
+                      "search.index.container_path",
+                      "search.index.table",
+                      "search.index.document_id"
+                    ],
+                    "attribute_path_conditions": [
+                      {
+                        "role": "search.index.item_path",
+                        "policy": "windows-volume-relative-directory-v1",
+                        "directory": "\\Users\\informant\\Desktop",
+                        "include_directory": true,
+                        "case_sensitive": false
+                      }
+                    ]
                   }
                 }
               },
@@ -7337,37 +7642,178 @@
                 "needs_vsc_outlook_exclusion_explanation_ost_files_excluded"
               ],
               "meaning": "Q50 answer value at /properties/ost_files_excluded: ost files excluded under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "evidence_needed": "Native registry key, value name and pattern support the recorded exclusion configuration. They do not establish that Outlook bytes were excluded from a particular snapshot or explain missing mail."
             }
           },
           "registry_key": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_registry_key"
+                "recorded_attribute_snapshot_exclusion_registry_key_string"
               ],
-              "meaning": "Q50 answer value at /properties/registry_key: registry key under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal registry_key of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           },
           "value_name": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_value_name"
+                "recorded_attribute_snapshot_exclusion_value_name_string"
               ],
-              "meaning": "Q50 answer value at /properties/value_name: value name under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal value_name of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           },
           "pattern": {
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_vsc_outlook_exclusion_explanation_pattern"
+                "recorded_attribute_snapshot_exclusion_pattern_string"
               ],
-              "meaning": "Q50 answer value at /properties/pattern: pattern under the full public question meaning.",
-              "evidence_needed": "The recorded exclusion configuration alone does not establish the cause of missing Outlook data. Registry path/name decomposition and effective exclusion/causation need explicit roles and rules."
+              "selectors": [
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ],
+              "meaning": "Literal pattern of the source-scoped OutlookOST exclusion configuration; not proof that bytes were omitted from any snapshot or the cause of missing mail.",
+              "evidence_needed": "Require all three exclusion roles in one atomic tuple and the exact OutlookOST value name documented by the Windows FilesNotToSnapshot configuration reader. Preserve the selected current-control-set origin. Configuration does not establish actual exclusion or causation.",
+              "required_attribute_roles": [
+                "snapshot.exclusion.registry_key",
+                "snapshot.exclusion.value_name",
+                "snapshot.exclusion.pattern"
+              ],
+              "attribute_conditions": [
+                {
+                  "role": "snapshot.exclusion.value_name",
+                  "values": [
+                    "OutlookOST"
+                  ]
+                }
+              ]
             }
           }
         },

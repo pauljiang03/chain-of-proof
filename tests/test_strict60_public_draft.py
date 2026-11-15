@@ -50,8 +50,8 @@ class StrictPublicDraft(unittest.TestCase):
         self.assertFalse(report['model_run_ready'])
         self.assertEqual(len(report['launch_blockers']), 4)
         self.assertEqual(report['counts']['leaf_occurrences_including_anyof_branches'], 358)
-        self.assertEqual(report['counts']['catalog_supported'], 55)
-        self.assertEqual(report['counts']['explicitly_unsupported'], 303)
+        self.assertEqual(report['counts']['catalog_supported'], 65)
+        self.assertEqual(report['counts']['explicitly_unsupported'], 293)
         self.assertEqual(report['counts']['row_policies'], 93)
 
     def test_every_declared_leaf_has_valid_explicit_support_or_gap(self):
@@ -70,7 +70,20 @@ class StrictPublicDraft(unittest.TestCase):
                     self.assertTrue(row['available_fields'])
                 else:
                     self.assertTrue(all(name.startswith('needs_') for name in requirement['semantic_types']))
-        self.assertEqual(counts, {'catalog_support': 55, 'no_catalog_support': 303})
+        self.assertEqual(counts, {'catalog_support': 65, 'no_catalog_support': 293})
+
+    def test_search_directory_condition_is_visible_in_public_review(self):
+        report = assembly.build()['review.json']
+        fields = [row for row in report['fields'] if row['question_id'] == 'Q46'
+                  and row['status'] == 'catalog_support']
+        self.assertEqual(len(fields), 2)
+        for field in fields:
+            self.assertEqual(field['attribute_path_conditions'], [{
+                'role': 'search.index.item_path',
+                'policy': 'windows-volume-relative-directory-v1',
+                'directory': r'\Users\informant\Desktop',
+                'include_directory': True, 'case_sensitive': False,
+            }])
 
     def test_reviewed_execution_path_supplies_partial_without_inventing_time(self):
         from checker.check import check
