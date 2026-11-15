@@ -25,7 +25,7 @@ class UsbEvidenceRouting(IntakeFixture):
         bind_config(self.run, self.initial['config'], self.initial['facts'])
 
     def test_capabilities_add_only_six_reviewed_role_kinds_and_shared_text_triple_rows(self):
-        original = {'usbInsert', 'volumeSeen', 'lnkTarget', 'webSearch', 'fileCreated',
+        original = {'volumeSeen', 'lnkTarget', 'webSearch', 'fileCreated',
                     'fileModified', 'fileDeleted', 'emailSent', 'cdBurn'}
         added = {ROLES[role].kind for role in USB_ROLES} | {'attributeSubject', 'attributeTextValue'}
         self.assertEqual(KINDS['windows'], original | added)
@@ -53,6 +53,25 @@ class UsbEvidenceRouting(IntakeFixture):
             result = recommendations(self.run, gap(kind))
             self.assertEqual(result['recommendations'], [])
             self.assertEqual(result['evidence_needs'][0]['candidate_readers'], [])
+
+    def test_legacy_hardware_kind_is_not_advertised_or_routed_by_its_old_rule(self):
+        self.assertNotIn('usbInsert', KINDS['windows'])
+        for category in ('missing_record', 'wrong_record_type'):
+            request = gap('usbInsert', category)
+            # deviceHolds carries R1 + R7; the media family for its other
+            # premise must not advertise an unavailable USB source kind.
+            request['requirements'][0]['required']['rules'] = ['R1', 'R7']
+            result = recommendations(self.run, request)
+            self.assertEqual(result['recommendations'], [])
+            need = result['evidence_needs'][0]
+            self.assertEqual(need['candidate_readers'], [])
+            self.assertEqual(need['collection_capability'], 'not_advertised_by_approved_readers')
+            self.assertEqual(need['source_presence'], 'not_determined')
+        typed = recommendations(self.run, gap(ROLES[USB_ROLES[0]].kind))
+        self.assertEqual(typed['evidence_needs'][0]['collection_capability'], 'reader_family_declared')
+        self.assertEqual(typed['evidence_needs'][0]['source_presence'], 'not_determined')
+        self.assertEqual([(row['reader'], row['exhibit']) for row in typed['recommendations']],
+                         [('windows', 'Computer A')])
 
     def test_identity_and_count_gaps_are_not_promoted_into_collection_guarantees(self):
         for category in ('contradictory_identity_or_value', 'cardinality_mismatch'):
