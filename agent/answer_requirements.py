@@ -62,13 +62,15 @@ def _semantic_types(spec):
     return variants
 
 
-def inspect(schema, forms):
+def inspect(schema, forms, *, require_claim_requirements=False):
     """Bounded preflight of public annotations; available roles are not evidence.
 
     Paths use '*' for an array item and {'additional_property': True} for a
     schema-valued additional property. Alternatives are shown separately. Actual
     bindings must satisfy all leaf requirements reached by the shared projector.
     """
+    if type(require_claim_requirements) is not bool:
+        raise ValueError('require_claim_requirements must be a boolean')
     pending, rows, visited = [(schema, [], [], 0)], [], 0
     while pending:
         node, path, branches, depth = pending.pop()
@@ -80,6 +82,14 @@ def inspect(schema, forms):
             continue
         if any(key in node for key in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
             rows.append({'path': path, 'status': 'invalid', 'reason': 'unsupported_schema_reference_or_union'})
+            continue
+        if require_claim_requirements and KEY not in node and not any(key in node for key in ('properties', 'items', 'additionalProperties', 'anyOf')) and node.get('type') not in ('object', 'array'):
+            rows.append({'path': path, 'branches': branches, 'status': 'missing_annotation', 'reason': 'missing_public_claim_requirement'})
+        if require_claim_requirements and 'anyOf' in node and (not isinstance(node['anyOf'], list) or not 1 <= len(node['anyOf']) <= 32):
+            rows.append({'path': path, 'branches': branches, 'status': 'invalid', 'reason': 'unsupported_public_schema_anyof'})
+            continue
+        if require_claim_requirements and KEY in node and (any(key in node for key in ('properties', 'items', 'additionalProperties', 'prefixItems')) or node.get('type') in ('object', 'array')):
+            rows.append({'path': path, 'branches': branches, 'status': 'invalid', 'reason': 'claim_requirement_must_annotate_exact_answer_value'})
             continue
         if KEY in node:
             row = {'path': path, 'branches': branches}
@@ -113,5 +123,28 @@ def inspect(schema, forms):
         if isinstance(alternatives, list):
             pending.extend((child, path, branches + [i], depth + 1)
                            for i, child in reversed(list(enumerate(alternatives))))
+    if require_claim_requirements:
+        # Structural anyOf siblings are conjunctive; an annotation on their
+        # shared leaf applies to each alternative. Use the binding resolver.
+        from agent.answer_projection import _strict_schema
+        filtered = []
+        for row in rows:
+            if row.get('status') == 'missing_annotation':
+                try:
+                    # Resolve wildcard paths with a representative array index
+                    # or an object key absent from all declared properties.
+                    sample = '__claim_requirement_additional_property__'
+                    while sample in repr(schema):
+                        sample += '_'
+                    path = [0 if token == '*' else sample if isinstance(token, dict) else token
+                            for token in row['path']]
+                    _strict_schema(schema, path)
+                    continue
+                except (ValueError, TypeError, KeyError):
+                    pass
+            filtered.append(row)
+        rows = filtered
     return {'requirements': rows, 'scope': SCOPE,
-            'unannotated_fields': 'No declared claim-role requirement; question placement remains unchecked.'}
+            'unannotated_fields': ('Unannotated answer fields are blocked by strict claim-role policy.'
+                                   if require_claim_requirements else
+                                   'No declared claim-role requirement; question placement remains unchecked.')}

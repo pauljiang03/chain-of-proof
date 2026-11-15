@@ -130,8 +130,12 @@ def _session(run, *, active=True):
     protocol = session.get("protocol", "literal-v1")
     if protocol not in PROTOCOLS:
         raise ValueError("invalid session protocol")
-    if (protocol == "claim-bindings-v2") != ("run-manifest.json" in session["inputs"]):
+    if (protocol != "literal-v1") != ("run-manifest.json" in session["inputs"]):
         raise ValueError("session protocol does not match its bound public inputs")
+    if protocol == "claim-bindings-v3":
+        value = session.get("deadline_unix")
+        if type(value) not in (int, float) or not math.isfinite(value):
+            raise ValueError("invalid session deadline")
     facts = session["facts"]
     if not isinstance(facts.get("path"), str) or not Path(facts["path"]).is_absolute():
         raise ValueError("facts path must be absolute")
@@ -140,7 +144,7 @@ def _session(run, *, active=True):
     for name in ("case-profile.json", "questions.json", "prompt.md"):
         if _binding(run / name) != session["inputs"][name]:
             raise ValueError("public session input changed: " + name)
-    if protocol == "claim-bindings-v2":
+    if protocol != "literal-v1":
         if _binding(run / "run-manifest.json") != session["inputs"]["run-manifest.json"]:
             raise ValueError("evidence manifest changed since session initialization")
     repository = Path(__file__).resolve().parents[2]
@@ -152,11 +156,14 @@ def _session(run, *, active=True):
     return session
 
 
-def init_session(*, arm, facts, case_profile, questions, out, protocol="literal-v1"):
+def init_session(*, arm, facts, case_profile, questions, out, protocol="literal-v1", deadline_unix=None):
     if arm not in ("A", "C"):
         raise ValueError("arm must be A or C")
     if protocol not in PROTOCOLS:
         raise ValueError("unknown ablation protocol")
+    if protocol == "claim-bindings-v3":
+        from comparison.ablation.checkpoints import deadline
+        deadline({"deadline_unix": deadline_unix})
     facts = Path(facts).absolute()
     facts_binding = _binding(facts)
     profile_bytes, question_bytes = _read(case_profile), _read(questions)
@@ -165,11 +172,17 @@ def init_session(*, arm, facts, case_profile, questions, out, protocol="literal-
     # Public readers reject reference fields. No path embedded in their JSON is followed.
     public = read_question_profile(Path(questions))
     profile = with_questions(read_profile(Path(case_profile)), public)
+    preflight = None
+    if protocol == "claim-bindings-v3":
+        from comparison.ablation.checkpoints import public_preflight
+        preflight = public_preflight(public)
     if _read(case_profile) != profile_bytes or _read(questions) != question_bytes:
         raise ValueError("public input changed during initialization")
     payloads = {"case-profile.json": profile_bytes, "questions.json": question_bytes,
                 "prompt.md": build_prompt(profile, public, arm, protocol=protocol).encode("utf-8")}
-    if protocol == "claim-bindings-v2":
+    if preflight is not None:
+        payloads["prompt.md"] += ("\nPUBLIC CONTRACT PREFLIGHT (uncertified):\n" + json.dumps(preflight, ensure_ascii=False) + "\n").encode("utf-8")
+    if protocol != "literal-v1":
         payloads["run-manifest.json"] = _encoded({"schema_version": 1, "protocol": protocol,
             "inputs": {"facts": dict(facts_binding, path=str(facts))}})
     repository = Path(__file__).resolve().parents[2]
@@ -182,25 +195,44 @@ def init_session(*, arm, facts, case_profile, questions, out, protocol="literal-
                "software": {"python": sys.version, "source_sha256": {
                    name: _binding(repository / name)["sha256"] for name in SOURCES}},
                "scope": SCOPE}
+    if protocol == "claim-bindings-v3":
+        session["deadline_unix"] = deadline_unix
+        session["public_contract_preflight"] = preflight
     out = Path(out).absolute()
     out.mkdir(parents=True, exist_ok=False)
     for name, raw in payloads.items():
         _write(out / name, raw)
     _write(out / "session.json", _encoded(session))
-    if protocol == "claim-bindings-v2":
+    if protocol != "literal-v1":
         from agent.investigation import Investigation
         Investigation(out).initialize(profile, public)
     return session
 
 
-def _record_call(run, bench, tool, arguments, protocol="literal-v1"):
+def _record_call(run, bench, tool, arguments, protocol="literal-v1", session=None):
     # This runtime-owned record retains batch positions; each claim has its own
     # normal Workbench audit event too. close is transport and is never audited.
     call_id = "bridge-" + uuid.uuid4().hex
     started, started_ns = _now(), time.monotonic_ns()
     result, error = None, None
     try:
-        result = dispatch(bench, tool, arguments, protocol=protocol)
+        if protocol == "claim-bindings-v3":
+            from comparison.ablation.checkpoints import deadline, checkpoint, preview
+            if session is None:
+                session = _session(run)
+            if any((run / name).exists() or (run / name).is_symlink()
+                   for name in (".finalizing", "trial.json", "seal.json")):
+                raise ValueError("run is frozen")
+            deadline(session)
+            if tool in ("checkpoint", "preview"):
+                if set(arguments) != {"document"}:
+                    raise ValueError("tool requires only document")
+                result = (checkpoint(run, session, arguments["document"]) if tool == "checkpoint"
+                          else preview(run, session, bench, arguments["document"]))
+            else:
+                result = dispatch(bench, tool, arguments, protocol=protocol)
+        else:
+            result = dispatch(bench, tool, arguments, protocol=protocol)
         return result
     except BaseException as caught:
         error = {"type": type(caught).__name__}
@@ -239,7 +271,7 @@ def call_tool(run, tool, arguments):
     # Normalize through strict finite JSON for callers that do not use the CLI.
     arguments = _json(json.dumps(arguments, allow_nan=False))
     with _bench(run) as (directory, session, bench):
-        return _record_call(directory, bench, tool, arguments, protocol=session.get("protocol", "literal-v1"))
+        return _record_call(directory, bench, tool, arguments, protocol=session.get("protocol", "literal-v1"), session=session)
 
 
 def serve_session(run, *, stdin=None, stdout=None):
@@ -258,7 +290,7 @@ def serve_session(run, *, stdin=None, stdout=None):
                         raise ValueError("close takes no arguments")
                     break
                 result = _record_call(directory, bench, request.get("tool"),
-                                      request.get("arguments", {}), protocol=session.get("protocol", "literal-v1"))
+                                      request.get("arguments", {}), protocol=session.get("protocol", "literal-v1"), session=session)
                 emit({"ok": True, "result": result})
             except (ValueError, TypeError, KeyError) as error:
                 emit({"ok": False, "error": {"type": type(error).__name__, "message": str(error)}})
@@ -313,7 +345,7 @@ def finalize_session(run, *, summary, status, elapsed_seconds=None):
             from verifier.verify import verify_run
             public = read_question_profile(directory / "questions.json")
             profile = with_questions(read_profile(directory / "case-profile.json"), public)
-            if session.get("protocol", "literal-v1") == "claim-bindings-v2":
+            if session.get("protocol", "literal-v1") != "literal-v1":
                 candidate_binding = _candidate_binding(directory / "proposals.jsonl")
             data = bundle(directory, profile.name, public_questions=public,
                           case_metadata={"backend": "codex-subagent", "model": MODEL,
@@ -342,7 +374,7 @@ def finalize_session(run, *, summary, status, elapsed_seconds=None):
                 _write(directory / "report.md", render(data).encode("utf-8"))
             metadata["certificate_replay"] = verification
             metadata["run"] = _binding(directory / "run.json")
-        if session.get("protocol", "literal-v1") == "claim-bindings-v2":
+        if session.get("protocol", "literal-v1") != "literal-v1":
             metadata["projection"] = _finalize_projection(directory, session, summary_raw,
                 candidate_binding=candidate_binding, verified_bundle=data, verification=verification)
         # Detect changed inputs during finalization, before publishing completion.
@@ -413,12 +445,19 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
     from comparison.ablation.projection import project_a, project_c
     from checker.facts import open_source
     public = read_question_profile(directory / "questions.json")
-    report = {"status": "unavailable", "protocol": "claim-bindings-v2",
+    report = {"status": "unavailable", "protocol": session.get("protocol", "claim-bindings-v2"),
               "scope": "Claim-field projection only; no private scoring or answer completeness certification.",
               "captured_candidates": candidate_binding}
     stage = "binding_document"
     try:
-        document, raw = extract_bindings(summary_raw, public)
+        strict = session.get("protocol") == "claim-bindings-v3"
+        if strict:
+            from comparison.ablation.checkpoints import load
+            document = load(directory, session)
+            report["checkpoint"] = _binding(directory / "binding-checkpoint.json")
+            raw = _encoded(document)
+        else:
+            document, raw = extract_bindings(summary_raw, public)
         _write(directory / "bindings.raw.json", raw)
         _write(directory / "bindings.json", _encoded(document))
         report["raw_bindings"] = _binding(directory / "bindings.raw.json")
@@ -437,7 +476,12 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
         stage = "candidate_resolution"
         if raw_candidates and not raw_candidates.endswith(b"\n"):
             raise ValueError("candidate log has an incomplete final entry")
-        candidates = [_json(line) for line in raw_candidates.splitlines()]
+        projection_raw = raw_candidates
+        if strict:
+            from comparison.ablation.checkpoints import FILE
+            receipt = _json(_read(directory / FILE))
+            projection_raw = raw_candidates[:receipt["candidate_population"]["bytes"]]
+        candidates = [_json(line) for line in projection_raw.splitlines()]
         resolved, resolutions = resolve_hashes(document["bindings"], candidates)
         _write(directory / "bindings-resolved.json", _encoded(resolved))
         _write(directory / "binding-resolution.json", _encoded(resolutions))
@@ -456,7 +500,7 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
             source = open_source(session["facts"]["path"])
             try:
                 projector = project_a if session["arm"] == "A" else project_c
-                projection = projector(public, candidates, resolved, source)
+                projection = projector(public, candidates, resolved, source, **({"require_claim_requirements": True} if strict else {}))
             finally:
                 _close_source(source)
             stage = "candidate_integrity"
@@ -479,6 +523,7 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="command", required=True)
     init = commands.add_parser("init", help="create a new public session")
     init.add_argument("--arm", choices=("A", "C"), required=True)
+    init.add_argument("--deadline-unix", type=float)
     init.add_argument("--protocol", choices=PROTOCOLS, default="literal-v1")
     for option in ("facts", "case-profile", "questions", "out"):
         init.add_argument("--" + option, required=True)
@@ -487,6 +532,8 @@ def main(argv=None):
     tool = commands.add_parser("tool", help="one tool call (reloads the facts)")
     tool.add_argument("--run", required=True)
     choices = tool.add_subparsers(dest="tool", required=True)
+    for name in ("checkpoint", "preview"):
+        choices.add_parser(name).add_argument("--document", required=True)
     choices.add_parser("forms")
     choices.add_parser("plan")
     update = choices.add_parser("update_question")
@@ -515,7 +562,7 @@ def main(argv=None):
     try:
         if args.command == "init":
             result = init_session(arm=args.arm, facts=args.facts, case_profile=args.case_profile,
-                                  questions=args.questions, out=args.out, protocol=args.protocol)
+                                  questions=args.questions, out=args.out, protocol=args.protocol, deadline_unix=args.deadline_unix)
         elif args.command == "session":
             return serve_session(args.run)
         elif args.command == "finalize":
@@ -523,7 +570,9 @@ def main(argv=None):
                                       elapsed_seconds=args.elapsed_seconds)
         else:
             arguments = {}
-            if args.tool == "update_question":
+            if args.tool in ("checkpoint", "preview"):
+                arguments = {"document": _json(args.document)}
+            elif args.tool == "update_question":
                 arguments = {"question_id": args.question_id}
                 for name in ("searched", "unresolved", "next_actions", "status"):
                     if getattr(args, name) is not None:

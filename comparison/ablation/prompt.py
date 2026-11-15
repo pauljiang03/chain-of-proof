@@ -5,7 +5,7 @@ import json
 
 from agent.brief import case_context, question_context, record_context
 
-PROTOCOLS = ("literal-v1", "claim-bindings-v2")
+PROTOCOLS = ("literal-v1", "claim-bindings-v2", "claim-bindings-v3")
 
 GATE = {
     "A": """SUBMISSION BEHAVIOR
@@ -129,13 +129,14 @@ def build_prompt(profile, public_questions: dict, arm: str, protocol="literal-v1
         raise ValueError("arm must be A or C")
     if protocol not in PROTOCOLS:
         raise ValueError("unsupported ablation protocol")
-    if protocol == "claim-bindings-v2":
+    if protocol != "literal-v1":
         example = {"schema_version": 1, "case_id": public_questions["case_id"],
                    "bindings": [], "unanswered": [
                        {"question_id": q["id"], "reason": "Replace with the actual gap, or remove when binding known fields."}
                        for q in public_questions["questions"]]}
         return (case_context(profile) + record_context(profile) + question_context(profile)
                 + GATE[arm] + "\n" + COMMON_BINDINGS
+                + ("\nDURABLE V3: checkpoint(document) saves a full binding document atomically. Call it early and repeatedly before the fixed deadline, accounting for every question through bindings or unanswered. Invalid updates preserve the last checkpoint. preview(document) returns bounded uncertified public claim-field/schema diagnostics identically in A and C, without proof checking. Only the last valid in-budget checkpoint supplies answers, including on timeout; final prose/JSON cannot replace it. Missing checkpoints leave answers unavailable. Strict public claim requirements apply to every binding.\n" if protocol == "claim-bindings-v3" else "")
                 + "\nSubmission structure (account for every question):\n"
                 + json.dumps(example, ensure_ascii=False, indent=2) + "\n")
     example = {"schema_version": 2, "case_id": public_questions["case_id"],

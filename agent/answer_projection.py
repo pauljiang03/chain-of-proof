@@ -124,11 +124,33 @@ _joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('co
 _joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'opened_from_mounted_volume')
 _joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'opened_from_device_volume')
 _joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'same_recorded_volume')
+# Legacy field keys remain stable, but their public roles describe only the
+# shortcut/DestList target association established by these joins.
+for _form, _relation, _meaning in (
+        ('openedFromMount', 'opened_from_mounted_volume', 'shortcut_target_associated_with_mounted_volume'),
+        ('openedFromDevice', 'opened_from_device_volume', 'shortcut_target_associated_with_device_volume'),
+        ('openedFromRecorded', 'same_recorded_volume', 'shortcut_target_associated_with_recorded_volume')):
+    _FIELDS[_form]['opened_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
+    _FIELDS[_form]['opened_time_us']['meaning'] = (
+        'Timestamp retained by the shortcut/DestList target record; does not establish actual file opening or its time.')
+    _FIELDS[_form][_relation]['semantic_type'] = _meaning
+    _FIELDS[_form][_relation]['meaning'] = (
+        'Shortcut/DestList target and volume association through the declared join; does not establish actual file opening.')
+
 _joined('recordedOnDevice', [('volume', 0, 'aux'), ('volume_label', 0, 'obj'), ('device_serial', 1, 'obj')], 'same_device_volume')
 _joined('sameLabel', [('first_volume', 0, 'aux'), ('second_volume', 1, 'aux'), ('label', 0, 'obj')], 'same_recorded_label_not_device_identity')
 _joined('copiedHere', [('path', 0, 'obj'), ('volume_or_recovery_area', 0, 'aux'), ('creation_time_us', 0, 't'), ('modification_time_us', 1, 't')], 'likely_copied_heuristic')
 _joined('deletedAfter', [('path', 0, 'obj'), ('deletion_recorded_time_us', 0, 't'), ('earlier_recorded_time_us', 1, 't')], 'deletion_record_after_other_record')
 _joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'same_device_has_unallocated_entries')
+# USBSTOR key last-write timestamps do not establish connection onset.
+for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
+    _FIELDS[_form]['connected_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
+    _FIELDS[_form]['connected_time_us']['meaning'] = (
+        'Timestamp retained by the USB record (including USBSTOR key last-write); does not establish connection onset.')
+_FIELDS['usbMountedAs']['same_device_mounted_volume']['semantic_type'] = 'same_recorded_device_volume_mapping'
+_FIELDS['usbMountedAs']['same_device_mounted_volume']['meaning'] = (
+    'USB record and volume mapping share the declared device serial; does not establish an actual mount event or time.')
+
 _joined('recoveredOnDevice', [('path', 0, 'obj'), ('device_serial', 1, 'obj'), ('creation_time_us', 0, 't')], 'entry_recovered_from_device')
 _joined('sameContent', [('first_path', 0, 'obj'), ('second_path', 1, 'obj'), ('sha256', 0, 'aux')], 'same_recorded_content_hash')
 _joined('createdAfterVolumeRecord', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('disc', 1, 'obj'), ('creation_time_us', 0, 't'), ('volume_recorded_time_us', 1, 't')], 'creation_timestamp_after_volume_record')
@@ -371,6 +393,53 @@ def _schema(schema, path):
     return leaves
 
 
+def _strict_schema(schema, path):
+    """Keep conjunctive constraints separate; require meaning in every alternative.
+
+    No schema keyword is an internal marker. A branch cannot overwrite sibling
+    constraints or their annotations, including additionalProperties and items.
+    """
+    pending, leaves, visited = [([schema], 0, 0)], [], 0
+    while pending:
+        nodes, position, depth = pending.pop()
+        visited += len(nodes)
+        if visited > MAX_SCHEMA_NODES or depth > MAX_SCHEMA_DEPTH:
+            raise ValueError('public_schema_traversal_limit')
+        expanded = False
+        for index, node in enumerate(nodes):
+            if not isinstance(node, dict):
+                raise ValueError('unsupported_public_schema_node')
+            if any(k in node for k in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
+                raise ValueError('unsupported_schema_reference_or_union')
+            if answer_requirements.KEY in node and position != len(path):
+                raise ValueError('claim_requirement_must_annotate_exact_answer_value')
+            if 'anyOf' in node:
+                branches = node['anyOf']
+                if not isinstance(branches, list) or not 1 <= len(branches) <= MAX_SCHEMA_ALTERNATIVES:
+                    raise ValueError('unsupported_public_schema_anyof')
+                siblings = {key: value for key, value in node.items() if key != 'anyOf'}
+                for branch in reversed(branches):
+                    pending.append((nodes[:index] + [siblings, branch] + nodes[index + 1:], position, depth + 1))
+                expanded = True
+                break
+        if expanded:
+            continue
+        if position == len(path):
+            for node in nodes:
+                kind = node.get('type')
+                if any(k in node for k in ('properties', 'items', 'additionalProperties', 'prefixItems')) or kind in ('object', 'array'):
+                    raise ValueError('claim_requirement_must_annotate_exact_answer_value')
+            if not any(answer_requirements.KEY in node for node in nodes):
+                raise ValueError('missing_public_claim_requirement')
+            leaves.extend(nodes)
+            continue
+        children = []
+        for node in nodes:
+            children.extend(_schema(node, [path[position]]))
+        pending.append((children, position + 1, depth + 1))
+    return leaves
+
+
 def _typed(value, schema):
     if '$ref' in schema or any(k in schema for k in ('oneOf', 'anyOf', 'allOf')):
         raise ValueError('unsupported_schema_reference_or_union')
@@ -411,8 +480,10 @@ def _format(value, format_name, zone, semantic_type):
         raise ValueError('timestamp_or_public_timezone_is_not_displayable') from error
 
 
-def prepare_projection(public, candidates, bindings, source):
+def prepare_projection(public, candidates, bindings, source, *, require_claim_requirements=False):
     """Freeze literal values once; no candidate is accepted/refused by this function."""
+    if type(require_claim_requirements) is not bool:
+        raise ValueError('require_claim_requirements must be a boolean')
     questions = _public(public)
     if not isinstance(candidates, list) or not isinstance(bindings, list) or len(bindings) > 20000:
         raise ValueError('candidates and at most 20000 bindings must be lists')
@@ -454,7 +525,7 @@ def prepare_projection(public, candidates, bindings, source):
             value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
             if 'value' in raw and _encoded(raw['value']) != _encoded(value):
                 raise ValueError('literal_value_mismatch_not_repaired')
-            for schema in _schema(questions[qid]['answer_schema'], path):
+            for schema in (_strict_schema if require_claim_requirements else _schema)(questions[qid]['answer_schema'], path):
                 _typed(value, schema)
                 if answer_requirements.KEY in schema:
                     meaning = answer_requirements.check(schema[answer_requirements.KEY], part_row['form'],
@@ -471,6 +542,7 @@ def prepare_projection(public, candidates, bindings, source):
             entry['reason'] = str(error)
             unsupported.append(entry)
     plan = {'schema_version': VERSION, 'kind': 'frozen_claim_field_projection', 'case_id': public['case_id'],
+            'require_claim_requirements': require_claim_requirements,
             'public_sha256': claim_digest(public), 'questions': [q['id'] for q in public['questions']],
             'candidates': indexed, 'bindings': prepared, 'unsupported': unsupported, 'scope': SCOPE}
     # Freeze omissions before any gate filtering. Removing a rejected candidate
@@ -570,6 +642,6 @@ def render_projection(plan, admitted_ids=None, authority='unchecked'):
             'certification': 'not_performed_by_projector', 'question_completeness': 'not_established', 'scope': SCOPE}
 
 
-def project_answers(public, candidates, bindings, source, admitted_ids=None, authority='unchecked'):
-    plan = prepare_projection(public, candidates, bindings, source)
+def project_answers(public, candidates, bindings, source, admitted_ids=None, authority='unchecked', *, require_claim_requirements=False):
+    plan = prepare_projection(public, candidates, bindings, source, require_claim_requirements=require_claim_requirements)
     return dict(render_projection(plan, admitted_ids=admitted_ids, authority=authority), projection=plan)
