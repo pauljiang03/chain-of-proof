@@ -174,12 +174,15 @@ def message_content(data, source_url):
         if len(cells) < 2:
             continue
         label = ' '.join(_text(cells[0]).split()).lower()
-        if label in ('from:', 'subject:', 'date:') and _text(cells[1]).strip():
+        # An empty retained From cell still identifies the message-header layout.
+        # It supplies no sender value, and this observation does not attribute one.
+        if label in ('from:', 'subject:', 'date:') and (label == 'from:' or _text(cells[1]).strip()):
             items = header_tables.setdefault(node['table'], {})
             if label[:-1] in items:
                 ambiguous_tables.add(node['table'])
             items[label[:-1]] = {
-                'byte_offset': node['start'], 'label': label, 'structure': 'message header table row'}
+                'byte_offset': node['start'], 'label': label, 'structure': 'message header table row',
+                'value_text_empty': _text(cells[1]) == ''}
     headers = [items for table, items in header_tables.items()
                if table is not None and table not in ambiguous_tables
                and set(items) == {'from', 'subject', 'date'}]

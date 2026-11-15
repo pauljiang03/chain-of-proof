@@ -131,6 +131,20 @@ class YahooCacheFormatTests(unittest.TestCase):
         self.assertIsNone(yahoo.message_content(b'<!--' + html() + b'-->', URL))
         self.assertIsNone(yahoo.message_content(b'<template>' + html() + b'</template>', URL))
 
+    def test_literal_empty_from_cell_classifies_without_inventing_sender(self):
+        data = html().replace(b'fixture@example.test', b'')
+        found = yahoo.message_content(data, URL)
+        self.assertIsNotNone(found)
+        self.assertTrue(found['message_header_locators']['from']['value_text_empty'])
+        self.assertNotIn('sender', found)
+        self.assertNotIn('from', found)
+        missing_row = data.replace(b'<tr><td><b>From:</b></td><td></td></tr>', b'')
+        self.assertIsNone(yahoo.message_content(missing_row, URL))
+        for changed in (data.replace(b'synthetic-42', b'wrong-id'),
+                        data.replace(b'<div id=message>', b'<div id=other>'),
+                        data.replace(b'A synthetic subject', b'')):
+            self.assertIsNone(yahoo.message_content(changed, URL))
+
     def test_mixed_message_forms_or_scattered_headers_are_not_coherent_message(self):
         other_form = (b'<form name=showLetter method=post action="/ym/ShowLetter">'
                       b'<input type=hidden name=MsgId value=other-id></form>')
