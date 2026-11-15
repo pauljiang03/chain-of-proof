@@ -6,10 +6,11 @@ import json
 from types import SimpleNamespace as NS
 import unittest
 from unittest.mock import patch
+from zoneinfo import ZoneInfo
 
 from extractor import windows
 from extractor.source_scope import base_volume_scope
-from extractor.store import Evidence
+from extractor.store import Evidence, us
 from extractor.tags import add_tags
 
 
@@ -135,6 +136,43 @@ class UsbInstanceIdentity(unittest.TestCase):
         self.assertTrue(all('UTC offset not recorded' in r['fields']['usb.record_time_meaning'] for r in rows))
         self.assertTrue(all(r['provenance']['timestamp_semantics'] == 'examination_observation' for r in rows))
         self.assertFalse(any(row[0] == 'usbInsert' for row in ev.rows()))
+
+    def test_setupapi_dst_fold_cannot_supply_the_audited_false_utc_ordering(self):
+        # Exact audit source: the two valid interpretations straddle 06:00 UTC.
+        raw = (b'>>> [Device Install (Hardware initiated) - USBSTOR\\DiskFixture\\DEVICEA]\n'
+               b'>>> Section start 2026/11/01 01:30:00.000\n')
+        wall = datetime(2026, 11, 1, 1, 30, tzinfo=ZoneInfo('America/New_York'))
+        alternatives = [wall.replace(fold=fold).astimezone(timezone.utc) for fold in (0, 1)]
+        reference = datetime(2026, 11, 1, 6, 0, tzinfo=timezone.utc)
+        self.assertEqual([stamp.isoformat() for stamp in alternatives],
+                         ['2026-11-01T05:30:00+00:00', '2026-11-01T06:30:00+00:00'])
+        self.assertLess(alternatives[0], reference)
+        self.assertGreater(alternatives[1], reference)
+        ev = Evidence()
+        windows._setupapi(ev, log_target(raw), scope(), 'America/New_York', examined_at=EXAMINED)
+        row, = observations(ev)
+        self.assertEqual(row['fields']['usb.recorded_time'], '2026/11/01 01:30:00.000')
+        self.assertIn('UTC offset not recorded', row['fields']['usb.record_time_meaning'])
+        self.assertEqual(ev.problems, [])
+        # No resolved event row exists for the audit's usbInsert-before claim.
+        self.assertFalse(any(item[0] == 'usbInsert' for item in ev.rows()))
+        self.assertTrue(all(item[1] == EXAMINED for item in ev.rows()))
+        self.assertTrue(all(item[1] not in {us(stamp) for stamp in alternatives} for item in ev.rows()))
+        self.assertTrue(all(json.loads(item[-1])['timestamp_semantics'] == 'examination_observation'
+                            for item in ev.rows()))
+
+    def test_setupapi_dst_gap_is_retained_as_text_without_inventing_a_utc_instant(self):
+        # 02:30 does not occur in New York on this date. The log has no offset;
+        # retain its literal text without claiming that this was the source zone.
+        ev = Evidence()
+        windows._setupapi(ev, log_target(section(stamp='2026/03/08 02:30:00.000').encode()),
+                          scope(), 'America/New_York', examined_at=EXAMINED)
+        row, = observations(ev)
+        self.assertEqual(row['fields']['usb.recorded_time'], '2026/03/08 02:30:00.000')
+        self.assertIn('UTC offset not recorded', row['fields']['usb.record_time_meaning'])
+        self.assertFalse(any(item[0] == 'usbInsert' for item in ev.rows()))
+        self.assertTrue(all(item[1] == EXAMINED for item in ev.rows()))
+        self.assertEqual(ev.problems, [])
 
     def test_setupapi_repeated_sections_are_distinct_source_occurrences(self):
         ev = Evidence()
