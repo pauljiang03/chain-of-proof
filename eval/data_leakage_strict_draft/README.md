@@ -12,8 +12,8 @@ and peer-review records; peer reports describe the draft before their findings
 were resolved in the authoring files.
 
 The reviewed draft has 358 leaf occurrences, including repeated `anyOf` branches:
-21 have compatible catalog roles and 337 explicitly require missing support.
-There are no missing or invalid annotations. Nine questions have at least one
+41 have compatible catalog roles and 317 explicitly require missing support.
+There are no missing or invalid annotations. Thirteen questions have at least one
 compatible leaf. **These are catalog counts, not accuracy, evidence availability
 or complete-answer counts.** Exact exhibit, source snapshot and artifact variant
 checks now apply to every supporting record against hash-bound evidence. There
@@ -30,8 +30,17 @@ The main remaining issues are concrete:
   withheld. The draft has 83 same-part policies and 10 independent section policies.
 - `programRan` includes observations from sources such as MuiCache. A generic
   path from that form cannot alone establish membership in an execution log.
-  Q11 now accepts the exact reviewed `app.execution.path` role as a partial
-  execution-artifact path. It supplies no inferred execution time or count.
+  Q11 accepts the exact reviewed path, artifact-reported timestamp, interpreted
+  counter and source classification. Every retained field requires a bounded
+  same-subject tuple containing exactly one `source_type` of `Prefetch` or
+  `UserAssist`, even if the source output column is omitted. Security records
+  cannot enter through partial bindings. Raw counters and examination times do
+  not supply the requested fields; absent values remain absent.
+- `attributeTuple` joins two to eight distinct approved typed attributes in one
+  atomic claim. Q3 can retain a coherent six-field OS configuration row. Q14
+  joins validated browser-history identity/path; Q19, Q38 and Q40 use exact
+  validated mail, Thumbcache and Sticky Notes container-path roles. Generic
+  source paths cannot substitute for these classified roles.
 - Generic paths, text, record kinds and timestamps lack many requested artifact,
   actor, date-range, action, copy, recovery and intent meanings. Such leaves use
   `needs_*` requirements absent from the catalog; those names do not create rules.
@@ -46,6 +55,14 @@ The guard also rejects using unrelated parts of one `both` certificate. This
 validates explicit row consistency; it does not establish question relevance,
 source-reader authenticity or case accuracy. Synthetic provenance now also
 exercises the selected-PC/base-volume/primary scope check.
+
+The tuple follow-up adds 20 compatible leaf occurrences across 12 field shapes,
+including repeated schema alternatives. Deterministic public-contract tests
+certify synthetic tuples and independently replay them, preserve valid partial
+rows, and refuse mixed subjects, wrong roles, source-family omissions and
+provenance substitutions. Strict enum/const checks retain exact public choices;
+they do not change proposed values or legacy protocol behavior. These are
+implementation checks, not a new model result or accuracy score.
 
 From the repository root, using an environment with the project's dependencies:
 

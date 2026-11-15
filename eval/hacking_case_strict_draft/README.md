@@ -10,6 +10,11 @@ meanings. It declares 26 same-atomic-part object policies and six independent
 scalar-list wrappers. These counts describe catalog compatibility, not case
 accuracy or available evidence.
 
+Already supported typed fields also accept bounded `attributeTuple` values.
+The tuple establishes one source subject for its distinct typed attributes;
+it does not add actor, application, cross-question or completeness meanings.
+The compatible/unsupported counts therefore remain 13/25.
+
 `review.json` records the exact public input hash, changed requirement pointers,
 source-scope assumptions and peer-review resolutions. `peer_review.json` records
 the independent review before those resolutions. In particular, a configured

@@ -50,8 +50,8 @@ class StrictPublicDraft(unittest.TestCase):
         self.assertFalse(report['model_run_ready'])
         self.assertEqual(len(report['launch_blockers']), 4)
         self.assertEqual(report['counts']['leaf_occurrences_including_anyof_branches'], 358)
-        self.assertEqual(report['counts']['catalog_supported'], 21)
-        self.assertEqual(report['counts']['explicitly_unsupported'], 337)
+        self.assertEqual(report['counts']['catalog_supported'], 41)
+        self.assertEqual(report['counts']['explicitly_unsupported'], 317)
         self.assertEqual(report['counts']['row_policies'], 93)
 
     def test_every_declared_leaf_has_valid_explicit_support_or_gap(self):
@@ -70,7 +70,7 @@ class StrictPublicDraft(unittest.TestCase):
                     self.assertTrue(row['available_fields'])
                 else:
                     self.assertTrue(all(name.startswith('needs_') for name in requirement['semantic_types']))
-        self.assertEqual(counts, {'catalog_support': 21, 'no_catalog_support': 337})
+        self.assertEqual(counts, {'catalog_support': 41, 'no_catalog_support': 317})
 
     def test_reviewed_execution_path_supplies_partial_without_inventing_time(self):
         from checker.check import check
@@ -83,20 +83,26 @@ class StrictPublicDraft(unittest.TestCase):
             root = Path(directory)
             evidence = Evidence()
             role = 'app.execution.path'
-            identity = emit_attribute(evidence, 'synthetic-image:Security-event:42', role,
+            identity = emit_attribute(evidence, 'synthetic-image:UserAssist-entry:42', role,
                                       r'C:\Synthetic\recorded.exe', 1000000,
+                                      artifact='synthetic reviewed execution artifact',
+                                      image='pc.E01', exhibit='PC', source_snapshot='base-volume', source_variant='primary')
+            source_role = 'app.execution.source_type'
+            source_identity = emit_attribute(evidence, 'synthetic-image:UserAssist-entry:42', source_role,
+                                      'UserAssist', 1000000,
                                       artifact='synthetic reviewed execution artifact',
                                       image='pc.E01', exhibit='PC', source_snapshot='base-volume', source_variant='primary')
             evidence.write_json(root / 'facts.json', {})
             source = JsonFacts(root / 'facts.json')
             rows = {row.kind: row.id for row in source.all() if source.string(row.obj) == identity}
-            claim = {'attributeRecorded': [rows['attributeSubject'], rows[ROLES[role].kind],
-                                            rows['attributeTextValue'], role]}
+            family = {row.kind: row.id for row in source.all() if source.string(row.obj) == source_identity}
+            claim = {'attributeTuple': [[rows['attributeSubject'], rows[ROLES[role].kind], rows['attributeTextValue'], role],
+                                       [family['attributeSubject'], family[ROLES[source_role].kind], family['attributeTextValue'], source_role]]}
             certificate = check(claim, 'Execution', source, out_dir=root)
             self.assertEqual(certificate['status'], 'verified')
             self.assertEqual(verify(certificate, source), [])
             bindings = [{'candidate_id': 'Execution', 'claim_sha256': claim_digest(claim),
-                         'question_id': 'Q11', 'path': ['records', 0, 'path_or_application_id'], 'field': 'value'}]
+                         'question_id': 'Q11', 'path': ['records', 0, 'path_or_application_id'], 'field': 'value_0'}]
             result = project_answers(self.public, [certificate], bindings, source,
                                      require_claim_requirements=True, require_evidence_scope=True,
                                      evidence_facts_sha256=hashlib.sha256((root / 'facts.json').read_bytes()).hexdigest(),
