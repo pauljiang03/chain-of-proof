@@ -434,7 +434,8 @@ def render_html(run: dict, options: dict | None = None) -> str:
     if chosen is not None:
         wanted = set(chosen)
         findings = [(i, row) for i, row in findings if row.get('finding_id') in wanted]
-        if len(findings) != len(wanted):   # an unknown ID, or one the bundle repeats
+        if (len(findings) != len(wanted)
+                or {row.get('finding_id') for _, row in findings} != wanted):
             raise ValueError('The selection names a finding that is not recorded exactly once as verified.')
     # The plan cross-references every finding, so it only belongs in a report that has them all.
     left_out = [name for name in SECTIONS if (sections is not None and name not in sections)

@@ -268,6 +268,9 @@ class AppReport(unittest.TestCase):
             render_html(data, report_options(ids=['F9']))
         with self.assertRaises(ValueError):                 # an ID the bundle repeats cannot be chosen
             render_html(bundle(finding(), finding()), report_options(ids=['F1']))
+        with self.assertRaises(ValueError):                 # a duplicate must not cancel an absent selected ID
+            render_html(bundle(finding(), finding(english='Conflicting copy.')),
+                        report_options(ids=['F1', 'MISSING']))
         unverified = bundle(finding(status='proposed'))
         with self.assertRaises(ValueError):
             render_html(unverified, report_options(ids=['F1']))

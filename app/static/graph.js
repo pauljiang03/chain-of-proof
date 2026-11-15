@@ -28,8 +28,24 @@
     key: null, signature: null, run: null, events: [], items: [],
     scope: "", query: "", focus: null, page: 0, step: 0, steps: 0, total: 0,
     selected: null, hover: null, view: { x: 24, y: 56, k: 1 }, fitted: false,
-    model: { nodes: new Map(), edges: [], shown: [] }, timer: null, drag: null, columns: [], width: 0, examined: new Set(),
+    model: { nodes: new Map(), edges: [], shown: [] }, timer: null, drag: null, columns: [], width: 0, examined: new Set(), rowKeys: new WeakMap(),
   };
+
+  // A fact ID is not enough to merge copied evidence. Share only identical records,
+  // including their provenance, irrespective of JSON object key order.
+  function stableJSON(value) {
+    if (Array.isArray(value)) return "[" + value.map(stableJSON).join(",") + "]";
+    if (value && typeof value === "object") return "{" + Object.keys(value).sort().map((key) => JSON.stringify(key) + ":" + stableJSON(value[key])).join(",") + "}";
+    return JSON.stringify(value);
+  }
+  function recordKey(row) {
+    if (!state.rowKeys.has(row)) state.rowKeys.set(row, stableJSON(row));
+    return state.rowKeys.get(row);
+  }
+  function imageKey(provenance) {
+    return stableJSON(["image", "image_sha256", "exhibit", "case_id", "snapshot_id", "snapshot", "view", "generation"]
+      .map((key) => provenance[key] === undefined ? null : provenance[key]));
+  }
 
   function svg(tag, attributes, content) {
     const node = document.createElementNS(NS, tag);
@@ -60,19 +76,25 @@
 
   // ---- data ---------------------------------------------------------------
   function prepare() {
-    const run = object(state.run), index = new Map(), order = new Map();
+    const run = object(state.run), index = new Map(), ambiguous = new Set(), order = new Map();
+    const focused = state.items.find((item) => item.key === state.focus);
+    state.rowKeys = new WeakMap();
     array(run.findings).forEach((finding) => array(object(finding).cited_facts).forEach((row) => {
-      if (row && typeof row === "object" && !index.has(row.id)) index.set(row.id, row);
+      if (row && typeof row === "object") {
+        if (!index.has(row.id)) index.set(row.id, row);
+        else if (recordKey(index.get(row.id)) !== recordKey(row)) ambiguous.add(row.id);
+      }
     }));
+    ambiguous.forEach((id) => index.delete(id));  // a refusal must not borrow an arbitrary conflicting copy
     array(state.events).forEach((event) => {
       const sequence = Number(object(event).sequence);
       if (event && event.finding_id && Number.isFinite(sequence) && !order.has(event.finding_id)) order.set(event.finding_id, sequence);
     });
     const items = [];
     array(run.findings).forEach((finding, at) => {
-      if (object(finding).status === "verified") items.push({ id: text(finding.finding_id), refused: false, data: finding, at });
+      if (object(finding).status === "verified") items.push({ key: "F:f" + (at + 1), id: text(finding.finding_id), refused: false, data: finding, at });
     });
-    array(run.rejections).forEach((rejection, at) => items.push({ id: text(object(rejection).finding_id), refused: true, data: object(rejection), at: 1e6 + at }));
+    array(run.rejections).forEach((rejection, at) => items.push({ key: "F:r" + (at + 1), id: text(object(rejection).finding_id), refused: true, data: object(rejection), at: 1e6 + at }));
     // Replay order: the audit sequence where it is recorded; otherwise the order in the bundle.
     if (items.some((item) => order.has(item.id))) {
       items.forEach((item) => { item.sequence = order.has(item.id) ? order.get(item.id) : item.at - 1e9; });
@@ -86,13 +108,18 @@
         .join(" ").toLowerCase();
     });
     state.items = items;
+    if (focused) {
+      const matches = items.filter((item) => item.id === focused.id && item.refused === focused.refused);
+      const retained = matches.length === 1 ? matches[0] : matches.find((item) => item.key === focused.key);
+      state.focus = retained ? retained.key : null;
+    }
     // Times this case itself declares to be examination times.
     state.examined = new Set();
     for (const item of items) for (const row of item.rows) if (EXAMINED.test(timeMeaning(row))) state.examined.add(row.t);
   }
   function uniqueRows(rows) {
     const seen = new Set();
-    return rows.filter((row) => row && typeof row === "object" && !seen.has(row.id) && seen.add(row.id));
+    return rows.filter((row) => row && typeof row === "object" && !seen.has(recordKey(row)) && seen.add(recordKey(row)));
   }
   // A refused proposal has no certificate. Show the records it named, from the checker's diagnostics.
   function refusedRows(rejection, index) {
@@ -111,10 +138,10 @@
   }
   function selection() {
     if (state.focus) {
-      const base = state.items.find((item) => item.id === state.focus);
+      const base = state.items.find((item) => item.key === state.focus);
       if (base) {
-        const ids = new Set(base.rows.map((row) => row.id));
-        return [base, ...state.items.filter((item) => item !== base && item.rows.some((row) => ids.has(row.id)))];
+        const ids = new Set(base.rows.map(recordKey));
+        return [base, ...state.items.filter((item) => item !== base && item.rows.some((row) => ids.has(recordKey(row))))];
       }
     }
     let list = state.items;
@@ -139,49 +166,54 @@
       return item;
     };
     const edge = (from, to, cls, birth) => {
-      const key = from.id + ">" + to.id, existing = edgeIndex.get(key);
+      const key = JSON.stringify([from.id, to.id]), existing = edgeIndex.get(key);
       if (existing) { existing.birth = Math.min(existing.birth, birth); return; }
       from.outs.add(to.id); to.ins.add(from.id);
       const created = { from, to, cls, birth };
       edgeIndex.set(key, created); edges.push(created);
     };
     const shared = new Map();
-    shown.forEach((item) => item.rows.forEach((row) => shared.set(row.id, (shared.get(row.id) || 0) + 1)));
+    shown.forEach((item) => item.rows.forEach((row) => shared.set(recordKey(row), (shared.get(recordKey(row)) || 0) + 1)));
 
     shown.forEach((item, position) => {
       const birth = position + 1;
-      const finding = node("F:" + item.id, "finding", { item, owned: [], cls: item.refused ? "refused" : item.data.strength === "heuristic" ? "heuristic" : "strong" });
+      const finding = node(item.key, "finding", { item, owned: [], cls: item.refused ? "refused" : item.data.strength === "heuristic" ? "heuristic" : "strong" });
       finding.birth = birth;
       // Keep records that several findings rest on visible; fold the rest of a long list.
-      const ranked = item.rows.map((row, at) => [row, at]).sort((a, b) => (shared.get(b[0].id) - shared.get(a[0].id)) || a[1] - b[1]).map((pair) => pair[0]);
+      const ranked = item.rows.map((row, at) => [row, at]).sort((a, b) => (shared.get(recordKey(b[0])) - shared.get(recordKey(a[0]))) || a[1] - b[1]).map((pair) => pair[0]);
       const visible = ranked.length > MAX_RECORDS + 1 ? ranked.slice(0, MAX_RECORDS) : ranked;
       visible.forEach((row) => {
-        const fresh = !nodes.has("R:" + row.id);
-        const record = node("R:" + row.id, "record", { row });
+        const key = "R:" + recordKey(row), fresh = !nodes.has(key);
+        const record = node(key, "record", { row });
         if (fresh) finding.owned.push(record);
         record.birth = Math.min(record.birth, birth);
         edge(record, finding, item.refused ? "refused" : "", birth);
         const provenance = object(row.prov);
         if (!provenance.artifact && !provenance.exhibit) return;
         const source = artifactOf(row), exhibitName = text(provenance.exhibit) || "Exhibit not recorded";
-        const artifact = node("A:" + exhibitName + "|" + source.key, "artifact", { label: source.label, path: source.key, exhibit: exhibitName, rows: [] });
+        const scope = imageKey(provenance);
+        const artifact = node("A:" + stableJSON([scope, source.key]), "artifact", { label: source.label, path: source.key, exhibit: exhibitName, rows: [] });
         if (!artifact.rows.includes(row)) artifact.rows.push(row);
         artifact.birth = Math.min(artifact.birth, birth);
         edge(artifact, record, "", birth);
-        const exhibit = node("E:" + exhibitName, "exhibit", { label: exhibitName, image: text(provenance.image), artifacts: new Set() });
+        const exhibit = node("E:" + scope, "exhibit", { label: exhibitName, image: text(provenance.image), artifacts: new Set() });
         exhibit.artifacts.add(artifact.id);
         exhibit.birth = Math.min(exhibit.birth, birth);
         edge(exhibit, artifact, "", birth);
       });
       if (visible.length < ranked.length) {
-        const more = node("M:" + item.id, "record", { item, count: ranked.length - visible.length, cls: "more" });
+        const more = node("M:" + item.key, "record", { item, count: ranked.length - visible.length, cls: "more" });
         more.birth = birth;
         finding.owned.push(more);
         edge(more, finding, "more", birth);
       }
     });
+    const byId = new Map();
+    state.items.forEach((item) => byId.set(item.id, byId.has(item.id) ? null : item));
     array(object(state.run).conclusions).forEach((conclusion) => {
-      const cited = array(object(conclusion).finding_ids).map((id) => nodes.get("F:" + id)).filter(Boolean);
+      // A label-only reference cannot select among duplicate claim occurrences.
+      const cited = array(object(conclusion).finding_ids).map((id) => byId.get(text(id)))
+        .filter((item) => item && !item.refused).map((item) => nodes.get(item.key)).filter(Boolean);
       if (!cited.length) return;
       const judgment = node("J:" + text(conclusion.conclusion_id), "judgment", { conclusion });
       judgment.birth = Math.max(...cited.map((finding) => finding.birth));
@@ -191,7 +223,7 @@
     // Each finding is a block; the records it introduced stack beside it.
     let y = 0;
     shown.forEach((item) => {
-      const finding = nodes.get("F:" + item.id), pitch = COLUMN.record.pitch;
+      const finding = nodes.get(item.key), pitch = COLUMN.record.pitch;
       const block = Math.max(COLUMN.finding.pitch, finding.owned.length * pitch);
       finding.owned.forEach((record, at) => { record.y = y + (block - finding.owned.length * pitch) / 2 + at * pitch + pitch / 2; });
       finding.y = y + block / 2;
@@ -263,7 +295,7 @@
       tip(text(conclusion.text));
     }
     group.addEventListener("click", (event) => { event.stopPropagation(); select(item.id); });
-    group.addEventListener("dblclick", (event) => { event.stopPropagation(); if (item.column === "finding") focus(item.item.id); });
+    group.addEventListener("dblclick", (event) => { event.stopPropagation(); if (item.column === "finding") focus(item.item.key); });
     group.addEventListener("pointerenter", () => { state.hover = item.id; highlight(); });
     group.addEventListener("pointerleave", () => { state.hover = null; highlight(); });
     return group;
@@ -413,8 +445,9 @@
     $("graph-prev").disabled = state.page === 0;
     $("graph-next").disabled = end >= state.total;
     $("graph-focus").hidden = !state.focus;
-    $("graph-focus-label").textContent = state.focus ? state.focus + " and related" : "";
-    $("graph-focus").title = state.focus ? "Showing " + state.focus + " and the findings that cite any of the same records" : "";
+    const focused = state.items.find((item) => item.key === state.focus);
+    $("graph-focus-label").textContent = focused ? focused.id + " and related" : "";
+    $("graph-focus").title = focused ? "Showing " + focused.id + " and the findings that cite any of the same records" : "";
     $("graph-play").textContent = state.timer ? "❚❚ Pause" : "▶ Replay";
     $("graph-play").disabled = !state.steps;
   }
@@ -518,8 +551,8 @@
     if (item.column === "judgment") return text(object(item.conclusion).conclusion_id);
     return text(item.label);
   }
-  function focus(id) {
-    state.focus = id; state.page = 0; state.selected = "F:" + id; state.step = Infinity;
+  function focus(key) {
+    state.focus = key; state.page = 0; state.selected = key; state.step = Infinity;
     rebuild(true);
   }
 
@@ -591,9 +624,9 @@
   }
 
   CONAN.graph = {
-    render(run, events, key) {
+    render(run, events, key, revision = null) {
       const bundle = object(run);
-      const signature = [array(bundle.findings).length, array(bundle.rejections).length, array(bundle.conclusions).length].join(":");
+      const signature = revision === null ? JSON.stringify([bundle, array(events)]) : revision;
       const changedCase = key !== state.key;
       if (!changedCase && signature === state.signature) return;
       if (changedCase) Object.assign(state, { scope: "", query: "", focus: null, page: 0, step: Infinity, selected: null, hover: null, fitted: false });
@@ -610,7 +643,10 @@
       $("graph").replaceChildren();
     },
     resize() { if (!state.fitted) state.fitted = fit(); },
-    focusFinding(id) { if (state.items.some((item) => item.id === id)) focus(id); },
+    focusFinding(id, data = null) {
+      const matches = state.items.filter((item) => item.id === id && !item.refused && (!data || item.data === data));
+      if (matches.length === 1) focus(matches[0].key);
+    },
   };
   wire();
 })();

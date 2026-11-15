@@ -16,7 +16,7 @@
   const COVER = ["reference", "examiner", "organisation"];
   const PREVIEW_LIMIT = 6 * 1024 * 1024;   // characters; larger reports are exported, not previewed
   const state = {
-    name: null, ids: [], known: new Set(), marked: new Set(), scope: "all", sections: new Set(), cover: {},
+    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", sections: new Set(), cover: {},
     shadow: null, stale: true, active: false, request: 0, timer: 0, built: false,
   };
 
@@ -180,12 +180,13 @@
 
   CONAN.report = {
     /** A case was opened or re-read: `ids` are its certified findings, in order. */
-    open(name, ids) {
-      const list = (ids || []).map(String), same = name === state.name && list.length === state.ids.length;
+    open(name, ids, revision = null) {
+      const list = (ids || []).map(String), same = name === state.name && revision === state.revision
+        && list.length === state.ids.length && list.every((id, index) => id === state.ids[index]);
       if (name !== state.name) { state.name = name; load(); state.built = false; state.stale = true; if (state.shadow) state.shadow.replaceChildren(); }
-      state.ids = list; state.known = new Set(list);
+      state.ids = list; state.known = new Set(list); state.revision = revision;
       if (state.scope === "marked" && !marked().length) state.scope = "all";
-      if (!same) state.stale = true;
+      if (!same) { state.stale = true; state.request += 1; }  // discard any preview of the previous contents
       form();
       controls();
       if (state.active && state.stale) changed();

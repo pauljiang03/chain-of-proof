@@ -196,8 +196,10 @@
     $("count-activity").textContent = array(payload.events).length ? count(payload.events.length, "") : "";
     $("activity-refresh-label").textContent = isRunning() ? "REFRESHES EVERY 2 SECONDS" : "RECORDED ACTIVITY";
     renderProgress();
-    if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name);
-    if (CONAN.report) CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)));
+    // Share one exact revision across both views; equal counts do not mean equal records.
+    const revision = JSON.stringify([payload.run, payload.events]);
+    if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name, revision);
+    if (CONAN.report) CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)), revision);
     renderFindings();
     renderNeeds();
     renderActivity();
@@ -571,7 +573,7 @@
     summary.push(element("p", "statement", present(finding.english)));
     const show = element("button", "text-button", "Show in proof graph →");
     show.type = "button";
-    show.addEventListener("click", () => { switchTab("graph"); if (CONAN.graph) CONAN.graph.focusFinding(String(finding.finding_id)); });
+    show.addEventListener("click", () => { switchTab("graph"); if (CONAN.graph) CONAN.graph.focusFinding(String(finding.finding_id), finding); });
     const actions = element("div", "detail-actions");
     actions.append(show, markButton(finding));
     summary.push(actions);
