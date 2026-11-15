@@ -115,7 +115,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .table-wrap { overflow-x:auto; }
 .cited th:first-child, .cited td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .cited th:nth-child(2) { width:34%; } .cited th:nth-child(3) { width:30%; }
-.lead { font-size:16px; line-height:1.7; max-width:72ch; margin:12px 0; }
+.lead { font-size:16px; line-height:1.7; margin:12px 0; }
 .keys { margin:0 0 6px; }
 .key { display:grid; grid-template-columns:150px minmax(0,1fr); gap:2px 18px; padding:7px 0; border-bottom:1px solid var(--line); break-inside:avoid; }
 .key h3 { font-size:14px; margin:0; line-height:1.5; }
