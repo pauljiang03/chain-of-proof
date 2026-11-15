@@ -161,8 +161,7 @@ flowchart TD
     K -->|No| X[Refusal and evidence requirements]
     X --> S
     K -->|Yes| B[Certificate and fixed sentence]
-    B --> QA[Certificate sentences and explicit answer fields]
-    QA --> R
+    B --> R
     F --> CR[Scoped conflict review]
     CR --> R
     B --> V[Independent certificate verifier]
@@ -172,9 +171,10 @@ flowchart TD
     L --> R
     R --> Z[Portable verification package]
     F --> Z
-    V --> A[Check bindings and optional public role requirements]
+    V --> A[Check declared field roles and row relationships]
     Q --> A
     A --> J[Structured answers with source links]
+    J --> R
     J --> T[Deterministic scorer]
     P[Published answer key] --> U[Source audit and reference review]
     U --> H[Private expected answers]
@@ -198,7 +198,9 @@ Public questions go to the investigator; expected answers go only to the scorer.
 6. **Report** — accepted findings use fixed sentences. Examiner judgments stay separate.
    Explicit bindings place claim values into the public answer format with source links.
    The product rejects answer fields without a declared role, or with an incompatible
-   role. Narrow source observations remain available. This does not prove the complete answer.
+   role. Related fields must come from the same atomic claim, or a declared checked
+   relation. Independent fields need an explicit policy. Narrow source observations
+   remain available. This does not prove the complete answer.
 7. **Score** — a deterministic scorer compares answers to the private reference using
    declared rules for strings, lists, paths, and timestamps.
 

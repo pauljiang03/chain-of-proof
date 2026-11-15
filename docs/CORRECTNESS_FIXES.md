@@ -20,7 +20,7 @@ Strict projection is the product default. The low-level projection API retains a
 
 Declared-role compatibility is still not a Lean proof of a complete English answer. A contract can be wrong or incomplete, an investigator can choose irrelevant evidence, and a parser can misread its source. These fixes do not establish universal zero false positives or an accuracy advantage on every run.
 
-A subsequent public-contract review found another gap: individually compatible fields can refer to different subjects or events. For example, an image name and two hashes can come from three images; a search query and its time can come from different history records. A candidate containing several independent claims does not establish a relationship between them. Explicit row relationships and source-scope checks are still being implemented. The execution-source follow-up below separates application sightings from reviewed execution artifacts. New model experiments remain on hold.
+A subsequent public-contract review found another gap: individually compatible fields can refer to different subjects or events. For example, an image name and two hashes can come from three images; a search query and its time can come from different history records. A candidate containing several independent claims does not establish a relationship between them. The row guard now requires explicit same-atomic-claim or independent-field policies. Source-scope enforcement is being integrated. The execution-source follow-up below separates application sightings from reviewed execution artifacts. New model experiments remain on hold.
 
 ## Better evidence and explicit gaps
 
@@ -105,3 +105,49 @@ not include the other terminal's unfinished answer-row and source-scope changes.
 The local archive is `runs/dev/execution-source-fixes-20261115T0440Z/`.
 It inventories 52 files. Its manifest SHA-256 is
 `6757dd45986a2f4b0ef879590ce4fa13cbedca74b354be0d98182ba1eb94a586`.
+
+## Answer-row and source-origin follow-up
+
+The row guard was integrated as `2ddfc33`. Related answer fields must use one
+atomic claim part. Unrelated parts of a `both` claim cannot supply a coherent row.
+Independent sections require an explicit public policy. Missing policies block
+strict answer projection. Conflicts are fixed before A/B candidate filtering, so
+removing a refused candidate cannot silently repair a mixed row. The integrated
+row/execution checkpoint passed 963 tests: 962 passed and one platform test skipped.
+
+The new public reviews are separate derivatives for
+[Data Leakage](../eval/data_leakage_strict_draft/README.md) and
+[Hacking](../eval/hacking_case_strict_draft/README.md). They preserve the original
+prompts, answer shapes and matching rules. Unsupported meanings remain explicit.
+Catalog compatibility is not evidence availability, question completeness or an
+accuracy score. The original contracts, private references and saved results stay
+unchanged.
+
+Reader source commit `a9895f2`, integrated as `715d437`, makes two origin fields
+explicit on fresh records. `source_snapshot` identifies the selected source view;
+`source_variant` identifies primary or alternate artifact state within that view.
+A RegBack hive can be on the base volume without being the primary registry state.
+A VSS catalog record names a copy but remains a base-volume observation. Records
+actually read from that copy carry its VSS identifier. NTFS reference-key equality
+can still link history across views; it does not establish equal source scope.
+
+Whole-image digests have separate logical-image and acquisition-container origins.
+Scanner output has an examination origin and binds its input view separately.
+Recovered content has an explicit alternate variant. Virtual registry results
+without a physical hive-copy identity remain unknown. No default converts missing
+scope to primary evidence, and no frozen facts were relabeled.
+
+A fresh check used only the system, host-attribute and application-identity readers:
+
+| Source-only snapshot | Data Leakage PC | Hacking Case PC |
+|---|---:|---:|
+| Primary records | 1,689 | 1,074 |
+| Noncurrent control-set records | 14 | 1 |
+| Registry backup records | 364 | 0 |
+| Total records | 2,067 | 1,075 |
+| Extraction issues | 0 | 1 |
+
+The Hacking issue is an unavailable registered binary, `cmmgr32.exe`. Its missing
+metadata is not replaced with a guess. These limited snapshots contain no real VSS
+or scanner outputs; those origin branches were exercised with source fixtures.
+This is not a replacement for either full benchmark snapshot or a scored run.
