@@ -302,6 +302,37 @@ def enrich_bundle(run, run_dir):
     return run
 
 
+def _inspection_snapshot(run_dir, question_id, *, _evidence_source=None,
+                         _evidence_facts_sha256=None):
+    """Read native inspection metadata and projection under one state lock.
+
+    Trusted native callers may borrow their already bound source/digest pair;
+    certificate/source equality checks still run through _evidence_context.
+    Direct callers retain its ordinary actual-file verification and cleanup.
+    Nothing from this snapshot is persisted.
+    """
+    from agent.answer_projection import catalog, tool_catalog
+    from agent.answer_requirements import inspect
+    directory = Path(run_dir)
+    planner = Investigation(directory)
+    with planner._locked():
+        state = planner._load()
+        question = next((row for row in state['questions'] if row['id'] == question_id), None)
+        if question is None:
+            raise ValueError('question_id must name a current public question')
+        document = _document(directory / FILENAME, state)
+        certificates = _certificates(directory, document['bindings'])
+        digest = _evidence_context(directory, state, document, certificates,
+                                   _evidence_source, _evidence_facts_sha256)
+        projection = _project(state, document, certificates, evidence_facts_sha256=digest)
+        metadata = {'question_id': question_id, 'field_catalog': tool_catalog(),
+                    'field_requirements': inspect(question.get('answer_schema', {}), catalog()['forms'],
+                                                  require_claim_requirements=True, require_evidence_scope=True),
+                    'bindings': deepcopy([b for b in document['bindings']
+                                          if b.get('question_id') == question_id])}
+        return {'inspection': metadata, 'projection': projection}
+
+
 def read_projection(run_dir):
     """Recompute a bound answer snapshot for neutral coverage diagnostics."""
     directory = Path(run_dir)

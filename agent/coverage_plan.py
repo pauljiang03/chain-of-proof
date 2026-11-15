@@ -26,7 +26,8 @@ def _question_id(value):
 def _fields(schema, value, budget):
     missing, notes = [], []
     annotations = {'title', 'description', '$comment', 'examples', 'default', 'readOnly', 'writeOnly', 'deprecated'}
-    supported = {'type', 'properties', 'required', 'items'} | annotations
+    supported = {'type', 'properties', 'required', 'items',
+                 'x-claim-requirement', 'x-claim-row', 'x-claim-scope', 'x-claim-reference'} | annotations
     # These standard constraints do not declare required object-field presence.
     # Their validity remains outside this helper, rather than an actionable gap.
     non_presence = {'$schema', '$id', '$anchor', '$defs', 'definitions', 'enum', 'const', 'format',

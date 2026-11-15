@@ -118,9 +118,8 @@ def explain(facts: List[Fact], claim: claims.Claim) -> List[dict]:
     Each part is one set instance; `bricks` lists the primitive checks it expands to.
     """
     if claims.census_of(claim):
-        actual = claims.census_actual(claim, {f.id: f for f in facts})
         return [{"part": claims.to_json(claim), "ok": False,
-                 "bricks": [f"FAIL the evidence holds {actual}, not {claim[1][-1]}"]}]
+                 "bricks": [claims.census_failure(claim, {f.id: f for f in facts})]}]
     rows = ", ".join(f.to_lean() for f in facts)
     parts = claims.parts(claim)
     text = f"import ChainOfProof\nopen ChainOfProof\ndef cited : List Fact := [{rows}]\n"
@@ -169,7 +168,7 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
             census_timeout = True
             kernel = {"ok": False, "output": "census kernel evaluation exceeded the 120-second wall-clock limit"}
         if not kernel["ok"]:
-            if claims.census_of(claim) and (census_timeout or claims.census_actual(claim, found) == claim[1][-1]):
+            if claims.census_of(claim) and (census_timeout or claims.census_satisfied(claim, found)):
                 # Python can explain a failure, but it never supplies a proof.
                 # A correct count can still fail elaboration/reduction budgets.
                 result["reason"] = ("census kernel evaluation exceeded the 120-second wall-clock limit; no certificate was issued"

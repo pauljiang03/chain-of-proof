@@ -36,6 +36,10 @@ def _neutral_plan(bench):
     except (ValueError, OSError, TypeError) as error:
         inventory = {"status": "invalid", "error_type": type(error).__name__, "traversals": []}
     neutral["coverage"] = coverage_pass(neutral, answers=None, inventory_progress=inventory)
+    session = getattr(bench, "_ablation_session", None)
+    if session is not None and session.get("protocol") == "claim-bindings-v3":
+        from comparison.ablation.checkpoints import completion_status
+        neutral["completion"] = completion_status(bench.run_dir, session, bench.source)
     neutral["disclaimer"] = "Public work notes and returned-row progress only; no certificate, relevance, accuracy or completeness is inferred."
     return neutral
 
