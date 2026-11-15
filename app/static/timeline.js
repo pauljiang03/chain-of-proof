@@ -1,6 +1,7 @@
 /* CONAN-F timeline: source timestamps in cited evidence records.
    Every mark is one record that an accepted finding cites. Nothing is inferred here:
-   a record is placed at its own recorded time, in UTC, and says what that time means. */
+   a record is placed at its own recorded time and says what that time means. Times are
+   shown on the case's own clock when the records name its time zone, and in UTC otherwise. */
 (() => {
   "use strict";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -21,17 +22,46 @@
   const array = (value) => (Array.isArray(value) ? value : []);
   const number = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
   const MINUTE = 60000, HOUR = 60 * MINUTE, DAY = 24 * HOUR;
-  const utc = (options) => new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", hourCycle: "h23", ...options });
-  const F = {
-    full: utc({ day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" }),
-    minute: utc({ day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }),
-    day: utc({ weekday: "short", day: "numeric", month: "short", year: "numeric" }),
-    short: utc({ day: "numeric", month: "short" }),
-    clock: utc({ hour: "2-digit", minute: "2-digit" }),
-    seconds: utc({ hour: "2-digit", minute: "2-digit", second: "2-digit" }),
-    month: utc({ month: "short", year: "numeric" }),
-    year: utc({ year: "numeric" }),
-  };
+  function formats(timeZone) {
+    const make = (options) => new Intl.DateTimeFormat("en-GB", { timeZone, hourCycle: "h23", ...options });
+    return {
+      full: make({ day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" }),
+      minute: make({ day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }),
+      day: make({ weekday: "short", day: "numeric", month: "short", year: "numeric" }),
+      short: make({ day: "numeric", month: "short" }),
+      clock: make({ hour: "2-digit", minute: "2-digit" }),
+      seconds: make({ hour: "2-digit", minute: "2-digit", second: "2-digit" }),
+      month: make({ month: "short", year: "numeric" }),
+      year: make({ year: "numeric" }),
+      parts: make({ year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }),
+    };
+  }
+  // The case clock. It is the time zone the evidence records themselves name; with none named, UTC.
+  const UTC = formats("UTC");
+  let F = UTC, zone = { name: "UTC", local: false, records: 0 };
+  const leads = new Map();
+  // How far the case clock runs ahead of UTC at an instant, in milliseconds (negative west of Greenwich).
+  function lead(t) {
+    if (!zone.local) return 0;
+    const key = Math.floor(t / (15 * MINUTE));
+    let value = leads.get(key);
+    if (value === undefined) {
+      const p = {};
+      for (const part of F.parts.formatToParts(t)) p[part.type] = Number(part.value);
+      value = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - Math.floor(t / 1000) * 1000;
+      leads.set(key, value);
+    }
+    return value;
+  }
+  const wall = (t) => t + lead(t);                 // what the case clock reads, written as if it were UTC
+  const unwall = (w) => w - lead(w - lead(w));     // and back to the instant
+  function adopt(found) {
+    leads.clear();
+    F = UTC; zone = { name: "UTC", local: false, records: 0 };
+    if (!found) return;
+    try { F = formats(found.name); zone = { name: found.name, local: true, records: found.records }; } catch (_) { F = UTC; /* a zone this system does not know */ }
+  }
+  const zoneNote = () => (zone.local ? "local time (" + zone.name + ")" : "UTC");
 
   // ---- the story model: records in plain words -------------------------------
   // Kinds of activity, in a fixed order. A lane keeps its colour whatever else is shown.
@@ -89,6 +119,7 @@
     if (SOURCE_TIMESTAMPS.has(semantics) || (meaning && !UNKNOWN_TIME.test(meaning))) return "source_recorded";
     return "unknown";
   }
+  const ZONE = /\b(?:Africa|America|Antarctica|Arctic|Asia|Atlantic|Australia|Europe|Indian|Pacific)\/[A-Za-z_]+(?:\/[A-Za-z_]+)?/;
   const show = (value) => (value === undefined || value === null ? "" : typeof value === "string" ? value : JSON.stringify(value));
   const stable = (value) => (value && typeof value === "object"
     ? Array.isArray(value) ? "[" + value.map(stable).join(",") + "]"
@@ -149,7 +180,15 @@
     }
     const lanes = LANES.map(() => ({ records: 0, events: 0 }));
     records.forEach((record) => { lanes[record.lane].records += 1; if (record.ms !== null) lanes[record.lane].events += 1; });
+    // The case's time zone is the one most of its records say their local times were converted from.
+    const named = new Map();
+    for (const record of records) {
+      const prov = record.row.prov, match = prov && typeof prov.time_zone === "string" ? prov.time_zone.match(ZONE) : null;
+      if (match) named.set(match[0], (named.get(match[0]) || 0) + 1);
+    }
+    const chosen = [...named.entries()].sort((a, b) => b[1] - a[1])[0];
     return {
+      zone: chosen ? { name: chosen[0], records: chosen[1] } : null,
       findings, records, events, undatedCount: records.length - events.length, times: events.map((record) => record.ms), lanes, main,
       range: events.length ? { from: events[0].ms, to: events[events.length - 1].ms } : null,
     };
@@ -158,32 +197,37 @@
   function open(run, name, revision) {
     if (cache.model && revision !== undefined && revision !== null && cache.name === name && cache.revision === revision) return cache.model;
     cache = { name, revision, model: build(run) };
+    adopt(cache.model.zone);
     return cache.model;
   }
 
-  // Axis marks for a span of time, in UTC: clock times within days, then days, months, years.
+  // Axis marks for a span of time on the case clock: clock times within days, then days, months, years.
   const STEPS = [MINUTE, 5 * MINUTE, 15 * MINUTE, 30 * MINUTE, HOUR, 3 * HOUR, 6 * HOUR, 12 * HOUR, DAY, 2 * DAY, 7 * DAY];
   function ticks(t0, span, plot) {
     const want = span / Math.max(2, Math.floor(plot / 92)), end = t0 + span, list = [];
     const fixed = STEPS.find((step) => step >= want);
     if (fixed) {
-      for (let t = Math.ceil(t0 / fixed) * fixed; t <= end; t += fixed) {
-        const midnight = t % DAY === 0, date = new Date(t), newYear = midnight && date.getUTCMonth() === 0 && date.getUTCDate() === 1;
+      for (let w = Math.ceil(wall(t0) / fixed) * fixed; w <= wall(end); w += fixed) {
+        const t = unwall(w), midnight = w % DAY === 0, date = new Date(w), newYear = midnight && date.getUTCMonth() === 0 && date.getUTCDate() === 1;
+        if (t < t0 || t > end) continue;
         if (fixed < DAY) list.push({ t, label: F.clock.format(t), major: midnight, sub: midnight ? F.day.format(t) : "" });
         else list.push({ t, label: F.short.format(t), major: newYear, sub: newYear ? F.year.format(t) : "" });
       }
       return { list, context: fixed < DAY ? F.day.format(t0) : F.year.format(t0) };
     }
-    const size = [1, 3, 6, 12, 24, 60, 120, 240].find((months) => months * 30.44 * DAY >= want) || 600, first = new Date(t0);
+    const size = [1, 3, 6, 12, 24, 60, 120, 240].find((months) => months * 30.44 * DAY >= want) || 600, first = new Date(wall(t0));
     for (let k = Math.ceil((first.getUTCFullYear() * 12 + first.getUTCMonth()) / size) * size; ; k += size) {
-      const t = Date.UTC(Math.floor(k / 12), ((k % 12) + 12) % 12, 1);
+      const t = unwall(Date.UTC(Math.floor(k / 12), ((k % 12) + 12) % 12, 1));
       if (t > end) break;
       if (t >= t0) list.push({ t, label: size >= 12 ? F.year.format(t) : F.month.format(t), major: k % 12 === 0, sub: "" });
     }
     return { list, context: "" };
   }
   const dot = (lane) => el("i", "dot c" + lane);
-  CONAN.story = { LANES, F, open, build, describe, clip, lower, ticks, dot, number, DAY, HOUR, MINUTE };
+  CONAN.story = {
+    LANES, UTC, open, build, adopt, describe, clip, lower, ticks, dot, number, wall, unwall, zoneNote, DAY, HOUR, MINUTE,
+    get F() { return F; }, get zone() { return zone; },
+  };
 
   // ---- the timeline view -----------------------------------------------------
   const LEFT = 152, RIGHT = 14, TOP = 6, LANE = 46, AXIS = 42, COLUMN = 3, LIST_MAX = 200;
@@ -312,7 +356,8 @@
     }
     // With no midnight near the left edge, say which date the view starts in.
     if (marks.context && !dated) axis.push(svg("text", { class: "axis-label major start", x: LEFT + 2, y: bottom + 34 }, marks.context));
-    axis.push(svg("text", { class: "axis-label start", x: 12, y: bottom + 18 }, "Time in UTC"));
+    axis.push(svg("text", { class: "axis-label start", x: 12, y: bottom + 18 }, zone.local ? "Case local time" : "Time in UTC"));
+    if (zone.local) axis.push(svg("text", { class: "axis-label start", x: 12, y: bottom + 34 }, zone.name));
     parts.axis.replaceChildren(...axis);
     let inView = 0, keys = 0;
     view.lanes.forEach((lane, i) => {
@@ -363,7 +408,7 @@
       parts.picked.setAttribute("transform", "translate(" + x + "," + (TOP + lane * LANE) + ")");
       parts.picked.lastChild.setAttribute("cy", chosen.marked ? 13 : 32);
     } else parts.picked.setAttribute("visibility", "hidden");
-    $("timeline-range").textContent = F.minute.format(view.t0) + " – " + F.minute.format(end) + " UTC · "
+    $("timeline-range").textContent = F.minute.format(view.t0) + " – " + F.minute.format(end) + " " + zoneNote() + " · "
       + number.format(inView) + (inView === 1 ? " record" : " records") + " in view, " + number.format(keys) + (keys === 1 ? " key event" : " key events");
     clearTimeout(view.listTimer);
     view.listTimer = setTimeout(list, 90);
@@ -415,7 +460,7 @@
     if (total > 12) used.append(el("p", "detail-intro", "and " + number.format(total - 12) + " more; search the Findings table for record " + show(record.row.id) + "."));
     const when = record.ms === null
       ? (record.timeStatus === "examination_observation" ? "Examination observation; not a source activity time." : "No source timestamp with a known meaning is plotted.")
-      : F.full.format(record.ms) + " UTC" + (record.meaning ? " · what this time means: " + record.meaning : "");
+      : F.full.format(record.ms) + " " + zoneNote() + (zone.local ? " · " + UTC.full.format(record.ms) + " UTC" : "") + (record.meaning ? " · what this time means: " + record.meaning : "");
     app.inspect("Record #" + app.present(record.row.id), [identity, el("p", "statement", describe(record, 400)), el("p", "detail-intro", when), used], [app.recordCard(record.row)], null);
   }
 
@@ -446,7 +491,7 @@
     parts.cursor.setAttribute("visibility", inside ? "visible" : "hidden");
     parts.cursor.setAttribute("x1", at.x); parts.cursor.setAttribute("x2", at.x);
     if (!found || !found.count) { tip.hidden = true; return; }
-    tip.replaceChildren(el("strong", "", (view.span < 3 * HOUR ? F.full : F.minute).format(found.at) + " UTC"));
+    tip.replaceChildren(el("strong", "", (view.span < 3 * HOUR ? F.full : F.minute).format(found.at) + (zone.local ? " local time" : " UTC")));
     found.items.slice().sort((a, b) => a.ms - b.ms).forEach((record) => {
       const line = el("div", "tip-line");
       line.append(dot(record.lane), el("span", "tip-time", F.seconds.format(record.ms)), el("span", "", describe(record, 54)));

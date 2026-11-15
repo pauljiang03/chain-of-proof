@@ -428,9 +428,6 @@
       if (pulse && item.column === "finding" && item.birth === at) {
         item.el.classList.add("newborn");
         setTimeout(() => item.el.classList.remove("newborn"), 1000);
-        const host = $("graph-host").getBoundingClientRect(), screenY = item.y * state.view.k + state.view.y;
-        const inset = insets();
-        if (host.height && (screenY < inset.top + 30 || screenY > host.height - inset.bottom - 40)) settle({ ...state.view, y: host.height * 0.55 - item.y * state.view.k });
       }
     });
     model.edges.forEach((edge) => edge.el.classList.toggle("unborn", edge.birth > at));
@@ -480,16 +477,30 @@
 
   // ---- replay -------------------------------------------------------------
   function stop() { if (state.timer) { clearInterval(state.timer); state.timer = null; controls(); } }
+  // Scroll so the finding the replay has just reached is on screen, whether it is playing or being dragged.
+  function follow(animate) {
+    const at = local(), host = $("graph-host").getBoundingClientRect();
+    let newest = null;
+    if (at > 0) state.model.nodes.forEach((item) => { if (item.column === "finding" && item.birth === at) newest = item; });
+    if (!newest || !host.height) return;
+    const inset = insets(), screenY = newest.y * state.view.k + state.view.y;
+    if (screenY >= inset.top + 30 && screenY <= host.height - inset.bottom - (animate ? 120 : 40)) return;   // scroll early while playing
+    const target = { ...state.view, y: host.height * 0.55 - newest.y * state.view.k };
+    // While it plays, each step retargets a scroll already under way: keep its speed, or the view never catches up.
+    if (animate) settle(target, motion.frame ? { x: motion.velocity.x, y: motion.velocity.y } : null, 1, 0.26);
+    else { interrupt(); state.view = target; applyView(); }
+  }
   // Move the replay to a position, turning to the page that holds it.
   function seek(step, pulse) {
     state.step = Math.max(0, Math.min(state.steps, step));
     const page = Math.max(0, Math.floor((state.step - 1) / PAGE));
-    if (page === state.page) return applyStep(pulse);
+    if (page === state.page) { applyStep(pulse); return follow(Boolean(pulse)); }
     state.page = page;
     interrupt();
     build();
     draw();
     fit(false, true);
+    follow(false);
   }
   function play() {
     if (state.timer) return stop();

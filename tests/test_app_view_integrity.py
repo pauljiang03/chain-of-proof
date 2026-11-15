@@ -20,7 +20,7 @@ class AppViewIntegrity(unittest.TestCase):
         self.assertEqual(source.count(tail), 1)
         if asset == 'graph.js':
             probe = ('  scopes = () => {}; rebuild = () => build();\n'
-                     '  draw = () => {}; fit = () => true; interrupt = () => {}; applyStep = () => {};\n'
+                     '  draw = () => {}; fit = () => true; interrupt = () => {}; applyStep = () => {}; follow = () => {};\n'
                      '  CONAN.probe = {state, prepare, build, selection, seek, local};\n})();')
         elif asset == 'timeline.js':
             probe = '  CONAN.probe = {view, hit, nearest};\n})();'
@@ -162,6 +162,33 @@ const observationsOnly = api.story.build({findings: [{status: 'verified', cited_
 assert.equal(observationsOnly.main, null);
 assert.equal(observationsOnly.range, null);
 assert.equal(observationsOnly.records.length, 9);
+''')
+
+    def test_times_use_the_zone_the_records_name_and_utc_otherwise(self):
+        self.run_js('timeline.js', r'''
+const story = api.story, DAY = 86400000, HOUR = 3600000;
+const row = (id, ms, zone) => ({id, kind: 'usbInsert', t: ms * 1000, obj_text: 'S' + id, prov: zone ? {time_zone: zone} : {}});
+const usb = Date.UTC(2015, 2, 23, 18, 31, 10);
+// no zone named: UTC
+story.open({findings: [{status: 'verified', cited_facts: [row(1, usb)]}]}, 'plain', 'r1');
+assert.equal(story.zone.local, false); assert.equal(story.zoneNote(), 'UTC');
+assert.equal(story.F.clock.format(usb), '18:31'); assert.equal(story.wall(usb), usb);
+// the records name a zone: the most named one becomes the case clock
+const model = story.open({findings: [{status: 'verified', cited_facts: [
+  row(1, usb, 'local time, converted from America/New_York'), row(2, usb + 1000, 'FAT local time, converted from America/New_York'),
+  row(3, usb + 2000, 'converted from Europe/Paris'), row(4, usb + 3000, 'UTC offset printed on the log line')]}]}, 'zoned', 'r1');
+assert.equal(model.zone.name, 'America/New_York'); assert.equal(model.zone.records, 2);
+assert.equal(story.zone.local, true); assert.equal(story.zoneNote(), 'local time (America/New_York)');
+assert.equal(story.F.clock.format(usb), '14:31');                 // daylight time, four hours behind UTC
+assert.equal(story.UTC.clock.format(usb), '18:31');               // the UTC time stays available
+assert.equal(story.wall(usb) - usb, -4 * HOUR); assert.equal(story.unwall(story.wall(usb)), usb);
+// day marks fall on the case's midnights, through the change to daylight time on 8 March 2015
+const marks = story.ticks(Date.UTC(2015, 2, 7, 12), 3 * DAY, 920).list.filter((mark) => mark.major);
+assert.deepEqual(Array.from(marks, (mark) => new Date(mark.t).toISOString().slice(5, 16)), ['03-08T05:00', '03-09T04:00', '03-10T04:00']);
+assert.ok(marks.every((mark) => story.F.clock.format(mark.t) === '00:00'));
+// a name this system does not know leaves UTC in place
+story.adopt({name: 'America/Not_A_Zone', records: 9});
+assert.equal(story.zone.local, false); assert.equal(story.F.clock.format(usb), '18:31');
 ''')
 
     def test_replay_runs_through_every_finding_not_only_one_page(self):

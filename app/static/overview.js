@@ -18,23 +18,24 @@
     return node;
   };
   const array = (value) => (Array.isArray(value) ? value : []);
-  const state = { model: null, run: null, range: "main", bins: null, hot: -1, painted: false };
+  const state = { model: null, run: null, brief: null, range: "main", bins: null, hot: -1, painted: false };
   const go = (tab) => () => { if (CONAN.app) CONAN.app.switchTab(tab, true); };
 
   // Whole hours, days, weeks, months or years: the finest step that keeps the chart to about 130 columns.
   function edges(from, to) {
     const S = CONAN.story;
+    // Steps are whole hours, days and months on the case clock, so a day's column runs midnight to midnight there.
     for (const [size, name] of [[S.HOUR, "hour"], [3 * S.HOUR, "3 hours"], [6 * S.HOUR, "6 hours"], [S.DAY, "day"], [7 * S.DAY, "week"]]) {
-      const a = Math.floor(from / size) * size, b = Math.floor(to / size) * size + size;
+      const a = Math.floor(S.wall(from) / size) * size, b = Math.floor(S.wall(to) / size) * size + size;
       if ((b - a) / size > 130) continue;
       const list = [];
-      for (let t = a; t <= b; t += size) list.push(t);
+      for (let w = a; w <= b; w += size) list.push(S.unwall(w));
       return { list, name };
     }
     for (const [months, name] of [[1, "month"], [3, "quarter"], [12, "year"], [60, "5 years"], [120, "10 years"]]) {
-      const first = new Date(from), list = [];
+      const first = new Date(S.wall(from)), list = [];
       for (let k = Math.floor((first.getUTCFullYear() * 12 + first.getUTCMonth()) / months) * months; ; k += months) {
-        const t = Date.UTC(Math.floor(k / 12), ((k % 12) + 12) % 12, 1);
+        const t = S.unwall(Date.UTC(Math.floor(k / 12), ((k % 12) + 12) % 12, 1));
         list.push(t);
         if (t > to || list.length > 400) break;
       }
@@ -48,9 +49,9 @@
     return (lead <= 1 ? 1 : lead <= 2 ? 2 : lead <= 5 ? 5 : 10) * power;
   }
   function when(bin) {
-    const S = CONAN.story, F = S.F, a = state.bins.list[bin], b = state.bins.list[bin + 1], name = state.bins.name;
-    if (name === "hour" || name === "3 hours" || name === "6 hours") return F.day.format(a) + ", " + F.clock.format(a) + "–" + F.clock.format(b) + " UTC";
-    if (name === "day") return F.day.format(a) + " (UTC)";
+    const S = CONAN.story, F = S.F, a = state.bins.list[bin], b = state.bins.list[bin + 1], name = state.bins.name, clock = S.zone.local ? "local time" : "UTC";
+    if (name === "hour" || name === "3 hours" || name === "6 hours") return F.day.format(a) + ", " + F.clock.format(a) + "–" + F.clock.format(b) + " " + clock;
+    if (name === "day") return F.day.format(a) + " (" + clock + ")";
     if (name === "week") return F.day.format(a) + " – " + F.day.format(b - S.DAY);
     if (name === "month") return F.month.format(a);
     if (name === "quarter") return F.month.format(a) + " – " + F.month.format(b - S.DAY);
@@ -93,9 +94,9 @@
     }
     const n = S.number, run = state.run || {}, findings = model.findings, firm = findings.filter((finding) => finding.strength !== "heuristic").length;
     const refused = array(run.rejections).length, opinions = array(run.conclusions).length, dated = model.events.length;
-    const exhibits = new Map();
-    model.records.forEach((record) => { const item = exhibits.get(record.exhibit) || { count: 0, image: record.image }; item.count += 1; exhibits.set(record.exhibit, item); });
-    const devices = [...exhibits.keys()].filter(Boolean).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const brief = state.brief && typeof state.brief === "object" ? state.brief : {}, items = array(brief.exhibits);
+    const devices = items.length ? items.map((item) => String(item.label))
+      : [...new Set(model.records.map((record) => record.exhibit).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
     const hero = el("header", "ov-hero");
     hero.append(el("h2", "", n.format(findings.length) + (findings.length === 1 ? " finding passed the proof checker" : " findings passed the proof checker")),
@@ -104,12 +105,12 @@
     const tiles = el("div", "ov-tiles");
     tiles.append(
       tile("Findings that passed", n.format(findings.length), n.format(firm) + " firm · " + n.format(findings.length - firm) + " likely (rule of thumb)", go("findings")),
-      tile("Refused by the checker", n.format(refused), refused ? "Listed under Not established" : "Nothing was refused in this run", go("needs")),
+      tile("Refused by the checker", n.format(refused), refused ? "Listed under Not established" : "Nothing was refused in this run", refused ? go("needs") : null),
       tile("Evidence records used", n.format(model.records.length), n.format(dated) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
       tile("Evidence exhibits", n.format(devices.length), devices.length ? S.clip(devices.join(", "), 44) : "No exhibit named in the records"));
     if (model.main) {
-      const days = Math.floor(model.main.to / S.DAY) - Math.floor(model.main.from / S.DAY) + 1, same = days === 1;
-      const first = new Date(model.main.from), last = new Date(model.main.to), month = first.getUTCFullYear() === last.getUTCFullYear() && first.getUTCMonth() === last.getUTCMonth();
+      const days = Math.floor(S.wall(model.main.to) / S.DAY) - Math.floor(S.wall(model.main.from) / S.DAY) + 1, same = days === 1;
+      const first = new Date(S.wall(model.main.from)), last = new Date(S.wall(model.main.to)), month = first.getUTCFullYear() === last.getUTCFullYear() && first.getUTCMonth() === last.getUTCMonth();
       tiles.append(tile("Busiest period", same ? S.F.short.format(model.main.from) : month ? first.getUTCDate() + "–" + S.F.short.format(model.main.to) : S.F.short.format(model.main.from) + " – " + S.F.short.format(model.main.to),
         S.F.year.format(model.main.to) + " · " + n.format(model.main.count) + " records in " + n.format(days) + (same ? " day" : " days"),
         () => CONAN.timeline && CONAN.timeline.show({ from: model.main.from, to: model.main.to })));
@@ -130,7 +131,9 @@
       timing.querySelector(".card-head p").id = "ov-when-note";
       chartHost.id = "ov-when";
       chartHost.append(svg("svg", { class: "chart", id: "ov-when-chart", role: "img", "aria-label": "Evidence records over time" }), Object.assign(el("div", "chart-tip"), { id: "ov-when-tip", hidden: true }));
-      timing.append(chartHost, el("p", "card-foot", "Click a column to open that stretch of time in the Timeline."));
+      timing.append(chartHost, el("p", "card-foot", "Click a column to open that stretch of time in the Timeline. " + (S.zone.local
+        ? "Times are on the examined computer's own clock, " + S.zone.name + ", the time zone " + n.format(S.zone.records) + " evidence records name. Each record also keeps its UTC time, and finding sentences quote UTC."
+        : "Times are in UTC: the evidence records do not name the examined computer's time zone.")));
       host.append(timing);
       chartHost.addEventListener("pointermove", point);
       chartHost.addEventListener("pointerleave", () => { $("ov-when-tip").hidden = true; light(-1); });
@@ -143,10 +146,7 @@
     model.lanes.map((lane, index) => ({ index, ...lane })).filter((lane) => lane.records).sort((a, b) => b.records - a.records)
       .forEach((lane) => kinds.append(barRow(lane.index, S.LANES[lane.index].name, lane.records, top, "Show " + S.LANES[lane.index].name + " on the Timeline",
         lane.events ? () => CONAN.timeline.show({ lane: lane.index }) : null)));
-    const sources = card("Where the records came from", "Evidence records by examined device"), most = Math.max(...[...exhibits.values()].map((item) => item.count));
-    [...exhibits.entries()].sort((a, b) => b[1].count - a[1].count)
-      .forEach(([name, item]) => sources.append(barRow(null, name ? name + (item.image ? " · " + S.clip(item.image, 22) : "") : "Not tied to one device", item.count, most)));
-    split.append(kinds, sources);
+    split.append(kinds, evidence(items, brief));
     host.append(split);
 
     if (model.main) host.append(days());
@@ -162,14 +162,51 @@
     chart();
   }
 
+  // Evidence examined: each item the records name, with the identifiers and hash values that are themselves cited records.
+  function evidence(items, brief) {
+    const S = CONAN.story, n = S.number, box = card("Evidence examined", "Items named by the evidence records");
+    const text = (value) => (typeof value === "string" ? value : "");
+    if (!items.length) { box.append(el("p", "card-foot", "The evidence records name no examined item.")); return box; }
+    const most = Math.max(1, ...items.map((item) => Number(item.records) || 0));
+    items.forEach((item) => {
+      const row = el("div", "ov-item"), head = el("div", "item-head"), track = el("span", "bar-track"), fill = el("span", "bar-fill");
+      const label = text(item.label), count = Number(item.records) || 0;
+      head.append(el("strong", "", label), el("span", "item-image", array(item.images).map(text).join(", ")),
+        el("span", "item-count", n.format(count) + (count === 1 ? " record · " : " records · ") + n.format(Number(item.findings) || 0) + " findings"));
+      fill.style.width = Math.max(0.6, (count / most) * 100) + "%";
+      track.append(fill);
+      row.append(head, track);
+      const identity = array(item.devices).map(text).filter((value) => value && !value.toLowerCase().includes(label.toLowerCase())).map((value) => "Device " + value)
+        .concat(array(item.volumes).map(text).filter(Boolean).map((value) => "Volume serial " + value),
+          array(item.system).map((fact) => text(fact && fact.label) + ": " + array(fact && fact.values).map(text).join(", ")));
+      if (identity.length) row.append(el("p", "item-facts", identity.join(" · ")));
+      const digests = array(item.digests).filter((digest) => digest && text(digest.value));
+      if (digests.length) {
+        const line = el("p", "item-hash");
+        digests.forEach((digest, index) => {
+          const value = text(digest.value), mark = el("span", "", text(digest.algorithm) + " " + (value.length > 20 ? value.slice(0, 8) + "…" + value.slice(-8) : value));
+          mark.title = text(digest.algorithm) + " " + value + (text(digest.stored_by) ? " — stored by " + text(digest.stored_by) : "");
+          if (index) line.append(" · ");
+          line.append(mark);
+        });
+        row.append(line);
+      }
+      box.append(row);
+    });
+    const loose = Number(brief.unlabelled) || 0;
+    box.append(el("p", "card-foot", "Listed from the records that findings cite, not from an intake list. Full hash values are in the report."
+      + (loose ? " " + n.format(loose) + (loose === 1 ? " record names" : " records name") + " no item." : "")));
+    return box;
+  }
+
   // Day by day: for each day of the busiest period, the mix of activity and the key events.
   function days() {
     const S = CONAN.story, model = state.model, n = S.number, byDay = new Map();
     const a = S.lower(model.times, model.main.from), b = S.lower(model.times, model.main.to + 1);
     for (let i = a; i < b; i += 1) {
-      const record = model.events[i], key = Math.floor(record.ms / S.DAY);
+      const record = model.events[i], key = Math.floor(S.wall(record.ms) / S.DAY);
       let day = byDay.get(key);
-      if (!day) byDay.set(key, (day = { key, total: 0, lanes: S.LANES.map(() => 0), kinds: new Map() }));
+      if (!day) byDay.set(key, (day = { key, first: record.ms, total: 0, lanes: S.LANES.map(() => 0), kinds: new Map() }));
       day.total += 1; day.lanes[record.lane] += 1;
       if (!record.marked) continue;
       const group = day.kinds.get(record.kind);
@@ -179,10 +216,10 @@
     const all = list.length;
     if (all > 8) list = list.sort((x, y) => y.total - x.total).slice(0, 8);
     list.sort((x, y) => x.key - y.key);
-    const box = card("Day by day", all > list.length ? "The " + list.length + " busiest of " + all + " days · UTC" : "Key events of the busiest period · UTC"), grid = el("div", "days");
+    const box = card("Day by day", (all > list.length ? "The " + list.length + " busiest of " + all + " days · " : "Key events of the busiest period · ") + S.zoneNote()), grid = el("div", "days");
     list.forEach((day) => {
       const item = el("article", "day"), head = el("div", "day-head"), mix = el("div", "mix");
-      head.append(el("h4", "", S.F.day.format(day.key * S.DAY)), el("span", "day-count", n.format(day.total) + " records"));
+      head.append(el("h4", "", S.F.day.format(day.first)), el("span", "day-count", n.format(day.total) + " records"));
       mix.setAttribute("role", "img");
       mix.setAttribute("aria-label", day.lanes.map((count, lane) => (count ? S.LANES[lane].name + " " + count : "")).filter(Boolean).join(", "));
       day.lanes.forEach((count, lane) => { if (!count) return; const part = el("i", "c" + lane); part.style.flexGrow = String(count); part.title = S.LANES[lane].name + ": " + n.format(count); mix.append(part); });
@@ -239,7 +276,7 @@
       return node;
     });
     root.replaceChildren(...parts);
-    $("ov-when-note").textContent = "Evidence records per " + bins.name + " · " + (state.range === "main" && model.main ? "busiest period" : "all dates") + " · UTC";
+    $("ov-when-note").textContent = "Evidence records per " + bins.name + " · " + (state.range === "main" && model.main ? "busiest period" : "all dates") + " · " + S.zoneNote();
   }
   function binAt(event) {
     const bins = state.bins, host = $("ov-when");
@@ -275,9 +312,9 @@
 
   function wire() { /* the page is built when a case is rendered */ }
   CONAN.overview = {
-    render(model, run) {
+    render(model, run, brief) {
       if (state.painted && model === state.model) return;   // the same stored run: nothing to redraw
-      state.model = model; state.run = run; state.range = "main"; state.painted = true;
+      state.model = model; state.run = run; state.brief = brief; state.range = "main"; state.painted = true;
       paint();
     },
     activate() { chart(); },

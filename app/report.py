@@ -3,6 +3,10 @@
 `render_html(run)` reproduces the whole bundle. `render_html(run, report_options(...))`
 builds an examiner's report: chosen findings, chosen sections and cover details. A
 report that leaves anything out says so on its first page.
+
+Every report opens with who asked and why, a summary, the evidence items with their
+identifiers and hash values, and the method and tools. Those pages are counts of the
+bundle's own records (app/brief.py).
 """
 from __future__ import annotations
 
@@ -11,17 +15,22 @@ from html import escape
 import json
 import re
 
+from . import brief
+
 # Optional parts of a report. The certified findings themselves are always included.
 SECTIONS = ('workflow', 'needs', 'judgments', 'evidence', 'proofs', 'activity')
 SECTION_LABELS = {'workflow': 'question-by-question plan', 'needs': 'refused proposals',
                   'judgments': 'investigator judgments', 'evidence': 'full evidence records',
                   'proofs': 'Lean proof records', 'activity': 'audit, coverage and history'}
-COVER = (('reference', 'Case reference'), ('examiner', 'Examiner'), ('organisation', 'Organisation'))
+COVER = (('reference', 'Case reference'), ('requested_by', 'Requested by'), ('authority', 'Authority for the request'),
+         ('purpose', 'Purpose and scope'), ('received', 'Evidence received'), ('examiner', 'Examiner'),
+         ('organisation', 'Organisation'), ('report_date', 'Date of report'))
+COVER_LIMITS = {'purpose': 600}   # characters; every other cover detail is at most 200
 MAX_SELECTED = 2000
 _FINDING_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
 
 
-def report_options(ids=None, sections=None, reference='', examiner='', organisation=''):
+def report_options(ids=None, sections=None, reference='', examiner='', organisation='', **more):
     """Validate what goes into a report. `None` for ids or sections means everything."""
     if ids is not None:
         ids = list(ids)
@@ -34,9 +43,14 @@ def report_options(ids=None, sections=None, reference='', examiner='', organisat
             raise ValueError('Unknown report section.')
         sections = frozenset(sections)
     options = {'ids': ids, 'sections': sections}
-    for (key, _), value in zip(COVER, (reference, examiner, organisation)):
-        if not isinstance(value, str) or len(value) > 200 or any(ord(c) < 32 or ord(c) == 127 for c in value):
-            raise ValueError('Cover details must be plain text of at most 200 characters.')
+    given = {'reference': reference, 'examiner': examiner, 'organisation': organisation, **more}
+    if set(given) - {key for key, _ in COVER}:
+        raise ValueError('Unknown cover detail.')
+    for key, _ in COVER:
+        value = given.get(key, '')
+        if (not isinstance(value, str) or len(value) > COVER_LIMITS.get(key, 200)
+                or any(ord(c) < 32 or ord(c) == 127 for c in value)):
+            raise ValueError('Cover details must be plain text of at most 200 characters (600 for the purpose and scope).')
         options[key] = value.strip()
     return options
 
@@ -70,10 +84,6 @@ nav { display:flex; flex-wrap:wrap; gap:10px 20px; margin:24px 0; font-size:13px
 .badge { display:inline-block; border:1px solid var(--line); padding:2px 9px;
   border-radius:20px; margin:0 5px 8px 0; font-size:12px; font-weight:650; }
 .sentence { font-size:18px; line-height:1.65; white-space:pre-wrap; overflow-wrap:anywhere; }
-.metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:24px 0; }
-.metric { background:var(--wash); border-radius:6px; padding:16px; }
-.metric strong { display:block; font-size:25px; overflow-wrap:anywhere; }
-.metric span { color:var(--muted); font-size:12px; }
 dl { display:grid; grid-template-columns:minmax(140px,1fr) minmax(0,3fr); gap:7px 18px; }
 dt { color:var(--muted); }
 dd { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
@@ -86,19 +96,33 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .table-wrap { overflow-x:auto; }
 .cited th:first-child, .cited td:first-child { white-space:nowrap; overflow-wrap:normal; }
 .cited th:nth-child(2) { width:34%; } .cited th:nth-child(3) { width:30%; }
+.lead { font-size:17px; line-height:1.6; }
+.mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
+.days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
+.days td:last-child, .exhibits td:last-child { white-space:nowrap; overflow-wrap:normal; }
+.exhibits th, .days th, .exhibits td:first-child, .exhibits td:nth-child(2) { white-space:nowrap; overflow-wrap:normal; }
+.exhibits td:last-child { white-space:normal; }
+ol { padding-left:22px; } ol li { margin:6px 0; }
+code { font:13px ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--wash); padding:1px 5px; border-radius:4px; }
+.sign { display:grid; grid-template-columns:2fr 2fr 1fr; gap:28px; margin:30px 0 12px; }
+.sign div { display:flex; flex-direction:column; justify-content:space-between; min-height:62px;
+  border-bottom:1px solid var(--ink); padding-bottom:6px; }
+.sign span { color:var(--muted); font-size:12px; } .sign strong { font-weight:600; min-height:1.4em; }
 summary { cursor:pointer; color:var(--muted); font-size:13px; margin:12px 0; }
 footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; color:var(--muted); font-size:12px; }
 @media(max-width:700px) { main { margin:0; padding:24px 18px; border:0; border-radius:0; }
   h1 { font-size:28px; } article { padding:18px; } dl { grid-template-columns:1fr; gap:2px; }
-  dd { margin-bottom:9px; } .metrics { grid-template-columns:1fr; } }
-@media print { @page { margin:18mm; } .report,main { background:#fff; }
+  dd { margin-bottom:9px; } .sign { grid-template-columns:1fr; } }
+@media print { @page { margin:18mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
+    font:9pt system-ui,sans-serif; color:#536674; } }
+  .report,main { background:#fff; } .sign { break-inside:avoid; }
   .report { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
   nav { display:none; } h1 { font-size:26pt; } h2 { font-size:18pt; } h3 { font-size:13pt; }
   h1,h2,h3,h4 { break-after:avoid; } section { margin-top:24px; padding-top:18px; }
   article { padding:15px; border-radius:0; } pre { font-size:8pt; overflow:visible; }
   .sentence { font-size:12pt; } .table-wrap { overflow:visible; } tr { break-inside:avoid; }
   details:not([open]) > :not(summary) { display:block !important; }
-  summary { display:none; } a { color:inherit; } .metrics,.notice { break-inside:avoid; }
+  summary { display:none; } a { color:inherit; } .notice { break-inside:avoid; }
 }
 """
 
@@ -148,18 +172,161 @@ def _table(headings, rows, kind=''):
             + '</tbody></table></div>')
 
 
-def _time(row):
+def _time(row, tz=None):
     stamp = row.get('t')
     if type(stamp) is not int:
         return _v(row, 't')
     try:
         date = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=stamp)
-        return _h(date.isoformat().replace('+00:00', 'Z')) + f' ({stamp} microseconds since Unix epoch)'
+        exact = _h(date.isoformat().replace('+00:00', 'Z')) + f' ({stamp} microseconds since Unix epoch)'
+        # With a case clock: local time first, then the UTC instant exactly as stored.
+        return exact if tz is None else _h(_local(date.astimezone(tz))) + '<br><span class="small">' + exact + '</span>'
     except (OverflowError, ValueError):
         return f'{stamp} microseconds since Unix epoch (outside displayable date range)'
 
 
-def _cited(rows):
+def _plural(count, one, many):
+    return f'{count:,} ' + (one if count == 1 else many)
+
+
+def _local(date):
+    """A date and time on the case clock, with its offset from UTC written out."""
+    offset = date.utcoffset() or timedelta(0)
+    minutes = int(offset.total_seconds() // 60)
+    sign = '+' if minutes >= 0 else '-'
+    return date.strftime('%Y-%m-%d %H:%M:%S') + f' local (UTC{sign}{abs(minutes) // 60:02d}:{abs(minutes) % 60:02d})'
+
+
+def _day(iso):
+    day = datetime.strptime(iso, '%Y-%m-%d')
+    return f'{day:%a} {day.day} {day:%b %Y}'
+
+
+def _span(first, last, tz):
+    start, end = brief.moment(first, tz), brief.moment(last, tz)
+    if start is None or end is None:
+        return ''
+    return f'{start:%H:%M}' if (last - first) < 60 * 1000000 else f'{start:%H:%M}–{end:%H:%M}'
+
+
+def _front(info, tz, case, metrics=''):
+    """Summary, evidence examined and method before the detailed findings."""
+    counts, where = info['counts'], info['zone']
+    clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
+    lead = '<strong>' + _plural(counts['findings'], 'finding', 'findings') + '</strong> in this report passed the proof checker'
+    if counts['findings']:
+        lead += (f": {counts['firm']:,} follow from the records alone and {counts['likely']:,} rest on a stated rule of thumb"
+                 if counts['likely'] else ', each following from the records alone')
+    lead += ('. They cite ' + _plural(counts['records'], 'evidence record', 'evidence records') + ' from '
+             + _plural(len([item for item in info['exhibits'] if item['records']]), 'exhibit', 'exhibits') + '. '
+             + (_plural(counts['refused'], 'proposed finding was', 'proposed findings were') + ' refused by the checker'
+                if counts['refused'] else 'No proposed finding was refused') + ' in the stored run.')
+    out = ['<section id="summary"><h2>Summary</h2><p class="lead">' + lead + '</p>',
+           metrics]
+    if counts['findings'] != counts['recorded']:
+        out.append(f"<p>The stored run records {counts['recorded']:,} verified findings; the counts in this summary cover "
+                   'only the ones selected for this report.</p>')
+    if info['range']:
+        first, last = brief.moment(info['range']['from'], tz), brief.moment(info['range']['to'], tz)
+        busy = info['busiest']
+        start, end = brief.moment(busy['from'], tz), brief.moment(busy['to'], tz)
+        if None not in (first, last, start, end):
+            out.append(f"<p>{counts['dated']:,} of the cited records carry the time of an event, from {first:%Y-%m-%d} to "
+                       f"{last:%Y-%m-%d}. The busiest period runs from {start:%Y-%m-%d} to {end:%Y-%m-%d} and holds "
+                       f"{busy['records']:,} of them. Times are in {_h(clock_name)}.</p>")
+    if info['days']:
+        rows = []
+        for day in info['days']:
+            events = ' · '.join(_h((group['one'] if group['count'] == 1 else f"{group['count']:,} {group['many']}")
+                                   + ' (' + _span(group['first'], group['last'], tz) + ')') for group in day['events'])
+            rows.append((_h(_day(day['date'])), events or 'No key events on this day.', f"{day['records']:,}"))
+        shown = ('the ' + str(len(info['days'])) + ' busiest of ' + str(info['days_total']) + ' days'
+                 if info['days_total'] > len(info['days']) else 'each day') + ' of the busiest period'
+        out += ['<h3>Key events by day</h3>', _table(('Day', 'Key events recorded', 'Dated records'), rows, 'days'),
+                '<p class="small">Shown for ' + shown + '. Key events are counted by record type — a device connection, '
+                'an e-mail, a deletion — and are not chosen by a model. A count is a count of evidence records, which can '
+                'be more than the number of things that happened. Each record is under the finding that cites it.</p>']
+    out.append('</section><section id="exhibits"><h2>Evidence examined</h2>')
+    if info['exhibits']:
+        rows = []
+        for item in info['exhibits']:
+            identity = [_h('Device ' + value) for value in item['devices'] if item['label'].lower() not in value.lower()]
+            identity += [_h('Volume serial ' + value) for value in item['volumes']]
+            identity += [_h(fact['label'] + ': ' + ', '.join(fact['values'])) for fact in item['system']]
+            digests = ['<span class="mono">' + _h(digest['algorithm'] + ' ' + digest['value']) + '</span> <span class="small">(record '
+                       + _h(digest['record']) + ')</span>' for digest in item['digests']]
+            acquired = [_h('Time as recorded: ' + value) for value in item['acquired']]
+            acquired += [_h('Imaging tool as recorded: ' + value) for value in item['tools']]
+            rows.append(('<strong>' + _h(item['label']) + '</strong>', _h(', '.join(item['images'])) or '—',
+                         '<br>'.join(identity) or '—', '<br>'.join(digests) or 'None among the cited records',
+                         '<br>'.join(acquired) or '—',
+                         f"{item['records']:,} in " + _plural(item['findings'], 'finding', 'findings')))
+        out.append(_table(('Exhibit', 'Image file', 'Identifiers', 'Hash values stored with the image',
+                           'Acquisition', 'Cited records'), rows, 'exhibits'))
+    else:
+        out.append('<p>The cited evidence records name no exhibit.</p>')
+    out.append('<p class="small">This lists the exhibits named by evidence records that verified findings cite, with the '
+               'identifiers and hash values that are themselves cited records. It is not a list of everything submitted: '
+               'an item that produced no cited record does not appear.'
+               + (' ' + _plural(info['unlabelled'], 'cited record names', 'cited records name') + ' no exhibit.'
+                  if info['unlabelled'] else '') + '</p></section>')
+    checker = info['checker']
+    tally = lambda rows: _h('; '.join(f"{row['name']} ({row['count']:,})" for row in rows)) or 'not stated'
+    out += ['<section id="method"><h2>Method, tools and times</h2><ol>',
+            '<li>Tools read the image files into evidence records. Each record keeps the exhibit, image and artefact it was read from.</li>',
+            '<li>Findings were proposed from those records. Proposer as recorded: ' + tally(checker['proposers']) + '.</li>',
+            '<li>Each proposed finding was given to the Lean proof checker together with the records it cites. Only findings '
+            'the checker accepted are reported as findings. Trust tier as recorded: ' + tally(checker['trust'])
+            + '. Declared axioms: ' + tally(checker['axioms']) + '.</li>',
+            '<li>Opinions of the investigator, where recorded, are printed apart and marked as not checked.</li></ol>']
+    named = [(_h(row['name']), 'Tool', f"{row['count']:,}") for row in info['tools']]
+    named += [(_h(row['name']), 'Record reader', f"{row['count']:,}") for row in info['readers']]
+    if named:
+        out.append(_table(('Named by the evidence records', 'As', 'Records naming it'), named))
+    else:
+        out.append('<p>The cited evidence records name no tool.</p>')
+    if tz is not None:
+        out.append('<p><strong>Times.</strong> ' + _plural(where['records'], 'cited record names', 'cited records name') + ' '
+                   + _h(where['name']) + ' as the time zone local times were converted from. Tables in this report give that '
+                   'local time first, with its offset, and then UTC. Finding sentences are reproduced verbatim and quote UTC.</p>')
+    else:
+        out.append('<p><strong>Times.</strong> All times in this report are in UTC'
+                   + ('; the records name the time zone ' + _h(where['name']) + ', which this system could not convert.'
+                      if where else ': the cited records do not name the time zone of the examined computer.') + '</p>')
+    store = case.get('facts_sha256')
+    out.append('<p><strong>Checking this report.</strong> The stored run holds every cited record and every proof. '
+               'An independent party can re-run the checker on it with <code>cop verify</code> and the original evidence store'
+               + ('. Evidence store SHA-256 as recorded: <span class="mono">' + _h(store) + '</span>' if isinstance(store, str) and store else '')
+               + '.</p></section>')
+    return out
+
+
+_GLOSSARY = (
+    ('Exhibit', 'An item submitted for examination, such as a computer or a USB stick, under the label the evidence records use.'),
+    ('Evidence record', 'One fact a tool read from an image file, kept with the place it was read from.'),
+    ('Finding', 'A statement the proof checker accepted because the evidence records it cites support it.'),
+    ('Strong / heuristic', 'A strong finding follows from the records alone. A heuristic finding also relies on a stated rule of thumb.'),
+    ('Refused', 'A proposed finding the checker did not accept. A refusal does not show the statement is false.'),
+    ('Proof checker', 'Lean 4, a program that accepts a statement only when it is given a complete proof of it.'),
+    ('Hash value (MD5, SHA-1)', 'A fingerprint computed from the contents of an image, used to show that a copy has not changed.'),
+    ('UTC', 'Coordinated Universal Time, the reference clock that local times are offset from.'),
+)
+
+
+def _close(options):
+    """A glossary and a place to sign, after the findings and before any appendix."""
+    out = ['<section id="glossary"><h2>Terms used</h2><dl>']
+    out += ['<dt>' + _h(term) + '</dt><dd>' + _h(meaning) + '</dd>' for term, meaning in _GLOSSARY]
+    out += ['</dl></section><section id="signoff"><h2>Sign-off</h2><div class="sign">',
+            '<div><span>Examiner</span><strong>' + _h(options.get('examiner') or '') + '</strong></div>',
+            '<div><span>Signature</span><strong></strong></div>',
+            '<div><span>Date of report</span><strong>' + _h(options.get('report_date') or '') + '</strong></div></div>',
+            '<p class="small">Add any declaration your court or organisation requires; this report does not supply one. '
+            'A name or date printed here was entered by the person who produced the report.</p></section>']
+    return out
+
+
+def _cited(rows, tz=None):
     """The cited records beside their finding, for reports without the full evidence appendix."""
     if not rows:
         return '<p>No copied evidence records supplied.</p>'
@@ -171,7 +338,7 @@ def _cited(rows):
         related = '<br><span class="small">Related value: ' + _v(row, 'aux_text') + '</span>' if row.get('aux_text') is not None else ''
         table.append(('<strong>' + _v(row, 'id') + '</strong><br><span class="small">' + _v(row, 'kind') + '</span>',
                       _v(row, 'obj_text', '—') + related,
-                      _time(row) + '<br><span class="small">Meaning: ' + _v(prov, 'time_meaning', 'not stated') + '</span>',
+                      _time(row, tz) + '<br><span class="small">Meaning: ' + _v(prov, 'time_meaning', 'not stated') + '</span>',
                       source or 'Unknown — not supplied'))
     return _table(('Record', 'Object', 'Recorded timestamp', 'Source'), table, 'cited')
 
@@ -444,30 +611,35 @@ def render_html(run: dict, options: dict | None = None) -> str:
     unverified = [row for row in _rows(run.get('findings'))
                   if not isinstance(row, dict) or row.get('status') != 'verified']
     title = _v(case, 'name', 'Untitled investigation')
+    info = brief.build(run, ids=chosen, days=31)
+    tz = brief.clock(info['zone']['name']) if info['zone'] and info['zone']['known'] else None
     out = ['<!doctype html><html lang="en"><head><meta charset="utf-8">',
            '<meta name="viewport" content="width=device-width,initial-scale=1">',
            '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; '
            'img-src \'none\'; base-uri \'none\'; form-action \'none\'">',
            '<title>Investigation report — ' + title + '</title><style>' + _CSS + '</style></head><body><main>',
-           '<header><div class="eyebrow">CONAN-F · Investigation report</div><h1>' + title + '</h1>',
-           _fields([('Generated', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))])]
+           '<header><div class="eyebrow">CONAN-F · Forensic examination report</div><h1>' + title + '</h1>']
+    # The first page reads as an examiner's report does: who asked and why, then the summary.
     cover = [(label, _h(options[key])) for key, label in COVER if options.get(key)]
     if cover:
         out.append(_fields(cover) + '<p class="small">Entered by the person who produced this report. '
                    'These details are not part of the stored run and were not checked.</p>')
-    out.append('<div class="metrics">')
-    for key, label in (('verified', 'accepted proposals reported'), ('rejected', 'refused proposals reported'),
-                       ('proposals', 'total proposals reported')):
-        out.append('<div class="metric"><strong>' + _v(stats, key, 'Unknown') + '</strong><span>' + label + '</span></div>')
+    out.append(_fields([('Run recorded', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))]))
+    metrics = ('<p class="small">Totals the stored run itself reports: ' + ', '.join(
+        _v(stats, key, 'unknown') + ' ' + label for key, label in (
+            ('verified', 'accepted'), ('rejected', 'refused'), ('proposals', 'proposed'))) + '.</p>')
     navigation = [('findings', 'Findings'), ('needs', 'Not established'), ('judgments', 'Judgments'),
+                  ('glossary', 'Terms'), ('signoff', 'Sign-off'),
                   ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity')]
-    navigation = [(anchor, label) for anchor, label in navigation if anchor == 'findings' or show(anchor)]
+    navigation = [(anchor, label) for anchor, label in navigation
+                  if anchor in ('findings', 'glossary', 'signoff') or show(anchor)]
     if show('workflow'):
         navigation = [(anchor, label) for key, anchor, label in (
             ('collection', 'collection', 'New evidence'),
             ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
             ('answer_projection', 'structured-answers', 'Structured answers'),
             ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
+    navigation = [('summary', 'Summary'), ('exhibits', 'Evidence examined'), ('method', 'Method')] + navigation
     scope = []
     if chosen is not None:
         scope.append(f'<p class="notice warning"><strong>Selected findings only.</strong> This report shows {len(findings)} '
@@ -476,12 +648,10 @@ def render_html(run: dict, options: dict | None = None) -> str:
     if left_out:
         scope.append('<p class="small">Left out of this report: '
                      + _h('; '.join(SECTION_LABELS[name] for name in left_out)) + '. The complete run bundle holds them.</p>')
-    out += ['</div><p class="notice">This report renders supplied records and certificates. It does not independently '
-            'verify them. Use the independent verifier with the original evidence store before relying on a proof.</p>',
-            '<p class="small">Printable HTML: use your browser’s Print / Save as PDF. All report content is embedded; '
-            'no remote assets or scripts are loaded.</p>' + ''.join(scope) + '</header>',
+    out += [''.join(scope) + '</header>',
             '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
                                                           for anchor, label in navigation) + '</nav>',
+            *_front(info, tz, case, metrics),
             _workflow(run, findings) if show('workflow') else '',
             '<section id="findings"><h2>Recorded certified findings</h2>',
             '<p class="muted">Sentences are reproduced verbatim. “Strong” describes what the records support; '
@@ -501,7 +671,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
         if show('evidence'):
             pointers.append(', '.join(links) if links else 'No copied evidence records supplied.')
         else:
-            out.append(_cited(rows))
+            out.append(_cited(rows, tz))
         if show('proofs'):
             pointers.append(f'<a href="#proof-f{number}">Proof record</a>')
         else:
@@ -550,6 +720,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
                        + _fields([('Stated supporting finding IDs', _v(row, 'finding_ids'))])
                        + _details('Supplied judgment record', raw) + '</article>')
         out.append('</section>')
+    out += _close(options)
     if show('evidence'):
         out.append('<section id="evidence"><h2>Evidence records</h2>'
                    '<p class="muted">Every copied citation is shown in its finding’s scope. Provenance is supplied metadata, '
@@ -577,7 +748,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
                     ('Related value', row, 'aux_text'), ('Related entity ID', row, 'aux'),
                     ('Timestamp meaning', prov, 'time_meaning'), ('Uncertainty (microseconds)', row, 'res'),
                     ('Parser', prov, 'parser'), ('Tool', prov, 'tool'), ('Row SHA-256', row, 'row_sha256'))]
-                    + [('Recorded timestamp', _time(row))]))
+                    + [('Recorded timestamp', _time(row, tz))]))
                 out += ['<h4>Full copied provenance</h4>', _pre(row['prov']) if 'prov' in row else '<p>Unknown — not supplied.</p>',
                         _details('Complete copied record', raw), f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>']
         out.append('</section>')
@@ -594,7 +765,8 @@ def render_html(run: dict, options: dict | None = None) -> str:
             out.append(f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>')
         out.append('</section>')
     out += [_activity(run) if show('activity') else '', '<footer>CONAN-F · Report rendering only. '
-            'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks.</footer>',
+            'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks. '
+            'To print, use your browser’s Print / Save as PDF; all content is embedded and nothing is loaded from elsewhere.</footer>',
             '</main></body></html>']
     rendered = '\n'.join(out) + '\n'
     if left_out:   # links into sections this report leaves out become plain text

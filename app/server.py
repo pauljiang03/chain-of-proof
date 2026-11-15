@@ -25,7 +25,8 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
-REPORT_OPTIONS = ("ids", "sections", "reference", "examiner", "organisation")
+REPORT_OPTIONS = ("ids", "sections", "reference", "examiner", "organisation", "requested_by", "authority",
+                  "purpose", "received", "report_date")
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
 
@@ -235,7 +236,11 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, {"runs": manager.list_runs()})
         if path == "/api/run":
             self._query(query, ("name",))
-            return self._json(200, manager.get_run(_name(query.get("name"), self.server.root)))
+            snapshot = manager.get_run(_name(query.get("name"), self.server.root))
+            if isinstance(snapshot, dict) and isinstance(snapshot.get("run"), dict):
+                from app import brief   # evidence items, tools and limits, counted from the run's own records
+                snapshot = {**snapshot, "brief": brief.build(snapshot["run"])}
+            return self._json(200, snapshot)
         if path == "/api/report":
             self._query(query, ("name", "format", "download") + REPORT_OPTIONS)
             name = _name(query.get("name"), self.server.root)

@@ -13,17 +13,19 @@
     ["proofs", "Appendix: Lean proofs", "The claim and Lean source of each certificate", false],
     ["activity", "Appendix: audit and coverage", "Recorded tool calls and coverage summaries", false],
   ];
-  const COVER = ["reference", "examiner", "organisation"];
+  const COVER = ["reference", "requested_by", "authority", "purpose", "received", "examiner", "organisation", "report_date"];
+  const limit = (key) => (key === "purpose" ? 600 : 200);
+  const today = () => { const now = new Date(); return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); };
   const PREVIEW_LIMIT = 6 * 1024 * 1024;   // characters; larger reports are exported, not previewed
   const state = {
-    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", sections: new Set(), cover: {},
+    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", sections: new Set(), cover: {}, empty: new Set(),
     shadow: null, stale: true, active: false, request: 0, timer: 0, built: false,
   };
 
   // Remembered per case in this browser only: a convenience, never the record of anything.
   const storageKey = () => "conan-f.report." + state.name;
   function load() {
-    state.marked = new Set(); state.scope = "all"; state.cover = {};
+    state.marked = new Set(); state.scope = "all"; state.cover = { report_date: today() };   // a report is dated the day it is made
     state.sections = new Set(SECTIONS.filter((section) => section[3]).map((section) => section[0]));
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey()) || "null");
@@ -31,7 +33,7 @@
       if (Array.isArray(saved.marked)) state.marked = new Set(saved.marked.filter((id) => typeof id === "string"));
       if (saved.scope === "marked") state.scope = "marked";
       if (Array.isArray(saved.sections)) state.sections = new Set(saved.sections.filter((key) => SECTIONS.some((section) => section[0] === key)));
-      for (const key of COVER) if (saved.cover && typeof saved.cover[key] === "string") state.cover[key] = saved.cover[key].slice(0, 200);
+      for (const key of COVER) if (key !== "report_date" && saved.cover && typeof saved.cover[key] === "string") state.cover[key] = saved.cover[key].slice(0, limit(key));
     } catch (_) { /* private windows and blocked storage: carry on without it */ }
   }
   function save() {
@@ -45,7 +47,9 @@
   function query(download) {
     const params = new URLSearchParams({ name: state.name, format: "html" });
     if (download) params.set("download", "1");
-    params.set("sections", SECTIONS.map((section) => section[0]).filter((key) => state.sections.has(key) && !(key === "workflow" && state.scope === "marked")).join(","));
+    // A part this case has nothing for is not offered, so it keeps its usual place: the report then says there is none.
+    const included = (section) => (state.empty.has(section[0]) ? section[3] : state.sections.has(section[0]));
+    params.set("sections", SECTIONS.filter((section) => included(section) && !(section[0] === "workflow" && state.scope === "marked")).map((section) => section[0]).join(","));
     if (state.scope === "marked") params.set("ids", marked().join(","));
     for (const key of COVER) if (state.cover[key]) params.set(key, state.cover[key]);
     return "/api/report?" + params;
@@ -75,7 +79,8 @@
   }
   function form() {
     document.querySelectorAll('#report-form input[name="report-scope"]').forEach((input) => { input.checked = input.value === state.scope; });
-    document.querySelectorAll("#report-sections input").forEach((input) => { input.checked = state.sections.has(input.value); });
+    // A part of the report with nothing in it for this case is not offered.
+    document.querySelectorAll("#report-sections input").forEach((input) => { input.checked = state.sections.has(input.value); input.closest("label").hidden = state.empty.has(input.value); });
     for (const key of COVER) $("report-" + key).value = state.cover[key] || "";
   }
 
@@ -173,16 +178,17 @@
       else return;
       changed();
     });
-    for (const key of COVER) $("report-" + key).addEventListener("input", (event) => { state.cover[key] = event.target.value.trim().slice(0, 200); changed(350); });
+    for (const key of COVER) $("report-" + key).addEventListener("input", (event) => { state.cover[key] = event.target.value.trim().slice(0, limit(key)); changed(350); });
     $("report-print").addEventListener("click", print);
     $("report-export").addEventListener("click", (event) => { if (!event.currentTarget.hasAttribute("href")) event.preventDefault(); });
   }
 
   CONAN.report = {
-    /** A case was opened or re-read: `ids` are its certified findings, in order. */
-    open(name, ids, revision = null) {
+    /** A case was opened or re-read: `ids` are its certified findings, in order; `empty` names report parts it has nothing for. */
+    open(name, ids, revision = null, empty = []) {
       const list = (ids || []).map(String), same = name === state.name && revision === state.revision
         && list.length === state.ids.length && list.every((id, index) => id === state.ids[index]);
+      state.empty = new Set(empty);
       if (name !== state.name) { state.name = name; load(); state.built = false; state.stale = true; if (state.shadow) state.shadow.replaceChildren(); }
       state.ids = list; state.known = new Set(list); state.revision = revision;
       if (state.scope === "marked" && !marked().length) state.scope = "all";
