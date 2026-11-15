@@ -12,6 +12,10 @@ PROTOCOL = 'claim-bindings-v3'
 FILE = 'binding-checkpoint.json'
 
 
+class SessionDeadlineExceeded(ValueError):
+    """The investigator budget expired; this is not a proof verdict."""
+
+
 def public_preflight(public):
     """Reject missing/invalid declarations before any investigator session exists."""
     from agent.answer_requirements import inspect
@@ -50,7 +54,7 @@ def deadline(session):
     if type(value) not in (int, float) or not __import__('math').isfinite(value):
         raise ValueError('v3 requires a finite explicit session deadline')
     if time.time() >= value:
-        raise ValueError('investigator session deadline has passed')
+        raise SessionDeadlineExceeded('investigator session deadline has passed')
 
 
 def validate(document, public):
