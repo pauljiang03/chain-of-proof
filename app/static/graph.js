@@ -1,8 +1,7 @@
 "use strict";
 
-// Proof graph. Read left to right:
-//   disk image -> source artifact -> extracted record -> finding (checked by Lean) -> interpretation (not certified).
-// Buildless and dependency-free. Record contents are only ever inserted as text.
+// Proof graph, left to right: disk image -> source artifact -> record -> finding (checked by Lean)
+// -> interpretation (not certified). Record contents are only ever inserted as text.
 (() => {
   const NS = "http://www.w3.org/2000/svg";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -31,8 +30,7 @@
     model: { nodes: new Map(), edges: [], shown: [] }, timer: null, drag: null, columns: [], width: 0, examined: new Set(), rowKeys: new WeakMap(),
   };
 
-  // A fact ID is not enough to merge copied evidence. Share only identical records,
-  // including their provenance, irrespective of JSON object key order.
+  // Records merge only when identical, provenance included and key order ignored; a shared fact ID is not enough.
   function stableJSON(value) {
     if (Array.isArray(value)) return "[" + value.map(stableJSON).join(",") + "]";
     if (value && typeof value === "object") return "{" + Object.keys(value).sort().map((key) => JSON.stringify(key) + ":" + stableJSON(value[key])).join(",") + "}";
@@ -53,8 +51,7 @@
     if (content !== undefined) node.textContent = content;
     return node;
   }
-  // Some records carry the time the image was examined, not a time from the device.
-  // Those must never read as an event time in the graph.
+  // An examination time must never read as a device event time.
   const EXAMINED = /^when the image was examined/i;
   const timeMeaning = (row) => { const provenance = object(row.prov); return text(provenance.time_meaning || provenance.timestamp_semantics || ""); };
   function when(row) {
@@ -74,7 +71,6 @@
     return { key, label: /[\\/]/.test(key) && parts.length ? parts[parts.length - 1] : key };
   }
 
-  // ---- data ---------------------------------------------------------------
   function prepare() {
     const run = object(state.run), index = new Map(), ambiguous = new Set(), order = new Map();
     const focused = state.items.find((item) => item.key === state.focus);
@@ -121,7 +117,7 @@
     const seen = new Set();
     return rows.filter((row) => row && typeof row === "object" && !seen.has(recordKey(row)) && seen.add(recordKey(row)));
   }
-  // A refused proposal has no certificate. Show the records it named, from the checker's diagnostics.
+  // A refused proposal has no certificate: take its records from the checker's diagnostics.
   function refusedRows(rejection, index) {
     const rows = new Map();
     const add = (id, fallback) => { if (id !== undefined && id !== null && !rows.has(id)) rows.set(id, index.get(id) || fallback); };
@@ -150,7 +146,6 @@
     return list;
   }
 
-  // ---- model and layout ---------------------------------------------------
   function build() {
     const all = selection();
     state.total = all.length;
@@ -251,14 +246,12 @@
 
     // The replay runs through every finding in the selection, not only the page on screen.
     state.steps = all.length;
-    // Browsing a page reveals that page, not the end of the entire investigation.
-    // Explicit replay positions always identify the page containing that position.
+    // Browsing reveals the whole current page; a replay keeps its own position.
     state.step = state.browsing ? Math.min(state.steps, (state.page + 1) * PAGE)
       : Math.max(0, Math.min(state.steps, state.step));
     state.model = { nodes, edges, shown };
   }
 
-  // ---- drawing ------------------------------------------------------------
   function drawNode(item) {
     const group = svg("g", { class: "node " + item.column + (item.cls ? " " + item.cls : ""), transform: `translate(${item.x},${item.y - item.h / 2})` });
     const box = () => group.append(svg("rect", { class: "box", width: item.w, height: item.h, rx: 4 }));
@@ -330,8 +323,8 @@
   function applyView() {
     if (state.viewport) state.viewport.setAttribute("transform", `translate(${state.view.x},${state.view.y}) scale(${state.view.k})`);
   }
-  // Motion. A spring always starts from the value on screen and can be interrupted at any frame.
-  // Parameters follow Apple's damping ratio and response; 1.0 / 0.4 is critically damped.
+  // Interruptible spring from the on-screen value. Damping ratio and response as in Apple's
+  // spring API; 1.0 / 0.4 is critically damped.
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const motion = { frame: 0, velocity: { x: 0, y: 0, k: 0 } };
   function interrupt() { if (motion.frame) { cancelAnimationFrame(motion.frame); motion.frame = 0; } }
@@ -484,9 +477,8 @@
     if (refit || !state.fitted) state.fitted = fit();
   }
 
-  // ---- replay -------------------------------------------------------------
   function stop() { if (state.timer) { clearInterval(state.timer); state.timer = null; controls(); } }
-  // Scroll so the finding the replay has just reached is on screen, whether it is playing or being dragged.
+  // Scroll the finding the replay just reached into view.
   function followTarget(item, host, inset, view) {
     const visibleTop = inset.top + 12, visibleBottom = Math.max(visibleTop + 1, host.height - inset.bottom - 12);
     // A manually enlarged card must still fit when replay takes control again.
@@ -503,7 +495,7 @@
     const at = local(), host = $("graph-host").getBoundingClientRect();
     const newest = [...state.model.nodes.values()].find(item => item.column === "finding" && item.birth === at);
     if (!newest || !host.height || !host.width) return;
-    // Replay positions and the visible card change together, including during fast playback.
+    // Jump without animation so fast playback stays in step.
     interrupt();
     state.view = followTarget(newest, host, insets(), state.view);
     applyView();
@@ -534,7 +526,6 @@
     controls();
   }
 
-  // ---- inspector ----------------------------------------------------------
   function select(id) {
     state.selected = id;
     highlight();
@@ -602,10 +593,9 @@
     rebuild(true);
   }
 
-  // ---- events -------------------------------------------------------------
   function wire() {
     const root = $("graph");
-    // Lock view: the replay still moves through the findings, but the canvas stays where the viewer put it.
+    // Lock view: the replay still advances, but the canvas stays where the viewer put it.
     try { state.locked = localStorage.getItem("conan.graph.lock") === "1"; } catch (error) { /* starts unlocked */ }
     $("graph-lock").addEventListener("click", () => {
       state.locked = !state.locked;

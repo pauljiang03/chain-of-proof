@@ -1,13 +1,8 @@
-"""Key findings in plain sentences.
+"""Key findings in plain sentences: counts and values from records that verified findings cite.
 
-Every sentence is a count or a value read from evidence records that findings stored as
-verified cite. Nothing here is a new finding: no sentence says who did something, or why.
-Which records are named is decided by record type and by the rule-based tags the readers
-wrote (watch-list search, confidential marker, matching file), never by a model.
-
-The wording follows the writing rules of ASD-STE100 Simplified Technical English: short
-sentences, one statement in each sentence, simple tenses, the same word for the same thing.
-It was written to those rules by hand and has not been run through an STE checker.
+No sentence says who did something, or why. Records are chosen by record type and the readers'
+rule-based tags, never by a model. The wording follows ASD-STE100 Simplified Technical English
+rules, applied by hand and not checked by an STE tool.
 """
 from __future__ import annotations
 
@@ -80,7 +75,7 @@ class _Case:
         if ids is not None:
             wanted = {str(value) for value in ids}
             findings = [row for row in findings if str(row.get('finding_id')) in wanted]
-        where = brief.zone(brief.cited(brief.verified(run)))   # one clock for the whole case, also for a selection
+        where = brief.zone(brief.cited(brief.verified(run)))   # one clock for the whole case, even for a selection
         self.findings = findings
         self.records = brief.cited(findings)
         self.stamp = {id(entry): stamp for stamp, entry in brief.timed(self.records)}
@@ -415,20 +410,18 @@ def _hidden(case):
 
 
 def _story(case, devices, detail=False):
-    """What happened, at a high level: one sentence for each kind of key activity, in date order.
+    """One dated sentence per kind of key activity, in date order, with undated context around them.
 
-    Activities are chosen by record type and by the readers' rule-based tags, never by a model.
-    Each date keeps its record's meaning: a folder list records the latest change ("by").
-    With `detail` (the report), sentences carry clock times, more names and a few more events.
+    With `detail` (the report), sentences add clock times, more names and a few more events.
     """
-    events = []   # (first stamp, last stamp, 'on' | 'by', clause)
+    events = []   # (first stamp, last stamp, 'on' | 'by', clause); 'by' marks a latest-change time
 
     def add(rows, clause, how='on'):
         stamps = case.times(rows)
         if stamps and clause:
             events.append((stamps[0], stamps[-1], how, clause))
 
-    def who(rows, key='account'):
+    def who(rows):
         name = case.account(rows) or _s(_prov(rows[0]).get('user'))
         return f'the account "{name}"' if name else 'a user account'
 
@@ -598,7 +591,7 @@ def _story(case, devices, detail=False):
 
 
 def _lead(case):
-    """A short paragraph in Simplified Technical English: one fact per sentence, counts and values only."""
+    """A short fallback paragraph: one fact per sentence, counts and values only."""
     if not case.records:
         return []
     out = []
@@ -630,11 +623,7 @@ def _lead(case):
 
 
 def build(run, ids=None):
-    """Plain sentences about what the cited records of verified findings show.
-
-    Returns {'schema_version', 'zone', 'points': [{'key', 'title', 'sentences', 'records',
-    'findings'}], 'devices': [...], 'findings'}. With `ids`, only those findings are read.
-    """
+    """The lead sentences, topic points and device table for a run, or for the findings in `ids`."""
     case = _Case(run, ids)
     devices_point, devices = _devices(case)
     # What happened comes first; the computer and its accounts close the list as background.
@@ -644,7 +633,7 @@ def build(run, ids=None):
     case_info = run.get('case') if isinstance(run, dict) and isinstance(run.get('case'), dict) else {}
     written = case_info.get('case_summary')
     written = ' '.join(written.split())[:1500] if isinstance(written, str) and ids is None and case.findings else ''
-    # Finding numbers such as [A003] or [A013–A022] help the investigator, not a reader of the Overview.
+    # Drop finding references such as [A003] or [A013–A022] from the investigator's summary.
     written = re.sub(r'\s*\[[A-Z]\d+(?:\s*[-–,]\s*[A-Z]?\d+)*\]', '', written).strip()
     return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings),
             'lead': [written] if written else (_story(case, devices) or _lead(case)), 'lead_by': 'investigator' if written else 'records',

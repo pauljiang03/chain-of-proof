@@ -1,7 +1,5 @@
-/* CONAN-F timeline: source timestamps in cited evidence records.
-   Every mark is one record that an accepted finding cites. Nothing is inferred here:
-   a record is placed at its own recorded time and says what that time means. Times are
-   shown on the case's own clock when the records name its time zone, and in UTC otherwise. */
+/* Timeline: each mark is one cited record at its own source timestamp; nothing is inferred.
+   Times use the case clock (the time zone the records name), or UTC when none is named. */
 (() => {
   "use strict";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -36,11 +34,10 @@
       parts: make({ year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }),
     };
   }
-  // The case clock. It is the time zone the evidence records themselves name; with none named, UTC.
   const UTC = formats("UTC");
   let F = UTC, zone = { name: "UTC", local: false, records: 0 };
   const leads = new Map();
-  // How far the case clock runs ahead of UTC at an instant, in milliseconds (negative west of Greenwich).
+  // How far the case clock runs ahead of UTC at an instant, in ms (negative west of Greenwich).
   function lead(t) {
     if (!zone.local) return 0;
     const key = Math.floor(t / (15 * MINUTE));
@@ -63,8 +60,7 @@
   }
   const zoneNote = () => (zone.local ? "local time (" + zone.name + ")" : "UTC");
 
-  // ---- the story model: records in plain words -------------------------------
-  // Kinds of activity, in a fixed order. A lane keeps its colour whatever else is shown.
+  // Fixed order, so a lane keeps its colour whatever else is shown.
   const LANES = [
     { key: "devices", name: "Devices & discs" },
     { key: "files", name: "Files & folders" },
@@ -76,8 +72,8 @@
     { key: "other", name: "Other records" },
   ];
   const LANE_INDEX = Object.fromEntries(LANES.map((lane, index) => [lane.key, index]));
-  // record kind: lane, one of them, several of them, and whether it is drawn as a key event.
-  // Key events are chosen here by record type alone; no model decides what matters.
+  // kind: [lane, singular, plural, key event?]; mirrors KINDS in app/brief.py. Key events are chosen
+  // by record type, never by a model.
   const KINDS = {
     usbInsert: ["devices", "USB device connected", "USB device connections", true],
     volumeSeen: ["devices", "Storage volume seen", "storage volumes seen", true],
@@ -107,8 +103,7 @@
     noteText: ["system", "Note", "notes", true],
     tag: ["other", "Label", "labels", false],
   };
-  // Examination is not source activity. Structured semantics take precedence over prose;
-  // the legacy readers also retain these explicit examination descriptions.
+  // Examination times are not source activity. Structured semantics take precedence over prose.
   const EXAMINED = /\bwhen (?:the image|this source attribute) was examined\b/i;
   const UNKNOWN_TIME = /^(?:unknown|unspecified|not recorded|unavailable|none|n\/a)(?:\b|$)/i;
   const SOURCE_TIMESTAMPS = new Set(["journal_observation", "destlist_entry_update"]);
@@ -225,15 +220,14 @@
   }
   const dot = (lane) => el("i", "dot c" + lane);
   CONAN.story = {
-    LANES, UTC, open, build, adopt, describe, clip, lower, ticks, dot, number, wall, unwall, zoneNote, DAY, HOUR, MINUTE,
+    LANES, UTC, open, build, adopt, describe, clip, ticks, dot, number, wall, unwall, zoneNote, DAY,
     get F() { return F; }, get zone() { return zone; },
   };
 
-  // ---- the timeline view -----------------------------------------------------
   const LEFT = 152, RIGHT = 14, TOP = 6, AXIS = 42, COLUMN = 3, LIST_MAX = 200, LANE_BASE = 46, LANE_MIN = 20, LANE_MAX = 96;
-  // The height of one row. The handle under the chart changes it, so the list below gets the space the chart gives up.
+  // Row height; the handle under the chart changes it.
   let LANE = LANE_BASE;
-  // Where things sit inside a row. A short row puts its key events on its lines and drops the count.
+  // Offsets inside a row; a short row puts key events on its lines and drops the count.
   const row = () => (LANE >= 40 ? { dot: 13, top: 24, length: LANE - 30, name: 22, count: 36, zone: 23 }
     : { dot: LANE / 2, top: 4, length: LANE - 8, name: LANE / 2 + 4, count: 0, zone: LANE });
   const view = {
@@ -421,7 +415,7 @@
     view.listTimer = setTimeout(list, 90);
   }
 
-  // The same records as a table: what is in view, in time order.
+  // The records in view as a list, in time order.
   function list() {
     const host = $("timeline-list");
     if (!view.model || !view.span) { host.replaceChildren(); return; }
@@ -471,7 +465,6 @@
     app.inspect("Record #" + app.present(record.row.id), [identity, el("p", "statement", describe(record, 400)), el("p", "detail-intro", when), used], [app.recordCard(record.row)], null);
   }
 
-  // ---- pointer, wheel and keys -----------------------------------------------
   function nearest(items, times, at, reach, max) {
     const a = lower(times, at - reach), b = lower(times, at + reach), out = [];
     let left = lower(times, at) - 1, right = left + 1;
@@ -563,7 +556,7 @@
     if (typeof ResizeObserver === "function") { const watch = new ResizeObserver(() => measure()); watch.observe(host); watch.observe($("panel-timeline")); }
     split();
   }
-  // The edge between the chart and the list can be dragged. Arrow keys move it too; double-click or Enter restores it.
+  // Chart/list edge: drag or arrow keys resize; double-click or Enter restores it.
   function split() {
     const handle = $("resize-timeline"), key = "conan.timeline.row";
     const rows = () => Math.max(1, view.lanes.length);
@@ -607,7 +600,7 @@
       event.preventDefault();
     });
   }
-  // Until the user picks a height, a short window makes the rows shorter so that the list keeps about five lines.
+  // Until the user picks a height, shorten rows in a short window so the list keeps about five lines.
   function fit() {
     if (view.sized) return false;
     const room = $("timeline-host").clientHeight + $("timeline-list").clientHeight;
@@ -626,7 +619,7 @@
   }
 
   CONAN.timeline = {
-    /** A case was opened or re-read. The view is kept while the same case is on screen. */
+    // The view is kept while the same case is on screen.
     render(model, name) {
       if (model === view.model && name === view.name) return;
       const fresh = name !== view.name || !view.span;
@@ -639,7 +632,7 @@
       layout(); draw();
     },
     activate() { measure(); schedule(); },
-    /** Open the timeline at a stretch of time, optionally with one kind of activity or one record chosen. */
+    // Open at a stretch of time, optionally with one lane or one record chosen.
     show(options = {}) {
       if (!view.model) return;
       if (CONAN.app) CONAN.app.switchTab("timeline");

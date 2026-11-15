@@ -1,8 +1,6 @@
-"""The Anthropic API key for the API investigator: where it comes from and where it is kept.
+"""The Anthropic API key: from ANTHROPIC_API_KEY, or a user-only file in the per-user settings folder.
 
-The key is taken from the ANTHROPIC_API_KEY environment variable when that is set. Otherwise it
-is read from one file in the user's own settings folder. That folder is outside every project
-folder, so the key cannot be committed with a case, and the file is readable by that user only.
+The settings folder is outside every project, so the key cannot be committed with a case.
 The key is never written to a run folder or a log, and no reply to the page contains it.
 """
 from __future__ import annotations
@@ -26,7 +24,7 @@ def folder() -> Path:
 
 
 def clean(value) -> str:
-    """The key without surrounding space. Raises ValueError, with no part of the value, if it cannot be one."""
+    """The trimmed key; the ValueError for a bad value contains no part of it."""
     key = value.strip() if isinstance(value, str) else ""
     if not 20 <= len(key) <= 512 or any(not 33 <= ord(c) <= 126 for c in key):
         raise ValueError("That does not look like an API key.")
@@ -34,7 +32,7 @@ def clean(value) -> str:
 
 
 def saved(directory) -> str | None:
-    """The key in the settings folder, or None when there is none that can be used."""
+    """The usable key in the settings folder, or None."""
     if directory is None:
         return None
     try:
@@ -57,7 +55,7 @@ def key(directory=None, environ=None) -> str | None:
 
 
 def save(value, directory) -> None:
-    """Write the key so that only this user can read it. The old file is replaced in one step."""
+    """Atomically write the key to a file only this user can read."""
     text, directory = clean(value), Path(directory)
     directory.mkdir(parents=True, exist_ok=True, mode=0o700)
     handle, temporary = tempfile.mkstemp(dir=directory, prefix=".key-")   # created with mode 0600
@@ -81,10 +79,9 @@ def clear(directory) -> None:
 
 
 def check(value, model) -> str:
-    """Ask Anthropic whether this key can use this model. One small request; it starts no model run.
+    """Ask Anthropic whether the key can use the model, without a model run.
 
-    Returns "ok", "rejected" (the key is wrong), "no_model" (the key cannot use this model),
-    "offline" (Anthropic could not be reached) or "unknown".
+    Returns "ok", "rejected", "no_model", "offline" or "unknown".
     """
     import anthropic
 

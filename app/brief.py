@@ -1,12 +1,7 @@
-"""What a saved run says about the examination itself, for the Summary screen and the report.
+"""Facts about the examination (exhibits, tools, time zone, key events per day, limits), built only
+from the records that verified findings cite. Nothing is inferred, checked or read from disk.
 
-`build(run)` reads the bundle only: the evidence records that findings stored as verified cite.
-From them it lists the exhibits the records name (with the identifiers and image digests that
-are themselves cited records), the tools the records name, the time zone the records say local
-times were converted from, a count of key events per day, and the limits that follow from those
-counts. Nothing is inferred, checked or read from disk.
-
-The record-type table mirrors `KINDS` in app/static/timeline.js; a test keeps the two identical.
+`KINDS` mirrors KINDS in app/static/timeline.js; a test keeps the two identical.
 """
 from __future__ import annotations
 
@@ -18,8 +13,7 @@ from datetime import datetime, timedelta, timezone
 LANES = (('devices', 'Devices & discs'), ('files', 'Files & folders'), ('web', 'Web'),
          ('messages', 'E-mail & cloud'), ('programs', 'Programs'), ('accounts', 'Sign-ins & accounts'),
          ('system', 'System & notes'), ('other', 'Other records'))
-# record kind: lane, one of them, several of them, and whether it counts as a key event.
-# Key events are chosen here by record type alone; no model decides what matters.
+# kind: (lane, singular label, plural label, key event?). Key events are chosen by record type, never by a model.
 KINDS = {
     'usbInsert': ('devices', 'USB device connected', 'USB device connections', True),
     'volumeSeen': ('devices', 'Storage volume seen', 'storage volumes seen', True),
@@ -58,7 +52,7 @@ _ZONE = re.compile(r'\b(?:Africa|America|Antarctica|Arctic|Asia|Atlantic|Austral
                    r'/[A-Za-z_]+(?:/[A-Za-z_]+)?')
 _DIGEST = re.compile(r'image (md5|sha1|sha256)', re.I)
 _DIGEST_NAMES = {'md5': 'MD5', 'sha1': 'SHA-1', 'sha256': 'SHA-256'}
-# System settings shown beside an exhibit, by the label the record itself carries.
+# System settings shown beside an exhibit, matched by the record's own label.
 _SYSTEM = (('computer name', 'Computer name'), ('operating system', 'Operating system'),
            ('registered owner', 'Registered owner'), ('time zone', 'Time zone setting'))
 
@@ -264,7 +258,7 @@ def _tally(values):
 
 
 def limits(counts, listing, where, note):
-    """What the numbers above do not show, in plain sentences built from the same counts."""
+    """What the counts do not show, in plain sentences built from the same counts."""
     out = [('scope', 'Findings state what the evidence records say. They do not identify who was using a device, or why.')]
     likely, total = counts['likely'], counts['findings']
     if likely:
@@ -300,7 +294,7 @@ def limits(counts, listing, where, note):
 
 
 def build(run, ids=None, days=8):
-    """The brief for a run, or for the findings named in `ids` (evidence items always cover the whole run)."""
+    """The brief for a run, or for the findings in `ids`; evidence items always cover the whole run."""
     run = _dict(run)
     everyone = verified(run)
     chosen = everyone if ids is None else [row for row in everyone if row.get('finding_id') in set(ids)]

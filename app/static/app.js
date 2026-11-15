@@ -1,20 +1,19 @@
 "use strict";
 
-// Buildless, same-origin client. Record contents are always inserted as text.
+// Workbench client. Record contents are always inserted as text, never as HTML.
 (() => {
   const CONAN = (window.CONAN = window.CONAN || {});
   const $ = (id) => document.getElementById(id);
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
     tab: "summary", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
-    findingView: "overview", evidenceTopic: "all", evidenceModel: null, loading: false, submitting: false, stopping: false,
+    findingView: "overview", evidenceTopic: "all", evidenceModel: null, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
   const statuses = new Set(["running", "completed", "partial", "failed", "cancelled", "saved"]);
   const number = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
   const shortDate = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
   const longDate = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
-  const timeDate = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", second: "2-digit" });
 
   function element(tag, className, text) {
     const item = document.createElement(tag);
@@ -26,7 +25,6 @@
   const array = (value) => Array.isArray(value) ? value : [];
   const present = (value, fallback = "Not recorded") => value === undefined || value === null || value === "" ? fallback : typeof value === "object" ? JSON.stringify(value) : String(value);
   const count = (value, fallback = "Unmeasured") => Number.isSafeInteger(value) && value >= 0 ? number.format(value) : fallback;
-  const measure = (section, key) => object(section).status === "measured" ? count(section[key]) : object(section).status === "invalid" ? "Invalid" : "Unmeasured";
   const isRunning = () => state.payload && state.payload.status === "running";
   const savedRun = () => object(state.payload && state.payload.run);
   const isAccepted = (finding) => object(finding).status === "verified";
@@ -137,7 +135,7 @@
     $("report-title").textContent = present(summary().title, name);
     $("report-meta").replaceChildren(element("span", "empty-loading", "Loading saved records…"));
     $("finding-list").replaceChildren(empty("Loading investigation", "Reading the saved report and available audit entries."));
-    // Clear the previous case immediately; a failed load must not leave another case's details visible.
+    // Clear the previous case first: a failed load must not leave another case's details visible.
     for (const id of ["conclusions", "unverified-findings", "finding-pagination"]) $(id).replaceChildren();
     for (const id of ["metric-accepted", "metric-refused", "metric-judgments", "metric-extracted", "metric-inspected"]) $(id).textContent = "—";
     $("evidence-hash").textContent = "";
@@ -182,7 +180,7 @@
     for (const format of ["html", "md", "json"]) {
       const link = $("download-" + format);
       link.href = reportURL(format, true);
-      // Without a file name the desktop window opens the file in place of the app instead of saving it.
+      // Without a file name the desktop window opens the file in place of the app.
       link.download = String(state.selected).replace(/\//g, "-") + "." + format;
     }
     const findings = acceptedFindings(run), rejections = array(run.rejections);
@@ -200,7 +198,7 @@
     $("metric-inspected").parentElement.hidden = object(coverage.inspection).status !== "measured";
     $("metric-judgments").parentElement.hidden = !array(run.conclusions).length;
     renderProgress();
-    // Share one exact revision across both views; equal counts do not mean equal records.
+    // One exact revision for every view; equal counts do not mean equal records.
     const revision = JSON.stringify([payload.run, payload.events]);
     if (CONAN.graph) CONAN.graph.render(payload.run, payload.events, payload.name, revision);
     if (CONAN.report) {
@@ -212,7 +210,6 @@
       if (!Object.keys(object(run.audit)).length && object(run.coverage).schema_version !== 1 && object(run.history).schema_version !== 1) nothing.push("activity");
       CONAN.report.open(payload.name, findings.map((finding) => String(finding.finding_id)), revision, nothing);
     }
-    // The summary and the timeline draw the same records in plain words; they add no finding.
     const story = CONAN.story ? CONAN.story.open(payload.run, payload.name, revision) : null;
     if (CONAN.timeline) CONAN.timeline.render(story, payload.name);
     state.evidenceModel = CONAN.evidence ? CONAN.evidence.open(payload.run, revision) : null;
@@ -323,11 +320,6 @@
     }});
     return details;
   }
-  function browseEvidence(topic = "all", search = "") {
-    state.findingView = "overview"; state.evidenceTopic = topic; state.search = search;
-    $("finding-search").value = search; renderFindings(); switchTab("findings", true);
-    $("panel-findings").scrollTop = 0;
-  }
   function renderUnverifiedFindings() {
     const container = $("unverified-findings");
     const wasOpen = container.querySelector("details")?.open;
@@ -388,7 +380,6 @@
     detailField(fields, "Parser / tool", [provenance.parser, provenance.tool].filter((value) => value !== undefined && value !== null).join(" · ") || undefined);
     detailField(fields, "Row SHA-256", row.row_sha256, true);
     record.append(fields);
-    // The full copied row is rendered only when it is opened.
     const copied = element("details", "provenance");
     copied.append(element("summary", "", "Full copied record and provenance"));
     copied.addEventListener("toggle", () => { if (copied.open && copied.childElementCount === 1) copied.append(code(row)); });
@@ -409,7 +400,6 @@
     state.selectedFinding = null;
     inspect("Inspector", [element("p", "inspector-empty", "Select something on the timeline, in the graph or in a table to see its records, source and proof.")], [], null);
   }
-  // A finding can be marked for the examiner's report from the table or the inspector.
   function markCell(finding) {
     const cell = element("td", "mark"), box = element("input");
     box.type = "checkbox";
@@ -463,7 +453,6 @@
       if (!ids.has(identity)) ids.set(identity, new Set());
       ids.get(identity).add(serialized);
     });
-    // Long citation lists are rendered a page at a time.
     const cards = (from) => rows.slice(from, from + RECORD_PAGE).map((row) => recordCard(row, ids.get(JSON.stringify(row.id)).size > 1));
     evidence.push(...cards(0));
     if (rows.length > RECORD_PAGE) {
@@ -498,7 +487,7 @@
       $("panel-" + button.dataset.tab).hidden = !active;
       if (focus && active) button.focus();
     });
-    $("shell").dataset.tab = name;   // the Summary and Report tabs take the inspector's room; the Report prints alone
+    $("shell").dataset.tab = name;   // the stylesheet hides the inspector on Summary and Report
     if (name === "graph" && CONAN.graph) CONAN.graph.resize();
     if (name === "timeline" && CONAN.timeline) CONAN.timeline.activate();
     if (name === "summary" && CONAN.overview) CONAN.overview.activate();
@@ -533,7 +522,7 @@
     const standard = backend && typeof backend.model === "string" ? backend.model : "";
     $("investigation-model").placeholder = standard || "default";
     $("investigation-settings").textContent = [label, $("investigation-model").value.trim() || standard, minutes ? minutes + " min" : ""].filter(Boolean).join(" · ");
-    // The API runs on the user's own key. It can be typed here once; the server keeps it and never sends it back.
+    // The server keeps a typed API key and never sends it back.
     const lacks = backend ? backend.needs : null, source = backend ? backend.key : null;
     $("api-key-field").hidden = !(lacks === "key" && backend.can_save_key === true);
     $("api-key-status").hidden = !source;
@@ -546,7 +535,6 @@
     else if (lacks === "key") help = backend.can_save_key === true ? "Add your Anthropic API key to start." : "Set ANTHROPIC_API_KEY on this computer, then start again.";
     else if (lacks) help = label + " is not installed on this computer.";
     else if (!ready) help = "No AI service is set up on this computer.";
-    // A run spends that account's usage, and the service receives what the investigator reads.
     else if (backend.id === "deepagents") help = "Uses your Anthropic API key. Anthropic bills it for the run and receives the records the investigator reads.";
     else help = "Runs on your " + label + " account.";
     $("backend-help").textContent = help;
@@ -584,8 +572,7 @@
       $("form-error").hidden = false;
     } finally { state.savingKey = false; $("api-key-save").disabled = false; updateStartButton(); }
   }
-  // A page cannot learn a file's path from a browser file input. The desktop window can supply it
-  // from its own open panel, asked through the local server; in a browser the button stays hidden and the path is typed.
+  // Browsers hide a chosen file's path; only the desktop window can supply one (via /api/choose).
   const chooser = () => Boolean(state.config && state.config.chooser === true);
   async function chooseEvidence() {
     if (!chooser() || state.choosing) return;
@@ -608,8 +595,7 @@
     if (typeof defaults.minutes === "number" && defaults.minutes >= 1) $("investigation-minutes").value = defaults.minutes;
     updateStartButton();
   }
-  // A page learns only the name of a dropped file. The desktop window knows where the file is and
-  // the page asks for that by name; in a browser the path has to be typed.
+  // A page sees only a dropped file's name; the desktop window maps it to a path (via /api/dropped).
   const droppable = () => Boolean(state.config && state.config.drop === true);
   const carriesFile = (event) => Boolean(event.dataTransfer) && Array.from(event.dataTransfer.types || []).includes("Files");
   async function dropEvidence(file) {
@@ -725,8 +711,7 @@
   $("refresh-runs").addEventListener("click", refreshAll);
   $("investigation-form").addEventListener("submit", startInvestigation);
   $("facts-choose").addEventListener("click", chooseEvidence);
-  // A file dropped anywhere on the window is the evidence for a new investigation. Without this
-  // the window would open the dropped file in place of the app.
+  // A file dropped anywhere starts a new investigation with it; otherwise the window would open the file.
   let dragDepth = 0;
   const dragging = (on) => { dragDepth = on ? dragDepth : 0; $("facts-drop").classList.toggle("dropping", on); };
   window.addEventListener("dragenter", (event) => { if (carriesFile(event)) { dragDepth += 1; dragging(true); } });
@@ -764,7 +749,7 @@
   });
   window.addEventListener("beforeunload", () => clearTimeout(state.timer));
 
-  // Every edge between two panes can be dragged. Arrow keys move it too; double-click or Enter restores the default.
+  // Pane edges: drag or arrow keys resize; double-click or Enter restores the default.
   const PANES = [
     { handle: "resize-side", pane: "sidebar", name: "--side-w", base: 208, min: 160, max: 440, sign: 1 },
     { handle: "resize-insp", pane: "inspector", name: "--insp-w", base: 380, min: 280, max: 820, sign: -1 },
@@ -820,7 +805,7 @@
     }
   }
 
-  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab, browseEvidence };
+  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab };
 
   async function init() {
     resizablePanes();

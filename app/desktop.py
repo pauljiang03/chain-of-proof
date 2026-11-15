@@ -1,15 +1,10 @@
-"""Conan, the CONAN-F desktop application: the local workbench in a native window.
+"""Conan, the CONAN-F desktop app: the local workbench in a native window.
 
-    conan                                         # or: conan desktop, python -m app.desktop
+    conan                                             # or: conan desktop, python -m app.desktop
     python -m app.desktop --make-app ~/Applications   # macOS: a double-clickable Conan.app
 
-The window is the operating system's own web view (WebKit on macOS, WebView2 on
-Windows, WebKitGTK on Linux) through pywebview, so no browser engine is bundled. It
-shows the same loopback server as `conan serve` and stops it when the window closes. The
-server keeps to one port when it can, so that the window remembers per-case conveniences
-(findings marked for a report, cover details) from one start to the next.
-
-Install the one extra dependency with:  pip install -e '.[desktop]'
+The window is the system web view, through pywebview, showing the same loopback server as
+`conan serve`; closing it stops the server. Install with:  pip install -e '.[desktop]'
 """
 from __future__ import annotations
 
@@ -26,9 +21,9 @@ from pathlib import Path
 
 from app.server import ROOT, create_server
 
-TITLE = "Conan"   # the application's name: window, menu bar and launcher; the workbench inside is CONAN-F
+TITLE = "Conan"   # window, menu bar and launcher name
 ICON = Path(__file__).resolve().parent / "assets" / "Conan.icns"   # built by scripts/make_icon.py
-PORT = 8766   # next to `conan serve` on 8765; any free port is used when this one is taken
+PORT = 8766   # a fixed port keeps the window's local storage between starts; any free port if taken
 BUNDLE_ID = "dev.conan-f.workbench"
 WINDOW = {"width": 1600, "height": 1000, "min_size": (900, 600)}
 
@@ -38,14 +33,8 @@ class DesktopUnavailable(RuntimeError):
 
 
 class Bridge:
-    """The one thing the page may ask the native window for: a file chooser.
-
-    A page cannot learn a file's path from a browser file input, so the window's own open
-    panel supplies it. Nothing is opened or read here; the path goes into a text box and
-    the server checks it like a typed one. The page asks through the local server
-    (POST /api/choose): the app's script policy forbids eval, which pywebview's own page
-    bridge needs, so that bridge never reaches the page.
-    """
+    """The native open panel, which gives the page a file path and reads nothing."""
+    # Reached through POST /api/choose: pywebview's own page bridge needs eval, which the page's CSP forbids.
 
     def __init__(self, webview):
         self._webview = webview
@@ -63,18 +52,11 @@ class Bridge:
 
 
 class Drops:
-    """Where the files last dropped on the window are.
-
-    A page learns only the name of a dropped file. The window records the full location when
-    the operating system delivers the drop; pywebview keeps that list for its own drop events.
-    The page asks for the location by name through the local server (POST /api/dropped).
-    Nothing is opened or read here; the path goes into a text box and the server checks it
-    like a typed one.
-    """
+    """Paths of the files last dropped on the window, looked up by name; reads nothing."""
 
     def __init__(self, state):
         self._state = state
-        state["num_listeners"] = state.get("num_listeners", 0) + 1   # the window records drops only when asked to
+        state["num_listeners"] = state.get("num_listeners", 0) + 1   # pywebview records drops only with a listener
 
     def path(self, name):
         waiting, self._state["paths"] = list(self._state.get("paths") or ()), []   # each drop is read once
@@ -101,7 +83,7 @@ def _webview():
 
 
 def _name_the_application():
-    """On macOS the menu bar would otherwise read "Python", under Python's own Dock icon."""
+    """Name the macOS menu bar and Dock icon after the app instead of "Python"."""
     if sys.platform != "darwin":
         return
     try:
@@ -123,7 +105,7 @@ def _server(root, port, manager):
         return create_server(root, port, manager=manager)
     try:
         return create_server(root, PORT, manager=manager)
-    except OSError:   # in use, for instance by a second window
+    except OSError:   # port in use, for instance by a second window
         return create_server(root, 0, manager=manager)
 
 
@@ -157,12 +139,7 @@ MARK = "Written by `python -m app.desktop --make-app`"
 
 
 def make_app(directory, root=ROOT, executable=None, replace=False) -> Path:
-    """Write a small macOS application bundle that starts the workbench from this checkout.
-
-    The bundle holds no code of its own: it runs this Python environment, so it works on
-    the machine it was made on. The search path is copied in because applications started
-    from the Finder do not inherit the shell's, and Lean has to be found.
-    """
+    """Write a macOS Conan.app that starts the workbench from this checkout and Python environment."""
     if sys.platform != "darwin":
         raise ValueError("--make-app writes a macOS application bundle; on this system use `conan desktop`")
     bundle = Path(directory).expanduser() / f"{TITLE}.app"
@@ -187,6 +164,7 @@ def make_app(directory, root=ROOT, executable=None, replace=False) -> Path:
         info["CFBundleIconFile"] = ICON.stem
     with (bundle / "Contents" / "Info.plist").open("wb") as stream:
         plistlib.dump(info, stream)
+    # Finder-started apps do not inherit the shell's PATH, and Lean must be found.
     launcher.write_text("\n".join([
         "#!/bin/sh",
         f"# {MARK}. Starts Conan (CONAN-F) from its checkout.",

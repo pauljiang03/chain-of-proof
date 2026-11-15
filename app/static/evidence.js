@@ -1,5 +1,5 @@
-/* Readable evidence browsing. Groups copied records for navigation, never invents a claim.
-   Every displayed property retains its own record and every finding remains verbatim. */
+/* Evidence browser: groups cited records for navigation. It adds no claim; every property keeps
+   its source record and every finding stays verbatim. */
 (() => {
   "use strict";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -14,7 +14,7 @@
     {key: "programs", label: "Programs", lane: 4}, {key: "accounts", label: "Accounts & sign-ins", lane: 5},
     {key: "system", label: "Computer & notes", lane: 6}, {key: "other", label: "Other records", lane: 7},
   ];
-  // Category, readable source type, object label, related-value label.
+  // kind: [category, source type, object label, related-value label]
   const types = {
     usbInsert: ["devices", "USB connection", "Device serial", "Related value"],
     volumeMount: ["devices", "Volume mount", "Device serial", "Volume serial"],
@@ -130,7 +130,7 @@
       group.scope = [...new Set(scope(group.records[0].row).filter(Boolean))].join(" · ");
       group.search = [group.title, group.scope, ...group.kinds, ...group.properties.map(p => p.label + " " + p.value),
         ...[...group.findings].map(i => text(findings[i].finding_id))].join(" ").toLocaleLowerCase();
-      // Put explicit identity and changed-file records before bulk inventories, without ranking evidentiary importance.
+      // Identity and changed-file records before bulk inventories: display order, not importance.
       group.priority = Math.min(...group.records.map(e => ["computer name", "operating system", "registered owner"].includes(text(e.row.obj_text).toLowerCase()) && e.row.kind === "systemSetting" ? -1 : e.row.kind === "systemSetting" && /^image (md5|sha)/i.test(text(e.row.obj_text)) ? 3 : ["systemSetting", "usbInsert", "volumeMount", "accountSeen", "webSearch", "emailSent", "fileRenamed", "fileDeleted", "lnkTarget", "noteText"].includes(e.row.kind) ? 0 : e.row.kind === "fileSeen" ? 2 : 1));
     });
     list.sort((a,b) => a.priority - b.priority || a.title.localeCompare(b.title, undefined, {numeric: true}) || a.key.localeCompare(b.key));
@@ -236,33 +236,7 @@
       append(); section.append(more); host.append(section);
     });
   }
-  function highlights(model) {
-    const section = el("section", "evidence-highlights");
-    const heading = el("div", "card-head"); heading.append(el("h3", "", "Explore the evidence"));
-    section.append(heading);
-    const grid = el("div", "highlight-grid");
-    categories.forEach(category => {
-      const groups = model.groups.filter(g => g.category === category.key).sort((a, b) => a.priority - b.priority || b.findings.size - a.findings.size || a.title.localeCompare(b.title));
-      if (!groups.length) return;
-      const box = el("section", "highlight-card c" + category.lane), header = el("div", "highlight-head");
-      header.append(el("h4", "", category.label), el("span", "", String(groups.length)));
-      box.append(header);
-      // Named values lead the case summary rather than a certificate counter.
-      // Root directories remain in the full inventory; named files lead the preview.
-      const named = groups.filter(group => category.key !== "files" || !/^(?:[\\/]+|[a-z]:[\\/]?)$/i.test(group.title));
-      (named.length ? named : groups).slice(0, 3).forEach(group => {
-        const line = el("div", "highlight-item");
-        line.append(button(group.title, () => CONAN.app.browseEvidence(category.key, text(group.records[0].row.obj_text)), "text-button"));
-        const p = group.properties.find(p => ["Device serial", "Sender", "Profile path", "Property", "Original path", "Path", "Browser"].includes(p.label) && p.value !== group.title) || previewProperties(group, 2).find(p => p.value !== group.title);
-        if (p) line.append(el("span", "", p.label + ": " + p.value));
-        box.append(line);
-      });
-      box.append(button("Explore " + category.label.toLocaleLowerCase() + " →", () => CONAN.app.browseEvidence(category.key), "text-button"));
-      grid.append(box);
-    });
-    section.append(grid); return section;
-  }
   let revision, cached;
-  CONAN.evidence = {categories, types, build, properties, title, time, entity, render, highlights,
+  CONAN.evidence = {categories, types, build, properties, title, time, entity, render,
     open(run, key) { if (!cached || revision !== key) { cached = build(run); revision = key; } return cached; }};
 })();

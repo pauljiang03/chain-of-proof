@@ -28,7 +28,7 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
 REPORT_OPTIONS = ("ids", "sections", "brief", *(key for key, _ in REPORT_COVER))
-# The longest query the app sends is a report request with every cover detail filled in.
+# The longest query: a report request with every cover detail filled in.
 MAX_FIELDS = len(("name", "format", "download") + REPORT_OPTIONS)
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
@@ -63,7 +63,7 @@ def _report_options(query):
         return report_options(
             ids=query["ids"].split(",") if "ids" in query else None,
             sections=[part for part in query["sections"].split(",") if part] if "sections" in query else None,
-            brief="brief" in query,   # the short report: one or two printed pages
+            brief="brief" in query,
             **{key: query.get(key, "") for key in REPORT_OPTIONS[3:]})
     except ValueError as error:
         raise RequestError(400, str(error)) from None
@@ -114,8 +114,8 @@ class LocalServer(ThreadingHTTPServer):
     def __init__(self, root, port, manager):
         self.root, self.manager = Path(root).resolve(), manager
         self.token = secrets.token_urlsafe(32)
-        self.chooser = None   # set by the desktop window: opens its file panel and returns the chosen path
-        self.dropped = None   # set by the desktop window: the location of a file just dropped on it, by name
+        self.chooser = None   # desktop window only: opens a file panel, returns the chosen path
+        self.dropped = None   # desktop window only: path of a file just dropped on it, by name
         self._manager_closed = False
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -246,7 +246,7 @@ class Handler(BaseHTTPRequestHandler):
             self._query(query, ("name",))
             snapshot = manager.get_run(_name(query.get("name"), self.server.root))
             if isinstance(snapshot, dict) and isinstance(snapshot.get("run"), dict):
-                from app import brief, narrative   # counted and worded from the run's own verified records
+                from app import brief, narrative
                 snapshot = {**snapshot, "brief": brief.build(snapshot["run"]), "narrative": narrative.build(snapshot["run"])}
             return self._json(200, snapshot)
         if path == "/api/report":
@@ -277,16 +277,15 @@ class Handler(BaseHTTPRequestHandler):
             raise RequestError(404, "Route not found.")
         payload = self._body()
         if path == "/api/choose":
-            # Only the desktop window has a file panel. It gives back a path for the text box;
-            # nothing is opened or read here, and the path is checked later like a typed one.
+            # Desktop window only. Returns a path for the text box; nothing is read here, and
+            # the path is checked later like a typed one.
             chooser = self.server.chooser
             if not callable(chooser) or payload != {}:
                 raise RequestError(404, "Route not found.")
             chosen = chooser()
             return self._json(200, {"path": chosen if isinstance(chosen, str) else ""})
         if path == "/api/dropped":
-            # A page learns only the name of a file dropped on it. The desktop window knows where
-            # that file is. Like the chooser, this gives back a path for the text box and reads nothing.
+            # A page sees only a dropped file's name; the desktop window maps it to a path. Nothing is read here.
             dropped = self.server.dropped
             name = payload.get("name") if isinstance(payload, dict) and set(payload) == {"name"} else None
             if not callable(dropped) or not isinstance(name, str) or not 0 < len(name) <= 255 or "/" in name or "\\" in name:
@@ -294,8 +293,7 @@ class Handler(BaseHTTPRequestHandler):
             found = dropped(name)
             return self._json(200, {"path": found if isinstance(found, str) else ""})
         if path == "/api/credentials":
-            # The user's own Anthropic API key, typed into the page. An empty value removes it.
-            # No reply and no error message carries the key back.
+            # An empty key removes the saved one. No reply or error message carries the key back.
             if not isinstance(payload, dict) or set(payload) != {"anthropic_api_key"} \
                     or not isinstance(payload["anthropic_api_key"], str):
                 raise RequestError(400, "Send only the API key.")
@@ -342,7 +340,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def create_server(root=ROOT, port=8765, *, manager=None):
-    """Bind to IPv4 loopback; tests may inject a manager and request port zero."""
+    """Bind to IPv4 loopback; port 0 picks any free port."""
     if type(port) is not int or not 0 <= port <= 65535:
         raise ValueError("port must be an integer from 0 to 65535")
     if manager is None:
