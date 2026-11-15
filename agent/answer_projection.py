@@ -22,6 +22,9 @@ from checker.facts import KINDS
 VERSION = 1
 AUTHORITIES = frozenset({'unchecked', 'recorded_certificates', 'independently_replayed'})
 FORMATS = frozenset({'identity', 'utc_iso', 'local_minute', 'local_date', 'integer'})
+MAX_SCHEMA_NODES = 256
+MAX_SCHEMA_DEPTH = 32
+MAX_SCHEMA_ALTERNATIVES = 32
 SCOPE = ('Projection preserves the proposed claim semantics; it does not check or repair them. '
          'Authority is supplied by the caller and is not a new certificate. Accepted semantic fields are '
          'relative to the cited facts and approved rules. Question placement, relevance, complete lists, '
@@ -258,30 +261,66 @@ def _path(path):
 
 
 def _schema(schema, path):
-    for token in path:
-        if '$ref' in schema or any(k in schema for k in ('oneOf', 'anyOf', 'allOf')):
+    """Collect common-path leaf constraints without choosing an anyOf branch.
+
+    This deliberately uses the intersection of branch path/type support, not
+    general JSON Schema validation. A branch must explicitly declare the path;
+    permissive additionalProperties cannot supply a branch-exclusive field.
+    Required fields, enum values and other grading constraints remain outside
+    this partial-field projector, as they are for schemas without alternatives.
+    """
+    pending, leaves, visited = [(schema, 0, 0, False)], [], 0
+    while pending:
+        schema, position, depth, common_path = pending.pop()
+        visited += 1
+        if visited > MAX_SCHEMA_NODES or depth > MAX_SCHEMA_DEPTH:
+            raise ValueError('public_schema_traversal_limit')
+        if not isinstance(schema, dict):
+            raise ValueError('unsupported_public_schema_node')
+        if any(k in schema for k in ('$ref', '$dynamicRef', '$recursiveRef', 'oneOf', 'allOf')):
             raise ValueError('unsupported_schema_reference_or_union')
+        if 'anyOf' in schema:
+            alternatives = schema['anyOf']
+            if (not isinstance(alternatives, list) or not alternatives
+                    or len(alternatives) > MAX_SCHEMA_ALTERNATIVES):
+                raise ValueError('unsupported_public_schema_anyof')
+            # Sibling constraints still apply to every branch. They need not
+            # redeclare the branch's paths, but cannot prohibit those paths.
+            siblings = {key: value for key, value in schema.items() if key != 'anyOf'}
+            pending.extend((branch, position, depth + 1, True) for branch in reversed(alternatives))
+            if siblings:
+                pending.append((siblings, position, depth + 1, False))
+            continue
+        if position == len(path):
+            leaves.append(schema)
+            continue
+        token = path[position]
         kind = schema.get('type')
         allowed = kind if isinstance(kind, list) else [kind] if kind else []
         if type(token) is int:
             if allowed and 'array' not in allowed:
                 raise ValueError('array_path_does_not_match_public_schema')
-            schema = schema.get('items', {})
+            if common_path and 'items' not in schema:
+                raise ValueError('path_not_common_to_public_schema_anyof')
+            child = schema.get('items', {})
         else:
             if allowed and 'object' not in allowed:
                 raise ValueError('object_path_does_not_match_public_schema')
             properties = schema.get('properties', {})
+            if not isinstance(properties, dict):
+                raise ValueError('unsupported_public_schema_node')
             if token in properties:
-                schema = properties[token]
+                child = properties[token]
+            elif common_path:
+                raise ValueError('path_not_common_to_public_schema_anyof')
             elif schema.get('additionalProperties') is False:
                 raise ValueError('field_not_in_public_schema')
             else:
-                schema = schema.get('additionalProperties', {})
-                if schema is True:
-                    schema = {}
-        if not isinstance(schema, dict):
-            raise ValueError('unsupported_public_schema_node')
-    return schema
+                child = schema.get('additionalProperties', {})
+                if child is True:
+                    child = {}
+        pending.append((child, position + 1, depth + 1, common_path))
+    return leaves
 
 
 def _typed(value, schema):
@@ -364,7 +403,8 @@ def prepare_projection(public, candidates, bindings, source):
             value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
             if 'value' in raw and _encoded(raw['value']) != _encoded(value):
                 raise ValueError('literal_value_mismatch_not_repaired')
-            _typed(value, _schema(questions[qid]['answer_schema'], path))
+            for schema in _schema(questions[qid]['answer_schema'], path):
+                _typed(value, schema)
             entry.update(candidate_id=cid, claim_sha256=candidate['claim_sha256'], question_id=qid,
                          path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
                          semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],
