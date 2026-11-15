@@ -17,6 +17,14 @@ The reference contains all 60 questions.
 Of these, 46 have provisional scoring rules and 14 require reference review.
 No final comparison with Mulder is available.
 
+A [small Sol pilot with and without Lean feedback](comparison/ablation/PILOT_SOL61_20261115.md) is complete.
+It used the same evidence and draft reference for one run in each mode.
+The final model answers had 11 and 12 fully correct questions out of 46 scorable questions.
+The run with Lean feedback had fewer contract mismatches and lower answer coverage.
+These final answer blocks were unverified; their scores are separate from certificate checks.
+This single pair does not establish a general improvement. It used an older frozen version,
+before the six backend workflow additions.
+
 The [current run](runs/current/run.json) combines saved AI claims and miner claims.
 It uses the current certificate format and sentence templates.
 It does not include a new investigation with all current readers.

@@ -42,7 +42,8 @@ Preparation is authorized. The full comparison remains unrun and must be finaliz
 | X2 | `optical_timestamps` | `scripts/demo_proof_gate.py`, `tests/test_demo_proof_gate.py`: synthetic acceptance, wrong-device refusal, independent verification, and certificate tampering. Five tests and the CLI demo pass. |
 | X3 | `journal_gaps` | `eval/review_notes/abcd_runtime_review.md`: implementation and scoring boundaries. Read-only review; existing runtime unchanged. |
 
-A/B runtime support and a shared claim-faithful answer projection remain to be implemented.
+A/B capture/replay runtime and a bounded literal-answer A/C pilot are integrated under `comparison/ablation/`.
+The shared claim-faithful answer projection remains unfinished.
 Do not relabel unchecked proposals as verified to use the current answer adapter.
 The adapter derives values from cited records and could otherwise repair an invalid proposal during scoring.
 Paired claim filtering and full question accuracy must remain distinct until the common projection is ready.
@@ -53,7 +54,7 @@ Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
 
-- 577 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
+- 627 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
 - The synthetic workflow verifies refusal, explicit revision, linked reports, portable packages, and tamper rejection without a model call.
 - Offline end-to-end tests exercise the CLI and HTTP API through the existing runner and real Lean checks, including cancellation and partial reports.
 - The installed CLI, static assets, and HTML/Markdown/JSON downloads pass a local smoke check. Sample report and workspace inspection passed native Chrome checks.
@@ -103,8 +104,8 @@ The facts contain 335,498 records. Logged limitations are nine unsupported Contr
 The 424 MB derived facts remain outside Git. Do not replace the small canonical fact store without also regenerating its bound certificates.
 
 Last authentication check: installed Claude CLI was signed out. No model API key was configured. The user has been asked to authenticate locally.
-A separate terminal has frozen and started a bounded Sol with/without-Lean pilot from its own checkout.
-Those results and comparison-only commits are separate from this backend change. No fresh native Mulder trial has started.
+The separate terminal completed a bounded Sol with/without-Lean pilot from frozen source `617dc29`.
+Its runtime and result summary are integrated; the saved trials still bind their original source and evidence. No fresh native Mulder trial has started.
 
 After credentials are available, the root coordinator can use a new run name:
 
@@ -124,11 +125,11 @@ The optional API backend is `--backend deepagents`; install `.[agent]` and confi
 ## Next parallel assignments
 
 Take one label per agent. Work in a separate worktree. Announce the label and files before editing.
-The other terminal has taken the next with/without-Lean experiment preparation in its own branch, following the user's request there. Coordinate B1/B2 with that coordinator; root has no active ablation edits.
+The other terminal completed and handed off the first with/without-Lean pilot. The root integrated its comparison-only commits. B1 capture/replay is complete; B2 common projection and B3 reference review remain separate work.
 
 | ID | Assignment | Allowed work | Completion evidence |
 |---|---|---|---|
-| B1 | Unchecked proposal capture | Implement A's receipt-only mode and replay its exact claims through B. Coordinate runner and tool ownership with root. A must receive no proof feedback. | Frozen claim IDs and hashes; no altered or silently discarded proposals. |
+| B1 (complete) | Unchecked proposal capture | Implement A's receipt-only mode and replay its exact claims through B. Coordinate runner and tool ownership with root. A must receive no proof feedback. | Frozen claim IDs and hashes; no altered or silently discarded proposals. |
 | B2 | Shared answer projection | Define one claim-faithful answer path for A, B, and C. Do not mark unchecked claims verified to reuse the current adapter. | Invalid proposed values remain invalid in A; B filters exact claims; source links are retained. |
 | B3 | Reference decisions | Review the existing source-grounded notes for the 14 unresolved questions. Keep human review and mechanical source checks distinct. | Explicit approved contract decisions, fixed before model execution. |
 
