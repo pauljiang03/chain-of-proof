@@ -44,6 +44,25 @@ PATH_ROLES = {'chromium': 'browser.history.path', 'firefox': 'browser.history.pa
               'thumbnail_cache': 'thumbcache.container.path', 'sticky_notes': 'sticky_notes.container.path'}
 
 
+def _windows_path(target, path):
+    """Map a virtual mount only through one identical filesystem drive mount.
+
+    A shared serial, filename, or familiar alias such as sysvol is insufficient.
+    The original filesystem locator remains separately retained in provenance.
+    """
+    rendered = _win(path)
+    if re.match(r'^[A-Za-z]:\\', rendered) or re.match(r'^\\\\[^\\]+\\[^\\]+(?:\\|$)', rendered):
+        return rendered
+    alias, separator, relative = str(path).replace('\\', '/').lstrip('/').partition('/')
+    mounts = {str(name).casefold(): filesystem for name, filesystem in target.fs.mounts.items()}
+    filesystem = mounts.get(alias.casefold())
+    drives = [name.upper() for name, mounted in mounts.items()
+              if re.fullmatch(r'[a-z]:', name) and mounted is filesystem]
+    if not separator or filesystem is None or len(drives) != 1:
+        raise ValueError('virtual container path has no unique concrete Windows drive mapping')
+    return drives[0] + '\\' + relative.replace('/', '\\')
+
+
 class ParseBytes(io.BytesIO):
     """Limit parser I/O and refuse pointers outside the captured byte snapshot."""
     def __init__(self, data):
@@ -237,7 +256,7 @@ def _thumbcache(data):
     start, end = int(cache.header.Offset), int(cache.header.Size)
     if not len(cache.header) <= start <= end <= len(data):
         raise ValueError('thumbnail cache entry region is outside captured bytes')
-    offset, count = start, 0
+    offset, count, empty_slots = start, 0, []
     while offset < end:
         if count >= MAX_RECORDS or end - offset < 32:
             raise ValueError('thumbnail cache entry bounds or record budget failed')
@@ -247,14 +266,30 @@ def _thumbcache(data):
         consumed = stream.tell() - offset
         if (size < 48 or size != consumed or offset + size > end
                 or int(entry._header.IdentifierSize) % 2
-                or int(entry._header.PaddingSize) > len(entry._data)
-                or int(entry._header.DataSize) != len(entry.data)):
+                or int(entry._header.PaddingSize) > len(entry._data)):
+            raise ValueError('thumbnail cache entry lengths do not match captured bytes')
+        # A zero hash denotes an empty slot in Thumbcache Viewer's parser. Its
+        # bounded allocation can retain bytes despite zero logical data length;
+        # those bytes are not a thumbnail, padding, or proof of deletion/wiping.
+        # https://github.com/thumbcacheviewer/thumbcacheviewer/blob/master/thumbcache_viewer_cmd/thumbcache_viewer_cmd.cpp
+        empty = (int(entry.hash, 16) == 0 and int(entry._header.IdentifierSize) == 0
+                 and int(entry._header.PaddingSize) == 0 and int(entry._header.DataSize) == 0
+                 and entry.data_checksum == bytes(8))
+        if empty:
+            empty_slots.append({'byte_offset': offset, 'slot_bytes': size,
+                                'uninterpreted_bytes': len(entry.data),
+                                'uninterpreted_sha256': hashlib.sha256(entry.data).hexdigest()})
+        elif int(entry._header.DataSize) != len(entry.data):
             raise ValueError('thumbnail cache entry lengths do not match captured bytes')
         offset += size
         count += 1
     return {'parser': 'dissect.thumbcache', 'format': 'thumbcache_database',
             'version': int(version), 'records_validated': count,
-            'validation': 'known cache version, bounded entry region and every entry header/length decoded'}
+            'empty_slot_count': len(empty_slots), 'empty_slot_samples': empty_slots[:16],
+            'empty_slot_samples_omitted': max(0, len(empty_slots) - 16),
+            'uninterpreted_slot_bytes': sum(slot['uninterpreted_bytes'] for slot in empty_slots),
+            'validation': 'known cache version, bounded entry region and every entry header/length decoded; '
+                          'nonempty payload lengths checked; zero-hash empty-slot residual bytes not interpreted'}
 
 
 def _sticky_ole(data):
@@ -428,7 +463,7 @@ def extract(ev, target, ctx):
                 if path.is_symlink() or not path.is_file():
                     continue
                 path = path.resolve(strict=True)
-                source = _win(path)
+                source = _windows_path(target, path)
                 if any(char in source for char in '*?\0'):
                     raise ValueError('container path is not concrete')
                 if source.casefold() in seen:
@@ -441,7 +476,10 @@ def extract(ev, target, ctx):
                     provenance = dict(common, artifact=source, source_path=source,
                                       source_field='validated container path', container_sha256=digest,
                                       container_size=len(data), container_locator=source, hash_complete=True,
-                                      profile_path=_win(profile) if profile is not None else None,
+                                      resolved_filesystem_locator=_win(path), discovered_path=discovered,
+                                      path_mapping=('explicit Windows path' if source == _win(path) else
+                                                    'virtual alias to unique drive mount of identical filesystem object'),
+                                      profile_path=_windows_path(target, profile) if profile is not None else None,
                                       classification_basis='validated container structure/schema plus standard application layout',
                                       limitation='structural container observation; not authenticity, execution, ownership or exhaustive discovery',
                                       **validation)

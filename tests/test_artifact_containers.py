@@ -204,6 +204,66 @@ class Containers(unittest.TestCase):
         with self.assertRaises(Exception):
             ac._thumbcache(raw[:-1])
 
+    def test_empty_hash_slot_keeps_bounds_and_records_residual_without_payload_claim(self):
+        try:
+            import dissect.thumbcache
+        except ImportError:
+            self.skipTest('optional extraction parser unavailable')
+        payload = struct.pack('<4sI8sIIII', b'CMMM', 56, b'12345678', 2, 2, 4, 0) + bytes(16) + b'x\0' + bytes(2) + b'data'
+        residual = b'residual'
+        slot = struct.pack('<4sI8sIIII', b'CMMM', 48 + len(residual), bytes(8), 0, 0, 0, 0) + bytes(16) + residual
+        def database(parts):
+            return struct.pack('<4sIIIII', b'CMMM', 21, 2, 24, 24 + len(parts), 3) + parts
+        result = ac._thumbcache(database(payload + slot + payload))
+        self.assertEqual(result['records_validated'], 3)
+        self.assertEqual(result['empty_slot_count'], 1)
+        self.assertEqual(result['empty_slot_samples'], [{'byte_offset': 80, 'slot_bytes': 56,
+            'uninterpreted_bytes': 8, 'uninterpreted_sha256': hashlib.sha256(residual).hexdigest()}])
+        self.assertIn('residual bytes not interpreted', result['validation'])
+        for change in ('nonzero_hash', 'nonzero_checksum', 'nonzero_declared_data', 'out_of_bounds'):
+            bad = bytearray(slot)
+            if change == 'nonzero_hash':
+                bad[8] = 1
+            elif change == 'nonzero_checksum':
+                bad[32] = 1
+            elif change == 'nonzero_declared_data':
+                struct.pack_into('<I', bad, 24, 1)
+            else:
+                struct.pack_into('<I', bad, 4, 9999)
+            with self.subTest(change=change), self.assertRaises(Exception):
+                ac._thumbcache(database(payload + bad + payload))
+
+    def test_virtual_alias_maps_only_by_unique_identical_filesystem_and_deduplicates(self):
+        relative = 'Documents and Settings/LocalService/Local Settings/History/History.IE5/index.dat'
+        raw = legacy_index('Visited: service@https://example.test/')
+        self.fs.add('C:/' + relative, data=raw)
+        self.fs.add('sysvol/' + relative, data=raw)
+        self.fs.mounts['sysvol'] = self.fs.mounts['c:']
+        home = self.fs.path('sysvol/Documents and Settings/LocalService')
+        self.target.user_details = NS(all_with_home=lambda: [NS(home_path=home)])
+        values = self.attributes(self.run_reader())
+        self.assertEqual(len(values), 2)
+        self.assertEqual({row['prov']['source_path'] for row in values}, {'C:\\' + relative.replace('/', '\\')})
+        self.assertEqual(self.fs.opened, ['C:/' + relative])
+        self.assertFalse(self.ev.problems)
+        self.assertEqual(ac._windows_path(self.target, self.fs.path('/sysvol/' + relative)),
+                         'C:\\' + relative.replace('/', '\\'))
+        self.fs.mounts['d:'] = self.fs.mounts['c:']
+        with self.assertRaises(ValueError):
+            ac._windows_path(self.target, self.fs.path('/sysvol/' + relative))
+        self.fs.mounts['sysvol'] = NS(ntfs=NS(serial=self.fs.mounts['c:'].ntfs.serial))
+        with self.assertRaises(ValueError):
+            ac._windows_path(self.target, self.fs.path('/sysvol/' + relative))
+
+    def test_unmapped_virtual_path_is_a_health_issue_not_a_windows_path_answer(self):
+        relative = 'Documents and Settings/Service/Local Settings/History/History.IE5/index.dat'
+        self.fs.add('other-volume/' + relative, data=legacy_index('Visited: service@https://example.test/'))
+        home = self.fs.path('other-volume/Documents and Settings/Service')
+        self.target.user_details = NS(all_with_home=lambda: [NS(home_path=home)])
+        self.assertEqual(self.run_reader(), [])
+        self.assertEqual(self.fs.opened, [])
+        self.assertTrue(self.ev.problems)
+
     def test_random_ole_signature_does_not_establish_sticky_subtype(self):
         try:
             import dissect.ole
