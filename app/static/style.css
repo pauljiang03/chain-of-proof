@@ -311,6 +311,10 @@ dialog[open]::backdrop { animation: dim 220ms ease-out; }
 .report-options { overflow: auto; padding: 12px; border-right: 1px solid var(--line); display: grid; gap: 14px; align-content: start; }
 .report-options fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; min-width: 0; }
 .report-options legend { padding: 0; margin-bottom: 4px; font-size: 0.65625rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.report-options details { border-top: 1px solid var(--line); padding-top: 10px; }
+.report-options details > summary { cursor: pointer; font-weight: 600; font-size: 0.75rem; }
+.report-options details[open] > summary { margin-bottom: 10px; }
+.report-options details input { margin-bottom: 8px; }
 .report-options label { display: flex; gap: 8px; align-items: flex-start; line-height: 1.35; }
 .report-options label.stacked { display: block; color: var(--muted); font-size: 0.71875rem; margin-top: 2px; }
 .report-options input[type="checkbox"], .report-options input[type="radio"], .grid-table .mark input { margin: 2px 0 0; padding: 0; accent-color: var(--accent); flex: none; }

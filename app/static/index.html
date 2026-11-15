@@ -127,17 +127,39 @@
               <p class="field-help">Mark a finding with its checkbox in Findings → Exact statements, or with Add to report in the inspector. A report of marked findings says on its first page that it is a selection.</p>
             </fieldset>
             <fieldset><legend>Also include</legend><div id="report-sections" class="report-sections"></div></fieldset>
-            <fieldset><legend>Cover details</legend>
-              <label class="stacked" for="report-reference">Case reference</label><input id="report-reference" maxlength="200" autocomplete="off" spellcheck="false">
-              <label class="stacked" for="report-requested_by">Requested by</label><input id="report-requested_by" maxlength="200" autocomplete="off" spellcheck="false">
-              <label class="stacked" for="report-authority">Authority for the request</label><input id="report-authority" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Warrant, consent, contract…">
-              <label class="stacked" for="report-purpose">Purpose and scope</label><input id="report-purpose" maxlength="600" autocomplete="off" placeholder="What the examination was asked to establish">
-              <label class="stacked" for="report-received">Evidence received</label><input id="report-received" maxlength="200" autocomplete="off" spellcheck="false" placeholder="Date and from whom">
-              <label class="stacked" for="report-examiner">Examiner</label><input id="report-examiner" maxlength="200" autocomplete="off" spellcheck="false">
-              <label class="stacked" for="report-organisation">Organisation</label><input id="report-organisation" maxlength="200" autocomplete="off" spellcheck="false">
-              <label class="stacked" for="report-report_date">Date of report</label><input id="report-report_date" maxlength="200" autocomplete="off" spellcheck="false">
-              <p class="field-help">Printed as entered and labelled as not part of the stored run. The date starts as today's.</p>
+            <fieldset><legend>Report details</legend>
+            <label class="stacked" for="report-reference">Case reference</label><input id="report-reference" maxlength="200" autocomplete="off" placeholder="Your case identifier">
+            <label class="stacked" for="report-report_id">Report number</label><input id="report-report_id" maxlength="200" autocomplete="off" placeholder="Report identifier">
+            <label class="stacked" for="report-report_version">Report version</label><input id="report-report_version" maxlength="200" autocomplete="off">
+            <label class="stacked" for="report-examiner">Examiner</label><input id="report-examiner" maxlength="200" autocomplete="off">
+            <label class="stacked" for="report-organisation">Organisation</label><input id="report-organisation" maxlength="200" autocomplete="off">
+            <label class="stacked" for="report-address">Organisation address</label><input id="report-address" maxlength="200" autocomplete="off">
+            <label class="stacked" for="report-report_date">Date of report</label><input id="report-report_date" maxlength="200" autocomplete="off">
             </fieldset>
+            <fieldset><legend>Request and scope</legend>
+            <label class="stacked" for="report-requested_by">Requested by</label><input id="report-requested_by" maxlength="200" autocomplete="off" placeholder="Name and organisation">
+            <label class="stacked" for="report-request_date">Date of request</label><input id="report-request_date" maxlength="200" autocomplete="off">
+            <label class="stacked" for="report-authority">Authority for the request</label><input id="report-authority" maxlength="200" autocomplete="off" placeholder="Warrant, consent, contract…">
+            <label class="stacked" for="report-purpose">Purpose and scope</label><input id="report-purpose" maxlength="600" autocomplete="off" placeholder="Questions to answer and evidence in scope">
+            </fieldset>
+            <details><summary>Evidence and methods</summary>
+            <label class="stacked" for="report-received">Evidence received</label><input id="report-received" maxlength="200" autocomplete="off" placeholder="Date of receipt or collection">
+            <label class="stacked" for="report-submitted_by">Submitted by</label><input id="report-submitted_by" maxlength="200" autocomplete="off" placeholder="Name and organisation">
+            <label class="stacked" for="report-collection_method">Method of receipt or collection</label><input id="report-collection_method" maxlength="200" autocomplete="off" placeholder="Delivery or collection method">
+            <label class="stacked" for="report-additional_items">Other submitted items</label><input id="report-additional_items" maxlength="600" autocomplete="off" placeholder="Other submitted items and examination status">
+            <label class="stacked" for="report-method_notes">Examination procedures</label><input id="report-method_notes" maxlength="600" autocomplete="off" placeholder="Procedures, tool versions, deviations, and outside examinations">
+            </details>
+            <details><summary>Disposition and authorization</summary>
+            <label class="stacked" for="report-disposition">Evidence disposition</label><input id="report-disposition" maxlength="600" autocomplete="off" placeholder="Item IDs, originals and copies, retained or returned, holder and date">
+            <label class="stacked" for="report-authorizer">Report authorizer</label><input id="report-authorizer" maxlength="200" autocomplete="off">
+            </details>
+            <details><summary>Incident response (optional)</summary>
+            <label class="stacked" for="report-impact">Incident impact</label><input id="report-impact" maxlength="600" autocomplete="off" placeholder="Affected systems, data, and operations">
+            <label class="stacked" for="report-root_cause">Cause of the incident</label><input id="report-root_cause" maxlength="600" autocomplete="off" placeholder="Established cause and supporting finding IDs">
+            <label class="stacked" for="report-response">Response and recovery</label><input id="report-response" maxlength="600" autocomplete="off" placeholder="Actions, results, owners, and dates">
+            <label class="stacked" for="report-recommendations">Recommended actions</label><input id="report-recommendations" maxlength="600" autocomplete="off" placeholder="Action, owner, due date, and supporting finding IDs">
+            </details>
+            <p class="field-help">The report uses these details as entered. Add source references to examination notes and conclusions. The date starts as today’s.</p>
             <div class="report-buttons"><button class="button primary" id="report-print" type="button" disabled>Print / Save as PDF</button><a class="button" id="report-export" aria-disabled="true">Export HTML</a></div>
             <p class="field-help" id="report-status" role="status" aria-live="polite"></p>
           </form>

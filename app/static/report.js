@@ -6,15 +6,16 @@
   const $ = (id) => document.getElementById(id);
   // key, label, note, included by default
   const SECTIONS = [
-    ["needs", "Refused proposals", "What the checker did not accept, and why", true],
-    ["judgments", "Interpretations", "Investigator judgments, printed as not certified", true],
+    ["needs", "Appendix: refused proposals", "What the checker did not accept, and why", false],
+    ["judgments", "Analysis and conclusions", "Investigator conclusions with supporting finding references", true],
     ["workflow", "Question-by-question plan", "Only in a report of all findings", false],
     ["evidence", "Appendix: full evidence records", "Every cited record with its complete provenance", false],
     ["proofs", "Appendix: Lean proofs", "The claim and Lean source of each certificate", false],
     ["activity", "Appendix: audit and coverage", "Recorded tool calls and coverage summaries", false],
   ];
-  const COVER = ["reference", "requested_by", "authority", "purpose", "received", "examiner", "organisation", "report_date"];
-  const limit = (key) => (key === "purpose" ? 600 : 200);
+  const COVER = ["reference", "report_id", "report_version", "examiner", "organisation", "address", "report_date", "requested_by", "request_date", "authority", "purpose", "received", "submitted_by", "collection_method", "additional_items", "method_notes", "disposition", "authorizer", "impact", "root_cause", "response", "recommendations"];
+  const LONG_FIELDS = new Set(["purpose", "additional_items", "method_notes", "disposition", "impact", "root_cause", "response", "recommendations"]);
+  const limit = key => LONG_FIELDS.has(key) ? 600 : 200;
   const today = () => { const now = new Date(); return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); };
   const PREVIEW_LIMIT = 6 * 1024 * 1024;   // characters; larger reports are exported, not previewed
   const state = {
@@ -25,7 +26,7 @@
   // Remembered per case in this browser only: a convenience, never the record of anything.
   const storageKey = () => "conan-f.report." + state.name;
   function load() {
-    state.marked = new Set(); state.scope = "all"; state.cover = { report_date: today() };   // a report is dated the day it is made
+    state.marked = new Set(); state.scope = "all"; state.cover = { report_date: today(), report_version: "1" };   // a report is dated the day it is made
     state.sections = new Set(SECTIONS.filter((section) => section[3]).map((section) => section[0]));
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey()) || "null");
@@ -47,8 +48,8 @@
   function query(download) {
     const params = new URLSearchParams({ name: state.name, format: "html" });
     if (download) params.set("download", "1");
-    // A part this case has nothing for is not offered, so it keeps its usual place: the report then says there is none.
-    const included = (section) => (state.empty.has(section[0]) ? section[3] : state.sections.has(section[0]));
+    // Do not add empty optional sections to the examiner's report.
+    const included = (section) => !state.empty.has(section[0]) && state.sections.has(section[0]);
     params.set("sections", SECTIONS.filter((section) => included(section) && !(section[0] === "workflow" && state.scope === "marked")).map((section) => section[0]).join(","));
     if (state.scope === "marked") params.set("ids", marked().join(","));
     for (const key of COVER) if (state.cover[key]) params.set(key, state.cover[key]);

@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
+from app.report import COVER as REPORT_COVER
 
 ROOT = Path(__file__).resolve().parent.parent
 STATIC_ROOT = Path(__file__).resolve().parent / "static"
@@ -26,8 +27,7 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
-REPORT_OPTIONS = ("ids", "sections", "reference", "examiner", "organisation", "requested_by", "authority",
-                  "purpose", "received", "report_date")
+REPORT_OPTIONS = ("ids", "sections", *(key for key, _ in REPORT_COVER))
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
 
