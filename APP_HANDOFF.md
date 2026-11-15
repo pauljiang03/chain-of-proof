@@ -6,6 +6,16 @@ Base: main `9f67dfd`. Root integrates and pushes. Use the existing investigator,
 
 The user clarified that the CLI is the primary interface. Finish the CLI-to-report path first; keep the browser layer optional and small.
 
+## Complete checkpoint
+
+All U0–U3 lanes are integrated. The full suite passes 510 tests with the optional API environment.
+The installed `cop` command and localhost report downloads pass smoke checks.
+Offline end-to-end tests use the existing investigator runner, actual Workbench calls and Lean, with a synthetic backend.
+Cancellation tests include the investigator's detached child and saved partial certificates.
+Native Chrome checks covered the sample workspace, evidence/proof inspector, diagnostic needs, evidence links, and report print preview.
+No model provider or benchmark was run for this checkpoint. Start/stop in the browser is covered by real local HTTP integration tests.
+The local app is a convenience interface, not a sandbox for arbitrary executables. Descendant termination is best effort for arbitrary programs outside the supported runner.
+
 ## Ownership
 
 | Lane | Owner | Files |

@@ -6,6 +6,8 @@ The two-terminal feature split is integrated. See [FEATURE_HANDOFF.md](FEATURE_H
 The original terminal supplied audits, citations, and proof-gap diagnostics.
 The other terminal supplied portable verification, coverage, and claim history.
 Both coordinators connected the modules to the runner and report.
+The CLI and optional local browser interface are also integrated; see [APP_HANDOFF.md](APP_HANDOFF.md).
+The CLI is the primary interface. Both interfaces use the same investigation runner and report outputs.
 
 ## Objective and constraints
 
@@ -50,8 +52,10 @@ Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
 
-- 452 regression tests pass with the optional API dependencies installed. Lean builds successfully.
+- 510 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
 - The synthetic workflow verifies refusal, explicit revision, linked reports, portable packages, and tamper rejection without a model call.
+- Offline end-to-end tests exercise the CLI and HTTP API through the existing runner and real Lean checks, including cancellation and partial reports.
+- The installed CLI, static assets, and HTML/Markdown/JSON downloads pass a local smoke check. Sample report and workspace inspection passed native Chrome checks.
 - All 473 certificates in the current saved report independently verify.
 - All 24 known false-claim regression probes are refused.
 - No LLM grader remains in the current evaluation path.
@@ -118,6 +122,7 @@ The optional API backend is `--backend deepagents`; install `.[agent]` and confi
 ## Next parallel assignments
 
 Take one label per agent. Work in a separate worktree. Announce the label and files before editing.
+The other terminal has taken the next with/without-Lean experiment preparation in its own branch, following the user's request there. Coordinate B1/B2 with that coordinator; root has no active ablation edits.
 
 | ID | Assignment | Allowed work | Completion evidence |
 |---|---|---|---|
