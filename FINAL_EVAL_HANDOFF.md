@@ -74,7 +74,8 @@ timed out with no final response, but its saved checkpoint was scored unchanged.
 The cause of its post-tool wait is unknown. All four checkpoints were in budget;
 no tool calls started or completed after the deadlines. Cases shared one host.
 All 69 scored input bindings passed validation. The approved frontend integration
-may now proceed separately; the frozen experiment remains unchanged.
+is complete at `bffaac2`; its app suite, focused literal-value checks and browser
+checks passed. The frozen experiment remains unchanged.
 
 Local archives:
 

@@ -10,14 +10,15 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 The answer terminal ran fresh Sol 6.1 A/C investigators from the frozen, clean
 `cf97b96` runtime, with 900 seconds per live arm. A separate reference role scored
 all six submissions. The [new results](comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md)
-show low coverage and retained errors. Frontend integration may now proceed.
+show low coverage and retained errors. The approved frontend is integrated at
+`bffaac2`, with app tests and browser checks complete.
 Later documentation and frontend work do not change the frozen runtime.
 
 | Owner | Current state |
 |---|---|
 | Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Combined suite and later UI tests passed. |
 | Answer terminal (`01a1dc3d`) | Completed the two case lanes, replay and operational audit. Now audits public source-to-answer mappings and implements prospective coverage fixes in isolation. No further model calls are planned. |
-| Third terminal (`01a1dd77`) | Integrates the owner-approved frontend patch in isolation after the scoring gate passed. Owns focused tests and browser checks. |
+| Third terminal (`01a1dd77`) | Completed the owner-approved frontend patch, focused tests and browser checks. Root integrated the reviewed commit at `bffaac2`. |
 | Root helper: formal types and events | Formal checks, qualified claim sentences, selected full Hacking proofs and public compatibility recheck complete. No private evaluator was read during the recheck. |
 | Root helper: host fields and review | Host fields and independent checker review complete. Reviewed the newer desktop changes and fixed unsupported summary claims. Native provider calls remain untested. |
 | Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Sealed the implementation and experiment archives; all copied files and input bindings passed readback checks. |
@@ -63,9 +64,18 @@ valid fixture passes 18/18. A new supplement preserves both results and the fixe
 These finite checks do not prove every reader or composition correct.
 
 The reviewed integration includes UI changes through `27ba010`. The main checkout
-also has another terminal's owner-approved UI edits. The third terminal integrates
-them separately. Do not reset, stash or overwrite those files to update it.
-The experiment uses a separate, clean frozen checkout.
+also retains another terminal's original five UI edits. The third terminal
+integrated their approved changes separately. Do not reset, stash or overwrite
+those original files. The experiment uses a separate, clean frozen checkout.
+
+The frontend follow-up at `bffaac2` restores evidence cards and short-report
+timeline counts. It preserves literal labels and property values, including case,
+spaces and line breaks. The app suite passed 143 tests with one skip. The final
+label-only change passed 22 focused checks and three browser surface checks.
+The adapted invariant harness passed 18/18 before that final display change.
+Root checked all nine merged file hashes against the validation receipt; all
+match. No core source changed from the frozen runtime. Frontend receipt SHA256:
+`d5fbe474fa823cbfdc332b083218b8f98ebcf596909d47857afbe5e212cc4393`.
 
 ## Readiness and dispatch
 

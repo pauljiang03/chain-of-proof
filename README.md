@@ -74,7 +74,7 @@ now pass regression checks, including valid-case controls. Optical content check
 use known bytes, and report summaries retain the limits of cited records. Fresh
 inputs and selected proof checks for both cases are complete. The latest comparison
 used a separate frozen runtime. Its saved answers, execution failures and scores
-remain unchanged while frontend work continues.
+remain unchanged in later product updates.
 
 ## Try it in 60 seconds
 
