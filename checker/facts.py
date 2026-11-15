@@ -24,13 +24,10 @@ _OCCURRENCE_FIELDS = {'schema_version', 'disk_index', 'partition_offset_bytes',
 
 
 def file_occurrence(prov):
-    """Return ten explicit identity dimensions, or None when evidence is absent.
+    """Return the ten identity fields of a file occurrence, or None when evidence is absent.
 
-    This is a strict source-to-formal-data adapter, not an identity equality
-    checker. Lean compares every dimension. Text is encoded injectively as UTF-8
-    bytes with a leading byte; no hash, path, volume serial, or unknown default
-    supplies an occurrence. Native values are offset by one to reserve zero for
-    absent identity. The full provenance remains covered by the source-row hash.
+    Text is encoded injectively as UTF-8 bytes; native values are offset by one so zero
+    means absent. Lean compares every field.
     """
     if type(prov) is not dict or type(prov.get('file_occurrence')) is not dict:
         return None
@@ -68,7 +65,7 @@ def file_occurrence(prov):
 
 FILESYSTEM_SET_KINDS = ("filesystemSet", "filesystemMemberDeleted",
                         "filesystemMemberAllocated", "filesystemMemberUnknown")
-# Preserve these new non-attribute ordinals when future attribute roles are appended.
+# Keep these ordinals fixed when attribute roles are appended.
 _SET_KIND_BOUNDARY = ATTRIBUTE_KINDS.index("roleRecycleIndexDeletedAt") + 1
 
 KINDS = (
@@ -86,7 +83,7 @@ KINDS = (
     "folderOpened", "fileRenamed", "fileSeen", "shadowCopy",
     # file contents
     "fileContent",
-    # Recorded removal and optical volume timestamps; preserve the preceding kind order.
+    # Removal and optical volume records. Append only: the order fixes Lean kind numbers.
     "fileRemoved", "volumeRecorded",
     "fileCreationRecorded",
     "journalName", "journalParent", "journalRemoval",

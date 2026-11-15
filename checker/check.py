@@ -1,11 +1,10 @@
-"""check(): turn a proposed claim into a certificate, or a rejection.
+"""Turn a proposed claim into a certificate or a rejection.
 
     python -m checker.check --facts fixtures/sample_facts.json --id F7 \\
         --claim '{"both": [{"usbMountedAs": [4512, 4513]}, {"openedFromMount": [4600, 4513]}]}'
 
-The claim arrives as JSON. This module writes the Lean file itself, from the claim tree
-and from rows it reads out of the evidence DB, so nothing the agent types reaches Lean
-as text. The Lean kernel then decides.
+The Lean file is written here from the claim tree and the evidence rows, so nothing the
+agent types reaches Lean as text. The Lean kernel decides.
 """
 from __future__ import annotations
 
@@ -33,8 +32,7 @@ STANDARD_AXIOMS = {"propext", "Quot.sound", "Classical.choice"}
 _ID = re.compile(r"[A-Za-z][A-Za-z0-9_]{0,31}\Z")
 _built = False
 
-# Census-only elaboration bounds. Small definitions avoid Lean's giant list
-# declaration recursion limit; flattening still exposes every row to counts.
+# Census limits. Chunked definitions keep long lists under Lean's recursion limit.
 CENSUS_CHUNK_SIZE = 128
 CENSUS_MAX_REC_DEPTH = 8192
 CENSUS_MAX_HEARTBEATS = 2_000_000
@@ -169,8 +167,7 @@ def check(claim_json, finding_id: str, source: FactSource, question: str = "",
             kernel = {"ok": False, "output": "census kernel evaluation exceeded the 120-second wall-clock limit"}
         if not kernel["ok"]:
             if claims.census_of(claim) and (census_timeout or claims.census_satisfied(claim, found)):
-                # Python can explain a failure, but it never supplies a proof.
-                # A correct count can still fail elaboration/reduction budgets.
+                # A correct count can still exceed Lean's limits; Python never supplies a proof.
                 result["reason"] = ("census kernel evaluation exceeded the 120-second wall-clock limit; no certificate was issued"
                                     if census_timeout else "census kernel execution did not certify the count within its execution/resource limits; no certificate was issued")
                 result["parts"] = []

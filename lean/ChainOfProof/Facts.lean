@@ -1,8 +1,8 @@
 /-
   Facts: the evidence vocabulary. Rows are produced by the extractor, never by an LLM.
 
-  This file is the contract between the Data and Lean roles. Changing `Kind` or `Fact`
-  means changing `extractor/schema.sql` and `checker/facts.py` in the same commit.
+  Changing `Kind` or `Fact` means changing `extractor/schema.sql` and `checker/facts.py`
+  together.
 
   Meaning of `obj` / `aux` per kind (both are interned entity ids):
 
@@ -33,7 +33,7 @@
     sessionEvent  logon / logoff / startup / shutdown / ...   the account, or 0 for the machine
     programInstalled program name          version          (registration/installer record; t retains
                                                             source meaning, not necessarily installation time)
-    programRun    executable name          recorded path    (legacy application observation; provenance
+    programRun    executable name          recorded path    (application observation; provenance
                                                             cannot upgrade the kind to execution evidence)
     webVisit      URL                      browser
     fileDownloaded saved path              source URL
@@ -194,8 +194,7 @@ inductive Kind where
   | filesystemMemberUnknown
   | roleStickyNotesNoteText
   | roleStickyNotesContainerModifiedAt
-  -- Canonical signed decimal source scalar. The slot remains an interned entity;
-  -- this is not a timestamp, a count or a new integer arithmetic primitive.
+  -- A signed decimal source value, stored as an interned entity; not a timestamp or count.
   | attributeSignedIntegerValue
   | roleCloudContainerService
   | roleCloudContainerType

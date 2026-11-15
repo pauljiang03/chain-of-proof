@@ -1,18 +1,9 @@
-"""Conclusions: the investigator's own judgment, kept apart from certified findings.
+"""Conclusions: the investigator's own judgments, kept apart from certified findings.
 
-A certified finding is a sentence the proof checker generated from records. A conclusion
-is a sentence the investigator wrote ("the files were copied to take them out of the
-company"). The checker cannot prove a conclusion, so it is never shown as a finding. It
-is accepted into the report only if:
-
-  1. it cites at least one finding, and every finding it cites was certified in this run;
-  2. every specific detail in it (a date, a time, a number, a serial, a file name, a
-     quoted name) appears in the sentences of the findings it cites.
-
-Rule 2 is a limited text check, not a proof: it recognizes some tokens, not every
-name, number or relationship. Explicit optical-write assertions also undergo the
-narrow contradiction checks in consistency.py. These checks do not make arbitrary
-inferences verified; the inference itself remains the investigator's.
+A conclusion is accepted only if it cites at least one finding certified in this run
+and every specific detail in it (a date, time, number, serial, file name or quoted
+name) appears in the cited findings' sentences. That is a limited text check, not a
+proof: the inference itself stays the investigator's.
 """
 from __future__ import annotations
 

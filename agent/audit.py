@@ -1,10 +1,8 @@
-"""Append-only integrity records for completed Workbench tool calls.
+"""Hash-chained, append-only log of completed tool calls.
 
-This is not an identity/authenticity proof. A hash chain detects changes relative
-to its retained head; a complete rewrite is detectable only with an independently
-retained expected head. Calls interrupted before completion may have no event.
-Arguments and returned tool values are recorded, but exception messages, process
-environment, credentials, shell commands and network state are never collected.
+The chain detects edits relative to its head; detecting a full rewrite needs a
+separately kept head. Exception text, environment, credentials and network state
+are never recorded.
 """
 from __future__ import annotations
 
@@ -63,11 +61,9 @@ def _utc() -> str:
 
 
 def verify_audit(path, expected_head=None) -> dict:
-    """Read a log without modifying it; optionally compare an external chain head.
+    """Check a log without changing it, optionally against an expected head digest.
 
-    ``count`` counts parsed event objects, and ``head`` is the final stored digest.
-    Neither is trustworthy when ``passed`` is false. Errors never quote log data.
-    A valid empty file has count 0 and head None; a missing file fails verification.
+    `count` and `head` are meaningful only when `passed` is true. A missing file fails.
     """
     problems, count, head, call_ids = [], 0, None, set()
     try:
@@ -152,11 +148,9 @@ def verify_audit(path, expected_head=None) -> dict:
 
 
 class AuditLog:
-    """One Workbench's append-only log, serialized by its existing reentrant lock.
+    """One run's append-only log. Opening and every append re-verify the whole chain.
 
-    Reopening a run verifies the entire existing chain. Every append verifies it
-    again and refuses damage instead of repairing or truncating it. This lock
-    coordinates threads of this Workbench, not independent writer processes.
+    The lock serializes threads in this process, not separate processes.
     """
 
     def __init__(self, path, lock=None):
@@ -184,9 +178,7 @@ class AuditLog:
             call_id = "call-" + uuid.uuid4().hex
             try:
                 result = action()
-                # A completed action may return bytes or non-finite numbers.
-                # Treat an unrecordable result as a logged tool failure, while
-                # leaving valid return objects untouched.
+                # A result that cannot be serialized (bytes, NaN) is logged as a failure.
                 _canonical(result)
             except BaseException as error:
                 self._append(state, tool, arguments, call_id, start,
@@ -217,7 +209,7 @@ class AuditLog:
 
 
 def audited(method):
-    """Decorate a public Workbench tool, including malformed invocation attempts."""
+    """Log every call of a Workbench tool, including malformed calls."""
     signature = inspect.signature(method)
 
     @wraps(method)

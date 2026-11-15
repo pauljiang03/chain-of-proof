@@ -1,9 +1,4 @@
-"""Exact, opt-in predicates for recorded Search timestamps; no action inference.
-
-The answer requirement gate checks unique typed timestamps in the same claim
-part. Public mappings must separately establish source category, row identity
-and reviewed interval policy; no real question is enabled by this helper alone.
-"""
+"""Exact interval tests for recorded timestamps, counted in 100 ns ticks."""
 from datetime import date, datetime, timezone
 import re
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -18,10 +13,10 @@ DAY = re.compile(r'\d{4}-\d{2}-\d{2}', re.ASCII)
 
 
 def instant_ticks(value):
-    """Return exact 100ns ticks from 1970 UTC for a supported explicit instant.
+    """Return exact 100 ns ticks since 1970 UTC for an instant with an explicit offset.
 
-    Reject unknown offsets (-00:00), naive times, leap seconds, malformed dates
-    and excess precision. No float arithmetic or microsecond conversion is used.
+    Rejects unknown offsets (-00:00), naive times, leap seconds, bad dates and more than
+    seven fractional digits.
     """
     match = STAMP.fullmatch(value) if isinstance(value, str) else None
     if not match:
@@ -62,11 +57,7 @@ def parse_interval(spec):
 
 
 def recorded_in_interval(value, *, role, policy):
-    """Test only the named recorded timestamp; unsupported/malformed inputs raise.
-
-    Membership does not establish that the value measures a browser visit, that
-    a person acted, or that the set of returned records is exhaustive.
-    """
+    """Whether a recorded timestamp lies in the policy's [start, stop) interval. Bad input raises."""
     spec = parse_interval(policy)
     if role != spec['role']:
         raise ValueError('timestamp_role_mismatch')

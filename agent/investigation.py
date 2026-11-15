@@ -1,4 +1,4 @@
-"""Persistent public-question work notes, separate from proof and completeness."""
+"""Saved per-question work notes, kept apart from proofs."""
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -60,7 +60,7 @@ def _read_json(path):
 
 
 def atomic_json(path, value):
-    """Replace one bounded JSON artifact atomically; never follow an artifact symlink."""
+    """Replace a JSON file atomically, refusing symlinks."""
     path = Path(path)
     if path.is_symlink() or path.parent.is_symlink():
         raise ValueError('JSON artifact or run directory cannot be a symlink')
@@ -337,7 +337,7 @@ class Investigation:
             question = current[old_id]
             if previous.get('prompt') != question['prompt']:
                 raise ValueError('continuation question differs from the public profile')
-            # Never copy supplied status, finding IDs, or previous history, even if inserted by a caller.
+            # Carry over only the notes: never status, finding IDs or history.
             question['previous_run_notes'] = {key: _strings(previous.get(key, []), key)
                                                for key in ('searched', 'unresolved', 'next_actions')}
             question['previous_run_notes']['status'] = 'unverified'

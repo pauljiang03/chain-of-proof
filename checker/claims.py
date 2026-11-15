@@ -1,6 +1,6 @@
-"""The claim surface the agents write, and its two renderings: Lean and English.
+"""The claim language the investigator writes, and its two renderings: Lean and English.
 
-Agents propose instances of approved sets, snapped together with "both":
+Claims are instances of approved sets, joined with "both":
 
     {"usbMountedAs":    [usb, mount]}            R1+R2
     {"openedFromMount": [lnk, mount]}            R3
@@ -23,8 +23,8 @@ Agents propose instances of approved sets, snapped together with "both":
     {"exactlyWith": [kind, slot, entity_id, n]}      census: about ALL records of a kind
 
 Numbers are fact ids (and one tag id). Nothing here accepts free text, so the Lean
-term and the English sentence are functions of the claim tree and the cited facts
-alone. Each set mirrors a definition in lean/ChainOfProof/Sets.lean: add both together.
+term and the English sentence depend only on the claim tree and the cited facts.
+Each set mirrors a definition in lean/ChainOfProof/Sets.lean: change both together.
 """
 from __future__ import annotations
 
@@ -39,9 +39,7 @@ from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, VALUE_TYPES, dec
 MAX_PARTS = 64
 MAX_ATTRIBUTE_TUPLE = 8
 MAX_FILESYSTEM_SET = 256
-# Every row remains cited and independently checked for source completeness.
-# Distinct-value reduction is quadratic in the existing Lean definition, so keep
-# a finite ceiling even though chunked emission removes the giant-list limit.
+# Distinct-value counting is quadratic in Lean, so census size stays capped.
 MAX_CENSUS = 2048
 SLOTS = ("obj", "aux")
 STRENGTHS = ("strong", "heuristic", "judgment")   # weakest last
@@ -53,7 +51,7 @@ class ClaimError(ValueError):
     pass
 
 
-# ---- English, from fixed templates ------------------------------------------------
+# English sentences, from fixed templates.
 
 def _utc(t: int) -> str:
     dt = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=t)
@@ -463,11 +461,7 @@ def _installed_record(f: Fact, src: FactSource) -> str:
 
 
 def _program_record(f: Fact, src: FactSource) -> str:
-    """The legacy kind proves an observation, regardless of free provenance text.
-
-    Execution-artifact meaning belongs to separately typed source roles. Lean does
-    not inspect source/time_meaning strings, so they cannot upgrade this claim.
-    """
+    """This form proves only that the record exists; provenance text cannot strengthen it."""
     path = src.string(f.aux)
     where = "" if _none(path) else f", path {path}"
     source = str(f.prov.get("source") or "unspecified application artifact")
@@ -568,7 +562,7 @@ def _en_same_content(args, facts, src):
             f"prove byte-for-byte identity or source authenticity.{qualifications}")
 
 
-# ---- Census: statements about all the records of one kind ----------------------------
+# Census: statements about all the records of one kind.
 
 # kind -> (what one record is, what `obj` holds, what `aux` holds)
 _NOUN = {
@@ -772,7 +766,7 @@ def _en_image_digests(args, facts, src):
             'or establish that the retained checksum was created contemporaneously.')
 
 
-# ---- The approved sets ------------------------------------------------------------
+# The approved sets.
 
 @dataclass(frozen=True)
 class SetDef:
@@ -872,8 +866,6 @@ SETS: Dict[str, SetDef] = {
 CENSUS = ("exactly", "exactlyDistinct", "exactlyWith")
 
 
-# ---- Parsing ----------------------------------------------------------------------
-
 def _is_id(a) -> bool:
     return isinstance(a, int) and not isinstance(a, bool) and 0 <= a < 2**63
 
@@ -937,8 +929,6 @@ def _parse(obj) -> Claim:
     return (name, tuple(args))
 
 
-# ---- Views of a claim -------------------------------------------------------------
-
 def parts(c: Claim) -> List[Claim]:
     """The set instances of a claim, left to right."""
     return parts(c[1]) + parts(c[2]) if c[0] == "both" else [c]
@@ -966,11 +956,7 @@ def census_of(c: Claim):
 
 
 def filesystem_set_support_rows(declaration_id: int, src: FactSource) -> List[Fact]:
-    """Resolve the declared source scope without testing the proposed count/result.
-
-    This is also safe for unchecked-answer projection: it does not certify a kind,
-    cardinality, flag or Boolean. It never substitutes a different declaration.
-    """
+    """Resolve the declared source rows without testing the proposed count or result."""
     declaration = src.get([declaration_id]).get(declaration_id)
     if declaration is None:
         return []

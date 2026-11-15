@@ -1,8 +1,7 @@
-"""Reviewed attribute roles: fixed Lean kinds, native value types and narrow meanings.
+"""Reviewed attribute roles, each with its own Lean kind, value type and narrow meaning.
 
-Role names are claim syntax, not arbitrary text supplied by an investigator. Each
-role has its own Lean Kind so a different role cannot reuse an accepted value row.
-Counts are reader-recorded scoped counts; they do not imply evidence completeness.
+A separate Lean kind per role stops one role from reusing another role's accepted
+value row. Counts are reader-recorded and do not imply the evidence is complete.
 """
 from dataclasses import dataclass
 import json
@@ -35,7 +34,7 @@ class AttributeRole:
         return None
 
 
-# Append new entries. Their order also extends the historical fact-kind order.
+# Append only: this order fixes the Lean kind numbering.
 _SPECS = (
     ('image.logical.md5', 'string', 'MD5 recomputed over the logical image bytes'),
     ('image.logical.sha1', 'string', 'SHA-1 recomputed over the logical image bytes'),
@@ -241,8 +240,7 @@ ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', ''
          for part in name.split('.')), value_type, meaning)
          for name, value_type, meaning in _SPECS}
 _ROLE_KINDS = tuple(role.kind for role in ROLES.values())
-# Signed values were introduced after the first 148 total kinds. Keep historical
-# role/value ordinals unchanged, including the filesystem kinds inserted by facts.py.
+# Signed-value kinds come after the first 148 kinds, so existing ordinals stay fixed.
 _SIGNED_KIND_BOUNDARY = _ROLE_KINDS.index('roleStickyNotesContainerModifiedAt') + 1
 ATTRIBUTE_KINDS = (('attributeSubject', 'attributeTextValue', 'attributeIntegerValue',
                     'attributeBooleanValue') + _ROLE_KINDS[:_SIGNED_KIND_BOUNDARY]

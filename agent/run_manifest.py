@@ -1,7 +1,6 @@
-"""Bind a future investigation to its actual public inputs and local software.
+"""Record the inputs and software an investigation runs with.
 
-These are recorded measurements, not authentication or a proof of extraction quality.
-No environment variables, private reference, or provider request payload is collected.
+No environment variables, private reference or provider request is recorded.
 """
 from __future__ import annotations
 
@@ -42,7 +41,7 @@ def _git(root):
 
 
 def create(run_dir, *, facts, backend, model, minutes, root, questions=None, health=None):
-    """Write a new manifest after the public prompt/profile have been materialized."""
+    """Write a new manifest once the prompt and case profile are saved."""
     run_dir, root = Path(run_dir), Path(root)
     inputs = {"facts": file_binding(facts),
               "case_profile": file_binding(run_dir / "case-profile.json"),

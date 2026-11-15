@@ -1,8 +1,7 @@
-"""Exact instant-preserving report displays, independent of source interpretation.
+"""Display recorded instants in an explicit report time zone.
 
-A report timezone is an explicit presentation choice. It does not establish the
-timezone that a machine used when it recorded an event. Naive source values must
-be interpreted separately before calling this module; there is no local default.
+The report zone is only a display choice; it says nothing about the zone the
+source machine used. Naive source values must be interpreted before calling this.
 """
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -31,20 +30,17 @@ def _offset_text(offset):
     sign = '+' if seconds >= 0 else '-'
     hours, remainder = divmod(abs(seconds), 3600)
     minutes, seconds = divmod(remainder, 60)
-    # Historical IANA offsets sometimes include seconds. Do not silently round
-    # them into a false minute offset in this deliberately narrow ISO profile.
+    # Some historical IANA offsets include seconds; refuse rather than round them.
     if seconds:
         raise ValueError('report timezone has a sub-minute offset at this instant')
     return f'{sign}{hours:02d}:{minutes:02d}'
 
 
 def render_timestamp(source: str, report_timezone: str) -> TimestampDisplay:
-    """Render an explicitly offset source instant in an explicit ZoneInfo zone.
+    """Render an explicitly offset instant in an explicit ZoneInfo zone.
 
-    Full seconds are required; either T or a space is accepted as the source
-    separator. Fractional digits (including trailing zeroes and 100ns digits)
-    are retained exactly, without conversion through floating point or datetime
-    microseconds. Unknown offsets (-00:00), naive values, and leap seconds fail.
+    Needs full seconds; T or a space separates date and time. Fractional digits are
+    kept exactly. Unknown offsets (-00:00), naive values and leap seconds fail.
     """
     if not isinstance(source, str) or (match := _ISO.fullmatch(source)) is None:
         raise ValueError('source must be a full ISO timestamp with an explicit offset')

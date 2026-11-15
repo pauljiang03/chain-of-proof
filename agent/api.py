@@ -1,7 +1,6 @@
-"""Restrict the optional API harness to the investigator's evidence tools.
+"""Limit the API investigator to its own tools, both in what it is offered and what it may call.
 
-Imported only by the API backend; core commands do not require LangChain.
-The same allowlist applies to tool advertising and actual dispatch.
+Imported only by the API backend, so other commands do not need LangChain.
 """
 from langchain.agents.middleware import AgentMiddleware
 from langchain_core.messages import ToolMessage

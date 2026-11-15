@@ -6,9 +6,6 @@ import Std.Data.HashMap
 
   Generators are untrusted. A bug in one can miss bricks; it cannot emit a false one,
   because only the `holds` filter decides (`mine_sound`).
-
-  Not built yet: `lake exe mine` (read facts.jsonl, write bricks.jsonl), generators
-  for the remaining sets, and the chainer.
 -/
 open Std
 namespace ChainOfProof

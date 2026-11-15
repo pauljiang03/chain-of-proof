@@ -1,16 +1,8 @@
-"""Conservative cross-record diagnostics, never certificates or a truth selector.
+"""Cross-record diagnostics: possible conflicts and ambiguities, never findings.
 
-``review(source)`` uses the existing FactSource.all() interface, which materializes
-its store. Pass an ordered ``facts`` iterable to review a supplied subset instead.
-The scan and indexes are capped; no rule performs a pairwise join. Only two
-witness records are copied for each emitted diagnostic.
-
-A source observation needs an image, artifact, and an explicit observation ID,
-physical offset, event-record ID, or table/row ID. An event *type* ID, path alone,
-same file name, or coincident timestamp never establishes the same observation.
-Start/end order needs explicit event_instance_id, event_meaning, timestamp_role
-('start'/'end'), the same source, and the same entity. Current readers need not
-emit that optional metadata; without it this check makes no ordering inference.
+The scan is capped and no rule joins records pairwise. Two records are the same
+observation only with an explicit observation, offset, event-record or row ID; a
+shared path, file name or timestamp never suffices.
 """
 from __future__ import annotations
 
@@ -97,12 +89,9 @@ def _interval(row):
 
 
 def review(source, facts=None, *, max_records=500000, max_diagnostics=100):
-    """Return bounded deterministic diagnostics for records in supplied order.
+    """Return bounded, deterministic diagnostics for records in the given order.
 
-    Supports Fact objects or their core-field dictionaries. ``source.string``
-    resolves identities; unknown interned strings are not evidence of identity.
-    The result and copied provenance never mutate the source. A truncated scan
-    or output is explicit; witnesses are examples, not an exhaustive group.
+    A truncated scan or output is marked; witnesses are examples, not a full group.
     """
     if type(max_records) is not int or not 1 <= max_records <= 1000000:
         raise ValueError('max_records must be an integer from 1 to 1000000')

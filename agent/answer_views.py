@@ -1,4 +1,4 @@
-"""Bounded native tool views; durable answer bindings and projections stay complete."""
+"""Size-limited views of answer state for the investigator's tools."""
 from __future__ import annotations
 
 import hashlib
@@ -23,7 +23,7 @@ def _digest(value):
 
 def validate_request(bindings, replace=False, preview=False, *, section=None, offset=None,
                      page_size=None, state_token=None):
-    """Validate before entering the mutating store, including preview-error paths."""
+    """Validate a request before it reaches the answer store."""
     if type(replace) is not bool or type(preview) is not bool:
         raise ValueError('replace and preview must be Booleans')
     if preview and bindings is None:
@@ -45,7 +45,7 @@ def validate_request(bindings, replace=False, preview=False, *, section=None, of
 
 
 def bounded(value):
-    """An oversize value is explicitly a descriptor, never an exact clipped value."""
+    """Replace an oversize value with a descriptor, never a clipped copy."""
     raw = _encoded(value)
     if len(raw) <= MAX_ITEM_BYTES:
         return value
@@ -54,8 +54,7 @@ def bounded(value):
                   'preview': raw[:768].decode('ascii'), 'preview_is_exact_value': False,
                   'full_value_location': 'complete durable answer state; this is a tool-facing preview only'}
     if isinstance(value, dict):
-        # Preserve short record locators outside the preview so a large leaf's
-        # content cannot hide which binding/answer location the page describes.
+        # Keep the locator fields so a large value cannot hide where it belongs.
         identity = {key: item for key, item in value.items()
                     if key in ('candidate_id', 'question_id', 'binding_index', 'part', 'field',
                                'path', 'status', 'reason', 'semantic_type')
@@ -101,8 +100,6 @@ def _complete_rows(path, value):
 
 
 def _catalog_rows(catalog):
-    # Each selector and approved role remains inspectable. No repeated expansion
-    # of allowed semantic variants is introduced by the native output view.
     rows = []
     for key, value in catalog.items():
         if key == 'forms':
@@ -123,7 +120,7 @@ def _requirement_rows(requirements):
 
 def inspection(run_dir, question_id, *, offset=None, page_size=None, section=None, state_token=None,
                _evidence_source=None, _evidence_facts_sha256=None):
-    """Read-only, selected-question pages bound to one locked full-state snapshot."""
+    """Read-only pages for selected questions, taken from one locked snapshot."""
     from agent.answer_store import _inspection_snapshot
     validate_request(None, section=section, offset=offset, page_size=page_size, state_token=state_token)
     section, offset, page_size = section or 'bindings', offset or 0, page_size or DEFAULT_PAGE_SIZE
@@ -144,9 +141,8 @@ def inspection(run_dir, question_id, *, offset=None, page_size=None, section=Non
             'continuation': 'Omit bindings/replace/preview; use section, next_offset, page_size and this state_token. Each section is separately paged.',
             'value_policy': 'Oversize entries are explicit length/hash/preview descriptors, not exact values. Complete originals remain on disk.',
             'question_completeness': 'not_established'}
-    # The compatibility alias repeats items outside page, and ordinary JSON
-    # serialization adds spaces. Bound the entire returned envelope, not only
-    # its compact item encodings. Removed items remain at the next cursor.
+    # Bound the whole response: the alias repeats items and JSON adds spaces.
+    # Dropped items stay at the next cursor.
     while len(json.dumps(response, ensure_ascii=True, allow_nan=False).encode('utf-8')) > MAX_RESPONSE_BYTES:
         if not page['items']:
             raise ValueError('answer inspection envelope exceeds response byte limit')
@@ -160,7 +156,7 @@ def inspection(run_dir, question_id, *, offset=None, page_size=None, section=Non
 
 
 def mutation_view(result, question_id):
-    """Keep selected-Q outcomes and bounded diagnostics, never all-Q projections."""
+    """Return the selected question's outcome and bounded diagnostics, not every question."""
     projection = result.get('projection') if result.get('preview') else result
     projection = projection if isinstance(projection, dict) else {}
     rows = _selected(projection, question_id)

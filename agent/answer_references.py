@@ -1,4 +1,4 @@
-"""Public cross-question atomic-part dependencies, frozen before admission gates."""
+"""Cross-question references between answer parts."""
 from collections import defaultdict, deque
 from copy import deepcopy
 import json
@@ -23,7 +23,7 @@ def parse(raw):
 
 
 def inspect_schema(schema):
-    """Local preflight only; public target existence needs validate_public."""
+    """Local check only; whether the target exists needs validate_public."""
     try:
         if '"x-claim-reference":' not in json.dumps(schema, separators=(',', ':')):
             return [], []
@@ -103,7 +103,7 @@ def _target_exists(schema, path):
 
 
 def _cycle_nodes(graph):
-    """Identify actual cycle members with a bounded iterative DFS."""
+    """Find the members of each cycle with a bounded iterative DFS."""
     done, cyclic = set(), set()
     for start in graph:
         if start in done:

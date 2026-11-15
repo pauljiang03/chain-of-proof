@@ -1,8 +1,4 @@
-"""Shared record/tool instructions rendered with public context for one case.
-
-The investigator runtime selects a profile and calls investigator_brief explicitly.
-No prompt builder reads scoring references or another run's findings.
-"""
+"""Build the investigator's prompt for one case from public context only."""
 from agent.case import CaseProfile
 
 RECORD_DESCRIPTIONS = """\

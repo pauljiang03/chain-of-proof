@@ -2,7 +2,7 @@
 
     python -m checker.export --certs certs --out ui/public/run.json
 
-The front end reads only this file. Shape:
+Shape:
 
     {
       "version": 1,
@@ -13,11 +13,9 @@ The front end reads only this file. Shape:
       "conclusions": [{conclusion_id, text, finding_ids, strength: "judgment", note}, ...]
     }
 
-Conclusions are the investigator's own inferences. They are not checked by the kernel
-and must never be shown as findings: see agent/conclusions.py.
-
-A certificate is exactly what check() returns for a verified claim; see
-fixtures/sample_cert/N1.json. Nothing here is recomputed or reworded.
+Conclusions are unchecked inferences and are never shown as findings. A certificate is
+exactly what check() returns for a verified claim (see fixtures/sample_cert/N1.json);
+nothing is recomputed or reworded.
 """
 from __future__ import annotations
 
@@ -58,8 +56,7 @@ def _audit_snapshot(directory, expected_head):
         summary["problems"] = ["cannot read audit: " + type(error).__name__]
         return summary, []
     summary["sha256"] = hashlib.sha256(raw).hexdigest()
-    # verify_audit accepts a path. An immutable snapshot prevents checking one
-    # version of an actively appended log and summarizing another version.
+    # Verify and summarize the same snapshot, even if the live log grows meanwhile.
     with tempfile.TemporaryDirectory(prefix="cop-export-audit-") as temporary:
         snapshot = Path(temporary) / "audit.jsonl"
         snapshot.write_bytes(raw)
@@ -80,14 +77,9 @@ def _audit_snapshot(directory, expected_head):
 def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
            public_questions=None, answers=None, health=None, audit_expected_head=None,
            case_metadata=None) -> dict:
-    """Keep certificate fields intact and add separately qualified run metadata.
+    """Bundle certificates unchanged, plus separately labelled run metadata.
 
-    Inputs are public extraction metadata/questions/answers, never a reference.
-    Optional fixed sidecars are used only when the corresponding value is absent.
-    Missing logs are unmeasured, not evidence that no tool calls occurred.
-    Case metadata is merged before coverage evaluates execution and question scope.
-    Certificates need a verified proposal entry or a same-ID Lean artifact; unrelated
-    JSON files are never opened to discover certificates.
+    Missing logs are reported as unmeasured, not as zero tool calls.
     """
     from agent.coverage import summarize_coverage
     from agent.history import summarize_history
@@ -99,8 +91,8 @@ def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
         raise ValueError("proposal log cannot be a symlink")
     proposals = ([json.loads(line) for line in log.read_text().splitlines() if line.strip()]
                  if log.is_file() else [])
-    # Generated certificates have a same-ID Lean file or an entry in the fixed
-    # proposal log. Do not scan unrelated JSON (answers, references, or secrets).
+    # Find certificates via the proposal log or a same-ID Lean file; never scan other
+    # JSON files (answers, references, secrets).
     identifiers = {p.get("finding_id") for p in proposals if isinstance(p, dict)
                    and p.get("status") == "verified" and valid_finding_id(p.get("finding_id"))}
     identifiers.update(p.stem for p in certs_dir.glob("*.lean") if valid_finding_id(p.stem))

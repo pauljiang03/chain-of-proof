@@ -2,16 +2,13 @@
 
     python3 -m miner.mine --facts evidence/case_facts.json --out certs
 
-The default bounded mode omits one-record kinds over RESTATE_UP_TO rows and reports
-them explicitly. It also omits compound journal identity joins if any participating
-kind exceeds that cap. Use --complete to include both the records and their joins.
+By default, kinds with more than RESTATE_UP_TO records are not restated one by one (they
+are reported), and journal identity joins are skipped if any of their kinds exceeds that
+cap. --complete includes both.
 
-Candidate generation here is untrusted Python: a bug can miss a finding, but it cannot
-certify a false one, because every candidate still goes through checker.check and the
-Lean kernel. The output order and the finding ids (M001, M002, ...) depend only on the
-evidence file, so two runs on the same evidence give the same findings.
-
-This is the floor for the agents: anything they certify beyond it is their contribution.
+Candidates come from untrusted Python, but every one goes through checker.check and the
+Lean kernel: a bug can miss a finding but never certify a false one. Output order and
+finding ids (M001, M002, ...) depend only on the evidence file.
 """
 from __future__ import annotations
 
@@ -236,8 +233,7 @@ def candidates(source: FactSource, complete: bool = False) -> List[Tuple[str, di
         for i in range(0, len(rows), BATCH):
             out.append((question, _both([{form: [f.id]} for f in rows[i:i + BATCH]])))
 
-    # Identity joins are generic and bounded by the same opt-in as journal names.
-    # Each name and removal retains its own timestamp; no alias rewrites an event.
+    # Identity joins use the same --complete opt-in as journal names.
     identity_kinds = ("journalName", "journalParent", "journalRemoval", "journalPath")
     if complete or all(len(by_kind[k]) <= RESTATE_UP_TO for k in identity_kinds):
         names = defaultdict(list)

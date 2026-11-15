@@ -1,10 +1,4 @@
-"""Literal claim-field projection, shared by unchecked and checked candidates.
-
-This module does not decide whether claims hold. Selectors follow the proposed
-form, even for a wrong record kind, identity join, count, or time order. B can
-filter a frozen projection without opening the evidence again. Question placement
-and relevance are supplied by the investigator, never proved by this projection.
-"""
+"""Project claim arguments into answer field values without deciding whether claims hold."""
 from __future__ import annotations
 
 from collections import defaultdict, deque
@@ -28,9 +22,7 @@ FORMATS = frozenset({'identity', 'utc_iso', 'local_minute', 'local_date', 'integ
 MAX_SCHEMA_NODES = 256
 MAX_SCHEMA_DEPTH = 32
 MAX_SCHEMA_ALTERNATIVES = 32
-# A public display annotation chooses representation, never temporal meaning.
-# Extend this reviewed capability list only after reviewing the source role's
-# instant semantics; ISO-shaped text and time-like role names are insufficient.
+# Roles reviewed as true instants. ISO-looking text or a time-like name is not enough.
 REPORT_TIMESTAMP_SEMANTIC_TYPES = frozenset({
     ROLES['os.install_time'].semantic_type,
     ROLES['machine.last_shutdown'].semantic_type,
@@ -79,8 +71,7 @@ def _assertion(meaning):
     return {'literal': True, 'semantic_type': meaning}
 
 
-# Field roles follow the claim form, never the actual source row's kind. These
-# select only formal core slots / literal claim arguments, not provenance fields.
+# Fields follow the claim form, not the cited row's kind, and read only core slots.
 _SINGLE = {
     'usbConnected': ('usbInsert', 'device_serial', 'connection_context'),
     'opened': ('lnkTarget', 'path', 'volume_or_share'),
@@ -132,8 +123,6 @@ _joined('usbMountedAs', [('device_serial', 0, 'obj'), ('volume', 1, 'aux'), ('co
 _joined('openedFromMount', [('path', 0, 'obj'), ('volume', 1, 'aux'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
 _joined('openedFromDevice', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('device_serial', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
 _joined('openedFromRecorded', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('volume_label', 1, 'obj'), ('opened_time_us', 0, 't')], 'matching_recorded_volume_serials')
-# Serial joins do not associate a shortcut with a unique volume/device. Remove
-# the stronger legacy Boolean selectors instead of retaining misleading aliases.
 for _form in ('openedFromMount', 'openedFromDevice', 'openedFromRecorded'):
     _FIELDS[_form]['opened_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
     _FIELDS[_form]['opened_time_us']['meaning'] = (
@@ -144,9 +133,6 @@ for _form in ('openedFromMount', 'openedFromDevice', 'openedFromRecorded'):
                    'volume serial values; this does not establish a common volume, physical '
                    'device, actual file opening or opening time.'}
 
-# This predicate proves equality of two recorded serial values. A cloned or
-# colliding serial is not a volume or physical-device identity proof. Do not
-# retain the stronger legacy Boolean selector as an alias.
 _joined('recordedOnDevice', [('recorded_volume_serial', 0, 'aux'),
                            ('recorded_volume_label', 0, 'obj'),
                            ('examined_device_identifier', 1, 'obj')],
@@ -163,7 +149,6 @@ _FIELDS['copiedHere']['likely_copied_heuristic']['meaning'] = (
     'the shared occurrence; the heuristic does not prove a copy action.')
 _joined('deletedAfter', [('path', 0, 'obj'), ('deletion_recorded_time_us', 0, 't'), ('earlier_recorded_time_us', 1, 't')], 'deletion_record_after_other_record')
 _joined('deviceExamined', [('device_serial', 0, 'obj'), ('connected_time_us', 0, 't')], 'matching_recorded_device_identifiers')
-# USBSTOR key last-write timestamps do not establish connection onset.
 for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
     _FIELDS[_form]['connected_time_us']['semantic_type'] = 'recorded_timestamp_not_action_or_execution_guarantee_us'
     _FIELDS[_form]['connected_time_us']['meaning'] = (
@@ -173,7 +158,6 @@ for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
         'this does not establish unique physical-device identity, connection onset, mounting '
         'or that the USB record describes the examined physical device.')
 
-# Preserve useful literal selectors while making their source-record scope clear.
 for _form in ('openedFromMount', 'openedFromDevice', 'openedFromRecorded',
               'deviceHolds', 'usbMountedAs', 'deviceExamined'):
     if 'volume' in _FIELDS[_form]:
@@ -268,7 +252,7 @@ for _fields in _FIELDS.values():
 
 
 def catalog():
-    """Public field schema only: no evidence queries, private reference or grading."""
+    """The public field schema. Reads no evidence."""
     return {'schema_version': VERSION, 'forms': deepcopy(_FIELDS), 'formats': sorted(FORMATS),
             'attribute_roles': roles_catalog(),
             'part': 'zero-based index into flattened claim parts; a whole conjunction is one filter dependency',
@@ -278,7 +262,7 @@ def catalog():
 
 
 def tool_catalog():
-    """Compact, self-contained tool view; the full internal catalog is unchanged."""
+    """A compact copy of the field catalog for the investigator's tools."""
     result = catalog()
     shared_types = [role['semantic_type'] for role in result['attribute_roles'].values()]
     for fields in result['forms'].values():
@@ -300,12 +284,7 @@ def tool_catalog():
 
 
 def _literal_parts(claim):
-    """Parse shapes only; checker-only restrictions must not filter A's meaning.
-
-    In particular, a sameContent claim citing one ID twice still asserts equal
-    content, even though the checker refuses it. Whole-candidate refusal remains
-    the gate's job. This parser neither checks records nor calls claims.parse.
-    """
+    """Parse claim parts by shape only; the checker enforces everything else."""
     pending, parts, count = [claim], [], 0
     while pending:
         node = pending.pop()
@@ -328,9 +307,7 @@ def _literal_parts(claim):
                    or not isinstance(entry[3], str) or entry[3] not in ROLES
                    for entry in args):
                 raise ValueError('attribute_tuple_entry_shape_mismatch')
-            # Kind, same-subject and unique-role conditions belong to the
-            # checker. A retains the exact semantics of invalid proposals so
-            # B can refuse them without repairing their frozen projection.
+            # Kind and role rules belong to the checker; keep invalid proposals as written.
             parts.append((form, tuple(tuple(entry) for entry in args)))
             continue
         if form not in claims.SETS:
@@ -352,20 +329,19 @@ def _literal_parts(claim):
 
 
 def claim_fields(claim, source):
-    """Dereference declared argument roles only; never test kind, equality or order."""
+    """Read each declared argument's fields without testing kind, equality or order."""
     output = {'claim_sha256': claim_digest(claim), 'parts': [], 'unsupported': []}
     try:
         parts = _literal_parts(claim)
     except (ValueError, TypeError, RecursionError) as error:
         output['unsupported'].append({'reason': 'unsupported_or_malformed_claim', 'detail': str(error)})
         return output
-    # Set support resolves only the exact declared membership. It never checks
-    # or replaces the proposed count or Boolean, including invalid proposals.
+    # Read only the declared set members; the proposed count is left to the checker.
     support = [claims.filesystem_set_support_ids(part[1][0], source)
                if part[0] == 'filesystemSetDeleted' else claims.fact_ids(part)
                for part in parts]
     ids = list(dict.fromkeys(fid for group in support for fid in group))
-    found = source.get(ids)  # Legacy censuses still read only their asserted n.
+    found = source.get(ids)
     for index, part in enumerate(parts):
         form, args = part
         row = {'part': index, 'form': form, 'fields': {}, 'unsupported': []}
@@ -442,14 +418,7 @@ def _path(path):
 
 
 def _schema(schema, path):
-    """Collect common-path leaf constraints without choosing an anyOf branch.
-
-    This deliberately uses the intersection of branch path/type support, not
-    general JSON Schema validation. A branch must explicitly declare the path;
-    permissive additionalProperties cannot supply a branch-exclusive field.
-    Required fields, enum values and other grading constraints remain outside
-    this partial-field projector, as they are for schemas without alternatives.
-    """
+    """Collect the leaf constraints that every anyOf branch shares."""
     pending, leaves, visited = [(schema, 0, 0, False)], [], 0
     while pending:
         schema, position, depth, common_path = pending.pop()
@@ -467,8 +436,7 @@ def _schema(schema, path):
             if (not isinstance(alternatives, list) or not alternatives
                     or len(alternatives) > MAX_SCHEMA_ALTERNATIVES):
                 raise ValueError('unsupported_public_schema_anyof')
-            # Sibling constraints still apply to every branch. They need not
-            # redeclare the branch's paths, but cannot prohibit those paths.
+            # Sibling constraints apply to every branch.
             siblings = {key: value for key, value in schema.items() if key != 'anyOf'}
             pending.extend((branch, position, depth + 1, True) for branch in reversed(alternatives))
             if siblings:
@@ -507,11 +475,7 @@ def _schema(schema, path):
 
 
 def _strict_schema(schema, path):
-    """Keep conjunctive constraints separate; require meaning in every alternative.
-
-    No schema keyword is an internal marker. A branch cannot overwrite sibling
-    constraints or their annotations, including additionalProperties and items.
-    """
+    """Keep sibling constraints separate and require a meaning in every alternative."""
     pending, leaves, visited = [([schema], 0, 0)], [], 0
     while pending:
         nodes, position, depth = pending.pop()
@@ -566,12 +530,7 @@ def _typed(value, schema):
 
 
 def _display_policy(schema, path):
-    """Require the same explicit display policy in every applicable alternative.
-
-    Conjunctive siblings may supply type/format/policy, but an alternative cannot
-    supply a policy on behalf of another alternative. Existing unannotated
-    schemas bypass this new traversal entirely.
-    """
+    """Require the same explicit display policy in every applicable alternative."""
     key = 'x-claim-display'
     if b'"x-claim-display":' not in _encoded(schema):
         return None
@@ -697,7 +656,7 @@ def _row_paths(requirements, path):
 
 
 def prepare_projection(public, candidates, bindings, source, *, require_claim_requirements=False, require_evidence_scope=False, evidence_facts_sha256=None):
-    """Freeze literal values once; no candidate is accepted/refused by this function."""
+    """Freeze literal answer values once; this does not accept or refuse candidates."""
     if type(require_claim_requirements) is not bool:
         raise ValueError('require_claim_requirements must be a boolean')
     if type(require_evidence_scope) is not bool:
@@ -839,9 +798,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             'require_evidence_scope': require_evidence_scope, 'evidence_facts_sha256': evidence_facts_sha256,
             'public_sha256': claim_digest(public), 'questions': [q['id'] for q in public['questions']],
             'candidates': indexed, 'bindings': prepared, 'unsupported': unsupported, 'scope': SCOPE}
-    # Freeze omissions before any gate filtering. Removing a rejected candidate
-    # must not reveal a conflicting value that was absent from A's answer. The
-    # product can correct a collision by explicitly replacing its bindings.
+    # Record conflicts before filtering, so dropping a refused candidate cannot
+    # reveal a value the answer had omitted.
     grouped = defaultdict(list)
     for entry in prepared:
         grouped[entry['question_id']].append(entry)
@@ -857,9 +815,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                 'reason': 'row_fields_require_same_claim_part', 'question_id': qid,
                 'path': list(row_path), 'binding_indices': [entry['binding_index'] for entry in entries]})
     answer_references.freeze_references(plan)
-    # Reference paths are addresses in the emitted answer, not just authoring
-    # coordinates. Freeze any initial compaction failure so later gate filtering
-    # cannot revive a dependent whose reference was invalid in A.
+    # Reference paths point into the emitted answer. Record compaction failures now
+    # so later filtering cannot revive a broken reference.
     blocked = {index for conflict in plan['frozen_conflicts'] for index in conflict['binding_indices']}
     retained = defaultdict(list)
     for entry in prepared:
@@ -915,12 +872,7 @@ def _assemble(entries):
 
 
 def _assemble_reference_safe(questions, grouped):
-    """Assemble referenced questions first and check their actual output paths.
-
-    Public references are acyclic across questions. Processing that dependency
-    order handles transitive omissions and nested-array compaction in one pass,
-    without rewriting any public path, inserting nulls, or reading evidence.
-    """
+    """Assemble referenced questions first, then check the paths they actually produced."""
     order = {qid: index for index, qid in enumerate(questions)}
     dependencies = {qid: set() for qid in questions}
     dependents = defaultdict(set)
@@ -974,7 +926,7 @@ def _assemble_reference_safe(questions, grouped):
 
 
 def render_projection(plan, admitted_ids=None, authority='unchecked'):
-    """Filter whole candidate dependencies and render frozen values without source access."""
+    """Drop refused candidates with their dependents and render the frozen values."""
     if authority not in AUTHORITIES:
         raise ValueError('unsupported authority label')
     if (not isinstance(plan, dict) or plan.get('schema_version') != VERSION

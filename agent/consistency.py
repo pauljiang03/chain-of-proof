@@ -1,9 +1,7 @@
-"""Conservative contradiction checks for explicit optical-write assertions.
+"""Catch simple contradictions in conclusions that say a disc was written or burned.
 
-This is not a semantic verifier for arbitrary prose. It recognizes affirmative
-"disc <exhibit> was written/burned ..." clauses and ISO UTC timestamps. It catches
-an unbound PC trace used as a device time and a window predating that disc's own
-file-set record. Other wording can escape it; conclusions remain unverified.
+Only "disc <exhibit> was written/burned ..." clauses with ISO UTC times are checked;
+other wording escapes it.
 """
 from datetime import datetime, timezone
 import re
@@ -31,7 +29,7 @@ def optical_conflicts(text, findings):
             continue
         own = [r for r in rows if r.get("prov", {}).get("exhibit", "").lower() == exhibit.lower()]
         pc_times = {r["t"] // 1_000_000 for r in rows if r["kind"] == "cdBurn"}
-        # A PC trace has no physical-media identity in the current record contract.
+        # A PC-side trace does not identify the physical disc.
         own_times = {r["t"] // 1_000_000 for r in own if r["kind"] == "fileCreated"}
         if any(t in pc_times and t not in own_times for t in times):
             issues.append(f"write time assigned to {exhibit} comes from a PC optical trace "

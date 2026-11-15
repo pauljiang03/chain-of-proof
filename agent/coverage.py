@@ -1,9 +1,7 @@
-"""Pure, key-free coverage summaries of supplied run artifacts.
+"""Coverage counts for a run's artifacts.
 
-Counts describe recorded activity, not investigation completeness or answer
-accuracy. No files are read, proofs rechecked, or audit signatures authenticated.
-Pass the result of ``agent.audit.verify_audit`` as ``audit_verification`` when
-available. An absent input is unmeasured, not an empty successful operation.
+Counts describe recorded activity, not completeness or accuracy. A missing input is
+reported as unmeasured, not as zero.
 """
 from __future__ import annotations
 
@@ -138,9 +136,8 @@ def _audit(events, verification):
     inspected, failures = set(), []
     for event in events:
         result = event["result"]
-        # F1 records the Workbench method's parameter (fact_id); API-level
-        # synthetic receipts may use id. Conflicting explicit selectors do not
-        # establish which record was inspected.
+        # The audit log stores fact_id; other receipts may use id. Conflicting values
+        # identify no record.
         arguments = event["arguments"]
         requested = arguments.get("fact_id", arguments.get("id"))
         selectors_agree = "fact_id" not in arguments or "id" not in arguments or arguments["fact_id"] == arguments["id"]
@@ -307,11 +304,9 @@ def summarize_coverage(run, *, facts_metadata=None, audit_events=None,
                        audit_verification=None):
     """Summarize supplied artifacts without inferring missing measurements.
 
-    ``facts_metadata`` is the fact file's ``_meta`` object, not its record list.
-    ``audit_events`` is a decoded completed-event list (``None`` means missing).
-    ``public_questions`` and ``answers`` are public schema-v2 objects.
-    ``audit_verification`` is optional F1 ``verify_audit`` output; its count/head
-    must match these events. An absent verification is explicitly not checked.
+    ``facts_metadata`` is the fact file's ``_meta`` object. ``audit_events`` is the list
+    of completed events (None when missing). ``audit_verification`` is optional
+    ``verify_audit`` output whose count and head must match these events.
     """
     if not isinstance(run, dict):
         raise ValueError("run must be an object")
