@@ -23,20 +23,24 @@ These checks do not establish answer accuracy or zero false positives.
 
 ## Remaining work
 
-1. Complete the running development comparison on both cases, then publish exact replay and deterministic scores. Original matching, answers, statuses and denominators stay unchanged. Normalization stays disabled. Preserve the frozen runtime while later frontend work is merged.
+1. Review the measured misses and mismatches from the completed two-case comparison. Hacking Q2/Q4/Q8 are incorrect in all arms; Data Leakage retains 27 extra/unequal fields per arm. Keep the original scores and matching unchanged. Do not assume a key error or harmless formatting.
 2. Continue the explicit gaps in [the public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md). These include units and derived values, actual DHCP assignment, historical time windows and stronger source relationships. A source field alone does not supply these meanings.
 3. Resolve source selection and relationship requirements for snapshot, optical-media, copy-direction and actor-attribution questions. A larger union of sources is not a substitute for those relationships.
 4. Preserve all 60 Data Leakage questions, including the 14 unresolved reference questions. Current catalog support covers 55 of 358 public schema leaf occurrences; Hacking covers 14 of 38. These are schema-support counts, not test accuracy. Hacking Q28/Q29 stay unsupported until the requested executable population is established.
-5. After readiness passes, build complete fresh evidence snapshots, freeze code/contracts/model/budget, then run the matched A/C comparison and exact B replay. The other terminal owns dispatch. Selected-reader source fixtures are not full comparison inputs.
+5. Complete the approved frontend integration and its focused checks. Preserve the frozen `cf97b96` runtime and all measured artifacts. Future experiments need exact freeze validation, independently reviewed references and a new recorded protocol; do not repair this comparison.
 6. Validate the native product backend with an approved destination. The prior Sol bridge tests do not validate native provider orchestration. No AWS work is required.
 
 ## Measured results
 
-The [latest frozen Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
-has A/B: seven complete, 22 partial, 16 unanswered and one incorrect question,
-with 14 unresolved reference questions. C saved certificates but no final answer
-bindings; its accuracy is unavailable. Do not repair that measured submission.
+The [latest frozen two-case comparison](comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md)
+has Data Leakage A/B: four complete, six partial and 36 unanswered questions;
+C: five complete, seven partial and 34 unanswered. Fourteen reference questions
+remain unevaluable. No question is wholly incorrect, but each arm retains
+14 extra fields and 13 unequal values. Hacking has eight complete, 20 unanswered
+and three incorrect questions in every arm.
 
-Hacking has a completed mechanical workflow, not a completed 31-question model
-accuracy result. Both Mulder packages remain prepared and unrun. Historical tests
-and failures remain in their linked reports and archives; they are not new scores.
+All 113 Data Leakage C and 11 Hacking C certificates passed independent replay.
+These counts are separate from answer scores. All submissions came from saved
+checkpoints. The failed first Leakage launch and the later A timeout remain
+visible. Both Mulder packages and the planned D arm remain unrun. Historical
+tests and failures remain in their linked reports and archives.

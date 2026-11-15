@@ -6,24 +6,25 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 
 ## Ownership
 
-**Both cases are running in parallel.** The answer terminal launched fresh Sol
-6.1 A investigators from the frozen, clean `cf97b96` runtime. Each case then runs
-a fresh C investigator, with 900 seconds per live arm. B replays A exactly.
-No new accuracy result is available yet. The main integration was pushed at
-`e0831a2`. Later documentation and frontend work do not change the frozen runtime.
+**Both cases have finished live runs, exact replay and fixed scoring.**
+The answer terminal ran fresh Sol 6.1 A/C investigators from the frozen, clean
+`cf97b96` runtime, with 900 seconds per live arm. A separate reference role scored
+all six submissions. The [new results](comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md)
+show low coverage and retained errors. Frontend integration may now proceed.
+Later documentation and frontend work do not change the frozen runtime.
 
 | Owner | Current state |
 |---|---|
 | Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Combined suite and later UI tests passed. |
-| Answer terminal (`01a1dc3d`) | Controls the two live case lanes, deadlines, exact replay and deterministic scoring. No other terminal may launch duplicate trials. |
-| Third terminal (`01a1dd77`) | Reader/audit work passed. Coordinates the remaining frontend merge after the experiments finish and the frontend owner is ready. |
+| Answer terminal (`01a1dc3d`) | Completed the two case lanes, deadlines, exact replay and operational audit. No further model calls are planned. |
+| Third terminal (`01a1dd77`) | Integrates the owner-approved frontend patch in isolation after the scoring gate passed. Owns focused tests and browser checks. |
 | Root helper: formal types and events | Formal checks, qualified claim sentences, selected full Hacking proofs and public compatibility recheck complete. No private evaluator was read during the recheck. |
 | Root helper: host fields and review | Host fields and independent checker review complete. Reviewed the newer desktop changes and fixed unsupported summary claims. Native provider calls remain untested. |
-| Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Now prepares and verifies the new local archive, preserving intermediate failures. |
-| Independent reference reviewer | Prepared the held metadata-only compatibility bundle. Original scoring content is unchanged. Builders do not receive expected answer values. |
+| Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Sealed the implementation and experiment archives; all copied files and input bindings passed readback checks. |
+| Independent reference reviewer | Completed all six fixed scores with 69 input bindings checked. Diagnoses mismatch categories separately, without changing scores or returning private expected values to builders. |
 
-The source-support batch passed its suite. The new soundness repair batch and
-complete experiment inputs remain under review.
+The source-support and soundness repair batches passed their recorded checks.
+The complete experiment inputs passed readiness and remained fixed during runs.
 Use isolated worktrees for new work. Reassign completed workers to independent
 review or a remaining implementation task, rather than leave them idle. Root
 serializes commits in the shared source worktree to prevent index conflicts.
@@ -62,8 +63,9 @@ valid fixture passes 18/18. A new supplement preserves both results and the fixe
 These finite checks do not prove every reader or composition correct.
 
 The reviewed integration includes UI changes through `27ba010`. The main checkout
-also has another terminal's unfinished UI edits. Do not reset, stash or overwrite
-those files to update it. The experiment uses a separate, clean frozen checkout.
+also has another terminal's owner-approved UI edits. The third terminal integrates
+them separately. Do not reset, stash or overwrite those files to update it.
+The experiment uses a separate, clean frozen checkout.
 
 ## Readiness and dispatch
 
@@ -73,8 +75,8 @@ leaves. Repeated alternatives count separately. These are not question-accuracy
 percentages. The [public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md) separates
 completed work, candidate capabilities and unresolved meanings/source selections.
 
-The user's matched Sol 6.1 experiment passed readiness and both A arms started.
-The answer terminal owns dispatch to avoid duplicate runs. Its coordinator
+The user's matched Sol 6.1 experiment passed readiness and is now scored.
+The answer terminal owned dispatch to avoid duplicate runs. Its coordinator
 and notes are outside the repo:
 `/private/tmp/cop-v3-experiment-coordinator.py` and
 `/private/tmp/cop-v3-experiment-dispatch.md`. The recorded parallel-case schedule
@@ -112,22 +114,38 @@ comparison with an unscored smoke run.
 
 ## Latest measured state
 
-[Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md),
-frozen at `96cd518`: A/B seven complete, 22 partial, 16 unanswered and one incorrect
-question among 46 scorable questions; 14 reference questions remain unresolved.
-A/B matched 544 of 1,627 expected atoms. C retained 1,017 replayed certificates but
-no final answer bindings, so its answer accuracy is unavailable. The earlier
-completed comparison showed no overall accuracy gain from Lean feedback.
+[Latest two-case comparison](comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md),
+frozen at `cf97b96`: Data Leakage A/B each have four complete, six partial and
+36 unanswered questions; C has five complete, seven partial and 34 unanswered.
+Fourteen reference questions remain unevaluable. A/B match 18/1,627 scorable
+fields; C matches 75/1,627. Every arm retains 14 extra fields and 13 unequal values.
+Zero wholly incorrect questions does not imply zero incorrect assertions.
 
-The Hacking mechanical workflow has 11,939 records and 58 independently verified
-certificates. Its model pilot was prepared but never dispatched. The two Mulder
-packages remain prepared and unrun. No new accuracy result follows from this batch.
+Hacking has eight complete, 20 unanswered and three incorrect questions in each
+arm, with 10/52 matched fields. Q2/Q4/Q8 remain incorrect under the frozen matcher.
+All 113 Data Leakage C and 11 Hacking C certificates passed independent replay.
+B verified 45 Data Leakage candidates and 11 Hacking candidates. One unbound
+malformed Hacking candidate did not affect answers. Proof checks and answer
+agreement remain separate measurements.
 
-Frozen Data Leakage facts:
-`/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json`,
-SHA256 `a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d`.
-These old facts do not contain the new roles and must not be used for a claim that
-the new readers improved accuracy. Original run archives remain unchanged.
+Data Leakage's first launch failed at transport and remains retained. Attempt 2 A
+reached the deadline without a final response; scoring used its saved checkpoint.
+Its last logged tool finished normally. The cause of the subsequent wait is
+unknown. All four checkpoints were in budget, with zero calls after deadlines.
+The controller records A's 39.190-second cleanup delay and shared-host timing.
+
+Run source: `/private/tmp/cop-matched-ablation-20261115T0918Z/`.
+Public scoring receipt SHA256:
+`30f6f8165d0205c963950dec92ad675425a4e815e71c58396f5069affe41c1ba`.
+Both actual frozen snapshots and all 69 scored input bindings passed validation.
+Original run archives and failed attempts remain unchanged. The two Mulder
+packages and the planned D arm remain unrun. Native-provider orchestration still
+needs its own validation.
+
+The experiment archive is `runs/dev/matched-ablation-20261115T1019Z/`, with manifest
+SHA256 `36849d2cd24bfaf3a7540c53bfab81f15b5cb959338388eee26a67d6ba60d8dc`.
+It preserves 564 files and verified external input bindings. Private evaluator
+payloads, full private scores and raw internal model traces are excluded.
 
 ## Trust boundary
 

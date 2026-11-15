@@ -63,18 +63,18 @@ Related answer fields must use one source subject and the required source view.
 Lean checks typed fields and exact declared file sets. A larger set of records
 does not prove a stronger conclusion. Unsupported meanings stay explicit.
 
-Paged tools and saved answer checkpoints retain partial work. The next comparison
-remains held until the integrated code, fresh evidence and compatible reference
-bundle pass review. Reader checks and proof checks are not new accuracy results.
+Paged tools and saved answer checkpoints retain partial work. The latest
+comparison has saved answer scores for both cases. Coverage remains low.
+Reader checks and proof checks are separate from answer scores.
 The [work log](WORKSTREAMS.md) records current ownership and validation.
 
 A soundness audit confirmed gaps in identity joins, time meanings, answer
 references and the standalone second checker. All ten reported counterexamples
 now pass regression checks, including valid-case controls. Optical content checks
 use known bytes, and report summaries retain the limits of cited records. Fresh
-inputs and selected proof checks for both cases are complete. The next comparison
-is running on both datasets with a separately frozen runtime and readiness receipt.
-It has no new score yet.
+inputs and selected proof checks for both cases are complete. The latest comparison
+used a separate frozen runtime. Its saved answers, execution failures and scores
+remain unchanged while frontend work continues.
 
 ## Try it in 60 seconds
 
@@ -109,46 +109,45 @@ cop desktop      # same app in a native window (needs `.[desktop]`)
 
 ## Results so far
 
-The [latest Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md)
-used the same 335,509 extracted records and all 60
-public questions. Each investigator had a 15-minute limit. Fixed rules score the
-saved answers; there is no LLM judge.
+The [latest two-case comparison](comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md)
+uses 409,971 Data Leakage records and 14,468 Hacking records. Each investigator had
+a 15-minute limit. Fixed rules score the saved answers; there is no LLM judge.
+This is a development test of agreement with the frozen reference. It does not
+establish semantic equivalence with every prose answer.
 
-| Mode | Complete | Partial | Unanswered | Incorrect |
-|---|---:|---:|---:|---:|
-| A — no Lean feedback | 7/46 | 22 | 16 | 1 |
-| B — check A's exact claims afterward | 7/46 | 22 | 16 | 1 |
-| C — Lean feedback during investigation | Unavailable | Unavailable | Unavailable | Unavailable |
+A has no Lean feedback. B checks A's exact saved claims afterward. C uses Lean
+feedback during investigation.
 
-The reference has 46 scorable questions and 14 unresolved questions. All 60 remain
-in the result. A and B matched 544 of 1,627 scorable answer fields (33.4%). They also
-submitted 2,644 extra assertions and 99 unequal values. These are answer-contract
-mismatches, not counts of forensic false positives.
+| Case | Mode | Complete | Partial | Unanswered | Incorrect |
+|---|---|---:|---:|---:|---:|
+| Data Leakage | A, B each | 4/46 (8.7%) | 6 | 36 | 0 |
+| Data Leakage | C | 5/46 (10.9%) | 7 | 34 | 0 |
+| Hacking | A, B, C each | 8/31 (25.8%) | 0 | 20 | 3 |
 
-C reached the time limit before it saved its final answer bindings. Its answer
-accuracy is unavailable. It retained 1,017 certified claims, and all 1,017 passed
-independent replay. B retained 84 of A's 87 candidates; three had malformed syntax.
-All 84 B certificates passed replay. Removing those candidates did not change A's
-answers. **A certificate count is not an answer-accuracy score.**
+Data Leakage has 60 questions: 46 are scorable and 14 remain unevaluable. All stay
+visible. A/B matched 18 of 1,627 scorable answer fields; C matched 75 (4.6%). Each
+arm also has 14 extra fields and 13 unequal values. A partial answer can contain
+errors, so zero wholly incorrect questions does not mean zero incorrect assertions.
+Hacking matched 10 of 52 fields in each arm and has three unequal values.
 
-The repeat is frozen at `96cd518`. It cannot establish an A-versus-C accuracy result.
-The [earlier completed comparison](comparison/ablation/RESULTS_SOL61_20261115.md)
-showed no overall accuracy gain from Lean feedback. Its three incorrect C answers
-were narrow observations placed in stronger answer fields. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
+All 113 Data Leakage C certificates and all 11 Hacking C certificates passed
+independent replay. B verified 45 Data Leakage claims and 11 Hacking claims;
+one unbound malformed Hacking claim changed no answer. **Certificate validity
+does not establish answer accuracy or completeness.**
 
-A [separate three-question diagnostic](comparison/ablation/RESULTS_MEANING_DIAGNOSTIC_20261115.md)
-completed with 21 independently verified
-claims. It preserved narrow observations and left stronger unsupported fields empty.
-The agent submitted no incompatible bindings, so this run does not demonstrate the
-guard catching an error. It has no accuracy key or accuracy score.
+Data Leakage A reached its time limit without a final response. Its earlier saved
+checkpoint was scored unchanged. Its post-tool wait has an unknown cause. The
+first failed transport launch is also retained. All four checkpoints were saved
+within budget, with no tool calls after the deadlines. The two cases shared one
+host. This single comparison shows limited gains and low coverage; it does not
+establish a general benefit from Lean feedback or zero false positives.
 
-The [Hacking Case mechanical workflow](docs/HACKING_CASE_VALIDATION.md)
-extracted 11,939 records and produced reports
-and a portable package. All 58 selected certificates passed replay and con-leche.
-This checks the workflow; it is not the 31-question model test. Stronger attribution,
-subscription state and the partial antivirus scan remain explicit limits.
-The earlier DFIR Madness operational test is a separate case with no accuracy key.
-The full A/B/C/D comparison and native-provider validation remain unfinished.
+The [previous Data Leakage repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md),
+[earlier comparison](comparison/ablation/RESULTS_SOL61_20261115.md) and
+[incorrect-answer diagnosis](docs/INCORRECT_ANSWER_DEBUG.md) remain historical
+records. Their inputs differ from this run. The [Hacking workflow validation](docs/HACKING_CASE_VALIDATION.md)
+is a separate mechanical check. Mulder, the planned D arm and native-provider
+validation remain unfinished.
 
 ## How it works
 

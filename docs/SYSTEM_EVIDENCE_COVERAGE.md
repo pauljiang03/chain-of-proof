@@ -120,6 +120,14 @@ bundle preserves all original answers, matching
 rules, statuses and 91 questions. The endpoint is a development comparison under
 original matching rules, not semantic equivalence. Normalization remains disabled.
 
+That comparison is now complete. The [saved answer results](../comparison/ablation/RESULTS_SOL61_TWO_CASE_20261115.md)
+show five complete Data Leakage C answers among 46 scorable questions, with 14
+unevaluable questions retained, and eight complete Hacking C answers among 31.
+Hacking has three incorrect answers; Data Leakage retains errors within partial
+answers. Certificate replay passed, but answer coverage remains low. The separate
+experiment archive is `runs/dev/matched-ablation-20261115T1019Z/`; previous seals
+and the frozen `cf97b96` runtime remain unchanged.
+
 Lean proves statements relative to the extracted facts and declared rules.
 Source parsing, authenticity, completeness and the meaning of a question remain
 separate trust boundaries. This batch does not establish zero false positives.
