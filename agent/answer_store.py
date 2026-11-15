@@ -1,9 +1,4 @@
-"""Save explicit question bindings and rebuild values from recorded certificates.
-
-The projection code is part of the trusted renderer, like the English renderer.
-Question placement and completeness are not Lean theorems. Independent certificate
-replay remains a separate operation; this module does not confer proof authority.
-"""
+"""Save answer bindings and rebuild their values from recorded certificates."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -51,10 +46,10 @@ class CertificateSource(FactSource):
         return [self.facts[i] for i in sorted(self.facts)]
 
     def check_sentences(self, certificates):
-        """Check copied strings against the certificate's fixed English rendering.
+        """Check copied sentences against the certificate's own English rendering.
 
-        This detects internal disagreement, not a coherent replacement of the
-        whole bundle. Only replay against the original source establishes that.
+        This catches internal disagreement only; replay against the source catches a
+        wholly replaced bundle.
         """
         for certificate in certificates:
             claim = claims.parse(certificate['claim'])
@@ -92,7 +87,7 @@ def _document(path, state):
 
 
 def _scoped(state, bindings):
-    """Only applicable public declarations request the selected-source boundary."""
+    """True when an applicable declaration limits answers to the selected source records."""
     from agent.answer_requirements import applicable_scopes
     questions = {row['id']: row for row in state.get('questions', [])}
     for binding in bindings:
@@ -103,14 +98,14 @@ def _scoped(state, bindings):
             scopes = applicable_scopes(question.get('answer_schema', {}), binding.get('path'),
                                        require_evidence_scope=True)
         except (ValueError, TypeError, KeyError):
-            continue  # The projector returns precise schema/path diagnostics.
+            continue  # the projector reports this error
         if any(scope['mode'] == 'source_records' for scope in scopes):
             return True
     return False
 
 
 def _evidence_context(directory, state, document, certificates, source=None, digest=None):
-    """Bind native scoped projections to actual source rows, not certificate assertions."""
+    """Bind scoped projections to the actual source rows, not to what certificates say."""
     from agent.run_manifest import file_binding
     import re
     if (source is None) != (digest is None):
@@ -180,8 +175,7 @@ def _project(state, document, certificates, *, evidence_facts_sha256=None):
 def _certificates(directory, bindings):
     ids = list(dict.fromkeys(b.get('candidate_id') for b in bindings if isinstance(b, dict)))
     result = {}
-    # The certificate reader also serves short work-note updates. Batching avoids
-    # imposing that UI's per-call limit on a complete answer inventory.
+    # Read in batches to stay within current_certificates' per-call limit.
     for start in range(0, len(ids), 256):
         result.update(current_certificates(directory, ids[start:start + 256]))
     return result
@@ -189,10 +183,9 @@ def _certificates(directory, bindings):
 
 def _answer(run_dir, question_id, bindings=None, *, replace=False, preview=False,
             _evidence_source=None, _evidence_facts_sha256=None):
-    """Read a field catalog or add explicit bindings to current-run certificates.
+    """Read a field catalog or add bindings to current-run certificates.
 
-    An empty replacement clears that question's bindings. The tool audit keeps
-    prior calls. No candidate or proof is edited by an answer update.
+    An empty replacement clears the question's bindings.
     """
     from agent.answer_projection import catalog, tool_catalog, claim_digest, _path
     planner = Investigation(run_dir)
@@ -266,11 +259,7 @@ def _answer(run_dir, question_id, bindings=None, *, replace=False, preview=False
 
 def answer(run_dir, question_id, bindings=None, *, replace=False, preview=False,
            _evidence_source=None, _evidence_facts_sha256=None):
-    """Inspect or bind explicit fields; preview never changes durable answer files.
-
-    Invalid replacements preserve the last durable supported partial answer.
-    Nonconflicting appends retain supported leaves and raw unsupported proposals.
-    """
+    """Inspect or bind fields. A preview or an invalid replacement leaves saved answers unchanged."""
     try:
         return _answer(run_dir, question_id, bindings, replace=replace, preview=preview,
                        _evidence_source=_evidence_source, _evidence_facts_sha256=_evidence_facts_sha256)
@@ -304,13 +293,7 @@ def enrich_bundle(run, run_dir):
 
 def _inspection_snapshot(run_dir, question_id, *, _evidence_source=None,
                          _evidence_facts_sha256=None):
-    """Read native inspection metadata and projection under one state lock.
-
-    Trusted native callers may borrow their already bound source/digest pair;
-    certificate/source equality checks still run through _evidence_context.
-    Direct callers retain its ordinary actual-file verification and cleanup.
-    Nothing from this snapshot is persisted.
-    """
+    """Read inspection metadata and the projection under one state lock. Nothing is saved."""
     from agent.answer_projection import catalog, tool_catalog
     from agent.answer_requirements import inspect
     directory = Path(run_dir)
@@ -334,7 +317,7 @@ def _inspection_snapshot(run_dir, question_id, *, _evidence_source=None,
 
 
 def read_projection(run_dir):
-    """Recompute a bound answer snapshot for neutral coverage diagnostics."""
+    """Recompute a bound answer snapshot for coverage diagnostics."""
     directory = Path(run_dir)
     path = directory / FILENAME
     if not path.exists() and not path.is_symlink():
@@ -349,10 +332,9 @@ def read_projection(run_dir):
 
 
 def project_bundle(run, public, *, authority='recorded_certificates', evidence_facts_sha256=None):
-    """Recompute typed answers from bundled claims after independent verification.
+    """Recompute typed answers from bundled claims.
 
-    Callers must verify the certificates before labelling the result independently
-    replayed. This function alone checks bindings, not Lean proofs.
+    This checks bindings, not Lean proofs: verify the certificates first.
     """
     from agent.answer_projection import project_answers
     document = run.get('answer_bindings')

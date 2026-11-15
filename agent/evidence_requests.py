@@ -1,8 +1,7 @@
-"""Bounded collection from trusted intake inputs, never arbitrary agent paths/code.
+"""Run approved readers on configured evidence into a new snapshot.
 
-Collection writes a new full evidence version for a later investigation stage.
-Existing facts, certificates and run bindings are never changed by a request.
-Recommendations are deterministic diagnostics, not assurances that evidence exists.
+The investigator picks only approved reader/exhibit pairs, never paths or code.
+Existing facts and certificates are never changed.
 """
 from __future__ import annotations
 
@@ -31,8 +30,7 @@ KINDS = {
     "inventory": {"fileSeen", "fileContent"}, "content": {"fileContent"},
     "optical": {"systemSetting", "volumeOnDevice", "fileCreated", "fileModified", "volumeRecorded", "unallocatedOnDevice"},
 }
-# Explicit reviewed USB source observations only. These registry/log strings do
-# not establish hardware serials, physical-device identity or device counts.
+# USB source roles. These strings are not hardware serials or proof of distinct devices.
 _USB_SOURCE_ROLES = (
     'usb.device_instance_id', 'usb.device_id', 'usb.instance_id',
     'usb.recorded_time', 'usb.record_time_meaning', 'usb.source_type',
@@ -40,7 +38,7 @@ _USB_SOURCE_ROLES = (
 KINDS['windows'].update({'attributeSubject', 'attributeTextValue',
                          *(ROLES[role].kind for role in _USB_SOURCE_ROLES)})
 
-# These identify existing reader families, not evidence guarantees or new rules.
+# Readers that can supply each rule's records.
 RULE_READERS = {
     "R3": {"windows"},
     "R4": {"windows", "media", "optical"}, "R5": {"windows"}, "R6": {"windows"},
@@ -160,8 +158,7 @@ def recommendations(run_dir, proof_gap=None):
             if isinstance(kind, str):
                 readers.update(reader for reader, kinds in KINDS.items() if kind in kinds)
             else:
-                # A compound rule can mention other source families. It must
-                # not override an explicit unavailable kind with those readers.
+                # A compound rule's other readers must not override an unavailable kind.
                 for rule in required.get("rules", []) if isinstance(required.get("rules", []), list) else []:
                     if isinstance(rule, str):
                         readers.update(RULE_READERS.get(rule, ()))
@@ -172,7 +169,7 @@ def recommendations(run_dir, proof_gap=None):
         if category in ("missing_record", "wrong_record_type") and isinstance(required.get("kind"), str):
             need['collection_capability'] = ('reader_family_declared' if readers else
                                              'not_advertised_by_approved_readers')
-            # This table describes collection capabilities, not a source query.
+            # Capabilities only; the evidence itself was not queried.
             need['source_presence'] = 'not_determined'
         needs.append(need)
     suggested = [row for row in available if row["reader"] in wanted and not row["already_collected"]]
@@ -217,8 +214,7 @@ def _collect(run, reader, exhibit):
     output = parent / ("collection-" + uuid.uuid4().hex)
     receipt = extend(config, reader, exhibit, output)
     receipt.update(reader=reader, exhibit=exhibit, note=NOTE)
-    # Each immutable snapshot keeps its receipt. The latest pointer is a
-    # replaceable convenience for the runner, never a fact-store mutation.
+    # Each snapshot keeps its receipt; latest-collection.json points to the newest.
     with (output / "collection.json").open("x", encoding="utf-8") as stream:
         json.dump(receipt, stream, indent=2, sort_keys=True)
         stream.write("\n")

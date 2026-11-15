@@ -1,8 +1,7 @@
-"""Continue public investigation work in a new, evidence-bound run.
+"""Continue an investigation in a new run.
 
-This is task-level recovery, not restoration of hidden provider reasoning. Old runs
-are never modified. Claims are replayed only with byte-identical fact inputs;
-changed evidence retains previous work notes but never reuses old record IDs.
+Old runs are never modified. Claims are replayed only when the evidence bytes are
+identical; otherwise only work notes carry over.
 """
 from __future__ import annotations
 
@@ -61,7 +60,7 @@ def _running(directory):
             return False
         finally:
             os.close(descriptor)
-    # Legacy runs have no liveness lock; preserve the conservative status check.
+    # Runs without a lock file fall back to the job status.
     job = directory / "app-job.json"
     return job.exists() and _read(job).get("status") == "running"
 
@@ -141,7 +140,7 @@ def restore(previous, run_dir, facts, profile, public_questions=None):
             if not line.strip():
                 continue
             item = json.loads(line)
-            # Rechecking the literal claim never trusts a stored 'verified' label.
+            # Verified claims are rechecked, not trusted.
             if item.get("status") != "verified":
                 continue
             result = bench.check(str(item.get("question", "Previous finding")), item.get("claim"))

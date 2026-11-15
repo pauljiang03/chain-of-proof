@@ -1,4 +1,4 @@
-"""Bounded public-schema and agent-work diagnostics; never proof or answer scoring."""
+"""Report which answer fields the investigator's work covers. Not proof or scoring."""
 from __future__ import annotations
 
 MAX_QUESTIONS = 500
@@ -28,8 +28,7 @@ def _fields(schema, value, budget):
     annotations = {'title', 'description', '$comment', 'examples', 'default', 'readOnly', 'writeOnly', 'deprecated'}
     supported = {'type', 'properties', 'required', 'items',
                  'x-claim-requirement', 'x-claim-row', 'x-claim-scope', 'x-claim-reference'} | annotations
-    # These standard constraints do not declare required object-field presence.
-    # Their validity remains outside this helper, rather than an actionable gap.
+    # Schema keywords that never require a field to be present.
     non_presence = {'$schema', '$id', '$anchor', '$defs', 'definitions', 'enum', 'const', 'format',
                     'additionalProperties', 'unevaluatedProperties', 'patternProperties', 'propertyNames',
                     'minProperties', 'maxProperties', 'minimum', 'maximum', 'exclusiveMinimum',

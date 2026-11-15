@@ -4,9 +4,9 @@
 #   scripts/fetch_data.sh          removable media only (about 430 MB)
 #   scripts/fetch_data.sh --pc     also the PC image, E01-E04 (about 7.3 GB)
 #
-# The E01 files are read directly by libewf, The Sleuth Kit and plaso, so
-# nothing needs 7-Zip or a 20 GB raw extraction. Downloads resume if interrupted.
-# Compare MD5/SHA-1 with the hashes published on the case page before using an image.
+# E01 images are read directly, so no 7-Zip or 20 GB raw extraction is needed.
+# Downloads resume if interrupted. Compare MD5/SHA-1 with the hashes published on
+# the case page before using an image.
 set -euo pipefail
 
 BASE="https://cfreds-archive.nist.gov/data_leakage_case/images"

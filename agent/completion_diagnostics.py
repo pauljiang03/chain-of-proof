@@ -1,4 +1,4 @@
-"""Bounded recorded-work diagnostics; never infer answers from returned records."""
+"""Summarize recorded answer work for review. Never infers answers."""
 from collections import Counter
 from agent.coverage_plan import coverage_pass
 from agent.answer_projection import catalog
@@ -13,7 +13,7 @@ LIMITATION = ('Counts describe public declarations, authored bindings, literal p
 
 
 def _declarations(schema, forms):
-    """Discard available-field catalogs; retain only bounded declaration counts."""
+    """Count a question's field declarations without copying the catalog."""
     keys = ('catalog_supported_fields', 'no_catalog_support_fields', 'missing_field_requirements',
             'invalid_requirement_rows', 'declared_source_scopes', 'unavailable_source_scopes')
     try:
@@ -60,7 +60,7 @@ def completion_diagnostics(public, document, projection, candidates, inventory=N
     conflicting_indices = {}
     for conflict in projection.get('conflicts', []):
         conflicting_indices.setdefault(conflict.get('question_id'), set()).update(conflict.get('binding_indices', []))
-    # One catalog snapshot per report; never expand or copy it per question.
+    # Read the catalog once per report.
     try:
         forms = catalog()['forms']
     except Exception:

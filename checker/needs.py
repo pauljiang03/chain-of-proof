@@ -1,9 +1,4 @@
-"""Deterministic, non-certifying explanations of rejected proof obligations.
-
-This module never invokes Lean, changes records, or decides acceptance. It describes
-failed bricks already returned by the checker and resolves their values from the same
-cited source. Unknown diagnostic formats remain unclassified rather than guessed.
-"""
+"""Explain why a claim was refused, from the checks that failed. Never decides acceptance."""
 from __future__ import annotations
 
 import re

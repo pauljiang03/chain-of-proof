@@ -1,16 +1,14 @@
-"""Run the AI investigator with public case context and optional deterministic scoring.
+"""Run the AI investigator on one case.
 
     python3 -m agent.run --name agent1                       # on this machine's Claude Code login
     uv run --extra agent python -m agent.run --backend deepagents --name agent2   # API key
     python3 -m agent.run --facts evidence/other.json --case-profile public-case.json --name other
 
-Writes runs/<name>/: every proposal and certificate, run.json for the front end,
-optional results.json from the scorer, and summary.md (the investigator's own closing words).
-Existing run directories are never overwritten. Evaluation needs explicit --reference, --questions and --adapter/--answers.
-Scoring references are never included in the investigator prompt.
+Writes a new runs/<name>/ with every proposal and certificate, run.json for the front end
+and summary.md. Scoring is optional; its references never reach the prompt.
 
 Backends
-  claude-code   Headless Claude Code with only our evidence and workflow tools (no shell, no files). No API key.
+  claude-code   Headless Claude Code with only our tools (no shell, no files). No API key.
   deepagents    LangChain deepagents on the Anthropic API. Needs ANTHROPIC_API_KEY.
 """
 from __future__ import annotations
@@ -53,11 +51,11 @@ INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude", "plan", "upda
 
 def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt: str,
                     tools=INVESTIGATOR_TOOLS, transcript: str = "transcript.jsonl") -> dict:
-    """The investigator as a headless Claude Code session.
+    """Run the investigator as a headless Claude Code session.
 
-    It gets restricted tools through agent/mcp_server.py and nothing else: every built-in
-    tool is switched off (--tools ""), so it has no shell and cannot read any file. It
-    runs in an empty directory so no project file is in reach either."""
+    Its only tools come from agent/mcp_server.py: built-in tools are off (--tools ""),
+    so it has no shell or file access, and it runs in an empty directory.
+    """
     servers = {"mcpServers": {"cop": {
         "command": sys.executable, "args": ["-m", "agent.mcp_server"],
         "env": {"PYTHONPATH": str(ROOT), "COP_FACTS": env["COP_FACTS"],
@@ -143,8 +141,7 @@ def _create_api_agent(model, tools):
 
     return create_deep_agent(model=model, tools=tools,
         middleware=[
-            # A restricted investigator cannot retrieve an evicted result through
-            # read_file. Keep supplied evidence and public prompts in messages.
+            # With no file tools, an evicted result could not be read back; keep it in messages.
             FilesystemMiddleware(tool_token_limit_before_evict=None,
                                  human_message_token_limit_before_evict=None),
             EvidenceToolsOnly(INVESTIGATOR_TOOLS),
@@ -153,7 +150,7 @@ def _create_api_agent(model, tools):
 
 def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
                    timeout_s: int = 45 * 60) -> dict:
-    """API investigator, covered by offline graph tests; live access needs credentials."""
+    """Run the investigator on the Anthropic API through LangChain deepagents."""
     from langchain_core.tools import tool
 
     from agent.tools import Workbench
@@ -179,9 +176,7 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
             return function(*args, **kwargs)
 
     def call_validated(function, *args, **kwargs):
-        # A malformed binding or expired cursor is recoverable model input, not
-        # a reason to discard the rest of the investigation. Audited methods
-        # record the failed call before this response is returned to the model.
+        # A bad binding or expired cursor is for the model to fix: return the error.
         try:
             return call_tool(function, *args, **kwargs)
         except ValueError as error:
@@ -205,8 +200,7 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
     @tool
     def check(question: str, claims: list, revises: str | None = None) -> str:
         """Propose claims for checking; optionally name the prior proposal being revised."""
-        # Each proof is one synchronous operation; stop between claims instead
-        # of finishing an unbounded batch after the investigation has expired.
+        # Stop between claims once time runs out, rather than finishing a long batch.
         revision = {"revises": revises} if revises is not None else {}
         return json.dumps([call_tool(bench.check, question, c, **revision) for c in claims], ensure_ascii=False)
 
@@ -279,8 +273,7 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
             budget_expired.set()
             return None
         finally:
-            # Also stop queued workers when another tool/provider fails. One
-            # already active synchronous proof must finish before asyncio exits.
+            # Stop queued tool calls on any exit; a proof already running still finishes.
             stop_work.set()
 
     state = asyncio.run(invoke())
@@ -323,10 +316,9 @@ def _input_path(value: str) -> Path:
 
 
 def _expected_backend_error(error: Exception) -> bool:
-    """Recognize setup/runtime and optional SDK failures without requiring the SDK.
+    """Whether a backend failure is an expected setup, runtime or provider error.
 
-    A provider used by the backend is already imported when its exception escapes.
-    Keep unexpected programming errors visible after saving the failed run.
+    Unexpected programming errors are re-raised after the run is saved.
     """
     if isinstance(error, (OSError, ImportError, RuntimeError)):
         return True
@@ -338,8 +330,7 @@ def _expected_backend_error(error: Exception) -> bool:
 
 
 def _execution_failed(meta: dict) -> bool:
-    # Reaching our own budget remains an ordinary partial run. A provider error
-    # observed before that deadline still fails, even if the watchdog later fires.
+    # Hitting our own time limit is a normal partial run; a provider error still fails.
     if meta.get("is_error"):
         return True
     if meta.get("ended") == "time_limit":
@@ -426,9 +417,8 @@ def _main(argv=None, *, resources) -> int:
             meta = run_deepagents(model, run_dir, str(facts_path), prompt=prompt,
                                  timeout_s=args.minutes * 60)
     except Exception as error:
-        # Only the backend invocation is caught: even an unexpected backend bug
-        # must not erase the trial from our records. Re-raise such bugs below,
-        # after finalization. Never serialize exception text or request payloads.
+        # Save the run even if the backend crashes; unexpected errors are re-raised below.
+        # Never record exception text or request payloads.
         backend_error = error
         meta = {"summary": "Investigation failed. Saved proposals and certificates remain available.",
                 "turns": None, "tool_calls": None, "seconds": round(time.monotonic() - started),
@@ -460,8 +450,7 @@ def _main(argv=None, *, resources) -> int:
     print(f"\n{meta['tool_calls']} tool calls, {meta['seconds']} s, ended: {meta['ended']}")
     print(f"proposals {data['stats']['proposals']}, certified {data['stats']['verified']}, "
           f"refused {data['stats']['rejected']}, conclusions {len(data['conclusions'])}\n")
-    # Save the investigation before optional regression work can fail. Gate probes
-    # remain separate from findings; a failed gate does not bypass verification.
+    # Save the run before the optional gate check, which may fail. Gate probes are not findings.
     regression, gate_error = None, None
     if labeled:
         try:
@@ -482,9 +471,8 @@ def _main(argv=None, *, resources) -> int:
     except (ValueError, OSError) as error:
         ap.error(str(error))
     if (run_dir / "answers.json").is_file():
-        # Count answer presence only after the explicit evaluation path produced
-        # a submission. Preserve the already exported audit/certificate snapshot;
-        # this summary never reads the reference or awards correctness credit.
+        # Count answered questions only when evaluation wrote answers.json.
+        # This never reads the reference or judges correctness.
         from agent.coverage import summarize_coverage
         submission = json.loads((run_dir / "answers.json").read_text())
         data["coverage"]["questions"] = summarize_coverage(data,

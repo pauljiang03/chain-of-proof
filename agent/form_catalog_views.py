@@ -1,4 +1,4 @@
-"""Exact, bounded static claim/answer catalog pages for the opt-in v3 protocol."""
+"""Page through the static claim and answer catalogs in bounded, exact pieces."""
 from copy import deepcopy
 import hashlib
 import json
@@ -41,8 +41,7 @@ def _fragments(path, value, budget=None):
     if isinstance(value, (dict, list)) and value:
         children = value.items() if isinstance(value, dict) else enumerate(value)
         return [row for key, child in children for row in _fragments(path + [key], child, budget)]
-    # Preserve the entire exact JSON literal, including escape sequences. Join
-    # chunks in order then JSON-decode; no scalar is replaced by a preview.
+    # Split an oversize value into exact JSON fragments; join them in order, then decode.
     literal = _encoded(value).decode('ascii')
     chunks = [literal[i:i + 1024] for i in range(0, len(literal), 1024)]
     return [{'path': path, 'encoding': 'json-ascii-fragment', 'offset': index * 1024,

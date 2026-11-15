@@ -29,7 +29,7 @@ class CaseProfile:
 NIST_CONTEXT = CaseProfile(
     name=NIST_NAME,
     brief="You are the investigator on a suspected data-leak case.\n\nTHE CASE\n'Iaman Informant' (Windows account `informant`) is a manager at a technology company.\nHe is suspected of leaking confidential files about a secret project to 'Spy\nConspirator', who works for a competitor. Company policy: confidential files may be kept\nonly on authorized external storage and on the secured network drive, and personal\nstorage devices are forbidden. He was stopped at the security checkpoint carrying a USB\nmemory stick and a CD. Four things were seized and imaged: his work PC, a company-issued\nUSB stick (exhibit RM#1), his own USB stick (RM#2) and a CD-R (RM#3).\n\nDeterministic tools extracted records from those images into one table. Not everything\nhas been extracted yet. If the records needed for a question are missing, say so. Do\nnot guess.",
-    questions=(),  # Always populated from the current public question contract.
+    questions=(),  # filled from the public question contract
     time_zone="America/New_York",
     case_id=NIST_CASE_ID,
 )
@@ -69,10 +69,10 @@ def validate_zone(value) -> Optional[str]:
 
 
 def read_profile(path: Path) -> CaseProfile:
-    """Accept public context only. Reference paths, answers and arbitrary metadata are rejected.
+    """Read public case context, rejecting reference paths, answers and unknown fields.
 
-    The caller is responsible for supplying a genuinely public brief: a schema cannot
-    determine whether a free-text string contains a private answer.
+    A schema cannot tell whether free text leaks an answer; the caller must supply a
+    genuinely public brief.
     """
     data = json.loads(Path(path).read_text())
     if not isinstance(data, dict):
@@ -157,11 +157,7 @@ def evidence_metadata(facts_path: Path) -> dict:
 
 def select_case(facts_path: Path, profile_path: Optional[Path] = None,
                 default_facts: Path = DEFAULT_FACTS) -> Tuple[CaseProfile, str]:
-    """Return a profile and its provenance. Only the original default gets the public NIST context.
-
-    Metadata supplies a case name and timezone, never allegations or questions. A copied
-    or regenerated evidence file must opt into any case-specific public brief explicitly.
-    """
+    """Return a profile and its source. Only the default NIST evidence file gets the NIST context."""
     if profile_path is not None:
         return read_profile(profile_path), "profile"
     meta = evidence_metadata(facts_path)

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Fetch only official public CFReDS Hacking Case evidence, never the answer key.
+"""Download the public NIST CFReDS Hacking Case images, never the answer key.
 
-SHA-256 values describe the downloaded containers. They are not verification of
-the logical image or comparison against a separately published acquisition hash.
-Existing complete files are preserved; interrupted .part files may be resumed.
+SHA-256 values are of the downloaded files, not the image's published acquisition
+hash. Complete files are kept; interrupted .part files resume.
 """
 from __future__ import annotations
 

@@ -2,20 +2,13 @@
 
     python -m verifier.conleche --run runs/current/run.json --facts evidence/facts.json [--jobs 8] [--out NEW.json]
 
-Lean 4.35 bundles con-leche, a proof checker written separately from Lean's own
-kernel. Its help text states the theorem it carries: in its default mode, a file that
-declares a theorem of type False is never accepted. Here each certificate is compiled,
-its `verified` theorem is exported with the toolchain's `leanexport`, and con-leche
-checks the export.
+Lean 4.35 bundles con-leche, a proof checker written separately from Lean's own kernel.
+Each certificate's proof is first regenerated from its finding ID, claim and the supplied
+facts. Its `verified` theorem is then exported with `leanexport` and checked by con-leche.
+A finding passes only if con-leche exits 0 and the export declares that theorem; a
+missing proof fails the whole run.
 
-A run certificate passes only after independent fact-based replay and exact
-regeneration of its saved proof from its finding ID, claim and supplied facts.
-con-leche must then exit 0 and the export must declare that regenerated theorem.
-Missing proofs fail the whole run. An exit code alone is not enough.
-
-The low-level check() API checks a proof term only; it does not bind an arbitrary
-term to a finding. check_run() performs that binding. Neither proves that readers
-parsed source images correctly or that the evidence is authentic.
+This checks proofs, not whether readers parsed the disk images correctly.
 """
 from __future__ import annotations
 
@@ -136,12 +129,9 @@ def check(lean_text: str, tools: Toolchain, workdir: Path) -> dict:
 
 def check_run(run: dict, tools: Toolchain, jobs: int = 4, *,
               source: Optional[FactSource] = None, facts_sha256: Optional[str] = None) -> dict:
-    """Bind and recheck every finding; absent facts or proof text never pass.
+    """Bind each finding to its facts and recheck it; missing facts or proofs fail.
 
-    Source reads and regeneration are serial: a DuckDB connection must not be
-    shared between proof-worker threads. Only already-bound proof text is checked
-    in parallel. Direct callers with a declared run digest must supply its observed
-    source digest; the CLI hashes and checks the actual input file.
+    Source reads are serial (one DuckDB connection); proof checks run in parallel.
     """
     findings = run.get('findings') if isinstance(run, dict) else None
     if not isinstance(findings, list):
@@ -256,10 +246,8 @@ def main(argv=None) -> int:
         print(f"con-leche is not available: {error}", file=sys.stderr)
         return 2
     try:
-        # Replay only the privately captured file, not a second open of the
-        # supplied pathname. A->B->A replacement cannot change replayed bytes
-        # while retaining a reported digest for A. A DuckDB input must be a
-        # finalized standalone file; adjacent mutable WAL files are not imported.
+        # Replay the private copy, never the path again, so a swapped file cannot pass.
+        # A DuckDB input must be a finalized file; WAL files are not copied.
         with tempfile.TemporaryDirectory(prefix='cop-conleche-facts-') as scratch:
             captured, observed = _snapshot_facts(args.facts, scratch)
             source = open_source(captured)

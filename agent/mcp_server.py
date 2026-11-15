@@ -1,10 +1,8 @@
-"""The investigator's restricted tools as a Model Context Protocol server over stdio.
+"""The investigator's tools as an MCP server over stdio (standard-library JSON-RPC).
 
-Hand-written JSON-RPC, standard library only. This is how the tools reach a headless
-Claude Code session: that session gets the selected tools and no others (no shell, no
-file access), so it cannot read the answer key or anything else on the machine.
-
-COP_FACTS names the evidence file, COP_RUN_DIR the directory proposals are logged in.
+A headless Claude Code session gets these tools and nothing else: no shell and no
+file access, so it cannot read the answer key. COP_FACTS names the evidence file and
+COP_RUN_DIR the directory proposals are logged in.
 """
 from __future__ import annotations
 

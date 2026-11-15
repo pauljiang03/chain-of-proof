@@ -176,7 +176,7 @@ theorem copiedHere_sameOccurrence (fs : List Fact) (c m : Nat)
   simp only [Sets.copiedHere, holds_both_iff] at h
   exact (holds_sameFileOccurrence_iff fs c m).mp h.2.2.1
 
-/-- Identity-free historical rows cannot satisfy the repaired copy predicate. -/
+/-- A row without a complete file-occurrence identity cannot satisfy the copy predicate. -/
 theorem copiedHere_missingOccurrence (fs : List Fact) (c m : Nat) (x : Fact)
     (hx : lookup fs c = some x) (missing : x.occurrence.complete = false) :
     holds fs (Sets.copiedHere c m) = false := by
@@ -195,8 +195,8 @@ theorem usbConnected_record_iff (fs : List Fact) (a : Nat) :
       ∃ x, lookup fs a = some x ∧ x.kind = .usbInsert := by
   exact holds_is_iff fs a .usbInsert
 
-/-- Despite its historical name, `opened` establishes exactly a retained shortcut
-    record of the cited kind. Neither opening nor an actor is a core predicate. -/
+/-- `opened` establishes exactly a retained shortcut record of the cited kind.
+    Neither opening nor an actor is a core predicate. -/
 theorem opened_record_iff (fs : List Fact) (a : Nat) :
     holds fs (Sets.opened a) = true ↔
       ∃ x, lookup fs a = some x ∧ x.kind = .lnkTarget := by
@@ -215,8 +215,8 @@ theorem programInstalledAt_record_iff (fs : List Fact) (a : Nat) :
       ∃ x, lookup fs a = some x ∧ x.kind = .programInstalled := by
   exact holds_is_iff fs a .programInstalled
 
-/-- Free provenance text is outside the core: `programRan` establishes only the
-    legacy mixed-source kind and cannot substitute for the execution-path role. -/
+/-- `programRan` establishes only the cited record's kind; provenance text cannot
+    stand in for the execution-path role. -/
 theorem programObservation_not_executionPathRole (fs : List Fact) (a : Nat)
     (h : holds fs (Sets.programRan a) = true) :
     holds fs (.is a .roleAppExecutionPath) = false := by

@@ -1,11 +1,11 @@
-"""Versioned lexical path predicates; never resolve files or infer volume identity."""
+"""Compare Windows paths as text, without touching any filesystem."""
 import re
 
 POLICY = 'windows-volume-relative-directory-v1'
 
 
 def components(value, *, directory=False):
-    """Accept an unambiguous rooted Windows path, retaining no canonicalized output."""
+    """Split an unambiguous rooted Windows path into components, or return None."""
     if not isinstance(value, str) or not 1 <= len(value) <= 32768:
         return None
     if any(ord(c) < 32 or ord(c) == 127 for c in value) or '/' in value:
@@ -18,7 +18,7 @@ def components(value, *, directory=False):
         value = value[2:]
     if not value.startswith('\\') or ':' in value:
         return None
-    # A single terminal separator denotes a directory; keep the source value unchanged.
+    # A trailing separator marks a directory.
     if value.endswith('\\'):
         value = value[:-1]
     parts = value[1:].split('\\')
@@ -50,7 +50,7 @@ def matches_directory(value, condition):
     if offered is None:
         return False
     if not condition['case_sensitive']:
-        # Only ASCII A-Z aliases are reviewed. Do not approximate filesystem Unicode folding.
+        # Fold ASCII A-Z only; filesystem Unicode case folding is not approximated.
         translation = str.maketrans('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')
         offered = [p.translate(translation) for p in offered]
         target = [p.translate(translation) for p in target]

@@ -1,4 +1,4 @@
-"""Literal Markdown values and finding-scoped evidence/proof anchors."""
+"""Escape untrusted text for Markdown reports and build report anchors."""
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
@@ -9,9 +9,8 @@ import unicodedata
 
 
 def text(value) -> str:
-    """Render untrusted text literally, without Markdown/HTML links or markup.
+    """Render untrusted text literally, with no Markdown or HTML markup.
 
-    Character references are decoded as text after Markdown syntax is parsed.
     Control characters are shown as escapes so metadata cannot add report blocks.
     """
     raw = str(value)

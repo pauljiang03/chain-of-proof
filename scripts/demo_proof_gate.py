@@ -1,10 +1,10 @@
-"""Run a real Lean proof gate on the repository's hand-written synthetic fixture.
+"""Run the Lean proof gate on the hand-written synthetic fixture.
 
     .venv/bin/python scripts/demo_proof_gate.py
     .venv/bin/python scripts/demo_proof_gate.py --out /private/tmp/proof-gate-demo
 
-No API, model, disk-image extraction, or benchmark grading is involved. --out must
-name a new directory; without it, generated certificates are temporary.
+No API, model or disk image is used. --out must name a new directory; without it,
+the certificates are temporary.
 """
 from __future__ import annotations
 

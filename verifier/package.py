@@ -3,9 +3,8 @@
     python -m verifier.package build --run RUN --facts FACTS --out NEW_DIRECTORY
     python -m verifier.package verify --bundle DIRECTORY [--expected-manifest-sha256 HASH]
 
-Verification uses the installed checker and Lean, never executable code from the
-package. Integrity is not original-disk authenticity. An externally retained
-manifest digest is needed to detect a complete replacement of an untrusted bundle.
+Verification uses the installed checker and Lean, never code from the package. Pass a
+separately kept manifest digest to detect a wholly replaced package.
 """
 from __future__ import annotations
 
@@ -143,8 +142,7 @@ def _facts(path):
         source = open_source(path)
         return source, len(source.all())
     except Exception as error:
-        # Optional database drivers have their own exception classes. Malformed
-        # supplied databases must fail closed without requiring that driver here.
+        # Database drivers raise their own exception types; any failure fails closed.
         raise ValueError("cannot read the supplied fact store: " + type(error).__name__) from error
 
 
@@ -179,8 +177,7 @@ def _original_inputs(run_manifest, files, facts_name):
     for role, binding in inputs.items():
         name = {"facts": facts_name, "questions": "questions.json"}.get(role)
         if name is None or name not in files:
-            # Original paths are descriptive only. Do not resolve them to add
-            # prompt, case-profile, health, or other inputs to the package.
+            # Recorded paths are labels only; never follow them to add files to the package.
             receipts[role] = {"status": "not_packaged", "file": None}
         else:
             if (not isinstance(binding, dict)
@@ -264,10 +261,9 @@ def _validate_toolchain(identity):
 
 
 def build_package(run, facts, out):
-    """Reverify, then build a new directory. Return its manifest; never overwrite.
+    """Reverify, then build a new directory and return its manifest. Never overwrites.
 
-    A failed copy can leave an incomplete directory without manifest.json. Such a
-    directory is deliberately unverifiable and must not be presented as a package.
+    A failed build leaves no manifest.json, so the directory cannot verify.
     """
     run, facts, out = Path(run), Path(facts), Path(out)
     if out.exists() or out.is_symlink():
@@ -424,8 +420,7 @@ def verify_package(bundle, expected_manifest_sha256=None):
         with _open_read(bundle / "report.md") as stream:
             if stream.read().decode("utf-8") != _render_report(data, source):
                 raise ValueError("report differs from regeneration; use the recorded renderer version")
-        # Proof checking can take long enough for any artifact to change. Recheck
-        # every listed payload, not only the run and its fact store.
+        # Files may change during the long proof check: recheck every listed file.
         for name in files:
             if _fingerprint(bundle / name) != {key: files[name][key] for key in ("sha256", "bytes")}:
                 raise ValueError(f"{name} changed during verification")

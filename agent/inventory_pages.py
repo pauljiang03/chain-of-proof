@@ -1,7 +1,4 @@
-"""Bounded record rendering and snapshot inventory traversal helpers.
-
-Clipping and traversal measure returned extracted records, never forensic completeness.
-"""
+"""Page through extracted records in ID order and render them within size limits."""
 from __future__ import annotations
 
 import fcntl
@@ -115,7 +112,7 @@ def _read(path):
 
 
 def inventory_progress(run_dir, evidence_sha256=None):
-    """Read bounded neutral traversal notes; this does not authenticate their author."""
+    """Read saved traversal progress. The notes' author is not authenticated."""
     path = _run(run_dir) / 'inventory-progress.json'
     if path.is_symlink():
         raise ValueError('inventory progress must not be a symlink')
@@ -150,7 +147,7 @@ def _filters(values, label):
 
 def page(db, run_dir, evidence_sha256, question_id, kinds=None, exhibits=None,
          page_size=100, cursor=None, cell_limit=240):
-    """Persist sequential fixed-query traversal; caller holds its database/thread lock."""
+    """Return the next page of a fixed query and save the cursor. The caller holds the database lock."""
     if type(page_size) is not int or not 1 <= page_size <= 250:
         raise ValueError('page_size must be an integer from 1 to 250')
     if not isinstance(question_id, str) or not question_id or len(question_id) > 128:

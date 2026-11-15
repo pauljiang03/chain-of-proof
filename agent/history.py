@@ -1,13 +1,4 @@
-"""Observed claim attempts and explicit revision links, separate from proof validity.
-
-``validate_revision`` accepts only the earlier proposal rows from the same run.
-It returns the requested ID (or None), and raises ValueError for invalid links.
-
-``summarize_history`` consumes already parsed logs; it neither opens files nor
-verifies certificates or audit hashes. Audit order is the completed-event order.
-Unmatched proposal rows stay in a separate list because their placement relative
-to partial audit events is unknown. With no audit, proposal order is preserved.
-"""
+"""Claim attempts and explicit revision links, kept apart from proof validity."""
 from __future__ import annotations
 
 from collections import Counter
@@ -23,12 +14,9 @@ _STATES = ("accepted", "refused", "duplicate", "failed", "unknown")
 
 
 def validate_revision(revises, previous_proposals, current_id=None):
-    """Validate an explicit ID against prior proposals from this run, without inference.
+    """Check that an explicit revision ID names an earlier proposal from this run.
 
-    Callers must pass a run-scoped log. If ``current_id`` already appears in that
-    log, only rows before it count as prior. IDs are opaque: their numeric suffix
-    is never used to infer order. Identical repeated rows do not create a new
-    proposal; conflicting definitions or declared case/run scopes are refused.
+    IDs are opaque: their numeric suffix never implies order.
     """
     if revises is None:
         return None
@@ -70,8 +58,7 @@ def _finding_id(value):
 
 
 def _claim(value):
-    # A tool accepts either a JSON string or an object. Parsing valid strings is
-    # only for checking an explicit ID binding, never for inferring revisions.
+    # Claims may arrive as JSON strings; parse them only to compare IDs.
     if isinstance(value, str):
         try:
             return json.loads(value)
@@ -120,17 +107,15 @@ def _proposal_attempt(row, index):
                    new_proposal=True)
     if attempt["finding_id"] is None:
         attempt["problems"].append("proposal finding_id is missing or invalid")
-    # Legacy checked_in_ms is not a wall-clock timestamp; do not manufacture one.
+    # checked_in_ms is not a wall-clock time, so no timestamp is set.
     return attempt
 
 
 def summarize_history(proposals, audit_events=None, audit_verification=None):
-    """Return schema-v1 observed history; inputs and certificate claims stay unchanged.
+    """Return the observed attempt history without changing the inputs.
 
-    ``counts`` describes ``attempts`` only. With an audit present, unmatched
-    proposals are reported separately, not double-counted or assigned invented
-    positions among audit events. Audit verification is supplied by the caller;
-    even a passed integrity check does not prove complete history or authorship.
+    Proposals the audit log does not match are listed separately. A passed audit check
+    does not prove the history is complete.
     """
     proposal_rows = _rows(proposals, "proposals")
     events = _rows(audit_events, "audit_events")

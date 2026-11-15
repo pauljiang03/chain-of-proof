@@ -1,12 +1,8 @@
-"""Restricted evidence access, checked claims, and persistent investigation work:
-
-  sql / fact   look at the extracted records (read-only)
-  forms        see which kinds of statement it may propose
-  check        propose a statement; the Lean kernel accepts or refuses it
+"""The investigator's tools: read-only record queries, checked claims and saved work notes.
 
 The investigator never writes a finding. It names records by id and picks a statement
-form; the sentence shown to a person is generated from the records after the kernel
-accepts. Every proposal, accepted or refused, is logged in the run directory.
+form; the sentence shown to a person is generated from the records after the Lean
+kernel accepts. Every proposal, accepted or refused, is logged in the run directory.
 """
 from __future__ import annotations
 
@@ -16,7 +12,7 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from checker import check as checker
 from checker import claims, needs
@@ -109,8 +105,8 @@ def _read_only(action, *_):
 
 class Workbench:
     def __init__(self, facts_path, run_dir, proposer: str = "agent"):
-        # API tools can run in worker threads. Share one evidence store, while
-        # serializing its cursors, query budget, and run-log ID allocation.
+        # API tools run in worker threads: share one store, but serialize its cursors,
+        # query budget and run-log IDs.
         self._lock = threading.RLock()
         self._inventory_facts_path = Path(facts_path)
         self._inventory_initial_stat = self._inventory_stat()
@@ -128,8 +124,6 @@ class Workbench:
                     stream.write(encoded)
             except FileExistsError:
                 pass
-
-    # ---- looking at records -------------------------------------------------------
 
     def _load(self) -> sqlite3.Connection:
         db = sqlite3.connect(":memory:", check_same_thread=False)
@@ -182,7 +176,7 @@ class Workbench:
 
     @audited
     def inventory_page(self, question_id: str, kinds=None, exhibits=None, page_size=100, cursor=None):
-        """Traverse exact kind/exhibit filters in ID order; exhaustion is snapshot scoped."""
+        """Page through records of the given kinds and exhibits in ID order."""
         from agent.inventory_pages import page
         from agent.investigation import Investigation
         from agent.run_manifest import file_binding
@@ -221,8 +215,6 @@ class Workbench:
                 "forms": {name: {"arguments": args, "says": says,
                                  "strength": claims.SETS[name].strength}
                           for name, (args, says) in FORMS.items()}}
-
-    # ---- investigation workflow ---------------------------------------------------
 
     @audited
     def plan(self) -> dict:
@@ -299,8 +291,6 @@ class Workbench:
         atomic_json(path, result)
         return result
 
-    # ---- proposing ----------------------------------------------------------------
-
     def _log(self) -> List[dict]:
         with self._lock:
             path = self.run_dir / "proposals.jsonl"
@@ -346,8 +336,7 @@ class Workbench:
                     if len(matched) == 1:
                         planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
                 except Exception as error:
-                    # The certificate is already saved. Work-note tracking must
-                    # not turn that accepted checker result into a failed call.
+                    # The certificate is already saved; a work-note error must not fail the call.
                     response = self._brief(result)
                     response["tracking_warning"] = {
                         "status": "unverified", "stage": "investigation_update",

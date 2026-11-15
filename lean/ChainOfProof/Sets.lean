@@ -5,8 +5,8 @@ import ChainOfProof.Claim
 
   A set cannot make the checker accept something false about the facts: it only
   combines primitive checks. What a set *means* lives in its English template and
-  strength label (`checker/sets.py`, `Rules.md`), and those need human review.
-  Adding a set means adding it here and in `checker/sets.py` in the same commit.
+  strength label (`checker/claims.py`), and those need human review.
+  Add each set here and in `checker/claims.py` together.
 -/
 namespace ChainOfProof.Sets
 
@@ -61,10 +61,10 @@ def deviceExamined (u d : Nat) : Claim :=
 def recoveredOnDevice (c d : Nat) : Claim :=
   .both (.is c .fileCreated) (.both (.is d .unallocatedOnDevice) (.link c .aux d .aux))
 
-/-- Single-fact sets assert the cited row's kind. `usbConnected` is a historical
-    form name for a USB source record, not an exact connection-onset predicate. -/
+/-- Single-fact sets assert the cited row's kind. `usbConnected` names a USB source
+    record, not the moment of connection. -/
 def usbConnected (u : Nat) : Claim := .is u .usbInsert
-/-- Historical form name: establishes a retained shortcut target, not a file-open event. -/
+/-- A retained shortcut target, not a file-open event. -/
 def opened (l : Nat) : Claim := .is l .lnkTarget
 def searched (w : Nat) : Claim := .is w .webSearch
 def fileCreatedAt (c : Nat) : Claim := .is c .fileCreated
@@ -79,8 +79,7 @@ def accountRecorded (x : Nat) : Claim := .is x .accountSeen
 def sessionRecorded (x : Nat) : Claim := .is x .sessionEvent
 /-- Registration/installer record; its timestamp retains the source's declared meaning. -/
 def programInstalledAt (x : Nat) : Claim := .is x .programInstalled
-/-- Legacy mixed-source application observation. Execution-artifact roles are
-    distinct typed attributes and cannot be supplied by this kind assertion. -/
+/-- An application observation. It cannot stand in for the typed execution roles. -/
 def programRan (x : Nat) : Claim := .is x .programRun
 def visited (x : Nat) : Claim := .is x .webVisit
 def downloaded (x : Nat) : Claim := .is x .fileDownloaded

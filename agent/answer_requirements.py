@@ -1,9 +1,4 @@
-"""Public claim-role requirements, not a proof of question entailment.
-
-The contract author declares which existing claim roles can supply an answer
-field. No answer key, source values, English inference or Lean calls are used.
-Unannotated contracts retain their existing behavior.
-"""
+"""Check which claim roles a question contract allows to supply each answer field."""
 from copy import deepcopy
 import re
 import json
@@ -163,8 +158,7 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
             diagnostic['offered_value'] = deepcopy(value)
             native = _native_literal(value, role.value_type)
             if negative:
-                # Validate the exact native type before comparing. Absence,
-                # ambiguity and non-string values never pass a negative test.
+                # Check the native type first: missing, ambiguous or non-string values never pass.
                 excluded = condition['excluded_values']
                 if native and condition['string_comparison'] == 'casefold':
                     allowed = value.casefold() not in [option.casefold() for option in excluded]
@@ -360,8 +354,8 @@ def applicable_scopes(schema, path, *, require_evidence_scope=False):
                         child = {}
                 children.append(child)
         except ValueError as error:
-            # Closed alternative-exclusive paths are not ambiguous meanings of
-            # this leaf. Discard this whole conjunction, never its constraints.
+            # A path that exists only in another closed alternative is not this leaf's;
+            # skip the whole conjunction.
             if str(error) in ('field_not_in_public_schema', 'object_path_does_not_match_public_schema',
                               'array_path_does_not_match_public_schema'):
                 continue
@@ -435,9 +429,8 @@ def row_requirements(schema, *, require_claim_requirements=False):
     """Bounded, evidence-free validation of explicit object coherence policies."""
     if type(require_claim_requirements) is not bool:
         raise ValueError('require_claim_requirements must be a boolean')
-    # JSON token search only selects whether to apply the bounded row walker.
-    # Escaped text values cannot impersonate a key token. Legacy contracts
-    # without explicit row policy retain their existing per-path limits.
+    # Fast path: skip the walk when no x-claim-row key appears. Escaped string
+    # values cannot fake that key.
     if not require_claim_requirements:
         try:
             if '"x-claim-row":' not in json.dumps(schema, separators=(',', ':')):
@@ -494,15 +487,14 @@ def row_requirements(schema, *, require_claim_requirements=False):
         pending.extend(reversed(children))
     if require_claim_requirements:
         for key, obj in objects.items():
-            # Open alternatives can each permit keys declared by another
-            # alternative. The projector can therefore retain their union.
+            # Open alternatives may allow each other's keys, so take their union.
             properties = set().union(*(names for _, names, _ in obj['nodes']))
             additional = any(extra for _, _, extra in obj['nodes'])
             if len(properties) <= 1 and not additional:
                 continue
             contexts = [branch for branch, _, _ in obj['nodes']]
-            # A sibling declaration applies to every alternative below it;
-            # one alternative's declaration never licenses another alternative.
+            # A sibling declaration covers every alternative below it; one alternative's
+            # declaration never covers another.
             terminal_contexts = [branch for branch in contexts if not any(
                 len(other) > len(branch) and other[:len(branch)] == branch for other in contexts)]
             declarations = [row['branches'] for row in rows
@@ -515,11 +507,10 @@ def row_requirements(schema, *, require_claim_requirements=False):
 
 
 def inspect(schema, forms, *, require_claim_requirements=False, require_evidence_scope=False):
-    """Bounded preflight of public annotations; available roles are not evidence.
+    """Check a contract's public annotations.
 
     Paths use '*' for an array item and {'additional_property': True} for a
-    schema-valued additional property. Alternatives are shown separately. Actual
-    bindings must satisfy all leaf requirements reached by the shared projector.
+    schema-valued additional property.
     """
     if type(require_claim_requirements) is not bool:
         raise ValueError('require_claim_requirements must be a boolean')
@@ -576,15 +567,14 @@ def inspect(schema, forms, *, require_claim_requirements=False, require_evidence
             pending.extend((child, path, branches + [i], depth + 1)
                            for i, child in reversed(list(enumerate(alternatives))))
     if require_claim_requirements:
-        # Structural anyOf siblings are conjunctive; an annotation on their
-        # shared leaf applies to each alternative. Use the binding resolver.
+        # anyOf siblings are conjunctive: an annotation on a shared leaf applies to
+        # every alternative.
         from agent.answer_projection import _strict_schema
         filtered = []
         for row in rows:
             if row.get('status') == 'missing_annotation':
                 try:
-                    # Resolve wildcard paths with a representative array index
-                    # or an object key absent from all declared properties.
+                    # Resolve wildcards with a sample array index or an undeclared object key.
                     sample = '__claim_requirement_additional_property__'
                     while sample in repr(schema):
                         sample += '_'

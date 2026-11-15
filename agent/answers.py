@@ -1,8 +1,4 @@
-"""Case-agnostic answer views made from exact recorded certificate sentences.
-
-This is not the evaluation submission format and does not establish whether a
-sentence is relevant, an answer is accurate, or a question is fully answered.
-"""
+"""Per-question answer views built from recorded certificate sentences."""
 from __future__ import annotations
 
 from collections import Counter
@@ -19,7 +15,7 @@ DISCLAIMER = ('Certified statements are copied verbatim from current-run records
 
 
 def build_answers(run, investigation):
-    """Build all public questions, with no free-form answer prose or expected values."""
+    """Build a view for every public question from certificate sentences only."""
     if not isinstance(run, dict) or not isinstance(investigation, dict):
         raise ValueError('run and investigation must be objects')
     if investigation.get('schema_version') != 1 or not isinstance(investigation.get('questions'), list):
@@ -65,8 +61,7 @@ def build_answers(run, investigation):
         ids = question.get('finding_ids', [])
         if not isinstance(ids, list) or any(not isinstance(fid, str) for fid in ids):
             raise ValueError('question finding_ids must be a list of strings')
-        # Only exact labels are associated automatically. No fuzzy text, content,
-        # expected answers or case-specific keyword selectors enter this view.
+        # Findings attach automatically only on an exact question label match.
         selected = list(dict.fromkeys(ids + [fid for fid, f in eligible.items() if matches(f.get('question'), question)]))
         issues = [{'finding_id': fid, 'reason': 'No unique current-run verified certificate sentence is available.'}
                   for fid in selected if fid not in eligible]
@@ -97,11 +92,7 @@ def build_answers(run, investigation):
 
 
 def enrich_bundle(run, run_dir, public_questions=None):
-    """Attach current plan/answer views and write only the distinct product sidecar.
-
-    Legacy runs without a public question profile remain explicitly unavailable.
-    Existing malformed plans are not replaced or silently reconstructed.
-    """
+    """Attach the plan and answer views to a run and write case-answers.json."""
     directory = Path(run_dir)
     planner = Investigation(directory)
     case_id = run.get('case', {}).get('case_id')
