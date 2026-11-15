@@ -8,6 +8,10 @@ from dataclasses import dataclass
 import json
 import re
 
+VALUE_KINDS = {'string': 'attributeTextValue', 'integer': 'attributeIntegerValue',
+               'boolean': 'attributeBooleanValue', 'signed_integer': 'attributeSignedIntegerValue'}
+VALUE_TYPES = {kind: value_type for value_type, kind in VALUE_KINDS.items()}
+
 
 @dataclass(frozen=True)
 class AttributeRole:
@@ -18,8 +22,7 @@ class AttributeRole:
 
     @property
     def value_kind(self):
-        return {'string': 'attributeTextValue', 'integer': 'attributeIntegerValue',
-                'boolean': 'attributeBooleanValue'}[self.value_type]
+        return VALUE_KINDS[self.value_type]
 
     @property
     def semantic_type(self):
@@ -139,12 +142,103 @@ _SPECS = (
     ('recycle.index_deleted_at', 'string', 'moved-to-Recycle-Bin timestamp retained in that same index entry; not filesystem deallocation or secure erasure'),
     ('sticky_notes.note.text', 'string', 'literal retained Unicode note text from validated OLE stream 3 (strict UTF-16LE) or SQLite Note.Text; not authorship, reading or physical action'),
     ('sticky_notes.container.modified_at', 'string', 'UTC filesystem modification timestamp of the actual Sticky Notes container; not a note entry timestamp, SQLite UpdatedAt or independently verified editing time'),
+    ('cloud.container.service', 'string', 'validated retained cloud artifact service'),
+    ('cloud.container.type', 'string', 'validated retained cloud artifact type'),
+    ('cloud.container.path', 'string', 'validated retained cloud artifact path'),
+    ('cloud.google_drive.document_id', 'string', 'literal Google Drive client log document_id; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.file_name', 'string', 'literal Google Drive client log file_name; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.server_modified_at', 'string', 'literal Google Drive client log server_modified_at; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.deletion_record_server_modified_at', 'string', 'literal WorkerDeleteCloudEvent.server_mod_time field as UTC ISO; does not establish actual deletion event time'),
+    ('cloud.google_drive.credentials_account', 'string', 'literal Google Drive client log credentials_account; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.credentials_used_at', 'string', 'literal Google Drive client log credentials_used_at; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.worker_stage', 'string', 'literal Google Drive client log worker_stage; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.worker_direction', 'string', 'literal Google Drive client log worker_direction; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.worker_action', 'string', 'literal Google Drive client log worker_action; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.worker_file_name', 'string', 'literal Google Drive client log worker_file_name; source-scoped relation, no human attribution'),
+    ('cloud.google_drive.worker_recorded_at', 'string', 'literal Google Drive client log worker_recorded_at; source-scoped relation, no human attribution'),
+    ('document.ole.title', 'string', 'literal OLE SummaryInformation title; metadata, not authorship or execution'),
+    ('document.ole.subject', 'string', 'literal OLE SummaryInformation subject; metadata, not authorship or execution'),
+    ('document.ole.author', 'string', 'literal OLE SummaryInformation author; metadata, not authorship or execution'),
+    ('document.ole.keywords', 'string', 'literal OLE SummaryInformation keywords; metadata, not authorship or execution'),
+    ('document.ole.comments', 'string', 'literal OLE SummaryInformation comments; metadata, not authorship or execution'),
+    ('document.ole.template', 'string', 'literal OLE SummaryInformation template; metadata, not authorship or execution'),
+    ('document.ole.last_author', 'string', 'literal OLE SummaryInformation last_author; metadata, not authorship or execution'),
+    ('document.ole.revision', 'string', 'literal OLE SummaryInformation revision; metadata, not authorship or execution'),
+    ('document.ole.application', 'string', 'literal OLE SummaryInformation application; metadata, not authorship or execution'),
+    ('document.ole.created_filetime', 'integer', 'raw unsigned FILETIME ticks in OLE SummaryInformation created_filetime; not filesystem/event time'),
+    ('document.ole.last_saved_filetime', 'integer', 'raw unsigned FILETIME ticks in OLE SummaryInformation last_saved_filetime; not filesystem/event time'),
+    ('document.pdf.title', 'string', 'literal PDF /Info title string; date values unparsed, no human attribution'),
+    ('document.pdf.author', 'string', 'literal PDF /Info author string; date values unparsed, no human attribution'),
+    ('document.pdf.subject', 'string', 'literal PDF /Info subject string; date values unparsed, no human attribution'),
+    ('document.pdf.keywords', 'string', 'literal PDF /Info keywords string; date values unparsed, no human attribution'),
+    ('document.pdf.creator', 'string', 'literal PDF /Info creator string; date values unparsed, no human attribution'),
+    ('document.pdf.producer', 'string', 'literal PDF /Info producer string; date values unparsed, no human attribution'),
+    ('document.pdf.created', 'string', 'literal PDF /Info created string; date values unparsed, no human attribution'),
+    ('document.pdf.modified', 'string', 'literal PDF /Info modified string; date values unparsed, no human attribution'),
+    ('mail.message.subject_string8', 'string', 'literal MAPI PT_STRING8 subject strictly decoded with recorded code page'),
+    ('mail.message.body_string8', 'string', 'literal MAPI PT_STRING8 body strictly decoded with recorded code page'),
+    ('mail.message.body_html', 'string', 'literal MAPI HTML body strictly decoded with explicit encoding, not rendered or sender-attributed'),
+    ('document.source.path', 'string', 'concrete path of structurally validated OLE Office or PDF source container'),
+    ('document.source.format', 'string', 'structurally validated OLE Office or PDF source format, not filename inference'),
+    ('account.rid', 'integer', 'RID recorded in SAM F and required to equal the enclosing account key RID; not a human identity'),
+    ('network.dhcp.device_name', 'string', 'NetworkCards description joined to the unique matching interface GUID in current DHCP-specific configuration; not proof of an actual DHCP assignment'),
+    ('network.dhcp.ip_address', 'string', 'literal DhcpIPAddress in the selected current interface configuration; not proof of an actual lease or assignment'),
+    ('network.dhcp.subnet_mask', 'string', 'literal DhcpSubnetMask in the selected current interface configuration; not proof of an actual lease or assignment'),
+    ('network.dhcp.name_server', 'string', 'literal DhcpNameServer in the selected current interface configuration; not proof of an actual lease or DNS use'),
+    ('network.dhcp.domain', 'string', 'literal DhcpDomain in the selected current interface configuration; not proof of an actual lease or domain membership'),
+    ('network.dhcp.default_gateway', 'string', 'literal DhcpDefaultGateway in the selected current interface configuration; not proof of an actual lease or network traffic'),
+    ('network.dhcp.server', 'string', 'literal DhcpServer in the selected current interface configuration; not proof of communication with that server'),
+    ('network.dhcp.enabled', 'boolean', 'EnableDHCP configuration flag for the selected current interface; not proof that a lease was obtained'),
+    ('os.time_zone.bias_minutes', 'signed_integer', 'signed Bias minutes decoded from the corresponding selected current time-zone registry field; not measured clock accuracy or actual time-zone use'),
+    ('os.time_zone.standard_bias_minutes', 'signed_integer', 'signed StandardBias minutes decoded from the corresponding selected current time-zone registry field; not proof of standard-time state'),
+    ('os.time_zone.daylight_bias_minutes', 'signed_integer', 'signed DaylightBias minutes decoded from the corresponding selected current time-zone registry field; not proof of daylight-saving state'),
+    ('os.time_zone.active_bias_minutes', 'signed_integer', 'signed ActiveTimeBias minutes decoded from the corresponding selected current time-zone registry field; not measured clock accuracy or actual daylight-saving state'),
+    ('partition.number', 'integer', 'entry number in the examined raw MBR partition table; not a filesystem or volume inference'),
+    ('partition.bootable', 'boolean', 'bootable indicator recorded in the examined raw MBR partition entry; not proof of successful boot'),
+    ('partition.start_sector', 'integer', 'starting sector recorded in the examined raw MBR partition entry'),
+    ('partition.total_sectors', 'integer', 'sector count recorded in the examined raw MBR partition entry'),
+    ('partition.filesystem', 'string', 'recognized filesystem parser type for a unique volume on the same examined disk with byte offset and size matching this MBR entry; never inferred from the partition type byte alone'),
+    ('search.config.registry_key', 'string', 'exact selected SOFTWARE Search registry key containing this observed configuration value'),
+    ('search.config.value_name', 'string', 'literal value name for this selected SOFTWARE Search registry occurrence'),
+    ('search.config.value_text', 'string', 'literal text in this selected SOFTWARE Search registry value; not proof that indexing or the service was running'),
+    ('search.config.value_integer', 'integer', 'native nonnegative integer in this selected SOFTWARE Search registry value; not proof that indexing or the service was running'),
+    ('search.service.registry_key', 'string', 'exact selected WSearch registry service key for this configuration occurrence'),
+    ('search.service.start_code', 'integer', 'native WSearch Start configuration code; not the running state of the service'),
+    ('search.service.start_type', 'string', 'reviewed Windows SERVICE_BOOT_START, SERVICE_SYSTEM_START, SERVICE_AUTO_START, SERVICE_DEMAND_START or SERVICE_DISABLED label for the corresponding native WSearch Start code 0 through 4; configuration only'),
+    ('snapshot.exclusion.registry_key', 'string', 'exact FilesNotToSnapshot registry key containing this observed exclusion-pattern occurrence'),
+    ('snapshot.exclusion.value_name', 'string', 'literal FilesNotToSnapshot value name for this observed exclusion-pattern occurrence'),
+    ('snapshot.exclusion.pattern', 'string', 'literal FilesNotToSnapshot pattern or list element; not proof that any particular file was excluded from a snapshot'),
+    ('search.index.container_path', 'string', 'exact source path of the parsed Windows Search ESE database containing this row'),
+    ('search.index.table', 'string', 'literal ESE table name containing this Windows Search row'),
+    ('search.index.document_id', 'integer', 'native nonnegative document identifier retained in this Windows Search ESE row'),
+    ('search.index.identifier_column', 'string', 'literal identifier-column name for this Windows Search ESE row'),
+    ('search.index.item_url', 'string', 'literal item URL retained in this Windows Search ESE row; not a browser visit or actual current presence'),
+    ('search.index.item_path', 'string', 'literal item path retained in this Windows Search ESE row; not actual current presence'),
+    ('search.index.date_modified', 'string', 'modification timestamp value retained in this Windows Search ESE row; not independently verified filesystem or action time'),
+    ('search.index.date_created', 'string', 'creation timestamp value retained in this Windows Search ESE row; not independently verified filesystem or action time'),
+    ('search.index.store', 'string', 'literal store value retained in this Windows Search ESE row'),
+    ('search.index.item_type', 'string', 'literal item-type value retained in this Windows Search ESE row'),
+    ('search.index.kind', 'string', 'literal kind/category string or list element retained in this Windows Search ESE row; no inferred browser use'),
+    ('event.provider', 'string', 'literal Provider_Name in the reviewed provider/channel/event-ID source event'),
+    ('event.channel', 'string', 'literal Channel in the reviewed provider/channel/event-ID source event'),
+    ('event.event_id', 'integer', 'native EventID in the reviewed provider/channel/event-ID source event; never supplied by a SAM or registry observation'),
+    ('event.record_id', 'integer', 'native EventRecordID in the source event; not an inferred account or action identifier'),
+    ('event.recorded_time', 'string', 'source event TimeCreated expressed in UTC; not examination time or independently verified physical action time'),
+    ('event.description', 'string', 'reviewed provider/channel/event-ID description of what the event record reports; not independent proof that the reported action occurred'),
+    ('event.time_meaning', 'string', 'fixed meaning of the source timestamp field for this reviewed event, such as event TimeCreated; not actual physical action time'),
+    ('event.account_name', 'string', 'literal account-name field within this source event; no SID-to-name guessing or physical-user attribution'),
+    ('event.account_sid', 'string', 'literal account SID field within this source event; not a personal identity'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)
          for name, value_type, meaning in _SPECS}
-ATTRIBUTE_KINDS = ('attributeSubject', 'attributeTextValue', 'attributeIntegerValue',
-                   'attributeBooleanValue') + tuple(role.kind for role in ROLES.values())
+_ROLE_KINDS = tuple(role.kind for role in ROLES.values())
+# Signed values were introduced after the first 148 total kinds. Keep historical
+# role/value ordinals unchanged, including the filesystem kinds inserted by facts.py.
+_SIGNED_KIND_BOUNDARY = _ROLE_KINDS.index('roleStickyNotesContainerModifiedAt') + 1
+ATTRIBUTE_KINDS = (('attributeSubject', 'attributeTextValue', 'attributeIntegerValue',
+                    'attributeBooleanValue') + _ROLE_KINDS[:_SIGNED_KIND_BOUNDARY]
+                   + ('attributeSignedIntegerValue',) + _ROLE_KINDS[_SIGNED_KIND_BOUNDARY:])
 DIGEST_ALGORITHMS = ('md5', 'sha1')
 
 
@@ -169,6 +263,8 @@ def decode_value(text, value_type):
             return value
         raise ValueError('attribute text value must be a canonical JSON string')
     if value_type == 'integer' and re.fullmatch(r'0|[1-9][0-9]*', text):
+        return int(text)
+    if value_type == 'signed_integer' and re.fullmatch(r'0|-?[1-9][0-9]*', text):
         return int(text)
     if value_type == 'boolean' and text in ('true', 'false'):
         return text == 'true'

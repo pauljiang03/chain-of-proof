@@ -34,7 +34,7 @@ import re
 from typing import Callable, Dict, List, Tuple
 
 from .facts import KINDS, Fact, FactSource, FILESYSTEM_SET_KINDS
-from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, decode_value
+from .catalog import ROLES, ATTRIBUTE_KINDS, DIGEST_ALGORITHMS, VALUE_TYPES, decode_value
 
 MAX_PARTS = 64
 MAX_ATTRIBUTE_TUPLE = 8
@@ -999,12 +999,10 @@ def cited_facts(c: Claim, src: FactSource) -> Tuple[List[int], Dict[int, Fact]]:
     missing = [i for i in ids if i not in found]
     if missing:
         raise ClaimError(f"fact ids not in the evidence DB: {missing}")
-    value_types = {'attributeTextValue': 'string', 'attributeIntegerValue': 'integer',
-                   'attributeBooleanValue': 'boolean'}
     for fact in found.values():
-        if fact.kind in value_types:
+        if fact.kind in VALUE_TYPES:
             try:
-                decode_value(src.string(fact.aux), value_types[fact.kind])
+                decode_value(src.string(fact.aux), VALUE_TYPES[fact.kind])
             except ValueError as error:
                 raise ClaimError(f'fact {fact.id}: {error}') from error
     return ids, found
