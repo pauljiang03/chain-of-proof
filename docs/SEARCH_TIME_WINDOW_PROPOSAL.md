@@ -1,9 +1,11 @@
 # Opt-in recorded Search timestamp windows
 
-Development proposal only. `agent.timestamp_predicates` is a standalone helper;
-no public question, projection guard, Lean statement or reader is changed here.
+Development capability only. `agent.timestamp_predicates` is connected to the
+answer requirement gate through `attribute_timestamp_conditions`. No real
+question mapping, Lean statement, source reader or matching rule is changed.
 
-Proposed public condition shape, to be integrated by the answer owner after review:
+An explicitly reviewed public requirement may include this condition in its
+`attribute_timestamp_conditions` list:
 
 ```json
 {
@@ -28,8 +30,9 @@ than seven fraction digits, leap seconds and malformed/out-of-range clocks.
 other roles are unsupported. Invalid values or policies raise `ValueError` and
 must become binding refusal, never guard bypass, default time or value repair.
 
-Integration must require a unique DateModified value in the same checked
-attribute tuple as the literal ItemUrl and reviewed native IE category/store.
+The gate requires a unique typed DateModified value in the same claim part and
+refuses malformed timestamps. An activated mapping must also require DateModified,
+literal ItemUrl and reviewed native IE category/store in one checked attribute tuple.
 Keep the extractor's existing subject identity, including source origin,
 container hash, ESE table, identifier-column name, DocID/WorkID and row ordinal.
 Duplicate IDs and rows from different containers cannot be joined. Retain original

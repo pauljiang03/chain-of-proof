@@ -10,6 +10,7 @@ import json
 
 from checker.catalog import ROLES
 from agent.path_predicates import validate_condition as valid_path_condition, matches_directory
+from agent.timestamp_predicates import parse_interval, recorded_in_interval
 
 KEY = 'x-claim-requirement'
 ROW_KEY = 'x-claim-row'
@@ -24,7 +25,7 @@ def _name(value):
 
 
 def parse(raw):
-    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions', 'field_conditions', 'required_attribute_roles', 'attribute_path_conditions'}
+    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions', 'field_conditions', 'required_attribute_roles', 'attribute_path_conditions', 'attribute_timestamp_conditions'}
     if not isinstance(raw, dict) or set(raw) - allowed:
         raise ValueError('invalid_public_claim_requirement')
     types = raw.get('semantic_types')
@@ -73,6 +74,20 @@ def parse(raw):
                     or ROLES[condition['role']].value_type != 'string'):
                 raise ValueError('invalid_public_claim_requirement_attribute_path_conditions')
             seen.add(condition['role'])
+    if 'attribute_timestamp_conditions' in raw:
+        conditions = raw['attribute_timestamp_conditions']
+        if not isinstance(conditions, list) or not 1 <= len(conditions) <= 8:
+            raise ValueError('invalid_public_claim_requirement_attribute_timestamp_conditions')
+        seen = set()
+        for condition in conditions:
+            try:
+                policy = parse_interval(condition)
+            except ValueError as error:
+                raise ValueError('invalid_public_claim_requirement_attribute_timestamp_conditions') from error
+            role = policy['role']
+            if role not in ROLES or role in seen or ROLES[role].value_type != 'string':
+                raise ValueError('invalid_public_claim_requirement_attribute_timestamp_conditions')
+            seen.add(role)
     if 'required_attribute_roles' in raw:
         roles = raw['required_attribute_roles']
         if (not isinstance(roles, list) or not 1 <= len(roles) <= 8
@@ -176,6 +191,28 @@ def check(raw, form, field, semantic_type, *, part_fields=None):
             diagnostic['offered_value'] = deepcopy(value)
             diagnostic['status'] = 'compatible' if matches_directory(value, condition) else 'incompatible'
         result.setdefault('attribute_path_condition_checks', []).append(diagnostic)
+        if diagnostic['status'] != 'compatible':
+            result['status'] = 'incompatible'
+            result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
+    for condition in requirement.get('attribute_timestamp_conditions', []):
+        role = ROLES[condition['role']]
+        matches = [(name, row) for name, row in fields.items()
+                   if isinstance(row, dict) and row.get('semantic_type') == role.semantic_type]
+        diagnostic = dict(condition, matching_fields=[name for name, _ in matches])
+        if not matches:
+            diagnostic['status'] = 'missing'
+        elif len(matches) != 1:
+            diagnostic['status'] = 'ambiguous'
+        else:
+            value = matches[0][1].get('value')
+            diagnostic['offered_value'] = deepcopy(value)
+            try:
+                admitted = recorded_in_interval(value, role=condition['role'], policy=condition)
+                diagnostic['status'] = 'compatible' if admitted else 'incompatible'
+            except ValueError as error:
+                diagnostic['status'] = 'invalid'
+                diagnostic['reason'] = str(error)
+        result.setdefault('attribute_timestamp_condition_checks', []).append(diagnostic)
         if diagnostic['status'] != 'compatible':
             result['status'] = 'incompatible'
             result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
