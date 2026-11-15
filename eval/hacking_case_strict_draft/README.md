@@ -18,6 +18,13 @@ only the declared scanner result: a positive signature can be retained after an
 incomplete examination; a negative requires the reader's completed declared scope.
 Neither value establishes global malware absence or historical infection.
 
-Selected-exhibit and source-subject admission remains a launch blocker. The
-same-part row guard establishes field coherence only. A new run requires the
-remaining scope checks and an explicitly frozen compatible comparison contract.
+All 31 questions now declare exact source origins checked against every
+supporting record in hash-bound evidence. Primary base-volume artifacts exclude
+registry backups and noncurrent control sets. Q1 permits the two typed
+same-image digest components; Q31 additionally requires the exact antivirus
+scan-input origin. These are reviewed contract checks, not new Lean theorems
+of source authenticity or question entailment.
+
+The same-part row guard establishes field coherence only. Missing meanings,
+unproved completeness and unsupported source relationships remain blockers.
+A new run requires their review and an explicitly frozen comparison contract.

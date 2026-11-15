@@ -18,7 +18,7 @@
     "Each declared requirement describes the full requested field meaning. A needs_* role names missing support; it is not a new proof rule.",
     "Supported individual fields remain partial observations. Complete lists, attribution and relationships between separately bound fields are not established.",
     "Reviewed row policies require the same atomic claim part where fields describe one record or relation. Independent policies apply only to explicitly separate sections.",
-    "Selected-exhibit requirements and missing stronger meanings remain launch blockers in review.json. Do not launch this draft until those checks are implemented and independently reviewed.",
+    "Source scope is checked against every supporting record in the bound evidence. Explicit unavailable selections always refuse bindings. Missing stronger meanings and exact source selections remain launch blockers in review.json.",
     "Keep narrower observations in a separate evidence report. Do not place them in stronger answer fields or change their labels to obtain support."
   ],
   "questions": [
@@ -190,6 +190,59 @@
         "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
+            },
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "evidence-image",
+              "source_variant": "acquisition-container"
+            },
+            {
+              "image": "rm1.E01",
+              "exhibit": "RM#1",
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
+            },
+            {
+              "image": "rm1.E01",
+              "exhibit": "RM#1",
+              "source_snapshot": "evidence-image",
+              "source_variant": "acquisition-container"
+            },
+            {
+              "image": "rm2.E01",
+              "exhibit": "RM#2",
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
+            },
+            {
+              "image": "rm2.E01",
+              "exhibit": "RM#2",
+              "source_snapshot": "evidence-image",
+              "source_variant": "acquisition-container"
+            },
+            {
+              "image": "rm3.E01",
+              "exhibit": "RM#3",
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
+            },
+            {
+              "image": "rm3.E01",
+              "exhibit": "RM#3",
+              "source_snapshot": "evidence-image",
+              "source_variant": "acquisition-container"
+            }
+          ]
         }
       },
       "match": {
@@ -290,7 +343,18 @@
           "partitions"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -395,6 +459,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -454,6 +529,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -488,7 +574,18 @@
         "required": [
           "computer_name"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -728,7 +825,18 @@
           "accounts"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -756,7 +864,18 @@
         "required": [
           "last_logged_on_user"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -791,7 +910,18 @@
         "required": [
           "last_shutdown"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -916,7 +1046,18 @@
         "required": [
           "interfaces"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1082,7 +1223,18 @@
           "applications"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1382,7 +1534,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1453,7 +1616,18 @@
         "required": [
           "events"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1526,6 +1700,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1605,7 +1790,18 @@
         "required": [
           "artifacts"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1671,7 +1867,18 @@
         "required": [
           "visits"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1777,7 +1984,18 @@
           "searches"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1846,7 +2064,18 @@
         "required": [
           "searches"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1879,7 +2108,18 @@
         "required": [
           "application"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1908,7 +2148,18 @@
           "path_as_printed"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -1936,7 +2187,18 @@
         "required": [
           "account"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2048,7 +2310,18 @@
         "required": [
           "messages"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2222,7 +2495,18 @@
         "required": [
           "devices"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2319,7 +2603,18 @@
         "required": [
           "renames"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2356,7 +2651,18 @@
         "required": [
           "ip_address"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2423,7 +2729,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2495,7 +2812,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2567,7 +2895,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2639,7 +2978,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2788,7 +3138,18 @@
           "traces"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2856,7 +3217,18 @@
           "files"
         ],
         "additionalProperties": true,
-        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong."
+        "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -2908,6 +3280,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -2955,6 +3338,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -3306,6 +3700,17 @@
         "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -3358,7 +3763,18 @@
         "required": [
           "paths"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3425,7 +3841,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3507,7 +3934,18 @@
         "required": [
           "timestamps"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3566,6 +4004,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -3602,7 +4051,18 @@
         "required": [
           "paths"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3740,6 +4200,17 @@
         "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -3768,7 +4239,18 @@
         "required": [
           "path"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3831,7 +4313,18 @@
         "required": [
           "notes"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -3934,6 +4427,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -3990,6 +4494,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -4045,7 +4560,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -4261,7 +4787,18 @@
         "required": [
           "messages"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -4321,7 +4858,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -4419,6 +4967,17 @@
               "additionalProperties": false,
               "x-claim-row": {
                 "mode": "same_claim_part"
+              },
+              "x-claim-scope": {
+                "mode": "source_records",
+                "origins": [
+                  {
+                    "image": "pc.E01",
+                    "exhibit": "PC",
+                    "source_snapshot": "base-volume",
+                    "source_variant": "primary"
+                  }
+                ]
               }
             }
           }
@@ -4514,6 +5073,10 @@
               "additionalProperties": false,
               "x-claim-row": {
                 "mode": "same_claim_part"
+              },
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "Actual contents read through one selected VSS store, not a base-volume file called snapshot.db, a backup-named file, or the catalog row describing the VSS copy."
               }
             }
           },
@@ -4585,6 +5148,10 @@
             "additionalProperties": false,
             "x-claim-row": {
               "mode": "same_claim_part"
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "Compare separately scoped historical VSS contents against acquired base-volume Q29–Q31 sources; both sides must be identified, never interchangeable."
             }
           }
         },
@@ -5025,7 +5592,11 @@
                     "mode": "same_claim_part"
                   }
                 }
-              ]
+              ],
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "Actual contents read through one selected VSS store, not a base-volume file called snapshot.db, a backup-named file, or the catalog row describing the VSS copy."
+              }
             }
           }
         },
@@ -5096,6 +5667,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -5168,7 +5750,18 @@
         "required": [
           "records"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -5456,6 +6049,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "pc.E01",
+              "exhibit": "PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -5688,6 +6292,17 @@
         "description": "Reference review is unresolved. Supply the full original answer; additional evidence-backed fields are allowed and are retained for review, not automatically graded as wrong.",
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "rm2.E01",
+              "exhibit": "RM#2",
+              "source_snapshot": "base-volume",
+              "source_variant": "unallocated-recovery"
+            }
+          ]
         }
       },
       "match": {
@@ -5730,6 +6345,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "rm2.E01",
+              "exhibit": "RM#2",
+              "source_snapshot": "base-volume",
+              "source_variant": "unallocated-recovery"
+            }
+          ]
         }
       },
       "match": {
@@ -5868,7 +6494,11 @@
                     "mode": "same_claim_part"
                   }
                 }
-              ]
+              ],
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "No approved source-direction/content-transfer rule or per-field origin mapping is supplied by this plan."
+              }
             }
           }
         },
@@ -5897,6 +6527,10 @@
               ],
               "meaning": "Q56 answer value at /properties/recovery_method: recovery method under the full public question meaning.",
               "evidence_needed": "Recovery of hidden CD bytes, validated format/viewability, displayed size and pre-rename original names need recovery evidence and an explicit identity/name reconstruction rule. A journal name, hash match or deleted directory entry is insufficient."
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
             }
           },
           "filename_basis": {
@@ -5907,6 +6541,10 @@
               ],
               "meaning": "Q56 answer value at /properties/filename_basis: filename basis under the full public question meaning.",
               "evidence_needed": "Recovery of hidden CD bytes, validated format/viewability, displayed size and pre-rename original names need recovery evidence and an explicit identity/name reconstruction rule. A journal name, hash match or deleted directory entry is insufficient."
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "Public prompt does not choose a reconstruction method or exact source artifacts; narrower component selection awaits a reviewed rule."
             }
           },
           "files": {
@@ -5924,6 +6562,10 @@
                         ],
                         "meaning": "Q56 answer value at /properties/files/items/anyOf/0/properties/inferred_filename: inferred filename under the full public question meaning.",
                         "evidence_needed": "Recovery of hidden CD bytes, validated format/viewability, displayed size and pre-rename original names need recovery evidence and an explicit identity/name reconstruction rule. A journal name, hash match or deleted directory entry is insufficient."
+                      },
+                      "x-claim-scope": {
+                        "mode": "unavailable",
+                        "meaning": "Public prompt does not prescribe exact reconstruction source; do not inherit the general RM#3 row origin as proof of a historical name."
                       }
                     },
                     "format": {
@@ -5980,6 +6622,10 @@
                         ],
                         "meaning": "Q56 answer value at /properties/files/items/anyOf/1/properties/inferred_filename: inferred filename under the full public question meaning.",
                         "evidence_needed": "Recovery of hidden CD bytes, validated format/viewability, displayed size and pre-rename original names need recovery evidence and an explicit identity/name reconstruction rule. A journal name, hash match or deleted directory entry is insufficient."
+                      },
+                      "x-claim-scope": {
+                        "mode": "unavailable",
+                        "meaning": "Public prompt does not prescribe exact reconstruction source; do not inherit the general RM#3 row origin as proof of a historical name."
                       }
                     },
                     "format": {
@@ -6032,7 +6678,11 @@
                     "mode": "same_claim_part"
                   }
                 }
-              ]
+              ],
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+              }
             }
           }
         },
@@ -6204,7 +6854,11 @@
         "required": [
           "actions"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "x-claim-scope": {
+          "mode": "unavailable",
+          "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+        }
       },
       "match": {
         "strings": "casefold_whitespace",
@@ -6251,6 +6905,10 @@
               "additionalProperties": false,
               "x-claim-row": {
                 "mode": "same_claim_part"
+              },
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "Daily aggregation inherits explicitly identified events; a date alone cannot select an evidence origin."
               }
             }
           },
@@ -6326,6 +6984,10 @@
               "additionalProperties": false,
               "x-claim-row": {
                 "mode": "same_claim_part"
+              },
+              "x-claim-scope": {
+                "mode": "unavailable",
+                "meaning": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
               }
             },
             "description": "Detailed evidence-linked events covering the requested leakage process; a daily summary alone does not answer the prompt."
@@ -6387,6 +7049,17 @@
                 "additionalProperties": false,
                 "x-claim-row": {
                   "mode": "same_claim_part"
+                },
+                "x-claim-scope": {
+                  "mode": "source_records",
+                  "origins": [
+                    {
+                      "image": "pc.E01",
+                      "exhibit": "PC",
+                      "source_snapshot": "base-volume",
+                      "source_variant": "primary"
+                    }
+                  ]
                 }
               },
               "email_shared_links": {
@@ -6421,6 +7094,17 @@
                 "additionalProperties": false,
                 "x-claim-row": {
                   "mode": "same_claim_part"
+                },
+                "x-claim-scope": {
+                  "mode": "source_records",
+                  "origins": [
+                    {
+                      "image": "pc.E01",
+                      "exhibit": "PC",
+                      "source_snapshot": "base-volume",
+                      "source_variant": "primary"
+                    }
+                  ]
                 }
               },
               "cloud_storage": {
@@ -6458,6 +7142,17 @@
                 "additionalProperties": false,
                 "x-claim-row": {
                   "mode": "same_claim_part"
+                },
+                "x-claim-scope": {
+                  "mode": "source_records",
+                  "origins": [
+                    {
+                      "image": "pc.E01",
+                      "exhibit": "PC",
+                      "source_snapshot": "base-volume",
+                      "source_variant": "primary"
+                    }
+                  ]
                 }
               }
             },
@@ -6540,6 +7235,10 @@
                 "additionalProperties": false,
                 "x-claim-row": {
                   "mode": "same_claim_part"
+                },
+                "x-claim-scope": {
+                  "mode": "unavailable",
+                  "meaning": "USB leakage and survival/formatting combine directional PC observations and RM#2 content. Apply separate component policies, not any-origin acceptance."
                 }
               },
               "cd_r": {
@@ -6619,6 +7318,10 @@
                 "additionalProperties": false,
                 "x-claim-row": {
                   "mode": "same_claim_part"
+                },
+                "x-claim-scope": {
+                  "mode": "unavailable",
+                  "meaning": "CD leakage combines PC burning traces and RM#3 content; separate each component’s origin."
                 }
               }
             },
@@ -6661,6 +7364,10 @@
               ],
               "meaning": "Q60 answer value at /properties/artifact_type: artifact type under the full public question meaning.",
               "evidence_needed": "An actual diagram specification, its format and linked evidentiary summary require a diagram-artifact production/validation rule. Generic text or source example labels do not establish a visual result."
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
             }
           },
           "source_example": {
@@ -6671,6 +7378,10 @@
               ],
               "meaning": "Q60 answer value at /properties/source_example: source example under the full public question meaning.",
               "evidence_needed": "An actual diagram specification, its format and linked evidentiary summary require a diagram-artifact production/validation rule. Generic text or source example labels do not establish a visual result."
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
             }
           },
           "diagram": {
@@ -6719,6 +7430,10 @@
             "description": "Provide the actual visual diagram or a portable diagram specification. A label naming a source example is not a diagram.",
             "x-claim-row": {
               "mode": "same_claim_part"
+            },
+            "x-claim-scope": {
+              "mode": "unavailable",
+              "meaning": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
             }
           }
         },

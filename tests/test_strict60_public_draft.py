@@ -1,6 +1,7 @@
 """Public-only contract fidelity and refusal regressions; no benchmark answers."""
 from collections import Counter
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -10,6 +11,7 @@ from agent.answer_projection import catalog, claim_digest, project_answers
 from agent.answer_requirements import inspect
 from agent.case import read_question_profile
 from tests.test_answer_requirements import Source
+from eval.data_leakage_strict_draft.scope_contract import apply_hacking_scopes
 
 ROOT = Path(__file__).resolve().parents[1]
 DRAFT = ROOT / 'eval/data_leakage_strict_draft'
@@ -55,7 +57,10 @@ class StrictPublicDraft(unittest.TestCase):
     def test_every_declared_leaf_has_valid_explicit_support_or_gap(self):
         counts = Counter()
         for question in self.public['questions']:
-            rows = inspect(question['answer_schema'], catalog()['forms'], require_claim_requirements=True)['requirements']
+            preflight = inspect(question['answer_schema'], catalog()['forms'], require_claim_requirements=True, require_evidence_scope=True)
+            self.assertTrue(preflight['scope_requirements'])
+            self.assertTrue(all(row['status'] in ('valid', 'unavailable') for row in preflight['scope_requirements']))
+            rows = preflight['requirements']
             for row in rows:
                 counts[row['status']] += 1
                 self.assertIn(row['status'], ('catalog_support', 'no_catalog_support'))
@@ -80,7 +85,8 @@ class StrictPublicDraft(unittest.TestCase):
             role = 'app.execution.path'
             identity = emit_attribute(evidence, 'synthetic-image:Security-event:42', role,
                                       r'C:\Synthetic\recorded.exe', 1000000,
-                                      artifact='synthetic reviewed execution artifact')
+                                      artifact='synthetic reviewed execution artifact',
+                                      image='pc.E01', exhibit='PC', source_snapshot='base-volume', source_variant='primary')
             evidence.write_json(root / 'facts.json', {})
             source = JsonFacts(root / 'facts.json')
             rows = {row.kind: row.id for row in source.all() if source.string(row.obj) == identity}
@@ -92,13 +98,17 @@ class StrictPublicDraft(unittest.TestCase):
             bindings = [{'candidate_id': 'Execution', 'claim_sha256': claim_digest(claim),
                          'question_id': 'Q11', 'path': ['records', 0, 'path_or_application_id'], 'field': 'value'}]
             result = project_answers(self.public, [certificate], bindings, source,
-                                     require_claim_requirements=True, authority='recorded_certificates')
+                                     require_claim_requirements=True, require_evidence_scope=True,
+                                     evidence_facts_sha256=hashlib.sha256((root / 'facts.json').read_bytes()).hexdigest(),
+                                     authority='recorded_certificates')
             answer = next(row for row in result['submission']['answers'] if row['question_id'] == 'Q11')
             self.assertEqual(answer['answer'], {'records': [{'path_or_application_id': r'C:\Synthetic\recorded.exe'}]})
             self.assertFalse(result['unsupported'])
 
     def test_generic_observations_cannot_supply_three_known_stronger_answers(self):
         source = Source()
+        for row in source.rows.values():
+            row.prov.update(image='pc.E01', exhibit='PC', source_snapshot='base-volume', source_variant='primary')
         candidates = [{'candidate_id': 'Program', 'claim': {'programRan': [1]}},
                       {'candidate_id': 'Suffix', 'claim': {'journalPathAt': [2]}},
                       {'candidate_id': 'Removal', 'claim': {'fileRemovedAt': [3]}}]
@@ -107,7 +117,8 @@ class StrictPublicDraft(unittest.TestCase):
         bindings = [{'candidate_id': candidate['candidate_id'], 'claim_sha256': claim_digest(candidate['claim']),
                      'question_id': qid, 'path': path, 'field': field}
                     for candidate, (qid, path, field) in zip(candidates, targets)]
-        output = project_answers(self.public, candidates, bindings, source, require_claim_requirements=True)
+        output = project_answers(self.public, candidates, bindings, source, require_claim_requirements=True,
+                                 require_evidence_scope=True, evidence_facts_sha256='a' * 64)
         self.assertEqual(output['leaves'], [])
         self.assertEqual([row['reason'] for row in output['unsupported']],
                          ['claim_role_does_not_meet_public_requirement'] * 3)
@@ -131,12 +142,24 @@ class StrictPublicDraft(unittest.TestCase):
                          assembly.without_annotations(original['questions']))
         counts, policies = Counter(), []
         for question in draft['questions']:
-            preflight = inspect(question['answer_schema'], catalog()['forms'], require_claim_requirements=True)
+            preflight = inspect(question['answer_schema'], catalog()['forms'], require_claim_requirements=True, require_evidence_scope=True)
             counts.update(row['status'] for row in preflight['requirements'])
             policies.extend(preflight['row_requirements'])
+            self.assertTrue(all(row['status'] == 'valid' for row in preflight['scope_requirements']))
         self.assertEqual(counts, {'catalog_support': 13, 'no_catalog_support': 25})
         self.assertEqual(len(policies), 32)
         self.assertFalse(report['model_run_ready'])
+        # Reapplying the reviewed public plan must be idempotent, including the
+        # scan input origin and two image-integrity component origins.
+        apply_hacking_scopes(draft['questions'], json.loads((directory / 'scope_plan.json').read_text()))
+        self.assertEqual(draft, read_question_profile(directory / 'questions.json'))
+
+    def test_historical_and_reconstruction_sources_remain_explicitly_unavailable(self):
+        for qid in ('Q48', 'Q49', 'Q55', 'Q56', 'Q57'):
+            schema = next(q['answer_schema'] for q in self.public['questions'] if q['id'] == qid)
+            policies = inspect(schema, catalog()['forms'], require_claim_requirements=True,
+                               require_evidence_scope=True)['scope_requirements']
+            self.assertTrue(any(row['status'] == 'unavailable' for row in policies), qid)
 
 
 if __name__ == '__main__':

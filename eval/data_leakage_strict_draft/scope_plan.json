@@ -1,0 +1,1059 @@
+{
+  "kind": "public_source_scope_mapping_review",
+  "status": "reviewed_compiler_input_with_explicit_unavailable_selections",
+  "public_inputs": [
+    "eval/QUESTIONS.md",
+    "eval/benchmark_nist_questions.json",
+    "extractor/exhibits.json",
+    "eval/hacking_case/exhibits.json"
+  ],
+  "path_convention": "JSON answer-object paths; * denotes one array item; empty path denotes the answer root. Component mappings are deliberate conjunctive relations, not allowed-origin unions.",
+  "canonical_meanings": {
+    "source_snapshot": "base-volume means the acquired original-volume namespace, never live. evidence-image means whole logical-image bytes or retained acquisition container. Actual historical snapshot content requires vss:<exact catalog copy identifier>.",
+    "source_variant": "primary for the intended original artifact instance; logical-image and acquisition-container distinguish image-integrity components. Historical registry backups, alternate database copies and recovered variants are not silently primary; require an explicit reviewed variant selection if used.",
+    "selected_source_gate": "All four origin dimensions must be checked against independently recorded source metadata. Claimed paths, target drive letters, tags, artifact basenames and investigator assertions do not establish origins.",
+    "known_excluded_case": "HACK-PC / 4Dell Latitude CPi.E01 is a different public case and is never eligible for this Data Leakage contract."
+  },
+  "source_profiles": {
+    "pc_primary": {
+      "origin": {
+        "image": "pc.E01",
+        "exhibit": "PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Artifacts on the acquired PC base-volume namespace. Primary means the intended source instance, not a live running system. Deleted records read from this namespace retain this origin; deleted is not a snapshot."
+    },
+    "rm1_primary": {
+      "origin": {
+        "image": "rm1.E01",
+        "exhibit": "RM#1",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Acquired RM#1 base-volume namespace; no question independently requests its file inventory."
+    },
+    "rm2_primary": {
+      "origin": {
+        "image": "rm2.E01",
+        "exhibit": "RM#2",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Acquired RM#2 base-volume namespace, excluding unallocated-recovery observations, which require the separately declared variant. Recovery success is a separate claim."
+    },
+    "rm3_primary": {
+      "origin": {
+        "image": "rm3.E01",
+        "exhibit": "RM#3",
+        "source_snapshot": "optical-image",
+        "source_variant": "primary"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Primary optical-image interpretation. A recovered entry or descriptor requires its own exact source_variant; primary never authorizes those variants."
+    },
+    "pc_selected_vss": {
+      "origin": {
+        "image": "pc.E01",
+        "exhibit": "PC",
+        "source_snapshot": null,
+        "source_variant": "primary"
+      },
+      "status": "unavailable_exact_vss_id_not_supplied_by_public_prompts_or_manifest",
+      "required_selection": {
+        "source_snapshot": "vss:<exact catalog copy identifier>",
+        "selection": "Choose and freeze a specific catalog copy identifier through public investigation before content binding. Each different copy requires its own exact origin; this placeholder never accepts a wildcard or base-volume fallback."
+      },
+      "meaning": "Actual contents read through one selected VSS store, not a base-volume file called snapshot.db, a backup-named file, or the catalog row describing the VSS copy."
+    },
+    "pc_logical_image": {
+      "origin": {
+        "image": "pc.E01",
+        "exhibit": "PC",
+        "source_snapshot": "evidence-image",
+        "source_variant": "logical-image"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Logical image bytes recomputed for verification."
+    },
+    "pc_acquisition_container": {
+      "origin": {
+        "image": "pc.E01",
+        "exhibit": "PC",
+        "source_snapshot": "evidence-image",
+        "source_variant": "acquisition-container"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Digest declarations retained by this evidence image acquisition container; not the logical-image recomputation."
+    },
+    "rm1_logical_image": {
+      "origin": {
+        "image": "rm1.E01",
+        "exhibit": "RM#1",
+        "source_snapshot": "evidence-image",
+        "source_variant": "logical-image"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Logical image bytes recomputed for verification."
+    },
+    "rm1_acquisition_container": {
+      "origin": {
+        "image": "rm1.E01",
+        "exhibit": "RM#1",
+        "source_snapshot": "evidence-image",
+        "source_variant": "acquisition-container"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Digest declarations retained by this evidence image acquisition container; not the logical-image recomputation."
+    },
+    "rm2_logical_image": {
+      "origin": {
+        "image": "rm2.E01",
+        "exhibit": "RM#2",
+        "source_snapshot": "evidence-image",
+        "source_variant": "logical-image"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Logical image bytes recomputed for verification."
+    },
+    "rm2_acquisition_container": {
+      "origin": {
+        "image": "rm2.E01",
+        "exhibit": "RM#2",
+        "source_snapshot": "evidence-image",
+        "source_variant": "acquisition-container"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Digest declarations retained by this evidence image acquisition container; not the logical-image recomputation."
+    },
+    "rm3_logical_image": {
+      "origin": {
+        "image": "rm3.E01",
+        "exhibit": "RM#3",
+        "source_snapshot": "evidence-image",
+        "source_variant": "logical-image"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Logical image bytes recomputed for verification."
+    },
+    "rm3_acquisition_container": {
+      "origin": {
+        "image": "rm3.E01",
+        "exhibit": "RM#3",
+        "source_snapshot": "evidence-image",
+        "source_variant": "acquisition-container"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Digest declarations retained by this evidence image acquisition container; not the logical-image recomputation."
+    },
+    "rm2_unallocated_recovery": {
+      "origin": {
+        "image": "rm2.E01",
+        "exhibit": "RM#2",
+        "source_snapshot": "base-volume",
+        "source_variant": "unallocated-recovery"
+      },
+      "status": "canonical_reader_origin_reviewed; availability_requires_fresh_source_evidence",
+      "meaning": "Directory-entry observations recovered from the selected USB unallocated area; not proof of recovered contents or wiping."
+    },
+    "rm3_selected_recovery": {
+      "status": "unavailable_exact_recovered_entry_or_descriptor_not_selected",
+      "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+    }
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "policies": [
+        {
+          "object_path": "/images/*",
+          "selection": {
+            "image": "pc.E01",
+            "exhibit": "PC"
+          },
+          "components": {
+            "image_identity": "pc_logical_image",
+            "md5": "pc_logical_image",
+            "sha1": "pc_logical_image"
+          },
+          "reason": "Manifest-selected image identity and recomputed logical-image digests. Each row selects one manifest image; no cross-image origin union."
+        },
+        {
+          "object_path": "/acquisition_verification/*",
+          "selection": {
+            "image": "pc.E01",
+            "exhibit": "PC"
+          },
+          "components": {
+            "image_identity": "pc_logical_image",
+            "verification_hash": "pc_logical_image",
+            "acquisition_hash": "pc_acquisition_container",
+            "algorithm_and_matches": {
+              "requires_all_profiles": [
+                "pc_logical_image",
+                "pc_acquisition_container"
+              ],
+              "relationship": "same exact image and algorithm"
+            }
+          },
+          "reason": "Comparison is a deliberate two-origin relation within one selected image. Component origins must be checked individually; allowing either variant for every component would be unsafe."
+        },
+        {
+          "object_path": "/images/*",
+          "selection": {
+            "image": "rm1.E01",
+            "exhibit": "RM#1"
+          },
+          "components": {
+            "image_identity": "rm1_logical_image",
+            "md5": "rm1_logical_image",
+            "sha1": "rm1_logical_image"
+          },
+          "reason": "Manifest-selected image identity and recomputed logical-image digests. Each row selects one manifest image; no cross-image origin union."
+        },
+        {
+          "object_path": "/acquisition_verification/*",
+          "selection": {
+            "image": "rm1.E01",
+            "exhibit": "RM#1"
+          },
+          "components": {
+            "image_identity": "rm1_logical_image",
+            "verification_hash": "rm1_logical_image",
+            "acquisition_hash": "rm1_acquisition_container",
+            "algorithm_and_matches": {
+              "requires_all_profiles": [
+                "rm1_logical_image",
+                "rm1_acquisition_container"
+              ],
+              "relationship": "same exact image and algorithm"
+            }
+          },
+          "reason": "Comparison is a deliberate two-origin relation within one selected image. Component origins must be checked individually; allowing either variant for every component would be unsafe."
+        },
+        {
+          "object_path": "/images/*",
+          "selection": {
+            "image": "rm2.E01",
+            "exhibit": "RM#2"
+          },
+          "components": {
+            "image_identity": "rm2_logical_image",
+            "md5": "rm2_logical_image",
+            "sha1": "rm2_logical_image"
+          },
+          "reason": "Manifest-selected image identity and recomputed logical-image digests. Each row selects one manifest image; no cross-image origin union."
+        },
+        {
+          "object_path": "/acquisition_verification/*",
+          "selection": {
+            "image": "rm2.E01",
+            "exhibit": "RM#2"
+          },
+          "components": {
+            "image_identity": "rm2_logical_image",
+            "verification_hash": "rm2_logical_image",
+            "acquisition_hash": "rm2_acquisition_container",
+            "algorithm_and_matches": {
+              "requires_all_profiles": [
+                "rm2_logical_image",
+                "rm2_acquisition_container"
+              ],
+              "relationship": "same exact image and algorithm"
+            }
+          },
+          "reason": "Comparison is a deliberate two-origin relation within one selected image. Component origins must be checked individually; allowing either variant for every component would be unsafe."
+        },
+        {
+          "object_path": "/images/*",
+          "selection": {
+            "image": "rm3.E01",
+            "exhibit": "RM#3"
+          },
+          "components": {
+            "image_identity": "rm3_logical_image",
+            "md5": "rm3_logical_image",
+            "sha1": "rm3_logical_image"
+          },
+          "reason": "Manifest-selected image identity and recomputed logical-image digests. Each row selects one manifest image; no cross-image origin union."
+        },
+        {
+          "object_path": "/acquisition_verification/*",
+          "selection": {
+            "image": "rm3.E01",
+            "exhibit": "RM#3"
+          },
+          "components": {
+            "image_identity": "rm3_logical_image",
+            "verification_hash": "rm3_logical_image",
+            "acquisition_hash": "rm3_acquisition_container",
+            "algorithm_and_matches": {
+              "requires_all_profiles": [
+                "rm3_logical_image",
+                "rm3_acquisition_container"
+              ],
+              "relationship": "same exact image and algorithm"
+            }
+          },
+          "reason": "Comparison is a deliberate two-origin relation within one selected image. Component origins must be checked individually; allowing either variant for every component would be unsafe."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q2",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q3",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q4",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q5",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q6",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q7",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q8",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q9",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q10",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q11",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q12",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q13",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q14",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q15",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q16",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q17",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q18",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q19",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q20",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q21",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC OST content only, as expressly required by the prompt. Windows Search email, other mail stores and VSS copies cannot substitute."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q22",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q23",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q24",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q25",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC shell/shortcut artifacts may reference RM#2; observation origin remains PC. Target-volume/device identity must separately establish RM#2, not relabel the source as USB evidence."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q26",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC shell/shortcut artifacts may reference RM#2; observation origin remains PC. Target-volume/device identity must separately establish RM#2, not relabel the source as USB evidence."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q27",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q28",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q29",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q30",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume Google Drive transaction log, as requested; cloud_entry SQLite recovery or historical VSS text is a different source."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q31",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q32",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q33",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q34",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Burning/copy/opening traces originate in PC artifacts. Q34 explicitly requires PC image only; RM#3 content cannot substitute."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q35",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q36",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q37",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q38",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q39",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q40",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q41",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q42",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q43",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q44",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q45",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q46",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q47",
+      "policies": [
+        {
+          "object_path": "/copies/*",
+          "source_profile": "pc_primary",
+          "reason": "VSS catalog and storage metadata are read from the PC base-volume. A catalog creation time/copy identifier is not content originating inside that VSS snapshot."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q48",
+      "policies": [
+        {
+          "object_path": "/files/*",
+          "source_profile": "pc_selected_vss",
+          "reason": "Requested Google Drive files are contents of an actual selected PC VSS store."
+        },
+        {
+          "object_path": "/comparison",
+          "components": {
+            "vss_side": "pc_selected_vss",
+            "current_side": "pc_primary"
+          },
+          "reason": "Compare separately scoped historical VSS contents against acquired base-volume Q29–Q31 sources; both sides must be identified, never interchangeable."
+        }
+      ],
+      "notes": [
+        "The comparison fields can contain VSS-side observations and cross-source conclusions. Compile field-specific component mappings when rules exist; do not let the entire comparison object accept an origin union. Exact VSS selection is currently unavailable."
+      ]
+    },
+    {
+      "question_id": "Q49",
+      "policies": [
+        {
+          "object_path": "/recovered_records/*",
+          "source_profile": "pc_selected_vss",
+          "reason": "Deleted cloud_entry rows must come from SQLite snapshot.db inside the selected actual VSS store. The database basename snapshot.db does not itself establish VSS origin.",
+          "source_constraint": "SQLite database only; no text transaction-log substitution."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q50",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "OST exclusion policy explanation and registry evidence originate in base-volume PC configuration, rather than attributing the registry observation to a VSS store."
+        }
+      ],
+      "notes": [
+        "A separate empirical claim that a particular VSS lacks OST content would additionally require exact pc_selected_vss selection and a scoped absence/enumeration rule. The public explanatory fields alone do not supply that claim."
+      ]
+    },
+    {
+      "question_id": "Q51",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q52",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "pc_primary",
+          "reason": "PC base-volume artifacts support the specified day’s anti-forensics question. Timestamp/day filtering and action semantics require their own rules; VSS is not an interchangeable source."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q53",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "rm2_unallocated_recovery",
+          "reason": "Question explicitly selects RM#2 USB evidence. Recovery and anti-forensics meanings still require their independent rules."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q54",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "rm2_unallocated_recovery",
+          "reason": "Question explicitly selects RM#2 USB evidence. Recovery and anti-forensics meanings still require their independent rules."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q55",
+      "policies": [
+        {
+          "object_path": "/files/*",
+          "components": {
+            "pc_source_artifact": "pc_primary",
+            "rm2_destination_if_relied_on": "rm2_primary"
+          },
+          "reason": "PC-to-RM#2 copy relation has directional component origins. PC shortcut/jumplist evidence belongs to PC, not the referenced USB target. If RM#2 bytes/entries support a join, constrain that component separately; no broad origin union.",
+          "known_unavailable": "No approved source-direction/content-transfer rule or per-field origin mapping is supplied by this plan."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q56",
+      "policies": [
+        {
+          "object_path": "/files/*",
+          "source_profile": "rm3_selected_recovery",
+          "reason": "Hidden bytes, formats and sizes refer to RM#3 optical source, not PC artifacts mentioning the disc."
+        },
+        {
+          "object_path": "/recovery_method",
+          "source_profile": "rm3_selected_recovery",
+          "reason": "Recovery method describes examination of the selected CD-R evidence."
+        },
+        {
+          "object_path": "/filename_basis",
+          "components": {
+            "hidden_cd_identity": "rm3_primary",
+            "pc_original_name_if_relied_on": "pc_primary"
+          },
+          "reason": "Original-name reconstruction can require PC-to-CD content/name identity evidence; retain separate component origins and a reconstruction rule, never accept arbitrary PC text as CD content.",
+          "known_unavailable": "Public prompt does not choose a reconstruction method or exact source artifacts; narrower component selection awaits a reviewed rule."
+        },
+        {
+          "object_path": "/files/*/inferred_filename",
+          "components": {
+            "recovered_cd_object": "rm3_primary",
+            "pre_rename_name_source": "unavailable_until_reconstruction_rule_selects_exact_origin"
+          },
+          "reason": "An inferred pre-rename filename is a relational reconstruction, not a literal filename guaranteed by CD origin. A rule may choose a PC original-name artifact, retained CD metadata or another specifically justified source; both component identities and origins must be explicit.",
+          "known_unavailable": "Public prompt does not prescribe exact reconstruction source; do not inherit the general RM#3 row origin as proof of a historical name."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q57",
+      "policies": [
+        {
+          "object_path": "",
+          "source_profile": "rm3_selected_recovery",
+          "reason": "Question explicitly selects RM#3 CD-R evidence. Recovery and anti-forensics meanings still require their independent rules."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q58",
+      "policies": [
+        {
+          "object_path": "/events/*",
+          "selection": "unavailable_until_each_investigator_authored_event_or_diagram_edge_declares_its_source_components",
+          "reason": "Synthesis spans heterogeneous exhibits and potentially actual VSS contents. Each event/edge needs explicit component policies; accepting any case origin for every field would allow source substitution.",
+          "allowed_component_profiles_by_explicit_role_only": [
+            "pc_primary",
+            "rm2_primary",
+            "rm3_primary",
+            "pc_selected_vss"
+          ],
+          "known_unavailable": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
+        },
+        {
+          "object_path": "/daily_summary/*",
+          "selection": "unavailable_until_summary_lists_its_scoped_event_components",
+          "reason": "Daily aggregation inherits explicitly identified events; a date alone cannot select an evidence origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q59",
+      "policies": [
+        {
+          "object_path": "/network_transmission/email_attachment",
+          "source_profile": "pc_primary",
+          "reason": "Email transfer observations originate in the PC email store; remote recipients do not change the observation origin."
+        },
+        {
+          "object_path": "/network_transmission/email_shared_links",
+          "source_profile": "pc_primary",
+          "reason": "Shared-link message content originates in PC email artifacts."
+        },
+        {
+          "object_path": "/network_transmission/cloud_storage",
+          "source_profile": "pc_primary",
+          "reason": "Cloud service transfer observations originate in PC cloud logs/databases; service name is not a separate evidence image."
+        },
+        {
+          "object_path": "/storage_device/usb_flash_drive",
+          "components": {
+            "pc_copy_activity": "pc_primary",
+            "usb_bytes_or_formatting": "rm2_primary"
+          },
+          "reason": "USB leakage and survival/formatting combine directional PC observations and RM#2 content. Apply separate component policies, not any-origin acceptance."
+        },
+        {
+          "object_path": "/storage_device/cd_r",
+          "components": {
+            "pc_burn_activity": "pc_primary",
+            "optical_bytes_or_deleted_entries": "rm3_primary"
+          },
+          "reason": "CD leakage combines PC burning traces and RM#3 content; separate each component’s origin."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "question_id": "Q60",
+      "policies": [
+        {
+          "object_path": "/diagram",
+          "selection": "unavailable_until_each_investigator_authored_event_or_diagram_edge_declares_its_source_components",
+          "reason": "Synthesis spans heterogeneous exhibits and potentially actual VSS contents. Each event/edge needs explicit component policies; accepting any case origin for every field would allow source substitution.",
+          "allowed_component_profiles_by_explicit_role_only": [
+            "pc_primary",
+            "rm2_primary",
+            "rm3_primary",
+            "pc_selected_vss"
+          ],
+          "known_unavailable": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
+        },
+        {
+          "object_path": "/artifact_type|/source_example",
+          "selection": "not_an_evidence_origin",
+          "reason": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "known_unavailable": [
+    "Exact VSS IDs and selection are absent from supplied public prompts/manifests; pc_selected_vss cannot bind until a concrete ID is frozen.",
+    "Source-origin emission and validation implementation is parent-owned and not established by this mapping.",
+    "Actor, action, chronology, exact field semantics, complete scope and row identity remain independent requirements; valid origin alone does not prove question entailment.",
+    "Mixed-source synthesis and transfer/reconstruction fields require component-specific rules before compilation; this plan forbids broad origin unions as substitutes."
+  ],
+  "no_expected_case_values": "Only public manifest image/exhibit labels appear; no expected answers, source artifact values, reference values or experiment outputs were consulted.",
+  "compilation_review": {
+    "digest_comparison": "A single imageDigestsAgree atomic part already proves exact roles, algorithm and source-subject equality. Every supporting row must belong to an approved manifest image logical/acquisition origin; row grouping forbids mixing separate atomic parts. This specific approved compound form may use the two variants together. A general origin union does not prove other directional relations.",
+    "canonical_source_update": "Optical sources use optical-image and exact primary/udf-recovered-entry:<sector>/udf-descriptor:<sector> variants. USB unallocated recovery is distinct from primary. Unknown selected VSS/optical views remain unavailable.",
+    "remaining_trust_boundary": "Origin tags are extracted provenance checked against the bound snapshot, not a new Lean theorem or proof of authenticity."
+  },
+  "compiled_by": "eval/data_leakage_strict_draft/scope_contract.py; review.json records final policies and remaining launch blockers"
+}

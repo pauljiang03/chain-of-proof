@@ -20,7 +20,8 @@
     "Every scored answer leaf declares x-claim-requirement. This checks compatibility with specific reviewed claim roles, not English entailment or answer completeness. A currently unsupported stronger role remains unsupported; do not replace it with a generic string-valued observation.",
     "HELD PUBLIC REVIEW DRAFT: model_run_ready is false. Do not launch model experiments or scoring from this contract.",
     "x-claim-row same_claim_part requires all retained fields of that object to originate in the same candidate and flattened claim part. It does not itself enforce case/exhibit membership, personal identity, cross-question linkage or list completeness.",
-    "Selected-case exhibit/source membership must be enforced at runtime before any model run. Exact recorded host/configuration and scoped inventory roles below remain narrow interpretations, not proof of actual use or global completeness. Unsupported stronger meanings remain empty."
+    "Selected-case exhibit/source membership must be enforced at runtime before any model run. Exact recorded host/configuration and scoped inventory roles below remain narrow interpretations, not proof of actual use or global completeness. Unsupported stronger meanings remain empty.",
+    "Every supporting source record must match the declared exact exhibit, source snapshot and artifact variant. Antivirus observations additionally require the declared scan-input origin. No origin may be inferred from answer text, target paths or investigator annotations."
   ],
   "questions": [
     {
@@ -112,6 +113,23 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "evidence-image",
+              "source_variant": "logical-image"
+            },
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "evidence-image",
+              "source_variant": "acquisition-container"
+            }
+          ]
         }
       },
       "match": {
@@ -148,6 +166,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -185,6 +214,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -221,6 +261,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -257,6 +308,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -293,6 +355,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -329,6 +402,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -366,6 +450,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -409,6 +504,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -440,6 +546,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -471,6 +588,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -514,6 +642,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -548,6 +687,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -591,6 +741,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -622,6 +783,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -656,6 +828,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -692,6 +875,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -723,6 +917,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -757,6 +962,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -790,6 +1006,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -863,6 +1090,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -897,6 +1135,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -934,6 +1183,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -965,6 +1225,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -999,6 +1270,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "independent"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1029,6 +1311,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1060,6 +1353,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1097,6 +1401,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1128,6 +1443,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1166,6 +1492,17 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          ]
         }
       },
       "match": {
@@ -1203,6 +1540,21 @@
         "additionalProperties": false,
         "x-claim-row": {
           "mode": "same_claim_part"
+        },
+        "x-claim-scope": {
+          "mode": "source_records",
+          "origins": [
+            {
+              "image": "4Dell Latitude CPi.E01",
+              "exhibit": "HACK-PC",
+              "source_snapshot": "examination",
+              "source_variant": "antivirus",
+              "input_source": {
+                "source_snapshot": "base-volume",
+                "source_variant": "primary"
+              }
+            }
+          ]
         }
       },
       "match": {

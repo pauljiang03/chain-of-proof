@@ -18,18 +18,33 @@
     },
     {
       "path": "agent/answer_projection.py",
-      "sha256": "833accf7befa3ddbf7c9af9cdbc3c9271fee93a545026e79e40fd7892f28db31",
-      "bytes": 39618
+      "sha256": "78d9e13456fbc06c718eb0ccd14be922547e055ded14b384825bface31f7b424",
+      "bytes": 43243
     },
     {
       "path": "agent/answer_requirements.py",
-      "sha256": "322b54478d123654dfe5f6b1b8d56cdc40f4d387e0c02b6854dc9414ca7091d0",
-      "bytes": 13672
+      "sha256": "fd34fec52f872999cf2fef10f7d9ca708a0a5fd44dda2804792fb212fbec0dc9",
+      "bytes": 23043
     },
     {
       "path": "checker/catalog.py",
       "sha256": "bf8bab14977374d0f1f49a79b4b7c46462f50694e6f00b86286f49e2c3a7a988",
       "bytes": 10169
+    },
+    {
+      "path": "extractor/exhibits.json",
+      "sha256": "ffb15e555f7c70786551c3ea676660753109c043429a27870589da845746e9cf",
+      "bytes": 426
+    },
+    {
+      "path": "eval/data_leakage_strict_draft/scope_plan.json",
+      "sha256": "3651cd20d773fe52be0a37142617779d6c241aecce271b082cccb8a0d96c633c",
+      "bytes": 41541
+    },
+    {
+      "path": "eval/data_leakage_strict_draft/scope_contract.py",
+      "sha256": "e52f825bc0bf364460634a80150042d5f516c699f5b848099994b43d36f7f130",
+      "bytes": 5359
     },
     {
       "path": "eval/data_leakage_strict_draft/parts/q01_20.json",
@@ -69,6 +84,8 @@
     "explicitly_unsupported": 337,
     "missing_or_invalid": 0,
     "row_policies": 93,
+    "scope_policies": 72,
+    "unavailable_scope_policies": 17,
     "same_claim_part_policies": 83,
     "independent_section_policies": 10,
     "questions_with_any_catalog_supported_leaf": 9
@@ -77,7 +94,7 @@
   "launch_blockers": [
     {
       "id": "selected_exhibit_scope",
-      "requirement": "Bind answer fields to the intended PC, USB or CD exhibit and snapshot. Existing exact roles do not by themselves enforce the public question scope."
+      "requirement": "Exact source checks are implemented. Historical copy IDs, recovered optical entries and mixed-source relationships without a reviewed exact selection remain unavailable. Fresh source provenance is required; do not relabel old evidence."
     },
     {
       "id": "cross_claim_subject_joins",
@@ -5961,6 +5978,1643 @@
       "branches": [],
       "status": "valid",
       "mode": "same_claim_part"
+    }
+  ],
+  "scope_policies": [
+    {
+      "question_id": "Q1",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "evidence-image",
+            "source_variant": "logical-image"
+          },
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "evidence-image",
+            "source_variant": "acquisition-container"
+          },
+          {
+            "image": "rm1.E01",
+            "exhibit": "RM#1",
+            "source_snapshot": "evidence-image",
+            "source_variant": "logical-image"
+          },
+          {
+            "image": "rm1.E01",
+            "exhibit": "RM#1",
+            "source_snapshot": "evidence-image",
+            "source_variant": "acquisition-container"
+          },
+          {
+            "image": "rm2.E01",
+            "exhibit": "RM#2",
+            "source_snapshot": "evidence-image",
+            "source_variant": "logical-image"
+          },
+          {
+            "image": "rm2.E01",
+            "exhibit": "RM#2",
+            "source_snapshot": "evidence-image",
+            "source_variant": "acquisition-container"
+          },
+          {
+            "image": "rm3.E01",
+            "exhibit": "RM#3",
+            "source_snapshot": "evidence-image",
+            "source_variant": "logical-image"
+          },
+          {
+            "image": "rm3.E01",
+            "exhibit": "RM#3",
+            "source_snapshot": "evidence-image",
+            "source_variant": "acquisition-container"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q2",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q3",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q4",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q5",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q6",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q7",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q8",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q9",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q10",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q11",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q12",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q13",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q14",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q15",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q16",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q17",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q18",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q19",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q20",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q21",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q22",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q23",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q24",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q25",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q26",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q27",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q28",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q29",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q30",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q31",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q32",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q33",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q34",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q35",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q36",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q37",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q38",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q39",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q40",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q41",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q42",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q43",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q44",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q45",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q46",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q47",
+      "path": [
+        "copies",
+        "*"
+      ],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q48",
+      "path": [
+        "files",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Actual contents read through one selected VSS store, not a base-volume file called snapshot.db, a backup-named file, or the catalog row describing the VSS copy."
+      }
+    },
+    {
+      "question_id": "Q48",
+      "path": [
+        "comparison"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Compare separately scoped historical VSS contents against acquired base-volume Q29–Q31 sources; both sides must be identified, never interchangeable."
+      }
+    },
+    {
+      "question_id": "Q49",
+      "path": [
+        "recovered_records",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Actual contents read through one selected VSS store, not a base-volume file called snapshot.db, a backup-named file, or the catalog row describing the VSS copy."
+      }
+    },
+    {
+      "question_id": "Q50",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q51",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q52",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q53",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "rm2.E01",
+            "exhibit": "RM#2",
+            "source_snapshot": "base-volume",
+            "source_variant": "unallocated-recovery"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q54",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "rm2.E01",
+            "exhibit": "RM#2",
+            "source_snapshot": "base-volume",
+            "source_variant": "unallocated-recovery"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q55",
+      "path": [
+        "files",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "No approved source-direction/content-transfer rule or per-field origin mapping is supplied by this plan."
+      }
+    },
+    {
+      "question_id": "Q56",
+      "path": [
+        "recovery_method"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+      }
+    },
+    {
+      "question_id": "Q56",
+      "path": [
+        "filename_basis"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Public prompt does not choose a reconstruction method or exact source artifacts; narrower component selection awaits a reviewed rule."
+      }
+    },
+    {
+      "question_id": "Q56",
+      "path": [
+        "files",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+      }
+    },
+    {
+      "question_id": "Q56",
+      "path": [
+        "files",
+        "*",
+        "inferred_filename"
+      ],
+      "branches": [
+        0
+      ],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Public prompt does not prescribe exact reconstruction source; do not inherit the general RM#3 row origin as proof of a historical name."
+      }
+    },
+    {
+      "question_id": "Q56",
+      "path": [
+        "files",
+        "*",
+        "inferred_filename"
+      ],
+      "branches": [
+        1
+      ],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Public prompt does not prescribe exact reconstruction source; do not inherit the general RM#3 row origin as proof of a historical name."
+      }
+    },
+    {
+      "question_id": "Q57",
+      "path": [],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Choose and freeze the exact optical udf-recovered-entry:<sector> or udf-descriptor:<sector> identity before using its reconstructed view; never fall back to primary."
+      }
+    },
+    {
+      "question_id": "Q58",
+      "path": [
+        "daily_summary",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Daily aggregation inherits explicitly identified events; a date alone cannot select an evidence origin."
+      }
+    },
+    {
+      "question_id": "Q58",
+      "path": [
+        "events",
+        "*"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
+      }
+    },
+    {
+      "question_id": "Q59",
+      "path": [
+        "network_transmission",
+        "email_attachment"
+      ],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q59",
+      "path": [
+        "network_transmission",
+        "email_shared_links"
+      ],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q59",
+      "path": [
+        "network_transmission",
+        "cloud_storage"
+      ],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "pc.E01",
+            "exhibit": "PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q59",
+      "path": [
+        "storage_device",
+        "usb_flash_drive"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "USB leakage and survival/formatting combine directional PC observations and RM#2 content. Apply separate component policies, not any-origin acceptance."
+      }
+    },
+    {
+      "question_id": "Q59",
+      "path": [
+        "storage_device",
+        "cd_r"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "CD leakage combines PC burning traces and RM#3 content; separate each component’s origin."
+      }
+    },
+    {
+      "question_id": "Q60",
+      "path": [
+        "artifact_type"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
+      }
+    },
+    {
+      "question_id": "Q60",
+      "path": [
+        "source_example"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
+      }
+    },
+    {
+      "question_id": "Q60",
+      "path": [
+        "diagram"
+      ],
+      "branches": [],
+      "status": "unavailable",
+      "requirement": {
+        "mode": "unavailable",
+        "meaning": "No event/edge-specific mapping or exact VSS ID is provided by public prompts; this is not an executable origin union."
+      }
+    }
+  ],
+  "scope_resolutions": [
+    {
+      "question_id": "Q1",
+      "path": [],
+      "mode": "source_records",
+      "reason": "A single imageDigestsAgree atomic part already proves exact roles, algorithm and source-subject equality. Every supporting row must belong to an approved manifest image logical/acquisition origin; row grouping forbids mixing separate atomic parts. This specific approved compound form may use the two variants together. A general origin union does not prove other directional relations."
+    },
+    {
+      "question_id": "Q2",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q3",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q4",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q5",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q6",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q7",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q8",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q9",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q10",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q11",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q12",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q13",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q14",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q15",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q16",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q17",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q18",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q19",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q20",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q21",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC OST content only, as expressly required by the prompt. Windows Search email, other mail stores and VSS copies cannot substitute."
+    },
+    {
+      "question_id": "Q22",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q23",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q24",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+    },
+    {
+      "question_id": "Q25",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC shell/shortcut artifacts may reference RM#2; observation origin remains PC. Target-volume/device identity must separately establish RM#2, not relabel the source as USB evidence."
+    },
+    {
+      "question_id": "Q26",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC shell/shortcut artifacts may reference RM#2; observation origin remains PC. Target-volume/device identity must separately establish RM#2, not relabel the source as USB evidence."
+    },
+    {
+      "question_id": "Q27",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+    },
+    {
+      "question_id": "Q28",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Company-share references are observed in PC artifacts. A remote address/path is the target, not an acquired server image or the observation origin."
+    },
+    {
+      "question_id": "Q29",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q30",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume Google Drive transaction log, as requested; cloud_entry SQLite recovery or historical VSS text is a different source."
+    },
+    {
+      "question_id": "Q31",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q32",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+    },
+    {
+      "question_id": "Q33",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+    },
+    {
+      "question_id": "Q34",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Burning/copy/opening traces originate in PC artifacts. Q34 explicitly requires PC image only; RM#3 content cannot substitute."
+    },
+    {
+      "question_id": "Q35",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Burning/copy/opening traces originate in PC artifacts. Referenced optical medium is a target; disc content would need a distinct reviewed component policy."
+    },
+    {
+      "question_id": "Q36",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q37",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q38",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q39",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q40",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q41",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q42",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q43",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+    },
+    {
+      "question_id": "Q44",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+    },
+    {
+      "question_id": "Q45",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+    },
+    {
+      "question_id": "Q46",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume Windows Search database only; matching file/email/browser text from direct sources is not Search-database origin."
+    },
+    {
+      "question_id": "Q47",
+      "path": "/copies/*",
+      "mode": "source_records",
+      "reason": "VSS catalog and storage metadata are read from the PC base-volume. A catalog creation time/copy identifier is not content originating inside that VSS snapshot."
+    },
+    {
+      "question_id": "Q48",
+      "path": "/files/*",
+      "mode": "unavailable",
+      "reason": "Requested Google Drive files are contents of an actual selected PC VSS store."
+    },
+    {
+      "question_id": "Q48",
+      "path": "/comparison",
+      "mode": "unavailable",
+      "reason": "Compare separately scoped historical VSS contents against acquired base-volume Q29–Q31 sources; both sides must be identified, never interchangeable."
+    },
+    {
+      "question_id": "Q49",
+      "path": "/recovered_records/*",
+      "mode": "unavailable",
+      "reason": "Deleted cloud_entry rows must come from SQLite snapshot.db inside the selected actual VSS store. The database basename snapshot.db does not itself establish VSS origin."
+    },
+    {
+      "question_id": "Q50",
+      "path": "",
+      "mode": "source_records",
+      "reason": "OST exclusion policy explanation and registry evidence originate in base-volume PC configuration, rather than attributing the registry observation to a VSS store."
+    },
+    {
+      "question_id": "Q51",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume primary artifacts are the intended source for this question; no actual VSS, another exhibit or backup-copy substitution is authorized."
+    },
+    {
+      "question_id": "Q52",
+      "path": "",
+      "mode": "source_records",
+      "reason": "PC base-volume artifacts support the specified day’s anti-forensics question. Timestamp/day filtering and action semantics require their own rules; VSS is not an interchangeable source."
+    },
+    {
+      "question_id": "Q53",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Question explicitly selects RM#2 USB evidence. Recovery and anti-forensics meanings still require their independent rules."
+    },
+    {
+      "question_id": "Q54",
+      "path": "",
+      "mode": "source_records",
+      "reason": "Question explicitly selects RM#2 USB evidence. Recovery and anti-forensics meanings still require their independent rules."
+    },
+    {
+      "question_id": "Q55",
+      "path": "/files/*",
+      "mode": "unavailable",
+      "reason": "PC-to-RM#2 copy relation has directional component origins. PC shortcut/jumplist evidence belongs to PC, not the referenced USB target. If RM#2 bytes/entries support a join, constrain that component separately; no broad origin union."
+    },
+    {
+      "question_id": "Q56",
+      "path": "/files/*",
+      "mode": "unavailable",
+      "reason": "Hidden bytes, formats and sizes refer to RM#3 optical source, not PC artifacts mentioning the disc."
+    },
+    {
+      "question_id": "Q56",
+      "path": "/recovery_method",
+      "mode": "unavailable",
+      "reason": "Recovery method describes examination of the selected CD-R evidence."
+    },
+    {
+      "question_id": "Q56",
+      "path": "/filename_basis",
+      "mode": "unavailable",
+      "reason": "Original-name reconstruction can require PC-to-CD content/name identity evidence; retain separate component origins and a reconstruction rule, never accept arbitrary PC text as CD content."
+    },
+    {
+      "question_id": "Q56",
+      "path": "/files/*/inferred_filename",
+      "mode": "unavailable",
+      "reason": "An inferred pre-rename filename is a relational reconstruction, not a literal filename guaranteed by CD origin. A rule may choose a PC original-name artifact, retained CD metadata or another specifically justified source; both component identities and origins must be explicit."
+    },
+    {
+      "question_id": "Q57",
+      "path": "",
+      "mode": "unavailable",
+      "reason": "Question explicitly selects RM#3 CD-R evidence. Recovery and anti-forensics meanings still require their independent rules."
+    },
+    {
+      "question_id": "Q58",
+      "path": "/events/*",
+      "mode": "unavailable",
+      "reason": "Synthesis spans heterogeneous exhibits and potentially actual VSS contents. Each event/edge needs explicit component policies; accepting any case origin for every field would allow source substitution."
+    },
+    {
+      "question_id": "Q58",
+      "path": "/daily_summary/*",
+      "mode": "unavailable",
+      "reason": "Daily aggregation inherits explicitly identified events; a date alone cannot select an evidence origin."
+    },
+    {
+      "question_id": "Q59",
+      "path": "/network_transmission/email_attachment",
+      "mode": "source_records",
+      "reason": "Email transfer observations originate in the PC email store; remote recipients do not change the observation origin."
+    },
+    {
+      "question_id": "Q59",
+      "path": "/network_transmission/email_shared_links",
+      "mode": "source_records",
+      "reason": "Shared-link message content originates in PC email artifacts."
+    },
+    {
+      "question_id": "Q59",
+      "path": "/network_transmission/cloud_storage",
+      "mode": "source_records",
+      "reason": "Cloud service transfer observations originate in PC cloud logs/databases; service name is not a separate evidence image."
+    },
+    {
+      "question_id": "Q59",
+      "path": "/storage_device/usb_flash_drive",
+      "mode": "unavailable",
+      "reason": "USB leakage and survival/formatting combine directional PC observations and RM#2 content. Apply separate component policies, not any-origin acceptance."
+    },
+    {
+      "question_id": "Q59",
+      "path": "/storage_device/cd_r",
+      "mode": "unavailable",
+      "reason": "CD leakage combines PC burning traces and RM#3 content; separate each component’s origin."
+    },
+    {
+      "question_id": "Q60",
+      "path": "/diagram",
+      "mode": "unavailable",
+      "reason": "Synthesis spans heterogeneous exhibits and potentially actual VSS contents. Each event/edge needs explicit component policies; accepting any case origin for every field would allow source substitution."
+    },
+    {
+      "question_id": "Q60",
+      "path": "/artifact_type",
+      "mode": "unavailable",
+      "reason": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
+    },
+    {
+      "question_id": "Q60",
+      "path": "/source_example",
+      "mode": "unavailable",
+      "reason": "Produced diagram artifact metadata needs a production/validation rule; source examples are not evidence observations."
     }
   ],
   "author_reviews": [

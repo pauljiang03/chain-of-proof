@@ -15,8 +15,11 @@ The reviewed draft has 358 leaf occurrences, including repeated `anyOf` branches
 21 have compatible catalog roles and 337 explicitly require missing support.
 There are no missing or invalid annotations. Nine questions have at least one
 compatible leaf. **These are catalog counts, not accuracy, evidence availability
-or complete-answer counts.** The supported mappings still require selected-PC or
-exhibit scope to be enforced before a run.
+or complete-answer counts.** Exact exhibit, source snapshot and artifact variant
+checks now apply to every supporting record against hash-bound evidence. There
+are 72 scope declarations; 17 explicitly unavailable selections always refuse
+bindings. Unknown VSS copy IDs, recovered optical views and unsupported
+relationships between sources are never replaced by a broad origin allowance.
 
 The main remaining issues are concrete:
 
@@ -41,7 +44,8 @@ accepts a shadow-copy ID with another copy's timestamp. The reviewed draft refus
 the mixed row and a nonexecution path while retaining an independent coherent row.
 The guard also rejects using unrelated parts of one `both` certificate. This
 validates explicit row consistency; it does not establish question relevance,
-selected-exhibit scope or case accuracy.
+source-reader authenticity or case accuracy. Synthetic provenance now also
+exercises the selected-PC/base-volume/primary scope check.
 
 From the repository root, using an environment with the project's dependencies:
 
@@ -54,5 +58,7 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python -m unittest tests.test_strict60_pu
 Omit `--check` only to regenerate the two derived review files from reviewed parts.
 The assembler reads only named public contracts, code and review files. No new
 reference, score, investigator session or model run is created here. Before any
-experiment, enforce the remaining exhibit checks and required cross-claim joins, review the exact
-remaining unsupported meanings, and freeze a separately declared comparison.
+experiment, resolve the remaining exact source selections and required
+cross-claim joins, review the unsupported meanings, and freeze a separately
+declared comparison. `scope_plan.json` records the public mapping review and
+`scope_contract.py` compiles it; `review.json` retains the resulting policies.

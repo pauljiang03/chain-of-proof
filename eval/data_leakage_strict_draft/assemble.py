@@ -9,8 +9,9 @@ import json
 from pathlib import Path
 
 from agent.answer_projection import catalog
-from agent.answer_requirements import KEY, ROW_KEY, inspect
+from agent.answer_requirements import KEY, ROW_KEY, SCOPE_KEY, inspect
 from agent.case import read_question_profile
+from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
@@ -30,7 +31,7 @@ def fingerprint(path):
 
 def without_annotations(value):
     if isinstance(value, dict):
-        return {key: without_annotations(child) for key, child in value.items() if key not in (KEY, ROW_KEY)}
+        return {key: without_annotations(child) for key, child in value.items() if key not in (KEY, ROW_KEY, SCOPE_KEY)}
     if isinstance(value, list):
         return [without_annotations(child) for child in value]
     return value
@@ -49,6 +50,7 @@ def build():
         raise ValueError('draft changed a public prompt, field, shape or matching rule')
     if [row['question_id'] for row in reviews] != [q['id'] for q in questions]:
         raise ValueError('reviews do not cover the public questions exactly')
+    scope_resolutions = apply_data_leakage_scopes(questions, json.loads((HERE / 'scope_plan.json').read_text()))
 
     public = deepcopy(original)
     public.update(case_id=CASE_ID, contract_revision='strict-public-review-v1-draft',
@@ -59,15 +61,18 @@ def build():
         'Each declared requirement describes the full requested field meaning. A needs_* role names missing support; it is not a new proof rule.',
         'Supported individual fields remain partial observations. Complete lists, attribution and relationships between separately bound fields are not established.',
         'Reviewed row policies require the same atomic claim part where fields describe one record or relation. Independent policies apply only to explicitly separate sections.',
-        'Selected-exhibit requirements and missing stronger meanings remain launch blockers in review.json. Do not launch this draft until those checks are implemented and independently reviewed.',
+        'Source scope is checked against every supporting record in the bound evidence. Explicit unavailable selections always refuse bindings. Missing stronger meanings and exact source selections remain launch blockers in review.json.',
         'Keep narrower observations in a separate evidence report. Do not place them in stronger answer fields or change their labels to obtain support.',
     ]
     forms = catalog()['forms']
-    field_rows, row_policies, counts, per_question = [], [], Counter(), []
+    field_rows, row_policies, scope_policies, counts, per_question = [], [], [], Counter(), []
     for question in questions:
-        preflight = inspect(question['answer_schema'], forms, require_claim_requirements=True)
+        preflight = inspect(question['answer_schema'], forms, require_claim_requirements=True, require_evidence_scope=True)
         rows = preflight['requirements']
         row_policies.extend({'question_id': question['id'], **row} for row in preflight['row_requirements'])
+        scope_policies.extend({'question_id': question['id'], **row} for row in preflight['scope_requirements'])
+        if any(row['status'] not in ('valid', 'unavailable') for row in preflight['scope_requirements']):
+            raise ValueError('incomplete or invalid source declarations in ' + question['id'])
         statuses = Counter(row['status'] for row in rows)
         if statuses['missing_annotation'] or statuses['invalid']:
             raise ValueError('incomplete or invalid declarations in ' + question['id'])
@@ -83,6 +88,7 @@ def build():
     peers = [json.loads((HERE / 'parts' / ('peer_' + name)).read_text()) for name in PARTS]
     inputs = [ORIGINAL, ROOT / 'eval/QUESTIONS.md', ROOT / 'agent/answer_projection.py',
               ROOT / 'agent/answer_requirements.py', ROOT / 'checker/catalog.py',
+              ROOT / 'extractor/exhibits.json', HERE / 'scope_plan.json', HERE / 'scope_contract.py',
               *(HERE / 'parts' / name for name in PARTS),
               *(HERE / 'parts' / ('peer_' + name) for name in PARTS)]
     report = {
@@ -96,18 +102,21 @@ def build():
                    'explicitly_unsupported': counts['no_catalog_support'],
                    'missing_or_invalid': 0,
                    'row_policies': len(row_policies),
+                   'scope_policies': len(scope_policies),
+                   'unavailable_scope_policies': sum(row['status'] == 'unavailable' for row in scope_policies),
                    'same_claim_part_policies': sum(row['mode'] == 'same_claim_part' for row in row_policies),
                    'independent_section_policies': sum(row['mode'] == 'independent' for row in row_policies),
                    'questions_with_any_catalog_supported_leaf': sum(q['catalog_supported'] > 0 for q in per_question)},
         'count_meaning': 'Catalog compatibility counts, not available case evidence, certified answers, accuracy or complete questions.',
         'launch_blockers': [
-            {'id': 'selected_exhibit_scope', 'requirement': 'Bind answer fields to the intended PC, USB or CD exhibit and snapshot. Existing exact roles do not by themselves enforce the public question scope.'},
+            {'id': 'selected_exhibit_scope', 'requirement': 'Exact source checks are implemented. Historical copy IDs, recovered optical entries and mixed-source relationships without a reviewed exact selection remain unavailable. Fresh source provenance is required; do not relabel old evidence.'},
             {'id': 'cross_claim_subject_joins', 'requirement': 'The declared same-atomic-part guard is implemented. Fields needing joins across separate claims remain unsupported until approved compound forms establish the required shared subject and roles.'},
             {'id': 'missing_meaning_rules', 'requirement': 'Add evidence and reviewed rules for requested actions, chronology, source-specific timestamps, attribution and recovery. A generic path, timestamp or record kind cannot stand in for those meanings.'},
             {'id': 'separate_scoring_revision', 'requirement': 'Any scoring use needs an explicitly frozen compatible derivative and comparison plan. No reference or scores were created or changed here.'},
         ],
         'peer_resolution_policy': 'Retain exact partial observations and coherent same-atomic-part rows; withhold unsupported cross-claim joins and nonexecution paths. Peer reports describe the earlier draft and author reviews record the resolutions.',
         'per_question': per_question, 'fields': field_rows, 'row_policies': row_policies,
+        'scope_policies': scope_policies, 'scope_resolutions': scope_resolutions,
         'author_reviews': reviews, 'peer_reviews': peers,
     }
     return {'questions.json': public, 'review.json': report}

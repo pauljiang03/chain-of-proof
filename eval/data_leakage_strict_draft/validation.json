@@ -28,6 +28,8 @@
   "legacy_require_claim_requirements": false,
   "legacy_row_policy_removed": true,
   "revised_require_claim_requirements": true,
+  "require_evidence_scope": true,
+  "source_scope": "Synthetic PC/base-volume/primary provenance with a caller-supplied synthetic digest, not actual case evidence.",
   "actual_row_guard_conflicts": [
     {
       "reason": "row_fields_require_same_claim_part",

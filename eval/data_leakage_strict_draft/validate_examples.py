@@ -67,6 +67,11 @@ def main():
     public = {'schema_version': 2, 'case_id': 'synthetic-receipt-only',
               'time_zone': 'UTC', 'questions': selected}
     source = SyntheticSource()
+    # Synthetic origin labels exercise the public source contract; this is not
+    # a claim that these invented observations occur in the actual case.
+    for row in source.rows.values():
+        row.prov.update(image='pc.E01', exhibit='PC', source_snapshot='base-volume', source_variant='primary')
+    scope_args = {'require_evidence_scope': True, 'evidence_facts_sha256': 'a' * 64}
     candidates = [{'candidate_id': 'SyntheticCopyA', 'claim': {'shadowCopyMade': [1]}},
                   {'candidate_id': 'SyntheticCopyB', 'claim': {'shadowCopyMade': [2]}},
                   {'candidate_id': 'SyntheticMuiCache', 'claim': {'programRan': [3]}}]
@@ -91,14 +96,14 @@ def main():
     old = deepcopy(public)
     q47 = next(q for q in old['questions'] if q['id'] == 'Q47')
     q47['answer_schema']['properties']['copies']['items'].pop('x-claim-row', None)
-    old_plan = prepare_projection(old, candidates, mixed, source, require_claim_requirements=False)
+    old_plan = prepare_projection(old, candidates, mixed, source, require_claim_requirements=False, **scope_args)
     assert not old_plan['unsupported'] and len(old_plan['bindings']) == 2
     old_rendered = render_projection(old_plan)
     old_row = next(q for q in old_rendered['submission']['answers'] if q['question_id'] == 'Q47')['answer']['copies'][0]
     assert old_row == {'shadow_copy_id': 'SYNTHETIC-COPY-A', 'created_at': '1970-01-01T00:00:09Z'}
     assert source.rows[1].t != source.rows[2].t
     revised = prepare_projection(public, candidates, mixed + coherent + [nonexecution], source,
-                                 require_claim_requirements=True)
+                                 require_claim_requirements=True, **scope_args)
     assert len(revised['bindings']) == 4, revised
     assert revised['frozen_conflicts'] == [{
         'reason': 'row_fields_require_same_claim_part', 'question_id': 'Q47',
@@ -120,7 +125,7 @@ def main():
     assert filtered_rows == [expected], filtered_rows
     assert sorted(row['binding_index'] for row in filtered['dropped']) == [0, 1]
     identifier_plan = prepare_projection(public, candidates, [mixed[0]], source,
-                                         require_claim_requirements=True)
+                                         require_claim_requirements=True, **scope_args)
     assert not identifier_plan['unsupported'] and not identifier_plan['frozen_conflicts']
     identifier_only = render_projection(identifier_plan)
     identifier_row = next(q for q in identifier_only['submission']['answers'] if q['question_id'] == 'Q47')['answer']['copies'][0]
@@ -131,6 +136,8 @@ def main():
                       'legacy_require_claim_requirements': False,
                       'legacy_row_policy_removed': True,
                       'revised_require_claim_requirements': True,
+                      'require_evidence_scope': True,
+                      'source_scope': 'Synthetic PC/base-volume/primary provenance with a caller-supplied synthetic digest, not actual case evidence.',
                       'actual_row_guard_conflicts': revised['frozen_conflicts'],
                       'revised_rejected': [{'path': list(path), 'reason': reason} for path, reason in rejected.items()],
                       'revised_retained_q47_rows': retained_rows,

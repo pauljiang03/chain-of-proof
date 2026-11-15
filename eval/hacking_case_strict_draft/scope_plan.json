@@ -1,0 +1,976 @@
+{
+  "plan_only": true,
+  "model_run_ready": false,
+  "case_id": "nist-cfreds-hacking-strict-review-v1",
+  "source_files": [
+    {
+      "filename": "eval/hacking_case/questions.json",
+      "sha256": "a2fe37685b2aee4dd70ac244c51659428233a3070e5c5de06979f18b5fd054db"
+    },
+    {
+      "filename": "eval/hacking_case_strict_draft/review.json",
+      "sha256": "bb753ef20267022edaf8785d727bfc85bfac7b2925055edbac4d426ce5e6b9ca"
+    },
+    {
+      "filename": "eval/hacking_case/exhibits.json",
+      "sha256": "ae8c75b6760dec3a1f34f21194e163a14f264f0e7249c265a4f03a6cce4974cd"
+    }
+  ],
+  "approved_exhibit_mapping": {
+    "image": "4Dell Latitude CPi.E01",
+    "exhibit": "HACK-PC",
+    "role": "pc"
+  },
+  "canonical_origin_confirmation": "Reviewed against explicit source readers: base-volume/primary, typed image digest components, and examination/antivirus with exact base-volume/primary input_source. review.json records final compiled policies; source_files preserve the earlier planning inputs.",
+  "questions": 31,
+  "object_mappings": [
+    {
+      "question_id": "Q1",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "image_hash": "object",
+        "acquisition_verification_match": "boolean"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": null,
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "Image hashing applies to reconstructed logical-media bytes and the acquisition checksum retained by its container, not the mounted base filesystem. The comparison must retain both origins and the same-image/same-algorithm relation. Algorithm/digest stay coupled; the row must not be reduced to one falsely common source variant.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ],
+      "source_components": {
+        "logical_digest": {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "logical-image"
+        },
+        "acquisition_digest": {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "acquisition-container"
+        }
+      },
+      "required_resolution": "Canonical source policy must support the two typed digest components and their image identity without weakening same-claim-part coherence."
+    },
+    {
+      "question_id": "Q1",
+      "object_path": "/image_hash",
+      "schema_type": "object",
+      "property_types": {
+        "algorithm": "string",
+        "digest": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": null,
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "Image hashing applies to reconstructed logical-media bytes and the acquisition checksum retained by its container, not the mounted base filesystem. The comparison must retain both origins and the same-image/same-algorithm relation. Algorithm/digest stay coupled; the row must not be reduced to one falsely common source variant.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ],
+      "source_components": {
+        "logical_digest": {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "logical-image"
+        },
+        "acquisition_digest": {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "acquisition-container"
+        }
+      },
+      "required_resolution": "Canonical source policy must support the two typed digest components and their image identity without weakening same-claim-part coherence."
+    },
+    {
+      "question_id": "Q2",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "operating_system": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q3",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "installed_at": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists. Historical installation/shutdown timestamps are values retained in current-hive observations; they do not imply selection of a historical snapshot.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q4",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "time_zone_setting": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q5",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "registered_owner": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q6",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "computer_account_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q7",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "primary_domain_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q8",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "shutdown_at": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists. Historical installation/shutdown timestamps are values retained in current-hive observations; they do not imply selection of a historical snapshot.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q9",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "account_count": "integer"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "account_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "historical_use_successful_logon_or_capability_relation",
+          "status": "unavailable",
+          "reason": "Recorded configuration/installation source origin is available only as an intended outer selection. The stronger event/use/classification relation remains unsupported."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "account_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "historical_use_successful_logon_or_capability_relation",
+          "status": "unavailable",
+          "reason": "Recorded configuration/installation source origin is available only as an intended outer selection. The stronger event/use/classification relation remains unsupported."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "file_path": "string",
+        "program": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q13",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "network_cards": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "historical_use_successful_logon_or_capability_relation",
+          "status": "unavailable",
+          "reason": "Recorded configuration/installation source origin is available only as an intended outer selection. The stronger event/use/classification relation remains unsupported."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q14",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "ip_address": "string",
+        "mac_address": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q15",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "network_card": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q16",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "programs": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "historical_use_successful_logon_or_capability_relation",
+          "status": "unavailable",
+          "reason": "Recorded configuration/installation source origin is available only as an intended outer selection. The stronger event/use/classification relation remains unsupported."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q17",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "email_address": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q18",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "nntp_server": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q19",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "programs": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q20",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "newsgroups": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q21",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "real_name": "string",
+        "email_address": "string",
+        "nickname": "string",
+        "alternate_nickname": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q22",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "channels": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q23",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "file_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists. A capture file recovered from this PC has this outer origin; network endpoints, victim identity and capture provenance do not inherit the PC identity.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q24",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "computer_type": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists. A capture file recovered from this PC has this outer origin; network endpoints, victim identity and capture provenance do not inherit the PC identity.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q25",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "websites": "array"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists. A capture file recovered from this PC has this outer origin; network endpoints, victim identity and capture provenance do not inherit the PC identity.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q26",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "email_address": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q27",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "file_name": "string"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q28",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "executable_file_count": "integer"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q29",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "deleted_from_file_system": "boolean"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "unavailable_pending_reviewed_relation",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "referenced_artifact_account_session_or_set_membership",
+          "status": "unavailable",
+          "reason": "The intended PC origin cannot establish the prompt-specific cross-question source, actor, application, session, capture or referenced-file-set relationship. It must not be replaced by an unscoped value."
+        },
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q30",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "deleted_file_count": "integer"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "base-volume",
+        "source_variant": "primary"
+      },
+      "plan_status": "intended_origin_only_not_implemented",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The public exhibit inventory identifies one PC evidence image. Current retained filesystem/configuration artifacts should be scoped to that image base-volume primary source; this is an outer source selection, not actor attribution, actual use, or proof that the requested artifact exists.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ]
+    },
+    {
+      "question_id": "Q31",
+      "object_path": "/",
+      "schema_type": "object",
+      "property_types": {
+        "viruses_found": "boolean"
+      },
+      "source_contract_file": "eval/hacking_case/questions.json",
+      "proposed_origin": {
+        "image": "4Dell Latitude CPi.E01",
+        "exhibit": "HACK-PC",
+        "source_snapshot": "examination",
+        "source_variant": "antivirus",
+        "input_source": {
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      },
+      "plan_status": "canonical_nested_input_source_confirmation_pending",
+      "semantic_scope_status": "narrow_recorded_source_under_launch_assumptions",
+      "reason": "The Boolean is generated by a scanner examination, not a historical filesystem event. Preserve the examination origin and its base-volume primary input separately. TRUE is at least one signature match and may accompany incomplete scope; FALSE requires completed declared scope. Neither means global absence, historical infection, or true malware execution.",
+      "unavailable_selections": [
+        {
+          "selection": "any_alternate_historical_snapshot_or_nonprimary_variant",
+          "status": "unavailable",
+          "reason": "No public input here authorizes an alternate historical source or variant. Never silently fall back to unknown, unspecified or unscoped provenance."
+        }
+      ],
+      "required_resolution": "Confirm canonical support/validation for nested input_source before any schema edit or launch; bind receipt, scanner/signatures, exclusions, completion and failures."
+    }
+  ],
+  "schema_notes": [
+    "Image/exhibit/snapshot/variant are intended provenance strings, not recovered answer values.",
+    "Nested input_source for antivirus requires canonical confirmation; absence of support must remain unavailable.",
+    "Row coherence and source admission are separate: same_claim_part does not enforce source origin or cross-question membership.",
+    "Supported catalog roles remain narrow observations under source assumptions; source selection does not upgrade any needs_* leaf.",
+    "No per-case answers, evidence values, source artifact contents or private inputs are included."
+  ],
+  "remaining_gaps": [
+    "Implement and verify actual origin population/admission before launch.",
+    "Confirm logical-image/acquisition-container component scope representation and same-image comparison.",
+    "Confirm examination/antivirus nested input_source canonical representation.",
+    "Unknown alternate/historical/variant selection is explicit unavailable, not unscoped fallback.",
+    "Resolve all unsupported semantic and referenced-source relationships independently of this source plan."
+  ],
+  "activity": {
+    "questions_or_review_edited": false,
+    "tests_run": false,
+    "model_or_scoring_run": false,
+    "commit_created": false
+  },
+  "compiled_by": "eval/data_leakage_strict_draft/scope_contract.py; review.json records final policies and remaining launch blockers"
+}

@@ -15,7 +15,8 @@
     "supported_selector_additions": 10,
     "missing_or_invalid": 0,
     "independent_collection_wrappers": 6,
-    "same_claim_part_objects": 26
+    "same_claim_part_objects": 26,
+    "scope_policies": 31
   },
   "row_policies": [
     {
@@ -23,224 +24,224 @@
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This object identifies one relational entity. Every retained leaf, including nested image digest and comparison fields, must use the same candidate and flattened part. No independent assembly of matching-looking values is allowed.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q1",
       "schema_pointer": "/answer_schema/properties/image_hash",
       "mode": "same_claim_part",
       "rationale": "This object identifies one relational entity. Every retained leaf, including nested image digest and comparison fields, must use the same candidate and flattened part. No independent assembly of matching-looking values is allowed.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q2",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q3",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q4",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q5",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q6",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q7",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q8",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q9",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q10",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q11",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q12",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q13",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q14",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q15",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q16",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q17",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q18",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q19",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q20",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q21",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q22",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q23",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q24",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q25",
       "schema_pointer": "/answer_schema",
       "mode": "independent",
       "rationale": "This root is only a collection wrapper. Each scalar list item is a separately interpreted requested example, not another field of one entity. independent prevents an accidental requirement that distinct interfaces/programs/channels/websites all originate in one flattened part. Each item still must satisfy its exact leaf requirement; list completeness is not inferred.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q26",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q27",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q28",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q29",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q30",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     },
     {
       "question_id": "Q31",
       "schema_pointer": "/answer_schema",
       "mode": "same_claim_part",
       "rationale": "This answer object denotes one source/entity or one set assertion. same_claim_part prevents cross-part assembly of its retained fields. For one-leaf/list-only objects it is explicit and vacuous for a single retained value; it does not couple separate scalar list items or prove completeness.",
-      "scope_assumption": "Support is conditional on an enforced runtime restriction to the selected case exhibit/source subject. Current leaf/row checks do not enforce that restriction; therefore this draft remains held and catalog availability is not evidence of actual-case availability."
+      "scope_assumption": "Exact source origins are now enforced against hash-bound evidence. Same-part row consistency does not establish stronger unsupported meanings or collection completeness; this draft remains held."
     }
   ],
   "reviews": [
@@ -1702,5 +1703,993 @@
       "question_id": "Q31",
       "resolution": "Retained exact scanner.detections_found role only under the public narrow declared-examination result interpretation. Corrected TRUE/FALSE completion asymmetry and documented source/completion/selected-scope launch requirements."
     }
-  ]
+  ],
+  "scope_resolutions": [
+    {
+      "question_id": "Q1",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "logical-image"
+        },
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "evidence-image",
+          "source_variant": "acquisition-container"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q2",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q3",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q4",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q5",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q6",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q7",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q8",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q9",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q10",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q11",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q12",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q13",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q14",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q15",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q16",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q17",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q18",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q19",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q20",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q21",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q22",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q23",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q24",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q25",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q26",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q27",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q28",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q29",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q30",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "base-volume",
+          "source_variant": "primary"
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    },
+    {
+      "question_id": "Q31",
+      "path": [],
+      "mode": "source_records",
+      "origins": [
+        {
+          "image": "4Dell Latitude CPi.E01",
+          "exhibit": "HACK-PC",
+          "source_snapshot": "examination",
+          "source_variant": "antivirus",
+          "input_source": {
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        }
+      ],
+      "scope": "Source origin only; stronger unsupported meanings stay unsupported."
+    }
+  ],
+  "scope_policies": [
+    {
+      "question_id": "Q1",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "evidence-image",
+            "source_variant": "logical-image"
+          },
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "evidence-image",
+            "source_variant": "acquisition-container"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q2",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q3",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q4",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q5",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q6",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q7",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q8",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q9",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q10",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q11",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q12",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q13",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q14",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q15",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q16",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q17",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q18",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q19",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q20",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q21",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q22",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q23",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q24",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q25",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q26",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q27",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q28",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q29",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q30",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "base-volume",
+            "source_variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "question_id": "Q31",
+      "path": [],
+      "branches": [],
+      "status": "valid",
+      "requirement": {
+        "mode": "source_records",
+        "origins": [
+          {
+            "image": "4Dell Latitude CPi.E01",
+            "exhibit": "HACK-PC",
+            "source_snapshot": "examination",
+            "source_variant": "antivirus",
+            "input_source": {
+              "source_snapshot": "base-volume",
+              "source_variant": "primary"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "scope_gate_status": "Implemented: exact source tuples checked for every supporting record against hash-bound facts. Source metadata authenticity and complete question entailment are not proved by this contract check.",
+  "remaining_source_selection": "Base-volume primary selected from approved case exhibit mapping; Q1 allows the two same-image digest component origins, Q31 binds antivirus examination to base-volume primary scan input. Historical/nonprimary sources require a separately reviewed selection.",
+  "review_history": "Peer reviews and requirement review notes describe the preceding row-only draft. scope_gate_status and scope_resolutions record the current source-bound implementation."
 }
