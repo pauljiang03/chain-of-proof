@@ -21,7 +21,8 @@ Root integrates and pushes `main`. Agents do not merge or push `main`.
 The first four implementation lanes are integrated. The second-case mechanical
 smoke passed with 12 independently reverified certificates, reports and a portable
 package. New comparison runtime preparation is in the other Codex terminal.
-It must be frozen before the new model runs. The local product login is still absent.
+It must be frozen before the new model runs. The native Claude test needs approval
+under the user's Sol-only instruction; automatic review blocked it before execution.
 All 701 integrated regression tests and the Lean build passed at this checkpoint.
 
 The shared projection must preserve a proposed claim's meaning. It must not fix
@@ -37,6 +38,7 @@ Reference review must preserve the published source and record any narrower
 contract or correction explicitly. Source hashes prove byte identity, not the
 truth of the answer key. Do not declare independent human review complete.
 
-At the start of this pass, the local Claude CLI was signed out and no model API
-key was present in this process. Offline work can proceed. Native live execution
-requires local authentication; credentials must not be copied into chat or Git.
+The first sandboxed login check could not access the local Claude login. A later
+check outside the sandbox confirmed it is available. No API key was present in
+this process. Do not send evidence to a different model destination without the
+user's approval; credentials must not be copied into chat or Git.

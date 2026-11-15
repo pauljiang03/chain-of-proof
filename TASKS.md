@@ -31,7 +31,7 @@ Keep essential evidence access, Lean verification, explicit limits, and reproduc
 ## Next
 
 1. Freeze and validate the new explicit-binding A/B/C runtime, then run the authorized bounded smoke and repeat.
-2. Configure native product model access locally. The installed Claude CLI was signed out at the last check.
+2. Validate a native product backend with an approved model destination. The local Claude login works, but the user's live-test choice is Sol 6.1; no Claude test has run.
 3. Complete unresolved full-case reference contracts and Mulder model/budget routing before the full A/B/C/D experiment.
 4. Use the new reports to separate missing source evidence, missing reader fields, unsupported claim forms and unbound answer fields.
 

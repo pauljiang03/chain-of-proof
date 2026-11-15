@@ -73,21 +73,28 @@ Do not describe a development smoke as the full experiment or as a final compari
 
 ## Inputs for the next full NIST development run
 
-- Facts: `/private/tmp/cop-nist-ready-20261114T224105Z/facts.json`.
-- SHA-256: `c22bc84acca90791961494d2411938efec8153965cb6f27696011090dc9673b5`.
-- Records: 335,498. This snapshot predates the new registry-setting additions.
+- Facts: `/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json`.
+- SHA-256: `a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d`.
+- Records: 335,509, including 11 email records and 32 system settings.
+- All 12 reader/exhibit attempts completed without reader-level crashes. Nine
+  unsupported shell targets and the dirty Search database remain explicit limitations.
+- Extraction took 55.96 seconds using the existing complete repository `.venv`.
+  The clean `8a625fc` launch and individual source hashes are recorded beside the facts.
 - Public case: `comparison/mulder/case-profile.json`.
 - Public questions: `eval/benchmark_nist_questions.json`.
 - Private reference: `eval/benchmark_nist.json`, post-investigation only.
 
-Use a new evidence snapshot to measure the new registry fields. Do not replace a
-fact store that saved certificates already bind. Keep the new extraction cost and
-reader limitations visible.
+Do not replace a fact store that saved certificates already bind. Keep the new
+extraction cost and reader limitations visible. An earlier attempt used a separate
+environment without the mailbox library; retain its failure record but do not use
+that incomplete snapshot as the final comparison input.
 
-Native product model access is not yet configured in this process. The local
-Claude CLI was signed out and no API key was present at the last check. Credentials
-must be configured locally, never copied into chat, logs or Git. A Codex subagent
-bridge trial is not validation of the native Claude/API product backend.
+The local Claude login works outside the sandbox; the first sandboxed status check
+could not access it. No API key is present in this process. Live work is restricted
+to the user's Sol 6.1 choice unless another destination is approved. The proposed
+native Claude test was blocked by automatic approval review and did not start.
+Credentials must never be copied into chat, logs or Git. A Codex subagent bridge
+trial is not validation of the native Claude/API product backend.
 
 ## Integration rules
 
