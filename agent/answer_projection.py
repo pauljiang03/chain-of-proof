@@ -7,7 +7,7 @@ and relevance are supplied by the investigator, never proved by this projection.
 """
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import defaultdict, deque
 from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -766,7 +766,18 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                 'reason': 'row_fields_require_same_claim_part', 'question_id': qid,
                 'path': list(row_path), 'binding_indices': [entry['binding_index'] for entry in entries]})
     answer_references.freeze_references(plan)
+    # Reference paths are addresses in the emitted answer, not just authoring
+    # coordinates. Freeze any initial compaction failure so later gate filtering
+    # cannot revive a dependent whose reference was invalid in A.
+    blocked = {index for conflict in plan['frozen_conflicts'] for index in conflict['binding_indices']}
+    retained = defaultdict(list)
+    for entry in prepared:
+        if entry['binding_index'] not in blocked:
+            retained[entry['question_id']].append(entry)
+    _, output_conflicts = _assemble_reference_safe(plan['questions'], retained)
+    plan['frozen_conflicts'].extend(output_conflicts)
     plan['conflict_policy'] = 'omit_all_conflicting_bindings_before_candidate_filtering'
+    plan['reference_output_policy'] = 'require_declared_target_path_after_assembly_and_candidate_filtering'
     plan['projection_sha256'] = claim_digest(plan)
     return plan
 
@@ -812,6 +823,65 @@ def _assemble(entries):
     return value is not absent, None if value is absent else value, leaves, conflicts
 
 
+def _assemble_reference_safe(questions, grouped):
+    """Assemble referenced questions first and check their actual output paths.
+
+    Public references are acyclic across questions. Processing that dependency
+    order handles transitive omissions and nested-array compaction in one pass,
+    without rewriting any public path, inserting nulls, or reading evidence.
+    """
+    order = {qid: index for index, qid in enumerate(questions)}
+    dependencies = {qid: set() for qid in questions}
+    dependents = defaultdict(set)
+    for qid in questions:
+        for entry in grouped[qid]:
+            for raw in entry.get('answer_references', []):
+                target = answer_references.parse(raw)['question_id']
+                if target not in dependencies:
+                    raise ValueError('invalid_frozen_answer_reference_target')
+                dependencies[qid].add(target)
+                dependents[target].add(qid)
+    ready = deque(qid for qid in questions if not dependencies[qid])
+    assembled, targets, conflicts = {}, defaultdict(list), []
+    while ready:
+        qid = ready.popleft()
+        retained = []
+        for entry in grouped[qid]:
+            failure = None
+            for reference in entry.get('answer_references', []):
+                matches = targets[(reference['question_id'], tuple(reference['path']))]
+                status, target = None, matches[0] if len(matches) == 1 else None
+                if len(matches) != 1:
+                    status = 'target_not_retained' if not matches else 'duplicate_rendered_target'
+                elif (target['candidate_id'], target['part']) != (entry['candidate_id'], entry['part']):
+                    status = 'different_claim_part'
+                elif target['output_path'] != reference['path']:
+                    status = 'target_output_path_changed'
+                if status:
+                    failure = {'reason': 'answer_reference_requires_declared_output_path',
+                               'binding_indices': [entry['binding_index']],
+                               'question_id': qid, 'path': deepcopy(entry['path']),
+                               'target_question_id': reference['question_id'],
+                               'target_path': deepcopy(reference['path']), 'reference_status': status}
+                    if target is not None:
+                        failure['target_output_path'] = deepcopy(target['output_path'])
+                    break
+            if failure:
+                conflicts.append(failure)
+            else:
+                retained.append(entry)
+        assembled[qid] = _assemble(retained)
+        for leaf in assembled[qid][2]:
+            targets[(qid, tuple(leaf['path']))].append(leaf)
+        for dependent in sorted(dependents[qid], key=order.__getitem__):
+            dependencies[dependent].remove(qid)
+            if not dependencies[dependent]:
+                ready.append(dependent)
+    if len(assembled) != len(questions):
+        raise ValueError('cyclic_frozen_answer_reference')
+    return assembled, conflicts
+
+
 def render_projection(plan, admitted_ids=None, authority='unchecked'):
     """Filter whole candidate dependencies and render frozen values without source access."""
     if authority not in AUTHORITIES:
@@ -840,9 +910,13 @@ def render_projection(plan, admitted_ids=None, authority='unchecked'):
             dropped.append(dict(entry, reason='whole_candidate_not_admitted'))
         else:
             grouped[entry['question_id']].append(entry)
-    answers, leaves, conflicts = [], [], deepcopy(frozen_conflicts)
+    assembled, output_conflicts = _assemble_reference_safe(plan['questions'], grouped)
+    output_omitted = {index for conflict in output_conflicts for index in conflict['binding_indices']}
+    dropped.extend(dict(entry, reason='answer_reference_output_conflict', candidate_admitted=True)
+                   for entries in grouped.values() for entry in entries if entry['binding_index'] in output_omitted)
+    answers, leaves, conflicts = [], [], deepcopy(frozen_conflicts) + output_conflicts
     for qid in plan['questions']:
-        present, value, used, collisions = _assemble(grouped[qid])
+        present, value, used, collisions = assembled[qid]
         answers.append({'question_id': qid, 'status': 'answered', 'answer': value} if present else
                        {'question_id': qid, 'status': 'unknown', 'reason': 'No unambiguous supported projection was retained.'})
         leaves.extend(dict(entry, authority=authority) for entry in used)

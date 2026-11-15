@@ -18,7 +18,11 @@ def project_a(public, candidates, bindings, source, *, require_claim_requirement
 
 
 def project_b(a_result, replay_rows):
-    """Only remove whole candidates; never dereference evidence or change values."""
+    """Filter whole candidates and enforce output-reference constraints.
+
+    References whose target moves during array compaction cannot retain their
+    dependent bindings. Never dereference evidence, change values or rewrite paths.
+    """
     if not isinstance(a_result, dict) or a_result.get('arm') != 'A':
         raise ValueError('B needs the frozen A projection')
     plan = a_result.get('projection')

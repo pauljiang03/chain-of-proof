@@ -237,3 +237,109 @@ class AnswerReferenceProjectionIntegration(unittest.TestCase):
         replayed = render_projection(result['projection'], admitted_ids=['C'])
         self.assertEqual(replayed['submission'], result['submission'])
         self.assertEqual(replayed['conflicts'], result['conflicts'])
+
+    def array_contract(self, path=None, nested=False):
+        leaf = deepcopy(self.public['questions'][0]['answer_schema']['properties']['count'])
+        scope = {'mode': 'unscoped_observation', 'meaning': 'Synthetic array reference mechanics.'}
+        schema = {'type': 'array', 'items': leaf, 'x-claim-scope': scope}
+        if nested:
+            schema = {'type': 'object', 'properties': {'groups': {
+                'type': 'array', 'items': {'type': 'array', 'items': leaf}}}, 'x-claim-scope': scope}
+        self.public['questions'][0]['answer_schema'] = schema
+        self.public['questions'][1]['answer_schema']['properties']['deleted'][refs.KEY] = reference(
+            path=[1] if path is None else path)
+
+    def test_sparse_array_target_moves_but_dependent_is_frozen_out(self):
+        from agent.answer_projection import render_projection
+        self.array_contract()
+        target = self.binding('C', 'Q28', 'value_0', [1])
+        result = self.project([target, self.dependent()])
+        self.assertEqual(result['submission']['answers'][0]['answer'], [2])
+        self.assertEqual(result['submission']['answers'][1]['status'], 'unknown')
+        conflict = result['conflicts'][-1]
+        self.assertEqual(conflict['reference_status'], 'target_output_path_changed')
+        self.assertEqual((conflict['target_path'], conflict['target_output_path']), ([1], [0]))
+        self.assertEqual(result['leaves'][0]['path'], [1])
+        self.assertEqual(result['leaves'][0]['output_path'], [0])
+        replayed = render_projection(result['projection'], admitted_ids=['C'])
+        self.assertEqual(replayed['submission'], result['submission'])
+        self.assertEqual(replayed['conflicts'], result['conflicts'])
+
+    def test_dense_array_reference_survives_until_b_removes_a_preceding_row(self):
+        from comparison.ablation.projection import project_b
+        self.array_contract()
+        prior = self.binding('D', 'Q28', 'value_0', [0])
+        target = self.binding('C', 'Q28', 'value_0', [1])
+        a = dict(self.project([prior, target, self.dependent()]), arm='A')
+        self.assertEqual(a['submission']['answers'][0]['answer'], [3, 2])
+        self.assertEqual(a['submission']['answers'][1]['answer'], {'deleted': False})
+        self.assertEqual(a['conflicts'], [])
+        self.source.get = lambda ids: self.fail('B must not reopen evidence to validate output paths')
+        replay_rows = [dict(row, status='verified', checker_status='verified', verification={'passed': True})
+                       for row in self.candidates]
+        self.assertEqual(project_b(a, replay_rows)['submission'], a['submission'])
+        replay_rows[1].update(status='rejected', checker_status='rejected', verification=None)
+        b = project_b(a, replay_rows)
+        self.assertEqual(b['submission']['answers'][0]['answer'], [2])
+        self.assertEqual(b['submission']['answers'][1]['status'], 'unknown')
+        self.assertEqual(b['conflicts'][-1]['reference_status'], 'target_output_path_changed')
+        self.assertEqual(b['dropped'][-1]['reason'], 'answer_reference_output_conflict')
+        self.assertTrue(b['dropped'][-1]['candidate_admitted'])
+
+    def test_nested_array_paths_use_final_addresses_and_preserve_dense_observations(self):
+        from agent.answer_projection import render_projection
+        path = ['groups', 1, 2]
+        self.array_contract(path, nested=True)
+        target = self.binding('C', 'Q28', 'value_0', path)
+        sparse = self.project([target, self.dependent()])
+        self.assertEqual(sparse['submission']['answers'][0]['answer'], {'groups': [[2]]})
+        self.assertEqual(sparse['conflicts'][-1]['target_output_path'], ['groups', 0, 0])
+        self.assertEqual(sparse['submission']['answers'][1]['status'], 'unknown')
+        prior = [self.binding('D', 'Q28', 'value_0', ['groups']+indices)
+                 for indices in ([0, 0], [1, 0], [1, 1])]
+        dense = self.project(prior+[target, self.dependent()])
+        self.assertEqual(dense['submission']['answers'][0]['answer'], {'groups': [[3], [3, 3, 2]]})
+        self.assertEqual(dense['submission']['answers'][1]['answer'], {'deleted': False})
+        filtered = render_projection(dense['projection'], admitted_ids=['C'])
+        self.assertEqual(filtered['submission']['answers'][0]['answer'], {'groups': [[2]]})
+        self.assertEqual(filtered['submission']['answers'][1]['status'], 'unknown')
+
+    def test_output_reference_failures_propagate_in_dependency_order_only(self):
+        from agent.answer_projection import render_projection
+        self.array_contract()
+        state = deepcopy(self.public['questions'][1]['answer_schema']['properties']['deleted'])
+        state[refs.KEY] = reference('Q29', ['deleted'])
+        state['x-claim-scope'] = {'mode': 'unscoped_observation', 'meaning': 'Synthetic chained dependency.'}
+        # Deliberately place the dependent before its target in public order.
+        self.public['questions'].insert(0, {'id': 'Q30', 'prompt': 'Dependent observation.', 'answer_schema': state})
+        independent = deepcopy(self.public['questions'][1]['answer_schema']['items'])
+        independent['x-claim-scope'] = {'mode': 'unscoped_observation', 'meaning': 'Synthetic independent observation.'}
+        self.public['questions'].append({'id': 'Q40', 'prompt': 'Independent observation.', 'answer_schema': independent})
+        result = self.project([self.binding('C', 'Q28', 'value_0', [1]), self.dependent(),
+                               self.binding('C', 'Q30', 'value_1', []),
+                               self.binding('C', 'Q40', 'value_0', [])])
+        answers = {row['question_id']: row for row in result['submission']['answers']}
+        self.assertEqual(answers['Q28']['answer'], [2])
+        self.assertEqual(answers['Q40']['answer'], 2)
+        self.assertEqual(answers['Q29']['status'], 'unknown')
+        self.assertEqual(answers['Q30']['status'], 'unknown')
+        failures = {row['question_id']: row['reference_status'] for row in result['conflicts']}
+        self.assertEqual(failures, {'Q29': 'target_output_path_changed', 'Q30': 'target_not_retained'})
+        dense = self.project([self.binding('D', 'Q28', 'value_0', [0]),
+                              self.binding('C', 'Q28', 'value_0', [1]), self.dependent(),
+                              self.binding('C', 'Q30', 'value_1', []),
+                              self.binding('C', 'Q40', 'value_0', [])])
+        self.assertTrue(all(row['status'] == 'answered' for row in dense['submission']['answers']))
+        self.source.get = lambda ids: self.fail('Transitive output validation must use frozen values only')
+        filtered = render_projection(dense['projection'], admitted_ids=['C'])
+        self.assertEqual(filtered['submission'], result['submission'])
+        self.assertEqual({row['question_id']: row['reference_status'] for row in filtered['conflicts']}, failures)
+
+    def test_conflicted_preceding_row_cannot_silently_shift_reference_target(self):
+        self.array_contract()
+        result = self.project([self.binding('C', 'Q28', 'value_0', [0]),
+                               self.binding('D', 'Q28', 'value_0', [0]),
+                               self.binding('C', 'Q28', 'value_0', [1]), self.dependent()])
+        self.assertEqual(result['submission']['answers'][0]['answer'], [2])
+        self.assertEqual(result['submission']['answers'][1]['status'], 'unknown')
+        self.assertIn('target_output_path_changed', [row.get('reference_status') for row in result['conflicts']])
