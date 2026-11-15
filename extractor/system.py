@@ -11,6 +11,7 @@ only rows that differ from what the live copy gave are kept.
 from __future__ import annotations
 
 import codecs
+import hashlib
 import html
 import io
 import json
@@ -349,8 +350,9 @@ class _Out:
     """Adds the common provenance, and drops a row from a backup copy of an artifact
     when the live copy already gave the same (kind, time, obj, aux)."""
 
-    def __init__(self, ev, common):
+    def __init__(self, ev, common, examined_at=None):
         self.ev, self.common, self.seen = ev, common, set()
+        self.examined_at = examined_at
 
     def add(self, kind, t, res, obj, aux="", _copy=False, **prov):
         key = (kind, t, obj, aux)
@@ -360,6 +362,80 @@ class _Out:
         prov = {k: v for k, v in prov.items() if v is not None and v != "" and v != []}
         self.ev.add(kind, int(t), int(res), obj, aux, **prov, **self.common)
         return True
+
+
+def _execution_attributes(out, program, path, recorded_at, source_kind, artifact, entry, **details):
+    """Reviewed-source opt-in only; broad programRun rows are never promoted.
+
+    Each source occurrence has a separate identity. The attribute timestamp is
+    examination time; the source's historical timestamp remains provenance.
+    Older callers without an explicit examination time retain their old rows.
+    """
+    if (type(out.examined_at) is not int or out.examined_at <= 0
+            or any(not isinstance(out.common.get(key), str) or not out.common[key].strip() for key in ('image', 'exhibit'))
+            or not isinstance(artifact, str) or not artifact.strip() or not entry
+            or type(recorded_at) is not int or recorded_at < 0):
+        return
+    from .attributes import emit_attribute
+    scope = [out.common['image'], out.common['exhibit'], source_kind, artifact, entry, recorded_at]
+    subject = json.dumps(scope, sort_keys=True, ensure_ascii=True, separators=(',', ':'))
+    provenance = dict(out.common, artifact=artifact, parser='extractor.system',
+                      execution_source=source_kind, source_entry=entry, recorded_time_us=recorded_at,
+                      limitation='observation of a reviewed execution artifact; not proof of a physical user, '
+                                 'actual code execution, or source authenticity', **details)
+    for role, value in (('app.execution.program', program), ('app.execution.path', path)):
+        if isinstance(value, str) and value:
+            emit_attribute(out.ev, subject, role, value, out.examined_at, **provenance)
+
+
+def _explicit_execution_path(value, allow_device=False):
+    """Literal .exe paths only; never expand a GUID, environment, or command."""
+    if (not isinstance(value, str) or not value or value != value.strip()
+            or any(ord(char) < 32 for char in value)
+            or any(char in value for char in ('"', '{', '}', '%', '/', '<', '>', '|', '?', '*'))
+            or not value.lower().endswith('.exe')):
+        return None
+    drive = re.match(r'^[A-Za-z]:\\', value)
+    device = allow_device and value.lower().startswith('\\device\\')
+    if not drive and not device:
+        return None
+    remainder = value[3:] if drive else value[len('\\Device\\'):]
+    if ':' in remainder or any(part in ('', '.', '..') for part in remainder.split('\\')):
+        return None
+    return value
+
+
+def _userassist_execution_path(decoded, version, list_id, raw_length):
+    # Dissect's UserAssist decoder requires Version 3/16 bytes or 5/72 bytes.
+    # The executable and shortcut lists are distinct; an .exe-looking value in
+    # the shortcut list is not promoted. Source profile:
+    # https://www.magnetforensics.com/blog/artifact-profile-userassist/
+    # dissect.regf REG_DWORD values are cstruct uint32 instances (int subclasses).
+    # Accept integer representations without coercing strings/floats or booleans.
+    if not isinstance(version, int) or isinstance(version, bool):
+        return None
+    if (version == 3 and raw_length == 16
+            and list_id.casefold() == '{75048700-ef1f-11d0-9888-006097deacf9}'
+            and decoded.startswith('UEME_RUNPATH:')):
+        decoded = decoded[len('UEME_RUNPATH:'):]
+    elif not (version == 5 and raw_length == 72
+              and list_id.casefold() == '{cebff5cd-ace2-4f4f-9178-9926f41749ea}'
+              and not decoded.startswith('UEME_')):
+        return None
+    return _explicit_execution_path(decoded)
+
+
+def _prefetch_execution_name(data):
+    """Strict literal header decoding; no inferred file-list path is returned."""
+    raw = data[16:76]
+    end = next((i for i in range(0, len(raw), 2) if raw[i:i + 2] == b'\0\0'), len(raw))
+    try:
+        name = raw[:end].decode('utf-16-le')
+    except UnicodeDecodeError:
+        return None
+    if not name or any(ord(char) < 32 for char in name) or '\\' in name or '/' in name:
+        return None
+    return name, raw[:end].hex(), end
 
 
 def _hives(ev, target):
@@ -870,6 +946,18 @@ def _event(out, ev, d, where, sids):
         path = str(d["NewProcessName"])
         out.add("programRun", t, res, exe_name(path), path, source="Security event log: process creation",
                 account=str(d.get("SubjectUserName") or ""), time_meaning="time the process was created", **base)
+        literal = _explicit_execution_path(d["NewProcessName"], allow_device=True)
+        record_id, source_path = d.get('EventRecordID'), str(d.get('source') or '')
+        if (literal and channel.casefold() == 'security' and source_path.strip()
+                and re.fullmatch(r'[1-9][0-9]*', str(record_id or ''))):
+            _execution_attributes(out, literal.rsplit('\\', 1)[-1], literal, t,
+                                  'Security process-creation event', where,
+                                  {'event_record_id': str(record_id), 'event_id': eid, 'provider': provider},
+                                  source_path=source_path, source_field='NewProcessName', source_value=literal,
+                                  program_derivation='last path component of literal NewProcessName',
+                                  recorded_time_meaning='event timestamp of Security process creation',
+                                  recorded_time_resolution_us=res, account=str(d.get('SubjectUserName') or ''),
+                                  event_id=eid, provider=provider, channel=channel)
     elif low == "msiinstaller" and eid == 1033 and str(d.get("Data_3")) == "0" and d.get("Data_0"):
         version = str(d.get("Data_1") or "")
         out.add("programInstalled", t, res, str(d["Data_0"]), "" if version == "(NULL)" else version,
@@ -946,10 +1034,13 @@ def _prefetch(out, ev, target):
         art = _win(p)
         try:
             data = p.open("rb").read()
+            source_sha256 = hashlib.sha256(data).hexdigest()
+            compressed = data[:4] == b"MAM\x04"
             if data[:4] == b"MAM\x04":
                 from dissect.util.compression import lzxpress_huffman
                 data = lzxpress_huffman.decompress(io.BytesIO(data[8:]))
             pf = parse_prefetch(data)
+            literal_name = _prefetch_execution_name(data)
             st = p.lstat()
             path, how = prefetch_path(pf)
             if not pf["run_times"]:
@@ -962,6 +1053,18 @@ def _prefetch(out, ev, target):
                         prefetch_file_modified=iso(us_from_unix(st.st_mtime)),
                         time_meaning="last run time in the prefetch header" if n == 0
                         else "earlier run time %d in the prefetch header" % n)
+                if literal_name:
+                    name, raw_hex, length = literal_name
+                    _execution_attributes(out, name, None, t, 'Prefetch header', art,
+                                          {'run_index': n, 'source_sha256': source_sha256},
+                                          source_path=art, source_field='prefetch header executable name',
+                                          source_value=name, source_sha256=source_sha256,
+                                          byte_offset=16, byte_length=length, raw_value_hex=raw_hex,
+                                          byte_offset_basis='decompressed Prefetch bytes' if compressed else 'source file bytes',
+                                          encoding='utf-16-le', header_name_may_be_truncated=len(name) >= 29,
+                                          format_version=pf['version'], run_count=pf['run_count'],
+                                          recorded_time_meaning='run timestamp stored in the Prefetch header',
+                                          recorded_time_resolution_us=1, run_index=n)
         except Exception as e:
             ev.problem(art, e)
 
@@ -976,6 +1079,7 @@ def _userassist(out, ev, hives):
             continue
         root = _open(ev, h, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist")
         for guid in (_subkeys(ev, h, root) if root is not None else []):
+            userassist_version = _vals(ev, h, guid).get('Version')
             count = _open(ev, h, guid.path + "\\Count")
             if count is None:
                 continue
@@ -997,6 +1101,20 @@ def _userassist(out, ev, hives):
                         focus_time_ms=rec["focus_time_ms"], userassist_list=guid.name,
                         known_folder=DESCRIPTIONS.get(m.group(1).lower()) if m else None,
                         time_meaning="last run time stored in the UserAssist entry", **_where(h))
+                literal_path = _userassist_execution_path(decoded, userassist_version, guid.name, len(raw))
+                if literal_path and isinstance(h.path, str) and h.path.strip():
+                    _execution_attributes(out, literal_path.rsplit('\\', 1)[-1], literal_path,
+                                          rec['last_run'], 'UserAssist executable run path',
+                                          _art(h, count.path, name),
+                                          {'hive': h.path, 'registry_key': count.path, 'registry_value': name,
+                                           'raw_value_sha256': hashlib.sha256(raw).hexdigest()},
+                                          source_field='ROT13-encoded UserAssist value name', source_value=name,
+                                          decoded_value_name=decoded, raw_value_hex=raw.hex(),
+                                          program_derivation='last path component of the explicit executable run path',
+                                          run_count=rec['run_count'], userassist_list=guid.name,
+                                          userassist_version=userassist_version, userassist_record_bytes=len(raw),
+                                          recorded_time_meaning='last run timestamp stored in the UserAssist entry',
+                                          recorded_time_resolution_us=1, **_where(h))
 
 
 def _shimcache(out, ev, target, hives):
@@ -1162,7 +1280,7 @@ def _task_cache(out, ev, target, hives):
 
 
 def extract(ev, target, ctx):
-    out = _Out(ev, dict(ctx["common"]))
+    out = _Out(ev, dict(ctx["common"]), ctx.get('examined_at'))
     zone = _zone(ev, target)
     try:
         hives = _hives(ev, target)

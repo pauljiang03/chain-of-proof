@@ -192,7 +192,8 @@ class BinaryAttributeSemantics(unittest.TestCase):
         roles = ['app.binary.product_name', 'app.binary.product_version',
                  'app.binary.file_description', 'app.binary.file_version']
         values = ['Fixture Mail', '11, 0, 0001 beta', 'Fixture Mail Client', '11.0.1.2']
-        self.assertEqual(tuple(ROLES[r].kind for r in roles), KINDS[-4:])
+        start = KINDS.index('roleAppConfigIrcLogFileName') + 1
+        self.assertEqual(tuple(ROLES[r].kind for r in roles), KINDS[start:start + 4])
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             ev = Evidence()

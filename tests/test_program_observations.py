@@ -52,7 +52,7 @@ class ProgramObservations(unittest.TestCase):
                 self.assertIn('does not establish execution at that time',
                               sentence({'source': source, 'time_meaning': meaning}))
 
-    def test_explicit_execution_artifacts_keep_run_time_meaning_without_invented_counts(self):
+    def test_execution_provenance_cannot_upgrade_the_legacy_kind(self):
         supported = [('prefetch', 'last run time in the prefetch header'),
                      ('prefetch', 'earlier run time 2 in the prefetch header'),
                      ('UserAssist', 'last run time stored in the UserAssist entry'),
@@ -60,7 +60,11 @@ class ProgramObservations(unittest.TestCase):
         for source, meaning in supported:
             prov = {'source': source, 'time_meaning': meaning, 'run_count': 42}
             with self.subTest(source=source, meaning=meaning):
-                self.assertIn('recorded execution time for example.exe', sentence(prov))
+                self.assertIn('application observation', sentence(prov))
+                self.assertIn('source: ' + source, sentence(prov))
+                self.assertIn(meaning, sentence(prov))
+                self.assertNotIn('recorded execution time for', sentence(prov))
+                self.assertIn('does not establish execution at that time', sentence(prov))
                 self.assertNotIn('42', sentence(prov))
                 for flag in (None, False, 0, 'true'):
                     self.assertIn('does not establish execution at that time', sentence(dict(prov, executed_flag=flag)))

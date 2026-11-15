@@ -177,6 +177,15 @@ theorem programInstalledAt_record_iff (fs : List Fact) (a : Nat) :
       ∃ x, lookup fs a = some x ∧ x.kind = .programInstalled := by
   exact holds_is_iff fs a .programInstalled
 
+/-- Free provenance text is outside the core: `programRan` establishes only the
+    legacy mixed-source kind and cannot substitute for the execution-path role. -/
+theorem programObservation_not_executionPathRole (fs : List Fact) (a : Nat)
+    (h : holds fs (Sets.programRan a) = true) :
+    holds fs (.is a .roleAppExecutionPath) = false := by
+  cases h' : holds fs (.is a .roleAppExecutionPath) with
+  | false => rfl
+  | true => cases holds_is_kind_unique h h'
+
 /-- A certified `usbMountedAs u m` cites a USB source record and a volume mapping
     that name the same device. -/
 theorem usbMountedAs_sound (fs : List Fact) (u m : Nat)

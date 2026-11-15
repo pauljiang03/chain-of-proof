@@ -33,8 +33,8 @@
     sessionEvent  logon / logoff / startup / shutdown / ...   the account, or 0 for the machine
     programInstalled program name          version          (registration/installer record; t retains
                                                             source meaning, not necessarily installation time)
-    programRun    executable name          full path        (application observation; only explicit
-                                                            execution sources record run time)
+    programRun    executable name          recorded path    (legacy application observation; provenance
+                                                            cannot upgrade the kind to execution evidence)
     webVisit      URL                      browser
     fileDownloaded saved path              source URL
     localSearch   text typed               where it was typed
@@ -146,6 +146,8 @@ inductive Kind where
   | roleAppBinaryProductVersion
   | roleAppBinaryFileDescription
   | roleAppBinaryFileVersion
+  | roleAppExecutionProgram
+  | roleAppExecutionPath
   deriving DecidableEq, Repr
 
 structure Fact where
