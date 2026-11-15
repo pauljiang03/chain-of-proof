@@ -461,6 +461,24 @@ def _story(case, devices):
     for rows in loads.values():
         add(rows, f'{who(rows)} downloaded {_join(_distinct([_base(_obj(entry)) for entry in rows]), 4)}')
 
+    # Programs that a user started (UserAssist) whose names contain a one-word watch-list search term.
+    words = sorted(term for term in watched if re.fullmatch(r'[a-z]{4,}', term))
+    started, names = [], []
+    for word in words:
+        rows = [entry for entry in case.of('programRun') if word in _base(_obj(entry)).lower()
+                and 'UserAssist' in _s(_prov(entry).get('time_meaning')) and id(entry) in case.stamp]
+        if rows:
+            base = _base(_obj(rows[-1]))
+            names.append((min(case.stamp[id(entry)] for entry in rows), base[base.lower().index(word):][:len(word)]))
+            started += rows
+    if started:
+        add(started, f'{who(started)} started {_join([name for _, name in sorted(names)], 4)}')
+
+    downs = [entry for entry in case.of('sessionEvent') if _obj(entry).lower() == 'shutdown' and id(entry) in case.stamp]
+    if downs:
+        last = max(downs, key=lambda entry: case.stamp[id(entry)])
+        add([last], 'the computer shut down for the last time in the records')
+
     out = []
     for start, end, how, clause in sorted(events, key=lambda event: (event[0], event[3])):
         a, b = brief.moment(start, case.tz), brief.moment(end, case.tz)

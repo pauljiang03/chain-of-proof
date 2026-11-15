@@ -145,6 +145,15 @@ class Narrative(unittest.TestCase):
         self.assertIn('On 2024-05-07, the account "worker" downloaded wiper.exe.', lead)
         self.assertEqual(len(lead), 8)
         self.assertEqual(narrative.build({})['lead'], [])
+        data = case()
+        data['findings'].append(finding('F9', [
+            row(90, 'programRun', 'Wiper.exe', 'C:\\Tools\\Wiper.exe', t=micro(2024, 5, 8, 9), account='worker',
+                time_meaning='last run time stored in the UserAssist entry'),
+            row(91, 'sessionEvent', 'shutdown', None, t=micro(2024, 5, 8, 10), time_meaning='time the event was logged'),
+            row(92, 'tag', 'wiper', 'watch-list-search')]))
+        lead = narrative.build(data)['lead']
+        self.assertEqual(lead[-2:], ['On 2024-05-08, the account "worker" started Wiper.',
+                                     'On 2024-05-08, the computer shut down for the last time in the records.'])
 
     def test_investigator_summary_leads_the_whole_case_only(self):
         data = case()
