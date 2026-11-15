@@ -613,6 +613,7 @@ dialog { width: min(560px, 92vw); border-radius: 12px; }
 .file-field input { flex: 1; min-width: 0; }
 .file-field .button { height: auto; }
 .optional-label { color: var(--subtle); }
+.field-note { margin: 6px 0 0; color: var(--muted); font-size: 0.75rem; }
 .advanced { border-top: 1px solid var(--line-2); padding-top: 12px; }
 .advanced > summary { cursor: pointer; font-size: 0.8125rem; font-weight: 600; }
 .advanced > summary span { font-weight: 400; color: var(--muted); margin-left: 8px; }

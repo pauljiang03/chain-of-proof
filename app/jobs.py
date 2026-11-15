@@ -24,12 +24,14 @@ import time
 import uuid
 
 from agent.case import read_question_profile, select_case, with_questions
+from app import credentials
 from checker import export, report as markdown_report
 from checker.facts import open_source
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLE = Path(__file__).resolve().parent / "sample"
+CODE_MODEL, API_MODEL = "opus", "claude-opus-5-5"   # the default model for each AI service
 STATUSES = {"running", "completed", "partial", "failed", "cancelled", "saved"}
 PAYLOAD_FIELDS = {"name", "facts", "title", "brief", "questions", "backend", "model", "minutes"}
 EVENT_FIELDS = ("sequence", "tool", "outcome", "completed_at", "finding_id", "arguments")
@@ -287,21 +289,59 @@ def _terminate(process, registry=None):
 
 
 class JobManager:
-    def __init__(self, root=ROOT):
+    def __init__(self, root=ROOT, secrets=None, check=None):
+        """`secrets` is the settings folder that may hold a saved API key; without it only the environment is read."""
         self.root = Path(root).resolve()
+        self._secrets = Path(secrets) if secrets is not None else None
+        self._check = check or credentials.check
         self._lock = threading.RLock()
         self._jobs = {}
         self._active = None
         self._closed = False
 
+    @staticmethod
+    def _api_installed():
+        return bool(importlib.util.find_spec("deepagents") and importlib.util.find_spec("langchain_anthropic"))
+
     def config(self):
+        """What the page needs to offer a run. `needs` says what a service lacks; `key` says where the
+        API key comes from ("environment" or "saved"), never the key."""
+        installed, key = self._api_installed(), credentials.source(self._secrets)
+        program = shutil.which("claude") is not None
+        code = {"id": "claude-code", "label": "Claude Code", "available": program, "model": CODE_MODEL,
+                "needs": None if program else "program"}
+        api = {"id": "deepagents", "label": "Anthropic API", "available": bool(installed and key), "model": API_MODEL,
+               "needs": "packages" if not installed else None if key else "key", "key": key,
+               "can_save_key": self._secrets is not None}
+        # The API is the default for anyone who has set it up; otherwise the local Claude Code login.
+        default = api if api["available"] or not program else code
         with self._lock:
             return {"defaults": {"facts": str(self.root / "evidence/case_facts.json"),
-                                 "backend": "claude-code", "model": "opus", "minutes": 45},
-                    "backends": [{"id": "claude-code", "label": "Claude Code", "available": shutil.which("claude") is not None},
-                        {"id": "deepagents", "label": "Anthropic API", "available": bool(
-                            importlib.util.find_spec("deepagents") and importlib.util.find_spec("langchain_anthropic")
-                            and os.environ.get("ANTHROPIC_API_KEY"))}], "active_run": self._active}
+                                 "backend": default["id"], "model": default["model"], "minutes": 45},
+                    "backends": [code, api], "active_run": self._active}
+
+    def set_api_key(self, value):
+        """Save the user's Anthropic API key in their settings folder, or remove it when `value` is empty.
+
+        A new key is checked with Anthropic first, and a key that Anthropic refuses is not saved.
+        Messages raised here never contain any part of the key.
+        """
+        if self._secrets is None:
+            raise RuntimeError("This copy cannot save an API key.")
+        if value == "":
+            credentials.clear(self._secrets)
+            return {"key": credentials.source(self._secrets), "check": None}
+        key = credentials.clean(value)
+        verdict = None
+        if self._api_installed():
+            try:
+                verdict = self._check(key, API_MODEL)
+            except Exception:
+                verdict = "unknown"
+            if verdict == "rejected":
+                raise ValueError("Anthropic did not accept this key. Check that all of it was copied.")
+        credentials.save(key, self._secrets)
+        return {"key": credentials.source(self._secrets), "check": verdict}
 
     def _input(self, value, label):
         if not isinstance(value, (str, Path)) or not str(value).strip():
@@ -333,7 +373,7 @@ class JobManager:
         model = payload.get("model")
         if model is not None and not isinstance(model, str):
             raise ValueError("Model must be a nonempty model identifier.")
-        model = model or ("opus" if backend == "claude-code" else "claude-opus-5-5")
+        model = model or (CODE_MODEL if backend == "claude-code" else API_MODEL)
         if not isinstance(model, str) or not model.strip() or len(model) > 200 or any(ord(c) < 32 for c in model):
             raise ValueError("Model must be a nonempty model identifier.")
         minutes = payload.get("minutes", 45)
@@ -393,6 +433,13 @@ class JobManager:
             _write_json(stage / "spec.json", spec)
             env = dict(os.environ)
             env["PYTHONPATH"] = str(ROOT) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+            if spec["backend"] == "deepagents":
+                # The key reaches the worker through its environment only: not its command line, not a file in the run.
+                key = credentials.key(self._secrets)
+                if key:
+                    env[credentials.ENV] = key
+                # Evidence goes to Anthropic and nowhere else: keep LangChain's own tracing service off.
+                env.update(LANGSMITH_TRACING="false", LANGCHAIN_TRACING_V2="false")
             command = [sys.executable, "-m", "app.jobs", "_worker", "--root", str(self.root),
                        "--spec", str(stage / "spec.json")]
             try:

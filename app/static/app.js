@@ -522,16 +522,66 @@
     const next = event.key === "Home" ? 0 : event.key === "End" ? names.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + names.length) % names.length;
     change(names[next], true);
   }
+  const LACKS = { key: "needs a key", packages: "not installed", program: "not installed" };
+  const chosenBackend = () => array(state.config && state.config.backends).find((item) => item.id === $("investigation-backend").value);
   function updateStartButton() {
-    const backend = array(state.config && state.config.backends).find((item) => item.id === $("investigation-backend").value);
+    const backend = chosenBackend();
     const ready = state.config && state.config.token && backend && backend.available;
     $("start-investigation").disabled = !ready || Boolean(state.activeName) || state.submitting;
     $("start-investigation").textContent = state.submitting ? "Starting…" : "Start investigation";
     const label = backend ? present(backend.label, backend.id) : "", minutes = $("investigation-minutes").value;
-    $("investigation-settings").textContent = [label, $("investigation-model").value.trim(), minutes ? minutes + " min" : ""].filter(Boolean).join(" · ");
-    if (state.activeName) $("backend-help").textContent = "Another investigation is running. Stop it or wait for it to finish.";
-    else if (!ready) $("backend-help").textContent = "No AI service is set up on this computer.";
-    else $("backend-help").textContent = "Runs on your " + label + " account.";   // a run spends that account's usage
+    const standard = backend && typeof backend.model === "string" ? backend.model : "";
+    $("investigation-model").placeholder = standard || "default";
+    $("investigation-settings").textContent = [label, $("investigation-model").value.trim() || standard, minutes ? minutes + " min" : ""].filter(Boolean).join(" · ");
+    // The API runs on the user's own key. It can be typed here once; the server keeps it and never sends it back.
+    const lacks = backend ? backend.needs : null, source = backend ? backend.key : null;
+    $("api-key-field").hidden = !(lacks === "key" && backend.can_save_key === true);
+    $("api-key-status").hidden = !source;
+    $("api-key-source").textContent = source === "saved" ? "An API key is saved on this computer." + (state.keyNote ? " " + state.keyNote : "")
+      : source ? "Uses the key in the ANTHROPIC_API_KEY setting of this computer." : "";
+    $("api-key-remove").hidden = source !== "saved";
+    let help;
+    if (state.activeName) help = "Another investigation is running. Stop it or wait for it to finish.";
+    else if (lacks === "key") help = backend.can_save_key === true ? "Add your Anthropic API key to start." : "Set ANTHROPIC_API_KEY on this computer, then start again.";
+    else if (lacks) help = label + " is not installed on this computer.";
+    else if (!ready) help = "No AI service is set up on this computer.";
+    // A run spends that account's usage, and the service receives what the investigator reads.
+    else if (backend.id === "deepagents") help = "Uses your Anthropic API key. Anthropic bills it for the run and receives the records the investigator reads.";
+    else help = "Runs on your " + label + " account.";
+    $("backend-help").textContent = help;
+  }
+  function fillBackends(chosen) {
+    const config = object(state.config), select = $("investigation-backend");
+    select.replaceChildren();
+    array(config.backends).forEach((backend) => {
+      const option = element("option", "", present(backend.label, backend.id) + (backend.available ? "" : " · " + (LACKS[backend.needs] || "unavailable")));
+      option.value = String(backend.id);
+      option.disabled = !backend.available && backend.needs !== "key";   // a service that only lacks a key can be chosen, to add one
+      select.append(option);
+    });
+    const usable = (backend) => backend.available || backend.needs === "key";
+    const wanted = array(config.backends).find((backend) => backend.id === chosen && usable(backend))
+      || array(config.backends).find((backend) => backend.id === object(config.defaults).backend && usable(backend))
+      || array(config.backends).find((backend) => backend.available);
+    if (wanted) select.value = wanted.id;
+    else if (!select.options.length) { const option = element("option", "", "No AI service"); option.value = ""; select.append(option); }
+  }
+  async function setKey(value) {
+    if (state.savingKey) return;
+    state.savingKey = true;
+    $("api-key-save").disabled = true;
+    $("form-error").hidden = true;
+    try {
+      const reply = await api("/api/credentials", { anthropic_api_key: value });
+      $("api-key").value = "";
+      state.keyNote = ({ no_model: "It cannot use the standard model: enter another model above.",
+        offline: "Anthropic could not be reached to check it.", unknown: "It could not be checked." })[reply.check] || "";
+      state.config = await api("/api/config");
+      fillBackends($("investigation-backend").value);
+    } catch (error) {
+      $("form-error").textContent = error.message;
+      $("form-error").hidden = false;
+    } finally { state.savingKey = false; $("api-key-save").disabled = false; updateStartButton(); }
   }
   // A page cannot learn a file's path from a browser file input. The desktop window can supply it
   // from its own open panel, asked through the local server; in a browser the button stays hidden and the path is typed.
@@ -551,19 +601,10 @@
   function applyConfig(config) {
     state.config = config;
     state.activeName = config.active_run || null;
-    const defaults = object(config.defaults), select = $("investigation-backend");
-    select.replaceChildren();
-    array(config.backends).forEach((backend) => {
-      const option = element("option", "", present(backend.label, backend.id) + (backend.available ? "" : " · unavailable"));
-      option.value = String(backend.id);
-      option.disabled = !backend.available;
-      select.append(option);
-    });
-    const preferred = array(config.backends).find((backend) => backend.id === defaults.backend && backend.available) || array(config.backends).find((backend) => backend.available);
-    if (preferred) select.value = preferred.id;
-    else if (!select.options.length) { const option = element("option", "", "No backend configured"); option.value = ""; select.append(option); }
+    const defaults = object(config.defaults);
+    fillBackends(null);
     $("facts-path").value = defaults.facts || "";
-    $("investigation-model").value = preferred && preferred.id === defaults.backend ? defaults.model || "" : "";
+    $("investigation-model").value = "";   // empty means the service's standard model, shown as the placeholder
     if (typeof defaults.minutes === "number" && defaults.minutes >= 1) $("investigation-minutes").value = defaults.minutes;
     updateStartButton();
   }
@@ -636,7 +677,7 @@
     try {
       const config = await api("/api/config");
       // Keep an open, edited form intact; the server token and availability still refresh.
-      if ($("new-dialog").open) { state.config = config; state.activeName = config.active_run || null; updateStartButton(); }
+      if ($("new-dialog").open) { state.config = config; state.activeName = config.active_run || null; fillBackends($("investigation-backend").value); updateStartButton(); }
       else applyConfig(config);
       await refreshRuns();
       if (state.selected) await loadRun(state.selected);
@@ -667,10 +708,16 @@
   $("facts-choose").addEventListener("click", chooseEvidence);
   for (const id of ["investigation-model", "investigation-minutes"]) $(id).addEventListener("input", updateStartButton);
   $("investigation-backend").addEventListener("change", () => {
-    const defaults = object(state.config && state.config.defaults);
-    if ($("investigation-model").value === defaults.model && $("investigation-backend").value !== defaults.backend) $("investigation-model").value = "";
+    $("investigation-model").value = "";   // a model name belongs to one service
     updateStartButton();
   });
+  $("api-key-save").addEventListener("click", () => { if ($("api-key").value.trim()) setKey($("api-key").value.trim()); });
+  $("api-key").addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();   // Enter here saves the key; it does not start the investigation
+    if ($("api-key").value.trim()) setKey($("api-key").value.trim());
+  });
+  $("api-key-remove").addEventListener("click", () => setKey(""));
   $("stop-investigation").addEventListener("click", stopInvestigation);
   $("sidebar-toggle").addEventListener("click", () => {
     const hidden = $("shell").classList.toggle("no-sidebar");

@@ -189,8 +189,12 @@
         <div class="file-field"><input id="facts-path" name="facts" placeholder="/path/to/case_facts.json" required spellcheck="false" autocomplete="off"><button class="button" id="facts-choose" type="button" hidden>Choose…</button></div></div>
       <div class="field"><label for="investigation-brief">What to establish <span class="optional-label">optional</span></label><textarea id="investigation-brief" name="brief" rows="2"></textarea></div>
       <div class="field"><label for="investigation-questions">Questions <span class="optional-label">optional, one per line</span></label><textarea id="investigation-questions" name="questions" rows="3" placeholder="Which removable devices are recorded?&#10;Which files were opened from them?"></textarea></div>
+      <div class="field" id="api-key-field" hidden><label for="api-key">Anthropic API key</label>
+        <div class="file-field"><input id="api-key" type="password" placeholder="sk-ant-…" spellcheck="false" autocomplete="off"><button class="button" id="api-key-save" type="button">Save key</button></div>
+        <p class="field-note">Kept on this computer, for your user account only.</p></div>
       <details class="advanced" id="investigation-advanced"><summary>Settings <span id="investigation-settings"></span></summary>
         <div class="form-row"><div><label for="investigation-backend">AI service</label><select id="investigation-backend" name="backend" required></select></div><div><label for="investigation-model">Model</label><input id="investigation-model" name="model" placeholder="default" autocomplete="off" spellcheck="false"></div><div><label for="investigation-minutes">Time limit (min)</label><input id="investigation-minutes" name="minutes" type="number" min="1" max="600" value="45" required></div></div>
+        <p class="field-note" id="api-key-status" hidden><span id="api-key-source"></span> <button class="text-button" id="api-key-remove" type="button">Remove key</button></p>
       </details>
       <div class="notice error" id="form-error" role="alert" hidden></div>
       <div class="form-footer"><span id="backend-help" role="status"></span><div><button class="button" type="button" data-close="new-dialog">Cancel</button><button class="button primary" id="start-investigation" type="submit" disabled>Start investigation</button></div></div>

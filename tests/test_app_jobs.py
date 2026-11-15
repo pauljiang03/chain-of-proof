@@ -74,6 +74,7 @@ class JobTests(unittest.TestCase):
         return directory
 
     def test_defaults_and_backend_aware_model(self):
+        os.environ.pop('ANTHROPIC_API_KEY', None)    # with a key and the API packages, the API is the default
         config = self.manager.config()
         self.assertEqual(config['defaults']['backend'], 'claude-code')
         self.assertEqual(config['defaults']['minutes'], 45)

@@ -269,7 +269,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _post(self, path, query):
         self._query(query, ())
-        if path not in ("/api/investigations", "/api/stop", "/api/choose"):
+        if path not in ("/api/investigations", "/api/stop", "/api/choose", "/api/credentials"):
             raise RequestError(404, "Route not found.")
         payload = self._body()
         if path == "/api/choose":
@@ -280,6 +280,17 @@ class Handler(BaseHTTPRequestHandler):
                 raise RequestError(404, "Route not found.")
             chosen = chooser()
             return self._json(200, {"path": chosen if isinstance(chosen, str) else ""})
+        if path == "/api/credentials":
+            # The user's own Anthropic API key, typed into the page. An empty value removes it.
+            # No reply and no error message carries the key back.
+            if not isinstance(payload, dict) or set(payload) != {"anthropic_api_key"} \
+                    or not isinstance(payload["anthropic_api_key"], str):
+                raise RequestError(400, "Send only the API key.")
+            try:
+                result = self.server.manager.set_api_key(payload["anthropic_api_key"])
+            except ValueError as error:
+                raise RequestError(400, str(error)) from None
+            return self._json(200, {"key": result.get("key"), "check": result.get("check")})
         if path == "/api/investigations":
             result = self.server.manager.start(_start_payload(payload, self.server.root))
             return self._json(200, result)
@@ -323,7 +334,8 @@ def create_server(root=ROOT, port=8765, *, manager=None):
         raise ValueError("port must be an integer from 0 to 65535")
     if manager is None:
         from app.jobs import JobManager
-        manager = JobManager(root=root)
+        from app import credentials
+        manager = JobManager(root=root, secrets=credentials.folder())
     return LocalServer(root, port, manager)
 
 
