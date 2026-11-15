@@ -160,10 +160,6 @@ class JournalRanges:
             return None, 'different_reference_sequence_only' if variants else 'no_directory_observation'
         return None, 'future_name_without_bounded_old_new_pair' if waiting else 'directory_observation_outside_intact_interval'
 
-    def directory_name(self, ref, usn):
-        """Return a preceding name or a safely bounded first future OLD_NAME pair."""
-        return self._directory_state(ref, usn)[0]
-
     def resolve_folder(self, ref, usn, root_reference, seen=()):
         """Folder path from this journal with diagnostics; identities are local (record, sequence) pairs."""
         chain, visited = [], set(seen)

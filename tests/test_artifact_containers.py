@@ -291,15 +291,6 @@ class Containers(unittest.TestCase):
 
 
 class UnicodeMail(unittest.TestCase):
-    def test_empty_absent_malformed_wrong_type_and_duplicates_are_distinct(self):
-        self.assertIsNone(ac._unicode_property(message([]), 0x1000))
-        self.assertEqual(ac._unicode_property(message([prop(0x1000, b'\0\0')]), 0x1000)[0], '')
-        self.assertEqual(ac._unicode_property(message([prop(0x1000, 'Line\r\n'.encode('utf-16-le'))]), 0x1000)[0], 'Line\r\n')
-        for entries in ([prop(0x1000, b'x')], [prop(0x1000, b'\x00\xd8')],
-                        [prop(0x1000, b'body', 0x1E)], [prop(0x1000, b'\0\0'), prop(0x1000, b'\0\0')]):
-            with self.subTest(entries=entries), self.assertRaises(ValueError):
-                ac._unicode_property(message(entries), 0x1000)
-
     def test_body_and_subject_share_exact_message_occurrence_and_empty_body_is_emitted(self):
         messages = [message([prop(0x0037, 'Subject'.encode('utf-16-le')), prop(0x1000, b'\0\0')], 7),
                     message([prop(0x0037, 'Subject'.encode('utf-16-le'))], 8)]

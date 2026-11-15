@@ -11,7 +11,7 @@ from dissect.util.stream import RangeStream, RunlistStream
 
 from .fatcarve import carve_fat32, fat_times_utc, folder_paths, parse_directory
 from .acquisition import area, provenance, resolve
-from .store import Evidence, us, us_from_unix
+from .store import Evidence, us_from_unix
 from .source_scope import base_volume_scope, merge_scope
 
 FAT_EPOCH = 315532800  # 1980-01-01, what an unset FAT timestamp decodes to

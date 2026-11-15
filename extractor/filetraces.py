@@ -1053,24 +1053,6 @@ def _folder_at(ntfs, cache, history, ref, usn, depth=0, allow_future=True):
     return _folder_path(ntfs, cache, ref), False
 
 
-def _historical_folder(ntfs, cache, history, ref, usn, seen=()):
-    """Resolve only a chain of preceding journal names to the volume root.
-
-    A current MFT name or a later rename's old name is useful context, but does
-    not establish a directory's name at an earlier journal observation.
-    """
-    if ref in seen or len(seen) >= 64:
-        return None
-    if ref[0] == 5:
-        return _folder_path(ntfs, cache, ref)
-    past = [entry for entry in history.get(ref, []) if entry[0] <= usn]
-    if not past:
-        return None
-    _when, name, parent = past[-1]
-    above = _historical_folder(ntfs, cache, history, parent, usn, seen + (ref,))
-    return None if above is None else (above + "\\" if above else "") + name
-
-
 def _journal_identity(common, serial, ref):
     """Scoped file identity (image, exhibit, NTFS volume serial, record+sequence), never a path."""
     return "NTFS identity " + json.dumps(

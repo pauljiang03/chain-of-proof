@@ -409,38 +409,6 @@ def validated(data, family, *, sqlite_view=None):
         raise ValueError('unsupported artifact-container family')
 
 
-def _unicode_property(message, property_id):
-    """Read exactly one PT_UNICODE property; missing and explicit empty differ."""
-    values = []
-    sets = _integer(message.number_of_record_sets)
-    if sets > 64:
-        raise ValueError('MAPI record-set budget exceeded')
-    for set_index in range(sets):
-        record_set = message.get_record_set(set_index)
-        count = _integer(record_set.number_of_entries)
-        if count > 4096:
-            raise ValueError('MAPI property-entry budget exceeded')
-        for entry_index in range(count):
-            entry = record_set.get_entry(entry_index)
-            if entry.entry_type != property_id:
-                continue
-            if entry.value_type != 0x1F:
-                raise ValueError('requested MAPI text property is not PT_UNICODE')
-            raw = entry.data
-            if not isinstance(raw, bytes) or len(raw) > MAX_TEXT_BYTES or len(raw) % 2:
-                raise ValueError('Unicode MAPI property bytes are invalid or exceed limit')
-            text = raw.decode('utf-16-le', errors='strict')
-            # One terminating NUL is storage framing, not replacement decoding.
-            if text.endswith('\0'):
-                text = text[:-1]
-            if '\0' in text:
-                raise ValueError('Unicode MAPI property contains an embedded NUL')
-            values.append((text, set_index, entry_index, len(raw)))
-    if len(values) > 1:
-        raise ValueError('duplicate requested MAPI property occurrences are ambiguous')
-    return values[0] if values else None
-
-
 def mail_fields(ev, box, container_subject, provenance, examined_at):
     """Walk the mail store's live messages; recovered and orphan messages are not read."""
     from .mail_content import text_property
