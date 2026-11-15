@@ -18,5 +18,3 @@ git clone https://github.com/pauljiang03/conan && cd conan && ./install.sh
 2. **Investigate.** The AI investigator searches the records and proposes claims.
 3. **Check.** The checker converts each claim to Lean code. The Lean kernel accepts or refuses it.
 4. **Verify.** A second checker, con-leche, checks the proofs again.
-
-A proof does not show that a reader read the disk image correctly, or who used a device.
