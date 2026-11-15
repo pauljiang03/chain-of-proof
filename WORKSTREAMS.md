@@ -118,8 +118,23 @@ and tolerances, so distinct 100ns values no longer match under zero tolerance.
 Independent checks include 802 scorer assertions and 107 FILETIME roundtrips.
 Root's overlapping precision/host/UI suites passed 73 tests; builder/publisher
 checks passed 29. The focused Hacking public builder retains explicit reference,
-source and launch holds. Fresh complete snapshots for both cases are rebuilding
-from the corrected readers, with source hashes checked before and after.
+source and launch holds. Fresh complete snapshots for both cases are complete,
+with reader hashes checked before and after and matched to the integrated code.
+Data Leakage has 409,971 records, no failed reader and 17 limitations; Hacking has
+14,468 records, no failed reader and 18 limitations. Their facts hashes are
+`259f97ebe98f1648783c1aa8498dc0050539296e794cf91e9584535f8f48268a` and
+`ff6dc61a61c9c0062e0571e9808e640293afc797f594460c77020c209fcad969`.
+The complete app suite passed 144 tests with one platform skip after the local
+socket/process tests ran outside the restricted sandbox. The initial sandboxed
+attempt could not exercise those tests; it is not a product regression.
+
+The C-only freeze mode and focused reader/report fingerprints are integrated.
+Root's focused and legacy freeze checks passed 13 tests. Actual prepared Hacking
+public fields Q2/Q3/Q4/Q8 passed four Lean/replay claims, exact projection and
+reports, with six refusal controls. Reference alignment and actual per-case
+freeze validation remain required. The approved next trial is one fresh C run
+per case, 300 seconds each, at most two parallel investigators. It is a focused
+development test, not a full comparison or a causal test of Lean feedback.
 
 Remote UI commits `6e40997` and `03261a2` are merged. The short prose lead remains;
 it now counts recorded identifiers, retains case-distinct computer names and
