@@ -1,6 +1,6 @@
 # CONAN-F
 
-**CONsistent ANalysis in Forensics.** Formerly Chain of Proof.
+**CONsistent ANalysis in Forensics.** 
 
 CONAN-F produces forensic findings with Lean proofs.
 The AI investigator searches records and proposes claims.
