@@ -1,0 +1,495 @@
+{
+  "schema_version": 2,
+  "case_id": "nist-cfreds-data-leakage-meaning-debug-v1",
+  "title": "Three-question claim-meaning diagnostic; no accuracy key",
+  "time_zone": "America/New_York",
+  "contract_revision": "explicit-meaning-debug-v1",
+  "instructions": [
+    "This is an unscored diagnostic profile, not the frozen 60-question benchmark.",
+    "The stronger field requirements are explicit development declarations and need review. Current claim roles cannot establish all of them.",
+    "Keep supported observations in their separate fields and retain unknown required answers. Do not substitute an observation for a stronger conclusion.",
+    "Do not read any private answer key, score output or previous investigation report."
+  ],
+  "questions": [
+    {
+      "id": "Q18",
+      "prompt": "What application was used for e-mail communication?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "application": {
+            "type": "string",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "email_application_product_with_version"
+              ],
+              "meaning": "Product identity and version linked to the observed email communication. This diagnostic contract makes that requirement explicit.",
+              "evidence_needed": "Source-supported product/version identity and a supported relationship to the communication evidence; an executable basename alone is insufficient."
+            }
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "executable": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "program"
+                    ],
+                    "meaning": "Name observed in a program-run record.",
+                    "evidence_needed": "A program-run observation.",
+                    "selectors": [
+                      {
+                        "form": "programRan",
+                        "field": "program"
+                      }
+                    ]
+                  }
+                },
+                "path": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "path"
+                    ],
+                    "meaning": "Path recorded by the program-run artifact.",
+                    "evidence_needed": "A program-run observation.",
+                    "selectors": [
+                      {
+                        "form": "programRan",
+                        "field": "path"
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "application"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q34",
+      "prompt": "What files were copied from PC to CD-R? [Hint: Just use PC image only. You can examine transaction logs of the file system for this task.]",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "complete_copy_destination_path"
+                ],
+                "meaning": "Complete destination path tied to the requested copy/staging relationship.",
+                "evidence_needed": "A resolved historical ancestor chain and a supported copy/staging relationship. Path syntax or a journal observation alone is insufficient."
+              }
+            }
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path_or_suffix": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "path_or_incomplete_suffix"
+                    ],
+                    "meaning": "Journal path observation, which may have unresolved ancestors.",
+                    "evidence_needed": "A journal path observation; this is not a copy claim.",
+                    "selectors": [
+                      {
+                        "form": "journalPathAt",
+                        "field": "path_or_incomplete_suffix"
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "paths"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {}
+      }
+    },
+    {
+      "id": "Q52",
+      "prompt": "What actions were performed for anti-forensics on PC at the last day \u20182015-03-25\u2019?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "anti_forensic_action_time_us"
+                    ],
+                    "meaning": "Time of the supported action, preserving its uncertainty.",
+                    "evidence_needed": "Evidence and a supported rule connecting this action, target and time to the requested activity. A record-kind label, retained removal flag or program-run record alone does not establish purpose or wiping."
+                  }
+                },
+                "action": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "anti_forensic_action"
+                    ],
+                    "meaning": "Observed activity with evidence supporting the requested category.",
+                    "evidence_needed": "Evidence and a supported rule connecting this action, target and time to the requested activity. A record-kind label, retained removal flag or program-run record alone does not establish purpose or wiping."
+                  }
+                },
+                "target": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "anti_forensic_target"
+                    ],
+                    "meaning": "Target linked to that supported action.",
+                    "evidence_needed": "Evidence and a supported rule connecting this action, target and time to the requested activity. A record-kind label, retained removal flag or program-run record alone does not establish purpose or wiping."
+                  }
+                }
+              },
+              "required": [
+                "timestamp",
+                "action",
+                "target"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "wiping": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "date-time",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wiping_start_us"
+                  ],
+                  "meaning": "A supported assertion for wiping/start, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "end": {
+                "type": "string",
+                "format": "date-time",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wiping_end_us"
+                  ],
+                  "meaning": "A supported assertion for wiping/end, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "tool": {
+                "type": "string",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wiping_tool"
+                  ],
+                  "meaning": "A supported assertion for wiping/tool, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "paths": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "anti_forensic_wiping_paths"
+                    ],
+                    "meaning": "A supported assertion for wiping/paths/*, with the scope required by this diagnostic question.",
+                    "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                  }
+                }
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "tool",
+              "paths"
+            ],
+            "additionalProperties": false
+          },
+          "shift_delete": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_shift_delete_timestamp_us"
+                  ],
+                  "meaning": "A supported assertion for shift_delete/timestamp, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "paths": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "anti_forensic_shift_delete_paths"
+                    ],
+                    "meaning": "A supported assertion for shift_delete/paths/*, with the scope required by this diagnostic question.",
+                    "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                  }
+                }
+              }
+            },
+            "required": [
+              "timestamp",
+              "paths"
+            ],
+            "additionalProperties": false
+          },
+          "deleted_mail_subjects": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-claim-requirement": {
+                "semantic_types": [
+                  "anti_forensic_deleted_mail_subjects"
+                ],
+                "meaning": "A supported assertion for deleted_mail_subjects/*, with the scope required by this diagnostic question.",
+                "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+              }
+            }
+          },
+          "mail_deletion_timestamp": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "array",
+              "null"
+            ],
+            "description": "Use null only for a source-reported absent/unavailable value; use unknown status if the system cannot answer.",
+            "x-claim-requirement": {
+              "semantic_types": [
+                "anti_forensic_mail_deletion_timestamp"
+              ],
+              "meaning": "A supported assertion for mail_deletion_timestamp, with the scope required by this diagnostic question.",
+              "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+            }
+          },
+          "wipe_trace": {
+            "type": "object",
+            "properties": {
+              "terminal_file_deleted": {
+                "type": "boolean",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wipe_trace_terminal_file_deleted"
+                  ],
+                  "meaning": "A supported assertion for wipe_trace/terminal_file_deleted, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "erasure_method": {
+                "type": "string",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wipe_trace_erasure_method"
+                  ],
+                  "meaning": "A supported assertion for wipe_trace/erasure_method, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "passes": {
+                "type": "integer",
+                "x-claim-requirement": {
+                  "semantic_types": [
+                    "anti_forensic_wipe_trace_passes"
+                  ],
+                  "meaning": "A supported assertion for wipe_trace/passes, with the scope required by this diagnostic question.",
+                  "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                }
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "step": {
+                      "type": "integer",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "anti_forensic_wipe_trace_steps_step"
+                        ],
+                        "meaning": "A supported assertion for wipe_trace/steps/*/step, with the scope required by this diagnostic question.",
+                        "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                      }
+                    },
+                    "filename": {
+                      "type": "string",
+                      "x-claim-requirement": {
+                        "semantic_types": [
+                          "anti_forensic_wipe_trace_steps_filename"
+                        ],
+                        "meaning": "A supported assertion for wipe_trace/steps/*/filename, with the scope required by this diagnostic question.",
+                        "evidence_needed": "Source evidence and a reviewed claim rule that establish this specific relationship, method or result. Generic record observations alone are insufficient."
+                      }
+                    }
+                  },
+                  "required": [
+                    "step",
+                    "filename"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "terminal_file_deleted",
+              "erasure_method",
+              "passes",
+              "steps"
+            ],
+            "additionalProperties": false
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "record_kind": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "asserted_record_kind"
+                    ],
+                    "meaning": "Kind of the cited record; not an interpretation of purpose.",
+                    "evidence_needed": "A checked observation.",
+                    "selectors": [
+                      {
+                        "form": "programRan",
+                        "field": "record_kind"
+                      },
+                      {
+                        "form": "fileRemovedAt",
+                        "field": "record_kind"
+                      }
+                    ]
+                  }
+                },
+                "recorded_time": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "recorded_timestamp_not_action_or_execution_guarantee_us"
+                    ],
+                    "meaning": "Timestamp recorded by the artifact; not guaranteed action onset.",
+                    "evidence_needed": "A checked recorded timestamp.",
+                    "selectors": [
+                      {
+                        "form": "programRan",
+                        "field": "recorded_time_us"
+                      },
+                      {
+                        "form": "fileRemovedAt",
+                        "field": "recorded_time_us"
+                      }
+                    ]
+                  }
+                },
+                "entity": {
+                  "type": "string",
+                  "x-claim-requirement": {
+                    "semantic_types": [
+                      "name_or_path",
+                      "path"
+                    ],
+                    "meaning": "Name or path recorded by the artifact; scope can be incomplete.",
+                    "evidence_needed": "A checked observation.",
+                    "selectors": [
+                      {
+                        "form": "fileRemovedAt",
+                        "field": "name_or_path"
+                      },
+                      {
+                        "form": "programRan",
+                        "field": "path"
+                      }
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "actions",
+          "wiping",
+          "shift_delete",
+          "deleted_mail_subjects",
+          "mail_deletion_timestamp",
+          "wipe_trace"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/actions/*/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/wiping/start": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/wiping/end": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          },
+          "/shift_delete/timestamp": {
+            "tolerance_seconds": 2,
+            "granularity": "instant"
+          }
+        },
+        "string_modes": {
+          "/wipe_trace/steps/*/filename": "exact"
+        }
+      }
+    }
+  ]
+}

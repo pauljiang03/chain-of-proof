@@ -1,50 +1,33 @@
 # Finish pass
 
 The AI investigator is the primary workflow. The miner is an optional baseline.
-Keep essential evidence access, Lean verification, explicit limits, and reproducible evaluation.
+Keep evidence access, Lean verification, explicit limits, and reproducible evaluation.
 
 ## Ready
 
-- Reader and answer-export fixes are integrated.
-- The latest full NIST fact build is ready outside Git.
-- Both Mulder test packages are prepared and remain unrun.
-- The first Sol A/C pilot is complete; all 169 offline B certificates and 29 unique C certificates independently verify.
-- All 738 integrated tests pass with the optional API dependencies. The Lean build passes.
-- All 473 saved certificates verify. All 24 false probes are refused.
-- Tool audits, full evidence citations, proof-gap diagnostics, portable verification, coverage, and explicit claim history are integrated.
-- The second terminal's hardening changes are integrated. The API graph has offline integration tests.
-- The primary CLI produces HTML, Markdown, and JSON reports. Cancellation retains partial work.
-- Supported-image intake validates explicit manifests and creates hashed snapshots with extraction health.
-- Persistent question work and case-agnostic certificate-linked answers are available for every public case profile.
-- Shared claim-field projection is implemented for A, B, C and product reports. It retains partial fields and source links.
-- Inventory paging saves a snapshot-bound cursor. The plan reports unfinished pages and missing required fields.
-- Census proofs now support up to 2,048 records. The full-row source check and Lean kernel check remain in place.
-- General registry readers now include system root, timezone display, Search settings and shadow-copy exclusions.
-- The second-case mechanical smoke produced reports and a verification package; all 12 certificates reverified.
-- A separate Q53 metadata-recovery contract is prepared. It does not replace or rescore the frozen 60-question test.
-- Approved reader collection creates a new snapshot; optional bounded continuation uses a new run and new proofs.
-- Resume preserves old reports, carries work notes, and rechecks prior claims only for identical facts.
-- Conservative conflict diagnostics are shown separately from findings; a failed review does not erase checked work.
-- The optional local browser interface opens reports, shows activity and evidence, and uses the same runner.
-- The installed CLI and local HTTP downloads passed a smoke check. Browser checks covered the sample layout, proof inspector, evidence links, diagnostics, and report print preview.
+- The three incorrect C answers are traced to exact claims and source records. All three certificates reverified. Optional public field requirements now reject incompatible claim roles and expose evidence needs; a separate unscored diagnostic profile preserves narrower observations. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
+
+- Claim-field answers, source links and supported partial answers are integrated in the tools, reports and deterministic evaluator.
+- Inventory paging saves evidence-bound cursors. Question plans show missing fields and unfinished pages.
+- Census proofs support up to 2,048 records without changing Lean semantics or independent source checks.
+- General registry readers include system root, timezone display, Search settings and snapshot exclusions.
+- Image intake, question work, bounded reader collection, continuation, conflict review, audits and portable verification are integrated.
+- The CLI writes HTML, Markdown and JSON reports. The browser and optional desktop window share the same runner.
+- Claude's desktop, proof graph and examiner report builder are merged. Reviewed fixes preserve distinct citations and invalidate stale previews.
+- A post-measurement fix exports common fields through public `anyOf` alternatives. It does not choose branches or change claim values.
+- Final regression suite: 775 tests run, 774 passed and one platform test skipped. The Lean build passed before the frozen trials; no Lean source changed afterwards.
+- The second-case mechanical workflow produced reports and a verified package. The live Sol workflow smoke also passed; all 34 C and 10 B certificates reverified. There is no second-case accuracy key.
+- The frozen Sol claim-binding comparison is complete. A/B: 8 complete, 20 partial, 16 unanswered, 2 incorrect. C: 7 complete, 21 partial, 15 unanswered, 3 incorrect. Each has 14 unresolved questions. All 63 B and 96 C certificates reverified.
+- All 60 public prompts are readable in [eval/QUESTIONS.md](eval/QUESTIONS.md). The full result is in [the latest comparison](comparison/ablation/RESULTS_SOL61_20261115.md).
+- Both Mulder packages and a separate Q53 metadata-recovery contract are prepared. They remain separate from the frozen test.
 
 ## Next
 
-1. Run the authorized bounded Sol smoke and NIST repeat with the tested explicit-binding runtime and frozen inputs.
-2. Validate a native product backend with an approved model destination. The local Claude login works, but the user's live-test choice is Sol 6.1; no Claude test has run.
-3. Complete unresolved full-case reference contracts and Mulder model/budget routing before the full A/B/C/D experiment.
-4. Use the new reports to separate missing source evidence, missing reader fields, unsupported claim forms and unbound answer fields.
+1. Improve answer selection and interpretation. Product names, full paths and anti-forensics sequences need appropriate source fields and relationships; a verified record alone is insufficient.
+2. Add bounded mail-body and document-metadata support, and preserve large inventories in final answers. Do not infer source absence from missing output.
+3. Give investigators a public-only binding preview before they finish. A future matched trial must give both arms the same export feedback and freeze new code. No new accuracy score is claimed for the schema fix.
+4. Complete the 14 unresolved reference contracts and the model/budget setup for a full A/B/C/D comparison. Do not use an LLM judge or silently alter the published source.
+5. Validate the native product backend with an approved destination. The Claude login works, but automatic approval review blocked that test under the user's Sol-only instruction. The Sol bridge does not validate native provider orchestration.
 
-The first bounded Sol with/without-Lean pilot and its runtime are integrated.
-See `comparison/ablation/PILOT_SOL61_20261115.md` for results and limits.
-It used the older frozen source at `617dc29`, not the six new backend features.
-The legacy NIST adapter still lacks mappings for 26 questions. New explicit claim bindings work across cases;
-they do not add missing evidence or certify fields outside the supported claim forms.
-Native provider validation still needs local authentication. Mechanical second-case results are not an accuracy score.
-
-The saved report still has 9 complete, 17 partial, and 20 unanswered questions.
-Another 14 questions require reference review.
-These are development results, not a finished benchmark claim.
-
-New schemas, exhaustive mining, image interpretation, and presentation extras are deferred.
-Use [WORKSTREAMS.md](WORKSTREAMS.md) for ownership, available parallel tasks, paths, and run commands.
+This single comparison showed no overall accuracy gain from Lean feedback and no demonstrated semantic-predicate refusal. Proof validity and answer accuracy remain separate.
+Use [WORKSTREAMS.md](WORKSTREAMS.md) before assigning more agents.

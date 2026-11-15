@@ -128,6 +128,13 @@ question's requested time and scope filters; do not export every row indiscrimin
 
 Use answer(question_id) to inspect the supported binding catalog. Bind the known
 requested fields to their exact claim fields; retain source distinctions and uncertainty.
+Inspect its public field_requirements too. Catalog support is not evidence availability.
+An executable name does not establish a product version; an incomplete path does not
+establish a full path or a copy; a record-kind label does not establish an action's purpose.
+A certificate proves its exact claim, not the meaning of the answer field you choose.
+If a declared field requirement has no supporting claim role, retain the evidence as
+observations and record the stated evidence need. Do not bypass the requirement by
+choosing another string-valued field or changing the question contract.
 A question can have useful supported fields while other fields remain unresolved.
 Save those partial bindings and record the missing fields with update_question instead
 of withholding the entire answer. Do not invent values, substitute null for an unknown,

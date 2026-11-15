@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "runtime_protocol": "claim-bindings-v2",
+  "protocol": "sol-subagent-A-B-C-common-claim-field-projection",
+  "created_at": "2026-11-15T02:17:07.854391+00:00",
+  "frozen_before_trials": true,
+  "evaluation_use": "development_not_blind",
+  "replicates": 1,
+  "order": [
+    "A",
+    "C",
+    "B"
+  ],
+  "inputs": {
+    "facts": {
+      "path": "/private/tmp/cop-nist-final-20261115T020159Z/evidence/facts.json",
+      "sha256": "a79fcce1015bf73a66779557a6d5235b4ee4d4b1bc9683803cff5f1abc0f5c8d",
+      "bytes": 444693715
+    },
+    "case_profile": {
+      "path": "/private/tmp/cop-sol61-smoke-runtime/comparison/mulder/case-profile.json",
+      "sha256": "88199c3549afcd624cc61151d3ce5504c549dc6062de22cd7646b3ab4281e493",
+      "bytes": 6924
+    },
+    "questions": {
+      "path": "/private/tmp/cop-sol61-smoke-runtime/eval/benchmark_nist_questions.json",
+      "sha256": "d3595618d737c2ffcaf92e364a9b0a485409885c2e0227af45507fb58a03f25a",
+      "bytes": 114264
+    },
+    "reference": {
+      "path": "/private/tmp/cop-sol61-smoke-runtime/eval/benchmark_nist.json",
+      "sha256": "728960f52fc9225f8b1e902e083a1ace92b6a139549250acdade9773b1c36055",
+      "bytes": 409238
+    }
+  },
+  "software": {
+    "commit": "c2b97537f43d12da7e8152e10fa0cf15121bbfc7",
+    "dirty": false,
+    "source_sha256": {
+      "agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "agent/answer_projection.py": "0cdf2edc707ff3edc43cdb026959bbf6a14d97f4e9034a836b1fadfb75321020",
+      "agent/answer_store.py": "e638239ffc5c2038d555d1970ded04e9d1db559c142810a1b61a13833cbb9538",
+      "agent/answers.py": "76e8bcd4bdab191012b0d8b096a30a3abc1555141b7faf269510992bf3589c90",
+      "agent/api.py": "4020873ba27ffa7d4d4fbf792017a7bab6dbd34f5f7e1a0b6311293dbf34927c",
+      "agent/audit.py": "f2d71844027c9d1e7bf1b7065e4edbd4de4f6ad5eff33ec8f107934150bc7668",
+      "agent/brief.py": "f2e441dc88e658fd013fc83b7cb5b2973dfe0113290cbb593a1b2819ad5b4037",
+      "agent/case.py": "d2d0172a1794af75214a392ae7aa757977da3e6ac840ad1ee07bf652ae5f62b8",
+      "agent/cli.py": "e8d3b24f27f9a69a65b576f643491899a0e2839948b3fb1e5b5eefbbbc67a770",
+      "agent/conclusions.py": "22571f2a019e53855b917775ff4508a40ddcb4ab476350c8a19e6e14602062ee",
+      "agent/consistency.py": "95f4862b653dd93bc2d4066e52aab25c1109e21bf47845f0476c4fd5a1faa51b",
+      "agent/continuation.py": "2ed9f5022800baf4d7aa6b5ca98ca2e98523e2ececd463c751ab5ac6231f7b42",
+      "agent/coverage.py": "7e18a8997bfbc5e9598972f974189e4f0c48d28041517336748156c77f35a761",
+      "agent/coverage_plan.py": "676a89e8e7ea004bb9219e7cc53ead4df0347467be567c4f0179f2f039e264aa",
+      "agent/evidence_requests.py": "35502deabf36f7f6f9de13db30afc0c5eda829f35f7b044a3ff958019210ff4d",
+      "agent/history.py": "e1b219afce718b44766b76a526b264dd45e64196024ded5d30a10fce4f63faa8",
+      "agent/inventory_pages.py": "68ddb159d1cb9c74a4a870dcc9937a4b9efecb05b164964283d7ada132d51a3a",
+      "agent/investigation.py": "a9e288336638a5c9df3346bfb47034c0294bd2c066cf302944c6fd3e1ed9d3ce",
+      "agent/mcp_server.py": "577c5514f84ad9dfde5614205c57253123badfd638828bde899bad1729adcd72",
+      "agent/review.py": "04b82719abc09b41382b7d7f1d89f0e2559058a34a219e0042eeb35b5d6431e0",
+      "agent/run.py": "5423794f65c872f4a9dba636e2a5b57798965f387e9cca167564cf9733646272",
+      "agent/run_manifest.py": "dd98d00dd3cf6b6aba274105ef07a2cc6a4d1b75574d4fd0b958a0f3e5688338",
+      "agent/tools.py": "1bc31bd0f9f1a090f1b2ed1847e55f3ded5227971dbcd43b07774d7b5e3870f7",
+      "checker/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "checker/check.py": "d94e4b78583bb11a2ade00a52743942ea3d757befb1462bcc777bdbbbed9fc18",
+      "checker/citations.py": "d4ae1ab6f4b051fa94a2337d48b741004c48d8b8571a71b7153a188bab82e4fd",
+      "checker/claims.py": "ea6706bb0d37ed1298a36fae5db3ce60f3c8eea3cd4c436e2ec257ebc0a6803f",
+      "checker/combine.py": "6214aed3ebd07a9823f1c439f944c4f5e4fecb43cff2af7c1b0ce25e577160c5",
+      "checker/export.py": "66909ba0d52b3d3217acb9aa3e1547731b902f4bb96255be451f79e77e2182ee",
+      "checker/facts.py": "0e5419638c74a59ba5782f5c4c837a5122a972dd48d83df47a9cd164e973726a",
+      "checker/needs.py": "d3c0b4ac6f55fc982c9e5cb3f0d99ea49a2e0de51fc44ba5c777ef657efb0fc5",
+      "checker/report.py": "c87842c2e346571bb4e72030200f21df5a544143ea713a3cf0cbc254d5f13f6e",
+      "verifier/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verifier/conleche.py": "76bdc266e3fcbaf1ee9a5cc4de3efc914f9cb9c2871fb09bd4a1d56679378ec1",
+      "verifier/package.py": "5f7a51801a306690327b6c4c1ba2696141f38eb5a10b324150fb75f7bf02c622",
+      "verifier/verify.py": "f32140141d91fd6c9792f801aa5552b51297a3fdc2e2500de54441566143366d",
+      "comparison/ablation/__init__.py": "b0ad04e5d7826139a78ca79054ba6a7dbda9c768547d0fed2411401889c6c025",
+      "comparison/ablation/answers.py": "82606282e7d4ec60e196947a61c9079c4cfa5d45301453e98114c4106349b988",
+      "comparison/ablation/bindings.py": "e600044356e2453aa188aa7e952d4e71c8461a3e77a7d225be2a81253a4d705f",
+      "comparison/ablation/capture.py": "9f265613974c41ba48e0846b2e62ccce84286c0e82735f1b397c65cec0a3c0a2",
+      "comparison/ablation/mcp_server.py": "6010cb5815c2a9050768c5f755445c54faac380969d21f7f3b7bb94e6d9fae0f",
+      "comparison/ablation/pilot.py": "0694b251c3f35f3617c047a687292fffd4395894516fce99a5f7df228caf8f8a",
+      "comparison/ablation/projection.py": "bae8bd4c06384749f9209137250f5d9e1fa3186dd01fddc8e9fac75d0bf61d4f",
+      "comparison/ablation/prompt.py": "6ea6a675dc8976f239f05746326a1d300bbf74edf1cb5281ddb52b7b71d8cc66",
+      "comparison/ablation/replay.py": "ba0a614303d47e63d95e902e9a23fb9707bc01db4ef1e09915cdb466b4291ac2",
+      "comparison/ablation/runtime.py": "359876c7e2ccd582a1e3b80442f90c2ab9260cd9ed5b5e9bab99d723e4ff67af",
+      "eval/benchmark.py": "4e1d6fc9babac8c23c91e83e68c064b6b8bfc660fa1e40181c619a7be4c2800f",
+      "eval/submission.py": "3be57fbc1b3a5ea21fe440f3151f16bd9f416fe106ca303895cba09cfa053c88",
+      "lean/lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+      "lean/ChainOfProof.lean": "e315e3cb878c1b9e7382ad98057e32529ffc8cd98353e8388fe329ae8b7f9b92",
+      "lean/lakefile.toml": "4373ca9699737d9c4e17f6735a09a0629cfc45271e1149f02f4f1d26cc7afc70",
+      "lean/ChainOfProof/Census.lean": "b5ac15e46603deec3f2536bdaa1c6edfde20c347daf546d634d66ca45fc49b3f",
+      "lean/ChainOfProof/Check.lean": "beb8eb7f6e2bac52716ebf4de3ed3517a1c1833d68042534563ca5252e388b41",
+      "lean/ChainOfProof/Claim.lean": "ac556e342c561da5e262f75983debd1364d1ce9896f69bdba6d27a2d30e7b241",
+      "lean/ChainOfProof/Facts.lean": "2ed1d19ee9e6744f7c3eda4bb1ddc0268e714ff359eba76f995b629cb60ae782",
+      "lean/ChainOfProof/Sets.lean": "b1f6dc48f18dd1d69737e77fba1a7c5bd714843c0bde9bf90a29cf6d8799319e",
+      "lean/ChainOfProof/Theorems.lean": "7d74fd584460710624d79da180859b2486c2a066a221874f88202ddb11fced17"
+    },
+    "python": "3.12.14",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "case": {
+    "case_id": "nist-cfreds-data-leakage",
+    "questions": 60,
+    "provisionally_scorable": 46,
+    "unevaluable_ids": [
+      "Q1",
+      "Q2",
+      "Q6",
+      "Q10",
+      "Q16",
+      "Q19",
+      "Q29",
+      "Q30",
+      "Q33",
+      "Q39",
+      "Q48",
+      "Q53",
+      "Q58",
+      "Q60"
+    ],
+    "reference_status": "draft_requires_independent_review"
+  },
+  "model": {
+    "requested_override": "gpt-6.1-sol",
+    "fresh_context": "fork_turns=none",
+    "observed_model_id": null,
+    "immutable_revision": null,
+    "reasoning_effort": "same inherited platform default; not independently observed"
+  },
+  "budget": {
+    "wall_seconds_per_live_arm": 900,
+    "model_tokens": null,
+    "model_cost": null,
+    "token_and_cost_comparability": "unavailable",
+    "B_model_calls": 0,
+    "extra_budget_after_failure": false
+  },
+  "arms": {
+    "A": "receipt-only unchecked proposals; no semantic feedback",
+    "C": "online checker feedback and independently replayable certificates",
+    "B": "offline exact whole-candidate filtering of sealed A; zero model calls"
+  },
+  "measurements": {
+    "answer_accuracy": "common frozen claim-field projection with deterministic scoring against the frozen reference; certificate validity remains distinct from question accuracy",
+    "claim_filtering": "A-to-B retention/refusal/error counts; refusal does not establish a forensic error",
+    "candidate_population": "JSON object claims admitted by the shared transport schema; malformed object contents remain exact candidates, transport rejections are separate",
+    "shared_claim_faithful_projector": "common frozen claim-field projection for A/B/C; B retains bindings only for accepted whole candidates",
+    "reference_policy": "Retain frozen draft reference; unresolved questions remain visible and unscored",
+    "missing_output_policy": "Retain failures/timeouts; invalid or absent submission is unmeasured, not repaired",
+    "claims_allowed": "single development pilot; no statistical significance, universal precision or end-to-end speed claim",
+    "binding_policy": "Model-authored final bindings only; fill absent hashes from exact named saved claims. No posthoc binding inference, selector changes, value repair or collision recovery after B filtering"
+  },
+  "isolation": {
+    "mode": "procedural instructions, not an OS sandbox",
+    "allowed_reads": "assigned public brief and shared forms/sql/fact/check/plan/update_question/inventory_page bridge tools",
+    "forbidden": [
+      "private references",
+      "prior reports",
+      "repository browsing",
+      "other agents",
+      "web"
+    ],
+    "bridge_audit": "retain tool requests/results and final answer",
+    "platform_tool_trace": "retain when exposed; unavailable traces do not establish full compliance"
+  },
+  "preparation": {
+    "facts": "same existing extracted snapshot for both arms",
+    "fresh_extraction_seconds": null,
+    "end_to_end_extraction_comparison": false
+  }
+}
