@@ -15,6 +15,57 @@ from typing import Dict, Iterable, List
 
 from .catalog import ATTRIBUTE_KINDS
 
+
+_ENTRY_KINDS = {name: index for index, name in enumerate((
+    'ntfs_mft', 'fat_directory_entry', 'exfat_directory_entry',
+    'udf_file_entry', 'iso9660_directory_record'), start=1)}
+_OCCURRENCE_FIELDS = {'schema_version', 'disk_index', 'partition_offset_bytes',
+                      'partition_size_bytes', 'entry_kind', 'entry_id'}
+
+
+def file_occurrence(prov):
+    """Return ten explicit identity dimensions, or None when evidence is absent.
+
+    This is a strict source-to-formal-data adapter, not an identity equality
+    checker. Lean compares every dimension. Text is encoded injectively as UTF-8
+    bytes with a leading byte; no hash, path, volume serial, or unknown default
+    supplies an occurrence. Native values are offset by one to reserve zero for
+    absent identity. The full provenance remains covered by the source-row hash.
+    """
+    if type(prov) is not dict or type(prov.get('file_occurrence')) is not dict:
+        return None
+    raw = prov['file_occurrence']
+    kind = raw.get('entry_kind')
+    if type(kind) is not str or kind not in _ENTRY_KINDS:
+        return None
+    expected = _OCCURRENCE_FIELDS | ({'entry_sequence'} if kind == 'ntfs_mft' else set())
+    if set(raw) != expected or type(raw.get('schema_version')) is not int or raw['schema_version'] != 1:
+        return None
+    scope = [prov.get(name) for name in ('image', 'exhibit', 'source_snapshot', 'source_variant')]
+    if any(type(value) is not str or not value.strip() or value != value.strip()
+           or value.lower() in {'unknown', 'none', '(none)'} or any(ord(char) < 32 for char in value)
+           for value in scope):
+        return None
+    try:
+        text_bytes = [value.encode('utf-8') for value in scope]
+    except UnicodeError:
+        return None
+    if any(len(value) > 512 for value in text_bytes):
+        return None
+    values = [raw.get(name) for name in ('disk_index', 'partition_offset_bytes',
+                                        'partition_size_bytes', 'entry_id')]
+    if any(type(value) is not int or not 0 <= value < 2**64 for value in values):
+        return None
+    if raw['partition_size_bytes'] == 0 or (kind != 'ntfs_mft' and raw['entry_id'] >= raw['partition_size_bytes']):
+        return None
+    sequence = raw.get('entry_sequence', 0)
+    if type(sequence) is not int or (kind == 'ntfs_mft' and not 1 <= sequence <= 65535):
+        return None
+    encoded = tuple(int.from_bytes(b'\x01' + value, 'big') for value in text_bytes)
+    return encoded + (raw['disk_index'] + 1, raw['partition_offset_bytes'] + 1,
+                      raw['partition_size_bytes'] + 1, _ENTRY_KINDS[kind],
+                      raw['entry_id'] + 1, sequence + 1)
+
 FILESYSTEM_SET_KINDS = ("filesystemSet", "filesystemMemberDeleted",
                         "filesystemMemberAllocated", "filesystemMemberUnknown")
 # Preserve these new non-attribute ordinals when future attribute roles are appended.
@@ -62,7 +113,9 @@ class Fact:
                 raise ValueError(f"fact {self.id}: {name} must be a non-negative integer")
 
     def to_lean(self) -> str:
-        return f"⟨{self.id}, .{self.kind}, {self.t}, {self.res}, {self.obj}, {self.aux}⟩"
+        occurrence = file_occurrence(self.prov) or (0,) * 10
+        identity = '⟨' + ', '.join(str(value) for value in occurrence) + '⟩'
+        return f"⟨{self.id}, .{self.kind}, {self.t}, {self.res}, {self.obj}, {self.aux}, {identity}⟩"
 
     def row_sha256(self) -> str:
         """Hash of everything a certificate relies on: the checked fields and provenance."""

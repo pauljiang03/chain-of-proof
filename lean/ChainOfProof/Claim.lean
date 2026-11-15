@@ -15,6 +15,7 @@ inductive Claim where
   | val    (f : Nat) (s : Slot) (v : Nat)              -- a stud of f equals a constant
   | link   (a : Nat) (sa : Slot) (b : Nat) (sb : Slot) -- same entity in two studs
   | before (a b : Nat)                                 -- recorded timestamp order, beyond uncertainty
+  | sameFileOccurrence (a b : Nat)                     -- complete source/native-entry identities agree
   | both   (c d : Claim)                               -- snap two claims together
   deriving Repr
 
