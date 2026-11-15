@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 import struct
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from .attributes import emit_attribute
 from .source_scope import merge_scope, subject_scope
@@ -24,6 +24,21 @@ def iso_seconds(seconds):
     if not isinstance(seconds, int) or isinstance(seconds, bool) or seconds < 0:
         raise ValueError("expected nonnegative Unix seconds")
     return datetime.fromtimestamp(seconds, timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def shutdown_filetime_iso(raw):
+    """Preserve all seven fractional digits of an eligible native FILETIME."""
+    if not isinstance(raw, bytes) or len(raw) != 8:
+        raise ValueError('ShutdownTime requires exactly eight native binary bytes')
+    ticks = struct.unpack('<Q', raw)[0]
+    if system.filetime_us(ticks) is None:
+        raise ValueError('ShutdownTime is unset, before the supported epoch, or a sentinel')
+    seconds, fraction = divmod(ticks - 116444736000000000, 10_000_000)
+    try:
+        whole = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(seconds=seconds)
+    except OverflowError as error:
+        raise ValueError('ShutdownTime is outside the supported calendar') from error
+    return whole.isoformat(timespec='seconds')[:-6] + f'.{fraction:07d}Z'
 
 
 def build_number(value):
@@ -257,13 +272,26 @@ def extract(ev, target, ctx):
             except (ValueError, OSError) as error:
                 ev.problem(system._art(hive, path) + ' effective recorded time zone', error)
             path = current + r"\Control\Windows"
-            data = values(hive, path)
-            raw = data.get("ShutdownTime")
-            if isinstance(raw, bytes) and len(raw) == 8:
-                stamp = system.filetime_us(struct.unpack("<Q", raw)[0])
-                if stamp is not None:
-                    emit(hive, path, "ShutdownTime", "machine.last_shutdown", system.iso(stamp),
-                         value_time_meaning="recorded shutdown FILETIME in UTC")
+            key = system._open(ev, hive, path)
+            if key is not None:
+                try:
+                    entries = [value for value in key.values()
+                               if isinstance(value.name, str) and value.name.casefold() == 'shutdowntime']
+                    if len(entries) > 1:
+                        raise ValueError('ShutdownTime registry value is ambiguous')
+                    if entries:
+                        entry = entries[0]
+                        if entry.type != 3:
+                            raise ValueError('ShutdownTime is not native REG_BINARY')
+                        raw = entry.value
+                        stamp = shutdown_filetime_iso(raw)
+                        emit(hive, path, entry.name, "machine.last_shutdown", stamp,
+                             registry_value_type=3, native_filetime_le_hex=raw.hex(),
+                             native_filetime_ticks=struct.unpack('<Q', raw)[0],
+                             value_resolution='100ns', current_control_set=current,
+                             value_time_meaning="recorded shutdown FILETIME in UTC")
+                except Exception as error:
+                    ev.problem(system._art(hive, path, 'ShutdownTime'), error)
         elif hive.name == "SECURITY":
             # LSA primary domain name is a counted Unicode string. A DNS suffix or
             # default-logon domain is not silently relabeled as this field.
