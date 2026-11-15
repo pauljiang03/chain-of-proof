@@ -33,8 +33,11 @@ class OpticalReview(unittest.TestCase):
         self.assertIn('does not establish a write', text)
 
     def test_recovery_and_label_templates_do_not_invent_filesystem_or_device_identity(self):
-        self.assertNotIn("before the device's current file system", self.sentence('A077'))
-        self.assertIn('older states of the same file system', self.sentence('A077'))
+        recovery = self.sentence('A077')
+        self.assertNotIn("before the device's current file system", recovery)
+        self.assertIn('carry the same recorded recovery-area label', recovery)
+        self.assertIn('Matching labels do not establish', recovery)
+        self.assertIn('do not by themselves establish reformatting, wiping, or a file-copy action', recovery)
         self.assertNotIn('earlier file system', self.sentence('A080'))
         self.assertIn('different devices can share it', self.sentence('A079'))
 

@@ -18,8 +18,8 @@
     },
     {
       "path": "agent/answer_projection.py",
-      "sha256": "91e98b57f10575bdceb7841a60950dcbec82d80126c8f10deb380d1f99998313",
-      "bytes": 48396
+      "sha256": "830e8e9aed856e122fffef7f97e25f124f4df74248d1afc68331e29f073a150a",
+      "bytes": 55668
     },
     {
       "path": "agent/answer_requirements.py",
@@ -33,8 +33,8 @@
     },
     {
       "path": "checker/catalog.py",
-      "sha256": "5dfbb0179e7fd43b592a4928837fd7cea7dba2a932ad07026b7db99e57113788",
-      "bytes": 29320
+      "sha256": "3d4e65e6089c3ddf6b41d7120219037e694c8b86ae3313e8be9804963b0d014e",
+      "bytes": 30331
     },
     {
       "path": "extractor/exhibits.json",
