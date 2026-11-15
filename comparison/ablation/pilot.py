@@ -116,6 +116,7 @@ def freeze_pilot(*, facts, case_profile, questions, reference, out, seconds=900)
         "measurements": {
             "answer_accuracy": "A/C literal model JSON, identical deterministic scoring; both answer blocks unverified",
             "claim_filtering": "A-to-B retention/refusal/error counts; refusal does not establish a forensic error",
+            "candidate_population": "JSON object claims admitted by the shared transport schema; malformed object contents remain exact candidates, transport rejections are separate",
             "shared_claim_faithful_projector": "not implemented; no B question-accuracy claim",
             "reference_policy": "Retain frozen draft reference; unresolved questions remain visible and unscored",
             "missing_output_policy": "Retain failures/timeouts; invalid or absent submission is unmeasured, not repaired",

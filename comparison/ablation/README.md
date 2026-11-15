@@ -15,6 +15,12 @@ After both agents stop, B replays A's exact sealed candidate stream in order.
 It preserves duplicates and whole conjunctions, performs no repairs or model
 calls, and independently verifies accepted certificates.
 
+Both live arms use the same structural transport contract: claims are JSON
+objects, questions are strings, and optional revision IDs are strings. Non-object
+claim payloads are transport errors in both arms and are retained in the bridge
+log separately from candidate counts. Unsupported forms and malformed contents
+inside an object reach A unchanged; A performs no semantic validation.
+
 The reported measurements are deliberately separate:
 
 - **A/C answer agreement:** unchanged literal model JSON scored with the same
