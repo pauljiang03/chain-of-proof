@@ -14,6 +14,9 @@ from datetime import datetime, timezone
 
 from .attributes import emit_attribute
 from .source_scope import merge_scope, subject_scope
+from .registry_fields import dword
+from .registry_network import emit_dhcp
+from .registry_resources import resolve_timezone_label
 from . import system
 
 
@@ -125,6 +128,45 @@ def effective_time_zone(data):
     }
 
 
+def source_time_zone(ev, target, hive, current, data):
+    """Resolve only matched indirect labels, using one retained installed language."""
+    resolved, label_sources = dict(data), {}
+    language = None
+    for bias, name in (('StandardBias', 'StandardName'), ('DaylightBias', 'DaylightName')):
+        if (_signed_bias(data.get('Bias'), 'Bias') + _signed_bias(data.get(bias), bias)
+                != _signed_bias(data.get('ActiveTimeBias'), 'ActiveTimeBias')):
+            continue
+        if not isinstance(data.get(name), str) or not data[name].startswith('@'):
+            continue
+        if language is None:
+            path = current + r'\Control\MUI\UILanguages'
+            key = system._open(ev, hive, path)
+            before = len(ev.problems)
+            entries = list(system._subkeys(ev, hive, key)) if key is not None else []
+            if len(entries) != 1 or len(ev.problems) != before:
+                raise ValueError('indirect timezone label needs one unambiguous recorded installed UI language')
+            entry = entries[0]
+            values = system._vals(ev, hive, entry)
+            lcid = dword(values.get('LCID'), 'installed UI language LCID')
+            if lcid > 65535:
+                raise ValueError('installed UI language LCID is outside supported LANGID range')
+            language = (entry.name, lcid, {'artifact': system._art(hive, entry.path, 'LCID'),
+                'source_hive': str(hive.path), 'registry_key': entry.path,
+                'registry_value': 'LCID', 'raw_value': values['LCID'],
+                'selection': 'only subkey in the current control set MUI\\UILanguages inventory'})
+        if target is None:
+            raise ValueError('indirect timezone resolution has no source filesystem')
+        text, location = resolve_timezone_label(target, data[name], language[0], language[1])
+        resolved[name] = text
+        label_sources[name] = dict(location, resolved_text=text, language_registry_source=language[2])
+    display, provenance = effective_time_zone(resolved)
+    if label_sources:
+        for name in label_sources:
+            provenance['time_zone_registry_inputs'][name] = data[name]
+        provenance['resolved_time_zone_labels'] = label_sources
+    return display, provenance
+
+
 def extract(ev, target, ctx):
     hives = [h for h in system._hives(ev, target) if system._where(h)['source_variant'] == 'primary']
     subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:windows-system"
@@ -139,6 +181,8 @@ def extract(ev, target, ctx):
     def values(hive, path):
         key = system._open(ev, hive, path)
         return system._vals(ev, hive, key) if key is not None else {}
+
+    emit_dhcp(ev, hives, subject, emit)
 
     for hive in hives:
         if hive.name == "SOFTWARE":
@@ -187,12 +231,21 @@ def extract(ev, target, ctx):
                 emit(hive, path, "ComputerName", "machine.account_name", data["ComputerName"])
             path = current + r"\Control\TimeZoneInformation"
             data = values(hive, path)
+            for field, suffix in [('Bias', 'bias_minutes'), ('StandardBias', 'standard_bias_minutes'),
+                                  ('DaylightBias', 'daylight_bias_minutes'), ('ActiveTimeBias', 'active_bias_minutes')]:
+                if field in data:
+                    try:
+                        emit(hive, path, field, 'os.time_zone.' + suffix, _signed_bias(data[field], field),
+                             registry_native_value=data[field], unit='minutes',
+                             value_conversion='literal signed LONG or two-complement DWORD decoding; no effective-offset inference')
+                    except ValueError as error:
+                        ev.problem(system._art(hive, path, field), error)
             field = "TimeZoneKeyName" if data.get("TimeZoneKeyName") else "StandardName"
             if isinstance(data.get(field), str) and data[field]:
                 emit(hive, path, field, "os.time_zone_setting", data[field],
                      bias=data.get("Bias"), daylight_bias=data.get("DaylightBias"))
             try:
-                display, provenance = effective_time_zone(data)
+                display, provenance = source_time_zone(ev, target, hive, current, data)
                 locators = {name: {'artifact': system._art(hive, path, name),
                                    'source_hive': str(hive.path), 'registry_key': path,
                                    'registry_value': name}
@@ -201,7 +254,7 @@ def extract(ev, target, ctx):
                      registry_input_locators=locators, current_control_set=current,
                      control_set_selection_artifact=system._art(hive, 'Select', 'Current'),
                      **provenance)
-            except ValueError as error:
+            except (ValueError, OSError) as error:
                 ev.problem(system._art(hive, path) + ' effective recorded time zone', error)
             path = current + r"\Control\Windows"
             data = values(hive, path)
@@ -241,7 +294,14 @@ def extract(ev, target, ctx):
                     data = system._vals(ev, hive, entry)
                     fixed = system.parse_sam_f(data["F"])
                     names = system.parse_sam_v(data["V"])
-                    owner = subject + ":sam-rid:" + entry.name.upper()
+                    if fixed['rid'] != int(entry.name, 16):
+                        raise ValueError('SAM F RID does not match its Users subkey identity')
+                    if not names['name'] or any(ord(c) < 32 for c in names['name']):
+                        raise ValueError('SAM account name is empty or malformed')
+                    owner = subject + ':sam-record:' + json.dumps([str(hive.path), entry.path], separators=(',', ':'))
+                    emit(hive, entry.path, 'F', 'account.rid', fixed['rid'], owner=owner,
+                         value_byte_offset=0x30, value_byte_length=4,
+                         registry_subkey_rid=entry.name, value_conversion='literal little-endian DWORD agrees with hexadecimal account subkey')
                     emit(hive, entry.path, "V", "account.name", names["name"], owner=owner)
                     emit(hive, entry.path, "F", "account.logon_count", fixed["logon_count"], owner=owner,
                          limitation="retained SAM counter; not a complete login history or habitual-use proof")
