@@ -150,6 +150,36 @@ come only from the claimed fixed digest role, so a computed hash can be exported
 without inventing acquisition agreement. Placement, relevance, source completeness
 and full-answer correctness remain outside these certificates.
 
+## Declared filesystem membership and allocation flags (C2)
+
+`filesystemSetDeleted [declaration_fact_id, count, all_deleted]` stands alone like
+a census. It certifies both the exact count and the Boolean over the same declared
+extracted file set. It takes no investigator-supplied subset of member IDs.
+`filesystemSet` records a completed, explicitly described reader enumeration;
+its `obj` identifies that set including source origin and snapshot, and `aux`
+describes the procedure. Each member row has the same set `obj` and a distinct
+source-qualified file identity in `aux`. The fixed membership kinds carry an
+actual source allocation flag: `filesystemMemberDeleted`,
+`filesystemMemberAllocated`, or `filesystemMemberUnknown`.
+
+The checker and independent verifier rebind every declaration and member row for
+that exact set. Lean requires one declaration, 1–256 members, unique nonempty
+member identities, all flags known, and the proposed count. `true` requires every
+member to have the deleted kind; `false` requires an allocated member. Unknown
+flags block both results. Duplicate declaration rows, duplicate identities, empty
+sets and omitted members cannot certify. Rows belonging to other sets are never
+substituted for members. Replay fails if any bound member, flag or set changes.
+Both count and result remain proposed literals until the kernel accepts them.
+
+Completeness here means all recorded members of the declared extraction, not all
+files that ever existed. The reader must withhold a complete declaration when its
+enumeration is partial or encounters an unsupported source. The source parser,
+scope-qualified identities and faithful allocation-bit interpretation remain part
+of the evidence boundary; Lean does not independently parse NTFS or prove that a
+reader found every physical file. This form never proves secure erasure, deletion
+onset, recoverability, actor identity or intent. `recycle.executable_count` remains
+a separate reader-reported attribute and does not acquire this aggregate meaning.
+
 ## Deterministic tags
 
 Tags are computed by plain code in `extractor/tags.py`; each tag fact carries its rule.

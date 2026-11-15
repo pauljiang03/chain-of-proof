@@ -173,6 +173,25 @@ inductive Kind where
   | roleDocumentCoreKeywords
   | roleDocumentCoreCreated
   | roleDocumentCoreModified
+  | roleOsEffectiveTimeZone
+  | roleBrowserYahooMailCacheFileName
+  | roleVssCopyId
+  | roleVssSetId
+  | roleVssStoragePath
+  | roleVssCreatedAt
+  | roleBrowserSearchUrl
+  | roleBrowserSearchQuery
+  | roleBrowserSearchBrowser
+  | roleBrowserSearchRecordedTime
+  | roleRecycleIndexFileName
+  | roleRecycleIndexDeletedAt
+  -- A completed declared extraction procedure and its exact source-scoped members.
+  -- obj = scoped set identity; declaration aux = procedure/definition;
+  -- member aux = scoped file identity. t = examination, not deletion onset.
+  | filesystemSet
+  | filesystemMemberDeleted
+  | filesystemMemberAllocated
+  | filesystemMemberUnknown
   deriving DecidableEq, Repr
 
 structure Fact where

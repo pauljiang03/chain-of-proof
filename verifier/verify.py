@@ -36,8 +36,10 @@ def verify(cert: dict, source: FactSource) -> List[str]:
         # for a census this is every fact of the kind now in the evidence: if the
         # certificate lists fewer or more, its count is about a different evidence file
         ids, found = claims.cited_facts(claim, source)
-    except claims.ClaimError:
-        ids, found = claims.fact_ids(claim), source.get(claims.fact_ids(claim))
+    except claims.ClaimError as error:
+        # A failed census closure/type/capacity check cannot be replaced by the
+        # explicitly named subset. In particular, never replay a partial set.
+        return [f"cannot bind the complete cited evidence: {error}"]
     saved = cert.get("cited_facts", [])
     cited = {c["id"]: c for c in saved}
     if len(cited) != len(saved):

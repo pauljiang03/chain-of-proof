@@ -171,6 +171,7 @@ def diagnose(raw_claim, source, *, parsed=None, facts=None, parts=None, reason="
                     "an unsupported inference.", observed={"form": unknown},
                     required={"reviewed_rule_and_source_semantics": True})])
             return malformed(reason or str(error))
+    bound_facts_available = facts is not None
     cited = claims.fact_ids(parsed)
     facts = facts if facts is not None else source.get(cited)
     missing = set(cited) - facts.keys()
@@ -189,6 +190,23 @@ def diagnose(raw_claim, source, *, parsed=None, facts=None, parts=None, reason="
                     _required(part, "every cited ID resolves to the intended source-bound record")))
         return _gap(requirements)
     if claims.census_of(parsed):
+        if parsed[0] == "filesystemSetDeleted":
+            actual = (claims.filesystem_set_actual(parsed, facts) if bound_facts_available else
+                      {"membership_binding": "unavailable", "reason": reason})
+            capacity = "can cover at most" in reason
+            unknown = actual.get("unknown_flag_ids", [])
+            category = ("execution_or_unclassified" if capacity or "kernel" in reason else
+                        "missing_record" if unknown or actual.get("declaration_valid") is False else
+                        "contradictory_identity_or_value")
+            return _gap([_need(category,
+                reason if capacity else "The proposed count and deletion aggregate are not established for the exact declared extracted set.",
+                "Inspect the declared extraction scope, every scoped membership record and each actual filesystem allocation flag. "
+                "Missing or unreadable flags require the corresponding source record or a reviewed reader; missing declarations "
+                "require a completed recorded enumeration. Preserve contradictory flags and duplicate identities. Do not remove "
+                "members or substitute a different set to obtain the proposed result. This establishes neither recoverability nor secure erasure.",
+                sorted(facts), actual,
+                _required(parsed, "one declaration, exact nonempty unique membership, all flags known, exact count and aggregate",
+                          count=parsed[1][1], all_deleted=parsed[1][2], maximum_members=claims.MAX_FILESYSTEM_SET))])
         if "a census can cover at most" in reason:
             return _gap([_need("execution_or_unclassified",
                 reason + "; this is a checker capacity limit, not an evidence-absence claim.",
