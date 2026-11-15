@@ -155,6 +155,25 @@ def attributesSameSubject (s r v s' r' v' : Nat) (rk vk rk' vk' : Kind) : Claim 
   .both (recordedAttribute s r v rk vk)
     (.both (recordedAttribute s' r' v' rk' vk') (.link s .aux s' .aux))
 
+/-- A typed reference accepted only through its actual subject, role and value rows.
+    The compiler supplies the reviewed role/value kinds, never source strings. -/
+structure AttributeRef where
+  subject : Nat
+  role : Nat
+  value : Nat
+  roleKind : Kind
+  valueKind : Kind
+
+/-- R34: one atomic public tuple composes existing typed-attribute and subject-link
+    checks. The public parser bounds the total to 2–8 distinct approved roles;
+    independent replay applies the same bound before generating this term. -/
+def attributeTuple (first : AttributeRef) : List AttributeRef → Claim
+  | [] => recordedAttribute first.subject first.role first.value first.roleKind first.valueKind
+  | next :: rest => .both
+      (attributesSameSubject first.subject first.role first.value
+        next.subject next.role next.value first.roleKind first.valueKind next.roleKind next.valueKind)
+      (attributeTuple first rest)
+
 /-- R34: same-subject attributes of one declared value type contain equal encoded
     values. For image checks the compiler fixes logical/acquisition roles and algorithm. -/
 def attributeValuesAgree (s r v s' r' v' : Nat) (rk rk' vk : Kind) : Claim :=

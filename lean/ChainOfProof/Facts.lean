@@ -148,6 +148,31 @@ inductive Kind where
   | roleAppBinaryFileVersion
   | roleAppExecutionProgram
   | roleAppExecutionPath
+  | roleOsVersion
+  | roleOsBuildNumber
+  | roleOsSystemRoot
+  | roleAppExecutionRecordedTime
+  | roleAppExecutionSourceType
+  | roleAppExecutionTimeMeaning
+  | roleAppExecutionRunCount
+  | roleAppExecutionRawRunCount
+  | roleBrowserHistoryBrowser
+  | roleBrowserHistoryPath
+  | roleMailStorePath
+  | roleThumbcacheContainerPath
+  | roleStickyNotesContainerPath
+  | roleMailMessageBodyUnicode
+  | roleMailMessageSubjectUnicode
+  | roleDocumentContainerPath
+  | roleDocumentContainerFormat
+  | roleDocumentCoreTitle
+  | roleDocumentCoreSubject
+  | roleDocumentCoreCreator
+  | roleDocumentCoreLastModifiedBy
+  | roleDocumentCoreDescription
+  | roleDocumentCoreKeywords
+  | roleDocumentCoreCreated
+  | roleDocumentCoreModified
   deriving DecidableEq, Repr
 
 structure Fact where
