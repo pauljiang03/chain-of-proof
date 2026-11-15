@@ -12,8 +12,6 @@ records prove it. The report and the app show only accepted findings.
 git clone https://github.com/pauljiang03/conan && cd conan && ./install.sh
 ```
 
-The app opens on two saved NIST CFReDS cases: Data Leakage and the Hacking Case.
-
 ## Results
 
 Each investigation had a 15-minute budget. A fixed scorer compared the answers with the
