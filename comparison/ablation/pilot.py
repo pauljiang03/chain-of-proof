@@ -82,7 +82,7 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
     """Write one immutable-by-convention plan; return its contents and file hash."""
     if type(seconds) is not int or seconds <= 0:
         raise ValueError("The per-arm wall-time cap must be a positive integer")
-    if protocol not in ("literal-v1", "claim-bindings-v2"):
+    if protocol not in ("literal-v1", "claim-bindings-v2", "claim-bindings-v3"):
         raise ValueError("Unsupported pilot runtime protocol")
     if reference is None and protocol == "literal-v1":
         raise ValueError("literal-v1 requires a private reference")
@@ -97,6 +97,10 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
     _json(questions)
     public = read_question_profile(questions)
     with_questions(read_profile(case_profile), public)
+    preflight = None
+    if protocol == "claim-bindings-v3":
+        from comparison.ablation.checkpoints import public_preflight
+        preflight = public_preflight(public)
     private = None
     unresolved = None
     if reference is not None:
@@ -148,7 +152,7 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
         "preparation": {"facts": "same existing extracted snapshot for both arms",
                         "fresh_extraction_seconds": None, "end_to_end_extraction_comparison": False},
     }
-    if protocol == "claim-bindings-v2":
+    if protocol != "literal-v1":
         manifest["protocol"] = "sol-subagent-A-B-C-common-claim-field-projection"
         if private is None:
             manifest["evaluation_use"] = "workflow_smoke_no_accuracy_key"
@@ -168,6 +172,14 @@ def freeze_pilot(*, facts, case_profile, questions, out, reference=None, protoco
         manifest["measurements"]["binding_policy"] = (
             "Model-authored final bindings only; fill absent hashes from exact named saved claims. "
             "No posthoc binding inference, selector changes, value repair or collision recovery after B filtering")
+    if protocol == "claim-bindings-v3":
+        manifest["public_contract_preflight"] = preflight
+        manifest["isolation"]["allowed_reads"] += "; shared preview(document) and checkpoint(document)"
+        manifest["measurements"]["binding_policy"] = (
+            "Last valid investigator-authored checkpoint before explicit session deadline only; "
+            "atomic receipt binds document, authoring time and candidate prefix; final prose cannot replace it. "
+            "Absent hashes resolve from exact saved claims only; strict public claim requirements apply. "
+            "Missing checkpoint is unavailable, including after timeout.")
     # Refuse input changes observed while the contracts were inspected.
     if any(fingerprint(path) != bindings[name] for name, path in paths.items()):
         raise ValueError("An input changed during pilot preparation")
@@ -186,10 +198,10 @@ def validate_frozen(path, *, expected_sha256):
     manifest = _json(path)
     protocol = manifest.get("runtime_protocol", "literal-v1")
     unavailable = manifest.get("case", {}).get("reference_status") == "unavailable_no_key"
-    expected_inputs = set(INPUTS) - {"reference"} if protocol == "claim-bindings-v2" and unavailable else set(INPUTS)
-    if (manifest.get("schema_version") != 1 or protocol not in ("literal-v1", "claim-bindings-v2")
+    expected_inputs = set(INPUTS) - {"reference"} if protocol != "literal-v1" and unavailable else set(INPUTS)
+    if (manifest.get("schema_version") != 1 or protocol not in ("literal-v1", "claim-bindings-v2", "claim-bindings-v3")
             or set(manifest.get("inputs", {})) != expected_inputs
-            or (unavailable and protocol != "claim-bindings-v2")
+            or (unavailable and protocol == "literal-v1")
             or (unavailable and (manifest["case"].get("provisionally_scorable") is not None
                                 or manifest["case"].get("unevaluable_ids") is not None))):
         raise ValueError("Unsupported frozen pilot manifest")
@@ -207,7 +219,7 @@ def main(argv=None):
     parser.add_argument("--case-profile", required=True)
     parser.add_argument("--questions", required=True)
     parser.add_argument("--reference", help="coordinator-only private scoring contract")
-    parser.add_argument("--protocol", choices=("literal-v1", "claim-bindings-v2"), default="literal-v1")
+    parser.add_argument("--protocol", choices=("literal-v1", "claim-bindings-v2", "claim-bindings-v3"), default="literal-v1")
     parser.add_argument("--out", required=True)
     parser.add_argument("--seconds", type=int, default=900)
     args = parser.parse_args(argv)

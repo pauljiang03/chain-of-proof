@@ -196,8 +196,12 @@ class AnswerRequirements(unittest.TestCase):
             result = answer(root, 'MAIL', [{'finding_id': 'F1', 'field': 'program', 'path': []}])
             self.assertEqual(result['submission']['answers'][0]['status'], 'unknown')
             bundle = export.bundle(root, 'Synthetic case')
-            self.assertEqual(project_bundle(bundle, contract), result)
-            self.assertIn('claim_role_does_not_meet_public_requirement', report.render(bundle))
+            # Refused proposals are preview diagnostics, not durable answers.
+            retained = project_bundle(bundle, contract)
+            self.assertEqual(retained['submission']['answers'][0]['status'], 'unknown')
+            self.assertEqual(retained['unsupported'], [])
+            self.assertIn('claim_role_does_not_meet_public_requirement',
+                          [row['reason'] for row in result['unsupported']])
 
     def test_separate_debug_profile_retains_observations_and_declares_missing_stronger_roles(self):
         path = Path(__file__).resolve().parent.parent / 'eval/contracts/answer_meaning_debug_v1/questions.json'

@@ -111,7 +111,7 @@ YOUR TOOLS (these are all you have)
   plan()                     saved public questions and work so far
   update_question(question_id, finding_ids?, searched?, unresolved?, next_actions?, status?)
                              persist work; status is not proof of completeness
-  answer(question_id, bindings?, replace?)
+  answer(question_id, bindings?, replace?, preview?)
                              get the field-binding catalog, or bind supported answer fields
   evidence_needs(proof_gap?)  available readers and diagnostic follow-up suggestions
   collect(reader, exhibit)   run an approved reader into a NEW evidence snapshot
@@ -139,7 +139,11 @@ question's requested time and scope filters; do not export every row indiscrimin
 
 Use answer(question_id) to inspect the supported binding catalog. Bind the known
 requested fields to their exact claim fields; retain source distinctions and uncertainty.
-Inspect its public field_requirements too. Catalog support is not evidence availability.
+Inspect its public field_requirements too. Use preview=True with proposed bindings to
+diagnose paths, roles, conflicts and literal mismatches before saving; preview does not
+change the answer store. Invalid replacements leave the last supported partial unchanged. Nonconflicting
+partial appends retain supported fields and raw unsupported proposals; inspect persisted
+and update_outcome on a partial or rejected response. Unsupported proposals never supply values. Catalog support is not evidence availability.
 An executable name does not establish a product version; an incomplete path does not
 establish a full path or a copy; a record-kind label does not establish an action's purpose.
 A certificate proves its exact claim, not the meaning of the answer field you choose.

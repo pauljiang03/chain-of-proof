@@ -9,13 +9,15 @@ from agent.audit import audited
 
 
 TOOLS = ("forms", "sql", "fact", "check")
-PROTOCOLS = ("literal-v1", "claim-bindings-v2")
+PROTOCOLS = ("literal-v1", "claim-bindings-v2", "claim-bindings-v3")
 BINDING_TOOLS = TOOLS + ("plan", "update_question", "inventory_page")
 
 
 def tools_for(protocol="literal-v1"):
     if protocol not in PROTOCOLS:
         raise ValueError("unknown ablation protocol")
+    if protocol == "claim-bindings-v3":
+        return BINDING_TOOLS + ("checkpoint", "preview")
     return TOOLS if protocol == "literal-v1" else BINDING_TOOLS
 
 
