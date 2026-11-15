@@ -85,6 +85,8 @@ def freeze_pilot(*, facts, case_profile, questions, reference, out, seconds=900)
     validate_reference(private)
     if private["case_id"] != public["case_id"] or private.get("time_zone") != public.get("time_zone"):
         raise ValueError("Public and private case contracts differ")
+    if public.get("contract_revision") != private.get("public_contract_revision"):
+        raise ValueError("Public and private contract revisions differ")
     expected = {str(q["id"]): q for q in private["questions"]}
     if {q["id"] for q in public["questions"]} != set(expected):
         raise ValueError("Public and private question IDs differ")

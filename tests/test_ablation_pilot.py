@@ -71,6 +71,11 @@ class PilotFreeze(unittest.TestCase):
             self.freeze()
         self.assertFalse((self.root / "pilot").exists())
         public["questions"][0]["prompt"] = "What is recorded?"
+        public["contract_revision"] = "different-revision"
+        self.questions.write_text(json.dumps(public))
+        with self.assertRaisesRegex(ValueError, "revisions differ"):
+            self.freeze()
+        del public["contract_revision"]
         self.questions.write_text(json.dumps(public))
         self.freeze()
         before = fingerprint(self.root / "pilot/frozen-manifest.json")
