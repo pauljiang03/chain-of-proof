@@ -285,7 +285,35 @@ inductive Kind where
   | roleEventAccountSid
   | roleMailRecoveredSubjectUnicode
   | roleMailRecoveredBodyUnicode
+  | roleUsbDeviceInstanceId
+  | roleUsbDeviceId
+  | roleUsbInstanceId
+  | roleUsbRecordedTime
+  | roleUsbRecordTimeMeaning
+  | roleUsbSourceType
   deriving DecidableEq, Repr
+
+/-- Source-file occurrence identity, separately from path and displayed serial.
+    Zero denotes missing identity. Text dimensions use an injective UTF-8 encoding;
+    native numeric dimensions are offset by one. Reader provenance binds these
+    values to the evidence; the kernel checks their presence and equality. -/
+structure FileOccurrence where
+  image : Nat := 0
+  exhibit : Nat := 0
+  snapshot : Nat := 0
+  variant : Nat := 0
+  disk : Nat := 0
+  partitionOffset : Nat := 0
+  partitionSize : Nat := 0
+  entryKind : Nat := 0
+  entryId : Nat := 0
+  entrySequence : Nat := 0
+  deriving BEq, DecidableEq, Repr
+
+def FileOccurrence.complete (o : FileOccurrence) : Bool :=
+  Nat.blt 0 o.image && Nat.blt 0 o.exhibit && Nat.blt 0 o.snapshot && Nat.blt 0 o.variant &&
+  Nat.blt 0 o.disk && Nat.blt 0 o.partitionOffset && Nat.blt 0 o.partitionSize &&
+  Nat.blt 0 o.entryKind && Nat.blt 0 o.entryId && Nat.blt 0 o.entrySequence
 
 structure Fact where
   id   : Nat    -- row id in the evidence DB
@@ -294,6 +322,7 @@ structure Fact where
   res  : Nat    -- timestamp uncertainty in µs: the true time lies within (t - res, t + res)
   obj  : Nat    -- interned primary entity
   aux  : Nat    -- interned secondary entity
+  occurrence : FileOccurrence := {}
   deriving Repr
 
 /-- A stud: one of a fact's two entity slots. -/
