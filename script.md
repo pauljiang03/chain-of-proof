@@ -1,4 +1,4 @@
-### 0:00–0:20 | The hook
+### 0:00–0:20 | The hook -- Michelle
 *Screen: CONAN-F, with the NIST case loaded.*
 
 **We built Devin for digital forensics.**
@@ -7,7 +7,7 @@ Imagine handing an AI an entire criminal investigation and letting it work throu
 
 That's what we wanted to build. An AI forensic investigator that searches evidence, reconstructs events, and checks its own findings.
 
-### 0:20–0:45 | The case
+### 0:20–0:45 | The case -- Person B
 *Screen: Summary.*
 
 Here's our test case from NIST.
@@ -18,7 +18,7 @@ Security stops him with a USB drive and a CD, but finds no obvious evidence of t
 
 You're the investigator assigned to figure out what actually happened.
 
-### 0:45–1:10 | The agent at work
+### 0:45–1:10 | The agent at work -- Person C
 *Screen: Timeline, then Proof Graph replay.*
 
 We gave CONAN-F over 335,000 extracted forensic records from this case.
@@ -27,7 +27,7 @@ Our AI agent can search these records, investigate leads, and propose findings a
 
 Here, we can see the timeline it reconstructed and replay how findings connect back to the original evidence.
 
-### 1:10–1:40 | The technical breakthrough
+### 1:10–1:40 | The technical breakthrough -- Person D
 *Screen: Show the Lean proof, ideally followed by the controlled incorrect USB claim.*
 
 But there's a catch.
@@ -42,7 +42,7 @@ For example, if the AI links a file to the wrong USB drive, Lean detects that th
 
 Supported claims receive independently verifiable proof certificates.
 
-### 1:40–2:00 | The close
+### 1:40–2:00 | The close -- Michelle
 *Screen: Proof Graph with a verified finding selected.*
 
 Think about what this means for investigators.
