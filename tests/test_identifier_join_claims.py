@@ -105,6 +105,21 @@ class IdentifierJoinClaims(unittest.TestCase):
                 promoted['english'] = 'This is the same physical device and volume.'
                 self.assertTrue(verify(promoted, self.source))
 
+    def test_content_hash_match_never_promotes_hash_equality_to_byte_identity(self):
+        self.source.strings.update({8: 'sha256:' + 'ab' * 32, 9: 'sha256:' + 'cd' * 32,
+                                    10: r'\other.txt'})
+        self.source.rows = [Fact(1, 'fileContent', 10_000_000, 1, 3, 8, {'exhibit': 'A'}),
+                            Fact(2, 'fileContent', 10_000_000, 1, 10, 8, {'exhibit': 'B'}),
+                            Fact(3, 'fileContent', 10_000_000, 1, 10, 9, {'exhibit': 'C'})]
+        cert = self.certify({'sameContent': [1, 2]})
+        self.assertIn('same recorded content hash sha256:' + 'ab' * 32, cert['english'])
+        self.assertIn('does not independently prove byte-for-byte identity or source authenticity', cert['english'])
+        self.assertNotIn('identical content', cert['english'])
+        self.certify({'sameContent': [1, 3]}, accepted=False)
+        promoted = copy.deepcopy(cert)
+        promoted['english'] = 'These files have identical authentic content.'
+        self.assertTrue(verify(promoted, self.source))
+
 
 if __name__ == '__main__':
     unittest.main()

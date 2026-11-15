@@ -559,8 +559,9 @@ def _en_content(args, facts, src):
 
 def _en_same_content(args, facts, src):
     a, b = facts[args[0]], facts[args[1]]
-    return (f"{src.string(a.obj)}{_on(a)} and {src.string(b.obj)}{_on(b)} have identical "
-            f"content: both read as {src.string(a.aux)}.")
+    return (f"{src.string(a.obj)}{_on(a)} and {src.string(b.obj)}{_on(b)} have the same "
+            f"recorded content hash {src.string(a.aux)}. This equality does not independently "
+            f"prove byte-for-byte identity or source authenticity.")
 
 
 # ---- Census: statements about all the records of one kind ----------------------------
