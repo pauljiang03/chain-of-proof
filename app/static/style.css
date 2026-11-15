@@ -326,7 +326,7 @@ body.resizing * { cursor: col-resize !important; }
 .report-buttons .button { text-decoration: none; }
 .button[aria-disabled="true"], .button:disabled { opacity: .45; pointer-events: none; }
 .report-preview { overflow: auto; background: var(--panel-2); padding: 18px; }
-.report-host { max-width: 980px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 10px 30px rgba(0, 0, 0, .12); }
+.report-host { max-width: 860px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 10px 30px rgba(0, 0, 0, .12); }
 .grid-table .mark { width: 1%; text-align: center; cursor: default; }
 .detail-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
@@ -627,7 +627,7 @@ dialog { width: min(560px, 92vw); border-radius: 12px; }
 .key-row:first-child { border-top: 0; }
 .key-row { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 4px 20px; padding: 10px 0; border-top: 1px solid var(--line-2); }
 .key-row h3 { margin: 0; font-size: 0.875rem; font-weight: 600; line-height: 1.5; }
-.key-body p { font-size: 0.9375rem; line-height: 1.55; max-width: 92ch; overflow-wrap: anywhere; white-space: pre-wrap; }
+.key-body p { font-size: 0.9375rem; line-height: 1.55; max-width: none; overflow-wrap: anywhere; white-space: pre-wrap; }
 .key-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
 .key-table th { text-align: left; font-weight: 600; color: var(--muted); padding: 4px 12px 4px 0; border-bottom: 1px solid var(--line); }
 .key-table td { padding: 5px 12px 5px 0; border-bottom: 1px solid var(--line-2); overflow-wrap: anywhere; }
@@ -677,8 +677,8 @@ table { font-variant-numeric: tabular-nums; }
 #graph-lock { grid-column: 1; grid-row: 2; padding: 0 6px; }
 #graph-step-label { grid-column: 2 / -1; grid-row: 2; align-self: center; font-size: 0.75rem; color: var(--muted); }
 
-/* Summary sentences: a readable line length. The device table keeps the full width. */
-.key-body p { max-width: 78ch; }
+/* Summary sentences fill their card, so the text sits evenly between both edges. */
+.key-body p { max-width: none; }
 .advanced > summary { padding: 4px 0; }
 /* Settings row: the three fields share one baseline even when a label is long. */
 .advanced .form-row { grid-template-columns: 1.1fr 1.3fr minmax(112px, .7fr); align-items: end; }

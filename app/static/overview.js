@@ -145,7 +145,7 @@
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
-    hero.append(el("h2", "", "Key findings"));
+    hero.append(el("h2", "", "Overview"));
     const lead = array(story.lead).map(String).join(" ");
     if (lead) hero.append(el("p", "ov-lead", lead));
     const overview = story.investigator_overview;
