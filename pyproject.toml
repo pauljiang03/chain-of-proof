@@ -3,15 +3,14 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "chain-of-proof"
+name = "conan-f"
 version = "0.1.0"
 description = "Machine-checked digital forensics: the LLM proposes, Lean 4 decides."
 requires-python = ">=3.9"
 dependencies = ["duckdb>=1.0"]
 
 [project.scripts]
-cop = "app.cli:main"
-# the same commands under the tool's own name; with no arguments it opens the desktop window
+# with no arguments it opens the desktop window
 conan = "app.cli:conan"
 
 [project.optional-dependencies]
@@ -21,7 +20,7 @@ extract = ["dissect>=3.20", "libpff-python>=20231205", "pypdf>=6.21.4,<7"]
 # needed only for the API-key backend of the AI investigator (agent/run.py --backend deepagents);
 # deepagents needs Python 3.11 or newer
 agent = ["deepagents>=0.7; python_version >= '3.11'", "langchain-anthropic>=1.7; python_version >= '3.11'"]
-# needed only for `cop desktop`: the workbench in a native window (the system's own web view)
+# needed only for `conan desktop`: the workbench in a native window (the system's own web view)
 desktop = ["pywebview>=5.0"]
 
 [tool.setuptools.packages.find]

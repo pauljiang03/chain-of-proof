@@ -75,7 +75,7 @@
     }
     let response;
     try { response = await fetch(path, options); }
-    catch (_) { connection(false); throw new Error("Cannot reach the local server. Check that cop serve is running, then refresh."); }
+    catch (_) { connection(false); throw new Error("Cannot reach the local server. Check that conan serve is running, then refresh."); }
     let value;
     try { value = await response.json(); }
     catch (_) { throw new Error("The local server returned an unreadable response."); }

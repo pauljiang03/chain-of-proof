@@ -413,7 +413,7 @@ def _front(info, tz, case, findings, options, story, short=False):
                         ('Trust tier as recorded', tally(checker['trust'])), ('Declared axioms', tally(checker['axioms']))]))
     store = case.get('facts_sha256')
     out.append('<p>Independent verification uses the stored proof and the original evidence store. '
-               'The verification command is <code>cop verify</code>.</p>')
+               'The verification command is <code>conan verify</code>.</p>')
     if isinstance(store, str) and store:
         out.append('<p>Evidence store hash (SHA-256): <span class="mono">' + _h(store) + '</span>.</p>')
     out.append('</section>')

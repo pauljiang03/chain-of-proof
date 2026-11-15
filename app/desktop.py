@@ -1,11 +1,11 @@
 """Conan, the CONAN-F desktop application: the local workbench in a native window.
 
-    conan                                         # or: cop desktop, python -m app.desktop
+    conan                                         # or: conan desktop, python -m app.desktop
     python -m app.desktop --make-app ~/Applications   # macOS: a double-clickable Conan.app
 
 The window is the operating system's own web view (WebKit on macOS, WebView2 on
 Windows, WebKitGTK on Linux) through pywebview, so no browser engine is bundled. It
-shows the same loopback server as `cop serve` and stops it when the window closes. The
+shows the same loopback server as `conan serve` and stops it when the window closes. The
 server keeps to one port when it can, so that the window remembers per-case conveniences
 (findings marked for a report, cover details) from one start to the next.
 
@@ -28,7 +28,7 @@ from app.server import ROOT, create_server
 
 TITLE = "Conan"   # the application's name: window, menu bar and launcher; the workbench inside is CONAN-F
 ICON = Path(__file__).resolve().parent / "assets" / "Conan.icns"   # built by scripts/make_icon.py
-PORT = 8766   # next to `cop serve` on 8765; any free port is used when this one is taken
+PORT = 8766   # next to `conan serve` on 8765; any free port is used when this one is taken
 BUNDLE_ID = "dev.conan-f.workbench"
 WINDOW = {"width": 1600, "height": 1000, "min_size": (900, 600)}
 
@@ -96,7 +96,7 @@ def _webview():
         import webview
     except ImportError:
         raise DesktopUnavailable("the desktop window needs pywebview. Install it with: "
-                                 "pip install -e '.[desktop]'  (or use `cop serve` in a browser)") from None
+                                 "pip install -e '.[desktop]'  (or use `conan serve` in a browser)") from None
     return webview
 
 
@@ -164,7 +164,7 @@ def make_app(directory, root=ROOT, executable=None, replace=False) -> Path:
     from the Finder do not inherit the shell's, and Lean has to be found.
     """
     if sys.platform != "darwin":
-        raise ValueError("--make-app writes a macOS application bundle; on this system use `cop desktop`")
+        raise ValueError("--make-app writes a macOS application bundle; on this system use `conan desktop`")
     bundle = Path(directory).expanduser() / f"{TITLE}.app"
     if bundle.exists() or bundle.is_symlink():
         # With `replace`, only a bundle this function wrote is removed: its launcher carries MARK.
@@ -200,7 +200,7 @@ def make_app(directory, root=ROOT, executable=None, replace=False) -> Path:
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(prog="cop desktop", description=__doc__,
+    parser = argparse.ArgumentParser(prog="conan desktop", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--port", type=int, help=f"loopback port; default: {PORT}, or any free port if it is taken")
     parser.add_argument("--make-app", metavar="DIR", help="macOS: write Conan.app into DIR and exit")

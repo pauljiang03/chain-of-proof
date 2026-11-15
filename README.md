@@ -71,26 +71,26 @@ that use a heuristic rule.
 
 ## Use the command line
 
-`./install.sh` also installs the `cop` command in `.venv`. Run `source .venv/bin/activate` first.
+`./install.sh` also installs the `conan` command in `.venv`. Run `source .venv/bin/activate` first.
 
 ```sh
-cop investigate --name dev/my-case --images /path/images --exhibits exhibits.json \
+conan investigate --name dev/my-case --images /path/images --exhibits exhibits.json \
   --question "Which external devices were connected?" --minutes 10
-cop report --run runs/dev/my-case/run.json --format html --out report.html
-cop verify --run runs/dev/my-case/run.json --facts /path/facts.json
+conan report --run runs/dev/my-case/run.json --format html --out report.html
+conan verify --run runs/dev/my-case/run.json --facts /path/facts.json
 ```
 
 `exhibits.json` names each image and its role (`pc`, `removable` or `optical`), for example
 `{"laptop.E01": {"exhibit": "PC1", "role": "pc"}}`. CONAN-F reads E01 sets, raw images and
-optical images. `cop investigate` prints the path of the record store (`facts.json`); use it
-with `cop verify`. The disk images stay on your computer. The AI service receives only the
+optical images. `conan investigate` prints the path of the record store (`facts.json`); use it
+with `conan verify`. The disk images stay on your computer. The AI service receives only the
 questions and the tool results.
 
 | Command | Use |
 |---|---|
-| `cop ingest` | Extract records only. Do not start the AI investigator. |
-| `cop plan`, `cop resume` | Continue an investigation in a new run. |
-| `cop serve`, `cop desktop` | Open the app in a browser or a window. |
+| `conan ingest` | Extract records only. Do not start the AI investigator. |
+| `conan plan`, `conan resume` | Continue an investigation in a new run. |
+| `conan serve`, `conan desktop` | Open the app in a browser or a window. |
 | `python -m verifier.package build` | Make a package that another examiner can verify without the disk images. |
 
 ## Develop

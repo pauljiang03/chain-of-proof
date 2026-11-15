@@ -1,4 +1,4 @@
-"""Local investigation commands. Run ``cop --help`` or ``python -m app.cli --help``."""
+"""Local investigation commands. Run ``conan --help`` or ``python -m app.cli --help``."""
 from __future__ import annotations
 
 import argparse
@@ -226,7 +226,7 @@ def _report(args):
     return 0
 
 
-def _parser(prog="cop"):
+def _parser(prog="conan"):
     parser = argparse.ArgumentParser(prog=prog, description="Local AI investigation of supported evidence images and extracted records.")
     commands = parser.add_subparsers(dest="command", required=True)
     investigate = commands.add_parser("investigate", help="investigate images or extracted facts and save a report")
@@ -283,12 +283,12 @@ def _parser(prog="cop"):
 
 
 def conan(argv=None, *, root=ROOT):
-    """The `conan` command: every `cop` subcommand, and the desktop window when given none."""
+    """The `conan` command: every subcommand, and the desktop window when given none."""
     argv = list(sys.argv[1:] if argv is None else argv)
     return main(argv or ["desktop"], root=root, prog="conan")
 
 
-def main(argv=None, *, root=ROOT, prog="cop"):
+def main(argv=None, *, root=ROOT, prog="conan"):
     argv = list(sys.argv[1:] if argv is None else argv)
     # Keep the existing verifier/package argument contracts and exit statuses.
     if argv and argv[0] == "verify":
