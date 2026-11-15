@@ -63,6 +63,12 @@ Related answer fields must use one source subject and the required source view.
 Lean checks typed fields and exact declared file sets. A larger set of records
 does not prove a stronger conclusion. Unsupported meanings stay explicit.
 
+Recent source checks cover partition fields, Desktop Search rows, registry
+exclusions, Search service configuration and a revised IE-index date-window
+question. Five selected actual-source claims passed Lean and replay; 14 answer
+fields reached reports. Seventeen misleading alternatives were refused. These
+are development checks. They do not replace the benchmark results below.
+
 Paged tools and saved answer checkpoints retain partial work. The latest
 comparison has saved answer scores for both cases. Coverage remains low.
 Reader checks and proof checks are separate from answer scores.

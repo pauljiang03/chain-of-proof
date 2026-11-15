@@ -60,6 +60,43 @@ coverage, not measured answer accuracy. Hacking's actual profile and all frozen
 matching rules stay unchanged. Q42 service-only support and Q44 interval admission
 are the next isolated work; both need their declared meanings and source limits.
 
+The later integrated batch at `58293c1` adds Q42's selected-service configuration
+label and Q44's explicitly narrowed indexed-store/date-window draft. The public
+draft is version 3, with 69 supported and 289 unsupported leaves. Q44's revised
+instruction defines the indexed observation and interval; it does not establish
+equivalence with the original usage question. Hacking representation changes
+remain a review-only proposal with unresolved reference and precision policies.
+
+Independent review found that the current-control-set selector accepted integer
+values with the wrong registry type. Root now requires a unique native DWORD
+selector and an existing control set. An initial exact-Python-type check rejected
+Dissect's legitimate uint32 subclass; the corrective commit accepts integer
+subclasses while rejecting booleans and retaining the native-type requirement.
+Actual SYSTEM readback passed after that correction, and wrong-type cases were
+refused. Root's 96 combined checks and eight updated Q42 tests passed. These
+overlap other reported suites; do not add their counts as unique tests.
+
+The selected actual-source Q2/Q46/Q50 probe passed three Lean/replay certificates,
+ten native answer fields and eight refusal controls. Receipt SHA256:
+`f75326f6e77d34fa65e9ab65c2dceac14353e08438bbc4eade1713e6ba619c70`.
+The native IE marker, literal URL and 100ns timestamp were read back for one ESE
+row; that is separate from the extracted 47/46 row inventory. Database state 2,
+unreplayed logs and no new whole-image hash remain explicit limits.
+
+The final corrected-reader Q42/Q44 source probe passed: two actual Lean/replay
+certificates, four native answer fields, nine refusal controls and HTML/Markdown
+report checks. The fresh SYSTEM reader retained Q50's exclusion value. Receipt
+SHA256 `768ad8e2db10184b93ff6e2a17fccca74cf1a5c337b6a24f00d45dba7a938e60`.
+Root verified the four shared runtime-file hashes and exact runner bytes against
+the sample receipt. The reusable runner is integrated at `6c2e90a`.
+
+Three intermediate audit assertions are retained: requested/native registry-key
+casing, projected leaf order, and an unavailable field selected for a negative
+control. They required runner corrections, not product fixes or extra model
+attempts. Fresh corrected SYSTEM facts were retained and reused. None of these
+checks changes the frozen experiment scores. The source-development supplement
+is being sealed separately from the original experiment archive.
+
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.
 Use isolated worktrees for new work. Reassign completed workers to independent
