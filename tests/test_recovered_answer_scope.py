@@ -105,7 +105,7 @@ class RecoveredAnswerScope(unittest.TestCase):
                 self.assertEqual(origin['source_variant'], 'parser-recovery')
 
     def test_actual_public_mail_questions_refuse_recovery_as_primary(self):
-        public = json.loads((ROOT / 'eval/data_leakage_strict_draft/questions.json').read_text())
+        public = json.loads((ROOT / 'tests/fixtures/contracts/data-leakage/questions.json').read_text())
         targets = [('Q21', ['messages', 0, 'subject'], 'value_0'),
                    ('Q21', ['messages', 0, 'body'], 'value_1'),
                    ('Q45', ['messages', 0, 'subject'], 'value_0'),
@@ -121,7 +121,7 @@ class RecoveredAnswerScope(unittest.TestCase):
     def test_recovered_roles_fail_deleted_and_purged_meaning_even_when_origin_matches(self):
         public = self.contract('parser-recovery', RECOVERED_ROLES)
         schema = public['questions'][0]['answer_schema']
-        original = json.loads((ROOT / 'eval/data_leakage_strict_draft/questions.json').read_text())
+        original = json.loads((ROOT / 'tests/fixtures/contracts/data-leakage/questions.json').read_text())
         q52 = next(q for q in original['questions'] if q['id'] == 'Q52')
         # Reuse the actual stronger public deletion requirement, while making
         # source origin intentionally compatible to test the separate boundary.

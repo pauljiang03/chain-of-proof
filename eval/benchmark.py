@@ -1,15 +1,12 @@
-"""Implementation-neutral, deterministic scoring of typed question answers.
+"""Deterministic scoring of typed answers against a reference.
 
     python -m eval.benchmark --reference eval/benchmark_nist.json \
         --answers /path/answers.json --out /path/results.json
 
-Neither facts nor Lean kinds occur in this contract. A reference question declares
-its expected JSON answer and optional matching rules. All required fields and list
-members must match, without extras, for FOUND. This is a new explicit rubric, not a
-reproduction of Mulder's historical prose judgments or false-positive rate.
-
+Each reference question declares its expected JSON answer and optional matching rules.
+FOUND needs every required field and list member, with no extras.
 Unknown/unanswered is a response status; false and null are ordinary answer values.
-Unevaluable questions remain in the question denominator and are reported separately.
+Unevaluable questions stay in the question count and are reported separately.
 """
 from __future__ import annotations
 
@@ -108,8 +105,7 @@ def _counts(events):
     return {"true_positive": c["match"], "missing": c["missing"], "wrong": c["wrong"]}
 
 
-# Explicit bound stays below Python's configurable large-integer parsing guard.
-# Precision through this bound is exact; larger inputs refuse rather than round.
+# Below Python's large-integer parsing limit. Longer fractions are refused, not rounded.
 MAX_TIMESTAMP_FRACTION_DIGITS = 256
 _ISO_INSTANT = re.compile(
     r'(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})[T ]'
@@ -119,11 +115,9 @@ _ISO_INSTANT = re.compile(
 
 
 def _parsed_instant(value, zone):
-    """Resolve a whole-second UTC datetime plus an exact decimal fraction.
+    """Return a whole-second UTC datetime and the exact decimal fraction.
 
-    datetime is used only for calendar/zone resolution, never for parsing a
-    fraction. Fractional offsets and fractions on hours/minutes are unsupported
-    rather than silently truncated or assigned an unintended unit.
+    Fractional offsets and fractions of hours or minutes are refused, not truncated.
     """
     if not isinstance(value, str) or not ("T" in value or " " in value):
         raise ValueError("an instant requires an ISO datetime, not a date alone")
@@ -143,8 +137,7 @@ def _parsed_instant(value, zone):
         if (int(digits[:2]) >= 24 or (len(digits) >= 4 and int(digits[2:4]) >= 60)
                 or (len(digits) == 6 and int(digits[4:6]) >= 60)):
             raise ValueError("invalid timestamp offset")
-        # Canonicalize supported compact/hour-only offsets for Python versions
-        # whose fromisoformat accepts fewer offset spellings.
+        # Rewrite as +HH:MM; older fromisoformat versions accept fewer spellings.
         offset = offset[0] + ':'.join(digits[i:i+2] for i in range(0, len(digits), 2))
         if len(digits) == 2:
             offset += ':00'
@@ -179,10 +172,9 @@ def _day(value, zone):
 
 
 def _windows_path(value, rule):
-    """Canonicalize spelling while retaining an explicit drive/share identity.
+    """Canonicalize a Windows path, keeping its drive or UNC share.
 
-    A declared root permits image-relative paths to match that one volume. It
-    never strips or replaces a different drive or UNC share in an answer.
+    A declared root applies only to paths without one; it never replaces another drive.
     """
     if not isinstance(value, str) or not value:
         raise ValueError("path must be a nonempty string")
@@ -318,8 +310,7 @@ class Matcher:
                 for family in ('paths', 'timestamps', 'string_modes', 'string_aliases', 'list_rules'):
                     for other in self.config.get(family, {}):
                         right = other.split('/')
-                        # Container rules can bypass child dispatch. Reject those
-                        # overlaps as well as two literal comparators for one leaf.
+                        # Container rules would bypass child rules; one leaf gets one comparator.
                         hierarchical = family in ('paths', 'timestamps', 'list_rules')
                         if (hierarchical or len(left) == len(right)) and all(
                                 a == b or a == '*' or b == '*' for a, b in zip(left, right)):
@@ -330,9 +321,8 @@ class Matcher:
         matched_rules = set()
         matched_normalization = set()
         def lists(value, path=""):
-            # Compare dispatch checks rules before descending into containers.
-            # Preflight must visit the same nodes, not just flattened atoms: a
-            # wildcard scalar rule may otherwise silently match an array/object.
+            # Visit the same nodes as compare(), so a wildcard scalar rule cannot
+            # silently match an array or object.
             normalization = _rule(self.normalization, path)
             if normalization is not None:
                 from eval.match_normalization import normalize
@@ -398,9 +388,8 @@ class Matcher:
         required = rule["count"]
         if not isinstance(actual, list):
             return self.missing(expected, ep, "required subset list missing") + _wrong(actual, ap, "expected a list")
-        # One-to-one assignment prevents duplicate answers from earning credit twice.
-        # Overlapping alias classes can make the same spelling eligible for more
-        # than one pool entry. Such indistinguishable answers still count once.
+        # One-to-one assignment: a repeated answer earns credit once, even when
+        # overlapping alias classes make it match several pool entries.
         supports, seen_supports = [], set()
         for value in actual:
             support = frozenset(i for i, item in enumerate(expected)
@@ -486,7 +475,7 @@ class Matcher:
                         events.extend(self.compare(expected[i], actual[i], _pointer(ep, i), _pointer(ap, i)))
                 return events
             # Rectangular matching avoids padding a short reference list to the
-            # size of a large submitted list. Only chosen pairs retain audits.
+            # size of a long answer list.
             transpose = len(expected) > len(actual)
             n, m = min(len(expected), len(actual)), max(len(expected), len(actual))
             weights = []
@@ -499,8 +488,7 @@ class Matcher:
                     ei, ai = (j, i) if transpose else (i, j)
                     events = self.compare(expected[ei], actual[ai], _pointer(ep, ei), _pointer(ap, ai))
                     counts = _counts(events)
-                    # Missing-all and wrong-all are the constant unmatched
-                    # baseline. Reward the improvement from joining this pair.
+                    # Weight is the gain over leaving both sides unmatched.
                     row.append(counts["true_positive"] * scale + expected_sizes[ei] + actual_sizes[ai]
                                - counts["missing"] - counts["wrong"])
                 weights.append(row)
@@ -527,8 +515,7 @@ class Matcher:
                     equal = True
         if equal:
             return [_event("match", ep, ap, expected, actual)]
-        # Empty submitted containers have no factual assertions when nonempty
-        # members were required; their required members are simply missing.
+        # An empty answer container asserts nothing; its required members are missing.
         wrong = [] if isinstance(actual, (list, dict)) and not actual and expected else _wrong(actual, ap)
         return self.missing(expected, ep, "value or type mismatch") + wrong
 
@@ -702,7 +689,7 @@ def main(argv=None):
                             for name, path in (("reference", args.reference), ("answers", args.answers))}
         encoded = json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
         output.parent.mkdir(parents=True, exist_ok=True)
-        # Exclusive creation also protects a file or symlink created after the check.
+        # Exclusive create also refuses a file or symlink made after the check.
         with output.open("x") as stream:
             stream.write(encoded)
     except (ValueError, KeyError, TypeError, OSError) as error:

@@ -22,7 +22,7 @@ class SupportedPublicTuples(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.public = json.loads((ROOT / 'eval/data_leakage_strict_draft/questions.json').read_text())
+        self.public = json.loads((ROOT / 'tests/fixtures/contracts/data-leakage/questions.json').read_text())
         self.ev = Evidence()
         self.identities = {}
         self.groups = {

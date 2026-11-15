@@ -4,10 +4,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from agent.answer_projection import claim_digest, claim_fields
+from agent.answer_projection import claim_digest, claim_fields, project_answers, render_projection
 from checker.check import check
 from checker.facts import JsonFacts
-from comparison.ablation.projection import project_a, project_b
 from extractor.store import Evidence
 from verifier.verify import verify
 
@@ -49,9 +48,9 @@ class RecoveryRelationAnswerSemantics(unittest.TestCase):
                     'evidence_needed': 'The two source records with their declared meanings.'}}}]}
         binding = {'candidate_id': candidate['candidate_id'], 'claim_sha256': claim_digest(candidate['claim']),
                    'question_id': 'Q1', 'path': [], 'field': selector}
-        return project_a(public, [candidate], [binding], self.source,
-                         require_claim_requirements=True, require_evidence_scope=True,
-                         evidence_facts_sha256=self.digest)
+        return project_answers(public, [candidate], [binding], self.source,
+                               require_claim_requirements=True, require_evidence_scope=True,
+                               evidence_facts_sha256=self.digest)
 
     def exercise(self, form, first, second, field, old_field, old_scalars, stronger):
         for index in range(2):
@@ -68,8 +67,8 @@ class RecoveryRelationAnswerSemantics(unittest.TestCase):
                 a = self.project(row, field, field, same_origin=index == 0)
                 self.assertFalse(a['unsupported'])
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
-                b = project_b(a, [dict(row, status='verified', checker_status='verified',
-                                      verification={'passed': not problems})])
+                b = render_projection(a['projection'], admitted_ids=[row['candidate_id']],
+                                      authority='recorded_certificates')
                 self.assertEqual(a['submission'], b['submission'])
                 for selector, meaning in [(old_field, old_field), (old_field, field),
                                            (field, old_field), (field, stronger)]:

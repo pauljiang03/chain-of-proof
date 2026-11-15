@@ -11,7 +11,6 @@ import unittest
 from agent.answer_projection import claim_digest, prepare_projection, render_projection
 from checker.catalog import ROLES
 from checker.facts import Fact, FactSource
-from comparison.ablation.projection import project_b
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
 
@@ -140,20 +139,3 @@ class AnswerReferenceInvariants(unittest.TestCase):
                         submissions.append(result['submission'])
                     self.assertEqual(submissions[0], submissions[1])
                     self.assertEqual(submissions[0], submissions[2])
-
-    def test_b_adapter_preserves_frozen_and_newly_shifted_refusals(self):
-        for authored, target, admitted in [((0, 1, 2, 3, 4), 2, (1, 2, 3, 4)),
-                                          ((0, 2, 4), 4, (4,)),
-                                          ((0, 1, 2), 2, (0, 1, 2)),
-                                          ((0,), 0, ())]:
-            plan = self.prepare(authored, target)
-            a = dict(render_projection(plan), arm='A', projection=plan)
-            rows = [dict(candidate, status='verified' if index in admitted else 'rejected',
-                         checker_status='verified' if index in admitted else 'rejected',
-                         verification={'passed': True} if index in admitted else None)
-                    for index, candidate in enumerate(self.candidates)]
-            b = project_b(a, rows)
-            self.assert_oracle(b, authored, admitted, target)
-            self.assertEqual(b['projection'], plan)
-            self.assertFalse(b['source_repair'])
-            self.assertEqual(b['model_calls'], 0)

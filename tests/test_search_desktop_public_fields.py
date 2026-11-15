@@ -85,13 +85,13 @@ class DesktopPublicProjection(unittest.TestCase):
         import tempfile
         from agent.answer_projection import claim_digest, project_answers
         from checker.facts import JsonFacts
-        from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
+        from tests.fixtures.contracts.scope_contract import apply_data_leakage_scopes
         from extractor.attributes import emit_attribute
         from extractor.store import Evidence
         root = Path(__file__).resolve().parents[1]
-        part = json.loads((root/'eval/data_leakage_strict_draft/parts/q41_60.json').read_text())
+        part = json.loads((root/'tests/fixtures/contracts/data-leakage/parts/q41_60.json').read_text())
         q = next(q for q in part['questions'] if q['id'] == 'Q46')
-        plan = json.loads((root/'eval/data_leakage_strict_draft/scope_plan.json').read_text())
+        plan = json.loads((root/'tests/fixtures/contracts/data-leakage/scope_plan.json').read_text())
         apply_data_leakage_scopes([q], plan)
         origin = deepcopy(q['answer_schema']['x-claim-scope']['origins'][0])
         if variant == 'foreign': origin.update(image='foreign.E01', exhibit='FOREIGN')

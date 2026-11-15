@@ -214,10 +214,7 @@ class AnswerReferenceProjectionIntegration(unittest.TestCase):
         self.assertEqual(result['conflicts'][-1]['reference_status'], 'different_claim_part')
 
     def test_invalid_public_reference_refuses_before_source_or_candidate_processing(self):
-        from comparison.ablation.checkpoints import public_preflight
         self.public['questions'][1]['answer_schema']['properties']['deleted'][refs.KEY]['question_id'] = 'missing'
-        with self.assertRaisesRegex(ValueError, 'v3 public answer references are not ready'):
-            public_preflight(self.public)
         self.source.get = lambda ids: self.fail('Invalid public references must refuse before evidence access')
         with self.assertRaisesRegex(ValueError, 'invalid_public_claim_references'):
             self.project([self.target(), self.dependent()])
@@ -266,20 +263,18 @@ class AnswerReferenceProjectionIntegration(unittest.TestCase):
         self.assertEqual(replayed['conflicts'], result['conflicts'])
 
     def test_dense_array_reference_survives_until_b_removes_a_preceding_row(self):
-        from comparison.ablation.projection import project_b
+        from agent.answer_projection import render_projection
         self.array_contract()
         prior = self.binding('D', 'Q28', 'value_0', [0])
         target = self.binding('C', 'Q28', 'value_0', [1])
-        a = dict(self.project([prior, target, self.dependent()]), arm='A')
+        a = self.project([prior, target, self.dependent()])
         self.assertEqual(a['submission']['answers'][0]['answer'], [3, 2])
         self.assertEqual(a['submission']['answers'][1]['answer'], {'deleted': False})
         self.assertEqual(a['conflicts'], [])
         self.source.get = lambda ids: self.fail('B must not reopen evidence to validate output paths')
-        replay_rows = [dict(row, status='verified', checker_status='verified', verification={'passed': True})
-                       for row in self.candidates]
-        self.assertEqual(project_b(a, replay_rows)['submission'], a['submission'])
-        replay_rows[1].update(status='rejected', checker_status='rejected', verification=None)
-        b = project_b(a, replay_rows)
+        self.assertEqual(render_projection(a['projection'], admitted_ids=['C', 'D'],
+                                           authority='recorded_certificates')['submission'], a['submission'])
+        b = render_projection(a['projection'], admitted_ids=['C'], authority='recorded_certificates')
         self.assertEqual(b['submission']['answers'][0]['answer'], [2])
         self.assertEqual(b['submission']['answers'][1]['status'], 'unknown')
         self.assertEqual(b['conflicts'][-1]['reference_status'], 'target_output_path_changed')

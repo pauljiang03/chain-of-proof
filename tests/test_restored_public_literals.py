@@ -10,7 +10,7 @@ from agent.answer_projection import claim_digest, project_answers
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
-from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
+from tests.fixtures.contracts.scope_contract import apply_data_leakage_scopes
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
 
@@ -26,9 +26,9 @@ class RestoredPublicLiterals(unittest.TestCase):
     def fixture(self, qid, variant='valid'):
         filename, fields, prefix, values = CASES[qid]
         roles = [prefix + field for field in fields]
-        part = json.loads((ROOT/'eval/data_leakage_strict_draft/parts'/filename).read_text())
+        part = json.loads((ROOT/'tests/fixtures/contracts/data-leakage/parts'/filename).read_text())
         question = next(q for q in part['questions'] if q['id'] == qid)
-        plan = json.loads((ROOT/'eval/data_leakage_strict_draft/scope_plan.json').read_text())
+        plan = json.loads((ROOT/'tests/fixtures/contracts/data-leakage/scope_plan.json').read_text())
         apply_data_leakage_scopes([question], plan)
         public = {'schema_version': 2, 'case_id': 'synthetic-literals', 'questions': [question]}
         origin = deepcopy(question['answer_schema']['x-claim-scope']['origins'][0])
@@ -102,7 +102,7 @@ class RestoredPublicLiterals(unittest.TestCase):
     def test_stronger_unimplemented_leaves_stay_explicit(self):
         for qid, field in [('Q2', 'size_as_printed'), ('Q50', 'ost_files_excluded')]:
             filename = CASES[qid][0]
-            part = json.loads((ROOT/'eval/data_leakage_strict_draft/parts'/filename).read_text())
+            part = json.loads((ROOT/'tests/fixtures/contracts/data-leakage/parts'/filename).read_text())
             q = next(q for q in part['questions'] if q['id'] == qid)
             props = q['answer_schema']['properties']
             if qid == 'Q2': props = props['partitions']['items']['properties']

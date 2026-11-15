@@ -1,8 +1,7 @@
-"""Check an answer transcription's source bindings, not the truth of English prose.
+"""Check that a reference's answers are bound to spans of its source text.
 
-Question spans bind the complete source context. Optional field_sources bind JSON
-pointers to literal text; optional timestamp_derivations check declared conversions.
-None of these checks substitutes for independent semantic review of the reference.
+Checks question spans, field_sources literals and timestamp_derivations.
+It does not prove that the reference interprets the source correctly.
 """
 from __future__ import annotations
 
@@ -118,7 +117,7 @@ def audit(reference, source_path):
                 literal = field["literal"]
                 if not isinstance(literal, str) or not literal or literal not in span:
                     raise ValueError("declared literal is absent from its source span")
-                # Literal equality only; interpretations need explicit review, not fuzzy matching.
+                # Literal equality only, never fuzzy matching.
                 if not isinstance(value, str) or value != literal:
                     raise ValueError("literal binding does not equal the expected string")
                 bound.add(field["pointer"])
