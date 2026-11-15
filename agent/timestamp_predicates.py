@@ -1,7 +1,8 @@
 """Exact, opt-in predicates for recorded Search timestamps; no action inference.
 
-This helper is not wired into public answer bindings. A caller must separately
-establish the typed role, same source row, category and reviewed public policy.
+The answer requirement gate checks unique typed timestamps in the same claim
+part. Public mappings must separately establish source category, row identity
+and reviewed interval policy; no real question is enabled by this helper alone.
 """
 from datetime import date, datetime, timezone
 import re

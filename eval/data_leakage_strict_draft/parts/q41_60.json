@@ -149,7 +149,7 @@
                 "needs_search_configuration_interpretation_enabled"
               ],
               "meaning": "Q42 answer value at /properties/enabled: enabled under the full public question meaning.",
-              "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+              "evidence_needed": "Recorded startup configuration does not establish that the service was running or that indexing was enabled at the requested time. No reviewed effective-state rule is present."
             }
           },
           "database_path": {
@@ -159,7 +159,7 @@
                 "needs_search_configuration_interpretation_database_path"
               ],
               "meaning": "Q42 answer value at /properties/database_path: database path under the full public question meaning.",
-              "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+              "evidence_needed": "A recorded DataDirectory or DefaultDataDirectory setting is not an observed index database file path. Environment expansion and a source-supported relation to the database file remain unreviewed."
             }
           },
           "identification": {
@@ -172,7 +172,7 @@
                     "needs_search_configuration_interpretation_database_registry_key"
                   ],
                   "meaning": "Q42 answer value at /properties/identification/properties/database_registry_key: database registry key under the full public question meaning.",
-                  "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+                  "evidence_needed": "Native Search configuration roles exist, but selecting a database configuration value and combining its SOFTWARE occurrence with the SYSTEM service occurrence require separate public meaning and relation review. The service-only partial does not establish that join."
                 }
               },
               "database_registry_value": {
@@ -182,27 +182,105 @@
                     "needs_search_configuration_interpretation_database_registry_value"
                   ],
                   "meaning": "Q42 answer value at /properties/identification/properties/database_registry_value: database registry value under the full public question meaning.",
-                  "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+                  "evidence_needed": "The public field does not distinguish a registry value name from its stored contents. Both native roles exist; public meaning must be resolved explicitly before mapping either. No value is selected from a private reference."
                 }
               },
               "service_registry_key": {
                 "type": "string",
                 "x-claim-requirement": {
                   "semantic_types": [
-                    "needs_search_configuration_interpretation_service_registry_key"
+                    "recorded_attribute_search_service_registry_key_string"
                   ],
-                  "meaning": "Q42 answer value at /properties/identification/properties/service_registry_key: service registry key under the full public question meaning.",
-                  "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+                  "selectors": [
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_0"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_1"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_2"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_3"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_4"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_5"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_6"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_7"
+                    }
+                  ],
+                  "meaning": "Exact WSearch service registry key of the selected current-control-set Start occurrence; configuration only.",
+                  "evidence_needed": "Require exactly one service registry_key, native start_code and reviewed start_type in one same-subject atomic tuple from PC base-volume primary. The native reader selects an existing control set only through valid Select\\Current, reads WSearch Start REG_DWORD and emits the fixed code-to-label mapping. Missing selection, backups, other services, nonnative strings and unselected control sets do not supply these roles. Source extraction and provenance remain trust boundaries; Lean checks typed retained records, not raw registry bytes or effective service state.",
+                  "required_attribute_roles": [
+                    "search.service.registry_key",
+                    "search.service.start_code",
+                    "search.service.start_type"
+                  ]
                 }
               },
               "startup": {
                 "type": "string",
                 "x-claim-requirement": {
                   "semantic_types": [
-                    "needs_search_configuration_interpretation_startup"
+                    "recorded_attribute_search_service_start_type_string"
                   ],
-                  "meaning": "Q42 answer value at /properties/identification/properties/startup: startup under the full public question meaning.",
-                  "evidence_needed": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+                  "selectors": [
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_0"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_1"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_2"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_3"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_4"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_5"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_6"
+                    },
+                    {
+                      "form": "attributeTuple",
+                      "field": "value_7"
+                    }
+                  ],
+                  "meaning": "Reviewed SERVICE_* startup-configuration label corresponding to the native WSearch Start code; not a running-service or enabled-indexing conclusion.",
+                  "evidence_needed": "Require exactly one service registry_key, native start_code and reviewed start_type in one same-subject atomic tuple from PC base-volume primary. The native reader selects an existing control set only through valid Select\\Current, reads WSearch Start REG_DWORD and emits the fixed code-to-label mapping. Missing selection, backups, other services, nonnative strings and unselected control sets do not supply these roles. Source extraction and provenance remain trust boundaries; Lean checks typed retained records, not raw registry bytes or effective service state.",
+                  "required_attribute_roles": [
+                    "search.service.registry_key",
+                    "search.service.start_code",
+                    "search.service.start_type"
+                  ]
                 }
               }
             },
@@ -3577,32 +3655,32 @@
         {
           "schema_pointer": "/answer_schema/properties/enabled",
           "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "rationale": "Recorded startup configuration does not establish that the service was running or that indexing was enabled at the requested time. No reviewed effective-state rule is present."
         },
         {
           "schema_pointer": "/answer_schema/properties/database_path",
           "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "rationale": "A recorded DataDirectory or DefaultDataDirectory setting is not an observed index database file path. Environment expansion and a source-supported relation to the database file remain unreviewed."
         },
         {
           "schema_pointer": "/answer_schema/properties/identification/properties/database_registry_key",
           "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "rationale": "Native Search configuration roles exist, but selecting a database configuration value and combining its SOFTWARE occurrence with the SYSTEM service occurrence require separate public meaning and relation review. The service-only partial does not establish that join."
         },
         {
           "schema_pointer": "/answer_schema/properties/identification/properties/database_registry_value",
           "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "rationale": "The public field does not distinguish a registry value name from its stored contents. Both native roles exist; public meaning must be resolved explicitly before mapping either. No value is selected from a private reference."
         },
         {
           "schema_pointer": "/answer_schema/properties/identification/properties/service_registry_key",
-          "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "status": "catalog_support",
+          "rationale": "Approved prospective service-only literal mapping. Require registry_key/start_code/start_type exactly once in one selected-current WSearch Start tuple, preserving both same_claim_part guards and PC base-volume primary scope. startup is the literal reviewed SERVICE_* startup-configuration label, never enabled/running/indexing. Generic typed proof does not independently authenticate raw registry extraction or Select/Current provenance. SOFTWARE config, ambiguous database_registry_value, database_path and enabled remain unsupported."
         },
         {
           "schema_pointer": "/answer_schema/properties/identification/properties/startup",
-          "status": "no_catalog_support",
-          "rationale": "Exact registry path/name components and interpreted startup or enabled state need field-specific extraction and an interpretation rule; generic configuration text does not establish them."
+          "status": "catalog_support",
+          "rationale": "Approved prospective service-only literal mapping. Require registry_key/start_code/start_type exactly once in one selected-current WSearch Start tuple, preserving both same_claim_part guards and PC base-volume primary scope. startup is the literal reviewed SERVICE_* startup-configuration label, never enabled/running/indexing. Generic typed proof does not independently authenticate raw registry extraction or Select/Current provenance. SOFTWARE config, ambiguous database_registry_value, database_path and enabled remain unsupported."
         }
       ],
       "narrow_observations": [

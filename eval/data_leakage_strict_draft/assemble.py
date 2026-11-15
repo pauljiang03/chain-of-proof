@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 ORIGINAL = ROOT / 'eval/benchmark_nist_questions.json'
 PARTS = ('q01_20.json', 'q21_40.json', 'q41_60.json')
-CASE_ID = 'nist-cfreds-data-leakage-strict-review-v1'
+CASE_ID = 'nist-cfreds-data-leakage-strict-review-v2'
 
 
 def encoded(value):
@@ -54,7 +54,7 @@ def build():
     scope_resolutions = apply_data_leakage_scopes(questions, json.loads((HERE / 'scope_plan.json').read_text()))
 
     public = deepcopy(original)
-    public.update(case_id=CASE_ID, contract_revision='strict-public-review-v1-draft',
+    public.update(case_id=CASE_ID, contract_revision='strict-public-review-v2-draft',
                   title='Data Leakage: strict public meaning review (not approved for a model run)',
                   questions=questions)
     public['instructions'] += [
@@ -87,13 +87,15 @@ def build():
                                'available_fields': row.get('available_fields', []),
                                'attribute_conditions': row['requirement'].get('attribute_conditions', []),
                                'attribute_path_conditions': row['requirement'].get('attribute_path_conditions', []),
+                               'attribute_timestamp_conditions': row['requirement'].get('attribute_timestamp_conditions', []),
                                'field_conditions': row['requirement'].get('field_conditions', []),
                                'required_attribute_roles': row['requirement'].get('required_attribute_roles', []),
                                'evidence_needed': row['requirement']['evidence_needed']})
     peers = [json.loads((HERE / 'parts' / ('peer_' + name)).read_text()) for name in PARTS]
     inputs = [ORIGINAL, ROOT / 'eval/QUESTIONS.md', ROOT / 'agent/answer_projection.py',
               ROOT / 'agent/answer_requirements.py', ROOT / 'agent/answer_references.py',
-              ROOT / 'agent/path_predicates.py', ROOT / 'agent/answer_representation.py', ROOT / 'checker/catalog.py',
+              ROOT / 'agent/path_predicates.py', ROOT / 'agent/answer_representation.py',
+              ROOT / 'agent/timestamp_predicates.py', ROOT / 'checker/catalog.py',
               ROOT / 'extractor/exhibits.json', HERE / 'scope_plan.json', HERE / 'scope_contract.py',
               *(HERE / 'parts' / name for name in PARTS),
               *(HERE / 'parts' / ('peer_' + name) for name in PARTS)]
@@ -109,7 +111,7 @@ def build():
                    'missing_or_invalid': 0,
                    'row_policies': len(row_policies),
                    'scope_policies': len(scope_policies),
-                   'conditioned_leaf_occurrences': sum(bool(row['attribute_conditions'] or row['attribute_path_conditions'] or row['field_conditions'] or row['required_attribute_roles']) for row in field_rows),
+                   'conditioned_leaf_occurrences': sum(bool(row['attribute_conditions'] or row['attribute_path_conditions'] or row['attribute_timestamp_conditions'] or row['field_conditions'] or row['required_attribute_roles']) for row in field_rows),
                    'unavailable_scope_policies': sum(row['status'] == 'unavailable' for row in scope_policies),
                    'same_claim_part_policies': sum(row['mode'] == 'same_claim_part' for row in row_policies),
                    'independent_section_policies': sum(row['mode'] == 'independent' for row in row_policies),
