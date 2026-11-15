@@ -42,12 +42,12 @@ class Census(unittest.TestCase):
         self.assertEqual(r["status"], "rejected")
         self.assertIn(f"holds {len(self.usb)}, not {len(self.usb) + 1}", r["parts"][0]["bricks"][0])
         r = self.check({"exactlyWith": ["usbInsert", "obj", self.usb[0].obj, 0]}, "X2")
-        self.assertEqual(r["status"], "rejected")                # "never connected" is false
+        self.assertEqual(r["status"], "rejected")                # a matching retained USB record exists
 
     def test_no_record_of_a_kind_can_be_stated(self):
         r = self.check({"exactly": ["volumeMount", 0]})
         self.assertEqual(r["status"], "verified")
-        self.assertIn("no volume mount record", r["english"])
+        self.assertIn("no device-volume mapping record", r["english"])
 
     def test_a_census_stands_alone(self):
         with self.assertRaises(claims.ClaimError):

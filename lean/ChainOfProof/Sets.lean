@@ -10,7 +10,7 @@ import ChainOfProof.Claim
 -/
 namespace ChainOfProof.Sets
 
-/-- R1+R2 (strong): USB insert `u` and volume mapping `m` name the same device serial. -/
+/-- R1+R2 (strong): USB source record `u` and volume mapping `m` name the same device serial. -/
 def usbMountedAs (u m : Nat) : Claim :=
   .both (.is u .usbInsert) (.both (.is m .volumeMount) (.link u .obj m .obj))
 
@@ -58,19 +58,23 @@ def deviceExamined (u d : Nat) : Claim :=
 def recoveredOnDevice (c d : Nat) : Claim :=
   .both (.is c .fileCreated) (.both (.is d .unallocatedOnDevice) (.link c .aux d .aux))
 
-/-- Single-fact sets: the claim is that the cited record exists and is of this kind. -/
+/-- Single-fact sets assert the cited row's kind. `usbConnected` is a historical
+    form name for a USB source record, not an exact connection-onset predicate. -/
 def usbConnected (u : Nat) : Claim := .is u .usbInsert
+/-- Historical form name: establishes a retained shortcut target, not a file-open event. -/
 def opened (l : Nat) : Claim := .is l .lnkTarget
 def searched (w : Nat) : Claim := .is w .webSearch
 def fileCreatedAt (c : Nat) : Claim := .is c .fileCreated
 def fileModifiedAt (m : Nat) : Claim := .is m .fileModified
 def fileDeletedAt (d : Nat) : Claim := .is d .fileDeleted
+/-- Retained message metadata; no transport, delivery, authorship or reading predicate. -/
 def emailed (e : Nat) : Claim := .is e .emailSent
 def burnTrace (b : Nat) : Claim := .is b .cdBurn
 
 def settingRecorded (x : Nat) : Claim := .is x .systemSetting
 def accountRecorded (x : Nat) : Claim := .is x .accountSeen
 def sessionRecorded (x : Nat) : Claim := .is x .sessionEvent
+/-- Registration/installer record; its timestamp retains the source's declared meaning. -/
 def programInstalledAt (x : Nat) : Claim := .is x .programInstalled
 def programRan (x : Nat) : Claim := .is x .programRun
 def visited (x : Nat) : Claim := .is x .webVisit

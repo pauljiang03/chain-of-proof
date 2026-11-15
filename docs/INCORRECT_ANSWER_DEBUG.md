@@ -46,7 +46,13 @@ This is a deterministic check against a declared public contract, **not a new Le
 
 For Q18, the profile explicitly requires a product/version identity linked to communication. That is a stronger public declaration than the original short question, whose strict score required a product/version name. Do not present the profile as the unchanged benchmark.
 
-The original 60-question files, all frozen model outputs and all scores remain unchanged. The guard has not been evaluated in a new AI trial. It prevents these declared role mismatches; it does not supply the missing correct answers.
+The original 60-question files, all frozen model outputs and all scores remain unchanged.
+The later [three-question diagnostic](../comparison/ablation/RESULTS_MEANING_DIAGNOSTIC_20261115.md)
+retained 21 verified claims and narrow observations. It submitted no incompatible
+bindings, so it did not demonstrate the guard catching a live error. It had no
+accuracy score. The [latest correctness fixes](CORRECTNESS_FIXES.md) make explicit
+field requirements the product default and add durable checkpoints; they do not
+supply missing evidence or certify a complete English answer.
 
 ## Evidence and verification
 

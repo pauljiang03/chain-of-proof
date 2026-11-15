@@ -7,14 +7,17 @@
   Meaning of `obj` / `aux` per kind (both are interned entity ids):
 
     kind          obj                      aux
-    usbInsert     device serial            0
+    usbInsert     device serial            0                (USB source record; key last-write is
+                                                            not exact connection onset)
     volumeMount   device serial            volume serial
-    lnkTarget     target path              volume serial the target lives on
+    lnkTarget     retained target path     recorded target volume serial (shortcut/DestList record
+                                                            timestamp; not proof of opening)
     fileCreated   file path                volume serial
     fileModified  file path                volume serial
     fileDeleted   original path            volume serial
     webSearch     query string             browser / profile
-    emailSent     subject                  "from A to B", as the mailbox records them
+    emailSent     subject                  "from A to B", as the mailbox records them (retained
+                                                            metadata and submit time, not confirmed delivery)
     cdBurn        the trace found          where it was found
     tag           tagged entity            tag id
     volumeSeen    volume label             volume serial   (the PC's registry or a shortcut recorded it)
@@ -28,8 +31,10 @@
     accountSeen   account name or id       what it is an account of (a Windows local account,
                                                             a cloud service, an e-mail client)
     sessionEvent  logon / logoff / startup / shutdown / ...   the account, or 0 for the machine
-    programInstalled program name          version
-    programRun    executable name          full path       (one row per recorded run time)
+    programInstalled program name          version          (registration/installer record; t retains
+                                                            source meaning, not necessarily installation time)
+    programRun    executable name          full path        (application observation; only explicit
+                                                            execution sources record run time)
     webVisit      URL                      browser
     fileDownloaded saved path              source URL
     localSearch   text typed               where it was typed
@@ -137,6 +142,10 @@ inductive Kind where
   | roleBrowserUrl
   | roleAppNewsGroupMailbox
   | roleAppConfigIrcLogFileName
+  | roleAppBinaryProductName
+  | roleAppBinaryProductVersion
+  | roleAppBinaryFileDescription
+  | roleAppBinaryFileVersion
   deriving DecidableEq, Repr
 
 structure Fact where

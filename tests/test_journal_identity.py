@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace as NS
 import unittest
 
 from checker import claims
@@ -10,29 +11,35 @@ from checker.facts import JsonFacts
 from extractor import filetraces as ft
 from extractor.store import Evidence
 from miner import mine
-from tests.test_journal_events import COMMON, ROOT, BASE_US, collect, record
+from tests.test_journal_events import COMMON, ROOT, BASE_US, Collector, Mft, collect, record
 from verifier.verify import verify
 
 
 class JournalIdentityExtraction(unittest.TestCase):
     def test_parent_rename_changes_only_later_observed_paths_and_repeated_flags_are_compressed(self):
+        from tests.test_journal_paths import fixture
         parent = (10, 3)
-        _, ev = collect([
-            record(1, 'early', ft.USN_FILE_CREATE | ft.USN_CLOSE, own=parent, parent=ROOT),
-            record(2, 'a.txt', ft.USN_FILE_CREATE | ft.USN_CLOSE),
-            record(3, 'early', ft.USN_RENAME_OLD, own=parent, parent=ROOT),
-            record(4, 'later', ft.USN_RENAME_NEW | ft.USN_CLOSE, own=parent, parent=ROOT),
-            record(5, 'a.txt', 2), record(6, 'a.txt', 2 | ft.USN_CLOSE),
-        ], identity=True, paths={10: (3, 'later')})
+        _ranges, entries, stream, records = fixture([
+            ('early', parent, ROOT, ft.USN_FILE_CREATE | ft.USN_CLOSE, 0x10),
+            ('a.txt', (40, 2), parent, ft.USN_FILE_CREATE | ft.USN_CLOSE, 0x20),
+            ('early', parent, ROOT, ft.USN_RENAME_OLD, 0x10),
+            ('later', parent, ROOT, ft.USN_RENAME_NEW | ft.USN_CLOSE, 0x10),
+            ('a.txt', (40, 2), parent, 2, 0x20),
+            ('a.txt', (40, 2), parent, 2 | ft.USN_CLOSE, 0x20)])
+        ntfs = NS(serial=0x12345678CA0C7A48, mft=Mft({10: (3, 'later')}),
+                  usnjrnl=NS(fh=stream, records=lambda: iter(records)))
+        ev = Collector()
+        ft._journal(ev, ntfs, 'C:', '', COMMON)
         names = [r for r in ev.rows if r['kind'] == 'journalName' and r['prov']['file_record'] == 40]
         self.assertEqual([r['obj'] for r in names], [r'C:\early\a.txt', r'C:\later\a.txt'])
-        self.assertEqual([r['t'] for r in names], [BASE_US + 2_000_000, BASE_US + 5_000_000])
+        self.assertEqual([r['t'] for r in names],
+                         [BASE_US + entries[i].usn * 1_000_000 for i in (1, 4)])
         self.assertEqual([r['prov']['observation_count'] for r in names], [1, 2])
-        self.assertEqual(names[1]['prov']['last_observation_usn'], 6)
+        self.assertEqual(names[1]['prov']['last_observation_usn'], entries[5].usn)
         parents = [r for r in ev.rows if r['kind'] == 'journalParent' and r['prov']['file_record'] == 40]
         self.assertEqual(len(parents), 1)
         self.assertEqual(parents[0]['prov']['observation_count'], 3)
-        self.assertEqual(parents[0]['t'], BASE_US + 2_000_000)
+        self.assertEqual(parents[0]['t'], BASE_US + entries[1].usn * 1_000_000)
 
     def test_later_name_and_current_mft_path_remain_context_not_earlier_historical_path(self):
         _, ev = collect([
@@ -45,7 +52,10 @@ class JournalIdentityExtraction(unittest.TestCase):
         self.assertFalse(early['prov']['historical_path_resolved'])
         self.assertEqual(early['prov']['context_path'], r'C:\random\a.txt')
         parent = next(r for r in ev.rows if r['kind'] == 'journalParent' and r['prov']['file_record'] == 40)
-        later = next(r for r in ev.rows if r['kind'] == 'journalName' and r['obj'] == r'C:\staging')
+        later = next(r for r in ev.rows if r['kind'] == 'journalName' and r['obj'] == 'staging')
+        self.assertFalse(later['prov']['historical_path_resolved'])
+        self.assertEqual(later['prov']['path_resolution_diagnostic']['reason'],
+                         'raw_journal_coverage_unavailable')
         self.assertEqual(parent['aux'], later['aux'])
         rename = next(r for r in ev.rows if r['kind'] == 'fileRenamed')
         self.assertEqual(rename['prov']['parent_sequence'], 1)

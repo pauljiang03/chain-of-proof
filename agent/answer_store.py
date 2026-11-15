@@ -97,7 +97,7 @@ def _project(state, document, certificates):
     source.check_sentences(certificates.values())
     return project_answers(public_profile(state), list(certificates.values()), document['bindings'],
                            source,
-                           admitted_ids=set(certificates), authority='recorded_certificates')
+                           admitted_ids=set(certificates), authority='recorded_certificates', require_claim_requirements=True)
 
 
 def _certificates(directory, bindings):
@@ -110,20 +110,20 @@ def _certificates(directory, bindings):
     return result
 
 
-def answer(run_dir, question_id, bindings=None, *, replace=False):
+def _answer(run_dir, question_id, bindings=None, *, replace=False, preview=False):
     """Read a field catalog or add explicit bindings to current-run certificates.
 
     An empty replacement clears that question's bindings. The tool audit keeps
     prior calls. No candidate or proof is edited by an answer update.
     """
-    from agent.answer_projection import catalog, claim_digest
+    from agent.answer_projection import catalog, claim_digest, _path
     planner = Investigation(run_dir)
     with planner._locked():
         state = planner._load()
         if question_id not in {q['id'] for q in state['questions']}:
             raise ValueError('question_id must name a current public question')
-        if type(replace) is not bool:
-            raise ValueError('replace must be a Boolean')
+        if type(replace) is not bool or type(preview) is not bool:
+            raise ValueError('replace and preview must be Booleans')
         path = Path(run_dir) / FILENAME
         document = _document(path, state)
         if bindings is None:
@@ -133,7 +133,7 @@ def answer(run_dir, question_id, bindings=None, *, replace=False):
             fields = catalog()
             question = next(q for q in state['questions'] if q['id'] == question_id)
             return {'question_id': question_id, 'field_catalog': fields,
-                    'field_requirements': inspect(question.get('answer_schema', {}), fields['forms']),
+                    'field_requirements': inspect(question.get('answer_schema', {}), fields['forms'], require_claim_requirements=True),
                     'bindings': [b for b in document['bindings'] if b.get('question_id') == question_id]}
         if not isinstance(bindings, list) or len(bindings) > MAX_BATCH:
             raise ValueError(f'bindings must be a list of at most {MAX_BATCH} entries')
@@ -147,6 +147,10 @@ def answer(run_dir, question_id, bindings=None, *, replace=False):
                 raise ValueError('conflicting finding_id and candidate_id')
             row.update(candidate_id=fid, question_id=question_id)
             row.setdefault('part', 0)
+            _path(row.get('path'))
+            if (not isinstance(row.get('field'), str) or not row['field']
+                    or type(row['part']) is not int or row['part'] < 0):
+                raise ValueError('binding requires a field name and nonnegative integer part')
             prepared.append(row)
         certificates = _certificates(run_dir, prepared)
         for row in prepared:
@@ -155,6 +159,7 @@ def answer(run_dir, question_id, bindings=None, *, replace=False):
                 raise ValueError('binding hash differs from the recorded claim')
             row['claim_sha256'] = digest
         combined = [b for b in document['bindings'] if not replace or b.get('question_id') != question_id]
+        retained_count = len(combined)
         seen = {json.dumps(b, sort_keys=True, allow_nan=False) for b in combined}
         for row in prepared:
             key = json.dumps(row, sort_keys=True, allow_nan=False)
@@ -166,9 +171,33 @@ def answer(run_dir, question_id, bindings=None, *, replace=False):
         document['bindings'] = combined
         certificates = _certificates(run_dir, combined)
         projection = _project(state, document, certificates)
+        valid = not projection.get('unsupported') and not projection.get('conflicts')
+        if preview:
+            return {'preview': True, 'valid': valid, 'persisted': False, 'projection': projection}
+        supported_new = any(leaf.get('binding_index', -1) >= retained_count
+                            for leaf in projection.get('leaves', []))
+        if not valid and (replace or projection.get('conflicts') or not supported_new):
+            return dict(projection, valid=False, persisted=False, update_outcome='rejected')
         atomic_json(path, document)
         atomic_json(Path(run_dir) / 'projected-answers.json', projection)
+        if not valid:
+            return dict(projection, valid=False, persisted=True, update_outcome='partial')
         return projection
+
+
+def answer(run_dir, question_id, bindings=None, *, replace=False, preview=False):
+    """Inspect or bind explicit fields; preview never changes durable answer files.
+
+    Invalid replacements preserve the last durable supported partial answer.
+    Nonconflicting appends retain supported leaves and raw unsupported proposals.
+    """
+    try:
+        return _answer(run_dir, question_id, bindings, replace=replace, preview=preview)
+    except (ValueError, KeyError, TypeError) as error:
+        if preview is True:
+            return {'preview': True, 'valid': False, 'persisted': False,
+                    'errors': [{'reason': str(error)}]}
+        raise
 
 
 def enrich_bundle(run, run_dir):
@@ -249,7 +278,7 @@ def project_bundle(run, public, *, authority='recorded_certificates'):
     source.check_sentences(certificates.values())
     return project_answers(projection_public, list(certificates.values()), document['bindings'],
                            source,
-                           admitted_ids=set(certificates), authority=authority)
+                           admitted_ids=set(certificates), authority=authority, require_claim_requirements=True)
 
 
 def report_projection(run):

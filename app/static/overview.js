@@ -92,7 +92,12 @@
       host.append(empty);
       return;
     }
-    const n = S.number, run = state.run || {}, findings = model.findings, firm = findings.filter((finding) => finding.strength !== "heuristic").length;
+    const n = S.number, run = state.run || {}, findings = model.findings;
+    const direct = findings.filter((finding) => finding.strength === "strong").length;
+    const heuristic = findings.filter((finding) => finding.strength === "heuristic").length;
+    const unspecified = findings.length - direct - heuristic;
+    const ruleTypes = n.format(direct) + " without heuristics · " + n.format(heuristic) + " with heuristics"
+      + (unspecified ? " · " + n.format(unspecified) + " not specified" : "");
     const refused = array(run.rejections).length, opinions = array(run.conclusions).length, dated = model.events.length;
     const brief = state.brief && typeof state.brief === "object" ? state.brief : {}, items = array(brief.exhibits);
     const devices = items.length ? items.map((item) => String(item.label))
@@ -104,7 +109,7 @@
 
     const tiles = el("div", "ov-tiles");
     tiles.append(
-      tile("Findings that passed", n.format(findings.length), n.format(firm) + " firm · " + n.format(findings.length - firm) + " likely (rule of thumb)", go("findings")),
+      tile("Findings that passed", n.format(findings.length), ruleTypes, go("findings")),
       tile("Refused by the checker", n.format(refused), refused ? "Listed under Not established" : "Nothing was refused in this run", refused ? go("needs") : null),
       tile("Evidence records used", n.format(model.records.length), n.format(dated) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
       tile("Evidence exhibits", n.format(devices.length), devices.length ? S.clip(devices.join(", "), 44) : "No exhibit named in the records"));

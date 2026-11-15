@@ -87,14 +87,14 @@ def _who(account: str) -> str:
 
 
 _EVENT = {
-    "usbInsert": "the connection of USB device {obj}",
-    "volumeMount": "the mounting of USB device {obj} as volume {aux}",
-    "lnkTarget": "the opening of {obj} on volume {aux}",
+    "usbInsert": "the USB device record naming serial {obj}",
+    "volumeMount": "the device-volume mapping record for device {obj}, volume {aux}",
+    "lnkTarget": "the shortcut target record naming {obj} on volume {aux}",
     "fileCreated": "the creation of {obj} on {where}",
     "fileModified": "the last modification of {obj} on {where}",
     "fileDeleted": "the deletion of {obj} from volume {aux}",
     "webSearch": 'the web search "{obj}"',
-    "emailSent": 'the sending of the e-mail "{obj}" {aux}',
+    "emailSent": 'the retained message record with subject "{obj}" and address text {aux}',
     "cdBurn": "the optical-disc-related record ({obj})",
     "tag": 'the tagging of {obj} as "{aux}"',
     "volumeSeen": 'this PC recording volume {aux} under the label "{obj}"',
@@ -103,7 +103,7 @@ _EVENT = {
     "systemSetting": 'the system setting "{obj}" ({aux})',
     "accountSeen": "the record of account {obj} ({aux})",
     "sessionEvent": "the {obj} recorded for {who}",
-    "programInstalled": "the recorded installation of {obj}",
+    "programInstalled": "the software-registration or installer record naming {obj}",
     "programRun": "the application-artifact record naming {obj}",
     "webVisit": "the visit to {obj} in {aux}",
     "fileDownloaded": "the download of {obj} from {aux}",
@@ -131,6 +131,14 @@ def _event(f: Fact, src: FactSource) -> str:
                 f'({f.kind}, value {src.string(f.aux)!r}, examined {_utc(f.t)})')
     if f.kind == "programRun":
         return _program_record(f, src)
+    if f.kind == "usbInsert":
+        return _usb_record(f, src)
+    if f.kind == "lnkTarget":
+        return _shortcut_record(f, src)
+    if f.kind == "emailSent":
+        return _message_record(f, src)
+    if f.kind == "programInstalled":
+        return _installed_record(f, src)
     aux = src.string(f.aux)
     text = _EVENT[f.kind].format(obj=src.string(f.obj), aux=aux, where=_where(aux),
                                  who=_who(aux))
@@ -143,20 +151,21 @@ def _cap(text: str) -> str:
 
 def _en_before(args, facts, src):
     x, y = facts[args[0]], facts[args[1]]
-    return (f"{_cap(_event(x, src))} happened before {_event(y, src)}: the gap of "
+    return (f"The timestamp of {_event(x, src)} precedes the timestamp of {_event(y, src)}: the gap of "
             f"{_span(y.t - x.t)} exceeds the combined timestamp uncertainty of "
-            f"{_span(x.res + y.res)}.")
+            f"{_span(x.res + y.res)}. This orders recorded timestamps, not necessarily the underlying actions.")
 
 
 def _en_usb(args, facts, src):
     u, m = facts[args[0]], facts[args[1]]
-    return (f"USB device {src.string(u.obj)} was connected ({_utc(u.t)}) and mounted as "
-            f"volume {src.string(m.aux)}.")
+    return (f"{_cap(_usb_record(u, src))}. Its device serial matches the device-volume "
+            f"mapping for volume {src.string(m.aux)}. {_USB_LIMIT}")
 
 
 def _en_opened(args, facts, src):
     l, m = facts[args[0]], facts[args[1]]
-    return f"{src.string(l.obj)} was opened ({_utc(l.t)}) from volume {src.string(m.aux)}."
+    return (f"{_cap(_shortcut_record(l, src))}. Its recorded volume serial matches the "
+            f"volume mapping for device {src.string(m.obj)}. {_SHORTCUT_LIMIT}")
 
 
 def _en_copied(args, facts, src):
@@ -168,25 +177,26 @@ def _en_copied(args, facts, src):
 
 def _en_deleted(args, facts, src):
     d, x = facts[args[0]], facts[args[1]]
-    return (f"{src.string(d.obj)} was deleted ({_utc(d.t)}) after {_event(x, src)}.")
+    return (f"The Recycle Bin record for {src.string(d.obj)} has a timestamp ({_utc(d.t)}) "
+            f"later than the timestamp of {_event(x, src)}. This orders recorded timestamps.")
 
 
 def _en_device_holds(args, facts, src):
     u, d = facts[args[0]], facts[args[1]]
-    return (f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)}). The "
-            f"seized device with that serial holds volume {src.string(d.aux)}.")
+    return (f"{_cap(_usb_record(u, src))}. Its device serial matches the examined-device "
+            f"record for volume {src.string(d.aux)}. {_USB_LIMIT}")
 
 
 def _en_opened_device(args, facts, src):
     l, d = facts[args[0]], facts[args[1]]
-    return (f"{src.string(l.obj)} was opened ({_utc(l.t)}) from volume {src.string(l.aux)}, "
-            f"the volume on seized device {src.string(d.obj)}.")
+    return (f"{_cap(_shortcut_record(l, src))}. Its recorded volume serial matches the "
+            f"volume read from examined device {src.string(d.obj)}. {_SHORTCUT_LIMIT}")
 
 
 def _en_opened_recorded(args, facts, src):
     l, v = facts[args[0]], facts[args[1]]
-    return (f"{src.string(l.obj)} was opened ({_utc(l.t)}) from volume {src.string(l.aux)}, "
-            f'which this PC recorded under the label "{src.string(v.obj)}" ({_utc(v.t)}).')
+    return (f"{_cap(_shortcut_record(l, src))}. Its recorded volume serial matches the "
+            f'volume record labeled "{src.string(v.obj)}" ({_record_details(v)}). {_SHORTCUT_LIMIT}')
 
 
 def _en_recorded_device(args, facts, src):
@@ -205,18 +215,39 @@ def _en_same_label(args, facts, src):
 
 
 def _en_usb_connected(args, facts, src):
-    u = facts[args[0]]
-    return f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)})."
+    return f"{_cap(_usb_record(facts[args[0]], src))}. {_USB_LIMIT}"
 
 
 def _en_opened_plain(args, facts, src):
-    l = facts[args[0]]
-    where = src.string(l.aux)
-    if where in ("", "(none)"):
-        return (f"{src.string(l.obj)} was opened ({_utc(l.t)}). The record does not name "
-                f"the volume.")
-    place = f"network share {where}" if where.startswith("\\\\") else f"volume {where}"
-    return f"{src.string(l.obj)} on {place} was opened ({_utc(l.t)})."
+    return f"{_cap(_shortcut_record(facts[args[0]], src))}. {_SHORTCUT_LIMIT}"
+
+
+def _record_details(f: Fact) -> str:
+    """Keep provenance meanings visible without promoting them to action times."""
+    meaning = str(f.prov.get("time_meaning") or f.prov.get("timestamp_semantics")
+                  or "unspecified record timestamp")
+    artifact = str(f.prov.get("artifact") or "not supplied")
+    return (f"record time {_utc(f.t)}; timestamp meaning in provenance: {meaning}; "
+            f"source artifact: {artifact}")
+
+
+_SHORTCUT_LIMIT = ("This establishes a retained target reference, not that the target was opened "
+                   "at this time or by a particular person.")
+_USB_LIMIT = ("The record timestamp does not by itself establish exact connection onset "
+              "or who connected the device.")
+
+
+def _usb_record(f: Fact, src: FactSource) -> str:
+    return f"the USB device record naming serial {src.string(f.obj)} ({_record_details(f)})"
+
+
+def _shortcut_record(f: Fact, src: FactSource) -> str:
+    where = src.string(f.aux)
+    if _none(where):
+        place = "with no volume recorded"
+    else:
+        place = f"on network share {where}" if where.startswith("\\\\") else f"on recorded volume {where}"
+    return f"the shortcut target record naming {src.string(f.obj)} {place} ({_record_details(f)})"
 
 
 def _en_searched(args, facts, src):
@@ -347,9 +378,13 @@ def _en_journal_path_for_file(args, facts, src):
 
 
 def _en_emailed(args, facts, src):
-    e = facts[args[0]]
-    return (f'An e-mail with the subject "{src.string(e.obj)}" was sent {src.string(e.aux)} '
-            f"({_utc(e.t)}).")
+    return (f"{_cap(_message_record(facts[args[0]], src))}. The retained message metadata "
+            f"does not establish successful transmission, delivery, reading, or authorship.")
+
+
+def _message_record(f: Fact, src: FactSource) -> str:
+    return (f'the retained message record with subject "{src.string(f.obj)}" and address text '
+            f'"{src.string(f.aux)}" ({_record_details(f)})')
 
 
 def _en_burn_trace(args, facts, src):
@@ -366,8 +401,8 @@ def _en_burn_trace(args, facts, src):
 
 def _en_device_examined(args, facts, src):
     u, d = facts[args[0]], facts[args[1]]
-    return (f"USB device {src.string(u.obj)} was connected to this PC ({_utc(u.t)}). The "
-            f"seized device with that serial has directory entries left in unallocated space.")
+    return (f"{_cap(_usb_record(u, src))}. Its device serial matches the examined-device "
+            f"record for recovered directory entries on device {src.string(d.obj)}. {_USB_LIMIT}")
 
 
 def _en_recovered(args, facts, src):
@@ -401,10 +436,14 @@ def _en_session(args, facts, src):
 
 
 def _en_installed(args, facts, src):
-    f = facts[args[0]]
+    return (f"{_cap(_installed_record(facts[args[0]], src))}. This record does not by itself "
+            f"establish the actual installation time, execution, or continued presence of the program.")
+
+
+def _installed_record(f: Fact, src: FactSource) -> str:
     version = src.string(f.aux)
     name = src.string(f.obj) + ("" if _none(version) else f" {version}")
-    return f"{name} is recorded as installed ({_utc(f.t)})."
+    return f"the software-registration or installer record naming {name} ({_record_details(f)})"
 
 
 def _program_record(f: Fact, src: FactSource) -> str:
@@ -525,14 +564,14 @@ def _en_same_content(args, facts, src):
 
 # kind -> (what one record is, what `obj` holds, what `aux` holds)
 _NOUN = {
-    "usbInsert": ("USB connection", "device serial", "second field"),
-    "volumeMount": ("volume mount", "device serial", "volume serial"),
-    "lnkTarget": ("file-open", "path", "volume or share"),
+    "usbInsert": ("USB device", "device serial", "second field"),
+    "volumeMount": ("device-volume mapping", "device serial", "volume serial"),
+    "lnkTarget": ("shortcut-target", "path", "volume or share"),
     "fileCreated": ("file-creation", "path", "volume or area"),
     "fileModified": ("file-modification", "path", "volume or area"),
     "fileDeleted": ("Recycle Bin", "path", "volume"),
     "webSearch": ("web-search", "search text", "browser"),
-    "emailSent": ("e-mail", "subject", "sender and recipient"),
+    "emailSent": ("retained-message", "subject", "sender and recipient text"),
     "cdBurn": ("optical-disc-related", "record", "place it was found"),
     "tag": ("tag", "tagged entity", "tag"),
     "volumeSeen": ("recorded-volume", "label", "volume serial"),
@@ -541,7 +580,7 @@ _NOUN = {
     "systemSetting": ("system-setting", "setting", "value"),
     "accountSeen": ("account", "account name", "kind of account"),
     "sessionEvent": ("session-event", "event", "account"),
-    "programInstalled": ("installed-program", "program", "version"),
+    "programInstalled": ("software-registration or installer", "program", "version"),
     "programRun": ("application-artifact", "application name", "recorded path"),
     "webVisit": ("web-visit", "URL", "browser"),
     "fileDownloaded": ("download", "saved path", "source URL"),

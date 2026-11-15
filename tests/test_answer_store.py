@@ -27,7 +27,12 @@ FACTS = ROOT / 'fixtures/sample_facts.json'
 def public():
     return {'schema_version': 2, 'case_id': 'portable-other-case', 'title': 'Other case', 'questions': [
         {'id': 'DEVICES', 'prompt': 'Which devices and labels?', 'answer_schema': {
-            'type': 'object', 'properties': {'serial': {'type': 'string'}, 'label': {'type': 'string'}},
+            'type': 'object', 'properties': {'serial': {'type': 'string', 'x-claim-requirement': {
+                'semantic_types': ['device_serial'], 'selectors': [{'form': 'usbConnected', 'field': 'device_serial'}],
+                'meaning': 'Device serial recorded at connection', 'evidence_needed': 'A device connection record with its serial'}},
+                'label': {'type': 'string', 'x-claim-requirement': {
+                'semantic_types': ['volume_label'], 'meaning': 'Recorded volume label',
+                'evidence_needed': 'A volume label record linked to this device'}}},
             'required': ['serial', 'label'], 'additionalProperties': False}},
         {'id': 'GAPS', 'prompt': 'What remains unknown?', 'answer_schema': {}}]}
 
@@ -66,6 +71,96 @@ class AnswerStore(unittest.TestCase):
         self.assertIsNone(report_projection(run)[1])
         self.assertIn('Structured answers from claim fields', report.render(run))
         self.assertIn('href="#proof-f1"', render_html(run))
+
+    def test_malformed_mixed_batch_is_rejected_atomically(self):
+        for invalid in [dict(self.binding, path='serial'), dict(self.binding, part=True),
+                        dict(self.binding, finding_id='Foreign'),
+                        dict(self.binding, claim_sha256='not-the-claim-hash')]:
+            with self.assertRaises(ValueError):
+                answer(self.path, 'DEVICES', [self.binding, invalid])
+            self.assertFalse((self.path / 'answer-bindings.json').exists())
+            self.assertFalse((self.path / 'projected-answers.json').exists())
+
+    def test_mixed_partial_proposals_retain_only_supported_leaves_and_raw_diagnostics(self):
+        contract = public()
+        contract['questions'][0]['answer_schema']['properties']['application'] = {
+            'type': 'string', 'x-claim-requirement': {
+                'semantic_types': ['software_product'], 'meaning': 'Identified application product',
+                'evidence_needed': 'Product identity evidence linked to the application'}}
+        state_path = self.path / 'investigation.json'
+        state = json.loads(state_path.read_text())
+        state['questions'][0]['answer_schema'] = contract['questions'][0]['answer_schema']
+        state_path.write_text(json.dumps(state))
+        (self.path / 'questions.json').write_text(json.dumps(contract))
+        stronger = dict(self.binding, path=['application'])
+        result = answer(self.path, 'DEVICES', [self.binding, stronger])
+        self.assertFalse(result['valid'])
+        self.assertTrue(result['persisted'])
+        self.assertEqual(result['update_outcome'], 'partial')
+        self.assertEqual(result['submission']['answers'][0]['answer'], {'serial': 'SAMPLE-SERIAL-RM2'})
+        self.assertEqual(result['unsupported'][0]['reason'], 'claim_role_does_not_meet_public_requirement')
+        self.assertEqual(len(answer(self.path, 'DEVICES')['bindings']), 2)
+        rebuilt = read_projection(self.path)
+        self.assertEqual(rebuilt['submission'], result['submission'])
+        self.assertEqual(rebuilt['unsupported'], result['unsupported'])
+        self.assertEqual(project_bundle(self.bundle(), contract), rebuilt)
+        before = (self.path / 'answer-bindings.json').read_bytes()
+        rejected = answer(self.path, 'DEVICES', [stronger], replace=True)
+        self.assertFalse(rejected['persisted'])
+        self.assertEqual(rejected['update_outcome'], 'rejected')
+        self.assertEqual((self.path / 'answer-bindings.json').read_bytes(), before)
+
+    def test_preview_and_invalid_replacement_preserve_durable_partial_bytes(self):
+        saved = answer(self.path, 'DEVICES', [self.binding])
+        paths = [self.path / 'answer-bindings.json', self.path / 'projected-answers.json']
+        before = [path.read_bytes() for path in paths]
+        proposals = [dict(self.binding, path=['absent']),
+                     dict(self.binding, path=['label']),
+                     dict(self.binding, value='wrong'),
+                     dict(self.binding, finding_id='Foreign')]
+        for proposal in proposals:
+            preview = answer(self.path, 'DEVICES', [proposal], replace=True, preview=True)
+            self.assertFalse(preview['valid'])
+            self.assertFalse(preview['persisted'])
+            self.assertEqual([path.read_bytes() for path in paths], before)
+        answer(self.path, 'DEVICES', [proposals[1]], replace=True)
+        self.assertEqual([path.read_bytes() for path in paths], before)
+        self.assertEqual(read_projection(self.path), saved)
+        self.assertEqual(project_bundle(self.bundle(), public()), saved)
+
+    def test_valid_preview_is_pure_and_audited(self):
+        bench = Workbench(FACTS, self.path)
+        preview = bench.answer('DEVICES', [self.binding], preview=True)
+        self.assertTrue(preview['valid'])
+        self.assertFalse((self.path / 'answer-bindings.json').exists())
+        self.assertFalse((self.path / 'projected-answers.json').exists())
+        events = [json.loads(line) for line in (self.path / 'audit.jsonl').read_text().splitlines()]
+        self.assertEqual(events[-1]['tool'], 'answer')
+
+    def test_conflicting_preview_does_not_hide_saved_sibling(self):
+        answer(self.path, 'DEVICES', [self.binding])
+        before = (self.path / 'answer-bindings.json').read_bytes()
+        certificate = check.check({'usbConnected': [4510]}, 'F2', open_source(FACTS),
+                                  question='DEVICES', out_dir=self.path)
+        self.assertEqual(certificate['status'], 'verified')
+        collision = dict(self.binding, finding_id='F2')
+        result = answer(self.path, 'DEVICES', [collision], preview=True)
+        self.assertFalse(result['valid'])
+        self.assertEqual(result['projection']['conflicts'][0]['reason'], 'different_values_at_same_path')
+        self.assertEqual((self.path / 'answer-bindings.json').read_bytes(), before)
+        self.assertEqual(read_projection(self.path)['submission']['answers'][0]['answer'],
+                         {'serial': 'SAMPLE-SERIAL-RM2'})
+
+    def test_unannotated_legacy_binding_is_not_certified_on_rebuild(self):
+        answer(self.path, 'DEVICES', [self.binding])
+        run = self.bundle()
+        unannotated = public()
+        del unannotated['questions'][0]['answer_schema']['properties']['serial']['x-claim-requirement']
+        run['investigation']['questions'] = deepcopy(unannotated['questions'])
+        projected = project_bundle(run, unannotated)
+        self.assertEqual(projected['submission']['answers'][0]['status'], 'unknown')
+        self.assertEqual(projected['unsupported'][0]['reason'], 'missing_public_claim_requirement')
+        self.assertIsNotNone(report_projection(run)[1])
 
     def test_foreign_refused_or_modified_certificate_cannot_supply_fields(self):
         for finding_id in ['Foreign', '../F1']:

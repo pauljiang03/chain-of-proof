@@ -57,6 +57,11 @@ Dataset support does not mean that every answer is correct or every conclusion c
 Use the public readiness check to inspect unsupported meanings and missing role records.
 Other cases use explicit case profiles and evidence manifests.
 
+The latest [correctness fixes](docs/CORRECTNESS_FIXES.md) require declared meanings
+for typed answer fields, retain partial answers, and save answer checkpoints in the
+new test protocol. They also narrow shortcut, email, installation and USB statements
+to their source evidence. No new accuracy result is claimed for these changes.
+
 ## Try it in 60 seconds
 
 ```sh
@@ -190,7 +195,8 @@ Public questions go to the investigator; expected answers go only to the scorer.
    field/hash/sentence, regenerates the proof, and runs the kernel again.
 6. **Report** — accepted findings use fixed sentences. Examiner judgments stay separate.
    Explicit bindings place claim values into the public answer format with source links.
-   Annotated fields reject incompatible roles; this does not prove the complete answer.
+   The product rejects answer fields without a declared role, or with an incompatible
+   role. Narrow source observations remain available. This does not prove the complete answer.
 7. **Score** — a deterministic scorer compares answers to the private reference using
    declared rules for strings, lists, paths, and timestamps.
 
@@ -322,7 +328,7 @@ re-verify offline:
 
 ```sh
 .venv/bin/python -m verifier.package build \
-  --run runs/current/run.json --facts evidence/case_facts.json \
+  --run runs/dev/my-case/run.json --facts /path/facts.json \
   --out /path/new-verification-package
 .venv/bin/python -m verifier.package verify --bundle /path/new-verification-package
 ```
@@ -354,8 +360,8 @@ Verify the saved certificates, then recheck with the second proof checker:
 
 ```sh
 .venv/bin/python -m verifier.verify \
-  --run runs/current/run.json --facts evidence/case_facts.json
-.venv/bin/python -m verifier.conleche --run runs/current/run.json
+  --run runs/dev/my-case/run.json --facts /path/facts.json
+.venv/bin/python -m verifier.conleche --run runs/dev/my-case/run.json
 ```
 
 con-leche is written separately from Lean's own kernel. Its result concerns the saved

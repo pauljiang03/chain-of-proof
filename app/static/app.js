@@ -276,7 +276,7 @@
         row.tabIndex = 0;
         row.dataset.finding = present(finding.finding_id, "");
         const basis = element("td"), statement = element("td");
-        basis.append(badge(finding.strength === "heuristic" ? "Heuristic" : present(finding.strength, "Certified"), finding.strength === "heuristic" ? "heuristic" : "accepted"));
+        basis.append(badge(finding.strength === "heuristic" ? "Heuristic" : present(finding.strength, "Rule type not recorded"), finding.strength === "heuristic" ? "heuristic" : "accepted"));
         if (finding.question) statement.append(element("div", "question", finding.question));
         statement.append(element("div", "", present(finding.english, "No fixed sentence was included in this certificate.")));
         row.append(markCell(finding), element("td", "id", present(finding.finding_id)), basis, statement,

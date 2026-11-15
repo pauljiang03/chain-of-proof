@@ -233,9 +233,9 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
         return json.dumps(call_tool(bench.review), ensure_ascii=False)
 
     @tool
-    def answer(question_id: str, bindings: list[dict] | None = None, replace: bool = False) -> str:
+    def answer(question_id: str, bindings: list[dict] | None = None, replace: bool = False, preview: bool = False) -> str:
         """Bind claim fields to answer paths; omit bindings for the catalog. Relevance and completeness are not proved."""
-        return json.dumps(call_validated(bench.answer, question_id, bindings, replace=replace), ensure_ascii=False)
+        return json.dumps(call_validated(bench.answer, question_id, bindings, replace=replace, preview=preview), ensure_ascii=False)
 
     @tool
     def inventory_page(question_id: str, kinds: list[str] | None = None,

@@ -31,14 +31,14 @@ def extract_pc(*args, **kwargs):
     from extractor.windows import extract_pc as reader
     return reader(*args, **kwargs)
 
-READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content", "hacking", "host_attributes", "image_integrity", "antivirus"),
+READERS = {"pc": ("system", "webcloud", "filetraces", "inventory", "content", "hacking", "host_attributes", "application_identity", "image_integrity", "antivirus"),
            "removable": ("content", "image_integrity"), "optical": ("optical", "content", "image_integrity")}
-OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory", "hacking", "host_attributes", "antivirus")
+OPEN_TARGET = ("system", "webcloud", "filetraces", "inventory", "hacking", "host_attributes", "application_identity", "antivirus")
 READER_ROLES = {"windows": ("pc",), "media": ("removable",),
                 **{reader: tuple(role for role, readers in READERS.items() if reader in readers)
                    for reader in sorted({r for readers in READERS.values() for r in readers})}}
 READER_ORDER = ("windows", "media", "system", "webcloud", "filetraces", "inventory", "optical", "content",
-                "hacking", "host_attributes", "image_integrity", "antivirus")
+                "hacking", "host_attributes", "application_identity", "image_integrity", "antivirus")
 # These expensive readers need an explicit selection. Scanning also needs a local
 # scanner and signature database; never start an update or service implicitly.
 DEFAULT_READERS = tuple(reader for reader in READER_ORDER if reader not in ("image_integrity", "antivirus"))

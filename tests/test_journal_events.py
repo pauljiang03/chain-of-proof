@@ -94,14 +94,18 @@ class JournalEvents(unittest.TestCase):
         self.assertEqual(ev.rows[0]['prov']['reason_flags'], ft.USN_FILE_CREATE | ft.USN_CLOSE)
 
     def test_parent_paths_use_the_name_at_each_event_usn(self):
+        from tests.test_journal_paths import fixture
         parent = (10, 3)
-        _, ev = collect([
-            record(1, 'old', ft.USN_FILE_CREATE | ft.USN_CLOSE, own=parent, parent=ROOT),
-            record(10, 'first.txt', ft.USN_FILE_CREATE | ft.USN_CLOSE, own=(40, 2)),
-            record(20, 'old', ft.USN_RENAME_OLD, own=parent, parent=ROOT),
-            record(21, 'new', ft.USN_RENAME_NEW | ft.USN_CLOSE, own=parent, parent=ROOT),
-            record(30, 'last.txt', ft.USN_FILE_CREATE | ft.USN_CLOSE, own=(41, 2)),
-        ], paths={10: (3, 'new')})
+        _ranges, _entries, stream, records = fixture([
+            ('old', parent, ROOT, ft.USN_FILE_CREATE | ft.USN_CLOSE, 0x10),
+            ('first.txt', (40, 2), parent, ft.USN_FILE_CREATE | ft.USN_CLOSE, 0x20),
+            ('old', parent, ROOT, ft.USN_RENAME_OLD, 0x10),
+            ('new', parent, ROOT, ft.USN_RENAME_NEW | ft.USN_CLOSE, 0x10),
+            ('last.txt', (41, 2), parent, ft.USN_FILE_CREATE | ft.USN_CLOSE, 0x20)])
+        ntfs = NS(serial=0x12345678CA0C7A48, mft=Mft({10: (3, 'new')}),
+                  usnjrnl=NS(fh=stream, records=lambda: iter(records)))
+        ev = Collector()
+        ft._journal(ev, ntfs, 'C:', '', COMMON)
         files = {r['prov'].get('raw_name'): r for r in ev.rows}
         self.assertEqual(files['first.txt']['obj'], r'C:\old\first.txt')
         self.assertEqual(files['last.txt']['obj'], r'C:\new\last.txt')

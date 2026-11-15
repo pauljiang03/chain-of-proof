@@ -94,6 +94,10 @@ _SPECS = (
     ('browser.url', 'string', 'URL text retained by a browser record; not proof of a visit or user attribution'),
     ('app.news.group_mailbox', 'string', 'name of a retained newsgroup mailbox file; current subscription is not established'),
     ('app.config.irc_log_file_name', 'string', 'retained IRC log basename whose Session Ident records a channel; not attributed to a person'),
+    ('app.binary.product_name', 'string', 'literal ProductName in PE StringFileInfo for the examined registered application binary and resource language; not execution, use, or authenticity'),
+    ('app.binary.product_version', 'string', 'literal ProductVersion in PE StringFileInfo for the examined registered application binary and resource language; not a derived version year, execution, use, or authenticity'),
+    ('app.binary.file_description', 'string', 'literal FileDescription in PE StringFileInfo for the examined registered application binary and resource language; not execution, use, or authenticity'),
+    ('app.binary.file_version', 'string', 'literal FileVersion in PE StringFileInfo for the examined registered application binary and resource language; not a derived version year, execution, use, or authenticity'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)

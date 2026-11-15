@@ -66,6 +66,7 @@ class JournalRanges:
         self.last_end = None
         self.rejected = 0
         self.keys = {}
+        self.sequences = defaultdict(set)
 
     def capture(self, offset, length, stream):
         try:
@@ -113,6 +114,9 @@ class JournalRanges:
 
     def finish(self):
         self.keys = {ref: [entry.usn for entry in entries] for ref, entries in self.directories.items()}
+        self.sequences = defaultdict(set)
+        for number, sequence in set(self.directories) | self.non_directory_refs:
+            self.sequences[number].add(sequence)
 
     def same_block(self, a, b):
         return a in self.membership and self.membership.get(a) == self.membership.get(b)
@@ -122,39 +126,125 @@ class JournalRanges:
         return {'start_offset': block['start'], 'end_offset_exclusive': block['end'],
                 'record_count': block['records'], 'sha256': block['hash'].hexdigest()}
 
-    def directory_name(self, ref, usn):
-        """Return a preceding name or a safely bounded first future OLD_NAME pair."""
+    def _directory_state(self, ref, usn):
+        """Return a supported observation or a precise reason for abstaining.
+
+        An OLD_NAME records the pre-rename name. It cannot establish which name
+        applies to a child record interleaved before the corresponding NEW_NAME.
+        https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ns-winioctl-usn_record_v2
+        """
+        if usn not in self.membership:
+            return None, 'child_record_outside_validated_interval'
         if ref in self.non_directory_refs:
-            return None
+            return None, 'identity_not_exclusively_directory'
         entries = self.directories.get(ref, [])
         index = bisect_right(self.keys.get(ref, []), usn)
         if index:
             previous = entries[index - 1]
-            if (self.same_block(previous.usn, usn)
-                    and not previous.reason & (DELETE | HARD_LINK)):
-                return previous, 'preceding directory observation'
+            if self.same_block(previous.usn, usn):
+                if previous.reason & OLD:
+                    return None, 'rename_transition_in_progress'
+                if previous.reason & (DELETE | HARD_LINK):
+                    return None, 'prior_removal_or_hard_link_transition'
+                return (previous, 'preceding directory observation'), None
         # A child observation already names this parent identity. Within the
         # intact range, require consistent directory state until the OLD/NEW pair.
         waiting = []
         for position in range(index, len(entries)):
             entry = entries[position]
             if not self.same_block(usn, entry.usn):
-                return None
+                return None, 'directory_observation_outside_intact_interval'
             if entry.reason & (CREATE | DELETE | NEW | HARD_LINK):
-                return None
+                return None, 'future_creation_removal_rename_or_link_transition'
             if entry.reason & OLD:
                 if any((e.name, e.parent) != (entry.name, entry.parent) for e in waiting):
-                    return None
+                    return None, 'conflicting_future_directory_state'
                 if position + 1 >= len(entries):
-                    return None
+                    return None, 'old_name_without_following_new_name'
                 following = entries[position + 1]
                 if (not self.same_block(entry.usn, following.usn)
                         or not following.reason & NEW
                         or following.reason & (OLD | CREATE | DELETE | HARD_LINK)):
-                    return None
-                return entry, 'future OLD_NAME paired with NEW_NAME within intact journal interval'
+                    return None, 'old_new_pair_not_validated'
+                return (entry, 'future OLD_NAME paired with NEW_NAME within intact journal interval'), None
             waiting.append(entry)
-        return None
+        if not entries:
+            variants = self.sequences.get(ref[0], set()) - {ref[1]}
+            return None, 'different_reference_sequence_only' if variants else 'no_directory_observation'
+        return None, 'future_name_without_bounded_old_new_pair' if waiting else 'directory_observation_outside_intact_interval'
+
+    def directory_name(self, ref, usn):
+        """Return a preceding name or a safely bounded first future OLD_NAME pair."""
+        return self._directory_state(ref, usn)[0]
+
+    def resolve_folder(self, ref, usn, root_reference, seen=()):
+        """Resolve within this stream and retain a diagnostic for any missing prefix.
+
+        Identities here are local (record, sequence) pairs. The caller must bind
+        this result to its image/exhibit/full-volume scope before emitting facts.
+        No current MFT names, timestamps or unbounded future names are consulted.
+        """
+        chain, visited = [], set(seen)
+        current = ref
+        valid_child = usn in self.membership
+        reason = None if valid_child else 'child_record_outside_validated_interval'
+        while valid_child and current != root_reference:
+            if current in visited:
+                reason = 'ancestor_cycle'
+                break
+            if len(visited) >= 64:
+                reason = 'ancestor_depth_limit'
+                break
+            if current[0] == 5 and root_reference is None:
+                reason = 'root_identity_unavailable'
+                break
+            if current[0] == 5 and root_reference is not None:
+                reason = 'root_reference_sequence_mismatch'
+                break
+            found, reason = self._directory_state(current, usn)
+            if found is None:
+                break
+            entry, method = found
+            chain.append({'directory_record': current[0], 'directory_sequence': current[1],
+                          'anchor_usn': entry.usn, 'anchor_name': entry.name,
+                          'anchor_parent': list(entry.parent), 'anchor_reason_flags': entry.reason,
+                          'method': method, 'intact_range': self.span(usn)})
+            visited.add(current)
+            current = entry.parent
+        complete = valid_child and current == root_reference and root_reference is not None
+        anchors = list(reversed(chain))
+        result = {'components': [anchor['anchor_name'] for anchor in anchors],
+                  'path_complete': complete, 'anchors': anchors, 'diagnostic': None}
+        if complete:
+            return result
+        entries = self.directories.get(current, [])
+        needed = ('A directory name and parent link for this exact record-and-sequence identity '
+                  'at the child USN, supported within the same intact journal interval. '
+                  'An earlier retained journal, independently bounded historical directory snapshot, '
+                  'or valid bounded OLD_NAME/NEW_NAME pair may supply support; present MFT paths '
+                  'or a different record sequence do not.')
+        if reason == 'ancestor_cycle':
+            needed = 'Resolve the conflicting parent-identity cycle from independently consistent historical records; do not splice in a present MFT prefix.'
+        elif reason == 'rename_transition_in_progress':
+            needed = 'A supported name/parent observation for the child event outside the interleaved OLD_NAME/NEW_NAME transition; neither rename endpoint alone orders that child event.'
+        elif reason in ('root_identity_unavailable', 'root_reference_sequence_mismatch'):
+            needed = 'The root-directory identity and sequence from the same scoped volume, plus a consistent historical chain to that exact root identity.'
+        result['diagnostic'] = {
+            'status': 'diagnostic', 'reason': reason or 'root_identity_unavailable',
+            'at_usn': usn,
+            'missing_ancestor': {'file_record': current[0], 'file_sequence': current[1]},
+            'resolved_chain_child_to_root': [
+                {'file_record': a['directory_record'], 'file_sequence': a['directory_sequence'],
+                 'anchor_usn': a['anchor_usn']} for a in chain],
+            'directory_observations_for_identity': len(entries),
+            'first_directory_usn': entries[0].usn if entries else None,
+            'last_directory_usn': entries[-1].usn if entries else None,
+            'other_observed_sequences': sorted(self.sequences.get(current[0], set()) - {current[1]}),
+            'child_intact_interval': self.span(usn) if usn in self.membership else None,
+            'evidence_needed': needed,
+            'scope_requirement': 'same image, exhibit and full NTFS volume serial; scoped identity must include the record sequence',
+            'limitation': 'This identifies missing support, not a recovered prefix or proof of absence.'}
+        return result
 
     def folder(self, ref, usn, root_reference, seen=()):
         """Resolve a full path or an explicitly incomplete ancestor suffix.
@@ -162,20 +252,7 @@ class JournalRanges:
         Each inferred component comes from an exact parent identity. A missing
         higher ancestor never supplies a guessed current-MFT prefix.
         """
-        if ref == root_reference:
-            return [], True, []
-        if ref in seen or len(seen) >= 64:
+        resolved = self.resolve_folder(ref, usn, root_reference, seen)
+        if not resolved['components'] and not resolved['path_complete']:
             return None
-        found = self.directory_name(ref, usn)
-        if found is None:
-            return None
-        entry, method = found
-        anchor = {'directory_record': ref[0], 'directory_sequence': ref[1],
-                  'anchor_usn': entry.usn, 'anchor_name': entry.name,
-                  'anchor_parent': list(entry.parent), 'anchor_reason_flags': entry.reason,
-                  'method': method, 'intact_range': self.span(usn)}
-        above = self.folder(entry.parent, usn, root_reference, seen + (ref,))
-        if above is None:
-            return [entry.name], False, [anchor]
-        components, complete, anchors = above
-        return components + [entry.name], complete, anchors + [anchor]
+        return resolved['components'], resolved['path_complete'], resolved['anchors']

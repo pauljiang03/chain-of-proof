@@ -1059,19 +1059,73 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
         return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
 
     serial = volume_serial or ("%08X" % (ntfs.serial & 0xFFFFFFFF))
+    root_reference = None
+    scope = {'image': common.get('image'), 'exhibit': common.get('exhibit'),
+             'ntfs_volume_serial': f'{ntfs.serial:016X}'}
+    scope_complete = (all(isinstance(scope[key], str) and scope[key].strip()
+                          for key in ('image', 'exhibit'))
+                      and isinstance(ntfs.serial, int) and not isinstance(ntfs.serial, bool)
+                      and 0 <= ntfs.serial < 1 << 64)
     if ranges is not None:
         try:
             root_reference = (5, int(ntfs.mft(5).header.SequenceNumber))
         except Exception:
-            root_reference = None
+            pass
+        if not scope_complete:
+            ev.problem(artifact + ' bounded-path scope', RuntimeWarning(
+                'image, exhibit and full NTFS volume identity are required; no bounded path facts emitted'))
+
+    def path_resolution(parent, usn):
+        """Attach operational diagnostics, never a guessed prefix or new claim."""
+        resolved = (ranges.resolve_folder(parent, usn, root_reference) if ranges is not None
+                    else {'components': [], 'path_complete': False, 'anchors': [], 'diagnostic': {
+                        'status': 'diagnostic', 'reason': 'raw_journal_coverage_unavailable',
+                        'at_usn': usn,
+                        'missing_ancestor': {'file_record': parent[0], 'file_sequence': parent[1]},
+                        'resolved_chain_child_to_root': [],
+                        'evidence_needed': 'Retained raw USN-v2 bytes with validated offsets and interval continuity, and historical ancestor observations for the exact identities.',
+                        'limitation': 'No historical prefix is inferred from a current MFT path.'}})
+        diagnostic = resolved['diagnostic']
+        if not scope_complete:
+            resolved['path_complete'] = False
+            diagnostic = dict(diagnostic or {}, status='diagnostic', reason='identity_scope_incomplete',
+                              at_usn=usn,
+                              missing_ancestor={'file_record': parent[0], 'file_sequence': parent[1]},
+                              resolved_chain_child_to_root=[],
+                              evidence_needed='Bind the raw journal to an image, exhibit and full NTFS volume serial before using its identities.',
+                              limitation='Unscoped identities do not support an absolute historical path.')
+            resolved['diagnostic'] = diagnostic
+        if diagnostic is not None:
+            diagnostic.update(scope=dict(scope), scope_complete=scope_complete,
+                              source_journal=artifact, shadow_copy=source.get('shadow_copy'))
+            missing = diagnostic['missing_ancestor']
+            missing['scoped_identity'] = (_journal_identity(common, ntfs.serial,
+                (missing['file_record'], missing['file_sequence'])) if scope_complete else None)
+            for item in diagnostic['resolved_chain_child_to_root']:
+                item['scoped_identity'] = (_journal_identity(common, ntfs.serial,
+                    (item['file_record'], item['file_sequence'])) if scope_complete else None)
+        return resolved
+
+    def historical_folder(parent, usn):
+        # The older direct-name path must not bypass the raw resolver's refusals
+        # (gaps, a rename in progress, conflicting type or reused identities).
+        # Future OLD_NAME inference remains in the separate journalPath record.
+        if not scope_complete or ranges is None:
+            return None
+        resolved = ranges.resolve_folder(parent, usn, root_reference)
+        if (resolved['path_complete'] and all(
+                a['method'] == 'preceding directory observation' for a in resolved['anchors'])):
+            return '\\'.join(resolved['components'])
+        return None
+
+    if ranges is not None and scope_complete:
         latest_paths = {}
         for usn, filetime, fref, parent, name, reason in observations:
             if usn not in ranges.membership or us_from_filetime(filetime) < 0:
                 continue
-            resolved = ranges.folder(parent, usn, root_reference)
-            if resolved is None:
-                continue
-            folders, complete, anchors = resolved
+            resolved = path_resolution(parent, usn)
+            folders, complete, anchors = (resolved['components'], resolved['path_complete'],
+                                          resolved['anchors'])
             if not folders:
                 continue
             # Existing direct historical names already cover full preceding paths.
@@ -1090,6 +1144,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                    parent_record=parent[0], parent_sequence=parent[1],
                    volume_serial=serial, ntfs_volume_serial=f'{ntfs.serial:016X}',
                    reason_flags=reason, path_complete=complete, directory_anchors=anchors,
+                   path_resolution_diagnostic=resolved['diagnostic'],
                    bounded_future_old_name=future, timestamp_semantics='journal_observation',
                    time_meaning='timestamp of the child journal observation; not filesystem creation onset',
                    rule='directory names constrained by exact identities and intact retained USN-v2 byte '
@@ -1105,7 +1160,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
         t = us_from_filetime(filetime)
         if t < 0:
             continue
-        folder = _historical_folder(ntfs, cache, history, parent, usn)
+        folder = historical_folder(parent, usn)
         path = full(folder, name)
         context, _ = _folder_at(ntfs, cache, history, parent, usn, allow_future=False)
         identity = _journal_identity(common, ntfs.serial, fref)
@@ -1117,6 +1172,10 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                       context_path=full(context, name),
                       context_path_source="journal or current file table; not asserted as the historical path",
                       last_observation_usn=usn, observation_count=1)
+        if folder is None or not scope_complete:
+            diagnostic = path_resolution(parent, usn)['diagnostic']
+            if diagnostic is not None:
+                detail['path_resolution_diagnostic'] = diagnostic
         old = latest_name.get(fref)
         name_key = (path, parent, folder is not None)
         if old is not None and old[0] == name_key:
@@ -1139,11 +1198,13 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
             ev.add(kind, t, 1, obj, aux, artifact=f"{artifact} USN {usn}",
                    time_meaning="first journal observation of this consecutive name/parent state; "
                                 "not creation onset or continuous presence between observations",
-                   path_source="a full path is used only when preceding journal directory names "
-                               "resolve every ancestor to the volume root; otherwise raw_name is retained",
+                   path_source="a full path is used only when validated raw journal coverage and "
+                               "preceding directory names resolve every ancestor to the volume root; "
+                               "otherwise raw_name is retained",
                    **detail, **source, **common)
     for event in events:
-        folder = _historical_folder(ntfs, cache, history, event["parent"], event["usn"])
+        folder = historical_folder(event["parent"], event["usn"])
+        diagnostic = path_resolution(event['parent'], event['usn'])['diagnostic']
         context, _ = _folder_at(ntfs, cache, history, event["parent"], event["usn"],
                                 allow_future=False)
         t = us_from_filetime(event["filetime"])
@@ -1158,12 +1219,13 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                parent_sequence=event["parent"][1], volume_serial=serial,
                parent_folder=(drive + "\\" + folder) if folder is not None else "not resolved",
                path_resolved=folder is not None,
+               path_resolution_diagnostic=diagnostic,
                folder_names_from="change journal" if folder is not None else "not resolved",
                context_path=full(context, event["name"]),
                context_path_source="journal or current file table; not asserted as the historical path",
                reason_flags=event["reason"], matching_usns=event["matching_usns"],
                close_usn=event["close_usn"], timestamp_semantics="journal_observation",
-               path_source="full path only when preceding journal directory names resolve "
+               path_source="full path only when validated raw journal coverage and preceding directory names resolve "
                            "every ancestor to the volume root; otherwise the recorded basename "
                            "is retained and current file-table paths are context only",
                time_meaning=f"time the first retained {flag_name} observation was logged in "
@@ -1178,14 +1240,15 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                    parent_record=event["parent"][0], parent_sequence=event["parent"][1],
                    volume_serial=serial, ntfs_volume_serial=f"{ntfs.serial:016X}",
                    historical_path_resolved=folder is not None,
+                   path_resolution_diagnostic=diagnostic,
                    reason_flags=event["reason"], matching_usns=event["matching_usns"],
                    close_usn=event["close_usn"], timestamp_semantics="journal_observation",
                    time_meaning="first retained FILE_DELETE flag observation in this close cycle; "
                                 "not deletion onset, removal of every alias, or secure wiping",
                    **source, **common)
     for rn in renames:
-        old_dir = _historical_folder(ntfs, cache, history, rn["old_parent"], rn["old_usn"])
-        new_dir = _historical_folder(ntfs, cache, history, rn["new_parent"], rn["new_usn"])
+        old_dir = historical_folder(rn["old_parent"], rn["old_usn"])
+        new_dir = historical_folder(rn["new_parent"], rn["new_usn"])
         old_context, _ = _folder_at(ntfs, cache, history, rn["old_parent"], rn["old_usn"],
                                     allow_future=False)
         new_context, _ = _folder_at(ntfs, cache, history, rn["new_parent"], rn["new_usn"],
@@ -1203,11 +1266,13 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                parent_sequence=rn["old_parent"][1], new_parent_sequence=rn["new_parent"][1],
                moved=rn["old_parent"] != rn["new_parent"],
                old_path_resolved=old_dir is not None, new_path_resolved=new_dir is not None,
+               old_path_resolution_diagnostic=path_resolution(rn['old_parent'], rn['old_usn'])['diagnostic'],
+               new_path_resolution_diagnostic=path_resolution(rn['new_parent'], rn['new_usn'])['diagnostic'],
                context_path=full(old_context, rn["old_name"]),
                new_context_path=full(new_context, rn["new_name"]),
                context_path_source="journal or current file table; not asserted as historical paths",
                folder_names_from="change journal where ancestors resolve; otherwise raw basenames",
-               path_source="each rename side uses its own USN and preceding journal directory "
+               path_source="each rename side uses validated raw journal coverage, its own USN and preceding directory "
                            "names to resolve the ancestor chain; otherwise its raw basename "
                            "is retained. Current or later paths do not rewrite either side",
                time_meaning="time of the journal's new-name record", **source, **common)
