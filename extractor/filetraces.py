@@ -1,18 +1,4 @@
-"""What the PC remembers about folders and files, apart from the files themselves.
-
-    folderOpened  shell bags of every user hive, typed paths, Run dialog paths, network
-                  drive lists, mount points, Office recent places, open/save dialog folders
-    fileSeen      desktop search index, thumbnail caches, recent-document lists, Office
-                  and other per-application recent-file lists, print spool traces, files
-                  that a shadow copy still holds but the live volume does not
-    shadowCopy    every volume shadow copy
-    fileRenamed   every rename in the NTFS change journal
-    fileCreationRecorded  the first retained CREATE-flag observation per journal close cycle
-    fileRemoved   the first retained DELETE-flag observation per journal close cycle
-
-Every row is read from bytes of the image. Parsing helpers at the top are pure Python
-(no dissect), so they can be tested on synthetic bytes; dissect is imported lazily.
-"""
+"""Folder and file traces: shell bags, recent lists, search index, thumbnails, journal, shadow copies."""
 from __future__ import annotations
 
 import re
@@ -26,7 +12,6 @@ from .attributes import emit_attribute
 from .journal_paths import JournalRanges
 from .source_scope import merge_scope, subject_scope, vss_snapshot
 
-# --------------------------------------------------------------------------- pure helpers
 
 PATH_LIKE = re.compile(r"^(?:[A-Za-z]:\\|\\\\[^\\])")
 OFFICE_MRU = re.compile(r"^\[F([0-9A-Fa-f]+)\]\[T([0-9A-Fa-f]+)\](?:\[O[0-9A-Fa-f]+\])?\*(.*)$", re.S)
@@ -112,8 +97,7 @@ def split_idlist(buf: bytes) -> list:
 
 
 def property_strings(buf: bytes) -> list:
-    """String values of every serialized property store ('1SPS') inside a shell item:
-    [(format id, property id or name, text)]."""
+    """Strings of each property store ('1SPS') in a shell item -> [(format id, property, text)]."""
     out, pos = [], 0
     while True:
         i = buf.find(b"1SPS", pos)
@@ -148,8 +132,7 @@ def property_strings(buf: bytes) -> list:
 
 
 def beef0004(buf: bytes):
-    """The first file-entry extension block (signature 0xBEEF0004) of a shell item:
-    {'long_name', 'created', 'accessed'} or None."""
+    """First 0xBEEF0004 block of a shell item -> {'long_name', 'created', 'accessed'} or None."""
     q = buf.find(b"\x04\x00\xef\xbe")
     if q < 4 or q + 14 > len(buf):
         return None
@@ -216,8 +199,7 @@ def _zip_item(buf: bytes):
 
 
 def parse_shell_item(buf: bytes, guid_names: dict = None) -> dict:
-    """One shell item -> {'type', 'name', ...}. Only what the bytes hold; an item this
-    code does not understand keeps a placeholder name and its readable strings."""
+    """One shell item -> {'type', 'name', ...}; unknown items keep a placeholder name."""
     names = guid_names or {}
 
     def guid_name(raw):
@@ -289,8 +271,7 @@ def parse_shell_item(buf: bytes, guid_names: dict = None) -> dict:
 
 
 def compose_path(parent, item: dict) -> str:
-    """Path of a shell item under its parent. A drive or a network share starts the
-    path anew; a file-system item directly under the namespace root is on the Desktop."""
+    """Shell item path under its parent; drives and shares start anew, root items are on the Desktop."""
     name = item["name"]
     if item["type"] == "drive":
         return name if name.endswith("\\") else name + "\\"
@@ -348,8 +329,7 @@ def mountpoint_to_unc(name: str):
 
 
 def search_filetime(raw, big_endian: bool):
-    """8-byte date of the search index -> FILETIME, or None when unset. Windows Vista/7
-    (table SystemIndex_0A) store it big-endian, later versions little-endian."""
+    """Search index date -> FILETIME or None; Vista/7 (SystemIndex_0A) store it big-endian."""
     if not isinstance(raw, (bytes, bytearray)) or len(raw) != 8:
         return None
     ft = int.from_bytes(raw, "big" if big_endian else "little")
@@ -357,8 +337,7 @@ def search_filetime(raw, big_endian: bool):
 
 
 def thumbcache_id(raw: bytes) -> str:
-    """Cache entry hash bytes -> the 16-digit id Windows prints (and the search index
-    stores as System.ThumbnailCacheId)."""
+    """Cache entry hash -> the 16-digit id Windows shows (System.ThumbnailCacheId)."""
     return "%016x" % int.from_bytes(bytes(raw), "little")
 
 
@@ -378,9 +357,7 @@ def pair_renames(records):
 
 
 def name_at(history, usn):
-    """history: [(usn, name, parent reference)] of one file reference in journal order ->
-    (name, parent reference) it had at that journal position. Before its first record it
-    had the name that first record carries (the first record of a rename holds the old name)."""
+    """(name, parent) a file had at a journal position; before its first record, that record's name."""
     best = history[0]
     for entry in history:
         if entry[0] > usn:
@@ -388,8 +365,6 @@ def name_at(history, usn):
         best = entry
     return best[1], best[2]
 
-
-# --------------------------------------------------------------------------- registry
 
 BAG_ROOTS = ("Software\\Microsoft\\Windows\\Shell", "Software\\Microsoft\\Windows\\ShellNoRoam",
              "Local Settings\\Software\\Microsoft\\Windows\\Shell",
@@ -720,8 +695,6 @@ def _registry(ev, target, tz, common):
             _application_lists(ev, software, "Software", hive_path, account, tz, common)
 
 
-# --------------------------------------------------------------------------- search index
-
 SEARCH_DB = "C:/ProgramData/Microsoft/Search/Data/Applications/Windows/Windows.edb"
 SEARCH_TABLES = (("SystemIndex_0A", True), ("SystemIndex_PropertyStore", False))
 SEARCH_TIMES = (
@@ -770,7 +743,7 @@ def _search_iso_filetime(filetime):
 
 def _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal, source,
                        digest, big_endian, common, examined_at, state):
-    """Typed fields from one immutable ESE row; no inferred use or path fallback."""
+    """Typed fields from one search index (ESE) row."""
     import hashlib
 
     if not isinstance(examined_at, int) or isinstance(examined_at, bool) or examined_at <= 0:
@@ -797,7 +770,7 @@ def _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal
                         ese_tag_data_offset=int(tag.offset), ese_tag_data_size=int(tag.size),
                         ese_node_sha256=hashlib.sha256(bytes(node.data)).hexdigest())
         except (AttributeError, TypeError, ValueError):
-            pass  # Container/table/row identity remains explicit when optional node metadata is unavailable.
+            pass  # optional ESE node details
     for role, value in (('search.index.container_path', source), ('search.index.table', str(table.name)),
                         ('search.index.document_id', doc), ('search.index.identifier_column', columns[identifier])):
         emit_attribute(ev, subject, role, value, examined_at, **base)
@@ -822,7 +795,7 @@ def _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal
                 raise ValueError('indexed FILETIME is not an eight-byte value')
             ft = search_filetime(raw, big_endian)
             if ft is None:
-                continue  # Zero/one are unset, not an epoch or examination timestamp.
+                continue  # 0 and 1 mean unset
             value = us_from_filetime(ft)
             if value < 0:
                 raise ValueError('indexed FILETIME predates supported Unix epoch')
@@ -849,7 +822,7 @@ def _search_attributes(ev, record, get, columns, table, identifier, doc, ordinal
 
 
 def _search_index(ev, target, common, examined_at=None) -> dict:
-    """Retained index observations; thumbnail map remains a separate legacy output."""
+    """Search index rows; returns the cache-id map the thumbnail reader uses."""
     import hashlib
     import tempfile
     thumbs = {}
@@ -862,8 +835,7 @@ def _search_index(ev, target, common, examined_at=None) -> dict:
     if (not isinstance(size, int) or isinstance(size, bool) or not 0 < size <= MAX_SEARCH_DATABASE_BYTES):
         ev.problem(source, ValueError('Search database size is unavailable or exceeds the bounded reader limit'))
         return thumbs
-    # Freeze the exact parser bytes while hashing. Large containers spill to an
-    # automatically removed temporary file rather than consuming unbounded RAM.
+    # Hash a private copy so the parser reads exactly the hashed bytes; big files spill to disk.
     with p.open('rb') as original, tempfile.SpooledTemporaryFile(max_size=8 * 1024 * 1024, mode='w+b') as frozen:
         sha, copied = hashlib.sha256(), 0
         while True:
@@ -924,8 +896,7 @@ def _search_index(ev, target, common, examined_at=None) -> dict:
                         ev.problem(where, error)
                     try:
                         url, item_path = get('System_ItemUrl'), get('System_ItemPathDisplay')
-                        # Retain the legacy fileSeen/thumbnail observation without
-                        # promoting its display fallback to search.index.item_path.
+                        # Prefer the display path; the URL is a fallback for fileSeen only.
                         path = item_path if isinstance(item_path, str) and item_path else url
                         if not isinstance(path, str) or not path:
                             continue
@@ -978,7 +949,6 @@ def _search_index(ev, target, common, examined_at=None) -> dict:
             ev.problem(source, ValueError('no supported property table found'))
     return thumbs
 
-# --------------------------------------------------------------------------- thumbnail caches
 
 def _thumbnail_caches(ev, target, thumbs, common):
     from dissect.thumbcache.index import ThumbnailIndex
@@ -1038,8 +1008,6 @@ def _thumbnail_caches(ev, target, thumbs, common):
                        **prov)
 
 
-# --------------------------------------------------------------------------- NTFS: journal, shadow copies
-
 def _ntfs_volumes(target):
     """(drive letter or volume name, filesystem) for each NTFS volume."""
     letters = {}
@@ -1059,8 +1027,7 @@ def _ref(r):
 
 
 def _folder_path(ntfs, cache, ref):
-    """Path of a folder from its file reference, as the file table has it now; None when
-    that record has since been reused (sequence number differs)."""
+    """Current path of a folder from its file reference; None if the record was reused."""
     if ref not in cache:
         path = None
         try:
@@ -1075,8 +1042,7 @@ def _folder_path(ntfs, cache, ref):
 
 
 def _folder_at(ntfs, cache, history, ref, usn, depth=0, allow_future=True):
-    """(path, True when the journal supplied the name) of a folder as it was at a journal
-    position: the journal's own record of that folder where it has one, else the file table."""
+    """(path, from_journal) of a folder at a journal position; the file table is the fallback."""
     if ref[0] != 5 and ref in history and depth < 64:
         past = history[ref] if allow_future else [r for r in history[ref] if r[0] <= usn]
         if past:
@@ -1087,46 +1053,17 @@ def _folder_at(ntfs, cache, history, ref, usn, depth=0, allow_future=True):
     return _folder_path(ntfs, cache, ref), False
 
 
-def _historical_folder(ntfs, cache, history, ref, usn, seen=()):
-    """Resolve only a chain of preceding journal names to the volume root.
-
-    A current MFT name or a later rename's old name is useful context, but does
-    not establish a directory's name at an earlier journal observation.
-    """
-    if ref in seen or len(seen) >= 64:
-        return None
-    if ref[0] == 5:
-        return _folder_path(ntfs, cache, ref)
-    past = [entry for entry in history.get(ref, []) if entry[0] <= usn]
-    if not past:
-        return None
-    _when, name, parent = past[-1]
-    above = _historical_folder(ntfs, cache, history, parent, usn, seen + (ref,))
-    return None if above is None else (above + "\\" if above else "") + name
-
-
 def _journal_identity(common, serial, ref):
-    """Scoped identity, never a path: full NTFS volume serial plus record+sequence.
-
-    Image/exhibit scope prevents joining unrelated evidence images that happen to
-    carry the same serial. Shadow copies from that image retain the same scope.
-    Reference equality across historical views does not establish equal source
-    snapshots, continuous existence or authenticity. A selected-view answer must
-    separately check the source origin of every supporting record.
-    """
+    """Scoped file identity (image, exhibit, NTFS volume serial, record+sequence), never a path."""
     return "NTFS identity " + json.dumps(
         [common.get("image", ""), common.get("exhibit", ""), f"{serial:016X}", *ref],
         ensure_ascii=False, separators=(",", ":"))
 
 
 def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial=None, **source):
-    """Creation/removal observations, renames and spool traces of one change journal.
+    """Emit creations, removals, renames and spool traces of one journal; return its first USN.
 
-    Reason flags accumulate until CLOSE (MS-FSCC USN_RECORD_V2, 2.3.62.2). Emit
-    their first retained occurrence in that cycle, not a new action for each
-    accumulated flag. The timestamp is when that observation was logged: a
-    close-only record cannot recover the exact earlier action time. Return the
-    first USN for the caller's live/VSS overlap boundary.
+    Reason flags accumulate until CLOSE (MS-FSCC 2.3.62.2): each counts once per close cycle.
     """
     common = merge_scope(common, {key: source.pop(key) for key in
                                  ('source_snapshot', 'source_variant') if key in source})
@@ -1159,8 +1096,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
             name = r.filename
         except Exception:
             unreadable += 1
-            # A malformed filename must not make accumulated flags leak into the
-            # next close cycle for the same file reference.
+            # Close the cycle even without a readable name, so flags do not carry over.
             if reason & USN_CLOSE:
                 for flag in (USN_FILE_CREATE, USN_FILE_DELETE):
                     event = active.pop((fref, flag), None)
@@ -1206,8 +1142,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                 f'{ranges.rejected} records failed raw continuity checks; no path inference crosses them'))
 
     def full(folder, name):
-        # The filename is copied as stored. Do not normalize slash-like characters
-        # inside a raw name or invent a parent when its reference cannot be resolved.
+        # Keep the name exactly as stored; no parent is invented when it cannot be resolved.
         return name if folder is None else drive + "\\" + (folder + "\\" if folder else "") + name
 
     serial = volume_serial or ("%08X" % (ntfs.serial & 0xFFFFFFFF))
@@ -1229,7 +1164,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                 'image, exhibit and full NTFS volume identity are required; no bounded path facts emitted'))
 
     def path_resolution(parent, usn):
-        """Attach operational diagnostics, never a guessed prefix or new claim."""
+        """Add path-resolution diagnostics; never a guessed path prefix."""
         resolved = (ranges.resolve_folder(parent, usn, root_reference) if ranges is not None
                     else {'components': [], 'path_complete': False, 'anchors': [], 'diagnostic': {
                         'status': 'diagnostic', 'reason': 'raw_journal_coverage_unavailable',
@@ -1260,9 +1195,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
         return resolved
 
     def historical_folder(parent, usn):
-        # The older direct-name path must not bypass the raw resolver's refusals
-        # (gaps, a rename in progress, conflicting type or reused identities).
-        # Future OLD_NAME inference remains in the separate journalPath record.
+        # Only fully preceding paths; future OLD_NAME names go to journalPath rows.
         if not scope_complete or ranges is None:
             return None
         resolved = ranges.resolve_folder(parent, usn, root_reference)
@@ -1281,8 +1214,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                                           resolved['anchors'])
             if not folders:
                 continue
-            # Existing direct historical names already cover full preceding paths.
-            # This new kind exposes bounded future-name inference and useful suffixes.
+            # Complete preceding paths are emitted elsewhere; this adds partial and future-name paths.
             future = any(a['method'].startswith('future OLD_NAME') for a in anchors)
             if complete and not future:
                 continue
@@ -1306,8 +1238,7 @@ def _journal(ev, ntfs, drive, spool_dir, common, only_before=None, volume_serial
                    limitation='partial paths have an explicitly unresolved ancestor; this does not prove '
                               'a copy, disc write, secure wiping or continuous presence outside the interval',
                    **source, **common)
-    # Name and parent observations expose identity as an IR field, not merely
-    # provenance. Keep each transition, but collapse repeated same-state flags.
+    # Record each name or parent change once; repeats of the same state are collapsed.
     names, parents, latest_name, latest_parent = [], [], {}, {}
     for usn, filetime, fref, parent, name, reason in observations:
         t = us_from_filetime(filetime)
@@ -1532,7 +1463,7 @@ def _tree(ntfs):
 
 
 def _vss_storage_path(ntfs, store, drive, store_id):
-    """Resolve the catalog's exact NTFS reference before claiming a store path."""
+    """Store file path for a catalog entry, resolved by its exact NTFS reference."""
     raw_reference = store.desc3.metadata_reference
     if not isinstance(raw_reference, int) or isinstance(raw_reference, bool) or not 0 < raw_reference < 2**64:
         raise ValueError('VSS store metadata reference is not an unsigned NTFS reference')
@@ -1557,15 +1488,12 @@ def _vss_storage_path(ntfs, store, drive, store_id):
 
 
 def _vss_catalog_attributes(ev, vss, store, drive, serial, common, examined_at, *, ntfs=None):
-    """Describe one catalog/store-header pair without opening snapshot content.
+    """Describe one VSS catalog entry from volume metadata, without opening the copy.
 
-    Dissect joins the type-2 and type-3 descriptors by store identifier. The
-    copy and set identifiers reside in the linked store-information header;
-    creation time resides in the type-2 catalog descriptor. These are all
-    observations of metadata on the examined volume, not reads inside a copy.
+    Creation time comes from the type-2 catalog descriptor; copy and set IDs from the store header.
     """
     if examined_at is None:
-        return  # Historical direct callers have no examination timestamp.
+        return  # no examination time, so no attributes
     if type(examined_at) is not int or examined_at <= 0:
         raise ValueError('VSS attributes need a positive examination timestamp')
     store_id = uuid.UUID(bytes_le=bytes(store.desc2.store_identifier))
@@ -1658,9 +1586,7 @@ def _shadow_copies(ev, target, spool_dir, common, *, examined_at=None):
                     ev.problem(artifact + ': catalog attributes', e)
                 snap = NTFS(store.open())
                 source = dict(shadow_copy=copy_id)
-                # The copy identifier above is an object named by base-volume
-                # catalog bytes. Only reads through this opened store have VSS
-                # byte origin; do not change or mutate the live/catalog scope.
+                # Only reads through the opened store have a VSS origin; catalog rows stay base-volume.
                 snapshot_common = merge_scope(common, {'source_snapshot': vss_snapshot(store.copy_identifier)})
                 if live_first is not None:
                     _journal(ev, snap, drive, spool_dir if spool_dir[:2].upper() == drive else "",
@@ -1716,8 +1642,6 @@ def _shadow_copies(ev, target, spool_dir, common, *, examined_at=None):
             except Exception as e:
                 ev.problem(artifact, e)
 
-
-# --------------------------------------------------------------------------- entry point
 
 def extract(ev, target, ctx):
     common = merge_scope(ctx["common"])

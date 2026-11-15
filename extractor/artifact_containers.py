@@ -1,10 +1,4 @@
-"""Bounded, format-validated artifact locations and literal Unicode mail fields.
-
-Layouts select candidates; a filename or magic signature never establishes a
-subtype. Full byte hashes bind the validated container and its source origin.
-Validation is a bounded structural examination, not authenticity, application
-execution, complete record recovery, or a claim that every container was found.
-"""
+"""Validated browser, mail, thumbnail and Sticky Notes containers and their literal text."""
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -47,11 +41,7 @@ PATH_ROLES = {'chromium': 'browser.history.path', 'firefox': 'browser.history.pa
 
 
 def _windows_path(target, path):
-    """Map a virtual mount only through one identical filesystem drive mount.
-
-    A shared serial, filename, or familiar alias such as sysvol is insufficient.
-    The original filesystem locator remains separately retained in provenance.
-    """
+    """Map a mount to its drive letter only when exactly one drive mount is the same filesystem."""
     rendered = _win(path)
     if re.match(r'^[A-Za-z]:\\', rendered) or re.match(r'^\\\\[^\\]+\\[^\\]+(?:\\|$)', rendered):
         return rendered
@@ -142,16 +132,14 @@ def _read(path, size, budget):
 
 
 def _integer(value):
-    """Parser integer subclasses are native integers; Boolean flags are not counts."""
+    """Accept parser int subclasses as plain ints, but reject bools."""
     if not isinstance(value, int) or isinstance(value, bool) or value < 0:
         raise ValueError('decoded nonnegative integer is required')
     return int(value)
 
 
 def _sqlite(data, family, *, with_notes=False, view_provenance=None):
-    # Use SQLite's own read-only parser and integrity check, not a signature-only
-    # classifier. A WAL-derived copy has its own sqlite_view_sha256; the original
-    # container_sha256 continues to identify the captured base database bytes.
+    # A WAL-merged copy has its own sqlite_view_sha256; container_sha256 stays the captured file.
     with tempfile.TemporaryDirectory(prefix='cop-container-') as directory:
         path = Path(directory) / 'container.sqlite'
         path.write_bytes(data)
@@ -273,10 +261,8 @@ def _thumbcache(data):
                 or int(entry._header.IdentifierSize) % 2
                 or int(entry._header.PaddingSize) > len(entry._data)):
             raise ValueError('thumbnail cache entry lengths do not match captured bytes')
-        # A zero hash denotes an empty slot in Thumbcache Viewer's parser. Its
-        # bounded allocation can retain bytes despite zero logical data length;
-        # those bytes are not a thumbnail, padding, or proof of deletion/wiping.
-        # https://github.com/thumbcacheviewer/thumbcacheviewer/blob/master/thumbcache_viewer_cmd/thumbcache_viewer_cmd.cpp
+        # A zero hash marks an empty slot; any bytes left in it are not a thumbnail.
+        # Format: https://github.com/thumbcacheviewer/thumbcacheviewer/blob/master/thumbcache_viewer_cmd/thumbcache_viewer_cmd.cpp
         empty = (int(entry.hash, 16) == 0 and int(entry._header.IdentifierSize) == 0
                  and int(entry._header.PaddingSize) == 0 and int(entry._header.DataSize) == 0
                  and entry.data_checksum == bytes(8))
@@ -298,7 +284,7 @@ def _thumbcache(data):
 
 
 def _sticky_sqlite_rows(db):
-    """Retained Note.Text values only; reject ambiguous IDs before any emission."""
+    """Note.Text values; duplicate note IDs raise before anything is emitted."""
     db.setlimit(sqlite3.SQLITE_LIMIT_LENGTH, MAX_TEXT_BYTES + 4096)
     columns = {row[1].casefold() for row in db.execute('PRAGMA table_info("Note")')}
     if columns & {'rowid', '_rowid_', 'oid'}:
@@ -372,7 +358,7 @@ def _sticky_ole(data, *, with_notes=False):
             raise ValueError('Sticky Notes text streams failed bounded format checks')
         value = text.decode('utf-16-le', errors='strict')
         if value.endswith('\0'):
-            value = value[:-1]  # One terminator is framing; no trimming of note text.
+            value = value[:-1]  # drop only the one NUL terminator
         if '\0' in value:
             raise ValueError('Sticky Notes Unicode stream has an embedded NUL')
         total += len(text)
@@ -423,40 +409,8 @@ def validated(data, family, *, sqlite_view=None):
         raise ValueError('unsupported artifact-container family')
 
 
-def _unicode_property(message, property_id):
-    """Read exactly one PT_UNICODE property; missing and explicit empty differ."""
-    values = []
-    sets = _integer(message.number_of_record_sets)
-    if sets > 64:
-        raise ValueError('MAPI record-set budget exceeded')
-    for set_index in range(sets):
-        record_set = message.get_record_set(set_index)
-        count = _integer(record_set.number_of_entries)
-        if count > 4096:
-            raise ValueError('MAPI property-entry budget exceeded')
-        for entry_index in range(count):
-            entry = record_set.get_entry(entry_index)
-            if entry.entry_type != property_id:
-                continue
-            if entry.value_type != 0x1F:
-                raise ValueError('requested MAPI text property is not PT_UNICODE')
-            raw = entry.data
-            if not isinstance(raw, bytes) or len(raw) > MAX_TEXT_BYTES or len(raw) % 2:
-                raise ValueError('Unicode MAPI property bytes are invalid or exceed limit')
-            text = raw.decode('utf-16-le', errors='strict')
-            # One terminating NUL is storage framing, not replacement decoding.
-            if text.endswith('\0'):
-                text = text[:-1]
-            if '\0' in text:
-                raise ValueError('Unicode MAPI property contains an embedded NUL')
-            values.append((text, set_index, entry_index, len(raw)))
-    if len(values) > 1:
-        raise ValueError('duplicate requested MAPI property occurrences are ambiguous')
-    return values[0] if values else None
-
-
 def mail_fields(ev, box, container_subject, provenance, examined_at):
-    """Bounded retained-message walk; never scans recoverable/orphan messages."""
+    """Walk the mail store's live messages; recovered and orphan messages are not read."""
     from .mail_content import text_property
     pending, folders, messages, text_bytes = [(box.get_root_folder(), (), 0)], 0, 0, 0
     seen = set()
@@ -512,7 +466,7 @@ def mail_fields(ev, box, container_subject, provenance, examined_at):
 
 
 def _container_mtime(stat):
-    """Exact filesystem modification time, with its original precision retained."""
+    """File modification time at its original precision."""
     value = getattr(stat, 'st_mtime_ns', None)
     if not isinstance(value, int) or isinstance(value, bool):
         raise ValueError('Sticky Notes container has no integer filesystem st_mtime_ns')
@@ -523,7 +477,7 @@ def _container_mtime(stat):
 
 
 def _sqlite_source_view(target, path, source, data, budget):
-    """Read an exact adjacent WAL in the same opened filesystem view, if present."""
+    """Apply the adjacent -wal file from the same filesystem, if there is one."""
     from .sqlite_wal import committed_view
     wal_path = target.fs.path(str(path) + '-wal')
     if not wal_path.exists():
@@ -548,7 +502,7 @@ def _sqlite_source_view(target, path, source, data, budget):
 
 
 def sticky_fields(ev, notes, container_subject, provenance, stat, examined_at):
-    """Keep each note's literal text, container path and container time together."""
+    """Emit each note's text with its container's path and modification time."""
     modified = None
     try:
         modified, raw_time = _container_mtime(stat)

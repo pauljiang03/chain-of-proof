@@ -1,10 +1,4 @@
-"""Bounded document-property observations from concrete Windows user files.
-
-The reader checks package relationships, content types and XML roots. It does not
-execute documents, extract archives to disk, infer authorship, or turn document
-properties into filesystem times. OLE Office and PDF readers preserve their own
-field meanings rather than relabeling them as OOXML core properties.
-"""
+"""Document properties from OOXML, OLE Office and PDF files in Windows user folders."""
 from __future__ import annotations
 
 import hashlib
@@ -77,7 +71,7 @@ def _part_name(raw):
 
 
 def parse_ooxml(data):
-    """Return literal reviewed properties after bounded package validation."""
+    """Validate an OOXML package and return its listed properties as literal text."""
     if not isinstance(data, bytes) or len(data) > MAX_FILE_BYTES:
         raise ValueError('document exceeds the byte limit')
     with zipfile.ZipFile(io.BytesIO(data)) as package:
@@ -183,8 +177,7 @@ def candidates(ev, target):
             path = profile.joinpath(folder)
             if path.exists():
                 queue.append((path, 0))
-    # Older Windows layouts can retain a shared/relocated drive-root document
-    # directory. Its path is an observation, never an inferred user association.
+    # Older Windows keeps shared document folders at the drive root; they are not tied to a user.
     for drive in sorted({str(name).upper() for name in getattr(target.fs, 'mounts', {})
                          if re.fullmatch(r'[A-Za-z]:', str(name))}):
         for folder in LEGACY_ROOT_FOLDERS:
@@ -225,7 +218,7 @@ def candidates(ev, target):
 
 
 def parse_document(data):
-    """Dispatch on bytes; filenames are only enumeration candidates."""
+    """Choose the parser by content, not by file name."""
     if data.startswith(OLE_SIGNATURE):
         return parse_ole(data)
     if data.startswith(b'%PDF-'):

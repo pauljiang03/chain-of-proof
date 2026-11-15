@@ -1,10 +1,4 @@
-"""Strict literal MAPI Unicode, STRING8 and HTML properties with source encodings.
-
-Microsoft properties: PidTagMessageCodepage (0x3FFD), PidTagInternetCodepage
-(0x3FDE), PidTagHtml (0x1013). No locale default or replacement decoding is used.
-HTML remains literal source markup; attachments and deleted-message carving are
-separate readers. Property and code-page locators remain in the same message.
-"""
+"""Literal MAPI text and HTML properties, decoded only by the code page the message records."""
 from __future__ import annotations
 
 import codecs
@@ -63,8 +57,7 @@ def _codepage(message, property_id, folder=None, *, allow_utf16=False):
         codepage = struct.unpack('<I', found[1])[0]
         locator = dict(found[2], message_codepage_locator=locator)
         scope = 'containing folder'
-    # Windows byte encodings with defined Python equivalents. UTF-16 STRING8
-    # and arbitrary codec aliases are not inferred from a numeric label.
+    # Windows code pages with exact Python codecs; nothing else is guessed.
     aliases = {65001: 'utf-8', 20127: 'ascii', 28591: 'iso8859-1', 28592: 'iso8859-2',
                20866: 'koi8-r', 21866: 'koi8-u'}
     if allow_utf16:
@@ -79,7 +72,7 @@ def _codepage(message, property_id, folder=None, *, allow_utf16=False):
 
 
 def text_property(message, property_id, *, folder=None):
-    """Return one exact typed value, its source locators and interpretation rule."""
+    """One property's value, its locators and how it was decoded."""
     found = one_property(message, property_id)
     if found is None:
         return None
@@ -108,8 +101,7 @@ def text_property(message, property_id, *, folder=None):
         if kind != 0x0102:
             raise ValueError('MAPI HTML body is not PT_BINARY')
         encoding, cp = _codepage(message, 0x3FDE, allow_utf16=True)
-        # The explicitly recorded body encoding controls decoding. A BOM must
-        # agree with it; no unrelated HTML/meta declarations override the field.
+        # The recorded code page decides; a BOM must agree and HTML meta tags are ignored.
         bom = next(((prefix, codec) for prefix, codec in ((b'\xef\xbb\xbf', 'utf-8'),
                     (b'\xff\xfe', 'utf-16-le'), (b'\xfe\xff', 'utf-16-be')) if raw.startswith(prefix)), None)
         if bom is not None:

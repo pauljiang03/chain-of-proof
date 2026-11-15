@@ -1,11 +1,4 @@
-"""Bounded committed SQLite WAL view from captured base and adjacent WAL bytes.
-
-Implements SQLite's documented reader/checksum algorithm:
-https://sqlite.org/fileformat2.html#wal_file_format
-The transient SHM file is not trusted. Invalid/stale tail frames never become
-rows; retained uncommitted frames are counted but not applied. Returned bytes
-are a derived view, never a replacement for the original source bytes or hash.
-"""
+"""Committed view of a SQLite database plus its WAL (https://sqlite.org/fileformat2.html#wal_file_format); the -shm file is not trusted."""
 from __future__ import annotations
 
 import hashlib
@@ -68,8 +61,7 @@ def committed_view(base, wal):
         if next_state != (check1, check2):
             reason = 'first frame with invalid cumulative checksum'
             break
-        # Tail headers are untrusted until their cumulative checksum succeeds.
-        # A corrupt trailing page number cannot invalidate earlier commits.
+        # Check the page only after the checksum, so a bad tail cannot undo earlier commits.
         if not 1 <= page <= 0xfffffffe:
             raise ValueError('SQLite WAL frame page number is invalid')
         if page * page_size > MAX_BYTES or database_pages * page_size > MAX_BYTES:

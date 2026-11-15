@@ -1,10 +1,4 @@
-"""Narrow Windows EVT session observations, without security-string inference.
-
-EventLog 6005/6006 record service start/stop. Their startup/shutdown categories
-match the existing system reader; they do not establish the exact power-on or
-power-off instant. The EVT parser supplies UTC TimeGenerated, with second
-precision, rather than an assumed local timezone or an examination timestamp.
-"""
+"""Service start/stop events (6005/6006) from legacy EVT logs, with UTC second-precision times."""
 from __future__ import annotations
 
 from datetime import datetime
@@ -47,7 +41,7 @@ def _event(out, record, source):
 
 
 def extract_sessions(out, ev, target):
-    """Feed the existing system._Out object; report failures per source file."""
+    """Add session events to system._Out; failures are reported per file."""
     from dissect.eventlog.evt import Evt
 
     result = {'files': 0, 'records_examined': 0, 'events_emitted': 0,

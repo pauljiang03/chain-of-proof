@@ -11,7 +11,7 @@ from dissect.util.stream import RangeStream, RunlistStream
 
 from .fatcarve import carve_fat32, fat_times_utc, folder_paths, parse_directory
 from .acquisition import area, provenance, resolve
-from .store import Evidence, us, us_from_unix
+from .store import Evidence, us_from_unix
 from .source_scope import base_volume_scope, merge_scope
 
 FAT_EPOCH = 315532800  # 1980-01-01, what an unset FAT timestamp decodes to
@@ -25,11 +25,7 @@ def _uint(value, *, positive=False):
 
 
 def _partition_context(target, vol, common):
-    """Only direct, unambiguous disk partitions have the coordinates used here.
-
-    The containing provenance binds image/exhibit/snapshot/variant. A serial, path,
-    volume number, or first data cluster is not a file-occurrence identifier.
-    """
+    """Partition coordinates, only for a direct and unambiguous disk partition."""
     for key in ("image", "exhibit", "source_snapshot", "source_variant"):
         value = common.get(key)
         if (type(value) is not str or not value.strip() or value != value.strip()
@@ -54,12 +50,7 @@ def _partition_context(target, vol, common):
 
 
 def _stream_locator(stream, vol, seen=()):
-    """Map a 32-byte native record through the actual parser stream to its volume.
-
-    FAT data runs are relative to a data-area RangeStream; exFAT runs are sectors
-    relative to the volume. Following the stream chain avoids confusing those units.
-    Unknown transforms, sparse runs, cycles and incomplete ranges are refused.
-    """
+    """Stream offset -> volume offset; FAT runs count data-area clusters, exFAT runs volume sectors."""
     size = getattr(stream, "size", None)
     if not _uint(size, positive=True):
         raise ValueError("directory stream has no bounded size")
@@ -124,11 +115,7 @@ def _read_directory(stream):
 
 
 def _record_slots(raw, kind):
-    """Yield native record bytes and their real directory-relative byte positions.
-
-    FAT uses the short entry, including all timestamps, not the first data cluster.
-    exFAT uses the primary FILE entry and its complete secondary-entry set.
-    """
+    """Yield (record bytes, directory offset): FAT short entries, or exFAT FILE entry sets."""
     offset = 0
     while offset < len(raw):
         record = raw[offset:offset + 32]
@@ -173,7 +160,7 @@ def _directory_occurrences(vol, fs, dirpath):
     locate = _stream_locator(stream, vol)
     slots = {}
     for record, offset in _record_slots(_read_directory(stream), kind):
-        # Byte-identical native entries can occupy different slots. Never pick one.
+        # Identical entries in different slots are ambiguous: pick neither.
         slots[record] = None if record in slots else locate(offset)
     return slots
 
@@ -220,10 +207,7 @@ def _wall(naive_seconds: float) -> datetime:
 
 def _recovered_entries(ev, vol, fs, identity: dict, tz: ZoneInfo, examined_at: int, common: dict,
                        occurrence_context=None):
-    """Directory entries left in unallocated FAT32 clusters, for example after a quick
-    format. They belonged to an earlier file system whose volume serial is gone, so the
-    rows carry an area id in `aux` and one unallocatedOnDevice row ties that area to the
-    device. Returns (folders, files)."""
+    """Entries in unallocated FAT32 clusters -> (folders, files); the old volume serial is gone."""
     bpb = fs.fatfs.bpb
     if bpb.BPB_RootEntCnt != 0:                      # FAT12/16: not handled
         return None
@@ -322,8 +306,7 @@ def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: i
                 rel = str(p).replace("/", "\\")
                 if kind == "fat":
                     if dirpath == "/" and st.st_size == 0 and st.st_ctime == FAT_EPOCH:
-                        # the volume-label directory entry, not a file; its write time is
-                        # when the label was set, which a format does
+                        # the volume label, not a file; its time is when a format set the label
                         label = name.replace(".", "")
                         continue
                     created, modified, zone = fat_times_utc(_wall(st.st_ctime), _wall(st.st_mtime),

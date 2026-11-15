@@ -1,8 +1,4 @@
-"""Explicit, versioned intake of supported disk images using existing readers.
-
-Each output directory is created once. Hashes bind the bytes examined, not their
-original authenticity. Unsupported artifacts and reader failures remain in health.
-"""
+"""Create evidence snapshots from configured disk images; each output directory is written once."""
 from __future__ import annotations
 
 import hashlib
@@ -121,7 +117,7 @@ def validated_manifest(images, manifest):
 
 
 def _segments(root, name):
-    """Bind all numeric EWF segments the current reader can open, in order."""
+    """All EWF segment files of an image, in order."""
     path = root / name
     if path.suffix.lower() != ".e01":
         return [path]
@@ -214,9 +210,7 @@ def _base_evidence(path):
         if fact.id in seen:
             raise ValueError("duplicate record ID in prior snapshot")
         seen.add(fact.id)
-        # Aggregate tags describe the evidence set at derivation time. Adding
-        # source observations can invalidate them, so only these derived rows
-        # are rebuilt; source observations and other tags retain their values.
+        # Derived tags depend on the whole evidence set, so they are rebuilt; other rows are kept.
         if fact.kind == "tag" and fact.prov.get("source") == "deterministic":
             derived_tags += 1
             continue
@@ -240,7 +234,7 @@ def _snapshot(root, manifest, output, *, case, examined_at, images, selected,
                                 evidence=ev, previous_meta=previous_meta,
                                 manifest_source="trusted explicit intake manifest")
     facts_path = output / "facts.json"
-    # Reading is complete before output becomes a configured snapshot.
+    # Refuse to publish if the images or parent facts changed while reading.
     if image_bindings(root, manifest) != images:
         raise ValueError("image bytes changed during extraction; snapshot was not published")
     if parent and sha256_file(parent["path"]) != parent["sha256"]:
@@ -284,7 +278,7 @@ def _snapshot(root, manifest, output, *, case, examined_at, images, selected,
 
 
 def intake(images, manifest, output_dir, *, case="Supplied case", examined_at=None, readers=None):
-    """Validate explicit images and write a new immutable-by-convention snapshot."""
+    """Validate the images and write a new evidence snapshot."""
     from extractor.build import selection
     output = Path(output_dir)
     if output.exists() or output.is_symlink():
@@ -301,7 +295,7 @@ def intake(images, manifest, output_dir, *, case="Supplied case", examined_at=No
 
 
 def extend(config, reader, exhibit, output_dir):
-    """Internal bounded collection: one allowlisted pair plus the prior full snapshot."""
+    """New snapshot: the previous one plus one more reader/exhibit pair."""
     from extractor.build import READER_ROLES
     cfg = load_config(config, verify_images=True)
     entries = {e["exhibit"]: e for n, e in cfg["manifest"].items() if not n.startswith("_")}

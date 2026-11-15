@@ -1,10 +1,4 @@
-"""Optional local ClamAV scan of readable allocated files in a mounted image.
-
-Evidence is copied to numbered, nonexecutable temporary files. The scanner receives
-only those copies. Results always state scan scope and limitations; a negative scan
-is not proof that no malware exists, and a signature hit is not proof of execution.
-This reader must be selected explicitly and never downloads signatures itself.
-"""
+"""Optional local ClamAV scan of copied files; a clean result does not prove absence of malware."""
 from __future__ import annotations
 
 import hashlib
@@ -72,7 +66,7 @@ def copy_file(source, destination, size):
 
 
 def parse_results(text, mapping, returncode):
-    """Only scanner paths that we staged may name findings; retain errors separately."""
+    """Accept findings only for paths we staged; keep scanner errors separately."""
     detections, errors = [], []
     for line in text.splitlines():
         if line.endswith(" FOUND"):
@@ -89,7 +83,7 @@ def parse_results(text, mapping, returncode):
         errors.append("scanner reported detections but no finding could be bound to a file")
     if returncode == 0 and detections:
         errors.append("scanner result contradicts its exit status")
-    # Exceeded limits are reported as heuristic detections by ClamAV, not malware.
+    # ClamAV reports exceeded limits as heuristic detections; they are not malware.
     limit_hits = [item for item in detections if item["signature"].startswith("Heuristics.Limits.Exceeded")]
     if limit_hits:
         errors.append("scanner limits were reached for one or more files")
@@ -155,8 +149,7 @@ def scan(target, *, executable=None, database=None):
             try:
                 result = subprocess.run(command, stdout=output, stderr=subprocess.STDOUT, timeout=TIMEOUT)
             except subprocess.TimeoutExpired:
-                # subprocess.run has killed and reaped the scanner. Its retained
-                # positive observations still matter; never turn timeout into zero.
+                # The scanner was killed; keep the detections it already logged.
                 timed_out = True
                 result = subprocess.CompletedProcess(command, 124)
         raw = log.read_bytes()
@@ -167,8 +160,7 @@ def scan(target, *, executable=None, database=None):
             parsed["errors"].append(f"scanner time limit {TIMEOUT} seconds reached; remaining files unscanned")
         if database_bindings(database) != signatures:
             parsed["errors"].append("signature database changed during scanning")
-        # Keep the exact file list and scanner transcript in the evidence provenance.
-        # Temporary host paths are replaced only in display text, not parsed identities.
+        # Hide temporary host paths in the transcript text only.
         transcript = raw.decode("utf-8", "replace").replace(str(files), "<staged-files>")
         return {**parsed, "scanner_version": version, "exit_code": result.returncode,
                 "files": list(mapping.values()), "bytes": total, "omitted": omitted,
@@ -197,8 +189,7 @@ def extract(ev, target, ctx):
         "detections_reported" if result["detections"] else "no_detections_reported")
     for role, value in (("scanner.version", result["scanner_version"]),
                         ("scanner.result", status), ("scanner.scope", result["scope"])):
-        # Keep the complete copied-file manifest once, on the declared scope.
-        # Every other observation binds that receipt by its canonical hash.
+        # Only the scope record carries the full file manifest; the others cite its hash.
         provenance = dict(common, scan_receipt=result) if role == "scanner.scope" else common
         emit_attribute(ev, subject, role, value, ctx["examined_at"], **provenance)
     if result["detections"] or result["complete_allocated_scope"]:

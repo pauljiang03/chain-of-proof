@@ -1,8 +1,4 @@
-"""Bounded selection of explicit historical filesystem sources.
-
-This module returns observations, not actor/transfer claims or proof verdicts.
-Callers own image opening and fact publication. No source is selected by time.
-"""
+"""Inventory VSS copies and UDF states; compare files between the live volume and one copy."""
 from __future__ import annotations
 
 import copy
@@ -164,13 +160,7 @@ def _failure(error):
 
 
 def _parse_vss(stream, limits):
-    """Preflight every catalog block before Dissect's eager catalog construction.
-
-    Dissect's read_block follows linked blocks without a cycle/count limit. The
-    preflight bounds entries and links, validates complete blocks, and rejects
-    cycles before that routine runs. A shared byte/call budget also bounds reads
-    from later lazy store block maps. None of this copies an image.
-    """
+    """Check VSS catalog blocks for bounds and cycles before Dissect reads them unbounded."""
     from dissect.volume import vss
     stream.seek(vss.VOLUME_HEADER_OFFSET)
     header = vss.c_vss.volume_header(stream)
@@ -194,8 +184,7 @@ def _parse_vss(stream, limits):
             if kind == 0:
                 ended = True
                 continue
-            # Dissect stops processing at the first empty entry. Padding across
-            # later linked blocks is normal, but hidden later entries are not.
+            # Later entries after an empty one would be hidden from Dissect; padding is fine.
             if ended:
                 raise UnsupportedSource("VSS catalog contains entries after an empty entry")
             entries += 1
@@ -208,11 +197,7 @@ def _parse_vss(stream, limits):
 
 
 def discover_vss(target, common, *, limits=None):
-    """Inventory catalog/store-header metadata on explicitly identified base bytes.
-
-    Does not open snapshot content. The caller's target and streams stay open.
-    Incomplete discovery is reported and cannot support unambiguous selection.
-    """
+    """Inventory VSS catalog and store-header metadata without opening any copy."""
     limits = limits or Limits()
     result = VssInventory(_common(common, "base-volume"), limits)
     mounts = getattr(target.fs, "mounts", {})
@@ -328,13 +313,7 @@ def _open_ntfs(stream):
 
 
 def _index_search(index, name, limits):
-    """Exact FILE_NAME search with bounds independent of parser I/O caches.
-
-    Dissect Index.search uppercases FILE_NAME keys, binary-searches a node, and
-    follows its selected child VCN unless the selected non-end key matches.
-    Its index_buffer is cached, so a cycle can otherwise loop without reads.
-    Retain those routing/equality semantics while bounding nodes and entries.
-    """
+    """FILE_NAME index search as Dissect's Index.search does it, but with node and entry limits."""
     # NTFS COLLATION.FILE_NAME is 0x1. Other comparators cannot resolve a path.
     if int(index.root.collation_rule) != 1:
         raise UnsupportedSource("directory index does not use FILE_NAME collation")
@@ -366,8 +345,7 @@ def _index_search(index, name, limits):
             raise UnsupportedSource("directory index FILE_NAME keys are not sorted")
         if any(left == right for left, right in zip(keys, keys[1:])):
             raise UnsupportedSource("ambiguous duplicate directory index FILE_NAME comparison keys")
-        # The last entry is the end sentinel, representing keys beyond the last
-        # named key. Match the primary parser's exact binary-search decisions.
+        # The last entry is the end sentinel; search exactly as Dissect does.
         low, high = 0, len(entries) - 1
         while low != high:
             middle = low + (high - low) // 2
@@ -394,8 +372,7 @@ def _index_search(index, name, limits):
 
 
 def _record(ntfs, path, limits=None):
-    # Resolve the actual directory index references and verify sequence numbers.
-    # Mft.get(path) follows junctions and does not itself check those sequences.
+    # Walk the index ourselves: Mft.get(path) follows junctions and skips sequence checks.
     limits = limits or Limits()
     record = ntfs.mft.root
     for part in path[3:].split("\\"):
@@ -458,8 +435,7 @@ def _observe(ntfs, path, provenance, limits, content_budget):
                 received += len(chunk)
                 content_budget[0] += len(chunk)
                 digest.update(chunk)
-            # Do not add an extra byte beyond a declared resource cap. NTFS's
-            # stream length and metadata must still agree after the complete read.
+            # The stream length and metadata must still agree after the full read.
             if _stat(record) != stat:
                 raise OSError("file metadata changed during content read")
         finally:
@@ -472,20 +448,14 @@ def _observe(ntfs, path, provenance, limits, content_budget):
 
 
 def compare_versions(inventory, snapshot_id, paths, *, volume_identity=None):
-    """Read/hash each explicit path in base plus one explicitly selected VSS copy.
-
-    Returns JSON-safe observations and a same/different-content result only when
-    both complete logical streams were read. Equality never implies direction,
-    actor, causation or transfer. Absence never means deletion was established.
-    """
+    """Hash each path in the base volume and one chosen VSS copy; compare only complete reads."""
     source = select_vss(inventory, snapshot_id, volume_identity=volume_identity)
     limits = inventory.limits
     paths = _paths(paths, limits)
     volume = source.metadata["volume"]
     if volume["drive"] is None or any(path[:2] != volume["drive"] for path in paths):
         raise SourceSelectionError("paths must address the selected volume's single explicit drive mapping")
-    # Separate operation budget; shared across base and snapshot, including all
-    # lazy snapshot reconstruction and metadata reads, not just returned content.
+    # One I/O budget for base and snapshot, including metadata and lazy reconstruction reads.
     budget = _Budget(limits.max_io_bytes, limits.max_read_calls)
     source.bounded.budget = budget
     origin = dict(inventory.common, volume=copy.deepcopy(volume), parser="extractor.historical_sources.ntfs")
@@ -545,7 +515,7 @@ class OpticalInventory:
 
 
 def optical_session_capability():
-    """An audited, specific capability gap; session ordinals are not snapshots."""
+    """Session selection is unsupported: a session number is not a snapshot."""
     return dict(status="unsupported", capability="select coherent historical filesystem by optical session number",
         audited_source=["extractor.optical.ewf_sessions", "extractor.optical.Udf._versions",
                         "extractor.optical.Survey.session"],
@@ -554,13 +524,7 @@ def optical_session_capability():
 
 
 def discover_optical(survey, common, *, limits=None):
-    """Index retained UDF states without initiating an image scan or content read.
-
-    ``optical.survey`` currently scans the disc to discover descriptors. Its prior
-    work is outside this API's bounds. Admission here is limited by source count,
-    retained directory-entry count and retained VAT metadata bytes. A partial
-    survey is never silently upgraded to a complete namespace.
-    """
+    """Index UDF states of an existing optical survey, within limits, without reading the image."""
     from .optical import parse_fsd, udf_serial32
     limits = limits or Limits()
     common = _common(common, "optical-image")
@@ -650,7 +614,7 @@ def _file_identity(path):
 
 
 def _input_receipt(image, exhibit, config_path=None, *, config_limit=16 * 1024 * 1024):
-    """Bind names/stats; optionally retain checked but unrecomputed intake hashes."""
+    """Input file names and stats, plus intake hashes if given (checked, not recomputed)."""
     from pathlib import Path
     from .intake import FORMATS, _digest, _segments
     if image.suffix.lower() not in FORMATS:
@@ -789,8 +753,7 @@ def main(argv=None):
                          volume_identity=getattr(args, "volume_identity", None)),
             input=source, code=code, result=result)
         encoded = json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + "\n"
-        # Exclusive create also protects against a file or symlink appearing
-        # after the preflight. No existing output or image is opened for writing.
+        # Exclusive create: refuse a file or symlink that appeared after the check.
         with output.open("x", encoding="utf-8") as stream:
             stream.write(encoded)
         print(str(output))

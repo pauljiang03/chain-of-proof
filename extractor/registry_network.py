@@ -1,4 +1,4 @@
-"""Exact current-hive DHCP configuration joins, never actual-assignment claims."""
+"""Configured DHCP settings per network card, from the current hives."""
 import json
 from . import system
 from .registry_fields import dword, interface_guid, text_value

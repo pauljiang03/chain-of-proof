@@ -1,11 +1,4 @@
-"""Literal VERSIONINFO strings from registered application binaries.
-
-This bounded reader follows live Windows App Paths registrations. It neither
-scans arbitrary executables nor maps a filename/version number to a product year.
-PE/resource layouts follow the Windows structures also implemented by
-dissect.executable.pe; the small decoder here retains exact physical offsets and
-rejects ambiguous mappings, cyclic directories, and out-of-bounds children.
-"""
+"""VERSIONINFO strings from executables registered under Windows App Paths."""
 from __future__ import annotations
 
 import hashlib
@@ -137,7 +130,7 @@ def version_resources(data):
 
 
 def version_strings(data):
-    """Decode exact four StringFileInfo values; never substitute fixed integers."""
+    """Read the four StringFileInfo strings, never the fixed numeric version fields."""
     nodes = 0
     align = lambda value: (value + 3) & ~3
 
@@ -254,7 +247,7 @@ def _registered(ev, target):
 
 
 def extract(ev, target, ctx):
-    """Emit literal metadata observations and full hashes for bounded registrations."""
+    """Emit version strings and file hashes for registered applications."""
     from .source_scope import merge_scope, subject_scope
     candidates = {}
     try:

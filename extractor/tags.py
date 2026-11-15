@@ -1,8 +1,4 @@
-"""Deterministic tags with explicit, shared public policy for case-specific labels.
-
-No case-specific serial, path marker, or authorization policy is built in. Generic
-artifact comparisons and the stated search watch list do not depend on case policy.
-"""
+"""Deterministic tags; case-specific labels come only from the manifest's public policy."""
 from __future__ import annotations
 
 import json
@@ -13,19 +9,14 @@ from .store import Evidence
 
 SAME_FILE_SLACK_US = 2_000_000      # FAT keeps modified times to 2 seconds
 
-# A generic watch list for search terms: moving data out, or covering tracks. It was
-# written before looking at this case's searches and is not tuned to them.
+# Generic search terms about moving data out or covering tracks; not tuned to any case.
 WATCH_WORDS = ("leak", "exfiltrat", "theft", "steal", "secret", "forensic", "delet", "eras",
                "wipe", "shred", "clean", "recover", "cover tracks", "dlp", "drm",
                "cloud storage", "cd burn", "external device", "investigat", "event log")
 
 
 def public_policy(value=None) -> dict:
-    """Validate the optional ``_policy`` in a public acquisition manifest.
-
-    A nonmember is unauthorized only when the supplied allowlist is explicitly
-    complete; an incomplete or absent list leaves nonmembers unclassified.
-    """
+    """Validate the manifest's `_policy`; nonmembers are unauthorized only if the allowlist is complete."""
     if value is None:
         return {}
     allowed = {"source", "authorized_device_serials", "authorized_device_serials_complete",
@@ -94,9 +85,7 @@ def add_tags(ev: Evidence, examined_at: int, *, policy=None) -> int:
 
 
 def _same_size_and_time(ev: Evidence, examined_at: int) -> int:
-    """Tag file records that sit in different places (volumes, or a device's unallocated
-    space) with the same size and the same last-modified time. A copy keeps both, so
-    this is how a renamed copy shows up. Contents are not compared, and the tag says so."""
+    """Tag files in different places with equal size and modified time (as a copy keeps both)."""
     by_size = defaultdict(list)
     for kind, t, _res, obj, aux, prov in ev.rows():
         if kind == "fileModified":

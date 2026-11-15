@@ -1,8 +1,4 @@
-"""Scoped partition and current-hive configuration observations.
-
-These are source fields, not a partition census, service-running status, or proof
-that a configured exclusion removed bytes from any particular shadow copy.
-"""
+"""Partition table entries and current-hive configuration fields."""
 from __future__ import annotations
 
 import hashlib
@@ -62,8 +58,7 @@ def partitions(ev, target, ctx):
         seen.add(id(disk))
         where = f'logical disk {disk_index} MBR'
         try:
-            # Dissect records the logical sector size used by this disk's volume
-            # parser. Do not infer it from an unrelated filesystem's boot sector.
+            # Use the disk's sector size from Dissect, not a filesystem boot sector.
             size = _uint(disk.size)
             sector_size = _uint(disk.vs._disk.sector_size, 65536)
             if sector_size not in (512, 4096):
@@ -157,8 +152,7 @@ def _registry_values(ev, hive, path):
 
 def _registry_provenance(ctx, hive, key, value, *, control_set=None):
     where = system._where(hive, control_set, control_set)
-    # A primary-looking filename does not upgrade an explicitly different or
-    # unknown caller origin. Known backup origins remain independently excluded.
+    # A hive named like the primary one does not override the caller's origin.
     if where.get('source_variant') == 'primary':
         where.pop('source_variant')
     path = key.path

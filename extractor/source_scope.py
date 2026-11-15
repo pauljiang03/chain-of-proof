@@ -1,9 +1,4 @@
-"""Explicit source origins for fresh extraction; never infer them from absence.
-
-Snapshot identifies the filesystem bytes read. Variant identifies primary or
-alternate artifact state within that snapshot. Neither identifies a physical user
-or asserts that a retained historical record describes the machine's current state.
-"""
+"""Source origin fields (snapshot and variant) for records; missing origins stay unknown."""
 from uuid import UUID
 
 
@@ -24,11 +19,7 @@ def vss_snapshot(copy_id):
 
 
 def merge_scope(common, details=None):
-    """Merge provenance without replacing a specific origin with common defaults.
-
-    Missing or malformed scope remains explicitly unknown. This function does not
-    upgrade historical facts or infer a primary origin from a missing backup flag.
-    """
+    """Merge provenance without replacing a specific origin by a default."""
     result = dict(common)
     result.update(details or {})
     for key in ('source_snapshot', 'source_variant'):
@@ -44,7 +35,7 @@ def merge_scope(common, details=None):
 
 
 def subject_scope(provenance):
-    """Bind typed subjects to the same origin axes as their retained provenance."""
+    """Origin fields to include in a subject identity."""
     resolved = merge_scope(provenance)
     return [resolved.get('image'), resolved.get('exhibit'),
             resolved['source_snapshot'], resolved['source_variant']]

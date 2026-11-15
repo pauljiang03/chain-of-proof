@@ -1,18 +1,4 @@
-"""Literal metadata from bounded OLE Office containers and PDF Info dictionaries.
-
-The small CFB/OLEPS reader follows Microsoft's MS-CFB 2.2/2.6 and MS-OLEPS
-2.5/2.18/2.20/2.21/2.25.1; Office identification checks MS-DOC FibBase,
-MS-XLS BOF and MS-PPT CurrentUserAtom/UserEditAtom headers. It never runs Office.
-PDF parsing uses pypdf in a resource-limited child, reads only the catalog and
-Info dictionary, and never renders pages, follows actions, or opens attachments.
-
-References:
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/05060311-bfce-4b12-874d-71fd4ce63aea
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-oleps/f7933d28-2cc4-4b36-bc23-8861cbcd37c4
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-oleps/a4c32611-5b79-4965-8f50-50639c138e16
-https://pypdf.readthedocs.io/en/6.21.4/modules/PdfReader.html
-https://udp.adobe.io/document-services/docs/assets/35e4369068f86065372c18787171a17e/PDF_ISO_32000-1.pdf
-"""
+"""Literal metadata from OLE Office files and PDF Info dictionaries; nothing is rendered or run."""
 from __future__ import annotations
 
 import codecs
@@ -121,8 +107,7 @@ class _CompoundFile:
             raise ValueError('mini FAT sector limit exceeded')
         mini_blob = self._regular(_uint(data, 60), mini_count * self.sector_size, 'mini FAT', MAX_FILE_BYTES)
         self.minifat = struct.unpack('<' + 'I' * (len(mini_blob) // 4), mini_blob)
-        # Only root-level siblings are eligible: embedded documents cannot supply
-        # the parent document's SummaryInformation or identity streams.
+        # Root-level entries only: embedded documents must not supply the parent's properties.
         self.entries, seen, pending = {}, {0}, [root['child']]
         while pending:
             sid = pending.pop()
@@ -272,7 +257,7 @@ def _summary_properties(data, stream_name=SUMMARY_STREAM):
             terminator = b'\0\0' if codepage == 1200 else b'\0'
             if length and (not encoded.endswith(terminator) or (codepage == 1200 and length % 2)):
                 raise ValueError('unterminated SummaryInformation string')
-            # Remove exactly the specified terminator, not embedded/trailing NULs.
+            # Strip only the declared terminator, not other NULs.
             text = (encoded[:-len(terminator)] if length else b'').decode(encoding, errors='strict')
             if len(text.encode('utf-8')) > MAX_PROPERTY_BYTES:
                 raise ValueError('decoded SummaryInformation string exceeds bounds')
@@ -337,7 +322,7 @@ def parse_ole(data):
 
 
 def parse_pdf(data):
-    """Run with CPU/time and parser budgets, plus OS memory limits where available."""
+    """Read PDF metadata in a child process with time and output limits."""
     _bounded(data)
     if not re.match(br'%PDF-(?:1\.[0-7]|2\.0)(?:\r\n|\r|\n)', data):
         raise ValueError('invalid supported PDF header')
@@ -359,8 +344,7 @@ def parse_pdf(data):
 def _parse_pdf(data):
     from pypdf import apply_configuration
 
-    # Configuration is local to this parse. No image decoder or external JBIG2
-    # executable is needed to read the catalog and Info dictionary.
+    # Tight limits: only the catalog and Info dictionary are read.
     with apply_configuration(
             maximum_declared_stream_length=MAX_METADATA_BYTES,
             array_based_stream_maximum_output_length=MAX_METADATA_BYTES,
@@ -426,10 +410,8 @@ def _read_pdf(data):
         raw = value.original_bytes if type(value) is TextStringObject else bytes(value)
         if len(raw) > MAX_PROPERTY_BYTES:
             raise ValueError('PDF Info encoded string exceeds the byte limit')
-        # pypdf guesses UTF-16 for some strings without a BOM. ISO 32000 text
-        # strings do not permit that heuristic: decode the retained bytes using
-        # only the encoding signaled in the file. PDF 2.0 additionally permits
-        # UTF-8 with BOM. Date strings remain literal; no calendar conversion.
+        # Decode by the encoding the file signals (ISO 32000), not pypdf's UTF-16 guess.
+        # PDF 2.0 also allows UTF-8 with a BOM. Dates stay literal.
         if raw.startswith(b'\xfe\xff'):
             literal, encoding = raw[2:].decode('utf-16-be', errors='strict'), 'UTF-16BE'
         elif raw.startswith(b'\xff\xfe'):

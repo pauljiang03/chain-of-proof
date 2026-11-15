@@ -1,10 +1,4 @@
-"""Typed Windows configuration and account observations, independent of case names.
-
-The existing system reader also retains historical copies and activity records.
-These attributes identify exact current-hive fields for public answer contracts.
-They do not infer personal identity, habitual use, or successful authentication
-from a configuration value or a SAM counter.
-"""
+"""Typed Windows configuration and account fields from the current registry hives."""
 from __future__ import annotations
 
 import re
@@ -27,7 +21,7 @@ def iso_seconds(seconds):
 
 
 def shutdown_filetime_iso(raw):
-    """Preserve all seven fractional digits of an eligible native FILETIME."""
+    """ISO time of a FILETIME, keeping all seven fractional digits."""
     if not isinstance(raw, bytes) or len(raw) != 8:
         raise ValueError('ShutdownTime requires exactly eight native binary bytes')
     ticks = struct.unpack('<Q', raw)[0]
@@ -42,11 +36,7 @@ def shutdown_filetime_iso(raw):
 
 
 def build_number(value):
-    """Decode only a canonical unsigned decimal/DWORD registry build value.
-
-    Preserve the original value in provenance. Versions, whitespace, leading
-    zeroes, signs and floating-point values are not silently repaired.
-    """
+    """Build number from a canonical decimal string or DWORD; anything else is rejected."""
     if isinstance(value, int) and not isinstance(value, bool):
         number = int(value)
     elif isinstance(value, str) and re.fullmatch(r"0|[1-9][0-9]{0,9}", value):
@@ -75,15 +65,7 @@ def _signed_bias(value, field):
 
 
 def effective_time_zone(data):
-    """Display only an unambiguous correspondence in the recorded bias fields.
-
-    Microsoft defines UTC = local time + bias, with StandardBias/DaylightBias
-    added to Bias. Those adjustments depend on transition dates at runtime; we
-    do not evaluate dates or claim an actual operating-system DST state here.
-    ActiveTimeBias is compared with the stored sums, not inferred from a clock.
-    A dynamic-DST disable flag alone can still allow fixed transition dates, so
-    the conservative flag check below does not resolve an ambiguous label.
-    """
+    """Time zone label only if the bias fields match it unambiguously (UTC = local + bias)."""
     raw, decoded = {}, {}
     for field in TIME_ZONE_FIELDS:
         if field not in data:
@@ -293,8 +275,7 @@ def extract(ev, target, ctx):
                 except Exception as error:
                     ev.problem(system._art(hive, path, 'ShutdownTime'), error)
         elif hive.name == "SECURITY":
-            # LSA primary domain name is a counted Unicode string. A DNS suffix or
-            # default-logon domain is not silently relabeled as this field.
+            # The LSA primary domain name; DNS suffix and default-logon domain are different fields.
             path = r"Policy\PolPrDmN"
             data = values(hive, path)
             raw = data.get("") or data.get("(Default)")

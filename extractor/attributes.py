@@ -1,4 +1,4 @@
-"""Emit typed source observations without converting them into forensic conclusions."""
+"""Emit typed observations from a source artifact, without drawing conclusions."""
 import hashlib
 import json
 import re
@@ -7,13 +7,7 @@ from checker.catalog import ROLES
 
 
 def emit_attribute(ev, subject, role, value, observed_at_us, **provenance):
-    """Emit one linked subject/role/typed-value triple; return its stable identity.
-
-    ``subject`` must be scoped to the evidence and source/object. Provenance must
-    identify the source artifact and its field/byte/key locator where available.
-    The triple timestamp is examination time. An event timestamp is a separate
-    typed attribute value; no event-time inference comes from this row's ``t``.
-    """
+    """Emit one subject/role/value observation; `t` is the examination time, not an event time."""
     if not isinstance(subject, str) or not subject.strip():
         raise ValueError('attribute subject must be a nonempty scoped identity')
     if role not in ROLES:
@@ -30,9 +24,7 @@ def emit_attribute(ev, subject, role, value, observed_at_us, **provenance):
         length = {'md5': 32, 'sha1': 40, 'sha256': 64}[role.rsplit('.', 1)[1]]
         if not re.fullmatch('[0-9a-f]{' + str(length) + '}', value):
             raise ValueError('image digest must be canonical lowercase hexadecimal')
-    # Quoted strings preserve real empty text despite the legacy interner's
-    # empty-entity sentinel. All value kinds use exact canonical JSON. Only an
-    # explicitly reviewed signed_integer role may emit a negative native integer.
+    # Store values as JSON, so empty text ("") stays distinct from the store's empty sentinel.
     encoded = json.dumps(value, ensure_ascii=True)
     identity = 'attribute:' + hashlib.sha256(json.dumps(
         [subject, role, value, observed_at_us, provenance], sort_keys=True,

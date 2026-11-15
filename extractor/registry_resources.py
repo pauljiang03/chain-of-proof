@@ -1,11 +1,7 @@
-"""Bounded PE string resources for retained indirect timezone labels.
+"""PE string resources for indirect time zone labels, matched by RC Config checksum and language.
 
-No Windows loader or evidence code executes. RT_STRING block numbering follows
-https://learn.microsoft.com/windows/win32/menurc/resource-types . MUI association
-uses the retained RC Config checksum and language, not the examiner's locale:
-https://learn.microsoft.com/windows/win32/intl/mui-resource-management .
-RC Config offsets are documented by Wine's primary implementation of
-GetFileMUIInfo in dlls/kernelbase/locale.c (struct mui_resource).
+RT_STRING blocks: https://learn.microsoft.com/windows/win32/menurc/resource-types
+RC Config layout: Wine's GetFileMUIInfo (dlls/kernelbase/locale.c).
 """
 from __future__ import annotations
 
@@ -176,11 +172,7 @@ def mui_config(data):
 
 
 def resolve_timezone_label(target, indirect, language_name, language_id):
-    """Resolve one ID using the caller's single recorded installed UI language.
-
-    This is a retained-resource interpretation, not the historical process/thread
-    UI choice. Other DLLs, locale fallbacks and search paths remain unsupported.
-    """
+    """Resolve one resource ID using the recorded installed UI language; no locale fallback."""
     match = re.fullmatch(r'@tzres\.dll,-([1-9][0-9]{0,4})', indirect, re.I)
     if not match or not re.fullmatch(r'[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*', language_name):
         raise ValueError('unsupported indirect timezone label or language name')

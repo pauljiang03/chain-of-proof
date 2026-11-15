@@ -1,9 +1,4 @@
-"""Legacy Windows application evidence, read without executing evidence programs.
-
-The public case prompts guide artifact coverage; this module contains no answer
-values, suspect names or case-specific paths. Configuration and traffic fields
-are source observations, not personal identity, intent, or victim attribution.
-"""
+"""Evidence from legacy Windows programs: INI files, IRC logs, Outlook Express, IE cache, INFO2, PCAP."""
 from __future__ import annotations
 
 import hashlib
@@ -112,7 +107,7 @@ def config_attributes(data):
 
 
 def irc_channels(data):
-    """Logged Session Ident channels only; a default channel list is not use."""
+    """Channels from logged Session Ident lines; a default channel list does not count."""
     for row in text_lines(data):
         match = re.fullmatch(r'Session Ident:\s*(#[^\s,]+)\s*', row['raw_line'])
         if match:
@@ -120,10 +115,9 @@ def irc_channels(data):
 
 
 def dbx_mailbox(data):
-    """A typed message-file header names retained news storage, not subscription.
+    """Read an Outlook Express .dbx header; the stored folder name may predate a rename.
 
     Format: https://www.infobyte.hr/oedbx/doc/OE_Dbx_FileInfo.html
-    The original folder name can survive renaming; that caveat is exported.
     """
     signature = bytes.fromhex('cfad12fec5fd746f66e3d1119a4e00c04fa309d4')
     if not data.startswith(signature) or len(data) < 0x24bc:
@@ -151,11 +145,7 @@ def dbx_mailbox(data):
 
 
 def msie_url_records(data):
-    """Allocated IE 4.7/5.2 URL records with bounded in-record string pointers.
-
-    Format: libyal/libmsiecf documentation/MSIE Cache File (index.dat) format.
-    No free-space carving and no interpreting a cache timestamp as a visit.
-    """
+    """Allocated URL records of an IE 4.7/5.2 index.dat (libmsiecf format); no free-space carving."""
     signature = bytes(data[:28]).split(b'\0', 1)[0]
     versions = {b'Client UrlCache MMF Ver 4.7': (56, 64),
                 b'Client UrlCache MMF Ver 5.2': (52, 60)}
@@ -208,7 +198,7 @@ def msie_url_records(data):
 
 
 def info2_records(data):
-    """XP/2000 INFO2 records. A recycle entry does not mean data is unallocated."""
+    """XP/2000 Recycle Bin INFO2 records; an entry does not mean the data is unallocated."""
     if len(data) < 20:
         raise ValueError('truncated INFO2 header')
     version, _, _, record_size, _ = struct.unpack_from('<5I', data)
@@ -338,7 +328,7 @@ def _path(path):
 
 
 def _file_name(path):
-    """Keep literal filesystem text while adapting Dissect wchar subclasses."""
+    """Filesystem name as a plain str (Dissect returns wchar subclasses)."""
     value = path.name
     if not isinstance(value, str):
         raise ValueError('filesystem filename must be decoded text')
@@ -539,8 +529,7 @@ def _browser_indexes(ev, paths, ctx):
 
 
 def _recycle(ev, target, paths, ctx):
-    # This reader enumerates concrete drive mounts itself. The caller's bounded
-    # general-purpose path list is not evidence of complete Recycle Bin coverage.
+    # recycle_inventory walks every drive itself, not the given path list.
     from . import recycle_inventory
 
     inventory = recycle_inventory.collect(ev, target, ctx)
@@ -573,8 +562,8 @@ def _recycle(ev, target, paths, ctx):
                 locator = dict(record, stored_path=stored, info2_mft_segment=segment,
                                info2_sequence_number=sequence, volume=item['volume'],
                                stored_path_basis='INFO2 drive/index and original suffix naming convention')
-                # Record indices may repeat; the physical record offset identifies
-                # this occurrence. A missing historical target is unknown, not false.
+                # Record indices can repeat, so the byte offset identifies the record.
+                # A stored file that is missing now is unknown, not false.
                 subject = _subject(ctx, source + ':INFO2-byte:' + str(record['byte_offset']))
                 provenance = merge_scope(ctx['common'], dict(locator, artifact=source, source_path=source,
                                                              parser='extractor.hacking.info2'))
@@ -649,7 +638,7 @@ def _deleted(ev, target, ctx):
 
 
 def extract(ev, target, ctx):
-    """Inspect bounded legacy user/application namespaces; report every reader failure."""
+    """Read legacy application evidence; each failure is reported, not fatal."""
     from . import yahoo_mail_cache
     paths, seen = [], set()
     # XP profiles and earlier standalone document folders are both supported.

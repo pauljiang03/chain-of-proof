@@ -1,18 +1,4 @@
-"""File contents: one `fileContent` row (SHA-256) for every file that has a
-`fileCreated` row, on the removable media, the optical disc and the PC's user folders.
-
-The path in `obj` is built exactly the way the module that emits the file's
-`fileCreated` row builds it (extractor/media.py, extractor/windows.py,
-extractor/optical.py), and `prov["location"]` repeats that row's `aux`.
-
-A recovered FAT entry has no allocation chain any more. Its content is read as one
-contiguous run from its first cluster, and `prov["read_as"]` says so. No hash is
-emitted when that run cannot be trusted: it leaves the volume, touches clusters that
-are in use now, or collides with another recovered file or folder.
-
-The helpers above `extract` are plain byte parsing; dissect is imported inside the
-functions that open an image.
-"""
+"""SHA-256 `fileContent` rows for every file with a `fileCreated` row, under the same path."""
 from __future__ import annotations
 
 import hashlib
@@ -24,10 +10,9 @@ from . import optical
 from .acquisition import area, fallback, provenance
 
 OBSERVED = "when the image was examined, not an event on the device"
-FAT_EPOCH = 315532800           # what an unset FAT timestamp decodes to (see extractor/media.py)
+FAT_EPOCH = 315532800           # 1980-01-01, an unset FAT timestamp
 HEAD = 4096
 
-# ---------------------------------------------------------------- file signatures
 
 ZIP_OFFICE = "zip-based office document"
 OLE_OFFICE = "legacy OLE office document"
@@ -126,8 +111,6 @@ def digest_of(chunks: Iterable[bytes]) -> Tuple[str, int, bytes]:
     return h.hexdigest(), size, head
 
 
-# ---------------------------------------------------------------- recovered FAT entries
-
 def contiguous_run(first_cluster: int, size: int, cluster_size: int, data_start: int,
                    volume_end: int) -> Tuple[int, int]:
     """Where a file sits if it is one unbroken run: (volume byte offset, clusters)."""
@@ -157,13 +140,7 @@ def _collide(files: Sequence[Tuple[int, int]], cluster_size: int) -> bool:
 
 def older_layout(folder_offset: int, own_cluster: int, files: Sequence[Tuple[int, int]],
                  sector_size: int = 512, largest: int = 65536) -> Tuple[int, int]:
-    """Cluster size and data-area start of an earlier layout of the device, of which
-    only one folder survives. The folder was found at `folder_offset` (bytes into the
-    volume) and its "." entry says it was cluster `own_cluster`. Nothing on the device
-    records the old cluster size any more, so it is derived: it must be a power of two,
-    the folder's files (each one contiguous run) must not overlap each other or the
-    folder, and the data area must start inside the volume. Raises ValueError unless
-    exactly one size fits."""
+    """Cluster size and data start of an earlier FAT layout, derived from one surviving folder."""
     if own_cluster < 2:
         raise ValueError("the folder's own cluster number is not a data cluster")
     fits = []
@@ -182,8 +159,6 @@ def older_layout(folder_offset: int, own_cluster: int, files: Sequence[Tuple[int
 def fat_in_use(fat: bytes, cluster: int) -> bool:
     return struct.unpack_from("<I", fat, cluster * 4)[0] & 0x0FFFFFFF != 0
 
-
-# ---------------------------------------------------------------- rows
 
 def _row(ev, ctx, obj: str, digest: str, size: int, head: bytes, location: str, artifact: str,
          **extra) -> None:
@@ -214,8 +189,7 @@ def _stream(fh, size: Optional[int] = None, step: int = 1 << 20):
 
 
 def _pc(ev, target, ctx) -> None:
-    """Files under each user profile's Desktop, Documents and Downloads: the files
-    extractor/windows.py gives fileCreated rows to, walked the same way."""
+    """Files in each profile's Desktop, Documents and Downloads, walked as windows.py walks them."""
     try:
         from .windows import USER_DIRS
     except Exception:
@@ -247,7 +221,7 @@ def _pc(ev, target, ctx) -> None:
 
 
 def _recovered(ev, vol, fs, ctx, identity: dict) -> None:
-    """Content of the entries extractor/media.py recovers from unallocated FAT32 clusters."""
+    """Content of files media.py recovers from unallocated FAT32 clusters."""
     from .fatcarve import carve_fat32, folder_paths
     bpb = fs.fatfs.bpb
     if bpb.BPB_RootEntCnt != 0:                      # FAT12/16: media.py recovers nothing there
@@ -298,7 +272,7 @@ def _recovered(ev, vol, fs, ctx, identity: dict) -> None:
                 continue
             plans.append([obj, e, cluster, offset, count, size_here, older])
 
-    # two recovered things cannot own the same bytes; if they claim to, neither is trusted
+    # overlapping recovered runs: trust neither
     spans = [(p[3], p[3] + p[4] * p[5], i) for i, p in enumerate(plans) if p[4]]
     spans += [(data_start + (c - 2) * cluster_size, data_start + (c - 1) * cluster_size, None) for c in found]
     spans.sort(key=lambda s: (s[0], s[1]))
@@ -345,11 +319,7 @@ def _recovered(ev, vol, fs, ctx, identity: dict) -> None:
 
 
 def _exfat_chunks(fs, entry, step: int = 1 << 20):
-    """Content of an exFAT file, read from its run list.
-
-    dissect's own ExfatFileEntry.open() (dissect.target 3.25) hands the run list, which
-    counts in sectors, to a stream that counts in clusters, and so returns bytes from
-    the wrong place. The run list itself is right, so it is read here in sectors."""
+    """Read an exFAT file by its run list in sectors (dissect.target 3.25 open() reads clusters)."""
     ex = fs.exfat
     stream = entry.entry[0].stream
     left = stream.data_length
@@ -416,7 +386,7 @@ def _removable(ev, target, ctx, identity: dict) -> None:
 
 
 def _disc(ev, path: Path, ctx) -> None:
-    """Every file extractor/optical.py gives a fileCreated row to: listed now, or recovered."""
+    """Every file optical.py gives a fileCreated row: listed now or recovered."""
     zone = ctx.get("pc_time_zone")
     s = optical.survey(path, zone)
     try:
@@ -438,8 +408,7 @@ def _disc_rows(ev, path: Path, ctx, s, zone) -> None:
         except ValueError:
             continue                                    # optical.py reports the unreadable time
         try:
-            # Resolve the selected historical VAT before consulting the cache.
-            # Equal virtual addresses can name different bytes in different states.
+            # One address can mean different bytes in different VAT states: resolve the VAT first.
             runs = ([] if f.entry.embedded is not None else
                     s.udf.runs(f.entry, f.partition, s.vat(f), s.unreadable))
             key = (tuple(runs), f.entry.size, f.entry.embedded)
