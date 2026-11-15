@@ -78,10 +78,12 @@ The browser interface includes a marked synthetic example. It is not a benchmark
 The same workbench runs as a desktop application in its own window:
 
 ```sh
-.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview
-cop desktop
-python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable CONAN-F.app
+.venv/bin/python -m pip install -e '.[desktop]'    # once: adds pywebview and the `conan` command
+conan                                              # the same as `cop desktop`
+python -m app.desktop --make-app ~/Applications    # macOS: a double-clickable Conan.app
 ```
+
+The application is called Conan. `conan` accepts every `cop` subcommand; with none it opens the window.
 
 The window is the operating system's own web view, so no browser engine is bundled.
 The front end is plain HTML, CSS and JavaScript with no framework and no graph library.
