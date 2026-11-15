@@ -293,13 +293,15 @@ The desktop application is called Conan. Its mark is original artwork in
 
 It opens on two everyday views, with the detail views beside them:
 
-- **Summary** — the case at a glance: findings that passed and were refused, when the
-  recorded activity happened, what kind it was, which devices it came from, and the key
-  events of each day. It counts and draws the stored run; it adds no finding of its own.
-- **Timeline** — every dated evidence record that an accepted finding cites, on a UTC
+- **Summary** — the case at a glance: findings that passed and were refused, source
+  timestamps, evidence types, exhibits, and selected records for each day.
+  It counts and draws the stored run; it adds no finding of its own.
+- **Timeline** — records with a stated source timestamp that an accepted finding cites, on a UTC
   axis with one row per kind of activity. Drag to move, scroll to zoom, click a mark for
   the record, its source and the findings that use it. Key events are picked by record
   type (a device connection, an e-mail, a deletion), never by a model's judgment.
+  Examination times and unknown time meanings stay off the event axis. A source
+  timestamp does not by itself prove when a user acted.
 - **Proof graph** — draws each finding back to its source (disk image → artifact →
   record → Lean-checked finding → any uncertified interpretation). Select a node to
   trace lineage, double-click a finding to see those sharing its records, and replay in

@@ -18,6 +18,7 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 - Image intake, question work, bounded reader collection, continuation, conflict review, audits and portable verification are integrated.
 - The CLI writes HTML, Markdown and JSON reports. The browser and optional desktop window share the same runner.
 - Claude's desktop, proof graph and examiner report builder are merged. Reviewed fixes preserve distinct citations and invalidate stale previews.
+- The latest Summary, Timeline and Conan launcher changes are merged. Examination observations and unknown time meanings stay off the event axis; shortcut targets are not labelled as file opens. The focused app suite ran 32 tests: 31 passed and one platform test skipped. JavaScript syntax checks passed.
 - A post-measurement fix exports common fields through public `anyOf` alternatives. It does not choose branches or change claim values.
 - The earlier Data Leakage fix passed 775 tests (one platform skip). Its repeat remains frozen at `96cd518`; Hacking Case changes are isolated from that code and evidence.
 - The separate DFIR Madness mechanical workflow produced reports and a verified package. Its live Sol workflow smoke also passed; all 34 C and 10 B certificates reverified. It has no accuracy key.

@@ -1,7 +1,7 @@
 # Workstreams and terminal handoff
 
 Updated: 2026-11-15 UTC. Read this before assigning more agents.
-The project is CONAN-F. The `cop` command and `ChainOfProof` Lean library retain their names for compatibility.
+The project is CONAN-F. The desktop app is Conan; `conan` opens it. The `cop` command and `ChainOfProof` Lean library retain their names for compatibility.
 
 ## Current ownership
 
@@ -9,8 +9,8 @@ The project is CONAN-F. The `cop` command and `ChainOfProof` Lean library retain
 |---|---|
 | Root Codex | Integrates tested changes and pushes main. Owns README, TASKS and this handoff. Hacking extraction is frozen at `/private/tmp/cop-nist-hacking` (`6cff4fe`). |
 | Other Codex terminal | Owns frozen Data Leakage repeat results, the separate role diagnostic, and the upcoming Hacking C-only test. No production-file ownership; do not duplicate these runs. |
-| Claude | Independent checker, rename, desktop, proof graph and report builder are integrated. Check for new work before assigning UI tasks. |
-| Root helpers | Hacking reader, proof-role and private-reference work is complete. `optical_timestamps` owns the final mechanical archive and `docs/HACKING_CASE_VALIDATION.md`. |
+| Claude | Independent checker, rename, desktop, proof graph, report builder, Summary and Timeline are integrated. Check for new work before assigning UI tasks. |
+| Root helpers | Hacking reader, proof-role, private-reference and final mechanical archive work is complete. The UI review and its examination-time classification fix are complete. |
 
 See [FINAL_EVAL_HANDOFF.md](FINAL_EVAL_HANDOFF.md) for the five priorities and [TASKS.md](TASKS.md) for remaining work.
 The six backend interfaces remain in [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md).

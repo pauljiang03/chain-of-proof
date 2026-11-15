@@ -1,4 +1,4 @@
-/* CONAN-F timeline: when the cited evidence records say things happened.
+/* CONAN-F timeline: source timestamps in cited evidence records.
    Every mark is one record that an accepted finding cites. Nothing is inferred here:
    a record is placed at its own recorded time, in UTC, and says what that time means. */
 (() => {
@@ -59,7 +59,7 @@
     fileDeleted: ["files", "File deleted", "files deleted", true],
     fileRenamed: ["files", "File renamed", "files renamed", true],
     fileSeen: ["files", "File noted by the system", "files noted by the system", false],
-    lnkTarget: ["files", "File opened", "files opened", true],
+    lnkTarget: ["files", "Shortcut target", "shortcut targets", true],
     folderOpened: ["files", "Folder record", "folder records", false],
     fileContent: ["files", "File content read", "file contents read", false],
     localSearch: ["files", "Search typed on the PC", "searches typed on the PC", true],
@@ -77,7 +77,18 @@
     noteText: ["system", "Note", "notes", true],
     tag: ["other", "Label", "labels", false],
   };
-  const EXAMINED = /^when the image was examined/i;   // a time of examination is not a time of an event
+  // Examination is not source activity. Structured semantics take precedence over prose;
+  // the legacy readers also retain these explicit examination descriptions.
+  const EXAMINED = /\bwhen (?:the image|this source attribute) was examined\b/i;
+  const UNKNOWN_TIME = /^(?:unknown|unspecified|not recorded|unavailable|none|n\/a)(?:\b|$)/i;
+  const SOURCE_TIMESTAMPS = new Set(["journal_observation", "destlist_entry_update"]);
+  function timeStatus(prov) {
+    const semantics = typeof prov.timestamp_semantics === "string" ? prov.timestamp_semantics.trim() : "";
+    const meaning = typeof prov.time_meaning === "string" ? prov.time_meaning.trim() : "";
+    if (semantics === "examination_observation" || EXAMINED.test(meaning)) return "examination_observation";
+    if (SOURCE_TIMESTAMPS.has(semantics) || (meaning && !UNKNOWN_TIME.test(meaning))) return "source_recorded";
+    return "unknown";
+  }
   const show = (value) => (value === undefined || value === null ? "" : typeof value === "string" ? value : JSON.stringify(value));
   const stable = (value) => (value && typeof value === "object"
     ? Array.isArray(value) ? "[" + value.map(stable).join(",") + "]"
@@ -105,7 +116,7 @@
     const exhibit = prov.exhibit === undefined || prov.exhibit === null ? "" : String(prov.exhibit);
     return {
       row, kind, lane: LANE_INDEX[known[0]], one: known[1], many: known[2], marked: known[3], obj, aux: aux === "(none)" ? "" : aux,
-      meaning, exhibit, image: prov.image === undefined || prov.image === null ? "" : String(prov.image), ms: null, findings: [],
+      meaning, timeStatus: timeStatus(prov), exhibit, image: prov.image === undefined || prov.image === null ? "" : String(prov.image), ms: null, findings: [],
       text: (known[1] + " " + obj + " " + aux + " " + exhibit + " " + kind).toLowerCase(),
     };
   }
@@ -122,11 +133,10 @@
       }
     }
     const records = [...byContent.values()];
-    const examined = new Set(records.filter((record) => EXAMINED.test(record.meaning)).map((record) => record.row.t));
     const events = [];
     for (const record of records) {
       const t = record.row.t;
-      if (Number.isSafeInteger(t) && t > 0 && !EXAMINED.test(record.meaning) && !(!record.meaning && examined.has(t))) { record.ms = t / 1000; events.push(record); }
+      if (Number.isSafeInteger(t) && t > 0 && record.timeStatus === "source_recorded") { record.ms = t / 1000; events.push(record); }
     }
     events.sort((a, b) => a.ms - b.ms);
     // The busiest period: the run of records with no gap longer than two days that holds the most records.
@@ -140,7 +150,7 @@
     const lanes = LANES.map(() => ({ records: 0, events: 0 }));
     records.forEach((record) => { lanes[record.lane].records += 1; if (record.ms !== null) lanes[record.lane].events += 1; });
     return {
-      findings, records, events, times: events.map((record) => record.ms), lanes, main,
+      findings, records, events, undatedCount: records.length - events.length, times: events.map((record) => record.ms), lanes, main,
       range: events.length ? { from: events[0].ms, to: events[events.length - 1].ms } : null,
     };
   }
@@ -254,8 +264,8 @@
     empty.hidden = !none && view.lanes.length > 0;
     root.style.display = empty.hidden ? "" : "none";
     if (!empty.hidden) {
-      empty.replaceChildren(el("h3", "", none ? "No dated records yet" : "Every kind of activity is hidden"),
-        el("p", "", none ? "The timeline fills in once findings that cite dated records pass the checker." : "Turn a kind of activity back on above."));
+      empty.replaceChildren(el("h3", "", none ? "No source timestamps to plot" : "Every kind of activity is hidden"),
+        el("p", "", none ? "Examination observations and timestamps with unknown meanings remain in the evidence inspector; they are not plotted as source activity." : "Turn a kind of activity back on above."));
       $("timeline-range").textContent = "";
       return;
     }
@@ -403,7 +413,9 @@
       used.append(button);
     });
     if (total > 12) used.append(el("p", "detail-intro", "and " + number.format(total - 12) + " more; search the Findings table for record " + show(record.row.id) + "."));
-    const when = record.ms === null ? "This record carries no event time." : F.full.format(record.ms) + " UTC" + (record.meaning ? " · what this time means: " + record.meaning : "");
+    const when = record.ms === null
+      ? (record.timeStatus === "examination_observation" ? "Examination observation; not a source activity time." : "No source timestamp with a known meaning is plotted.")
+      : F.full.format(record.ms) + " UTC" + (record.meaning ? " · what this time means: " + record.meaning : "");
     app.inspect("Record #" + app.present(record.row.id), [identity, el("p", "statement", describe(record, 400)), el("p", "detail-intro", when), used], [app.recordCard(record.row)], null);
   }
 

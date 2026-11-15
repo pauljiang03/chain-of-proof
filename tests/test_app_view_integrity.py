@@ -93,8 +93,8 @@ assert.equal(state.selected, state.items.find(item => item.data === second).key)
 const story = api.story, DAY = 86400000, at = (ms) => ms * 1000;
 const base = Date.UTC(2015, 2, 22, 14, 0, 0);
 const usb = {id: 1, kind: 'usbInsert', t: at(base), obj_text: 'SERIAL-1', aux_text: '(none)', prov: {exhibit: 'PC', time_meaning: 'first connection'}};
-const mail = {id: 2, kind: 'emailSent', t: at(base + 3600000), obj_text: 'Subject', aux_text: 'from a to b', prov: {exhibit: 'PC'}};
-const old = {id: 3, kind: 'programInstalled', t: at(Date.UTC(2009, 6, 14)), obj_text: 'Old program', prov: {exhibit: 'PC'}};
+const mail = {id: 2, kind: 'emailSent', t: at(base + 3600000), obj_text: 'Subject', aux_text: 'from a to b', prov: {exhibit: 'PC', time_meaning: 'client submit time stored in the message'}};
+const old = {id: 3, kind: 'programInstalled', t: at(Date.UTC(2009, 6, 14)), obj_text: 'Old program', prov: {exhibit: 'PC', time_meaning: 'last-write time of the uninstall key'}};
 const examined = {id: 4, kind: 'fileContent', t: at(Date.UTC(2026, 10, 14)), obj_text: 'a.txt', prov: {exhibit: 'RM#1', time_meaning: 'when the image was examined'}};
 const label = {id: 5, kind: 'tag', t: at(Date.UTC(2026, 10, 14)), obj_text: 'a.txt', aux_text: 'confidential'};
 const unknown = {id: 6, kind: 'somethingNew', t: at(base + 60000), obj_text: 'x', prov: {exhibit: 'PC'}};
@@ -108,15 +108,16 @@ const model = story.build({findings: [
 ]});
 assert.equal(model.findings.length, 3);                        // the refused proposal contributes nothing
 assert.equal(model.records.length, 7);                         // conflicting copies stay apart
-assert.equal(model.events.length, 5);                          // examination times and labels are not events
-assert.deepEqual(Array.from(model.events, (r) => r.row.id), [3, 1, 1, 6, 2]);
+assert.equal(model.events.length, 4);                          // examination and unknown meanings are not activity
+assert.equal(model.undatedCount, 3);
+assert.deepEqual(Array.from(model.events, (r) => r.row.id), [3, 1, 1, 2]);
 assert.equal(model.records.find((r) => r.obj === 'SERIAL-1').findings.length, 3);   // a reordered copy is the same record
-assert.equal(model.main.count, 4);                             // the old install date is outside the busiest period
+assert.equal(model.main.count, 3);                             // the old install date is outside the busiest period
 assert.equal(model.main.from, base); assert.equal(model.main.to, base + 3600000);
 const lanes = Object.fromEntries(story.LANES.map((lane, i) => [lane.key, model.lanes[i]]));
-assert.equal(lanes.devices.events, 2); assert.equal(lanes.messages.events, 1); assert.equal(lanes.other.records, 2); assert.equal(lanes.other.events, 1);
+assert.equal(lanes.devices.events, 2); assert.equal(lanes.messages.events, 1); assert.equal(lanes.other.records, 2); assert.equal(lanes.other.events, 0);
 assert.equal(story.describe(model.events[1]), 'USB device connected: SERIAL-1');
-assert.equal(story.describe(model.events[4]), 'E-mail: Subject — from a to b');
+assert.equal(story.describe(model.events[3]), 'E-mail: Subject — from a to b');
 assert.equal(model.records.find((r) => r.kind === 'somethingNew').marked, false);
 assert.equal(story.open({findings: []}, 'a', 'r1'), story.open({findings: [{status: 'verified', cited_facts: [usb]}]}, 'a', 'r1'));   // one model per stored revision
 const marks = story.ticks(base, 2 * DAY, 920).list;
@@ -124,6 +125,43 @@ assert.ok(marks.length >= 4 && marks.every((mark, i) => !i || mark.t > marks[i -
 assert.equal(marks.filter((mark) => mark.major).length, 2);    // two UTC midnights in view
 const near = api.probe.nearest(['a', 'b', 'c', 'd'], [10, 20, 30, 40], 24, 12, 2);
 assert.equal(near.count, 2); assert.deepEqual(Array.from(near.items), ['b', 'c']);
+''')
+
+    def test_timeline_excludes_examination_and_unknown_times_without_losing_records(self):
+        self.run_js('timeline.js', r'''
+const t = Date.UTC(2026, 10, 14) * 1000;
+// These are the actual attribute, inventory, and legacy media provenance forms.
+const rows = [
+  {id: 1, kind: 'attributeSubject', t, prov: {timestamp_semantics: 'examination_observation', time_meaning: 'when this source attribute was examined, not the described event'}},
+  {id: 2, kind: 'fileSeen', t, prov: {timestamp_semantics: 'examination_observation', time_meaning: 'file observed when the image was examined; not application execution'}},
+  {id: 3, kind: 'fileSeen', t, prov: {time_meaning: 'file observed when the image was examined; not application execution'}},
+  {id: 4, kind: 'volumeOnDevice', t, prov: {time_meaning: 'when the image was examined, not an event on the device'}},
+  {id: 5, kind: 'fileContent', t, prov: {timestamp_semantics: 'examination_observation'}},
+  {id: 6, kind: 'fileSeen', t, prov: {timestamp_semantics: 'examination_observation', time_meaning: 'browser history visit time'}},
+  {id: 7, kind: 'usbInsert', t: t - 1000000, prov: {}},
+  {id: 8, kind: 'newKind', t: t - 1000000, prov: {timestamp_semantics: 'unrecognized_new_semantics'}},
+  {id: 9, kind: 'programRun', t: t - 1000000, prov: {time_meaning: 'unspecified record timestamp'}},
+  // Equality to an examination timestamp does not make a genuine source timestamp invalid.
+  {id: 10, kind: 'webVisit', t, prov: {time_meaning: 'browser history visit time'}},
+  {id: 11, kind: 'fileRemoved', t: t + 1000000, prov: {timestamp_semantics: 'journal_observation'}},
+  {id: 12, kind: 'lnkTarget', t: t + 2000000, obj_text: 'target.txt', prov: {time_meaning: 'shortcut file last-modified time (last open via the shell)'}},
+];
+const model = api.story.build({findings: [{finding_id: 'F1', status: 'verified', cited_facts: rows}]});
+assert.equal(model.records.length, rows.length);                 // inspector evidence is preserved
+assert.equal(model.undatedCount, 9);
+assert.deepEqual(Array.from(model.events, r => r.row.id), [10, 11, 12]);
+assert.equal(model.main.count, 3);
+for (let i = 0; i < 6; i++) {
+  assert.equal(model.records[i].timeStatus, 'examination_observation');
+  assert.equal(model.records[i].ms, null);
+  assert.equal(model.records[i].row, rows[i]);
+}
+for (let i = 6; i < 9; i++) assert.equal(model.records[i].timeStatus, 'unknown');
+assert.equal(api.story.describe(model.events[2]), 'Shortcut target: target.txt');
+const observationsOnly = api.story.build({findings: [{status: 'verified', cited_facts: rows.slice(0, 9)}]});
+assert.equal(observationsOnly.main, null);
+assert.equal(observationsOnly.range, null);
+assert.equal(observationsOnly.records.length, 9);
 ''')
 
     def test_replay_runs_through_every_finding_not_only_one_page(self):

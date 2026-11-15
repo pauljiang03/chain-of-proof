@@ -105,8 +105,8 @@
     tiles.append(
       tile("Findings that passed", n.format(findings.length), n.format(firm) + " firm · " + n.format(findings.length - firm) + " likely (rule of thumb)", go("findings")),
       tile("Refused by the checker", n.format(refused), refused ? "Listed under Not established" : "Nothing was refused in this run", go("needs")),
-      tile("Evidence records used", n.format(model.records.length), n.format(dated) + " carry an event time", () => CONAN.timeline && CONAN.timeline.show({})),
-      tile("Devices examined", n.format(devices.length), devices.length ? S.clip(devices.join(", "), 44) : "No device named in the records"));
+      tile("Evidence records used", n.format(model.records.length), n.format(dated) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
+      tile("Evidence exhibits", n.format(devices.length), devices.length ? S.clip(devices.join(", "), 44) : "No exhibit named in the records"));
     if (model.main) {
       const days = Math.floor(model.main.to / S.DAY) - Math.floor(model.main.from / S.DAY) + 1, same = days === 1;
       const first = new Date(model.main.from), last = new Date(model.main.to), month = first.getUTCFullYear() === last.getUTCFullYear() && first.getUTCMonth() === last.getUTCMonth();
@@ -126,7 +126,7 @@
         button.addEventListener("click", () => { state.range = key; pick.querySelectorAll("button").forEach((other) => other.setAttribute("aria-pressed", String(other === button))); chart(); });
         pick.append(button);
       });
-      const timing = card("When it happened", "", pick), chartHost = el("div", "chart-host");
+      const timing = card("Recorded timestamps", "", pick), chartHost = el("div", "chart-host");
       timing.querySelector(".card-head p").id = "ov-when-note";
       chartHost.id = "ov-when";
       chartHost.append(svg("svg", { class: "chart", id: "ov-when-chart", role: "img", "aria-label": "Evidence records over time" }), Object.assign(el("div", "chart-tip"), { id: "ov-when-tip", hidden: true }));
@@ -139,7 +139,7 @@
     }
 
     const split = el("div", "ov-split");
-    const kinds = card("What kind of activity", "Evidence records by kind"), top = Math.max(...model.lanes.map((lane) => lane.records));
+    const kinds = card("Evidence types", "Evidence records by kind"), top = Math.max(...model.lanes.map((lane) => lane.records));
     model.lanes.map((lane, index) => ({ index, ...lane })).filter((lane) => lane.records).sort((a, b) => b.records - a.records)
       .forEach((lane) => kinds.append(barRow(lane.index, S.LANES[lane.index].name, lane.records, top, "Show " + S.LANES[lane.index].name + " on the Timeline",
         lane.events ? () => CONAN.timeline.show({ lane: lane.index }) : null)));
