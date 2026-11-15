@@ -22,11 +22,12 @@ import re
 import sys
 from collections import Counter, defaultdict
 from datetime import date, datetime, timezone
+from fractions import Fraction
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 
-VERSION = "2.1"
+VERSION = "2.2"
 STRING_MODES = {"exact", "casefold", "casefold_whitespace", "prefix"}
 RUBRIC = {"fully_correct": "FOUND", "partial": "PARTIAL", "unanswered": "MISSED",
           "incorrect": "INCORRECT", "unevaluable": "UNEVALUABLE"}
@@ -107,10 +108,47 @@ def _counts(events):
     return {"true_positive": c["match"], "missing": c["missing"], "wrong": c["wrong"]}
 
 
-def _instant(value, zone):
+# Explicit bound stays below Python's configurable large-integer parsing guard.
+# Precision through this bound is exact; larger inputs refuse rather than round.
+MAX_TIMESTAMP_FRACTION_DIGITS = 256
+_ISO_INSTANT = re.compile(
+    r'(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})[T ]'
+    r'(?P<clock>[0-9]{2}(?::[0-9]{2}(?::[0-9]{2})?)?)'
+    r'(?P<fraction>[.,][0-9]+)?'
+    r'(?P<offset>Z|[+-](?:[0-9]{2}(?:[0-9]{2}){0,2}|[0-9]{2}:[0-9]{2}(?::[0-9]{2})?))?')
+
+
+def _parsed_instant(value, zone):
+    """Resolve a whole-second UTC datetime plus an exact decimal fraction.
+
+    datetime is used only for calendar/zone resolution, never for parsing a
+    fraction. Fractional offsets and fractions on hours/minutes are unsupported
+    rather than silently truncated or assigned an unintended unit.
+    """
     if not isinstance(value, str) or not ("T" in value or " " in value):
         raise ValueError("an instant requires an ISO datetime, not a date alone")
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    match = _ISO_INSTANT.fullmatch(value)
+    if match is None:
+        raise ValueError("unsupported ISO timestamp syntax or fractional UTC offset")
+    fraction = match['fraction']
+    if fraction and len(fraction) - 1 > MAX_TIMESTAMP_FRACTION_DIGITS:
+        raise ValueError("timestamp fractional precision exceeds supported 256 digits")
+    if fraction and match['clock'].count(':') != 2:
+        raise ValueError("fractional timestamps require an explicit seconds field")
+    offset = match['offset'] or ''
+    if offset in ('-00', '-0000', '-00:00', '-000000', '-00:00:00'):
+        raise ValueError("unknown timestamp offset")
+    if offset and offset != 'Z':
+        digits = offset[1:].replace(':', '')
+        if (int(digits[:2]) >= 24 or (len(digits) >= 4 and int(digits[2:4]) >= 60)
+                or (len(digits) == 6 and int(digits[4:6]) >= 60)):
+            raise ValueError("invalid timestamp offset")
+        # Canonicalize supported compact/hour-only offsets for Python versions
+        # whose fromisoformat accepts fewer offset spellings.
+        offset = offset[0] + ':'.join(digits[i:i+2] for i in range(0, len(digits), 2))
+        if len(digits) == 2:
+            offset += ':00'
+    parsed = datetime.fromisoformat(match['date'] + 'T' + match['clock'] + offset.replace('Z', '+00:00'))
     if parsed.tzinfo is None:
         if zone is None:
             raise ValueError("a timestamp without an offset requires a declared time_zone")
@@ -121,7 +159,14 @@ def _instant(value, zone):
         if first.astimezone(timezone.utc).astimezone(tz).replace(tzinfo=None) != parsed:
             raise ValueError("nonexistent local timestamp")
         parsed = first
-    return parsed.astimezone(timezone.utc)
+    return parsed.astimezone(timezone.utc), (Fraction(int(fraction[1:]), 10 ** len(fraction[1:])) if fraction else Fraction(0))
+
+
+def _instant(value, zone):
+    """Exact rational UTC seconds; no float or datetime microsecond rounding."""
+    whole, fraction = _parsed_instant(value, zone)
+    delta = whole - datetime(1970, 1, 1, tzinfo=timezone.utc)
+    return Fraction(delta.days * 86400 + delta.seconds) + fraction
 
 
 def _day(value, zone):
@@ -129,7 +174,8 @@ def _day(value, zone):
         return date.fromisoformat(value)
     if zone is None:
         raise ValueError("local_day matching requires a declared time_zone")
-    return _instant(value, zone).astimezone(ZoneInfo(zone)).date()
+    whole, _fraction = _parsed_instant(value, zone)
+    return whole.astimezone(ZoneInfo(zone)).date()
 
 
 def _windows_path(value, rule):
@@ -251,7 +297,8 @@ class Matcher:
             if set(rule) - {"tolerance_seconds", "granularity", "time_zone"}:
                 raise ValueError("unknown timestamp matching setting")
             tolerance = rule.get("tolerance_seconds", 0)
-            if isinstance(tolerance, bool) or not isinstance(tolerance, (int, float)) or not math.isfinite(tolerance) or tolerance < 0:
+            if (isinstance(tolerance, bool) or not isinstance(tolerance, (int, float))
+                    or (isinstance(tolerance, float) and not math.isfinite(tolerance)) or tolerance < 0):
                 raise ValueError("timestamp tolerance must be a finite nonnegative number")
             if rule.get("granularity", "instant") not in ("instant", "local_day"):
                 raise ValueError("timestamp granularity must be instant or local_day")
@@ -413,7 +460,7 @@ class Matcher:
             try:
                 got = parser(actual, zone)
                 equal = (wanted == got if parser is _day else
-                         abs((wanted - got).total_seconds()) <= rule.get("tolerance_seconds", 0))
+                         abs(wanted - got) <= Fraction(str(rule.get("tolerance_seconds", 0))))
             except (TypeError, ValueError, OverflowError):
                 equal = False
             if equal:
