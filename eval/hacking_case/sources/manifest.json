@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "source_kind": "official NIST CFReDS published material",
+  "files": [
+    {
+      "path": "sources/Hacking_Case.html",
+      "sha256": "eb024d9fda7cf6d432d4ed61ad09235516ddc93ba88420d090d9edc57b27c9b6",
+      "bytes": 8761,
+      "url": "https://cfreds-archive.nist.gov/Hacking_Case.html",
+      "classification": "public_case"
+    },
+    {
+      "path": "sources/TestAnswers.pdf",
+      "sha256": "ee1795a7efe150ae3ecddaea2a1ee4ab2431a2c28ed3df009e759628bfda87f8",
+      "bytes": 66916,
+      "url": "https://cfreds-archive.nist.gov/images/TestAnswers.pdf",
+      "classification": "private_reference_source"
+    },
+    {
+      "path": "sources/SCHARDT.LOG",
+      "sha256": "a516724003f8ee6ace46480d96bb46d8163cdbb2a56a0cc9d5831696f024c8ee",
+      "bytes": 4608,
+      "url": "https://cfreds-archive.nist.gov/images/hacking-dd/SCHARDT.LOG",
+      "classification": "public_acquisition_metadata"
+    },
+    {
+      "path": "sources/TestAnswers.txt",
+      "sha256": "204046b0dfa27fb476bb242846845e736091d72f671e60c3c43b6abdf6abe380",
+      "bytes": 5839,
+      "url": null,
+      "classification": "private_reference_text"
+    },
+    {
+      "path": "sources/questions.txt",
+      "sha256": "393ee705932247c7a40f79a7a43605a9b528873a9f26dd36484b9205a6029cff",
+      "bytes": 2759,
+      "url": null,
+      "classification": "public_question_transcript"
+    },
+    {
+      "path": "sources/questions-public-initial.json",
+      "sha256": "98089251cc7509b7b86f036d64f4b599034bd1520cc194bae9c2c9686fb83563",
+      "bytes": 23448,
+      "url": null,
+      "classification": "public_initial_contract"
+    }
+  ],
+  "transcription_tool": {
+    "name": "pypdfium2",
+    "method": "get_textpage().get_text_range() per page; CRLF normalized, explicit page markers inserted",
+    "version": "5.15.2"
+  },
+  "visual_review": {
+    "pages": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "independent": false
+  },
+  "public_profile_before_key_reading_sha256": "98089251cc7509b7b86f036d64f4b599034bd1520cc194bae9c2c9686fb83563",
+  "note": "Initial public profile was derived before reading the key. Final field-role and matching refinements contain no expected values.",
+  "snapshot_manifest_created_at_utc": "2026-11-15T03:29:33.904050+00:00"
+}

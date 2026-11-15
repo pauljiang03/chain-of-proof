@@ -49,6 +49,17 @@ Table facts(id, kind, time_utc, t_us, uncertainty_us, obj, aux, exhibit, artifac
                   Tags are computed by fixed rules; `fact <id>` shows the rule.
   systemSetting   obj = setting name (computer name, operating system, time zone, ...),
                   aux = its value
+  attributeSubject obj = scoped attribute-observation identity, aux = scoped source subject.
+  role*           obj = the same observation identity, aux = approved role name; the
+                  exact role kind is fixed by the catalog returned by forms.
+  attributeTextValue / attributeIntegerValue / attributeBooleanValue
+                  obj = that observation identity, aux = the exact typed value (integers
+                  and Booleans have canonical encodings). Use attributeRecorded with all
+                  three rows and the approved role. Their t is examination time, never
+                  the event described by a timestamp attribute. Configured names do not
+                  prove personal identity, installed programs do not prove use, recorded
+                  counters do not prove who mostly used the computer, and scanner matches
+                  do not establish historical infection or universal absence of malware.
   accountSeen     obj = account name or address, aux = what it is an account of
   sessionEvent    obj = logon / logoff / startup / shutdown / time change, aux = account
   programInstalled  obj = program name, aux = version

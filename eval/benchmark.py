@@ -26,7 +26,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 
-VERSION = "2.0"
+VERSION = "2.1"
 STRING_MODES = {"exact", "casefold", "casefold_whitespace", "prefix"}
 RUBRIC = {"fully_correct": "FOUND", "partial": "PARTIAL", "unanswered": "MISSED",
           "incorrect": "INCORRECT", "unevaluable": "UNEVALUABLE"}
@@ -211,13 +211,19 @@ class Matcher:
         self.zone = time_zone
         if self.zone is not None:
             ZoneInfo(self.zone)
-        unknown = set(self.config) - {"strings", "string_modes", "string_aliases", "paths", "list_order", "timestamps"}
+        unknown = set(self.config) - {"strings", "string_modes", "string_aliases", "paths", "list_order", "timestamps", "list_rules"}
         if unknown:
             raise ValueError(f"unknown matching settings: {sorted(unknown)}")
         if self.config.get("strings", "exact") not in STRING_MODES:
             raise ValueError("unknown string matching mode")
         if self.config.get("list_order", "unordered") not in ("ordered", "unordered"):
             raise ValueError("list_order must be ordered or unordered")
+        for pointer, rule in self.config.get("list_rules", {}).items():
+            if (not isinstance(pointer, str) or (pointer and not pointer.startswith("/"))
+                    or not isinstance(rule, dict) or set(rule) != {"mode", "count"}
+                    or rule["mode"] != "subset" or type(rule["count"]) is not int
+                    or rule["count"] <= 0):
+                raise ValueError("list_rules requires JSON pointers and subset rules with a positive count")
         for pointer, mode in self.config.get("string_modes", {}).items():
             if (pointer and not pointer.startswith("/")) or mode not in STRING_MODES:
                 raise ValueError("string_modes needs JSON pointers and recognized modes")
@@ -253,6 +259,30 @@ class Matcher:
 
     def validate_expected(self, expected):
         _json(expected)
+        matched_rules = set()
+        def lists(value, path=""):
+            rule = _rule(self.config.get("list_rules", {}), path)
+            if rule is not None:
+                matched_rules.update(pattern for pattern in self.config["list_rules"]
+                                     if _rule({pattern: True}, path))
+                if (not isinstance(value, list) or len(value) < rule["count"]
+                        or any(isinstance(item, (dict, list)) for item in value)):
+                    raise ValueError("subset reference must be a scalar pool with at least count members")
+                for i, item in enumerate(value):
+                    for other in value[:i]:
+                        if (self._complete_match(item, other, _pointer(path, i))
+                                or self._complete_match(other, item, _pointer(path, value.index(other)))):
+                            raise ValueError("subset reference pool members must be distinct under matching rules")
+                return
+            if isinstance(value, dict):
+                for key, item in value.items():
+                    lists(item, _pointer(path, key))
+            elif isinstance(value, list):
+                for index, item in enumerate(value):
+                    lists(item, _pointer(path, index))
+        lists(expected)
+        if matched_rules != set(self.config.get("list_rules", {})):
+            raise ValueError("list rule does not address a reference pool")
         for path, value in _atoms(expected):
             path_rule = _rule(self.config.get("paths", {}), path)
             if path_rule is not None and value is not None:
@@ -265,7 +295,62 @@ class Matcher:
             if mode == "prefix" and isinstance(value, str) and not value:
                 raise ValueError("an empty prefix would accept every string")
 
+    def _complete_match(self, expected, actual, path):
+        counts = _counts(self.compare(expected, actual, path, ""))
+        return counts["missing"] == 0 and counts["wrong"] == 0
+
+    def missing(self, expected, path="", reason=None):
+        """A requested-size subset has N obligations, not the whole reference pool."""
+        rule = _rule(self.config.get("list_rules", {}), path)
+        if rule is not None:
+            return [_event("missing", _pointer(path, f"required-{i + 1}"),
+                           expected={"distinct_member_of_pool": path}, reason=reason)
+                    for i in range(rule["count"])]
+        if isinstance(expected, dict) and expected:
+            return [event for key, value in expected.items()
+                    for event in self.missing(value, _pointer(path, key), reason)]
+        if isinstance(expected, list) and expected:
+            return [event for i, value in enumerate(expected)
+                    for event in self.missing(value, _pointer(path, i), reason)]
+        return _missing(expected, path, reason)
+
+    def subset(self, expected, actual, rule, ep, ap):
+        required = rule["count"]
+        if not isinstance(actual, list):
+            return self.missing(expected, ep, "required subset list missing") + _wrong(actual, ap, "expected a list")
+        # One-to-one assignment prevents duplicate answers from earning credit twice.
+        # Overlapping alias classes can make the same spelling eligible for more
+        # than one pool entry. Such indistinguishable answers still count once.
+        supports, seen_supports = [], set()
+        for value in actual:
+            support = frozenset(i for i, item in enumerate(expected)
+                                if self._complete_match(item, value, _pointer(ep, i)))
+            supports.append(support if support not in seen_supports else frozenset())
+            if support:
+                seen_supports.add(support)
+        transpose = len(expected) > len(actual)
+        n, m = min(len(expected), len(actual)), max(len(expected), len(actual))
+        weights = [[int((j if transpose else i) in supports[i if transpose else j])
+                    for j in range(m)] for i in range(n)]
+        pairs = [(j, i) if transpose else (i, j) for i, j in _assignment(weights)
+                 if weights[i][j]]
+        # Membership beyond the requested count is an extra assertion, even if true.
+        accepted = sorted(pairs, key=lambda pair: pair[1])[:required]
+        used = {j for _, j in accepted}
+        events = [_event("match", _pointer(ep, i), _pointer(ap, j), expected[i], actual[j],
+                         "distinct member of the declared accepted pool") for i, j in accepted]
+        events += [_event("missing", _pointer(ep, f"required-{i + 1}"),
+                          expected={"distinct_member_of_pool": ep}, reason="requested subset member missing")
+                   for i in range(len(accepted), required)]
+        events += [event for j, value in enumerate(actual) if j not in used
+                   for event in _wrong(value, _pointer(ap, j), "extra list member" if len(accepted) == required
+                                       else "unaccepted or duplicate subset member")]
+        return events
+
     def compare(self, expected, actual, ep="", ap=""):
+        subset_rule = _rule(self.config.get("list_rules", {}), ep)
+        if subset_rule is not None:
+            return self.subset(expected, actual, subset_rule, ep, ap)
         path_rule = _rule(self.config.get("paths", {}), ep)
         if path_rule is not None and expected is not None:
             wanted = _windows_path(expected, path_rule)
@@ -294,7 +379,7 @@ class Matcher:
             events = []
             for key, value in expected.items():
                 events.extend(self.compare(value, actual[key], _pointer(ep, key), _pointer(ap, key))
-                              if key in actual else _missing(value, _pointer(ep, key), "required field missing"))
+                              if key in actual else self.missing(value, _pointer(ep, key), "required field missing"))
             for key in sorted(actual.keys() - expected.keys()):
                 events.extend(_wrong(actual[key], _pointer(ap, key), "unexpected field"))
             return events
@@ -354,7 +439,7 @@ class Matcher:
         # Empty submitted containers have no factual assertions when nonempty
         # members were required; their required members are simply missing.
         wrong = [] if isinstance(actual, (list, dict)) and not actual and expected else _wrong(actual, ap)
-        return _missing(expected, ep, "value or type mismatch") + wrong
+        return self.missing(expected, ep, "value or type mismatch") + wrong
 
 
 def validate_reference(reference):
@@ -424,7 +509,7 @@ def score(reference, submission):
             response_status = response["status"] if response else "unanswered"
             matcher = Matcher(question.get("match"), reference.get("time_zone"))
             events = (matcher.compare(expected, response["answer"], "", f"/answers/{responses[0][0]}/answer")
-                      if response_status == "answered" else _missing(expected, "", response_status))
+                      if response_status == "answered" else matcher.missing(expected, "", response_status))
             for index, extra in responses[1:]:
                 events.extend(_wrong(extra.get("answer"), f"/answers/{index}/answer", "duplicate question response"))
             atomic = _counts(events)

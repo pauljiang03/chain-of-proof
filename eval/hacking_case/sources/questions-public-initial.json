@@ -1,0 +1,776 @@
+{
+  "schema_version": 2,
+  "case_id": "nist-cfreds-hacking",
+  "title": "NIST CFReDS Hacking Case: all 31 official questions",
+  "time_zone": null,
+  "contract_revision": "hacking-v1-public-draft",
+  "instructions": [
+    "Answer all 31 official questions using only supplied evidence and the public case context. Do not read private references, published answers, saved scores or other systems' answers.",
+    "Return {schema_version:2, case_id, answers:[{question_id,status,answer}]}. Status is answered, unknown or unanswered. False and zero are claims, not synonyms for unknown.",
+    "Public schemas define typed answer roles. Required fields describe a complete response; omit unsupported fields and explain limitations outside answer. Never guess to fill a field.",
+    "Keep supporting observations, evidence paths, tools, reasoning, and qualifications in top-level submission appendices or the report, outside answer. Extras inside answer are extra assertions under the deterministic rubric.",
+    "Lists are unordered multisets. Preserve distinct observations and meaningful duplicates. Submit only requested items; do not pad with alternatives. An unresolved reference is reported separately, not silently counted wrong.",
+    "String matching ignores case and repeated whitespace only unless a question publishes another rule. Preserve filenames, full paths, account identities and unusual characters. Use single Windows path separators; do not invent a drive prefix.",
+    "Timestamps require an explicit source-supported UTC offset. Do not infer local display timezone from this profile or shift timestamps to match another source. Printed precision and event meaning must remain explicit in the evidence appendix.",
+    "An answer score is deterministic agreement with a versioned reference. It is separate from proof verification, extraction completeness, attribution, and investigation completeness.",
+    "The public source obscures a suspect name with equals signs to avoid indexing; the official scenario says those signs do not occur in the evidence. The wording is preserved in the prompts."
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "What is the image hash? Does the acquisition and verification hash match?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "image_hash": {
+            "type": "object",
+            "properties": {
+              "algorithm": {
+                "type": "string",
+                "description": "Hash algorithm name."
+              },
+              "digest": {
+                "type": "string",
+                "description": "Hexadecimal digest of the reconstructed acquired media, not the compressed container or an individual segment."
+              }
+            },
+            "required": [
+              "algorithm",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "acquisition_verification_match": {
+            "type": "boolean",
+            "description": "Agreement of acquisition and verification media digests; identify their observations separately in the evidence appendix."
+          }
+        },
+        "required": [
+          "image_hash",
+          "acquisition_verification_match"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q2",
+      "prompt": "What operating system was used on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "operating_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "operating_system"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q3",
+      "prompt": "When was the install date?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "installed_at": {
+            "type": "string",
+            "description": "Recorded OS installation timestamp in ISO 8601 with explicit offset."
+          }
+        },
+        "required": [
+          "installed_at"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/installed_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "prompt": "What is the timezone settings?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "time_zone_setting": {
+            "type": "string",
+            "description": "Recorded Windows time-zone setting; do not substitute the analyst workstation timezone."
+          }
+        },
+        "required": [
+          "time_zone_setting"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q5",
+      "prompt": "Who is the registered owner?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "registered_owner": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "registered_owner"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q6",
+      "prompt": "What is the computer account name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_account_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "computer_account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q7",
+      "prompt": "What is the primary domain name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "primary_domain_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "primary_domain_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q8",
+      "prompt": "When was the last recorded computer shutdown date/time?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "shutdown_at": {
+            "type": "string",
+            "description": "Last recorded shutdown timestamp in ISO 8601 with explicit offset."
+          }
+        },
+        "required": [
+          "shutdown_at"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered",
+        "timestamps": {
+          "/shutdown_at": {
+            "tolerance_seconds": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "prompt": "How many accounts are recorded (total number)?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total recorded local operating-system accounts, including built-in accounts."
+          }
+        },
+        "required": [
+          "account_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q10",
+      "prompt": "What is the account name of the user who mostly uses the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Account identified as predominantly used, with the selection basis outside answer."
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q11",
+      "prompt": "Who was the last user to logon to the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "Last recorded logon identity; distinguish a recorded setting from a successful event in the evidence appendix."
+          }
+        },
+        "required": [
+          "account_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q12",
+      "prompt": "A search for the name of “G=r=e=g S=c=h=a=r=d=t” reveals multiple hits. One of these proves that G=r=e=g S=c=h=a=r=d=t is Mr. Evil and is also the administrator of this computer. What file is it? What software program does this file relate to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Full evidence path identifying the file."
+          },
+          "program": {
+            "type": "string",
+            "description": "Software associated with that file."
+          }
+        },
+        "required": [
+          "file_path",
+          "program"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q13",
+      "prompt": "List the network cards used by this computer",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_cards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Vendor and model as recorded; preserve distinct interfaces."
+            }
+          }
+        },
+        "required": [
+          "network_cards"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q14",
+      "prompt": "This same file reports the IP address and MAC address of the computer. What are they?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "Dotted-decimal IPv4 address reported in the referenced file."
+          },
+          "mac_address": {
+            "type": "string",
+            "description": "Six hexadecimal octets separated by colons."
+          }
+        },
+        "required": [
+          "ip_address",
+          "mac_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q15",
+      "prompt": "An internet search for vendor name/model of NIC cards by MAC address can be used to find out which network interface was used. In the above answer, the first 3 hex characters of the MAC address report the vendor of the card. Which NIC card was used during the installation and set-up for LOOK@LAN?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "network_card": {
+            "type": "string",
+            "description": "Identified vendor/model; keep vendor-prefix evidence and the identity association outside answer."
+          }
+        },
+        "required": [
+          "network_card"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q16",
+      "prompt": "Find 6 installed programs that may be used for hacking.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Installed program name; keep evidence of installation, capability and actual use distinct outside answer."
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q17",
+      "prompt": "What is the SMTP email address for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q18",
+      "prompt": "What are the NNTP (news server) settings for Mr. Evil?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "settings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Setting or field name; preserve distinctions between server, identity and connection parameters."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Recorded value. Do not infer unavailable settings."
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "settings"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q19",
+      "prompt": "What two installed programs show this information?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "programs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "programs"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q20",
+      "prompt": "List 5 newsgroups that Mr. Evil has subscribed to?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "newsgroups": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "newsgroups"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q21",
+      "prompt": "A popular IRC (Internet Relay Chat) program called MIRC was installed. What are the user settings that was shown when the user was online and in a chat channel?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "settings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Setting or field name; preserve distinctions between server, identity and connection parameters."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Recorded value. Do not infer unavailable settings."
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "settings"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q22",
+      "prompt": "This IRC program has the capability to log chat sessions. List 3 IRC channels that the user of this computer accessed.",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "IRC channel name, including its leading channel sigil."
+            }
+          }
+        },
+        "required": [
+          "channels"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q23",
+      "prompt": "Ethereal, a popular “sniffing” program that can be used to intercept wired and wireless internet packets was also found to be installed. When TCP packets are collected and re-assembled, the default save directory is that users \\My Documents directory. What is the name of the file that contains the intercepted data?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Filename of the captured/intercepted data; provide the evidence path separately."
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q24",
+      "prompt": "Viewing the file in a text format reveals much information about who and what was intercepted. What type of wireless computer was the victim (person who had his internet surfing recorded) using?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "computer_type": {
+            "type": "string",
+            "description": "Device/platform type supported by the captured data; no stronger identification from an agent string alone."
+          }
+        },
+        "required": [
+          "computer_type"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q25",
+      "prompt": "What websites was the victim accessing?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "websites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Website host/domain, without scheme or URL path. Keep supporting URLs and reconstruction basis outside answer."
+            }
+          }
+        },
+        "required": [
+          "websites"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q26",
+      "prompt": "Search for the main users web based email address. What is it?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email_address"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q27",
+      "prompt": "Yahoo mail, a popular web based email service, saves copies of the email under what file name?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Cached filename or documented filename pattern; preserve the distinction in the evidence appendix."
+          }
+        },
+        "required": [
+          "file_name"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q28",
+      "prompt": "How many executable files are in the recycle bin?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "executable_file_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "executable_file_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q29",
+      "prompt": "Are these files really deleted?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_from_file_system": {
+            "type": "boolean",
+            "description": "Whether filesystem metadata marks the referenced recycle-bin entries deleted; not recoverability, secure erasure or a claim that no copy exists."
+          }
+        },
+        "required": [
+          "deleted_from_file_system"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q30",
+      "prompt": "How many files are actually reported to be deleted by the file system?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "deleted_file_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Files reported deleted by filesystem metadata; do not substitute recycle-bin membership."
+          }
+        },
+        "required": [
+          "deleted_file_count"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    },
+    {
+      "id": "Q31",
+      "prompt": "Perform a Anti-Virus check. Are there any viruses on the computer?",
+      "answer_schema": {
+        "type": "object",
+        "properties": {
+          "viruses_found": {
+            "type": "boolean",
+            "description": "Result of the declared antivirus examination; absence requires stated tool, signatures, coverage and failures."
+          },
+          "detections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "viruses_found",
+          "detections"
+        ],
+        "additionalProperties": false
+      },
+      "match": {
+        "strings": "casefold_whitespace",
+        "list_order": "unordered"
+      }
+    }
+  ]
+}

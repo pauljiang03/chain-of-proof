@@ -369,16 +369,9 @@ def _win(path) -> str:
 
 
 def _users(target):
-    """(profile name, profile folder) for every real folder under C:\\Users."""
-    out = []
-    for p in sorted(target.fs.path("C:/Users").iterdir(), key=lambda x: x.name.lower()):
-        try:
-            if p.is_symlink() or not p.is_dir():
-                continue
-        except Exception:
-            continue
-        out.append((p.name, p))
-    return out
+    """Profile name and folder in modern and legacy Windows layouts."""
+    from .profiles import user_profiles
+    return [(path.name, path) for path in user_profiles(target)]
 
 
 def _hive_user(key) -> str:

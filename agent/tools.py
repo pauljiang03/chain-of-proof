@@ -29,6 +29,14 @@ STEP_LIMIT = 20_000_000     # stop runaway queries
 
 # One line per statement form: its arguments, and what the generated sentence says.
 FORMS = {
+    'attributeRecorded': ('[attributeSubject, role row, typed value row, "approved.role"]',
+                          'A scoped source records this exact typed attribute. All three rows must share its observation identity; the role has a fixed Lean kind. See attribute_roles. Examination time is not event time.'),
+    'attributesSameSubject': ('[subject, role, value, "role", subject, role, value, "role"]',
+                             'Two typed attribute observations name exactly the same scoped source subject. Not proof of personal identity, ownership, use, intent or completeness.'),
+    'attributeValuesAgree': ('[subject, role, value, "role", subject, role, value, "role"]',
+                            'Same-subject attributes with the same declared native value type agree exactly. The full triples and value equality are checked.'),
+    'imageDigestsAgree': ('[logical subject, role, value, acquisition subject, role, value, "md5"|"sha1"]',
+                         'Recomputed logical-image digest equals the retained acquisition digest for the same subject and algorithm. Missing/mismatching values do not certify; equality does not authenticate acquisition.'),
     "usbConnected":       ("[usbInsert]", "USB device S was connected to this PC (time)."),
     "deviceHolds":        ("[usbInsert, volumeOnDevice]", "USB device S was connected (time); the seized device with that serial holds volume V. Needs the same device serial in both."),
     "opened":             ("[lnkTarget]", "Path P on volume/share X was opened (time)."),
@@ -202,8 +210,10 @@ class Workbench:
 
     @audited
     def forms(self) -> dict:
+        from checker.catalog import roles_catalog
         return {"how": 'A claim is {"form": [record ids...]}. Join several with '
                        '{"both": [claim, claim, ...]}: every part must hold.',
+                "attribute_roles": roles_catalog(),
                 "forms": {name: {"arguments": args, "says": says,
                                  "strength": claims.SETS[name].strength}
                           for name, (args, says) in FORMS.items()}}

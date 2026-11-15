@@ -289,4 +289,55 @@ theorem journalPathForFile_sound (fs : List Fact) (n p : Nat)
   subst y'
   exact ⟨x, y, hx, hy, hkx, hky, by simpa [Fact.get] using heq⟩
 
+/-- The recorded value and fixed semantic role belong to the same source observation,
+    whose subject is retained separately. No meaning is guessed from value text. -/
+theorem recordedAttribute_sound (fs : List Fact) (s r v : Nat) (rk vk : Kind)
+    (h : holds fs (Sets.recordedAttribute s r v rk vk) = true) :
+    ∃ x y z, lookup fs s = some x ∧ lookup fs r = some y ∧ lookup fs v = some z ∧
+      x.kind = .attributeSubject ∧ y.kind = rk ∧ z.kind = vk ∧
+      x.obj = y.obj ∧ x.obj = z.obj := by
+  simp only [Sets.recordedAttribute, holds_both_iff, holds_is_iff, holds_link_iff] at h
+  obtain ⟨⟨x, hx, hkx⟩, ⟨y, hy, hky⟩, ⟨z, hz, hkz⟩,
+           ⟨x', y', hx', hy', hxy⟩, ⟨x'', z', hx'', hz', hxz⟩⟩ := h
+  have : x = x' := Option.some.inj (hx.symm.trans hx')
+  subst x'
+  have : y = y' := Option.some.inj (hy.symm.trans hy')
+  subst y'
+  have : x = x'' := Option.some.inj (hx.symm.trans hx'')
+  subst x''
+  have : z = z' := Option.some.inj (hz.symm.trans hz')
+  subst z'
+  exact ⟨x, y, z, hx, hy, hz, hkx, hky, hkz,
+         by simpa [Fact.get] using hxy, by simpa [Fact.get] using hxz⟩
+
+/-- An investigator cannot relabel an accepted source attribute with another role. -/
+theorem recordedAttribute_role_unique {fs : List Fact} {s r v : Nat} {rk vk rk' vk' : Kind}
+    (h : holds fs (Sets.recordedAttribute s r v rk vk) = true)
+    (h' : holds fs (Sets.recordedAttribute s r v rk' vk') = true) : rk = rk' := by
+  simp only [Sets.recordedAttribute, holds_both_iff] at h h'
+  exact holds_is_kind_unique h.2.1 h'.2.1
+
+/-- Integer/Boolean/text representations are distinct typed premises, not casts. -/
+theorem recordedAttribute_value_type_unique {fs : List Fact} {s r v : Nat} {rk vk rk' vk' : Kind}
+    (h : holds fs (Sets.recordedAttribute s r v rk vk) = true)
+    (h' : holds fs (Sets.recordedAttribute s r v rk' vk') = true) : vk = vk' := by
+  simp only [Sets.recordedAttribute, holds_both_iff] at h h'
+  exact holds_is_kind_unique h.2.2.1 h'.2.2.1
+
+/-- A same-subject join preserves both complete attributes and exact subject equality. -/
+theorem attributesSameSubject_sound (fs : List Fact) (s r v s' r' v' : Nat) (rk vk rk' vk' : Kind)
+    (h : holds fs (Sets.attributesSameSubject s r v s' r' v' rk vk rk' vk') = true) :
+    holds fs (Sets.recordedAttribute s r v rk vk) = true ∧
+    holds fs (Sets.recordedAttribute s' r' v' rk' vk') = true ∧
+    ∃ x y, lookup fs s = some x ∧ lookup fs s' = some y ∧ x.aux = y.aux := by
+  simpa [Sets.attributesSameSubject, holds_both_iff, holds_link_iff, Fact.get] using h
+
+/-- Value agreement keeps the subject/role obligations; it is not a free comparison
+    of two matching strings from unrelated evidence. -/
+theorem attributeValuesAgree_sound (fs : List Fact) (s r v s' r' v' : Nat) (rk rk' vk : Kind)
+    (h : holds fs (Sets.attributeValuesAgree s r v s' r' v' rk rk' vk) = true) :
+    holds fs (Sets.attributesSameSubject s r v s' r' v' rk vk rk' vk) = true ∧
+    ∃ x y, lookup fs v = some x ∧ lookup fs v' = some y ∧ x.aux = y.aux := by
+  simpa [Sets.attributeValuesAgree, holds_both_iff, holds_link_iff, Fact.get] using h
+
 end ChainOfProof

@@ -99,7 +99,10 @@ def parse_sam_v(data):
     """The strings of a SAM user record (value V): offsets are relative to 0xCC."""
     def text(index):
         off, length = struct.unpack_from("<2I", data, 0x0C + 12 * index)
-        return data[0xCC + off: 0xCC + off + length].decode("utf-16-le", "replace")
+        start, end = 0xCC + off, 0xCC + off + length
+        if length % 2 or start > len(data) or end > len(data):
+            raise ValueError("SAM V string offset or length is outside the record")
+        return data[start:end].decode("utf-16-le")
     if len(data) < 0xCC:
         raise ValueError("SAM V value is %d bytes, expected at least 204" % len(data))
     return {"name": text(0), "full_name": text(1), "comment": text(2), "user_comment": text(3),
@@ -803,6 +806,10 @@ def _as_us(value):
 
 
 def _events(out, ev, target, sids):
+    if hasattr(target, "has_function") and not target.has_function("evtx"):
+        from .legacy_events import extract_sessions
+        extract_sessions(out, ev, target)
+        return
     try:
         records = target.evtx()
     except Exception as e:

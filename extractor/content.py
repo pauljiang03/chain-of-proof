@@ -220,9 +220,9 @@ def _pc(ev, target, ctx) -> None:
     except Exception:
         USER_DIRS = ("Desktop", "Documents", "Downloads")
     import re
-    fs = target.fs.mounts["c:"]
-    vsn = "%08X" % (fs.ntfs.serial & 0xFFFFFFFF)
-    for user in target.fs.path("C:/Users").iterdir():
+    from .profiles import user_profiles, ntfs_volume_serial
+    for user in user_profiles(target):
+        vsn = ntfs_volume_serial(target, user)
         for d in USER_DIRS:
             top = user.joinpath(d)
             if not top.exists():

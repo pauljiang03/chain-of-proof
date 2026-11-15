@@ -15,14 +15,20 @@ from dissect.shellitem.lnk import Lnk
 from dissect.target import Target
 
 from .store import Evidence, us, us_from_filetime, us_from_unix
+from .profiles import user_profiles, ntfs_volume_serial
 
-USER_DIRS = ("Desktop", "Documents", "Downloads")
+USER_DIRS = ("Desktop", "Documents", "My Documents", "Downloads")
 SEARCH_PARAMS = {"google.": "q", "bing.": "q", "yahoo.": "p"}
 
 
 def _usb(ev, t, common):
     path = "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR"
-    for dev in t.registry.key(path).subkeys():
+    from dissect.target.exceptions import RegistryKeyNotFoundError
+    try:
+        devices = t.registry.key(path)
+    except RegistryKeyNotFoundError:
+        return  # No USBSTOR key is present; this does not prove no device was used.
+    for dev in devices.subkeys():
         for inst in dev.subkeys():
             ev.add("usbInsert", us(inst.timestamp), 1, inst.name.split("&")[0], "",
                    artifact=f"{path}\\{dev.name}\\{inst.name}", device=dev.name,
@@ -52,7 +58,12 @@ def _setupapi(ev, t, common, tz: str):
 
 def _volumes_seen(ev, t, common):
     path = "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt"
-    for sub in t.registry.key(path).subkeys():
+    from dissect.target.exceptions import RegistryKeyNotFoundError
+    try:
+        volumes = t.registry.key(path)
+    except RegistryKeyNotFoundError:
+        return
+    for sub in volumes.subkeys():
         m = re.match(r"^(.{6})(.*)_(\d+)$", sub.name)
         if not m:
             continue
@@ -93,9 +104,10 @@ def _lnk_fact(ev, lnk: Lnk, t_us: int, common: dict, **prov) -> bool:
 
 def _lnk_files(ev, t, common):
     n = 0
-    for user in t.fs.path("C:/Users").iterdir():
+    for user in user_profiles(t):
         for rel in ("AppData/Roaming/Microsoft/Windows/Recent",
-                    "AppData/Roaming/Microsoft/Office/Recent"):
+                    "AppData/Roaming/Microsoft/Office/Recent", "Recent",
+                    "Application Data/Microsoft/Office/Recent"):
             folder = user.joinpath(rel)
             if not folder.exists():
                 continue
@@ -205,7 +217,7 @@ def _jumplist_stream(ole, name):
 
 def _jumplists(ev, t, common):
     n = 0
-    for user in t.fs.path("C:/Users").iterdir():
+    for user in user_profiles(t):
         folder = user.joinpath("AppData/Roaming/Microsoft/Windows/Recent/AutomaticDestinations")
         if not folder.exists():
             continue
@@ -255,6 +267,8 @@ def _jumplists(ev, t, common):
 
 def _searches(ev, t, common):
     n = 0
+    if hasattr(t, "has_function") and not t.has_function("browser.history"):
+        return n  # Legacy IE history is read separately; no fabricated modern store.
     for r in t.browser.history():
         url = r.url or ""
         parts = urlsplit(url)
@@ -274,10 +288,9 @@ def _searches(ev, t, common):
 
 
 def _user_files(ev, t, common):
-    fs = t.fs.mounts["c:"]
-    vsn = "%08X" % (fs.ntfs.serial & 0xFFFFFFFF)
     n = 0
-    for user in t.fs.path("C:/Users").iterdir():
+    for user in user_profiles(t):
+        vsn = ntfs_volume_serial(t, user)
         for d in USER_DIRS:
             top = user.joinpath(d)
             if not top.exists():
@@ -405,7 +418,8 @@ def _burn_traces(ev, t, common):
         n += 1
     # 2. System event log: cdrom driver event 133 (exclusive-access lock)
     try:
-        for r in t.evtx():
+        records = t.evtx() if not hasattr(t, "has_function") or t.has_function("evtx") else ()
+        for r in records:
             d = r._asdict()
             if str(d.get("Provider_Name")) != "cdrom" or str(d.get("EventID")) != "133":
                 continue
@@ -472,11 +486,12 @@ def _email(ev, t, common):
     Only messages the mailbox still lists are read. Messages purged from the mailbox
     (libpff calls them recoverable items) are not: the Python binding does not expose them."""
     files = []
-    for user in t.fs.path("C:/Users").iterdir():
-        box = user.joinpath("AppData/Local/Microsoft/Outlook")
-        if box.exists():
-            files += [(user.name, p) for p in sorted(box.iterdir(), key=str)
-                      if p.suffix.lower() in (".ost", ".pst")]
+    for user in user_profiles(t):
+        for layout in ("AppData/Local/Microsoft/Outlook", "Local Settings/Application Data/Microsoft/Outlook"):
+            box = user.joinpath(layout)
+            if box.exists():
+                files += [(user.name, p) for p in sorted(box.iterdir(), key=str)
+                          if p.suffix.lower() in (".ost", ".pst")]
     if not files:
         return 0
     try:
