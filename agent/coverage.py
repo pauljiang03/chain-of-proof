@@ -12,7 +12,9 @@ from datetime import datetime, timedelta
 import re
 
 
-TOOLS = frozenset(("forms", "sql", "fact", "check", "conclude"))
+from agent.audit import AUDITED_TOOLS
+
+TOOLS = AUDITED_TOOLS
 LIMITATIONS = [
     "Extracted records do not establish completeness of the original evidence.",
     "Inspection counts successful fact-tool returns with matching record IDs; SQL results, including aggregates, are not counted as full-record inspection.",
