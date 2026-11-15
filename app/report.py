@@ -266,11 +266,6 @@ def _span(first, last, tz):
 # Which event groups a summary day names first: a fixed order by record type, the same for every case.
 _SUMMARY_ORDER = ('usbInsert', 'cdBurn', 'fileDeleted', 'emailSent', 'fileDownloaded', 'cloudFile', 'webSearch', 'fileRenamed',
                   'localSearch', 'noteText', 'volumeSeen', 'shadowCopy', 'programInstalled', 'lnkTarget')
-_SUMMARY_LABELS = {'usbInsert': 'USB identifier', 'cdBurn': 'disc trace', 'fileDeleted': 'deletion',
-                   'emailSent': 'e-mail', 'fileDownloaded': 'download', 'cloudFile': 'cloud client',
-                   'webSearch': 'web search', 'fileRenamed': 'file rename', 'localSearch': 'local search',
-                   'noteText': 'note text', 'volumeSeen': 'volume', 'shadowCopy': 'shadow copy',
-                   'programInstalled': 'software registration', 'lnkTarget': 'shortcut target'}
 
 
 def _day_events(groups, most=3):
@@ -327,9 +322,9 @@ def _short_back(info, options):
     return out
 
 
-def _front(info, tz, case, findings, options, story, short=False):
+def _front(info, tz, case, options, story, short=False):
     """The summary, request, evidence examined and method sections."""
-    counts, where = info['counts'], info['zone']
+    where = info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
     if story.get('lead'):
@@ -825,7 +820,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
     out += [''.join(scope) + '</header>',
             '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
                                                           for anchor, label in navigation) + '</nav>' if navigation else '',
-            *_front(info, tz, case, findings, options, narrative.build(run, ids=chosen), short)]
+            *_front(info, tz, case, options, narrative.build(run, ids=chosen), short)]
     if not short:
         out += ['<section id="findings"><h2>Examination findings</h2>', _result_index(findings)]
     if not findings:

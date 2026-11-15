@@ -7,14 +7,13 @@
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
     tab: "summary", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
-    findingView: "overview", evidenceTopic: "all", evidenceModel: null, loading: false, submitting: false, stopping: false,
+    findingView: "overview", evidenceTopic: "all", evidenceModel: null, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
   const statuses = new Set(["running", "completed", "partial", "failed", "cancelled", "saved"]);
   const number = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
   const shortDate = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
   const longDate = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
-  const timeDate = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", second: "2-digit" });
 
   function element(tag, className, text) {
     const item = document.createElement(tag);
@@ -26,7 +25,6 @@
   const array = (value) => Array.isArray(value) ? value : [];
   const present = (value, fallback = "Not recorded") => value === undefined || value === null || value === "" ? fallback : typeof value === "object" ? JSON.stringify(value) : String(value);
   const count = (value, fallback = "Unmeasured") => Number.isSafeInteger(value) && value >= 0 ? number.format(value) : fallback;
-  const measure = (section, key) => object(section).status === "measured" ? count(section[key]) : object(section).status === "invalid" ? "Invalid" : "Unmeasured";
   const isRunning = () => state.payload && state.payload.status === "running";
   const savedRun = () => object(state.payload && state.payload.run);
   const isAccepted = (finding) => object(finding).status === "verified";
@@ -321,11 +319,6 @@
       } else details.append(element("p", "", present(finding.english, "No fixed sentence was included.")));
     }});
     return details;
-  }
-  function browseEvidence(topic = "all", search = "") {
-    state.findingView = "overview"; state.evidenceTopic = topic; state.search = search;
-    $("finding-search").value = search; renderFindings(); switchTab("findings", true);
-    $("panel-findings").scrollTop = 0;
   }
   function renderUnverifiedFindings() {
     const container = $("unverified-findings");
@@ -812,7 +805,7 @@
     }
   }
 
-  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab, browseEvidence };
+  CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab };
 
   async function init() {
     resizablePanes();

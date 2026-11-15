@@ -421,7 +421,7 @@ def _story(case, devices, detail=False):
         if stamps and clause:
             events.append((stamps[0], stamps[-1], how, clause))
 
-    def who(rows, key='account'):
+    def who(rows):
         name = case.account(rows) or _s(_prov(rows[0]).get('user'))
         return f'the account "{name}"' if name else 'a user account'
 

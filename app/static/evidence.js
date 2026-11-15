@@ -236,32 +236,7 @@
       append(); section.append(more); host.append(section);
     });
   }
-  function highlights(model) {
-    const section = el("section", "evidence-highlights");
-    const heading = el("div", "card-head"); heading.append(el("h3", "", "Explore the evidence"));
-    section.append(heading);
-    const grid = el("div", "highlight-grid");
-    categories.forEach(category => {
-      const groups = model.groups.filter(g => g.category === category.key).sort((a, b) => a.priority - b.priority || b.findings.size - a.findings.size || a.title.localeCompare(b.title));
-      if (!groups.length) return;
-      const box = el("section", "highlight-card c" + category.lane), header = el("div", "highlight-head");
-      header.append(el("h4", "", category.label), el("span", "", String(groups.length)));
-      box.append(header);
-      // Named files lead the preview; bare root directories stay in the full list.
-      const named = groups.filter(group => category.key !== "files" || !/^(?:[\\/]+|[a-z]:[\\/]?)$/i.test(group.title));
-      (named.length ? named : groups).slice(0, 3).forEach(group => {
-        const line = el("div", "highlight-item");
-        line.append(button(group.title, () => CONAN.app.browseEvidence(category.key, text(group.records[0].row.obj_text)), "text-button"));
-        const p = group.properties.find(p => ["Device serial", "Sender", "Profile path", "Property", "Original path", "Path", "Browser"].includes(p.label) && p.value !== group.title) || previewProperties(group, 2).find(p => p.value !== group.title);
-        if (p) line.append(el("span", "", p.label + ": " + p.value));
-        box.append(line);
-      });
-      box.append(button("Explore " + category.label.toLocaleLowerCase() + " →", () => CONAN.app.browseEvidence(category.key), "text-button"));
-      grid.append(box);
-    });
-    section.append(grid); return section;
-  }
   let revision, cached;
-  CONAN.evidence = {categories, types, build, properties, title, time, entity, render, highlights,
+  CONAN.evidence = {categories, types, build, properties, title, time, entity, render,
     open(run, key) { if (!cached || revision !== key) { cached = build(run); revision = key; } return cached; }};
 })();

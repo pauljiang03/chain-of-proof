@@ -18,7 +18,7 @@
   const today = () => { const now = new Date(); return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); };
   const PREVIEW_LIMIT = 6 * 1024 * 1024;   // characters; larger reports are exported, not previewed
   const state = {
-    name: null, revision: null, ids: [], known: new Set(), marked: new Set(), scope: "all", length: "short", sections: new Set(), cover: {}, empty: new Set(),
+    name: null, revision: null, ids: [], marked: new Set(), scope: "all", length: "short", sections: new Set(), cover: {}, empty: new Set(),
     shadow: null, stale: true, active: false, request: 0, timer: 0, built: false,
   };
 
@@ -196,7 +196,7 @@
         && list.length === state.ids.length && list.every((id, index) => id === state.ids[index]);
       state.empty = new Set(empty);
       if (name !== state.name) { state.name = name; load(); state.built = false; state.stale = true; if (state.shadow) state.shadow.replaceChildren(); }
-      state.ids = list; state.known = new Set(list); state.revision = revision;
+      state.ids = list; state.revision = revision;
       if (state.scope === "marked" && !marked().length) state.scope = "all";
       if (!same) { state.stale = true; state.request += 1; }  // discard any preview of the previous contents
       form();
@@ -206,7 +206,6 @@
     activate() { state.active = true; if (state.stale || !state.built) refresh(); },
     deactivate() { state.active = false; clearTimeout(state.timer); },
     has: (id) => state.marked.has(String(id)),
-    count: () => marked().length,
     toggle(id, on) {
       const key = String(id), before = marked().length;
       if (on === undefined ? !state.marked.has(key) : on) state.marked.add(key); else state.marked.delete(key);

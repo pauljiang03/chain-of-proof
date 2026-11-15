@@ -16,7 +16,6 @@ import subprocess
 import sys
 import tempfile
 import threading
-import time
 import uuid
 
 from agent.case import read_question_profile, select_case, with_questions

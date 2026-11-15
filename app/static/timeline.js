@@ -220,7 +220,7 @@
   }
   const dot = (lane) => el("i", "dot c" + lane);
   CONAN.story = {
-    LANES, UTC, open, build, adopt, describe, clip, lower, ticks, dot, number, wall, unwall, zoneNote, DAY, HOUR, MINUTE,
+    LANES, UTC, open, build, adopt, describe, clip, ticks, dot, number, wall, unwall, zoneNote, DAY,
     get F() { return F; }, get zone() { return zone; },
   };
 
