@@ -3,6 +3,8 @@ import copy
 import hashlib
 import json
 import unittest
+import tempfile
+from pathlib import Path
 
 from agent.coverage import summarize_coverage
 
@@ -89,6 +91,24 @@ class Coverage(unittest.TestCase):
                        ("fact", {"fact_id": 13, "id": 14}, {"id": 13}, "success"))
         self.assertEqual(summarize_coverage(self.run, audit_events=audit)["inspection"]["record_ids"], [12])
 
+    def test_workflow_tools_are_counted_without_inventing_record_inspections(self):
+        from agent.audit import AuditLog, verify_audit
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "audit.jsonl"
+            audit = AuditLog(path)
+            for name in ("plan", "update_question", "evidence_needs", "collect", "review"):
+                audit.record(name, {}, lambda: {"status": "diagnostic", "id": 999})
+            audit.record("fact", {"fact_id": 7}, lambda: {"id": 7})
+            rows = [json.loads(line) for line in path.read_text().splitlines()]
+            measured = summarize_coverage(self.run, audit_events=rows,
+                                           audit_verification=verify_audit(path))
+        inspection = measured["inspection"]
+        self.assertEqual(inspection["status"], "measured")
+        self.assertEqual(inspection["audit_integrity"], "passed")
+        self.assertEqual(inspection["completed_tool_calls"], 6)
+        self.assertEqual(inspection["record_ids"], [7])
+        self.assertEqual(set(inspection["by_tool"]), {"plan", "update_question", "evidence_needs", "collect", "review", "fact"})
+
     def test_audit_integrity_is_not_implied_by_structurally_valid_events(self):
         audit = events(("fact", {"id": 1}, {"id": 1}, "success"))
         result = summarize_coverage(self.run, audit_events=audit)
@@ -115,7 +135,7 @@ class Coverage(unittest.TestCase):
     def test_malformed_or_incomplete_audit_events_are_not_counted(self):
         valid = events(("fact", {"id": 1}, {"id": 1}, "success"))
         bad_events = ["not decoded", [None], [{}]]
-        for field, value in (("sequence", True), ("sequence", 2), ("tool", []), ("completed_at", None),
+        for field, value in (("sequence", True), ("sequence", 2), ("tool", []), ("tool", "unknown_tool"), ("completed_at", None),
                              ("duration_ns", -1), ("previous_sha256", "broken"), ("success", False)):
             changed = copy.deepcopy(valid)
             changed[0][field] = value

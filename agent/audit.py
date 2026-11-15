@@ -27,7 +27,8 @@ _DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 _FIELDS = {"schema_version", "sequence", "call_id", "started_at", "completed_at",
            "duration_ns", "tool", "arguments", "result", "result_sha256", "success",
            "outcome", "error", "finding_id", "previous_sha256", "event_sha256"}
-_TOOLS = {"forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review"}
+AUDITED_TOOLS = frozenset(("forms", "sql", "fact", "check", "conclude", "plan",
+                           "update_question", "evidence_needs", "collect", "review"))
 
 
 class AuditError(RuntimeError):
@@ -110,7 +111,7 @@ def verify_audit(path, expected_head=None) -> dict:
                 except (ValueError, TypeError):
                     problems.append(prefix + "noncanonical JSON event")
                 head = stored if isinstance(stored, str) else None
-                if (not isinstance(event.get("tool"), str) or event["tool"] not in _TOOLS
+                if (not isinstance(event.get("tool"), str) or event["tool"] not in AUDITED_TOOLS
                         or not isinstance(event.get("arguments"), dict)):
                     problems.append(prefix + "invalid tool or arguments")
                 duration = event.get("duration_ns")

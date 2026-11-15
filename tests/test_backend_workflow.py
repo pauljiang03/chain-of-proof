@@ -95,6 +95,10 @@ class BackendWorkflow(IntakeFixture):
         self.assertNotEqual(a['case']['facts_sha256'], b['case']['facts_sha256'])
         self.assertEqual(a['case_answers']['questions'][0]['prompt'], b['case_answers']['questions'][0]['prompt'])
         self.assertIn('New evidence snapshot:', output)
+        for saved in (a, b):
+            self.assertEqual(saved['coverage']['inspection']['status'], 'measured')
+            self.assertEqual(saved['coverage']['inspection']['audit_integrity'], 'passed')
+            self.assertEqual(saved['coverage']['inspection']['record_count'], 0)
         for path in (first, second):
             self.assertTrue((path / 'report.html').is_file())
             self.assertTrue((path / 'case-answers.json').is_file())
