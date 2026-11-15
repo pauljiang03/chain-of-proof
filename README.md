@@ -1,6 +1,8 @@
-# Chain of Proof
+# CONAN-F
 
-Chain of Proof produces forensic findings with Lean proofs.
+**CONsistent ANalysis in Forensics.** Formerly Chain of Proof.
+
+CONAN-F produces forensic findings with Lean proofs.
 The AI investigator searches records and proposes claims.
 An optional miner supplies a baseline with preset search rules.
 The Lean kernel verifies the formal claim against extracted records.

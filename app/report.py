@@ -360,7 +360,7 @@ def render_html(run: dict) -> str:
            '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; '
            'img-src \'none\'; base-uri \'none\'; form-action \'none\'">',
            '<title>Investigation report — ' + title + '</title><style>' + _CSS + '</style></head><body><main>',
-           '<header><div class="eyebrow">Chain of Proof · Investigation report</div><h1>' + title + '</h1>',
+           '<header><div class="eyebrow">CONAN-F · Investigation report</div><h1>' + title + '</h1>',
            _fields([('Generated', _v(case, 'generated_at')), ('Execution outcome', _v(case, 'ended'))]),
            '<div class="metrics">']
     for key, label in (('verified', 'accepted proposals reported'), ('rejected', 'refused proposals reported'),
@@ -471,7 +471,7 @@ def render_html(run: dict) -> str:
         out.append('<h4>Embedded Lean source</h4>' + (_pre(lean, source=True) if isinstance(lean, str) and lean.strip()
                    else '<p>Unknown — embedded Lean source was not included. No file is loaded by this renderer.</p>'))
         out.append(f'<p class="small"><a href="#finding-f{number}">Back to finding</a></p></article>')
-    out += ['</section>', _activity(run), '<footer>Chain of Proof · Report rendering only. '
+    out += ['</section>', _activity(run), '<footer>CONAN-F · Report rendering only. '
             'Certificate validity, source binding, audit integrity and forensic interpretation are distinct checks.</footer>',
             '</main></body></html>']
     return '\n'.join(out) + '\n'

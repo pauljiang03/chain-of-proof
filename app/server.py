@@ -285,7 +285,7 @@ def serve(root=ROOT, port=8765, open_browser=True):
     """Serve the local app until interrupted, closing its owned jobs on exit."""
     with create_server(root, port) as server:
         url = f"http://127.0.0.1:{server.server_port}/"
-        print(f"Chain of Proof: {url}", flush=True)
+        print(f"CONAN-F: {url}", flush=True)
         if open_browser:
             webbrowser.open(url)
         try:
