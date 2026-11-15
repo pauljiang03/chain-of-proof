@@ -16,6 +16,14 @@ class SessionDeadlineExceeded(ValueError):
     """The investigator budget expired; this is not a proof verdict."""
 
 
+def _work_state(directory):
+    from agent.investigation import Investigation
+    try:
+        return Investigation(directory).snapshot()
+    except (ValueError, OSError, KeyError, TypeError):
+        return None
+
+
 def public_preflight(public):
     """Reject missing/invalid declarations before any investigator session exists."""
     from agent.answer_requirements import inspect
@@ -103,6 +111,7 @@ def completion_status(directory, session, source):
         except (ValueError, OSError, TypeError):
             inventory = {'status': 'invalid', 'traversals': []}
         return completion_diagnostics(public, document, projection, current, inventory,
+            work_state=_work_state(directory),
             checkpoint={'status': 'saved', 'authored_at': receipt['authored_at'],
                 'saved_candidates': len(saved), 'candidates_since_checkpoint': len(current)-len(saved)})
     except (ValueError, OSError, KeyError, TypeError, RecursionError) as error:
@@ -153,6 +162,7 @@ def preview(directory, session, bench, document):
     except (ValueError, OSError, TypeError):
         inventory = {'status': 'invalid', 'traversals': []}
     completion = completion_diagnostics(public, document, result, candidates, inventory,
+        work_state=_work_state(directory),
         checkpoint={'status': 'preview_only', 'persisted': False})
     return {'completion': completion, 'status': 'uncertified', 'diagnostics': [{'diagnostic': json.dumps(row, ensure_ascii=True)[:2000]} for row in diagnostics[:100]],
             'diagnostic_count': len(diagnostics), 'truncated': len(diagnostics) > 100,

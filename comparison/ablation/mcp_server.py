@@ -31,12 +31,16 @@ def _neutral_plan(bench):
     neutral["questions"] = [{key: question[key] for key in
         ("id", "prompt", "answer_schema", "work_status", "searched", "unresolved", "next_actions") if key in question}
         for question in state.get("questions", [])]
+    session = getattr(bench, "_ablation_session", None)
+    if session is not None and session.get("protocol") == "claim-bindings-v3":
+        for question in neutral["questions"]:
+            question.pop("answer_schema", None)
+        neutral["public_schema_location"] = "The initial public brief contains the full answer schemas."
     try:
         inventory = inventory_progress(bench.run_dir, evidence_sha256=state.get("facts_sha256"))
     except (ValueError, OSError, TypeError) as error:
         inventory = {"status": "invalid", "error_type": type(error).__name__, "traversals": []}
     neutral["coverage"] = coverage_pass(neutral, answers=None, inventory_progress=inventory)
-    session = getattr(bench, "_ablation_session", None)
     if session is not None and session.get("protocol") == "claim-bindings-v3":
         from comparison.ablation.checkpoints import completion_status
         neutral["completion"] = completion_status(bench.run_dir, session, bench.source)

@@ -11,6 +11,20 @@ from agent.coverage_plan import coverage_pass
 
 
 class CompletionDiagnostics(unittest.TestCase):
+    def test_one_array_row_without_traversal_warns_without_inventing_missing_rows(self):
+        public = {'case_id': 'C', 'questions': [{'id': 'Q', 'answer_schema': {
+            'type': 'object', 'properties': {'records': {'type': 'array', 'items': {'type': 'string'}}}}}]}
+        projection = {'submission': {'schema_version': 2, 'case_id': 'C', 'answers': [{
+            'question_id': 'Q', 'status': 'answered', 'answer': {'records': ['observed']}}]},
+            'leaves': [{'question_id': 'Q'}], 'unsupported': [], 'conflicts': []}
+        result = completion_diagnostics(public, {'bindings': [{'question_id': 'Q', 'candidate_id': 'A'}]}, projection, [])
+        row = result['questions'][0]
+        self.assertEqual(row['answer_status'], 'answered')
+        self.assertEqual(row['missing_required_fields'], [])
+        self.assertIn('array_inventory_coverage_unknown', row['diagnostics'])
+        self.assertEqual(row['inventory_population_coverage'], 'unknown')
+        self.assertEqual(result['question_completeness'], 'not_established')
+
     def test_returned_rows_are_not_answers_and_no_values_are_returned(self):
         public = {'case_id': 'C', 'questions': [{'id': 'Q', 'answer_schema': {'type': 'string'}}]}
         projection = {'submission': {'schema_version': 2, 'case_id': 'C', 'answers': [{'question_id': 'Q', 'status': 'unknown'}]},
