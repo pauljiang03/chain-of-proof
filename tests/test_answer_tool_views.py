@@ -170,6 +170,47 @@ class AnswerToolViews(unittest.TestCase):
         self.assertEqual(len(rows), page['page']['total'])
         self.assertTrue(rows)
 
+    def test_full_envelope_budget_preserves_dense_rows_and_oversize_descriptors(self):
+        # Compact item encodings underestimate both JSON spacing and the
+        # compatibility alias that repeats the page items in the envelope.
+        cases = [
+            ('field_catalog', {'forms': {'dense': {
+                'field_' + str(i): {'values': [i] * 150} for i in range(100)}}}, []),
+            ('bindings', {}, [{'binding_index': i, 'candidate_id': 'C' + str(i),
+                               'value': '\u2603' * 5000} for i in range(100)]),
+        ]
+        for section, field_catalog, bindings in cases:
+            snapshot = {'inspection': {'bindings': bindings, 'field_catalog': field_catalog,
+                                       'field_requirements': {}}, 'projection': None}
+            original = deepcopy(snapshot)
+            retained, offset, token, pages = [], 0, None, 0
+            with patch('agent.answer_store._inspection_snapshot', return_value=snapshot):
+                while True:
+                    response = answer_views.inspection(self.root, 'Q1', section=section,
+                        offset=offset, page_size=100, state_token=token)
+                    self.assertLessEqual(len(json.dumps(response).encode('utf-8')), answer_views.MAX_RESPONSE_BYTES)
+                    page = response['page']
+                    self.assertEqual(response[section], page['items'])
+                    self.assertGreater(page['returned'], 0)
+                    self.assertEqual(page['returned'], len(page['items']))
+                    retained.extend(page['items']); pages += 1
+                    if page['next_offset'] is None:
+                        break
+                    self.assertEqual(page['next_offset'], offset + page['returned'])
+                    offset, token = page['next_offset'], response['state_token']
+            self.assertGreater(pages, 1)
+            self.assertEqual(len(retained), 100)
+            self.assertEqual(snapshot, original, 'View bounds must not mutate complete durable values')
+            if section == 'field_catalog':
+                self.assertEqual({row['path'][2] for row in retained}, {'field_' + str(i) for i in range(100)})
+                for row in retained:
+                    self.assertEqual(row['value'], field_catalog['forms']['dense'][row['path'][2]])
+            else:
+                self.assertEqual([row['record_identity']['binding_index'] for row in retained], list(range(100)))
+                for row, complete in zip(retained, bindings):
+                    self.assertFalse(row['exact_value_included'])
+                    self.assertEqual(row['sha256'], hashlib.sha256(answer_views._encoded(complete)).hexdigest())
+
     def test_diagnostic_samples_are_bounded_and_selected_q_only(self):
         rows = [dict(binding={'question_id': 'Q1'}, reason='synthetic', value=self.value) for _ in range(300)]
         full = {'preview': True, 'valid': False, 'persisted': False, 'projection': {

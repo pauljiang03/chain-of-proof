@@ -9,6 +9,7 @@ DEFAULT_PAGE_SIZE = 25
 MAX_PAGE_SIZE = 100
 MAX_ITEM_BYTES = 4096
 MAX_PAGE_BYTES = 48_000
+MAX_RESPONSE_BYTES = 64_000
 SAMPLE_SIZE = 5
 
 
@@ -136,13 +137,26 @@ def inspection(run_dir, question_id, *, offset=None, page_size=None, section=Non
     rows.update(bindings=before['bindings'], field_catalog=_catalog_rows(before['field_catalog']),
                 field_requirements=_requirement_rows(before['field_requirements']))
     page = _page(rows[section], offset, page_size, token)
-    return {'view': 'bounded_answer_inspection', 'question_id': question_id, 'section': section,
+    response = {'view': 'bounded_answer_inspection', 'question_id': question_id, 'section': section,
             'state_token': token, 'counts': {key: len(value) for key, value in rows.items()},
             'page': page, section: page['items'],
             'inspection_sections': list(SECTIONS),
             'continuation': 'Omit bindings/replace/preview; use section, next_offset, page_size and this state_token. Each section is separately paged.',
             'value_policy': 'Oversize entries are explicit length/hash/preview descriptors, not exact values. Complete originals remain on disk.',
             'question_completeness': 'not_established'}
+    # The compatibility alias repeats items outside page, and ordinary JSON
+    # serialization adds spaces. Bound the entire returned envelope, not only
+    # its compact item encodings. Removed items remain at the next cursor.
+    while len(json.dumps(response, ensure_ascii=True, allow_nan=False).encode('utf-8')) > MAX_RESPONSE_BYTES:
+        if not page['items']:
+            raise ValueError('answer inspection envelope exceeds response byte limit')
+        page['items'].pop()
+        page['returned'] = len(page['items'])
+        next_offset = offset + page['returned']
+        page['next_offset'] = next_offset if next_offset < page['total'] else None
+    if rows[section] and offset < len(rows[section]) and not page['returned']:
+        raise ValueError('answer inspection entry exceeds response byte limit')
+    return response
 
 
 def mutation_view(result, question_id):
