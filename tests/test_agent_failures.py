@@ -112,6 +112,21 @@ class AgentFailures(unittest.TestCase):
         self.assertEqual(self.saved()["case"]["error_type"], "ModuleNotFoundError")
         self.assert_no_exception_payload()
 
+    def test_optional_conflict_review_failure_keeps_checked_work_and_report(self):
+        def success(_model, run_dir, _facts, **kwargs):
+            check({"searched": [3100]}, "A001", open_source(FACTS), "Which search?", run_dir)
+            return {"summary": "done", "turns": 1, "tool_calls": 1, "seconds": 0, "ended": "success"}
+        with patch.object(run, "run_deepagents", side_effect=success), \
+             patch("agent.review.review", side_effect=RuntimeError("SECRET-REQUEST-TOKEN")):
+            self.assertEqual(self.invoke("deepagents"), 0)
+        self.finalized()
+        saved = self.saved()
+        self.assertEqual(saved["conflicts"]["status"], "unavailable")
+        self.assertEqual(saved["conflicts"]["diagnostics"], [])
+        self.assertEqual(saved["stats"]["verified"], 1)
+        self.assertTrue(verify_run(saved, open_source(FACTS))["passed"])
+        self.assert_no_exception_payload()
+
     def test_runtime_provider_failure_is_finalized(self):
         with patch.object(run, "run_deepagents", side_effect=RuntimeError("SECRET-REQUEST-TOKEN")):
             self.assertEqual(self.invoke("deepagents"), 1)

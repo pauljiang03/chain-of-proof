@@ -35,7 +35,7 @@ Old reports and old scoring methods are available in Git history.
 
 ## Investigation CLI and reports
 
-The CLI is the primary interface. It uses an extracted facts file, public case context, and your questions.
+The CLI is the primary interface. Give it extracted facts or supported evidence images, public case context, and your questions.
 Install this checkout with `pip install -e .`, then run:
 
 ```sh
@@ -69,8 +69,66 @@ Open the HTML report in a browser to print it or save it as PDF.
 The app does not provide a separate PDF generator.
 
 The current release runs from an editable repository checkout with the Lean project installed.
-Raw disk images require the extraction step described below.
+The CLI can extract supported images before it starts the investigator. The browser start form still takes extracted facts.
 The local app does not assign benchmark scores. Model access uses the local CLI login or API environment.
+
+## Evidence intake and continued work
+
+Use an explicit image manifest for each new case. For example, save this as `exhibits.json`:
+
+```json
+{"laptop.E01": {"exhibit": "PC1", "role": "pc"}}
+```
+
+The supported roles are `pc`, `removable`, and `optical`.
+Intake accepts numeric E01–E99 sets, raw `.dd`, `.raw`, `.img`, and `.bin` images, and `.iso` or `.udf` images.
+A recognized extension does not guarantee that every file system or artifact is supported.
+Use the readers that apply to the image and its file system.
+A missing image or an invalid role stops intake. Parser failures remain in the extraction health file.
+
+```sh
+cop investigate --name dev/new-case --images /path/images --exhibits exhibits.json \
+  --question "Which external devices were connected?" --minutes 10
+```
+
+Use `cop ingest --images /path/images --exhibits exhibits.json --out /path/new-snapshot`
+to extract records without an AI run.
+Each snapshot records its image hashes, facts hash, reader selection, and parser failures.
+The images are read locally. The investigator backend receives the public prompt and selected tool results.
+
+The investigator saves work for each question in `investigation.json`.
+It records searches, finding links, unresolved fields, and next actions.
+`case-answers.json` groups exact certificate sentences by question for any case.
+A question can have findings and still have missing answers.
+Work status does not establish answer accuracy or completeness.
+The benchmark submission remains a separate `answers.json` file.
+
+```sh
+cop plan --run runs/dev/new-case
+cop resume --run runs/dev/new-case --name dev/new-case-2 --minutes 10 \
+  --question "What evidence links those devices to the opened files?"
+```
+
+A continuation creates a new run. It does not change the previous report.
+With identical facts, it checks prior accepted claims again and restores question links.
+With new facts, use `--facts /path/new-snapshot/facts.json`.
+Old work notes remain context. Old record IDs and certificates do not transfer to new facts.
+This resumes saved tasks; it does not restore a provider's hidden reasoning.
+
+The `evidence_needs` tool lists approved readers for the configured images.
+The `collect` tool can run a reader that has not yet run for that exhibit.
+It writes a new full snapshot and retains the current snapshot.
+It preserves source observations and recomputes derived tags from the combined records.
+Use `--readers windows,system` for a limited initial PC intake when later collection is useful.
+One successful collection is allowed per run. The next run can collect another reader.
+Add `--follow-up-stages 1` to continue automatically on collected evidence once.
+Each additional stage has its own `--minutes` limit. The default is no automatic extra stage.
+For a manual continuation, also supply the new snapshot's `--intake-config` to permit further collection.
+
+The final report includes a review of recognized identity ambiguities and scoped record conflicts.
+Each diagnostic shows the records and the condition that requires review.
+The review preserves timestamp uncertainty and does not choose which source is true.
+A clean review does not establish that all evidence is consistent. Truncated reviews are marked.
 
 ## Pipeline
 
@@ -79,6 +137,12 @@ flowchart TD
     I[Evidence images] --> E[Extract records]
     E --> F[Fact store and source details]
     Q[Public questions and answer format] --> S[AI agent]
+    S --> W[Saved question plan and open work]
+    W --> S
+    S --> N[Approved follow-up reader]
+    N --> F2[New evidence snapshot]
+    F2 --> S2[Continue in a new run]
+    S2 --> C
     F --> S
     F --> M[Optional miner]
     S --> C[Claim in JSON]
@@ -89,6 +153,10 @@ flowchart TD
     K -->|No| X[Refusal and evidence requirements]
     X --> S
     K -->|Yes| B[Certificate and fixed sentence]
+    B --> QA[Answers with exact certificate sentences]
+    QA --> R
+    F --> CR[Scoped conflict review]
+    CR --> R
     B --> V[Independent certificate verifier]
     F --> V
     V --> R[Certified report]
@@ -181,7 +249,8 @@ It does not infer corrections from similar wording.
 Coverage separates extracted, explicitly inspected, and cited records from accepted findings.
 Answer presence is separate from answer accuracy. Missing measurements remain unknown.
 
-Create a portable directory with the report, complete fact store, certificates, and available logs:
+Create a portable directory with the report, complete fact store, certificates, and available logs.
+This package supports verification. Use the original run directory for continuation.
 
 ```sh
 .venv/bin/python -m verifier.package build \

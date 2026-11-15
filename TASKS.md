@@ -8,11 +8,16 @@ Keep essential evidence access, Lean verification, explicit limits, and reproduc
 - Reader and answer-export fixes are integrated.
 - The latest full NIST fact build is ready outside Git.
 - Both Mulder test packages are prepared and remain unrun.
-- 510 tests pass with the optional API dependencies installed. The Lean project is unchanged from its passing build.
+- 577 tests pass with the optional API dependencies installed. The Lean project is unchanged from its passing build.
 - All 473 saved certificates verify. All 24 false probes are refused.
 - Tool audits, full evidence citations, proof-gap diagnostics, portable verification, coverage, and explicit claim history are integrated.
 - The second terminal's hardening changes are integrated. The API graph has offline integration tests.
 - The primary CLI produces HTML, Markdown, and JSON reports. Cancellation retains partial work.
+- Supported-image intake validates explicit manifests and creates hashed snapshots with extraction health.
+- Persistent question work and case-agnostic certificate-linked answers are available for every public case profile.
+- Approved reader collection creates a new snapshot; optional bounded continuation uses a new run and new proofs.
+- Resume preserves old reports, carries work notes, and rechecks prior claims only for identical facts.
+- Conservative conflict diagnostics are shown separately from findings; a failed review does not erase checked work.
 - The optional local browser interface opens reports, shows activity and evidence, and uses the same runner.
 - The installed CLI and local HTTP downloads passed a smoke check. Browser checks covered the sample layout, proof inspector, evidence links, diagnostics, and report print preview.
 
@@ -25,7 +30,7 @@ Keep essential evidence access, Lean verification, explicit limits, and reproduc
 5. Review missing answers and source-supported errors. Keep unsupported inferences separate.
 
 The other terminal owns the next with/without-Lean ablation work in an isolated branch.
-The app implementation is complete; the experiment runtime and comparable scoring are separate work.
+The app and six backend workflow additions are complete; the experiment runtime and comparable scoring remain separate work.
 Exactly 26 NIST questions still have no explicit answer-export mapping. Some also need reader, proof, or reference support.
 No live provider or benchmark run was used to validate this app checkpoint.
 

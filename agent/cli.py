@@ -29,11 +29,34 @@ def main(argv=None) -> int:
     p.add_argument("--question", required=True)
     p.add_argument("--claim", required=True, action="append",
                    help="repeat --claim to propose several claims for one question")
+    for command in ("plan", "review"):
+        sub.add_parser(command)
+    p = sub.add_parser("evidence-needs")
+    p.add_argument("--proof-gap", help="diagnostic JSON returned by check")
+    p = sub.add_parser("collect")
+    p.add_argument("--reader", required=True)
+    p.add_argument("--exhibit", required=True)
+    p = sub.add_parser("update-question")
+    p.add_argument("--id", required=True)
+    p.add_argument("--finding", action="append")
+    p.add_argument("--searched", action="append")
+    p.add_argument("--unresolved", action="append")
+    p.add_argument("--next-action", action="append")
+    p.add_argument("--status", choices=("not_started", "in_progress", "blocked", "reviewed"))
     args = ap.parse_args(argv)
     bench = Workbench(os.environ.get("COP_FACTS", "evidence/case_facts.json"),
                       os.environ.get("COP_RUN_DIR", "runs/dev"),
                       os.environ.get("COP_PROPOSER", "agent"))
-    if args.cmd == "forms":
+    if args.cmd in ("plan", "review"):
+        out = getattr(bench, args.cmd)()
+    elif args.cmd == "evidence-needs":
+        out = bench.evidence_needs(json.loads(args.proof_gap) if args.proof_gap else None)
+    elif args.cmd == "collect":
+        out = bench.collect(args.reader, args.exhibit)
+    elif args.cmd == "update-question":
+        out = bench.update_question(args.id, finding_ids=args.finding, searched=args.searched,
+            unresolved=args.unresolved, next_actions=args.next_action, status=args.status)
+    elif args.cmd == "forms":
         out = bench.forms()
     elif args.cmd == "sql":
         out = bench.sql(args.query)

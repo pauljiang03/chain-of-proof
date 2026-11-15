@@ -51,13 +51,44 @@ CONCLUDE_TOOL = {
                                                    "items": {"type": "string"}}},
                     "required": ["text", "finding_ids"]}}
 
+WORKFLOW_TOOLS = [
+    {"name": "plan", "description": "Read persistent public questions, searches, supported findings and open work.",
+     "inputSchema": {"type": "object", "properties": {}}},
+    {"name": "update_question", "description": "Save agent-reported question progress. Refer only to verified finding IDs from this run. This does not prove completeness.",
+     "inputSchema": {"type": "object", "properties": {
+         "question_id": {"type": "string"},
+         **{key: {"type": "array", "items": {"type": "string"}} for key in
+            ("finding_ids", "searched", "unresolved", "next_actions")},
+         "status": {"type": "string", "enum": ["not_started", "in_progress", "blocked", "reviewed"]}},
+         "required": ["question_id"]}},
+    {"name": "evidence_needs", "description": "List available readers and evidence needed to resolve a proof gap. Suggestions are diagnostic, not findings.",
+     "inputSchema": {"type": "object", "properties": {"proof_gap": {"type": "object"}}}},
+    {"name": "collect", "description": "Run an approved reader/exhibit pair returned by evidence_needs. Creates a NEW evidence snapshot for continuation; current facts and certificates stay unchanged.",
+     "inputSchema": {"type": "object", "properties": {"reader": {"type": "string"}, "exhibit": {"type": "string"}},
+                     "required": ["reader", "exhibit"]}},
+    {"name": "review", "description": "Find scoped evidence conflicts and ambiguities. Diagnostics do not establish what actually happened.",
+     "inputSchema": {"type": "object", "properties": {}}},
+]
+
+
 def tools_for(names) -> list:
     """The tools a session is given. COP_TOOLS picks them; the default is the four."""
-    by_name = {t["name"]: t for t in TOOLS + [CONCLUDE_TOOL]}
+    by_name = {t["name"]: t for t in TOOLS + [CONCLUDE_TOOL] + WORKFLOW_TOOLS}
     return [by_name[n] for n in names]
 
 
 def call(bench: Workbench, name: str, args: dict) -> str:
+    if name in {"plan", "review"}:
+        return json.dumps(getattr(bench, name)(), ensure_ascii=False)
+    if name == "update_question":
+        allowed = {"question_id", "finding_ids", "searched", "unresolved", "next_actions", "status"}
+        if set(args) - allowed:
+            raise ValueError("Unknown question update field")
+        return json.dumps(bench.update_question(**args), ensure_ascii=False)
+    if name == "evidence_needs":
+        return json.dumps(bench.evidence_needs(args.get("proof_gap")), ensure_ascii=False)
+    if name == "collect":
+        return json.dumps(bench.collect(args.get("reader"), args.get("exhibit")), ensure_ascii=False)
     if name == "conclude":
         return json.dumps(bench.conclude(args.get("text", ""), args.get("finding_ids")),
                           ensure_ascii=False)

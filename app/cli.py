@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import sys
 import time
+import tempfile
+from argparse import Namespace
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -72,7 +74,28 @@ def _print_report(manager, name, root, snapshot):
     return True
 
 
+def _intake(args, root):
+    from extractor.intake import intake
+    from app.jobs import _name
+    if not args.exhibits:
+        raise ValueError("--images requires an explicit --exhibits manifest")
+    output = args.evidence_out or str(Path(root) / "evidence" / "intake" / _name(args.name))
+    print("Extracting supported evidence into a new snapshot...", flush=True)
+    result = intake(args.images, args.exhibits, output, case=args.title or "Supplied case",
+                    readers=args.readers.split(",") if args.readers else None)
+    print(f"Extraction: {result['status']}; {result['fact_count']} records; {result['issues']} reported issues", flush=True)
+    print(f"Evidence: {result['facts']}", flush=True)
+    print(f"Extraction health: {result['health']}", flush=True)
+    return result
+
+
 def _investigate(args, root):
+    if getattr(args, "images", None):
+        extracted = _intake(args, root)
+        if extracted["fact_count"] == 0:
+            raise ValueError("Extraction produced no facts; inspect its health file before starting an investigator")
+        args = Namespace(**{**vars(args), "facts": extracted["facts"], "images": None,
+                            "intake_config": extracted["config"]})
     payload = {"name": args.name, "facts": args.facts, "questions": args.question or []}
     # The same manager supplies backend-aware defaults to the UI and CLI.
     for field in ("title", "brief", "backend", "model", "minutes"):
@@ -81,7 +104,11 @@ def _investigate(args, root):
             payload[field] = value
     manager = _job_manager(root)
     try:
-        started = manager.start(payload, case_profile=args.case_profile, question_profile=args.questions)
+        options = {"case_profile": args.case_profile, "question_profile": args.questions}
+        for field in ("resume_from", "intake_config"):
+            if getattr(args, field, None):
+                options[field] = getattr(args, field)
+        started = manager.start(payload, **options)
         name = started["name"]
         print(f"Investigation: {name}", flush=True)
         interrupted = False
@@ -102,9 +129,64 @@ def _investigate(args, root):
         has_report = _print_report(manager, name, root, snapshot)
         if interrupted:
             return 130
+        receipt = Path(root) / "runs" / name / "latest-collection.json"
+        if receipt.is_file() and not receipt.is_symlink():
+            collected = json.loads(receipt.read_text())
+            if collected.get("facts"):
+                print(f"New evidence snapshot: {collected['facts']}")
+                if getattr(args, "follow_up_stages", 0) > 0 and status in ("completed", "partial"):
+                    manager.close()
+                    parent_dir = Path(root) / "runs" / name
+                    follow = Namespace(**{**vars(args), "name": name + "-followup",
+                        "facts": collected["facts"], "intake_config": collected["config"],
+                        "resume_from": str(parent_dir), "case_profile": str(parent_dir / "case-profile.json"),
+                        "questions": str(parent_dir / "questions.json") if (parent_dir / "questions.json").is_file() else None,
+                        "question": None, "title": None, "brief": None,
+                        "follow_up_stages": args.follow_up_stages - 1})
+                    print("Continuing on the new evidence snapshot in a separate run.", flush=True)
+                    return _investigate(follow, root)
         return 0 if status == "completed" and has_report else 1
     finally:
         manager.close()
+
+
+def _resume(args, root):
+    from agent.continuation import parent, default_facts
+    previous = parent(args.run)
+    facts = args.facts or str(default_facts(previous))
+    prior_backend = previous["manifest"].get("investigator", {})
+    if args.backend is None:
+        args.backend = prior_backend.get("backend")
+        if args.model is None:
+            args.model = prior_backend.get("requested_model")
+    profile = previous["profile"].public_dict()
+    public = previous["questions"]
+    if args.question:
+        if public:
+            public = json.loads(json.dumps(public))
+            existing = {q["id"] for q in public["questions"]}
+            for question in args.question:
+                index = 1
+                while f"FOLLOWUP{index}" in existing:
+                    index += 1
+                qid = f"FOLLOWUP{index}"
+                existing.add(qid)
+                public["questions"].append({"id": qid, "prompt": question, "answer_schema": {}})
+        else:
+            profile["questions"] = list(profile["questions"]) + args.question
+    with tempfile.TemporaryDirectory(prefix="cop-continuation-") as directory:
+        path = Path(directory)
+        (path / "profile.json").write_text(json.dumps(profile))
+        if public:
+            (path / "questions.json").write_text(json.dumps(public))
+        intake = args.intake_config
+        if not intake and not args.facts and (previous["directory"] / "intake-config.json").is_file():
+            intake = str(previous["directory"] / "intake-config.json")
+        request = Namespace(**{**vars(args), "facts": facts, "images": None,
+            "case_profile": str(path / "profile.json"), "questions": str(path / "questions.json") if public else None,
+            "question": None, "title": None, "brief": None, "intake_config": intake,
+            "resume_from": str(previous["directory"])})
+        return _investigate(request, root)
 
 
 def _report(args):
@@ -149,7 +231,15 @@ def _parser():
     commands = parser.add_subparsers(dest="command", required=True)
     investigate = commands.add_parser("investigate", help="investigate extracted facts and save a report")
     investigate.add_argument("--name", required=True, help="new run name; existing runs are preserved")
-    investigate.add_argument("--facts", required=True, help="extracted fact store; not a raw disk image")
+    inputs = investigate.add_mutually_exclusive_group(required=True)
+    inputs.add_argument("--facts", help="extracted JSON or DuckDB fact store")
+    inputs.add_argument("--images", help="directory containing supported evidence images")
+    investigate.add_argument("--exhibits", help="explicit image-role/exhibit manifest for --images")
+    investigate.add_argument("--readers", help="comma-separated initial reader IDs; default all applicable readers")
+    investigate.add_argument("--evidence-out", help="new extraction snapshot directory")
+    investigate.add_argument("--intake-config", help="trusted intake config matching --facts, for approved follow-up readers")
+    investigate.add_argument("--follow-up-stages", type=int, default=0,
+                             help="automatically continue after collection this many times; each stage gets --minutes (default 0)")
     investigate.add_argument("--backend", choices=("claude-code", "deepagents"), help="default: claude-code")
     investigate.add_argument("--model", help="model name; default depends on the selected backend")
     investigate.add_argument("--minutes", type=_positive, help="positive time budget in minutes; default: 45")
@@ -158,6 +248,25 @@ def _parser():
     investigate.add_argument("--question", action="append", help="public question; repeat for multiple questions")
     investigate.add_argument("--case-profile", help="public case-profile JSON path")
     investigate.add_argument("--questions", help="public schema-v2 question-profile JSON path")
+    resume = commands.add_parser("resume", help="continue public work in a new run; preserve the original")
+    resume.add_argument("--run", required=True, help="previous run directory or run.json")
+    resume.add_argument("--name", required=True, help="new run name")
+    resume.add_argument("--facts", help="new evidence snapshot; default hash-checked previous facts")
+    resume.add_argument("--question", action="append", help="add a public follow-up question")
+    resume.add_argument("--backend", choices=("claude-code", "deepagents"))
+    resume.add_argument("--model")
+    resume.add_argument("--minutes", type=_positive)
+    resume.add_argument("--intake-config", help="trusted intake config for a new snapshot")
+    resume.add_argument("--follow-up-stages", type=int, default=0)
+    ingest = commands.add_parser("ingest", help="extract supported images without starting an AI run")
+    ingest.add_argument("--images", required=True)
+    ingest.add_argument("--exhibits", required=True)
+    ingest.add_argument("--out", dest="evidence_out", required=True)
+    ingest.add_argument("--title")
+    ingest.add_argument("--readers")
+    ingest.set_defaults(name="intake")
+    plan = commands.add_parser("plan", help="inspect saved question progress")
+    plan.add_argument("--run", required=True)
     serve = commands.add_parser("serve", help="open the local browser app on 127.0.0.1")
     serve.add_argument("--port", type=_port, default=8765)
     serve.add_argument("--no-open", "--no-browser", dest="no_open", action="store_true",
@@ -183,6 +292,20 @@ def main(argv=None, *, root=ROOT):
     parser = _parser()
     args = parser.parse_args(argv)
     try:
+        if hasattr(args, "follow_up_stages") and not 0 <= args.follow_up_stages <= 3:
+            raise ValueError("--follow-up-stages must be between 0 and 3")
+        if args.command == "resume":
+            return _resume(args, root)
+        if args.command == "ingest":
+            _intake(args, root)
+            return 0
+        if args.command == "plan":
+            from agent.investigation import Investigation
+            directory = Path(args.run)
+            if directory.name == "run.json":
+                directory = directory.parent
+            print(json.dumps(Investigation(directory).snapshot(), indent=2, ensure_ascii=False))
+            return 0
         if args.command == "investigate":
             return _investigate(args, root)
         if args.command == "serve":

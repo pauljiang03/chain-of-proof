@@ -50,6 +50,10 @@ def create(run_dir, *, facts, backend, model, minutes, root, questions=None, hea
     for name, path in (("questions", questions), ("extraction_health", health)):
         if path is not None:
             inputs[name] = file_binding(path)
+    for name in ("continuation.json", "intake-config.json"):
+        path = run_dir / name
+        if path.is_file():
+            inputs[name.removesuffix(".json").replace("-", "_")] = file_binding(path)
     packages = {}
     for name in ("chain-of-proof", "deepagents", "langchain-anthropic", "duckdb", "dissect.target"):
         try:

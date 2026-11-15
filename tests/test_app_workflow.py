@@ -127,8 +127,9 @@ class AppWorkflow(unittest.TestCase):
         self.assertEqual(snapshot["run"]["stats"]["rejected"], 1)
         self.assertTrue(snapshot["run"]["audit"]["passed"])
         self.assertFalse(snapshot["run"]["case"]["scoring_requested"])
-        self.assertEqual([entry["tool"] for entry in snapshot["events"]], ["fact", "check", "check"])
-        self.assertEqual(snapshot["events"][-1]["arguments"]["revises"], "A001")
+        expected = ["fact", "check", "check"] + (["review"] if snapshot["status"] == "completed" else [])
+        self.assertEqual([entry["tool"] for entry in snapshot["events"]], expected)
+        self.assertEqual(snapshot["events"][2]["arguments"]["revises"], "A001")
         sentence = snapshot["run"]["findings"][0]["english"]
         for fmt in ("html", "md", "json"):
             status, report = self.request("GET", f"/api/report?name={name}&format={fmt}&download=1")

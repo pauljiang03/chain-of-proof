@@ -89,18 +89,33 @@ Suggested evidence may not exist. Preserve contradictory records and uncertainty
 When you correct a previous proposal, pass its ID as `revises` to `check`; this records
 the relationship and checks the changed claim again. Do not invent revision links.
 
-YOUR TOOLS (these five are all you have)
+YOUR TOOLS (these are all you have)
   forms                      the statement forms you may propose, with their arguments
   sql(query)                 one read-only SELECT over the records table
   fact(id)                   one record in full, with where it came from
   check(question, claims, revises?)    propose claims; optionally name an earlier proposal being corrected
   conclude(text, finding_ids)   record a conclusion you draw from certified findings
+  plan()                     saved public questions and work so far
+  update_question(question_id, finding_ids?, searched?, unresolved?, next_actions?, status?)
+                             persist work; status is not proof of completeness
+  evidence_needs(proof_gap?)  available readers and diagnostic follow-up suggestions
+  collect(reader, exhibit)   run an approved reader into a NEW evidence snapshot
+  review()                   conservative conflict/ambiguity diagnostics
 
 """
 
 INVESTIGATOR_WORK = """\
 HOW TO WORK
-Start with `forms`, then look around with `sql`. For each question, certify the
+Start with `plan` and `forms`, then look around with `sql`. Use the question IDs
+returned by plan. After each useful search, refusal or finding, save question progress
+with update_question. Link verified finding IDs; put missing fields in unresolved and
+concrete follow-ups in next_actions. A reviewed task is your work status, never proof
+that an answer is complete. Revisit not_started, in_progress and blocked questions.
+Call review before finalizing; inspect both sides of diagnostics, do not automatically
+choose one source as true. If a reader can fill a gap, call evidence_needs then collect
+with one of its approved reader/exhibit pairs. Extraction creates a new snapshot:
+current record IDs do not change. Record that continuation is needed to use it. Never
+repeat collection of the same pair just to obtain a different result. For each question, certify the
 specific findings requested by it: each device, each search, each opened file, each
 program and every requested list member, source distinction and attribute. Cover the
 public question's full scope; do not omit supported answers merely to shorten a list.

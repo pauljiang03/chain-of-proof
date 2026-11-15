@@ -8,7 +8,7 @@ The user clarified that the CLI is the primary interface. Finish the CLI-to-repo
 
 ## Complete checkpoint
 
-All U0–U3 lanes are integrated. The full suite passes 510 tests with the optional API environment.
+All U0–U3 lanes are integrated. The full suite passes 577 tests with the optional API environment.
 The installed `cop` command and localhost report downloads pass smoke checks.
 Offline end-to-end tests use the existing investigator runner, actual Workbench calls and Lean, with a synthetic backend.
 Cancellation tests include the investigator's detached child and saved partial certificates.
@@ -27,7 +27,7 @@ The local app is a convenience interface, not a sandbox for arbitrary executable
 
 ## User workflow
 
-Run `cop serve` (also `python -m app.cli serve`) to open a loopback browser app. List existing reports, start an investigation with an extracted facts file and public questions, inspect actual activity and progress, stop a run, and download HTML/Markdown/JSON. Raw disk extraction remains the existing separate CLI; label the facts input clearly. Never imply that arbitrary raw images are accepted by the investigator.
+Run `cop serve` (also `python -m app.cli serve`) to open a loopback browser app. List existing reports, start an investigation with an extracted facts file and public questions, inspect actual activity and progress, stop a run, and download HTML/Markdown/JSON. The browser start form continues to take extracted facts. The primary CLI now supports image intake, approved collection and continuation; see BACKEND_HANDOFF.md. Label the browser facts input clearly. Never imply that arbitrary raw images are accepted by the investigator.
 
 `cop investigate` wraps the existing `agent.run` with a new name, explicit facts/backend/model/minutes, optional public profile, and optional repeated free-text `--question` plus `--title`/`--brief`. Keep `--no-score` for the product path. Generate a temporary public profile when free-text questions are supplied. Preserve existing output directories. Print the output report path. The CLI also exposes `report`, `verify`, and `package` by delegating to existing components where possible. `report` uses U3 HTML or existing Markdown; never invent proof results. Core package includes app/static assets and a `cop` console entry point.
 
@@ -51,3 +51,11 @@ Public API `render_html(run: dict) -> str`. Produce standalone HTML with embedde
 ## Validation
 
 Use synthetic jobs and temporary run roots; no provider calls. Test public-input validation, no overwrites, failed/cancelled jobs, path/Origin protection, truthful run state, literal evidence rendering, and downloadable outputs. Root tests the UI in a browser using saved/synthetic reports. Existing benchmark outputs remain unchanged. Root runs combined regression and pushes after integration.
+
+## Backend workflow extension
+
+The six backend additions are integrated in `finish/backend-workflow`.
+The HTTP start form retains its extracted-facts contract. The CLI adds `ingest`,
+image-backed `investigate`, `resume`, and `plan`. New report sections show question
+work, exact certificate-linked answers, conflict diagnostics, and collected evidence.
+No new hosted service or cloud deployment is required.

@@ -170,6 +170,36 @@ def bundle(certs_dir: Path, case_name: str, *, facts_metadata=None,
         if not isinstance(manifest, dict):
             raise ValueError("recorded run manifest must be an object")
         data["run_manifest"] = manifest
+    from agent.answers import enrich_bundle
+    enrich_bundle(data, certs_dir, public_questions=public_questions)
+    review = _sidecar(certs_dir, "review.json")
+    if review is not None:
+        if (not isinstance(review, dict) or review.get("schema_version") != 1
+                or review.get("status") not in ("diagnostic", "unavailable") or not isinstance(review.get("scope"), dict)
+                or not isinstance(review.get("diagnostics"), list)
+                or any(not isinstance(item, dict) or item.get("status") != "diagnostic"
+                       for item in review["diagnostics"])):
+            raise ValueError("conflict review must contain schema-v1 diagnostic records")
+        data["conflicts"] = review  # diagnostic only; never a finding or certificate
+    continuation = _sidecar(certs_dir, "continuation.json")
+    if continuation is not None:
+        if (not isinstance(continuation, dict) or continuation.get("schema_version") != 1
+                or type(continuation.get("same_evidence")) is not bool
+                or continuation.get("replay_log") != "continuation-replay.json"
+                or not isinstance(continuation.get("parent"), str)):
+            raise ValueError("continuation must contain a schema-v1 recorded parent binding")
+        data["continuation"] = continuation
+    replay = _sidecar(certs_dir, "continuation-replay.json")
+    if replay is not None:
+        if (continuation is None or not isinstance(replay, dict) or replay.get("schema_version") != 1
+                or not isinstance(replay.get("replayed"), list)):
+            raise ValueError("continuation replay requires a parent binding and schema-v1 replay records")
+        data["continuation_replay"] = replay
+    collection = _sidecar(certs_dir, "latest-collection.json")
+    if collection is not None:
+        if not isinstance(collection, dict) or not isinstance(collection.get("facts"), str) or collection.get("continuation_required") is not True:
+            raise ValueError("collection must be a successful new-snapshot receipt")
+        data["collection"] = collection
     return data
 
 

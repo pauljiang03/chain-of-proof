@@ -219,23 +219,169 @@ def _proof_gaps(run: dict) -> list:
     return lines + [""]
 
 
+def _workflow_summary(run, findings):
+    lines, by_id, duplicates = [], {}, set()
+    for number, finding in findings:
+        fid = finding.get("finding_id")
+        if not isinstance(fid, str):
+            continue
+        if fid in by_id:
+            duplicates.add(fid)
+        by_id[fid] = (number, finding)
+    eligible = {fid: item for fid, item in by_id.items() if fid not in duplicates
+                and isinstance(item[1].get("english"), str) and item[1]["english"]}
+    rows = lambda value: value if isinstance(value, list) else []
+    if "collection" in run:
+        receipt = _object(run["collection"])
+        lines += ["## New evidence available", ""]
+        if receipt.get("status") in ("completed", "completed_with_limitations") and receipt.get("continuation_required") is True:
+            lines += ["A separate evidence snapshot was collected. It is not incorporated into the current findings. "
+                      "Continue in a new run, query the new records and issue new proofs; old fact IDs and certificates "
+                      "cannot be carried over as current proof.", ""]
+            for key, label in (("status", "Collection status"), ("snapshot_id", "Snapshot ID"),
+                               ("facts", "Facts path — literal text"), ("facts_sha256", "Facts SHA-256"),
+                               ("config", "Intake configuration path — literal text"), ("health", "Extraction health path — literal text")):
+                lines.append(f"- {label}: {_supplied(receipt, key)}")
+            if receipt.get("note"):
+                lines += ["", citations.text(receipt["note"])]
+        else:
+            lines += ["A completed collection requiring continuation is not established by this receipt. Supplied metadata:", "",
+                      citations.fenced(citations.json_text(receipt), "json")]
+        lines.append("")
+    if "investigation" in run:
+        plan = _object(run["investigation"])
+        lines += ["## Investigation plan — agent-reported work", "",
+                  "Work status, searches, unresolved questions and next actions are agent-reported notes, not proof. "
+                  "Reviewed does not mean answered, accurate or complete.", ""]
+        if plan.get("schema_version") != 1 or plan.get("status") == "unavailable":
+            lines += ["A supported investigation plan is unavailable.", "", citations.fenced(citations.json_text(plan), "json"), ""]
+        else:
+            lines += [f"Plan revision: {_supplied(plan, 'revision')}; case ID: {_supplied(plan, 'case_id')}.", ""]
+            for raw in rows(plan.get("questions")):
+                question = _object(raw)
+                lines += [f"### {_supplied(question, 'id')} — {_supplied(question, 'prompt')}", ""]
+                for key, label in (("work_status", "Agent-reported work status"), ("finding_ids", "Stated finding IDs"),
+                                   ("searched", "Reported searches"), ("unresolved", "Unresolved notes"),
+                                   ("next_actions", "Proposed next actions")):
+                    lines.append(f"- {label}: {_supplied(question, key)}")
+                if "previous_run_notes" in question:
+                    lines += ["", "Previous-run notes — unverified; no current proof is inferred:", "",
+                              citations.fenced(citations.json_text(question["previous_run_notes"]), "json")]
+                lines.append("")
+            if plan.get("disclaimer"):
+                lines += [citations.text(plan["disclaimer"]), ""]
+
+    if "case_answers" in run:
+        answers = _object(run["case_answers"])
+        lines += ["## Question-by-question findings", "",
+                  "Only exact sentences matching a unique current-run record marked verified are shown as certificate statements. "
+                  "Question association does not prove relevance, accuracy or completeness. This renderer does not independently replay certificates.", ""]
+        mismatch = (_object(run.get("case")).get("case_id") is not None and answers.get("case_id") is not None
+                    and run["case"]["case_id"] != answers["case_id"])
+        if (answers.get("schema_version") != 1 or answers.get("kind") != "certificate_sentence_answers"
+                or answers.get("status") == "unavailable" or mismatch):
+            lines += ["Question answers are unavailable, unsupported, or not bound to this case. Supplied content remains unverified:", "",
+                      citations.fenced(citations.json_text(answers), "json"), ""]
+        else:
+            for raw in rows(answers.get("questions")):
+                question = _object(raw)
+                lines += [f"### {_supplied(question, 'id')} — {_supplied(question, 'prompt')}", "",
+                          f"Declared answer presence: {_supplied(question, 'status')}; "
+                          f"agent-reported work status: {_supplied(question, 'work_status')}.", ""]
+                displayed = 0
+                for raw_entry in rows(question.get("certified_findings")):
+                    entry = _object(raw_entry)
+                    linked = eligible.get(entry.get("finding_id")) if isinstance(entry.get("finding_id"), str) else None
+                    if linked and entry.get("sentence") == linked[1]["english"]:
+                        number, finding = linked
+                        lines += [f"- **Recorded certificate statement {_supplied(finding, 'finding_id')}**: "
+                                  f"{citations.text(finding['english'])} [Proof record](#proof-f{number}).",
+                                  f"  Reported association: {_supplied(entry, 'association')}. "
+                                  "This is not a proof that the question is answered."]
+                        displayed += 1
+                    else:
+                        lines += ["An answer entry has no matching unique current-run certificate sentence. It is unverified:", "",
+                                  citations.fenced(citations.json_text(raw_entry), "json"), ""]
+                if not displayed:
+                    lines += ["No bound certificate statement is available for this question. "
+                              "This does not establish that no relevant evidence exists.", ""]
+                for key, label in (("searched", "Reported searches — unverified"), ("unresolved", "Unresolved notes — unverified"),
+                                   ("next_actions", "Proposed next actions — unverified")):
+                    lines.append(f"- {label}: {_supplied(question, key)}")
+                for key, label in (("refusals", "Refused proposals and diagnostics — not certified"),
+                                   ("issues", "Question-association issues — not certified"),
+                                   ("previous_run_notes", "Previous-run notes — unverified")):
+                    if question.get(key):
+                        lines += ["", label + ":", "", citations.fenced(citations.json_text(question[key]), "json")]
+                lines.append("")
+            if answers.get("disclaimer"):
+                lines += [citations.text(answers["disclaimer"]), ""]
+
+    if "conflicts" in run:
+        review = _object(run["conflicts"])
+        lines += ["## Cross-record review — unverified diagnostics", "",
+                  "These are leads for review, not certified contradictions or a choice of which source is true. "
+                  "Shared labels and repeated events can be legitimate. No diagnostic does not mean no conflict exists.", ""]
+        if review.get("schema_version") == 1 and review.get("status") == "unavailable":
+            lines += ["**Conflict review unavailable:** " + _supplied(review, "reason"), "",
+                      "Recorded error type: " + _supplied(review, "error_type"), ""]
+        elif review.get("schema_version") != 1 or review.get("status") != "diagnostic":
+            lines += ["A supported diagnostic review is unavailable. Uninterpreted review metadata:", "",
+                      citations.fenced(citations.json_text(review), "json"), ""]
+        else:
+            scope = _object(review.get("scope"))
+            if scope.get("scan_truncated") is True or scope.get("diagnostics_truncated") is True:
+                lines += ["**REVIEW TRUNCATED:** the scan or diagnostic output reached its limit. "
+                          "Unshown records or diagnostics remain unreviewed here.", ""]
+            for key, label in (("records_examined", "Records examined"), ("max_records", "Maximum records"),
+                               ("scan_truncated", "Scan truncated"), ("diagnostics_truncated", "Diagnostic output truncated"),
+                               ("input", "Input scope")):
+                lines.append(f"- {label}: {_supplied(scope, key)}")
+            lines.append("")
+            diagnostics = rows(review.get("diagnostics"))
+            if not diagnostics:
+                lines += ["No matching diagnostics were recorded within the supplied review scope. "
+                          "This is not a finding that the evidence is consistent.", ""]
+            for raw in diagnostics:
+                diagnostic = _object(raw)
+                if diagnostic.get("status") != "diagnostic":
+                    lines += ["Unrecognized review entry — not certified:", "", citations.fenced(citations.json_text(raw), "json"), ""]
+                    continue
+                lines += [f"### {_supplied(diagnostic, 'id')} — {_supplied(diagnostic, 'category')}", "",
+                          "**Unverified diagnostic:** " + _supplied(diagnostic, "summary"), "", _supplied(diagnostic, "why"), ""]
+                for key, label in (("record_ids", "Witness record IDs — not certified citations"),
+                                   ("observed", "Observed conditions"), ("required", "Further review needed")):
+                    lines.append(f"- {label}: {_supplied(diagnostic, key)}")
+                lines += ["", "Copied witness records and provenance — not certified findings:", "",
+                          citations.fenced(citations.json_text(diagnostic.get("records")), "json"), ""]
+            if review.get("limitations"):
+                lines += ["Review limitations:", ""] + ["- " + citations.text(item) for item in rows(review["limitations"])] + [""]
+            if review.get("disclaimer"):
+                lines += [citations.text(review["disclaimer"]), ""]
+    return lines
+
+
 def render(run: dict, include_judgments: bool = False) -> str:
+    findings = [(number, f) for number, f in enumerate(run["findings"], 1)
+                if isinstance(f, dict) and f.get("status") == "verified"]
+    unverified = [f for f in run["findings"] if not isinstance(f, dict) or f.get("status") != "verified"]
     L = [f"# Investigation report: {citations.text(run['case']['name'])}", ""]
     stats = run["stats"]
-    L += [f"{citations.value(stats, 'verified')} findings certified by the proof checker, {citations.value(stats, 'rejected')} "
+    L += [f"{len(findings)} finding entries recorded as verified, {citations.value(stats, 'rejected')} "
           "proposed claims refused.", ""]
     if include_judgments:
         L += [f"{len(run.get('conclusions', []))} unverified judgments are included in a "
               "separate appendix at the reader's explicit request.", ""]
     L += _audit_summary(run)
     L += _coverage_summary(run)
+    L += _workflow_summary(run, findings)
     L += ["", "## Certified findings", "",
           "Each sentence was generated from extracted records and checked by the proof "
           "checker. `strong`: follows from what the artifacts record. `heuristic`: rests on "
           "a stated rule of thumb. Sentences are reproduced without rewording; markup is "
           "escaped for display. This renderer does not independently verify certificates.", ""]
     by_q = OrderedDict()
-    for number, f in enumerate(run["findings"], 1):
+    for number, f in findings:
         by_q.setdefault(f.get("question") or "(no question given)", []).append((number, f))
     for q, items in by_q.items():
         L += [f"### {citations.text(q)}", ""]
@@ -248,6 +394,9 @@ def render(run: dict, include_judgments: bool = False) -> str:
                      f"{citations.value(f, 'english')} Evidence: {evidence} "
                      f"[Proof record](#proof-f{number}).")
         L.append("")
+    if unverified:
+        L += ["Entries not marked verified are not displayed as certified findings. Supplied content:", "",
+              citations.fenced(citations.json_text(unverified), "json"), ""]
     L += _proof_gaps(run)
     L += _history_summary(run)
     L += ["## Evidence records", "",
@@ -255,14 +404,14 @@ def render(run: dict, include_judgments: bool = False) -> str:
           "are not merged. Provenance is copied metadata; its presence does not prove the "
           "parser or its interpretation correct. Source offsets and locations appear only "
           "when supplied by the record.", ""]
-    conflicts = citations.conflicting_fact_ids(run["findings"])
-    for number, f in enumerate(run["findings"], 1):
+    conflicts = citations.conflicting_fact_ids([f for _, f in findings])
+    for number, f in findings:
         for index, row in enumerate(f.get("cited_facts", []), 1):
             L += citations.evidence_record(f, row, number, index, conflicts)
     L += ["## Proof records", "",
           "These are the bundle's declared claims and embedded proofs. To verify them, use "
           "the independent verifier with the original evidence store.", ""]
-    for number, f in enumerate(run["findings"], 1):
+    for number, f in findings:
         L += citations.proof_record(f, number)
     if not include_judgments:
         return "\n".join(L) + "\n"

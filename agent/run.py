@@ -16,6 +16,7 @@ Backends
 from __future__ import annotations
 
 import argparse
+from contextlib import ExitStack
 import asyncio
 import json
 import os
@@ -36,7 +37,7 @@ from checker.facts import open_source
 from eval import gate, pipeline
 
 ROOT = Path(__file__).resolve().parent.parent
-INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude")
+INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review")
 
 
 def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt: str,
@@ -194,8 +195,37 @@ def run_deepagents(model: str, run_dir: Path, facts: str, prompt: str,
         """Record an uncertified inference citing certified findings from this run."""
         return json.dumps(call_tool(bench.conclude, text, finding_ids), ensure_ascii=False)
 
+    @tool
+    def plan() -> str:
+        """Read saved question progress and unresolved work; status is agent-reported."""
+        return json.dumps(call_tool(bench.plan), ensure_ascii=False)
+
+    @tool
+    def update_question(question_id: str, finding_ids: list[str] | None = None,
+                        searched: list[str] | None = None, unresolved: list[str] | None = None,
+                        next_actions: list[str] | None = None, status: str | None = None) -> str:
+        """Save work notes and checked finding links for a public question."""
+        return json.dumps(call_tool(bench.update_question, question_id, finding_ids,
+            searched, unresolved, next_actions, status), ensure_ascii=False)
+
+    @tool
+    def evidence_needs(proof_gap: dict | None = None) -> str:
+        """List approved readers and diagnostic evidence needs."""
+        return json.dumps(call_tool(bench.evidence_needs, proof_gap), ensure_ascii=False)
+
+    @tool
+    def collect(reader: str, exhibit: str) -> str:
+        """Extract an approved reader/exhibit into a NEW snapshot for continuation."""
+        return json.dumps(call_tool(bench.collect, reader, exhibit), ensure_ascii=False)
+
+    @tool
+    def review() -> str:
+        """Inspect conservative evidence conflict diagnostics; these are not findings."""
+        return json.dumps(call_tool(bench.review), ensure_ascii=False)
+
     agent = _create_api_agent(model=f"anthropic:{model}",
-                              tools=[forms, sql, fact, check, conclude])
+                              tools=[forms, sql, fact, check, conclude, plan, update_question,
+                                     evidence_needs, collect, review])
     started = time.monotonic()
     deadline = started + timeout_s
     async def invoke():
@@ -280,12 +310,12 @@ def _execution_failed(meta: dict) -> bool:
     return meta.get("ended") != "success" or meta.get("exit_code") not in (None, 0)
 
 
-def main(argv=None) -> int:
+def _main(argv=None, *, resources) -> int:
     ap = argparse.ArgumentParser(description="Run the investigator; optionally evaluate neutral structured answers.")
     ap.add_argument("--name", default="dev/agent")
     ap.add_argument("--backend", choices=("claude-code", "deepagents"), default="claude-code")
     ap.add_argument("--model", help="default: opus (claude-code) or claude-opus-5-5 (deepagents)")
-    ap.add_argument("--facts", default="evidence/case_facts.json")
+    ap.add_argument("--facts", help="fact snapshot; continuation defaults to the bound previous input")
     ap.add_argument("--minutes", type=int, default=45)
     ap.add_argument("--case-profile", help="public case context; no expected answers")
     ap.add_argument("--questions", help="public schema-v2 question/answer-shape profile")
@@ -294,15 +324,20 @@ def main(argv=None) -> int:
     answer.add_argument("--adapter", choices=("nist",), help="explicit case adapter over verified certificates")
     answer.add_argument("--answers", help="external structured answers for another case or system")
     ap.add_argument("--labeled-claims", help="explicit independent false-claim gate fixture")
+    ap.add_argument("--resume-from", help="previous run directory; continue in a new run")
+    ap.add_argument("--intake-config", help="trusted image intake configuration for approved extraction")
     ap.add_argument("--no-score", action="store_true", help="record evaluation as not measured")
     args = ap.parse_args(argv)
     model = args.model or ("opus" if args.backend == "claude-code" else "claude-opus-5-5")
     try:
         if args.minutes <= 0:
             raise ValueError("--minutes must be positive")
-        facts_path = _input_path(args.facts)
-        profile_path = _input_path(args.case_profile) if args.case_profile else None
-        questions_path = _input_path(args.questions) if args.questions else None
+        from agent import continuation
+        previous = continuation.parent(_input_path(args.resume_from) if Path(args.resume_from or "").is_file()
+                                       else ROOT / args.resume_from) if args.resume_from else None
+        facts_path = _input_path(args.facts) if args.facts else (continuation.default_facts(previous) if previous else _input_path("evidence/case_facts.json"))
+        profile_path = _input_path(args.case_profile) if args.case_profile else (previous["directory"] / "case-profile.json" if previous else None)
+        questions_path = _input_path(args.questions) if args.questions else (previous["directory"] / "questions.json" if previous and previous["questions"] else None)
         profile, profile_source = select_case(facts_path, profile_path,
                                                default_facts=ROOT / "evidence" / "case_facts.json")
         if questions_path:
@@ -317,8 +352,16 @@ def main(argv=None) -> int:
             gate.load_fixture(labeled, profile.case_id, profile.time_zone)
         prompt = investigator_brief(profile)
         run_dir = prepare_run_dir(args.name, ROOT)
+        resources.enter_context(continuation.active_run(run_dir))
     except (ValueError, OSError) as exc:
         ap.error(str(exc))
+    public = read_question_profile(questions_path) if questions_path else None
+    if previous:
+        receipt = continuation.prepare(previous, run_dir, facts_path)
+        prompt += continuation.prompt_context(receipt)
+    if args.intake_config:
+        from agent.evidence_requests import bind_config
+        bind_config(run_dir, _input_path(args.intake_config), facts_path)
     (run_dir / "case-profile.json").write_text(json.dumps(profile.public_dict(), indent=2) + "\n")
     (run_dir / "prompt.md").write_text(prompt)
     if questions_path is not None:
@@ -329,6 +372,11 @@ def main(argv=None) -> int:
             questions=run_dir / "questions.json" if questions_path else None)
     except (ValueError, OSError) as error:
         ap.error(str(error))
+    if previous:
+        continuation.restore(previous, run_dir, facts_path, profile, public)
+    else:
+        from agent.investigation import Investigation
+        Investigation(run_dir).initialize(profile, public)
     print(f"investigator: {args.backend} / {model} -> {run_dir.relative_to(ROOT)}")
     started = time.monotonic()
     backend_error = None
@@ -355,6 +403,17 @@ def main(argv=None) -> int:
                         scoring_requested=plan.measured,
                         run_manifest="run-manifest.json",
                         facts_sha256=manifest["inputs"]["facts"]["sha256"], **meta)
+    # Always run a final conservative review, even if the model skipped its tool.
+    from agent.tools import Workbench
+    try:
+        Workbench(facts_path, run_dir, proposer="final-review").review()
+    except Exception as error:
+        # Optional diagnostic review must not erase already checked findings.
+        from agent.investigation import atomic_json
+        case_metadata["review_error_type"] = type(error).__name__
+        atomic_json(run_dir / "review.json", {"schema_version": 1, "status": "unavailable", "scope": {"records_examined": None},
+            "diagnostics": [], "reason": "Final conflict review failed; no consistency conclusion is available.",
+            "error_type": type(error).__name__})
     data = export.bundle(run_dir, profile.name, case_metadata=case_metadata)
     (run_dir / "run.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     (run_dir / "report.md").write_text(report.render(data))
@@ -400,6 +459,11 @@ def main(argv=None) -> int:
     failed_execution = _execution_failed(meta)
     return 1 if failed_execution or gate_error is not None or data["audit"]["status"] == "invalid" or (
         regression and not regression["all_as_expected"]) else 0
+
+
+def main(argv=None) -> int:
+    with ExitStack() as resources:
+        return _main(argv, resources=resources)
 
 
 if __name__ == "__main__":

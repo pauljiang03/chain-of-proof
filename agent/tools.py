@@ -180,6 +180,48 @@ class Workbench:
                                  "strength": claims.SETS[name].strength}
                           for name, (args, says) in FORMS.items()}}
 
+    # ---- investigation workflow ---------------------------------------------------
+
+    @audited
+    def plan(self) -> dict:
+        """Current question work, with agent-reported status separate from proof."""
+        from agent.investigation import Investigation
+        state = Investigation(self.run_dir).snapshot()
+        # Full history stays on disk and in the report; the agent needs current work.
+        return {key: value for key, value in state.items() if key != "history"}
+
+    @audited
+    def update_question(self, question_id: str, finding_ids=None, searched=None,
+                        unresolved=None, next_actions=None, status=None) -> dict:
+        """Save question progress and references to this run's checked findings."""
+        from agent.investigation import Investigation
+        return Investigation(self.run_dir).update(question_id, finding_ids=finding_ids,
+            searched=searched, unresolved=unresolved, next_actions=next_actions, status=status)
+
+    @audited
+    def evidence_needs(self, proof_gap=None) -> dict:
+        """Available approved readers and diagnostic follow-up suggestions."""
+        from agent.evidence_requests import recommendations
+        return recommendations(self.run_dir, proof_gap=proof_gap)
+
+    @audited
+    def collect(self, reader: str, exhibit: str) -> dict:
+        """Run an approved reader on configured evidence into a new snapshot."""
+        from agent.evidence_requests import collect
+        return collect(self.run_dir, reader, exhibit)
+
+    @audited
+    def review(self) -> dict:
+        """Conservative cross-record diagnostics, not certified findings."""
+        from agent.review import review
+        result = review(self.source)
+        path = self.run_dir / "review.json"
+        if path.is_symlink():
+            raise ValueError("Review output must not be a symlink")
+        from agent.investigation import atomic_json
+        atomic_json(path, result)
+        return result
+
     # ---- proposing ----------------------------------------------------------------
 
     def _log(self) -> List[dict]:
@@ -219,6 +261,12 @@ class Workbench:
                                 "proof_gap": needs.malformed(reason)}
             result = checker.check(claim, f"A{len(log) + 1:03d}", self.source, question,
                                    self.run_dir, proposer=self.proposer)
+            if result.get("status") == "verified" and (self.run_dir / "investigation.json").is_file():
+                from agent.investigation import Investigation
+                planner = Investigation(self.run_dir)
+                matched = [q for q in planner.snapshot()["questions"] if question in (q["id"], q["prompt"])]
+                if len(matched) == 1:
+                    planner.update(matched[0]["id"], finding_ids=[result["finding_id"]], status="in_progress")
             return self._brief(result)
 
     @audited

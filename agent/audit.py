@@ -27,7 +27,7 @@ _DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 _FIELDS = {"schema_version", "sequence", "call_id", "started_at", "completed_at",
            "duration_ns", "tool", "arguments", "result", "result_sha256", "success",
            "outcome", "error", "finding_id", "previous_sha256", "event_sha256"}
-_TOOLS = {"forms", "sql", "fact", "check", "conclude"}
+_TOOLS = {"forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review"}
 
 
 class AuditError(RuntimeError):

@@ -34,7 +34,9 @@ STATUSES = {"running", "completed", "partial", "failed", "cancelled", "saved"}
 PAYLOAD_FIELDS = {"name", "facts", "title", "brief", "questions", "backend", "model", "minutes"}
 EVENT_FIELDS = ("sequence", "tool", "outcome", "completed_at", "finding_id", "arguments")
 ARGUMENT_FIELDS = {"forms": (), "sql": ("query",), "fact": ("id", "fact_id"),
-                   "check": ("question", "claim", "revises"), "conclude": ("text", "finding_ids")}
+                   "check": ("question", "claim", "revises"), "conclude": ("text", "finding_ids"),
+                   "plan": (), "update_question": ("question_id", "finding_ids", "searched", "unresolved", "next_actions", "status"),
+                   "review": (), "evidence_needs": ("proof_gap",), "collect": ("reader", "exhibit")}
 GRACE_SECONDS = 2.0
 KILL_SECONDS = 1.0
 
@@ -365,8 +367,14 @@ class JobManager:
                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                 start_new_session=(os.name == "posix"))
 
-    def start(self, payload, *, case_profile=None, question_profile=None):
+    def start(self, payload, *, case_profile=None, question_profile=None,
+              resume_from=None, intake_config=None):
         spec = self._prepare(payload, case_profile, question_profile)
+        if resume_from is not None:
+            from agent.continuation import parent
+            spec["resume_from"] = str(parent(resume_from)["directory"])
+        if intake_config is not None:
+            spec["intake_config"] = str(self._input(intake_config, "Intake configuration"))
         with self._lock:
             if self._closed:
                 raise RuntimeError("The job manager is closed.")
@@ -682,6 +690,9 @@ def _worker(root, spec_path):
             "--case-profile", spec["case_profile"], "--no-score"]
     if spec.get("question_profile"):
         args += ["--questions", spec["question_profile"]]
+    for key in ("resume_from", "intake_config"):
+        if spec.get(key):
+            args += ["--" + key.replace("_", "-"), spec[key]]
     status = "failed"
     try:
         run.ROOT, run.prepare_run_dir = Path(root).resolve(), prepare

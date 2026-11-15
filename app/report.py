@@ -198,6 +198,153 @@ def _activity(run):
     return ''.join(out) + '</section>'
 
 
+def _workflow(run, findings):
+    """Keep agent work notes, bound certificate sentences, and review diagnostics apart."""
+    out = []
+    by_id, duplicates = {}, set()
+    for number, finding in findings:
+        fid = finding.get('finding_id')
+        if not isinstance(fid, str):
+            continue
+        if fid in by_id:
+            duplicates.add(fid)
+        by_id[fid] = (number, finding)
+    eligible = {fid: item for fid, item in by_id.items() if fid not in duplicates
+                and isinstance(item[1].get('english'), str) and item[1]['english']}
+
+    if 'collection' in run:
+        receipt = _object(run['collection'])
+        out.append('<section id="collection"><h2>New evidence available</h2>')
+        if receipt.get('status') in ('completed', 'completed_with_limitations') and receipt.get('continuation_required') is True:
+            out.append('<p class="notice warning">A separate evidence snapshot was collected. It is not incorporated '
+                       'into the current findings. Continue in a new run, query the new records and issue new proofs; '
+                       'old fact IDs and certificates cannot be carried over as current proof.</p>')
+            out.append(_fields([(label, _v(receipt, key)) for label, key in (
+                ('Collection status', 'status'), ('Snapshot ID', 'snapshot_id'), ('Facts path — literal text', 'facts'),
+                ('Facts SHA-256', 'facts_sha256'), ('Intake configuration path — literal text', 'config'),
+                ('Extraction health path — literal text', 'health'))]))
+            if receipt.get('note'):
+                out.append('<p class="small">' + _v(receipt, 'note') + '</p>')
+        else:
+            out.append('<p>A completed collection requiring continuation is not established by this receipt.</p>'
+                       + _details('Uninterpreted collection receipt', receipt))
+        out.append('</section>')
+
+    if 'investigation' in run:
+        plan = _object(run['investigation'])
+        out.append('<section id="investigation"><h2>Investigation plan — agent-reported work</h2>'
+                   '<p class="notice">Work status, searched sources, unresolved questions and next actions are '
+                   'agent-reported notes, not proof. “Reviewed” does not mean answered, accurate or complete.</p>')
+        if plan.get('schema_version') != 1 or plan.get('status') == 'unavailable':
+            out.append('<p>A supported investigation plan is unavailable.</p>' + _details('Supplied plan metadata', plan))
+        else:
+            out.append(_fields([('Plan revision', _v(plan, 'revision')), ('Case ID', _v(plan, 'case_id'))]))
+            for number, raw in enumerate(_rows(plan.get('questions')), 1):
+                question = _object(raw)
+                out += [f'<article id="plan-q{number}"><h3>' + _v(question, 'id') + ' · ' + _v(question, 'prompt') + '</h3>',
+                        _fields([(label, _v(question, key)) for label, key in (
+                            ('Agent-reported work status', 'work_status'), ('Stated finding IDs', 'finding_ids'),
+                            ('Reported searches', 'searched'), ('Unresolved notes', 'unresolved'), ('Proposed next actions', 'next_actions'))])]
+                if 'previous_run_notes' in question:
+                    out.append(_details('Previous-run notes — unverified; no current proof is inferred', question['previous_run_notes']))
+                out.append('</article>')
+            if plan.get('disclaimer'):
+                out.append('<p class="small">' + _v(plan, 'disclaimer') + '</p>')
+        out.append('</section>')
+
+    if 'case_answers' in run:
+        answers = _object(run['case_answers'])
+        out.append('<section id="answers"><h2>Question-by-question findings</h2>'
+                   '<p class="notice">Only exact sentences matching a unique current-run record marked verified '
+                   'are shown as certificate statements. Question association is not proof of relevance, accuracy '
+                   'or completeness. This renderer does not independently replay certificates.</p>')
+        mismatch = (_object(run.get('case')).get('case_id') is not None and answers.get('case_id') is not None
+                    and run['case']['case_id'] != answers['case_id'])
+        if (answers.get('schema_version') != 1 or answers.get('kind') != 'certificate_sentence_answers'
+                or answers.get('status') == 'unavailable' or mismatch):
+            out.append('<p>Question answers are unavailable, unsupported, or not bound to this case.</p>'
+                       + _details('Uninterpreted answer view — not certified', answers))
+        else:
+            for number, raw in enumerate(_rows(answers.get('questions')), 1):
+                question = _object(raw)
+                out += [f'<article id="answer-q{number}"><h3>' + _v(question, 'id') + ' · ' + _v(question, 'prompt') + '</h3>',
+                        _fields([('Declared answer presence', _v(question, 'status')),
+                                 ('Agent-reported work status', _v(question, 'work_status'))])]
+                displayed = 0
+                for raw_entry in _rows(question.get('certified_findings')):
+                    entry = _object(raw_entry)
+                    linked = eligible.get(entry.get('finding_id')) if isinstance(entry.get('finding_id'), str) else None
+                    if linked and entry.get('sentence') == linked[1]['english']:
+                        index, finding = linked
+                        out += ['<p><span class="badge">Recorded certificate statement</span> '
+                                + f'<a href="#finding-f{index}">' + _v(finding, 'finding_id') + '</a></p>',
+                                '<p class="sentence">' + _h(finding['english']) + '</p>',
+                                '<p class="small">Reported association: ' + _v(entry, 'association')
+                                + '. This is not a proof that the question is answered.</p>']
+                        displayed += 1
+                    else:
+                        out.append('<p class="notice warning">An answer entry has no matching unique current-run '
+                                   'certificate sentence. It is unverified.</p>' + _details('Unbound answer entry', raw_entry))
+                if not displayed:
+                    out.append('<p>No bound certificate statement is available for this question. '
+                               'This does not establish that no relevant evidence exists.</p>')
+                out.append(_fields([(label, _v(question, key)) for label, key in (
+                    ('Reported searches — unverified', 'searched'), ('Unresolved notes — unverified', 'unresolved'),
+                    ('Proposed next actions — unverified', 'next_actions'))]))
+                for key, label in (('refusals', 'Refused proposals and diagnostics — not certified'),
+                                   ('issues', 'Question-association issues — not certified'),
+                                   ('previous_run_notes', 'Previous-run notes — unverified')):
+                    if question.get(key):
+                        out.append(_details(label, question[key]))
+                out.append('</article>')
+            if answers.get('disclaimer'):
+                out.append('<p class="small">' + _v(answers, 'disclaimer') + '</p>')
+        out.append('</section>')
+
+    if 'conflicts' in run:
+        review = _object(run['conflicts'])
+        out.append('<section id="conflicts"><h2>Cross-record review — unverified diagnostics</h2>'
+                   '<p class="notice warning">These are leads for review, not certified contradictions or a choice '
+                   'of which source is true. Shared labels and repeated events can be legitimate. '
+                   'No diagnostic does not mean no conflict exists.</p>')
+        if review.get('schema_version') == 1 and review.get('status') == 'unavailable':
+            out.append('<p class="notice warning">Conflict review unavailable: ' + _v(review, 'reason') + '</p>'
+                       + _fields([('Recorded error type', _v(review, 'error_type'))]))
+        elif review.get('schema_version') != 1 or review.get('status') != 'diagnostic':
+            out.append('<p>A supported diagnostic review is unavailable.</p>' + _details('Uninterpreted review metadata', review))
+        else:
+            scope = _object(review.get('scope'))
+            if scope.get('scan_truncated') is True or scope.get('diagnostics_truncated') is True:
+                out.append('<p class="notice warning">REVIEW TRUNCATED: the scan or diagnostic output reached its limit. '
+                           'Unshown records or diagnostics remain unreviewed here.</p>')
+            out.append(_fields([(label, _v(scope, key)) for label, key in (
+                ('Records examined', 'records_examined'), ('Maximum records', 'max_records'),
+                ('Scan truncated', 'scan_truncated'), ('Diagnostic output truncated', 'diagnostics_truncated'), ('Input scope', 'input'))]))
+            rows = _rows(review.get('diagnostics'))
+            if not rows:
+                out.append('<p>No matching diagnostics were recorded within the supplied review scope. '
+                           'This is not a finding that the evidence is consistent.</p>')
+            for number, raw in enumerate(rows, 1):
+                diagnostic = _object(raw)
+                if diagnostic.get('status') != 'diagnostic':
+                    out.append(_details('Unrecognized review entry — not certified', raw))
+                    continue
+                out += [f'<article id="conflict-d{number}"><h3>' + _v(diagnostic, 'id') + ' · ' + _v(diagnostic, 'category') + '</h3>',
+                        '<span class="badge">Unverified diagnostic</span><p>' + _v(diagnostic, 'summary') + '</p>',
+                        '<p>' + _v(diagnostic, 'why') + '</p>',
+                        _fields([('Witness record IDs — not certified citations', _v(diagnostic, 'record_ids')),
+                                 ('Observed conditions', _v(diagnostic, 'observed')),
+                                 ('Further review needed', _v(diagnostic, 'required'))]),
+                        _details('Copied witness records and provenance — not certified findings', diagnostic.get('records')),
+                        '</article>']
+            if review.get('limitations'):
+                out.append(_details('Review limitations', review['limitations']))
+            if review.get('disclaimer'):
+                out.append('<p class="small">' + _v(review, 'disclaimer') + '</p>')
+        out.append('</section>')
+    return ''.join(out)
+
+
 def render_html(run: dict) -> str:
     """Render literal bundle contents without certifying them or loading linked files."""
     if not isinstance(run, dict):
@@ -219,13 +366,19 @@ def render_html(run: dict) -> str:
     for key, label in (('verified', 'accepted proposals reported'), ('rejected', 'refused proposals reported'),
                        ('proposals', 'total proposals reported')):
         out.append('<div class="metric"><strong>' + _v(stats, key, 'Unknown') + '</strong><span>' + label + '</span></div>')
+    navigation = [('findings', 'Findings'), ('needs', 'Not established'), ('judgments', 'Judgments'),
+                  ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity')]
+    navigation = [(anchor, label) for key, anchor, label in (
+        ('collection', 'collection', 'New evidence'),
+        ('investigation', 'investigation', 'Investigation plan'), ('case_answers', 'answers', 'Question answers'),
+        ('conflicts', 'conflicts', 'Cross-record review')) if key in run] + navigation
     out += ['</div><p class="notice">This report renders supplied records and certificates. It does not independently '
             'verify them. Use the independent verifier with the original evidence store before relying on a proof.</p>',
             '<p class="small">Printable HTML: use your browser’s Print / Save as PDF. All report content is embedded; '
             'no remote assets or scripts are loaded.</p></header>',
-            '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>' for anchor, label in (
-                ('findings', 'Findings'), ('needs', 'Not established'), ('judgments', 'Judgments'),
-                ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity'))) + '</nav>',
+            '<nav aria-label="Report sections">' + ''.join('<a href="#' + anchor + '">' + label + '</a>'
+                                                          for anchor, label in navigation) + '</nav>',
+            _workflow(run, findings),
             '<section id="findings"><h2>Recorded certified findings</h2>',
             '<p class="muted">Sentences are reproduced verbatim. “Strong” describes what the records support; '
             '“heuristic” relies on a stated rule of thumb. These labels do not prove parser correctness or real-world completeness.</p>']

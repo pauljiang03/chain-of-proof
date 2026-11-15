@@ -8,6 +8,7 @@ The other terminal supplied portable verification, coverage, and claim history.
 Both coordinators connected the modules to the runner and report.
 The CLI and optional local browser interface are also integrated; see [APP_HANDOFF.md](APP_HANDOFF.md).
 The CLI is the primary interface. Both interfaces use the same investigation runner and report outputs.
+The user then authorized six backend workflow additions. See [BACKEND_HANDOFF.md](BACKEND_HANDOFF.md) for the completed split and scope.
 
 ## Objective and constraints
 
@@ -52,7 +53,7 @@ Do not copy evaluator review notes into public investigator inputs.
 
 ## Completed and tested
 
-- 510 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
+- 577 regression tests pass with the optional API dependencies installed. Lean sources are unchanged from the passing build.
 - The synthetic workflow verifies refusal, explicit revision, linked reports, portable packages, and tamper rejection without a model call.
 - Offline end-to-end tests exercise the CLI and HTTP API through the existing runner and real Lean checks, including cancellation and partial reports.
 - The installed CLI, static assets, and HTML/Markdown/JSON downloads pass a local smoke check. Sample report and workspace inspection passed native Chrome checks.
@@ -102,7 +103,8 @@ The facts contain 335,498 records. Logged limitations are nine unsupported Contr
 The 424 MB derived facts remain outside Git. Do not replace the small canonical fact store without also regenerating its bound certificates.
 
 Last authentication check: installed Claude CLI was signed out. No model API key was configured. The user has been asked to authenticate locally.
-No fresh AI or Mulder trial has started.
+A separate terminal has frozen and started a bounded Sol with/without-Lean pilot from its own checkout.
+Those results and comparison-only commits are separate from this backend change. No fresh native Mulder trial has started.
 
 After credentials are available, the root coordinator can use a new run name:
 
