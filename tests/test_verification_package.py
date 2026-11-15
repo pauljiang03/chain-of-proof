@@ -99,6 +99,9 @@ class VerificationPackage(unittest.TestCase):
         self.assertEqual(self.manifest["provenance"]["requested_model"]["value"], "fixture-model")
         self.assertEqual(self.manifest["provenance"]["resolved_model"]["status"], "unknown")
         self.assertEqual(self.manifest["provenance"]["original_code_revision"]["value"], "fixture-revision")
+        toolchain = json.loads((self.package / "toolchain.json").read_text())
+        self.assertEqual(toolchain["implementation"]["checker/catalog.py"],
+                         fingerprint(ROOT / "checker/catalog.py"))
 
     def test_whole_fact_store_and_only_allowlisted_sidecars_are_exported(self):
         self.assertEqual((self.package / "facts.json").read_bytes(), FACTS.read_bytes())

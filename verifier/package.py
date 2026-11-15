@@ -117,7 +117,7 @@ def _audit(path, expected_head=None):
 
 
 def _toolchain():
-    implementation = ["agent/audit.py", "agent/case.py", "checker/claims.py", "checker/facts.py", "checker/check.py",
+    implementation = ["agent/audit.py", "agent/case.py", "checker/catalog.py", "checker/claims.py", "checker/facts.py", "checker/check.py",
                       "checker/citations.py", "checker/needs.py", "checker/report.py", "verifier/verify.py", "verifier/package.py",
                       "lean/lean-toolchain", "lean/lakefile.toml", "lean/ChainOfProof.lean"]
     implementation += [str(path.relative_to(ROOT)) for path in sorted((ROOT / "lean/ChainOfProof").glob("*.lean"))]
