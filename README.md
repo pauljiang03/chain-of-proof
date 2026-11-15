@@ -353,6 +353,17 @@ Verify the saved certificates:
   --run runs/current/run.json --facts evidence/case_facts.json
 ```
 
+Recheck the same proofs with con-leche, a second proof checker bundled with Lean 4.35:
+
+```sh
+.venv/bin/python -m verifier.conleche --run runs/current/run.json
+```
+
+con-leche is written separately from Lean's own kernel.
+All 473 saved certificates are accepted by both; the recheck takes about one minute.
+It is a second opinion on the proofs only.
+It does not check that the cited records match the evidence, or that the readers parsed the images correctly.
+
 ## Data and commands
 
 The image files remain outside Git.
