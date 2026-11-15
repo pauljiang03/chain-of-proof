@@ -211,7 +211,8 @@ class Matcher:
         self.zone = time_zone
         if self.zone is not None:
             ZoneInfo(self.zone)
-        unknown = set(self.config) - {"strings", "string_modes", "string_aliases", "paths", "list_order", "timestamps", "list_rules"}
+        unknown = set(self.config) - {"strings", "string_modes", "string_aliases", "paths", "list_order", "timestamps", "list_rules",
+                                     "normalization", "normalization_profile"}
         if unknown:
             raise ValueError(f"unknown matching settings: {sorted(unknown)}")
         if self.config.get("strings", "exact") not in STRING_MODES:
@@ -256,10 +257,31 @@ class Matcher:
                 raise ValueError("timestamp granularity must be instant or local_day")
             if rule.get("time_zone") is not None:
                 ZoneInfo(rule["time_zone"])
+        self.normalization, self.normalization_profile = {}, None
+        if 'normalization' in self.config or 'normalization_profile' in self.config:
+            from eval.match_normalization import validate_config, validate_profile
+            if 'normalization' not in self.config or 'normalization_profile' not in self.config:
+                raise ValueError('versioned normalization requires its explicit public profile and field rules')
+            self.normalization_profile = validate_profile(self.config['normalization_profile'])
+            self.normalization = validate_config(self.config['normalization'], profile=self.normalization_profile)
+            if self.config.get('strings') == 'prefix':
+                raise ValueError('versioned normalization cannot combine with global prefix matching')
+            for path in self.normalization:
+                left = path.split('/')
+                for family in ('paths', 'timestamps', 'string_modes', 'string_aliases', 'list_rules'):
+                    for other in self.config.get(family, {}):
+                        right = other.split('/')
+                        # Container rules can bypass child dispatch. Reject those
+                        # overlaps as well as two literal comparators for one leaf.
+                        hierarchical = family in ('paths', 'timestamps', 'list_rules')
+                        if (hierarchical or len(left) == len(right)) and all(
+                                a == b or a == '*' or b == '*' for a, b in zip(left, right)):
+                            raise ValueError('versioned normalization overlaps a legacy matching rule')
 
     def validate_expected(self, expected):
         _json(expected)
         matched_rules = set()
+        matched_normalization = set()
         def lists(value, path=""):
             rule = _rule(self.config.get("list_rules", {}), path)
             if rule is not None:
@@ -284,6 +306,12 @@ class Matcher:
         if matched_rules != set(self.config.get("list_rules", {})):
             raise ValueError("list rule does not address a reference pool")
         for path, value in _atoms(expected):
+            normalization = _rule(self.normalization, path)
+            if normalization is not None:
+                from eval.match_normalization import normalize
+                normalize(value, normalization, profile=self.normalization_profile)
+                matched_normalization.update(pattern for pattern in self.normalization
+                                             if _rule({pattern: True}, path))
             path_rule = _rule(self.config.get("paths", {}), path)
             if path_rule is not None and value is not None:
                 _windows_path(value, path_rule)
@@ -294,6 +322,8 @@ class Matcher:
             mode = _rule(self.config.get("string_modes", {}), path, self.config.get("strings", "exact"))
             if mode == "prefix" and isinstance(value, str) and not value:
                 raise ValueError("an empty prefix would accept every string")
+        if matched_normalization != set(self.normalization):
+            raise ValueError('normalization rule does not address a reference scalar')
 
     def _complete_match(self, expected, actual, path):
         counts = _counts(self.compare(expected, actual, path, ""))
@@ -351,6 +381,17 @@ class Matcher:
         subset_rule = _rule(self.config.get("list_rules", {}), ep)
         if subset_rule is not None:
             return self.subset(expected, actual, subset_rule, ep, ap)
+        normalization = _rule(self.normalization, ep)
+        if normalization is not None:
+            from eval.match_normalization import normalize
+            wanted = normalize(expected, normalization, profile=self.normalization_profile)
+            try:
+                equal = wanted == normalize(actual, normalization, profile=self.normalization_profile)
+            except (ValueError, TypeError, OverflowError):
+                equal = False
+            if equal:
+                return [_event('match', ep, ap, expected, actual, 'declared typed-representation-v1 contract')]
+            return _missing(expected, ep, 'typed representation mismatch') + _wrong(actual, ap, 'typed representation mismatch')
         path_rule = _rule(self.config.get("paths", {}), ep)
         if path_rule is not None and expected is not None:
             wanted = _windows_path(expected, path_rule)
@@ -540,7 +581,7 @@ def score(reference, submission):
     extra_reasons = {"extra list member", "unexpected field", "duplicate question response", "unexpected question id"}
     wrong_events = [event for item in results + unexpected for event in item["audit"] if event["status"] == "wrong"]
     extra_atoms = sum(event.get("reason") in extra_reasons for event in wrong_events)
-    return {"schema_version": 2, "scorer_version": VERSION, "case_id": reference["case_id"],
+    result = {"schema_version": 2, "scorer_version": VERSION, "case_id": reference["case_id"],
             "reference_sha256": _hash(reference), "submission_sha256": _hash(submission),
             "scorer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "question_counts": question_counts,
@@ -565,6 +606,13 @@ def score(reference, submission):
                     "denominator. Atomic rates cover known expected atoms; questions lacking an expected answer "
                     "have an unknown atomic denominator. Extra assertions are wrong under the declared answer "
                     "schema, not a general assessment of forensic truth."}
+    normalized = [str(q['id']) for q in reference['questions'] if 'normalization' in q.get('match', {})]
+    if normalized:
+        from eval import match_normalization
+        result['matching_extensions'] = {'typed-representation-v1': {
+            'question_ids': normalized,
+            'implementation_sha256': hashlib.sha256(Path(match_normalization.__file__).read_bytes()).hexdigest()}}
+    return result
 
 
 def report(result):

@@ -65,7 +65,7 @@ def _software():
     for directory in ("agent", "checker", "verifier", "comparison/ablation"):
         for path in sorted((ROOT / directory).glob("*.py")):
             sources[str(path.relative_to(ROOT))] = fingerprint(path)["sha256"]
-    for name in ("eval/benchmark.py", "eval/submission.py", "lean/lean-toolchain",
+    for name in ("eval/benchmark.py", "eval/match_normalization.py", "eval/submission.py", "lean/lean-toolchain",
                  "lean/ChainOfProof.lean", "lean/lakefile.toml"):
         sources[name] = fingerprint(ROOT / name)["sha256"]
     for path in sorted((ROOT / "lean/ChainOfProof").glob("*.lean")):
