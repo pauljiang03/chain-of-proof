@@ -142,7 +142,10 @@ index-buffer lookup. A cached self-cycle or longer cycle therefore cannot bypass
 the bound by avoiding further I/O. Node materialization is bounded separately.
 The lookup preserves the primary parser's uppercase `FILE_NAME` comparison and
 exact-match/child-routing decisions; malformed keys, missing/end-entry errors,
-and unsorted names are refused instead of reporting absence. Cycles/malformed
+unsorted names, and duplicate uppercase comparison keys are refused instead of
+reporting absence or choosing an arbitrary MFT reference. Named keys must be
+strictly increasing. Even equivalent namespace aliases are conservatively
+unsupported when they collide under that comparator. Cycles/malformed
 nodes are `unsupported`, exhausted caps are `limit_exceeded`, and only a completed
 exact no-match becomes `absent`. Unrelated parser `KeyError`s remain unreadable.
 

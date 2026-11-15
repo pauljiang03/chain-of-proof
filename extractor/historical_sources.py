@@ -364,6 +364,8 @@ def _index_search(index, name, limits):
         keys = [filename(entry) for entry in entries[:-1]]
         if any(left > right for left, right in zip(keys, keys[1:])):
             raise UnsupportedSource("directory index FILE_NAME keys are not sorted")
+        if any(left == right for left, right in zip(keys, keys[1:])):
+            raise UnsupportedSource("ambiguous duplicate directory index FILE_NAME comparison keys")
         # The last entry is the end sentinel, representing keys beyond the last
         # named key. Match the primary parser's exact binary-search decisions.
         low, high = 0, len(entries) - 1

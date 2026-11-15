@@ -492,6 +492,24 @@ print(json.dumps(dict(misses=info.misses, hits=info.hits)))
         entries = [index_entry("a"), index_entry("B"), index_entry()]
         self.assertEqual(h._index_search(directory_index(entries), "b", h.Limits()).buf, entries[1].buf)
 
+    def test_duplicate_or_case_colliding_names_cannot_select_an_arbitrary_record(self):
+        for second_name in ("same.txt", "SAME.TXT"):
+            first, second = Record(b"one", segment=40), Record(b"two", segment=41)
+            root = Record(children={"first": first, "second": second})
+            entries = [index_entry("same.txt", record_entry=root.search("first")),
+                       index_entry(second_name, record_entry=root.search("second")), index_entry()]
+            with patch.object(root, "index", return_value=directory_index(entries)):
+                result = h._observe(NS(mft=NS(root=root)), r"C:\same.txt", COMMON, h.Limits(), [0])
+            self.assertEqual(result["status"], "unsupported")
+            self.assertIn("ambiguous duplicate", result["detail"])
+            self.assertNotIn("sha256", result)
+            self.assertEqual((first.opened, second.opened), (0, 0))
+        # Even equivalent aliases require namespace/reference semantics outside
+        # this reader; never select arbitrarily just because references agree.
+        same = index_entry("same.txt")
+        with self.assertRaisesRegex(h.UnsupportedSource, "ambiguous duplicate"):
+            h._index_search(directory_index([same, same, index_entry()]), "same.txt", h.Limits())
+
     def test_cycle_and_node_cap_statuses_survive_comparison_reporting(self):
         for cap, expected in ((128, "unsupported"), (1, "limit_exceeded")):
             base = ntfs()
