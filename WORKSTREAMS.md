@@ -16,12 +16,12 @@ Later documentation and frontend work do not change the frozen runtime.
 | Owner | Current state |
 |---|---|
 | Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Combined suite and later UI tests passed. |
-| Answer terminal (`01a1dc3d`) | Completed the two case lanes, deadlines, exact replay and operational audit. No further model calls are planned. |
+| Answer terminal (`01a1dc3d`) | Completed the two case lanes, replay and operational audit. Now audits public source-to-answer mappings and implements prospective coverage fixes in isolation. No further model calls are planned. |
 | Third terminal (`01a1dd77`) | Integrates the owner-approved frontend patch in isolation after the scoring gate passed. Owns focused tests and browser checks. |
 | Root helper: formal types and events | Formal checks, qualified claim sentences, selected full Hacking proofs and public compatibility recheck complete. No private evaluator was read during the recheck. |
 | Root helper: host fields and review | Host fields and independent checker review complete. Reviewed the newer desktop changes and fixed unsupported summary claims. Native provider calls remain untested. |
 | Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Sealed the implementation and experiment archives; all copied files and input bindings passed readback checks. |
-| Independent reference reviewer | Completed all six fixed scores with 69 input bindings checked. Diagnoses mismatch categories separately, without changing scores or returning private expected values to builders. |
+| Independent reference reviewer | Completed all six fixed scores with 69 input bindings checked and a separate mismatch diagnosis. Preserves the scores and private expected values; reviews prospective contract policy separately. |
 
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.

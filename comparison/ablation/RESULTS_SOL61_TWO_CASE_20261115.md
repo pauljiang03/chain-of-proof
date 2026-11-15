@@ -53,6 +53,36 @@ errors under the frozen contract. The reference was not changed to accept them.
 The [machine-readable results](RESULTS_SOL61_TWO_CASE_20261115.json) include all
 question statuses and field counts without private expected answers.
 
+## Mismatch diagnosis after scoring
+
+A separate reference-only review compared the fixed audit events. It did not
+rescore the answers or change the key. Hacking's three failures are identical
+across A/B/C:
+
+| Question | Mechanical finding | Remaining limit |
+|---|---|---|
+| Q2 | Removing a vendor prefix from the submitted product label yields string equality. | This does not establish software identity equivalence. |
+| Q4 | The parsed zone-label phrase and signed offset agree; the rendered strings differ. | This does not establish the machine's actual clock or DST state. |
+| Q8 | The submitted timestamp retains fractional seconds; removing them matches the whole-second reference. | Source-time interpretation and an acceptable precision policy remain separate questions. |
+
+For Data Leakage, the 27 wrong fields per arm comprise Q14's eight browser-label
+and path discrepancies, Q38's 14 extra list members and one path mismatch,
+Q41's one note-text discrepancy, and Q47's one path and two identifier
+discrepancies. Q41 becomes equal under Unicode compatibility normalization;
+Q47 becomes equal after removing drive qualification and GUID braces. Those
+transformations are not enabled by the frozen matcher and may remove meaningful
+distinctions. Q14's source selection and Q38's requested list population still
+need investigation. Q38 has the same submitted values in every arm but a different
+order in C, which changes the unmatched pair assignment without changing totals.
+
+These findings do not establish an answer-key error or make the mismatches
+harmless. They identify separate work on representation policies and source
+scope. Preserve raw values. Any prospective matching change needs a new reviewed
+contract and freeze; the scores above remain unchanged. The aggregate diagnosis
+receipt has SHA-256
+`773103e3ec86c5636e532709f3971c72169924ae81e833ae1b177324d0551b01`.
+Its permitted findings are included in the machine-readable results.
+
 ## Proof checks and retained answers
 
 B verified all 45 Data Leakage candidates. For Hacking, it verified 11 candidates

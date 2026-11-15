@@ -2931,5 +2931,241 @@
     "scorable_question_rate": "complete / scorable questions; unevaluable reference questions remain separately visible",
     "fully_correct_question_rate": "complete / all reference questions; unevaluable questions are unresolved, not failed",
     "atomic.scorable_match_rate": "matched / scorable reference atoms; not complete-question accuracy"
+  },
+  "post_score_diagnosis": {
+    "status": "FROZEN_AUDIT_DIAGNOSIS_COMPLETE_NO_RESCORE",
+    "scope": "Existing audit events, public schemas and saved projection bindings; no new source investigation or scores.",
+    "hacking": [
+      {
+        "question_id": "Q2",
+        "category": "OS product-label qualifier discrepancy",
+        "comparison_establishes": "One string mismatch under case/whitespace folding.",
+        "diagnostic_relation": "Removing the vendor prefix from the submitted product-name string yields equality under that comparison.",
+        "limits": "Does not establish software identity equivalence or justify dropping qualifiers from retained evidence.",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_counts": {
+          "unequal": 1,
+          "missing": 1
+        },
+        "wrong_audit_events_exactly_identical_all_arms": true
+      },
+      {
+        "question_id": "Q4",
+        "category": "Time-zone label/offset representation discrepancy",
+        "comparison_establishes": "One complete-string mismatch under case/whitespace folding.",
+        "diagnostic_relation": "The parsed signed offsets and daylight/standard zone-label phrases agree; complete rendered strings differ.",
+        "limits": "No standard-versus-daylight choice error or offset disagreement is demonstrated. Physical clock accuracy, actual DST state and registry interpretation remain unvalidated.",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_counts": {
+          "unequal": 1,
+          "missing": 1
+        },
+        "wrong_audit_events_exactly_identical_all_arms": true
+      },
+      {
+        "question_id": "Q8",
+        "category": "Timestamp precision discrepancy",
+        "comparison_establishes": "One parsed timestamp mismatch under zero tolerance.",
+        "diagnostic_relation": "Submission retains fractional seconds; reference is whole-second precision. Removing fractional seconds yields the same instant, without a remaining timezone/hour shift.",
+        "limits": "Does not authorize truncation or changing tolerance, and does not independently validate source-time interpretation.",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_counts": {
+          "unequal": 1,
+          "missing": 1
+        },
+        "wrong_audit_events_exactly_identical_all_arms": true
+      }
+    ],
+    "data_leakage": [
+      {
+        "question_id": "Q14",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_wrong_atoms": 8,
+        "per_arm_atomic_counts": {
+          "A": {
+            "true_positive": 2,
+            "missing": 20,
+            "wrong": 8
+          },
+          "B": {
+            "true_positive": 2,
+            "missing": 20,
+            "wrong": 8
+          },
+          "C": {
+            "true_positive": 2,
+            "missing": 20,
+            "wrong": 8
+          }
+        },
+        "A_B_wrong_audit_events_exactly_identical": true,
+        "A_C_wrong_audit_events_exactly_identical": true,
+        "categories": {
+          "browser_label_unequal": 5,
+          "artifact_path_unequal": 3
+        },
+        "comparison_establishes": "Five browser-label atoms and three artifact-path atoms fail the frozen string comparison.",
+        "supported_generic_cause": "Native validated-container labels and selected locations disagree with legacy strings/list entries; saved bindings carry the public browser/path roles.",
+        "unknowns": "Canonical label mapping and source-population equivalence need source investigation. The three unmatched paths are not explained by drive/separator normalization in diagnostic checks. No wrong semantic source role is established."
+      },
+      {
+        "question_id": "Q38",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_wrong_atoms": 15,
+        "per_arm_atomic_counts": {
+          "A": {
+            "true_positive": 3,
+            "missing": 1,
+            "wrong": 15
+          },
+          "B": {
+            "true_positive": 3,
+            "missing": 1,
+            "wrong": 15
+          },
+          "C": {
+            "true_positive": 3,
+            "missing": 1,
+            "wrong": 15
+          }
+        },
+        "A_B_wrong_audit_events_exactly_identical": true,
+        "A_C_wrong_audit_events_exactly_identical": false,
+        "categories": {
+          "extra_list_member": 14,
+          "path_or_volume_mismatch": 1
+        },
+        "comparison_establishes": "Fourteen extra members and one paired path/volume mismatch remain under the frozen unordered-list and Windows-path rules.",
+        "cross_arm_population": {
+          "submitted_paths_each": 18,
+          "submitted_value_multiset_identical_all_arms": true,
+          "combined_wrong_value_multiset_identical_all_arms": true,
+          "A_C_order_equal": false,
+          "A_C_extra_value_overlap": 13,
+          "A_C_single_paired_unequal_value_equal": false
+        },
+        "supported_generic_cause": "List-population disagreement after the declared path normalization.",
+        "interpretation": "Reordering changes which nonmatching member the deterministic unordered assignment pairs as the single path mismatch. One value swaps between mismatch and extra categories; combined wrong values are unchanged.",
+        "unknowns": "Audit does not establish that additional retained paths are forensically false or that the reference population is exhaustive. Intended list scope needs source review."
+      },
+      {
+        "question_id": "Q41",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_wrong_atoms": 1,
+        "per_arm_atomic_counts": {
+          "A": {
+            "true_positive": 1,
+            "missing": 1,
+            "wrong": 1
+          },
+          "B": {
+            "true_positive": 1,
+            "missing": 1,
+            "wrong": 1
+          },
+          "C": {
+            "true_positive": 1,
+            "missing": 1,
+            "wrong": 1
+          }
+        },
+        "A_B_wrong_audit_events_exactly_identical": true,
+        "A_C_wrong_audit_events_exactly_identical": true,
+        "categories": {
+          "note_text_unequal": 1
+        },
+        "comparison_establishes": "One literal note-text string mismatch under the frozen case/whitespace comparison.",
+        "diagnostic_relation": "Unicode compatibility normalization (NFKC) yields equality; canonical normalization (NFC) does not.",
+        "supported_generic_cause": "Unicode compatibility-character discrepancy.",
+        "limits": "NFKC is not enabled by this frozen matcher. Diagnostic equality is not a harmlessness or forensic-equivalence judgment."
+      },
+      {
+        "question_id": "Q47",
+        "arms": [
+          "A",
+          "B",
+          "C"
+        ],
+        "per_arm_wrong_atoms": 3,
+        "per_arm_atomic_counts": {
+          "A": {
+            "true_positive": 1,
+            "missing": 4,
+            "wrong": 3
+          },
+          "B": {
+            "true_positive": 1,
+            "missing": 4,
+            "wrong": 3
+          },
+          "C": {
+            "true_positive": 1,
+            "missing": 4,
+            "wrong": 3
+          }
+        },
+        "A_B_wrong_audit_events_exactly_identical": true,
+        "A_C_wrong_audit_events_exactly_identical": true,
+        "categories": {
+          "storage_path_unequal": 1,
+          "identifier_unequal": 2
+        },
+        "comparison_establishes": "One storage path and two identifiers fail string comparison. A separate required size is absent and is missing, not one of the twenty-seven wrong atoms.",
+        "diagnostic_relation": "Storage paths agree after drive qualification is removed. Both identifier pairs agree after GUID braces are removed.",
+        "supported_generic_cause": "Drive-qualification and identifier-brace representation discrepancies. Public size role is unsupported.",
+        "limits": "These field canonicalizations are not enabled; diagnostic relations do not prove source identity or authorize repair."
+      }
+    ],
+    "data_leakage_wrong_atoms_per_arm": {
+      "extra": 14,
+      "unequal": 13,
+      "total": 27
+    },
+    "binding_observation": "Inspected saved meaning/scope checks report compatible. Admission is not independent semantic correctness or list completeness.",
+    "prospective_correction_requirements": [
+      "Review product-label qualifier policy, time-zone rendering and timestamp precision explicitly, preserving raw observations.",
+      "Any representation/matching change needs a separately versioned public/private contract; do not silently repair outputs to this frozen key.",
+      "Investigate browser-history and Thumbcache list/source scope before attributing disagreement to reference or source error.",
+      "Preserve native Unicode text, VSS paths and identifiers alongside any separately reviewed canonical representation.",
+      "Run exact freeze plus validate_frozen for every future prepared case before readiness."
+    ],
+    "limitations": [
+      "No answer-key error established. Unsupported source causes remain unknown.",
+      "Diagnostic transformations are not semantic-equivalence, harmlessness or correctness judgments.",
+      "No private expected values, submitted content or private prose exported.",
+      "Original scores, contracts, submissions, handoff and scoring receipt are unchanged."
+    ],
+    "validation": {
+      "frozen_manifest_checks": "PASSED",
+      "all_bound_input_hashes_unchanged": true,
+      "original_scoring_receipt_unchanged": true,
+      "new_score_calls": 0,
+      "source_changes": false
+    },
+    "source_receipt_sha256": "773103e3ec86c5636e532709f3971c72169924ae81e833ae1b177324d0551b01"
   }
 }
