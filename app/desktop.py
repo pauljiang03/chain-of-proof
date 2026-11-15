@@ -153,7 +153,10 @@ def run(root=ROOT, port=None, *, webview=None, manager=None) -> int:
     return 0
 
 
-def make_app(directory, root=ROOT, executable=None) -> Path:
+MARK = "Written by `python -m app.desktop --make-app`"
+
+
+def make_app(directory, root=ROOT, executable=None, replace=False) -> Path:
     """Write a small macOS application bundle that starts the workbench from this checkout.
 
     The bundle holds no code of its own: it runs this Python environment, so it works on
@@ -164,7 +167,12 @@ def make_app(directory, root=ROOT, executable=None) -> Path:
         raise ValueError("--make-app writes a macOS application bundle; on this system use `cop desktop`")
     bundle = Path(directory).expanduser() / f"{TITLE}.app"
     if bundle.exists() or bundle.is_symlink():
-        raise ValueError(f"refusing to overwrite existing application: {bundle}")
+        # With `replace`, only a bundle this function wrote is removed: its launcher carries MARK.
+        launcher = bundle / "Contents" / "MacOS" / TITLE
+        ours = not bundle.is_symlink() and launcher.is_file() and MARK in launcher.read_text(errors="replace")
+        if not (replace and ours):
+            raise ValueError(f"refusing to overwrite existing application: {bundle}")
+        shutil.rmtree(bundle)
     launcher = bundle / "Contents" / "MacOS" / TITLE
     launcher.parent.mkdir(parents=True)
     info = {
@@ -181,7 +189,7 @@ def make_app(directory, root=ROOT, executable=None) -> Path:
         plistlib.dump(info, stream)
     launcher.write_text("\n".join([
         "#!/bin/sh",
-        "# Written by `python -m app.desktop --make-app`. Starts Conan (CONAN-F) from its checkout.",
+        f"# {MARK}. Starts Conan (CONAN-F) from its checkout.",
         f"export PATH={shlex.quote(os.environ.get('PATH', '/usr/bin:/bin'))}",
         f"cd {shlex.quote(str(Path(root).resolve()))} || exit 1",
         f"exec {shlex.quote(str(executable or sys.executable))} -m app.desktop",
@@ -196,10 +204,11 @@ def main(argv=None) -> int:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--port", type=int, help=f"loopback port; default: {PORT}, or any free port if it is taken")
     parser.add_argument("--make-app", metavar="DIR", help="macOS: write Conan.app into DIR and exit")
+    parser.add_argument("--replace", action="store_true", help="with --make-app: replace a Conan.app this command wrote before")
     args = parser.parse_args(argv)
     try:
         if args.make_app:
-            print(make_app(args.make_app))
+            print(make_app(args.make_app, replace=args.replace))
             return 0
         return run(port=args.port)
     except (DesktopUnavailable, ValueError, OSError) as error:

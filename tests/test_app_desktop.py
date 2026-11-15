@@ -177,6 +177,16 @@ class Desktop(unittest.TestCase):
         self.assertEqual(stopped.exception.code, 0)
         self.assertEqual(cli._parser("conan").prog, "conan")
 
+    @unittest.skipUnless(sys.platform == "darwin", "macOS application bundles")
+    def test_make_app_replaces_only_a_bundle_it_wrote(self):
+        bundle = desktop.make_app(self.root / "Applications", root=self.root, executable="/py")
+        again = desktop.make_app(self.root / "Applications", root=self.root, executable="/py2", replace=True)
+        self.assertIn("/py2", (again / "Contents" / "MacOS" / desktop.TITLE).read_text())
+        (bundle / "Contents" / "MacOS" / desktop.TITLE).write_text("#!/bin/sh\necho someone else's app\n")
+        with self.assertRaises(ValueError):
+            desktop.make_app(self.root / "Applications", root=self.root, replace=True)
+        self.assertIn("someone else", (bundle / "Contents" / "MacOS" / desktop.TITLE).read_text())
+
     @unittest.skipIf(sys.platform == "darwin", "only other systems refuse")
     def test_make_app_is_refused_off_macos(self):
         with self.assertRaises(ValueError):
