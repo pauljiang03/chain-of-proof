@@ -10,7 +10,6 @@ import re
 import struct
 from datetime import datetime, timezone
 from urllib.parse import parse_qs, urlsplit
-from zoneinfo import ZoneInfo
 
 from dissect.ole import OLE
 from dissect.shellitem.lnk import Lnk
@@ -26,9 +25,65 @@ SEARCH_PARAMS = dict.fromkeys(("google.com", "google.co.uk", "google.ca", "googl
                               "google.fr", "google.com.au", "google.co.jp", "google.co.in",
                               "bing.com"), "q") | {"yahoo.com": "p"}
 MAX_SEARCH_URL = 65536
+MAX_USB_RECORDS = 10000
+MAX_SETUPAPI_BYTES = 64 * 1024 * 1024
 
 
-def _usb(ev, t, common):
+def _usb_component(value):
+    """Retain native text, including every ampersand; never derive a serial.
+
+    Windows instance IDs can encode location information instead of a hardware
+    serial. Their shape does not establish which interpretation applies:
+    https://learn.microsoft.com/en-us/windows-hardware/drivers/install/instance-ids
+    """
+    if not isinstance(value, str):
+        raise ValueError('USB instance components must be source text')
+    value = str.__str__(value)  # Dissect text subclasses, without coercing objects.
+    if (not value or len(value) > 16384 or '\\' in value
+            or any(ord(char) < 32 or ord(char) == 127 for char in value)):
+        raise ValueError('USB instance component is empty, oversized or malformed')
+    return value
+
+
+def _usb_context(ev, common, examined_at, where):
+    if type(examined_at) is not int or examined_at <= 0:
+        ev.problem(where, ValueError('explicit positive examination time required; USB attributes omitted'))
+        return None
+    if any(not isinstance(common.get(key), str) or not common[key].strip()
+           for key in ('image', 'exhibit')):
+        ev.problem(where, ValueError('explicit image and exhibit required; USB attributes omitted'))
+        return None
+    return merge_scope(common)
+
+
+def _usb_observation(ev, common, examined_at, device, instance, source_type,
+                     artifact, locator, recorded_time=None, record_time_meaning=None, **details):
+    device, instance = _usb_component(device), _usb_component(instance)
+    device_id = 'USBSTOR\\' + device
+    instance_id = device_id + '\\' + instance
+    provenance = merge_scope(common, dict(artifact=artifact, source_entry=locator,
+        reader='windows.usb_instances', source_type=source_type,
+        device_identity_kind='windows_device_instance',
+        hardware_serial_status='not established from a Windows instance identifier',
+        **details))
+    # This identifies one retained source observation, not a physical device.
+    subject = json.dumps(subject_scope(provenance) + [source_type, artifact, locator, instance_id],
+                         sort_keys=True, ensure_ascii=True, separators=(',', ':'))
+    fields = [('usb.device_instance_id', instance_id), ('usb.device_id', device_id),
+              ('usb.instance_id', instance), ('usb.source_type', source_type)]
+    if recorded_time is not None:
+        fields += [('usb.recorded_time', recorded_time),
+                   ('usb.record_time_meaning', record_time_meaning)]
+        provenance.update(recorded_time=recorded_time, recorded_time_meaning=record_time_meaning)
+    for role, value in fields:
+        emit_attribute(ev, subject, role, value, examined_at, **provenance)
+
+
+def _usb(ev, t, common, *, examined_at=None):
+    """USBSTOR key observations; key names are not validated hardware serials."""
+    common = _usb_context(ev, common, examined_at, 'USB registry instances')
+    if common is None:
+        return 0
     # The virtual registry API does not identify the selected physical hive copy.
     common = merge_scope(common, {'source_variant': 'unknown'})
     path = "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR"
@@ -36,33 +91,125 @@ def _usb(ev, t, common):
     try:
         devices = t.registry.key(path)
     except RegistryKeyNotFoundError:
-        return  # No USBSTOR key is present; this does not prove no device was used.
-    for dev in devices.subkeys():
-        for inst in dev.subkeys():
-            ev.add("usbInsert", us(inst.timestamp), 1, inst.name.split("&")[0], "",
-                   artifact=f"{path}\\{dev.name}\\{inst.name}", device=dev.name,
-                   time_meaning="registry key last-write time", **common)
+        return 0  # An absent key does not prove that no device was used.
+    count = 0
+    seen = 0
+    for device_index, dev in enumerate(devices.subkeys()):
+        if device_index >= MAX_USB_RECORDS:
+            ev.problem(path, ValueError('USB registry device enumeration limit reached'))
+            break
+        try:
+            device = _usb_component(dev.name)
+            for instance_index, inst in enumerate(dev.subkeys()):
+                if seen >= MAX_USB_RECORDS:
+                    ev.problem(path, ValueError('USB registry instance enumeration limit reached'))
+                    return count
+                seen += 1
+                where = f'{path}\\{device} instance {instance_index}'
+                try:
+                    instance = _usb_component(inst.name)
+                    where = f'{path}\\{device}\\{instance}'
+                    stamp = None
+                    try:
+                        value = inst.timestamp
+                        if not isinstance(value, datetime) or value.utcoffset() is None:
+                            raise ValueError('registry key last-write timestamp has no explicit UTC offset')
+                        stamp = value.isoformat()
+                    except Exception as error:
+                        ev.problem(where, error)
+                    locator = dict(device_index=device_index, instance_index=instance_index,
+                                   registry_key=where, decoded_last_write=stamp)
+                    _usb_observation(ev, common, examined_at, device, instance, 'USBSTOR registry key',
+                        where, locator, stamp, 'registry key last-write timestamp decoded by the parser',
+                        source_path=where, registry_hive_identity='not supplied by the virtual registry API')
+                    count += 1
+                except Exception as error:
+                    ev.problem(where, error)
+        except Exception as error:
+            ev.problem(f'{path} device {device_index}', error)
+    return count
 
 
-def _setupapi(ev, t, common, tz: str):
-    """First connection of each USB storage device, from the device install log.
-    The log prints local time with no zone; convert with the PC's zone."""
+def _setupapi(ev, t, common, tz=None, *, examined_at=None):
+    """Retain USBSTOR install-section IDs and local timestamp text.
+
+    The optional legacy ``tz`` argument is deliberately unused: a current zone
+    setting does not establish the zone in force when this log record was made.
+    A section start is neither a proven insertion nor a first-ever connection.
+    """
+    common = _usb_context(ev, common, examined_at, 'SetupAPI USB instances')
+    if common is None:
+        return 0
     path = t.fs.path("C:/Windows/inf/setupapi.dev.log")
     if not path.exists():
-        return
-    lines = path.open("rb").read().decode("utf-8", "replace").splitlines()
-    head = re.compile(r"^>>>\s+\[Device Install \(Hardware initiated\) - USBSTOR\\([^\\]+)\\([^\]]+)\]")
-    start = re.compile(r"^>>>\s+Section start (\d{4})/(\d\d)/(\d\d) (\d\d):(\d\d):(\d\d)\.(\d{3})")
-    for i, line in enumerate(lines[:-1]):
-        m, when = head.match(line), start.match(lines[i + 1])
-        if not (m and when):
+        return 0
+    source = r'C:\Windows\inf\setupapi.dev.log'
+    with path.open('rb') as handle:
+        raw = handle.read(MAX_SETUPAPI_BYTES + 1)
+    if len(raw) > MAX_SETUPAPI_BYTES:
+        raise ValueError('SetupAPI log exceeds the 64 MiB parsing limit')
+    # SetupAPI specifies ANSI text, not UTF-8. A byte-preserving latin-1 view
+    # lets us locate ASCII structure without guessing the source code page.
+    # Non-ASCII identifiers in a BOM-less log are reported, never decoded by
+    # guessing or replacement. Unrelated ANSI text cannot erase valid IDs.
+    # https://learn.microsoft.com/en-us/windows-hardware/drivers/install/setupapi-text-logs
+    encoding, prefix = 'latin-1', 0
+    for bom, candidate in ((b'\xef\xbb\xbf', 'utf-8'), (b'\xff\xfe', 'utf-16-le'),
+                           (b'\xfe\xff', 'utf-16-be')):
+        if raw.startswith(bom):
+            encoding, prefix = candidate, len(bom)
+            break
+    # A Unicode BOM explicitly identifies its decoder; decoding stays strict.
+    # Only actual CR/LF delimit lines. ANSI bytes such as 0x85 must not become
+    # Unicode line separators and fabricate an apparent section boundary.
+    lines = [line for line in re.findall(r'[^\r\n]*(?:\r\n|\r|\n|\Z)', raw[prefix:].decode(encoding)) if line]
+    offsets, offset = [], prefix
+    for line in lines:
+        offsets.append(offset)
+        offset += len(line.encode(encoding))
+    digest = hashlib.sha256(raw).hexdigest()
+    head = re.compile(r'^>>>[ \t]+\[Device Install \(Hardware initiated\) - USBSTOR\\([^\\\]\r\n]+)\\([^\\\]\r\n]+)\][ \t]*$')
+    start = re.compile(r'^>>>[ \t]+Section start ([0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})[ \t]*$')
+    count = 0
+    seen = 0
+    for i, line in enumerate(lines):
+        match = head.fullmatch(line.rstrip('\r\n'))
+        if match is None:
             continue
-        y, mo, d, h, mi, sec, ms = map(int, when.groups())
-        local = datetime(y, mo, d, h, mi, sec, ms * 1000, tzinfo=ZoneInfo(tz))
-        ev.add("usbInsert", us(local), 1000, m.group(2).split("&")[0], "",
-               artifact=f"C:\\Windows\\inf\\setupapi.dev.log line {i + 1}", device=m.group(1),
-               time_meaning="device install section start (first connection)",
-               time_zone=f"log local time, converted from {tz}", **common)
+        if seen >= MAX_USB_RECORDS:
+            ev.problem(source, ValueError('SetupAPI USB section enumeration limit reached'))
+            break
+        seen += 1
+        where = f'{source} line {i + 1}'
+        try:
+            if not prefix and any(not part.isascii() for part in match.groups()):
+                raise ValueError('non-ASCII SetupAPI identifier requires an established source code page')
+            when = start.fullmatch(lines[i + 1].rstrip('\r\n')) if i + 1 < len(lines) else None
+            stamp = None
+            length = len(line.encode(encoding))
+            if when is not None:
+                # Validate the calendar fields but preserve the original wall-clock text.
+                try:
+                    datetime.strptime(when.group(1), '%Y/%m/%d %H:%M:%S.%f')
+                    stamp = when.group(1)
+                    length += len(lines[i + 1].encode(encoding))
+                except ValueError as error:
+                    ev.problem(where, error)
+            else:
+                ev.problem(where, ValueError('USB install header lacks an adjacent supported section timestamp'))
+            locator = dict(source_sha256=digest, header_line=i + 1,
+                           byte_offset=offsets[i], byte_length=length,
+                           encoding=encoding if prefix else 'ASCII fields; ANSI source code page unknown')
+            if stamp is not None:
+                locator['section_start_line'] = i + 2
+            _usb_observation(ev, common, examined_at, *match.groups(), 'SetupAPI install section',
+                where, locator, stamp, 'SetupAPI section start local wall-clock text; UTC offset not recorded',
+                source_path=source, source_sha256=digest,
+                event_scope='retained install-section observation, not first connection or physical insertion')
+            count += 1
+        except Exception as error:
+            ev.problem(where, error)
+    return count
 
 
 def _volumes_seen(ev, t, common):
@@ -699,8 +846,8 @@ def _step(ev: Evidence, name: str, fn, default=0):
 def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC", *, examined_at=None):
     t = Target.open(path)
     common = dict(image=path.name, exhibit=exhibit, tool=tool, **base_volume_scope())
-    _step(ev, "USB devices in the registry", lambda: _usb(ev, t, common))
-    _step(ev, "device install log", lambda: _setupapi(ev, t, common, str(t.timezone)))
+    _step(ev, "USB instances in the registry", lambda: _usb(ev, t, common, examined_at=examined_at))
+    _step(ev, "device install log", lambda: _setupapi(ev, t, common, examined_at=examined_at))
     _step(ev, "volumes recorded in the registry", lambda: _volumes_seen(ev, t, common))
     parts = (("shortcuts", lambda: _lnk_files(ev, t, common)),
              ("jump list entries", lambda: _jumplists(ev, t, common)),
