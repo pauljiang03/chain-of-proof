@@ -95,7 +95,20 @@ casing, projected leaf order, and an unavailable field selected for a negative
 control. They required runner corrections, not product fixes or extra model
 attempts. Fresh corrected SYSTEM facts were retained and reused. None of these
 checks changes the frozen experiment scores. The source-development supplement
-is being sealed separately from the original experiment archive.
+is sealed at `runs/dev/post-ablation-answer-development-20261115T1149Z/`, manifest
+SHA256 `1aee4206d2d371a0741fc2a716e88893aed3bdcf88accff3d4dd323530aed926`.
+All 330 files, 45 declared bindings and three prior-archive references passed
+readback. Earlier seals remain unchanged.
+
+The next authorized step is a small fresh development investigation after
+readiness. Root owns integration, archives and final reference alignment. The
+answer terminal owns the Hacking fixes and sole model dispatch. The third window
+owns independent contract/precision review and trial-freeze preparation. The
+fourth owns negative controls and post-run replay/projection/report checks.
+The exact timestamp scorer currently loses sub-microsecond precision; a synthetic
+zero-tolerance counterexample confirms this. Its prospective fix and version
+review are required before the next run. Old scorers, submissions and scores stay
+frozen. No fresh model investigation has started.
 
 The source-support and soundness repair batches passed their recorded checks.
 The complete experiment inputs passed readiness and remained fixed during runs.
