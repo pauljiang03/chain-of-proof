@@ -54,8 +54,10 @@ class CheckerTest(unittest.TestCase):
         self.assertEqual(r["status"], "verified", r)
         self.assertEqual((r["strength"], r["axioms"]), ("strong", []))
         self.assertIn('is tagged "unauthorized-device" (rule: device serial is not on', r["english"])
-        # one heuristic set, or one LLM-labeled tag, lowers the whole finding
-        self.assertEqual(self.run_check({"copiedHere": [4701, 4700]}, "H1")["strength"], "heuristic")
+        # The historical fixture lacks native file-occurrence identity. Its old
+        # path/serial-only copy heuristic now fails closed (new positives have
+        # explicit source/native identity in test_file_occurrence.py).
+        self.assertEqual(self.run_check({"copiedHere": [4701, 4700]}, "H1")["status"], "rejected")
         judged = self.run_check({"both": [NARRATIVE, {"tagged": [3100, "obj", 9003, 52]}]}, "J1")
         self.assertEqual((judged["status"], judged["strength"]), ("verified", "judgment"))
         self.assertIn("an LLM judgment", judged["english"])
@@ -79,7 +81,7 @@ class CheckerTest(unittest.TestCase):
     def test_order_within_timestamp_uncertainty_is_not_certified(self):
         # modified 1 s before created, but FAT mtime is only good to 2 s
         self.assertEqual(self.run_check({"copiedHere": [4703, 4702]})["status"], "rejected")
-        self.assertEqual(self.run_check({"copiedHere": [4701, 4700]}, "C1")["status"], "verified")
+        self.assertEqual(self.run_check({"copiedHere": [4701, 4700]}, "C1")["status"], "rejected")
 
     def test_same_path_on_another_volume_is_not_a_copy_here(self):
         # 4704 is the same path last modified on RM1's volume, 4701 its creation on RM2's

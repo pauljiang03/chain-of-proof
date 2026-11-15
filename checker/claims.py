@@ -176,9 +176,11 @@ def _en_opened(args, facts, src):
 
 def _en_copied(args, facts, src):
     c, m = facts[args[0]], facts[args[1]]
-    return (f"{src.string(c.obj)} was likely copied onto {_where(src.string(c.aux))}: it was "
-            f"created there ({_utc(c.t)}) after its last modification ({_utc(m.t)}). "
-            f"This rests on heuristic rule R4.")
+    return (f"The same scoped native file occurrence for {src.string(c.obj)} on "
+            f"{_where(src.string(c.aux))} has a recorded creation timestamp ({_utc(c.t)}) "
+            f"after its recorded modification timestamp ({_utc(m.t)}), beyond their uncertainty. "
+            f"This is the timestamp pattern used by copy heuristic R4; it does not establish "
+            f"a copying action, its completion, or an actor.")
 
 
 def _en_deleted(args, facts, src):
@@ -207,9 +209,10 @@ def _en_opened_recorded(args, facts, src):
 
 def _en_recorded_device(args, facts, src):
     v, d = facts[args[0]], facts[args[1]]
-    return (f'Volume {src.string(v.aux)}, which this PC recorded under the label '
-            f'"{src.string(v.obj)}" ({_utc(v.t)}), is the volume on seized device '
-            f"{src.string(d.obj)}.")
+    return (f'The volume record labeled "{src.string(v.obj)}" ({_utc(v.t)}) and the '
+            f'examination record for {src.string(d.obj)} carry the same recorded volume '
+            f'serial {src.string(v.aux)}. Matching serials do not establish that these '
+            f'are the same volume or physical device; copied or cloned volumes may share a serial.')
 
 
 def _en_same_label(args, facts, src):

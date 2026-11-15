@@ -18,11 +18,13 @@ def usbMountedAs (u m : Nat) : Claim :=
 def openedFromMount (l m : Nat) : Claim :=
   .both (.is l .lnkTarget) (.both (.is m .volumeMount) (.link l .aux m .aux))
 
-/-- R4 (heuristic): on one volume, a path created after its last modification. -/
+/-- R4 (heuristic): one complete scoped native file occurrence has a creation
+    timestamp after its modification timestamp. No copying action is proved. -/
 def copiedHere (c m : Nat) : Claim :=
   .both (.is c .fileCreated)
     (.both (.is m .fileModified)
-      (.both (.link c .obj m .obj) (.both (.link c .aux m .aux) (.before m c))))
+      (.both (.sameFileOccurrence c m)
+        (.both (.link c .obj m .obj) (.both (.link c .aux m .aux) (.before m c)))))
 
 /-- R5 (strong): deletion record `d` is later than event `x`. -/
 def deletedAfter (d x : Nat) : Claim :=
@@ -40,7 +42,8 @@ def openedFromDevice (l d : Nat) : Claim :=
 def openedFromRecorded (l s : Nat) : Claim :=
   .both (.is l .lnkTarget) (.both (.is s .volumeSeen) (.link l .aux s .aux))
 
-/-- R6+R7 (strong): the volume recorded as `s` is the one on the examined device `d`. -/
+/-- R6+R7 (strong): recorded volume serials match. Serial equality does not
+    establish volume or physical-device identity, including for cloned volumes. -/
 def recordedOnDevice (s d : Nat) : Claim :=
   .both (.is s .volumeSeen) (.both (.is d .volumeOnDevice) (.link s .aux d .aux))
 

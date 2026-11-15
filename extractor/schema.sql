@@ -1,5 +1,8 @@
 -- Evidence DB schema (DuckDB). The contract between the extractor and the checker.
 -- Mirrors lean/ChainOfProof/Facts.lean and checker/facts.py: change all three together.
+-- prov.file_occurrence (schema_version 1) carries explicit source/native-entry
+-- identity for copiedHere; checker.facts promotes its validated dimensions into
+-- formal Fact. Missing metadata is absent identity, never path/serial inference.
 
 CREATE TABLE IF NOT EXISTS strings (
     id BIGINT PRIMARY KEY,          -- interned id; 0 is reserved for "none"
@@ -219,7 +222,13 @@ CREATE TABLE IF NOT EXISTS facts (
         'roleEventAccountName',
         'roleEventAccountSid',
         'roleMailRecoveredSubjectUnicode',
-        'roleMailRecoveredBodyUnicode')),
+        'roleMailRecoveredBodyUnicode',
+        'roleUsbDeviceInstanceId',
+        'roleUsbDeviceId',
+        'roleUsbInstanceId',
+        'roleUsbRecordedTime',
+        'roleUsbRecordTimeMeaning',
+        'roleUsbSourceType')),
     t    BIGINT NOT NULL CHECK (t   >= 0),  -- UTC microseconds since the Unix epoch
     res  BIGINT NOT NULL CHECK (res >= 1),  -- timestamp uncertainty in microseconds
     obj  BIGINT NOT NULL,                   -- strings.id; meaning per kind: see Facts.lean
