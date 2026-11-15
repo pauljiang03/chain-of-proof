@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <title>CONAN-F detective hat — original mark: a slanted navy fedora with a mint band</title>
+  <title>CONAN-F detective hat — original mark: a slanted navy fedora defined by loose white lines</title>
   <g transform="translate(8 46)">
     <g transform="rotate(-18 512 510)">
       <g fill="#152B36">
@@ -7,8 +7,10 @@
           C 896 600 724 632 512 632 C 300 632 128 600 128 560 Z"/>
         <path d="M 332 552 L 372 342 C 384 298 446 272 540 274 C 630 276 690 304 700 346 L 740 552 Z"/>
       </g>
-      <g fill="#7FD1B5">
-        <path d="M 330 552 L 742 552 L 730 506 L 342 506 Z"/>
+      <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 300 556 C 372 544 432 548 494 544 C 572 539 624 548 712 520" stroke-width="20"/>
+        <path d="M 206 582 C 324 616 436 630 526 627 C 652 623 760 602 842 572" stroke-width="16"/>
+        <path d="M 398 356 C 458 324 566 320 676 350" stroke-width="15"/>
       </g>
     </g>
   </g>
