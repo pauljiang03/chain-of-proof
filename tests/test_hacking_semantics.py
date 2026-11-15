@@ -1,7 +1,6 @@
-"""Source-bound attribute roles, typed values and exact image comparisons use Lean.
+"""Source-bound attribute roles, typed values and image comparisons through the real Lean kernel.
 
-All fixtures are synthetic. No case image, private reference or expected case answer
-is consulted. These tests exercise the actual kernel and independent certificate replay.
+Synthetic fixtures only: no case image, private reference or expected answer is read.
 """
 import json
 from pathlib import Path

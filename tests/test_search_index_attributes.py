@@ -103,7 +103,7 @@ class SearchAttributes(unittest.TestCase):
             self.assertEqual(attrs(ev,'search.index.date_modified')[0][1],'2023-11-14T22:13:20.1234567Z')
             self.assertEqual(attrs(ev,'search.index.date_created')[0][1],'2020-09-13T12:26:40.6543219Z')
             self.assertEqual(attrs(ev,'search.index.date_modified')[0][3]['value_precision'],'100ns')
-            # Historical generic fileSeen rows keep their existing microsecond IR.
+            # The generic fileSeen row keeps microsecond time.
             self.assertIn(MODIFIED,{record[1] for record in ev.rows() if record[0]=='fileSeen'})
 
     def test_same_docid_in_distinct_rows_tables_or_source_snapshots_does_not_join(self):

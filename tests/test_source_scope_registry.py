@@ -119,7 +119,7 @@ class RegistryScope(unittest.TestCase):
     def test_invalid_or_dangling_select_current_is_unknown(self):
         for current in (True, 0, -1, 9999, '1', 3):
             with self.subTest(current=current):
-                # A native REG_DWORD (type 4) value, as the stricter Select\\Current check now requires.
+                # A native REG_DWORD (type 4) value, as the Select\\Current check requires.
                 key = SimpleNamespace(values=lambda: [SimpleNamespace(name='Current', value=current, type=4)])
                 current_hive = hive()._replace(hive=SimpleNamespace(root=lambda: None))
                 with patch.object(system, '_open', return_value=key), \

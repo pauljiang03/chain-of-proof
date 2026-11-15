@@ -1,9 +1,7 @@
-"""Bounded generated reference/address invariants, with a rank-based oracle.
+"""Reference/address invariants over all 810 small scenarios, checked by a rank-based oracle.
 
-For each target among indices 0..4, every other index is absent, authored but
-rejected, or authored and admitted; the target is authored and either rejected
-or admitted. This gives 5 * 2 * 3**4 = 810 distinct scenarios. The oracle uses
-only sorted integer ranks and immutable authored coordinates, never assembly.
+Each of five indices is absent, rejected or admitted (the target is never absent); the
+oracle uses only sorted ranks and authored coordinates, never the assembly code.
 """
 from copy import deepcopy
 import unittest

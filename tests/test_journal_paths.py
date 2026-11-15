@@ -1,4 +1,4 @@
-"""Future OLD_NAME inference requires intact bytes, identity and a bounded rename pair."""
+"""Inferring a name from a later OLD_NAME record needs intact bytes, identity and a bounded rename pair."""
 import io
 import json
 from pathlib import Path

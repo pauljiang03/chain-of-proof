@@ -1,8 +1,4 @@
-"""Replay event regression with the real event handlers, drawing and camera logic.
-
-A small DOM supplies geometry. No replay functions are replaced. Browser/native
-visual review complements these tests; this harness does not emulate a browser.
-"""
+"""Replay with the real event handlers, drawing and camera code on a small DOM (not a browser)."""
 import json
 from pathlib import Path
 import shutil

@@ -1,8 +1,4 @@
-"""CLI intake -> tool collection -> new run -> report, using a synthetic parser/model.
-
-Only model execution and image parsing are replaced. Evidence snapshots, public
-profiles, the investigator runner, tool audits, Lean checks and reports are real.
-"""
+"""CLI intake -> tool collection -> run -> report; only the model and image parsing are faked."""
 import contextlib
 import io
 import json

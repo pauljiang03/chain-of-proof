@@ -1,7 +1,7 @@
 """Known-byte UDF invariants across physical layouts and allocation-table states.
 
-Expected content is constructed independently, before the bytes are placed in a
-synthetic image. The oracle does not call Udf.physical, runs, pieces or the cache.
+Expected content is built before the bytes are placed; the oracle never calls
+Udf.physical, runs, pieces or the cache.
 """
 import hashlib
 import itertools

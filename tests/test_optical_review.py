@@ -1,4 +1,4 @@
-"""Regressions for drive-lock interpretation and the original C008 inference."""
+"""Drive-lock interpretation, and refusal of the saved C008 conclusion's inference."""
 import json
 from pathlib import Path
 import tempfile

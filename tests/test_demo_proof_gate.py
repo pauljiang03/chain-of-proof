@@ -1,4 +1,4 @@
-"""The pitch demo must exercise the real checker and independent verifier."""
+"""The proof-gate demo must exercise the real checker and independent verifier."""
 import hashlib
 import json
 from pathlib import Path

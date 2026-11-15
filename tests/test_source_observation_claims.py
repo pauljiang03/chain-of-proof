@@ -1,7 +1,6 @@
 """Retained records certify observations, never an invented stronger event.
 
-Synthetic fixtures use the actual readers' provenance shapes. Certificates go
-through the real Lean kernel and independent replay; no private case data.
+Synthetic fixtures in the readers' provenance shapes, checked by the real Lean kernel and replay.
 """
 import copy
 from pathlib import Path
