@@ -214,9 +214,44 @@ class Workbench:
     def plan(self) -> dict:
         """Current question work, with agent-reported status separate from proof."""
         from agent.investigation import Investigation
+        from agent.coverage_plan import coverage_pass
+        from agent.inventory_pages import inventory_progress
         state = Investigation(self.run_dir).snapshot()
+        inventory_error = projection_error = None
+        try:
+            inventory = inventory_progress(self.run_dir, evidence_sha256=state.get("facts_sha256"))
+        except Exception as error:
+            inventory = {}
+            inventory_error = type(error).__name__
+        answers = None
+        try:
+            from agent.answer_store import read_projection
+        except ModuleNotFoundError as error:
+            if error.name != "agent.answer_store":
+                projection_error = type(error).__name__
+        except Exception as error:
+            projection_error = type(error).__name__
+        else:
+            try:
+                projection = read_projection(self.run_dir)
+                if projection is None:
+                    answers = None
+                elif isinstance(projection, dict) and "submission" in projection:
+                    answers = projection["submission"]
+                else:
+                    raise ValueError("invalid safe projection result")
+            except Exception as error:
+                projection_error = type(error).__name__
+        coverage = coverage_pass(state, answers={} if projection_error else answers, inventory_progress=inventory)
+        for name, error in (("answers", projection_error), ("inventory", inventory_error)):
+            if error:
+                coverage["inputs"][name] = {"status": "unavailable", "error_type": error,
+                                           "reason": "The saved artifact could not be read safely; diagnostics are unavailable."}
+        if projection_error:
+            for question in coverage["questions"]:
+                question["answer_status"] = "unavailable"
         # Full history stays on disk and in the report; the agent needs current work.
-        return {key: value for key, value in state.items() if key != "history"}
+        return {**{key: value for key, value in state.items() if key != "history"}, "coverage": coverage}
 
     @audited
     def update_question(self, question_id: str, finding_ids=None, searched=None,
