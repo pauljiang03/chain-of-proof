@@ -26,8 +26,12 @@ DISCLAIMER = ('This summary describes copied records in findings stored as verif
 
 
 def _s(value):
-    """One clean line of text, or '' for anything that is not text."""
-    return ' '.join(value.split()) if isinstance(value, str) else ''
+    """Literal source text, or '' for anything that is not text.
+
+    Spaces, tabs and line breaks can be significant evidence values. Formatting
+    belongs to the display and must not silently rewrite a quoted source value.
+    """
+    return value if isinstance(value, str) else ''
 
 
 def _obj(entry):
@@ -367,7 +371,8 @@ def _notes(case):
         out.append(f'The {_aux(entry) or "local search history"} contains the search text "{_obj(entry)}".')
     for text in _distinct([_obj(entry) for entry in notes])[:2]:
         place = _aux(next(entry for entry in notes if _obj(entry) == text)) or 'note'
-        out.append(f'A {place} file contains this text: "{text[:140]}".')
+        label = 'text excerpt (first 140 characters)' if len(text) > 140 else 'text'
+        out.append(f'A {place} file contains this {label}: "{text[:140]}".')
     return _point('notes', 'Search box and notes', out, searches[:3] + notes)
 
 

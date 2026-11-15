@@ -119,7 +119,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .keys { margin:0 0 6px; }
 .key { display:grid; grid-template-columns:150px minmax(0,1fr); gap:2px 18px; padding:7px 0; border-bottom:1px solid var(--line); break-inside:avoid; }
 .key h3 { font-size:14px; margin:0; line-height:1.5; }
-.key p { margin:0; line-height:1.5; }
+.key p { margin:0; line-height:1.5; white-space:pre-wrap; overflow-wrap:anywhere; }
 .key table { margin:6px 0 2px; font-size:12px; }
 .key th, .key td { padding:4px 8px; white-space:nowrap; overflow-wrap:normal; }
 .devices td:first-child, .devices td:nth-child(2), .devices td:last-child { white-space:normal; overflow-wrap:anywhere; }

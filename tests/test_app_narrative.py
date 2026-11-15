@@ -120,7 +120,7 @@ class Narrative(unittest.TestCase):
         self.assertEqual(sentences(story, 'deleted')[0], 'The Recycle Bin index shows 1 deletion record.')
         self.assertEqual(sentences(story, 'disc')[0], 'The cited records include 1 optical-drive record.')
         self.assertEqual(sentences(story, 'notes'), ['The Windows Explorer search box contains the search text "budget".',
-                                                     'A Sticky Notes file contains this text: "Call me later".'])
+                                                     'A Sticky Notes file contains this text: "Call  me\n\nlater".'])
         # short sentences, and a count of the records and findings each topic rests on
         self.assertEqual([point['key'] for point in story['points']],
                          ['devices', 'folders', 'files', 'disc', 'mail', 'web', 'downloads', 'cloud', 'deleted', 'notes', 'computer'])
@@ -131,6 +131,43 @@ class Narrative(unittest.TestCase):
             for sentence in point['sentences']:
                 self.assertLessEqual(len(sentence.split()), 25, sentence)
                 self.assertTrue(sentence.endswith('.'), sentence)
+
+    def test_literal_source_values_survive_summary_and_both_report_formats(self):
+        values = ('password: a  b', ' leading and trailing ', 'line 1\n\nline 2',
+                  'a\tb', 'Ω 日本語', '<tag> & "quoted"')
+        for value in values:
+            with self.subTest(value=value):
+                data = bundle(finding('Literal', [
+                    row(1, 'noteText', value, 'Sticky Notes'),
+                    row(2, 'localSearch', value, 'Explorer search box'),
+                    row(3, 'emailSent', value, 'from worker to friend'),
+                    row(4, 'systemSetting', 'registered owner', value),
+                ]))
+                story = narrative.build(data)
+                expected = {
+                    'notes': [f'The Explorer search box contains the search text "{value}".',
+                              f'A Sticky Notes file contains this text: "{value}".'],
+                    'mail': [f'These are the subjects: "{value}".'],
+                    'computer': [f'The cited records name the registered owner "{value}".'],
+                }
+                for key, expected_sentences in expected.items():
+                    for sentence in expected_sentences:
+                        self.assertIn(sentence, sentences(story, key))
+                for short in (False, True):
+                    rendered = render_html(data, options={'brief': short})
+                    summary = rendered.split('<section id="summary">', 1)[1].split('</section>', 1)[0]
+                    for expected_sentences in expected.values():
+                        for sentence in expected_sentences:
+                            self.assertIn(html.escape(sentence), summary)
+
+    def test_shortened_note_is_labeled_as_an_excerpt(self):
+        value = 'password: a  b\n' + 'Ω' * 150
+        data = bundle(finding('Excerpt', [row(1, 'noteText', value, 'Sticky Notes')]))
+        expected = f'A Sticky Notes file contains this text excerpt (first 140 characters): "{value[:140]}".'
+        self.assertEqual(sentences(narrative.build(data), 'notes'), [expected])
+        for short in (False, True):
+            rendered = render_html(data, options={'brief': short})
+            self.assertIn(html.escape(expected), rendered)
 
     def test_only_verified_findings_are_read_and_a_selection_narrows_them(self):
         data = case()
