@@ -192,6 +192,8 @@ inductive Kind where
   | filesystemMemberDeleted
   | filesystemMemberAllocated
   | filesystemMemberUnknown
+  | roleStickyNotesNoteText
+  | roleStickyNotesContainerModifiedAt
   deriving DecidableEq, Repr
 
 structure Fact where

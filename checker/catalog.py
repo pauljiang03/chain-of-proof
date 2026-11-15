@@ -137,6 +137,8 @@ _SPECS = (
     ('browser.search.recorded_time', 'string', 'timestamp retained by that same search history occurrence; not independently verified human activity time'),
     ('recycle.index_file_name', 'string', 'literal filename of the examined Recycle Bin index entry'),
     ('recycle.index_deleted_at', 'string', 'moved-to-Recycle-Bin timestamp retained in that same index entry; not filesystem deallocation or secure erasure'),
+    ('sticky_notes.note.text', 'string', 'literal retained Unicode note text from validated OLE stream 3 (strict UTF-16LE) or SQLite Note.Text; not authorship, reading or physical action'),
+    ('sticky_notes.container.modified_at', 'string', 'UTC filesystem modification timestamp of the actual Sticky Notes container; not a note entry timestamp, SQLite UpdatedAt or independently verified editing time'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)
