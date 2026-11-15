@@ -229,10 +229,10 @@ def registered_path(raw, target, sid=None):
 
 
 def _registered(ev, target):
-    from .system import _hives, _open, _subkeys, _vals
+    from .system import _hives, _open, _subkeys, _vals, _where
     count = 0
     for hive in _hives(ev, target):
-        if hive.backup:
+        if _where(hive)['source_variant'] != 'primary':
             continue
         roots = [APP_PATHS, 'Wow6432Node\\' + APP_PATHS] if hive.name == 'SOFTWARE' else (
             ['Software\\' + APP_PATHS] if hive.sid and not hive.name.endswith('_CLASSES') else [])
@@ -255,6 +255,7 @@ def _registered(ev, target):
 
 def extract(ev, target, ctx):
     """Emit literal metadata observations and full hashes for bounded registrations."""
+    from .source_scope import merge_scope, subject_scope
     candidates = {}
     try:
         for source, registration in _registered(ev, target):
@@ -286,15 +287,15 @@ def extract(ev, target, ctx):
             for resource in version_resources(data):
                 for field in version_strings(resource['data']):
                     records.append((resource, field))
-            common = dict(ctx['common'], artifact=source, source_path=source,
+            common = merge_scope(ctx['common'], dict(artifact=source, source_path=source,
                           parser='extractor.application_identity', registrations=candidate['registrations'],
                           file_sha256=digest, file_size=size,
-                          limitation='literal binary metadata; no execution, use, authenticity, or marketing-year inference')
+                          limitation='literal binary metadata; no execution, use, authenticity, or marketing-year inference'))
             ev.add('fileContent', ctx['examined_at'], 1, source, 'sha256:' + digest,
                    **dict(common, hash_complete=True, timestamp_semantics='examination_observation',
                           time_meaning='when the image was examined, not an event on the device'))
             for resource, field in records:
-                scope = [ctx['common'].get('image'), ctx['common'].get('exhibit'), source, digest,
+                scope = subject_scope(common) + [source, digest,
                          resource['resource_name'], resource['resource_language'],
                          resource['byte_offset'], field['string_table'], field['table_offset']]
                 locator = {key: value for key, value in resource.items() if key not in ('data', 'byte_offset')}

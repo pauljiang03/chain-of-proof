@@ -10,6 +10,7 @@ from dissect.target import Target
 from .fatcarve import carve_fat32, fat_times_utc, folder_paths
 from .acquisition import area, provenance, resolve
 from .store import Evidence, us, us_from_unix
+from .source_scope import base_volume_scope, merge_scope
 
 FAT_EPOCH = 315532800  # 1980-01-01, what an unset FAT timestamp decodes to
 
@@ -45,9 +46,10 @@ def _recovered_entries(ev, vol, fs, identity: dict, tz: ZoneInfo, examined_at: i
                 continue
             rel = paths[cluster] + "\\" + e.name
             created, modified, note = fat_times_utc(e.created, e.modified, tz)
-            base = dict(artifact=f"FAT directory entry in unallocated cluster {cluster}",
+            base = merge_scope(common, dict(artifact=f"FAT directory entry in unallocated cluster {cluster}",
+                        source_variant="unallocated-recovery",
                         recovered=True, removed_before_format=e.deleted, size=e.size,
-                        short_name=e.short_name, first_cluster=e.first_cluster, **common)
+                        short_name=e.short_name, first_cluster=e.first_cluster))
             ev.add("fileCreated", created, 10_000, rel, location,
                    time_zone=f"FAT local time, converted from {tz.key}", **base)
             ev.add("fileModified", modified, 2_000_000, rel, location, time_zone=note, **base)
@@ -99,7 +101,8 @@ def extract_media(ev: Evidence, path, exhibit: dict, fat_tz: str, examined_at: i
                     created, modified = us_from_unix(st.st_ctime), us_from_unix(st.st_mtime)
                     res_c, res_m, zone = 10_000, 10_000, "exFAT local time with its recorded UTC offset"
                 files.append((rel, created, res_c, modified, res_m, zone, st.st_size))
-        common = dict(image=image, exhibit=exhibit["exhibit"], tool=tool, **provenance(identity))
+        common = dict(image=image, exhibit=exhibit["exhibit"], tool=tool,
+                      **provenance(identity), **base_volume_scope())
         ev.add("volumeOnDevice", examined_at, 1, identity["device_identity"], vsn,
                artifact=f"volume boot record, partition at byte offset {getattr(vol, 'offset', None)}",
                filesystem=kind, volume_label=label, disk_signature=signature,

@@ -180,14 +180,19 @@ def scan(target, *, executable=None, database=None):
 
 def extract(ev, target, ctx):
     from .attributes import emit_attribute
+    from .source_scope import merge_scope, subject_scope
     result = scan(target)
-    subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:allocated-file-scan"
+    inputs = merge_scope(ctx['common'])
+    input_source = {key: inputs[key] for key in ('source_snapshot', 'source_variant')}
     receipt_hash = hashlib.sha256(json.dumps(result, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     summary = {key: value for key, value in result.items() if key not in ("files", "transcript")}
     summary["staged_file_count"] = len(result["files"])
-    common = dict(ctx["common"], artifact="local ClamAV scan", reader="antivirus",
+    common = merge_scope(ctx["common"], dict(artifact="local ClamAV scan", reader="antivirus",
+                  source_snapshot="examination", source_variant="antivirus", input_source=input_source,
                   timestamp_semantics="examination_observation", scan=summary, scan_receipt_sha256=receipt_hash,
-                  meaning="A scanner observation. A signature match does not establish execution; no detections do not prove absence.")
+                  meaning="A scanner observation. A signature match does not establish execution; no detections do not prove absence."))
+    subject = json.dumps(subject_scope(common) + [input_source, receipt_hash, 'allocated-file-scan'],
+                         sort_keys=True, separators=(',', ':'))
     status = "incomplete" if not result["complete_allocated_scope"] else (
         "detections_reported" if result["detections"] else "no_detections_reported")
     for role, value in (("scanner.version", result["scanner_version"]),
