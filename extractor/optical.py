@@ -133,7 +133,9 @@ def ewf_unreadable(fh) -> List[Tuple[int, int]]:
 
 def emit_image_digests(ev, path, ctx) -> int:
     """systemSetting rows `image md5` / `image sha1` for the digests an E01 stores."""
-    common = dict(ctx["common"])
+    from .source_scope import merge_scope
+    common = merge_scope(ctx["common"], {'source_snapshot': 'evidence-image',
+                                         'source_variant': 'acquisition-container'})
     header: Dict[str, str] = {}
     seen, n = set(), 0
     for seg in ewf_segments(Path(path)):
@@ -980,8 +982,9 @@ def survey(path, zone: Optional[str] = None) -> Survey:
 
 
 def extract(ev, path, ctx) -> None:
+    from .source_scope import merge_scope
     path = Path(path)
-    common = dict(ctx["common"])
+    common = merge_scope(ctx["common"], {'source_snapshot': 'optical-image', 'source_variant': 'primary'})
     examined = ctx["examined_at"]
     zone = ctx.get("pc_time_zone")
     disc = "disc " + common["exhibit"]
@@ -1041,6 +1044,8 @@ def extract(ev, path, ctx) -> None:
                     sectors_in_image=udf.sectors,
                     sectors_the_imager_could_not_read=len(s.unreadable),
                     time_meaning=OBSERVED, **common)
+        prov['source_variant'] = ('primary' if v is udf.versions[-1]
+                                  else 'udf-descriptor:' + str(fsd_sector))
         session = s.session(fsd_sector)
         if session is not None:
             prov.update(session=session, track=session,
@@ -1054,6 +1059,8 @@ def extract(ev, path, ctx) -> None:
     for (serial, timestamp), sectors_ in sorted(recorded_groups.items()):
         sector = sectors_[-1]
         _timestamp, conversion, fsd = recordings[sector]
+        descriptor_scope = merge_scope(common, {'source_variant': (
+            'primary' if sector == udf.versions[-1].fsd_sector else 'udf-descriptor:' + str(sector))})
         ev.add("volumeRecorded", timestamp, 1, disc, "%08X" % serial,
                artifact=f"UDF file set descriptor at sector {sector} (byte offset {sector * SECTOR})",
                filesystem="udf", udf_revision=udf.lvd.revision, volume_label=fsd.label,
@@ -1066,7 +1073,7 @@ def extract(ev, path, ctx) -> None:
                    if v.fsd_sector in sectors_ and v.vat_sector is not None],
                time_meaning="UDF file-set descriptor recording time",
                note="This timestamp does not by itself establish a format action, "
-                    "the start of writing files, or completion of a write.", **common)
+                    "the start of writing files, or completion of a write.", **descriptor_scope)
 
     seen = set()
 
@@ -1081,7 +1088,10 @@ def extract(ev, path, ctx) -> None:
         named = (f", named by the directory at sector {f.directory_sector}"
                  if f.directory_sector >= 0 else "")
         base = dict(artifact=f"UDF {kind} at sector {f.sector} (byte offset {f.sector * SECTOR}){named}",
-                    size=f.entry.size, unique_id=f.entry.unique_id, **extra, **common)
+                    size=f.entry.size, unique_id=f.entry.unique_id, **extra)
+        base = merge_scope(common, base)
+        if extra.get('recovered'):
+            base['source_variant'] = 'udf-recovered-entry:' + str(f.sector)
         if v is not None and v.vat_sector is not None:
             base["allocation_table_at_sector"] = v.vat_sector
         session = s.session(f.sector)

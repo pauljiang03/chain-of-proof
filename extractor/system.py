@@ -5,8 +5,8 @@ Every row is one record of one artifact; nothing is joined up or inferred. disse
 imported inside functions, so the decoders in the first half of this file can be tested
 with plain Python 3.9.
 
-Copies of the same artifact (RegBack hives, non-current control sets) are read too, but
-only rows that differ from what the live copy gave are kept.
+Copies of the same artifact (RegBack hives, non-current control sets) are read too.
+Their source variants stay separate, even when the recorded values are equal.
 """
 from __future__ import annotations
 
@@ -347,20 +347,24 @@ WELL_KNOWN = {"S-1-5-18": "SYSTEM", "S-1-5-19": "LOCAL SERVICE", "S-1-5-20": "NE
 
 
 class _Out:
-    """Adds the common provenance, and drops a row from a backup copy of an artifact
-    when the live copy already gave the same (kind, time, obj, aux)."""
+    """Merge provenance and deduplicate only within the same source scope.
+
+    Equal-valued observations from a backup or another snapshot remain visible.
+    """
 
     def __init__(self, ev, common, examined_at=None):
         self.ev, self.common, self.seen = ev, common, set()
         self.examined_at = examined_at
 
     def add(self, kind, t, res, obj, aux="", _copy=False, **prov):
-        key = (kind, t, obj, aux)
+        from .source_scope import merge_scope, subject_scope
+        prov = merge_scope(self.common, prov)
+        key = (*subject_scope(prov), prov.get('hive'), prov.get('control_set'), kind, t, obj, aux)
         if _copy and key in self.seen:
             return False
         self.seen.add(key)
         prov = {k: v for k, v in prov.items() if v is not None and v != "" and v != []}
-        self.ev.add(kind, int(t), int(res), obj, aux, **prov, **self.common)
+        self.ev.add(kind, int(t), int(res), obj, aux, **prov)
         return True
 
 
@@ -371,18 +375,19 @@ def _execution_attributes(out, program, path, recorded_at, source_kind, artifact
     examination time; the source's historical timestamp remains provenance.
     Older callers without an explicit examination time retain their old rows.
     """
+    from .source_scope import merge_scope, subject_scope
+    provenance = merge_scope(out.common, dict(details, artifact=artifact, parser='extractor.system',
+                      execution_source=source_kind, source_entry=entry, recorded_time_us=recorded_at,
+                      limitation='observation of a reviewed execution artifact; not proof of a physical user, '
+                                 'actual code execution, or source authenticity'))
     if (type(out.examined_at) is not int or out.examined_at <= 0
-            or any(not isinstance(out.common.get(key), str) or not out.common[key].strip() for key in ('image', 'exhibit'))
+            or any(not isinstance(provenance.get(key), str) or not provenance[key].strip() for key in ('image', 'exhibit'))
             or not isinstance(artifact, str) or not artifact.strip() or not entry
             or type(recorded_at) is not int or recorded_at < 0):
         return
     from .attributes import emit_attribute
-    scope = [out.common['image'], out.common['exhibit'], source_kind, artifact, entry, recorded_at]
+    scope = subject_scope(provenance) + [source_kind, artifact, entry, recorded_at]
     subject = json.dumps(scope, sort_keys=True, ensure_ascii=True, separators=(',', ':'))
-    provenance = dict(out.common, artifact=artifact, parser='extractor.system',
-                      execution_source=source_kind, source_entry=entry, recorded_time_us=recorded_at,
-                      limitation='observation of a reviewed execution artifact; not proof of a physical user, '
-                                 'actual code execution, or source authenticity', **details)
     for role, value in (('app.execution.program', program), ('app.execution.path', path)):
         if isinstance(value, str) and value:
             emit_attribute(out.ev, subject, role, value, out.examined_at, **provenance)
@@ -474,11 +479,28 @@ def _art(h, key_path, value=None):
     return "%s\\%s%s" % (root, key_path, " value %s" % value if value else "")
 
 
-def _where(h):
-    prov = {"hive": h.path}
-    if h.backup:
+def _where(h, control_set=None, current_control_set=None):
+    """Keep a registry copy's variant distinct from its filesystem snapshot.
+
+    A RegBack file on the base volume is still a backup. A control set is only
+    primary when Select\\Current identifies it; an unselected fallback has
+    unknown currentness. Backup identity takes precedence, while the selected
+    and observed control-set identifiers remain separately inspectable.
+    """
+    path = str(h.path) if h.path is not None else ""
+    backup = getattr(h, "backup", False) or "\\regback\\" in path.replace("/", "\\").casefold()
+    prov = {"hive": path, "source_variant": "primary" if path.strip() else "unknown"}
+    if control_set is not None:
+        prov["control_set"] = control_set
+        prov["current_control_set"] = current_control_set
+        if not current_control_set:
+            prov["source_variant"] = "unknown"
+        elif control_set.casefold() != current_control_set.casefold():
+            prov["source_variant"] = "noncurrent-control-set:" + control_set
+    if backup:
+        prov["source_variant"] = "registry-backup:" + path if path.strip() else "unknown"
         prov["copy"] = "RegBack backup of the hive"
-    if h.account:
+    if getattr(h, "account", None):
         prov["account"] = h.account
     return prov
 
@@ -510,9 +532,11 @@ def _control_sets(ev, h):
     current, sel = None, _open(ev, h, "Select")
     if sel is not None:
         cur = _vals(ev, h, sel).get("Current")
-        if isinstance(cur, int):
+        if isinstance(cur, int) and not isinstance(cur, bool) and 0 < cur <= 999:
             current = "ControlSet%03d" % cur
     names = [k.name for k in _subkeys(ev, h, h.hive.root()) if re.match(r"(?i)^ControlSet\d{3}$", k.name)]
+    # Invalid/dangling Select values must not make a fallback look primary.
+    current = next((name for name in names if current and name.casefold() == current.casefold()), None)
     return current, sorted(names, key=lambda n: (n != current, n))
 
 
@@ -586,11 +610,12 @@ def _settings(out, ev, target, hives, zone, ctx):
             current, sets = _control_sets(ev, h)
             cs = current or (sets[0] if sets else None)
             if cs:
-                _system_hive_settings(out, ev, target, hives, h, cs, zone, setting)
+                _system_hive_settings(out, ev, target, hives, h, cs, zone, setting,
+                                      current_control_set=current)
     _partitions(out, ev, target, ctx)
 
 
-def _registry_settings(out, ev, h, path, names, setting):
+def _registry_settings(out, ev, h, path, names, setting, current_control_set=None):
     """Preserve selected configuration values verbatim, without expanding paths."""
     key = _open(ev, h, path)
     if key is None:
@@ -604,28 +629,31 @@ def _registry_settings(out, ev, h, path, names, setting):
             continue
         identifier = _art(h, path, name)
         rendered = json.dumps(value, ensure_ascii=False, separators=(",", ":")) if isinstance(value, list) else str(value)
+        control_set = path.split("\\", 1)[0] if h.name == "SYSTEM" and re.match(r"(?i)^ControlSet\d{3}(?:\\|$)", path) else None
         out.add("systemSetting", us(key.timestamp), 1, identifier, rendered,
                 artifact=identifier, registry_value=value, registry_path=_art(h, path),
-                registry_value_name=name, time_meaning=setting, **_where(h))
+                registry_value_name=name, time_meaning=setting,
+                **_where(h, control_set, current_control_set))
 
 
-def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting):
+def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting, current_control_set=None):
+    where = _where(h, cs, current_control_set)
     _registry_settings(out, ev, h, cs + "\\Services\\WSearch",
-                       ("Start", "DelayedAutoStart", "ImagePath"), setting)
+                       ("Start", "DelayedAutoStart", "ImagePath"), setting, current_control_set)
     _registry_settings(out, ev, h, cs + "\\Control\\BackupRestore\\FilesNotToSnapshot",
-                       ("OutlookOST",), setting)
+                       ("OutlookOST",), setting, current_control_set)
     path = cs + "\\Control\\ComputerName\\ComputerName"
     key = _open(ev, h, path)
     if key is not None and _text(_vals(ev, h, key).get("ComputerName")):
         out.add("systemSetting", us(key.timestamp), 1, "computer name",
                 _text(_vals(ev, h, key)["ComputerName"]), artifact=_art(h, path, "ComputerName"),
-                time_meaning=setting, **_where(h))
+                time_meaning=setting, **where)
     path = cs + "\\Services\\Tcpip\\Parameters"
     tcpip = _open(ev, h, path)
     if tcpip is not None and _text(_vals(ev, h, tcpip).get("Hostname")):
         out.add("systemSetting", us(tcpip.timestamp), 1, "computer name",
                 _text(_vals(ev, h, tcpip)["Hostname"]), artifact=_art(h, tcpip.path, "Hostname"),
-                note="TCP/IP host name", time_meaning=setting, **_where(h))
+                note="TCP/IP host name", time_meaning=setting, **where)
     path = cs + "\\Control\\TimeZoneInformation"
     key = _open(ev, h, path)
     if key is not None:
@@ -646,7 +674,7 @@ def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting):
                     bias_minutes=signed(v.get("Bias")), active_bias_minutes=signed(v.get("ActiveTimeBias")),
                     daylight_bias_minutes=signed(v.get("DaylightBias")),
                     standard_name=_text(v.get("StandardName")), daylight_name=_text(v.get("DaylightName")),
-                    iana_zone=zone, time_meaning=setting, **_where(h))
+                    iana_zone=zone, time_meaning=setting, **where)
     path = cs + "\\Control\\Windows"
     key = _open(ev, h, path)
     if key is not None:
@@ -654,11 +682,11 @@ def _system_hive_settings(out, ev, target, hives, h, cs, zone, setting):
         t = filetime_us(struct.unpack("<Q", raw)[0]) if isinstance(raw, bytes) and len(raw) == 8 else None
         if t is not None:
             out.add("systemSetting", t, 1, "last shutdown", "", artifact=_art(h, path, "ShutdownTime"),
-                    time_meaning="ShutdownTime value", **_where(h))
-    _network(out, ev, hives, h, cs, setting)
+                    time_meaning="ShutdownTime value", **where)
+    _network(out, ev, hives, h, cs, setting, current_control_set)
 
 
-def _network(out, ev, hives, h, cs, setting):
+def _network(out, ev, hives, h, cs, setting, current_control_set=None):
     names, cards = {}, {}
     net = _open(ev, h, cs + "\\Control\\Network\\{4D36E972-E325-11CE-BFC1-08002BE10318}")
     for sub in (_subkeys(ev, h, net) if net is not None else []):
@@ -696,7 +724,7 @@ def _network(out, ev, hives, h, cs, setting):
                     dns_domain=", ".join(many("DhcpDomain", "Domain")),
                     lease_obtained=lease("LeaseObtainedTime"), lease_terminates=lease("LeaseTerminatesTime"),
                     lease_seconds=v.get("Lease") if isinstance(v.get("Lease"), int) else None,
-                    time_meaning=setting, **_where(h))
+                    time_meaning=setting, **_where(h, cs, current_control_set))
         t = us(sub.timestamp)
         for ip in many("DhcpIPAddress", "IPAddress"):
             out.add("systemSetting", t, 1, "network address", ip, **prov)
@@ -816,7 +844,8 @@ def _registry_sessions(out, ev, hives):
     for h in hives:
         if h.name != "SYSTEM":
             continue
-        for cs in _control_sets(ev, h)[1]:
+        current, sets = _control_sets(ev, h)
+        for cs in sets:
             path = cs + "\\Control\\Windows"
             key = _open(ev, h, path)
             if key is None:
@@ -826,7 +855,7 @@ def _registry_sessions(out, ev, hives):
             if t is not None:
                 out.add("sessionEvent", t, 1, "shutdown", "", _copy=True,
                         artifact=_art(h, path, "ShutdownTime"), source="registry",
-                        time_meaning="ShutdownTime value of this control set", **_where(h))
+                        time_meaning="ShutdownTime value of this control set", **_where(h, cs, current))
 
 
 # ---------------------------------------------------------------- event logs
@@ -1155,9 +1184,9 @@ def _shimcache(out, ev, target, hives):
                                                      "this entry stores no file time")
                 out.add("programRun", t, 1, exe_name(shown), shown, _copy=copy,
                         artifact="%s entry %d" % (art, n), source="application compatibility cache",
-                        path_recorded=e["path"], executed_flag=e["executed"], control_set=cs,
+                        path_recorded=e["path"], executed_flag=e["executed"],
                         raw_modified_time=e.get("raw_modified"),
-                        time_meaning=meaning, **_where(h))
+                        time_meaning=meaning, **_where(h, cs, current))
 
 
 def _recentfilecache(out, ev, target):

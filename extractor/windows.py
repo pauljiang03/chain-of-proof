@@ -16,12 +16,15 @@ from dissect.target import Target
 
 from .store import Evidence, us, us_from_filetime, us_from_unix
 from .profiles import user_profiles, ntfs_volume_serial
+from .source_scope import base_volume_scope, merge_scope
 
 USER_DIRS = ("Desktop", "Documents", "My Documents", "Downloads")
 SEARCH_PARAMS = {"google.": "q", "bing.": "q", "yahoo.": "p"}
 
 
 def _usb(ev, t, common):
+    # The virtual registry API does not identify the selected physical hive copy.
+    common = merge_scope(common, {'source_variant': 'unknown'})
     path = "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR"
     from dissect.target.exceptions import RegistryKeyNotFoundError
     try:
@@ -57,6 +60,7 @@ def _setupapi(ev, t, common, tz: str):
 
 
 def _volumes_seen(ev, t, common):
+    common = merge_scope(common, {'source_variant': 'unknown'})
     path = "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt"
     from dissect.target.exceptions import RegistryKeyNotFoundError
     try:
@@ -328,16 +332,18 @@ def _volumes_in_shortcuts(ev, common):
         if any(pv.get(key) != common.get(key) for key in ("image", "exhibit")):
             continue
         label = pv.get("volume_label")
-        if label and (label, aux) not in first:      # rows() is sorted by time within a kind
-            first[(label, aux)] = (t_us, _res, pv)
-    for (label, serial), (t_us, resolution, pv) in sorted(first.items()):
+        origin = merge_scope(pv)
+        key = (label, aux, origin['source_snapshot'], origin['source_variant'])
+        if label and key not in first:      # rows() is sorted by time within a kind
+            first[key] = (t_us, _res, pv)
+    for (label, serial, snapshot, variant), (t_us, resolution, pv) in sorted(first.items()):
         ev.add("volumeSeen", t_us, resolution, label, serial,
                artifact=f"volume block of shortcut: {pv.get('artifact', '')}",
                drive_type=DRIVE_TYPES.get(pv.get("drive_type"), str(pv.get("drive_type"))),
                time_meaning=pv.get("time_meaning") or "unspecified originating shortcut record timestamp",
                timestamp_semantics=pv.get("timestamp_semantics", "shortcut_record_observation"),
                limitation="retained shortcut volume metadata; not proof of target opening or mount time",
-               **common)
+               **merge_scope(common, {'source_snapshot': snapshot, 'source_variant': variant}))
     return len(first)
 
 
@@ -453,7 +459,8 @@ def _burn_traces(ev, t, common):
                    f"CD Burning settings of user {user} last changed "
                    f"(DefaultToMastered={values['DefaultToMastered']})",
                    "registry", artifact=BURN_KEY, staging_path=staging,
-                   time_meaning="registry key last-write time", **common)
+                   time_meaning="registry key last-write time",
+                   **merge_scope(common, {'source_variant': 'unknown'}))
             n += 1
     except Exception as e:
         ev.problem(BURN_KEY, e)
@@ -555,7 +562,7 @@ def _step(ev: Evidence, name: str, fn, default=0):
 
 def extract_pc(ev: Evidence, path, tool: str, exhibit: str = "PC"):
     t = Target.open(path)
-    common = dict(image=path.name, exhibit=exhibit, tool=tool)
+    common = dict(image=path.name, exhibit=exhibit, tool=tool, **base_volume_scope())
     _step(ev, "USB devices in the registry", lambda: _usb(ev, t, common))
     _step(ev, "device install log", lambda: _setupapi(ev, t, common, str(t.timezone)))
     _step(ev, "volumes recorded in the registry", lambda: _volumes_seen(ev, t, common))

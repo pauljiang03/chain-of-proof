@@ -12,6 +12,7 @@ from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
 from .optical import EWF_MAGIC, ewf_digests, ewf_segments
+from .source_scope import merge_scope
 
 ALGORITHMS = ("md5", "sha1", "sha256")
 BLOCK = 4 * 1024 * 1024
@@ -76,11 +77,13 @@ def inspect(path):
 def extract(ev, path, ctx):
     from .attributes import emit_attribute
     result = inspect(path)
-    common = dict(ctx["common"], artifact="complete logical image byte stream",
+    common = merge_scope(ctx["common"], dict(artifact="complete logical image byte stream",
                   reader="image_integrity", logical_bytes=result["logical_bytes"],
                   representation=result["representation"], segments=result["segments"],
+                  source_snapshot="evidence-image", source_variant="logical-image",
                   timestamp_semantics="examination_observation",
-                  scope="Digest equality does not establish acquisition authenticity.")
+                  scope="Digest equality does not establish acquisition authenticity."))
+    # Both roles describe the same image entity, from different byte sources.
     subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:logical-image"
     for algorithm, value in result["computed"].items():
         emit_attribute(ev, subject, f"image.logical.{algorithm}", value,
@@ -88,6 +91,7 @@ def extract(ev, path, ctx):
     for entry in result["recorded"]:
         emit_attribute(ev, subject, f"image.acquisition.{entry['algorithm']}", entry["digest"],
                        ctx["examined_at"], **dict(common, artifact=entry["segment"],
+                       source_variant="acquisition-container",
                        section=entry["section"], byte_offset=entry["offset"],
                        scope="Digest declared by the acquisition container, not independently authenticated."))
     if not result["recorded"]:

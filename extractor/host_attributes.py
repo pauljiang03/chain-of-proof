@@ -9,9 +9,11 @@ from __future__ import annotations
 
 import re
 import struct
+import json
 from datetime import datetime, timezone
 
 from .attributes import emit_attribute
+from .source_scope import merge_scope, subject_scope
 from . import system
 
 
@@ -22,15 +24,15 @@ def iso_seconds(seconds):
 
 
 def extract(ev, target, ctx):
-    hives = [h for h in system._hives(ev, target) if not h.backup]
+    hives = [h for h in system._hives(ev, target) if system._where(h)['source_variant'] == 'primary']
     subject = f"{ctx['common']['exhibit']}:{ctx['common']['image']}:windows-system"
 
     def emit(hive, path, field, role, value, *, owner=subject, **extra):
-        emit_attribute(ev, owner, role, value, ctx["examined_at"],
-                       **dict(ctx["common"], reader="host_attributes",
-                              artifact=system._art(hive, path, field),
-                              source_hive=str(hive.path), registry_key=path,
-                              registry_value=field, **extra))
+        provenance = merge_scope(ctx["common"], dict(system._where(hive), reader="host_attributes",
+                                 artifact=system._art(hive, path, field), source_hive=str(hive.path),
+                                 registry_key=path, registry_value=field, **extra))
+        scoped_owner = json.dumps(subject_scope(provenance) + [owner], ensure_ascii=True, separators=(',', ':'))
+        emit_attribute(ev, scoped_owner, role, value, ctx["examined_at"], **provenance)
 
     def values(hive, path):
         key = system._open(ev, hive, path)
