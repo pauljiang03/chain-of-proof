@@ -10,7 +10,7 @@ Existing run directories are never overwritten. Evaluation needs explicit --refe
 Scoring references are never included in the investigator prompt.
 
 Backends
-  claude-code   Headless Claude Code with only our five tools (no shell, no files). No API key.
+  claude-code   Headless Claude Code with only our evidence and workflow tools (no shell, no files). No API key.
   deepagents    LangChain deepagents on the Anthropic API. Needs ANTHROPIC_API_KEY.
 """
 from __future__ import annotations
@@ -44,7 +44,7 @@ def run_claude_code(model: str, run_dir: Path, env: dict, timeout_s: int, prompt
                     tools=INVESTIGATOR_TOOLS, transcript: str = "transcript.jsonl") -> dict:
     """The investigator as a headless Claude Code session.
 
-    It gets our five tools through agent/mcp_server.py and nothing else: every built-in
+    It gets restricted tools through agent/mcp_server.py and nothing else: every built-in
     tool is switched off (--tools ""), so it has no shell and cannot read any file. It
     runs in an empty directory so no project file is in reach either."""
     servers = {"mcpServers": {"cop": {

@@ -1,4 +1,4 @@
-"""What the AI investigator is allowed to do. Three abilities and nothing else:
+"""Restricted evidence access, checked claims, and persistent investigation work:
 
   sql / fact   look at the extracted records (read-only)
   forms        see which kinds of statement it may propose

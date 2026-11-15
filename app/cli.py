@@ -227,9 +227,9 @@ def _report(args):
 
 
 def _parser():
-    parser = argparse.ArgumentParser(prog="cop", description="Local AI investigation of extracted forensic records.")
+    parser = argparse.ArgumentParser(prog="cop", description="Local AI investigation of supported evidence images and extracted records.")
     commands = parser.add_subparsers(dest="command", required=True)
-    investigate = commands.add_parser("investigate", help="investigate extracted facts and save a report")
+    investigate = commands.add_parser("investigate", help="investigate images or extracted facts and save a report")
     investigate.add_argument("--name", required=True, help="new run name; existing runs are preserved")
     inputs = investigate.add_mutually_exclusive_group(required=True)
     inputs.add_argument("--facts", help="extracted JSON or DuckDB fact store")
