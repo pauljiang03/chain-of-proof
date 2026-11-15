@@ -46,8 +46,8 @@ _FINDING_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
 def report_options(ids=None, sections=None, reference='', examiner='', organisation='', *, brief=False, **more):
     """Validate what goes into a report. `None` for ids or sections means everything.
 
-    `brief` asks for the short report: the summary, the evidence examined, the limits and the
-    sign-off, on one or two printed pages. The findings themselves stay in the stored run.
+    `brief` asks for the short report: the summary, timeline and evidence examined
+    on one or two printed pages. The findings themselves stay in the stored run.
     """
     if not isinstance(brief, bool):
         raise ValueError('Unknown report length.')
@@ -135,8 +135,8 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
   .brief p { margin:6px 0; } .brief dl { gap:3px 16px; } .brief table { margin:8px 0; } .brief th, .brief td { padding:6px 8px; }
   .brief .key { display:block; padding:5px 0; } .brief .key h3 { display:inline; font-size:inherit; line-height:inherit; }
   .brief .key h3::after { content:". "; } .brief .key > div, .brief .key p { display:inline; line-height:inherit; }
-  .brief #summary > h3 { font-size:15px; margin:14px 0 4px; }
-  .brief .sign { margin:18px 0 8px; } .brief .sign div { min-height:46px; } .brief footer { margin-top:18px; padding-top:12px; }
+  .brief #summary .timeline-block > h3 { font-size:15px; margin:14px 0 4px; }
+  .brief footer { margin-top:18px; padding-top:12px; }
 }
 .mono { font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere; }
 .days th:first-child, .days td:first-child { white-space:nowrap; overflow-wrap:normal; }
@@ -145,24 +145,19 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .exhibits { table-layout:fixed; }
 .exhibits th:first-child { width:24%; }
 .exhibits th:nth-child(2) { width:38%; }
-.short th:first-child { width:24%; } .short th:nth-child(2) { width:30%; } .short .mono { overflow-wrap:normal; white-space:nowrap; }
+.short th:first-child { width:24%; } .short th:nth-child(2) { width:30%; } .short .mono { overflow-wrap:anywhere; white-space:pre-wrap; }
 .exact-statement { margin:12px 0; border-left:2px solid var(--line); padding-left:14px; }
-.exhibits td:last-child { white-space:normal; }
+.exhibits td { white-space:pre-wrap; }
 ol { padding-left:22px; } ol li { margin:6px 0; }
-.limits { margin:10px 0; padding-left:20px; } .limits li { margin:4px 0; }
 code { font:13px ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--wash); padding:1px 5px; border-radius:4px; }
-.sign { display:grid; grid-template-columns:2fr 2fr 1fr; gap:28px; margin:30px 0 12px; }
-.sign div { display:flex; flex-direction:column; justify-content:space-between; min-height:62px;
-  border-bottom:1px solid var(--ink); padding-bottom:6px; }
-.sign span { color:var(--muted); font-size:12px; } .sign strong { font-weight:600; min-height:1.4em; }
 summary { cursor:pointer; color:var(--muted); font-size:13px; margin:12px 0; }
 footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; color:var(--muted); font-size:12px; }
 @media(max-width:700px) { main { margin:0; padding:24px 18px; border:0; border-radius:0; }
   h1 { font-size:28px; } article { padding:18px; } dl { grid-template-columns:1fr; gap:2px; }
-  dd { margin-bottom:9px; } .sign { grid-template-columns:1fr; } }
+  dd { margin-bottom:9px; } }
 @media print { @page { margin:18mm; @bottom-right { content:"Page " counter(page) " of " counter(pages);
     font:9pt system-ui,sans-serif; color:#536674; } }
-  .report,main { background:#fff; } .sign { break-inside:avoid; }
+  .report,main { background:#fff; }
   .report { font-size:10pt; } main { max-width:none; margin:0; padding:0; border:0; }
   nav { display:none; } h1 { font-size:26pt; } h2 { font-size:18pt; } h3 { font-size:13pt; }
   h1,h2,h3,h4 { break-after:avoid; } section { margin-top:24px; padding-top:18px; }
@@ -175,15 +170,15 @@ footer { border-top:1px solid var(--line); padding-top:24px; margin-top:40px; co
   .key { display:block; padding:2px 0; line-height:1.4; } .key h3 { display:inline; font-size:9pt; line-height:inherit; }
   .key h3::after { content:". "; } .key > div, .key p { display:inline; line-height:inherit; }
   .key table { font-size:8pt; margin:3px 0 0; } .key th, .key td { padding:2px 6px; }
-  #summary > h3 { font-size:11pt; margin:6px 0 2px; } #summary .days { font-size:8.5pt; line-height:1.4; margin:2px 0; }
+  #summary .timeline-block > h3 { font-size:11pt; margin:6px 0 2px; } #summary .days { font-size:8.5pt; line-height:1.4; margin:2px 0; }
+  .brief .timeline-block { break-inside:avoid; page-break-inside:avoid; }
   #summary .days th, #summary .days td { padding:2px 8px; } #summary > .small { font-size:8pt; line-height:1.35; margin:4px 0 0; }
   /* The short report is one or two printed pages. */
   .brief { font-size:9pt; line-height:1.45; } .brief header { padding-top:10px; }
   .brief h1 { font-size:18pt; margin:4px 0 8px; } .brief h2, .brief #summary h2 { font-size:12pt; margin-bottom:4px; }
   .brief section { margin-top:10px; padding-top:8px; } .brief p { margin:4px 0; } .brief dl { gap:2px 14px; }
   .brief table { font-size:8pt; margin:4px 0; } .brief th, .brief td { padding:3px 8px; }
-  .brief .small, .brief .mono, .brief code { font-size:8pt; } .brief .limits { margin:4px 0; } .brief .limits li { margin:2px 0; }
-  .brief .sign { margin:12px 0 4px; gap:20px; } .brief .sign div { min-height:40px; }
+  .brief .small, .brief .mono, .brief code { font-size:8pt; }
   .brief footer { margin-top:12px; padding-top:8px; font-size:8pt; }
 }
 """
@@ -294,20 +289,23 @@ def _exhibits(info, short=False):
         return '<p>The cited evidence records name no exhibit.</p>'
     rows = []
     for item in info['exhibits'] if short else ():   # one or two lines per cell: what identifies the item, and its hash values
-        identity = [_h('Device ' + value) for value in item['devices'] if item['label'].lower() not in value.lower()]
+        identity = [_h('Device ' + value) for value in item['devices']]
         identity += [_h('Volume serial ' + value) for value in item['volumes']]
         if item['system']:
             identity.append(_h(' · '.join(fact['label'] + ': ' + ', '.join(fact['values']) for fact in item['system'])))
+        identity += [_h('Acquisition time as recorded: ' + value) for value in item['acquired']]
+        identity += [_h('Imaging tool: ' + value) for value in item['tools']]
         rows.append(('<strong>' + _h(item['label']) + '</strong> ' + _h(', '.join(item['images']))
                      + '<br><span class="small">' + f"{item['records']:,} records in "
                      + _plural(item['findings'], 'finding', 'findings') + '</span>',
                      '<br>'.join(identity) or '—',
                      '<br>'.join('<span class="mono">' + _h(digest['algorithm'] + ' ' + digest['value']) + '</span>'
+                                 + ' <span class="small">(record ' + _h(digest['record']) + ')</span>'
                                  for digest in item['digests']) or 'No stored hash value in the cited records'))
     if short:
         return _table(('Evidence item and image', 'Identifiers', 'Stored hash values'), rows, 'exhibits short')
     for item in info['exhibits']:
-        identity = [_h('Device ' + value) for value in item['devices'] if item['label'].lower() not in value.lower()]
+        identity = [_h('Device ' + value) for value in item['devices']]
         identity += [_h('Volume serial ' + value) for value in item['volumes']]
         identity += [_h(fact['label'] + ': ' + ', '.join(fact['values'])) for fact in item['system']]
         digests = ['<span class="mono">' + _h(digest['algorithm'] + ' ' + digest['value']) + '</span> <span class="small">(record '
@@ -322,28 +320,14 @@ def _exhibits(info, short=False):
     return _table(('Evidence item and image', 'Identifiers and acquisition', 'Stored hash values'), rows, 'exhibits')
 
 
-def _short_back(info, case, options):
-    """The rest of the short report: the evidence examined, then the method and its limits in a few lines."""
+def _short_back(info, options):
+    """The evidence examined, with any supplied intake and request details."""
     out = []
     request = _option_fields(options, _REQUEST_KEYS)
     if request:
         out.append('<section id="request"><h2>Request and scope</h2>' + request + '</section>')
     out += ['<section id="exhibits"><h2>Evidence examined</h2>', _option_fields(options, _INTAKE_KEYS), _exhibits(info, True),
-            '<p class="small">The table lists the evidence items that the findings cite.</p></section>',
-            '<section id="method"><h2>Method and limits</h2>',
-            '<p>CONAN-F generates findings from evidence records. The stored run identifies the findings that the Lean 4 '
-            'proof checker accepted. This report summarizes their copied records. It does not run the proof checker again.</p>',
-            _option_fields(options, ('method_notes',)),
-            '<ul class="limits"><li>The findings state what the evidence records say. They do not identify the person '
-            'who used a device or an account, or the reason.</li>'
-            '<li>The proof check covers the step from records to findings. It does not check that the tools read the '
-            'disk images correctly.</li>'
-            '<li>This report is a summary. The stored run contains each finding, its source records and its proof. '
-            'The verification command is <code>cop verify</code>.</li></ul>']
-    store = case.get('facts_sha256')
-    if isinstance(store, str) and store:
-        out.append('<p class="small">Evidence store hash (SHA-256): <span class="mono">' + _h(store) + '</span></p>')
-    out.append('</section>')
+            '<p class="small">The table lists the evidence items that the findings cite.</p></section>']
     return out
 
 
@@ -378,18 +362,24 @@ def _front(info, tz, case, findings, options, story, short=False):
         for day in days:
             events = ' · '.join(_h(f"{group['count']:,} " + _SUMMARY_LABELS.get(group.get('kind'), 'source')
                                    + (' record' if group['count'] == 1 else ' records')
-                                   + ' (' + _span(group['first'], group['last'], tz) + ')') for group in _day_events(day['events']))
-            rows.append((_h(_day(day['date'])), events or 'No key events on this day.'))
-        out += ['<h3>Source-record timeline</h3>', _table(('Day', 'Cited records and source timestamps'), rows, 'days')]
+                                   + ' (' + _span(group['first'], group['last'], tz) + ')')
+                              for group in _day_events(day['events'], most=5 if short else 3))
+            row = (_h(_day(day['date'])), events or 'No listed source records on this day.')
+            rows.append((*row, f"{day['records']:,}") if short else row)
+        headings = ('Day', 'Cited records and source timestamps', 'Records') if short else ('Day', 'Cited records and source timestamps')
+        out += ['<div class="timeline-block"><h3>Source-record timeline</h3>', _table(headings, rows, 'days'), '</div>']
     notes = ['Each statement is a count or a value from the evidence records that the '
              + _plural(counts['findings'], 'finding cites', 'findings cite') + '.', 'Times are in ' + _h(clock_name) + '.']
+    if short and days:
+        notes.append('The timeline shows ' + (f"{len(days)} of {info['days_total']} days" if info['days_total'] > len(days) else 'the days')
+                     + ' in the busiest period. Daily totals count all dated records, including event types not listed.')
     if counts['likely']:
         notes.append(_plural(counts['likely'], 'finding uses', 'findings use') + ' a stated heuristic rule. The finding identifies this rule.')
     if counts['findings'] != counts['recorded']:
         notes.append(f"This summary uses {counts['findings']:,} of the {counts['recorded']:,} findings in the stored run.")
     out.append('<p class="small">' + ' '.join(notes) + '</p>')
     if short:
-        return out + ['</section>'] + _short_back(info, case, options)
+        return out + ['</section>'] + _short_back(info, options)
     out.append('</section><section id="request"><h2>Request and scope</h2>')
     request = _option_fields(options, _REQUEST_KEYS)
     out.append(request or '<p>The report contains no request details from the author.</p>')
@@ -464,20 +454,13 @@ def _option_fields(options, keys):
 
 
 def _close(options, short=False):
-    """Disposition and report authorization close the main report."""
+    """Keep supplied evidence disposition details at the end of the report."""
     out = []
     if options.get('disposition') or not short:
         out.append('<section id="disposition"><h2>Evidence disposition</h2>'
                    + ('<p>' + _h(options['disposition']) + '</p>' if options.get('disposition') else
                       '<p>The report contains no disposition details for the original evidence or its copies.</p>')
                    + '</section>')
-    out += ['<section id="signoff"><h2>Report authorization</h2><div class="sign">',
-            '<div><span>Examiner</span><strong>' + _h(options.get('examiner') or '') + '</strong></div>',
-            '<div><span>Report authorizer</span><strong>' + _h(options.get('authorizer') or '') + '</strong></div>',
-            '<div><span>Date of report</span><strong>' + _h(options.get('report_date') or '') + '</strong></div></div>',
-            '<div class="sign"><div><span>Signature</span><strong></strong></div></div>',
-            '<p class="small">The report author supplies the administrative details and examination notes. '
-            'The signature records authorization of this report.</p></section>']
     return out
 
 
@@ -822,7 +805,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
     left_out = [name for name in SECTIONS if (sections is not None and name not in sections)
                 or (name == 'workflow' and chosen is not None)]
     show = lambda name: name not in left_out
-    short = bool(options.get('brief'))   # summary, evidence, limits and sign-off only: one or two printed pages
+    short = bool(options.get('brief'))   # summary, timeline and evidence: one or two printed pages
     unverified = [row for row in _rows(run.get('findings'))
                   if not isinstance(row, dict) or row.get('status') != 'verified']
     title = _v(case, 'name', 'Untitled investigation')
@@ -841,18 +824,18 @@ def render_html(run: dict, options: dict | None = None) -> str:
         out.append(_fields(cover))
     out.append('<p class="small">Source run: ' + _v(case, 'generated_at') + '</p>')
     navigation = [('findings', 'Findings'), ('judgments', 'Conclusions'),
-                  ('disposition', 'Disposition'), ('signoff', 'Authorization'), ('glossary', 'Terms'),
+                  ('disposition', 'Disposition'), ('glossary', 'Terms'),
                   ('needs', 'Refused proposals'),
                   ('evidence', 'Evidence'), ('proofs', 'Proofs'), ('activity', 'Activity')]
     navigation = [(anchor, label) for anchor, label in navigation
-                  if anchor in ('findings', 'glossary', 'signoff', 'disposition') or show(anchor)]
+                  if anchor in ('findings', 'glossary', 'disposition') or show(anchor)]
     if any(options.get(key) for key in _INCIDENT_KEYS):
         navigation.insert(2, ('incident', 'Incident response'))
     navigation = [('summary', 'Executive summary'), ('request', 'Request'), ('exhibits', 'Evidence examined'), ('method', 'Methods')] + navigation
     if short:   # a short report needs links only when optional parts make it long
         extra = [(anchor, label) for anchor, label in navigation if anchor in SECTIONS and show(anchor)]
         navigation = extra and [('summary', 'Executive summary'), ('exhibits', 'Evidence examined'),
-                                ('method', 'Method and limits'), *extra, ('signoff', 'Authorization')]
+                                *extra]
     scope = []
     if chosen is not None:
         action = 'summarizes records from' if short else 'shows'

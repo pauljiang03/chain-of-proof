@@ -85,6 +85,36 @@ class Brief(unittest.TestCase):
         self.assertEqual(limits['note'], 'Note stored with this run: A synthetic fixture.')
         self.assertIn('does not check that the tools read the disk images correctly', limits['readers'])
 
+    def test_exhibit_properties_preserve_literal_spaces_case_and_line_breaks(self):
+        import html
+        from app.report import render_html
+        values = (' owner  Ω ', 'Owner', 'owner', 'line one\nline two', 'a\tb')
+        data = {'findings': [finding('Literal', [
+            row(index, 'systemSetting', 'registered owner', value, exhibit='PC', image='disk  A.E01')
+            for index, value in enumerate(values, 1)])]}
+        data['findings'][0]['cited_facts'] += [
+            row(index, 'volumeOnDevice', value, 'VOL', exhibit='PC', image='disk  A.E01')
+            for index, value in enumerate(('PC-1234', 'pc', 'PC'), 10)]
+        item = brief.build(data)['exhibits'][0]
+        self.assertEqual(item['images'], ['disk  A.E01'])
+        self.assertEqual(item['system'], [{'label': 'Registered owner', 'values': list(values)}])
+        self.assertEqual(item['devices'], ['PC-1234', 'pc', 'PC'])
+        for short in (False, True):
+            rendered = render_html(data, {'brief': short})
+            evidence = rendered.split('<section id="exhibits">', 1)[1].split('</section>', 1)[0]
+            for value in values:
+                self.assertIn(html.escape(value), evidence)
+            self.assertIn('disk  A.E01', evidence)
+            for value in item['devices']:
+                self.assertIn('Device ' + value, evidence)
+        label = ' PC  Ω\n\t desk '
+        for record in data['findings'][0]['cited_facts']:
+            record['prov']['exhibit'] = label
+        self.assertEqual(brief.build(data)['exhibits'][0]['label'], label)
+        for short in (False, True):
+            evidence = render_html(data, {'brief': short}).split('<section id="exhibits">', 1)[1].split('</section>', 1)[0]
+            self.assertIn(html.escape(label), evidence)
+
     def test_days_follow_the_zone_the_records_name_and_examination_time_is_not_an_event(self):
         info = brief.build(bundle())
         self.assertEqual((info['zone']['name'], info['zone']['records']), ('America/New_York', 1))

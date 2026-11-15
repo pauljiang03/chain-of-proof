@@ -13,7 +13,7 @@
     ["proofs", "Appendix: Lean proofs", "The claim and Lean source of each certificate", false],
     ["activity", "Appendix: audit and coverage", "Recorded tool calls and coverage summaries", false],
   ];
-  const COVER = ["reference", "report_id", "report_version", "examiner", "organisation", "address", "report_date", "requested_by", "request_date", "authority", "purpose", "received", "submitted_by", "collection_method", "additional_items", "method_notes", "disposition", "authorizer", "impact", "root_cause", "response", "recommendations"];
+  const COVER = ["reference", "report_id", "report_version", "examiner", "organisation", "address", "report_date", "requested_by", "request_date", "authority", "purpose", "received", "submitted_by", "collection_method", "additional_items", "method_notes", "disposition", "impact", "root_cause", "response", "recommendations"];
   const LONG_FIELDS = new Set(["purpose", "additional_items", "method_notes", "disposition", "impact", "root_cause", "response", "recommendations"]);
   const limit = key => LONG_FIELDS.has(key) ? 600 : 200;
   const today = () => { const now = new Date(); return now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0"); };
@@ -49,7 +49,7 @@
   function query(download) {
     const params = new URLSearchParams({ name: state.name, format: "html" });
     if (download) params.set("download", "1");
-    // The short report is the summary, the evidence, the limits and the sign-off: one or two printed pages.
+    // The short report is the summary, timeline and evidence: one or two printed pages.
     if (state.length === "short") params.set("brief", "1");
     // Do not add empty optional sections to the examiner's report.
     const included = (section) => state.length === "full" && !state.empty.has(section[0]) && state.sections.has(section[0]);
@@ -83,6 +83,8 @@
     if (badge) badge.textContent = count ? String(count) : "";
   }
   function form() {
+    $("report-method_notes").hidden = state.length === "short";
+    $("report-method-label").hidden = state.length === "short";
     document.querySelectorAll('#report-form input[name="report-scope"]').forEach((input) => { input.checked = input.value === state.scope; });
     document.querySelectorAll('#report-form input[name="report-length"]').forEach((input) => { input.checked = input.value === state.length; });
     $("report-extras").hidden = state.length !== "full";   // the parts that add pages belong to the full report
@@ -183,7 +185,7 @@
     $("report-form").addEventListener("change", (event) => {
       const input = event.target;
       if (input.name === "report-scope" && input.checked) state.scope = input.value;
-      else if (input.name === "report-length" && input.checked) { state.length = input.value; $("report-extras").hidden = state.length !== "full"; }
+      else if (input.name === "report-length" && input.checked) { state.length = input.value; form(); }
       else if (input.closest("#report-sections")) { if (input.checked) state.sections.add(input.value); else state.sections.delete(input.value); }
       else return;
       changed();

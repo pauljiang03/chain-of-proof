@@ -50,6 +50,74 @@
     return row;
   }
 
+  function card(title, note, extra) {
+    const box = el("section", "card"), head = el("div", "card-head");
+    head.append(el("h3", "", title), el("p", "", note));
+    if (extra) head.append(el("span", "spacer"), extra);
+    box.append(head);
+    return box;
+  }
+  function barRow(lane, name, value, max, title, action) {
+    const row = el(action ? "button" : "div", "bar-row"), label = el("span", "bar-name"), track = el("span", "bar-track"), fill = el("span", "bar-fill" + (lane === null ? "" : " c" + lane));
+    if (action) { row.type = "button"; row.addEventListener("click", action); row.title = title; }
+    if (lane !== null) label.append(CONAN.story.dot(lane));
+    label.append(name);
+    fill.style.width = (max ? Math.max(0.6, (value / max) * 100) : 0) + "%";
+    track.append(fill);
+    row.append(label, track, el("span", "bar-value", CONAN.story.number.format(value)));
+    return row;
+  }
+
+  // Evidence examined: each item the records name, with the identifiers and hash values that are themselves cited records.
+  function evidence(items, brief) {
+    const S = CONAN.story, n = S.number, box = card("Evidence examined", "Items named by the evidence records");
+    const text = (value) => (typeof value === "string" ? value : "");
+    if (!items.length) { box.append(el("p", "card-foot", "The evidence records name no examined item.")); return box; }
+    const most = Math.max(1, ...items.map((item) => Number(item.records) || 0));
+    items.forEach((item) => {
+      const row = el("div", "ov-item"), head = el("div", "item-head"), track = el("span", "bar-track"), fill = el("span", "bar-fill");
+      const label = text(item.label), count = Number(item.records) || 0;
+      head.append(el("strong", "", label), el("span", "item-image", array(item.images).map(text).join(", ")),
+        el("span", "item-count", n.format(count) + (count === 1 ? " record · " : " records · ") + n.format(Number(item.findings) || 0) + " findings"));
+      fill.style.width = Math.max(0.6, (count / most) * 100) + "%";
+      track.append(fill);
+      row.append(head, track);
+      const identity = array(item.devices).map(text).filter(Boolean).map((value) => "Device " + value)
+        .concat(array(item.volumes).map(text).filter(Boolean).map((value) => "Volume serial " + value),
+          array(item.system).map((fact) => text(fact && fact.label) + ": " + array(fact && fact.values).map(text).join(", ")));
+      if (identity.length) row.append(el("p", "item-facts", identity.join(" · ")));
+      const digests = array(item.digests).filter((digest) => digest && text(digest.value));
+      if (digests.length) {
+        const line = el("p", "item-hash");
+        digests.forEach((digest, index) => {
+          const value = text(digest.value), mark = el("span", "", text(digest.algorithm) + " " + (value.length > 20 ? value.slice(0, 8) + "…" + value.slice(-8) : value));
+          mark.title = text(digest.algorithm) + " " + value + (text(digest.stored_by) ? " — stored by " + text(digest.stored_by) : "");
+          if (index) line.append(" · ");
+          line.append(mark);
+        });
+        row.append(line);
+      }
+      box.append(row);
+    });
+    const loose = Number(brief.unlabelled) || 0;
+    box.append(el("p", "card-foot", "Listed from the records that findings cite, not from an intake list. Full hash values are in the report."
+      + (loose ? " " + n.format(loose) + (loose === 1 ? " record names" : " records name") + " no item." : "")));
+    return box;
+  }
+
+  function statistics(model) {
+    const S = CONAN.story, info = state.brief || {}, split = el("div", "ov-split");
+    const kinds = card("Evidence types", "Cited records by category"), top = Math.max(1, ...model.lanes.map((lane) => lane.records));
+    model.lanes.map((lane, index) => ({ index, ...lane })).filter((lane) => lane.records).sort((a, b) => b.records - a.records)
+      .forEach((lane) => kinds.append(barRow(lane.index, S.LANES[lane.index].name, lane.records, top,
+        "Show dated " + S.LANES[lane.index].name + " records on the Timeline",
+        lane.events ? () => CONAN.timeline.show({ lane: lane.index }) : null)));
+    kinds.append(el("p", "card-foot", S.number.format(model.events.length) + " records carry a source timestamp; "
+      + S.number.format(model.undatedCount) + " have no event time. Counts refer to records, which can describe the same event."));
+    split.append(kinds, evidence(array(info.exhibits), info));
+    return split;
+  }
+
   function devices(list) {
     const table = el("table", "key-table"), top = el("thead"), head = el("tr"), rows = el("tbody");
     DEVICE.forEach(([, name]) => { const cell = el("th", "", name); cell.scope = "col"; head.append(cell); });
@@ -74,6 +142,7 @@
         el("p", "", found ? "Open Findings to read the exact statements and cited records. This limited view does not establish absence of evidence." : "This page fills in as findings are accepted."));
       host.append(empty);
       if (model) host.append(tiles(model));
+      if (found) host.append(statistics(model));
       return;
     }
     const hero = el("header", "ov-hero"), box = el("section", "card key-findings");
@@ -86,7 +155,7 @@
       row.append(el("h3", "", String(point.title)), body);
       box.append(row);
     });
-    host.append(hero, box, tiles(model));
+    host.append(hero, box, tiles(model), statistics(model));
   }
 
   CONAN.overview = {

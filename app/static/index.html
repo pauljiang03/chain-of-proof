@@ -114,7 +114,7 @@
         <section class="tab-panel report-panel" id="panel-report" role="tabpanel" aria-labelledby="tab-report" hidden>
           <form class="report-options" id="report-form" aria-label="Report contents">
             <fieldset><legend>Length</legend>
-              <label><input type="radio" name="report-length" value="short" checked><span>Short report<small>Summary, evidence, limits and sign-off. 1–2 pages.</small></span></label>
+              <label><input type="radio" name="report-length" value="short" checked><span>Short report<small>Summary, timeline and evidence. 1–2 pages.</small></span></label>
               <label><input type="radio" name="report-length" value="full"><span>Full report<small>Adds every finding with its source records.</small></span></label>
             </fieldset>
             <fieldset><legend>Findings</legend>
@@ -143,11 +143,10 @@
             <label class="stacked" for="report-submitted_by">Submitted by</label><input id="report-submitted_by" maxlength="200" autocomplete="off" placeholder="Name and organisation">
             <label class="stacked" for="report-collection_method">Method of receipt or collection</label><input id="report-collection_method" maxlength="200" autocomplete="off" placeholder="Delivery or collection method">
             <label class="stacked" for="report-additional_items">Other submitted items</label><input id="report-additional_items" maxlength="600" autocomplete="off" placeholder="Other submitted items and examination status">
-            <label class="stacked" for="report-method_notes">Examination procedures</label><input id="report-method_notes" maxlength="600" autocomplete="off" placeholder="Procedures, tool versions, deviations, and outside examinations">
+            <label class="stacked" id="report-method-label" for="report-method_notes" hidden>Examination procedures (full report)</label><input hidden id="report-method_notes" maxlength="600" autocomplete="off" placeholder="Procedures, tool versions, deviations, and outside examinations">
             </details>
-            <details><summary>Disposition and authorization</summary>
+            <details><summary>Evidence disposition</summary>
             <label class="stacked" for="report-disposition">Evidence disposition</label><input id="report-disposition" maxlength="600" autocomplete="off" placeholder="Item IDs, originals and copies, retained or returned, holder and date">
-            <label class="stacked" for="report-authorizer">Report authorizer</label><input id="report-authorizer" maxlength="200" autocomplete="off">
             </details>
             <details><summary>Incident response (optional)</summary>
             <label class="stacked" for="report-impact">Incident impact</label><input id="report-impact" maxlength="600" autocomplete="off" placeholder="Affected systems, data, and operations">

@@ -80,7 +80,7 @@ class AppReport(unittest.TestCase):
         self.assertIn('The report author supplies the following incident assessment and actions.', rendered)
         self.assertNotIn('id="incident"', render_html(data))
         self.assertNotIn('id="limits"', rendered)
-        self.assertLess(rendered.index('id="signoff"'), rendered.index('id="glossary"'))
+        self.assertLess(rendered.index('id="disposition"'), rendered.index('id="glossary"'))
         headings = re.findall(r'<section id="[^"]+"><h2>(.*?)</h2>', rendered)
         numbered = [text for text in headings if not text.startswith('Appendix')]
         self.assertEqual([int(text.split('.')[0]) for text in numbered], list(range(1, len(numbered) + 1)))
@@ -255,7 +255,7 @@ class AppReport(unittest.TestCase):
         # cover details are text, labelled as the author's own
         self.assertIn('<dt>Case reference</dt><dd>REF-7 &lt;i&gt;</dd>', rendered)
         self.assertIn('<dt>Examiner</dt><dd>A. Examiner</dd>', rendered)
-        self.assertIn('The report author supplies the administrative details and examination notes.', rendered)
+        self.assertNotIn('The report author supplies the administrative details and examination notes.', rendered)
         self.assertNotIn('<dt>Organisation</dt>', rendered)
         # sections: refusals kept; judgments, appendices and the plan gone, with no link left dangling
         self.assertIn('id="needs"', rendered)
@@ -272,7 +272,7 @@ class AppReport(unittest.TestCase):
         self.assertIn('Certificate: trust tier kernel', rendered)
         self.assertNotIn('example : True', rendered)
 
-    def test_report_opens_with_summary_evidence_method_and_ends_with_a_sign_off(self):
+    def test_report_opens_with_summary_evidence_method_without_a_sign_off(self):
         zone = 'local time, converted from America/New_York'
         digest = record(9, kind='systemSetting', obj_text='image md5', aux_text='ab' * 16, t=0)
         digest['prov'] = {'exhibit': 'USB <b>1</b>', 'image': 'usb.E01', 'tool': 'reader <i>1.0</i>',
@@ -285,8 +285,8 @@ class AppReport(unittest.TestCase):
         rendered = render_html(data, options)
         parsed = Markup(rendered)
         order = [rendered.index(f'<section id="{name}">') for name in (
-            'summary', 'request', 'exhibits', 'method', 'findings', 'disposition', 'signoff', 'glossary', 'evidence')]
-        self.assertEqual(order, sorted(order))               # the sign-off closes the report; appendices follow it
+            'summary', 'request', 'exhibits', 'method', 'findings', 'disposition', 'glossary', 'evidence')]
+        self.assertEqual(order, sorted(order))               # the main report precedes its appendices
         self.assertEqual([link for link in parsed.links if link.startswith('#') and link[1:] not in parsed.ids], [])
         for label, value in (('Requested by', 'Det. &lt;X&gt;'), ('Authority for the request', 'Warrant 7'),
                              ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
@@ -301,14 +301,22 @@ class AppReport(unittest.TestCase):
         self.assertIn('<strong>USB &lt;b&gt;1&lt;/b&gt;</strong>', rendered)
         self.assertIn('<span class="mono">MD5 ' + 'ab' * 16 + '</span> <span class="small">(record 9)</span>', rendered)
         self.assertIn('Imaging tool as recorded: imager 7', rendered)
+        short = render_html(data, report_options(sections=[], brief=True))
+        self.assertIn('Imaging tool: imager 7', short)
+        self.assertIn('(record 9)', short)
+        self.assertIn('<th scope="col">Records</th>', short)
+        self.assertIn('Daily totals count all dated records', short)
+        self.assertNotIn('id="method"', short)
         self.assertIn('<td>reader &lt;i&gt;1.0&lt;/i&gt;</td><td>Tool</td><td>1</td>', rendered)
         self.assertIn('<td>synthetic parser</td><td>Record reader</td><td>2</td>', rendered)
         self.assertNotIn('<b>1</b>', rendered)
         self.assertNotIn('<i>1.0</i>', rendered)
         self.assertIn('The table lists evidence items that the findings cite.', rendered)
-        self.assertIn('<div><span>Examiner</span><strong>A. Examiner</strong></div>', rendered)
-        self.assertIn('<div><span>Date of report</span><strong>2026-11-14</strong></div>', rendered)
-        self.assertIn('The signature records authorization of this report.', rendered)
+        self.assertIn('<dt>Examiner</dt><dd>A. Examiner</dd>', rendered)
+        self.assertIn('<dt>Date of report</dt><dd>2026-11-14</dd>', rendered)
+        self.assertNotIn('The signature records authorization of this report.', rendered)
+        self.assertNotIn('id="signoff"', rendered)
+        self.assertNotIn('Signature', rendered)
         exact = '2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
         if 'The tables use America/New_York local time.' in rendered:   # this system can convert the zone the records name
             self.assertIn('2023-11-14 17:13:20 local (UTC-05:00)<br><span class="small">' + exact + '</span>', rendered)
@@ -321,7 +329,7 @@ class AppReport(unittest.TestCase):
         self.assertIn('The tables use Coordinated Universal Time (UTC). The cited records contain no local time zone.', plain)
         self.assertIn(exact + '<br><span class="small">Meaning: record observation</span>',
                       render_html(bundle(finding()), report_options(sections=[])))
-        self.assertIn('<div><span>Examiner</span><strong></strong></div>', plain)
+        self.assertNotIn('<dt>Examiner</dt>', plain)
         for bad in ({'purpose': 'p' * 601}, {'requested_by': 'x' * 201}, {'authority': 'a\tb'}, {'colour': 'red'}):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 report_options(**bad)
@@ -345,17 +353,17 @@ class AppReport(unittest.TestCase):
         short = render_html(data, report_options(sections=[], brief=True, examiner='A. Examiner <x>'))
         parsed = Markup(short)
         self.assertEqual([name for name in parsed.ids if not name.startswith('finding')],
-                         ['summary', 'exhibits', 'method', 'signoff'])
+                         ['summary', 'exhibits'])
         self.assertEqual(parsed.sentences, [])                  # no finding is written out
         for absent in ('id="findings"', '<article', '<nav', 'id="glossary"', 'id="disposition"', 'id="request"',
-                       'Left out of this report', 'An unverified judgment', 'not supported'):
+                       'Left out of this report', 'An unverified judgment', 'not supported',
+                       'id="method"', 'Method and limits', 'Signature', 'id="signoff"',
+                       'The report author supplies the administrative details and examination notes.',
+                       'The signature records authorization of this report.'):
             self.assertNotIn(absent, short)
-        for present in ('They do not identify the person who used a device or an account, or the reason.',
-                        'It does not check that the tools read the disk images correctly.',
-                        'This report is a summary.', 'It does not run the proof checker again.',
-                        'Read each exact certificate statement and its limitations in the full report or stored run.',
+        for present in ('Read each exact certificate statement and its limitations in the full report or stored run.',
                         'Read the exact statements and cited records in the full report or stored run.',
-                        'A. Examiner &lt;x&gt;', '<main class="brief">'):
+                        'A. Examiner &lt;x&gt;', '<main class="brief">', 'Evidence examined'):
             self.assertIn(present, short)
         self.assertNotIn('limitations in Findings.', short)
         self.assertNotIn('cited records in Findings.', short)
@@ -365,7 +373,7 @@ class AppReport(unittest.TestCase):
                                                   disposition='Returned to the owner.'))
         self.assertIn('Selected findings only', chosen)
         self.assertIn('This report summarizes records from 1 of the 2 entries', chosen)
-        self.assertEqual([name for name in Markup(chosen).ids], ['summary', 'request', 'exhibits', 'method', 'disposition', 'signoff'])
+        self.assertEqual([name for name in Markup(chosen).ids], ['summary', 'request', 'exhibits', 'disposition'])
         # Optional parts can still be added; a link into the findings they refer to becomes plain text.
         longer = Markup(render_html(data, report_options(sections=['judgments', 'needs', 'proofs'], brief=True)))
         self.assertEqual([name for name in ('judgments', 'needs', 'proofs') if name in longer.ids], ['judgments', 'needs', 'proofs'])

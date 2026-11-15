@@ -402,11 +402,11 @@ button.bar-row:hover { background: var(--panel-2); }
 .ov-item { display: grid; gap: 4px; padding: 9px 0; border-top: 1px solid var(--line-2); }
 .card-head + .ov-item { border-top: 0; padding-top: 2px; }
 .ov-item .item-head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.ov-item .item-head strong { font-size: 0.875rem; white-space: nowrap; }
-.ov-item .item-image { color: var(--muted); font: 0.71875rem var(--mono); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ov-item .item-head strong { font-size: 0.875rem; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ov-item .item-image { color: var(--muted); font: 0.71875rem var(--mono); min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
 .ov-item .item-count { margin-left: auto; color: var(--muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .ov-item .bar-track { height: 6px; }
-.ov-item .item-facts, .ov-item .item-hash { color: var(--muted); font-size: 0.75rem; line-height: 1.45; overflow-wrap: anywhere; }
+.ov-item .item-facts, .ov-item .item-hash { color: var(--muted); font-size: 0.75rem; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; }
 .ov-item .item-hash { font: 0.6875rem/1.5 var(--mono); }
 
 /* Timeline */

@@ -14,35 +14,48 @@ NODE = shutil.which('node')
 class AppViewIntegrity(unittest.TestCase):
     def test_summary_stats_survive_unsupported_typed_topics_and_missing_refusal_data(self):
         source = (ASSETS / 'overview.js').read_text()
+        timeline = (ASSETS / 'timeline.js').read_text()
+        self.assertEqual(timeline.count('  wire();\n})();'), 1)
+        timeline = timeline.replace('  wire();\n})();', '})();')
         harness = r'''
 const vm = require('node:vm'), assert = require('node:assert/strict');
 class Element {
-  constructor(tag) { this.tag = tag; this.children = []; this.ownText = ''; }
+  constructor(tag) { this.tag = tag; this.children = []; this.ownText = ''; this.style = {}; }
   set textContent(value) { this.ownText = String(value); }
   get textContent() { return this.ownText + this.children.map(child => child.textContent).join(' '); }
-  append(...children) { this.children.push(...children); }
+  append(...children) { this.children.push(...children.map(child => typeof child === 'string' ? {textContent: child} : child)); }
   replaceChildren(...children) { this.children = children; this.ownText = ''; }
   addEventListener() {}
 }
 const host = new Element('div');
-const sandbox = {window: {CONAN: {story: {number: new Intl.NumberFormat('en-US'), clip: (s) => s}}},
+const sandbox = {window: {CONAN: {}, matchMedia: () => ({matches: true})},
  document: {createElement: tag => new Element(tag), getElementById: () => host}};
 vm.createContext(sandbox);
 '''
+        harness += '\nvm.runInContext(' + json.dumps(timeline) + ', sandbox);\n'
         harness += '\nvm.runInContext(' + json.dumps(source) + ', sandbox);\n'
         harness += r'''
-const model = {findings: [{status: 'verified', strength: 'strong'}],
- records: [{kind: 'roleUsbDeviceInstanceId', exhibit: 'PC'}], events: [], main: null};
+const model = sandbox.window.CONAN.story.build({findings: [{finding_id: 'TypedUsb', status: 'verified',
+ strength: 'strong', cited_facts: [{id: 1, kind: 'roleUsbDeviceInstanceId', prov: {exhibit: 'PC'}}]}]});
 const view = sandbox.window.CONAN.overview;
-view.render(model, {}, null, null, {points: [], devices: []});
+const metadata = {exhibits: [{label: 'PC', images: ['disk  A.E01'], records: 1, findings: 1,
+ devices: ['PC-1234', 'pc', 'PC'], volumes: [], system: [], digests: []}], unlabelled: 0};
+view.render(model, {}, metadata, null, {points: [], devices: []});
 assert.ok(host.textContent.includes('No supported summary for these record types'));
 assert.ok(host.textContent.includes('does not establish absence of evidence'));
 assert.ok(host.textContent.includes('Recorded accepted findings 1'));
 assert.ok(host.textContent.includes('Recorded refusals Not supplied'));
 assert.ok(!host.textContent.includes('Nothing was refused'));
-view.render({...model}, {rejections: []}, null, null, {points: [], devices: []});
+assert.ok(host.textContent.includes('Evidence types'));
+assert.ok(host.textContent.includes('1 have no event time'));
+assert.equal(host.children.filter(child => child.className === 'ov-tiles').length, 1);
+for (const value of metadata.exhibits[0].devices) assert.ok(host.textContent.includes('Device ' + value));
+view.render({...model}, {rejections: []}, metadata, null, {points: [], devices: []});
 assert.ok(host.textContent.includes('Recorded refusals 0'));
 assert.ok(host.textContent.includes('No refusal entries supplied'));
+metadata.exhibits[0].label = ' PC  Ω\n\t desk ';
+view.render(model, {}, metadata, null, {points: [], devices: []});
+assert.ok(host.textContent.includes(metadata.exhibits[0].label));
 '''
         result = subprocess.run([NODE, '-e', harness], text=True, capture_output=True, timeout=15)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)

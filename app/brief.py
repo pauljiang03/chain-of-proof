@@ -79,6 +79,11 @@ def _text(value):
     return '' if value in ('', '(none)') else value
 
 
+def _literal(value):
+    """Keep exact source values for display; normalization is only for classification."""
+    return value if isinstance(value, str) and value != '(none)' else ''
+
+
 def _natural(label):
     return [int(part) if index % 2 else part.lower() for index, part in enumerate(re.split(r'(\d+)', label))]
 
@@ -202,7 +207,7 @@ def by_day(events, period, tz, most=8):
 
 
 def _add(values, value):
-    if value and value.lower() not in {other.lower() for other in values}:
+    if value and value not in values:
         values.append(value)
 
 
@@ -212,24 +217,24 @@ def exhibits(everything, chosen):
     order = lambda entry: json.dumps(entry['row'].get('id'), sort_keys=True, default=str)
     for entry in sorted(everything, key=order):
         row, prov = entry['row'], _dict(entry['row'].get('prov'))
-        label = _text(prov.get('exhibit'))
+        label = _literal(prov.get('exhibit'))
         if not label:
             continue
         item = found.setdefault(label, {'label': label, 'images': [], 'records': 0, 'findings': set(), 'devices': [],
                                         'volumes': [], 'digests': [], 'acquired': [], 'tools': [], 'system': []})
-        _add(item['images'], _text(prov.get('image')))
-        kind, name, value = row.get('kind'), _text(row.get('obj_text')), _text(row.get('aux_text'))
+        _add(item['images'], _literal(prov.get('image')))
+        kind, name, value = row.get('kind'), _literal(row.get('obj_text')), _literal(row.get('aux_text'))
         if kind == 'volumeOnDevice':
             _add(item['devices'], name)
             _add(item['volumes'], value)
         elif kind == 'systemSetting' and _DIGEST.fullmatch(name) and value:
             digest = {'algorithm': _DIGEST_NAMES[_DIGEST.fullmatch(name).group(1).lower()], 'value': value,
-                      'record': row.get('id'), 'source': _text(prov.get('artifact')),
-                      'stored_by': _text(prov.get('stored_by'))}
+                      'record': row.get('id'), 'source': _literal(prov.get('artifact')),
+                      'stored_by': _literal(prov.get('stored_by'))}
             if digest not in item['digests']:
                 item['digests'].append(digest)
-            _add(item['acquired'], _text(prov.get('acquired_as_recorded')))
-            _add(item['tools'], _text(prov.get('acquired_with')))
+            _add(item['acquired'], _literal(prov.get('acquired_as_recorded')))
+            _add(item['tools'], _literal(prov.get('acquired_with')))
         elif kind == 'systemSetting' and value:
             for key, title in _SYSTEM:
                 if name.lower() == key:
@@ -239,7 +244,7 @@ def exhibits(everything, chosen):
                     else:
                         _add(known['values'], value)
     for entry in chosen:
-        label = _text(_dict(entry['row'].get('prov')).get('exhibit'))
+        label = _literal(_dict(entry['row'].get('prov')).get('exhibit'))
         if label in found:
             found[label]['records'] += 1
             found[label]['findings'] |= entry['findings']
