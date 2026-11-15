@@ -283,6 +283,8 @@ inductive Kind where
   | roleEventTimeMeaning
   | roleEventAccountName
   | roleEventAccountSid
+  | roleMailRecoveredSubjectUnicode
+  | roleMailRecoveredBodyUnicode
   deriving DecidableEq, Repr
 
 structure Fact where

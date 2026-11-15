@@ -155,6 +155,29 @@ class SignedAttributes(unittest.TestCase):
                          'format identified by the validated OOXML package structure; not application execution')
         self.assertNotEqual(ROLES['document.source.path'].kind, ROLES['document.container.path'].kind)
 
+    def test_recovered_mail_roles_preserve_literal_text_without_deletion_claim(self):
+        self.ev = Evidence()
+        keys = []
+        for key, role, value in (
+                ('recovered_subject', 'mail.recovered.subject_unicode', 'Recovered literal subject'),
+                ('recovered_body', 'mail.recovered.body_unicode', '')):
+            self.roles[key] = role
+            keys.append(key)
+            self.identities[key] = emit_attribute(self.ev, 'image:base:parser-recovery:item-17',
+                role, value, 1000000, artifact='synthetic recovered PST item',
+                source_snapshot='base-volume', source_variant='parser-recovery')
+        self.ev.write_json(self.path, {})
+        self.source = JsonFacts(self.path)
+        rows = [self.attribute(key)['attributeRecorded'] for key in keys]
+        certificate = self.certify({'attributeTuple': rows})
+        self.assertIn('not proof of deletion, purge', certificate['english'])
+        self.assertIn("''", certificate['english'])
+        for record in certificate['cited_facts']:
+            self.assertEqual(record['prov']['source_variant'], 'parser-recovery')
+        wrong = list(rows[0])
+        wrong[3] = 'mail.message.subject_unicode'
+        self.certify({'attributeRecorded': wrong}, False)
+
 
 if __name__ == '__main__':
     unittest.main()

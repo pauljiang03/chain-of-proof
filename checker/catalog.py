@@ -228,6 +228,8 @@ _SPECS = (
     ('event.time_meaning', 'string', 'fixed meaning of the source timestamp field for this reviewed event, such as event TimeCreated; not actual physical action time'),
     ('event.account_name', 'string', 'literal account-name field within this source event; no SID-to-name guessing or physical-user attribution'),
     ('event.account_sid', 'string', 'literal account SID field within this source event; not a personal identity'),
+    ('mail.recovered.subject_unicode', 'string', 'literal PT_UNICODE subject of a parser-recovered message item in the parser-recovery source variant; not proof of deletion, purge or unallocated status'),
+    ('mail.recovered.body_unicode', 'string', 'literal PT_UNICODE body of a parser-recovered message item in the parser-recovery source variant; not proof of deletion, purge, unallocated status or authorship'),
 )
 ROLES = {name: AttributeRole(name, 'role' + ''.join(part.title().replace('_', '')
          for part in name.split('.')), value_type, meaning)
