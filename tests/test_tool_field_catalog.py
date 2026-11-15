@@ -52,7 +52,7 @@ class ToolFieldCatalog(unittest.TestCase):
                            require_claim_requirements=True, require_evidence_scope=True)
         self.assertEqual(result['field_requirements'], expected)
 
-    def test_a_and_c_receive_identical_complete_compact_views(self):
+    def test_a_and_c_receive_identical_bounded_v3_views(self):
         with tempfile.TemporaryDirectory() as directory:
             outputs = []
             for arm in ('A', 'C'):
@@ -63,7 +63,10 @@ class ToolFieldCatalog(unittest.TestCase):
                 finally:
                     bench._db.close()
             self.assertEqual(outputs[0], outputs[1])
-            self.assertEqual(outputs[0]['answer_projection'], tool_catalog())
+            self.assertEqual(outputs[0]['view'], 'static_form_catalog_page')
+            self.assertEqual(outputs[0]['section'], 'claim_forms')
+            self.assertLessEqual(len(json.dumps(outputs[0]).encode()), 64000)
+            self.assertEqual(set(outputs[0]['form_names']['answer_fields']), set(tool_catalog()['forms']))
 
 
 if __name__ == '__main__':

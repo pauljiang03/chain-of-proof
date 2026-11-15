@@ -572,7 +572,11 @@ def main(argv=None):
     choices = tool.add_subparsers(dest="tool", required=True)
     for name in ("checkpoint", "preview"):
         choices.add_parser(name).add_argument("--document", required=True)
-    choices.add_parser("forms")
+    forms = choices.add_parser("forms")
+    for name in ("section", "state-token", "form", "role"):
+        forms.add_argument("--" + name)
+    for name in ("offset", "page-size"):
+        forms.add_argument("--" + name, type=int)
     choices.add_parser("plan")
     update = choices.add_parser("update_question")
     update.add_argument("--question-id", required=True)
@@ -610,6 +614,10 @@ def main(argv=None):
             arguments = {}
             if args.tool in ("checkpoint", "preview"):
                 arguments = {"document": _json(args.document)}
+            elif args.tool == "forms":
+                for name in ("section", "offset", "page_size", "state_token", "form", "role"):
+                    if getattr(args, name) is not None:
+                        arguments[name] = getattr(args, name)
             elif args.tool == "update_question":
                 arguments = {"question_id": args.question_id}
                 for name in ("searched", "unresolved", "next_actions", "status"):

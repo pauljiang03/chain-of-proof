@@ -64,15 +64,24 @@ class _NeutralWorkflow:
         return _neutral_plan(self)
 
 
+class _PagedNeutralWorkflow(_NeutralWorkflow):
+    @audited
+    def forms(self, *, section=None, offset=None, page_size=None, state_token=None, form=None, role=None):
+        from agent.form_catalog_views import forms_page
+        return forms_page(section=section, offset=offset, page_size=page_size,
+                          state_token=state_token, form=form, role=role)
+
+
 def make_workbench(arm, facts, run_dir, protocol="literal-v1"):
     tools_for(protocol)
+    workflow = _PagedNeutralWorkflow if protocol == "claim-bindings-v3" else _NeutralWorkflow
     if arm == "A":
         from comparison.ablation.capture import ReceiptWorkbench
-        kind = ReceiptWorkbench if protocol == "literal-v1" else type("NeutralReceiptWorkbench", (_NeutralWorkflow, ReceiptWorkbench), {})
+        kind = ReceiptWorkbench if protocol == "literal-v1" else type("NeutralReceiptWorkbench", (workflow, ReceiptWorkbench), {})
         return kind(facts, run_dir, proposer="ablation-subagent")
     if arm == "C":
         from agent.tools import Workbench
-        kind = Workbench if protocol == "literal-v1" else type("NeutralCheckedWorkbench", (_NeutralWorkflow, Workbench), {})
+        kind = Workbench if protocol == "literal-v1" else type("NeutralCheckedWorkbench", (workflow, Workbench), {})
         return kind(facts, run_dir, proposer="ablation-subagent")
     raise ValueError("arm must be A or C")
 
@@ -86,6 +95,8 @@ def dispatch(bench, tool: str, arguments: dict, protocol="literal-v1"):
                "check": {"question", "claim", "claims", "revises"},
                "plan": set(), "update_question": {"question_id", "searched", "unresolved", "next_actions", "status"},
                "inventory_page": {"question_id", "kinds", "exhibits", "page_size", "cursor"}}[tool]
+    if tool == "forms" and protocol == "claim-bindings-v3":
+        allowed = {"section", "offset", "page_size", "state_token", "form", "role"}
     if set(arguments) - allowed:
         raise ValueError("unsupported tool argument")
     if tool == "plan":
@@ -95,7 +106,7 @@ def dispatch(bench, tool: str, arguments: dict, protocol="literal-v1"):
             raise ValueError(tool + " requires a public question_id")
         return getattr(bench, tool)(**arguments)
     if tool == "forms":
-        return bench.forms()
+        return bench.forms(**arguments)
     if tool == "sql":
         if not isinstance(arguments.get("query"), str):
             raise ValueError("sql requires a query string")
