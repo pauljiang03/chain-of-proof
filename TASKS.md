@@ -23,7 +23,7 @@ These checks do not establish answer accuracy or zero false positives.
 
 ## Remaining work
 
-1. Freeze and run the authorized development comparison after the separate readiness receipt is issued. Implementation, combined/UI tests, ten audit regressions, current demos, complete snapshots and selected proofs for both cases passed their checks. Original matching, answers, statuses and denominators stay unchanged. Normalization stays disabled.
+1. Complete the running development comparison on both cases, then publish exact replay and deterministic scores. Original matching, answers, statuses and denominators stay unchanged. Normalization stays disabled. Preserve the frozen runtime while later frontend work is merged.
 2. Continue the explicit gaps in [the public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md). These include units and derived values, actual DHCP assignment, historical time windows and stronger source relationships. A source field alone does not supply these meanings.
 3. Resolve source selection and relationship requirements for snapshot, optical-media, copy-direction and actor-attribution questions. A larger union of sources is not a substitute for those relationships.
 4. Preserve all 60 Data Leakage questions, including the 14 unresolved reference questions. Current catalog support covers 55 of 358 public schema leaf occurrences; Hacking covers 14 of 38. These are schema-support counts, not test accuracy. Hacking Q28/Q29 stay unsupported until the requested executable population is established.

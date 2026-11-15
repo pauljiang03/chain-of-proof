@@ -73,7 +73,8 @@ references and the standalone second checker. All ten reported counterexamples
 now pass regression checks, including valid-case controls. Optical content checks
 use known bytes, and report summaries retain the limits of cited records. Fresh
 inputs and selected proof checks for both cases are complete. The next comparison
-uses a separately frozen runtime and readiness receipt; it has no new score yet.
+is running on both datasets with a separately frozen runtime and readiness receipt.
+It has no new score yet.
 
 ## Try it in 60 seconds
 

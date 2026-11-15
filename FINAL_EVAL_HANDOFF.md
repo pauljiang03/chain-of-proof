@@ -3,16 +3,19 @@
 Updated: 2026-11-15 UTC. Current ownership and measurements are in
 [WORKSTREAMS.md](WORKSTREAMS.md). Reader origins, answer-row checks, exact source
 checks and professional reports are integrated. Both stricter public contracts
-remain held. No new model experiment has run after these fixes. Native provider
-validation and full reference review remain incomplete.
+remain held for semantic evaluation. The separately labeled development comparison
+has started on both cases, using a frozen `cf97b96` runtime. No new score is
+available yet. Native provider validation and full reference review remain incomplete.
 
-**Implementation validation passed; dispatch needs its separate readiness receipt.** All ten reported counterexamples
+**Implementation validation and dispatch readiness passed.** All ten reported counterexamples
 pass checks on the integrated fixes, including valid-case controls. Both complete
 source snapshots were rebuilt after the UDF repairs. Current demos were refreshed
 and independently replayed. Report summaries preserve cited record meanings.
 Selected full-snapshot checks passed for both cases. The local archive records the
 validation chain. See ownership in [WORKSTREAMS.md](WORKSTREAMS.md). The answer
-terminal must receive the root readiness receipt before freeze or dispatch.
+terminal received the root readiness receipt and the metadata-repair supplement.
+It owns both live case lanes, replay and deterministic scoring. Do not duplicate
+those runs or modify their frozen runtime and inputs.
 
 The latest [combined batch](docs/SYSTEM_EVIDENCE_COVERAGE.md) passed at
 `445ef58`: 1,636 tests passed and two were skipped. The later UI merge at `8bf03a0`

@@ -6,17 +6,17 @@ The project is CONAN-F. The desktop app is Conan. The `cop` command and
 
 ## Ownership
 
-**Implementation validation passed.** All ten reported soundness fixes are
-integrated and pass regression checks with valid-case controls. Both complete
-source snapshots and selected proof checks are complete. The answer terminal
-holds dispatch until root issues the separate readiness receipt. Root owns the
-archive, integration, push and release decision.
+**Both cases are running in parallel.** The answer terminal launched fresh Sol
+6.1 A investigators from the frozen, clean `cf97b96` runtime. Each case then runs
+a fresh C investigator, with 900 seconds per live arm. B replays A exactly.
+No new accuracy result is available yet. The main integration was pushed at
+`e0831a2`. Later documentation and frontend work do not change the frozen runtime.
 
 | Owner | Current state |
 |---|---|
 | Root Codex | Owns integration, combined tests, complete fresh evidence, readiness, archives and pushes. Active worktree: `/private/tmp/cop-system-evidence-coverage`. Combined suite and later UI tests passed. |
-| Answer terminal (`01a1dc3d`) | Answer-reference fix, generated reference tests, demo refresh and capability routing integrated. Owns dispatch after root readiness. No model call or freeze has started. |
-| Third terminal (`01a1dd77`) | Reader fixes, ten-case regression, actual-media controls and selected cloud proof/projection checks on the final full Leakage snapshot passed. |
+| Answer terminal (`01a1dc3d`) | Controls the two live case lanes, deadlines, exact replay and deterministic scoring. No other terminal may launch duplicate trials. |
+| Third terminal (`01a1dd77`) | Reader/audit work passed. Coordinates the remaining frontend merge after the experiments finish and the frontend owner is ready. |
 | Root helper: formal types and events | Formal checks, qualified claim sentences, selected full Hacking proofs and public compatibility recheck complete. No private evaluator was read during the recheck. |
 | Root helper: host fields and review | Host fields and independent checker review complete. Reviewed the newer desktop changes and fixed unsupported summary claims. Native provider calls remain untested. |
 | Root helper: structured sources | Completed source-tested partition, configuration and Search fields. Now prepares and verifies the new local archive, preserving intermediate failures. |
@@ -73,11 +73,13 @@ leaves. Repeated alternatives count separately. These are not question-accuracy
 percentages. The [public gap plan](eval/PUBLIC_IMPLEMENTATION_GAPS.md) separates
 completed work, candidate capabilities and unresolved meanings/source selections.
 
-The user's matched Sol 6.1 experiment is authorized only after readiness. The
-answer terminal owns dispatch to avoid duplicate runs. Its prepared coordinator
+The user's matched Sol 6.1 experiment passed readiness and both A arms started.
+The answer terminal owns dispatch to avoid duplicate runs. Its coordinator
 and notes are outside the repo:
 `/private/tmp/cop-v3-experiment-coordinator.py` and
-`/private/tmp/cop-v3-experiment-dispatch.md`. Preparation is not a launch.
+`/private/tmp/cop-v3-experiment-dispatch.md`. The recorded parallel-case schedule
+retains A then C within each case and at most two live investigators. Shared-host
+timing is a limitation of this comparison.
 
 A compatible scoring derivative must be frozen before investigation. Original
 expected values, match rules, question denominators and measured submissions must
@@ -89,7 +91,17 @@ It supports an explicitly labeled development comparison under original matching
 rules. It does not assert semantic equivalence. All 60/31 questions and original
 46/31 scorable statuses remain; Data Leakage's other 14 questions remain visible.
 Hacking Q28/Q29 original-population bindings are unsupported. Normalization is off.
-The bundle remains held until final evidence, validation and protocol are accepted.
+The compatible development bundle passed the actual freeze validator. Hacking's
+first attempt exposed a packaging error: its private envelope lacked
+`public_contract_revision`. A new derivative adds only that field. All 31 question
+records and every other byte remain unchanged. The independent reference role
+verified this, then ran exact freeze and `validate_frozen`. The original bundle,
+failed preflight, readiness record and sealed archives remain unchanged.
+
+For every future case, run the actual freeze validator and `validate_frozen`
+before issuing readiness. A preparation script's own metadata check is not enough.
+Builders receive only the public reattestation; private answers stay with the
+reference and scoring roles.
 
 After readiness passes, create complete fresh snapshots and freeze the code,
 public contract, compatible private reference, facts, model and budget. A and C
