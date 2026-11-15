@@ -73,6 +73,20 @@ def case():
 
 
 class Narrative(unittest.TestCase):
+    def test_unbound_investigator_overview_is_separate_from_recorded_summary(self):
+        run = case()
+        overview = 'An unsupported inference with "a  b".\n<unsafe>'
+        run['case']['case_summary'] = overview
+        baseline = narrative.build(case())
+        story = narrative.build(run)
+        self.assertEqual(story['lead'], baseline['lead'])
+        self.assertEqual(story['points'], baseline['points'])
+        self.assertEqual(story['investigator_overview'], {'text': overview, 'status': 'unverified'})
+        rendered = render_html(run)
+        self.assertIn('Investigator overview (unverified)', rendered)
+        self.assertIn(html.escape(overview), rendered)
+        self.assertNotIn('<unsafe>', rendered)
+
     def test_prose_lead_keeps_identifiers_literals_and_source_time_limits(self):
         story = narrative.build(case())
         text = ' '.join(story['lead'])

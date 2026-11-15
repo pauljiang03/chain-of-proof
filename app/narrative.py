@@ -416,6 +416,11 @@ def build(run, ids=None):
     points = [devices_point, _folders(case), _merge('files', 'Files', _files(case), _recovered(case)), _disc(case), _mail(case),
               _web(case), _downloads(case), _cloud(case), _deleted(case), _notes(case),
               _merge('computer', 'Computer and accounts', _computer(case), _accounts(case))]
-    return {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings), 'lead': _lead(case),
+    result = {'schema_version': 1, 'zone': case.zone, 'findings': len(case.findings), 'lead': _lead(case),
             'points': [{name: value for name, value in point.items() if name != '_entries'} for point in points if point],
             'devices': devices}
+    metadata = run.get('case') if isinstance(run, dict) and isinstance(run.get('case'), dict) else {}
+    overview = _s(metadata.get('case_summary'))
+    if overview.strip():
+        result['investigator_overview'] = {'text': overview, 'status': 'unverified'}
+    return result

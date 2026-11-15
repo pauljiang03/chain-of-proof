@@ -148,6 +148,12 @@
     hero.append(el("h2", "", "Key findings"));
     const lead = array(story.lead).map(String).join(" ");
     if (lead) hero.append(el("p", "ov-lead", lead));
+    const overview = story.investigator_overview;
+    if (overview && overview.status === "unverified" && typeof overview.text === "string") {
+      const interpretation = card("Investigator overview (unverified)", "");
+      interpretation.append(el("p", "ov-lead exact-value", overview.text));
+      hero.append(interpretation);
+    }
     points.forEach((point) => {
       const row = el("div", "key-row"), body = el("div", "key-body");
       body.append(el("p", "", array(point.sentences).map(String).join(" ")));

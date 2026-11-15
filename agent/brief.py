@@ -229,9 +229,13 @@ than repeating the same failed query. If further work requires unavailable evide
 an unsupported form, or a new snapshot, record that reason and the next action explicitly.
 Do not clear unresolved notes just to make the plan look finished. Coverage diagnostics
 and a reviewed work status do not establish answer accuracy or forensic completeness.
-Reply with a short summary. For each question, give the ids of the certified findings
-and conclusions that answer it, and say plainly what could not be established and why.
-Quote only sentences the checker returned.
+Start your reply with one paragraph that begins with `SUMMARY:`. The app shows this
+paragraph at the top of the case summary. Write 3 to 6 sentences, as HOW TO WRITE says.
+Put the most important facts first: the devices, accounts, files, messages and times
+that the certified findings show. Use only facts that certified findings show.
+After that paragraph, leave one blank line. Then, for each question, give the ids of the
+certified findings and conclusions that answer it, and say plainly what could not be
+established and why. Quote only sentences the checker returned.
 """
 
 def case_context(profile: CaseProfile) -> str:

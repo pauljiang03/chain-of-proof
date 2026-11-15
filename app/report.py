@@ -147,6 +147,7 @@ th { color:var(--muted); background:var(--wash); font-weight:650; }
 .exhibits th:nth-child(2) { width:38%; }
 .short th:first-child { width:24%; } .short th:nth-child(2) { width:30%; } .short .mono { overflow-wrap:anywhere; white-space:pre-wrap; }
 .exact-statement { margin:12px 0; border-left:2px solid var(--line); padding-left:14px; }
+.exact-value { white-space:pre-wrap; overflow-wrap:anywhere; }
 .exhibits td { white-space:pre-wrap; }
 ol { padding-left:22px; } ol li { margin:6px 0; }
 code { font:13px ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--wash); padding:1px 5px; border-radius:4px; }
@@ -335,6 +336,9 @@ def _front(info, tz, case, findings, options, story, short=False):
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
+    if not short and story.get('investigator_overview'):
+        out.append('<div class="investigator-overview"><h3>Investigator overview (unverified)</h3>'
+                   '<p class="exact-value">' + _h(story['investigator_overview']['text']) + '</p></div>')
     if story.get('lead'):
         out.append('<p class="lead">' + ' '.join(_h(sentence) for sentence in story['lead']) + '</p>')
     if story['points']:

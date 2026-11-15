@@ -410,6 +410,7 @@ button.bar-row:hover { background: var(--panel-2); }
 .ov-item .item-hash { font: 0.6875rem/1.5 var(--mono); }
 
 /* Timeline */
+.exact-value { white-space: pre-wrap; overflow-wrap: anywhere; }
 .timeline-panel { display: flex; flex-direction: column; overflow: hidden; padding-bottom: 0; }
 .timeline-toolbar { flex-wrap: wrap; flex: none; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -700,4 +701,8 @@ body.resizing-rows * { cursor: row-resize !important; }
 @media (prefers-reduced-motion: reduce) { .drop-zone { transition: none; } }
 
 /* The prose summary at the top of Key findings. */
-.ov-hero .ov-lead { color: var(--text); font-size: 1rem; line-height: 1.55; max-width: 78ch; margin-top: 8px; }
+/* The heading and the paragraph share one card, so the heading lines up with the text. */
+.ov-hero { background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 16px 20px 18px; }
+.ov-hero h2 { font-size: 1.25rem; }
+.ov-hero .ov-lead { color: var(--text); font-size: 1rem; line-height: 1.6; max-width: none; margin-top: 8px; }
+.ov-hero .ov-byline { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }

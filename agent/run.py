@@ -37,6 +37,17 @@ from checker.facts import open_source
 from eval import gate, pipeline
 
 ROOT = Path(__file__).resolve().parent.parent
+SUMMARY_LIMIT = 1500
+
+
+def case_summary(text) -> str:
+    """The paragraph that starts with "SUMMARY:" in the investigator's closing reply, or ''."""
+    if not isinstance(text, str):
+        return ""
+    found = re.search(r"^[\s*#_]*SUMMARY[*_]*:[*_]*[ \t]*(.+?)(?:\n[ \t]*\n|\Z)", text, re.S | re.M)
+    return found.group(1).strip()[:SUMMARY_LIMIT] if found else ""
+
+
 INVESTIGATOR_TOOLS = ("forms", "sql", "fact", "check", "conclude", "plan", "update_question", "evidence_needs", "collect", "review", "answer", "inventory_page")
 
 
@@ -423,12 +434,15 @@ def _main(argv=None, *, resources) -> int:
                 "turns": None, "tool_calls": None, "seconds": round(time.monotonic() - started),
                 "ended": "backend_error", "is_error": True, "error_type": type(error).__name__}
         print(f"  stopped: backend failed ({meta['error_type']}); see run.json")
-    (run_dir / "summary.md").write_text(meta.pop("summary") + "\n")
+    closing = meta.pop("summary")
+    (run_dir / "summary.md").write_text(closing + "\n")
     case_metadata = dict(backend=args.backend, model=model, case_id=profile.case_id,
                         time_zone=profile.time_zone, profile_source=profile_source,
                         scoring_requested=plan.measured,
                         run_manifest="run-manifest.json",
                         facts_sha256=manifest["inputs"]["facts"]["sha256"], **meta)
+    if case_summary(closing):
+        case_metadata["case_summary"] = case_summary(closing)
     # Always run a final conservative review, even if the model skipped its tool.
     from agent.tools import Workbench
     try:
