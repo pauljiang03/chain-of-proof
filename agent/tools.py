@@ -29,6 +29,8 @@ STEP_LIMIT = 20_000_000     # stop runaway queries
 
 # One line per statement form: its arguments, and what the generated sentence says.
 FORMS = {
+    'attributeTuple': ('[[subject, role, value, "approved.role"], ...] (2 to 8 entries)',
+                       'A bounded set of approved typed attributes from one exact source subject. Every triple, distinct role and shared subject is checked. Values keep their native types; this does not establish personal identity, source authenticity or completeness.'),
     'attributeRecorded': ('[attributeSubject, role row, typed value row, "approved.role"]',
                           'A scoped source records this exact typed attribute. All three rows must share its observation identity; the role has a fixed Lean kind. See attribute_roles. Examination time is not event time.'),
     'attributesSameSubject': ('[subject, role, value, "role", subject, role, value, "role"]',

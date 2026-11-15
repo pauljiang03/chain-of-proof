@@ -8,11 +8,13 @@ from copy import deepcopy
 import re
 import json
 
+from checker.catalog import ROLES
+
 KEY = 'x-claim-requirement'
 ROW_KEY = 'x-claim-row'
 SCOPE_KEY = 'x-claim-scope'
 ORIGIN_KEYS = ('image', 'exhibit', 'source_snapshot', 'source_variant')
-SCOPE = ('Checks compatibility with declared public claim roles only. The requirement itself '
+SCOPE = ('Checks compatibility with declared public claim roles and same-part attribute conditions. The requirement itself '
          'needs review; compatibility does not prove question relevance, completeness or truth.')
 
 
@@ -21,7 +23,7 @@ def _name(value):
 
 
 def parse(raw):
-    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed'}
+    allowed = {'semantic_types', 'selectors', 'meaning', 'evidence_needed', 'attribute_conditions'}
     if not isinstance(raw, dict) or set(raw) - allowed:
         raise ValueError('invalid_public_claim_requirement')
     types = raw.get('semantic_types')
@@ -38,7 +40,33 @@ def parse(raw):
                        or not _name(row['form']) or not _name(row['field']) for row in selectors)
                 or len({(row['form'], row['field']) for row in selectors}) != len(selectors)):
             raise ValueError('invalid_public_claim_requirement_selectors')
+    if 'attribute_conditions' in raw:
+        conditions = raw['attribute_conditions']
+        if not isinstance(conditions, list) or not 1 <= len(conditions) <= 8:
+            raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+        seen = set()
+        for condition in conditions:
+            if not isinstance(condition, dict) or set(condition) != {'role', 'values'}:
+                raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+            role = condition['role']
+            if not isinstance(role, str) or role not in ROLES or role in seen:
+                raise ValueError('invalid_public_claim_requirement_attribute_conditions')
+            seen.add(role)
+            values = condition['values']
+            if not isinstance(values, list) or not 1 <= len(values) <= 32 or any(
+                    not _native_literal(value, ROLES[role].value_type) for value in values):
+                raise ValueError('invalid_public_claim_requirement_attribute_conditions')
     return deepcopy(raw)
+
+
+def _native_literal(value, kind):
+    return (type(value) is str and len(value) <= 2000 if kind == 'string' else
+            type(value) is int and value >= 0 if kind == 'integer' else
+            type(value) is bool if kind == 'boolean' else False)
+
+
+def _literal_key(value):
+    return json.dumps(value, ensure_ascii=True, allow_nan=False, sort_keys=True, separators=(',', ':'))
 
 
 def compatible(requirement, form, field, semantic_type):
@@ -47,12 +75,36 @@ def compatible(requirement, form, field, semantic_type):
                  or {'form': form, 'field': field} in requirement['selectors']))
 
 
-def check(raw, form, field, semantic_type):
+def check(raw, form, field, semantic_type, *, part_fields=None):
     requirement = parse(raw)
-    return {'status': 'compatible' if compatible(requirement, form, field, semantic_type) else 'incompatible',
-            'requirement': requirement,
-            'offered': {'form': form, 'field': field, 'semantic_type': semantic_type},
-            'scope': SCOPE}
+    result = {'status': 'compatible' if compatible(requirement, form, field, semantic_type) else 'incompatible',
+              'requirement': requirement,
+              'offered': {'form': form, 'field': field, 'semantic_type': semantic_type},
+              'scope': SCOPE}
+    if result['status'] != 'compatible':
+        return result
+    fields = part_fields if isinstance(part_fields, dict) else {}
+    for condition in requirement.get('attribute_conditions', []):
+        role = ROLES[condition['role']]
+        matches = [(name, row) for name, row in fields.items()
+                   if isinstance(row, dict) and row.get('semantic_type') == role.semantic_type]
+        diagnostic = {'role': condition['role'], 'values': deepcopy(condition['values']),
+                      'matching_fields': [name for name, _ in matches]}
+        if not matches:
+            diagnostic['status'] = 'missing'
+        elif len(matches) != 1:
+            diagnostic['status'] = 'ambiguous'
+        else:
+            value = matches[0][1].get('value')
+            diagnostic['offered_value'] = deepcopy(value)
+            diagnostic['status'] = ('compatible' if _native_literal(value, role.value_type)
+                                    and _literal_key(value) in [_literal_key(option) for option in condition['values']]
+                                    else 'incompatible')
+        result.setdefault('condition_checks', []).append(diagnostic)
+        if diagnostic['status'] != 'compatible':
+            result['status'] = 'incompatible'
+            result['reason'] = 'claim_attributes_do_not_meet_public_requirement'
+    return result
 
 
 def _semantic_types(spec):

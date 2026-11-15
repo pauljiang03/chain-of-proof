@@ -114,12 +114,17 @@ shutdown, browsing, scan completion or another historical event.
 | Form | Checked relation | Boundary |
 |---|---|---|
 | `attributeRecorded s r v role` | Subject kind, exact catalog role kind, exact declared value kind, and one common observation identity | Certifies the recorded field; reader interpretation remains an extraction premise |
+| `attributeTuple [[s,r,v,role], ...]` | Every complete typed attribute plus equality of every subject to the first | One atomic claim, 2–8 distinct approved roles. Does not establish selected-exhibit admission, simultaneous events, personal identity or completeness |
 | `attributesSameSubject s r v role s2 r2 v2 role2` | Both complete attributes plus exact scoped subject equality | Source co-occurrence does not prove personal identity, ownership, simultaneous activity or habitual use |
 | `attributeValuesAgree` (same arguments) | Both complete attributes, one native value type, same subject and exact encoded value equality | Does not infer causation or authenticity |
 | `imageDigestsAgree s r v s2 r2 v2 algorithm` | Fixed logical/acquisition roles for MD5 or SHA-1, same image subject and equal digests | Missing checksums and mismatches do not certify; equality does not authenticate original acquisition |
 
 `recordedAttribute_sound`, role/type uniqueness, `attributesSameSubject_sound` and
 `attributeValuesAgree_sound` prove these obligations for arbitrary fact lists.
+`attributeTuple_sound` proves that every tuple member retains the complete
+typed-attribute and exact subject-link obligations. Tuple length and duplicate-role
+limits belong to the public syntax and are reapplied during independent replay.
+Tuple field order is preserved; none is silently selected, dropped or overwritten.
 Recorded counters remain scoped reader observations: this rule does not prove the
 reader enumerated every account, deleted entry or Recycle Bin file. Census forms
 separately prove counts of extracted records. A scanner match may be a false

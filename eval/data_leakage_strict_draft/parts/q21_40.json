@@ -297,7 +297,7 @@
     },
     {
       "id": "Q23",
-      "prompt": "Identify all traces related to \u2018renaming\u2019 of files in Windows Desktop. (It should be considered only during a date range between 2015-03-23 and 2015-03-24.) [Hint: the parent directories of renamed files were deleted and their MFT entries were also overwritten. Therefore, you may not be able to find their full paths.]",
+      "prompt": "Identify all traces related to ‘renaming’ of files in Windows Desktop. (It should be considered only during a date range between 2015-03-23 and 2015-03-24.) [Hint: the parent directories of renamed files were deleted and their MFT entries were also overwritten. Therefore, you may not be able to find their full paths.]",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -394,7 +394,7 @@
     },
     {
       "id": "Q24",
-      "prompt": "What is the IP address of company\u2019s shared network drive?",
+      "prompt": "What is the IP address of company’s shared network drive?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -422,7 +422,7 @@
     },
     {
       "id": "Q25",
-      "prompt": "List all directories that were traversed in \u2018RM#2\u2019.",
+      "prompt": "List all directories that were traversed in ‘RM#2’.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -494,7 +494,7 @@
     },
     {
       "id": "Q26",
-      "prompt": "List all files that were opened in \u2018RM#2\u2019.",
+      "prompt": "List all files that were opened in ‘RM#2’.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -566,7 +566,7 @@
     },
     {
       "id": "Q27",
-      "prompt": "List all directories that were traversed in the company\u2019s network drive.",
+      "prompt": "List all directories that were traversed in the company’s network drive.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -638,7 +638,7 @@
     },
     {
       "id": "Q28",
-      "prompt": "List all files that were opened in the company\u2019s network drive.",
+      "prompt": "List all files that were opened in the company’s network drive.",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1637,7 +1637,7 @@
     },
     {
       "id": "Q38",
-      "prompt": "Where are \u2018Thumbcache\u2019 files located?",
+      "prompt": "Where are ‘Thumbcache’ files located?",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1647,10 +1647,48 @@
               "type": "string",
               "x-claim-requirement": {
                 "semantic_types": [
-                  "needs_thumbcache_container_location_paths"
+                  "recorded_attribute_thumbcache_container_path_string"
                 ],
-                "meaning": "Q38 exact answer leaf /answer_schema/properties/paths/items: paths in the scope and sense required by the public prompt.",
-                "evidence_needed": "A generic file path or source.path role has no Thumbcache-container subtype or category restriction. Thumbnail fileSeen paths can be indexed document paths or cache identifiers, not the cache container path. Need a reviewed inventory-category/path relation; list completeness is separately unproved."
+                "meaning": "Exact path of a format-validated Thumbcache container.",
+                "evidence_needed": "Use the exact validated container subtype role, never generic source.path, fileRecorded.path or a filename/category guess. A tuple value preserves its declared role and native type within one bounded same-source-subject atomic part (maximum eight attributes); every backing record must satisfy the selected evidence scope. Individual container paths do not establish complete enumeration or document association.",
+                "selectors": [
+                  {
+                    "form": "attributeRecorded",
+                    "field": "value"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_0"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_1"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_2"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_3"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_4"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_5"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_6"
+                  },
+                  {
+                    "form": "attributeTuple",
+                    "field": "value_7"
+                  }
+                ]
               }
             }
           }
@@ -1676,7 +1714,7 @@
     },
     {
       "id": "Q39",
-      "prompt": "Identify traces related to confidential files stored in Thumbcache. (Include \u2018256\u2019 only)",
+      "prompt": "Identify traces related to confidential files stored in Thumbcache. (Include ‘256’ only)",
       "answer_schema": {
         "type": "object",
         "properties": {
@@ -1814,10 +1852,48 @@
             "type": "string",
             "x-claim-requirement": {
               "semantic_types": [
-                "needs_sticky_note_container_location_path"
+                "recorded_attribute_sticky_notes_container_path_string"
               ],
-              "meaning": "Q40 exact answer leaf /answer_schema/properties/path: path in the scope and sense required by the public prompt.",
-              "evidence_needed": "noteFound exposes note text and application, while its container path remains provenance. Generic file paths or source.path lack a Sticky Notes container subtype/category restriction. Need a reviewed container-classification/path rule."
+              "meaning": "Exact path of a format-validated Sticky Notes container.",
+              "evidence_needed": "Use the exact validated container subtype role, never generic source.path, fileRecorded.path or a filename/category guess. A tuple value preserves its declared role and native type within one bounded same-source-subject atomic part (maximum eight attributes); every backing record must satisfy the selected evidence scope. Individual container paths do not establish complete enumeration or document association.",
+              "selectors": [
+                {
+                  "form": "attributeRecorded",
+                  "field": "value"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_0"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_1"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_2"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_3"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_4"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_5"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_6"
+                },
+                {
+                  "form": "attributeTuple",
+                  "field": "value_7"
+                }
+              ]
             }
           }
         },
@@ -2739,8 +2815,8 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/paths/items",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "A generic file path or source.path role has no Thumbcache-container subtype or category restriction. Thumbnail fileSeen paths can be indexed document paths or cache identifiers, not the cache container path. Need a reviewed inventory-category/path relation; list completeness is separately unproved."
+          "status": "supported_narrow_source_field",
+          "rationale": "Exact path of a format-validated Thumbcache container. The reader must validate the container format before emitting thumbcache.container.path. Allow attributeRecorded.value or the matching typed attributeTuple.value_0 through value_7. Tuple coherence and all-backing-record source checks remain required; generic paths remain unsupported. No claim of list completeness, note authorship or associated document identity is added."
         }
       ],
       "narrow_observations": [
@@ -2757,7 +2833,8 @@
           "does_not_establish": "A generic file path or source.path role has no Thumbcache-container subtype or category restriction. Thumbnail fileSeen paths can be indexed document paths or cache identifiers, not the cache container path. Need a reviewed inventory-category/path relation; list completeness is separately unproved."
         }
       ],
-      "row_policies": []
+      "row_policies": [],
+      "tuple_selector_policy": "A maximum of eight declared attributes may share one source subject in one atomic tuple part. Each projected value retains its own exact catalog role and native type; all supporting records remain subject to strict evidence-scope checks."
     },
     {
       "question_id": "Q39",
@@ -2835,8 +2912,8 @@
       "decisions": [
         {
           "schema_pointer": "/answer_schema/properties/path",
-          "status": "unsupported_semantic_requirement",
-          "rationale": "noteFound exposes note text and application, while its container path remains provenance. Generic file paths or source.path lack a Sticky Notes container subtype/category restriction. Need a reviewed container-classification/path rule."
+          "status": "supported_narrow_source_field",
+          "rationale": "Exact path of a format-validated Sticky Notes container. The reader must validate the container format before emitting sticky_notes.container.path. Allow attributeRecorded.value or the matching typed attributeTuple.value_0 through value_7. Tuple coherence and all-backing-record source checks remain required; generic paths remain unsupported. No claim of list completeness, note authorship or associated document identity is added."
         }
       ],
       "narrow_observations": [
@@ -2859,7 +2936,8 @@
           "does_not_establish": "noteFound exposes note text and application, while its container path remains provenance. Generic file paths or source.path lack a Sticky Notes container subtype/category restriction. Need a reviewed container-classification/path rule."
         }
       ],
-      "row_policies": []
+      "row_policies": [],
+      "tuple_selector_policy": "A maximum of eight declared attributes may share one source subject in one atomic tuple part. Each projected value retains its own exact catalog role and native type; all supporting records remain subject to strict evidence-scope checks."
     }
   ]
 }

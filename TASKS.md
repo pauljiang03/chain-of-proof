@@ -5,7 +5,10 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 
 ## Ready
 
-- Final combined regression at `f8ff658`: 1,024 tests run, 1,023 passed and one platform skip. This includes the source guard, public derivatives, professional report and updated demo certificates.
+- Combined validation at `6c1031f`: 1,100 tests ran, 1,099 passed and one platform test skipped. Thirteen selected real-source certificates passed independent replay; 22 supported public bindings were retained. These checks are not benchmark scores.
+- The agent-facing field catalog is 49.6% smaller, with the same fields and full internal verification catalog. Its focused checks and the final UI and public-draft checks pass.
+- Bounded same-subject tuples, three exact OS fields, five execution metadata roles, five validated artifact-location roles, Unicode mail subject/body fields and OOXML core metadata are implemented. Strict answer choices and same-part source conditions are integrated. See [the implementation and source limits](docs/SUPPORTED_FIELDS.md).
+- Earlier combined regression at `f8ff658`: 1,024 tests run, 1,023 passed and one platform skip. This includes the source guard, public derivatives, professional report and updated demo certificates.
 - Answer-row checks, explicit reader origins and exact source enforcement are integrated. Four selected real-source certificates passed independent replay; four correct source projections were retained and eight deliberate source/hash mismatches were refused. Both public contract derivatives remain held. See [the source checks and remaining gaps](docs/CORRECTNESS_FIXES.md).
 - Readable evidence cards, a 32-certificate synthetic frontend sample and professional examiner reports are merged and pushed. The report keeps administrative details, certified source statements and examiner judgments distinct.
 - The combined source, strict answer-policy and durable-checkpoint batch passed 913 tests: 912 passed and one platform skip. Application binary metadata now supplies literal product/version fields; historical journal paths retain explicit missing-ancestor diagnostics. See [the fixes and limitations](docs/CORRECTNESS_FIXES.md).
@@ -36,8 +39,8 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 ## Next
 
 1. Hold new model experiments while the stricter public contracts have unresolved source selections and required support. The row, source-scope, execution-source, strict field-policy and durable-checkpoint changes are integrated. The Hacking pilot is prepared but has never launched. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
-2. Add bounded same-subject tuples and exact OS fields, execution-artifact timestamp/counter meanings, and format-validated artifact-container paths. The public-only audit targets 12 additional field shapes, not a predicted score. Historical evidence gaps and complete-list claims remain separate problems.
-3. Add bounded mail-body and document-metadata support, and preserve large inventories in final answers. Do not infer source absence from missing output.
+2. Review and implement remaining field meanings and relations. The latest batch adds support for 12 field shapes; Data Leakage still has 317 unsupported leaf occurrences and Hacking has 25 unsupported leaves. Historical evidence gaps and complete-list claims remain separate problems.
+3. Extend content support where required beyond Unicode PFF properties and bounded OOXML core metadata. Preserve large inventories in final answers. Do not infer source absence from missing output.
 4. Resolve the derivative contracts' unavailable source selections and unsupported joins. V3 gives A and C the same public binding preview and durable checkpoints. Freeze new code and inputs for any future matched trial. No new accuracy score is claimed for these changes.
 5. Complete the 14 unresolved reference contracts and the model/budget setup for a full A/B/C/D comparison. Do not use an LLM judge or silently alter the published source.
 6. Validate the native product backend with an approved destination. The Claude login works, but automatic approval review blocked that test under the user's Sol-only instruction. The Sol bridge does not validate native provider orchestration.

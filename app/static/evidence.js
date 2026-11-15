@@ -153,9 +153,18 @@
   }
   function recordDetails(entry, model) {
     const row = entry.row, summary = [el("p", "statement", entity(row).title), el("p", "detail-intro", spec(row)[1])];
+    const details = el("dl", "entity-properties source-properties");
+    properties(row).forEach(property => {
+      const pair = el("div");
+      pair.append(el("dt", "", property.label), el("dd", "", property.value));
+      details.append(pair);
+    });
     const links = el("div", "evidence-links");
     entry.findings.forEach(index => { const f = model.findings[index]; links.append(button(text(f.finding_id) + " · exact statement & proof", () => CONAN.app.openFinding(f), "text-button")); });
-    CONAN.app.inspect("Source record #" + text(row.id), summary, [CONAN.app.recordCard(row), links], null);
+    const findings = el("details", "entity-details"), source = el("details", "entity-details");
+    findings.append(el("summary", "", "Supporting findings (" + entry.findings.size + ")"), links);
+    source.append(el("summary", "", "Full source record & provenance"), CONAN.app.recordCard(row));
+    CONAN.app.inspect("Source record #" + text(row.id), summary, [details, findings, source], null);
     CONAN.app.switchTab("findings");
   }
   function propertyList(values, model, compact=false) {
@@ -169,7 +178,8 @@
     return dl;
   }
   function previewProperties(group, limit=4) {
-    const useful = group.properties.filter(p => !["Image", "Snapshot", "Evidence item", "Time meaning"].includes(p.label));
+    const useful = group.properties.filter(p => !["Image", "Snapshot", "Evidence item", "Time meaning"].includes(p.label)
+      && !(p.label === "Source type" && p.value === "deterministic"));
     const labels = new Set(), output = [];
     for (const property of useful) if (!labels.has(property.label)) { labels.add(property.label); output.push(property); }
     const stamp = output.find(p => p.label === "Recorded time");
@@ -238,10 +248,12 @@
       header.append(el("h4", "", category.label), el("span", "", String(groups.length)));
       box.append(header);
       // Named values lead the case summary rather than a certificate counter.
-      groups.slice(0, 3).forEach(group => {
+      // Root directories remain in the full inventory; named files lead the preview.
+      const named = groups.filter(group => category.key !== "files" || !/^(?:[\\/]+|[a-z]:[\\/]?)$/i.test(group.title));
+      (named.length ? named : groups).slice(0, 3).forEach(group => {
         const line = el("div", "highlight-item");
         line.append(button(group.title, () => CONAN.app.browseEvidence(category.key, text(group.records[0].row.obj_text)), "text-button"));
-        const p = group.properties.find(p => ["Device serial", "Sender", "Profile path", "Source type", "Property", "Original path", "Path", "Browser"].includes(p.label) && p.value !== group.title) || previewProperties(group, 2).find(p => p.value !== group.title);
+        const p = group.properties.find(p => ["Device serial", "Sender", "Profile path", "Property", "Original path", "Path", "Browser"].includes(p.label) && p.value !== group.title) || previewProperties(group, 2).find(p => p.value !== group.title);
         if (p) line.append(el("span", "", p.label + ": " + p.value));
         box.append(line);
       });

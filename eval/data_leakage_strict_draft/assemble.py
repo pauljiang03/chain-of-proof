@@ -84,6 +84,7 @@ def build():
             field_rows.append({'question_id': question['id'], 'path': row['path'],
                                'branches': row.get('branches', []), 'status': row['status'],
                                'available_fields': row.get('available_fields', []),
+                               'attribute_conditions': row['requirement'].get('attribute_conditions', []),
                                'evidence_needed': row['requirement']['evidence_needed']})
     peers = [json.loads((HERE / 'parts' / ('peer_' + name)).read_text()) for name in PARTS]
     inputs = [ORIGINAL, ROOT / 'eval/QUESTIONS.md', ROOT / 'agent/answer_projection.py',
@@ -103,6 +104,7 @@ def build():
                    'missing_or_invalid': 0,
                    'row_policies': len(row_policies),
                    'scope_policies': len(scope_policies),
+                   'conditioned_leaf_occurrences': sum(bool(row['attribute_conditions']) for row in field_rows),
                    'unavailable_scope_policies': sum(row['status'] == 'unavailable' for row in scope_policies),
                    'same_claim_part_policies': sum(row['mode'] == 'same_claim_part' for row in row_policies),
                    'independent_section_policies': sum(row['mode'] == 'independent' for row in row_policies),

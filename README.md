@@ -66,6 +66,11 @@ claim. Source checks require the selected image, exhibit, source view and artifa
 state. The two stricter public test contracts remain on hold where required support
 or source selections are missing. These changes have no new accuracy score.
 
+The latest [typed-field implementation](docs/SUPPORTED_FIELDS.md) adds coherent
+multi-field proofs, exact OS fields, execution-artifact metadata, validated artifact
+paths, Unicode mail content and OOXML metadata. Public answer conditions also apply
+when an agent submits only part of a row. Unsupported meanings stay explicit.
+
 ## Try it in 60 seconds
 
 ```sh

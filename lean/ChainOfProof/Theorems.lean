@@ -368,6 +368,33 @@ theorem attributesSameSubject_sound (fs : List Fact) (s r v s' r' v' : Nat) (rk 
     ∃ x y, lookup fs s = some x ∧ lookup fs s' = some y ∧ x.aux = y.aux := by
   simpa [Sets.attributesSameSubject, holds_both_iff, holds_link_iff, Fact.get] using h
 
+/-- Every tuple member retains its complete typed proof and joins to the first
+    source subject. This is not an unconnected conjunction of independently true fields. -/
+theorem attributeTuple_sound (fs : List Fact) (first : Sets.AttributeRef)
+    (rest : List Sets.AttributeRef)
+    (h : holds fs (Sets.attributeTuple first rest) = true) :
+    holds fs (Sets.recordedAttribute first.subject first.role first.value
+      first.roleKind first.valueKind) = true ∧
+    ∀ next ∈ rest, holds fs (Sets.attributesSameSubject
+      first.subject first.role first.value next.subject next.role next.value
+      first.roleKind first.valueKind next.roleKind next.valueKind) = true := by
+  have and_split (a b : Bool) (hab : a && b = true) : a = true ∧ b = true := by
+    cases a <;> cases b
+    · cases hab
+    · cases hab
+    · cases hab
+    · exact ⟨rfl, rfl⟩
+  induction rest with
+  | nil => exact ⟨h, fun _ hm => nomatch hm⟩
+  | cons next rest ih =>
+    have split := and_split _ _ h
+    obtain ⟨hfirst, hrest⟩ := ih split.2
+    refine ⟨hfirst, ?_⟩
+    intro member hm
+    cases hm with
+    | head => exact split.1
+    | tail _ inside => exact hrest member inside
+
 /-- Value agreement keeps the subject/role obligations; it is not a free comparison
     of two matching strings from unrelated evidence. -/
 theorem attributeValuesAgree_sound (fs : List Fact) (s r v s' r' v' : Nat) (rk rk' vk : Kind)
