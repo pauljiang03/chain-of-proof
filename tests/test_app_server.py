@@ -122,8 +122,9 @@ class AppServer(unittest.TestCase):
         status, headers, body = self.request("/api/config")
         self.assertEqual(status, 200)
         config = json.loads(body)
-        self.assertEqual(set(config), {"token", "chooser", "defaults", "backends", "active_run"})
+        self.assertEqual(set(config), {"token", "chooser", "drop", "defaults", "backends", "active_run"})
         self.assertIs(config["chooser"], False)                 # a plain browser has no file panel
+        self.assertIs(config["drop"], False)                    # and does not know where a dropped file is
         self.assertEqual(config["token"], self.server.token)
         self.assertGreaterEqual(len(config["token"]), 32)
         self.assertEqual(headers["Cache-Control"], "no-store")
@@ -142,6 +143,24 @@ class AppServer(unittest.TestCase):
         self.assertIsNone(result["run"])
         self.assertEqual(result["events"][0]["arguments"], {"fact_id": 1})
         self.assertEqual(self.manager.calls, [("get", "saved/run1.2")])
+
+    def test_dropped_file_location_exists_only_when_the_desktop_window_supplies_it(self):
+        self.assert_error(404, self.request("/api/dropped", method="POST", payload={"name": "facts.json"}))
+        asked = []
+        self.server.dropped = lambda name: asked.append(name) or ("/cases/one/" + name if name == "facts.json" else "")
+        self.assertIs(json.loads(self.request("/api/config")[2])["drop"], True)
+        status, _, body = self.request("/api/dropped", method="POST", payload={"name": "facts.json"})
+        self.assertEqual((status, json.loads(body)), (200, {"path": "/cases/one/facts.json"}))
+        self.assertEqual(json.loads(self.request("/api/dropped", method="POST", payload={"name": "other.json"})[2]), {"path": ""})
+        before = len(asked)
+        for bad in ({}, {"name": ""}, {"name": "x" * 256}, {"name": "../facts.json"}, {"name": "a\\b.json"}, {"name": 7},
+                    {"name": "facts.json", "directory": "/"}):
+            with self.subTest(bad=bad):
+                self.assert_error(404, self.request("/api/dropped", method="POST", payload=bad))
+        self.assert_error(403, self.request("/api/dropped", method="POST", payload={"name": "facts.json"}, token=False))
+        self.assertEqual(len(asked), before)                    # a refused request reaches nothing
+        self.server.dropped = lambda name: None
+        self.assertEqual(json.loads(self.request("/api/dropped", method="POST", payload={"name": "facts.json"})[2]), {"path": ""})
 
     def test_file_chooser_exists_only_when_the_desktop_window_supplies_one(self):
         self.assert_error(404, self.request("/api/choose", method="POST", payload={}))
@@ -291,7 +310,7 @@ class AppServer(unittest.TestCase):
         options = self.manager.calls[-1][3]
         self.assertEqual(self.manager.calls[-1][:3], ("report", "saved", "html"))
         expected = {key: "" for key, _ in COVER}
-        expected.update(ids=["F1", "F2"], sections=frozenset(("needs", "proofs")),
+        expected.update(ids=["F1", "F2"], sections=frozenset(("needs", "proofs")), brief=False,
                         reference="R-1", examiner="A B", organisation="Lab")
         self.assertEqual(options, expected)
         self.request("/api/report?name=saved&requested_by=Det.%20X&authority=Warrant%207&purpose=" + "p" * 600
@@ -314,10 +333,14 @@ class AppServer(unittest.TestCase):
         self.request("/api/report?name=saved&sections=")      # findings alone
         self.assertEqual(self.manager.calls[-1][3]["sections"], frozenset())
         self.assertIsNone(self.manager.calls[-1][3]["ids"])
+        self.request("/api/report?name=saved&brief=1&sections=")   # the short report
+        self.assertEqual((self.manager.calls[-1][3]["brief"], self.manager.calls[-1][3]["sections"]), (True, frozenset()))
+        self.request("/api/report?name=saved&brief=1")
+        self.assertEqual((self.manager.calls[-1][3]["brief"], self.manager.calls[-1][3]["sections"]), (True, None))
         self.request("/api/report?name=saved")                # no options: the complete report, as before
         self.assertEqual(self.manager.calls[-1], ("report", "saved", "html"))
         before = len(self.manager.calls)
-        for bad in ("ids=", "ids=F1,F1", "ids=a%20b", "sections=findings", "sections=needs,needs",
+        for bad in ("ids=", "ids=F1,F1", "ids=a%20b", "sections=findings", "sections=needs,needs", "brief=0", "brief=", "format=md&brief=1",
                     "examiner=" + "x" * 201, "purpose=" + "x" * 601, "reference=a%0Ab", "format=md&ids=F1", "format=json&sections=needs",
                     "ids=F1&unknown=1"):
             with self.subTest(bad=bad):

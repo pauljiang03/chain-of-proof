@@ -230,10 +230,15 @@
   };
 
   // ---- the timeline view -----------------------------------------------------
-  const LEFT = 152, RIGHT = 14, TOP = 6, LANE = 46, AXIS = 42, COLUMN = 3, LIST_MAX = 200;
+  const LEFT = 152, RIGHT = 14, TOP = 6, AXIS = 42, COLUMN = 3, LIST_MAX = 200, LANE_BASE = 46, LANE_MIN = 20, LANE_MAX = 96;
+  // The height of one row. The handle under the chart changes it, so the list below gets the space the chart gives up.
+  let LANE = LANE_BASE;
+  // Where things sit inside a row. A short row puts its key events on its lines and drops the count.
+  const row = () => (LANE >= 40 ? { dot: 13, top: 24, length: LANE - 30, name: 22, count: 36, zone: 23 }
+    : { dot: LANE / 2, top: 4, length: LANE - 8, name: LANE / 2 + 4, count: 0, zone: LANE });
   const view = {
     model: null, name: null, off: new Set(), query: "", keyOnly: true, t0: 0, span: 0, width: 0,
-    lanes: [], shown: [], times: [], selected: null, parts: null, frame: 0, tween: 0, listTimer: 0, drag: null,
+    lanes: [], shown: [], times: [], selected: null, parts: null, frame: 0, tween: 0, listTimer: 0, drag: null, sized: false,
   };
   const still = () => typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -262,7 +267,7 @@
       chip.append(dot(index), LANES[index].name, el("small", "", number.format(count.events)));
       chip.addEventListener("click", () => {
         if (view.off.has(index)) view.off.delete(index); else view.off.add(index);
-        chips(); refilter(); layout(); schedule();
+        chips(); refilter(); fit(); layout(); schedule();
       });
       host.append(chip);
     });
@@ -324,12 +329,13 @@
     const picked = svg("g", { class: "picked", visibility: "hidden" });
     picked.append(svg("line", { y1: 0, y2: LANE }), svg("circle", { r: 8 }));
     root.append(defs);
+    const inside = row();
     view.lanes.forEach((lane, i) => {
       const y = TOP + i * LANE;
-      lane.count = svg("text", { class: "lane-count", x: 26, y: y + 36 }, "");
+      lane.count = svg("text", { class: "lane-count", x: 26, y: y + inside.count, visibility: inside.count ? "visible" : "hidden" }, "");
       root.append(svg("rect", { class: "lane-bg" + (i % 2 ? " alt" : ""), x: 0, y, width: view.width, height: LANE }),
-        svg("circle", { class: "lane-dot c" + lane.index, cx: 14, cy: y + 18, r: 4.5 }),
-        svg("text", { class: "lane-name", x: 26, y: y + 22 }, LANES[lane.index].name), lane.count);
+        svg("circle", { class: "lane-dot c" + lane.index, cx: 14, cy: y + inside.name - 4, r: 4.5 }),
+        svg("text", { class: "lane-name", x: 26, y: y + inside.name }, LANES[lane.index].name), lane.count);
       const group = svg("g", { class: "c" + lane.index });
       lane.paths = [1, 2, 3].map((level) => svg("path", { class: "ticks t" + level }));
       lane.dots = svg("g", {});
@@ -360,12 +366,13 @@
     if (zone.local) axis.push(svg("text", { class: "axis-label start", x: 12, y: bottom + 34 }, zone.name));
     parts.axis.replaceChildren(...axis);
     let inView = 0, keys = 0;
+    const inside = row();
     view.lanes.forEach((lane, i) => {
       const y = TOP + i * LANE, ms = lane.ms, a = lower(ms, view.t0), b = lower(ms, end);
       // One line per three-pixel column; a darker line means more records share that moment.
       const d = ["", "", ""];
       let column = -1, n = 0;
-      const flush = () => { if (n) d[n === 1 ? 0 : n <= 5 ? 1 : 2] += "M" + (LEFT + column * COLUMN + 1) + " " + (y + 24) + "v16"; };
+      const flush = () => { if (n) d[n === 1 ? 0 : n <= 5 ? 1 : 2] += "M" + (LEFT + column * COLUMN + 1) + " " + (y + inside.top) + "v" + inside.length; };
       for (let j = a; j < b; j += 1) {
         const c = Math.floor(((ms[j] - view.t0) * scale) / COLUMN);
         if (c !== column) { flush(); column = c; n = 0; }
@@ -392,7 +399,7 @@
         joined.push(item);
       }
       lane.dots.replaceChildren(...joined.map((item) => {
-        const x = (item.first + item.last) / 2, cy = y + 13;
+        const x = (item.first + item.last) / 2, cy = y + inside.dot;
         if (item.n === 1) return svg("circle", { class: "mark", cx: x, cy, r: 4.5 });
         const width = wide(item.n), badge = svg("g", { class: "cluster" });
         badge.append(svg("rect", { x: x - width / 2, y: cy - 7.5, width, height: 15, rx: 7.5 }), svg("text", { x, y: cy + 3.5 }, item.n));
@@ -406,7 +413,7 @@
     if (lane >= 0 && x >= LEFT && x <= LEFT + plot) {
       parts.picked.setAttribute("visibility", "visible");
       parts.picked.setAttribute("transform", "translate(" + x + "," + (TOP + lane * LANE) + ")");
-      parts.picked.lastChild.setAttribute("cy", chosen.marked ? 13 : 32);
+      parts.picked.lastChild.setAttribute("cy", chosen.marked ? inside.dot : inside.top + inside.length / 2);
     } else parts.picked.setAttribute("visibility", "hidden");
     $("timeline-range").textContent = F.minute.format(view.t0) + " – " + F.minute.format(end) + " " + zoneNote() + " · "
       + number.format(inView) + (inView === 1 ? " record" : " records") + " in view, " + number.format(keys) + (keys === 1 ? " key event" : " key events");
@@ -479,7 +486,7 @@
     const index = Math.floor((py - TOP) / LANE), lane = view.lanes[index];
     if (!lane) return null;
     const each = view.span / parts.plot, at = view.t0 + (px - LEFT) * each;
-    let found = py - TOP - index * LANE < 23 ? nearest(lane.marked, lane.markedMs, at, 9 * each, 5) : { count: 0, items: [] };
+    let found = py - TOP - index * LANE < row().zone ? nearest(lane.marked, lane.markedMs, at, 9 * each, 5) : { count: 0, items: [] };
     if (!found.count) found = nearest(lane.items, lane.ms, at, 4 * each, 5);
     return { at, lane, ...found };
   }
@@ -553,11 +560,66 @@
     $("timeline-all").addEventListener("click", () => { if (view.model && view.model.range) go(allView(), true); });
     $("timeline-search").addEventListener("input", (event) => { view.query = event.target.value.trim().toLowerCase(); refilter(); layout(); schedule(); });
     $("timeline-key-only").addEventListener("change", (event) => { view.keyOnly = event.target.checked; list(); });
-    if (typeof ResizeObserver === "function") new ResizeObserver(() => measure()).observe(host);
+    if (typeof ResizeObserver === "function") { const watch = new ResizeObserver(() => measure()); watch.observe(host); watch.observe($("panel-timeline")); }
+    split();
+  }
+  // The edge between the chart and the list can be dragged. Arrow keys move it too; double-click or Enter restores it.
+  function split() {
+    const handle = $("resize-timeline"), key = "conan.timeline.row";
+    const rows = () => Math.max(1, view.lanes.length);
+    const keep = () => { try { localStorage.setItem(key, String(LANE)); } catch (_) { /* the size lasts for this window only */ } };
+    const set = (height, most = LANE_MAX) => {
+      const next = Math.round(Math.max(LANE_MIN, Math.min(most, LANE_MAX, height)) * 2) / 2;
+      handle.setAttribute("aria-valuenow", String(Math.round(next)));
+      view.sized = true;
+      if (next === LANE) return;
+      LANE = next;
+      layout(); draw();
+    };
+    const reset = () => { view.sized = false; LANE = LANE_BASE; fit(); handle.setAttribute("aria-valuenow", String(Math.round(LANE))); layout(); draw(); try { localStorage.removeItem(key); } catch (_) { /* nothing was kept */ } };
+    try { const saved = Number(localStorage.getItem(key)); if (saved >= LANE_MIN && saved <= LANE_MAX) { LANE = saved; view.sized = true; } } catch (_) { /* start at the standard height */ }
+    handle.setAttribute("aria-valuemin", String(LANE_MIN)); handle.setAttribute("aria-valuemax", String(LANE_MAX)); handle.setAttribute("aria-valuenow", String(Math.round(LANE)));
+    handle.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      // The list keeps at least three rows of its own, however far down the edge is pulled.
+      const from = event.clientY, start = LANE, most = start + Math.max(0, $("timeline-list").clientHeight - 96) / rows();
+      try { handle.setPointerCapture(event.pointerId); } catch (_) { /* the drag still works while the pointer stays on the handle */ }
+      handle.classList.add("dragging"); document.body.classList.add("resizing-rows");
+      const move = (step) => set(start + (step.clientY - from) / rows(), Math.max(start, most));
+      const done = () => {
+        handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", done); handle.removeEventListener("pointercancel", done);
+        handle.classList.remove("dragging"); document.body.classList.remove("resizing-rows");
+        keep();
+      };
+      handle.addEventListener("pointermove", move); handle.addEventListener("pointerup", done); handle.addEventListener("pointercancel", done);
+    });
+    handle.addEventListener("dblclick", reset);
+    handle.addEventListener("keydown", (event) => {
+      const step = (event.shiftKey ? 64 : 16) / rows();
+      if (event.key === "ArrowDown") set(LANE + step);
+      else if (event.key === "ArrowUp") set(LANE - step);
+      else if (event.key === "Home") set(LANE_MIN);
+      else if (event.key === "End") set(LANE_MAX);
+      else if (event.key === "Enter") reset();
+      else return;
+      if (view.sized) keep();
+      event.preventDefault();
+    });
+  }
+  // Until the user picks a height, a short window makes the rows shorter so that the list keeps about five lines.
+  function fit() {
+    if (view.sized) return false;
+    const room = $("timeline-host").clientHeight + $("timeline-list").clientHeight;
+    if (!room) return false;
+    const next = Math.max(26, Math.min(LANE_BASE, Math.floor((room - 150 - TOP - AXIS) / Math.max(1, view.lanes.length))));
+    if (next === LANE) return false;
+    LANE = next;
+    return true;
   }
   function measure() {
-    const width = Math.floor($("timeline-host").clientWidth);
-    if (!width || width === view.width) return;
+    const width = Math.floor($("timeline-host").clientWidth), refit = fit();
+    if (!width || (width === view.width && !refit)) return;
     view.width = width;
     layout();
     draw();

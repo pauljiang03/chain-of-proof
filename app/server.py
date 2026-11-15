@@ -27,7 +27,7 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/static/style.css": ("style.css", "text/css; charset=utf-8")}
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
-REPORT_OPTIONS = ("ids", "sections", *(key for key, _ in REPORT_COVER))
+REPORT_OPTIONS = ("ids", "sections", "brief", *(key for key, _ in REPORT_COVER))
 # The longest query the app sends is a report request with every cover detail filled in.
 MAX_FIELDS = len(("name", "format", "download") + REPORT_OPTIONS)
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
@@ -57,11 +57,14 @@ def _report_options(query):
     if not any(key in query for key in REPORT_OPTIONS):
         return None
     from app.report import report_options
+    if query.get("brief", "1") != "1":
+        raise RequestError(400, "Unknown report length.")
     try:
         return report_options(
             ids=query["ids"].split(",") if "ids" in query else None,
             sections=[part for part in query["sections"].split(",") if part] if "sections" in query else None,
-            **{key: query.get(key, "") for key in REPORT_OPTIONS[2:]})
+            brief="brief" in query,   # the short report: one or two printed pages
+            **{key: query.get(key, "") for key in REPORT_OPTIONS[3:]})
     except ValueError as error:
         raise RequestError(400, str(error)) from None
 
@@ -112,6 +115,7 @@ class LocalServer(ThreadingHTTPServer):
         self.root, self.manager = Path(root).resolve(), manager
         self.token = secrets.token_urlsafe(32)
         self.chooser = None   # set by the desktop window: opens its file panel and returns the chosen path
+        self.dropped = None   # set by the desktop window: the location of a file just dropped on it, by name
         self._manager_closed = False
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -233,7 +237,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/config":
             self._query(query, ())
             config = manager.config()
-            return self._json(200, {"token": self.server.token, "chooser": callable(self.server.chooser),
+            return self._json(200, {"token": self.server.token, "chooser": callable(self.server.chooser), "drop": callable(self.server.dropped),
                                     **{key: config[key] for key in ("defaults", "backends", "active_run")}})
         if path == "/api/runs":
             self._query(query, ())
@@ -269,7 +273,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _post(self, path, query):
         self._query(query, ())
-        if path not in ("/api/investigations", "/api/stop", "/api/choose", "/api/credentials"):
+        if path not in ("/api/investigations", "/api/stop", "/api/choose", "/api/dropped", "/api/credentials"):
             raise RequestError(404, "Route not found.")
         payload = self._body()
         if path == "/api/choose":
@@ -280,6 +284,15 @@ class Handler(BaseHTTPRequestHandler):
                 raise RequestError(404, "Route not found.")
             chosen = chooser()
             return self._json(200, {"path": chosen if isinstance(chosen, str) else ""})
+        if path == "/api/dropped":
+            # A page learns only the name of a file dropped on it. The desktop window knows where
+            # that file is. Like the chooser, this gives back a path for the text box and reads nothing.
+            dropped = self.server.dropped
+            name = payload.get("name") if isinstance(payload, dict) and set(payload) == {"name"} else None
+            if not callable(dropped) or not isinstance(name, str) or not 0 < len(name) <= 255 or "/" in name or "\\" in name:
+                raise RequestError(404, "Route not found.")
+            found = dropped(name)
+            return self._json(200, {"path": found if isinstance(found, str) else ""})
         if path == "/api/credentials":
             # The user's own Anthropic API key, typed into the page. An empty value removes it.
             # No reply and no error message carries the key back.

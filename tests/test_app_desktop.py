@@ -65,6 +65,28 @@ class Desktop(unittest.TestCase):
         window.answer = ("/a", "/b")                                # only ever one path
         self.assertEqual(bridge.choose_evidence(), "/a")
 
+    def test_window_gives_the_location_of_a_dropped_file_by_name_once(self):
+        self.assertIsNone(desktop._drops(FakeWebview()))            # a library that keeps no record of drops
+        fake = FakeWebview()
+        fake.dom = type("Dom", (), {"_dnd_state": {"num_listeners": 0, "paths": []}})
+        drops = desktop._drops(fake)
+        state = fake.dom._dnd_state
+        self.assertEqual(state["num_listeners"], 1)                 # the window records drops only when asked to
+        here = self.root / "case facts.json"
+        here.write_text("{}")
+        self.assertEqual(drops.path("case facts.json"), "")         # nothing was dropped
+        state["paths"] += [("other.json", str(self.root / "other.json")), ("case facts.json", str(here))]
+        self.assertEqual(drops.path("other.json"), "")              # recorded, but there is no such file
+        self.assertEqual(state["paths"], [])                        # every drop is read once
+        state["paths"] += [("case facts.json", str(here))]
+        self.assertEqual(drops.path("case facts.json"), str(here))
+        self.assertEqual(drops.path("case facts.json"), "")
+        state["paths"] += [("cafe\u0301.json", str(here))]           # the same name, written with a combining accent
+        self.assertEqual(drops.path("caf\u00e9.json"), str(here))
+        manager = FakeManager()
+        self.assertEqual(desktop.run(self.root, 0, webview=fake, manager=manager), 0)
+        self.assertIs(fake.config["drop"], True)
+
     def setUp(self):
         scratch = tempfile.TemporaryDirectory()
         self.addCleanup(scratch.cleanup)
@@ -79,6 +101,7 @@ class Desktop(unittest.TestCase):
         self.assertEqual(options["min_size"], (900, 600))
         self.assertNotIn("js_api", options)                # the page asks through the server instead
         self.assertIs(fake.config["chooser"], True)
+        self.assertIs(fake.config["drop"], False)           # this stand-in keeps no record of dropped files
         self.assertEqual(fake.seen[0], 200)
         self.assertIn(b"CONAN-F", fake.seen[1])
         self.assertTrue(fake.settings["ALLOW_DOWNLOADS"])

@@ -20,6 +20,7 @@ import shlex
 import shutil
 import sys
 import threading
+import unicodedata
 from collections.abc import MutableMapping
 from pathlib import Path
 
@@ -59,6 +60,35 @@ class Bridge:
         chosen = windows[0].create_file_dialog(
             kind, allow_multiple=False, file_types=("Evidence records (*.json;*.duckdb)", "All files (*.*)"))
         return str(chosen[0]) if chosen else ""
+
+
+class Drops:
+    """Where the files last dropped on the window are.
+
+    A page learns only the name of a dropped file. The window records the full location when
+    the operating system delivers the drop; pywebview keeps that list for its own drop events.
+    The page asks for the location by name through the local server (POST /api/dropped).
+    Nothing is opened or read here; the path goes into a text box and the server checks it
+    like a typed one.
+    """
+
+    def __init__(self, state):
+        self._state = state
+        state["num_listeners"] = state.get("num_listeners", 0) + 1   # the window records drops only when asked to
+
+    def path(self, name):
+        waiting, self._state["paths"] = list(self._state.get("paths") or ()), []   # each drop is read once
+        same = lambda text: unicodedata.normalize("NFC", str(text))
+        for base, full in reversed(waiting):
+            if same(base) == same(name) and os.path.isfile(full):
+                return str(full)
+        return ""
+
+
+def _drops(webview):
+    """pywebview's record of dropped files, or None when this version keeps none."""
+    state = getattr(getattr(webview, "dom", None), "_dnd_state", None)
+    return Drops(state) if isinstance(state, dict) else None
 
 
 def _webview():
@@ -111,6 +141,9 @@ def run(root=ROOT, port=None, *, webview=None, manager=None) -> int:
             settings["OPEN_EXTERNAL_LINKS_IN_BROWSER"] = True
         _name_the_application()
         server.chooser = Bridge(webview).choose_evidence
+        drops = _drops(webview)
+        if drops is not None:
+            server.dropped = drops.path
         webview.create_window(TITLE, url, text_select=True, **WINDOW)
         webview.start(private_mode=False)   # keep the window's own storage between starts
     finally:

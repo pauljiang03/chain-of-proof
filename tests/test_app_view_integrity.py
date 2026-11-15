@@ -12,6 +12,41 @@ NODE = shutil.which('node')
 
 @unittest.skipUnless(NODE, 'Node.js is required for the buildless client regressions')
 class AppViewIntegrity(unittest.TestCase):
+    def test_summary_stats_survive_unsupported_typed_topics_and_missing_refusal_data(self):
+        source = (ASSETS / 'overview.js').read_text()
+        harness = r'''
+const vm = require('node:vm'), assert = require('node:assert/strict');
+class Element {
+  constructor(tag) { this.tag = tag; this.children = []; this.ownText = ''; }
+  set textContent(value) { this.ownText = String(value); }
+  get textContent() { return this.ownText + this.children.map(child => child.textContent).join(' '); }
+  append(...children) { this.children.push(...children); }
+  replaceChildren(...children) { this.children = children; this.ownText = ''; }
+  addEventListener() {}
+}
+const host = new Element('div');
+const sandbox = {window: {CONAN: {story: {number: new Intl.NumberFormat('en-US'), clip: (s) => s}}},
+ document: {createElement: tag => new Element(tag), getElementById: () => host}};
+vm.createContext(sandbox);
+'''
+        harness += '\nvm.runInContext(' + json.dumps(source) + ', sandbox);\n'
+        harness += r'''
+const model = {findings: [{status: 'verified', strength: 'strong'}],
+ records: [{kind: 'roleUsbDeviceInstanceId', exhibit: 'PC'}], events: [], main: null};
+const view = sandbox.window.CONAN.overview;
+view.render(model, {}, null, null, {points: [], devices: []});
+assert.ok(host.textContent.includes('No supported summary for these record types'));
+assert.ok(host.textContent.includes('does not establish absence of evidence'));
+assert.ok(host.textContent.includes('Recorded accepted findings 1'));
+assert.ok(host.textContent.includes('Recorded refusals Not supplied'));
+assert.ok(!host.textContent.includes('Nothing was refused'));
+view.render({...model}, {rejections: []}, null, null, {points: [], devices: []});
+assert.ok(host.textContent.includes('Recorded refusals 0'));
+assert.ok(host.textContent.includes('No refusal entries supplied'));
+'''
+        result = subprocess.run([NODE, '-e', harness], text=True, capture_output=True, timeout=15)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def run_js(self, asset, checks):
         source = (ASSETS / asset).read_text()
         # Expose the actual closure to the test and skip DOM event wiring only.
