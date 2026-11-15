@@ -589,7 +589,8 @@ def _control_sets(ev, h):
                 raise ValueError('Select\\Current missing or ambiguous')
             selector = selectors[0]
             cur = selector.value
-            if selector.type != 4 or type(cur) is not int or not 0 < cur <= 999:
+            if (selector.type != 4 or not isinstance(cur, int) or isinstance(cur, bool)
+                    or not 0 < cur <= 999):
                 raise ValueError('Select\\Current must be a valid native REG_DWORD control-set number')
             current = "ControlSet%03d" % cur
         except Exception as error:

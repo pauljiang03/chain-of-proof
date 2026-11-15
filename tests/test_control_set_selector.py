@@ -31,6 +31,14 @@ class ControlSetSelector(unittest.TestCase):
                 self.assertIsNone(result[0])
                 self.assertTrue(evidence.problems)
 
+    def test_native_parser_integer_subclass_remains_eligible(self):
+        # Dissect's DWORD decoder returns a uint32 integer subclass.
+        class NativeUInt32(int):
+            pass
+        result, evidence = self.run_selector([NS(name='Current', value=NativeUInt32(2), type=4)])
+        self.assertEqual(result[0], 'ControlSet002')
+        self.assertEqual(evidence.problems, [])
+
     def test_missing_duplicate_undecodable_and_invalid_values_never_select(self):
         cases = [[], [NS(name='Current', value=2)],
                  [NS(name='Current', value=2, type=4), NS(name='CURRENT', value=1, type=4)]]
