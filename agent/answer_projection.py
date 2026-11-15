@@ -165,9 +165,28 @@ for _form in ('deviceHolds', 'usbMountedAs', 'deviceExamined'):
         'this does not establish unique physical-device identity, connection onset, mounting '
         'or that the USB record describes the examined physical device.')
 
-_joined('recoveredOnDevice', [('path', 0, 'obj'), ('device_serial', 1, 'obj'), ('creation_time_us', 0, 't')], 'entry_recovered_from_device')
+_joined('recoveredOnDevice', [('recorded_file_path', 0, 'obj'),
+                            ('recorded_recovery_area_label', 0, 'aux'),
+                            ('examined_device_identifier', 1, 'obj'),
+                            ('creation_recorded_time_us', 0, 't')],
+        'matching_recorded_recovery_area_labels')
+_FIELDS['recoveredOnDevice']['examined_device_identifier']['semantic_type'] = 'recorded_examined_device_identifier'
+_FIELDS['recoveredOnDevice']['matching_recorded_recovery_area_labels']['meaning'] = (
+    'The file creation record and unallocated-space examination record carry equal recovery-area '
+    'label values. This does not establish a shared image, partition, physical device or '
+    'recovery of this file from the examined device.')
 _joined('sameContent', [('first_path', 0, 'obj'), ('second_path', 1, 'obj'), ('sha256', 0, 'aux')], 'same_recorded_content_hash')
-_joined('createdAfterVolumeRecord', [('path', 0, 'obj'), ('volume', 0, 'aux'), ('disc', 1, 'obj'), ('creation_time_us', 0, 't'), ('volume_recorded_time_us', 1, 't')], 'creation_timestamp_after_volume_record')
+_joined('createdAfterVolumeRecord', [('recorded_file_path', 0, 'obj'),
+                                   ('recorded_volume_serial', 0, 'aux'),
+                                   ('volume_record_device_identifier', 1, 'obj'),
+                                   ('creation_recorded_time_us', 0, 't'),
+                                   ('volume_recorded_time_us', 1, 't')],
+        'recorded_time_order_with_matching_volume_serials')
+_FIELDS['createdAfterVolumeRecord']['volume_record_device_identifier']['semantic_type'] = 'recorded_volume_record_device_identifier'
+_FIELDS['createdAfterVolumeRecord']['recorded_time_order_with_matching_volume_serials']['meaning'] = (
+    'The creation-record timestamp follows the volume-record timestamp beyond their uncertainty, '
+    'and the records carry equal volume serial values. This does not establish a shared volume, '
+    'partition, physical disc, copy action or completed burn.')
 _joined('sameJournalFile', [('first_name_or_path', 0, 'obj'), ('second_name_or_path', 1, 'obj'), ('scoped_identity', 0, 'aux')], 'same_scoped_file_identity')
 _joined('removedFilePreviouslyNamed', [('earlier_name_or_path', 0, 'obj'), ('removal_name_or_path', 1, 'obj'), ('scoped_identity', 1, 'aux'), ('removal_observed_time_us', 1, 't')], 'same_identity_later_removal_flag')
 _joined('journalChildNamedDirectory', [('child_name_or_path', 0, 'obj'), ('child_identity', 0, 'aux'), ('parent_identity', 1, 'aux'), ('directory_name_or_path', 2, 'obj')], 'observations_join_through_scoped_parent_identity')
