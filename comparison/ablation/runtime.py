@@ -231,6 +231,9 @@ def _record_call(run, bench, tool, arguments, protocol="literal-v1", session=Non
                     raise ValueError("tool requires only document")
                 result = (checkpoint(run, session, arguments["document"]) if tool == "checkpoint"
                           else preview(run, session, bench, arguments["document"]))
+                if tool == "checkpoint":
+                    from comparison.ablation.checkpoints import completion_status
+                    result["completion"] = completion_status(run, session, bench.source)
             else:
                 result = dispatch(bench, tool, arguments, protocol=protocol)
         else:
@@ -268,6 +271,7 @@ def _bench(run):
             if session.get("protocol") == "claim-bindings-v3":
                 if _binding(session["facts"]["path"]) != {k: session["facts"][k] for k in ("sha256", "bytes")}:
                     raise ValueError("facts changed while opening session source")
+            bench._ablation_session = session
             yield directory, session, bench
         finally:
             bench._db.close()
@@ -307,6 +311,29 @@ def serve_session(run, *, stdin=None, stdout=None):
     return 0
 
 
+def _retain_completion(directory, session):
+    """Best effort operational artifact; must not replace a finalizer failure."""
+    from comparison.ablation.checkpoints import completion_status
+    from checker.facts import open_source
+    source = None
+    try:
+        source = open_source(session['facts']['path'])
+        report = completion_status(directory, session, source)
+    except Exception as error:
+        report = {'status': 'unavailable', 'error_type': type(error).__name__, 'answers_inferred': False}
+    finally:
+        if source is not None:
+            try:
+                _close_source(source)
+            except Exception as error:
+                report = {'status': 'unavailable', 'error_type': type(error).__name__, 'answers_inferred': False}
+    try:
+        _write(directory / 'completion-diagnostics.json', _encoded(report))
+        return {'status': report['status'], 'artifact': _binding(directory / 'completion-diagnostics.json')}
+    except (OSError, ValueError, TypeError) as error:
+        return {'status': 'unavailable', 'error_type': type(error).__name__}
+
+
 def finalize_session(run, *, summary, status, elapsed_seconds=None):
     if status not in STATUSES:
         raise ValueError("invalid terminal status")
@@ -334,6 +361,8 @@ def finalize_session(run, *, summary, status, elapsed_seconds=None):
                     "elapsed_source": "controller_supplied" if elapsed_seconds is not None else "unavailable",
                     "session": session_binding, "facts": session["facts"],
                     "summary": _binding(directory / "summary.md"), "scope": SCOPE}
+        if session.get("protocol") == "claim-bindings-v3":
+            metadata["completion"] = _retain_completion(directory, session)
         candidate_binding = None
         data = verification = None
         if session["arm"] == "A":
@@ -459,9 +488,9 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
     try:
         strict = session.get("protocol") == "claim-bindings-v3"
         if strict:
-            from comparison.ablation.checkpoints import load
-            document = load(directory, session)
-            report["checkpoint"] = _binding(directory / "binding-checkpoint.json")
+            from comparison.ablation.checkpoints import load_checkpoint
+            document, checkpoint_receipt = load_checkpoint(directory, session)
+            report["checkpoint"] = checkpoint_receipt["_checkpoint_binding"]
             raw = _encoded(document)
         else:
             document, raw = extract_bindings(summary_raw, public)
@@ -485,9 +514,10 @@ def _finalize_projection(directory, session, summary_raw, *, candidate_binding, 
             raise ValueError("candidate log has an incomplete final entry")
         projection_raw = raw_candidates
         if strict:
-            from comparison.ablation.checkpoints import FILE
-            receipt = _json(_read(directory / FILE))
-            projection_raw = raw_candidates[:receipt["candidate_population"]["bytes"]]
+            population = checkpoint_receipt["candidate_population"]
+            projection_raw = raw_candidates[:population["bytes"]]
+            if len(projection_raw) != population["bytes"] or hashlib.sha256(projection_raw).hexdigest() != population["sha256"]:
+                raise ValueError("checkpoint population changed during projection")
         candidates = [_json(line) for line in projection_raw.splitlines()]
         resolved, resolutions = resolve_hashes(document["bindings"], candidates)
         _write(directory / "bindings-resolved.json", _encoded(resolved))

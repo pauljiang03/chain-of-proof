@@ -29,6 +29,8 @@ STEP_LIMIT = 20_000_000     # stop runaway queries
 
 # One line per statement form: its arguments, and what the generated sentence says.
 FORMS = {
+    'filesystemSetDeleted': ('[filesystemSet declaration record, count, true|false]',
+                            'For one exact declared extracted file set, count all distinct members and assert whether every member has a deleted-entry flag. All allocation flags must be known, with 1..256 members. Stands alone, not inside both. This is not physical erasure, recoverability, all disk files or intent; inspect the declaration definition.'),
     'attributeTuple': ('[[subject, role, value, "approved.role"], ...] (2 to 8 entries)',
                        'A bounded set of approved typed attributes from one exact source subject. Every triple, distinct role and shared subject is checked. Values keep their native types; this does not establish personal identity, source authenticity or completeness.'),
     'attributeRecorded': ('[attributeSubject, role row, typed value row, "approved.role"]',

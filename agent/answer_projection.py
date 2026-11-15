@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 from checker import claims
 from checker.facts import KINDS
 from checker.catalog import ROLES, DIGEST_ALGORITHMS, decode_value, roles_catalog
-from agent import answer_requirements
+from agent import answer_requirements, answer_references
 
 VERSION = 1
 AUTHORITIES = frozenset({'unchecked', 'recorded_certificates', 'independently_replayed'})
@@ -167,6 +167,13 @@ for _form in claims.CENSUS:
     if _form == 'exactlyWith':
         _FIELDS[_form]['value'] = _argument(2, 'asserted_count_selector', True)
 
+_FIELDS['filesystemSetDeleted'] = {
+    'declared_set': _record(0, 'obj', 'declared_filesystem_set_identity'),
+    'definition': _record(0, 'aux', 'declared_filesystem_set_extraction_definition'),
+    'count': _argument(1, 'asserted_declared_filesystem_set_count'),
+    'all_deleted': _argument(2, 'asserted_all_members_deleted_in_declared_filesystem_set'),
+}
+
 _FIELDS['attributeRecorded'] = {
     'subject': _record(0, 'aux', 'scoped_source_subject'),
     'role': _argument(3, 'asserted_attribute_role'),
@@ -284,6 +291,7 @@ def _literal_parts(claim):
                      isinstance(value, str) and value in KINDS if param == 'kind' else
                      isinstance(value, str) and value in ROLES if param == 'role' else
                      isinstance(value, str) and value in DIGEST_ALGORITHMS if param == 'algorithm' else
+                     type(value) is bool if param == 'boolean' else
                      type(value) is int and value >= 0)
             if not valid:
                 raise ValueError('claim_argument_type_mismatch')
@@ -299,8 +307,13 @@ def claim_fields(claim, source):
     except (ValueError, TypeError, RecursionError) as error:
         output['unsupported'].append({'reason': 'unsupported_or_malformed_claim', 'detail': str(error)})
         return output
-    ids = list(dict.fromkeys(fid for part in parts for fid in claims.fact_ids(part)))
-    found = source.get(ids)  # A census reads its asserted n, never source.all().
+    # Set support resolves only the exact declared membership. It never checks
+    # or replaces the proposed count or Boolean, including invalid proposals.
+    support = [claims.filesystem_set_support_ids(part[1][0], source)
+               if part[0] == 'filesystemSetDeleted' else claims.fact_ids(part)
+               for part in parts]
+    ids = list(dict.fromkeys(fid for group in support for fid in group))
+    found = source.get(ids)  # Legacy censuses still read only their asserted n.
     for index, part in enumerate(parts):
         form, args = part
         row = {'part': index, 'form': form, 'fields': {}, 'unsupported': []}
@@ -339,7 +352,7 @@ def claim_fields(claim, source):
                     value = decode_value(value, selector['value_type'])
                 _finite(value)
                 row['fields'][name] = {'value': value, 'selector': deepcopy(selector),
-                    'semantic_type': semantic_type, 'record_ids': claims.fact_ids(part),
+                    'semantic_type': semantic_type, 'record_ids': list(support[index]),
                     'value_record_ids': value_ids}
             except (ValueError, KeyError, IndexError, AttributeError) as error:
                 row['unsupported'].append({'field': name, 'reason': str(error)})
@@ -571,6 +584,8 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
     if evidence_facts_sha256 is not None and not answer_requirements.valid_facts_digest(evidence_facts_sha256):
         raise ValueError('invalid_evidence_facts_sha256')
     questions = _public(public)
+    if answer_references.validate_public(public)['errors']:
+        raise ValueError('invalid_public_claim_references')
     if not isinstance(candidates, list) or not isinstance(bindings, list) or len(bindings) > 20000:
         raise ValueError('candidates and at most 20000 bindings must be lists')
     _finite(candidates)
@@ -654,6 +669,9 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                     if any(origin not in scope['origins'] for origin in origins):
                         scope_check['status'] = 'incompatible'
                         raise ValueError('claim_records_do_not_meet_public_scope')
+                    if scope.get('same_origin') and any(origin != origins[0] for origin in origins[1:]):
+                        scope_check['status'] = 'incompatible'
+                        raise ValueError('claim_supporting_records_have_mixed_origins')
             value = _format(field['value'], raw.get('format', 'identity'), public.get('time_zone'), field['semantic_type'])
             if 'value' in raw and _encoded(raw['value']) != _encoded(value):
                 raise ValueError('literal_value_mismatch_not_repaired')
@@ -667,6 +685,10 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
                     entry.setdefault('meaning_checks', []).append(meaning)
                     if meaning['status'] != 'compatible':
                         raise ValueError(meaning.get('reason', 'claim_role_does_not_meet_public_requirement'))
+                if answer_references.KEY in schema:
+                    reference = answer_references.parse(schema[answer_references.KEY])
+                    if reference not in entry.setdefault('answer_references', []):
+                        entry['answer_references'].append(reference)
             entry.update(candidate_id=cid, claim_sha256=candidate['claim_sha256'], question_id=qid,
                          path=deepcopy(path), part=part, form=part_row['form'], field=raw['field'],
                          semantic_type=field['semantic_type'], value=value, record_ids=field['record_ids'],
@@ -699,6 +721,7 @@ def prepare_projection(public, candidates, bindings, source, *, require_claim_re
             plan['frozen_conflicts'].append({
                 'reason': 'row_fields_require_same_claim_part', 'question_id': qid,
                 'path': list(row_path), 'binding_indices': [entry['binding_index'] for entry in entries]})
+    answer_references.freeze_references(plan)
     plan['conflict_policy'] = 'omit_all_conflicting_bindings_before_candidate_filtering'
     plan['projection_sha256'] = claim_digest(plan)
     return plan
