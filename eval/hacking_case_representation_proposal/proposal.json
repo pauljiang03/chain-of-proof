@@ -104,6 +104,12 @@
     "eval/representation_derivative.py:prepare",
     "eval/match_normalization.py"
   ],
+  "exact_instant_implementation_limitation": {
+    "existing_benchmark_datetime_parsing": "May truncate fractional digits beyond six places; zero tolerance alone does not establish exact native-precision comparison.",
+    "timestamp_predicates": "Exact integer comparison supports at most seven fractional digits (100ns).",
+    "report_display_formatter": "Preserves arbitrarily many supplied fractional digits without truncation.",
+    "future_comparator_requirement": "Review an explicit precision policy and exact-instant parser before activation; do not assume the existing matcher implements the proposed zero-tolerance precision."
+  },
   "review_requirements": [
     "Review the changed public endpoint, case ID, contract revision and explicit replacement of the prior local-display instruction.",
     "Review the exact zone label plus signed-offset equivalence and declared label_mode independently of private expected values.",

@@ -41,6 +41,14 @@ precision cannot be reconstructed from formatted text. A future activation must
 review raw source precision, exact matching implementation, and independent
 reference alignment before making any comparison claim.
 
+The existing benchmark datetime parsing may truncate fractional digits beyond
+six places. A zero-tolerance setting alone therefore does not establish exact
+comparison at native precision. `agent/timestamp_predicates.py` supports exact
+integer comparison for up to seven fractional digits (100ns), while the display
+formatter preserves arbitrarily many supplied fractional digits. A future
+exact-instant comparator requires a separately reviewed precision policy and
+parser; do not assume the existing matcher implements this proposed precision.
+
 Implementation references are `agent/answer_representation.py` (pure exact report
 display), `agent/answer_projection.py` (explicit reviewed temporal capabilities
 and opt-in display annotation), `eval/representation_derivative.py` (public-only
