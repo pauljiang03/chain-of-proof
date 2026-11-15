@@ -9,6 +9,9 @@ description = "Machine-checked digital forensics: the LLM proposes, Lean 4 decid
 requires-python = ">=3.9"
 dependencies = ["duckdb>=1.0"]
 
+[project.scripts]
+cop = "app.cli:main"
+
 [project.optional-dependencies]
 # needed only to rebuild evidence/case_facts.json from the disk images
 # (libpff-python reads the Outlook mailbox file; it compiles on install)
@@ -18,5 +21,8 @@ extract = ["dissect>=3.20", "libpff-python>=20231205"]
 agent = ["deepagents>=0.7; python_version >= '3.11'", "langchain-anthropic>=1.7; python_version >= '3.11'"]
 
 [tool.setuptools.packages.find]
-include = ["agent*", "checker*", "eval*", "extractor*", "miner*", "verifier*"]
+include = ["agent*", "app*", "checker*", "eval*", "extractor*", "miner*", "verifier*"]
 namespaces = false
+
+[tool.setuptools.package-data]
+app = ["static/*.html", "static/*.css", "static/*.js", "sample/*.json"]
