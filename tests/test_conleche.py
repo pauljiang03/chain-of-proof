@@ -5,6 +5,9 @@ import unittest
 from pathlib import Path
 
 from verifier import conleche
+from checker.check import check
+from checker.facts import JsonFacts
+from extractor.store import Evidence
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -22,7 +25,23 @@ class ConLeche(unittest.TestCase):
     def setUpClass(cls):
         run = json.loads((ROOT / "app" / "sample" / "run.json").read_text())
         cls.bundle = run
-        cls.lean = next(f["lean"] for f in run["findings"] if f["finding_id"] == "A002")
+        # The frontend demo can change independently of these tampering checks.
+        # Make the exact temporal premise under test explicit and stable.
+        scratch = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(scratch.cleanup)
+        directory = Path(scratch.name)
+        evidence = Evidence()
+        evidence.add('usbInsert', 1427119200000000, 1, 'fixture-device')
+        evidence.add('lnkTarget', 1427119201000000, 1, 'fixture-target', 'fixture-volume')
+        evidence.write_json(directory / 'facts.json', {})
+        source = JsonFacts(directory / 'facts.json')
+        ids = {fact.kind: fact.id for fact in source.all()}
+        certificate = check({'before': [ids['usbInsert'], ids['lnkTarget']]},
+                            'ConLecheFixture', source, out_dir=directory)
+        if certificate['status'] != 'verified':
+            raise AssertionError(certificate)
+        cls.lean = (directory / certificate['lean_file']).read_text()
+        cls.theorem = 'Cert.ConLecheFixture.verified'
 
     def setUp(self):
         scratch = tempfile.TemporaryDirectory()
@@ -34,26 +53,27 @@ class ConLeche(unittest.TestCase):
         self.assertTrue(result["accepted"], result["detail"])
 
     def test_rejects_an_export_changed_after_lean_accepted_it(self):
-        # A002 claims the stick was connected before the file was opened. Move the
-        # connection to a later time inside the exported proof: the claim is now false.
+        # Move the earlier source timestamp past the later timestamp. The formal
+        # ordering claim is now false, without asserting physical actions occurred.
         export = conleche.export(self.lean, self.dir, TOOLS)
         text = export.read_text()
         self.assertEqual(text.count('"natVal":"1427119200000000"'), 1)
         export.write_text(text.replace('"natVal":"1427119200000000"', '"natVal":"1527119200000000"'))
-        result = conleche.check_export(export, "Cert.A002.verified", TOOLS)
+        result = conleche.check_export(export, self.theorem, TOOLS)
         self.assertFalse(result["accepted"])
-        self.assertIn("Cert.A002.verified", result["detail"])
+        self.assertIn(self.theorem, result["detail"])
 
     def test_an_export_without_the_theorem_is_not_accepted(self):
         # con-leche exits 0 on an export that declares nothing.
         export = conleche.export(self.lean, self.dir, TOOLS)
         export.write_text(export.read_text().splitlines()[0] + "\n")
-        result = conleche.check_export(export, "Cert.A002.verified", TOOLS)
+        result = conleche.check_export(export, self.theorem, TOOLS)
         self.assertFalse(result["accepted"])
         self.assertIn("does not declare", result["detail"])
 
     def test_a_false_certificate_never_reaches_the_export(self):
         false_claim = self.lean.replace("1427119200000000", "1527119200000000")
+        self.assertNotEqual(false_claim, self.lean, 'the negative control must change its premise')
         result = conleche.check(false_claim, TOOLS, self.dir)
         self.assertFalse(result["accepted"])
         self.assertIn("Lean did not accept", result["detail"])
@@ -65,7 +85,7 @@ class ConLeche(unittest.TestCase):
         self.assertEqual(result["checker"], "con-leche")
 
     def test_theorem_name_needs_exactly_one_namespace(self):
-        self.assertEqual(conleche.theorem_name(self.lean), "Cert.A002.verified")
+        self.assertEqual(conleche.theorem_name(self.lean), self.theorem)
         with self.assertRaises(ValueError):
             conleche.theorem_name("theorem verified : True := trivial")
 
