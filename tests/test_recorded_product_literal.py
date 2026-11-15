@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class RecordedProductLiteral(unittest.TestCase):
     def test_reader_typed_certificate_and_public_q2_preserve_product_text(self):
-        public = json.loads((ROOT / 'eval/hacking_case_strict_draft/questions.json').read_text())
+        public = json.loads((ROOT / 'tests/fixtures/contracts/hacking/questions.json').read_text())
         question = deepcopy(next(q for q in public['questions'] if q['id'] == 'Q2'))
         requirement = question['answer_schema']['properties']['operating_system']['x-claim-requirement']
         self.assertEqual(requirement['semantic_types'], [ROLES['os.product_name'].semantic_type])

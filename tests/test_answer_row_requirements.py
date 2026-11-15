@@ -2,11 +2,9 @@
 import tempfile
 import unittest
 
-from agent.answer_projection import catalog, claim_digest, project_answers
+from agent.answer_projection import catalog, claim_digest, project_answers, render_projection
 from agent.answer_requirements import inspect
 from checker.facts import Fact, FactSource
-from comparison.ablation.projection import project_a, project_b
-from tests.test_ablation_projection import replay
 from tests.test_answer_requirements import need
 
 ROW = 'x-claim-row'
@@ -91,12 +89,11 @@ class RowRequirements(unittest.TestCase):
                          {'copies': [{'id': 'SHADOW-A', 'time': 2000000}]})
 
     def test_b_removal_cannot_reveal_frozen_conflict(self):
-        a = project_a(public(), [self.a, self.b], self.mixed(), self.source)
+        a = project_answers(public(), [self.a, self.b], self.mixed(), self.source)
         self.assert_row_conflict(a)
-        b = project_b(a, [replay(self.a, 'verified'), replay(self.b, 'rejected')])
+        b = render_projection(a['projection'], admitted_ids=['A'], authority='recorded_certificates')
         self.assertEqual(b['submission'], a['submission'])
         self.assertEqual(b['conflicts'], a['conflicts'])
-        self.assertEqual(b['projection'], a['projection'])
 
     def test_unrelated_rows_survive(self):
         bindings = self.mixed()+self.mixed(self.a, self.a, ['copies', 1])

@@ -3,9 +3,7 @@ from copy import deepcopy
 import unittest
 from unittest.mock import patch
 
-from agent.answer_projection import project_answers
-from comparison.ablation.projection import project_a, project_b
-from tests.test_ablation_projection import replay
+from agent.answer_projection import project_answers, render_projection
 from tests.test_answer_projection import Source, bind, candidate
 
 
@@ -115,13 +113,12 @@ class CommonAnyOfProjection(unittest.TestCase):
                             object_schema(serial={'type': ['string', 'null']})]}
         wrong = candidate('P2', {'usbConnected': [3]})
         bindings = [bind(row, 'inventory', ['serial'], 'device_serial') for row in (self.row, wrong)]
-        a = project_a(public(schema), [self.row, wrong], bindings, self.source)
+        a = project_answers(public(schema), [self.row, wrong], bindings, self.source)
         self.assertTrue(a['conflicts'])
         with patch.object(self.source, 'get', side_effect=AssertionError('B must not reread evidence')):
-            b = project_b(a, [replay(self.row, 'verified'), replay(wrong, 'rejected')])
+            b = render_projection(a['projection'], admitted_ids=['P1'], authority='recorded_certificates')
         self.assertEqual(a['submission'], b['submission'])
         self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
-        self.assertEqual(a['projection'], b['projection'])
 
 
 if __name__ == '__main__':

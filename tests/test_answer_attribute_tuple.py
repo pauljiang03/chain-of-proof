@@ -5,14 +5,12 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from agent.answer_projection import claim_digest, project_answers
+from agent.answer_projection import claim_digest, project_answers, render_projection
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
-from comparison.ablation.projection import project_a, project_b
-from tests.test_ablation_projection import replay
 from tests.test_answer_requirements import need
 from verifier.verify import verify
 
@@ -63,9 +61,9 @@ class AttributeTupleAnswers(unittest.TestCase):
 
     def project(self, row=None, public=None, bindings=None):
         row = row or self.row
-        return project_a(public or self.public(), [row], bindings or [self.binding(row, i) for i in range(6)],
-                         self.source, require_claim_requirements=True, require_evidence_scope=True,
-                         evidence_facts_sha256=self.digest)
+        return project_answers(public or self.public(), [row], bindings or [self.binding(row, i) for i in range(6)],
+                               self.source, require_claim_requirements=True, require_evidence_scope=True,
+                               evidence_facts_sha256=self.digest)
 
     def test_six_field_tuple_certifies_replays_and_preserves_typed_values(self):
         cert = check(self.row['claim'], 'CERT', self.source, out_dir=self.root)
@@ -94,13 +92,12 @@ class AttributeTupleAnswers(unittest.TestCase):
                 contract = self.public()
                 contract['questions'][0]['answer_schema'] = {'type': 'object'}
                 bindings = [self.binding(row, i) for i in range(6)]
-                a = project_a(contract, [row], bindings, self.source)
+                a = project_answers(contract, [row], bindings, self.source)
                 self.assertEqual(len(a['leaves']), 6)
                 cert = check(row['claim'], 'BAD'+str(index), self.source, out_dir=self.root)
                 self.assertNotEqual(cert['status'], 'verified')
-                b = project_b(a, [replay(row, 'rejected')])
+                b = render_projection(a['projection'], admitted_ids=[], authority='recorded_certificates')
                 self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
-                self.assertEqual(b['projection'], a['projection'])
 
     def test_tuple_inside_both_is_one_part_but_separate_parts_cannot_repair_row(self):
         row = {'candidate_id': 'BOTH', 'claim': {'both': [self.row['claim'], {'attributeRecorded': self.entries[0]}]}}

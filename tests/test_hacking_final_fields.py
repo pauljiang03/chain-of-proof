@@ -22,7 +22,7 @@ def without_annotations(value):
 
 class HackingFinalFields(unittest.TestCase):
     def setUp(self):
-        self.public = json.loads((ROOT / 'eval/hacking_case_strict_draft/questions.json').read_text())
+        self.public = json.loads((ROOT / 'tests/fixtures/contracts/hacking/questions.json').read_text())
         self.questions = {q['id']: q for q in self.public['questions']}
 
     def leaf(self, qid):
@@ -31,7 +31,7 @@ class HackingFinalFields(unittest.TestCase):
     def test_public_context_derivative_preserves_brief_and_matches_case(self):
         from agent.case import read_profile, with_questions
         original = json.loads((ROOT / 'eval/hacking_case/case-profile.json').read_text())
-        path = ROOT / 'eval/hacking_case_strict_draft/case-profile.json'
+        path = ROOT / 'tests/fixtures/contracts/hacking/case-profile.json'
         derivative = json.loads(path.read_text())
         self.assertEqual(dict(derivative, case_id=original['case_id']), original)
         self.assertEqual(derivative['case_id'], self.public['case_id'])
@@ -42,7 +42,7 @@ class HackingFinalFields(unittest.TestCase):
     def test_original_prompts_shapes_matching_rules_and_held_status_preserved(self):
         original = json.loads((ROOT / 'eval/hacking_case/questions.json').read_text())
         self.assertEqual(without_annotations(self.public['questions']), without_annotations(original['questions']))
-        review = json.loads((ROOT / 'eval/hacking_case_strict_draft/review.json').read_text())
+        review = json.loads((ROOT / 'tests/fixtures/contracts/hacking/review.json').read_text())
         self.assertIs(review['model_run_ready'], False)
         self.assertEqual(review['counts']['leaf_status'], {'catalog_support': 14, 'no_catalog_support': 24})
         statuses = []

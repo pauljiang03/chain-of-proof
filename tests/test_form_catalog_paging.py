@@ -1,20 +1,12 @@
 """V3 static catalog pages are exact, complete, bounded and arm-neutral."""
 from collections import defaultdict
-import contextlib
-import io
 from copy import deepcopy
 import json
-from pathlib import Path
-import tempfile
 import unittest
 from unittest.mock import patch
 
 from agent import form_catalog_views as views
 from agent.answer_projection import tool_catalog
-from agent.tools import Workbench
-from comparison.ablation.mcp_server import dispatch, make_workbench
-
-ROOT = Path(__file__).resolve().parents[1]
 
 
 def all_rows(section, **filters):
@@ -117,50 +109,3 @@ class FormCatalogPaging(unittest.TestCase):
             views._fragments(['metadata'], 'x' * 1048577)
         self.assertEqual(views.forms_page(offset=views.forms_page()['page']['total'],
             state_token=views.forms_page()['state_token'])['page']['items'], [])
-
-    def test_v3_dispatch_is_identical_in_a_and_c_and_never_queries_evidence_or_kernel(self):
-        with tempfile.TemporaryDirectory() as directory:
-            outputs = []
-            for arm in ('A', 'C'):
-                bench = make_workbench(arm, ROOT / 'fixtures/sample_facts.json', Path(directory) / arm,
-                                       protocol='claim-bindings-v3')
-                try:
-                    with patch.object(bench.source, 'get', side_effect=AssertionError('no facts')), \
-                         patch('checker.check.run_kernel', side_effect=AssertionError('no kernel')):
-                        outputs.append(dispatch(bench, 'forms', {'section': 'attribute_roles', 'role': 'os.product_name'}, protocol='claim-bindings-v3'))
-                finally: bench._db.close()
-            self.assertEqual(outputs[0], outputs[1])
-
-    def test_v1_v2_payloads_and_paging_rejection_are_preserved(self):
-        with tempfile.TemporaryDirectory() as directory:
-            for protocol in ('literal-v1', 'claim-bindings-v2'):
-                bench = make_workbench('C', ROOT / 'fixtures/sample_facts.json', Path(directory) / protocol,
-                                       protocol=protocol)
-                try:
-                    result = dispatch(bench, 'forms', {}, protocol=protocol)
-                    claim = Workbench.forms.__wrapped__(bench)
-                    expected = claim if protocol == 'literal-v1' else dict(claim, answer_projection=tool_catalog())
-                    self.assertEqual(result, expected)
-                    with self.assertRaisesRegex(ValueError, 'unsupported tool argument'):
-                        dispatch(bench, 'forms', {'page_size': 1}, protocol=protocol)
-                finally: bench._db.close()
-
-    def test_cli_forms_options_and_v3_prompt_continuation(self):
-        from comparison.ablation import runtime, prompt
-        with patch.object(runtime, 'call_tool', return_value={'static': 'fixture'}) as called, \
-             contextlib.redirect_stdout(io.StringIO()):
-            self.assertEqual(runtime.main(['tool', '--run', 'synthetic-run', 'forms',
-                '--section', 'answer_fields', '--offset', '2', '--page-size', '10',
-                '--state-token', 'a' * 64, '--form', 'attributeTuple']), 0)
-        called.assert_called_once_with('synthetic-run', 'forms', {'section': 'answer_fields',
-            'offset': 2, 'page_size': 10, 'state_token': 'a' * 64, 'form': 'attributeTuple'})
-        with patch.object(prompt, 'case_context', return_value=''), \
-             patch.object(prompt, 'record_context', return_value=''), \
-             patch.object(prompt, 'question_context', return_value=''):
-            public = {'case_id': 'fixture', 'questions': []}
-            text = prompt.build_prompt(None, public, 'A', protocol='claim-bindings-v3')
-            legacy = prompt.build_prompt(None, public, 'A', protocol='claim-bindings-v2')
-        for marker in ('V3 FORMS', 'claim_forms', 'answer_fields', 'attribute_roles', 'page.next_offset',
-                       'state_token', '--section', 'JSON-ascii fragments'):
-            self.assertIn(marker, text)
-        self.assertNotIn('V3 FORMS', legacy)

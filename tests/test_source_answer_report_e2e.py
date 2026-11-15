@@ -19,7 +19,6 @@ from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
 from checker.report import render as render_markdown
-from eval.data_leakage_strict_draft.assemble import build
 from extractor.cloud_attributes import extract_paths
 from extractor.store import Evidence
 from verifier.verify import verify
@@ -45,7 +44,7 @@ PREFIX = 'cloud.google_drive.'
 class SourceAnswerReportE2E(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        public = build()['questions.json']
+        public = json.loads((Path(__file__).resolve().parent / 'fixtures/contracts/data-leakage/questions.json').read_text())
         cls.public = dict(public, questions=[q for q in public['questions'] if q['id'] in ('Q29', 'Q30', 'Q31')])
         cls.origin = next(q for q in cls.public['questions'] if q['id'] == 'Q29')['answer_schema']['x-claim-scope']['origins'][0]
 

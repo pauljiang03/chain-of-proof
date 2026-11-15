@@ -207,7 +207,7 @@ class AnswerRequirements(unittest.TestCase):
                           [row['reason'] for row in result['unsupported']])
 
     def test_separate_debug_profile_retains_observations_and_declares_missing_stronger_roles(self):
-        path = Path(__file__).resolve().parent.parent / 'eval/contracts/answer_meaning_debug_v1/questions.json'
+        path = Path(__file__).resolve().parent.parent / 'tests/fixtures/contracts/answer-meaning/questions.json'
         contract = json.loads(path.read_text())
         result = self.project(contract, [binding(self.certs[0], 'Q18', 'program', ['application']),
             binding(self.certs[0], 'Q18', 'program', ['observations', 0, 'executable'])])

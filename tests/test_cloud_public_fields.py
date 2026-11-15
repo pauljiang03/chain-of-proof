@@ -1,15 +1,14 @@
 """Approved cloud source observations respect the unchanged public meanings."""
 import hashlib
+import json
 from pathlib import Path
 import tempfile
 import unittest
 
-from agent.answer_projection import claim_digest
+from agent.answer_projection import claim_digest, project_answers, render_projection
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
-from comparison.ablation.projection import project_a, project_b
-from eval.data_leakage_strict_draft.assemble import build
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
 from verifier.verify import verify
@@ -23,9 +22,7 @@ CREDENTIALS = ['cloud.google_drive.credentials_account', 'cloud.google_drive.cre
 class CloudPublicFields(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # Assemble the actual public derivative in memory only, with its exact
-        # compiler-selected origins. No generated artifact or key is touched.
-        public = build()['questions.json']
+        public = json.loads((Path(__file__).resolve().parent / 'fixtures/contracts/data-leakage/questions.json').read_text())
         cls.public = dict(public, questions=[q for q in public['questions'] if q['id'] in ('Q29', 'Q30', 'Q31')])
         q29 = next(q for q in cls.public['questions'] if q['id'] == 'Q29')
         cls.origin = q29['answer_schema']['x-claim-scope']['origins'][0]
@@ -79,8 +76,8 @@ class CloudPublicFields(unittest.TestCase):
     def project(self, row, qid, fields):
         bindings = [{'candidate_id': row['candidate_id'], 'claim_sha256': claim_digest(row['claim']),
             'question_id': qid, 'path': path, 'field': field, 'part': 0} for path, field in fields]
-        return project_a(self.public, [row], bindings, self.source, require_claim_requirements=True,
-                         require_evidence_scope=True, evidence_facts_sha256=self.digest)
+        return project_answers(self.public, [row], bindings, self.source, require_claim_requirements=True,
+                               require_evidence_scope=True, evidence_facts_sha256=self.digest)
 
     def answer(self, result, qid):
         return next(row for row in result['submission']['answers'] if row['question_id'] == qid)
@@ -113,7 +110,7 @@ class CloudPublicFields(unittest.TestCase):
         row = self.candidate(claim); self.certify(row, accepted=False)
         a = self.project(row, 'Q29', [(['traces', 0, 'path'], 'value_2')])
         self.assertEqual(self.answer(a, 'Q29')['answer'], {'traces': [{'path': '/synthetic/sync.log'}]})
-        b = project_b(a, [dict(row, status='rejected', checker_status='rejected', verification=None)])
+        b = render_projection(a['projection'], admitted_ids=[], authority='recorded_certificates')
         self.assertEqual(self.answer(b, 'Q29')['status'], 'unknown')
 
     def test_foreign_origin_tuple_remains_certified_but_not_selected_public_source(self):

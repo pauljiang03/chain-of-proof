@@ -10,7 +10,7 @@ from agent.answer_projection import claim_digest, project_answers
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
-from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
+from tests.fixtures.contracts.scope_contract import apply_data_leakage_scopes
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
 from verifier.verify import verify
@@ -25,9 +25,9 @@ STOP = '2015-03-24T04:00:00Z'
 
 class SearchIEPublicFields(unittest.TestCase):
     def fixture(self, stamp='2015-03-23T03:59:59.1234567Z', variant='valid'):
-        part = json.loads((ROOT/'eval/data_leakage_strict_draft/parts/q41_60.json').read_text())
+        part = json.loads((ROOT/'tests/fixtures/contracts/data-leakage/parts/q41_60.json').read_text())
         question = next(q for q in part['questions'] if q['id'] == 'Q44')
-        apply_data_leakage_scopes([question], json.loads((ROOT/'eval/data_leakage_strict_draft/scope_plan.json').read_text()))
+        apply_data_leakage_scopes([question], json.loads((ROOT/'tests/fixtures/contracts/data-leakage/scope_plan.json').read_text()))
         origin = deepcopy(question['answer_schema']['x-claim-scope']['origins'][0])
         if variant == 'foreign': origin.update(image='foreign.E01', exhibit='FOREIGN')
         if variant == 'backup': origin['source_variant'] = 'registry-backup:synthetic'

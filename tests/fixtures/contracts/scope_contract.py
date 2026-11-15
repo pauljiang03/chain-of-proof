@@ -1,4 +1,4 @@
-"""Compile reviewed public source selections, without examining case answer values."""
+"""Add the reviewed source-origin scopes to Data Leakage test contracts."""
 from copy import deepcopy
 
 from agent.answer_requirements import SCOPE_KEY, parse_scope
@@ -96,31 +96,3 @@ def apply_data_leakage_scopes(questions, plan):
         mark_unselected_leaves(schema)
     return resolutions
 
-
-def apply_hacking_scopes(questions, plan):
-    mapping = plan['approved_exhibit_mapping']
-    # This is an approved input label, not an answer inferred from evidence.
-    if isinstance(mapping, dict) and 'image' in mapping:
-        image, exhibit = mapping['image'], mapping['exhibit']
-    else:
-        rows = [(name, entry) for name, entry in mapping.items() if not name.startswith('_')]
-        if len(rows) != 1:
-            raise ValueError('reviewed Hacking exhibit mapping must identify one image')
-        image, entry = rows[0]
-        exhibit = entry['exhibit']
-    base = {'image': image, 'exhibit': exhibit, 'source_snapshot': 'base-volume', 'source_variant': 'primary'}
-    resolutions = []
-    for question in questions:
-        qid = question['id']
-        if qid == 'Q1':
-            origins = [dict(base, source_snapshot='evidence-image', source_variant=variant)
-                       for variant in ('logical-image', 'acquisition-container')]
-        elif qid == 'Q31':
-            origins = [dict(base, source_snapshot='examination', source_variant='antivirus',
-                            input_source={'source_snapshot': 'base-volume', 'source_variant': 'primary'})]
-        else:
-            origins = [base]
-        declare(question['answer_schema'], '', records(origins))
-        resolutions.append({'question_id': qid, 'path': [], 'mode': 'source_records',
-                            'origins': origins, 'scope': 'Source origin only; stronger unsupported meanings stay unsupported.'})
-    return resolutions

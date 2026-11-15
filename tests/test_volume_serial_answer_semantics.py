@@ -4,11 +4,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from agent.answer_projection import catalog, claim_digest, claim_fields
+from agent.answer_projection import catalog, claim_digest, claim_fields, project_answers, render_projection
 from agent.tools import FORMS
 from checker.check import check
 from checker.facts import JsonFacts
-from comparison.ablation.projection import project_a, project_b
 from extractor.store import Evidence
 from verifier.verify import verify
 
@@ -68,9 +67,9 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
         binding = {'candidate_id': row['candidate_id'], 'claim_sha256': claim_digest(row['claim']),
                    'question_id': 'Q1', 'path': [], 'field': selector}
         form = next(iter(row['claim']))
-        return project_a(self.public(semantic_type, selector, form), [row], [binding], self.source,
-                         require_claim_requirements=True, require_evidence_scope=True,
-                         evidence_facts_sha256=self.digest)
+        return project_answers(self.public(semantic_type, selector, form), [row], [binding], self.source,
+                               require_claim_requirements=True, require_evidence_scope=True,
+                               evidence_facts_sha256=self.digest)
 
     def test_real_certificate_and_replay_preserve_only_collision_safe_equality(self):
         row = self.candidate()
@@ -83,8 +82,8 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
         projected = self.project(row)
         self.assertFalse(projected['unsupported'])
         self.assertIs(projected['submission']['answers'][0]['answer'], True)
-        filtered = project_b(projected, [dict(row, status='verified', checker_status='verified',
-                                             verification={'passed': not problems})])
+        filtered = render_projection(projected['projection'], admitted_ids=[row['candidate_id']],
+                                     authority='recorded_certificates')
         self.assertEqual(filtered['submission'], projected['submission'])
         fields = claim_fields(row['claim'], self.source)['parts'][0]['fields']
         self.assertEqual(fields['recorded_volume_serial']['value'], 'DEADBEEF')
@@ -112,7 +111,7 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
         self.assertEqual(certificate['status'], 'rejected')
         a = self.project(row)
         self.assertIs(a['submission']['answers'][0]['answer'], True)
-        b = project_b(a, [dict(row, status='rejected', checker_status='rejected', verification=None)])
+        b = render_projection(a['projection'], admitted_ids=[], authority='recorded_certificates')
         self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
 
     def test_shortcut_serial_collisions_never_restore_old_volume_associations(self):
@@ -133,8 +132,8 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                 self.assertEqual(problems, [])
                 a = self.project(row)
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
-                b = project_b(a, [dict(row, status='verified', checker_status='verified',
-                                      verification={'passed': not problems})])
+                b = render_projection(a['projection'], admitted_ids=[row['candidate_id']],
+                                      authority='recorded_certificates')
                 self.assertEqual(a['submission'], b['submission'])
                 for selector, meaning in [(old_field, old_type), (EQUALITY, old_type),
                                            (EQUALITY, old_field), (old_field, EQUALITY)]:
@@ -146,7 +145,7 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                 self.assertEqual(certificate['status'], 'rejected')
                 a = self.project(wrong)
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
-                b = project_b(a, [dict(wrong, status='rejected', checker_status='rejected', verification=None)])
+                b = render_projection(a['projection'], admitted_ids=[], authority='recorded_certificates')
                 self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
 
     def test_device_identifier_collisions_do_not_establish_physical_identity(self):
@@ -166,8 +165,8 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                 self.assertEqual(problems, [])
                 a = self.project(row, selector=equality, semantic_type=equality)
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
-                b = project_b(a, [dict(row, status='verified', checker_status='verified',
-                                      verification={'passed': not problems})])
+                b = render_projection(a['projection'], admitted_ids=[row['candidate_id']],
+                                      authority='recorded_certificates')
                 self.assertEqual(a['submission'], b['submission'])
                 for selector, meaning in [(old_field, old_field), (old_field, equality),
                                            (equality, old_field), (equality, 'unique_physical_device_identity'),
@@ -180,7 +179,7 @@ class VolumeSerialAnswerSemantics(unittest.TestCase):
                 self.assertEqual(certificate['status'], 'rejected')
                 a = self.project(wrong, selector=equality, semantic_type=equality)
                 self.assertIs(a['submission']['answers'][0]['answer'], True)
-                b = project_b(a, [dict(wrong, status='rejected', checker_status='rejected', verification=None)])
+                b = render_projection(a['projection'], admitted_ids=[], authority='recorded_certificates')
                 self.assertEqual(b['submission']['answers'][0]['status'], 'unknown')
 
 

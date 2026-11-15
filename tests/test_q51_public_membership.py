@@ -9,7 +9,7 @@ from agent.answer_projection import claim_digest, project_answers
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
-from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
+from tests.fixtures.contracts.scope_contract import apply_data_leakage_scopes
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
 from verifier.verify import verify
@@ -24,9 +24,9 @@ class Q51PublicMembership(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        part = json.loads((ROOT / 'eval/data_leakage_strict_draft/parts/q41_60.json').read_text())
+        part = json.loads((ROOT / 'tests/fixtures/contracts/data-leakage/parts/q41_60.json').read_text())
         question = next(q for q in part['questions'] if q['id'] == 'Q51')
-        plan = json.loads((ROOT / 'eval/data_leakage_strict_draft/scope_plan.json').read_text())
+        plan = json.loads((ROOT / 'tests/fixtures/contracts/data-leakage/scope_plan.json').read_text())
         apply_data_leakage_scopes([question], plan)  # in-memory only; never assemble/write derivatives
         self.public = {'schema_version': 2, 'case_id': 'synthetic-q51', 'questions': [question]}
         self.identities = {}

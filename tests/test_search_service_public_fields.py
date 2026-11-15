@@ -12,7 +12,7 @@ from agent.answer_projection import claim_digest, project_answers
 from checker.catalog import ROLES
 from checker.check import check
 from checker.facts import JsonFacts
-from eval.data_leakage_strict_draft.scope_contract import apply_data_leakage_scopes
+from tests.fixtures.contracts.scope_contract import apply_data_leakage_scopes
 from extractor import structured_system as reader, system
 from extractor.attributes import emit_attribute
 from extractor.store import Evidence
@@ -57,9 +57,9 @@ class SearchServicePublicFields(unittest.TestCase):
             entries.append([records['attributeSubject'], records[spec.kind], records[spec.value_kind], role])
         if variant == 'missing': entries.pop(1)
         row = dict(candidate_id='Service', claim={'attributeTuple':entries})
-        part = json.loads((ROOT/'eval/data_leakage_strict_draft/parts/q41_60.json').read_text())
+        part = json.loads((ROOT/'tests/fixtures/contracts/data-leakage/parts/q41_60.json').read_text())
         question = next(q for q in part['questions'] if q['id'] == 'Q42')
-        apply_data_leakage_scopes([question], json.loads((ROOT/'eval/data_leakage_strict_draft/scope_plan.json').read_text()))
+        apply_data_leakage_scopes([question], json.loads((ROOT/'tests/fixtures/contracts/data-leakage/scope_plan.json').read_text()))
         bindings = [dict(candidate_id='Service', claim_sha256=claim_digest(row['claim']), question_id='Q42',
                          path=['identification', field], part=0, field='value_'+str(i))
                     for i, field in [(0, 'service_registry_key'), (2 if variant != 'missing' else 1, 'startup')]]
