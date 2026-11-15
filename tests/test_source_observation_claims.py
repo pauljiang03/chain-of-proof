@@ -127,7 +127,8 @@ class SourceObservationClaims(unittest.TestCase):
                       {'deviceHolds': [11, 6]}, {'deviceExamined': [11, 13]}):
             with self.subTest(claim=claim):
                 text = self.certify(claim)['english']
-                self.assertIn('USB device record naming serial DEVICE-A', text)
+                self.assertIn('matching recorded device identifier DEVICE-A' if 'deviceExamined' in claim
+                              else 'USB device record naming serial DEVICE-A', text)
                 self.assertIn('registry key last-write time', text)
                 self.assertIn(r'Enum\USBSTOR\Fixture\DEVICE-A', text)
                 self.assertIn('does not by itself establish exact connection onset', text)

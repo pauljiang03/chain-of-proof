@@ -55,6 +55,10 @@ exact connection onset, or installation-time predicates.
 Their strong label applies to the stated record observation. English templates
 are versioned: certificates issued under older wording need their retained runtime
 for exact historical replay, or reissuance under the current templates.
+USB joins retain the explicit qualification that recorded identifiers are not
+guaranteed unique and do not by themselves establish physical-device identity.
+The legacy joins below compare exactly their declared string-valued entity slots;
+they do not silently add source, partition, volume or physical-device identity.
 
 | Set | Rules | Strength | English template |
 |---|---|---|---|
@@ -74,8 +78,8 @@ for exact historical replay, or reissuance under the current templates.
 | `fileDeletedAt d` | R5 | Strong | {path} on volume {vol} was sent to the Recycle Bin ({time}). |
 | `emailed e` | R11 | Strong | The retained message records subject {subject}, address text, source artifact and timestamp meaning. Transmission, delivery, reading and authorship are not established. |
 | `burnTrace b` | R12 | Heuristic | Optical-disc-related record in the {source}: {trace} ({time}). A record alone does not establish a write, completion, contents or physical disc. Event 133 means an exclusive-access lock; a registry last-write means a configuration change. |
-| `deviceExamined u d` | R1, R13 | Strong | The USB source record's device serial matches the examined-device record for recovered directory entries. Exact connection onset is not established. |
-| `recoveredOnDevice c d` | R10, R13 | Strong | A directory entry for {path}, created ({time}), was recovered from the recovery area on seized device {serial}. Recovery alone does not establish a reformat; an optical disc may retain older states of the same filesystem. |
+| `deviceExamined u d` | R1, R13 | Strong | The USB source record and recovery-area examination record carry matching recorded device identifiers. Their source/time meanings are stated. The same physical device and exact connection onset are not established. |
+| `recoveredOnDevice c d` | R10, R13 | Strong | The file-creation record for {path} and recovery-area examination record naming {identifier} carry the same recorded recovery-area label. Matching labels do not establish that the entry came from that physical device or the same source area, nor reformatting, wiping or copying. |
 | `tagged f s g T` | T | Strong, or judgment for an LLM tag | {entity} is tagged "{tag}" ({rule that computed it, or "an LLM judgment"}). |
 | `before a b` | none | Strong | The timestamp of {record a} precedes that of {record b}: the gap of {Δ} exceeds combined uncertainty {r}. This need not order the underlying actions. |
 | `settingRecorded`, `accountRecorded`, `sessionRecorded`, `programInstalledAt`, `programRan`, `visited`, `downloaded`, `typedInSearchBox`, `cloudEvent`, `noteFound`, `folderRecorded`, `renamed`, `fileRecorded`, `shadowCopyMade`, `contentHashed` (one record each) | R14 to R28 | Strong | One sentence saying what that record holds. `programRan` preserves provenance literally and always states an application observation, never an execution predicate. |
@@ -83,7 +87,7 @@ for exact historical replay, or reissuance under the current templates.
 | `fileRemovedAt r` | R29 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a removal flag ({time}). This is the record timestamp, not necessarily deletion onset; it does not establish wiping or Recycle Bin use. |
 | `fileCreationRecordedAt r` | R31 | Strong | An NTFS change-journal record for {path} on volume {volume} carries a creation flag ({time}). This is not a filesystem creation timestamp and cannot be used by `copiedHere`. |
 | `volumeRecordedAt v` | R30 | Strong | The UDF file-set descriptor on {disc}, volume {volume}, records its timestamp as {time}. This is descriptor recording time, not examination time or proof of completed formatting/writing. |
-| `createdAfterVolumeRecord c v` | R10, R30 | Strong | The filesystem creation timestamp of {path} follows the UDF file-set descriptor recording timestamp on {disc}, on the same volume, by more than combined uncertainty. This orders recorded timestamps; it does not establish a completed burn or copy. |
+| `createdAfterVolumeRecord c v` | R10, R30 | Strong | The filesystem creation record for {path} and UDF descriptor record for {disc} carry matching volume serials; the recorded creation timestamp follows the descriptor timestamp beyond uncertainty. Different volumes may share this serial. Volume identity and completed burn/copy are not established. |
 | `journalNamed n`, `journalParentRecorded p`, `journalRemovalObserved r` | R32 | Strong | A journal name, child-parent reference or removal flag was observed at its recorded time. A name is not creation onset; a removal flag is not secure wiping. |
 | `sameJournalFile a b` | R32 | Strong | The two names at their own observation times share the same scoped NTFS file-record identity, not necessarily unchanged contents or simultaneous aliases. |
 | `removedFilePreviouslyNamed n r` | R32 | Strong | A later removal-flag observation shares the identity of the earlier name, beyond timestamp uncertainty. It does not assign the removal time to the earlier alias or prove wiping. |

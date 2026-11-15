@@ -51,13 +51,13 @@ def recordedOnDevice (s d : Nat) : Claim :=
 def sameLabel (a b : Nat) : Claim :=
   .both (.is a .volumeSeen) (.both (.is b .volumeSeen) (.link a .obj b .obj))
 
-/-- R1+R13 (strong): USB record `u` and the examination `d` of a seized device's
-    unallocated space name the same device serial. -/
+/-- R1+R13 (strong): USB and recovery-area examination records carry matching
+    recorded device identifiers. Physical-device identity is not established. -/
 def deviceExamined (u d : Nat) : Claim :=
   .both (.is u .usbInsert) (.both (.is d .unallocatedOnDevice) (.link u .obj d .obj))
 
-/-- R10+R13 (strong): file-creation record `c` is a directory entry recovered from the
-    unallocated space of the examined device `d`. -/
+/-- R10+R13 (strong): file-creation and recovery-area examination records carry
+    matching recovery-area labels. The same source area/device is not established. -/
 def recoveredOnDevice (c d : Nat) : Claim :=
   .both (.is c .fileCreated) (.both (.is d .unallocatedOnDevice) (.link c .aux d .aux))
 
@@ -131,8 +131,9 @@ def journalChildNamedDirectory (c p d : Nat) : Claim :=
   .both (.is c .journalName) (.both (.is p .journalParent) (.both (.is d .journalName)
     (.both (.link c .aux p .obj) (.link p .aux d .aux))))
 
-/-- R10+R30: a filesystem creation timestamp follows the UDF file-set recording
-    timestamp for the same volume. This is not a completed-write assertion. -/
+/-- R10+R30: a filesystem creation timestamp follows a UDF descriptor timestamp
+    and their recorded volume serials match. Volume identity is not established;
+    distinct or cloned volumes may share a serial. No completed-write assertion. -/
 def createdAfterVolumeRecord (c v : Nat) : Claim :=
   .both (.is c .fileCreated)
     (.both (.is v .volumeRecorded)

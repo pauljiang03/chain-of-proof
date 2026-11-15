@@ -243,7 +243,8 @@ def _record_details(f: Fact) -> str:
 _SHORTCUT_LIMIT = ("This establishes a retained target reference, not that the target was opened "
                    "at this time or by a particular person.")
 _USB_LIMIT = ("The record timestamp does not by itself establish exact connection onset "
-              "or who connected the device.")
+              "or who connected the device. Recorded identifiers are not guaranteed unique "
+              "and do not by themselves establish physical-device identity.")
 
 
 def _usb_record(f: Fact, src: FactSource) -> str:
@@ -313,11 +314,13 @@ def _en_volume_recorded(args, facts, src):
 
 def _en_created_after_volume(args, facts, src):
     c, v = facts[args[0]], facts[args[1]]
-    return (f"The filesystem creation timestamp of {src.string(c.obj)} on volume "
-            f"{src.string(c.aux)} ({_utc(c.t)}) follows the UDF file-set descriptor's "
-            f"recording timestamp on {src.string(v.obj)}, the same volume ({_utc(v.t)}), "
-            f"by more than the combined timestamp uncertainty. This orders recorded "
-            f"timestamps; it does not establish that a burn or copy completed.")
+    return (f"The filesystem creation record for {src.string(c.obj)} ({_record_details(c)}) "
+            f"and UDF file-set descriptor record for {src.string(v.obj)} ({_record_details(v)}) "
+            f"carry matching recorded volume serial {src.string(c.aux)}. The creation record's "
+            f"timestamp follows the descriptor's recording timestamp by more than the combined "
+            f"timestamp uncertainty. Different volumes can share this serial; their volume "
+            f"identity is not established. This orders recorded timestamps; it does not "
+            f"establish that a burn or copy completed.")
 
 
 def _en_journal_named(args, facts, src):
@@ -410,16 +413,20 @@ def _en_burn_trace(args, facts, src):
 
 def _en_device_examined(args, facts, src):
     u, d = facts[args[0]], facts[args[1]]
-    return (f"{_cap(_usb_record(u, src))}. Its device serial matches the examined-device "
-            f"record for recovered directory entries on device {src.string(d.obj)}. {_USB_LIMIT}")
+    return (f"The USB source record ({_record_details(u)}) and recovery-area examination "
+            f"record ({_record_details(d)}) carry matching recorded device identifier "
+            f"{src.string(u.obj)}. Matching identifiers do not establish that the records "
+            f"refer to the same physical device. {_USB_LIMIT}")
 
 
 def _en_recovered(args, facts, src):
     c, d = facts[args[0]], facts[args[1]]
-    return (f"A directory entry for {src.string(c.obj)}, created ({_utc(c.t)}), was recovered "
-            f"from the recovery area on seized device {src.string(d.obj)}. Recovery alone "
-            f"does not establish that the device was reformatted; an optical disc may "
-            f"retain older states of the same file system.")
+    return (f"The file-creation record for {src.string(c.obj)} ({_record_details(c)}) and "
+            f"recovery-area examination record naming {src.string(d.obj)} ({_record_details(d)}) "
+            f"carry the same recorded recovery-area label {src.string(c.aux)}. Matching labels "
+            f"do not establish that the entry came from that physical device or from the same "
+            f"source area. The records do not by themselves establish reformatting, wiping, "
+            f"or a file-copy action.")
 
 
 # One record, one sentence. Each says what the artifact records, not more: a record of

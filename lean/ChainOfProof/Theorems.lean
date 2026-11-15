@@ -225,7 +225,7 @@ theorem programObservation_not_executionPathRole (fs : List Fact) (a : Nat)
   | true => cases holds_is_kind_unique h h'
 
 /-- A certified `usbMountedAs u m` cites a USB source record and a volume mapping
-    that name the same device. -/
+    with matching recorded device identifiers, not proved physical identity. -/
 theorem usbMountedAs_sound (fs : List Fact) (u m : Nat)
     (h : holds fs (Sets.usbMountedAs u m) = true) :
     ∃ x y, lookup fs u = some x ∧ lookup fs m = some y ∧
@@ -260,7 +260,7 @@ theorem journalCreation_not_filesystemCreation (fs : List Fact) (a : Nat)
   | false => rfl
   | true => cases holds_is_kind_unique h h'
 
-/-- What the optical timeline set establishes: typed records, a common volume,
+/-- What the optical timeline set establishes: typed records, matching volume serials,
     and a timestamp gap greater than the two uncertainties. -/
 theorem createdAfterVolumeRecord_sound (fs : List Fact) (c v : Nat)
     (h : holds fs (Sets.createdAfterVolumeRecord c v) = true) :
