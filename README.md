@@ -9,39 +9,42 @@ The Lean kernel verifies the formal claim against extracted records.
 The report uses fixed sentences from accepted claims.
 
 The project uses the [NIST CFReDS Data Leakage Case](https://cfreds-archive.nist.gov/data_leakage_case/data-leakage-case.html).
-The case has 60 questions, one PC image, and three removable media images.
+The case has [60 questions](eval/QUESTIONS.md), one PC image, and three removable media images.
 The code also accepts other cases through explicit case profiles and evidence manifests.
 
 ## Current state
 
-The full evaluation is in development.
-The reference contains all 60 questions.
-Of these, 46 have provisional scoring rules and 14 require reference review.
-No final comparison with Mulder is available.
+The [latest development comparison](comparison/ablation/RESULTS_SOL61_20261115.md) uses explicit claim fields as answers.
+Both investigators received the same 335,509 extracted records and all 60 public questions.
+They used the requested Sol 6.1 model, with one run per mode and a 15-minute limit each.
+The scorer uses fixed rules. It does not use an LLM judge.
 
-A [small Sol pilot with and without Lean feedback](comparison/ablation/PILOT_SOL61_20261115.md) is complete.
-It used the same evidence and draft reference for one run in each mode.
-The final model answers had 11 and 12 fully correct questions out of 46 scorable questions.
-The run with Lean feedback had fewer contract mismatches and lower answer coverage.
-These final answer blocks were unverified; their scores are separate from certificate checks.
-This single pair does not establish a general improvement. It used an older frozen version,
-before the six backend workflow additions.
+| Mode | Complete answers | Partial | Unanswered | Incorrect |
+|---|---:|---:|---:|---:|
+| A: no Lean feedback | 8/46 (17.4%) | 20 | 16 | 2 |
+| B: check A's exact claims afterwards | 8/46 (17.4%) | 20 | 16 | 2 |
+| C: Lean feedback during investigation | 7/46 (15.2%) | 21 | 15 | 3 |
 
-The [current run](runs/current/run.json) combines saved AI claims and miner claims.
-It uses the current certificate format and sentence templates.
-It does not include a new investigation with all current readers.
-The saved report fully answers 9 of the 46 provisionally scorable questions.
-Another 17 questions have partial answers, and 20 have no answer.
-The remaining 14 questions require reference review.
-This gives 9 confirmed complete answers across all 60 questions.
-See the [current results](runs/current/results.json) for each question.
+The other 14 questions require reference-review decisions. They remain visible and unresolved.
+This pair showed no answer-accuracy gain from Lean feedback.
+All 63 B certificates and all 96 C certificates passed independent verification.
+Valid claims can still be placed in the wrong answer field or fail to answer the full question.
+The test did not demonstrate rejection of a semantically false claim: B accepted all proposals,
+and C's one refusal was a malformed claim.
 
-All 473 certificates in this snapshot pass independent verification.
-This count measures certificate validity, not answer accuracy.
+A public-schema export bug dropped some attempted fields. Shared-field `anyOf` support was added after this test.
+The saved scores were not changed, and the fix has no new accuracy score.
 
-The [60-question package](comparison/mulder/README.md) and [original 20-item package](comparison/mulder-original20/README.md) are prepared only.
-We will run it after implementation and reference review are complete, with the user's instruction.
-Old reports and old scoring methods are available in Git history.
+The measured code is frozen at `c2b9753`. The test used a controlled Sol tool bridge;
+it does not validate the product's native model backend. This is one development pair, not an unseen-case benchmark.
+The earlier literal-answer pilot used a different answer channel and is not a direct comparison.
+
+A second-case operational test also passed. All 34 C certificates and 10 B certificates reverified.
+That case has no accuracy key. Its field counts are not accuracy scores.
+The [saved demonstration report](runs/current/run.json) remains available, but is not the latest AI test.
+
+The [60-question Mulder package](comparison/mulder/README.md) and [original 20-item package](comparison/mulder-original20/README.md) are prepared and unrun.
+The full A/B/C/D comparison and native provider validation remain unfinished.
 
 ## Investigation CLI and reports
 
