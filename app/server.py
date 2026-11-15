@@ -28,6 +28,8 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
 REPORT_TYPES = {"html": "text/html; charset=utf-8", "md": "text/markdown; charset=utf-8",
                 "json": "application/json; charset=utf-8"}
 REPORT_OPTIONS = ("ids", "sections", *(key for key, _ in REPORT_COVER))
+# The longest query the app sends is a report request with every cover detail filled in.
+MAX_FIELDS = len(("name", "format", "download") + REPORT_OPTIONS)
 START_FIELDS = frozenset(("name", "facts", "title", "brief", "questions", "backend", "model", "minutes"))
 MAX_BODY = 64 * 1024
 
@@ -183,7 +185,7 @@ class Handler(BaseHTTPRequestHandler):
                     or any(p in (".", "..") for p in parsed.path.split("/"))):
                 raise ValueError("invalid path")
             # Before Python 3.11, strict parsing rejects an empty query string.
-            query = (parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=8)
+            query = (parse_qs(parsed.query, keep_blank_values=True, strict_parsing=True, max_num_fields=MAX_FIELDS)
                      if parsed.query else {})
         except ValueError:
             raise RequestError(400, "Invalid request path or query.") from None
@@ -239,8 +241,8 @@ class Handler(BaseHTTPRequestHandler):
             self._query(query, ("name",))
             snapshot = manager.get_run(_name(query.get("name"), self.server.root))
             if isinstance(snapshot, dict) and isinstance(snapshot.get("run"), dict):
-                from app import brief   # evidence items, tools and limits, counted from the run's own records
-                snapshot = {**snapshot, "brief": brief.build(snapshot["run"])}
+                from app import brief, narrative   # counted and worded from the run's own verified records
+                snapshot = {**snapshot, "brief": brief.build(snapshot["run"]), "narrative": narrative.build(snapshot["run"])}
             return self._json(200, snapshot)
         if path == "/api/report":
             self._query(query, ("name", "format", "download") + REPORT_OPTIONS)

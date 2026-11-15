@@ -18,7 +18,7 @@
     return node;
   };
   const array = (value) => (Array.isArray(value) ? value : []);
-  const state = { model: null, run: null, brief: null, evidence: null, range: "main", bins: null, hot: -1, painted: false };
+  const state = { model: null, run: null, brief: null, evidence: null, narrative: null, range: "main", bins: null, hot: -1, painted: false };
   const go = (tab) => () => { if (CONAN.app) CONAN.app.switchTab(tab, true); };
 
   // Whole hours, days, weeks, months or years: the finest step that keeps the chart to about 130 columns.
@@ -64,6 +64,32 @@
     box.append(el("span", "tile-label", label), el("span", "tile-value", value), el("span", "tile-note", note));
     return box;
   }
+  // What the verified records show, in plain sentences the server wrote from those records alone.
+  function keyFindings(story) {
+    const points = array(story && story.points).filter((point) => point && array(point.sentences).length);
+    if (!points.length) return null;
+    const S = CONAN.story, zone = typeof story.zone === "string" && story.zone ? story.zone + " local time" : "UTC";
+    const box = card("Key findings", "From the records the verified findings cite · times in " + zone);
+    box.classList.add("key-findings");
+    points.forEach((point) => {
+      const row = el("div", "key-row"), body = el("div", "key-body");
+      body.append(el("p", "", array(point.sentences).map(String).join(" ")));
+      const devices = point.key === "devices" ? array(story.devices) : [];
+      if (devices.length) {
+        const table = el("table", "key-table"), head = el("tr"), rows = el("tbody");
+        ["Item", "Device", "Serial number", "Volume label", "First connection", "Last connection"].forEach((name) => { const cell = el("th", "", name); cell.scope = "col"; head.append(cell); });
+        devices.forEach((device) => {
+          const line = el("tr");
+          ["item", "device", "serial", "label", "first", "last"].forEach((key) => line.append(el("td", "", S.clip(String(device && device[key] || "—"), 60))));
+          rows.append(line);
+        });
+        const top = el("thead"); top.append(head); table.append(top, rows); body.append(table);
+      }
+      row.append(el("h4", "", String(point.title)), body);
+      box.append(row);
+    });
+    return box;
+  }
   function card(title, note, extra) {
     const box = el("section", "card"), head = el("div", "card-head");
     head.append(el("h3", "", title), el("p", "", note));
@@ -88,7 +114,7 @@
     state.bins = null;
     if (!S || !model || !model.findings.length) {
       const empty = el("div", "empty-state");
-      empty.append(el("h3", "", "No findings have passed the checker yet"), el("p", "", "This page fills in as findings are accepted. Refused proposals are listed under Not established."));
+      empty.append(el("h3", "", "No findings have passed the checker yet"), el("p", "", "This page fills in as findings are accepted."));
       host.append(empty);
       return;
     }
@@ -104,13 +130,12 @@
       : [...new Set(model.records.map((record) => record.exhibit).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
     const hero = el("header", "ov-hero");
-    hero.append(el("h2", "", "Case summary"),
-      el("p", "", n.format(model.records.length) + " cited records across " + n.format(devices.length) + " evidence items. Explore the names, properties, and recorded activity below."));
+    hero.append(el("h2", "", "Case summary"));
 
     const tiles = el("div", "ov-tiles");
     tiles.append(
       tile("Findings that passed", n.format(findings.length), ruleTypes, go("findings")),
-      tile("Refused by the checker", n.format(refused), refused ? "Listed under Not established" : "Nothing was refused in this run", refused ? go("needs") : null),
+      tile("Refused by the checker", n.format(refused), refused ? "Listed in the report appendix" : "Nothing was refused in this run", refused ? go("report") : null),
       tile("Evidence records used", n.format(model.records.length), n.format(dated) + " carry a source timestamp", () => CONAN.timeline && CONAN.timeline.show({})),
       tile("Evidence exhibits", n.format(devices.length), devices.length ? S.clip(devices.join(", "), 44) : "No exhibit named in the records"));
     if (model.main) {
@@ -121,6 +146,8 @@
         () => CONAN.timeline && CONAN.timeline.show({ from: model.main.from, to: model.main.to })));
     }
     host.append(hero);
+    const told = keyFindings(state.narrative);
+    if (told) host.append(told);
     if (state.evidence && CONAN.evidence) host.append(CONAN.evidence.highlights(state.evidence));
     host.append(tiles);
     if (opinions) host.append(el("p", "ov-note", n.format(opinions) + (opinions === 1 ? " interpretation by the investigator is" : " interpretations by the investigator are") + " recorded as not checked. They are under Findings, never counted above."));
@@ -158,14 +185,6 @@
 
     if (model.main) host.append(days());
 
-    const how = el("div", "how");
-    [["1", "Tools read the disk images into records"], ["2", "The AI investigator proposes findings"], ["3", "The proof checker keeps only what the records support"]].forEach(([step, text], index) => {
-      if (index) how.append(el("span", "how-arrow", "→"));
-      const item = el("span", "how-step");
-      item.append(el("b", "", step), text);
-      how.append(item);
-    });
-    host.append(how);
     chart();
   }
 
@@ -244,7 +263,7 @@
       });
       grid.append(item);
     });
-    box.append(grid, el("p", "card-foot", "Key events are picked by record type — a device connection, an e-mail, a deletion — not by AI judgment. Every other record is on the Timeline."));
+    box.append(grid);
     return box;
   }
 
@@ -270,7 +289,7 @@
     });
     const marks = S.ticks(from, total, plot);
     marks.list.forEach((mark) => {
-      parts.push(svg("line", { class: "tick", x1: x(mark.t), x2: x(mark.t), y1: M.top + tall, y2: M.top + tall + 5 }), svg("text", { class: "axis-label", x: x(mark.t), y: M.top + tall + 18 }, mark.label));
+      parts.push(svg("line", { class: "tick", x1: x(mark.t), x2: x(mark.t), y1: M.top + tall, y2: M.top + tall + 5 }), svg("text", { class: "axis-label" + (x(mark.t) > width - M.right - 20 ? " end" : ""), x: x(mark.t), y: M.top + tall + 18 }, mark.label));
       if (mark.sub && x(mark.t) > M.left + 110) parts.push(svg("text", { class: "axis-label major", x: x(mark.t), y: M.top + tall + 34 }, mark.sub));
     });
     if (marks.context) parts.push(svg("text", { class: "axis-label major start", x: M.left, y: M.top + tall + 34 }, marks.context));
@@ -319,9 +338,9 @@
 
   function wire() { /* the page is built when a case is rendered */ }
   CONAN.overview = {
-    render(model, run, brief, evidence) {
+    render(model, run, brief, evidence, narrative) {
       if (state.painted && model === state.model) return;   // the same stored run: nothing to redraw
-      state.model = model; state.run = run; state.brief = brief; state.evidence = evidence; state.range = "main"; state.painted = true;
+      state.model = model; state.run = run; state.brief = brief; state.evidence = evidence; state.narrative = narrative; state.range = "main"; state.painted = true;
       paint();
     },
     activate() { chart(); },

@@ -300,7 +300,8 @@ time.sleep(120)
         original = (directory / 'run.json').read_bytes()
         with patch.object(jobs, 'SAMPLE', directory):
             self.assertEqual(self.manager.get_run('sample')['run']['case']['name'], 'Public case')
-            self.assertTrue(next(row for row in self.manager.list_runs() if row['name'] == 'sample')['sample'])
+            # The synthetic fixture stays readable by its reserved name but is not offered as a case.
+            self.assertNotIn('sample', [row['name'] for row in self.manager.list_runs()])
         for fmt in ('md', 'json'):
             value, content_type, filename = self.manager.report('saved', fmt)
             self.assertTrue(value)

@@ -558,8 +558,6 @@ class JobManager:
                         names.add(name)
                     except ValueError:
                         pass
-        if SAMPLE.is_dir() and not SAMPLE.is_symlink() and (SAMPLE / "run.json").is_file():
-            names.add("sample")
         result = []
         for name in sorted(names):
             try:

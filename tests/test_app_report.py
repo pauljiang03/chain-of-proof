@@ -291,7 +291,10 @@ class AppReport(unittest.TestCase):
         for label, value in (('Requested by', 'Det. &lt;X&gt;'), ('Authority for the request', 'Warrant 7'),
                              ('Evidence received', '2026-11-01'), ('Date of report', '2026-11-14')):
             self.assertIn(f'<dt>{label}</dt><dd>{value}</dd>', rendered)
-        self.assertIn('<strong>2 findings</strong> from the supplied examination records. The findings refer to 3 evidence records.', rendered)
+        # the summary opens with what the records show, not with a description of the report
+        self.assertIn('<div class="key"><h3>Storage devices</h3><div><p>The computer records show connections of 1 USB storage device.</p>', rendered)
+        self.assertNotIn('from the supplied examination records', rendered)
+        self.assertIn('Each statement is a count or a value from the evidence records that the 2 findings cite.', rendered)
         self.assertIn('1 finding uses a stated heuristic rule.', rendered)
         # evidence items, their stored hash values and the tools are the records' own words, escaped
         self.assertIn('<strong>USB &lt;b&gt;1&lt;/b&gt;</strong>', rendered)
@@ -308,7 +311,8 @@ class AppReport(unittest.TestCase):
         exact = '2023-11-14T22:13:20.123456Z (1700000000123456 microseconds since Unix epoch)'
         if 'The tables use America/New_York local time.' in rendered:   # this system can convert the zone the records name
             self.assertIn('2023-11-14 17:13:20 local (UTC-05:00)<br><span class="small">' + exact + '</span>', rendered)
-            self.assertIn('<td>Tue 14 Nov 2023</td><td>USB device connected (17:13)</td><td>2</td>', rendered)
+            self.assertIn('<td>Tue 14 Nov 2023</td><td>USB device connected (17:13)</td>', rendered)
+            self.assertIn('<td>—</td><td>—</td><td>SERIAL9</td><td>—</td><td>2023-11-14 17:13</td><td>—</td>', rendered)
             self.assertIn('Each detailed timestamp includes its offset and Coordinated Universal Time (UTC).' , rendered)
         else:
             self.assertIn('This system could not convert that time zone.', rendered)

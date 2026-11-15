@@ -291,6 +291,11 @@ class AppServer(unittest.TestCase):
                            "authorizer": "Reviewer", "impact": "Unknown", "response": "No response recorded",
                            "method_notes": "Recorded procedure"}.items():
             self.assertEqual(self.manager.calls[-1][3][key], value)
+        # Every option at once is still one valid request: the field cap covers the whole list.
+        everything = "&".join(key + "=x" for key, _ in COVER)
+        status, _, _ = self.request("/api/report?name=saved&format=html&download=1&ids=F1&sections=needs&" + everything)
+        self.assertEqual(status, 200)
+        self.assertEqual({self.manager.calls[-1][3][key] for key, _ in COVER}, {"x"})
         self.request("/api/report?name=saved&sections=")      # findings alone
         self.assertEqual(self.manager.calls[-1][3]["sections"], frozenset())
         self.assertIsNone(self.manager.calls[-1][3]["ids"])

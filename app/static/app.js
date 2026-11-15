@@ -7,7 +7,7 @@
   const state = {
     config: null, runs: [], selected: null, payload: null, activeName: null,
     tab: "summary", detailTab: "evidence", search: "", findingLimit: 40, selectedFinding: null,
-    findingView: "overview", evidenceTopic: "all", evidenceModel: null, needsLimit: 40, loading: false, submitting: false, stopping: false,
+    findingView: "overview", evidenceTopic: "all", evidenceModel: null, loading: false, submitting: false, stopping: false,
     request: 0, timer: null, connected: false, sidebarRenderKey: null,
   };
   const statuses = new Set(["running", "completed", "partial", "failed", "cancelled", "saved"]);
@@ -126,7 +126,6 @@
     state.search = "";
     state.findingLimit = 40;
     state.evidenceTopic = "all";
-    state.needsLimit = 40;
     $("finding-search").value = "";
     clearInspector();
     if (CONAN.graph) CONAN.graph.clear();
@@ -139,10 +138,10 @@
     $("report-meta").replaceChildren(element("span", "empty-loading", "Loading saved records…"));
     $("finding-list").replaceChildren(empty("Loading investigation", "Reading the saved report and available audit entries."));
     // Clear the previous case immediately; a failed load must not leave another case's details visible.
-    for (const id of ["needs-list", "activity-list", "history-list", "coverage-content", "conclusions", "unverified-findings", "finding-pagination"]) $(id).replaceChildren();
+    for (const id of ["conclusions", "unverified-findings", "finding-pagination"]) $(id).replaceChildren();
     for (const id of ["metric-accepted", "metric-refused", "metric-judgments", "metric-extracted", "metric-inspected"]) $(id).textContent = "—";
     $("evidence-hash").textContent = "";
-    for (const id of ["count-findings", "count-needs", "count-activity"]) $(id).textContent = "";
+    $("count-findings").textContent = "";
     $("run-progress").hidden = true;
     $("sample-banner").hidden = !summary().sample;
     await loadRun(name);
@@ -192,18 +191,6 @@
     $("evidence-hash").title = typeof evidenceHash === "string" && evidenceHash ? "SHA-256 of the evidence store: " + evidenceHash : "";
     $("metric-inspected").textContent = object(coverage.inspection).status === "measured" ? count(coverage.inspection.record_count, "—") : "—";
     $("count-findings").textContent = payload.run ? count(findings.length, "") : "";
-    $("count-needs").textContent = payload.run ? count(rejections.length, "") : "";
-    $("count-activity").textContent = array(payload.events).length ? count(payload.events.length, "") : "";
-    $("activity-refresh-label").textContent = isRunning() ? "REFRESHES EVERY 2 SECONDS" : "RECORDED ACTIVITY";
-    // A view with nothing in it is not offered: no refusals, no recorded activity, no coverage measurements.
-    const filled = {
-      needs: rejections.length > 0,
-      activity: array(payload.events).length > 0 || isRunning() || object(run.history).schema_version === 1,
-      coverage: coverage.schema_version === 1,
-    };
-    for (const name of Object.keys(filled)) $("tab-" + name).hidden = !filled[name];
-    $("tab-gap").hidden = !Object.values(filled).some(Boolean);
-    if (filled[state.tab] === false) switchTab("summary");
     $("metric-extracted").parentElement.hidden = object(coverage.extraction).status !== "measured" && object(coverage.extraction).status !== "invalid";
     $("metric-inspected").parentElement.hidden = object(coverage.inspection).status !== "measured";
     $("metric-judgments").parentElement.hidden = !array(run.conclusions).length;
@@ -224,11 +211,8 @@
     const story = CONAN.story ? CONAN.story.open(payload.run, payload.name, revision) : null;
     if (CONAN.timeline) CONAN.timeline.render(story, payload.name);
     state.evidenceModel = CONAN.evidence ? CONAN.evidence.open(payload.run, revision) : null;
-    if (CONAN.overview) CONAN.overview.render(story, payload.run, payload.brief, state.evidenceModel);
+    if (CONAN.overview) CONAN.overview.render(story, payload.run, payload.brief, state.evidenceModel, payload.narrative);
     renderFindings();
-    renderNeeds();
-    renderActivity();
-    renderCoverage();
     if (payload.error) notice(present(payload.error), true);
     else if (state.connected) notice("");
     updateStartButton();
@@ -371,182 +355,6 @@
     });
     container.append(details);
   }
-  function renderNeeds() {
-    const container = $("needs-list"), rejections = array(savedRun().rejections);
-    container.replaceChildren();
-    if (!rejections.length) {
-      container.append(empty("No refusal diagnostics are available", "This does not establish that the investigation is complete or that no evidence is missing."));
-      return;
-    }
-    rejections.slice(0, state.needsLimit).forEach((rejection) => {
-      const gap = object(rejection.proof_gap), diagnostic = gap.status === "diagnostic";
-      const card = element("article", "finding-card needs-card"), body = element("div", "finding-body");
-      const identity = element("div", "finding-identity");
-      identity.append(element("span", "finding-id", present(rejection.finding_id)), badge("NOT ESTABLISHED", "needs"));
-      body.append(identity);
-      if (rejection.question) body.append(element("p", "finding-question", rejection.question));
-      const sentence = element("p", "finding-sentence", diagnostic ? present(gap.summary) : "The checker refused this proposal. Structured evidence requirements were not recorded.");
-      sentence.style.marginTop = "12px";
-      body.append(sentence);
-      card.append(body);
-      if (diagnostic) {
-        const requirements = element("div", "requirement-list");
-        array(gap.requirements).forEach((raw) => {
-          const requirement = object(raw), row = element("div", "requirement");
-          row.append(element("strong", "", present(requirement.category, "Evidence requirement").replaceAll("_", " ")));
-          if (requirement.reason) row.append(element("p", "", requirement.reason));
-          if (requirement.action) row.append(element("p", "action", requirement.action));
-          if (array(requirement.fact_ids).length) row.append(element("span", "small-mono", "Proposed fact IDs: " + requirement.fact_ids.join(", ")));
-          if (requirement.required !== undefined || requirement.observed !== undefined) {
-            const details = element("details", "provenance");
-            details.append(element("summary", "", "Inspect diagnostic conditions"), code({ ...(requirement.observed !== undefined ? { observed: requirement.observed } : {}), ...(requirement.required !== undefined ? { required: requirement.required } : {}) }));
-            row.append(details);
-          }
-          requirements.append(row);
-        });
-        if (gap.disclaimer) requirements.append(element("p", "field-help", gap.disclaimer));
-        card.append(requirements);
-      }
-      container.append(card);
-    });
-    if (rejections.length > state.needsLimit) {
-      const more = element("button", "button secondary", "Show 40 more refused proposals");
-      more.type = "button";
-      more.addEventListener("click", () => { state.needsLimit += 40; renderNeeds(); });
-      container.append(more);
-    }
-  }
-  function renderActivity() {
-    const container = $("activity-list");
-    const open = new Set([...container.querySelectorAll("details[open]")].map((item) => item.dataset.eventKey));
-    container.replaceChildren();
-    const events = array(state.payload.events).slice().sort((left, right) => (Number(right.sequence) || 0) - (Number(left.sequence) || 0));
-    if (!events.length) container.append(empty("No completed audit calls are available", isRunning()
-      ? "The current tool call may still be running. This view refreshes every two seconds."
-      : "This may be a legacy report or a run without an audit log. Missing activity is not evidence that no work occurred."));
-    else {
-      const feed = element("div", "activity-feed");
-      const names = { forms: "Read available claim forms", sql: "Queried the fact store", fact: "Inspected an evidence record", check: "Submitted a claim to the checker", conclude: "Recorded an investigator interpretation" };
-      events.slice(0, 100).forEach((event) => {
-        const row = element("article", "activity-row");
-        const title = element("div", "activity-title");
-        title.append(element("span", "", names[event.tool] || present(event.tool, "Recorded tool call")), badge(present(event.outcome, "unknown"), event.outcome));
-        const body = element("div", "activity-body");
-        body.append(title, element("div", "activity-meta", "Sequence " + present(event.sequence, "unknown") + (event.finding_id ? " · Finding " + event.finding_id : "")));
-        if (event.arguments !== undefined && event.arguments !== null) {
-          const details = element("details");
-          details.dataset.eventKey = present(event.sequence) + ":" + present(event.tool);
-          details.open = open.has(details.dataset.eventKey);
-          details.append(element("summary", "", "View recorded arguments"), code(event.arguments));
-          body.append(details);
-        }
-        const timestamp = element("time", "activity-time", date(event.completed_at, timeDate));
-        if (event.completed_at) { timestamp.dateTime = event.completed_at; timestamp.title = String(event.completed_at); }
-        row.append(element("span", "activity-symbol", "↳"), body, timestamp);
-        feed.append(row);
-      });
-      container.append(feed);
-      container.append(element("p", "field-help", "Showing " + count(Math.min(100, events.length)) + " supplied recent calls. Displayed times use your local time zone; hover a time for the recorded timestamp."));
-    }
-    renderHistory();
-  }
-  function renderHistory() {
-    const container = $("history-list"), history = object(savedRun().history);
-    container.replaceChildren();
-    if (history.schema_version !== 1) return;
-    container.append(element("h3", "history-heading", "Recorded claim attempts"), element("p", "history-help", "Explicit revision links only. Recorded checker outcomes are not independent verification, and the log does not guarantee complete history."));
-    const integrity = object(history.audit_integrity).status;
-    if (integrity === "failed") container.append(element("div", "notice error", "Invalid history audit. Treat these recorded events as diagnostics only."));
-    else if (integrity !== "passed") container.append(element("p", "field-help", "History audit integrity: " + present(integrity, "unavailable") + ". No integrity guarantee is supplied."));
-    const attempts = array(history.attempts);
-    if (!attempts.length) container.append(element("p", "history-help", history.available ? "No attempts appear in the supplied history." : "Attempt history is unavailable; this does not establish that no attempts occurred."));
-    else {
-      container.append(historyTable(attempts.slice(-40)));
-      if (attempts.length > 40) container.append(element("p", "field-help", "Last 40 of " + count(attempts.length) + " recorded attempts, in supplied order. Download the JSON bundle for the full supplied history."));
-    }
-    if (array(history.unmatched_proposals).length) {
-      container.append(element("h3", "history-heading", "Proposals with unknown position in the audit"), element("p", "history-help", "These proposal rows cannot be placed in the recorded event sequence."), historyTable(history.unmatched_proposals.slice(-40)));
-    }
-  }
-  function historyTable(attempts) {
-    const wrap = element("div", "history-table-wrap"), table = element("table", "history-table");
-    const head = element("thead"), row = element("tr");
-    ["Attempt / finding", "Outcome", "Explicit revision"].forEach((label) => { const th = element("th", "", label); th.scope = "col"; row.append(th); });
-    head.append(row); table.append(head);
-    const body = element("tbody");
-    attempts.forEach((attempt) => {
-      const tr = element("tr"), identity = element("td"), outcome = element("td"), revision = element("td");
-      identity.append(element("div", "small-mono", present(attempt.attempt_id)), element("div", "", present(attempt.finding_id, "No finding ID")));
-      outcome.append(badge(present(attempt.status, "unknown"), attempt.status));
-      if (attempt.duplicate_of) outcome.append(element("div", "field-help", "Duplicate of " + attempt.duplicate_of + "; no new proof"));
-      if (attempt.error) outcome.append(element("div", "field-help", attempt.error));
-      revision.textContent = attempt.revises !== undefined && attempt.revises !== null ? "Revises " + present(attempt.revises) + " · " + present(attempt.revision_status, "unknown") : "None recorded";
-      if (attempt.revision_error) revision.append(element("div", "field-help", attempt.revision_error));
-      tr.append(identity, outcome, revision); body.append(tr);
-    });
-    table.append(body); wrap.append(table); return wrap;
-  }
-  function coverageRow(label, value) {
-    const row = element("div", "coverage-row");
-    row.append(element("span", "", label), element("strong", "", present(value, "Unmeasured")));
-    return row;
-  }
-  function coverageCard(title, status) {
-    const card = element("section", "coverage-card"), heading = element("h3", "", title);
-    if (status) heading.append(badge(status, status === "invalid" ? "invalid" : ""));
-    card.append(heading); return card;
-  }
-  function renderCoverage() {
-    const container = $("coverage-content"), run = savedRun(), coverage = object(run.coverage);
-    container.replaceChildren();
-    if (coverage.schema_version !== 1) {
-      container.append(empty("Coverage measurements are unavailable", "This saved report does not include the supported coverage summary. Unknown measurements are not zero."));
-    } else {
-      const grid = element("div", "coverage-grid");
-      const records = coverageCard("Records and findings");
-      records.append(coverageRow("Extracted records", measure(coverage.extraction, "record_count")), coverageRow("Explicitly inspected records", measure(coverage.inspection, "record_count")), coverageRow("Distinct cited records", measure(coverage.citations, "record_count")), coverageRow("Recorded accepted findings", measure(coverage.certification, "finding_count")), element("p", "", "SQL results and aggregates are not counted as full-record inspection. Logged access does not establish that a model understood a record."));
-      const q = object(coverage.questions), questions = coverageCard("Public question answer presence", present(q.status, "unmeasured"));
-      questions.append(coverageRow("Public questions", q.status === "invalid" ? "Invalid" : count(q.total_count)));
-      [["Answers supplied", "answered_count"], ["Explicitly unknown", "unknown_count"], ["Explicitly unanswered", "unanswered_count"], ["No response supplied", "missing_count"]].forEach(([label, key]) => questions.append(coverageRow(label, measure(q, key))));
-      questions.append(element("p", "", "Answer presence is not correctness, completeness, or forensic truth. No answer key is used for these counts."));
-      const failures = object(coverage.failures), tools = object(failures.tools), extraction = object(failures.extraction);
-      const problems = coverageCard("Execution and source limits");
-      problems.append(coverageRow("Run outcome", present(object(failures.run).status, "Unmeasured")), coverageRow("Tool errors", measure(tools, "error_count")), coverageRow("Refused tool calls", measure(tools, "rejected_count")), coverageRow("Reader failures", measure(extraction, "reader_failure_count")), coverageRow("Unsupported sources", measure(extraction, "unsupported_source_count")), coverageRow("Extraction warnings", measure(extraction, "warning_count")), coverageRow("Unclassified extraction issues", measure(extraction, "unclassified_issue_count")));
-      const issues = array(extraction.issues);
-      const messages = [];
-      for (const [key, section] of Object.entries(coverage)) if (section && typeof section === "object" && !Array.isArray(section)) array(section.problems).forEach((message) => messages.push(key + ": " + message));
-      for (const section of [tools, extraction]) array(section.problems).forEach((message) => messages.push(String(message)));
-      if (issues.length || messages.length) {
-        const details = element("details", "provenance");
-        details.append(element("summary", "", "Inspect reported issues"));
-        const list = element("ul", "coverage-notes");
-        issues.forEach((issue) => list.append(element("li", "", present(issue.category) + ": " + present(issue.message))));
-        messages.forEach((message) => list.append(element("li", "", message)));
-        details.append(list); problems.append(details);
-      }
-      const inspection = object(coverage.inspection), scope = coverageCard("Measurement boundaries");
-      scope.append(coverageRow("Inspection audit integrity", present(inspection.audit_integrity, "Unavailable")), coverageRow("Certificate replay by this viewer", "Not performed"));
-      const list = element("ul", "coverage-notes");
-      array(coverage.limitations).forEach((message) => list.append(element("li", "", message)));
-      if (list.childElementCount) scope.append(list);
-      else scope.append(element("p", "", "Supplied record counts do not establish evidence completeness. Independent verification must be performed separately."));
-      grid.append(records, questions, problems, scope);
-      container.append(grid);
-    }
-    const audit = object(run.audit), auditCard = coverageCard("Audit integrity", present(audit.status, "unavailable"));
-    auditCard.classList.add("full-width");
-    auditCard.style.marginTop = "16px";
-    if (audit.status === "invalid" || audit.passed === false) {
-      auditCard.classList.add("invalid-audit");
-      auditCard.append(element("div", "notice error", "Invalid audit. The recorded events are diagnostic only; this viewer does not repair or independently recheck the log."));
-    } else if (audit.status === "valid" && audit.passed === true) auditCard.append(element("p", "", "The bundle reports a passed integrity check. This viewer does not recheck the audit file."));
-    else auditCard.append(element("p", "", "An audit integrity result is not available in this report."));
-    auditCard.append(coverageRow("Recorded completed events", count(audit.count)), coverageRow("Audit file (literal path)", present(audit.path)), coverageRow("File SHA-256", present(audit.sha256)), coverageRow("Chain head", present(audit.head)), coverageRow("Expected head supplied", present(audit.expected_head, "Not supplied")));
-    array(audit.problems).forEach((message) => auditCard.append(element("p", "", message)));
-    auditCard.append(element("p", "", "Integrity does not authenticate an author or establish complete history. Detecting a complete rewrite requires an independently retained checkpoint."));
-    container.append(auditCard);
-  }
-
   function detailField(list, name, value, mono = false) {
     const row = element("div");
     row.append(element("dt", "", name), element("dd", mono ? "code" : "", present(value)));
@@ -714,9 +522,21 @@
     const ready = state.config && state.config.token && backend && backend.available;
     $("start-investigation").disabled = !ready || Boolean(state.activeName) || state.submitting;
     $("start-investigation").textContent = state.submitting ? "Starting…" : "Start investigation";
-    if (state.activeName) $("backend-help").textContent = "An investigation is already running. Stop it or wait for it to finish before starting another.";
-    else if (!ready) $("backend-help").textContent = "No available backend is selected. Configure a supported provider locally and refresh the workspace.";
-    else $("backend-help").textContent = "Detected locally. Provider authentication has not been checked. Starting a run may incur provider usage.";
+    const label = backend ? present(backend.label, backend.id) : "", minutes = $("investigation-minutes").value;
+    $("investigation-settings").textContent = [label, $("investigation-model").value.trim(), minutes ? minutes + " min" : ""].filter(Boolean).join(" · ");
+    if (state.activeName) $("backend-help").textContent = "Another investigation is running. Stop it or wait for it to finish.";
+    else if (!ready) $("backend-help").textContent = "No AI service is set up on this computer.";
+    else $("backend-help").textContent = "Runs on your " + label + " account.";   // a run spends that account's usage
+  }
+  // A page cannot learn a file's path from a browser file input. The desktop window can supply it
+  // from its own open panel; in a browser the button stays hidden and the path is typed.
+  const chooser = () => Boolean(window.pywebview && window.pywebview.api && typeof window.pywebview.api.choose_evidence === "function");
+  async function chooseEvidence() {
+    if (!chooser()) return;
+    try {
+      const path = await window.pywebview.api.choose_evidence();
+      if (typeof path === "string" && path) $("facts-path").value = path;
+    } catch { /* the path can still be typed */ }
   }
   function applyConfig(config) {
     state.config = config;
@@ -739,6 +559,8 @@
   }
   function openNew() {
     $("form-error").hidden = true;
+    $("facts-choose").hidden = !chooser();
+    $("investigation-advanced").open = false;
     updateStartButton();
     $("new-dialog").showModal();
     $("investigation-title").focus();
@@ -749,7 +571,9 @@
   }
   async function startInvestigation(event) {
     event.preventDefault();
-    if (state.submitting || $("start-investigation").disabled || !$("investigation-form").reportValidity()) return;
+    if (state.submitting || $("start-investigation").disabled) return;
+    if (!$("investigation-form").checkValidity()) $("investigation-advanced").open = true;   // a folded field cannot show its message
+    if (!$("investigation-form").reportValidity()) return;
     state.submitting = true;
     $("form-error").hidden = true;
     updateStartButton();
@@ -763,8 +587,7 @@
       const result = await api("/api/investigations", body);
       state.activeName = result.name;
       $("new-dialog").close();
-      $("tab-activity").hidden = false;
-      switchTab("activity");
+      switchTab("summary");   // progress shows in the strip above the tabs
       await refreshRuns();
       await selectRun(result.name);
       schedulePoll(2000);
@@ -821,18 +644,20 @@
   }));
   document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   document.querySelectorAll("[data-detail-tab]").forEach((button) => button.addEventListener("click", () => switchDetail(button.dataset.detailTab)));
-  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "needs", "activity", "coverage", "report"].filter((name) => !$("tab-" + name).hidden), state.tab, switchTab));
+  document.querySelector(".report-tabs").addEventListener("keydown", (event) => tabKeys(event, ["summary", "timeline", "graph", "findings", "report"], state.tab, switchTab));
   $("open-report").addEventListener("click", () => switchTab("report", true));
   document.querySelector(".detail-tabs").addEventListener("keydown", (event) => tabKeys(event, ["evidence", "proof"], state.detailTab, switchDetail));
   $("finding-search").addEventListener("input", (event) => { state.search = event.target.value.trim(); state.findingLimit = 40; renderFindings(); });
   for (const [id, view] of [["findings-overview", "overview"], ["findings-exact", "exact"]]) $(id).addEventListener("click", () => {
     state.findingView = view; state.findingLimit = 40; renderFindings();
   });
-  $("open-demo").addEventListener("click", async () => { await selectRun("sample"); switchTab("summary", true); });
   $("new-investigation").addEventListener("click", openNew);
   $("welcome-new").addEventListener("click", openNew);
   $("refresh-runs").addEventListener("click", refreshAll);
   $("investigation-form").addEventListener("submit", startInvestigation);
+  $("facts-choose").addEventListener("click", chooseEvidence);
+  window.addEventListener("pywebviewready", () => { $("facts-choose").hidden = !chooser(); });
+  for (const id of ["investigation-model", "investigation-minutes"]) $(id).addEventListener("input", updateStartButton);
   $("investigation-backend").addEventListener("change", () => {
     const defaults = object(state.config && state.config.defaults);
     if ($("investigation-model").value === defaults.model && $("investigation-backend").value !== defaults.backend) $("investigation-model").value = "";
@@ -849,9 +674,66 @@
   });
   window.addEventListener("beforeunload", () => clearTimeout(state.timer));
 
+  // Every edge between two panes can be dragged. Arrow keys move it too; double-click or Enter restores the default.
+  const PANES = [
+    { handle: "resize-side", pane: "sidebar", name: "--side-w", base: 208, min: 160, max: 440, sign: 1 },
+    { handle: "resize-insp", pane: "inspector", name: "--insp-w", base: 380, min: 280, max: 820, sign: -1 },
+    { handle: "resize-report", pane: "report-form", name: "--report-w", base: 264, min: 220, max: 600, sign: 1 },
+  ];
+  function resizablePanes() {
+    const shell = $("shell");
+    let saved = {}, queued = 0;
+    try { saved = object(JSON.parse(localStorage.getItem("conan.panes") || "{}")); } catch { saved = {}; }
+    const keep = () => { try { localStorage.setItem("conan.panes", JSON.stringify(saved)); } catch { /* the sizes last for this window only */ } };
+    const refit = () => { if (!queued) queued = requestAnimationFrame(() => { queued = 0; window.dispatchEvent(new Event("resize")); }); };
+    for (const pane of PANES) {
+      const handle = $(pane.handle);
+      const shown = () => Math.round($(pane.pane).getBoundingClientRect().width) || pane.base;
+      const set = (width) => {
+        const value = Math.round(Math.max(pane.min, Math.min(pane.max, width)));
+        shell.style.setProperty(pane.name, value + "px");
+        handle.setAttribute("aria-valuenow", String(value));
+        refit();
+        return value;
+      };
+      const store = (value) => { saved[pane.name] = value; keep(); };
+      const reset = () => { shell.style.removeProperty(pane.name); handle.setAttribute("aria-valuenow", String(pane.base)); delete saved[pane.name]; keep(); refit(); };
+      handle.setAttribute("aria-valuemin", String(pane.min)); handle.setAttribute("aria-valuemax", String(pane.max));
+      handle.setAttribute("aria-valuenow", String(pane.base));
+      if (Number.isFinite(saved[pane.name])) set(saved[pane.name]);
+      handle.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0) return;
+        event.preventDefault();
+        const from = event.clientX, start = shown();
+        let value = start;
+        try { handle.setPointerCapture(event.pointerId); } catch { /* the drag still works while the pointer stays on the handle */ }
+        handle.classList.add("dragging"); document.body.classList.add("resizing");
+        const move = (step) => { value = set(start + pane.sign * (step.clientX - from)); };
+        const done = () => {
+          handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", done); handle.removeEventListener("pointercancel", done);
+          handle.classList.remove("dragging"); document.body.classList.remove("resizing");
+          if (value !== start) store(value);
+        };
+        handle.addEventListener("pointermove", move); handle.addEventListener("pointerup", done); handle.addEventListener("pointercancel", done);
+      });
+      handle.addEventListener("dblclick", reset);
+      handle.addEventListener("keydown", (event) => {
+        const step = (event.shiftKey ? 64 : 16) * pane.sign;
+        if (event.key === "ArrowRight") store(set(shown() + step));
+        else if (event.key === "ArrowLeft") store(set(shown() - step));
+        else if (event.key === "Home") store(set(pane.min));
+        else if (event.key === "End") store(set(pane.max));
+        else if (event.key === "Enter") reset();
+        else return;
+        event.preventDefault();
+      });
+    }
+  }
+
   CONAN.app = { element, badge, code, present, openFinding, recordCard, inspect, switchTab, browseEvidence };
 
   async function init() {
+    resizablePanes();
     const [config, runs] = await Promise.allSettled([api("/api/config"), api("/api/runs")]);
     if (config.status === "fulfilled") applyConfig(config.value);
     else notice(config.reason.message, true);
