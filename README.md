@@ -326,8 +326,12 @@ Create the Python environment:
 
 ```sh
 python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -e .
 ```
+
+The upgrade is required where Python ships an old pip, such as the macOS system Python 3.9.
+Older pip versions cannot install this project in editable mode.
 
 Build the Lean project from the `lean` directory:
 
