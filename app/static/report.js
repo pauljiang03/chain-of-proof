@@ -1,5 +1,4 @@
-/* CONAN-F report builder: choose what goes into an examiner's report, preview it, print it.
-   The server writes the report; this file only chooses its contents and shows the result. */
+/* Report tab: choose what goes into the report, then preview and print the page the server writes. */
 (() => {
   "use strict";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -23,7 +22,7 @@
     shadow: null, stale: true, active: false, request: 0, timer: 0, built: false,
   };
 
-  // Remembered per case in this browser only: a convenience, never the record of anything.
+  // Kept per case in this browser only, as a convenience; never a record of anything.
   const storageKey = () => "conan-f.report." + state.name;
   function load() {
     state.marked = new Set(); state.scope = "all"; state.length = "short"; state.cover = { report_date: today(), report_version: "1" };   // a report is dated the day it is made
@@ -49,9 +48,7 @@
   function query(download) {
     const params = new URLSearchParams({ name: state.name, format: "html" });
     if (download) params.set("download", "1");
-    // The short report is the summary, timeline and evidence: one or two printed pages.
     if (state.length === "short") params.set("brief", "1");
-    // Do not add empty optional sections to the examiner's report.
     const included = (section) => state.length === "full" && !state.empty.has(section[0]) && state.sections.has(section[0]);
     params.set("sections", SECTIONS.filter((section) => included(section) && !(section[0] === "workflow" && state.scope === "marked")).map((section) => section[0]).join(","));
     if (state.scope === "marked") params.set("ids", marked().join(","));
@@ -75,7 +72,7 @@
     $("report-print").disabled = !state.built || state.stale;
     const link = $("report-export");
     if (none || !state.name) { link.removeAttribute("href"); link.removeAttribute("download"); link.setAttribute("aria-disabled", "true"); }
-    // The file name makes the desktop window save the report instead of opening it in place of the app.
+    // Without a file name the desktop window opens the report in place of the app.
     else { link.href = query(true); link.download = String(state.name).replace(/\//g, "-") + ".html"; link.removeAttribute("aria-disabled"); }
     const workflow = document.querySelector('#report-sections input[value="workflow"]');
     if (workflow) workflow.disabled = state.scope === "marked";
@@ -87,14 +84,12 @@
     $("report-method-label").hidden = state.length === "short";
     document.querySelectorAll('#report-form input[name="report-scope"]').forEach((input) => { input.checked = input.value === state.scope; });
     document.querySelectorAll('#report-form input[name="report-length"]').forEach((input) => { input.checked = input.value === state.length; });
-    $("report-extras").hidden = state.length !== "full";   // the parts that add pages belong to the full report
-    // A part of the report with nothing in it for this case is not offered.
+    $("report-extras").hidden = state.length !== "full";
     document.querySelectorAll("#report-sections input").forEach((input) => { input.checked = state.sections.has(input.value); input.closest("label").hidden = state.empty.has(input.value); });
     for (const key of COVER) $("report-" + key).value = state.cover[key] || "";
   }
 
-  // The report arrives as a finished page. Show it inside a shadow root so its styles and
-  // the workbench's cannot touch each other, and so it prints as part of this page.
+  // A shadow root keeps the report's styles and the workbench's apart, and lets the report print with this page.
   function mount(text) {
     const parsed = new DOMParser().parseFromString(text, "text/html");
     parsed.querySelectorAll("script, iframe, object, embed, link, meta, base, form").forEach((node) => node.remove());
@@ -111,8 +106,7 @@
       });
     }
     const style = document.createElement("style"), page = document.createElement("div");
-    // On screen the workbench already supplies the desk around the page. A long report holds hundreds of
-    // findings; laying out only the ones near the view keeps the tab quick. Print still lays out all of them.
+    // On screen, lay out only findings near the view so a long report stays quick; print lays out all.
     style.textContent = [...parsed.querySelectorAll("style")].map((sheet) => sheet.textContent).join("\n")
       + "\n@media screen { .report { background: transparent; } main { margin: 0; max-width: none; border: 0; border-radius: 0; }"
       + " article { content-visibility: auto; contain-intrinsic-size: auto 1500px; } }";
@@ -167,7 +161,7 @@
   }
 
   function print() {
-    // In the desktop window the system print panel is reached through the window's own handler.
+    // The desktop window reaches the system print panel through its own message handler.
     const native = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.browserDelegate;
     if (native && typeof native.postMessage === "function") native.postMessage("print"); else window.print();
   }
@@ -196,7 +190,7 @@
   }
 
   CONAN.report = {
-    /** A case was opened or re-read: `ids` are its certified findings, in order; `empty` names report parts it has nothing for. */
+    // `ids`: the case's certified findings, in order; `empty`: report parts the case has nothing for.
     open(name, ids, revision = null, empty = []) {
       const list = (ids || []).map(String), same = name === state.name && revision === state.revision
         && list.length === state.ids.length && list.every((id, index) => id === state.ids[index]);

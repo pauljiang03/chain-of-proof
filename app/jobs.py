@@ -1,8 +1,4 @@
-"""Local, single-job access to the existing investigator and report pipeline.
-
-The internal worker is a subprocess, never a new investigator implementation.
-Only an explicit ``start`` launches it. Provider output is not exposed by this API.
-"""
+"""Run one local investigation at a time in a worker subprocess, and read saved runs."""
 from __future__ import annotations
 
 import argparse
@@ -31,7 +27,7 @@ from checker.facts import open_source
 
 ROOT = Path(__file__).resolve().parent.parent
 SAMPLE = Path(__file__).resolve().parent / "sample"
-CODE_MODEL, API_MODEL = "opus", "claude-opus-5-5"   # the default model for each AI service
+CODE_MODEL, API_MODEL = "opus", "claude-opus-5-5"   # default model per backend
 STATUSES = {"running", "completed", "partial", "failed", "cancelled", "saved"}
 PAYLOAD_FIELDS = {"name", "facts", "title", "brief", "questions", "backend", "model", "minutes"}
 EVENT_FIELDS = ("sequence", "tool", "outcome", "completed_at", "finding_id", "arguments")
@@ -159,8 +155,7 @@ def _finish_partial(directory, spec, status):
                 if isinstance(existing.get("case"), dict):
                     metadata.update(existing["case"])
             except (OSError, ValueError):
-                # Preserve a truncated owned output before replacing it with a
-                # bundle rebuilt from the intact fixed certificate/log artifacts.
+                # Keep the unreadable run.json before rebuilding it from the certificates and log.
                 with _open(directory / "run.json") as incoming, (directory / "interrupted-run.json").open("xb") as saved:
                     shutil.copyfileobj(incoming, saved)
         metadata.update(backend=spec["backend"], model=spec["model"], ended=status,
@@ -173,8 +168,7 @@ def _finish_partial(directory, spec, status):
                 "evaluation": {"measured": False, "reason": "Product investigation; no scoring requested"}})
         return True
     except Exception:
-        # A cancelled write may leave an incomplete proposal/certificate. Keep it
-        # intact for review rather than pretending a complete report was made.
+        # A cancelled write may leave an incomplete certificate: keep it rather than claim a complete report.
         return False
 
 
@@ -227,8 +221,7 @@ def _signal_known(identities, sig, popen=None):
     current = _processes(popen)
     for pid, old in identities.items():
         now = current.get(pid)
-        # Parent IDs can change after reparenting, but PID/group/creation time
-        # must still match the app-owned process captured before cancellation.
+        # The parent changes on reparenting; PID, group and start time must still match.
         if now is not None and now[1:] == old[1:]:
             try:
                 os.kill(pid, sig)
@@ -237,7 +230,7 @@ def _signal_known(identities, sig, popen=None):
 
 
 def _registered(path, rows):
-    """Include direct children recorded before the worker handles deferred termination."""
+    """Children the worker recorded that are still the same processes, with their descendants."""
     known = {}
     if path is None:
         return known
@@ -280,8 +273,7 @@ def _terminate(process, registry=None):
                     pass
             process.wait(timeout=KILL_SECONDS)
     finally:
-        # Claude creates another session, and nested helpers can do so too. A
-        # worker process-group signal alone would not stop these descendants.
+        # Descendants may start their own sessions, which a process-group signal would miss.
         rows = _processes()
         known.update(_descendants(process.pid, rows))
         known.update(_registered(registry, rows))
@@ -290,7 +282,7 @@ def _terminate(process, registry=None):
 
 class JobManager:
     def __init__(self, root=ROOT, secrets=None, check=None):
-        """`secrets` is the settings folder that may hold a saved API key; without it only the environment is read."""
+        """`secrets` is the settings folder for a saved API key; without it only the environment is read."""
         self.root = Path(root).resolve()
         self._secrets = Path(secrets) if secrets is not None else None
         self._check = check or credentials.check
@@ -304,8 +296,7 @@ class JobManager:
         return bool(importlib.util.find_spec("deepagents") and importlib.util.find_spec("langchain_anthropic"))
 
     def config(self):
-        """What the page needs to offer a run. `needs` says what a service lacks; `key` says where the
-        API key comes from ("environment" or "saved"), never the key."""
+        """Backends and defaults for a new run; `key` says where the API key comes from, never the key."""
         installed, key = self._api_installed(), credentials.source(self._secrets)
         program = shutil.which("claude") is not None
         code = {"id": "claude-code", "label": "Claude Code", "available": program, "model": CODE_MODEL,
@@ -313,7 +304,7 @@ class JobManager:
         api = {"id": "deepagents", "label": "Anthropic API", "available": bool(installed and key), "model": API_MODEL,
                "needs": "packages" if not installed else None if key else "key", "key": key,
                "can_save_key": self._secrets is not None}
-        # The API is the default for anyone who has set it up; otherwise the local Claude Code login.
+        # Prefer the API once it is set up; otherwise the local Claude Code login.
         default = api if api["available"] or not program else code
         with self._lock:
             return {"defaults": {"facts": str(self.root / "evidence/case_facts.json"),
@@ -321,11 +312,7 @@ class JobManager:
                     "backends": [code, api], "active_run": self._active}
 
     def set_api_key(self, value):
-        """Save the user's Anthropic API key in their settings folder, or remove it when `value` is empty.
-
-        A new key is checked with Anthropic first, and a key that Anthropic refuses is not saved.
-        Messages raised here never contain any part of the key.
-        """
+        """Check and save the user's API key, or remove it when `value` is empty; errors never contain the key."""
         if self._secrets is None:
             raise RuntimeError("This copy cannot save an API key.")
         if value == "":
@@ -434,11 +421,11 @@ class JobManager:
             env = dict(os.environ)
             env["PYTHONPATH"] = str(ROOT) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
             if spec["backend"] == "deepagents":
-                # The key reaches the worker through its environment only: not its command line, not a file in the run.
+                # The key reaches the worker only through its environment, never its command line or a run file.
                 key = credentials.key(self._secrets)
                 if key:
                     env[credentials.ENV] = key
-                # Evidence goes to Anthropic and nowhere else: keep LangChain's own tracing service off.
+                # Evidence goes to Anthropic only: keep LangChain tracing off.
                 env.update(LANGSMITH_TRACING="false", LANGCHAIN_TRACING_V2="false")
             command = [sys.executable, "-m", "app.jobs", "_worker", "--root", str(self.root),
                        "--spec", str(stage / "spec.json")]
@@ -665,7 +652,7 @@ def _bounded(value, depth=0):
 
 
 def _worker(root, spec_path):
-    """Run the existing CLI entry in a child with a graceful termination hook."""
+    """Run `agent.run` for one job; SIGTERM cancels it and keeps the saved artifacts."""
     from agent import run
 
     spec = _read_json(spec_path)
@@ -685,10 +672,7 @@ def _worker(root, spec_path):
             raise KeyboardInterrupt()
 
     def guarded_popen(*args, **kwargs):
-        # Claude's session is created before its runner try/finally. Defer the
-        # Python interrupt across spawn/registration without changing the child's
-        # signal mask. No new runtime work may start after cancellation. An active
-        # synchronous proof still uses the manager's bounded process-tree fallback.
+        # Hold SIGTERM's interrupt until the child is started and registered; start nothing after cancellation.
         nonlocal spawning
         main_thread = threading.current_thread() is threading.main_thread()
         if main_thread:
@@ -754,8 +738,7 @@ def _worker(root, spec_path):
             status = "cancelled"
         except (Exception, SystemExit):
             status = "failed"
-        # Finish all child writes before rebuilding a cancelled bundle. Repeated
-        # cancellation during finalization is handled by the manager fallback.
+        # Stop all children before rebuilding a cancelled bundle; a second SIGTERM is ignored.
         signal.signal(signal.SIGTERM, signal.SIG_IGN)
         cleanup_children()
         if owned:

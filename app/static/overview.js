@@ -1,6 +1,5 @@
-/* CONAN-F summary: what the records behind the verified findings show, in plain sentences,
-   then the counts of the run. The server writes the sentences from those records alone.
-   This page adds no finding of its own. */
+/* Summary tab: the server's plain sentences about the cited records, then the run's counts.
+   It adds no finding of its own. */
 (() => {
   "use strict";
   const CONAN = (window.CONAN = window.CONAN || {});
@@ -24,7 +23,7 @@
     box.append(el("span", "tile-label", label), el("span", "tile-value", value), el("span", "tile-note", note));
     return box;
   }
-  // The counts of the run. A tile that leads somewhere opens the tab that shows what it counts.
+  // A clickable tile opens the tab that shows what it counts.
   function tiles(model) {
     const S = CONAN.story, n = S.number, run = state.run || {}, findings = model.findings, row = el("div", "ov-tiles");
     const direct = findings.filter((finding) => finding.strength === "strong").length;
@@ -68,7 +67,7 @@
     return row;
   }
 
-  // Evidence examined: each item the records name, with the identifiers and hash values that are themselves cited records.
+  // Identifiers and hash values shown here are themselves cited records.
   function evidence(items, brief) {
     const S = CONAN.story, n = S.number, box = card("Evidence examined", "Items named by the evidence records");
     const text = (value) => (typeof value === "string" ? value : "");

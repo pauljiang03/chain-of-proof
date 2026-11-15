@@ -1,12 +1,8 @@
-"""Standalone HTML for supplied investigation bundles; never verifies or reads files.
+"""Standalone HTML report for a run bundle; it shows what the bundle records and never verifies or reads files.
 
-`render_html(run)` reproduces the whole bundle. `render_html(run, report_options(...))`
-builds an examiner's report: chosen findings, chosen sections and cover details. A
-report that leaves anything out says so on its first page.
-
-Reports use a conventional examination structure. Administrative details come from
-the report author. Results and source references come from the supplied bundle.
-The report prose uses ASD-STE100 writing rules. Source text remains unchanged.
+`render_html(run)` shows the whole bundle; `render_html(run, report_options(...))` builds an
+examiner's report from chosen findings, sections and cover details, and says on its first page
+what it leaves out. Report prose follows ASD-STE100 rules; source text is shown unchanged.
 """
 from __future__ import annotations
 
@@ -17,7 +13,7 @@ import re
 
 from . import brief, narrative
 
-# Optional parts of a report. The certified findings themselves are always included.
+# Optional report parts; the certified findings are always included.
 SECTIONS = ('workflow', 'needs', 'judgments', 'evidence', 'proofs', 'activity')
 SECTION_LABELS = {'workflow': 'question-by-question plan', 'needs': 'refused proposals',
                   'judgments': 'investigator judgments', 'evidence': 'full evidence records',
@@ -44,10 +40,9 @@ _FINDING_ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
 
 
 def report_options(ids=None, sections=None, reference='', examiner='', organisation='', *, brief=False, **more):
-    """Validate what goes into a report. `None` for ids or sections means everything.
+    """Validate what goes into a report; `None` ids or sections means all.
 
-    `brief` asks for the short report: the summary, timeline and evidence examined
-    on one or two printed pages. The findings themselves stay in the stored run.
+    `brief` asks for the short report: summary, timeline and evidence examined, one or two printed pages.
     """
     if not isinstance(brief, bool):
         raise ValueError('Unknown report length.')
@@ -238,7 +233,7 @@ def _time(row, tz=None):
     try:
         date = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(microseconds=stamp)
         exact = _h(date.isoformat().replace('+00:00', 'Z')) + f' ({stamp} microseconds since Unix epoch)'
-        # With a case clock: local time first, then the UTC instant exactly as stored.
+        # With a case clock: local time first, then the stored UTC instant.
         return exact if tz is None else _h(_local(date.astimezone(tz))) + '<br><span class="small">' + exact + '</span>'
     except (OverflowError, ValueError):
         return f'{stamp} microseconds since Unix epoch (outside displayable date range)'
@@ -268,7 +263,7 @@ def _span(first, last, tz):
     return f'{start:%H:%M}' if (last - first) < 60 * 1000000 else f'{start:%H:%M}–{end:%H:%M}'
 
 
-# Which event groups a summary day names first. The order is by record type and is the same for every case.
+# Which event groups a summary day names first: a fixed order by record type, the same for every case.
 _SUMMARY_ORDER = ('usbInsert', 'cdBurn', 'fileDeleted', 'emailSent', 'fileDownloaded', 'cloudFile', 'webSearch', 'fileRenamed',
                   'localSearch', 'noteText', 'volumeSeen', 'shadowCopy', 'programInstalled', 'lnkTarget')
 _SUMMARY_LABELS = {'usbInsert': 'USB identifier', 'cdBurn': 'disc trace', 'fileDeleted': 'deletion',
@@ -279,7 +274,7 @@ _SUMMARY_LABELS = {'usbInsert': 'USB identifier', 'cdBurn': 'disc trace', 'fileD
 
 
 def _day_events(groups, most=3):
-    """The groups one summary row names: picked by record type in a fixed order, shown in time order."""
+    """The groups one summary row names, picked by record type and shown in time order."""
     rank = {kind: place for place, kind in enumerate(_SUMMARY_ORDER)}
     chosen = sorted(groups, key=lambda group: rank.get(group.get('kind'), len(rank)))[:most]
     return sorted(chosen, key=lambda group: group['first'])
@@ -290,7 +285,7 @@ def _exhibits(info, short=False):
     if not info['exhibits']:
         return '<p>The cited evidence records name no exhibit.</p>'
     rows = []
-    for item in info['exhibits'] if short else ():   # one or two lines per cell: what identifies the item, and its hash values
+    for item in info['exhibits'] if short else ():   # compact cells for the short report
         identity = [_h('Device ' + value) for value in item['devices']]
         identity += [_h('Volume serial ' + value) for value in item['volumes']]
         if item['system']:
@@ -333,7 +328,7 @@ def _short_back(info, options):
 
 
 def _front(info, tz, case, findings, options, story, short=False):
-    """Cited record values and source timestamps, then evidence examined and method."""
+    """The summary, request, evidence examined and method sections."""
     counts, where = info['counts'], info['zone']
     clock_name = where['name'] + ' local time' if tz is not None else 'UTC'
     out = ['<section id="summary"><h2>Executive summary</h2>']
@@ -442,7 +437,7 @@ def _option_fields(options, keys):
 
 
 def _close(options, short=False):
-    """Keep supplied evidence disposition details at the end of the report."""
+    """The evidence disposition section; a short report has it only when supplied."""
     out = []
     if options.get('disposition') or not short:
         out.append('<section id="disposition"><h2>Evidence disposition</h2>'
@@ -801,8 +796,7 @@ def render_html(run: dict, options: dict | None = None) -> str:
            '<title>Report of digital forensic examination — ' + title + '</title><style>' + _CSS + '</style></head><body class="report">'
            + ('<main class="brief">' if short else '<main>'),
            '<header><div class="eyebrow">Report of digital forensic examination</div><h1>' + title + '</h1>']
-    # Report identification precedes the summary. Request details have their own section.
-    cover = [(label, _h(options[key])) for key, label in COVER if key in _HEADER_KEYS and options.get(key)]
+    cover =[(label, _h(options[key])) for key, label in COVER if key in _HEADER_KEYS and options.get(key)]
     if cover:
         out.append(_fields(cover))
     out.append('<p class="small">Source run: ' + _v(case, 'generated_at') + '</p>')

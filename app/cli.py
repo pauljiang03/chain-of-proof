@@ -1,4 +1,4 @@
-"""Local investigation commands. Run ``cop --help`` or ``python -m app.cli --help``."""
+"""The `cop` and `conan` commands. Run ``cop --help`` for the list."""
 from __future__ import annotations
 
 import argparse
@@ -53,8 +53,7 @@ def _print_report(manager, name, root, snapshot):
     try:
         content, content_type, _ = manager.report(name, "html")
     except ImportError:
-        # The Markdown path remains usable while the optional app renderer is
-        # unavailable in a checkout. No provider or investigation is retried.
+        # Without the HTML renderer, fall back to the Markdown report.
         pass
     else:
         if not isinstance(content, bytes) or content_type.split(";", 1)[0] != "text/html":
@@ -64,7 +63,6 @@ def _print_report(manager, name, root, snapshot):
             stream.write(content)
         print(f"Report: {html}")
         return True
-    # The manager may finalize a missing Markdown artifact for this owned job.
     manager.report(name, "md")
     path = directory / "report.md"
     if not path.is_file() or path.is_symlink():
@@ -97,7 +95,7 @@ def _investigate(args, root):
         args = Namespace(**{**vars(args), "facts": extracted["facts"], "images": None,
                             "intake_config": extracted["config"]})
     payload = {"name": args.name, "facts": args.facts, "questions": args.question or []}
-    # The same manager supplies backend-aware defaults to the UI and CLI.
+    # Options left unset take the manager's defaults, as in the web app.
     for field in ("title", "brief", "backend", "model", "minutes"):
         value = getattr(args, field)
         if value is not None:
@@ -290,7 +288,7 @@ def conan(argv=None, *, root=ROOT):
 
 def main(argv=None, *, root=ROOT, prog="cop"):
     argv = list(sys.argv[1:] if argv is None else argv)
-    # Keep the existing verifier/package argument contracts and exit statuses.
+    # verify and package hand their arguments and exit status straight to the verifier.
     if argv and argv[0] == "verify":
         from verifier.verify import main as verify_main
         return verify_main(argv[1:])
