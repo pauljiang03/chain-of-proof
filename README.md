@@ -12,8 +12,7 @@ quickly.
 ## What we solve
 
 An AI can state facts that are not in the evidence. A citation alone does not make a
-conclusion true. Because a forensic finding can go to court, an investigator must be able to
-check it. CONAN-F lets the AI do the investigation, but it keeps only the findings that the
+conclusion true. An investigator must be able to check each finding. CONAN-F lets the AI do the investigation, but it keeps only the findings that the
 evidence proves.
 
 ## How we solve it
