@@ -61,8 +61,10 @@ The latest [correctness fixes](docs/CORRECTNESS_FIXES.md) require declared meani
 for typed answer fields, retain partial answers, and save answer checkpoints in the
 new test protocol. They also narrow shortcut, email, installation and USB statements
 to their source evidence. Fixed execution-artifact roles separate reviewed sources
-from generic application sightings. Answer-row and source-scope checks are still in
-progress. No new accuracy result is claimed for these changes.
+from generic application sightings. Related answer fields must refer to one atomic
+claim. Source checks require the selected image, exhibit, source view and artifact
+state. The two stricter public test contracts remain on hold where required support
+or source selections are missing. These changes have no new accuracy score.
 
 ## Try it in 60 seconds
 
@@ -171,7 +173,7 @@ flowchart TD
     L --> R
     R --> Z[Portable verification package]
     F --> Z
-    V --> A[Check declared field roles and row relationships]
+    V --> A[Check field roles, row relationships and selected sources]
     Q --> A
     A --> J[Structured answers with source links]
     J --> R

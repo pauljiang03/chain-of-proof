@@ -5,12 +5,15 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 
 ## Ready
 
+- Final combined regression at `f8ff658`: 1,024 tests run, 1,023 passed and one platform skip. This includes the source guard, public derivatives, professional report and updated demo certificates.
+- Answer-row checks, explicit reader origins and exact source enforcement are integrated. Four selected real-source certificates passed independent replay; four correct source projections were retained and eight deliberate source/hash mismatches were refused. Both public contract derivatives remain held. See [the source checks and remaining gaps](docs/CORRECTNESS_FIXES.md).
+- Readable evidence cards, a 32-certificate synthetic frontend sample and professional examiner reports are merged and pushed. The report keeps administrative details, certified source statements and examiner judgments distinct.
 - The combined source, strict answer-policy and durable-checkpoint batch passed 913 tests: 912 passed and one platform skip. Application binary metadata now supplies literal product/version fields; historical journal paths retain explicit missing-ancestor diagnostics. See [the fixes and limitations](docs/CORRECTNESS_FIXES.md).
 - Fixed execution-artifact roles distinguish reviewed source records from generic application sightings. Fresh system-reader snapshots from both NIST images supplied six selected claims that passed independent replay; two wrong-role controls were refused. A real Dissect DWORD regression covers the UserAssist adapter fix. The integrated source/desktop suite ran 938 tests: 937 passed and one platform test was skipped. These are mechanical checks, not model accuracy.
 
 - Official NIST Hacking Case package: all 31 public questions, a separate source-bound deterministic reference, real-image readers, fixed-role Lean attributes and digest comparison. See [scope and commands](docs/HACKING_CASE.md). This is distinct from the DFIR Madness operational test.
 - Windows XP profile and EVT support, exact application/traffic attributes, Recycle Bin allocation flags, image hashing and an optional bounded local antivirus scan are integrated. Stronger attribution and subscription gaps remain explicit.
-- Hacking integration regression: 834 tests run, 833 passed, one platform skip; Lean build passed. A later focused scan-timeout check is recorded with the final feature commit. The real-image mechanical workflow produced 58 certificates; all passed independent replay and con-leche. The portable package also passed verification. The new model experiment is not yet scored.
+- Hacking integration regression: 834 tests run, 833 passed, one platform skip; Lean build passed. A later focused scan-timeout check is recorded with the final feature commit. The real-image mechanical workflow produced 58 certificates; all passed independent replay and con-leche. The portable package also passed verification. Its model pilot was prepared but never launched.
 
 - The three incorrect C answers are traced to exact claims and source records. All three certificates reverified. Optional public field requirements now reject incompatible claim roles and expose evidence needs; a separate unscored diagnostic profile preserves narrower observations. See [the diagnosis](docs/INCORRECT_ANSWER_DEBUG.md).
 
@@ -32,10 +35,10 @@ Keep evidence access, Lean verification, explicit limits, and reproducible evalu
 
 ## Next
 
-1. Hold new model experiments until answer-row consistency, source-scope enforcement and the derivative public contracts pass review and deterministic regressions. The source-semantics, execution-source, strict field-policy and durable-checkpoint changes are integrated. The Hacking pilot is prepared but has never launched. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
-2. Improve answer selection and interpretation. Product names, full paths and anti-forensics sequences need appropriate source fields and relationships; a verified record alone is insufficient.
+1. Hold new model experiments while the stricter public contracts have unresolved source selections and required support. The row, source-scope, execution-source, strict field-policy and durable-checkpoint changes are integrated. The Hacking pilot is prepared but has never launched. Preserve the failed Data Leakage C run; do not invent or repair its missing bindings.
+2. Add bounded same-subject tuples and exact OS fields, execution-artifact timestamp/counter meanings, and format-validated artifact-container paths. The public-only audit targets 12 additional field shapes, not a predicted score. Historical evidence gaps and complete-list claims remain separate problems.
 3. Add bounded mail-body and document-metadata support, and preserve large inventories in final answers. Do not infer source absence from missing output.
-4. Finish the separate strict public contract and explicit row/scope requirements. V3 already gives A and C the same public binding preview and durable checkpoints. Freeze new code and inputs for any future matched trial. No new accuracy score is claimed for these changes.
+4. Resolve the derivative contracts' unavailable source selections and unsupported joins. V3 gives A and C the same public binding preview and durable checkpoints. Freeze new code and inputs for any future matched trial. No new accuracy score is claimed for these changes.
 5. Complete the 14 unresolved reference contracts and the model/budget setup for a full A/B/C/D comparison. Do not use an LLM judge or silently alter the published source.
 6. Validate the native product backend with an approved destination. The Claude login works, but automatic approval review blocked that test under the user's Sol-only instruction. The Sol bridge does not validate native provider orchestration.
 7. Keep Hacking Case proof limits visible: predominant use, setup-interface attribution and actual device type need stronger relations. Retained DBX mailbox names do not prove current subscription. A scanner result does not prove global malware absence.

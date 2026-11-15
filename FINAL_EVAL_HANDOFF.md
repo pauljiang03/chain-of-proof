@@ -1,6 +1,10 @@
 # Final evaluation handoff
 
-Updated: 2026-11-15 UTC. The five requested priorities have implementation and validation results below. Native provider validation and full reference review remain incomplete.
+Updated: 2026-11-15 UTC. Current ownership and measurements are in
+[WORKSTREAMS.md](WORKSTREAMS.md). Reader origins, answer-row checks, exact source
+checks and professional reports are integrated. Both stricter public contracts
+remain held. No new model experiment has run after these fixes. Native provider
+validation and full reference review remain incomplete.
 
 | Priority | Delivered | Remaining limit |
 |---|---|---|
@@ -10,17 +14,33 @@ Updated: 2026-11-15 UTC. The five requested priorities have implementation and v
 | 4. Evidence support | General registry omissions fixed; mail-body and document-metadata gaps diagnosed from source | Those additional reader/semantic fields remain future work |
 | 5. Reference and validation | All 14 reference issues reviewed; separate Q53 derivative; fresh evidence; mechanical and live second-case checks; frozen NIST A/B/C comparison | Original 14 stay unresolved; Mulder unrun; native Claude test blocked |
 
-The final combined code includes Claude's desktop/report work, reviewed citation and stale-preview fixes, and common-field `anyOf` export support. Final regression suite: 775 tests run, 774 passed, one platform test skipped. No Lean source changed after the passing build.
+The original handoff checkpoint included Claude's desktop/report work, citation
+and stale-preview fixes, and common-field `anyOf` export support. It ran 775 tests:
+774 passed and one platform test skipped. Later validation is recorded in
+[the correctness report](docs/CORRECTNESS_FIXES.md).
 
-The measured comparison is frozen at clean `c2b9753`, before the UI and schema fixes. Do not change its outputs, add bindings, reproject its answers or revise its scores. A/B fully answered 8/46 questions; C fully answered 7/46. All 63 B and 96 C certificates independently verified. This single pair did not show an accuracy gain or a semantic-predicate refusal. See [the result](comparison/ablation/RESULTS_SOL61_20261115.md).
+The earlier completed comparison is frozen at clean `c2b9753`. Do not change its
+outputs, add bindings, reproject its answers or revise its scores. A/B fully
+answered 8/46 questions; C fully answered 7/46. All 63 B and 96 C certificates
+independently verified. This pair did not show an accuracy gain or a
+semantic-predicate refusal. See [the result](comparison/ablation/RESULTS_SOL61_20261115.md).
+
+The [latest repeat](comparison/ablation/RESULTS_SOL61_POSTFIX_20261115.md) is frozen
+at `96cd518`. A/B have 7 complete, 22 partial, 16 unanswered and 1 incorrect
+question, with 14 unresolved reference questions. C retained 1,017 independently
+verified certificates but no final answer document. Its accuracy is unavailable.
+Do not create retrospective bindings. The Hacking pilot was never launched.
 
 Local archives:
 
-- `runs/dev/sol61-nist-v2-20261115T0217Z/`: latest scored comparison, all outputs, exact replay, audits and hashes.
+- `runs/dev/sol61-nist-postfix-20261115T0316Z/`: latest repeat, including C's missing final submission.
+- `runs/dev/sol61-nist-v2-20261115T0217Z/`: earlier completed comparison, exact replay, audits and hashes.
 - `runs/dev/sol61-smoke-20261115T0209Z/`: second-case live operational smoke; no accuracy key.
 - `runs/dev/case2-workflow-20261115T015403Z/`: mechanical product workflow, reports and portable package.
 
-The frozen runtime remains `/private/tmp/cop-sol61-smoke-runtime`. The latest implementation worktree is `/private/tmp/cop-answer-meaning`. Do not confuse their commits.
+The earlier frozen runtime remains `/private/tmp/cop-sol61-smoke-runtime`; the
+latest repeat uses `/private/tmp/cop-sol61-96cd518-runtime`. Main contains the
+current implementation. Do not confuse implementation checks with scored runs.
 
 The schema fix accepts only explicit common paths and compatible types across every `anyOf` branch. It retains missing and conflicting fields; it does not infer relevance, choose a branch, repair a claim, or certify arbitrary metadata. It has no new accuracy result.
 
@@ -28,4 +48,9 @@ The local Claude login is available. Automatic approval review rejected the nati
 
 Reports already exist in HTML, Markdown and JSON. Extend the shared writer. Coordinate with the other terminal before changing shared files, preserve all saved runs, and inspect main before the next merge.
 
-The follow-up incorrect-answer diagnosis and public role guards are in [docs/INCORRECT_ANSWER_DEBUG.md](docs/INCORRECT_ANSWER_DEBUG.md). The exact three source certificates reverified. The guard is opt-in through explicit public annotations; it retains supported observations and exposes unmet evidence needs. The separate diagnostic profile is not a replacement benchmark and has no accuracy result.
+The incorrect-answer diagnosis is in
+[docs/INCORRECT_ANSWER_DEBUG.md](docs/INCORRECT_ANSWER_DEBUG.md). The exact three
+source certificates reverified. The product and v3 protocol now require explicit
+public field, row and source declarations. Low-level legacy modes remain for old
+protocols. Missing support stays visible. The separate diagnostic profile is not
+a replacement benchmark and has no accuracy result.

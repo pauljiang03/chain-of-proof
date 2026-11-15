@@ -20,7 +20,7 @@ Strict projection is the product default. The low-level projection API retains a
 
 Declared-role compatibility is still not a Lean proof of a complete English answer. A contract can be wrong or incomplete, an investigator can choose irrelevant evidence, and a parser can misread its source. These fixes do not establish universal zero false positives or an accuracy advantage on every run.
 
-A subsequent public-contract review found another gap: individually compatible fields can refer to different subjects or events. For example, an image name and two hashes can come from three images; a search query and its time can come from different history records. A candidate containing several independent claims does not establish a relationship between them. The row guard now requires explicit same-atomic-claim or independent-field policies. Source-scope enforcement is being integrated. The execution-source follow-up below separates application sightings from reviewed execution artifacts. New model experiments remain on hold.
+A subsequent public-contract review found another gap: individually compatible fields can refer to different subjects or events. For example, an image name and two hashes can come from three images; a search query and its time can come from different history records. A candidate containing several independent claims does not establish a relationship between them. The row guard now requires explicit same-atomic-claim or independent-field policies. The source guard checks every supporting record against the selected origins. The execution-source follow-up below separates application sightings from reviewed execution artifacts. New model experiments remain on hold.
 
 ## Better evidence and explicit gaps
 
@@ -151,3 +151,55 @@ The Hacking issue is an unavailable registered binary, `cmmgr32.exe`. Its missin
 metadata is not replaced with a guess. These limited snapshots contain no real VSS
 or scanner outputs; those origin branches were exercised with source fixtures.
 This is not a replacement for either full benchmark snapshot or a scored run.
+
+## Enforced source selections
+
+Source enforcement is integrated as `2599d48`. Public declarations use
+`x-claim-scope` to name exact image, exhibit, source snapshot and artifact variant
+values. Scanner declarations must also name the input view. A missing selection
+can be declared `unavailable`; it always refuses a binding. An explicitly unscoped
+observation makes no claim that it belongs to the case. Unknown values and wildcards
+cannot act as exact origin selections.
+
+The guard reads all records that support each atomic claim. It does not trust origin
+text supplied with a candidate. It checks those records against the actual facts
+file and its SHA-256. The product and v3 comparison require these checks. The
+low-level API retains its explicit legacy mode for old protocols. Reopening native
+answer documents also checks their recorded evidence hash and source records.
+
+Parent and branch scope requirements apply together. A child declaration cannot
+replace a parent restriction. Unsupported branch paths remain blocked. Scope and
+row checks run before A/B candidate filtering, so filtering cannot repair a bad
+answer after the fact. These are deterministic contract checks. They are not Lean
+proofs that an English question follows from the evidence or that a reader is correct.
+
+Four selected claims from the two fresh snapshots passed Lean and independent
+replay with empty axiom lists. Four matching source projections were retained.
+Eight deliberately wrong exhibit, snapshot, facts-hash or primary/alternate-source
+bindings were refused. Candidate-supplied provenance did not bypass the checks.
+These controls check known failures; they do not measure case accuracy or establish
+zero false positives for arbitrary investigations.
+
+The public scope declarations are integrated as `10392c7`. Data Leakage has 72
+declarations, including 17 explicitly unavailable selections. Its 358 leaf
+occurrences have 21 catalog-compatible requirements and 337 unsupported ones.
+Hacking has 31 exact-origin declarations; 13 of its 38 leaf requirements have
+compatible catalog roles. These counts include repeated schema branches and are
+not counts of answered questions. Both derivative contracts remain held. Source
+selection, missing meanings and unsupported joins still need work before a new trial.
+
+The final combined code at `f8ff658` ran 1,024 tests in 168.644 seconds: 1,023
+passed and one platform test was skipped. This includes source enforcement, public
+derivatives, the professional report and all 32 demo certificates. The first
+combined run had two stale negative controls. They tried to replace a timestamp
+from the old demo that was absent from the new demo. The replacement therefore
+left a valid certificate unchanged. The checks now generate a separate two-record
+temporal proof and assert that tampering changes it. The verifier was unchanged.
+Intermediate failed checks remain in the archive.
+
+The local archive is `runs/dev/source-scope-fixes-20261115T0500Z/`. Its manifest
+inventories 46 files, including 43 exact copies of source checks, scripts and logs.
+All recorded sizes and SHA-256 values were rechecked after sealing. The manifest
+SHA-256 is `a1aa94f6a455f6e514eb2d58a55892072aaf7faf3f7664b84da3cf499dcb0bc9`.
+Large local artifacts stay outside Git. No new investigator output or accuracy
+result is included.
